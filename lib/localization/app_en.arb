@@ -1,0 +1,381 @@
+{
+    "appTitle": "Paisa",
+    "@appTitle": {
+        "description": "The app name"
+    },
+    "home": "Home",
+    "@home": {
+        "description": "Home label"
+    },
+    "category": "Category",
+    "@category": {
+        "description": "Category label"
+    },
+    "addCategory": "Add Category",
+    "@addCategory": {
+        "description": "Add Category label"
+    },
+    "addExpense": "Add Expense",
+    "@addExpense": {
+        "description": "Add Expense label"
+    },
+    "updateExpense": "Update Expense",
+    "@updateExpense": {
+        "description": "Update Expense label"
+    },
+    "addAccount": "Add Account",
+    "@addAccount": {
+        "description": "Add Account label"
+    },
+    "categories": "Categories",
+    "@categories": {
+        "description": "Categories label"
+    },
+    "accounts": "Accounts",
+    "@accounts": {
+        "description": "Accounts label"
+    },
+    "budget": "Budget",
+    "@budget": {
+        "description": "Budget label"
+    },
+    "welcomeMessage": "Hi, {username}",
+    "@welcomeMessage": {
+        "description": "Budget label",
+        "placeholders": {
+            "username": {
+                "type": "String"
+            }
+        }
+    },
+    "settings": "Settings",
+    "@settings": {
+        "description": "Settings label"
+    },
+    "total": "Total",
+    "@total": {
+        "description": "Total label"
+    },
+    "yesterday": "Yesterday",
+    "@yesterday": {
+        "description": "Yesterday label"
+    },
+    "lastSeventDays": "Last 7 days",
+    "@lastSeventDays": {
+        "description": "Last 7 days label"
+    },
+    "lastThirtyDays": "Last 30 Days",
+    "@lastThirtyDays": {
+        "description": "Last 30 Days label"
+    },
+    "income": "Income",
+    "@income": {
+        "description": "Income label"
+    },
+    "expense": "Expense",
+    "@expense": {
+        "description": "Expense label"
+    },
+    "expenses": "Expenses",
+    "@expenses": {
+        "description": "Expenses label"
+    },
+    "deposit": "Deposit",
+    "@deposit": {
+        "description": "Deposit label"
+    },
+    "daily": "Daily",
+    "@daily": {
+        "description": "Daily label"
+    },
+    "weekly": "Weekly",
+    "@weekly": {
+        "description": "Weekly label"
+    },
+    "monthly": "Monthly",
+    "@monthly": {
+        "description": "Monthly label"
+    },
+    "yearly": "Yearly",
+    "@yearly": {
+        "description": "Yearly label"
+    },
+    "all": "All",
+    "@all": {
+        "description": "All label"
+    },
+    "transactionHistory": "Transaction History",
+    "@transactionHistory": {
+        "description": "Transaction history label"
+    },
+    "selectCategoryIcon": "Select category icon",
+    "@selectCategoryIcon": {
+        "description": "Select category icon label"
+    },
+    "description": "Description",
+    "@description": {
+        "description": "Description label"
+    },
+    "cash": "Cash",
+    "@cash": {
+        "description": "Cash label"
+    },
+    "debitCard": "Debit Card",
+    "@debitCard": {
+        "description": "Debit Card label"
+    },
+    "creditCard": "Credit Card",
+    "@creditCard": {
+        "description": "Credit Card label"
+    },
+    "cardHoder": "Card holder name",
+    "@cardHoder": {
+        "description": "Card holder name label"
+    },
+    "accountName": "Account name",
+    "@accountName": {
+        "description": "Account label"
+    },
+    "lastFourDigit": "Last four digit number",
+    "@lastFourDigit": {
+        "description": "Last four digit number label"
+    },
+    "addCard": "Add card",
+    "@addCard": {
+        "description": "Add card label"
+    },
+    "addedCard": "Account added",
+    "@addedCard": {
+        "description": "Account added label"
+    },
+    "updatedCard": "Account updated",
+    "@updatedCard": {
+        "description": "Account updated label"
+    },
+    "deletedCard": "Account deleted",
+    "@deletedCard": {
+        "description": "Account deleted label"
+    },
+    "successAddCategory": "Category added succesful",
+    "@successAddCategory": {
+        "description": "Category added succesful label"
+    },
+    "validName": "Enter valid name",
+    "@validName": {
+        "description": "Enter valid name label"
+    },
+    "profile": "Profile",
+    "@profile": {
+        "description": "Profile label"
+    },
+    "theme": "Theme",
+    "@theme": {
+        "description": "Theme label"
+    },
+    "reminder": "Reminder",
+    "@reminder": {
+        "description": "Reimder label"
+    },
+    "reminderDescription": "Show schedule notifications to add expense",
+    "@reminderDescription": {
+        "description": "Show schedule notifications to add expense label"
+    },
+    "biometric": "Biometric authentication",
+    "@biometric": {
+        "description": "Biometric label"
+    },
+    "exportExpenses": "Export data to excel",
+    "@exportExpenses": {
+        "description": "Export data to excel label"
+    },
+    "exportExpensesDescription": "All expenses will be exported as a CSV file to share",
+    "@exportExpensesDescription": {
+        "description": "All expenses will be exported as a CSV file to share label"
+    },
+    "chooseTheme": "Choose theme",
+    "@chooseTheme": {
+        "description": "Choose theme label"
+    },
+    "update": "Update",
+    "@update": {
+        "description": "Update label"
+    },
+    "userName": "User name",
+    "@userName": {
+        "description": "User name label"
+    },
+    "selecteCountry": "Select country",
+    "@selecteCountry": {
+        "description": "Select country label"
+    },
+    "errorAuth": "Error authentication",
+    "@errorAuth": {
+        "description": "Error authentication label"
+    },
+    "errorNoCards": "Empty in cards",
+    "@errorNoCards": {
+        "description": "No cards label"
+    },
+    "errorNoCardsDescription": "Add expenses and will show up here",
+    "@errorNoCardsDescription": {
+        "description": "No cards description label"
+    },
+    "errorNoCatgories": "Empty in categories",
+    "@errorNoCatgories": {
+        "description": "No categories label"
+    },
+    "errorNoCategoriesDescription": "Add some categories and will show up here",
+    "@errorNoCategoriesDescription": {
+        "description": "No category description label"
+    },
+    "errorNoBudget": "Empty in budget overview",
+    "@errorNoBudget": {
+        "description": "Empty in budget overview label"
+    },
+    "errorNoBudgetDescription": "Add some expenses and budget overview will show up here",
+    "@errorNoBudgetDescription": {
+        "description": "No budget overview description label"
+    },
+    "cardholder": "CardHolder",
+    "@cardholder": {
+        "description": "CardHolder label"
+    },
+    "expenseAddedSuccessful": "Expense added",
+    "@expenseAddedSuccessful": {
+        "description": "Expense added label"
+    },
+    "expenseUpdateSuccessful": "Expense updated",
+    "@expenseUpdateSuccessful": {
+        "description": "Expense updated label"
+    },
+    "expenseDeletedSuccessful": "Expense deleted",
+    "@expenseDeletedSuccessful": {
+        "description": "Expense deleted label"
+    },
+    "expenseName": "Expense name",
+    "@expenseName": {
+        "description": "Expense name label"
+    },
+    "amount": "Amount",
+    "@amount": {
+        "description": "Amount label"
+    },
+    "validAmount": "Enter valid amount",
+    "@validAmount": {
+        "description": "Enter valid amount label"
+    },
+    "date": "Date",
+    "@date": {
+        "description": "date label"
+    },
+    "validDate": "Select date",
+    "@validDate": {
+        "description": "Select date label"
+    },
+    "add": "Add",
+    "@add": {
+        "description": "add label"
+    },
+    "selectAccount": "Select account",
+    "@selectAccount": {
+        "description": "Select account label"
+    },
+    "selectCategory": "Select category",
+    "@selectCategory": {
+        "description": "Select category label"
+    },
+    "socialLinks": "Social links",
+    "@socialLinks": {
+        "description": "Social links label"
+    },
+    "telegram": "Telegram",
+    "@telegram": {
+        "description": "Telegram label"
+    },
+    "telegramGroup": "A group to follow and post bugs and feature requests",
+    "@telegramGroup": {
+        "description": "A group to follow and post bugs and feature requests label"
+    },
+    "budgetOverView": "Budget overview",
+    "@budgetOverView": {
+        "description": "Budget overview label"
+    },
+    "noResultFound": "No result found",
+    "@noResultFound": {
+        "description": "No result found label"
+    },
+    "noCategory": "No category selected",
+    "@noCategory": {
+        "description": "No category label"
+    },
+    "noAccountAvailable": "No account selected",
+    "@noAccountAvailable": {
+        "description": "No account label"
+    },
+    "privacyPolicy": "Privacy & Policy",
+    "@privacyPolicy": {
+        "description": "Privacy & Policy label"
+    },
+    "github": "Github",
+    "@github": {
+        "description": "Github label"
+    },
+    "version": "Version",
+    "@version": {
+        "description": "Github label"
+    },
+    "versionNumber": "v{version}",
+    "@versionNumber": {
+        "description": "Version number label",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "updatedCategory": "Category updated",
+    "@updatedCategory": {
+        "description": "Category updated label"
+    },
+    "done": "Done",
+    "@done": {
+        "description": "Done label"
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+        "description": "Cancel label"
+    },
+    "custom": "Custom",
+    "@custom": {
+        "description": "Custom label"
+    },
+    "accentColor": "Accent color",
+    "@accentColor": {
+        "description": "Accent color label"
+    },
+    "dynamicColor": "Dynamic",
+    "@dynamicColor": {
+        "description": "Dynamic label"
+    },
+    "pickColor": "Pick color",
+    "@pickColor": {
+        "description": "Pick color label"
+    },
+    "colors": "Colors",
+    "@colors": {
+        "description": "Colors label"
+    },
+    "others": "Others",
+    "@others": {
+        "description": "Others label"
+    },
+    "githubText": "Fork the project on GitHub",
+    "@githubText": {
+        "description": "GitHub text label"
+    }
+    ,
+    "madeWithLoveInIndia": "Made with ♥ in India",
+    "@madeWithLoveInIndia": {
+        "description": "Made with ♥ in India label"
+    }
+}
