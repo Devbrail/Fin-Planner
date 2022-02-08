@@ -9,8 +9,6 @@ import '../../../common/constants/theme.dart';
 import '../../../common/constants/util.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
-import '../../../data/accounts/model/account.dart';
-import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/expense_bloc.dart';
@@ -39,19 +37,19 @@ class _ExpensePageState extends State<ExpensePage> {
   late TextEditingController dateTextController;
 
   DateTime selectedDate = DateTime.now();
-  Category? selectedCategory;
-  Account? selectedAccount;
+  int? selectedCategoryId;
+  int? selectedAccountId;
   TransactonType selectedType = TransactonType.expense;
   String? errorMessage;
   bool get isAddExpense => widget.expense == null;
 
   void addExpense() {
-    if (selectedCategory == null) {
+    if (selectedCategoryId == null) {
       errorMessage = 'Select category';
       setState(() {});
       return;
     }
-    if (selectedAccount == null) {
+    if (selectedAccountId == null) {
       errorMessage = 'Select account';
       setState(() {});
       return;
@@ -71,24 +69,24 @@ class _ExpensePageState extends State<ExpensePage> {
           amount: amountTextController.text,
           name: nameTextController.text,
           time: selectedDate,
-          category: selectedCategory!,
-          account: selectedAccount!,
+          categoryId: selectedCategoryId!,
+          accountId: selectedAccountId!,
           type: selectedType,
         ),
       );
     } else {
-      final double amount = double.parse(amountTextController.text);
+      /* final double amount = double.parse(amountTextController.text);
       expenseBloc.add(
         UpdateExpenseEvent(
           expense: widget.expense!
-            ..account = selectedAccount!
-            ..category = selectedCategory!
+            ..accountId = selectedAccount!.key
+            ..categoryId = selectedCategory!.key
             ..currency = amount
             ..name = nameTextController.text
             ..time = selectedDate
             ..type = selectedType,
         ),
-      );
+      ); */
     }
   }
 
@@ -104,8 +102,8 @@ class _ExpensePageState extends State<ExpensePage> {
       selectedDate = widget.expense!.time;
       final dateString = formattedDate(selectedDate);
       dateTextController = TextEditingController(text: dateString);
-      selectedCategory = widget.expense!.category;
-      selectedAccount = widget.expense!.account;
+      selectedCategoryId = widget.expense!.categoryId;
+      selectedAccountId = widget.expense!.accountId;
       selectedType = widget.expense!.type ?? TransactonType.expense;
     } else {
       nameTextController = TextEditingController();
@@ -168,12 +166,12 @@ class _ExpensePageState extends State<ExpensePage> {
                   ),
                   SelectCategoryIcon(
                     onSelected: (category) {
-                      selectedCategory = category;
+                      selectedCategoryId = category.key;
                     },
                   ),
                   SelectedAccount(
                     onSelected: (account) {
-                      selectedAccount = account;
+                      selectedAccountId = account.key;
                     },
                   ),
                   Padding(
@@ -247,7 +245,7 @@ class _ExpensePageState extends State<ExpensePage> {
                         ),
                         child: SelectCategoryIcon(
                           onSelected: (category) {
-                            selectedCategory = category;
+                            selectedCategoryId = category.key;
                           },
                         ),
                       ),
@@ -258,7 +256,7 @@ class _ExpensePageState extends State<ExpensePage> {
                         ),
                         child: SelectedAccount(
                           onSelected: (account) {
-                            selectedAccount = account;
+                            selectedAccountId = account.key;
                           },
                         ),
                       ),

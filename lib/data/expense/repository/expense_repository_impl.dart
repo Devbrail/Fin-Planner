@@ -6,8 +6,6 @@ import '../../../common/constants/util.dart';
 import '../../../common/enum/filter_days.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../domain/landing/repository/expense_repository.dart';
-import '../../accounts/model/account.dart';
-import '../../category/model/category.dart';
 import '../datasources/expense_manager_data_source.dart';
 import '../model/expense.dart';
 
@@ -15,6 +13,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   ExpenseRepositoryImpl({
     required this.dataSource,
   });
+
   List<Expense> expensesList = [];
   final ExpenseManagerDataSource dataSource;
   @override
@@ -27,16 +26,16 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     String name,
     double amount,
     DateTime time,
-    Category category,
-    Account account,
+    int category,
+    int account,
     TransactonType transactonType,
   ) async {
     final expense = Expense(
       name: name,
       currency: amount,
       time: time,
-      category: category,
-      account: account,
+      categoryId: category,
+      accountId: account,
       type: transactonType,
     );
     await dataSource.addOrUpdateExpense(expense);
@@ -87,20 +86,6 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
         .map((e) => e.currency)
         .fold<double>(0, (previousValue, element) => previousValue + element);
     return getFormattedCurrency(total);
-  }
-
-  @override
-  Future<Map<Category, List<Expense>>> fetchBudgetSummary() async {
-    final List<Expense> expenses = await fetchAndCache();
-    final result = groupBy(expenses, (Expense expense) => expense.category);
-    return result;
-  }
-
-  @override
-  Future<Map<Account, List<Expense>>> fetchAccountsSummary() async {
-    final List<Expense> expenses = await fetchAndCache();
-    final result = groupBy(expenses, (Expense expense) => expense.account);
-    return result;
   }
 
   Future<List<Expense>> fetchAndCache({bool isRefresh = false}) async {

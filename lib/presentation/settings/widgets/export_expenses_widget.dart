@@ -45,6 +45,7 @@ class _ExportExpensesWidgetState extends State<ExportExpensesWidget> {
 }
 
 List<List<String>> csvDataList(List<Expense> expenses) {
+//TODO Fix export
   return [
     [
       'No',
@@ -66,11 +67,11 @@ List<List<String>> csvDataList(List<Expense> expenses) {
           expense.name,
           '${expense.currency}',
           expense.time.toIso8601String(),
-          expense.category.name,
-          expense.category.description,
-          expense.account.name,
-          expense.account.bankName,
-          expense.account.cardType!.name,
+          //expense.category.name,
+          //expense.category.description,
+          //expense.accountId.name,
+          //expense.accountId.bankName,
+          //expense.accountId.cardType!.name,
         ];
       },
     ),

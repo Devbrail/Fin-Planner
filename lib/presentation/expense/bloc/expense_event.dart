@@ -11,16 +11,16 @@ class AddExpenseEvent extends ExpenseEvent {
   final String amount;
   final String name;
   final DateTime time;
-  final Category category;
-  final Account account;
+  final int categoryId;
+  final int accountId;
   final TransactonType type;
 
   const AddExpenseEvent({
     required this.amount,
     required this.name,
     required this.time,
-    required this.category,
-    required this.account,
+    required this.categoryId,
+    required this.accountId,
     required this.type,
   });
 }

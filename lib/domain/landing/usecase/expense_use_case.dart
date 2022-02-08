@@ -1,7 +1,5 @@
 import '../../../common/enum/filter_days.dart';
 import '../../../common/enum/transaction.dart';
-import '../../../data/accounts/model/account.dart';
-import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 import '../repository/expense_repository.dart';
 
@@ -33,8 +31,8 @@ class ExpenseUseCase {
     String name,
     double amount,
     DateTime time,
-    Category category,
-    Account account,
+    int category,
+    int account,
     TransactonType type,
   ) async {
     await expenseRepository.addExpense(
@@ -53,14 +51,6 @@ class ExpenseUseCase {
 
   Future<void> clearExpense(Expense expense) async {
     expenseRepository.clearExpense(expense);
-  }
-
-  Future<Map<Category, List<Expense>>> fetchBudgetSummary() {
-    return expenseRepository.fetchBudgetSummary();
-  }
-
-  Future<Map<Account, List<Expense>>> fetchAccountsSummary() async {
-    return await expenseRepository.fetchAccountsSummary();
   }
 
   Future<void> updateExpense(Expense expense) async {

@@ -1,8 +1,6 @@
 import 'package:hive/hive.dart';
 
 import '../../../common/enum/transaction.dart';
-import '../../accounts/model/account.dart';
-import '../../category/model/category.dart';
 
 part 'expense.g.dart';
 
@@ -20,21 +18,30 @@ class Expense extends HiveObject {
   @HiveField(4)
   DateTime time;
 
-  @HiveField(5)
-  Category category;
-
-  @HiveField(6)
-  Account account;
-
   @HiveField(7, defaultValue: TransactonType.expense)
   TransactonType? type;
+
+  /* @HiveField(5)
+  Category category; */
+
+  /* @HiveField(6)
+  Account account; */
+
+  @HiveField(8)
+  int accountId;
+
+  @HiveField(9)
+  int categoryId;
+
+  @HiveField(10)
+  int? superId;
 
   Expense({
     required this.name,
     required this.currency,
     required this.time,
-    required this.category,
-    required this.account,
+    required this.categoryId,
+    required this.accountId,
     this.addOrSub = false,
     required this.type,
   });

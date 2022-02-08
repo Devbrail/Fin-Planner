@@ -40,14 +40,14 @@ final locator = GetIt.instance;
 
 Future<void> setupLocator() async {
   setPathUrlStrategy();
-  _setupHive();
+  await _setupHive();
+  _localSoruces();
   await _setupSharePrefes();
   await _setupNotification();
-  _localSoruces();
   _setupRepository();
   _setupUseCase();
   _setupBloc();
-  _setupController();
+  await _setupController();
   _setupLocalAuth();
 }
 
@@ -84,14 +84,10 @@ Future<void> _setupHive() async {
 }
 
 void _localSoruces() {
-  locator.registerSingleton(
-    SplashLocalDataSource(sharePrefefs: locator.get()),
-  );
   locator.registerSingleton<ExpenseManagerDataSource>(
       ExpenseManagerLocalDataSource());
   locator.registerSingleton<CategoryDataSource>(CategoryLocalDataSources());
   locator.registerSingleton<AccountDataSource>(AccountLocalDataSource());
-  locator.registerSingleton(SettingsService(locator.get()));
 }
 
 void _setupRepository() {
@@ -127,7 +123,11 @@ void _setupUseCase() {
 
 Future<void> _setupSharePrefes() async {
   final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-  locator.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
+  locator.registerSingleton<SharedPreferences>(sharedPrefs);
+  locator.registerSingleton(SettingsService(locator.get()));
+  locator.registerSingleton(
+    SplashLocalDataSource(sharePrefefs: locator.get()),
+  );
 }
 
 void _setupBloc() {

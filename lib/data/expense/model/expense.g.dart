@@ -20,8 +20,8 @@ class ExpenseAdapter extends TypeAdapter<Expense> {
       name: fields[0] as String,
       currency: fields[1] as double,
       time: fields[4] as DateTime,
-      category: fields[5] as Category,
-      account: fields[6] as Account,
+      categoryId: fields[9] as int,
+      accountId: fields[8] as int,
       addOrSub: fields[3] as bool,
       type: fields[7] == null
           ? TransactonType.expense
@@ -41,12 +41,12 @@ class ExpenseAdapter extends TypeAdapter<Expense> {
       ..write(obj.addOrSub)
       ..writeByte(4)
       ..write(obj.time)
-      ..writeByte(5)
-      ..write(obj.category)
-      ..writeByte(6)
-      ..write(obj.account)
       ..writeByte(7)
-      ..write(obj.type);
+      ..write(obj.type)
+      ..writeByte(8)
+      ..write(obj.accountId)
+      ..writeByte(9)
+      ..write(obj.categoryId);
   }
 
   @override

@@ -74,16 +74,13 @@ class _AddAccountPageState extends State<AddAccountPage> {
         ),
       );
     } else {
-      accountsBloc.add(
-        UpdateAccountEvent(
-          widget.account!
-            ..bankName = bankNameController.text
-            ..cardType = selectedType
-            ..name = cardHolderController.text
-            ..validThru = selectedDate
-            ..number = cardNumberController.text,
-        ),
-      );
+      widget.account!
+        ..bankName = bankNameController.text
+        ..cardType = selectedType
+        ..name = cardHolderController.text
+        ..validThru = selectedDate
+        ..number = cardNumberController.text
+        ..save();
     }
   }
 

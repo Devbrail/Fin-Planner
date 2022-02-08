@@ -2,8 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../common/enum/transaction.dart';
-import '../../../data/accounts/model/account.dart';
-import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../domain/landing/usecase/expense_use_case.dart';
 import '../../home/bloc/home_bloc.dart';
@@ -36,8 +34,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       event.name,
       validAmount,
       event.time,
-      event.category,
-      event.account,
+      event.categoryId,
+      event.accountId,
       event.type,
     );
     emit(const ExpenseAdded(isAddOrUpdate: true));

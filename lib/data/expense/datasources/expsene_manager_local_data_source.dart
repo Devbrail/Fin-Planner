@@ -8,11 +8,9 @@ class ExpenseManagerLocalDataSource implements ExpenseManagerDataSource {
   late final epenseBox = Hive.box<Expense>(BoxType.expense.stringValue);
   @override
   Future<void> addOrUpdateExpense(Expense expense) async {
-    if (epenseBox.containsKey(expense.key)) {
-      await epenseBox.put(expense.key, expense);
-    } else {
-      await epenseBox.add(expense);
-    }
+    final id = await epenseBox.add(expense);
+    expense.superId = id;
+    expense.save();
   }
 
   @override

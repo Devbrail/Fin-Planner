@@ -17,6 +17,9 @@ class Category extends HiveObject with EquatableMixin {
   @HiveField(3)
   final bool isPredefined;
 
+  @HiveField(4, defaultValue: 0)
+  int? superId;
+
   Category({
     required this.description,
     required this.name,

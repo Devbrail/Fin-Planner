@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/data/category/datasources/category_local_data_source.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/time.dart';
 import '../../../common/constants/util.dart';
+import '../../../common/enum/box_types.dart';
 import '../../../common/enum/filter_budget.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../common/widgets/empty_widget.dart';
@@ -33,7 +35,8 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
           AppLocalizations.of(context)!.budgetOverView,
         ),
         body: ValueListenableBuilder<Box<Expense>>(
-          valueListenable: Hive.box<Expense>('expense').listenable(),
+          valueListenable:
+              Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
           builder: (context, value, Widget? child) {
             var expenses = value.values.toList();
             if (expenses.isEmpty) {
@@ -153,7 +156,8 @@ class BudgetSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final maps = groupBy(map.value, (Expense element) => element.category)
+    final maps = groupBy(
+            map.value, (Expense element) => fetchCategory(element.categoryId))
         .entries
         .toList();
     return Column(

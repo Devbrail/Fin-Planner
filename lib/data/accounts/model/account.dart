@@ -28,6 +28,9 @@ class Account extends HiveObject with EquatableMixin {
   @HiveField(6, defaultValue: CardType.debitcard)
   CardType? cardType;
 
+  @HiveField(7, defaultValue: 0)
+  int? superId;
+
   Account({
     required this.name,
     required this.icon,

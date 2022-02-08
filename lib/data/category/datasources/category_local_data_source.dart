@@ -11,11 +11,9 @@ class CategoryLocalDataSources implements CategoryDataSource {
 
   @override
   Future<void> addCategory(Category category) async {
-    if (box.containsKey(category.key)) {
-      await box.put(category.key, category);
-    } else {
-      await box.add(category);
-    }
+    final int id = await box.add(category);
+    category.superId = id;
+    category.save();
   }
 
   @override
@@ -23,7 +21,7 @@ class CategoryLocalDataSources implements CategoryDataSource {
     final expenseBox = Hive.box<Expense>('expense');
     final values = expenseBox.values.toList();
     final keys = values
-        .where((element) => element.category.key == key)
+        .where((element) => element.categoryId == key)
         .map((e) => e.key)
         .toList();
     await expenseBox.deleteAll(keys);
@@ -35,6 +33,11 @@ class CategoryLocalDataSources implements CategoryDataSource {
   Future<List<Category>> categories() async {
     return box.values.toList();
   }
+}
+
+Category fetchCategory(int categoryId) {
+  final box = Hive.box<Category>(BoxType.category.stringValue);
+  return box.values.firstWhere((element) => element.key == categoryId);
 }
 
 List<IconData> categoryIcons = [

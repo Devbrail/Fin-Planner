@@ -21,13 +21,13 @@ class CategoryAdapter extends TypeAdapter<Category> {
       name: fields[0] as String,
       icon: fields[2] as int,
       isPredefined: fields[3] as bool,
-    );
+    )..superId = fields[4] == null ? 0 : fields[4] as int?;
   }
 
   @override
   void write(BinaryWriter writer, Category obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -35,7 +35,9 @@ class CategoryAdapter extends TypeAdapter<Category> {
       ..writeByte(2)
       ..write(obj.icon)
       ..writeByte(3)
-      ..write(obj.isPredefined);
+      ..write(obj.isPredefined)
+      ..writeByte(4)
+      ..write(obj.superId);
   }
 
   @override

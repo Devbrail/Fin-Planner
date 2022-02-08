@@ -6,19 +6,21 @@ import '../../../app/routes.dart';
 import '../../../common/constants/currency.dart';
 import '../../../common/constants/theme.dart';
 import '../../../common/enum/transaction.dart';
+import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
 
 class ExpensItemWidget extends StatelessWidget {
   const ExpensItemWidget({
     Key? key,
     required this.expense,
+    required this.account,
   }) : super(key: key);
-
+  final Account account;
   final Expense expense;
-
   @override
   Widget build(BuildContext context) {
     final date = _readableDateWeekTime(expense.time);
+
     return InkWell(
       onTap: () => Navigator.pushNamed(
         context,
@@ -49,7 +51,7 @@ class ExpensItemWidget extends StatelessWidget {
           ],
         ),
         title: Text(expense.name),
-        subtitle: Text('${expense.account.name} • ${expense.account.bankName}'),
+        subtitle: Text('${account.name} • ${account.bankName}'),
         trailing: _type(),
       ),
     );

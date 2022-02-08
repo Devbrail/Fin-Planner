@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/data/accounts/datasources/account_data_source.dart';
+import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../common/enum/box_types.dart';
@@ -23,7 +25,7 @@ class AccountTransactinWidget extends StatelessWidget {
           Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
       builder: (context, value, child) {
         final expenses = value.values
-            .where((element) => element.account.hashCode == account.hashCode)
+            .where((element) => element.accountId == account.superId)
             .toList();
 
         if (expenses.isEmpty) {
@@ -52,6 +54,9 @@ class AccountTransactinWidget extends StatelessWidget {
                   itemBuilder: (_, index) {
                     return ExpensItemWidget(
                       expense: expenses[index],
+                      account: locator
+                          .get<AccountDataSource>()
+                          .fetchAccount(expenses[index].accountId),
                     );
                   },
                 ),

@@ -21,9 +21,7 @@ class SearchListWidget extends StatelessWidget {
         var results = query.isEmpty
             ? value.values.toList() // whole list
             : value.values.where((Expense c) {
-                return c.name.toLowerCase().contains(query) ||
-                    c.category.name.contains(query) ||
-                    c.account.name.contains(query);
+                return c.name.toLowerCase().contains(query);
               }).toList();
         return results.isEmpty
             ? Center(

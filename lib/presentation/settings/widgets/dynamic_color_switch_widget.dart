@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../bloc/settings_controller.dart';
 import 'setting_option.dart';
 
