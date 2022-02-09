@@ -26,6 +26,10 @@ class _ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
 
   void showThemeDialog() {
     showModalBottomSheet(
+      constraints: BoxConstraints(
+        maxWidth:
+            MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
+      ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       context: context,
       builder: (context) => ThemeModeWidget(

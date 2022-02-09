@@ -12,28 +12,22 @@ class Expense extends HiveObject {
   @HiveField(1)
   double currency;
 
-  @HiveField(3)
+  @HiveField(2)
   bool addOrSub;
 
-  @HiveField(4)
+  @HiveField(3)
   DateTime time;
 
-  @HiveField(7, defaultValue: TransactonType.expense)
+  @HiveField(4, defaultValue: TransactonType.expense)
   TransactonType? type;
 
-  /* @HiveField(5)
-  Category category; */
-
-  /* @HiveField(6)
-  Account account; */
-
-  @HiveField(8)
+  @HiveField(5)
   int accountId;
 
-  @HiveField(9)
+  @HiveField(6)
   int categoryId;
 
-  @HiveField(10)
+  @HiveField(7)
   int? superId;
 
   Expense({

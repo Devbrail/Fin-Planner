@@ -73,7 +73,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                       tablet: LocaleGridView(
                         locales: locales,
                         onPressed: splashCubit.setSeledetdLocale,
-                        crossAxisCount: 3,
+                        crossAxisCount: 5,
                       ),
                       desktop: LocaleGridView(
                         locales: locales,

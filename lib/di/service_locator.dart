@@ -1,7 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import '../common/enum/box_types.dart';
@@ -22,7 +21,6 @@ import '../data/expense/repository/expense_repository_impl.dart';
 import '../data/local_auth/local_auth_api.dart';
 import '../data/notification/notification_service.dart';
 import '../data/settings/settings_service.dart';
-import '../data/splash_screen/datasource/splash_local_data_sources.dart';
 import '../domain/account/repository/account_repository.dart';
 import '../domain/account/usecase/account_use_case.dart';
 import '../domain/category/repository/category_repository.dart';
@@ -42,7 +40,6 @@ Future<void> setupLocator() async {
   setPathUrlStrategy();
   await _setupHive();
   _localSoruces();
-  await _setupSharePrefes();
   await _setupNotification();
   _setupRepository();
   _setupUseCase();
@@ -81,6 +78,7 @@ Future<void> _setupHive() async {
   await Hive.openBox<Expense>(BoxType.expense.stringValue);
   await Hive.openBox<Category>(BoxType.category.stringValue);
   await Hive.openBox<Account>(BoxType.accounts.stringValue);
+  await Hive.openBox(BoxType.settings.stringValue);
 }
 
 void _localSoruces() {
@@ -88,6 +86,7 @@ void _localSoruces() {
       ExpenseManagerLocalDataSource());
   locator.registerSingleton<CategoryDataSource>(CategoryLocalDataSources());
   locator.registerSingleton<AccountDataSource>(AccountLocalDataSource());
+  locator.registerSingleton<SettingsService>(SettingsServiceImpl());
 }
 
 void _setupRepository() {
@@ -121,17 +120,8 @@ void _setupUseCase() {
   );
 }
 
-Future<void> _setupSharePrefes() async {
-  final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-  locator.registerSingleton<SharedPreferences>(sharedPrefs);
-  locator.registerSingleton(SettingsService(locator.get()));
-  locator.registerSingleton(
-    SplashLocalDataSource(sharePrefefs: locator.get()),
-  );
-}
-
 void _setupBloc() {
-  locator.registerFactory(() => SplashCubit(splashUseCase: locator.get()));
+  locator.registerFactory(() => SplashCubit());
   locator.registerFactory(() => CategoryBloc(categoryUseCase: locator.get()));
   locator.registerFactory(() => ExpenseBloc(locator.get()));
   locator.registerFactory(
@@ -140,10 +130,5 @@ void _setupBloc() {
       expenseUseCase: locator.get(),
     ),
   );
-  locator.registerFactory(
-    () => HomeBloc(
-      expenseUseCase: locator.get(),
-      splashDataSource: locator.get(),
-    ),
-  );
+  locator.registerFactory(() => HomeBloc());
 }

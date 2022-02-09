@@ -33,11 +33,12 @@ class CategoryLocalDataSources implements CategoryDataSource {
   Future<List<Category>> categories() async {
     return box.values.toList();
   }
-}
 
-Category fetchCategory(int categoryId) {
-  final box = Hive.box<Category>(BoxType.category.stringValue);
-  return box.values.firstWhere((element) => element.key == categoryId);
+  @override
+  Category fetchCategory(int categoryId) {
+    final box = Hive.box<Category>(BoxType.category.stringValue);
+    return box.values.firstWhere((element) => element.key == categoryId);
+  }
 }
 
 List<IconData> categoryIcons = [

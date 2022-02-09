@@ -37,8 +37,7 @@ dependencies:
   package_info_plus: ^1.3.0
   path_provider: ^2.0.8
   responsive_builder: ^0.4.1
-  share_plus: ^3.0.4
-  shared_preferences: ^2.0.11
+  share_plus: ^3.0.4 
   url_launcher: ^6.0.18
   url_strategy: ^0.2.0
 

@@ -1,74 +1,139 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive/hive.dart';
 
-/// A service that stores and retrieves user settings.
-///
-/// By default, this class does not persist user settings. If you'd like to
-/// persist the user settings locally, use the shared_preferences package. If
-/// you'd like to store settings on a web server, use the http package.
-///
+import '../../common/enum/box_types.dart';
+
 const String themeModeKey = 'key_theme_mode';
 const String appColorKey = 'key_app_color';
 const String dynamicColorKey = 'keydynamicColor';
 const String pushNotificationKey = 'key_push_notification';
 const String biometricKey = 'key_biometric';
+const String userNameKey = 'user_name_key';
+const String userLoginKey = 'user_login_key';
+const String userImageKey = 'user_image_key';
+const String userLanguageKey = 'user_laguage_key';
+const String scheduleTime = 'schedule_time_key';
 
-class SettingsService {
-  SettingsService(this.sharedPrefs);
+abstract class SettingsService {
+  Future<void> setThemeMode(ThemeMode themeMode);
+  Future<ThemeMode> themeMode();
 
-  final SharedPreferences sharedPrefs;
+  Future<void> setUpdateNotification(bool mode);
+  Future<bool> notification();
 
-  /// Loads the User's preferred ThemeMode from local or remote storage.
-  Future<ThemeMode> themeMode() async =>
-      ThemeMode.values[sharedPrefs.getInt(themeModeKey) ?? 0];
+  Future<void> setBiometric(bool isOn);
+  Future<bool> biometric();
 
-  /// Persists the user's preferred ThemeMode to local or remote storage.
-  Future<void> updateThemeMode(ThemeMode theme) async {
-    await sharedPrefs.setInt(themeModeKey, theme.index);
+  Future<void> setThemeColor(Color color);
+  Future<Color> themeColor();
+
+  Future<void> setDynamicColor(bool dynamicColor);
+  Future<bool> dynamicColor();
+
+  Future<String> userName();
+  Future<void> setUserName(String name);
+
+  Future<bool> isLoggedIn();
+  Future<void> setLoggedIn(bool isLogin);
+
+  Future<String> userImage();
+  Future<void> setUserImage(String name);
+
+  Future<Locale> language();
+  Future<void> setLanguage(Locale locale);
+}
+
+class SettingsServiceImpl implements SettingsService {
+  late final box = Hive.box(BoxType.settings.stringValue);
+
+  @override
+  Future<String> userName() async {
+    return box.get(userNameKey, defaultValue: 'Name');
   }
 
-  Future<Brightness> themeBrightness() async {
-    final theme = await themeMode();
-    switch (theme) {
-      case ThemeMode.dark:
-        return Brightness.light;
-      case ThemeMode.light:
-        return Brightness.light;
-      default:
-        return Brightness.light;
-    }
+  @override
+  Future<void> setUserName(String name) async {
+    await box.put(userNameKey, name);
   }
 
-  Future<void> updateNotification(bool isOn) async {
-    await sharedPrefs.setBool(pushNotificationKey, isOn);
+  @override
+  Future<bool> isLoggedIn() async {
+    return box.get(userLoginKey, defaultValue: false) ?? false;
   }
 
-  Future<bool> getNotification() async {
-    return sharedPrefs.getBool(pushNotificationKey) ?? false;
+  @override
+  Future<void> setLoggedIn(bool isLogin) async {
+    await box.put(userLoginKey, isLogin);
   }
 
-  Future<void> updateBiometric(bool isOn) async {
-    await sharedPrefs.setBool(biometricKey, isOn);
+  @override
+  Future<String> userImage() async {
+    return box.get(userImageKey, defaultValue: '');
   }
 
+  @override
+  Future<void> setUserImage(String name) async {
+    await box.put(userImageKey, name);
+  }
+
+  @override
+  Future<Locale> language() async {
+    return Locale(box.get(userLanguageKey, defaultValue: 'INR'));
+  }
+
+  @override
+  Future<void> setLanguage(Locale locale) async {
+    await box.put(userLanguageKey, locale.languageCode);
+  }
+
+  @override
+  Future<void> setThemeMode(ThemeMode themeMode) async {
+    await box.put(themeModeKey, themeMode.index);
+  }
+
+  @override
+  Future<ThemeMode> themeMode() async {
+    return ThemeMode.values[box.get(themeModeKey, defaultValue: 0)];
+  }
+
+  @override
+  Future<void> setUpdateNotification(bool mode) async {
+    await box.put(pushNotificationKey, mode);
+  }
+
+  @override
+  Future<bool> notification() async {
+    return box.get(pushNotificationKey, defaultValue: false);
+  }
+
+  @override
+  Future<void> setBiometric(bool isOn) async {
+    await box.put(biometricKey, isOn);
+  }
+
+  @override
   Future<bool> biometric() async {
-    return sharedPrefs.getBool(biometricKey) ?? false;
+    return box.get(biometricKey, defaultValue: false);
   }
 
-  Future<void> updateAppThemeColor(Color color) async {
-    await sharedPrefs.setInt(appColorKey, color.value);
+  @override
+  Future<void> setThemeColor(Color color) async {
+    await box.put(appColorKey, color.value);
   }
 
-  Future<Color> appColor() async {
-    final colorInt = sharedPrefs.getInt(appColorKey) ?? 0xFF795548;
+  @override
+  Future<Color> themeColor() async {
+    final colorInt = box.get(appColorKey, defaultValue: 0xFF795548);
     return Color(colorInt);
   }
 
+  @override
   Future<void> setDynamicColor(bool dynamicColor) async {
-    await sharedPrefs.setBool(dynamicColorKey, dynamicColor);
+    await box.put(dynamicColorKey, dynamicColor);
   }
 
+  @override
   Future<bool> dynamicColor() async {
-    return sharedPrefs.getBool(dynamicColorKey) ?? false;
+    return box.get(dynamicColorKey, defaultValue: false);
   }
 }

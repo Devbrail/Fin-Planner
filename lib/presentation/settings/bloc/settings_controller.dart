@@ -20,8 +20,8 @@ class SettingsController with ChangeNotifier {
 
   Future<void> loadSettings() async {
     _themeMode = await settingsService.themeMode();
-    showNotificatons = await settingsService.getNotification();
-    _currentColor = await settingsService.appColor();
+    showNotificatons = await settingsService.notification();
+    _currentColor = await settingsService.themeColor();
     notifyListeners();
   }
 
@@ -33,13 +33,13 @@ class SettingsController with ChangeNotifier {
     } else {
       locator.get<NotificationService>().notification.cancelAll();
     }
-    await settingsService.updateNotification(isOn);
+    await settingsService.setUpdateNotification(isOn);
   }
 
   Future<void> updateBiometric(bool isOn) async {
     useBiometrics = isOn;
     notifyListeners();
-    await settingsService.updateBiometric(isOn);
+    await settingsService.setBiometric(isOn);
   }
 
   Future<void> updateThemeMode(ThemeMode? newThemeMode) async {
@@ -47,14 +47,14 @@ class SettingsController with ChangeNotifier {
     if (newThemeMode == _themeMode) return;
     _themeMode = newThemeMode;
     notifyListeners();
-    await settingsService.updateThemeMode(newThemeMode);
+    await settingsService.setThemeMode(newThemeMode);
   }
 
   Future<void> updateColor(Color color) async {
     if (currentColor == color) return;
     _currentColor = color;
     notifyListeners();
-    await settingsService.updateAppThemeColor(color);
+    await settingsService.setThemeColor(color);
   }
 
   Future<void> setDynamicColor(bool color) async {

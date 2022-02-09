@@ -37,9 +37,6 @@ class _AccountsPageState extends State<AccountsPage> {
           key: const Key('add_account'),
           tooltip: AppLocalizations.of(context)!.addAccount,
           child: const Icon(Icons.add),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
         ),
         body: ListView(
           padding: const EdgeInsets.only(

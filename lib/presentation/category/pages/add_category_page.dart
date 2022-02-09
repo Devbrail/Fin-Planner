@@ -38,11 +38,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   late int selectedIcon = widget.category?.icon ?? -1;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocListener(
       bloc: addCategoryBloc,
@@ -158,12 +153,11 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                 icon: selectedIcon,
               ));
             } else {
-              addCategoryBloc.add(CategoryUpdateEvent(
-                widget.category!
-                  ..description = descController.text
-                  ..name = categoryController.text
-                  ..icon = selectedIcon,
-              ));
+              widget.category!
+                ..description = descController.text
+                ..name = categoryController.text
+                ..icon = selectedIcon
+                ..save();
             }
           } else {
             showMaterialSnackBar(

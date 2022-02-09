@@ -42,9 +42,9 @@ class BudgetItemMobileWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            const Spacer(),
+            const SizedBox(height: 8),
             SizedBox(
-              height: 50,
+              height: 40,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Sparkline(
@@ -62,7 +62,6 @@ class BudgetItemMobileWidget extends StatelessWidget {
                 bottom: 16,
                 left: 16,
                 right: 16,
-                top: 4,
               ),
               child: Text(
                 totalExpens(expenses),

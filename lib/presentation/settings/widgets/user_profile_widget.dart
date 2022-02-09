@@ -1,9 +1,11 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/common/enum/box_types.dart';
+import 'package:flutter_paisa/data/settings/settings_service.dart';
+import 'package:hive_flutter/adapters.dart';
 
 import '../../home/bloc/home_bloc.dart';
 
@@ -16,16 +18,14 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   final nameController = TextEditingController();
-  late HomeBloc expenseBloc = BlocProvider.of<HomeBloc>(context)
-    ..add(FetchUserDetailsEvent());
+  late final expenseBloc = BlocProvider.of<HomeBloc>(context);
 
   void _updateDetails() {
     expenseBloc.add(UpdateUserDetailsEvent(name: nameController.text));
+    Navigator.pop(context);
   }
 
-  void _pickImage() {
-    expenseBloc.add(PickImageEvent());
-  }
+  void _pickImage() => expenseBloc.add(PickImageEvent());
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +80,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                )
+                const SizedBox(height: 10)
               ],
             ),
           ),
@@ -102,35 +100,33 @@ class UserTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<HomeBloc>(context),
-      builder: (context, state) {
-        if (state is UserDetailsChangedState) {
-          nameController.text = state.name;
-          return Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: TextFormField(
-              autocorrect: true,
-              controller: nameController,
-              keyboardType: TextInputType.name,
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.userName,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                filled: true,
+    return ValueListenableBuilder<Box>(
+      valueListenable: Hive.box(BoxType.settings.stringValue)
+          .listenable(keys: [userNameKey]),
+      builder: (context, value, _) {
+        nameController.text = value.get(userNameKey, defaultValue: 'Name');
+        return Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: TextFormField(
+            autocorrect: true,
+            controller: nameController,
+            keyboardType: TextInputType.name,
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.userName,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16.0),
               ),
-              validator: (value) {
-                if (value!.length >= 3) {
-                  return null;
-                } else {
-                  return AppLocalizations.of(context)!.validName;
-                }
-              },
+              filled: true,
             ),
-          );
-        }
-        return const SizedBox.shrink();
+            validator: (value) {
+              if (value!.length >= 3) {
+                return null;
+              } else {
+                return AppLocalizations.of(context)!.validName;
+              }
+            },
+          ),
+        );
       },
     );
   }
@@ -146,36 +142,32 @@ class UserImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: pickImage,
-        child: BlocBuilder(
-          buildWhen: (previous, current) => current is UserDetailsChangedState,
-          bloc: BlocProvider.of<HomeBloc>(context),
-          builder: (context, state) {
-            if (state is UserDetailsChangedState) {
-              if (state.image.isEmpty) {
-                return CircleAvatar(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  child: Icon(
-                    Icons.account_circle_outlined,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                );
-              } else {
-                if (kIsWeb) {
-                  return const SizedBox.shrink();
+    return ValueListenableBuilder<Box>(
+      valueListenable: Hive.box(BoxType.settings.stringValue)
+          .listenable(keys: [userImageKey]),
+      builder: (context, value, _) {
+        final image = value.get(userImageKey, defaultValue: '');
+        return Center(
+          child: GestureDetector(
+            onTap: pickImage,
+            child: Builder(
+              builder: (context) {
+                if (image.isEmpty) {
+                  return CircleAvatar(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    child: Icon(
+                      Icons.account_circle_outlined,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  );
+                } else {
+                  return CircleAvatar(foregroundImage: FileImage(File(image)));
                 }
-
-                return CircleAvatar(
-                  foregroundImage: FileImage(File(state.image)),
-                );
-              }
-            }
-            return const CircleAvatar(maxRadius: 96);
-          },
-        ),
-      ),
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

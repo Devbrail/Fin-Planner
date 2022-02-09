@@ -34,9 +34,6 @@ class _CategoryListPageState extends State<CategoryListPage> {
         key: const Key('add_category'),
         tooltip: AppLocalizations.of(context)!.addCategory,
         child: const Icon(Icons.add),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
       ),
     );
   }

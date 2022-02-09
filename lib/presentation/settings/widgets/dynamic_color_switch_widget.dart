@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive/hive.dart';
 
-import '../bloc/settings_controller.dart';
+import '../../../common/enum/box_types.dart';
+import '../../../data/settings/settings_service.dart';
 import 'setting_option.dart';
 
 class DynamicColorSwitchWidget extends StatefulWidget {
-  final Function(bool) onChange;
-  final SettingsController settingsController;
-
-  const DynamicColorSwitchWidget({
-    Key? key,
-    required this.onChange,
-    required this.settingsController,
-  }) : super(key: key);
+  const DynamicColorSwitchWidget({Key? key}) : super(key: key);
 
   @override
   _DynamicColorSwitchWidgetState createState() =>
@@ -20,12 +15,15 @@ class DynamicColorSwitchWidget extends StatefulWidget {
 }
 
 class _DynamicColorSwitchWidgetState extends State<DynamicColorSwitchWidget> {
-  late bool isDynamic = widget.settingsController.dynamicColor;
+  late final settings = Hive.box(BoxType.settings.stringValue);
+  late bool isDynamic = settings.get(
+    dynamicColorKey,
+    defaultValue: false,
+  );
 
   @override
   void initState() {
     super.initState();
-    widget.onChange(isDynamic);
   }
 
   @override
@@ -38,8 +36,7 @@ class _DynamicColorSwitchWidgetState extends State<DynamicColorSwitchWidget> {
           setState(() {
             isDynamic = value;
           });
-          widget.settingsController.setDynamicColor(value);
-          widget.onChange(value);
+          settings.put(dynamicColorKey, value);
         },
       ),
     );

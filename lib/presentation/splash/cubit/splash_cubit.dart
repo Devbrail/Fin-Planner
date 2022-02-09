@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import '../../../data/splash_screen/datasource/splash_local_data_sources.dart';
+import 'package:hive_flutter/adapters.dart';
 
+import '../../../common/enum/box_types.dart';
 import '../../../data/local_auth/local_auth_api.dart';
 import '../../../data/settings/settings_service.dart';
 import '../../../di/service_locator.dart';
@@ -10,24 +11,20 @@ import '../../../main.dart';
 part 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
-  SplashCubit({
-    required this.splashUseCase,
-  }) : super(SplashInitial());
+  SplashCubit() : super(SplashInitial());
 
-  final SplashLocalDataSource splashUseCase;
+  late final settings = Hive.box(BoxType.settings.stringValue);
   final SettingsService service = locator.get();
   final LocalAuthApi localAuthApi = locator.get();
 
   void checkLogin() {
-    splashUseCase.getLanguage().then((value) {
-      //emit(CountryLocalesState(locales));
-      if (value.languageCode == 'INR') {
-        emit(CountryLocalesState(locales));
-      } else {
-        currentLocale = value;
-        _checkBiometric();
-      }
-    });
+    final languageCode = settings.get(userLanguageKey, defaultValue: 'INR');
+    if (languageCode == 'INR') {
+      emit(CountryLocalesState(locales));
+    } else {
+      currentLocale = Locale(languageCode);
+      _checkBiometric();
+    }
   }
 
   void _checkBiometric() {
@@ -55,7 +52,9 @@ class SplashCubit extends Cubit<SplashState> {
           .then((value) => emit(NavigateToHome()));
 
   void setSeledetdLocale(Locale locale) {
-    splashUseCase.setLanguage(locale).then((value) => checkLogin());
+    settings
+        .put(userLanguageKey, locale.languageCode)
+        .then((value) => checkLogin());
   }
 }
 

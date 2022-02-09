@@ -1,9 +1,11 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../di/service_locator.dart';
-import '../bloc/settings_controller.dart';
+import 'package:hive_flutter/adapters.dart';
+
+import '../../../common/enum/box_types.dart';
+import '../../../data/settings/settings_service.dart';
 import 'dynamic_color_switch_widget.dart';
 import 'setting_option.dart';
 
@@ -20,37 +22,41 @@ class ColorSelectorWidget extends StatefulWidget {
 }
 
 class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
-  final SettingsController dataSources = locator.get();
-  late Color selectedColor = dataSources.currentColor;
-
-  void _updateColor(Color color) {
-    selectedColor = color;
-    setState(() {});
-    widget.onSelectedColor(color);
-  }
+  late final settings = Hive.box(BoxType.settings.stringValue)
+      .listenable(keys: [appColorKey, dynamicColorKey]);
 
   @override
   Widget build(BuildContext context) {
-    return SettingsOption(
-      title: AppLocalizations.of(context)!.accentColor,
-      subtitle: AppLocalizations.of(context)!.custom,
-      trailing: CircleAvatar(
-        backgroundColor: selectedColor,
-        maxRadius: 16,
-      ),
-      onTap: () {
-        showModalBottomSheet(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
+    return ValueListenableBuilder<Box>(
+      valueListenable: settings,
+      builder: (context, value, _) {
+        final isDynamic = value.get(dynamicColorKey, defaultValue: false);
+        final color = value.get(appColorKey, defaultValue: 0xFF795548);
+        return SettingsOption(
+          title: AppLocalizations.of(context)!.accentColor,
+          subtitle: isDynamic
+              ? AppLocalizations.of(context)!.dynamicColor
+              : AppLocalizations.of(context)!.custom,
+          trailing: CircleAvatar(
+            backgroundColor: Color(color),
+            maxRadius: 16,
           ),
-          context: context,
-          builder: (context) => ColorSelectionWidget(
-            onSelectedColor: (color) {
-              _updateColor(color);
-            },
-            dataSources: dataSources,
-            selectedColor: selectedColor,
-          ),
+          onTap: () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              context: context,
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width >= 700
+                    ? 700
+                    : double.infinity,
+              ),
+              builder: (context) =>
+                  ColorSelectionWidget(valueListenable: settings),
+            );
+          },
         );
       },
     );
@@ -58,15 +64,10 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
 }
 
 class ColorSelectionWidget extends StatefulWidget {
-  final Function(Color) onSelectedColor;
-  final Color selectedColor;
-  final SettingsController dataSources;
-
+  final ValueListenable<Box<dynamic>> valueListenable;
   const ColorSelectionWidget({
     Key? key,
-    required this.onSelectedColor,
-    required this.selectedColor,
-    required this.dataSources,
+    required this.valueListenable,
   }) : super(key: key);
 
   @override
@@ -74,19 +75,12 @@ class ColorSelectionWidget extends StatefulWidget {
 }
 
 class _ColorSelectionWidgetState extends State<ColorSelectionWidget> {
-  late Color selectedColor = widget.dataSources.currentColor;
-  late bool isDynamic = widget.dataSources.dynamicColor;
   late bool isAndroid12 = false;
+
   @override
   void initState() {
     super.initState();
     _fetchInfo();
-  }
-
-  void _updateColor(Color color) {
-    debugPrint(color.value.toString());
-    selectedColor = color;
-    setState(() {});
   }
 
   Future<void> _fetchInfo() async {
@@ -98,83 +92,90 @@ class _ColorSelectionWidgetState extends State<ColorSelectionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          ListTile(
-            title: Text(
-              AppLocalizations.of(context)!.pickColor,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-          ),
-          if (!isAndroid12)
-            DynamicColorSwitchWidget(
-              settingsController: widget.dataSources,
-              onChange: (value) {
-                isDynamic = value;
-              },
-            ),
-          AbsorbPointer(
-            absorbing: isDynamic,
-            child: Opacity(
-              opacity: isDynamic ? 0.3 : 1,
-              child: GridView.builder(
-                padding: const EdgeInsets.only(bottom: 16),
-                shrinkWrap: true,
-                itemCount: Colors.primaries.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 6,
+    return ValueListenableBuilder<Box>(
+        valueListenable: widget.valueListenable,
+        builder: (context, value, _) {
+          final isDynamic = value.get(dynamicColorKey, defaultValue: false);
+          final selectedColor =
+              value.get(appColorKey, defaultValue: 0xFF795548);
+
+          return SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                ListTile(
+                  title: Text(
+                    AppLocalizations.of(context)!.pickColor,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
                 ),
-                itemBuilder: (_, index) {
-                  final color = Colors.primaries[index].shade500;
-                  if (color == selectedColor) {
-                    return Stack(
-                      children: [
-                        Center(child: CircleAvatar(backgroundColor: color)),
-                        const Center(child: Icon(Icons.check)),
-                      ],
-                    );
-                  } else {
-                    return GestureDetector(
-                      onTap: () {
-                        _updateColor(color);
-                      },
-                      child: Stack(
-                        children: [
-                          Center(
-                            child: CircleAvatar(
-                              backgroundColor: color,
-                            ),
-                          ),
-                        ],
+                if (!isAndroid12) const DynamicColorSwitchWidget(),
+                AbsorbPointer(
+                  absorbing: isDynamic,
+                  child: Opacity(
+                    opacity: isDynamic ? 0.3 : 1,
+                    child: GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.only(
+                        bottom: 16,
                       ),
-                    );
-                  }
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0, bottom: 16),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
+                      shrinkWrap: true,
+                      itemCount: Colors.primaries.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount:
+                            MediaQuery.of(context).size.width >= 700 ? 9 : 6,
+                      ),
+                      itemBuilder: (_, index) {
+                        final color = Colors.primaries[index].shade500;
+                        if (color == selectedColor) {
+                          return Stack(
+                            children: [
+                              Center(
+                                  child: CircleAvatar(backgroundColor: color)),
+                              const Center(child: Icon(Icons.check)),
+                            ],
+                          );
+                        } else {
+                          return GestureDetector(
+                            onTap: () {
+                              value.put(appColorKey, color.value);
+                            },
+                            child: Stack(
+                              children: [
+                                Center(
+                                  child: CircleAvatar(
+                                    backgroundColor: color,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
                 ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              ),
-              onPressed: () {
-                widget.onSelectedColor(selectedColor);
-                Navigator.pop(context);
-              },
-              child: Text(AppLocalizations.of(context)!.done),
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 12),
+                    ),
+                    onPressed: () {
+                      //widget.onSelectedColor(selectedColor);
+                      Navigator.pop(context);
+                    },
+                    child: Text(AppLocalizations.of(context)!.done),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/data/category/datasources/category_local_data_source.dart';
+import 'package:flutter_paisa/app/routes.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -8,12 +8,12 @@ import '../../../common/constants/time.dart';
 import '../../../common/constants/util.dart';
 import '../../../common/enum/box_types.dart';
 import '../../../common/enum/filter_budget.dart';
-import '../../../common/enum/transaction.dart';
 import '../../../common/widgets/empty_widget.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
+import '../../../data/category/datasources/category_datasource.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
-import '../widgets/budget_graph.dart';
+import '../../../di/service_locator.dart';
 import '../widgets/budget_item_widget.dart';
 import '../widgets/filter_budget_widget.dart';
 
@@ -26,6 +26,7 @@ class BudgetOverViewPage extends StatefulWidget {
 
 class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
   FilterBudget selectedType = FilterBudget.daily;
+  final CategoryDataSource categoryDataSource = locator.get();
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
@@ -33,6 +34,13 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
         appBar: materialYouAppBar(
           context,
           AppLocalizations.of(context)!.budgetOverView,
+        ),
+        floatingActionButton: FloatingActionButton.large(
+          onPressed: () => Navigator.pushNamed(context, addCategoryScreen),
+          heroTag: 'date_range',
+          key: const Key('date_range'),
+          tooltip: AppLocalizations.of(context)!.addCategory,
+          child: const Icon(Icons.add),
         ),
         body: ValueListenableBuilder<Box<Expense>>(
           valueListenable:
@@ -67,7 +75,11 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
                     shrinkWrap: true,
                     itemCount: filterBudget.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return BudgetSection(map: filterBudget[index]);
+                      return BudgetSection(
+                        name: filterBudget[index].key,
+                        dataSource: categoryDataSource,
+                        values: filterBudget[index].value,
+                      );
                     },
                   ),
                 ),
@@ -107,59 +119,47 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
                 .entries
                 .toList();
 
-            final graphData = filterBudget
-                .map((e) => OrdinalSales(e.key, calcauleTotal(e.value)))
-                .toList();
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: 200,
-                  child: TransactionGraph(
-                    seriesList: TransactionGraph.createSampleData(graphData),
-                  ),
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: filterBudget.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return BudgetSection(map: filterBudget[index]);
-                  },
-                ),
-              ],
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: filterBudget.length,
+              itemBuilder: (BuildContext context, int index) {
+                return BudgetSection(
+                  name: filterBudget[index].key,
+                  values: filterBudget[index].value,
+                  dataSource: categoryDataSource,
+                );
+              },
             );
           },
         ),
       ),
     );
   }
-
-  num calcauleTotal(List<Expense> expenses) {
-    final total = expenses.fold<double>(0, (previousValue, element) {
-      if (element.type == TransactonType.expense) {
-        return previousValue + element.currency;
-      } else {
-        return previousValue + 0;
-      }
-    });
-    return total;
-  }
 }
 
 class BudgetSection extends StatelessWidget {
   const BudgetSection({
     Key? key,
-    required this.map,
+    required this.values,
+    required this.name,
+    required this.dataSource,
   }) : super(key: key);
 
-  final MapEntry<String, List<Expense>> map;
+  final String name;
+  final List<Expense> values;
+  final CategoryDataSource dataSource;
+
+  List<MapEntry<Category, List<Expense>>> _filterCategory(
+    List<Expense> expenses,
+  ) {
+    return groupBy(expenses,
+            (Expense element) => dataSource.fetchCategory(element.categoryId))
+        .entries
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final maps = groupBy(
-            map.value, (Expense element) => fetchCategory(element.categoryId))
-        .entries
-        .toList();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -171,7 +171,7 @@ class BudgetSection extends StatelessWidget {
             top: 16,
           ),
           child: Text(
-            map.key,
+            name,
             style: Theme.of(context)
                 .textTheme
                 .headline6
@@ -180,11 +180,11 @@ class BudgetSection extends StatelessWidget {
         ),
         ScreenTypeLayout(
           mobile: BudgetOverViewList(
-            maps: maps,
+            maps: _filterCategory(values),
             crossAxisCount: 2,
           ),
           tablet: BudgetOverViewList(
-            maps: maps,
+            maps: _filterCategory(values),
             crossAxisCount: 4,
           ),
         )

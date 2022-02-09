@@ -19,34 +19,36 @@ class ExpenseAdapter extends TypeAdapter<Expense> {
     return Expense(
       name: fields[0] as String,
       currency: fields[1] as double,
-      time: fields[4] as DateTime,
-      categoryId: fields[9] as int,
-      accountId: fields[8] as int,
-      addOrSub: fields[3] as bool,
-      type: fields[7] == null
+      time: fields[3] as DateTime,
+      categoryId: fields[6] as int,
+      accountId: fields[5] as int,
+      addOrSub: fields[2] as bool,
+      type: fields[4] == null
           ? TransactonType.expense
-          : fields[7] as TransactonType?,
-    );
+          : fields[4] as TransactonType?,
+    )..superId = fields[7] as int?;
   }
 
   @override
   void write(BinaryWriter writer, Expense obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.currency)
-      ..writeByte(3)
+      ..writeByte(2)
       ..write(obj.addOrSub)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.time)
-      ..writeByte(7)
+      ..writeByte(4)
       ..write(obj.type)
-      ..writeByte(8)
+      ..writeByte(5)
       ..write(obj.accountId)
-      ..writeByte(9)
-      ..write(obj.categoryId);
+      ..writeByte(6)
+      ..write(obj.categoryId)
+      ..writeByte(7)
+      ..write(obj.superId);
   }
 
   @override

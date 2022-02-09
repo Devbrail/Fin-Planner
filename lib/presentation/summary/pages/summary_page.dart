@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/common/enum/box_types.dart';
+import 'package:flutter_paisa/data/settings/settings_service.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
@@ -25,15 +28,11 @@ class _SummaryPageState extends State<SummaryPage> {
     return ScreenTypeLayout(
       mobile: Scaffold(
         appBar: AppBar(
-          title: BlocBuilder(
-            buildWhen: (previous, current) =>
-                current is UserDetailsChangedState,
-            bloc: BlocProvider.of<HomeBloc>(context),
-            builder: (context, state) {
-              String name = '';
-              if (state is UserDetailsChangedState) {
-                name = state.name;
-              }
+          title: ValueListenableBuilder<Box>(
+            valueListenable: Hive.box(BoxType.settings.stringValue)
+                .listenable(keys: [userNameKey]),
+            builder: (context, value, _) {
+              final name = value.get(userNameKey, defaultValue: 'Name');
               return Text(
                 AppLocalizations.of(context)!.welcomeMessage(name),
                 style: Theme.of(context).textTheme.headline6?.copyWith(
@@ -126,9 +125,6 @@ class _SummaryPageState extends State<SummaryPage> {
       heroTag: 'add_expense',
       key: const Key('add_expense'),
       child: const Icon(Icons.add),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
     );
   }
 
