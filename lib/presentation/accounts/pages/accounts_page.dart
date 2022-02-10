@@ -31,13 +31,6 @@ class _AccountsPageState extends State<AccountsPage> {
           context,
           AppLocalizations.of(context)!.accounts,
         ),
-        floatingActionButton: FloatingActionButton.large(
-          onPressed: () => Navigator.pushNamed(context, addAccountCardScreen),
-          heroTag: 'add_account',
-          key: const Key('add_account'),
-          tooltip: AppLocalizations.of(context)!.addAccount,
-          child: const Icon(Icons.add),
-        ),
         body: ListView(
           padding: const EdgeInsets.only(
             bottom: 124,
@@ -56,6 +49,13 @@ class _AccountsPageState extends State<AccountsPage> {
               },
             ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton.large(
+          onPressed: () => Navigator.pushNamed(context, addAccountCardScreen),
+          heroTag: 'add_account',
+          key: const Key('add_account'),
+          tooltip: AppLocalizations.of(context)!.addAccount,
+          child: const Icon(Icons.add),
         ),
       ),
     );

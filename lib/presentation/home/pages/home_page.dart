@@ -52,6 +52,11 @@ class _LandingPageState extends State<LandingPage>
                   selectedIcon: const Icon(Icons.home),
                 ),
                 NavigationDestination(
+                  label: AppLocalizations.of(context)!.accounts,
+                  icon: const Icon(Icons.credit_card_outlined),
+                  selectedIcon: const Icon(Icons.credit_card),
+                ),
+                NavigationDestination(
                   label: AppLocalizations.of(context)!.category,
                   icon: const Icon(Icons.category_outlined),
                   selectedIcon: const Icon(Icons.category),
@@ -60,11 +65,6 @@ class _LandingPageState extends State<LandingPage>
                   label: AppLocalizations.of(context)!.budget,
                   icon: const Icon(Icons.account_balance_wallet_outlined),
                   selectedIcon: const Icon(Icons.account_balance_wallet),
-                ),
-                NavigationDestination(
-                  label: AppLocalizations.of(context)!.accounts,
-                  icon: const Icon(Icons.credit_card_outlined),
-                  selectedIcon: const Icon(Icons.credit_card),
                 ),
                 NavigationDestination(
                   label: AppLocalizations.of(context)!.settings,
@@ -103,6 +103,11 @@ class _LandingPageState extends State<LandingPage>
                     selectedIcon: const Icon(Icons.home),
                   ),
                   NavigationRailDestination(
+                    icon: const Icon(Icons.credit_card_outlined),
+                    selectedIcon: const Icon(Icons.credit_card),
+                    label: Text(AppLocalizations.of(context)!.accounts),
+                  ),
+                  NavigationRailDestination(
                     icon: const Icon(Icons.category_outlined),
                     selectedIcon: const Icon(Icons.category),
                     label: Text(AppLocalizations.of(context)!.category),
@@ -111,11 +116,6 @@ class _LandingPageState extends State<LandingPage>
                     icon: const Icon(Icons.account_balance_wallet_outlined),
                     selectedIcon: const Icon(Icons.account_balance_wallet),
                     label: Text(AppLocalizations.of(context)!.budget),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.credit_card_outlined),
-                    selectedIcon: const Icon(Icons.credit_card),
-                    label: Text(AppLocalizations.of(context)!.accounts),
                   ),
                   NavigationRailDestination(
                     icon: const Icon(Icons.settings_outlined),
@@ -156,9 +156,9 @@ class _ContentWidgetState extends State<ContentWidget> {
       duration: const Duration(milliseconds: 300),
       child: const [
         SummaryPage(key: Key('home_page')),
+        AccountsPage(key: Key('accounts_page')),
         CategoryListPage(key: Key('category_page')),
         BudgetOverViewPage(key: Key('budget_page')),
-        AccountsPage(key: Key('accounts_page')),
         SettingsPage(key: Key('settings_page')),
       ][widget.index],
     );

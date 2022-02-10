@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/app/routes.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/time.dart';
+import '../../../common/constants/extensions.dart';
 import '../../../common/constants/util.dart';
 import '../../../common/enum/box_types.dart';
 import '../../../common/enum/filter_budget.dart';
@@ -25,8 +25,29 @@ class BudgetOverViewPage extends StatefulWidget {
 }
 
 class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
-  FilterBudget selectedType = FilterBudget.daily;
   final CategoryDataSource categoryDataSource = locator.get();
+  FilterBudget selectedType = FilterBudget.daily;
+  DateTimeRange? dateTimeRange;
+
+  Future<void> _dateRangePicker() async {
+    final intialDateRange = DateTimeRange(
+      start: DateTime.now(),
+      end: DateTime.now().add(
+        const Duration(days: 3),
+      ),
+    );
+    final newDateRange = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+      initialDateRange: dateTimeRange ?? intialDateRange,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+    );
+    if (newDateRange == null) return;
+    dateTimeRange = newDateRange;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
@@ -36,17 +57,20 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
           AppLocalizations.of(context)!.budgetOverView,
         ),
         floatingActionButton: FloatingActionButton.large(
-          onPressed: () => Navigator.pushNamed(context, addCategoryScreen),
+          onPressed: _dateRangePicker,
           heroTag: 'date_range',
           key: const Key('date_range'),
           tooltip: AppLocalizations.of(context)!.addCategory,
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.date_range),
         ),
         body: ValueListenableBuilder<Box<Expense>>(
           valueListenable:
               Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
-          builder: (context, value, Widget? child) {
-            var expenses = value.values.toList();
+          builder: (context, value, _) {
+            List<Expense> expenses = value.values.toList();
+            if (dateTimeRange != null) {
+              expenses = value.isFilterTimeBetween(dateTimeRange!);
+            }
             if (expenses.isEmpty) {
               return EmptyWidget(
                 icon: Icons.paid,
@@ -55,6 +79,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
                     AppLocalizations.of(context)!.errorNoBudgetDescription,
               );
             }
+            expenses.sort((a, b) => a.time.compareTo(b.time));
 
             final filterBudget = groupBy(expenses,
                     (Expense element) => element.time.formated(selectedType))

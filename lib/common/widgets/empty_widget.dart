@@ -9,6 +9,7 @@ class EmptyWidget extends StatelessWidget {
     required this.icon,
     required this.description,
   }) : super(key: key);
+
   final String title;
   final IconData icon;
   final String description;

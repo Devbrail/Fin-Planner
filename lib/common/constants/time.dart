@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../enum/filter_budget.dart';
@@ -60,6 +61,11 @@ extension DateUtils on DateTime {
       case FilterBudget.all:
         return 'All';
     }
+  }
+
+  bool isAfterBeforeTime(DateTimeRange range) {
+    return (isAfter(range.start) || isAtSameMomentAs(range.start)) &&
+        (isAtSameMomentAs(range.end) || isBefore(range.end));
   }
 }
 

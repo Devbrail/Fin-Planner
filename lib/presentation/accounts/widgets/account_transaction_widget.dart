@@ -5,6 +5,7 @@ import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../common/enum/box_types.dart';
+import '../../../common/constants/extensions.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
@@ -24,10 +25,7 @@ class AccountTransactinWidget extends StatelessWidget {
       valueListenable:
           Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
       builder: (context, value, child) {
-        final expenses = value.values
-            .where((element) => element.accountId == account.superId)
-            .toList();
-
+        final expenses = value.allAccount(account.superId!);
         if (expenses.isEmpty) {
           return const SizedBox.shrink();
         }
