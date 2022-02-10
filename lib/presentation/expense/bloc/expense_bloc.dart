@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_paisa/common/constants/util.dart';
 
+import '../../../common/constants/util.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../domain/landing/usecase/expense_use_case.dart';
-import '../../home/bloc/home_bloc.dart';
 
 part 'expense_event.dart';
 part 'expense_state.dart';

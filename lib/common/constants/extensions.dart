@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/common/constants/util.dart';
-import 'package:flutter_paisa/data/expense/model/expense.dart';
 import 'package:hive_flutter/adapters.dart';
+
+import '../../data/expense/model/expense.dart';
 import 'time.dart';
 
 extension ExpenseListMapping on Box<Expense> {
