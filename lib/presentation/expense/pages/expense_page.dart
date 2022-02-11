@@ -30,7 +30,7 @@ class ExpensePage extends StatefulWidget {
 
 class _ExpensePageState extends State<ExpensePage> {
   final _form = GlobalKey<FormState>();
-  final ExpenseBloc expenseBloc = locator.get();
+  final expenseBloc = locator.get<ExpenseBloc>();
 
   late TextEditingController nameTextController;
   late TextEditingController amountTextController;
@@ -43,7 +43,7 @@ class _ExpensePageState extends State<ExpensePage> {
   String? errorMessage;
   bool get isAddExpense => widget.expense == null;
 
-  void addExpense() {
+  Future<void> addExpense() async {
     if (selectedCategoryId == null) {
       errorMessage = 'Select category';
       setState(() {});
@@ -75,18 +75,16 @@ class _ExpensePageState extends State<ExpensePage> {
         ),
       );
     } else {
-      /* final double amount = double.parse(amountTextController.text);
-      expenseBloc.add(
-        UpdateExpenseEvent(
-          expense: widget.expense!
-            ..accountId = selectedAccount!.key
-            ..categoryId = selectedCategory!.key
-            ..currency = amount
-            ..name = nameTextController.text
-            ..time = selectedDate
-            ..type = selectedType,
-        ),
-      ); */
+      final double amount = double.parse(amountTextController.text);
+      widget.expense!
+        ..accountId = selectedAccountId!
+        ..categoryId = selectedCategoryId!
+        ..currency = amount
+        ..name = nameTextController.text
+        ..time = selectedDate
+        ..type = selectedType;
+      await widget.expense!.save();
+      expenseBloc.add(UpdateExpenseEvent(expense: widget.expense!));
     }
   }
 
@@ -144,9 +142,8 @@ class _ExpensePageState extends State<ExpensePage> {
               isAddExpense
                   ? const SizedBox.shrink()
                   : IconButton(
-                      onPressed: () {
-                        expenseBloc.add(ClearExpenseEvent(widget.expense!));
-                      },
+                      onPressed: () =>
+                          expenseBloc.add(ClearExpenseEvent(widget.expense!)),
                       icon: const Icon(Icons.delete_rounded),
                     )
             ],

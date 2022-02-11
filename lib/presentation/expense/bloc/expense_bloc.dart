@@ -45,7 +45,6 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     UpdateExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) async {
-    await expenseUseCase.updateExpense(event.expense);
     emit(const ExpenseAdded());
   }
 
