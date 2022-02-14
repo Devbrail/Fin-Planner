@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
@@ -24,9 +25,15 @@ class _CategoryListPageState extends State<CategoryListPage> {
         context,
         AppLocalizations.of(context)!.categories,
       ),
-      body: CategoryListWidget(
-        addCategoryBloc: addCategoryBloc,
-        crossAxisCount: 2,
+      body: ScreenTypeLayout(
+        mobile: CategoryListWidget(
+          addCategoryBloc: addCategoryBloc,
+          crossAxisCount: 2,
+        ),
+        tablet: CategoryListWidget(
+          addCategoryBloc: addCategoryBloc,
+          crossAxisCount: 5,
+        ),
       ),
       floatingActionButton: FloatingActionButton.large(
         onPressed: () => Navigator.pushNamed(context, addCategoryScreen),

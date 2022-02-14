@@ -249,7 +249,6 @@ FloatingActionButtonThemeData floatingActionButton(ColorScheme colorScheme) {
 AppBarTheme appBarTheme(Brightness brightness) {
   return AppBarTheme(
     elevation: 0,
-    backgroundColor: Colors.transparent,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.transparent,

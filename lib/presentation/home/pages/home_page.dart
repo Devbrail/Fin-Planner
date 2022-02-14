@@ -38,6 +38,13 @@ class _LandingPageState extends State<LandingPage>
         mobile: Scaffold(
           body: ContentWidget(index: index),
           bottomNavigationBar: Material(
+            clipBehavior: Clip.antiAlias,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
+              ),
+            ),
             elevation: 6,
             child: NavigationBar(
               selectedIndex: index,

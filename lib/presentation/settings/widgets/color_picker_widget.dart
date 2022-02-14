@@ -44,8 +44,11 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
           onTap: () {
             showModalBottomSheet(
               isScrollControlled: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
+                ),
               ),
               context: context,
               constraints: BoxConstraints(
@@ -93,89 +96,88 @@ class _ColorSelectionWidgetState extends State<ColorSelectionWidget> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-        valueListenable: widget.valueListenable,
-        builder: (context, value, _) {
-          final isDynamic = value.get(dynamicColorKey, defaultValue: false);
-          final selectedColor =
-              value.get(appColorKey, defaultValue: 0xFF795548);
+      valueListenable: widget.valueListenable,
+      builder: (context, value, _) {
+        final isDynamic = value.get(dynamicColorKey, defaultValue: false);
+        final selectedColor = value.get(appColorKey, defaultValue: 0xFF795548);
 
-          return SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                ListTile(
-                  title: Text(
-                    AppLocalizations.of(context)!.pickColor,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              ListTile(
+                title: Text(
+                  AppLocalizations.of(context)!.pickColor,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
-                if (!isAndroid12) const DynamicColorSwitchWidget(),
-                AbsorbPointer(
-                  absorbing: isDynamic,
-                  child: Opacity(
-                    opacity: isDynamic ? 0.3 : 1,
-                    child: GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.only(
-                        bottom: 16,
-                      ),
-                      shrinkWrap: true,
-                      itemCount: Colors.primaries.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount:
-                            MediaQuery.of(context).size.width >= 700 ? 9 : 6,
-                      ),
-                      itemBuilder: (_, index) {
-                        final color = Colors.primaries[index].shade500;
-                        if (color == selectedColor) {
-                          return Stack(
+              ),
+              if (!isAndroid12) const DynamicColorSwitchWidget(),
+              AbsorbPointer(
+                absorbing: isDynamic,
+                child: Opacity(
+                  opacity: isDynamic ? 0.3 : 1,
+                  child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.only(
+                      bottom: 16,
+                    ),
+                    shrinkWrap: true,
+                    itemCount: Colors.primaries.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount:
+                          MediaQuery.of(context).size.width >= 700 ? 9 : 6,
+                    ),
+                    itemBuilder: (_, index) {
+                      final color = Colors.primaries[index].shade500;
+                      if (color == selectedColor) {
+                        return Stack(
+                          children: [
+                            Center(child: CircleAvatar(backgroundColor: color)),
+                            const Center(child: Icon(Icons.check)),
+                          ],
+                        );
+                      } else {
+                        return GestureDetector(
+                          onTap: () {
+                            value.put(appColorKey, color.value);
+                          },
+                          child: Stack(
                             children: [
                               Center(
-                                  child: CircleAvatar(backgroundColor: color)),
-                              const Center(child: Icon(Icons.check)),
-                            ],
-                          );
-                        } else {
-                          return GestureDetector(
-                            onTap: () {
-                              value.put(appColorKey, color.value);
-                            },
-                            child: Stack(
-                              children: [
-                                Center(
-                                  child: CircleAvatar(
-                                    backgroundColor: color,
-                                  ),
+                                child: CircleAvatar(
+                                  backgroundColor: color,
                                 ),
-                              ],
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 16.0, bottom: 16),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 12),
-                    ),
-                    onPressed: () {
-                      //widget.onSelectedColor(selectedColor);
-                      Navigator.pop(context);
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                     },
-                    child: Text(AppLocalizations.of(context)!.done),
                   ),
                 ),
-              ],
-            ),
-          );
-        });
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 12),
+                  ),
+                  onPressed: () {
+                    //widget.onSelectedColor(selectedColor);
+                    Navigator.pop(context);
+                  },
+                  child: Text(AppLocalizations.of(context)!.done),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

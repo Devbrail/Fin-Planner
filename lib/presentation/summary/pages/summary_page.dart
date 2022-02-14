@@ -26,6 +26,7 @@ class _SummaryPageState extends State<SummaryPage> {
     return ScreenTypeLayout(
       mobile: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           title: ValueListenableBuilder<Box>(
             valueListenable: Hive.box(BoxType.settings.stringValue)
                 .listenable(keys: [userNameKey]),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -42,6 +44,20 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
       lastDate: DateTime(DateTime.now().year + 5),
       initialDateRange: dateTimeRange ?? intialDateRange,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
+      builder: (_, child) => Theme(
+        data: Theme.of(context).copyWith(
+          textTheme: GoogleFonts.outfitTextTheme(Theme.of(context).textTheme),
+          colorScheme: Theme.of(context).colorScheme,
+          appBarTheme: Theme.of(context).appBarTheme.copyWith(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.transparent,
+                  systemNavigationBarColor: Colors.transparent,
+                  statusBarIconBrightness: Theme.of(context).brightness,
+                ),
+              ),
+        ),
+        child: child!,
+      ),
     );
     if (newDateRange == null) return;
     dateTimeRange = newDateRange;
@@ -116,7 +132,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
       tablet: Scaffold(
         appBar: materialYouAppBar(
           context,
-          AppLocalizations.of(context)!.budget,
+          AppLocalizations.of(context)!.budgetOverView,
           actions: [
             FilterBudgetWidget(
               onSelected: (budget) {
@@ -125,6 +141,13 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
               },
             ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton.large(
+          onPressed: _dateRangePicker,
+          heroTag: 'date_range',
+          key: const Key('date_range'),
+          tooltip: AppLocalizations.of(context)!.addCategory,
+          child: const Icon(Icons.date_range),
         ),
         body: ValueListenableBuilder<Box<Expense>>(
           valueListenable: Hive.box<Expense>('expense').listenable(),
