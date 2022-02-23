@@ -17,7 +17,7 @@ import 'di/service_locator.dart';
 import 'presentation/home/bloc/home_bloc.dart';
 
 final GlobalKey<NavigatorState> mainNavigator = GlobalKey<NavigatorState>();
-late Locale currentLocale;
+late String currentLocale;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
@@ -116,6 +116,6 @@ class _MyAppState extends State<MyApp> {
               );
             },
           );
-        });
+        },);
   }
 }

@@ -7,9 +7,10 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/constants/util.dart';
+import '../../../common/pair.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../di/service_locator.dart';
-import '../cubit/splash_cubit.dart';
+import '../bloc/splash_bloc.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({Key? key}) : super(key: key);
@@ -19,13 +20,8 @@ class SplashScreenPage extends StatefulWidget {
 }
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
-  final SplashCubit splashCubit = locator.get();
-
-  @override
-  void initState() {
-    super.initState();
-    splashCubit.checkLogin();
-  }
+  late final SplashBloc splashCubit = locator.get<SplashBloc>()
+    ..add(CheckLoginEvent());
 
   @override
   Widget build(BuildContext context) {
@@ -63,21 +59,27 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TextField(
+                      decoration: InputDecoration(hintText: 'Search'),
+                    ),
+                  ),
                   Expanded(
                     child: ScreenTypeLayout(
                       mobile: LocaleGridView(
                         locales: locales,
-                        onPressed: splashCubit.setSeledetdLocale,
+                        onPressed: splashCubit.setSelectedLocale,
                         crossAxisCount: 2,
                       ),
                       tablet: LocaleGridView(
                         locales: locales,
-                        onPressed: splashCubit.setSeledetdLocale,
+                        onPressed: splashCubit.setSelectedLocale,
                         crossAxisCount: 5,
                       ),
                       desktop: LocaleGridView(
                         locales: locales,
-                        onPressed: splashCubit.setSeledetdLocale,
+                        onPressed: splashCubit.setSelectedLocale,
                         crossAxisCount: 5,
                       ),
                     ),

@@ -32,7 +32,7 @@ import '../presentation/category/bloc/category_bloc.dart';
 import '../presentation/expense/bloc/expense_bloc.dart';
 import '../presentation/home/bloc/home_bloc.dart';
 import '../presentation/settings/bloc/settings_controller.dart';
-import '../presentation/splash/cubit/splash_cubit.dart';
+import '../presentation/splash/bloc/splash_bloc.dart';
 
 final locator = GetIt.instance;
 
@@ -121,7 +121,7 @@ void _setupUseCase() {
 }
 
 void _setupBloc() {
-  locator.registerFactory(() => SplashCubit());
+  locator.registerFactory(() => SplashBloc());
   locator.registerFactory(() => CategoryBloc(categoryUseCase: locator.get()));
   locator.registerFactory(() => ExpenseBloc(locator.get()));
   locator.registerFactory(
