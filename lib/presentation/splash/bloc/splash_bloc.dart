@@ -4,10 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:intl/number_symbols_data.dart';
 
 import '../../../common/enum/box_types.dart';
-import '../../../common/pair.dart';
 import '../../../data/local_auth/local_auth_api.dart';
 import '../../../data/settings/settings_service.dart';
 import '../../../di/service_locator.dart';

@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive/hive.dart';
+
+import '../../main.dart';
 
 part 'transaction.g.dart';
 
@@ -15,14 +16,16 @@ enum TransactonType {
 }
 
 extension TransactonTypeMapping on TransactonType {
-  String name(BuildContext context) {
+  String get name {
     switch (this) {
       case TransactonType.income:
-        return AppLocalizations.of(context)!.income;
+        return AppLocalizations.of(mainNavigator.currentState!.context)!.income;
       case TransactonType.expense:
-        return AppLocalizations.of(context)!.expense;
+        return AppLocalizations.of(mainNavigator.currentState!.context)!
+            .expense;
       case TransactonType.deposit:
-        return AppLocalizations.of(context)!.deposit;
+        return AppLocalizations.of(mainNavigator.currentState!.context)!
+            .deposit;
     }
   }
 }

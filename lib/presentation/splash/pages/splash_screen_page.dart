@@ -1,13 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/presentation/login/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/constants/util.dart';
-import '../../../common/pair.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/splash_bloc.dart';
@@ -25,76 +26,83 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: BlocConsumer(
-          listener: (context, state) {
-            if (state is BiometricErrorState) {
-              showMaterialSnackBar(
-                context,
-                AppLocalizations.of(context)!.errorAuth,
-              );
-            }
-            if (state is NavigateToHome) {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                landingScreen,
-                (route) => false,
-              );
-            }
-          },
-          bloc: splashCubit,
-          builder: (context, state) {
-            if (state is CountryLocalesState) {
-              final locales = state.locales.entries.toList();
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    title: Text(
-                      AppLocalizations.of(context)!.selecteCountry,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextField(
-                      decoration: InputDecoration(hintText: 'Search'),
-                    ),
-                  ),
-                  Expanded(
-                    child: ScreenTypeLayout(
-                      mobile: LocaleGridView(
-                        locales: locales,
-                        onPressed: splashCubit.setSelectedLocale,
-                        crossAxisCount: 2,
-                      ),
-                      tablet: LocaleGridView(
-                        locales: locales,
-                        onPressed: splashCubit.setSelectedLocale,
-                        crossAxisCount: 5,
-                      ),
-                      desktop: LocaleGridView(
-                        locales: locales,
-                        onPressed: splashCubit.setSelectedLocale,
-                        crossAxisCount: 5,
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
-      ),
-    );
+    return StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const LoginPage();
+          }
+          return Scaffold(
+            body: SafeArea(
+              child: BlocConsumer(
+                listener: (context, state) {
+                  if (state is BiometricErrorState) {
+                    showMaterialSnackBar(
+                      context,
+                      AppLocalizations.of(context)!.errorAuth,
+                    );
+                  }
+                  if (state is NavigateToHome) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      landingScreen,
+                      (route) => false,
+                    );
+                  }
+                },
+                bloc: splashCubit,
+                builder: (context, state) {
+                  if (state is CountryLocalesState) {
+                    final locales = state.locales.entries.toList();
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          title: Text(
+                            AppLocalizations.of(context)!.selecteCountry,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5
+                                ?.copyWith(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextField(
+                            decoration: InputDecoration(hintText: 'Search'),
+                          ),
+                        ),
+                        Expanded(
+                          child: ScreenTypeLayout(
+                            mobile: LocaleGridView(
+                              locales: locales,
+                              onPressed: splashCubit.setSelectedLocale,
+                              crossAxisCount: 2,
+                            ),
+                            tablet: LocaleGridView(
+                              locales: locales,
+                              onPressed: splashCubit.setSelectedLocale,
+                              crossAxisCount: 5,
+                            ),
+                            desktop: LocaleGridView(
+                              locales: locales,
+                              onPressed: splashCubit.setSelectedLocale,
+                              crossAxisCount: 5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+            ),
+          );
+        });
   }
 }
 

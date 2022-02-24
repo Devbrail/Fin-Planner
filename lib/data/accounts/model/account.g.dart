@@ -24,7 +24,8 @@ class AccountAdapter extends TypeAdapter<Account> {
       number: fields[5] as String,
       cardType: fields[6] == null ? CardType.debitcard : fields[6] as CardType?,
       isPredefined: fields[2] as bool,
-    )..superId = fields[7] == null ? 0 : fields[7] as int?;
+      superId: fields[7] as String,
+    );
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,6 +30,15 @@ class _SelectedAccountState extends State<SelectedAccount> {
 
   @override
   Widget build(BuildContext context) {
+    final ref = FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('accounts')
+        .withConverter<Account>(
+          fromFirestore: (snapshots, _) => Account.fromJson(snapshots.data()!),
+          toFirestore: (expense, _) => expense.toJson(),
+        );
+
     return BlocBuilder(
       bloc: accountsBloc,
       buildWhen: (previous, current) => current is AccountListState,
@@ -99,14 +110,27 @@ class _SelectedAccountState extends State<SelectedAccount> {
                                   ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                           ),
-                          SelectedItem(
-                            accounts: accounts,
-                            onSelected: (index) {
-                              selectedIndex = index;
-                              widget.onSelected(accounts[index]);
-                              setState(() {});
+                          StreamBuilder<QuerySnapshot<Account>>(
+                            stream: ref.snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                final data = snapshot.requireData;
+                                final accounts =
+                                    data.docs.map((e) => e.data()).toList();
+                                return SelectedItem(
+                                  accounts: accounts,
+                                  onSelected: (index) {
+                                    selectedIndex = index;
+                                    widget.onSelected(accounts[index]);
+                                    setState(() {});
+                                  },
+                                  selectedIndex: selectedIndex,
+                                );
+                              }
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
                             },
-                            selectedIndex: selectedIndex,
                           )
                         ],
                       ),

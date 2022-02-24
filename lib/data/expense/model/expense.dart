@@ -39,4 +39,21 @@ class Expense extends HiveObject {
     this.addOrSub = false,
     required this.type,
   });
+
+  factory Expense.fromJson(Map<String, dynamic> json) => Expense(
+        name: json['name'],
+        currency: json['amount'],
+        time: json['time'],
+        categoryId: json['categoryId'],
+        accountId: json['accountId'],
+        type: json['type'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'time': time.toIso8601String(),
+        'type': type!.name,
+        'accountId': accountId,
+        'categoryId': categoryId,
+      };
 }

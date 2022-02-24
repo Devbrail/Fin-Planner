@@ -5,7 +5,7 @@ import '../../data/expense/model/expense.dart';
 import 'time.dart';
 
 extension ExpenseListMapping on Box<Expense> {
-  List<Expense> allAccount(int accountId) {
+  List<Expense> allAccount(String accountId) {
     return values.where((element) => element.accountId == accountId).toList();
   }
 

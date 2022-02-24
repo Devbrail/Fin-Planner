@@ -48,4 +48,5 @@ app.*.map.json
 
 
 *.VSCodeCounter
-/expense.jks
+
+**/app/google-services.json

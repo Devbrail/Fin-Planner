@@ -15,6 +15,22 @@ enum CardType {
   upi
 }
 
+extension StringCardTypeMapping on String {
+  CardType get type {
+    switch (this) {
+      case 'Cash':
+        return CardType.cash;
+      case 'Debit card':
+        return CardType.debitcard;
+      case 'Credit card':
+        return CardType.creditCard;
+      case 'UPI':
+        return CardType.upi;
+    }
+    return CardType.cash;
+  }
+}
+
 extension CardTypeMapping on CardType {
   String get name {
     switch (this) {

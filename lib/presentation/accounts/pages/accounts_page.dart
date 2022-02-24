@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,6 +21,15 @@ class AccountsPage extends StatefulWidget {
 }
 
 class _AccountsPageState extends State<AccountsPage> {
+  final ref = FirebaseFirestore.instance
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .collection('accounts')
+      .withConverter<Account>(
+        fromFirestore: (snapshots, _) => Account.fromJson(snapshots.data()!),
+        toFirestore: (expense, _) => expense.toJson(),
+      );
+
   final AccountsBloc accountsBloc = locator.get();
   int selectedIndex = 0;
   Account? selectedAccount;
@@ -38,7 +49,7 @@ class _AccountsPageState extends State<AccountsPage> {
               bottom: 124,
             ),
             children: [
-              const AccountPageViewWidget(),
+              AccountPageViewWidget(),
               BlocBuilder(
                 bloc: accountsBloc,
                 buildWhen: (previous, current) =>
@@ -69,7 +80,7 @@ class _AccountsPageState extends State<AccountsPage> {
           body: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Expanded(child: AccountPageViewWidget()),
+              Expanded(child: AccountPageViewWidget()),
               Expanded(
                 child: BlocBuilder(
                   bloc: accountsBloc,

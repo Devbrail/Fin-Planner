@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/presentation/login/pages/login_page.dart';
 
 import '../data/accounts/model/account.dart';
 import '../data/category/model/category.dart';
@@ -11,6 +12,7 @@ import '../presentation/settings/widgets/user_profile_widget.dart';
 import '../presentation/splash/pages/splash_screen_page.dart';
 
 const splashScreen = '/splash';
+const loginScreen = '/login';
 const landingScreen = '/landing';
 const addExpenseScreen = '/add-expense';
 const addCategoryScreen = '/add-category';
@@ -23,6 +25,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return _page(const SplashScreenPage());
     case landingScreen:
       return _page(const LandingPage());
+    case loginScreen:
+      return _page(const LoginPage());
     case addExpenseScreen:
       final args = settings.arguments as Expense?;
       return MaterialPageRoute(

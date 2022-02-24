@@ -48,17 +48,17 @@ class ExpenseTotalWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         TotalTextWidget(
-                          title: TransactonType.income.name(context),
+                          title: TransactonType.income.name,
                           value: totalIncome,
                         ),
                         const SizedBox(height: 16),
                         TotalTextWidget(
-                          title: TransactonType.expense.name(context),
+                          title: TransactonType.expense.name,
                           value: totalExpense,
                         ),
                         const SizedBox(height: 16),
                         TotalTextWidget(
-                          title: TransactonType.deposit.name(context),
+                          title: TransactonType.deposit.name,
                           value: totalDeposit,
                         ),
                       ],

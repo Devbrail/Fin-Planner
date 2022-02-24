@@ -1,4 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,6 +21,7 @@ final GlobalKey<NavigatorState> mainNavigator = GlobalKey<NavigatorState>();
 late String currentLocale;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await setupLocator();
   runApp(const MyApp());
 }
@@ -37,85 +39,88 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-        valueListenable: settings,
-        builder: (context, value, _) {
-          final isDynamic = value.get(dynamicColorKey, defaultValue: false);
-          final color = value.get(appColorKey, defaultValue: 0xFF795548);
-          final themeMode =
-              ThemeMode.values[value.get(themeModeKey, defaultValue: 0)];
-          final primaryColor = Color(color);
-          return AppBuilder(
-            builder: (context) {
-              return DynamicColorBuilder(
-                builder: (material_color.CorePalette? corePalette) {
-                  ColorScheme colorScheme = ColorScheme.fromSeed(
-                    seedColor: primaryColor,
-                  );
-                  ColorScheme darkColorScheme = ColorScheme.fromSeed(
-                    seedColor: primaryColor,
-                    brightness: Brightness.dark,
-                  );
+      valueListenable: settings,
+      builder: (context, value, _) {
+        final isDynamic = value.get(dynamicColorKey, defaultValue: false);
+        final color = value.get(appColorKey, defaultValue: 0xFF795548);
+        final themeMode =
+            ThemeMode.values[value.get(themeModeKey, defaultValue: 0)];
+        final primaryColor = Color(color);
+        return AppBuilder(
+          builder: (context) {
+            return DynamicColorBuilder(
+              builder: (material_color.CorePalette? corePalette) {
+                ColorScheme colorScheme = ColorScheme.fromSeed(
+                  seedColor: primaryColor,
+                );
+                ColorScheme darkColorScheme = ColorScheme.fromSeed(
+                  seedColor: primaryColor,
+                  brightness: Brightness.dark,
+                );
 
-                  if (corePalette != null && isDynamic) {
-                    colorScheme = corePalette.colorScheme;
-                    darkColorScheme = corePalette.darkColorScheme;
-                    colorScheme = colorScheme.harmonized();
-                    darkColorScheme = darkColorScheme.harmonized();
-                  }
-                  return MultiBlocProvider(
-                    providers: [
-                      BlocProvider(
-                          create: (context) => locator.get<HomeBloc>()),
-                    ],
-                    child: MaterialApp(
-                      navigatorKey: mainNavigator,
-                      debugShowCheckedModeBanner: false,
-                      theme: ThemeData.light().copyWith(
-                        colorScheme: colorScheme,
-                        dialogTheme: dialogTheme(),
-                        appBarTheme: appBarTheme(Brightness.dark),
-                        useMaterial3: true,
-                        textTheme: GoogleFonts.outfitTextTheme(
-                          ThemeData.light().textTheme,
-                        ),
-                        scaffoldBackgroundColor: colorScheme.background,
-                        dialogBackgroundColor: colorScheme.background,
-                        navigationBarTheme: navigationBarThemeData,
-                        applyElevationOverlayColor: true,
+                if (corePalette != null && isDynamic) {
+                  colorScheme = corePalette.colorScheme;
+                  darkColorScheme = corePalette.darkColorScheme;
+                  colorScheme = colorScheme.harmonized();
+                  darkColorScheme = darkColorScheme.harmonized();
+                }
+                return MultiBlocProvider(
+                  providers: [
+                    BlocProvider(create: (context) => locator.get<HomeBloc>()),
+                  ],
+                  child: MaterialApp(
+                    navigatorKey: mainNavigator,
+                    debugShowCheckedModeBanner: false,
+                    theme: ThemeData.light().copyWith(
+                      colorScheme: colorScheme,
+                      dialogTheme: dialogTheme(),
+                      appBarTheme: appBarTheme(Brightness.dark),
+                      useMaterial3: true,
+                      textTheme: GoogleFonts.outfitTextTheme(
+                        ThemeData.light().textTheme,
                       ),
-                      darkTheme: ThemeData.dark().copyWith(
-                        colorScheme: darkColorScheme,
-                        dialogTheme: dialogTheme(),
-                        appBarTheme: appBarTheme(Brightness.light),
-                        useMaterial3: true,
-                        textTheme: GoogleFonts.outfitTextTheme(
-                          ThemeData.dark().textTheme,
-                        ),
-                        scaffoldBackgroundColor: darkColorScheme.background,
-                        dialogBackgroundColor: darkColorScheme.background,
-                        navigationBarTheme: navigationBarThemeData,
-                        applyElevationOverlayColor: true,
-                      ),
-                      themeMode: themeMode,
-                      onGenerateRoute: onGenerateRoute,
-                      initialRoute: splashScreen,
-                      localizationsDelegates: const [
-                        AppLocalizations.delegate, // Add this line
-                        GlobalMaterialLocalizations.delegate,
-                        GlobalWidgetsLocalizations.delegate,
-                        GlobalCupertinoLocalizations.delegate,
-                      ],
-                      supportedLocales: const [
-                        Locale('en', ''),
-                      ],
-                      onGenerateTitle: (BuildContext context) =>
-                          AppLocalizations.of(context)!.appTitle,
+                      scaffoldBackgroundColor: colorScheme.background,
+                      dialogBackgroundColor: colorScheme.background,
+                      navigationBarTheme: navigationBarThemeData,
+                      applyElevationOverlayColor: true,
                     ),
-                  );
-                },
-              );
-            },
-          );
-        },);
+                    darkTheme: ThemeData.dark().copyWith(
+                      colorScheme: darkColorScheme,
+                      dialogTheme: dialogTheme(),
+                      appBarTheme: appBarTheme(Brightness.light),
+                      useMaterial3: true,
+                      textTheme: GoogleFonts.outfitTextTheme(
+                        ThemeData.dark().textTheme,
+                      ),
+                      scaffoldBackgroundColor: darkColorScheme.background,
+                      dialogBackgroundColor: darkColorScheme.background,
+                      navigationBarTheme: navigationBarThemeData,
+                      inputDecorationTheme: const InputDecorationTheme(
+                        border: OutlineInputBorder(),
+                      ),
+                      applyElevationOverlayColor: true,
+                    ),
+                    themeMode: themeMode,
+                    onGenerateRoute: onGenerateRoute,
+                    initialRoute: splashScreen,
+                    localizationsDelegates: const [
+                      AppLocalizations.delegate, // Add this line
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    supportedLocales: const [
+                      Locale('en', ''),
+                    ],
+                    onGenerateTitle: (BuildContext context) =>
+                        AppLocalizations.of(context)!.appTitle,
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
+    );
   }
 }

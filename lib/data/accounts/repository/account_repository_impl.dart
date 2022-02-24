@@ -24,14 +24,17 @@ class AccountRepositoryImpl extends AccountRepository {
     required DateTime validThru,
     required CardType cardType,
   }) async {
-    await dataSource.addAccount(Account(
-      name: holderName,
-      icon: icon,
-      bankName: bankName,
-      number: number,
-      validThru: validThru,
-      cardType: cardType,
-    ));
+    await dataSource.addAccount(
+      Account(
+        name: holderName,
+        icon: icon,
+        bankName: bankName,
+        number: number,
+        validThru: validThru,
+        cardType: cardType,
+        superId: '1',
+      ),
+    );
   }
 
   @override
