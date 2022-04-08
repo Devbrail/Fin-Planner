@@ -12,10 +12,10 @@ class CategoryListPage extends StatefulWidget {
   const CategoryListPage({Key? key}) : super(key: key);
 
   @override
-  _CategoryListPageState createState() => _CategoryListPageState();
+  CategoryListPageState createState() => CategoryListPageState();
 }
 
-class _CategoryListPageState extends State<CategoryListPage> {
+class CategoryListPageState extends State<CategoryListPage> {
   final CategoryBloc addCategoryBloc = locator.get();
 
   @override

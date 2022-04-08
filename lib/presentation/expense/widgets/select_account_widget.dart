@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-
+import 'package:collection/collection.dart';
 import '../../../app/routes.dart';
 import '../../../common/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
@@ -10,15 +10,23 @@ import '../../../di/service_locator.dart';
 import '../../accounts/bloc/accounts_bloc.dart';
 
 class SelectedAccount extends StatefulWidget {
-  const SelectedAccount({Key? key, required this.onSelected}) : super(key: key);
+  const SelectedAccount({
+    Key? key,
+    required this.onSelected,
+    required this.accountId,
+  }) : super(key: key);
+
   final Function(Account) onSelected;
+  final int accountId;
+
   @override
   State<SelectedAccount> createState() => _SelectedAccountState();
 }
 
 class _SelectedAccountState extends State<SelectedAccount> {
   final AccountsBloc accountsBloc = locator.get();
-  int selectedIndex = 0;
+  Account? selectedAccount;
+  int accountId = 0;
 
   @override
   void initState() {
@@ -45,7 +53,15 @@ class _SelectedAccountState extends State<SelectedAccount> {
               trailing: const Icon(Icons.keyboard_arrow_right),
             );
           }
-          widget.onSelected(accounts[selectedIndex]);
+          selectedAccount = accounts.firstWhereOrNull(
+              (element) => element.superId == widget.accountId);
+          if (selectedAccount != null) {
+            accountId = accounts.indexOf(selectedAccount!);
+          } else {
+            selectedAccount = accounts.first;
+          }
+          widget.onSelected(accounts[accountId]);
+
           return ScreenTypeLayout(
             tablet: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,13 +79,14 @@ class _SelectedAccountState extends State<SelectedAccount> {
                 ),
                 SelectedItem(
                   accounts: accounts,
-                  onSelected: (index) {
-                    selectedIndex = index;
-                    widget.onSelected(accounts[index]);
+                  onSelected: (account) {
+                    selectedAccount = account;
+                    widget.onSelected(account);
+                    debugPrint("SelectedItem: ${account.superId}");
                     setState(() {});
                   },
-                  selectedIndex: selectedIndex,
-                ),
+                  account: selectedAccount!,
+                )
               ],
             ),
             mobile: ListTile(
@@ -101,12 +118,12 @@ class _SelectedAccountState extends State<SelectedAccount> {
                           ),
                           SelectedItem(
                             accounts: accounts,
-                            onSelected: (index) {
-                              selectedIndex = index;
-                              widget.onSelected(accounts[index]);
-                              setState(() {});
+                            onSelected: (account) {
+                              selectedAccount = account;
+                              widget.onSelected(account);
+                              debugPrint("SelectedItem: ${account.superId}");
                             },
-                            selectedIndex: selectedIndex,
+                            account: selectedAccount!,
                           )
                         ],
                       ),
@@ -117,7 +134,7 @@ class _SelectedAccountState extends State<SelectedAccount> {
               title: Text(
                 AppLocalizations.of(context)!.selectAccount,
               ),
-              subtitle: Text(accounts[selectedIndex].name),
+              subtitle: Text(selectedAccount!.name),
             ),
           );
         }
@@ -132,25 +149,19 @@ class SelectedItem extends StatefulWidget {
     Key? key,
     required this.accounts,
     required this.onSelected,
-    required this.selectedIndex,
+    required this.account,
   }) : super(key: key);
 
   final List<Account> accounts;
-  final Function(int) onSelected;
-  final int selectedIndex;
+  final Function(Account) onSelected;
+  final Account account;
 
   @override
-  _SelectedItemState createState() => _SelectedItemState();
+  SelectedItemState createState() => SelectedItemState();
 }
 
-class _SelectedItemState extends State<SelectedItem> {
-  int selectedIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedIndex = widget.selectedIndex;
-  }
+class SelectedItemState extends State<SelectedItem> {
+  late Account selectedAccount = widget.account;
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +183,7 @@ class _SelectedItemState extends State<SelectedItem> {
             child: Card(
               color: Theme.of(context).colorScheme.surface,
               clipBehavior: Clip.antiAlias,
-              shape: selectedIndex == index
+              shape: selectedAccount == account
                   ? RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                       side: BorderSide(
@@ -185,9 +196,11 @@ class _SelectedItemState extends State<SelectedItem> {
                     ),
               child: InkWell(
                 onTap: () {
-                  selectedIndex = index;
-                  widget.onSelected(selectedIndex);
-                  setState(() {});
+                  selectedAccount = account;
+                  setState(() {
+                    widget.onSelected(account);
+                  });
+                  debugPrint("onTap: ${account.superId}");
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

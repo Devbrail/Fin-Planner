@@ -14,10 +14,10 @@ class BiotmetricWidget extends StatefulWidget {
 
   final SettingsController settingsController;
   @override
-  _BiotmetricWidgetState createState() => _BiotmetricWidgetState();
+  BiotmetricWidgetState createState() => BiotmetricWidgetState();
 }
 
-class _BiotmetricWidgetState extends State<BiotmetricWidget> {
+class BiotmetricWidgetState extends State<BiotmetricWidget> {
   late bool showNotificatons = false;
   final LocalAuthApi localAuthApi = locator.get();
 

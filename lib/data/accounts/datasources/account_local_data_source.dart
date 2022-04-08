@@ -11,7 +11,7 @@ class AccountLocalDataSource implements AccountDataSource {
   Future<void> addAccount(Account account) async {
     final int id = await box.add(account);
     account.superId = id;
-    account.save();
+    await account.save();
   }
 
   @override

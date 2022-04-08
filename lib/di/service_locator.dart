@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -67,8 +67,7 @@ Future<void> _setupController() async {
 }
 
 Future<void> _setupHive() async {
-  var path = await getApplicationDocumentsDirectory();
-  Hive.init(path.path);
+  Hive.initFlutter();
 
   Hive.registerAdapter(ExpenseAdapter());
   Hive.registerAdapter(CategoryAdapter());

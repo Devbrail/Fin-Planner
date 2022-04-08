@@ -18,10 +18,10 @@ class ColorSelectorWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ColorSelectorWidgetState createState() => _ColorSelectorWidgetState();
+  ColorSelectorWidgetState createState() => ColorSelectorWidgetState();
 }
 
-class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
+class ColorSelectorWidgetState extends State<ColorSelectorWidget> {
   late final settings = Hive.box(BoxType.settings.stringValue)
       .listenable(keys: [appColorKey, dynamicColorKey]);
 
@@ -74,10 +74,10 @@ class ColorSelectionWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ColorSelectionWidgetState createState() => _ColorSelectionWidgetState();
+  ColorSelectionWidgetState createState() => ColorSelectionWidgetState();
 }
 
-class _ColorSelectionWidgetState extends State<ColorSelectionWidget> {
+class ColorSelectionWidgetState extends State<ColorSelectionWidget> {
   late bool isAndroid12 = false;
 
   @override

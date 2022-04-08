@@ -17,10 +17,10 @@ class SelectCategoryIcon extends StatefulWidget {
   final Function(Category) onSelected;
 
   @override
-  _SelectCategoryIconState createState() => _SelectCategoryIconState();
+  SelectCategoryIconState createState() => SelectCategoryIconState();
 }
 
-class _SelectCategoryIconState extends State<SelectCategoryIcon> {
+class SelectCategoryIconState extends State<SelectCategoryIcon> {
   final CategoryBloc addCategoryBloc = locator.get();
   int selectedIndex = 0;
 

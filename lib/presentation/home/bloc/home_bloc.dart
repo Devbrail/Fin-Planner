@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_paisa/common/enum/box_types.dart';
-import 'package:flutter_paisa/data/settings/settings_service.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
+
+import '../../../common/enum/box_types.dart';
+import '../../../data/settings/settings_service.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -30,8 +31,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _pickImage(PickImageEvent event, Emitter<HomeState> emit) async {
-    final ImagePicker _picker = ImagePicker();
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       selectedImage = pickedFile.path;
       settings.put(userImageKey, selectedImage);

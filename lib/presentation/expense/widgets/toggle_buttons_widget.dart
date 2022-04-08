@@ -8,11 +8,11 @@ class TransactionToggleButtons extends StatefulWidget {
 
   final Function(TransactonType) onSelected;
   @override
-  _TransactionToggleButtonsState createState() =>
-      _TransactionToggleButtonsState();
+  TransactionToggleButtonsState createState() =>
+      TransactionToggleButtonsState();
 }
 
-class _TransactionToggleButtonsState extends State<TransactionToggleButtons> {
+class TransactionToggleButtonsState extends State<TransactionToggleButtons> {
   TransactonType selectedType = TransactonType.expense;
   @override
   void initState() {

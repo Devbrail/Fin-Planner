@@ -7,7 +7,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/constants/util.dart';
-import '../../../common/pair.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/splash_bloc.dart';

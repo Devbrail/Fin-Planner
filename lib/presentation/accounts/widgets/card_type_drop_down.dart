@@ -10,10 +10,10 @@ class CardTypeButtons extends StatefulWidget {
 
   final Function(CardType) onSelected;
   @override
-  _CardTypeButtonsState createState() => _CardTypeButtonsState();
+  CardTypeButtonsState createState() => CardTypeButtonsState();
 }
 
-class _CardTypeButtonsState extends State<CardTypeButtons> {
+class CardTypeButtonsState extends State<CardTypeButtons> {
   CardType selectedType = CardType.cash;
 
   @override

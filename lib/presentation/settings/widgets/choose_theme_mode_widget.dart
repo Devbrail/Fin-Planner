@@ -12,10 +12,10 @@ class ChooseThemeModeWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ChooseThemeModeWidgetState createState() => _ChooseThemeModeWidgetState();
+  ChooseThemeModeWidgetState createState() => ChooseThemeModeWidgetState();
 }
 
-class _ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
+class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
   final SettingsController settingsController = locator.get();
   late ThemeMode selectedThemeMode = ThemeMode.system;
   @override
@@ -67,10 +67,10 @@ class ThemeModeWidget extends StatefulWidget {
 
   final Function(ThemeMode) onSelected;
   @override
-  _ThemeModeWidgetState createState() => _ThemeModeWidgetState();
+  ThemeModeWidgetState createState() => ThemeModeWidgetState();
 }
 
-class _ThemeModeWidgetState extends State<ThemeModeWidget> {
+class ThemeModeWidgetState extends State<ThemeModeWidget> {
   late ThemeMode curentIndex = widget.curentTheme;
 
   @override

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/presentation/login/pages/user_image.dart';
+import 'package:flutter_paisa/presentation/login/pages/user_name.dart';
 
 import '../data/accounts/model/account.dart';
 import '../data/category/model/category.dart';
@@ -11,6 +13,8 @@ import '../presentation/settings/widgets/user_profile_widget.dart';
 import '../presentation/splash/pages/splash_screen_page.dart';
 
 const splashScreen = '/splash';
+const userNameScreen = '/user-name';
+const userImageScreen = '/user-image';
 const landingScreen = '/landing';
 const addExpenseScreen = '/add-expense';
 const addCategoryScreen = '/add-category';
@@ -38,6 +42,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       );
     case profileScreen:
       return _page(const UserProfilePage());
+    case userNameScreen:
+      return _page(UserNamePage());
+    case userImageScreen:
+      return _page(const UserImagePage());
     default:
       return _page(const UserProfilePage());
   }

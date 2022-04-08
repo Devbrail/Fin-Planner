@@ -23,14 +23,15 @@ class AddAccountPage extends StatefulWidget {
   final Account? account;
 
   @override
-  _AddAccountPageState createState() => _AddAccountPageState();
+  AddAccountPageState createState() => AddAccountPageState();
 }
 
-class _AddAccountPageState extends State<AddAccountPage> {
+class AddAccountPageState extends State<AddAccountPage> {
   late final cardNumberController = TextEditingController()
     ..addListener(() {
       setState(() {});
     });
+
   late final cardHolderController = TextEditingController()
     ..addListener(() {
       setState(() {});
@@ -56,6 +57,7 @@ class _AddAccountPageState extends State<AddAccountPage> {
     bankNameController.value = TextEditingValue(
       text: widget.account?.bankName ?? '',
     );
+
     selectedDate = widget.account?.validThru ?? DateTime.now();
     selectedType = widget.account?.cardType ?? CardType.cash;
   }
@@ -117,18 +119,18 @@ class _AddAccountPageState extends State<AddAccountPage> {
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 onPressed: _addOrUpddateAccount,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32.0),
+                  ),
+                ),
                 child: Text(
                   AppLocalizations.of(context)!.addCard,
                   style: Theme.of(context).textTheme.headline6?.copyWith(
                         color: context.onPrimary,
                         fontWeight: FontWeight.bold,
                       ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32.0),
-                  ),
                 ),
               ),
             ),
@@ -137,6 +139,15 @@ class _AddAccountPageState extends State<AddAccountPage> {
             mobile: SingleChildScrollView(
               child: Column(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: CardTypeButtons(onSelected: (cardType) {
+                      selectedType = cardType;
+                    }),
+                  ),
                   AccountCard(
                     cardNumber: cardNumberController.value.text,
                     cardHolder: cardHolderController.value.text,
@@ -149,9 +160,6 @@ class _AddAccountPageState extends State<AddAccountPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          CardTypeButtons(onSelected: (cardType) {
-                            selectedType = cardType;
-                          }),
                           const SizedBox(height: 16),
                           TextFormField(
                             controller: cardHolderController,
@@ -286,6 +294,12 @@ class _AddAccountPageState extends State<AddAccountPage> {
                                       ),
                                     );
                                   },
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.all(16),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                  ),
                                   child: Text(
                                     AppLocalizations.of(context)!.addCard,
                                     style: Theme.of(context)
@@ -295,12 +309,6 @@ class _AddAccountPageState extends State<AddAccountPage> {
                                           color: context.onPrimary,
                                           fontWeight: FontWeight.bold,
                                         ),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.all(16),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                    ),
                                   ),
                                 ),
                               ],

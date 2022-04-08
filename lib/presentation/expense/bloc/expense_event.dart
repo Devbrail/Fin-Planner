@@ -27,8 +27,11 @@ class AddExpenseEvent extends ExpenseEvent {
 
 class UpdateExpenseEvent extends ExpenseEvent {
   final Expense expense;
-
-  const UpdateExpenseEvent({required this.expense});
+  final double amount;
+  const UpdateExpenseEvent({
+    required this.expense,
+    required this.amount,
+  });
 }
 
 class ClearExpenseEvent extends ExpenseEvent {

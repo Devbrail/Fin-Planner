@@ -167,18 +167,18 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           }
         }
       },
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        ),
+      ),
       child: Text(
         AppLocalizations.of(context)!.addCategory,
         style: Theme.of(context).textTheme.headline6?.copyWith(
               color: context.onPrimary,
               fontWeight: FontWeight.bold,
             ),
-      ),
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32.0),
-        ),
       ),
     );
   }
@@ -216,10 +216,10 @@ class CategoryIcons extends StatefulWidget {
   final Function(IconData iconData) onSeleted;
 
   @override
-  _CategoryIconsState createState() => _CategoryIconsState();
+  CategoryIconsState createState() => CategoryIconsState();
 }
 
-class _CategoryIconsState extends State<CategoryIcons> {
+class CategoryIconsState extends State<CategoryIcons> {
   IconData selectedIcon = Icons.fastfood_rounded;
   @override
   Widget build(BuildContext context) {

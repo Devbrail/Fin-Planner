@@ -10,11 +10,11 @@ class DynamicColorSwitchWidget extends StatefulWidget {
   const DynamicColorSwitchWidget({Key? key}) : super(key: key);
 
   @override
-  _DynamicColorSwitchWidgetState createState() =>
-      _DynamicColorSwitchWidgetState();
+  DynamicColorSwitchWidgetState createState() =>
+      DynamicColorSwitchWidgetState();
 }
 
-class _DynamicColorSwitchWidgetState extends State<DynamicColorSwitchWidget> {
+class DynamicColorSwitchWidgetState extends State<DynamicColorSwitchWidget> {
   late final settings = Hive.box(BoxType.settings.stringValue);
   late bool isDynamic = settings.get(
     dynamicColorKey,

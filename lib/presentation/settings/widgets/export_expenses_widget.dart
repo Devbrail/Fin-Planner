@@ -19,10 +19,10 @@ class ExportExpensesWidget extends StatefulWidget {
   const ExportExpensesWidget({Key? key}) : super(key: key);
 
   @override
-  _ExportExpensesWidgetState createState() => _ExportExpensesWidgetState();
+  ExportExpensesWidgetState createState() => ExportExpensesWidgetState();
 }
 
-class _ExportExpensesWidgetState extends State<ExportExpensesWidget> {
+class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
   final dataSource = locator.get<ExpenseManagerDataSource>();
   final accountDataSource = locator.get<AccountDataSource>();
   final categoryDataSource = locator.get<CategoryDataSource>();

@@ -136,15 +136,18 @@ class UserImageWidget extends StatelessWidget {
   const UserImageWidget({
     Key? key,
     required this.pickImage,
+    this.maxRadius,
   }) : super(key: key);
 
   final VoidCallback pickImage;
+  final double? maxRadius;
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: Hive.box(BoxType.settings.stringValue)
-          .listenable(keys: [userImageKey]),
+      valueListenable: Hive.box(BoxType.settings.stringValue).listenable(
+        keys: [userImageKey],
+      ),
       builder: (context, value, _) {
         final image = value.get(userImageKey, defaultValue: '');
         return Center(
@@ -155,13 +158,17 @@ class UserImageWidget extends StatelessWidget {
                 if (image.isEmpty) {
                   return CircleAvatar(
                     backgroundColor: Theme.of(context).colorScheme.primary,
+                    maxRadius: maxRadius,
                     child: Icon(
                       Icons.account_circle_outlined,
                       color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   );
                 } else {
-                  return CircleAvatar(foregroundImage: FileImage(File(image)));
+                  return CircleAvatar(
+                    foregroundImage: FileImage(File(image)),
+                    maxRadius: maxRadius,
+                  );
                 }
               },
             ),

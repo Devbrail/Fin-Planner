@@ -32,14 +32,14 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   _addAccount(AddAccountEvent event, Emitter<AccountsState> emit) async {
     await accountUseCase.addAccount(
-        bankName: event.bankName,
-        icon: event.icon,
-        holderName: event.holderName,
-        number: event.number,
-        validThru: event.validThru,
-        cardType: event.cardType);
+      bankName: event.bankName,
+      icon: event.icon,
+      holderName: event.holderName,
+      number: event.number,
+      validThru: event.validThru,
+      cardType: event.cardType,
+    );
     emit(AddAccountState());
-    add(FetchAccountsEvent());
   }
 
   _deleteAccount(DeleteAccountEvent event, Emitter<AccountsState> emit) async {

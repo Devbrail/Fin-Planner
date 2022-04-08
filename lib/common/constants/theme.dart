@@ -232,6 +232,38 @@ extension CorePaletteMapping on CorePalette {
   }
 }
 
+ElevatedButtonThemeData elevatedButtonTheme(
+  BuildContext context,
+  ColorScheme colorScheme,
+) {
+  return ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 12,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(32.0),
+      ),
+      textStyle: GoogleFonts.outfit(
+        textStyle: TextStyle(
+          fontWeight: FontWeight.w600,
+          color: colorScheme.onPrimary,
+        ),
+      ),
+    ),
+  );
+}
+
+InputDecorationTheme get inputDecorationTheme {
+  return InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.0),
+    ),
+    filled: true,
+  );
+}
+
 NavigationBarThemeData get navigationBarThemeData {
   return NavigationBarThemeData(
     labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,

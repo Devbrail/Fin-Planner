@@ -42,6 +42,7 @@ class _ExpensePageState extends State<ExpensePage> {
   TransactonType selectedType = TransactonType.expense;
   String? errorMessage;
   bool get isAddExpense => widget.expense == null;
+  double initialAmount = 0;
 
   Future<void> addExpense() async {
     if (selectedCategoryId == null) {
@@ -84,7 +85,10 @@ class _ExpensePageState extends State<ExpensePage> {
         ..time = selectedDate
         ..type = selectedType;
       await widget.expense!.save();
-      expenseBloc.add(UpdateExpenseEvent(expense: widget.expense!));
+      expenseBloc.add(UpdateExpenseEvent(
+        expense: widget.expense!,
+        amount: initialAmount,
+      ));
     }
   }
 
@@ -103,6 +107,7 @@ class _ExpensePageState extends State<ExpensePage> {
       selectedCategoryId = widget.expense!.categoryId;
       selectedAccountId = widget.expense!.accountId;
       selectedType = widget.expense!.type ?? TransactonType.expense;
+      initialAmount = widget.expense!.currency;
     } else {
       nameTextController = TextEditingController();
       amountTextController = TextEditingController();
@@ -167,8 +172,10 @@ class _ExpensePageState extends State<ExpensePage> {
                     },
                   ),
                   SelectedAccount(
+                    accountId: selectedAccountId ?? -1,
                     onSelected: (account) {
                       selectedAccountId = account.key;
+                      debugPrint("SelectedAccount: ${account.superId}");
                     },
                   ),
                   Padding(
@@ -252,6 +259,7 @@ class _ExpensePageState extends State<ExpensePage> {
                           right: 12,
                         ),
                         child: SelectedAccount(
+                          accountId: selectedAccountId ?? -1,
                           onSelected: (account) {
                             selectedAccountId = account.key;
                           },
@@ -289,6 +297,12 @@ class _ExpensePageState extends State<ExpensePage> {
   Widget _addButton() {
     return ElevatedButton(
       onPressed: addExpense,
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        ),
+      ),
       child: Text(
         isAddExpense
             ? AppLocalizations.of(context)!.add
@@ -297,12 +311,6 @@ class _ExpensePageState extends State<ExpensePage> {
             .textTheme
             .headline6
             ?.copyWith(fontWeight: FontWeight.w700, color: context.onPrimary),
-      ),
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32.0),
-        ),
       ),
     );
   }
@@ -410,10 +418,6 @@ class _ExpensePageState extends State<ExpensePage> {
       keyboardType: TextInputType.name,
       decoration: InputDecoration(
         hintText: AppLocalizations.of(context)!.expenseName,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        filled: true,
       ),
       onChanged: (value) {},
       validator: (value) {

@@ -9,11 +9,11 @@ class ScheduleNotificationWidget extends StatefulWidget {
   const ScheduleNotificationWidget({Key? key}) : super(key: key);
 
   @override
-  _ScheduleNotificationWidgetState createState() =>
-      _ScheduleNotificationWidgetState();
+  ScheduleNotificationWidgetState createState() =>
+      ScheduleNotificationWidgetState();
 }
 
-class _ScheduleNotificationWidgetState
+class ScheduleNotificationWidgetState
     extends State<ScheduleNotificationWidget> {
   final SettingsController settingsController = locator.get();
   late bool showNotificatons = false;
