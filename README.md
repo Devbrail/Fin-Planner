@@ -9,11 +9,20 @@
 
 ### Screen shots
 
+#### Android
+
 | <img src="paisa-images/1642589160039.png" width="200"/> | <img src="paisa-images/1642589316445.png" width="200"/> | <img src="paisa-images/1642589351674.png" width="200"/> |
 |:---:|:---:|:---:|
 | Home|Categories| Accounts |
 
+#### Windows
+
+| <img src="paisa-images/windows-1.jpg" width="200"/> | <img src="paisa-images/windows-2.jpg" width="200"/> | <img src="paisa-images/windows-3.jpg" width="200"/> |<img src="paisa-images/windows-5.jpg" width="200"/> |
+|:---:|:---:|:---:|:---:|
+| Home|Categories| Summary |Account|
+
 Built with fashion of Material Desgin
+
 ### Expense Tracking
 
 - Tracking expenses, incomes & deposits
