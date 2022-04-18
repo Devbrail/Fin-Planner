@@ -87,10 +87,12 @@ class ColorSelectionWidgetState extends State<ColorSelectionWidget> {
   }
 
   Future<void> _fetchInfo() async {
-    final info = await DeviceInfoPlugin().androidInfo;
-    final sdk = info.version.sdkInt ?? 0;
-    isAndroid12 = sdk <= 29;
-    setState(() {});
+    try {
+      final AndroidDeviceInfo info = await DeviceInfoPlugin().androidInfo;
+      final sdk = info.version.sdkInt ?? 0;
+      isAndroid12 = sdk <= 29;
+      setState(() {});
+    } catch (_) {}
   }
 
   @override
