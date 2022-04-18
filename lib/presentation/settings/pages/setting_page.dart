@@ -84,7 +84,7 @@ class _SettingsPageState extends State<SettingsPage> {
               SettingsOption(
                 title: AppLocalizations.of(context)!.github,
                 subtitle: AppLocalizations.of(context)!.githubText,
-                onTap: () => launch('https://github.com/h4h13/paisa'),
+                onTap: () => launch('https://github.com/h4h13/paisa-app'),
               ),
               const Divider(),
               SettingsOption(

@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import '../common/enum/box_types.dart';
@@ -19,7 +18,6 @@ import '../data/expense/datasources/expsene_manager_local_data_source.dart';
 import '../data/expense/model/expense.dart';
 import '../data/expense/repository/expense_repository_impl.dart';
 import '../data/local_auth/local_auth_api.dart';
-import '../data/notification/notification_service.dart';
 import '../data/settings/settings_service.dart';
 import '../domain/account/repository/account_repository.dart';
 import '../domain/account/usecase/account_use_case.dart';
@@ -53,9 +51,9 @@ void _setupLocalAuth() {
 }
 
 Future<void> _setupNotification() async {
-  final service = NotificationService();
-  await service.init();
-  locator.registerSingleton<NotificationService>(service);
+  //final service = NotificationService();
+  //await service.init();
+  //locator.registerSingleton<NotificationService>(service);
 }
 
 Future<void> _setupController() async {
@@ -67,13 +65,14 @@ Future<void> _setupController() async {
 }
 
 Future<void> _setupHive() async {
-  Hive.initFlutter();
+  await Hive.initFlutter();
+  Hive
+    ..registerAdapter(ExpenseAdapter())
+    ..registerAdapter(CategoryAdapter())
+    ..registerAdapter(AccountAdapter())
+    ..registerAdapter(TransactonTypeAdapter())
+    ..registerAdapter(CardTypeAdapter());
 
-  Hive.registerAdapter(ExpenseAdapter());
-  Hive.registerAdapter(CategoryAdapter());
-  Hive.registerAdapter(AccountAdapter());
-  Hive.registerAdapter(TransactonTypeAdapter());
-  Hive.registerAdapter(CardTypeAdapter());
   await Hive.openBox<Expense>(BoxType.expense.stringValue);
   await Hive.openBox<Category>(BoxType.category.stringValue);
   await Hive.openBox<Account>(BoxType.accounts.stringValue);

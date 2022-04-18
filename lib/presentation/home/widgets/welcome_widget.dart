@@ -20,53 +20,54 @@ class WelcomeWidget extends StatelessWidget {
         final name = value.get(userNameKey, defaultValue: 'Name');
         final image = value.get(userImageKey, defaultValue: '');
         return SafeArea(
-            child: ScreenTypeLayout(
-          mobile: Builder(
-            builder: (context) {
-              if (image.isEmpty) {
-                return CircleAvatar(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  child: Icon(
-                    Icons.account_circle_outlined,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                );
-              } else {
-                return CircleAvatar(foregroundImage: FileImage(File(image)));
-              }
-            },
-          ),
-          tablet: Column(
-            children: [
-              Builder(
-                builder: (context) {
-                  if (image.isEmpty) {
-                    return CircleAvatar(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      child: Icon(
-                        Icons.account_circle_outlined,
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    );
-                  } else {
-                    return CircleAvatar(
-                        foregroundImage: FileImage(File(image)));
-                  }
-                },
-              ),
-              RotatedBox(
-                quarterTurns: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.welcomeMessage(name),
-                    style: Theme.of(context).textTheme.headline5?.copyWith(),
+          child: ScreenTypeLayout(
+            mobile: Builder(
+              builder: (context) {
+                if (image.isEmpty) {
+                  return CircleAvatar(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    child: Icon(
+                      Icons.account_circle_outlined,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  );
+                } else {
+                  return CircleAvatar(foregroundImage: FileImage(File(image)));
+                }
+              },
+            ),
+            tablet: Column(
+              children: [
+                Builder(
+                  builder: (context) {
+                    if (image.isEmpty) {
+                      return CircleAvatar(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        child: Icon(
+                          Icons.account_circle_outlined,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      );
+                    } else {
+                      return CircleAvatar(
+                          foregroundImage: FileImage(File(image)));
+                    }
+                  },
+                ),
+                RotatedBox(
+                  quarterTurns: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.welcomeMessage(name),
+                      style: Theme.of(context).textTheme.headline5?.copyWith(),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ));
+        );
       },
     );
   }

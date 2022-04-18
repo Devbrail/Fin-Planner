@@ -269,7 +269,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 const SizedBox(height: 16),
                                 TextFormField(
                                   controller: cardNumberController,
-                                  maxLength: 6,
+                                  maxLength: 4,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     hintText: AppLocalizations.of(context)!
