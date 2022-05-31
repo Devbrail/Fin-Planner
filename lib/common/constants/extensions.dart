@@ -15,3 +15,10 @@ extension ExpenseListMapping on Box<Expense> {
         .toList();
   }
 }
+
+extension TextStyleHelpers on TextStyle {
+  TextStyle toBigTextBold(BuildContext context) => copyWith(
+        fontWeight: FontWeight.w700,
+        fontSize: Theme.of(context).textTheme.headline6?.fontSize,
+      );
+}

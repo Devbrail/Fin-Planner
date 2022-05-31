@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
@@ -51,7 +52,7 @@ class AccountsPageState extends State<AccountsPage> {
             ],
           ),
           floatingActionButton: FloatingActionButton.large(
-            onPressed: () => Navigator.pushNamed(context, addAccountCardScreen),
+            onPressed: () => context.goNamed(addAccountCardScreen),
             heroTag: 'add_account',
             key: const Key('add_account'),
             tooltip: AppLocalizations.of(context)!.addAccount,

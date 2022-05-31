@@ -127,10 +127,10 @@ class AddAccountPageState extends State<AddAccountPage> {
                 ),
                 child: Text(
                   AppLocalizations.of(context)!.addCard,
-                  style: Theme.of(context).textTheme.headline6?.copyWith(
-                        color: context.onPrimary,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: Theme.of(context).textTheme.headline6?.fontSize,
+                  ),
                 ),
               ),
             ),

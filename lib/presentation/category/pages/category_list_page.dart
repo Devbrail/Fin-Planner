@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
@@ -36,7 +37,7 @@ class CategoryListPageState extends State<CategoryListPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.large(
-        onPressed: () => Navigator.pushNamed(context, addCategoryScreen),
+        onPressed: () => context.goNamed(addCategoryScreen),
         heroTag: 'add_category',
         key: const Key('add_category'),
         tooltip: AppLocalizations.of(context)!.addCategory,

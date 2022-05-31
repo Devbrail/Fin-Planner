@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -20,8 +21,7 @@ class SplashScreenPage extends StatefulWidget {
 }
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
-  late final SplashBloc splashCubit = locator.get<SplashBloc>()
-    ..add(CheckLoginEvent());
+  late final splashCubit = locator.get<SplashBloc>()..add(CheckLoginEvent());
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +36,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
               );
             }
             if (state is NavigateToHome) {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                landingScreen,
-                (route) => false,
-              );
+              context.go(landingScreen);
             }
           },
           bloc: splashCubit,

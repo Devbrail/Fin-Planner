@@ -307,10 +307,10 @@ class _ExpensePageState extends State<ExpensePage> {
         isAddExpense
             ? AppLocalizations.of(context)!.add
             : AppLocalizations.of(context)!.update,
-        style: Theme.of(context)
-            .textTheme
-            .headline6
-            ?.copyWith(fontWeight: FontWeight.w700, color: context.onPrimary),
+        style: TextStyle(
+          fontWeight: FontWeight.w700,
+          fontSize: Theme.of(context).textTheme.headline6?.fontSize,
+        ),
       ),
     );
   }

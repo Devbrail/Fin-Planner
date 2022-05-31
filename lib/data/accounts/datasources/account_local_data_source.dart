@@ -7,6 +7,7 @@ import 'account_data_source.dart';
 
 class AccountLocalDataSource implements AccountDataSource {
   late final box = Hive.box<Account>(BoxType.accounts.stringValue);
+
   @override
   Future<void> addAccount(Account account) async {
     final int id = await box.add(account);
@@ -34,5 +35,10 @@ class AccountLocalDataSource implements AccountDataSource {
   @override
   Account fetchAccount(int accountId) {
     return box.values.firstWhere((element) => element.key == accountId);
+  }
+
+  @override
+  Box<Account> getBox() {
+    return box;
   }
 }

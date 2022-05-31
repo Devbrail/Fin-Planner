@@ -62,8 +62,9 @@ class _MyAppState extends State<MyApp> {
                   providers: [
                     BlocProvider(create: (context) => locator.get<HomeBloc>()),
                   ],
-                  child: MaterialApp(
-                    navigatorKey: mainNavigator,
+                  child: MaterialApp.router(
+                    routeInformationParser: goRouter.routeInformationParser,
+                    routerDelegate: goRouter.routerDelegate,
                     debugShowCheckedModeBanner: false,
                     theme: ThemeData.light().copyWith(
                       colorScheme: lightColorScheme,
@@ -102,8 +103,6 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     themeMode: themeMode,
-                    onGenerateRoute: onGenerateRoute,
-                    initialRoute: splashScreen,
                     localizationsDelegates: const [
                       AppLocalizations.delegate, // Add this line
                       GlobalMaterialLocalizations.delegate,
