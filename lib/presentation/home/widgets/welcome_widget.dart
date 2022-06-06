@@ -24,15 +24,26 @@ class WelcomeWidget extends StatelessWidget {
             mobile: Builder(
               builder: (context) {
                 if (image.isEmpty) {
-                  return CircleAvatar(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    child: Icon(
-                      Icons.account_circle_outlined,
-                      color: Theme.of(context).colorScheme.onPrimary,
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipOval(
+                      child: Container(
+                        color: Theme.of(context).colorScheme.primary,
+                        child: Icon(
+                          Icons.account_circle_outlined,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
                     ),
                   );
                 } else {
-                  return CircleAvatar(foregroundImage: FileImage(File(image)));
+                  return CircleAvatar(
+                    radius: 12,
+                    maxRadius: 12,
+                    foregroundImage: FileImage(
+                      File(image),
+                    ),
+                  );
                 }
               },
             ),

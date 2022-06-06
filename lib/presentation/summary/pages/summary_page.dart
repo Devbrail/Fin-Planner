@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/presentation/settings/widgets/user_profile_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -27,6 +28,22 @@ class _SummaryPageState extends State<SummaryPage> {
     return ScreenTypeLayout(
       mobile: Scaffold(
         appBar: AppBar(
+          leading: GestureDetector(
+            onTap: () => showModalBottomSheet(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width >= 700
+                    ? 700
+                    : double.infinity,
+              ),
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              context: context,
+              builder: (_) => const UserProfilePage(),
+            ),
+            child: const WelcomeWidget(),
+          ),
           backgroundColor: Colors.transparent,
           title: ValueListenableBuilder<Box>(
             valueListenable: Hive.box(BoxType.settings.stringValue)
@@ -53,10 +70,6 @@ class _SummaryPageState extends State<SummaryPage> {
                   delegate: SearchPage(),
                 );
               },
-            ),
-            const WelcomeWidget(),
-            const SizedBox(
-              width: 16,
             ),
           ],
         ),

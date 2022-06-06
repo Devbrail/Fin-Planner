@@ -20,7 +20,7 @@ const landingScreen = '/landing';
 const addExpenseScreen = 'add-expense';
 const addCategoryScreen = 'add-category';
 const addAccountCardScreen = 'add-card';
-const profileScreen = '/profile';
+const profileScreen = 'profile';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -89,11 +89,12 @@ final GoRouter goRouter = GoRouter(
             account: state.extra as Account?,
           ),
         ),
+        GoRoute(
+          name: profileScreen,
+          path: profileScreen,
+          builder: (context, state) => const UserProfilePage(),
+        ),
       ],
-    ),
-    GoRoute(
-      path: profileScreen,
-      builder: (context, state) => const UserProfilePage(),
     ),
     GoRoute(
       path: userNameScreen,
