@@ -20,41 +20,6 @@ const landingScreen = '/landing';
 const addExpenseScreen = 'add-expense';
 const addCategoryScreen = 'add-category';
 const addAccountCardScreen = 'add-card';
-const profileScreen = 'profile';
-
-Route<dynamic> onGenerateRoute(RouteSettings settings) {
-  switch (settings.name) {
-    case splashScreen:
-      return _page(const SplashScreenPage());
-    case landingScreen:
-      return _page(const LandingPage());
-    case addExpenseScreen:
-      final args = settings.arguments as Expense?;
-      return MaterialPageRoute(
-        builder: (context) => ExpensePage(expense: args),
-      );
-    case addCategoryScreen:
-      final args = settings.arguments as Category?;
-      return _page(AddCategoryPage(category: args));
-    case addAccountCardScreen:
-      final args = settings.arguments as Account?;
-      return _page(
-        AddAccountPage(account: args),
-      );
-    case profileScreen:
-      return _page(const UserProfilePage());
-    case userNameScreen:
-      return _page(UserNamePage());
-    case userImageScreen:
-      return _page(const UserImagePage());
-    default:
-      return _page(const UserProfilePage());
-  }
-}
-
-PageRoute _page(Widget page) {
-  return MaterialPageRoute(builder: (_) => page);
-}
 
 final GoRouter goRouter = GoRouter(
   routes: [
@@ -88,11 +53,6 @@ final GoRouter goRouter = GoRouter(
           builder: (context, state) => AddAccountPage(
             account: state.extra as Account?,
           ),
-        ),
-        GoRoute(
-          name: profileScreen,
-          path: profileScreen,
-          builder: (context, state) => const UserProfilePage(),
         ),
       ],
     ),

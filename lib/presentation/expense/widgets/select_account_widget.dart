@@ -176,8 +176,55 @@ class SelectedItemState extends State<SelectedItem> {
         ),
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: widget.accounts.length,
+        itemCount: widget.accounts.length + 1,
         itemBuilder: (_, index) {
+          if (index == widget.accounts.length) {
+            return AspectRatio(
+              aspectRatio: 10 / 14,
+              child: Card(
+                color: Theme.of(context).colorScheme.surface,
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: InkWell(
+                  onTap: () => context.goNamed(addAccountCardScreen),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                          child: Icon(
+                            Icons.add,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Add New',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+
           final account = widget.accounts[index];
           return AspectRatio(
             aspectRatio: 10 / 14,

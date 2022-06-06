@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/common/enum/box_types.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../data/category/model/category.dart';
 import '../../../domain/category/usecase/category_use_case.dart';
@@ -19,6 +21,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<CategoryUpdateEvent>((event, emit) => _update(event, emit));
   }
   final CategoryUseCase categoryUseCase;
+  late final box = Hive.box<Category>(BoxType.category.stringValue);
 
   _fetchCategories(Emitter<CategoryState> emit) async {
     final categories = await categoryUseCase.categories();

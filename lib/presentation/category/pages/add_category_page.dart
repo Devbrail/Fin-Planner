@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 //import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -49,7 +50,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                 ? AppLocalizations.of(context)!.successAddCategory
                 : AppLocalizations.of(context)!.updatedCategory,
           );
-          Navigator.pop(context);
+          context.pop();
         }
       },
       child: ScreenTypeLayout(
@@ -168,7 +169,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         }
       },
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32.0),
         ),

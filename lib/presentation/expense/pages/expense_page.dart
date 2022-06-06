@@ -299,7 +299,7 @@ class _ExpensePageState extends State<ExpensePage> {
     return ElevatedButton(
       onPressed: addExpense,
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32.0),
         ),

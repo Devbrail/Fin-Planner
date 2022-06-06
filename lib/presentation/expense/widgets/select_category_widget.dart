@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -32,7 +33,7 @@ class SelectCategoryIconState extends State<SelectCategoryIcon> {
         final categories = value.values.toList();
         if (categories.isEmpty) {
           return ListTile(
-            onTap: () => Navigator.pushNamed(context, addCategoryScreen),
+            onTap: () => context.goNamed(addCategoryScreen),
             title: Text(AppLocalizations.of(context)!.addCategory),
             subtitle: Text(AppLocalizations.of(context)!.noCategory),
             trailing: const Icon(Icons.keyboard_arrow_right),
@@ -156,8 +157,55 @@ class _SelectedItemState extends State<SelectedItem> {
         ),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: widget.categories.length,
+        itemCount: widget.categories.length + 1,
         itemBuilder: (_, index) {
+          if (index == widget.categories.length) {
+            return AspectRatio(
+              aspectRatio: 10 / 14,
+              child: Card(
+                color: Theme.of(context).colorScheme.surface,
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: InkWell(
+                  onTap: () => context.goNamed(addCategoryScreen),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                          child: Icon(
+                            Icons.add,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Add New',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+
           final category = widget.categories[index];
           return AspectRatio(
             aspectRatio: 10 / 14,
