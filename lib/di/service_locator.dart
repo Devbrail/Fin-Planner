@@ -1,3 +1,4 @@
+import 'package:flutter_paisa/data/notification/notification_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -51,9 +52,9 @@ void _setupLocalAuth() {
 }
 
 Future<void> _setupNotification() async {
-  //final service = NotificationService();
-  //await service.init();
-  //locator.registerSingleton<NotificationService>(service);
+  final service = NotificationService();
+  await service.init();
+  locator.registerSingleton<NotificationService>(service);
 }
 
 Future<void> _setupController() async {

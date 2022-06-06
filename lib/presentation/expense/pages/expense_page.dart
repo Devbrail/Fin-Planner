@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -134,7 +135,7 @@ class _ExpensePageState extends State<ExpensePage> {
           }
           showMaterialSnackBar(context, content);
         }
-        Navigator.pop(context);
+        context.pop();
       },
       child: ScreenTypeLayout(
         mobile: Scaffold(
@@ -298,7 +299,7 @@ class _ExpensePageState extends State<ExpensePage> {
     return ElevatedButton(
       onPressed: addExpense,
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(24),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32.0),
         ),

@@ -87,7 +87,7 @@ class AccountsPageState extends State<AccountsPage> {
             );
           }),
           floatingActionButton: FloatingActionButton.large(
-            onPressed: () => Navigator.pushNamed(context, addAccountCardScreen),
+            onPressed: () => context.goNamed(addAccountCardScreen),
             heroTag: 'add_account',
             key: const Key('add_account'),
             tooltip: AppLocalizations.of(context)!.addAccount,

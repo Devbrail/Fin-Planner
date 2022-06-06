@@ -168,7 +168,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         }
       },
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(24),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32.0),
         ),

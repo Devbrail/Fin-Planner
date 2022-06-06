@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:collection/collection.dart';
 import '../../../app/routes.dart';
@@ -45,7 +46,7 @@ class _SelectedAccountState extends State<SelectedAccount> {
           if (accounts.isEmpty) {
             return ListTile(
               onTap: () async {
-                await Navigator.pushNamed(context, addAccountCardScreen);
+                context.goNamed(addAccountCardScreen);
                 accountsBloc.add(FetchAccountsEvent());
               },
               title: Text(AppLocalizations.of(context)!.addAccount),

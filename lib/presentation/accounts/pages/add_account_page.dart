@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -98,14 +99,14 @@ class AddAccountPageState extends State<AddAccountPage> {
                 ? AppLocalizations.of(context)!.addedCard
                 : AppLocalizations.of(context)!.updatedCard,
           );
-          Navigator.pop(context);
+          context.pop();
         }
         if (state is AccountDeletedState) {
           showMaterialSnackBar(
             context,
             AppLocalizations.of(context)!.deletedCard,
           );
-          Navigator.pop(context);
+          context.pop();
         }
       },
       child: ScreenTypeLayout(
@@ -282,33 +283,22 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 ),
                                 const SizedBox(height: 16),
                                 ElevatedButton(
-                                  onPressed: () {
-                                    accountsBloc.add(
-                                      AddAccountEvent(
-                                        bankName: bankNameController.text,
-                                        icon: Icons.credit_card.codePoint,
-                                        holderName: cardHolderController.text,
-                                        number: cardNumberController.text,
-                                        validThru: selectedDate,
-                                        cardType: selectedType,
-                                      ),
-                                    );
-                                  },
+                                  onPressed: _addOrUpddateAccount,
                                   style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.all(16),
+                                    padding: const EdgeInsets.all(24),
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12.0),
+                                      borderRadius: BorderRadius.circular(32.0),
                                     ),
                                   ),
                                   child: Text(
                                     AppLocalizations.of(context)!.addCard,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6
-                                        ?.copyWith(
-                                          color: context.onPrimary,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: Theme.of(context)
+                                          .textTheme
+                                          .headline6
+                                          ?.fontSize,
+                                    ),
                                   ),
                                 ),
                               ],

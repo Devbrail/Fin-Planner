@@ -193,7 +193,9 @@ class _AccountCardState extends State<AccountCard>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    'CARDHOLDER',
+                                    AppLocalizations.of(context)!
+                                        .cardholder
+                                        .toUpperCase(),
                                     style: TextStyle(
                                         color: Theme.of(context)
                                             .textTheme
@@ -351,7 +353,9 @@ class _AccountCardState extends State<AccountCard>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            AppLocalizations.of(context)!.successAddCategory,
+                            AppLocalizations.of(context)!
+                                .cardholder
+                                .toUpperCase(),
                             style:
                                 Theme.of(context).textTheme.caption?.copyWith(
                                       color: Theme.of(context)

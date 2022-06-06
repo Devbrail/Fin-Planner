@@ -27,6 +27,7 @@ class AccountTransactinWidget extends StatelessWidget {
           Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
       builder: (context, value, child) {
         final expenses = value.allAccount(account.superId!);
+        expenses.sort((a, b) => b.time.compareTo(a.time));
         if (expenses.isEmpty) {
           return const SizedBox.shrink();
         }

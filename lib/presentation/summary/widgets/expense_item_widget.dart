@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -22,10 +23,9 @@ class ExpensItemWidget extends StatelessWidget {
     final date = _readableDateWeekTime(expense.time);
 
     return InkWell(
-      onTap: () => Navigator.pushNamed(
-        context,
+      onTap: () => context.goNamed(
         addExpenseScreen,
-        arguments: expense,
+        extra: expense,
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(

@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_paisa/common/enum/box_types.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:meta/meta.dart';
 
 import '../../../common/enum/card_type.dart';
@@ -24,6 +26,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   }
   final AccountUseCase accountUseCase;
   final ExpenseUseCase expenseUseCase;
+  late final box = Hive.box<Account>(BoxType.accounts.stringValue);
 
   _fetchAccount(Emitter<AccountsState> emit) async {
     final accounts = await accountUseCase.accounts();
@@ -31,14 +34,19 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   }
 
   _addAccount(AddAccountEvent event, Emitter<AccountsState> emit) async {
-    await accountUseCase.addAccount(
+    final account = Account(
       bankName: event.bankName,
       icon: event.icon,
-      holderName: event.holderName,
+      name: event.holderName,
       number: event.number,
       validThru: event.validThru,
       cardType: event.cardType,
     );
+
+    final int id = await box.add(account);
+    account.superId = id;
+    await account.save();
+
     emit(AddAccountState());
   }
 
