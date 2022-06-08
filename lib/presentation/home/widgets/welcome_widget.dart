@@ -37,11 +37,12 @@ class WelcomeWidget extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return CircleAvatar(
-                    radius: 12,
-                    maxRadius: 12,
-                    foregroundImage: FileImage(
-                      File(image),
+                  return Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: CircleAvatar(
+                      foregroundImage: FileImage(
+                        File(image),
+                      ),
                     ),
                   );
                 }

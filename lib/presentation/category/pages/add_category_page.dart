@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:go_router/go_router.dart';
 //import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/theme.dart';
 import '../../../common/constants/util.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
@@ -139,7 +137,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   AppBar appBar() {
     return materialYouAppBar(
       context,
-      AppLocalizations.of(context)!.addCategory,
+      isAddCategory
+          ? AppLocalizations.of(context)!.addCategory
+          : AppLocalizations.of(context)!.updateCategory,
     );
   }
 
@@ -160,6 +160,11 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                 ..name = categoryController.text
                 ..icon = selectedIcon
                 ..save();
+              showMaterialSnackBar(
+                context,
+                AppLocalizations.of(context)!.updatedCategory,
+              );
+              context.pop();
             }
           } else {
             showMaterialSnackBar(
@@ -176,7 +181,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         ),
       ),
       child: Text(
-        AppLocalizations.of(context)!.addCategory,
+        isAddCategory
+            ? AppLocalizations.of(context)!.addCategory
+            : AppLocalizations.of(context)!.update,
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: Theme.of(context).textTheme.headline6?.fontSize,
@@ -236,7 +243,7 @@ class CategoryIconsState extends State<CategoryIcons> {
         return ScreenTypeLayout(
           mobile: IconButton(
             onPressed: () async {
-              if (index == categoryIcons.length - 1) {
+              /* if (index == categoryIcons.length - 1) {
                 final icon = await FlutterIconPicker.showIconPicker(
                   context,
                   iconPackModes: [IconPack.material],
@@ -251,10 +258,10 @@ class CategoryIconsState extends State<CategoryIcons> {
                   setState(() {});
                 }
                 return;
-              }
-              //selectedIcon = iconData;
-              //widget.onSeleted(iconData);
-              //setState(() {});
+              } */
+              selectedIcon = iconData;
+              widget.onSeleted(iconData);
+              setState(() {});
             },
             icon: Icon(
               iconData,

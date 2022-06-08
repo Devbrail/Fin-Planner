@@ -377,5 +377,9 @@
     "madeWithLoveInIndia": "Made with ♥ in India",
     "@madeWithLoveInIndia": {
         "description": "Made with ♥ in India label"
+    },
+    "updateCategory": "Update Category",
+    "@updateCategory": {
+        "description": "Made with ♥ in India label"
     }
 }

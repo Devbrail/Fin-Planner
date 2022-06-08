@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/presentation/login/pages/user_image.dart';
-import 'package:flutter_paisa/presentation/login/pages/user_name.dart';
 import 'package:go_router/go_router.dart';
 
 import '../data/accounts/model/account.dart';
@@ -10,7 +8,8 @@ import '../presentation/accounts/pages/add_account_page.dart';
 import '../presentation/category/pages/add_category_page.dart';
 import '../presentation/expense/pages/expense_page.dart';
 import '../presentation/home/pages/home_page.dart';
-import '../presentation/settings/widgets/user_profile_widget.dart';
+import '../presentation/login/pages/user_image.dart';
+import '../presentation/login/pages/user_name.dart';
 import '../presentation/splash/pages/splash_screen_page.dart';
 
 const splashScreen = '/';

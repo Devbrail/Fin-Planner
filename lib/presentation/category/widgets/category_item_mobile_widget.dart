@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
@@ -18,10 +19,9 @@ class CategoryItemMobileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialYouCard(
       child: InkWell(
-        onTap: () => Navigator.pushNamed(
-          context,
+        onTap: () => context.goNamed(
           addCategoryScreen,
-          arguments: category,
+          extra: category,
         ),
         child: Stack(
           children: [
