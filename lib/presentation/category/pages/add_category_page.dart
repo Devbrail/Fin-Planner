@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:go_router/go_router.dart';
 //import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -235,7 +236,7 @@ class CategoryIconsState extends State<CategoryIcons> {
         return ScreenTypeLayout(
           mobile: IconButton(
             onPressed: () async {
-              /* if (index == categoryIcons.length - 1) {
+              if (index == categoryIcons.length - 1) {
                 final icon = await FlutterIconPicker.showIconPicker(
                   context,
                   iconPackModes: [IconPack.material],
@@ -250,10 +251,10 @@ class CategoryIconsState extends State<CategoryIcons> {
                   setState(() {});
                 }
                 return;
-              } */
-              selectedIcon = iconData;
-              widget.onSeleted(iconData);
-              setState(() {});
+              }
+              //selectedIcon = iconData;
+              //widget.onSeleted(iconData);
+              //setState(() {});
             },
             icon: Icon(
               iconData,
