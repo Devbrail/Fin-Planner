@@ -46,16 +46,19 @@ class _MyAppState extends State<MyApp> {
           builder: (context) {
             return DynamicColorBuilder(
               builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-                ColorScheme lightColorScheme = ColorScheme.fromSeed(
-                  seedColor: primaryColor,
-                );
-                ColorScheme darkColorScheme = ColorScheme.fromSeed(
-                  seedColor: primaryColor,
-                  brightness: Brightness.dark,
-                );
+                ColorScheme lightColorScheme;
+                ColorScheme darkColorScheme;
                 if (lightDynamic != null && darkDynamic != null && isDynamic) {
                   lightColorScheme = lightDynamic.harmonized();
                   darkColorScheme = darkDynamic.harmonized();
+                } else {
+                  lightColorScheme = ColorScheme.fromSeed(
+                    seedColor: primaryColor,
+                  );
+                  darkColorScheme = ColorScheme.fromSeed(
+                    seedColor: primaryColor,
+                    brightness: Brightness.dark,
+                  );
                 }
 
                 return MultiBlocProvider(

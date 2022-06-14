@@ -145,35 +145,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
 
   Widget _submitButton() {
     return ElevatedButton(
-      onPressed: () {
-        if (formKey.currentState!.validate()) {
-          if (selectedIcon != -1) {
-            if (isAddCategory) {
-              addCategoryBloc.add(EditCategoryEvent(
-                title: categoryController.text,
-                description: descController.text,
-                icon: selectedIcon,
-              ));
-            } else {
-              widget.category!
-                ..description = descController.text
-                ..name = categoryController.text
-                ..icon = selectedIcon
-                ..save();
-              showMaterialSnackBar(
-                context,
-                AppLocalizations.of(context)!.updatedCategory,
-              );
-              context.pop();
-            }
-          } else {
-            showMaterialSnackBar(
-              context,
-              AppLocalizations.of(context)!.selectCategoryIcon,
-            );
-          }
-        }
-      },
+      onPressed: _submitCategory,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(16),
         shape: RoundedRectangleBorder(
@@ -213,6 +185,36 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       keyboardType: TextInputType.name,
       hintText: AppLocalizations.of(context)!.description,
     );
+  }
+
+  void _submitCategory() {
+    if (formKey.currentState!.validate()) {
+      if (selectedIcon != -1) {
+        if (isAddCategory) {
+          addCategoryBloc.add(EditCategoryEvent(
+            title: categoryController.text,
+            description: descController.text,
+            icon: selectedIcon,
+          ));
+        } else {
+          widget.category!
+            ..description = descController.text
+            ..name = categoryController.text
+            ..icon = selectedIcon
+            ..save();
+          showMaterialSnackBar(
+            context,
+            AppLocalizations.of(context)!.updatedCategory,
+          );
+          context.pop();
+        }
+      } else {
+        showMaterialSnackBar(
+          context,
+          AppLocalizations.of(context)!.selectCategoryIcon,
+        );
+      }
+    }
   }
 }
 

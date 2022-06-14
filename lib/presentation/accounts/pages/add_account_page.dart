@@ -113,6 +113,12 @@ class AddAccountPageState extends State<AddAccountPage> {
           appBar: materialYouAppBar(
             context,
             AppLocalizations.of(context)!.addCard,
+            actions: [
+              IconButton(
+                onPressed: _showInfo,
+                icon: const Icon(Icons.info_rounded),
+              )
+            ],
           ),
           bottomNavigationBar: SafeArea(
             child: Padding(
@@ -212,6 +218,12 @@ class AddAccountPageState extends State<AddAccountPage> {
           appBar: materialYouAppBar(
             context,
             AppLocalizations.of(context)!.addCard,
+            actions: [
+              IconButton(
+                onPressed: _showInfo,
+                icon: const Icon(Icons.info_rounded),
+              )
+            ],
           ),
           body: SingleChildScrollView(
             child: Row(
@@ -317,4 +329,64 @@ class AddAccountPageState extends State<AddAccountPage> {
   }
 
   String formatedDate(DateTime date) => DateFormat('MM/yyyy').format(date);
+  void _showInfo() {
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ),
+      context: context,
+      builder: (context) {
+        return SafeArea(
+          maintainBottomViewPadding: true,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  AppLocalizations.of(context)!.accountInfo,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(AppLocalizations.of(context)!.accountInfoDesc),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                    ),
+                    onPressed: () {
+                      GoRouter.of(context).pop();
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.cancel,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10)
+            ],
+          ),
+        );
+      },
+    );
+  }
 }

@@ -372,8 +372,7 @@
     "githubText": "Fork the project on GitHub",
     "@githubText": {
         "description": "GitHub text label"
-    }
-    ,
+    },
     "madeWithLoveInIndia": "Made with ♥ in India",
     "@madeWithLoveInIndia": {
         "description": "Made with ♥ in India label"
@@ -381,5 +380,13 @@
     "updateCategory": "Update Category",
     "@updateCategory": {
         "description": "Made with ♥ in India label"
+    },
+    "accountInfo": "Information",
+    "@accountInfo": {
+        "description": "information label"
+    },
+    "accountInfoDesc": "The account details you entered are not shared with anyone, including us. It is only used for visual representation of account details, you may enter false info too",
+    "@accountInfoDesc": {
+        "description": "information label"
     }
 }

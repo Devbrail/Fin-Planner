@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app/app_builder.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
@@ -84,18 +85,18 @@ class _SettingsPageState extends State<SettingsPage> {
               SettingsOption(
                 title: AppLocalizations.of(context)!.github,
                 subtitle: AppLocalizations.of(context)!.githubText,
-                onTap: () => launch('https://github.com/h4h13/paisa'),
+                onTap: () => launchUrlString('https://github.com/h4h13/paisa'),
               ),
               const Divider(),
               SettingsOption(
                 title: AppLocalizations.of(context)!.telegram,
                 subtitle: AppLocalizations.of(context)!.telegramGroup,
-                onTap: () => launch('https://t.me/app_paisa'),
+                onTap: () => launchUrlString('https://t.me/app_paisa'),
               ),
               const Divider(),
               SettingsOption(
                 title: AppLocalizations.of(context)!.privacyPolicy,
-                onTap: () => launch('https://hemanths.dev/privacy'),
+                onTap: () => launchUrlString('https://hemanths.dev/privacy'),
               ),
               const Divider(),
               const VersionWidget(),

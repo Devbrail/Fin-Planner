@@ -33,10 +33,8 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
 
   Future<void> _dateRangePicker() async {
     final intialDateRange = DateTimeRange(
-      start: DateTime.now(),
-      end: DateTime.now().add(
-        const Duration(days: 3),
-      ),
+      start: DateTime.now().subtract(const Duration(days: 3)),
+      end: DateTime.now(),
     );
     final newDateRange = await showDateRangePicker(
       context: context,
@@ -44,20 +42,24 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
       lastDate: DateTime(DateTime.now().year + 5),
       initialDateRange: dateTimeRange ?? intialDateRange,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
-      builder: (_, child) => Theme(
+      /* builder: (_, child) => Theme(
         data: Theme.of(context).copyWith(
           textTheme: GoogleFonts.outfitTextTheme(Theme.of(context).textTheme),
-          colorScheme: Theme.of(context).colorScheme,
-          appBarTheme: Theme.of(context).appBarTheme.copyWith(
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: Colors.transparent,
-                  systemNavigationBarColor: Colors.transparent,
-                  statusBarIconBrightness: Theme.of(context).brightness,
-                ),
+          colorScheme: Theme.of(context).colorScheme.copyWith(
+                primary: Theme.of(context).colorScheme.primaryContainer,
               ),
         ),
         child: child!,
-      ),
+      ), */
+      builder: (_, child) {
+        return Theme(
+          data: ThemeData.from(colorScheme: Theme.of(context).colorScheme)
+              .copyWith(
+            appBarTheme: Theme.of(context).appBarTheme,
+          ),
+          child: child!,
+        );
+      },
     );
     if (newDateRange == null) return;
     dateTimeRange = newDateRange;
@@ -83,6 +85,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
           valueListenable:
               Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
           builder: (context, value, _) {
+            debugPrint('Hemanth :: ${Theme.of(context).colorScheme.primary}');
             List<Expense> expenses = value.values.toList();
             if (dateTimeRange != null) {
               expenses = value.isFilterTimeBetween(dateTimeRange!);

@@ -24,53 +24,20 @@ class AccountsPageState extends State<AccountsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => accountsBloc,
+      create: (_) => accountsBloc,
       child: ScreenTypeLayout(
-        mobile: Scaffold(
-          appBar: materialYouAppBar(
-            context,
-            AppLocalizations.of(context)!.accounts,
-          ),
-          body: ListView(
-            padding: const EdgeInsets.only(
-              bottom: 124,
-            ),
-            children: [
-              const AccountPageViewWidget(),
-              BlocBuilder(
-                bloc: accountsBloc,
-                buildWhen: (previous, current) =>
-                    current is AccountSeletedState,
-                builder: (context, state) {
-                  if (state is AccountSeletedState) {
-                    return AccountTransactinWidget(account: state.account);
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
+        mobile: Builder(
+          builder: (_) {
+            return Scaffold(
+              appBar: materialYouAppBar(
+                context,
+                AppLocalizations.of(context)!.accounts,
               ),
-            ],
-          ),
-          floatingActionButton: FloatingActionButton.large(
-            onPressed: () => context.goNamed(addAccountCardScreen),
-            heroTag: 'add_account',
-            key: const Key('add_account'),
-            tooltip: AppLocalizations.of(context)!.addAccount,
-            child: const Icon(Icons.add),
-          ),
-        ),
-        tablet: Scaffold(
-          appBar: materialYouAppBar(
-            context,
-            AppLocalizations.of(context)!.accounts,
-          ),
-          body: Builder(builder: (context) {
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Expanded(child: AccountPageViewWidget()),
-                Expanded(
-                  child: BlocBuilder(
+              body: ListView(
+                padding: const EdgeInsets.only(bottom: 124),
+                children: [
+                  const AccountPageViewWidget(),
+                  BlocBuilder(
                     bloc: accountsBloc,
                     buildWhen: (previous, current) =>
                         current is AccountSeletedState,
@@ -82,10 +49,48 @@ class AccountsPageState extends State<AccountsPage> {
                       }
                     },
                   ),
-                ),
-              ],
+                ],
+              ),
+              floatingActionButton: FloatingActionButton.large(
+                onPressed: () => context.goNamed(addAccountCardScreen),
+                heroTag: 'add_account',
+                key: const Key('add_account'),
+                tooltip: AppLocalizations.of(context)!.addAccount,
+                child: const Icon(Icons.add),
+              ),
             );
-          }),
+          },
+        ),
+        tablet: Scaffold(
+          appBar: materialYouAppBar(
+            context,
+            AppLocalizations.of(context)!.accounts,
+          ),
+          body: Builder(
+            builder: (context) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Expanded(child: AccountPageViewWidget()),
+                  Expanded(
+                    child: BlocBuilder(
+                      bloc: accountsBloc,
+                      buildWhen: (previous, current) =>
+                          current is AccountSeletedState,
+                      builder: (context, state) {
+                        if (state is AccountSeletedState) {
+                          return AccountTransactinWidget(
+                              account: state.account);
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
           floatingActionButton: FloatingActionButton.large(
             onPressed: () => context.goNamed(addAccountCardScreen),
             heroTag: 'add_account',
