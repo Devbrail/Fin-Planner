@@ -1,9 +1,24 @@
-# Paisa - Expense Tracker
+<p align="center">
+  <a href="https://retromusic.app">
+    <img src="assets\images\icon.png" height="128">
+    <h1 align="center">Paisa - Expense Tracker</h1>
+  </a>
+</p>
+<p align="center">
+ <a href="https://github.com/h4h13/paisa" style="text-decoration:none" area-label="flutter">
+    <img src="https://img.shields.io/badge/Platform-Flutter-blue">
+  </a>
 
- [![Genric Badge](https://img.shields.io/badge/Download-Google%20play-brightgreen)](https://play.google.com/store/apps/details?id=dev.hemanths.paisa)
-[![Version Image](https://img.shields.io/badge/Version-1.3.3-green)]('')
-
-## Material design expense manager
+   <a href="https://play.google.com/store/apps/details?id=dev.hemanths.paisa" style="text-decoration:none" area-label="flutter">
+    <img src="https://img.shields.io/badge/Download-Google%20Play-green">
+  </a>
+  <a href="https://github.com/h4h13/paisa" style="text-decoration:none" area-label="flutter">
+    <img src="https://img.shields.io/badge/Version-1.5.0%2B10-orange">
+  </a>
+</p>
+<p  align="center">
+    <h2> Material design expense manager</h2>
+</p>
 
 ### ⚠ Join [@paisa](https://t.me/app_paisa) on Telegram for important updates
 
@@ -12,14 +27,14 @@
 #### Android
 
 | <img src="paisa-images/1642589160039.png" width="200"/> | <img src="paisa-images/1642589316445.png" width="200"/> | <img src="paisa-images/1642589351674.png" width="200"/> |
-|:---:|:---:|:---:|
-| Home|Categories| Accounts |
+| :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
+|                          Home                           |                       Categories                        |                        Accounts                         |
 
 #### Windows
 
-| <img src="paisa-images/windows-1.jpg" width="200"/> | <img src="paisa-images/windows-2.jpg" width="200"/> | <img src="paisa-images/windows-3.jpg" width="200"/> |<img src="paisa-images/windows-5.jpg" width="200"/> |
-|:---:|:---:|:---:|:---:|
-| Home|Categories| Summary |Account|
+| <img src="paisa-images/windows-1.jpg" width="200"/> | <img src="paisa-images/windows-2.jpg" width="200"/> | <img src="paisa-images/windows-3.jpg" width="200"/> | <img src="paisa-images/windows-5.jpg" width="200"/> |
+| :-------------------------------------------------: | :-------------------------------------------------: | :-------------------------------------------------: | :-------------------------------------------------: |
+|                        Home                         |                     Categories                      |                       Summary                       |                       Account                       |
 
 Built with fashion of Material Desgin
 
