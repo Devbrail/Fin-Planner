@@ -30,6 +30,12 @@
 | :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
 |                          Home                           |                       Categories                        |                        Accounts                         |
 
+#### Tablet
+
+| <img src="paisa-images/tablet.png" width="200"/> | <img src="paisa-images/tablet_1.png" width="200"/> | <img src="paisa-images/tablet_2.png" width="200"/> |<img src="paisa-images/tablet_3.png" width="200"/> |
+| :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
+|                          Locale Select                           |                       Account                        |                        Home                         |  Budget Overview                         |
+
 #### Windows
 
 | <img src="paisa-images/windows-1.jpg" width="200"/> | <img src="paisa-images/windows-2.jpg" width="200"/> | <img src="paisa-images/windows-3.jpg" width="200"/> | <img src="paisa-images/windows-5.jpg" width="200"/> |
