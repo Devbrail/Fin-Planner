@@ -18,3 +18,7 @@ class CountryLocalesState extends SplashState {
 }
 
 class NavigateToHome extends SplashState {}
+
+class NavigateToUserName extends SplashState {}
+
+class NavigateToUserImage extends SplashState {}

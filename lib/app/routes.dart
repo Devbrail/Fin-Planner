@@ -12,7 +12,7 @@ import '../presentation/login/pages/user_image.dart';
 import '../presentation/login/pages/user_name.dart';
 import '../presentation/splash/pages/splash_screen_page.dart';
 
-const splashScreen = '/';
+const splashScreen = '/splash';
 const userNameScreen = '/user-name';
 const userImageScreen = '/user-image';
 const landingScreen = '/landing';
@@ -57,10 +57,12 @@ final GoRouter goRouter = GoRouter(
     ),
     GoRoute(
       path: userNameScreen,
+      name: userNameScreen,
       builder: (context, state) => UserNamePage(),
     ),
     GoRoute(
       path: userImageScreen,
+      name: userImageScreen,
       builder: (context, state) => const UserImagePage(),
     ),
   ],

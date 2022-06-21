@@ -388,5 +388,37 @@
     "accountInfoDesc": "The account details you entered are not shared with anyone, including us. It is only used for visual representation of account details, you may enter false info too",
     "@accountInfoDesc": {
         "description": "information label"
+    },
+    "nextLable": "Next",
+    "@nextLable": {
+        "description": "Next label"
+    },
+    "imageLable": "Image",
+    "@imageLable": {
+        "description": "Image label"
+    },
+    "welcomeLable": "Hi, Welcome to",
+    "@welcomeLable": {
+        "description": "Welcome label"
+    },
+    "welcomeDescLable": "What should we call you",
+    "@welcomeDescLable": {
+        "description": "Welcome desc label"
+    },
+    "name": "Name",
+    "@name": {
+        "description": "Name label"
+    },
+    "enterName": "Enter name",
+    "@enterName": {
+        "description": "Enter name label"
+    },
+    "imageDesc": "Let's set image for you",
+    "@imageDesc": {
+        "description": "Image desc label"
+    },
+    "backLable": "Back",
+    "@backLable": {
+        "description": "Back label"
     }
 }

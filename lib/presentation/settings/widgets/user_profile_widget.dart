@@ -150,28 +150,26 @@ class UserImageWidget extends StatelessWidget {
       ),
       builder: (context, value, _) {
         final image = value.get(userImageKey, defaultValue: '');
-        return Center(
-          child: GestureDetector(
-            onTap: pickImage,
-            child: Builder(
-              builder: (context) {
-                if (image.isEmpty) {
-                  return CircleAvatar(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    maxRadius: maxRadius,
-                    child: Icon(
-                      Icons.account_circle_outlined,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                  );
-                } else {
-                  return CircleAvatar(
-                    foregroundImage: FileImage(File(image)),
-                    maxRadius: maxRadius,
-                  );
-                }
-              },
-            ),
+        return GestureDetector(
+          onTap: pickImage,
+          child: Builder(
+            builder: (context) {
+              if (image.isEmpty) {
+                return CircleAvatar(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  maxRadius: maxRadius,
+                  child: Icon(
+                    Icons.account_circle_outlined,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                );
+              } else {
+                return CircleAvatar(
+                  foregroundImage: FileImage(File(image)),
+                  maxRadius: maxRadius,
+                );
+              }
+            },
           ),
         );
       },

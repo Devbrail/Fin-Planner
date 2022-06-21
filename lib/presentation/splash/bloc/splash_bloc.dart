@@ -27,6 +27,18 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     CheckLoginEvent event,
     Emitter<SplashState> emit,
   ) async {
+    final name = await settings.get(userNameKey, defaultValue: '');
+    if (name == '') {
+      emit(NavigateToUserName());
+      return;
+    }
+
+    final image = await settings.get(userImageKey, defaultValue: '');
+    if (image == '') {
+      emit(NavigateToUserImage());
+      return;
+    }
+
     final languageCode = settings.get(userLanguageKey, defaultValue: 'DEF');
     //emit(CountryLocalesState(locales));
 

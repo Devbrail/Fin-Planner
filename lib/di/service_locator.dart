@@ -1,4 +1,3 @@
-import '../data/notification/notification_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -19,6 +18,7 @@ import '../data/expense/datasources/expsene_manager_local_data_source.dart';
 import '../data/expense/model/expense.dart';
 import '../data/expense/repository/expense_repository_impl.dart';
 import '../data/local_auth/local_auth_api.dart';
+import '../data/notification/notification_service.dart';
 import '../data/settings/settings_service.dart';
 import '../domain/account/repository/account_repository.dart';
 import '../domain/account/usecase/account_use_case.dart';

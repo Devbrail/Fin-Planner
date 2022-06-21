@@ -37,6 +37,12 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             if (state is NavigateToHome) {
               context.go(landingScreen);
             }
+            if (state is NavigateToUserName) {
+              context.go(userNameScreen);
+            }
+            if (state is NavigateToUserImage) {
+              context.go(userImageScreen);
+            }
           },
           bloc: splashCubit,
           builder: (context, state) {
