@@ -1,6 +1,6 @@
-import '../model/account.dart';
-
 import 'package:hive_flutter/adapters.dart';
+
+import '../model/account.dart';
 
 abstract class AccountDataSource {
   Future<void> addAccount(Account account);

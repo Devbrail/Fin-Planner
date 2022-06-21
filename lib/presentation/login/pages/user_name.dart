@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/app/routes.dart';
-import 'package:flutter_paisa/common/enum/box_types.dart';
-import 'package:flutter_paisa/data/settings/settings_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../app/routes.dart';
+import '../../../common/enum/box_types.dart';
+import '../../../data/settings/settings_service.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class UserNamePage extends StatelessWidget {
@@ -62,7 +63,7 @@ class UserNamePage extends StatelessWidget {
                   Navigator.pushNamed(context, userImageScreen);
                 }
               },
-              child: const Text('Next'),
+              child: Text('AppLocalizations.of(context)!.next'),
             ),
           ),
         ],

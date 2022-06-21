@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../common/enum/filter_budget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+
+import '../../../common/enum/filter_budget.dart';
 
 class FilterBudgetWidget extends StatefulWidget {
   const FilterBudgetWidget({

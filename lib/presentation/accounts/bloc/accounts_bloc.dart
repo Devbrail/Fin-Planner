@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import '../../../common/enum/box_types.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:meta/meta.dart';
 
+import '../../../common/enum/box_types.dart';
 import '../../../common/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../domain/account/usecase/account_use_case.dart';
