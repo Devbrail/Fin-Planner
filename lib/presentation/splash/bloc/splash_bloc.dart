@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_paisa/data/accounts/model/account.dart';
+import 'package:flutter_paisa/data/category/model/category.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../common/enum/box_types.dart';
@@ -19,9 +21,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     on<SplashEvent>((event, emit) {});
     on<CheckLoginEvent>(_checkLogin);
   }
+  final service = locator.get<SettingsService>();
+  final localAuthApi = locator.get<LocalAuthApi>();
   late final settings = Hive.box(BoxType.settings.stringValue);
-  final SettingsService service = locator.get();
-  final LocalAuthApi localAuthApi = locator.get();
+  late final accounts = Hive.box<Account>(BoxType.accounts.stringValue);
+  late final categorys = Hive.box<Category>(BoxType.category.stringValue);
 
   FutureOr<void> _checkLogin(
     CheckLoginEvent event,
@@ -36,6 +40,18 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     final image = await settings.get(userImageKey, defaultValue: '');
     if (image == '') {
       emit(NavigateToUserImage());
+      return;
+    }
+
+    final isAnyAccount = accounts.values.isEmpty;
+    if (isAnyAccount) {
+      emit(NavigateToAccount());
+      return;
+    }
+
+    final isAnyCategory = categorys.values.isEmpty;
+    if (isAnyCategory) {
+      emit(NavigateToCategory());
       return;
     }
 

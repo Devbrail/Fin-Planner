@@ -8,8 +8,8 @@ import '../presentation/accounts/pages/add_account_page.dart';
 import '../presentation/category/pages/add_category_page.dart';
 import '../presentation/expense/pages/expense_page.dart';
 import '../presentation/home/pages/home_page.dart';
-import '../presentation/login/pages/user_image.dart';
-import '../presentation/login/pages/user_name.dart';
+import '../presentation/login/pages/user_image_page.dart';
+import '../presentation/login/pages/user_name_page.dart';
 import '../presentation/splash/pages/splash_screen_page.dart';
 
 const splashScreen = '/splash';
@@ -17,8 +17,11 @@ const userNameScreen = '/user-name';
 const userImageScreen = '/user-image';
 const landingScreen = '/landing';
 const addExpenseScreen = 'add-expense';
-const addCategoryScreen = 'add-category';
+const addCategoryInsideScreen = 'add-category';
+const addCategoryOutScreen = '/add-category';
 const addAccountCardScreen = 'add-card';
+
+const addAccountScreen = '/add-card';
 
 final GoRouter goRouter = GoRouter(
   routes: [
@@ -40,8 +43,8 @@ final GoRouter goRouter = GoRouter(
           ),
         ),
         GoRoute(
-          path: addCategoryScreen,
-          name: addCategoryScreen,
+          path: addCategoryInsideScreen,
+          name: addCategoryInsideScreen,
           builder: (context, state) => AddCategoryPage(
             category: state.extra as Category?,
           ),
@@ -54,6 +57,20 @@ final GoRouter goRouter = GoRouter(
           ),
         ),
       ],
+    ),
+    GoRoute(
+      path: addAccountScreen,
+      name: addAccountScreen,
+      builder: (context, state) => AddAccountPage(
+        account: state.extra as Account?,
+      ),
+    ),
+    GoRoute(
+      path: addCategoryOutScreen,
+      name: addCategoryOutScreen,
+      builder: (context, state) => AddCategoryPage(
+        category: state.extra as Category?,
+      ),
     ),
     GoRoute(
       path: userNameScreen,

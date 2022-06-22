@@ -84,6 +84,7 @@ class AddAccountPageState extends State<AddAccountPage> {
         ..number = cardNumberController.text
         ..save();
     }
+    context.pop();
   }
 
   @override
@@ -98,14 +99,12 @@ class AddAccountPageState extends State<AddAccountPage> {
                 ? AppLocalizations.of(context)!.addedCard
                 : AppLocalizations.of(context)!.updatedCard,
           );
-          context.pop();
         }
         if (state is AccountDeletedState) {
           showMaterialSnackBar(
             context,
             AppLocalizations.of(context)!.deletedCard,
           );
-          context.pop();
         }
       },
       child: ScreenTypeLayout(
@@ -329,6 +328,7 @@ class AddAccountPageState extends State<AddAccountPage> {
   }
 
   String formatedDate(DateTime date) => DateFormat('MM/yyyy').format(date);
+
   void _showInfo() {
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(

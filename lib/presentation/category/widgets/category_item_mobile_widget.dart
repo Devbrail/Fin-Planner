@@ -20,7 +20,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
     return MaterialYouCard(
       child: InkWell(
         onTap: () => context.goNamed(
-          addCategoryScreen,
+          addCategoryInsideScreen,
           extra: category,
         ),
         child: Stack(

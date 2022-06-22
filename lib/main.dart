@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
     return ValueListenableBuilder<Box>(
       valueListenable: settings,
       builder: (context, value, _) {
-        final isDynamic = value.get(dynamicColorKey, defaultValue: false);
+        final isDynamic = value.get(dynamicColorKey, defaultValue: true);
         final color = value.get(appColorKey, defaultValue: 0xFF795548);
         final themeMode =
             ThemeMode.values[value.get(themeModeKey, defaultValue: 0)];

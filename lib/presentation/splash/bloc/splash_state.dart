@@ -22,3 +22,7 @@ class NavigateToHome extends SplashState {}
 class NavigateToUserName extends SplashState {}
 
 class NavigateToUserImage extends SplashState {}
+
+class NavigateToAccount extends SplashState {}
+
+class NavigateToCategory extends SplashState {}

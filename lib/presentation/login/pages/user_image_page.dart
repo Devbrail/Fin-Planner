@@ -28,19 +28,19 @@ class _UserImagePageState extends State<UserImagePage> {
             widthFactor: 0.8,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 16),
                 Text(
                   AppLocalizations.of(context)!.imageLable,
-                  style: Theme.of(context).textTheme.headline4?.copyWith(
+                  style: Theme.of(context).textTheme.headline5?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
                 Text(
                   AppLocalizations.of(context)!.imageDesc,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
                 const SizedBox(height: 16),
                 UserImageWidget(
@@ -52,26 +52,29 @@ class _UserImagePageState extends State<UserImagePage> {
           ),
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton(
-                onPressed: () => context.pop(),
-                child: Text(AppLocalizations.of(context)!.backLable),
+      bottomNavigationBar: Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: SafeArea(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ElevatedButton(
+                  onPressed: () => context.pop(),
+                  child: Text(AppLocalizations.of(context)!.backLable),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton(
-                onPressed: () => context.go(splashScreen),
-                child: Text(AppLocalizations.of(context)!.nextLable),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ElevatedButton(
+                  onPressed: () => context.go(splashScreen),
+                  child: Text(AppLocalizations.of(context)!.nextLable),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -413,7 +413,7 @@
     "@enterName": {
         "description": "Enter name label"
     },
-    "imageDesc": "Let's set image for you",
+    "imageDesc": "Let's set image of you",
     "@imageDesc": {
         "description": "Image desc label"
     },
