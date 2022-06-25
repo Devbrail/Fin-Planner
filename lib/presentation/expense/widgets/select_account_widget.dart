@@ -2,7 +2,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/common/enum/box_types.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
@@ -38,18 +40,14 @@ class _SelectedAccountState extends State<SelectedAccount> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: accountsBloc,
-      buildWhen: (previous, current) => current is AccountListState,
-      builder: (context, state) {
-        if (state is AccountListState) {
-          final accounts = state.accounts;
+    return ValueListenableBuilder<Box<Account>>(
+        valueListenable:
+            Hive.box<Account>(BoxType.accounts.stringValue).listenable(),
+        builder: (context, value, child) {
+          final accounts = value.values.toList();
           if (accounts.isEmpty) {
             return ListTile(
-              onTap: () async {
-                context.goNamed(addAccountCardScreen);
-                accountsBloc.add(FetchAccountsEvent());
-              },
+              onTap: () => context.pushNamed(addAccountPath),
               title: Text(AppLocalizations.of(context)!.addAccount),
               subtitle: Text(AppLocalizations.of(context)!.noAccountAvailable),
               trailing: const Icon(Icons.keyboard_arrow_right),
@@ -139,10 +137,7 @@ class _SelectedAccountState extends State<SelectedAccount> {
               subtitle: Text(selectedAccount!.name),
             ),
           );
-        }
-        return const SizedBox.shrink();
-      },
-    );
+        });
   }
 }
 
@@ -189,7 +184,7 @@ class SelectedItemState extends State<SelectedItem> {
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: InkWell(
-                  onTap: () => context.goNamed(addAccountCardScreen),
+                  onTap: () => context.pushNamed(addAccountPath),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -6,7 +6,6 @@ import '../../../app/app_builder.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/settings_controller.dart';
-import '../widgets/biometric_auth_widget.dart';
 import '../widgets/choose_theme_mode_widget.dart';
 import '../widgets/color_picker_widget.dart';
 import '../widgets/export_expenses_widget.dart';
@@ -68,14 +67,11 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           SettingsGroup(
             title: AppLocalizations.of(context)!.others,
-            options: [
-              const ScheduleNotificationWidget(),
-              const Divider(),
-              BiotmetricWidget(
-                settingsController: settingsController,
-              ),
-              const Divider(),
-              const ExportExpensesWidget(),
+            options: const [
+              ScheduleNotificationWidget(),
+              Divider(),
+              Divider(),
+              ExportExpensesWidget(),
             ],
           ),
           SettingsGroup(

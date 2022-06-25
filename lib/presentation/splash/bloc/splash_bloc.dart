@@ -2,13 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_paisa/data/accounts/model/account.dart';
-import 'package:flutter_paisa/data/category/model/category.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../common/enum/box_types.dart';
-import '../../../data/local_auth/local_auth_api.dart';
+import '../../../data/accounts/model/account.dart';
+import '../../../data/category/model/category.dart';
 import '../../../data/settings/settings_service.dart';
 import '../../../di/service_locator.dart';
 import '../../../main.dart';
@@ -22,7 +21,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     on<CheckLoginEvent>(_checkLogin);
   }
   final service = locator.get<SettingsService>();
-  final localAuthApi = locator.get<LocalAuthApi>();
   late final settings = Hive.box(BoxType.settings.stringValue);
   late final accounts = Hive.box<Account>(BoxType.accounts.stringValue);
   late final categorys = Hive.box<Category>(BoxType.category.stringValue);
@@ -31,7 +29,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     CheckLoginEvent event,
     Emitter<SplashState> emit,
   ) async {
-    final name = await settings.get(userNameKey, defaultValue: '');
+    /* final name = await settings.get(userNameKey, defaultValue: '');
     if (name == '') {
       emit(NavigateToUserName());
       return;
@@ -45,16 +43,31 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
     final isAnyAccount = accounts.values.isEmpty;
     if (isAnyAccount) {
-      emit(NavigateToAccount());
-      return;
+      final account = Account(
+        name: 'Default',
+        icon: Icons.credit_card.codePoint,
+        bankName: 'Bank Name',
+        validThru: DateTime.now(),
+        number: '1234',
+        cardType: CardType.cash,
+      );
+      final int id = await accounts.add(account);
+      account.superId = id;
+      await account.save();
     }
 
     final isAnyCategory = categorys.values.isEmpty;
     if (isAnyCategory) {
-      emit(NavigateToCategory());
-      return;
+      final category = Category(
+        name: 'Default',
+        icon: Icons.home_rounded.codePoint,
+        description: '',
+      );
+      final int id = await categorys.add(category);
+      category.superId = id;
+      category.save();
     }
-
+*/
     final languageCode = settings.get(userLanguageKey, defaultValue: 'DEF');
     //emit(CountryLocalesState(locales));
 
@@ -62,17 +75,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       emit(const CountryLocalesState(locales));
     } else {
       currentLocale = languageCode;
-      final isEnable = await service.biometric();
-      if (isEnable) {
-        final isAuthenticate = await localAuthApi.authenticate();
-        if (isAuthenticate) {
-          emit(NavigateToHome());
-        } else {
-          emit(BiometricErrorState());
-        }
-      } else {
-        emit(NavigateToHome());
-      }
+      emit(NavigateToHome());
     }
   }
 

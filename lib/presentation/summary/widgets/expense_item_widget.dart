@@ -24,7 +24,7 @@ class ExpensItemWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () => context.goNamed(
-        addExpenseScreen,
+        addExpensePath,
         extra: expense,
       ),
       child: ListTile(

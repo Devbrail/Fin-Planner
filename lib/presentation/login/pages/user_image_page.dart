@@ -69,7 +69,7 @@ class _UserImagePageState extends State<UserImagePage> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
-                  onPressed: () => context.go(splashScreen),
+                  onPressed: () => context.go(splashPath),
                   child: Text(AppLocalizations.of(context)!.nextLable),
                 ),
               ),

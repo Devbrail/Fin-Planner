@@ -52,7 +52,7 @@ class AccountsPageState extends State<AccountsPage> {
                 ],
               ),
               floatingActionButton: FloatingActionButton.large(
-                onPressed: () => context.goNamed(addAccountCardScreen),
+                onPressed: () => context.goNamed(addAccountPath),
                 heroTag: 'add_account',
                 key: const Key('add_account'),
                 tooltip: AppLocalizations.of(context)!.addAccount,
@@ -92,7 +92,7 @@ class AccountsPageState extends State<AccountsPage> {
             },
           ),
           floatingActionButton: FloatingActionButton.large(
-            onPressed: () => context.goNamed(addAccountCardScreen),
+            onPressed: () => context.goNamed('/add-expense'),
             heroTag: 'add_account',
             key: const Key('add_account'),
             tooltip: AppLocalizations.of(context)!.addAccount,

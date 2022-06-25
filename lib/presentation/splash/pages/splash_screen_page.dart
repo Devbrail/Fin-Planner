@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/constants/util.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/splash_bloc.dart';
@@ -21,6 +20,11 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   late final splashCubit = locator.get<SplashBloc>()..add(CheckLoginEvent());
+  @override
+  void initState() {
+    debugPrint('Hemanth :: initState');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +32,8 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       body: SafeArea(
         child: BlocConsumer(
           listener: (context, state) {
-            if (state is BiometricErrorState) {
-              showMaterialSnackBar(
-                context,
-                AppLocalizations.of(context)!.errorAuth,
-              );
-            }
             if (state is NavigateToHome) {
-              context.go(landingScreen);
-            }
-            if (state is NavigateToUserName) {
-              context.pushNamed(userNameScreen);
-            }
-            if (state is NavigateToUserImage) {
-              context.pushNamed(userImageScreen);
-            }
-            if (state is NavigateToAccount) {
-              context.pushNamed(addAccountScreen);
-            }
-            if (state is NavigateToCategory) {
-              context.pushNamed(addCategoryOutScreen);
+              context.go(homePath);
             }
           },
           bloc: splashCubit,
@@ -88,7 +74,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                       desktop: LocaleGridView(
                         locales: locales,
                         onPressed: splashCubit.setSelectedLocale,
-                        crossAxisCount: 5,
+                        crossAxisCount: 6,
                       ),
                     ),
                   ),

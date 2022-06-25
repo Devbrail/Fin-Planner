@@ -33,7 +33,7 @@ class SelectCategoryIconState extends State<SelectCategoryIcon> {
         final categories = value.values.toList();
         if (categories.isEmpty) {
           return ListTile(
-            onTap: () => context.goNamed(addCategoryInsideScreen),
+            onTap: () => context.pushNamed(addCategoryPath),
             title: Text(AppLocalizations.of(context)!.addCategory),
             subtitle: Text(AppLocalizations.of(context)!.noCategory),
             trailing: const Icon(Icons.keyboard_arrow_right),
@@ -169,7 +169,7 @@ class _SelectedItemState extends State<SelectedItem> {
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: InkWell(
-                  onTap: () => context.goNamed(addCategoryInsideScreen),
+                  onTap: () => context.pushNamed(addCategoryPath),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

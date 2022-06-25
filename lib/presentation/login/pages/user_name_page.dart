@@ -9,6 +9,7 @@ import '../../../data/settings/settings_service.dart';
 
 class UserNamePage extends StatelessWidget {
   UserNamePage({Key? key}) : super(key: key);
+
   final _nameController = TextEditingController();
   final _formState = GlobalKey<FormState>();
   @override
@@ -99,8 +100,9 @@ class UserNamePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_formState.currentState!.validate()) {
-                          value.put(userNameKey, _nameController.text).then(
-                              (value) => context.pushNamed(userImageScreen));
+                          value
+                              .put(userNameKey, _nameController.text)
+                              .then((value) => context.go(userImagePath));
                         }
                       },
                       child: Text(AppLocalizations.of(context)!.nextLable),

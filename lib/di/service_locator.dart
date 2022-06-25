@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:url_strategy/url_strategy.dart';
 
 import '../common/enum/box_types.dart';
 import '../common/enum/card_type.dart';
@@ -17,7 +16,6 @@ import '../data/expense/datasources/expense_manager_data_source.dart';
 import '../data/expense/datasources/expsene_manager_local_data_source.dart';
 import '../data/expense/model/expense.dart';
 import '../data/expense/repository/expense_repository_impl.dart';
-import '../data/local_auth/local_auth_api.dart';
 import '../data/notification/notification_service.dart';
 import '../data/settings/settings_service.dart';
 import '../domain/account/repository/account_repository.dart';
@@ -36,7 +34,6 @@ import '../presentation/splash/bloc/splash_bloc.dart';
 final locator = GetIt.instance;
 
 Future<void> setupLocator() async {
-  setPathUrlStrategy();
   await _setupHive();
   _localSoruces();
   await _setupNotification();
@@ -44,11 +41,6 @@ Future<void> setupLocator() async {
   _setupUseCase();
   _setupBloc();
   await _setupController();
-  _setupLocalAuth();
-}
-
-void _setupLocalAuth() {
-  locator.registerSingleton<LocalAuthApi>(LocalAuthApi());
 }
 
 Future<void> _setupNotification() async {

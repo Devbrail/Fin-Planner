@@ -39,7 +39,7 @@ class NotificationService {
   }
 
   Future selectNotification(String? payload) async {
-    await mainNavigator.currentState!.pushNamed(addExpenseScreen);
+    await mainNavigator.currentState!.pushNamed(addExpensePath);
   }
 
   Future<void> show() async {

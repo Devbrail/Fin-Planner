@@ -21,9 +21,6 @@ abstract class SettingsService {
   Future<void> setUpdateNotification(bool mode);
   Future<bool> notification();
 
-  Future<void> setBiometric(bool isOn);
-  Future<bool> biometric();
-
   Future<void> setThemeColor(Color color);
   Future<Color> themeColor();
 
@@ -104,16 +101,6 @@ class SettingsServiceImpl implements SettingsService {
   @override
   Future<bool> notification() async {
     return box.get(pushNotificationKey, defaultValue: false);
-  }
-
-  @override
-  Future<void> setBiometric(bool isOn) async {
-    await box.put(biometricKey, isOn);
-  }
-
-  @override
-  Future<bool> biometric() async {
-    return box.get(biometricKey, defaultValue: false);
   }
 
   @override

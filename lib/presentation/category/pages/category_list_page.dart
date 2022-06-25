@@ -37,7 +37,7 @@ class CategoryListPageState extends State<CategoryListPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.large(
-        onPressed: () => context.goNamed(addCategoryInsideScreen),
+        onPressed: () => context.goNamed(addCategoryPath),
         heroTag: 'add_category',
         key: const Key('add_category'),
         tooltip: AppLocalizations.of(context)!.addCategory,

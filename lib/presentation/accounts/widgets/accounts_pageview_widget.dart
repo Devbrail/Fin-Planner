@@ -52,7 +52,7 @@ class AccountPageViewWidget extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(
                     context,
-                    addAccountCardScreen,
+                    addAccountPath,
                     arguments: account,
                   );
                 },

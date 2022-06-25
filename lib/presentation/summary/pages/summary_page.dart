@@ -141,5 +141,5 @@ class _SummaryPageState extends State<SummaryPage> {
     );
   }
 
-  void _addExpense() async => context.goNamed(addExpenseScreen);
+  void _addExpense() async => context.goNamed(addExpensePath);
 }

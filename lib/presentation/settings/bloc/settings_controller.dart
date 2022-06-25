@@ -36,12 +36,6 @@ class SettingsController with ChangeNotifier {
     await settingsService.setUpdateNotification(isOn);
   }
 
-  Future<void> updateBiometric(bool isOn) async {
-    useBiometrics = isOn;
-    notifyListeners();
-    await settingsService.setBiometric(isOn);
-  }
-
   Future<void> updateThemeMode(ThemeMode? newThemeMode) async {
     if (newThemeMode == null) return;
     if (newThemeMode == _themeMode) return;

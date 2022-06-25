@@ -35,8 +35,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       selectedImage = pickedFile.path;
-      settings.put(userImageKey, selectedImage);
-      add(UpdateUserDetailsEvent(imagePath: selectedImage));
+      settings.put(userImageKey, selectedImage).then(
+          (value) => add(UpdateUserDetailsEvent(imagePath: selectedImage)));
     }
   }
 }

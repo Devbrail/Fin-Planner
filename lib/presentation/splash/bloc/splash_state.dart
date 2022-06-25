@@ -9,8 +9,6 @@ abstract class SplashState extends Equatable {
 
 class SplashInitial extends SplashState {}
 
-class BiometricErrorState extends SplashState {}
-
 class CountryLocalesState extends SplashState {
   final Map<String, Locale> locales;
 
