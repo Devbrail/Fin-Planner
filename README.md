@@ -13,7 +13,7 @@
     <img src="https://img.shields.io/badge/Download-Google%20Play-green">
   </a>
   <a href="https://github.com/h4h13/paisa" style="text-decoration:none" area-label="flutter">
-    <img src="https://img.shields.io/badge/Version-1.5.0%2B10-orange">
+    <img src="https://img.shields.io/badge/Version-1.6.0-orange">
   </a>
 </p>
 <p  align="center">
