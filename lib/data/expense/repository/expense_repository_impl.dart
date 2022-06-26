@@ -66,7 +66,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
         })
         .map((e) => e.currency)
         .fold<double>(0, (previousValue, element) => previousValue + element);
-    return getFormattedCurrency(total);
+    return formattedCurrency(total);
   }
 
   String _readableMonth(DateTime time) {
@@ -85,7 +85,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
         .where((element) => element.type == type)
         .map((e) => e.currency)
         .fold<double>(0, (previousValue, element) => previousValue + element);
-    return getFormattedCurrency(total);
+    return formattedCurrency(total);
   }
 
   Future<List<Expense>> fetchAndCache({bool isRefresh = false}) async {

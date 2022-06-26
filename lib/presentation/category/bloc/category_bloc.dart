@@ -36,6 +36,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       icon: event.icon,
       desc: event.description,
       name: event.title,
+      budget: event.budget,
     );
     emit(CategoryAddedState());
   }

@@ -11,11 +11,13 @@ class EditCategoryEvent extends CategoryEvent {
   final String title;
   final String description;
   final int icon;
+  final int? budget;
 
   EditCategoryEvent({
     required this.title,
     required this.description,
     required this.icon,
+    this.budget,
   });
 }
 

@@ -65,7 +65,7 @@ class BudgetItemTableWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Text(
-                totalExpens(expenses),
+                totalExpenseWithSymbol(expenses),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline5?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,

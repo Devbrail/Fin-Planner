@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -29,13 +30,14 @@ class AddCategoryPage extends StatefulWidget {
 class _AddCategoryPageState extends State<AddCategoryPage> {
   final addCategoryBloc = locator.get<CategoryBloc>();
   final formKey = GlobalKey<FormState>();
-
+  late final budgetController =
+      TextEditingController(text: widget.category?.budget.toString() ?? '');
   late final categoryController =
       TextEditingController(text: widget.category?.name ?? '');
   late final descController =
       TextEditingController(text: widget.category?.description ?? '');
-
   late int selectedIcon = widget.category?.icon ?? -1;
+  bool setBudget = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +79,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                           _categoryField(),
                           const SizedBox(height: 16),
                           _descriptionField(),
+                          _setBudget(),
                         ],
                       ),
                     ),
@@ -191,16 +194,38 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     if (formKey.currentState!.validate()) {
       if (selectedIcon != -1) {
         if (isAddCategory) {
+          int budget = 0;
+          if (setBudget) {
+            try {
+              budget = int.parse(budgetController.text);
+            } catch (_) {
+              debugPrint(_.toString());
+              return;
+            }
+          }
+
           addCategoryBloc.add(EditCategoryEvent(
             title: categoryController.text,
             description: descController.text,
             icon: selectedIcon,
+            budget: budget,
           ));
         } else {
+          int budget = 0;
+          if (setBudget) {
+            try {
+              budget = int.parse(budgetController.text);
+            } catch (_) {
+              debugPrint(_.toString());
+              return;
+            }
+          }
+
           widget.category!
             ..description = descController.text
             ..name = categoryController.text
             ..icon = selectedIcon
+            ..budget = budget
             ..save();
           showMaterialSnackBar(
             context,
@@ -215,6 +240,35 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         );
       }
     }
+  }
+
+  Widget _setBudget() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SwitchListTile(
+          title: Text(AppLocalizations.of(context)!.setBudgetLable),
+          onChanged: (bool value) {
+            setState(() {
+              setBudget = value;
+            });
+          },
+          value: setBudget,
+        ),
+        setBudget
+            ? TextField(
+                controller: budgetController,
+                decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.budget,
+                ),
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                ],
+              )
+            : const SizedBox.shrink(),
+      ],
+    );
   }
 }
 

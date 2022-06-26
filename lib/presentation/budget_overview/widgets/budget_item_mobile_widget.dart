@@ -18,6 +18,11 @@ class BudgetItemMobileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double totalExpenses = totalExpense(expenses);
+    final totalBudget = category.budget?.toDouble() ?? -1;
+    final difference = totalBudget - totalExpenses;
+
+    debugPrint('$difference');
     return MaterialYouCard(
       child: InkWell(
         onTap: () {},
@@ -64,10 +69,12 @@ class BudgetItemMobileWidget extends StatelessWidget {
                 right: 16,
               ),
               child: Text(
-                totalExpens(expenses),
+                formattedCurrency(difference),
                 style: GoogleFonts.manrope(
                   textStyle: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
+                        color: difference.isNegative
+                            ? Theme.of(context).colorScheme.error
+                            : Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
               ),

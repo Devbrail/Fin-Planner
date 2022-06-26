@@ -8,7 +8,7 @@ String getCurrency() {
   return format.currencySymbol;
 }
 
-String getFormattedCurrency(double currency) {
+String formattedCurrency(double currency) {
   return NumberFormat.simpleCurrency(
     locale: currentLocale.toString(),
   ).format(currency);
@@ -20,9 +20,16 @@ String getTwoDigitCurrency(double currency) {
   ).format(currency);
 }
 
-String totalExpens(List<Expense> expenses) {
+String totalExpenseWithSymbol(List<Expense> expenses) {
   final total = expenses
       .map((e) => e.currency)
       .fold<double>(0, (previousValue, element) => previousValue + element);
-  return getFormattedCurrency(total);
+  return formattedCurrency(total);
+}
+
+double totalExpense(List<Expense> expenses) {
+  final total = expenses
+      .map((e) => e.currency)
+      .fold<double>(0, (previousValue, element) => previousValue + element);
+  return total;
 }

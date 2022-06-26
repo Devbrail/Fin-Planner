@@ -27,8 +27,3 @@ Map<T, List<S>> groupBy<S, T>(Iterable<S> values, T Function(S) key) {
   }
   return map;
 }
-
-double validDate(String amount) {
-  double amountInt = double.parse(amount);
-  return amountInt;
-}

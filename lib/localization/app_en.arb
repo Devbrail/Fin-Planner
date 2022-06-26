@@ -420,5 +420,10 @@
     "backLable": "Back",
     "@backLable": {
         "description": "Back label"
+    },
+    "setBudgetLable": "Set budget",
+    "@setBudgetLable": {
+        "description": "set budget label"
     }
+     
 }

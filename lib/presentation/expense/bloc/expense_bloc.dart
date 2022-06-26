@@ -25,7 +25,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   ) async {
     double validAmount = 0.0;
     try {
-      validAmount = validDate(event.amount);
+      validAmount = double.parse(event.amount);
     } catch (_) {
       return;
     }

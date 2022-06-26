@@ -25,12 +25,14 @@ class CategoryRepositoryImpl extends CategoryRepository {
     required String desc,
     required int icon,
     bool isPredefined = false,
+    int? budget = -1,
   }) async {
     await dataSources.addCategory(Category(
       description: desc,
       name: name,
       icon: icon,
       isPredefined: isPredefined,
+      budget: budget,
     ));
   }
 
