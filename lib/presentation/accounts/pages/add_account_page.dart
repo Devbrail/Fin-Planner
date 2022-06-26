@@ -149,9 +149,12 @@ class AddAccountPageState extends State<AddAccountPage> {
                       horizontal: 16,
                       vertical: 8,
                     ),
-                    child: CardTypeButtons(onSelected: (cardType) {
-                      selectedType = cardType;
-                    }),
+                    child: CardTypeButtons(
+                      onSelected: (cardType) {
+                        selectedType = cardType;
+                      },
+                      selectedCardType: selectedType,
+                    ),
                   ),
                   AccountCard(
                     cardNumber: cardNumberController.value.text,
@@ -248,9 +251,12 @@ class AddAccountPageState extends State<AddAccountPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                CardTypeButtons(onSelected: (cardType) {
-                                  selectedType = cardType;
-                                }),
+                                CardTypeButtons(
+                                  onSelected: (cardType) {
+                                    selectedType = cardType;
+                                  },
+                                  selectedCardType: selectedType,
+                                ),
                                 const SizedBox(height: 16),
                                 TextFormField(
                                   controller: cardHolderController,
@@ -377,7 +383,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                       GoRouter.of(context).pop();
                     },
                     child: Text(
-                      AppLocalizations.of(context)!.cancel,
+                      AppLocalizations.of(context)!.acceptLable,
                     ),
                   ),
                 ),

@@ -3,17 +3,22 @@ import 'package:flutter/material.dart';
 import '../../../common/enum/transaction.dart';
 
 class TransactionToggleButtons extends StatefulWidget {
-  const TransactionToggleButtons({Key? key, required this.onSelected})
-      : super(key: key);
+  const TransactionToggleButtons({
+    Key? key,
+    required this.onSelected,
+    required this.selectedType,
+  }) : super(key: key);
 
   final Function(TransactonType) onSelected;
+  final TransactonType selectedType;
   @override
   TransactionToggleButtonsState createState() =>
       TransactionToggleButtonsState();
 }
 
 class TransactionToggleButtonsState extends State<TransactionToggleButtons> {
-  TransactonType selectedType = TransactonType.expense;
+  late TransactonType selectedType = widget.selectedType;
+
   @override
   void initState() {
     super.initState();

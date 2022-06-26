@@ -444,5 +444,9 @@
     "summaryLable": "Summary",
     "@summaryLable": {
         "description": "Summary label"
+    },
+    "acceptLable": "Accept",
+    "@acceptLable": {
+        "description": "Accept label"
     }
 }

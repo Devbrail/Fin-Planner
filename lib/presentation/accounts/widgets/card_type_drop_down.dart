@@ -6,15 +6,17 @@ class CardTypeButtons extends StatefulWidget {
   const CardTypeButtons({
     Key? key,
     required this.onSelected,
+    required this.selectedCardType,
   }) : super(key: key);
 
   final Function(CardType) onSelected;
+  final CardType selectedCardType;
   @override
   CardTypeButtonsState createState() => CardTypeButtonsState();
 }
 
 class CardTypeButtonsState extends State<CardTypeButtons> {
-  CardType selectedType = CardType.cash;
+  late CardType selectedType = widget.selectedCardType;
 
   @override
   void initState() {

@@ -165,6 +165,7 @@ class _ExpensePageState extends State<ExpensePage> {
                     onSelected: (type) {
                       selectedType = type;
                     },
+                    selectedType: selectedType,
                   ),
                   SelectCategoryIcon(
                     onSelected: (category) {
@@ -222,6 +223,7 @@ class _ExpensePageState extends State<ExpensePage> {
                 onSelected: (type) {
                   selectedType = type;
                 },
+                selectedType: selectedType,
               ),
               isAddExpense
                   ? const SizedBox.shrink()
