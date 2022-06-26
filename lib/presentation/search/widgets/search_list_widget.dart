@@ -60,7 +60,7 @@ class SearchListWidget extends StatelessWidget {
         return results.isEmpty
             ? Center(
                 child: Text(
-                  AppLocalizations.of(context)!.noResultFound,
+                  AppLocalizations.of(context)!.noResultFoundLable,
                   style: Theme.of(context).textTheme.headline6,
                 ),
               )

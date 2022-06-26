@@ -25,8 +25,9 @@ class AccountPageViewWidget extends StatelessWidget {
         if (accounts.isEmpty) {
           return EmptyWidget(
             icon: Icons.credit_card,
-            title: AppLocalizations.of(context)!.errorNoCards,
-            description: AppLocalizations.of(context)!.errorNoCardsDescription,
+            title: AppLocalizations.of(context)!.errorNoCardsLable,
+            description:
+                AppLocalizations.of(context)!.errorNoCardsDescriptionLable,
           );
         }
         BlocProvider.of<AccountsBloc>(context)

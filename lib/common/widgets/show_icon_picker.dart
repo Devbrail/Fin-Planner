@@ -35,7 +35,7 @@ Future<IconData?> showIconPicker({
     context: context,
     builder: (_) => AlertDialog(
       title: Text(
-        AppLocalizations.of(context)!.updatedCategory,
+        AppLocalizations.of(context)!.updatedCategoryLable,
       ),
       content: FractionallySizedBox(
         widthFactor: 0.9,
@@ -62,7 +62,7 @@ Future<IconData?> showIconPicker({
       actions: [
         ElevatedButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(AppLocalizations.of(context)!.cancel),
+          child: Text(AppLocalizations.of(context)!.cancelLable),
         )
       ],
     ),

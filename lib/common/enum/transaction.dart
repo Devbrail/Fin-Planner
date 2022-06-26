@@ -18,9 +18,9 @@ extension TransactonTypeMapping on TransactonType {
   String name(BuildContext context) {
     switch (this) {
       case TransactonType.income:
-        return AppLocalizations.of(context)!.income;
+        return AppLocalizations.of(context)!.incomeLable;
       case TransactonType.expense:
-        return AppLocalizations.of(context)!.expense;
+        return AppLocalizations.of(context)!.expenseLable;
       /*  case TransactonType.deposit:
         return AppLocalizations.of(context)!.deposit; */
     }

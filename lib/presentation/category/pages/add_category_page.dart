@@ -48,8 +48,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           showMaterialSnackBar(
             context,
             isAddCategory
-                ? AppLocalizations.of(context)!.successAddCategory
-                : AppLocalizations.of(context)!.updatedCategory,
+                ? AppLocalizations.of(context)!.successAddCategoryLable
+                : AppLocalizations.of(context)!.updatedCategoryLable,
           );
           context.pop();
         }
@@ -141,8 +141,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     return materialYouAppBar(
       context,
       isAddCategory
-          ? AppLocalizations.of(context)!.addCategory
-          : AppLocalizations.of(context)!.updateCategory,
+          ? AppLocalizations.of(context)!.addCategoryLable
+          : AppLocalizations.of(context)!.updateCategoryLable,
     );
   }
 
@@ -157,8 +157,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       ),
       child: Text(
         isAddCategory
-            ? AppLocalizations.of(context)!.addCategory
-            : AppLocalizations.of(context)!.update,
+            ? AppLocalizations.of(context)!.addCategoryLable
+            : AppLocalizations.of(context)!.updateLable,
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: Theme.of(context).textTheme.headline6?.fontSize,
@@ -171,12 +171,12 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     return MaterialYouTextFeild(
       controller: categoryController,
       keyboardType: TextInputType.name,
-      hintText: AppLocalizations.of(context)!.category,
+      hintText: AppLocalizations.of(context)!.categoryLable,
       validator: (value) {
         if (value!.length >= 3) {
           return null;
         } else {
-          return AppLocalizations.of(context)!.validName;
+          return AppLocalizations.of(context)!.validNameLable;
         }
       },
     );
@@ -186,7 +186,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     return MaterialYouTextFeild(
       controller: descController,
       keyboardType: TextInputType.name,
-      hintText: AppLocalizations.of(context)!.description,
+      hintText: AppLocalizations.of(context)!.descriptionLable,
     );
   }
 
@@ -229,14 +229,14 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             ..save();
           showMaterialSnackBar(
             context,
-            AppLocalizations.of(context)!.updatedCategory,
+            AppLocalizations.of(context)!.updatedCategoryLable,
           );
           context.pop();
         }
       } else {
         showMaterialSnackBar(
           context,
-          AppLocalizations.of(context)!.selectCategoryIcon,
+          AppLocalizations.of(context)!.selectCategoryIconLable,
         );
       }
     }
@@ -259,7 +259,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             ? TextField(
                 controller: budgetController,
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.budget,
+                  hintText: AppLocalizations.of(context)!.budgetLable,
                 ),
                 keyboardType: TextInputType.number,
                 inputFormatters: <TextInputFormatter>[

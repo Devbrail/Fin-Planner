@@ -38,7 +38,7 @@ class AccountTransactinWidget extends StatelessWidget {
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                 title: Text(
-                  AppLocalizations.of(context)!.transactionHistory,
+                  AppLocalizations.of(context)!.transactionHistoryLable,
                   style: Theme.of(context)
                       .textTheme
                       .headline6
@@ -70,7 +70,7 @@ class AccountTransactinWidget extends StatelessWidget {
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                 title: Text(
-                  AppLocalizations.of(context)!.transactionHistory,
+                  AppLocalizations.of(context)!.transactionHistoryLable,
                   style: Theme.of(context)
                       .textTheme
                       .headline6

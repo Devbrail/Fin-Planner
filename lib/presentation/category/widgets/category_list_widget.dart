@@ -28,9 +28,9 @@ class CategoryListWidget extends StatelessWidget {
         if (categories.isEmpty) {
           return EmptyWidget(
             description:
-                AppLocalizations.of(context)!.errorNoCategoriesDescription,
+                AppLocalizations.of(context)!.errorNoCategoriesDescriptionLable,
             icon: Icons.category,
-            title: AppLocalizations.of(context)!.errorNoCatgories,
+            title: AppLocalizations.of(context)!.errorNoCatgoriesLable,
           );
         }
         return GridView.builder(

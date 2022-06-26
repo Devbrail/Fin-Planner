@@ -29,13 +29,13 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: materialYouAppBar(
         context,
-        AppLocalizations.of(context)!.settings,
+        AppLocalizations.of(context)!.settingsLable,
       ),
       body: ListView(
         shrinkWrap: true,
         children: [
           SettingsOption(
-            title: AppLocalizations.of(context)!.profile,
+            title: AppLocalizations.of(context)!.profileLable,
             onTap: () {
               showModalBottomSheet(
                 constraints: BoxConstraints(
@@ -54,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
             trailing: const Icon(Icons.keyboard_arrow_right),
           ),
           SettingsGroup(
-            title: AppLocalizations.of(context)!.colors,
+            title: AppLocalizations.of(context)!.colorsLable,
             options: [
               const ChooseThemeModeWidget(),
               const Divider(),
@@ -66,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
           SettingsGroup(
-            title: AppLocalizations.of(context)!.others,
+            title: AppLocalizations.of(context)!.othersLable,
             options: const [
               ScheduleNotificationWidget(),
               Divider(),
@@ -75,22 +75,22 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
           SettingsGroup(
-            title: AppLocalizations.of(context)!.socialLinks,
+            title: AppLocalizations.of(context)!.socialLinksLable,
             options: [
               SettingsOption(
-                title: AppLocalizations.of(context)!.github,
-                subtitle: AppLocalizations.of(context)!.githubText,
+                title: AppLocalizations.of(context)!.githubLable,
+                subtitle: AppLocalizations.of(context)!.githubTextLable,
                 onTap: () => launchUrlString('https://github.com/h4h13/paisa'),
               ),
               const Divider(),
               SettingsOption(
-                title: AppLocalizations.of(context)!.telegram,
-                subtitle: AppLocalizations.of(context)!.telegramGroup,
+                title: AppLocalizations.of(context)!.telegramLable,
+                subtitle: AppLocalizations.of(context)!.telegramGroupLable,
                 onTap: () => launchUrlString('https://t.me/app_paisa'),
               ),
               const Divider(),
               SettingsOption(
-                title: AppLocalizations.of(context)!.privacyPolicy,
+                title: AppLocalizations.of(context)!.privacyPolicyLable,
                 onTap: () => launchUrlString('https://hemanths.dev/privacy'),
               ),
               const Divider(),
@@ -99,7 +99,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text(AppLocalizations.of(context)!.madeWithLoveInIndia),
+            child: Text(AppLocalizations.of(context)!.madeWithLoveInIndiaLable),
           ),
         ],
       ),

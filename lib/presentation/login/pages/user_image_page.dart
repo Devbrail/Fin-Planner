@@ -39,7 +39,7 @@ class _UserImagePageState extends State<UserImagePage> {
                       ),
                 ),
                 Text(
-                  AppLocalizations.of(context)!.imageDesc,
+                  AppLocalizations.of(context)!.imageDescLable,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 const SizedBox(height: 16),

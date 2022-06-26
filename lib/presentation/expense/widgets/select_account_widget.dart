@@ -47,8 +47,12 @@ class _SelectedAccountState extends State<SelectedAccount> {
           if (accounts.isEmpty) {
             return ListTile(
               onTap: () => context.pushNamed(addAccountPath),
-              title: Text(AppLocalizations.of(context)!.addAccount),
-              subtitle: Text(AppLocalizations.of(context)!.noAccountAvailable),
+              title: Text(
+                AppLocalizations.of(context)!.addAccountLable,
+              ),
+              subtitle: Text(
+                AppLocalizations.of(context)!.noAccountAvailableLable,
+              ),
               trailing: const Icon(Icons.keyboard_arrow_right),
             );
           }
@@ -68,7 +72,7 @@ class _SelectedAccountState extends State<SelectedAccount> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    AppLocalizations.of(context)!.selectAccount,
+                    AppLocalizations.of(context)!.selectAccountLable,
                     style: Theme.of(context).textTheme.headline6?.copyWith(
                           fontWeight: FontWeight.bold,
                           color:
@@ -108,7 +112,7 @@ class _SelectedAccountState extends State<SelectedAccount> {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
-                              AppLocalizations.of(context)!.selectAccount,
+                              AppLocalizations.of(context)!.selectAccountLable,
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6
@@ -131,7 +135,7 @@ class _SelectedAccountState extends State<SelectedAccount> {
                 );
               },
               title: Text(
-                AppLocalizations.of(context)!.selectAccount,
+                AppLocalizations.of(context)!.selectAccountLable,
               ),
               subtitle: Text(selectedAccount!.name),
             ),

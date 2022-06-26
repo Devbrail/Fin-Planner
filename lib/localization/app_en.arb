@@ -3,40 +3,40 @@
     "@appTitle": {
         "description": "The app name"
     },
-    "home": "Home",
-    "@home": {
+    "homeLable": "Home",
+    "@homeLable": {
         "description": "Home label"
     },
-    "category": "Category",
-    "@category": {
+    "categoryLable": "Category",
+    "@categoryLable": {
         "description": "Category label"
     },
-    "addCategory": "Add Category",
-    "@addCategory": {
+    "addCategoryLable": "Add Category",
+    "@addCategoryLable": {
         "description": "Add Category label"
     },
-    "addExpense": "Add Expense",
-    "@addExpense": {
+    "addExpenseLable": "Add Expense",
+    "@addExpenseLable": {
         "description": "Add Expense label"
     },
-    "updateExpense": "Update Expense",
-    "@updateExpense": {
+    "updateExpenseLable": "Update Expense",
+    "@updateExpenseLable": {
         "description": "Update Expense label"
     },
-    "addAccount": "Add Account",
-    "@addAccount": {
+    "addAccountLable": "Add Account",
+    "@addAccountLable": {
         "description": "Add Account label"
     },
-    "categories": "Categories",
-    "@categories": {
+    "categoriesLable": "Categories",
+    "@categoriesLable": {
         "description": "Categories label"
     },
-    "accounts": "Accounts",
-    "@accounts": {
+    "accountsLable": "Accounts",
+    "@accountsLable": {
         "description": "Accounts label"
     },
-    "budget": "Budget",
-    "@budget": {
+    "budgetLable": "Budget",
+    "@budgetLable": {
         "description": "Budget label"
     },
     "welcomeMessage": "Hi, {username}",
@@ -48,280 +48,260 @@
             }
         }
     },
-    "settings": "Settings",
-    "@settings": {
+    "settingsLable": "Settings",
+    "@settingsLable": {
         "description": "Settings label"
     },
-    "total": "Total",
-    "@total": {
+    "totalLable": "Total",
+    "@totalLable": {
         "description": "Total label"
     },
-    "yesterday": "Yesterday",
-    "@yesterday": {
-        "description": "Yesterday label"
-    },
-    "lastSeventDays": "Last 7 days",
-    "@lastSeventDays": {
-        "description": "Last 7 days label"
-    },
-    "lastThirtyDays": "Last 30 Days",
-    "@lastThirtyDays": {
-        "description": "Last 30 Days label"
-    },
-    "income": "Income",
-    "@income": {
-        "description": "Income label"
-    },
-    "expense": "Expense",
-    "@expense": {
+    "expenseLable": "Expense",
+    "@expenseLable": {
         "description": "Expense label"
     },
-    "expenses": "Expenses",
-    "@expenses": {
+    "expensesLable": "Expenses",
+    "@expensesLable": {
         "description": "Expenses label"
     },
-    "deposit": "Deposit",
-    "@deposit": {
+    "depositLable": "Deposit",
+    "@depositLable": {
         "description": "Deposit label"
     },
-    "daily": "Daily",
-    "@daily": {
+    "dailyLable": "Daily",
+    "@dailyLable": {
         "description": "Daily label"
     },
-    "weekly": "Weekly",
-    "@weekly": {
+    "weeklyLable": "Weekly",
+    "@weeklyLable": {
         "description": "Weekly label"
     },
-    "monthly": "Monthly",
-    "@monthly": {
+    "monthlyLable": "Monthly",
+    "@monthlyLable": {
         "description": "Monthly label"
     },
-    "yearly": "Yearly",
-    "@yearly": {
+    "yearlyLable": "Yearly",
+    "@yearlyLable": {
         "description": "Yearly label"
     },
-    "all": "All",
-    "@all": {
+    "allLable": "All",
+    "@allLable": {
         "description": "All label"
     },
-    "transactionHistory": "Transaction History",
-    "@transactionHistory": {
+    "transactionHistoryLable": "Transaction History",
+    "@transactionHistoryLable": {
         "description": "Transaction history label"
     },
-    "selectCategoryIcon": "Select category icon",
-    "@selectCategoryIcon": {
+    "selectCategoryIconLable": "Select category icon",
+    "@selectCategoryIconLable": {
         "description": "Select category icon label"
     },
-    "description": "Description",
-    "@description": {
+    "descriptionLable": "Description",
+    "@descriptionLable": {
         "description": "Description label"
     },
-    "cash": "Cash",
-    "@cash": {
+    "cashLable": "Cash",
+    "@cashLable": {
         "description": "Cash label"
     },
-    "debitCard": "Debit Card",
-    "@debitCard": {
+    "debitCardLable": "Debit Card",
+    "@debitCardLable": {
         "description": "Debit Card label"
     },
-    "creditCard": "Credit Card",
-    "@creditCard": {
+    "creditCardLable": "Credit Card",
+    "@creditCardLable": {
         "description": "Credit Card label"
     },
-    "cardHoder": "Card holder name",
-    "@cardHoder": {
+    "cardHoderLable": "Card holder name",
+    "@cardHoderLable": {
         "description": "Card holder name label"
     },
-    "accountName": "Account name",
-    "@accountName": {
+    "accountNameLable": "Account name",
+    "@accountNameLable": {
         "description": "Account label"
     },
-    "lastFourDigit": "Last four digit number",
-    "@lastFourDigit": {
+    "lastFourDigitLable": "Last four digit number",
+    "@lastFourDigitLable": {
         "description": "Last four digit number label"
     },
-    "addCard": "Add card",
-    "@addCard": {
+    "addCardLable": "Add card",
+    "@addCardLable": {
         "description": "Add card label"
     },
-    "addedCard": "Account added",
-    "@addedCard": {
+    "addedCardLable": "Account added",
+    "@addedCardLable": {
         "description": "Account added label"
     },
-    "updatedCard": "Account updated",
-    "@updatedCard": {
+    "updatedCardLable": "Account updated",
+    "@updatedCardLable": {
         "description": "Account updated label"
     },
-    "deletedCard": "Account deleted",
-    "@deletedCard": {
+    "deletedCardLable": "Account deleted",
+    "@deletedCardLable": {
         "description": "Account deleted label"
     },
-    "successAddCategory": "Category added succesful",
-    "@successAddCategory": {
+    "successAddCategoryLable": "Category added succesful",
+    "@successAddCategoryLable": {
         "description": "Category added succesful label"
     },
-    "validName": "Enter valid name",
-    "@validName": {
+    "validNameLable": "Enter valid name",
+    "@validNameLable": {
         "description": "Enter valid name label"
     },
-    "profile": "Profile",
-    "@profile": {
+    "profileLable": "Profile",
+    "@profileLable": {
         "description": "Profile label"
     },
-    "theme": "Theme",
-    "@theme": {
+    "themeLable": "Theme",
+    "@themeLable": {
         "description": "Theme label"
     },
-    "reminder": "Reminder",
-    "@reminder": {
+    "reminderLable": "Reminder",
+    "@reminderLable": {
         "description": "Reimder label"
     },
-    "reminderDescription": "Show schedule notifications to add expense",
-    "@reminderDescription": {
+    "reminderDescriptionLable": "Show schedule notifications to add expense",
+    "@reminderDescriptionLable": {
         "description": "Show schedule notifications to add expense label"
     },
-    "biometric": "Biometric authentication",
-    "@biometric": {
-        "description": "Biometric label"
-    },
-    "exportExpenses": "Export data to excel",
-    "@exportExpenses": {
+    "exportExpensesLable": "Export data to excel",
+    "@exportExpensesLable": {
         "description": "Export data to excel label"
     },
-    "exportExpensesDescription": "All expenses will be exported as a CSV file to share",
-    "@exportExpensesDescription": {
+    "exportExpensesDescriptionLable": "All expenses will be exported as a CSV file to share",
+    "@exportExpensesDescriptionLable": {
         "description": "All expenses will be exported as a CSV file to share label"
     },
-    "chooseTheme": "Choose theme",
-    "@chooseTheme": {
+    "chooseThemeLable": "Choose theme",
+    "@chooseThemeLable": {
         "description": "Choose theme label"
     },
-    "update": "Update",
-    "@update": {
+    "updateLable": "Update",
+    "@updateLable": {
         "description": "Update label"
     },
-    "userName": "User name",
-    "@userName": {
+    "userNameLable": "User name",
+    "@userNameLable": {
         "description": "User name label"
     },
-    "selecteCountry": "Select country",
-    "@selecteCountry": {
+    "selecteCountryLable": "Select country",
+    "@selecteCountryLable": {
         "description": "Select country label"
     },
-    "errorAuth": "Error authentication",
-    "@errorAuth": {
+    "errorAuthLable": "Error authentication",
+    "@errorAuthLable": {
         "description": "Error authentication label"
     },
-    "errorNoCards": "Empty in cards",
-    "@errorNoCards": {
+    "errorNoCardsLable": "Empty in cards",
+    "@errorNoCardsLable": {
         "description": "No cards label"
     },
-    "errorNoCardsDescription": "Add expenses and will show up here",
-    "@errorNoCardsDescription": {
+    "errorNoCardsDescriptionLable": "Add expenses and will show up here",
+    "@errorNoCardsDescriptionLable": {
         "description": "No cards description label"
     },
-    "errorNoCatgories": "Empty in categories",
-    "@errorNoCatgories": {
+    "errorNoCatgoriesLable": "Empty in categories",
+    "@errorNoCatgoriesLable": {
         "description": "No categories label"
     },
-    "errorNoCategoriesDescription": "Add some categories and will show up here",
-    "@errorNoCategoriesDescription": {
+    "errorNoCategoriesDescriptionLable": "Add some categories and will show up here",
+    "@errorNoCategoriesDescriptionLable": {
         "description": "No category description label"
     },
-    "errorNoBudget": "Empty in budget overview",
-    "@errorNoBudget": {
+    "errorNoBudgetLable": "Empty in budget overview",
+    "@errorNoBudgetLable": {
         "description": "Empty in budget overview label"
     },
-    "errorNoBudgetDescription": "Add some expenses and budget overview will show up here",
-    "@errorNoBudgetDescription": {
+    "errorNoBudgetDescriptionLable": "Add some expenses and budget overview will show up here",
+    "@errorNoBudgetDescriptionLable": {
         "description": "No budget overview description label"
     },
-    "cardholder": "CardHolder",
-    "@cardholder": {
+    "cardholderLable": "CardHolder",
+    "@cardholderLable": {
         "description": "CardHolder label"
     },
-    "expenseAddedSuccessful": "Expense added",
-    "@expenseAddedSuccessful": {
+    "expenseAddedSuccessfulLable": "Expense added",
+    "@expenseAddedSuccessfulLable": {
         "description": "Expense added label"
     },
-    "expenseUpdateSuccessful": "Expense updated",
-    "@expenseUpdateSuccessful": {
+    "expenseUpdateSuccessfulLable": "Expense updated",
+    "@expenseUpdateSuccessfulLable": {
         "description": "Expense updated label"
     },
-    "expenseDeletedSuccessful": "Expense deleted",
-    "@expenseDeletedSuccessful": {
+    "expenseDeletedSuccessfulLable": "Expense deleted",
+    "@expenseDeletedSuccessfulLable": {
         "description": "Expense deleted label"
     },
-    "expenseName": "Expense name",
-    "@expenseName": {
+    "expenseNameLable": "Expense name",
+    "@expenseNameLable": {
         "description": "Expense name label"
     },
-    "amount": "Amount",
-    "@amount": {
+    "amountLable": "Amount",
+    "@amountLable": {
         "description": "Amount label"
     },
-    "validAmount": "Enter valid amount",
-    "@validAmount": {
+    "validAmountLable": "Enter valid amount",
+    "@validAmountLable": {
         "description": "Enter valid amount label"
     },
-    "date": "Date",
-    "@date": {
+    "dateLable": "Date",
+    "@dateLable": {
         "description": "date label"
     },
-    "validDate": "Select date",
-    "@validDate": {
+    "validDateLable": "Select date",
+    "@validDateLable": {
         "description": "Select date label"
     },
-    "add": "Add",
-    "@add": {
+    "addLable": "Add",
+    "@addLable": {
         "description": "add label"
     },
-    "selectAccount": "Select account",
-    "@selectAccount": {
+    "selectAccountLable": "Select account",
+    "@selectAccountLable": {
         "description": "Select account label"
     },
-    "selectCategory": "Select category",
-    "@selectCategory": {
+    "selectCategoryLable": "Select category",
+    "@selectCategoryLable": {
         "description": "Select category label"
     },
-    "socialLinks": "Social links",
-    "@socialLinks": {
+    "socialLinksLable": "Social links",
+    "@socialLinksLable": {
         "description": "Social links label"
     },
-    "telegram": "Telegram",
-    "@telegram": {
+    "telegramLable": "Telegram",
+    "@telegramLable": {
         "description": "Telegram label"
     },
-    "telegramGroup": "A group to follow and post bugs and feature requests",
-    "@telegramGroup": {
+    "telegramGroupLable": "A group to follow and post bugs and feature requests",
+    "@telegramGroupLable": {
         "description": "A group to follow and post bugs and feature requests label"
     },
-    "budgetOverView": "Budget overview",
-    "@budgetOverView": {
+    "budgetOverViewLable": "Budget overview",
+    "@budgetOverViewLable": {
         "description": "Budget overview label"
     },
-    "noResultFound": "No result found",
-    "@noResultFound": {
+    "noResultFoundLable": "No result found",
+    "@noResultFoundLable": {
         "description": "No result found label"
     },
-    "noCategory": "No category selected",
-    "@noCategory": {
+    "noCategoryLable": "No category selected",
+    "@noCategoryLable": {
         "description": "No category label"
     },
-    "noAccountAvailable": "No account selected",
-    "@noAccountAvailable": {
+    "noAccountAvailableLable": "No account selected",
+    "@noAccountAvailableLable": {
         "description": "No account label"
     },
-    "privacyPolicy": "Privacy & Policy",
-    "@privacyPolicy": {
+    "privacyPolicyLable": "Privacy & Policy",
+    "@privacyPolicyLable": {
         "description": "Privacy & Policy label"
     },
-    "github": "Github",
-    "@github": {
+    "githubLable": "Github",
+    "@githubLable": {
         "description": "Github label"
     },
-    "version": "Version",
-    "@version": {
+    "versionLable": "Version",
+    "@versionLable": {
         "description": "Github label"
     },
     "versionNumber": "v{version}",
@@ -333,60 +313,60 @@
             }
         }
     },
-    "updatedCategory": "Category updated",
-    "@updatedCategory": {
+    "updatedCategoryLable": "Category updated",
+    "@updatedCategoryLable": {
         "description": "Category updated label"
     },
-    "done": "Done",
-    "@done": {
+    "doneLable": "Done",
+    "@doneLable": {
         "description": "Done label"
     },
-    "cancel": "Cancel",
-    "@cancel": {
+    "cancelLable": "Cancel",
+    "@cancelLable": {
         "description": "Cancel label"
     },
-    "custom": "Custom",
-    "@custom": {
+    "customLable": "Custom",
+    "@customLable": {
         "description": "Custom label"
     },
-    "accentColor": "Accent color",
-    "@accentColor": {
+    "accentColorLable": "Accent color",
+    "@accentColorLable": {
         "description": "Accent color label"
     },
-    "dynamicColor": "Dynamic",
-    "@dynamicColor": {
+    "dynamicColorLable": "Dynamic",
+    "@dynamicColorLable": {
         "description": "Dynamic label"
     },
-    "pickColor": "Pick color",
-    "@pickColor": {
+    "pickColorLable": "Pick color",
+    "@pickColorLable": {
         "description": "Pick color label"
     },
-    "colors": "Colors",
-    "@colors": {
+    "colorsLable": "Colors",
+    "@colorsLable": {
         "description": "Colors label"
     },
-    "others": "Others",
-    "@others": {
+    "othersLable": "Others",
+    "@othersLable": {
         "description": "Others label"
     },
-    "githubText": "Fork the project on GitHub",
-    "@githubText": {
+    "githubTextLable": "Fork the project on GitHub",
+    "@githubTextLable": {
         "description": "GitHub text label"
     },
-    "madeWithLoveInIndia": "Made with ♥ in India",
-    "@madeWithLoveInIndia": {
+    "madeWithLoveInIndiaLable": "Made with ♥ in India",
+    "@madeWithLoveInIndiaLable": {
         "description": "Made with ♥ in India label"
     },
-    "updateCategory": "Update Category",
-    "@updateCategory": {
+    "updateCategoryLable": "Update Category",
+    "@updateCategoryLable": {
         "description": "Made with ♥ in India label"
     },
-    "accountInfo": "Information",
-    "@accountInfo": {
+    "accountInfoLable": "Information",
+    "@accountInfoLable": {
         "description": "information label"
     },
-    "accountInfoDesc": "The account details you entered are not shared with anyone, including us. It is only used for visual representation of account details, you may enter false info too",
-    "@accountInfoDesc": {
+    "accountInfoDescLable": "The account details you entered are not shared with anyone, including us. It is only used for visual representation of account details, you may enter false info too",
+    "@accountInfoDescLable": {
         "description": "information label"
     },
     "nextLable": "Next",
@@ -405,16 +385,16 @@
     "@welcomeDescLable": {
         "description": "Welcome desc label"
     },
-    "name": "Name",
-    "@name": {
+    "nameLable": "Name",
+    "@nameLable": {
         "description": "Name label"
     },
-    "enterName": "Enter name",
-    "@enterName": {
+    "enterNameLable": "Enter name",
+    "@enterNameLable": {
         "description": "Enter name label"
     },
-    "imageDesc": "Let's set image of you",
-    "@imageDesc": {
+    "imageDescLable": "Let's set image of you",
+    "@imageDescLable": {
         "description": "Image desc label"
     },
     "backLable": "Back",

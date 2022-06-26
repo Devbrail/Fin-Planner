@@ -24,7 +24,7 @@ class CategoryListPageState extends State<CategoryListPage> {
     return Scaffold(
       appBar: materialYouAppBar(
         context,
-        AppLocalizations.of(context)!.categories,
+        AppLocalizations.of(context)!.categoriesLable,
       ),
       body: ScreenTypeLayout(
         mobile: CategoryListWidget(
@@ -40,7 +40,7 @@ class CategoryListPageState extends State<CategoryListPage> {
         onPressed: () => context.goNamed(addCategoryPath),
         heroTag: 'add_category',
         key: const Key('add_category'),
-        tooltip: AppLocalizations.of(context)!.addCategory,
+        tooltip: AppLocalizations.of(context)!.addCategoryLable,
         child: const Icon(Icons.add),
       ),
     );

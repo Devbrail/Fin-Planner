@@ -27,8 +27,8 @@ class ScheduleNotificationWidgetState
   @override
   Widget build(BuildContext context) {
     return SettingsOption(
-      title: AppLocalizations.of(context)!.reminder,
-      subtitle: AppLocalizations.of(context)!.reminderDescription,
+      title: AppLocalizations.of(context)!.reminderLable,
+      subtitle: AppLocalizations.of(context)!.reminderDescriptionLable,
       trailing: Switch(
         activeColor: Theme.of(context).colorScheme.primary,
         value: showNotificatons,

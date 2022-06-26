@@ -50,7 +50,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
   @override
   Widget build(BuildContext context) {
     return SettingsOption(
-      title: AppLocalizations.of(context)!.theme,
+      title: AppLocalizations.of(context)!.themeLable,
       subtitle: selectedThemeMode.themeName,
       onTap: () => showThemeDialog(),
     );
@@ -82,7 +82,7 @@ class ThemeModeWidgetState extends State<ThemeModeWidget> {
         children: [
           ListTile(
             title: Text(
-              AppLocalizations.of(context)!.theme,
+              AppLocalizations.of(context)!.themeLable,
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
@@ -119,7 +119,7 @@ class ThemeModeWidgetState extends State<ThemeModeWidget> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text(AppLocalizations.of(context)!.cancel),
+              child: Text(AppLocalizations.of(context)!.cancelLable),
             ),
           ),
         ],

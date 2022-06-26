@@ -31,8 +31,8 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
   Widget build(BuildContext context) {
     return SettingsOption(
       onTap: () => exportData(),
-      title: AppLocalizations.of(context)!.exportExpenses,
-      subtitle: AppLocalizations.of(context)!.exportExpensesDescription,
+      title: AppLocalizations.of(context)!.exportExpensesLable,
+      subtitle: AppLocalizations.of(context)!.exportExpensesDescriptionLable,
     );
   }
 
@@ -45,7 +45,7 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
     final file = File(path);
     await file.writeAsString(csvData);
     Share.shareFiles([path],
-        subject: AppLocalizations.of(context)!.exportExpenses);
+        subject: AppLocalizations.of(context)!.exportExpensesLable);
   }
 }
 

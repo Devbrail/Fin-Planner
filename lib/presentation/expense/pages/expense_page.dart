@@ -123,14 +123,15 @@ class _ExpensePageState extends State<ExpensePage> {
         if (state is ExpenseDeletedState) {
           showMaterialSnackBar(
             context,
-            AppLocalizations.of(context)!.expenseDeletedSuccessful,
+            AppLocalizations.of(context)!.expenseDeletedSuccessfulLable,
           );
         } else if (state is ExpenseAdded) {
           String content = '';
           if (state.isAddOrUpdate) {
-            content = AppLocalizations.of(context)!.expenseAddedSuccessful;
+            content = AppLocalizations.of(context)!.expenseAddedSuccessfulLable;
           } else {
-            content = AppLocalizations.of(context)!.expenseUpdateSuccessful;
+            content =
+                AppLocalizations.of(context)!.expenseUpdateSuccessfulLable;
           }
           showMaterialSnackBar(context, content);
         }
@@ -141,8 +142,8 @@ class _ExpensePageState extends State<ExpensePage> {
           appBar: materialYouAppBar(
             context,
             isAddExpense
-                ? AppLocalizations.of(context)!.addExpense
-                : AppLocalizations.of(context)!.updateExpense,
+                ? AppLocalizations.of(context)!.addExpenseLable
+                : AppLocalizations.of(context)!.updateExpenseLable,
             actions: [
               isAddExpense
                   ? const SizedBox.shrink()
@@ -211,8 +212,8 @@ class _ExpensePageState extends State<ExpensePage> {
             backgroundColor: Colors.transparent,
             title: Text(
               isAddExpense
-                  ? AppLocalizations.of(context)!.addExpense
-                  : AppLocalizations.of(context)!.updateExpense,
+                  ? AppLocalizations.of(context)!.addExpenseLable
+                  : AppLocalizations.of(context)!.updateExpenseLable,
               style: Theme.of(context)
                   .textTheme
                   .headline6
@@ -307,8 +308,8 @@ class _ExpensePageState extends State<ExpensePage> {
       ),
       child: Text(
         isAddExpense
-            ? AppLocalizations.of(context)!.add
-            : AppLocalizations.of(context)!.update,
+            ? AppLocalizations.of(context)!.addLable
+            : AppLocalizations.of(context)!.updateLable,
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: Theme.of(context).textTheme.headline6?.fontSize,
@@ -349,7 +350,7 @@ class _ExpensePageState extends State<ExpensePage> {
             controller: dateTextController,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.date,
+              hintText: AppLocalizations.of(context)!.dateLable,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
@@ -359,7 +360,7 @@ class _ExpensePageState extends State<ExpensePage> {
               if (value!.length > 1) {
                 return null;
               } else {
-                return AppLocalizations.of(context)!.validDate;
+                return AppLocalizations.of(context)!.validDateLable;
               }
             },
           ),
@@ -395,7 +396,7 @@ class _ExpensePageState extends State<ExpensePage> {
       keyboardType: TextInputType.number,
       maxLines: 1,
       decoration: InputDecoration(
-        hintText: AppLocalizations.of(context)!.amount,
+        hintText: AppLocalizations.of(context)!.amountLable,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
@@ -406,7 +407,7 @@ class _ExpensePageState extends State<ExpensePage> {
         if (value!.length > 1) {
           return null;
         } else {
-          return AppLocalizations.of(context)!.validAmount;
+          return AppLocalizations.of(context)!.validAmountLable;
         }
       },
     );
@@ -419,14 +420,14 @@ class _ExpensePageState extends State<ExpensePage> {
       controller: nameTextController,
       keyboardType: TextInputType.name,
       decoration: InputDecoration(
-        hintText: AppLocalizations.of(context)!.expenseName,
+        hintText: AppLocalizations.of(context)!.expenseNameLable,
       ),
       onChanged: (value) {},
       validator: (value) {
         if (value!.length >= 3) {
           return null;
         } else {
-          return AppLocalizations.of(context)!.validName;
+          return AppLocalizations.of(context)!.validNameLable;
         }
       },
     );

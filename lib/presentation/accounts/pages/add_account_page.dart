@@ -96,14 +96,14 @@ class AddAccountPageState extends State<AddAccountPage> {
           showMaterialSnackBar(
             context,
             isAddOrUpdate
-                ? AppLocalizations.of(context)!.addedCard
-                : AppLocalizations.of(context)!.updatedCard,
+                ? AppLocalizations.of(context)!.addedCardLable
+                : AppLocalizations.of(context)!.updatedCardLable,
           );
         }
         if (state is AccountDeletedState) {
           showMaterialSnackBar(
             context,
-            AppLocalizations.of(context)!.deletedCard,
+            AppLocalizations.of(context)!.deletedCardLable,
           );
         }
       },
@@ -111,7 +111,7 @@ class AddAccountPageState extends State<AddAccountPage> {
         mobile: Scaffold(
           appBar: materialYouAppBar(
             context,
-            AppLocalizations.of(context)!.addCard,
+            AppLocalizations.of(context)!.addCardLable,
             actions: [
               IconButton(
                 onPressed: _showInfo,
@@ -131,7 +131,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                   ),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.addCard,
+                  AppLocalizations.of(context)!.addCardLable,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: Theme.of(context).textTheme.headline6?.fontSize,
@@ -173,7 +173,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                             controller: cardHolderController,
                             keyboardType: TextInputType.name,
                             decoration: InputDecoration(
-                              hintText: AppLocalizations.of(context)!.cardHoder,
+                              hintText:
+                                  AppLocalizations.of(context)!.cardHoderLable,
                               filled: true,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
@@ -185,8 +186,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                             controller: bankNameController,
                             keyboardType: TextInputType.name,
                             decoration: InputDecoration(
-                              hintText:
-                                  AppLocalizations.of(context)!.accountName,
+                              hintText: AppLocalizations.of(context)!
+                                  .accountNameLable,
                               filled: true,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
@@ -199,8 +200,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                             maxLength: 4,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              hintText:
-                                  AppLocalizations.of(context)!.lastFourDigit,
+                              hintText: AppLocalizations.of(context)!
+                                  .lastFourDigitLable,
                               filled: true,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
@@ -219,7 +220,7 @@ class AddAccountPageState extends State<AddAccountPage> {
         tablet: Scaffold(
           appBar: materialYouAppBar(
             context,
-            AppLocalizations.of(context)!.addCard,
+            AppLocalizations.of(context)!.addCardLable,
             actions: [
               IconButton(
                 onPressed: _showInfo,
@@ -262,8 +263,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                                   controller: cardHolderController,
                                   keyboardType: TextInputType.name,
                                   decoration: InputDecoration(
-                                    hintText:
-                                        AppLocalizations.of(context)!.cardHoder,
+                                    hintText: AppLocalizations.of(context)!
+                                        .cardHoderLable,
                                     filled: true,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12.0),
@@ -276,7 +277,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                                   keyboardType: TextInputType.name,
                                   decoration: InputDecoration(
                                     hintText: AppLocalizations.of(context)!
-                                        .accountName,
+                                        .accountNameLable,
                                     filled: true,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12.0),
@@ -290,7 +291,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     hintText: AppLocalizations.of(context)!
-                                        .lastFourDigit,
+                                        .lastFourDigitLable,
                                     filled: true,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12.0),
@@ -307,7 +308,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                                     ),
                                   ),
                                   child: Text(
-                                    AppLocalizations.of(context)!.addCard,
+                                    AppLocalizations.of(context)!.addCardLable,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: Theme.of(context)
@@ -354,7 +355,7 @@ class AddAccountPageState extends State<AddAccountPage> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  AppLocalizations.of(context)!.accountInfo,
+                  AppLocalizations.of(context)!.accountInfoLable,
                   style: Theme.of(context)
                       .textTheme
                       .headline6
@@ -363,7 +364,9 @@ class AddAccountPageState extends State<AddAccountPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(AppLocalizations.of(context)!.accountInfoDesc),
+                child: Text(
+                  AppLocalizations.of(context)!.accountInfoDescLable,
+                ),
               ),
               Align(
                 alignment: Alignment.bottomRight,

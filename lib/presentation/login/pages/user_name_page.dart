@@ -70,14 +70,14 @@ class UserNamePage extends StatelessWidget {
                       child: TextFormField(
                         controller: _nameController,
                         decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.name,
+                          hintText: AppLocalizations.of(context)!.nameLable,
                         ),
                         keyboardType: TextInputType.name,
                         validator: (val) {
                           if (val!.length > 3) {
                             return null;
                           } else {
-                            return AppLocalizations.of(context)!.enterName;
+                            return AppLocalizations.of(context)!.enterNameLable;
                           }
                         },
                       ),

@@ -70,13 +70,13 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
       mobile: Scaffold(
         appBar: materialYouAppBar(
           context,
-          AppLocalizations.of(context)!.budgetOverView,
+          AppLocalizations.of(context)!.budgetOverViewLable,
         ),
         floatingActionButton: FloatingActionButton.large(
           onPressed: _dateRangePicker,
           heroTag: 'date_range',
           key: const Key('date_range'),
-          tooltip: AppLocalizations.of(context)!.addCategory,
+          tooltip: AppLocalizations.of(context)!.addCategoryLable,
           child: const Icon(Icons.date_range),
         ),
         body: ValueListenableBuilder<Box<Expense>>(
@@ -91,9 +91,9 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
             if (expenses.isEmpty) {
               return EmptyWidget(
                 icon: Icons.paid,
-                title: AppLocalizations.of(context)!.errorNoBudget,
+                title: AppLocalizations.of(context)!.errorNoBudgetLable,
                 description:
-                    AppLocalizations.of(context)!.errorNoBudgetDescription,
+                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLable,
               );
             }
             expenses.sort((a, b) => a.time.compareTo(b.time));
@@ -133,7 +133,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
       tablet: Scaffold(
         appBar: materialYouAppBar(
           context,
-          AppLocalizations.of(context)!.budgetOverView,
+          AppLocalizations.of(context)!.budgetOverViewLable,
           actions: [
             FilterBudgetWidget(
               onSelected: (budget) {
@@ -147,7 +147,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
           onPressed: _dateRangePicker,
           heroTag: 'date_range',
           key: const Key('date_range'),
-          tooltip: AppLocalizations.of(context)!.addCategory,
+          tooltip: AppLocalizations.of(context)!.addCategoryLable,
           child: const Icon(Icons.date_range),
         ),
         body: ValueListenableBuilder<Box<Expense>>(
@@ -157,9 +157,9 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
             if (expenses.isEmpty) {
               return EmptyWidget(
                 icon: Icons.paid,
-                title: AppLocalizations.of(context)!.errorNoBudget,
+                title: AppLocalizations.of(context)!.errorNoBudgetLable,
                 description:
-                    AppLocalizations.of(context)!.errorNoBudgetDescription,
+                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLable,
               );
             }
 

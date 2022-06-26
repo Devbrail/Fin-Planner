@@ -54,27 +54,27 @@ class _LandingPageState extends State<LandingPage>
               },
               destinations: [
                 NavigationDestination(
-                  label: AppLocalizations.of(context)!.home,
+                  label: AppLocalizations.of(context)!.homeLable,
                   icon: const Icon(Icons.home_outlined),
                   selectedIcon: const Icon(Icons.home),
                 ),
                 NavigationDestination(
-                  label: AppLocalizations.of(context)!.accounts,
+                  label: AppLocalizations.of(context)!.accountsLable,
                   icon: const Icon(Icons.credit_card_outlined),
                   selectedIcon: const Icon(Icons.credit_card),
                 ),
                 NavigationDestination(
-                  label: AppLocalizations.of(context)!.category,
+                  label: AppLocalizations.of(context)!.categoryLable,
                   icon: const Icon(Icons.category_outlined),
                   selectedIcon: const Icon(Icons.category),
                 ),
                 NavigationDestination(
-                  label: AppLocalizations.of(context)!.budget,
+                  label: AppLocalizations.of(context)!.budgetLable,
                   icon: const Icon(Icons.account_balance_wallet_outlined),
                   selectedIcon: const Icon(Icons.account_balance_wallet),
                 ),
                 NavigationDestination(
-                  label: AppLocalizations.of(context)!.settings,
+                  label: AppLocalizations.of(context)!.settingsLable,
                   icon: const Icon(Icons.settings_outlined),
                   selectedIcon: const Icon(Icons.settings),
                 ),
@@ -106,7 +106,7 @@ class _LandingPageState extends State<LandingPage>
                 elevation: 10,
                 destinations: [
                   NavigationRailDestination(
-                    label: Text(AppLocalizations.of(context)!.home),
+                    label: Text(AppLocalizations.of(context)!.homeLable),
                     icon: const Icon(Icons.home_outlined),
                     selectedIcon: const Icon(Icons.home),
                     padding: const EdgeInsets.all(16),
@@ -114,25 +114,25 @@ class _LandingPageState extends State<LandingPage>
                   NavigationRailDestination(
                     icon: const Icon(Icons.credit_card_outlined),
                     selectedIcon: const Icon(Icons.credit_card),
-                    label: Text(AppLocalizations.of(context)!.accounts),
+                    label: Text(AppLocalizations.of(context)!.accountsLable),
                     padding: const EdgeInsets.all(16),
                   ),
                   NavigationRailDestination(
                     icon: const Icon(Icons.category_outlined),
                     selectedIcon: const Icon(Icons.category),
-                    label: Text(AppLocalizations.of(context)!.category),
+                    label: Text(AppLocalizations.of(context)!.categoryLable),
                     padding: const EdgeInsets.all(16),
                   ),
                   NavigationRailDestination(
                     icon: const Icon(Icons.account_balance_wallet_outlined),
                     selectedIcon: const Icon(Icons.account_balance_wallet),
-                    label: Text(AppLocalizations.of(context)!.budget),
+                    label: Text(AppLocalizations.of(context)!.budgetLable),
                     padding: const EdgeInsets.all(16),
                   ),
                   NavigationRailDestination(
                     icon: const Icon(Icons.settings_outlined),
                     selectedIcon: const Icon(Icons.settings),
-                    label: Text(AppLocalizations.of(context)!.settings),
+                    label: Text(AppLocalizations.of(context)!.settingsLable),
                     padding: const EdgeInsets.all(16),
                   ),
                 ],

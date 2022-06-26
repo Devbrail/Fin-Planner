@@ -33,10 +33,10 @@ class ColorSelectorWidgetState extends State<ColorSelectorWidget> {
         final isDynamic = value.get(dynamicColorKey, defaultValue: false);
         final color = value.get(appColorKey, defaultValue: 0xFF795548);
         return SettingsOption(
-          title: AppLocalizations.of(context)!.accentColor,
+          title: AppLocalizations.of(context)!.accentColorLable,
           subtitle: isDynamic
-              ? AppLocalizations.of(context)!.dynamicColor
-              : AppLocalizations.of(context)!.custom,
+              ? AppLocalizations.of(context)!.dynamicColorLable
+              : AppLocalizations.of(context)!.customLable,
           trailing: CircleAvatar(
             backgroundColor: Color(color),
             maxRadius: 16,
@@ -110,7 +110,7 @@ class ColorSelectionWidgetState extends State<ColorSelectionWidget> {
             children: [
               ListTile(
                 title: Text(
-                  AppLocalizations.of(context)!.pickColor,
+                  AppLocalizations.of(context)!.pickColorLable,
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
@@ -173,7 +173,7 @@ class ColorSelectionWidgetState extends State<ColorSelectionWidget> {
                     //widget.onSelectedColor(selectedColor);
                     Navigator.pop(context);
                   },
-                  child: Text(AppLocalizations.of(context)!.done),
+                  child: Text(AppLocalizations.of(context)!.doneLable),
                 ),
               ),
             ],

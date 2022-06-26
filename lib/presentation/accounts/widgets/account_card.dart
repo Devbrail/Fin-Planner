@@ -194,7 +194,7 @@ class _AccountCardState extends State<AccountCard>
                                 children: <Widget>[
                                   Text(
                                     AppLocalizations.of(context)!
-                                        .cardholder
+                                        .cardholderLable
                                         .toUpperCase(),
                                     style: TextStyle(
                                         color: Theme.of(context)
@@ -354,7 +354,7 @@ class _AccountCardState extends State<AccountCard>
                         children: <Widget>[
                           Text(
                             AppLocalizations.of(context)!
-                                .cardholder
+                                .cardholderLable
                                 .toUpperCase(),
                             style:
                                 Theme.of(context).textTheme.caption?.copyWith(

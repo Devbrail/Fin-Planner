@@ -35,7 +35,7 @@ class AccountsPageState extends State<AccountsPage> {
             return Scaffold(
               appBar: materialYouAppBar(
                 context,
-                AppLocalizations.of(context)!.accounts,
+                AppLocalizations.of(context)!.accountsLable,
               ),
               body: ListView(
                 padding: const EdgeInsets.only(bottom: 124),
@@ -59,7 +59,7 @@ class AccountsPageState extends State<AccountsPage> {
                 onPressed: _addCard,
                 heroTag: 'add_account',
                 key: const Key('add_account'),
-                tooltip: AppLocalizations.of(context)!.addAccount,
+                tooltip: AppLocalizations.of(context)!.addAccountLable,
                 child: const Icon(Icons.add),
               ),
             );
@@ -68,7 +68,7 @@ class AccountsPageState extends State<AccountsPage> {
         tablet: Scaffold(
           appBar: materialYouAppBar(
             context,
-            AppLocalizations.of(context)!.accounts,
+            AppLocalizations.of(context)!.accountsLable,
           ),
           body: Builder(
             builder: (context) {
@@ -99,7 +99,7 @@ class AccountsPageState extends State<AccountsPage> {
             onPressed: _addCard,
             heroTag: 'add_account',
             key: const Key('add_account'),
-            tooltip: AppLocalizations.of(context)!.addAccount,
+            tooltip: AppLocalizations.of(context)!.addAccountLable,
             child: const Icon(Icons.add),
           ),
         ),
