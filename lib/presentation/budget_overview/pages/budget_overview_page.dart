@@ -115,6 +115,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
+                    padding: const EdgeInsets.only(bottom: 128),
                     itemCount: filterBudget.length,
                     itemBuilder: (BuildContext context, int index) {
                       return BudgetSection(
