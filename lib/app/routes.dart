@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/common/enum/box_types.dart';
-import 'package:flutter_paisa/data/settings/settings_service.dart';
-import 'package:flutter_paisa/main.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:hive_flutter/adapters.dart';
+
+import '../common/enum/box_types.dart';
 import '../data/accounts/model/account.dart';
 import '../data/category/model/category.dart';
 import '../data/expense/model/expense.dart';
+import '../data/settings/settings_service.dart';
+import '../main.dart';
 import '../presentation/accounts/pages/add_account_page.dart';
 import '../presentation/category/pages/add_category_page.dart';
 import '../presentation/expense/pages/expense_page.dart';

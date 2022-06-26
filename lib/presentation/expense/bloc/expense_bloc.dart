@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../common/constants/util.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../domain/landing/usecase/expense_use_case.dart';

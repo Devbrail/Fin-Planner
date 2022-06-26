@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/common/constants/currency.dart';
-import 'package:flutter_paisa/common/enum/transaction.dart';
+import 'currency.dart';
+import '../enum/transaction.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../data/expense/model/expense.dart';
