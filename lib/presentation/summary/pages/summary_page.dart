@@ -12,7 +12,6 @@ import '../../home/widgets/welcome_widget.dart';
 import '../../search/pages/search_page.dart';
 import '../../settings/widgets/user_profile_widget.dart';
 import '../widgets/expense_history_widget.dart';
-import '../widgets/expense_summary_widget.dart';
 import '../widgets/expense_total_widget.dart';
 
 class SummaryPage extends StatefulWidget {
@@ -78,7 +77,6 @@ class _SummaryPageState extends State<SummaryPage> {
             shrinkWrap: true,
             padding: const EdgeInsets.only(bottom: 128),
             children: const [
-              ExpenseSummaryWidget(),
               ExpenseTotalWidget(),
               ExpenseHistory(),
             ],
@@ -113,15 +111,12 @@ class _SummaryPageState extends State<SummaryPage> {
               Expanded(
                 child: Column(
                   children: const [
-                    ExpenseSummaryWidget(),
                     ExpenseTotalWidget(),
                   ],
                 ),
               ),
               const Expanded(
-                child: SingleChildScrollView(
-                  child: ExpenseHistory(),
-                ),
+                child: ExpenseHistory(),
               ),
             ],
           ),

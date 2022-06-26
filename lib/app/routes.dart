@@ -23,7 +23,7 @@ const homePath = '/home';
 const loginPath = '/login';
 const addExpensePath = 'add-expense';
 const addCategoryPath = 'add-category';
-const addAccountPath = 'add-card';
+const addAccountPath = 'add-account';
 
 final settings = Hive.box(BoxType.settings.stringValue);
 

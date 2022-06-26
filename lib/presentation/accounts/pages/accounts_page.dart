@@ -21,6 +21,10 @@ class AccountsPage extends StatefulWidget {
 class AccountsPageState extends State<AccountsPage> {
   final AccountsBloc accountsBloc = locator.get();
 
+  void _addCard() {
+    context.goNamed(addAccountPath);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -52,7 +56,7 @@ class AccountsPageState extends State<AccountsPage> {
                 ],
               ),
               floatingActionButton: FloatingActionButton.large(
-                onPressed: () => context.goNamed(addAccountPath),
+                onPressed: _addCard,
                 heroTag: 'add_account',
                 key: const Key('add_account'),
                 tooltip: AppLocalizations.of(context)!.addAccount,
@@ -92,7 +96,7 @@ class AccountsPageState extends State<AccountsPage> {
             },
           ),
           floatingActionButton: FloatingActionButton.large(
-            onPressed: () => context.goNamed('/add-expense'),
+            onPressed: _addCard,
             heroTag: 'add_account',
             key: const Key('add_account'),
             tooltip: AppLocalizations.of(context)!.addAccount,

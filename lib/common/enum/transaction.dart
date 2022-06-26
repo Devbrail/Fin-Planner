@@ -9,9 +9,9 @@ enum TransactonType {
   @HiveField(1)
   expense,
   @HiveField(0)
-  income,
+  income /* ,
   @HiveField(2)
-  deposit
+  deposit */
 }
 
 extension TransactonTypeMapping on TransactonType {
@@ -21,8 +21,8 @@ extension TransactonTypeMapping on TransactonType {
         return AppLocalizations.of(context)!.income;
       case TransactonType.expense:
         return AppLocalizations.of(context)!.expense;
-      case TransactonType.deposit:
-        return AppLocalizations.of(context)!.deposit;
+      /*  case TransactonType.deposit:
+        return AppLocalizations.of(context)!.deposit; */
     }
   }
 }

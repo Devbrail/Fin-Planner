@@ -42,7 +42,6 @@ class _ExpenseHistoryState extends State<ExpenseHistory> {
               },
             ),
             ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: maps.entries.length,
               itemBuilder: (_, mapIndex) {
@@ -65,7 +64,6 @@ class _ExpenseHistoryState extends State<ExpenseHistory> {
 
 double calcauleTotal(List<Expense> expenses) {
   final total = expenses.fold<double>(0, (previousValue, element) {
-    if (element.type == TransactonType.deposit) return previousValue + 0;
     if (element.type == TransactonType.expense) {
       return previousValue - element.currency;
     } else {

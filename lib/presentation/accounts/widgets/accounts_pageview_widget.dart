@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import '../../../app/routes.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -49,13 +50,7 @@ class AccountPageViewWidget extends StatelessWidget {
                   BlocProvider.of<AccountsBloc>(context)
                       .add(DeleteAccountEvent(account));
                 },
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    addAccountPath,
-                    arguments: account,
-                  );
-                },
+                onTap: () => context.goNamed(addAccountPath, extra: account),
               );
             },
           ),

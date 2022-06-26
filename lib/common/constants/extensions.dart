@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/common/constants/currency.dart';
+import 'package:flutter_paisa/common/enum/transaction.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../data/expense/model/expense.dart';
@@ -21,4 +23,33 @@ extension TextStyleHelpers on TextStyle {
         fontWeight: FontWeight.w700,
         fontSize: Theme.of(context).textTheme.headline6?.fontSize,
       );
+}
+
+extension TotalAmountOnExpenses on Iterable<Expense> {
+  double get totalExpense =>
+      where((element) => element.type == TransactonType.expense)
+          .map((e) => e.currency)
+          .fold<double>(0, (previousValue, element) => previousValue + element);
+
+  double get totalIncome =>
+      where((element) => element.type == TransactonType.income)
+          .map((e) => e.currency)
+          .fold<double>(0, (previousValue, element) => previousValue + element);
+
+  double get total => map((e) => e.currency)
+      .fold<double>(0, (previousValue, element) => previousValue + element);
+
+  String get totalWithCurrenySymbol => formattedCurrency(total);
+
+  double get thisMonthExpense =>
+      where((element) => element.type == TransactonType.expense)
+          .where((element) => element.time.month == DateTime.now().month)
+          .map((e) => e.currency)
+          .fold<double>(0, (previousValue, element) => previousValue + element);
+
+  double get thisMonthIncome =>
+      where((element) => element.type == TransactonType.income)
+          .where((element) => element.time.month == DateTime.now().month)
+          .map((e) => e.currency)
+          .fold<double>(0, (previousValue, element) => previousValue + element);
 }

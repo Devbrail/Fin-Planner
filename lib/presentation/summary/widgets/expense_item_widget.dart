@@ -58,9 +58,7 @@ class ExpensItemWidget extends StatelessWidget {
   }
 
   Color get _typeColor {
-    if (expense.type == TransactonType.deposit) {
-      return Colors.blue;
-    } else if (expense.type == TransactonType.expense) {
+    if (expense.type == TransactonType.expense) {
       return Colors.red;
     } else {
       return Colors.green;
@@ -68,9 +66,7 @@ class ExpensItemWidget extends StatelessWidget {
   }
 
   String get _typeSign {
-    if (expense.type == TransactonType.deposit) {
-      return '';
-    } else if (expense.type == TransactonType.expense) {
+    if (expense.type == TransactonType.expense) {
       return '-';
     } else {
       return '+';

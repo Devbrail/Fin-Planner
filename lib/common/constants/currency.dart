@@ -11,6 +11,7 @@ String getCurrency() {
 String formattedCurrency(double currency) {
   return NumberFormat.simpleCurrency(
     locale: currentLocale.toString(),
+    decimalDigits: 2,
   ).format(currency);
 }
 

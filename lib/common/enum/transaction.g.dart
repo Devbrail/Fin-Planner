@@ -17,8 +17,6 @@ class TransactonTypeAdapter extends TypeAdapter<TransactonType> {
         return TransactonType.expense;
       case 0:
         return TransactonType.income;
-      case 2:
-        return TransactonType.deposit;
       default:
         return TransactonType.expense;
     }
@@ -32,9 +30,6 @@ class TransactonTypeAdapter extends TypeAdapter<TransactonType> {
         break;
       case TransactonType.income:
         writer.writeByte(0);
-        break;
-      case TransactonType.deposit:
-        writer.writeByte(2);
         break;
     }
   }

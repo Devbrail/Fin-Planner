@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/common/constants/currency.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TotalTextWidget extends StatelessWidget {
-  const TotalTextWidget({
+class TotalWidget extends StatelessWidget {
+  const TotalWidget({
     Key? key,
     required this.title,
-    required this.value,
+    required this.amount,
   }) : super(key: key);
-
   final String title;
-  final String value;
+  final double amount;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,20 +18,15 @@ class TotalTextWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: GoogleFonts.manrope(
-            textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-          ),
+          style: Theme.of(context).textTheme.headline6,
         ),
-        const SizedBox(
-          height: 4,
-        ),
+        const SizedBox(height: 8),
         Text(
-          value,
+          formattedCurrency(amount),
           style: GoogleFonts.manrope(
             textStyle: Theme.of(context).textTheme.headline4?.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.w600,
                 ),
           ),
         ),

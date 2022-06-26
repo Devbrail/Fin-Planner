@@ -424,6 +424,25 @@
     "setBudgetLable": "Set budget",
     "@setBudgetLable": {
         "description": "set budget label"
+    },
+    "incomeLable": "Income",
+    "@incomeLable": {
+        "description": "income label"
+    },
+    "outcomeLable": "Outcome",
+    "@outcomeLable": {
+        "description": "outcome label"
+    },
+    "thisMonthLable": "This month",
+    "@thisMonthLable": {
+        "description": "This month label"
+    },
+    "totalBalanceLable": "Total balance",
+    "@totalBalanceLable": {
+        "description": "Total balance label"
+    },
+    "summaryLable": "Summary",
+    "@summaryLable": {
+        "description": "Summary label"
     }
-     
 }
