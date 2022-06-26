@@ -177,7 +177,6 @@ class _ExpensePageState extends State<ExpensePage> {
                     accountId: selectedAccountId ?? -1,
                     onSelected: (account) {
                       selectedAccountId = account.key;
-                      debugPrint("SelectedAccount: ${account.superId}");
                     },
                   ),
                   Padding(

@@ -85,7 +85,6 @@ class _SelectedAccountState extends State<SelectedAccount> {
                   onSelected: (account) {
                     selectedAccount = account;
                     widget.onSelected(account);
-                    debugPrint("SelectedItem: ${account.superId}");
                     setState(() {});
                   },
                   account: selectedAccount!,
@@ -124,7 +123,6 @@ class _SelectedAccountState extends State<SelectedAccount> {
                             onSelected: (account) {
                               selectedAccount = account;
                               widget.onSelected(account);
-                              debugPrint("SelectedItem: ${account.superId}");
                             },
                             account: selectedAccount!,
                           )
@@ -247,7 +245,6 @@ class SelectedItemState extends State<SelectedItem> {
                   setState(() {
                     widget.onSelected(account);
                   });
-                  debugPrint("onTap: ${account.superId}");
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
