@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../common/enum/box_types.dart';
 import '../../expense/model/expense.dart';
 import '../model/category.dart';
@@ -40,70 +41,3 @@ class CategoryLocalDataSources implements CategoryDataSource {
     return box.values.firstWhere((element) => element.key == categoryId);
   }
 }
-
-List<IconData> categoryIcons = [
-  Icons.home,
-  Icons.receipt,
-  Icons.checkroom,
-  Icons.restaurant,
-  Icons.medication,
-  Icons.paid_outlined,
-  Icons.sports_tennis,
-  Icons.cable,
-  Icons.local_gas_station,
-  Icons.more_horiz,
-];
-/* 
-List<Category> _predefinedCategories() {
-  return [
-    Category(
-      description: '',
-      name: 'Bills',
-      icon: Icons.receipt.codePoint,
-      isPredefined: true,
-    ),
-    Category(
-      description: '',
-      name: 'Lifestyle',
-      icon: Icons.checkroom.codePoint,
-      isPredefined: true,
-    ),
-    Category(
-      description: '',
-      name: 'Food',
-      icon: Icons.restaurant.codePoint,
-      isPredefined: true,
-    ),
-    Category(
-      description: '',
-      name: 'Heatlh',
-      icon: Icons.medication.codePoint,
-      isPredefined: true,
-    ),
-    Category(
-      description: '',
-      name: 'Home',
-      icon: Icons.home.codePoint,
-      isPredefined: true,
-    ),
-    Category(
-      description: '',
-      name: 'Sports',
-      icon: Icons.sports_tennis.codePoint,
-      isPredefined: true,
-    ),
-    Category(
-      description: '',
-      name: 'Electronics',
-      icon: Icons.cable.codePoint,
-      isPredefined: true,
-    ),
-    Category(
-      description: '',
-      name: 'Gas',
-      icon: Icons.local_gas_station.codePoint,
-      isPredefined: true,
-    ),
-  ];
-}
- */

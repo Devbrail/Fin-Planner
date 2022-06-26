@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/common/enum/box_types.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../data/expense/model/expense.dart';
@@ -16,13 +17,46 @@ class SearchListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<Expense>>(
-      valueListenable: Hive.box<Expense>('expense').listenable(),
-      builder: (BuildContext context, value, Widget? child) {
-        var results = query.isEmpty
-            ? value.values.toList() // whole list
-            : value.values.where((Expense c) {
-                return c.name.toLowerCase().contains(query);
-              }).toList();
+      valueListenable:
+          Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
+      builder: (context, value, child) {
+        if (query.isEmpty) {
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.search,
+                  size: 72,
+                ),
+                Text(AppLocalizations.of(context)!.searchMessageLable),
+              ],
+            ),
+          );
+        }
+
+        final results = value.values
+            .where((Expense c) => c.name.toLowerCase().contains(query))
+            .toList();
+
+        if (results.isEmpty) {
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.sentiment_satisfied_rounded,
+                  size: 72,
+                ),
+                Text(AppLocalizations.of(context)!.emptySearchMessageLable),
+              ],
+            ),
+          );
+        }
         return results.isEmpty
             ? Center(
                 child: Text(

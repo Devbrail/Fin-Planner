@@ -448,5 +448,13 @@
     "acceptLable": "Accept",
     "@acceptLable": {
         "description": "Accept label"
+    },
+    "searchMessageLable": "Start searching something!",
+    "@searchMessageLable": {
+        "description": "search message label"
+    },
+    "emptySearchMessageLable": "Looks like nothing found!",
+    "@emptySearchMessageLable": {
+        "description": "empty search message label"
     }
 }

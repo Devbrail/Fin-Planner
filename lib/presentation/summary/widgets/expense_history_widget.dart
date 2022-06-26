@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../common/constants/time.dart';
 import '../../../common/constants/util.dart';
+import '../../../common/constants/extensions.dart';
 import '../../../common/enum/filter_budget.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../data/expense/model/expense.dart';
@@ -43,14 +44,14 @@ class _ExpenseHistoryState extends State<ExpenseHistory> {
             ),
             ListView.builder(
               shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: maps.entries.length,
               itemBuilder: (_, mapIndex) {
                 final expenses = maps.values.toList()[mapIndex];
                 expenses.sort((a, b) => b.time.compareTo(a.time));
-                final double total = calcauleTotal(expenses);
                 return ExpenseMonthCardWidget(
                   title: maps.keys.toList()[mapIndex],
-                  total: total,
+                  total: expenses.filterTotal,
                   expenses: expenses,
                 );
               },
@@ -60,15 +61,4 @@ class _ExpenseHistoryState extends State<ExpenseHistory> {
       },
     );
   }
-}
-
-double calcauleTotal(List<Expense> expenses) {
-  final total = expenses.fold<double>(0, (previousValue, element) {
-    if (element.type == TransactonType.expense) {
-      return previousValue - element.currency;
-    } else {
-      return previousValue + element.currency;
-    }
-  });
-  return total;
 }

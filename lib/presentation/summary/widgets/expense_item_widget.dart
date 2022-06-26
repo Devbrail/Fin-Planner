@@ -10,7 +10,7 @@ import '../../../common/enum/transaction.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
 
-class ExpensItemWidget extends StatelessWidget {
+class ExpensItemWidget extends StatefulWidget {
   const ExpensItemWidget({
     Key? key,
     required this.expense,
@@ -18,14 +18,54 @@ class ExpensItemWidget extends StatelessWidget {
   }) : super(key: key);
   final Account account;
   final Expense expense;
+
+  @override
+  State<ExpensItemWidget> createState() => _ExpensItemWidgetState();
+}
+
+class _ExpensItemWidgetState extends State<ExpensItemWidget> {
+  Color get _typeColor {
+    if (widget.expense.type == TransactonType.expense) {
+      return Theme.of(context).colorScheme.error;
+    } else {
+      return Colors.green.shade300;
+    }
+  }
+
+  String get _typeSign {
+    if (widget.expense.type == TransactonType.expense) {
+      return '-';
+    } else {
+      return '+';
+    }
+  }
+
+  Widget _type() {
+    return RichText(
+      text: TextSpan(
+        text: _typeSign,
+        style: GoogleFonts.manrope(
+          textStyle: TextStyle(color: _typeColor),
+        ),
+        children: [
+          TextSpan(text: formattedCurrency(widget.expense.currency)),
+        ],
+      ),
+    );
+  }
+
+  String _readableDateWeekTime(DateTime time) {
+    return DateFormat('dd EEE').format(time);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final date = _readableDateWeekTime(expense.time);
+    final date = _readableDateWeekTime(widget.expense.time);
 
     return InkWell(
       onTap: () => context.goNamed(
         addExpensePath,
-        extra: expense,
+        extra: widget.expense,
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(
@@ -50,44 +90,10 @@ class ExpensItemWidget extends StatelessWidget {
             ),
           ],
         ),
-        title: Text(expense.name),
-        subtitle: Text('${account.name} • ${account.bankName}'),
+        title: Text(widget.expense.name),
+        subtitle: Text('${widget.account.name} • ${widget.account.bankName}'),
         trailing: _type(),
       ),
     );
-  }
-
-  Color get _typeColor {
-    if (expense.type == TransactonType.expense) {
-      return Colors.red;
-    } else {
-      return Colors.green;
-    }
-  }
-
-  String get _typeSign {
-    if (expense.type == TransactonType.expense) {
-      return '-';
-    } else {
-      return '+';
-    }
-  }
-
-  Widget _type() {
-    return RichText(
-      text: TextSpan(
-        text: _typeSign,
-        style: GoogleFonts.manrope(
-          textStyle: TextStyle(color: _typeColor),
-        ),
-        children: [
-          TextSpan(text: getTwoDigitCurrency(expense.currency)),
-        ],
-      ),
-    );
-  }
-
-  String _readableDateWeekTime(DateTime time) {
-    return DateFormat('dd EEE').format(time);
   }
 }

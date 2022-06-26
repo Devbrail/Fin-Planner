@@ -26,6 +26,14 @@ extension TextStyleHelpers on TextStyle {
 }
 
 extension TotalAmountOnExpenses on Iterable<Expense> {
+  double get filterTotal => fold<double>(0, (previousValue, element) {
+        if (element.type == TransactonType.expense) {
+          return previousValue - element.currency;
+        } else {
+          return previousValue + element.currency;
+        }
+      });
+
   double get totalExpense =>
       where((element) => element.type == TransactonType.expense)
           .map((e) => e.currency)

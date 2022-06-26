@@ -10,7 +10,7 @@ import '../../../common/constants/util.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../common/widgets/material_you_textfield.dart';
-import '../../../data/category/datasources/category_local_data_source.dart';
+import '../../../common/widgets/show_icon_picker.dart';
 import '../../../data/category/model/category.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/category_bloc.dart';
@@ -290,23 +290,19 @@ class CategoryIconsState extends State<CategoryIcons> {
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      itemCount: categoryIcons.length,
+      itemCount: defaultCategoryIcons.take(9).length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 5,
       ),
-      itemBuilder: (BuildContext context, int index) {
-        var iconData = categoryIcons[index];
+      itemBuilder: (context, index) {
+        var iconData = defaultCategoryIcons[index];
         return ScreenTypeLayout(
           mobile: IconButton(
             onPressed: () async {
-              /* if (index == categoryIcons.length - 1) {
-                final icon = await FlutterIconPicker.showIconPicker(
-                  context,
-                  iconPackModes: [IconPack.material],
-                  searchIcon: const Icon(Icons.search_rounded),
-                  iconPickerShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
-                  ),
+              if (index == defaultCategoryIcons.length - 1) {
+                final icon = await showIconPicker(
+                  context: context,
+                  defaultIcon: selectedIcon,
                 );
                 if (icon != null) {
                   selectedIcon = icon;
@@ -314,7 +310,7 @@ class CategoryIconsState extends State<CategoryIcons> {
                   setState(() {});
                 }
                 return;
-              } */
+              }
               selectedIcon = iconData;
               widget.onSeleted(iconData);
               setState(() {});

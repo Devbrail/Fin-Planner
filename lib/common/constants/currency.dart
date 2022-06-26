@@ -15,12 +15,6 @@ String formattedCurrency(double currency) {
   ).format(currency);
 }
 
-String getTwoDigitCurrency(double currency) {
-  return NumberFormat.simpleCurrency(
-    locale: currentLocale.toString(),
-  ).format(currency);
-}
-
 String totalExpenseWithSymbol(List<Expense> expenses) {
   final total = expenses
       .map((e) => e.currency)

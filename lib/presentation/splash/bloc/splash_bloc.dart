@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/common/enum/card_type.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../common/enum/box_types.dart';
@@ -29,24 +30,12 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     CheckLoginEvent event,
     Emitter<SplashState> emit,
   ) async {
-    /* final name = await settings.get(userNameKey, defaultValue: '');
-    if (name == '') {
-      emit(NavigateToUserName());
-      return;
-    }
-
-    final image = await settings.get(userImageKey, defaultValue: '');
-    if (image == '') {
-      emit(NavigateToUserImage());
-      return;
-    }
-
     final isAnyAccount = accounts.values.isEmpty;
     if (isAnyAccount) {
       final account = Account(
-        name: 'Default',
+        name: 'Holder name',
         icon: Icons.credit_card.codePoint,
-        bankName: 'Bank Name',
+        bankName: 'Bank name',
         validThru: DateTime.now(),
         number: '1234',
         cardType: CardType.cash,
@@ -67,7 +56,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       category.superId = id;
       category.save();
     }
-*/
+
     final languageCode = settings.get(userLanguageKey, defaultValue: 'DEF');
     //emit(CountryLocalesState(locales));
 
