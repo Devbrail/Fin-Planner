@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/presentation/accounts/pages/accounts_page.dart';
+import 'package:flutter_paisa/presentation/summary/pages/summary_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -19,7 +21,7 @@ import '../presentation/splash/pages/splash_screen_page.dart';
 const splashPath = '/splash';
 const userNamePath = '/user-name';
 const userImagePath = '/user-image';
-const homePath = '/home';
+const landingPath = '/landing';
 const loginPath = '/login';
 const addExpensePath = 'add-expense';
 const addCategoryPath = 'add-category';
@@ -49,7 +51,7 @@ final GoRouter goRouter = GoRouter(
     }
     if (name.isNotEmpty && image.isNotEmpty && isLogging) {
       currentLocale = languageCode;
-      return homePath;
+      return landingPath;
     }
     return null;
   },
@@ -68,8 +70,8 @@ final GoRouter goRouter = GoRouter(
       builder: (context, state) => const SplashScreenPage(),
     ),
     GoRoute(
-      name: 'home',
-      path: homePath,
+      name: 'landing',
+      path: landingPath,
       builder: (context, state) => const LandingPage(),
       routes: [
         GoRoute(

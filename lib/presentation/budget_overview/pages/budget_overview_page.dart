@@ -11,10 +11,9 @@ import '../../../common/enum/filter_budget.dart';
 import '../../../common/widgets/empty_widget.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
 import '../../../data/category/datasources/category_datasource.dart';
-import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
-import '../widgets/budget_item_widget.dart';
+import '../widgets/budget_section_widget.dart';
 import '../widgets/filter_budget_widget.dart';
 
 class BudgetOverViewPage extends StatefulWidget {
@@ -40,15 +39,6 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
       lastDate: DateTime(DateTime.now().year + 5),
       initialDateRange: dateTimeRange ?? intialDateRange,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
-      /* builder: (_, child) => Theme(
-        data: Theme.of(context).copyWith(
-          textTheme: GoogleFonts.outfitTextTheme(Theme.of(context).textTheme),
-          colorScheme: Theme.of(context).colorScheme.copyWith(
-                primary: Theme.of(context).colorScheme.primaryContainer,
-              ),
-        ),
-        child: child!,
-      ), */
       builder: (_, child) {
         return Theme(
           data: ThemeData.from(colorScheme: Theme.of(context).colorScheme)
@@ -59,51 +49,50 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
         );
       },
     );
-    if (newDateRange == null) return;
+    if (newDateRange == null || newDateRange == dateTimeRange) return;
     dateTimeRange = newDateRange;
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
-      mobile: Scaffold(
-        appBar: materialYouAppBar(
-          context,
-          AppLocalizations.of(context)!.budgetOverViewLable,
-        ),
-        floatingActionButton: FloatingActionButton.large(
-          onPressed: _dateRangePicker,
-          heroTag: 'date_range',
-          key: const Key('date_range'),
-          tooltip: AppLocalizations.of(context)!.addCategoryLable,
-          child: const Icon(Icons.date_range),
-        ),
-        body: ValueListenableBuilder<Box<Expense>>(
-          valueListenable:
-              Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
-          builder: (context, value, _) {
-            debugPrint('Hemanth :: ${Theme.of(context).colorScheme.primary}');
-            List<Expense> expenses = value.values.toList();
-            if (dateTimeRange != null) {
-              expenses = value.isFilterTimeBetween(dateTimeRange!);
-            }
-            if (expenses.isEmpty) {
-              return EmptyWidget(
-                icon: Icons.paid,
-                title: AppLocalizations.of(context)!.errorNoBudgetLable,
-                description:
-                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLable,
-              );
-            }
-            expenses.sort((a, b) => a.time.compareTo(b.time));
+    return ValueListenableBuilder<Box<Expense>>(
+      valueListenable:
+          Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
+      builder: (context, value, _) {
+        List<Expense> expenses = value.budgetOverView;
+        if (dateTimeRange != null) {
+          expenses = value.isFilterTimeBetween(dateTimeRange!);
+        }
+        if (expenses.isEmpty) {
+          return EmptyWidget(
+            icon: Icons.paid,
+            title: AppLocalizations.of(context)!.errorNoBudgetLable,
+            description:
+                AppLocalizations.of(context)!.errorNoBudgetDescriptionLable,
+          );
+        }
+        expenses.sort((a, b) => a.time.compareTo(b.time));
 
-            final filterBudget = groupBy(expenses,
-                    (Expense element) => element.time.formated(selectedType))
-                .entries
-                .toList();
+        final filterBudget = groupBy(expenses,
+                (Expense element) => element.time.formated(selectedType))
+            .entries
+            .toList();
 
-            return Column(
+        return ScreenTypeLayout(
+          mobile: Scaffold(
+            appBar: materialYouAppBar(
+              context,
+              AppLocalizations.of(context)!.budgetOverViewLable,
+            ),
+            floatingActionButton: FloatingActionButton.large(
+              onPressed: _dateRangePicker,
+              heroTag: 'date_range',
+              key: const Key('date_range'),
+              tooltip: AppLocalizations.of(context)!.addCategoryLable,
+              child: const Icon(Icons.date_range),
+            ),
+            body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FilterBudgetWidget(
@@ -127,49 +116,29 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
                   ),
                 ),
               ],
-            );
-          },
-        ),
-      ),
-      tablet: Scaffold(
-        appBar: materialYouAppBar(
-          context,
-          AppLocalizations.of(context)!.budgetOverViewLable,
-          actions: [
-            FilterBudgetWidget(
-              onSelected: (budget) {
-                selectedType = budget;
-                setState(() {});
-              },
             ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton.large(
-          onPressed: _dateRangePicker,
-          heroTag: 'date_range',
-          key: const Key('date_range'),
-          tooltip: AppLocalizations.of(context)!.addCategoryLable,
-          child: const Icon(Icons.date_range),
-        ),
-        body: ValueListenableBuilder<Box<Expense>>(
-          valueListenable: Hive.box<Expense>('expense').listenable(),
-          builder: (context, value, Widget? child) {
-            var expenses = value.values.toList();
-            if (expenses.isEmpty) {
-              return EmptyWidget(
-                icon: Icons.paid,
-                title: AppLocalizations.of(context)!.errorNoBudgetLable,
-                description:
-                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLable,
-              );
-            }
-
-            final filterBudget = groupBy(expenses,
-                    (Expense element) => element.time.formated(selectedType))
-                .entries
-                .toList();
-
-            return ListView.builder(
+          ),
+          tablet: Scaffold(
+            appBar: materialYouAppBar(
+              context,
+              AppLocalizations.of(context)!.budgetOverViewLable,
+              actions: [
+                FilterBudgetWidget(
+                  onSelected: (budget) {
+                    selectedType = budget;
+                    setState(() {});
+                  },
+                ),
+              ],
+            ),
+            floatingActionButton: FloatingActionButton.large(
+              onPressed: _dateRangePicker,
+              heroTag: 'date_range',
+              key: const Key('date_range'),
+              tooltip: AppLocalizations.of(context)!.addCategoryLable,
+              child: const Icon(Icons.date_range),
+            ),
+            body: ListView.builder(
               shrinkWrap: true,
               itemCount: filterBudget.length,
               itemBuilder: (BuildContext context, int index) {
@@ -179,93 +148,8 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
                   dataSource: categoryDataSource,
                 );
               },
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class BudgetSection extends StatelessWidget {
-  const BudgetSection({
-    Key? key,
-    required this.values,
-    required this.name,
-    required this.dataSource,
-  }) : super(key: key);
-
-  final String name;
-  final List<Expense> values;
-  final CategoryDataSource dataSource;
-
-  List<MapEntry<Category, List<Expense>>> _filterCategory(
-    List<Expense> expenses,
-  ) {
-    return groupBy(expenses,
-            (Expense element) => dataSource.fetchCategory(element.categoryId))
-        .entries
-        .toList();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 16,
-            bottom: 8,
-            right: 16,
-            top: 16,
+            ),
           ),
-          child: Text(
-            name,
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ),
-        ),
-        ScreenTypeLayout(
-          mobile: BudgetOverViewList(
-            maps: _filterCategory(values),
-            crossAxisCount: 2,
-          ),
-          tablet: BudgetOverViewList(
-            maps: _filterCategory(values),
-            crossAxisCount: 4,
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class BudgetOverViewList extends StatelessWidget {
-  const BudgetOverViewList({
-    Key? key,
-    required this.maps,
-    required this.crossAxisCount,
-  }) : super(key: key);
-
-  final List<MapEntry<Category, List<Expense>>> maps;
-  final int crossAxisCount;
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-      ),
-      padding: const EdgeInsets.all(8),
-      shrinkWrap: true,
-      itemCount: maps.length,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (_, index) {
-        return BudgetItem(
-          category: maps[index].key,
-          expenses: maps[index].value,
         );
       },
     );

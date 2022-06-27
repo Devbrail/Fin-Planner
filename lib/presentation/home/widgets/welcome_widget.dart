@@ -72,7 +72,10 @@ class WelcomeWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       AppLocalizations.of(context)!.welcomeMessage(name),
-                      style: Theme.of(context).textTheme.headline5?.copyWith(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

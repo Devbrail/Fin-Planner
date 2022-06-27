@@ -33,7 +33,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         child: BlocConsumer(
           listener: (context, state) {
             if (state is NavigateToHome) {
-              context.go(homePath);
+              context.go(landingPath);
             }
           },
           bloc: splashCubit,

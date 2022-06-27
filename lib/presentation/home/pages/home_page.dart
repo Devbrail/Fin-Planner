@@ -82,67 +82,65 @@ class _LandingPageState extends State<LandingPage>
             ),
           ),
         ),
-        tablet: Scaffold(
-          body: Row(
-            children: [
-              NavigationRail(
-                selectedIndex: index,
-                labelType: NavigationRailLabelType.none,
-                useIndicator: true,
-                groupAlignment: -1,
-                leading: const WelcomeWidget(),
-                selectedLabelTextStyle: TextStyle(
-                  fontSize: Theme.of(context).textTheme.headline6?.fontSize,
-                  fontWeight: FontWeight.bold,
-                ),
-                unselectedLabelTextStyle: TextStyle(
-                  fontSize: Theme.of(context).textTheme.headline6?.fontSize,
-                  fontWeight: FontWeight.bold,
-                ),
-                onDestinationSelected: (index) {
-                  this.index = index;
-                  setState(() {});
-                },
-                elevation: 10,
-                destinations: [
-                  NavigationRailDestination(
-                    label: Text(AppLocalizations.of(context)!.homeLable),
-                    icon: const Icon(Icons.home_outlined),
-                    selectedIcon: const Icon(Icons.home),
-                    padding: const EdgeInsets.all(16),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.credit_card_outlined),
-                    selectedIcon: const Icon(Icons.credit_card),
-                    label: Text(AppLocalizations.of(context)!.accountsLable),
-                    padding: const EdgeInsets.all(16),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.category_outlined),
-                    selectedIcon: const Icon(Icons.category),
-                    label: Text(AppLocalizations.of(context)!.categoryLable),
-                    padding: const EdgeInsets.all(16),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.account_balance_wallet_outlined),
-                    selectedIcon: const Icon(Icons.account_balance_wallet),
-                    label: Text(AppLocalizations.of(context)!.budgetLable),
-                    padding: const EdgeInsets.all(16),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.settings_outlined),
-                    selectedIcon: const Icon(Icons.settings),
-                    label: Text(AppLocalizations.of(context)!.settingsLable),
-                    padding: const EdgeInsets.all(16),
-                  ),
-                ],
+        tablet: Row(
+          children: [
+            NavigationRail(
+              selectedIndex: index,
+              labelType: NavigationRailLabelType.none,
+              useIndicator: true,
+              groupAlignment: -1,
+              leading: const WelcomeWidget(),
+              selectedLabelTextStyle: TextStyle(
+                fontSize: Theme.of(context).textTheme.headline6?.fontSize,
+                fontWeight: FontWeight.bold,
               ),
-              const VerticalDivider(thickness: 1, width: 1),
-              Expanded(
-                child: ContentWidget(index: index),
+              unselectedLabelTextStyle: TextStyle(
+                fontSize: Theme.of(context).textTheme.headline6?.fontSize,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
+              onDestinationSelected: (index) {
+                this.index = index;
+                setState(() {});
+              },
+              elevation: 10,
+              destinations: [
+                NavigationRailDestination(
+                  label: Text(AppLocalizations.of(context)!.homeLable),
+                  icon: const Icon(Icons.home_outlined),
+                  selectedIcon: const Icon(Icons.home),
+                  padding: const EdgeInsets.all(16),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.credit_card_outlined),
+                  selectedIcon: const Icon(Icons.credit_card),
+                  label: Text(AppLocalizations.of(context)!.accountsLable),
+                  padding: const EdgeInsets.all(16),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.category_outlined),
+                  selectedIcon: const Icon(Icons.category),
+                  label: Text(AppLocalizations.of(context)!.categoryLable),
+                  padding: const EdgeInsets.all(16),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.account_balance_wallet_outlined),
+                  selectedIcon: const Icon(Icons.account_balance_wallet),
+                  label: Text(AppLocalizations.of(context)!.budgetLable),
+                  padding: const EdgeInsets.all(16),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.settings_outlined),
+                  selectedIcon: const Icon(Icons.settings),
+                  label: Text(AppLocalizations.of(context)!.settingsLable),
+                  padding: const EdgeInsets.all(16),
+                ),
+              ],
+            ),
+            const VerticalDivider(thickness: 1, width: 1),
+            Expanded(
+              child: ContentWidget(index: index),
+            ),
+          ],
         ),
       ),
     );

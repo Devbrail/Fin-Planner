@@ -1,5 +1,7 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/app/routes.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/constants/currency.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
@@ -19,7 +21,7 @@ class BudgetItemTableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialYouCard(
       child: InkWell(
-        onTap: () {},
+        onTap: () => context.goNamed(addCategoryPath, extra: category),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

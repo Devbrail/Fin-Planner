@@ -11,6 +11,9 @@ extension ExpenseListMapping on Box<Expense> {
     return values.where((element) => element.accountId == accountId).toList();
   }
 
+  List<Expense> get budgetOverView =>
+      values.where((element) => element.type != TransactonType.income).toList();
+
   List<Expense> isFilterTimeBetween(DateTimeRange range) {
     return values
         .where((element) => element.time.isAfterBeforeTime(range))

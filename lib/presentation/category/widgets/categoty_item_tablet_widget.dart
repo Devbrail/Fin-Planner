@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/app/routes.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../data/category/model/category.dart';
@@ -17,7 +19,10 @@ class CategoryItemTabletWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialYouCard(
       child: InkWell(
-        onTap: () {},
+        onTap: () => context.goNamed(
+          addCategoryPath,
+          extra: category,
+        ),
         child: Stack(
           children: [
             Positioned(

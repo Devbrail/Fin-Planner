@@ -3,7 +3,7 @@ description: A expene manager app for Android.
 
 publish_to: 'none'
 
-version: 1.6.0+12
+version: 1.6.5+13
 
 environment:
   sdk: ">=2.17.0-69.0.dev <3.0.0"

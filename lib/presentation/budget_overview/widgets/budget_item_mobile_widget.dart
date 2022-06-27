@@ -1,5 +1,7 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/app/routes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/constants/currency.dart';
@@ -21,11 +23,9 @@ class BudgetItemMobileWidget extends StatelessWidget {
     double totalExpenses = totalExpense(expenses);
     final totalBudget = category.budget?.toDouble() ?? -1;
     final difference = totalBudget - totalExpenses;
-
-    debugPrint('$difference');
     return MaterialYouCard(
       child: InkWell(
-        onTap: () {},
+        onTap: () => context.goNamed(addCategoryPath, extra: category),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
