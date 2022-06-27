@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../common/enum/box_types.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../common/enum/box_types.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../summary/widgets/expense_list_widget.dart';
 

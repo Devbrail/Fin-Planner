@@ -37,7 +37,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   late final descController =
       TextEditingController(text: widget.category?.description ?? '');
   late int selectedIcon = widget.category?.icon ?? -1;
-  bool setBudget = false;
+  late bool setBudget = widget.category?.budget != 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -137,6 +137,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
 
   bool get isAddCategory => widget.category == null;
 
+  bool get isBudgetActive => widget.category?.budget == null;
+
   AppBar appBar() {
     return materialYouAppBar(
       context,
@@ -194,10 +196,10 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     if (formKey.currentState!.validate()) {
       if (selectedIcon != -1) {
         if (isAddCategory) {
-          int budget = 0;
+          double? budget = 0;
           if (setBudget) {
             try {
-              budget = int.parse(budgetController.text);
+              budget = double.tryParse(budgetController.text);
             } catch (_) {
               debugPrint(_.toString());
               return;
@@ -211,10 +213,10 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             budget: budget,
           ));
         } else {
-          int budget = 0;
+          double? budget = 0;
           if (setBudget) {
             try {
-              budget = int.parse(budgetController.text);
+              budget = double.tryParse(budgetController.text);
             } catch (_) {
               debugPrint(_.toString());
               return;

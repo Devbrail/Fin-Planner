@@ -6,7 +6,7 @@ abstract class CategoryRepository {
     required String desc,
     required int icon,
     bool isPredefined = false,
-    int? budget = -1,
+    double? budget = -1,
   });
   Future<void> deleteCategory(int key);
   Future<List<Category>> categories();

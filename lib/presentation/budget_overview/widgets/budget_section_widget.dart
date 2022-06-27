@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/common/constants/util.dart';
-import 'package:flutter_paisa/data/category/datasources/category_datasource.dart';
-import 'package:flutter_paisa/data/category/model/category.dart';
-import 'package:flutter_paisa/data/expense/model/expense.dart';
-import 'package:flutter_paisa/presentation/budget_overview/widgets/budget_item_widget.dart';
+import '../../../common/constants/util.dart';
+import '../../../data/category/datasources/category_datasource.dart';
+import '../../../data/category/model/category.dart';
+import '../../../data/expense/model/expense.dart';
+import 'budget_item_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class BudgetSection extends StatelessWidget {

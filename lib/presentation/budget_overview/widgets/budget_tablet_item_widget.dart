@@ -1,6 +1,6 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/app/routes.dart';
+import '../../../app/routes.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../common/constants/currency.dart';

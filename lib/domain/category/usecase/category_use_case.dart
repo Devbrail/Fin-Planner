@@ -11,7 +11,7 @@ class CategoryUseCase {
     required String desc,
     required int icon,
     bool isPredefined = false,
-    int? budget = -1,
+    double? budget = -1,
   }) async {
     categoryRepository.addCategory(
       name: name,

@@ -11,7 +11,7 @@ class EditCategoryEvent extends CategoryEvent {
   final String title;
   final String description;
   final int icon;
-  final int? budget;
+  final double? budget;
 
   EditCategoryEvent({
     required this.title,

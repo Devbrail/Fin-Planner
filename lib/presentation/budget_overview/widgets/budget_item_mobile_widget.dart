@@ -1,6 +1,6 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/app/routes.dart';
+import '../../../app/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,11 +18,19 @@ class BudgetItemMobileWidget extends StatelessWidget {
   final Category category;
   final List<Expense> expenses;
 
+  get isBudgetActive => category.budget == null;
+
   @override
   Widget build(BuildContext context) {
     double totalExpenses = totalExpense(expenses);
-    final totalBudget = category.budget?.toDouble() ?? -1;
-    final difference = totalBudget - totalExpenses;
+    final totalBudget = category.budget ?? -1;
+    double difference;
+    if (isBudgetActive) {
+      difference = totalBudget - totalExpenses;
+    } else {
+      difference = totalExpenses;
+    }
+
     return MaterialYouCard(
       child: InkWell(
         onTap: () => context.goNamed(addCategoryPath, extra: category),
@@ -69,13 +77,9 @@ class BudgetItemMobileWidget extends StatelessWidget {
                 right: 16,
               ),
               child: Text(
-                formattedCurrency(difference),
+                '${isBudgetActive ? 'Remainig' : ''} ${formattedCurrency(difference)}',
                 style: GoogleFonts.manrope(
-                  textStyle: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        color: difference.isNegative
-                            ? Theme.of(context).colorScheme.error
-                            : Theme.of(context).colorScheme.onSurface,
-                      ),
+                  textStyle: Theme.of(context).textTheme.bodyText1?.copyWith(),
                 ),
               ),
             ),

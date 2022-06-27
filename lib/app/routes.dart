@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/presentation/accounts/pages/accounts_page.dart';
-import 'package:flutter_paisa/presentation/summary/pages/summary_page.dart';
+import '../presentation/accounts/pages/accounts_page.dart';
+import '../presentation/summary/pages/summary_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 

@@ -20,8 +20,8 @@ class Category extends HiveObject with EquatableMixin {
   @HiveField(4, defaultValue: 0)
   int? superId;
 
-  @HiveField(5, defaultValue: 0)
-  int? budget;
+  @HiveField(6, defaultValue: 0)
+  double? budget;
 
   Category({
     required this.description,

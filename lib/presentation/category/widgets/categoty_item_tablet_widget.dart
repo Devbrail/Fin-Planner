@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/app/routes.dart';
+import '../../../app/routes.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../common/widgets/material_you_card_widget.dart';

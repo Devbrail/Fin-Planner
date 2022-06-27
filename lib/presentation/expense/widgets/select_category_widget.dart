@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../common/enum/box_types.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
+import '../../../common/enum/box_types.dart';
 import '../../../data/category/model/category.dart';
 import '../../../di/service_locator.dart';
 import '../../category/bloc/category_bloc.dart';

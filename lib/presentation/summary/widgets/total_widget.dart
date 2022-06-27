@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../common/constants/currency.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../common/constants/currency.dart';
 
 class TotalWidget extends StatelessWidget {
   const TotalWidget({

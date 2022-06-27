@@ -21,7 +21,7 @@ class CategoryAdapter extends TypeAdapter<Category> {
       name: fields[0] as String,
       icon: fields[2] as int,
       isPredefined: fields[3] as bool,
-      budget: fields[5] == null ? 0 : fields[5] as int?,
+      budget: fields[6] == null ? 0 : fields[6] as double?,
     )..superId = fields[4] == null ? 0 : fields[4] as int?;
   }
 
@@ -39,7 +39,7 @@ class CategoryAdapter extends TypeAdapter<Category> {
       ..write(obj.isPredefined)
       ..writeByte(4)
       ..write(obj.superId)
-      ..writeByte(5)
+      ..writeByte(6)
       ..write(obj.budget);
   }
 
