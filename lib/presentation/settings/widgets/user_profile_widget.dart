@@ -149,7 +149,10 @@ class UserImageWidget extends StatelessWidget {
         keys: [userImageKey],
       ),
       builder: (context, value, _) {
-        final image = value.get(userImageKey, defaultValue: '');
+        String image = value.get(userImageKey, defaultValue: '');
+        if (image == 'no-image') {
+          image = '';
+        }
         return GestureDetector(
           onTap: pickImage,
           child: Builder(
