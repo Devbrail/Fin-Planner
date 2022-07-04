@@ -31,6 +31,8 @@ class WelcomeWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ClipOval(
                       child: Container(
+                        width: 42,
+                        height: 42,
                         color: Theme.of(context).colorScheme.primary,
                         child: Icon(
                           Icons.account_circle_outlined,
@@ -44,7 +46,9 @@ class WelcomeWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: CircleAvatar(
                       foregroundImage: FileImage(
-                        File(image),
+                        File(
+                          image,
+                        ),
                       ),
                     ),
                   );
@@ -77,7 +81,7 @@ class WelcomeWidget extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      AppLocalizations.of(context)!.welcomeMessage(name),
+                      AppLocalizations.of(context)!.welcomeMessage,
                       style: Theme.of(context)
                           .textTheme
                           .headline5

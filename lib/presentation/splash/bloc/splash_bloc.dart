@@ -50,7 +50,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       final category = Category(
         name: 'Default',
         icon: Icons.home_rounded.codePoint,
-        description: '',
+        description: 'All expenses',
       );
       final int id = await categorys.add(category);
       category.superId = id;

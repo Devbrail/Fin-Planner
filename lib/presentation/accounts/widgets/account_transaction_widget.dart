@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/common/constants/currency.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -29,12 +30,73 @@ class AccountTransactinWidget extends StatelessWidget {
         final expenses = value.allAccount(account.superId!);
         expenses.sort((a, b) => b.time.compareTo(a.time));
         if (expenses.isEmpty) {
-          return const SizedBox.shrink();
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Column(
+                children: [
+                  const Icon(Icons.money_off_rounded, size: 72),
+                  Text(AppLocalizations.of(context)!.emptyExpensesMessage),
+                ],
+              ),
+            ),
+          );
         }
 
         return ScreenTypeLayout(
-          mobile: Column(
+          mobile: ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: MaterialYouCard(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(AppLocalizations.of(context)!.balanceLable),
+                              const SizedBox(height: 6),
+                              Text(
+                                expenses.balance,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    ?.copyWith(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: MaterialYouCard(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(AppLocalizations.of(context)!.expenseLable),
+                              const SizedBox(height: 6),
+                              Text(
+                                formattedCurrency(expenses.totalExpense),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    ?.copyWith(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                 title: Text(

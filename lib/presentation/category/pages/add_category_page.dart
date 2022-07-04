@@ -173,9 +173,10 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     return MaterialYouTextFeild(
       controller: categoryController,
       keyboardType: TextInputType.name,
+      maxLength: 10,
       hintText: AppLocalizations.of(context)!.categoryLable,
       validator: (value) {
-        if (value!.length >= 3) {
+        if (value!.length >= 3 && value.length < 10) {
           return null;
         } else {
           return AppLocalizations.of(context)!.validNameLable;
@@ -186,6 +187,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
 
   Widget _descriptionField() {
     return MaterialYouTextFeild(
+      maxLength: 15,
       controller: descController,
       keyboardType: TextInputType.name,
       hintText: AppLocalizations.of(context)!.descriptionLable,

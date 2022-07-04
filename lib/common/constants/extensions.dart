@@ -29,6 +29,8 @@ extension TextStyleHelpers on TextStyle {
 }
 
 extension TotalAmountOnExpenses on Iterable<Expense> {
+  String get balance => formattedCurrency(totalIncome - totalExpense);
+
   double get filterTotal => fold<double>(0, (previousValue, element) {
         if (element.type == TransactonType.expense) {
           return previousValue - element.currency;

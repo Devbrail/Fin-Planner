@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/presentation/summary/widgets/welcome_name_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -27,48 +28,35 @@ class _SummaryPageState extends State<SummaryPage> {
     return ScreenTypeLayout(
       mobile: Scaffold(
         appBar: AppBar(
-          leading: GestureDetector(
-            onTap: () => showModalBottomSheet(
-              constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width >= 700
-                    ? 700
-                    : double.infinity,
-              ),
-              isScrollControlled: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              context: context,
-              builder: (_) => const UserProfilePage(),
+          leading: IconButton(
+            icon: Icon(
+              Icons.search,
+              color: Theme.of(context).colorScheme.onBackground,
             ),
-            child: const WelcomeWidget(),
-          ),
-          backgroundColor: Colors.transparent,
-          title: ValueListenableBuilder<Box>(
-            valueListenable: Hive.box(BoxType.settings.stringValue)
-                .listenable(keys: [userNameKey]),
-            builder: (context, value, _) {
-              final name = value.get(userNameKey, defaultValue: 'Name');
-              return Text(
-                AppLocalizations.of(context)!.welcomeMessage(name),
-                style: Theme.of(context).textTheme.headline6?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: SearchPage(),
               );
             },
           ),
+          backgroundColor: Colors.transparent,
           actions: [
-            IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Theme.of(context).colorScheme.onBackground,
+            GestureDetector(
+              onTap: () => showModalBottomSheet(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width >= 700
+                      ? 700
+                      : double.infinity,
+                ),
+                isScrollControlled: true,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                context: context,
+                builder: (_) => const UserProfilePage(),
               ),
-              onPressed: () {
-                showSearch(
-                  context: context,
-                  delegate: SearchPage(),
-                );
-              },
+              child: const WelcomeWidget(),
             ),
           ],
         ),
@@ -77,6 +65,7 @@ class _SummaryPageState extends State<SummaryPage> {
             shrinkWrap: true,
             padding: const EdgeInsets.only(bottom: 128),
             children: const [
+              WelcomeNameWidget(),
               ExpenseTotalWidget(),
               ExpenseHistory(),
             ],

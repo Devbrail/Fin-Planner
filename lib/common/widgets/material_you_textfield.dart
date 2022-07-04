@@ -8,6 +8,7 @@ class MaterialYouTextFeild extends StatelessWidget {
     this.validator,
     this.decoration,
     this.hintText,
+    this.maxLength,
   }) : super(key: key);
 
   final TextEditingController? controller;
@@ -15,10 +16,12 @@ class MaterialYouTextFeild extends StatelessWidget {
   final InputDecoration? decoration;
   final FormFieldValidator<String>? validator;
   final String? hintText;
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: maxLength,
       controller: controller,
       decoration: decoration ??
           InputDecoration(

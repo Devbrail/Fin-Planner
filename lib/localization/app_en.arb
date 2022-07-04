@@ -39,14 +39,9 @@
     "@budgetLable": {
         "description": "Budget label"
     },
-    "welcomeMessage": "Hi, {username}",
+    "welcomeMessage": "Welcome back!",
     "@welcomeMessage": {
-        "description": "Budget label",
-        "placeholders": {
-            "username": {
-                "type": "String"
-            }
-        }
+        "description": "Budget label"
     },
     "settingsLable": "Settings",
     "@settingsLable": {
@@ -436,10 +431,13 @@
     "emptySearchMessageLable": "Looks like nothing found!",
     "@emptySearchMessageLable": {
         "description": "empty search message label"
-    }
-    ,
+    },
     "emptyExpensesMessage": "Add some expenses will show up here",
     "@emptyExpensesMessage": {
         "description": "empty search message label"
+    },
+    "balanceLable": "Balance",
+    "@balanceLable": {
+        "description": "Balance label"
     }
 }

@@ -36,10 +36,8 @@ class AccountPageViewWidget extends StatelessWidget {
           aspectRatio: 16 / 10,
           child: PageView.builder(
             itemCount: accounts.length,
-            onPageChanged: (index) {
-              BlocProvider.of<AccountsBloc>(context)
-                  .add(AccountSeletedEvent(accounts[index]));
-            },
+            onPageChanged: (index) => BlocProvider.of<AccountsBloc>(context)
+                .add(AccountSeletedEvent(accounts[index])),
             itemBuilder: (_, index) {
               final account = accounts[index];
               return AccountCard(

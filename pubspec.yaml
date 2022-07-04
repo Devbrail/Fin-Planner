@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.6.5+13
 
 environment:
-  sdk: ">=2.17.0-69.0.dev <3.0.0"
+  sdk: ">=2.17.1 <3.0.0"
 
 dependencies:
   chart_sparkline: ^1.0.8

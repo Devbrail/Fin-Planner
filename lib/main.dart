@@ -14,7 +14,6 @@ import 'data/settings/settings_service.dart';
 import 'di/service_locator.dart';
 import 'presentation/home/bloc/home_bloc.dart';
 
-final GlobalKey<NavigatorState> mainNavigator = GlobalKey<NavigatorState>();
 late String currentLocale;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
