@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../common/constants/extensions.dart';
 import '../../../common/constants/time.dart';
 import '../../../common/constants/util.dart';
-import '../../../common/constants/extensions.dart';
+import '../../../common/enum/box_types.dart';
 import '../../../common/enum/filter_budget.dart';
-import '../../../common/enum/transaction.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../budget_overview/widgets/filter_budget_widget.dart';
 import 'expense_month_card.dart';
@@ -22,10 +23,28 @@ class _ExpenseHistoryState extends State<ExpenseHistory> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<Expense>>(
-      valueListenable: Hive.box<Expense>('expense').listenable(),
-      builder: (BuildContext context, value, Widget? child) {
+      valueListenable:
+          Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
+      builder: (_, value, child) {
         final expenses = value.values.toList();
-        if (expenses.isEmpty) return const SizedBox.shrink();
+        if (expenses.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Column(
+                children: [
+                  const Icon(
+                    Icons.money_off_rounded,
+                    size: 72,
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.emptyExpensesMessage,
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
         expenses.sort(((a, b) => b.time.compareTo(a.time)));
         final maps = groupBy(
             expenses, (Expense element) => element.time.formated(selectedType));

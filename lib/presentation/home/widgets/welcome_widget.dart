@@ -18,7 +18,10 @@ class WelcomeWidget extends StatelessWidget {
           .listenable(keys: [userImageKey, userNameKey]),
       builder: (context, value, _) {
         final name = value.get(userNameKey, defaultValue: 'Name');
-        final image = value.get(userImageKey, defaultValue: '');
+        String image = value.get(userImageKey, defaultValue: '');
+        if (image == 'no-image') {
+          image = '';
+        }
         return SafeArea(
           child: ScreenTypeLayout(
             mobile: Builder(
@@ -62,7 +65,10 @@ class WelcomeWidget extends StatelessWidget {
                       );
                     } else {
                       return CircleAvatar(
-                          foregroundImage: FileImage(File(image)));
+                        foregroundImage: FileImage(
+                          File(image),
+                        ),
+                      );
                     }
                   },
                 ),

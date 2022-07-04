@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/common/enum/box_types.dart';
+import 'package:flutter_paisa/data/settings/settings_service.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/adapters.dart';
 
 import '../../../app/routes.dart';
 import '../../home/bloc/home_bloc.dart';
@@ -17,7 +20,7 @@ class UserImagePage extends StatefulWidget {
 class _UserImagePageState extends State<UserImagePage> {
   void _pickImage() => expenseBloc.add(PickImageEvent());
   late final expenseBloc = BlocProvider.of<HomeBloc>(context);
-
+  late final value = Hive.box(BoxType.settings.stringValue);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +72,14 @@ class _UserImagePageState extends State<UserImagePage> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
-                  onPressed: () => context.go(splashPath),
+                  onPressed: () {
+                    final String image =
+                        value.get(userImageKey, defaultValue: '');
+                    if (image.isEmpty) {
+                      value.put(userImageKey, 'no-image');
+                    }
+                    context.go(splashPath);
+                  },
                   child: Text(AppLocalizations.of(context)!.nextLable),
                 ),
               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../app/routes.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/routes.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../data/category/model/category.dart';
 

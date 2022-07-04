@@ -437,4 +437,9 @@
     "@emptySearchMessageLable": {
         "description": "empty search message label"
     }
+    ,
+    "emptyExpensesMessage": "Add some expenses will show up here",
+    "@emptyExpensesMessage": {
+        "description": "empty search message label"
+    }
 }

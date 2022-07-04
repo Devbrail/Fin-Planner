@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../common/constants/extensions.dart';
+import '../../../common/enum/box_types.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../data/expense/model/expense.dart';
 import 'expense_total_for_month_widget.dart';
@@ -14,10 +15,11 @@ class ExpenseTotalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<Expense>>(
-      valueListenable: Hive.box<Expense>('expense').listenable(),
-      builder: (BuildContext context, value, Widget? child) {
+      valueListenable:
+          Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
+      builder: (_, value, child) {
         final expenses = value.values.toList();
-        final totalIncome = expenses.totalIncome;
+        final totalIncome = expenses.totalIncome - expenses.totalExpense;
 
         final thisMonthExpenses = expenses.thisMonthExpense;
         final thisMonthIncome = expenses.thisMonthIncome;

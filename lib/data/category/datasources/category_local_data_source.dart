@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../common/enum/box_types.dart';
 import '../../expense/model/expense.dart';
 import '../model/category.dart';

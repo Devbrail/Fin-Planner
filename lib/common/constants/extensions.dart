@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'currency.dart';
-import '../enum/transaction.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../data/expense/model/expense.dart';
+import '../enum/transaction.dart';
+import 'currency.dart';
 import 'time.dart';
 
 extension ExpenseListMapping on Box<Expense> {

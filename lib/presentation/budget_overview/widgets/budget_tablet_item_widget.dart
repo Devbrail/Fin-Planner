@@ -1,8 +1,8 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
-import '../../../app/routes.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/routes.dart';
 import '../../../common/constants/currency.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../data/category/model/category.dart';

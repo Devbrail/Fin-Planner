@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
 import '../../../common/constants/util.dart';
 import '../../../data/category/datasources/category_datasource.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 import 'budget_item_widget.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 class BudgetSection extends StatelessWidget {
   const BudgetSection({
