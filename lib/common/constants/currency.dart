@@ -21,10 +21,3 @@ String totalExpenseWithSymbol(List<Expense> expenses) {
       .fold<double>(0, (previousValue, element) => previousValue + element);
   return formattedCurrency(total);
 }
-
-double totalExpense(List<Expense> expenses) {
-  final total = expenses
-      .map((e) => e.currency)
-      .fold<double>(0, (previousValue, element) => previousValue + element);
-  return total;
-}

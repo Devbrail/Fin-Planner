@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_paisa/common/constants/currency.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -63,10 +64,12 @@ class AccountTransactinWidget extends StatelessWidget {
                               const SizedBox(height: 6),
                               Text(
                                 expenses.balance,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    ?.copyWith(fontWeight: FontWeight.bold),
+                                style: GoogleFonts.lato(
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      ?.copyWith(fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
@@ -84,10 +87,12 @@ class AccountTransactinWidget extends StatelessWidget {
                               const SizedBox(height: 6),
                               Text(
                                 formattedCurrency(expenses.totalExpense),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    ?.copyWith(fontWeight: FontWeight.bold),
+                                style: GoogleFonts.lato(
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      ?.copyWith(fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),

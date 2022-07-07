@@ -44,7 +44,7 @@ class _ExpensItemWidgetState extends State<ExpensItemWidget> {
     return RichText(
       text: TextSpan(
         text: _typeSign,
-        style: GoogleFonts.manrope(
+        style: GoogleFonts.lato(
           textStyle: TextStyle(color: _typeColor),
         ),
         children: [
@@ -78,11 +78,10 @@ class _ExpensItemWidgetState extends State<ExpensItemWidget> {
           children: [
             Text(
               date.substring(0, 2),
-              style: GoogleFonts.outfit(
-                  textStyle: Theme.of(context)
-                      .textTheme
-                      .headline6
-                      ?.onSurface(context)),
+              style: GoogleFonts.lato(
+                textStyle:
+                    Theme.of(context).textTheme.headline6?.onSurface(context),
+              ),
             ),
             Text(
               date.substring(2, date.length),

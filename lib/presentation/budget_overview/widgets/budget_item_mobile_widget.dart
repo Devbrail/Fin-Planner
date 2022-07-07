@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/constants/currency.dart';
+
+import '../../../common/constants/extensions.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
@@ -18,12 +20,12 @@ class BudgetItemMobileWidget extends StatelessWidget {
   final Category category;
   final List<Expense> expenses;
 
-  get isBudgetActive => category.budget == null;
+  get isBudgetActive => category.budget != null;
 
   @override
   Widget build(BuildContext context) {
-    double totalExpenses = totalExpense(expenses);
-    final totalBudget = category.budget ?? -1;
+    final double totalExpenses = expenses.total;
+    final double totalBudget = category.budget ?? -1;
     double difference;
     if (isBudgetActive) {
       difference = totalBudget - totalExpenses;
@@ -38,24 +40,53 @@ class BudgetItemMobileWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Icon(
-                IconData(category.icon, fontFamily: 'MaterialIcons'),
-                color: Theme.of(context).colorScheme.primary,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 14.0,
+                          bottom: 8,
+                          left: 14.0,
+                          right: 8,
+                        ),
+                        child: Icon(
+                          IconData(category.icon, fontFamily: 'MaterialIcons'),
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 8,
+                          left: 14.0,
+                          right: 8,
+                        ),
+                        child: Text(category.name),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 14.0,
+                    right: 14.0,
+                  ),
+                  child: isBudgetActive
+                      ? SizedBox(
+                          height: 16,
+                          width: 16,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            value: totalExpenses / totalBudget,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                category.name,
-                style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: 8),
             SizedBox(
               height: 40,
               child: Padding(
@@ -77,9 +108,9 @@ class BudgetItemMobileWidget extends StatelessWidget {
                 right: 16,
               ),
               child: Text(
-                '${isBudgetActive ? 'Remainig' : ''} ${formattedCurrency(difference)}',
-                style: GoogleFonts.manrope(
-                  textStyle: Theme.of(context).textTheme.bodyText1?.copyWith(),
+                '${isBudgetActive ? 'Balance:' : ''} ${formattedCurrency(difference)}',
+                style: GoogleFonts.lato(
+                  textStyle: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
             ),

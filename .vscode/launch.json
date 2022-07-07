@@ -5,9 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_expense",
+            "name": "Paisa - Dev",
             "request": "launch",
-            "type": "dart"
+            "type": "dart", 
+            "args": [
+                "--flavor",
+                "dev",
+            ]
+        },
+        {
+            "name": "Paisa - Prod",
+            "request": "launch",
+            "type": "dart", 
+            "args": [
+                "--flavor",
+                "prod",
+            ]
         },
         {
             "name": "flutter_expense (profile mode)",

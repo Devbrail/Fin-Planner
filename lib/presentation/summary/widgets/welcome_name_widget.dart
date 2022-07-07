@@ -4,7 +4,6 @@ import 'package:flutter_paisa/data/settings/settings_service.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomeNameWidget extends StatelessWidget {
   const WelcomeNameWidget({Key? key}) : super(key: key);
@@ -34,9 +33,6 @@ class WelcomeNameWidget extends StatelessWidget {
               ),
               Text(
                 AppLocalizations.of(context)!.welcomeMessage,
-                style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                      fontWeight: FontWeight.w100,
-                    ),
               ),
             ],
           ),

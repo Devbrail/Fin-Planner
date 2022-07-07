@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/constants/currency.dart';
 
@@ -48,7 +49,9 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                   ),
                   Text(
                     '+${formattedCurrency(income)}',
-                    style: Theme.of(context).textTheme.headline6?.copyWith(),
+                    style: GoogleFonts.lato(
+                      textStyle: Theme.of(context).textTheme.headline6,
+                    ),
                   ),
                 ],
               ),
@@ -76,7 +79,9 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                   ),
                   Text(
                     '-${formattedCurrency(outcome)}',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: GoogleFonts.lato(
+                      textStyle: Theme.of(context).textTheme.headline6,
+                    ),
                   ),
                 ],
               ),
