@@ -21,26 +21,27 @@ class AccountsPage extends StatefulWidget {
 class AccountsPageState extends State<AccountsPage> {
   final AccountsBloc accountsBloc = locator.get();
 
-  void _addCard() {
-    context.goNamed(addAccountPath);
-  }
+  void _addCard() => context.goNamed(addAccountPath);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => accountsBloc,
       child: ScreenTypeLayout(
+        key: const Key('accounts'),
         mobile: Builder(
           builder: (_) {
             return Scaffold(
+              key: const Key('accounts_mobile'),
               appBar: materialYouAppBar(
                 context,
                 AppLocalizations.of(context)!.accountsLable,
               ),
               body: ListView(
+                key: const Key('accounts_listview'),
                 padding: const EdgeInsets.only(bottom: 124),
                 children: [
-                  const AccountPageViewWidget(),
+                  AccountPageViewWidget(),
                   BlocBuilder(
                     bloc: accountsBloc,
                     buildWhen: (previous, current) =>
@@ -75,7 +76,7 @@ class AccountsPageState extends State<AccountsPage> {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Expanded(child: AccountPageViewWidget()),
+                  Expanded(child: AccountPageViewWidget()),
                   Expanded(
                     child: BlocBuilder(
                       bloc: accountsBloc,

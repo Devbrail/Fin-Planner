@@ -29,8 +29,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late final settings = Hive.box(BoxType.settings.stringValue)
-      .listenable(keys: [appColorKey, dynamicColorKey, themeModeKey]);
+  late final settings =
+      Hive.box(BoxType.settings.stringValue).listenable(keys: [
+    appColorKey,
+    dynamicColorKey,
+    themeModeKey,
+  ],);
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(

@@ -13,7 +13,8 @@ import '../bloc/accounts_bloc.dart';
 import 'account_card.dart';
 
 class AccountPageViewWidget extends StatelessWidget {
-  const AccountPageViewWidget({Key? key}) : super(key: key);
+  AccountPageViewWidget({Key? key}) : super(key: key);
+  final PageController _controller = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,27 +33,34 @@ class AccountPageViewWidget extends StatelessWidget {
         }
         BlocProvider.of<AccountsBloc>(context)
             .add(AccountSeletedEvent(accounts[0]));
-        return AspectRatio(
-          aspectRatio: 16 / 10,
-          child: PageView.builder(
-            itemCount: accounts.length,
-            onPageChanged: (index) => BlocProvider.of<AccountsBloc>(context)
-                .add(AccountSeletedEvent(accounts[index])),
-            itemBuilder: (_, index) {
-              final account = accounts[index];
-              return AccountCard(
-                cardHolder: account.name,
-                cardNumber: account.number,
-                bankName: account.bankName,
-                cardType: account.cardType ?? CardType.debitcard,
-                onDelete: () {
-                  BlocProvider.of<AccountsBloc>(context)
-                      .add(DeleteAccountEvent(account));
+        return Column(
+          children: [
+            AspectRatio(
+              aspectRatio: 16 / 10,
+              child: PageView.builder(
+                key: const Key('accounts_page_view'),
+                controller: _controller,
+                padEnds: true,
+                itemCount: accounts.length,
+                onPageChanged: (index) => BlocProvider.of<AccountsBloc>(context)
+                    .add(AccountSeletedEvent(accounts[index])),
+                itemBuilder: (_, index) {
+                  final account = accounts[index];
+                  return AccountCard(
+                    key: ValueKey(account.hashCode),
+                    cardHolder: account.name,
+                    cardNumber: account.number,
+                    bankName: account.bankName,
+                    cardType: account.cardType ?? CardType.debitcard,
+                    onDelete: () => BlocProvider.of<AccountsBloc>(context)
+                        .add(DeleteAccountEvent(account)),
+                    onTap: () =>
+                        context.goNamed(addAccountPath, extra: account),
+                  );
                 },
-                onTap: () => context.goNamed(addAccountPath, extra: account),
-              );
-            },
-          ),
+              ),
+            ),
+          ],
         );
       },
     );
