@@ -440,4 +440,14 @@
     "@balanceLable": {
         "description": "Balance label"
     }
+    ,
+    "selectIconLable": "Select icon",
+    "@selectIconLable": {
+        "description": "Balance label"
+    }
+    ,
+    "selectIconDescLable": "Tap to select icon",
+    "@selectIconDescLable": {
+        "description": "Balance label"
+    }
 }

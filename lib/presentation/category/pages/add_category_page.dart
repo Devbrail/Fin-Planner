@@ -8,12 +8,11 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/util.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
-import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../common/widgets/material_you_textfield.dart';
+import '../../../common/widgets/show_icon_picker.dart';
 import '../../../data/category/model/category.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/category_bloc.dart';
-import '../widgets/category_icon_widget.dart';
 
 class AddCategoryPage extends StatefulWidget {
   const AddCategoryPage({
@@ -37,7 +36,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   late final descController =
       TextEditingController(text: widget.category?.description ?? '');
   late int selectedIcon = widget.category?.icon ?? -1;
-  late bool setBudget = widget.category?.budget != 0.0;
+  late bool setBudget = widget.category?.budget == 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -59,32 +58,55 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           appBar: appBar(),
           body: SafeArea(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: MaterialYouCard(
-                      child: CategoryIcons(onSeleted: (icon) {
-                        selectedIcon = icon.codePoint;
-                      }),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        title:
+                            Text(AppLocalizations.of(context)!.selectIconLable),
+                        subtitle: Text(
+                            AppLocalizations.of(context)!.selectIconDescLable),
+                        leading: Icon(
+                          IconData(
+                            selectedIcon,
+                            fontFamily: 'MaterialIcons',
+                          ),
+                        ),
+                        onTap: () async {
+                          final IconData? icon = await showIconPicker(
+                            context: context,
+                            defaultIcon: IconData(
+                              selectedIcon,
+                              fontFamily: 'MaterialIcons',
+                            ),
+                          );
+                          setState(() {
+                            selectedIcon =
+                                icon?.codePoint ?? Icons.home_rounded.codePoint;
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _categoryField(),
-                          const SizedBox(height: 16),
-                          _descriptionField(),
-                          _setBudget(),
+                          Expanded(child: _categoryField()),
                         ],
                       ),
-                    ),
+                      const SizedBox(height: 16),
+                      _descriptionField(),
+                      _setBudget(),
+                      const SizedBox(height: 16),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
@@ -101,14 +123,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CategoryIcons(onSeleted: (icon) {
-                      selectedIcon = icon.codePoint;
-                    }),
-                  ),
-                ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
@@ -174,7 +188,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       controller: categoryController,
       keyboardType: TextInputType.name,
       maxLength: 10,
-      hintText: AppLocalizations.of(context)!.categoryLable,
+      label: AppLocalizations.of(context)!.categoryLable,
+      hintText: 'Enter category',
       validator: (value) {
         if (value!.length >= 3 && value.length < 10) {
           return null;
@@ -190,7 +205,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       maxLength: 15,
       controller: descController,
       keyboardType: TextInputType.name,
-      hintText: AppLocalizations.of(context)!.descriptionLable,
+      label: AppLocalizations.of(context)!.descriptionLable,
+      hintText: 'Enter description',
     );
   }
 

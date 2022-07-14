@@ -380,7 +380,6 @@ class _ExpensePageState extends State<ExpensePage> {
           },
           icon: const Icon(
             Icons.today_rounded,
-            size: 32,
           ),
         )
       ],
