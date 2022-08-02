@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/common/theme/custom_color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/constants/currency.dart';
-import '../../../common/constants/theme.dart';
+import '../../../common/theme/paisa_theme.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
+import '../../../common/enum/card_type.dart';
 
 class ExpensItemWidget extends StatefulWidget {
   const ExpensItemWidget({
@@ -24,11 +26,11 @@ class ExpensItemWidget extends StatefulWidget {
 }
 
 class _ExpensItemWidgetState extends State<ExpensItemWidget> {
-  Color get _typeColor {
+  Color? get _typeColor {
     if (widget.expense.type == TransactonType.expense) {
-      return Theme.of(context).colorScheme.error;
+      return Theme.of(context).extension<CustomColors>()!.red;
     } else {
-      return Colors.green.shade300;
+      return Theme.of(context).extension<CustomColors>()!.green;
     }
   }
 
@@ -90,7 +92,8 @@ class _ExpensItemWidgetState extends State<ExpensItemWidget> {
           ],
         ),
         title: Text(widget.expense.name),
-        subtitle: Text('${widget.account.name} • ${widget.account.bankName}'),
+        subtitle: Text(
+            '${widget.account.cardType?.name} • ${widget.account.bankName}'),
         trailing: _type(),
       ),
     );

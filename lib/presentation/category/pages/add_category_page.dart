@@ -35,8 +35,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   late final descController =
       TextEditingController(text: widget.category?.description ?? '');
   late int selectedIcon = widget.category?.icon ?? Icons.home_rounded.codePoint;
-  late bool setBudget = widget.category?.budget == 0.0;
-
+  late bool setBudget = _checkBudget();
   @override
   Widget build(BuildContext context) {
     return BlocListener(
@@ -288,5 +287,13 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             : const SizedBox.shrink(),
       ],
     );
+  }
+
+  bool _checkBudget() {
+    final double budget = widget.category?.budget ?? 0.0;
+    if (budget > 0.0) {
+      return true;
+    }
+    return false;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/constants/theme.dart';
+import '../../common/theme/paisa_theme.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
