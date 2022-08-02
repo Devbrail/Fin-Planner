@@ -35,7 +35,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       TextEditingController(text: widget.category?.name ?? '');
   late final descController =
       TextEditingController(text: widget.category?.description ?? '');
-  late int selectedIcon = widget.category?.icon ?? -1;
+  late int selectedIcon = widget.category?.icon ?? Icons.home_rounded.codePoint;
   late bool setBudget = widget.category?.budget == 0.0;
 
   @override
