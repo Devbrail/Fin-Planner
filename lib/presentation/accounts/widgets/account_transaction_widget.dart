@@ -30,6 +30,7 @@ class AccountTransactinWidget extends StatelessWidget {
       builder: (context, value, child) {
         final expenses = value.allAccount(account.superId!);
         expenses.sort((a, b) => b.time.compareTo(a.time));
+
         if (expenses.isEmpty) {
           return Padding(
             padding: const EdgeInsets.all(16.0),

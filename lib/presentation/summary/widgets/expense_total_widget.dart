@@ -20,7 +20,6 @@ class ExpenseTotalWidget extends StatelessWidget {
       builder: (_, value, child) {
         final expenses = value.values.toList();
         final totalIncome = expenses.totalIncome - expenses.totalExpense;
-
         final thisMonthExpenses = expenses.thisMonthExpense;
         final thisMonthIncome = expenses.thisMonthIncome;
         return Column(

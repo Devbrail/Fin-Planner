@@ -56,89 +56,111 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box<Expense>>(
-      valueListenable:
-          Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
-      builder: (context, value, _) {
-        List<Expense> expenses = value.budgetOverView;
-        if (dateTimeRange != null) {
-          expenses = value.isFilterTimeBetween(dateTimeRange!);
-        }
-        if (expenses.isEmpty) {
-          return EmptyWidget(
-            icon: Icons.paid,
-            title: AppLocalizations.of(context)!.errorNoBudgetLable,
-            description:
-                AppLocalizations.of(context)!.errorNoBudgetDescriptionLable,
-          );
-        }
-        expenses.sort((a, b) => a.time.compareTo(b.time));
+    return ScreenTypeLayout(
+      mobile: Scaffold(
+        appBar: materialYouAppBar(
+          context,
+          AppLocalizations.of(context)!.budgetOverViewLable,
+        ),
+        floatingActionButton: FloatingActionButton.large(
+          onPressed: _dateRangePicker,
+          heroTag: 'date_range',
+          key: const Key('date_range'),
+          tooltip: AppLocalizations.of(context)!.addCategoryLable,
+          child: const Icon(Icons.date_range),
+        ),
+        body: ValueListenableBuilder<Box<Expense>>(
+            valueListenable:
+                Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
+            builder: (context, value, _) {
+              List<Expense> expenses = value.budgetOverView;
+              if (dateTimeRange != null) {
+                expenses = value.isFilterTimeBetween(dateTimeRange!);
+              }
+              if (expenses.isEmpty) {
+                return EmptyWidget(
+                  icon: Icons.paid,
+                  title: AppLocalizations.of(context)!.errorNoBudgetLable,
+                  description: AppLocalizations.of(context)!
+                      .errorNoBudgetDescriptionLable,
+                );
+              }
+              expenses.sort((a, b) => a.time.compareTo(b.time));
 
-        final filterBudget = groupBy(expenses,
-                (Expense element) => element.time.formated(selectedType))
-            .entries
-            .toList();
-
-        return ScreenTypeLayout(
-          mobile: Scaffold(
-            appBar: materialYouAppBar(
-              context,
-              AppLocalizations.of(context)!.budgetOverViewLable,
-            ),
-            floatingActionButton: FloatingActionButton.large(
-              onPressed: _dateRangePicker,
-              heroTag: 'date_range',
-              key: const Key('date_range'),
-              tooltip: AppLocalizations.of(context)!.addCategoryLable,
-              child: const Icon(Icons.date_range),
-            ),
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FilterBudgetWidget(
-                  onSelected: (budget) {
-                    selectedType = budget;
-                    setState(() {});
-                  },
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(bottom: 128),
-                    itemCount: filterBudget.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return BudgetSection(
-                        name: filterBudget[index].key,
-                        dataSource: categoryDataSource,
-                        values: filterBudget[index].value,
-                      );
+              final filterBudget = groupBy(expenses,
+                      (Expense element) => element.time.formated(selectedType))
+                  .entries
+                  .toList();
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FilterBudgetWidget(
+                    onSelected: (budget) {
+                      selectedType = budget;
+                      setState(() {});
                     },
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.only(bottom: 128),
+                      itemCount: filterBudget.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return BudgetSection(
+                          name: filterBudget[index].key,
+                          dataSource: categoryDataSource,
+                          values: filterBudget[index].value,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            }),
+      ),
+      tablet: Scaffold(
+        appBar: materialYouAppBar(
+          context,
+          AppLocalizations.of(context)!.budgetOverViewLable,
+          actions: [
+            FilterBudgetWidget(
+              onSelected: (budget) {
+                selectedType = budget;
+                setState(() {});
+              },
             ),
-          ),
-          tablet: Scaffold(
-            appBar: materialYouAppBar(
-              context,
-              AppLocalizations.of(context)!.budgetOverViewLable,
-              actions: [
-                FilterBudgetWidget(
-                  onSelected: (budget) {
-                    selectedType = budget;
-                    setState(() {});
-                  },
-                ),
-              ],
-            ),
-            floatingActionButton: FloatingActionButton.large(
-              onPressed: _dateRangePicker,
-              heroTag: 'date_range',
-              key: const Key('date_range'),
-              tooltip: AppLocalizations.of(context)!.addCategoryLable,
-              child: const Icon(Icons.date_range),
-            ),
-            body: ListView.builder(
+          ],
+        ),
+        floatingActionButton: FloatingActionButton.large(
+          onPressed: _dateRangePicker,
+          heroTag: 'date_range',
+          key: const Key('date_range'),
+          tooltip: AppLocalizations.of(context)!.addCategoryLable,
+          child: const Icon(Icons.date_range),
+        ),
+        body: ValueListenableBuilder<Box<Expense>>(
+          valueListenable:
+              Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
+          builder: (context, value, _) {
+            List<Expense> expenses = value.budgetOverView;
+            if (dateTimeRange != null) {
+              expenses = value.isFilterTimeBetween(dateTimeRange!);
+            }
+            if (expenses.isEmpty) {
+              return EmptyWidget(
+                icon: Icons.paid,
+                title: AppLocalizations.of(context)!.errorNoBudgetLable,
+                description:
+                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLable,
+              );
+            }
+            expenses.sort((a, b) => a.time.compareTo(b.time));
+
+            final filterBudget = groupBy(expenses,
+                    (Expense element) => element.time.formated(selectedType))
+                .entries
+                .toList();
+            return ListView.builder(
               shrinkWrap: true,
               itemCount: filterBudget.length,
               itemBuilder: (BuildContext context, int index) {
@@ -148,10 +170,10 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
                   dataSource: categoryDataSource,
                 );
               },
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 }

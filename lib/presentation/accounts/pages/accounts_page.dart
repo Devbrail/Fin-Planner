@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
+import '../../../common/enum/box_types.dart';
+import '../../../common/widgets/empty_widget.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
+import '../../../data/accounts/model/account.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_transaction_widget.dart';
@@ -37,25 +41,43 @@ class AccountsPageState extends State<AccountsPage> {
                 context,
                 AppLocalizations.of(context)!.accountsLable,
               ),
-              body: ListView(
-                key: const Key('accounts_listview'),
-                padding: const EdgeInsets.only(bottom: 124),
-                children: [
-                  AccountPageViewWidget(),
-                  BlocBuilder(
-                    bloc: accountsBloc,
-                    buildWhen: (previous, current) =>
-                        current is AccountSeletedState,
-                    builder: (context, state) {
-                      if (state is AccountSeletedState) {
-                        return AccountTransactinWidget(account: state.account);
-                      } else {
-                        return const SizedBox.shrink();
-                      }
-                    },
-                  ),
-                ],
-              ),
+              body: ValueListenableBuilder<Box<Account>>(
+                  valueListenable:
+                      Hive.box<Account>(BoxType.accounts.stringValue)
+                          .listenable(),
+                  builder: (context, value, _) {
+                    final accounts = value.values.toList();
+                    if (accounts.isEmpty) {
+                      return EmptyWidget(
+                        icon: Icons.credit_card,
+                        title: AppLocalizations.of(context)!.errorNoCardsLable,
+                        description: AppLocalizations.of(context)!
+                            .errorNoCardsDescriptionLable,
+                      );
+                    }
+                    accountsBloc.add(AccountSeletedEvent(accounts[0]));
+                    return ListView(
+                      shrinkWrap: true,
+                      key: const Key('accounts_listview'),
+                      padding: const EdgeInsets.only(bottom: 124),
+                      children: [
+                        AccountPageViewWidget(accounts: accounts),
+                        BlocBuilder(
+                          bloc: accountsBloc,
+                          buildWhen: (previous, current) =>
+                              current is AccountSeletedState,
+                          builder: (context, state) {
+                            if (state is AccountSeletedState) {
+                              return AccountTransactinWidget(
+                                  account: state.account);
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
+                        ),
+                      ],
+                    );
+                  }),
               floatingActionButton: FloatingActionButton.large(
                 onPressed: _addCard,
                 heroTag: 'add_account',
@@ -71,12 +93,28 @@ class AccountsPageState extends State<AccountsPage> {
             context,
             AppLocalizations.of(context)!.accountsLable,
           ),
-          body: Builder(
-            builder: (context) {
+          body: ValueListenableBuilder<Box<Account>>(
+            valueListenable:
+                Hive.box<Account>(BoxType.accounts.stringValue).listenable(),
+            builder: (context, value, _) {
+              final accounts = value.values.toList();
+              if (accounts.isEmpty) {
+                return EmptyWidget(
+                  icon: Icons.credit_card,
+                  title: AppLocalizations.of(context)!.errorNoCardsLable,
+                  description: AppLocalizations.of(context)!
+                      .errorNoCardsDescriptionLable,
+                );
+              }
+              accountsBloc.add(AccountSeletedEvent(accounts[0]));
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: AccountPageViewWidget()),
+                  Expanded(
+                    child: AccountPageViewWidget(
+                      accounts: accounts,
+                    ),
+                  ),
                   Expanded(
                     child: BlocBuilder(
                       bloc: accountsBloc,
