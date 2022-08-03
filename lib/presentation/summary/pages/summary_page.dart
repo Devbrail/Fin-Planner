@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/presentation/summary/widgets/welcome_name_widget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/enum/box_types.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
-import '../../../data/settings/settings_service.dart';
 import '../../home/widgets/welcome_widget.dart';
 import '../../search/pages/search_page.dart';
 import '../../settings/widgets/user_profile_widget.dart';
 import '../widgets/expense_history_widget.dart';
 import '../widgets/expense_total_widget.dart';
+import '../widgets/welcome_name_widget.dart';
 
 class SummaryPage extends StatefulWidget {
   const SummaryPage({Key? key}) : super(key: key);

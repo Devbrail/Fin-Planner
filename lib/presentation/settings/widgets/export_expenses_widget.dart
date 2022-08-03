@@ -30,13 +30,14 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
   @override
   Widget build(BuildContext context) {
     return SettingsOption(
-      onTap: () => exportData(),
+      onTap: () =>
+          exportData(AppLocalizations.of(context)!.exportExpensesLable),
       title: AppLocalizations.of(context)!.exportExpensesLable,
       subtitle: AppLocalizations.of(context)!.exportExpensesDescriptionLable,
     );
   }
 
-  Future<void> exportData() async {
+  Future<void> exportData(String subject) async {
     final intialDateRange = DateTimeRange(
       start: DateTime.now().subtract(const Duration(days: 3)),
       end: DateTime.now(),
@@ -66,8 +67,7 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
     final path = "${directory.path}/paisa-expense-manager.csv";
     final file = File(path);
     await file.writeAsString(csvData);
-    Share.shareFiles([path],
-        subject: AppLocalizations.of(context)!.exportExpensesLable);
+    Share.shareFiles([path], subject: subject);
   }
 }
 

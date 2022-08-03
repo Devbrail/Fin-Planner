@@ -17,7 +17,6 @@ class WelcomeWidget extends StatelessWidget {
       valueListenable: Hive.box(BoxType.settings.stringValue)
           .listenable(keys: [userImageKey, userNameKey]),
       builder: (context, value, _) {
-        final name = value.get(userNameKey, defaultValue: 'Name');
         String image = value.get(userImageKey, defaultValue: '');
         if (image == 'no-image') {
           image = '';

@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/constants/currency.dart';
-
 import '../../../common/constants/extensions.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../data/category/model/category.dart';
