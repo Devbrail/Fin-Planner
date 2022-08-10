@@ -7,7 +7,7 @@ import '../../../common/enum/box_types.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../data/expense/model/expense.dart';
 import 'expense_total_for_month_widget.dart';
-import 'total_widget.dart';
+import 'total_balance_widget.dart';
 
 class ExpenseTotalWidget extends StatelessWidget {
   const ExpenseTotalWidget({Key? key}) : super(key: key);
@@ -22,33 +22,29 @@ class ExpenseTotalWidget extends StatelessWidget {
         final totalIncome = expenses.totalIncome - expenses.totalExpense;
         final thisMonthExpenses = expenses.thisMonthExpense;
         final thisMonthIncome = expenses.thisMonthIncome;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: MaterialYouCard(
-                child: Padding(
-                  padding: const EdgeInsets.all(22.0),
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      TotalWidget(
-                        title: AppLocalizations.of(context)!.totalBalanceLable,
-                        amount: totalIncome,
-                      ),
-                      const SizedBox(height: 24),
-                      ExpsenseTotalForMonthWidget(
-                        outcome: thisMonthExpenses,
-                        income: thisMonthIncome,
-                      ),
-                    ],
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: MaterialYouCard(
+            child: Padding(
+              padding: const EdgeInsets.all(22.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TotalBalanceWidget(
+                    title: AppLocalizations.of(context)!.totalBalanceLable,
+                    amount: totalIncome,
                   ),
-                ),
+                  const SizedBox(height: 24),
+                  ExpsenseTotalForMonthWidget(
+                    outcome: thisMonthExpenses,
+                    income: thisMonthIncome,
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         );
       },
     );

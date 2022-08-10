@@ -27,6 +27,9 @@ List<IconData> _defaultCategoryIcons = [
   Icons.emoji_objects_rounded,
   Icons.outdoor_grill_rounded,
   Icons.new_releases_rounded,
+  Icons.smoking_rooms_rounded,
+  Icons.wifi_rounded,
+  Icons.liquor_rounded,
 ];
 Future<IconData?> showIconPicker({
   required BuildContext context,

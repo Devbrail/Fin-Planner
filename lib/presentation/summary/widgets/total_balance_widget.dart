@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/constants/currency.dart';
 
-class TotalWidget extends StatelessWidget {
-  const TotalWidget({
+class TotalBalanceWidget extends StatelessWidget {
+  const TotalBalanceWidget({
     Key? key,
     required this.title,
     required this.amount,

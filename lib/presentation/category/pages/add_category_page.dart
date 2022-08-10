@@ -36,6 +36,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       TextEditingController(text: widget.category?.description ?? '');
   late int selectedIcon = widget.category?.icon ?? Icons.home_rounded.codePoint;
   late bool setBudget = _checkBudget();
+
   @override
   Widget build(BuildContext context) {
     return BlocListener(
@@ -71,10 +72,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                         subtitle: Text(
                             AppLocalizations.of(context)!.selectIconDescLable),
                         leading: Icon(
-                          IconData(
-                            selectedIcon,
-                            fontFamily: 'MaterialIcons',
-                          ),
+                          IconData(selectedIcon, fontFamily: 'MaterialIcons'),
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                         onTap: () async {
                           final IconData? icon = await showIconPicker(
