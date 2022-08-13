@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-List<IconData> defaultCategoryIcons = [
+List<IconData> _defaultCategoryIcons = [
   Icons.home_rounded,
   Icons.shopping_cart_rounded,
   Icons.fastfood_rounded,
@@ -17,13 +17,20 @@ List<IconData> defaultCategoryIcons = [
   Icons.self_improvement_rounded,
   Icons.hiking_rounded,
   Icons.qr_code_rounded,
-  Icons.qr_code_rounded,
-  Icons.local_gas_station_rounded,
   Icons.photo_camera_rounded,
   Icons.directions_bus_rounded,
-  Icons.more_horiz,
+  Icons.eco_rounded,
+  Icons.pets_rounded,
+  Icons.water_drop_rounded,
+  Icons.vaccines_rounded,
+  Icons.forest_rounded,
+  Icons.emoji_objects_rounded,
+  Icons.outdoor_grill_rounded,
+  Icons.new_releases_rounded,
+  Icons.smoking_rooms_rounded,
+  Icons.wifi_rounded,
+  Icons.liquor_rounded,
 ];
-
 Future<IconData?> showIconPicker({
   required BuildContext context,
   IconData? defaultIcon = Icons.home_rounded,
@@ -33,28 +40,27 @@ Future<IconData?> showIconPicker({
   await showDialog(
     context: context,
     builder: (_) => AlertDialog(
-      title: Text(
-        AppLocalizations.of(context)!.updatedCategoryLable,
-      ),
-      content: FractionallySizedBox(
-        widthFactor: 0.9,
-        heightFactor: 0.4,
+      title: Text(AppLocalizations.of(context)!.selectIconLable),
+      content: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.4,
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 70,
             childAspectRatio: 1 / 1,
           ),
-          itemCount: defaultCategoryIcons.length,
+          shrinkWrap: true,
+          itemCount: _defaultCategoryIcons.length,
           itemBuilder: (_, index) => IconButton(
-            key: ValueKey(defaultCategoryIcons[index].codePoint),
-            color: selectedIcon == defaultCategoryIcons[index]
+            key: ValueKey(_defaultCategoryIcons[index].codePoint),
+            color: selectedIcon == _defaultCategoryIcons[index]
                 ? Theme.of(context).colorScheme.primary
                 : Theme.of(context).disabledColor,
             onPressed: () {
-              selectedIcon = defaultCategoryIcons[index];
+              selectedIcon = _defaultCategoryIcons[index];
               Navigator.of(context).pop();
             },
-            icon: Icon(defaultCategoryIcons[index]),
+            icon: Icon(_defaultCategoryIcons[index]),
           ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../../../common/enum/box_types.dart';
@@ -26,5 +27,16 @@ class ExpenseManagerLocalDataSource implements ExpenseManagerDataSource {
   @override
   Future<void> clearExpense(int key) async {
     await epenseBox.delete(key);
+  }
+
+  @override
+  Future<List<Expense>> filteredExpenses(DateTimeRange dateTimeRange) async {
+    final List<Expense> expenses = epenseBox.values.toList();
+    expenses.sort((a, b) => b.time.compareTo(a.time));
+    final filteredExpenses = expenses.takeWhile((value) {
+      return value.time.isAfter(dateTimeRange.start) &&
+          value.time.isBefore(dateTimeRange.end);
+    }).toList();
+    return filteredExpenses;
   }
 }

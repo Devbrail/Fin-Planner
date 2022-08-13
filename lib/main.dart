@@ -8,7 +8,7 @@ import 'package:hive_flutter/adapters.dart';
 
 import 'app/app_builder.dart';
 import 'app/routes.dart';
-import 'common/constants/theme.dart';
+import '../../common/theme/paisa_theme.dart';
 import 'common/enum/box_types.dart';
 import 'data/settings/settings_service.dart';
 import 'di/service_locator.dart';
@@ -29,17 +29,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late final settings = Hive.box(BoxType.settings.stringValue)
-      .listenable(keys: [appColorKey, dynamicColorKey, themeModeKey]);
+  late final settings = Hive.box(BoxType.settings.stringValue).listenable(
+    keys: [
+      appColorKey,
+      dynamicColorKey,
+      themeModeKey,
+    ],
+  );
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
       valueListenable: settings,
-      builder: (context, value, _) {
+      builder: (BuildContext context, Box<dynamic> value, Widget? child) {
         final isDynamic = value.get(dynamicColorKey, defaultValue: true);
+        final themeModeValue = value.get(themeModeKey, defaultValue: 0);
         final color = value.get(appColorKey, defaultValue: 0xFF795548);
-        final themeMode =
-            ThemeMode.values[value.get(themeModeKey, defaultValue: 0)];
         final primaryColor = Color(color);
         return AppBuilder(
           builder: (context) {
@@ -69,23 +73,23 @@ class _MyAppState extends State<MyApp> {
                     routerDelegate: goRouter.routerDelegate,
                     debugShowCheckedModeBanner: false,
                     theme: ThemeData.light().copyWith(
-                      colorScheme: lightColorScheme,
-                      dialogTheme: dialogTheme(),
-                      appBarTheme: appBarTheme(Brightness.dark),
-                      useMaterial3: true,
-                      textTheme: GoogleFonts.outfitTextTheme(
-                        ThemeData.light().textTheme,
-                      ),
-                      scaffoldBackgroundColor: lightColorScheme.background,
-                      dialogBackgroundColor: lightColorScheme.background,
-                      navigationBarTheme: navigationBarThemeData,
-                      applyElevationOverlayColor: true,
-                      inputDecorationTheme: inputDecorationTheme,
-                      elevatedButtonTheme: elevatedButtonTheme(
-                        context,
-                        lightColorScheme,
-                      ),
-                    ),
+                        colorScheme: lightColorScheme,
+                        dialogTheme: dialogTheme(),
+                        appBarTheme: appBarTheme(Brightness.dark),
+                        useMaterial3: true,
+                        textTheme: GoogleFonts.outfitTextTheme(
+                          ThemeData.light().textTheme,
+                        ),
+                        scaffoldBackgroundColor: lightColorScheme.background,
+                        dialogBackgroundColor: lightColorScheme.background,
+                        navigationBarTheme: navigationBarThemeData,
+                        applyElevationOverlayColor: true,
+                        inputDecorationTheme: inputDecorationTheme,
+                        elevatedButtonTheme: elevatedButtonTheme(
+                          context,
+                          lightColorScheme,
+                        ),
+                        extensions: [lightCustomColor]),
                     darkTheme: ThemeData.dark().copyWith(
                       colorScheme: darkColorScheme,
                       dialogTheme: dialogTheme(),
@@ -103,8 +107,9 @@ class _MyAppState extends State<MyApp> {
                         context,
                         darkColorScheme,
                       ),
+                      extensions: [darkCustomColor],
                     ),
-                    themeMode: themeMode,
+                    themeMode: ThemeMode.values[themeModeValue],
                     localizationsDelegates: const [
                       AppLocalizations.delegate, // Add this line
                       GlobalMaterialLocalizations.delegate,

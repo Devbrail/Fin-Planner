@@ -15,11 +15,13 @@ class UserNamePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
+      key: const Key('user_name_page_view'),
       valueListenable: Hive.box(BoxType.settings.stringValue).listenable(
         keys: [userNameKey],
       ),
       builder: (context, value, _) {
         return Scaffold(
+          key: const Key('user_name_scaffold'),
           resizeToAvoidBottomInset: true,
           body: Align(
             alignment: Alignment.center,
@@ -68,6 +70,7 @@ class UserNamePage extends StatelessWidget {
                     Form(
                       key: _formState,
                       child: TextFormField(
+                        key: const Key('user_name_textfield'),
                         controller: _nameController,
                         decoration: InputDecoration(
                           hintText: AppLocalizations.of(context)!.nameLable,
@@ -98,6 +101,7 @@ class UserNamePage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: ElevatedButton(
+                      key: const Key('next_button'),
                       onPressed: () async {
                         if (_formState.currentState!.validate()) {
                           value

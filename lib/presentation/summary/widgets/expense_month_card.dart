@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../common/theme/custom_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/constants/currency.dart';
@@ -34,11 +35,11 @@ class ExpenseMonthCardWidget extends StatelessWidget {
           ),
           trailing: Text(
             formattedCurrency(total),
-            style: GoogleFonts.manrope(
+            style: GoogleFonts.lato(
               textStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
                     color: total.isNegative
-                        ? Theme.of(context).colorScheme.error
-                        : Colors.green.shade300,
+                        ? Theme.of(context).extension<CustomColors>()!.red
+                        : Theme.of(context).extension<CustomColors>()!.green,
                   ),
             ),
           ),

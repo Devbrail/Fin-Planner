@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/constants/currency.dart';
+import '../../../common/constants/extensions.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
@@ -18,12 +19,18 @@ class BudgetItemMobileWidget extends StatelessWidget {
   final Category category;
   final List<Expense> expenses;
 
-  get isBudgetActive => category.budget == null;
+  get isBudgetActive {
+    final double budget = category.budget ?? 0.0;
+    if (budget > 0.0) {
+      return true;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
-    double totalExpenses = totalExpense(expenses);
-    final totalBudget = category.budget ?? -1;
+    final double totalExpenses = expenses.total;
+    final double totalBudget = category.budget ?? -1;
     double difference;
     if (isBudgetActive) {
       difference = totalBudget - totalExpenses;
@@ -34,54 +41,82 @@ class BudgetItemMobileWidget extends StatelessWidget {
     return MaterialYouCard(
       child: InkWell(
         onTap: () => context.goNamed(addCategoryPath, extra: category),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Icon(
-                IconData(category.icon, fontFamily: 'MaterialIcons'),
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                category.name,
-                style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
+            isBudgetActive
+                ? SizedBox(
+                    height: double.infinity,
+                    child: LinearProgressIndicator(
+                      value: totalExpenses / totalBudget,
+                      color: Theme.of(context).colorScheme.tertiaryContainer,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
                     ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 40,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Sparkline(
-                  data: expenses.map((e) => e.currency).toList(),
-                  useCubicSmoothing: true,
-                  cubicSmoothingFactor: 0.2,
-                  lineWidth: 3,
-                  lineColor: Theme.of(context).colorScheme.secondary,
+                  )
+                : const SizedBox.shrink(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 14.0,
+                              bottom: 8,
+                              left: 14.0,
+                              right: 8,
+                            ),
+                            child: Icon(
+                              IconData(category.icon,
+                                  fontFamily: 'MaterialIcons'),
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: 8,
+                              left: 14.0,
+                              right: 8,
+                            ),
+                            child: Text(category.name),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(
-                bottom: 16,
-                left: 16,
-                right: 16,
-              ),
-              child: Text(
-                '${isBudgetActive ? 'Remainig' : ''} ${formattedCurrency(difference)}',
-                style: GoogleFonts.manrope(
-                  textStyle: Theme.of(context).textTheme.bodyText1?.copyWith(),
+                SizedBox(
+                  height: 40,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Sparkline(
+                      data: expenses.map((e) => e.currency).toList(),
+                      useCubicSmoothing: true,
+                      cubicSmoothingFactor: 0.2,
+                      lineWidth: 3,
+                      lineColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
                 ),
-              ),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 16,
+                    left: 16,
+                    right: 16,
+                  ),
+                  child: Text(
+                    '${isBudgetActive ? 'Balance:' : ''} ${formattedCurrency(difference)}',
+                    style: GoogleFonts.lato(
+                      textStyle: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:bloc/bloc.dart' show Bloc, Emitter;
 import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:meta/meta.dart';

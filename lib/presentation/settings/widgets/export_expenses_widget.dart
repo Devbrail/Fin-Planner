@@ -26,26 +26,48 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
   final dataSource = locator.get<ExpenseManagerDataSource>();
   final accountDataSource = locator.get<AccountDataSource>();
   final categoryDataSource = locator.get<CategoryDataSource>();
-
+  DateTimeRange? dateTimeRange;
   @override
   Widget build(BuildContext context) {
     return SettingsOption(
-      onTap: () => exportData(),
+      onTap: () =>
+          exportData(AppLocalizations.of(context)!.exportExpensesLable),
       title: AppLocalizations.of(context)!.exportExpensesLable,
       subtitle: AppLocalizations.of(context)!.exportExpensesDescriptionLable,
     );
   }
 
-  Future<void> exportData() async {
-    final expenses = await dataSource.expenses();
+  Future<void> exportData(String subject) async {
+    final intialDateRange = DateTimeRange(
+      start: DateTime.now().subtract(const Duration(days: 3)),
+      end: DateTime.now(),
+    );
+    final newDateRange = await showDateRangePicker(
+      context: context,
+      initialDateRange: dateTimeRange ?? intialDateRange,
+      firstDate: DateTime.now().subtract(const Duration(days: 7)),
+      lastDate: DateTime.now(),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      builder: (_, child) {
+        return Theme(
+          data: ThemeData.from(colorScheme: Theme.of(context).colorScheme)
+              .copyWith(
+            appBarTheme: Theme.of(context).appBarTheme,
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (newDateRange == null) return;
+    dateTimeRange = newDateRange;
+    final expenses = await dataSource.filteredExpenses(dateTimeRange!);
     final data = csvDataList(expenses, accountDataSource, categoryDataSource);
     final csvData = const ListToCsvConverter().convert(data);
     final directory = await getApplicationSupportDirectory();
     final path = "${directory.path}/paisa-expense-manager.csv";
     final file = File(path);
     await file.writeAsString(csvData);
-    Share.shareFiles([path],
-        subject: AppLocalizations.of(context)!.exportExpensesLable);
+    Share.shareFiles([path], subject: subject);
   }
 }
 

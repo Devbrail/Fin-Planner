@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../common/theme/custom_color.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/constants/currency.dart';
 
@@ -32,10 +34,11 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                   RichText(
                     text: TextSpan(
                       text: '▼',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          ?.copyWith(color: Colors.green.shade300),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                            color: Theme.of(context)
+                                .extension<CustomColors>()!
+                                .green,
+                          ),
                       children: [
                         TextSpan(
                           text: AppLocalizations.of(context)!.incomeLable,
@@ -48,7 +51,9 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                   ),
                   Text(
                     '+${formattedCurrency(income)}',
-                    style: Theme.of(context).textTheme.headline6?.copyWith(),
+                    style: GoogleFonts.lato(
+                      textStyle: Theme.of(context).textTheme.headline6,
+                    ),
                   ),
                 ],
               ),
@@ -60,10 +65,11 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                   RichText(
                     text: TextSpan(
                       text: '▲',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          ?.copyWith(color: Colors.red.shade300),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                            color: Theme.of(context)
+                                .extension<CustomColors>()!
+                                .red,
+                          ),
                       children: [
                         TextSpan(
                           text: AppLocalizations.of(context)!.outcomeLable,
@@ -76,7 +82,9 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                   ),
                   Text(
                     '-${formattedCurrency(outcome)}',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: GoogleFonts.lato(
+                      textStyle: Theme.of(context).textTheme.headline6,
+                    ),
                   ),
                 ],
               ),

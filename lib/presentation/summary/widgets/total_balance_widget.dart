@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/constants/currency.dart';
 
-class TotalWidget extends StatelessWidget {
-  const TotalWidget({
+class TotalBalanceWidget extends StatelessWidget {
+  const TotalBalanceWidget({
     Key? key,
     required this.title,
     required this.amount,
@@ -24,7 +24,7 @@ class TotalWidget extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           formattedCurrency(amount),
-          style: GoogleFonts.manrope(
+          style: GoogleFonts.lato(
             textStyle: Theme.of(context).textTheme.headline4?.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.w600,

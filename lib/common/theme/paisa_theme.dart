@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'custom_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
@@ -55,7 +56,7 @@ const Color darkOnSurfaceVariant = Color(0xFFd7c3b7);
 const Color darkInverseSurface = Color(0xFFece0da);
 const Color darkInverseOnSurface = Color(0xFF201a17);
 
-const ColorScheme whiteTheme = ColorScheme.light(
+const ColorScheme lightTheme = ColorScheme.light(
   primary: whitePrimary,
   onPrimary: whiteOnPrimary,
   primaryContainer: whitePrimaryContainer,
@@ -306,3 +307,12 @@ extension ColorExtension on Color {
         (blue * value).round());
   }
 }
+
+CustomColors lightCustomColor = CustomColors(
+  red: Colors.red.shade300,
+  green: Colors.green.shade300,
+);
+CustomColors darkCustomColor = CustomColors(
+  red: Colors.red.shade300,
+  green: Colors.green.shade300,
+);
