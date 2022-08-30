@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 

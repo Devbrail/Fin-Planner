@@ -30,6 +30,7 @@ List<IconData> _defaultCategoryIcons = [
   Icons.smoking_rooms_rounded,
   Icons.wifi_rounded,
   Icons.liquor_rounded,
+  Icons.breakfast_dining_rounded,
 ];
 Future<IconData?> showIconPicker({
   required BuildContext context,

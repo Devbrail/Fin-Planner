@@ -82,4 +82,6 @@ const Map<String, Locale> locales = {
   "Polish Złoty": Locale('pl'),
   "Austria Euro": Locale('de'),
   "Bangladesh Taka": Locale('bn'),
+  "Turkish lira": Locale('tr'),
+  "Mexican peso": Locale('es-mx'),
 };
