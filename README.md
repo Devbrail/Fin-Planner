@@ -52,10 +52,8 @@ Built with fashion of Material Desgin
   
 ### License
 
-    ```
     Copyright (c) 2022, Hemanth S
     All rights reserved.
     
     This source code is licensed under the GPLv3-style license found in the
     LICENSE file in the root directory of this source tree. 
-    ```
