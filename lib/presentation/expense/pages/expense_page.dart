@@ -46,12 +46,12 @@ class _ExpensePageState extends State<ExpensePage> {
 
   Future<void> addExpense() async {
     if (selectedCategoryId == null) {
-      errorMessage = 'Select category';
+      errorMessage = AppLocalizations.of(context)!.selectCategoryLable;
       setState(() {});
       return;
     }
     if (selectedAccountId == null) {
-      errorMessage = 'Select account';
+      errorMessage = AppLocalizations.of(context)!.selectAccountLable;
       setState(() {});
       return;
     }
@@ -165,6 +165,7 @@ class _ExpensePageState extends State<ExpensePage> {
                   TransactionToggleButtons(
                     onSelected: (type) {
                       selectedType = type;
+                      setState(() {});
                     },
                     selectedType: selectedType,
                   ),
@@ -418,7 +419,9 @@ class _ExpensePageState extends State<ExpensePage> {
       controller: nameTextController,
       keyboardType: TextInputType.name,
       decoration: InputDecoration(
-        hintText: AppLocalizations.of(context)!.expenseNameLable,
+        hintText: selectedType == TransactonType.expense
+            ? AppLocalizations.of(context)!.expenseNameLable
+            : AppLocalizations.of(context)!.incomeNameLable,
       ),
       onChanged: (value) {},
       validator: (value) {
