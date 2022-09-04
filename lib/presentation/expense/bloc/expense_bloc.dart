@@ -14,6 +14,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<AddExpenseEvent>((event, emit) => _addExpense(event, emit));
     on<UpdateExpenseEvent>((event, emit) => _updateExpense(event, emit));
     on<ClearExpenseEvent>((event, emit) => _clearExpense(event, emit));
+    on<ChangeExpenseEvent>((event, emit) => _changeExpense(event, emit));
   }
 
   final ExpenseUseCase expenseUseCase;
@@ -53,5 +54,9 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   ) async {
     await expenseUseCase.clearExpense(event.expense);
     emit(ExpenseDeletedState());
+  }
+
+  void _changeExpense(ChangeExpenseEvent event, Emitter<ExpenseState> emit) {
+    emit(ChangeExpenseState(event.transactionType));
   }
 }

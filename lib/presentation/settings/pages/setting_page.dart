@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/presentation/settings/widgets/currency_change_widget.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app/app_builder.dart';
@@ -68,6 +69,7 @@ class _SettingsPageState extends State<SettingsPage> {
           SettingsGroup(
             title: AppLocalizations.of(context)!.othersLable,
             options: const [
+              CurrencyChangeWidget(),
               ScheduleNotificationWidget(),
               Divider(),
               Divider(),

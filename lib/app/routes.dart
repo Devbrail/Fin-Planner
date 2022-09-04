@@ -65,7 +65,16 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: 'splash',
       path: splashPath,
-      builder: (context, state) => const SplashScreenPage(),
+      builder: (context, state) {
+        if (state.extra is Map) {
+          final map = state.extra as Map;
+          return SplashScreenPage(
+            forceChangeCurrency: map['force_change_currency'] as bool,
+          );
+        } else {
+          return const SplashScreenPage();
+        }
+      },
     ),
     GoRoute(
       name: 'landing',

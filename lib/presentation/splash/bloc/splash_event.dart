@@ -7,4 +7,8 @@ abstract class SplashEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CheckLoginEvent extends SplashEvent {}
+class CheckLoginEvent extends SplashEvent {
+  final bool forceChangeCurrency;
+
+  const CheckLoginEvent({this.forceChangeCurrency = false});
+}

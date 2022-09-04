@@ -60,7 +60,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     final languageCode = settings.get(userLanguageKey, defaultValue: 'DEF');
     //emit(CountryLocalesState(locales));
 
-    if (languageCode == 'DEF') {
+    if (languageCode == 'DEF' || event.forceChangeCurrency) {
       emit(const CountryLocalesState(locales));
     } else {
       currentLocale = languageCode;
@@ -70,7 +70,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   Future<void> setSelectedLocale(Locale locale) async {
     await settings.put(userLanguageKey, locale.languageCode);
-    add(CheckLoginEvent());
+    add(const CheckLoginEvent());
   }
 }
 
@@ -84,4 +84,6 @@ const Map<String, Locale> locales = {
   "Bangladesh Taka": Locale('bn'),
   "Turkish lira": Locale('tr'),
   "Mexican peso": Locale('es-mx'),
+  "Philippine peso": Locale('fil'),
+  "Indonesian rupiah": Locale('id'),
 };

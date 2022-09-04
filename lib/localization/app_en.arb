@@ -452,4 +452,9 @@
     "@incomeNameLable": {
         "description": "income name label"
     }
+    ,
+    "currencySignLable": "Currency sign",
+    "@currencySignLable": {
+        "description": "Currency sign label"
+    }
 }

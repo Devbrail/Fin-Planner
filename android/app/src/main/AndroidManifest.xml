@@ -9,6 +9,7 @@
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name">
         <activity
+            android:enableOnBackInvokedCallback="true"
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"

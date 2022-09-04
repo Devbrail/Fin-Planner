@@ -16,3 +16,11 @@ class ExpenseAdded extends ExpenseState {
 }
 
 class ExpenseDeletedState extends ExpenseState {}
+
+class ChangeExpenseState extends ExpenseState {
+  final TransactonType transactionType;
+
+  const ChangeExpenseState(this.transactionType);
+  @override
+  List<Object> get props => [transactionType];
+}

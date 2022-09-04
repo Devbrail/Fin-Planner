@@ -125,17 +125,15 @@ class _ExpensePageState extends State<ExpensePage> {
             context,
             AppLocalizations.of(context)!.expenseDeletedSuccessfulLable,
           );
+          context.pop();
         } else if (state is ExpenseAdded) {
-          String content = '';
-          if (state.isAddOrUpdate) {
-            content = AppLocalizations.of(context)!.expenseAddedSuccessfulLable;
-          } else {
-            content =
-                AppLocalizations.of(context)!.expenseUpdateSuccessfulLable;
-          }
-          showMaterialSnackBar(context, content);
+          showMaterialSnackBar(
+              context,
+              state.isAddOrUpdate
+                  ? AppLocalizations.of(context)!.expenseAddedSuccessfulLable
+                  : AppLocalizations.of(context)!.expenseUpdateSuccessfulLable);
+          context.pop();
         }
-        context.pop();
       },
       child: ScreenTypeLayout(
         mobile: Scaffold(
@@ -165,7 +163,7 @@ class _ExpensePageState extends State<ExpensePage> {
                   TransactionToggleButtons(
                     onSelected: (type) {
                       selectedType = type;
-                      setState(() {});
+                      expenseBloc.add(ChangeExpenseEvent(type));
                     },
                     selectedType: selectedType,
                   ),
@@ -413,22 +411,32 @@ class _ExpensePageState extends State<ExpensePage> {
   }
 
   Widget _expenseName() {
-    return TextFormField(
-      autocorrect: true,
-      autofocus: true,
-      controller: nameTextController,
-      keyboardType: TextInputType.name,
-      decoration: InputDecoration(
-        hintText: selectedType == TransactonType.expense
-            ? AppLocalizations.of(context)!.expenseNameLable
-            : AppLocalizations.of(context)!.incomeNameLable,
-      ),
-      onChanged: (value) {},
-      validator: (value) {
-        if (value!.length >= 3) {
-          return null;
+    return BlocBuilder(
+      bloc: expenseBloc,
+      buildWhen: (oldState, newState) => newState is ChangeExpenseState,
+      builder: (context, state) {
+        if (state is ChangeExpenseState) {
+          return TextFormField(
+            autocorrect: true,
+            autofocus: true,
+            controller: nameTextController,
+            keyboardType: TextInputType.name,
+            decoration: InputDecoration(
+              hintText: state.transactionType == TransactonType.expense
+                  ? AppLocalizations.of(context)!.expenseNameLable
+                  : AppLocalizations.of(context)!.incomeNameLable,
+            ),
+            onChanged: (value) {},
+            validator: (value) {
+              if (value!.length >= 3) {
+                return null;
+              } else {
+                return AppLocalizations.of(context)!.validNameLable;
+              }
+            },
+          );
         } else {
-          return AppLocalizations.of(context)!.validNameLable;
+          return const SizedBox.shrink();
         }
       },
     );
