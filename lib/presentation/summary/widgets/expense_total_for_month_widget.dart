@@ -51,7 +51,7 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                   ),
                   Text(
                     '+${formattedCurrency(income)}',
-                    style: GoogleFonts.lato(
+                    style: GoogleFonts.manrope(
                       textStyle: Theme.of(context).textTheme.headline6,
                     ),
                   ),
@@ -82,7 +82,7 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                   ),
                   Text(
                     '-${formattedCurrency(outcome)}',
-                    style: GoogleFonts.lato(
+                    style: GoogleFonts.manrope(
                       textStyle: Theme.of(context).textTheme.headline6,
                     ),
                   ),

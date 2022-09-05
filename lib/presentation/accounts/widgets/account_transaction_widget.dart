@@ -65,7 +65,7 @@ class AccountTransactinWidget extends StatelessWidget {
                               const SizedBox(height: 6),
                               Text(
                                 expenses.balance,
-                                style: GoogleFonts.lato(
+                                style: GoogleFonts.manrope(
                                   textStyle: Theme.of(context)
                                       .textTheme
                                       .headline6
@@ -88,7 +88,7 @@ class AccountTransactinWidget extends StatelessWidget {
                               const SizedBox(height: 6),
                               Text(
                                 formattedCurrency(expenses.totalExpense),
-                                style: GoogleFonts.lato(
+                                style: GoogleFonts.manrope(
                                   textStyle: Theme.of(context)
                                       .textTheme
                                       .headline6

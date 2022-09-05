@@ -111,7 +111,7 @@ class BudgetItemMobileWidget extends StatelessWidget {
                   ),
                   child: Text(
                     '${isBudgetActive ? 'Balance:' : ''} ${formattedCurrency(difference)}',
-                    style: GoogleFonts.lato(
+                    style: GoogleFonts.manrope(
                       textStyle: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),

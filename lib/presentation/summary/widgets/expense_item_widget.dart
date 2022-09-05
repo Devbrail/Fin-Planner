@@ -46,7 +46,7 @@ class _ExpensItemWidgetState extends State<ExpensItemWidget> {
     return RichText(
       text: TextSpan(
         text: _typeSign,
-        style: GoogleFonts.lato(
+        style: GoogleFonts.manrope(
           textStyle: TextStyle(color: _typeColor),
         ),
         children: [
