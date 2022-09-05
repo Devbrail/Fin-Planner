@@ -123,15 +123,21 @@ class _ExpensePageState extends State<ExpensePage> {
         if (state is ExpenseDeletedState) {
           showMaterialSnackBar(
             context,
-            AppLocalizations.of(context)!.expenseDeletedSuccessfulLable,
+            selectedType == TransactonType.expense
+                ? AppLocalizations.of(context)!.expenseDeletedSuccessfulLable
+                : AppLocalizations.of(context)!.incomeDeletedSuccessfulLable,
           );
           context.pop();
         } else if (state is ExpenseAdded) {
-          showMaterialSnackBar(
-              context,
-              state.isAddOrUpdate
+          final content = selectedType == TransactonType.expense
+              ? state.isAddOrUpdate
                   ? AppLocalizations.of(context)!.expenseAddedSuccessfulLable
-                  : AppLocalizations.of(context)!.expenseUpdateSuccessfulLable);
+                  : AppLocalizations.of(context)!.expenseUpdateSuccessfulLable
+              : state.isAddOrUpdate
+                  ? AppLocalizations.of(context)!.incomeAddedSuccessfulLable
+                  : AppLocalizations.of(context)!.incomeUpdateSuccessfulLable;
+
+          showMaterialSnackBar(context, content);
           context.pop();
         }
       },

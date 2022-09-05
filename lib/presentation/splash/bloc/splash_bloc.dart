@@ -75,6 +75,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 }
 
 const Map<String, Locale> locales = {
+  /*  "Afghan Afghani": Locale('ps'),
+  "Albanian lek": Locale('sq'), */
   "US Doller": Locale('en'),
   "Indian Rupee": Locale('hi'),
   "Malaysia Ringgit": Locale('ms'),
@@ -86,4 +88,5 @@ const Map<String, Locale> locales = {
   "Mexican peso": Locale('es-mx'),
   "Philippine peso": Locale('fil'),
   "Indonesian rupiah": Locale('id'),
+  "Vietnamese dong": Locale('vi'),
 };

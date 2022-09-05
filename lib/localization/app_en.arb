@@ -451,10 +451,21 @@
     "incomeNameLable": "Income name",
     "@incomeNameLable": {
         "description": "income name label"
-    }
-    ,
+    },
     "currencySignLable": "Currency sign",
     "@currencySignLable": {
         "description": "Currency sign label"
+    },
+    "incomeAddedSuccessfulLable": "Income added",
+    "@incomeAddedSuccessfulLable": {
+        "description": "Expense added label"
+    },
+    "incomeUpdateSuccessfulLable": "Income updated",
+    "@incomeUpdateSuccessfulLable": {
+        "description": "Expense updated label"
+    },
+    "incomeDeletedSuccessfulLable": "Income deleted",
+    "@incomeDeletedSuccessfulLable": {
+        "description": "Expense deleted label"
     }
 }
