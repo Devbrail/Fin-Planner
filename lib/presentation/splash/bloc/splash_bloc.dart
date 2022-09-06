@@ -89,4 +89,5 @@ const Map<String, Locale> locales = {
   "Philippine peso": Locale('fil'),
   "Indonesian rupiah": Locale('id'),
   "Vietnamese dong": Locale('vi'),
+  "Lebanese pound": Locale('ar-lb'),
 };

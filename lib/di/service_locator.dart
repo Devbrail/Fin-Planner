@@ -60,7 +60,7 @@ Future<void> _setupController() async {
 }
 
 Future<void> _setupHive() async {
-  await Hive.initFlutter();
+  await Hive.initFlutter('hive');
   Hive
     ..registerAdapter(ExpenseAdapter())
     ..registerAdapter(CategoryAdapter())

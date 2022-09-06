@@ -70,8 +70,8 @@ class _SettingsPageState extends State<SettingsPage> {
             title: AppLocalizations.of(context)!.othersLable,
             options: const [
               CurrencyChangeWidget(),
-              ScheduleNotificationWidget(),
               Divider(),
+              ScheduleNotificationWidget(),
               Divider(),
               ExportExpensesWidget(),
             ],
