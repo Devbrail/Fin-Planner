@@ -23,25 +23,44 @@ class CategoryItemTabletWidget extends StatelessWidget {
           addCategoryPath,
           extra: category,
         ),
-        child: Stack(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
                 children: [
                   Icon(
-                    IconData(category.icon, fontFamily: 'MaterialIcons'),
-                    size: 72,
+                    IconData(
+                      category.icon,
+                      fontFamily: 'Material Design Icons',
+                      fontPackage: 'material_design_icons_flutter',
+                    ),
+                    size: 42,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () {
+                      onPressed(category);
+                    },
+                    icon: Icon(
+                      Icons.delete_rounded,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
                   Text(
                     category.name,
-                    style: Theme.of(context).textTheme.headline5?.copyWith(
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                     textAlign: TextAlign.center,
@@ -56,20 +75,6 @@ class CategoryItemTabletWidget extends StatelessWidget {
                 ],
               ),
             ),
-            category.isPredefined
-                ? const SizedBox.shrink()
-                : Positioned(
-                    right: 0,
-                    child: IconButton(
-                      onPressed: () {
-                        onPressed(category);
-                      },
-                      icon: Icon(
-                        Icons.delete_rounded,
-                        color: Theme.of(context).colorScheme.error,
-                      ),
-                    ),
-                  ),
           ],
         ),
       ),

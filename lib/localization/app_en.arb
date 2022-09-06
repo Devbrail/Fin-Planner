@@ -396,10 +396,10 @@
     "@backLable": {
         "description": "Back label"
     },
-    "setBudgetLable": "Set budget",
+    "setBudgetLable": "Set budget for category",
     "@setBudgetLable": {
-        "description": "set budget label"
-    },
+        "description": "Set budget label"
+    }, 
     "incomeLable": "Income",
     "@incomeLable": {
         "description": "income label"

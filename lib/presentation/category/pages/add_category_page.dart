@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/util.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
 import '../../../common/widgets/material_you_textfield.dart';
-import '../../../common/widgets/show_icon_picker.dart';
 import '../../../data/category/model/category.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/category_bloc.dart';
+import '../widgets/select_icon_widget.dart';
+import '../widgets/set_budget_widget.dart';
 
 class AddCategoryPage extends StatefulWidget {
   const AddCategoryPage({
@@ -34,7 +35,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       TextEditingController(text: widget.category?.name ?? '');
   late final descController =
       TextEditingController(text: widget.category?.description ?? '');
-  late int selectedIcon = widget.category?.icon ?? Icons.home_rounded.codePoint;
+  late int selectedIcon = widget.category?.icon ?? MdiIcons.home.codePoint;
   late bool setBudget = _checkBudget();
 
   @override
@@ -57,53 +58,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           appBar: appBar(),
           body: SafeArea(
             child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ListTile(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        title:
-                            Text(AppLocalizations.of(context)!.selectIconLable),
-                        subtitle: Text(
-                            AppLocalizations.of(context)!.selectIconDescLable),
-                        leading: Icon(
-                          IconData(selectedIcon, fontFamily: 'MaterialIcons'),
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                        onTap: () async {
-                          final IconData? icon = await showIconPicker(
-                            context: context,
-                            defaultIcon: IconData(
-                              selectedIcon,
-                              fontFamily: 'MaterialIcons',
-                            ),
-                          );
-                          setState(() {
-                            selectedIcon =
-                                icon?.codePoint ?? Icons.home_rounded.codePoint;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(child: _categoryField()),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      _descriptionField(),
-                      _setBudget(),
-                      const SizedBox(height: 16),
-                    ],
-                  ),
-                ),
+              child: Form(
+                key: formKey,
+                child: _inputForm(),
               ),
             ),
           ),
@@ -115,30 +72,68 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           ),
         ),
         tablet: Scaffold(
-          appBar: appBar(),
-          body: SafeArea(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          _categoryField(),
-                          const SizedBox(height: 16),
-                          _descriptionField(),
-                          const SizedBox(height: 16),
-                          _submitButton(),
-                        ],
-                      ),
-                    ),
+          appBar: materialYouAppBar(
+            context,
+            isAddCategory
+                ? AppLocalizations.of(context)!.addCategoryLable
+                : AppLocalizations.of(context)!.updateCategoryLable,
+            actions: [
+              TextButton(
+                onPressed: _submitCategory,
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32.0),
                   ),
                 ),
-              ],
+                child: Text(
+                  isAddCategory
+                      ? AppLocalizations.of(context)!.addCategoryLable
+                      : AppLocalizations.of(context)!.updateLable,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: Theme.of(context).textTheme.headline6?.fontSize,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 24),
+            ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Form(
+              key: formKey,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        SelectIconWidget(
+                          codePoint: selectedIcon,
+                          onSelectedIcon: (codePoint) {
+                            selectedIcon = codePoint;
+                          },
+                        ),
+                        SetBudgetWidget(
+                          controller: budgetController,
+                          setBudget: setBudget,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 24),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        _categoryField(),
+                        const SizedBox(height: 24),
+                        _descriptionField(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -259,31 +254,33 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     }
   }
 
-  Widget _setBudget() {
+  Widget _inputForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SwitchListTile(
-          title: Text(AppLocalizations.of(context)!.setBudgetLable),
-          onChanged: (bool value) {
-            setState(() {
-              setBudget = value;
-            });
+        SelectIconWidget(
+          codePoint: selectedIcon,
+          onSelectedIcon: (codePoint) {
+            selectedIcon = codePoint;
           },
-          value: setBudget,
         ),
-        setBudget
-            ? TextField(
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 16),
+              _categoryField(),
+              const SizedBox(height: 16),
+              _descriptionField(),
+              SetBudgetWidget(
                 controller: budgetController,
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.budgetLable,
-                ),
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                ],
-              )
-            : const SizedBox.shrink(),
+                setBudget: setBudget,
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ),
       ],
     );
   }

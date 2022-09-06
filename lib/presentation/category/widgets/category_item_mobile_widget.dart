@@ -37,7 +37,8 @@ class CategoryItemMobileWidget extends StatelessWidget {
                       child: Icon(
                         IconData(
                           category.icon,
-                          fontFamily: 'MaterialIcons',
+                          fontFamily: 'Material Design Icons',
+                          fontPackage: 'material_design_icons_flutter',
                         ),
                         size: 28,
                         color: Theme.of(context).colorScheme.onSurface,
