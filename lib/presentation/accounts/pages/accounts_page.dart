@@ -42,42 +42,42 @@ class AccountsPageState extends State<AccountsPage> {
                 AppLocalizations.of(context)!.accountsLable,
               ),
               body: ValueListenableBuilder<Box<Account>>(
-                  valueListenable:
-                      Hive.box<Account>(BoxType.accounts.stringValue)
-                          .listenable(),
-                  builder: (context, value, _) {
-                    final accounts = value.values.toList();
-                    if (accounts.isEmpty) {
-                      return EmptyWidget(
-                        icon: Icons.credit_card,
-                        title: AppLocalizations.of(context)!.errorNoCardsLable,
-                        description: AppLocalizations.of(context)!
-                            .errorNoCardsDescriptionLable,
-                      );
-                    }
-                    accountsBloc.add(AccountSeletedEvent(accounts[0]));
-                    return ListView(
-                      shrinkWrap: true,
-                      key: const Key('accounts_listview'),
-                      padding: const EdgeInsets.only(bottom: 124),
-                      children: [
-                        AccountPageViewWidget(accounts: accounts),
-                        BlocBuilder(
-                          bloc: accountsBloc,
-                          buildWhen: (previous, current) =>
-                              current is AccountSeletedState,
-                          builder: (context, state) {
-                            if (state is AccountSeletedState) {
-                              return AccountTransactinWidget(
-                                  account: state.account);
-                            } else {
-                              return const SizedBox.shrink();
-                            }
-                          },
-                        ),
-                      ],
+                valueListenable: Hive.box<Account>(BoxType.accounts.stringValue)
+                    .listenable(),
+                builder: (_, value, __) {
+                  final List<Account> accounts = value.values.toList();
+                  if (accounts.isEmpty) {
+                    return EmptyWidget(
+                      icon: Icons.credit_card,
+                      title: AppLocalizations.of(context)!.errorNoCardsLable,
+                      description: AppLocalizations.of(context)!
+                          .errorNoCardsDescriptionLable,
                     );
-                  }),
+                  }
+                  accountsBloc.add(AccountSeletedEvent(accounts[0]));
+                  return ListView(
+                    shrinkWrap: true,
+                    key: const Key('accounts_listview'),
+                    padding: const EdgeInsets.only(bottom: 124),
+                    children: [
+                      AccountPageViewWidget(accounts: accounts),
+                      BlocBuilder(
+                        bloc: accountsBloc,
+                        buildWhen: (previous, current) =>
+                            current is AccountSeletedState,
+                        builder: (context, state) {
+                          if (state is AccountSeletedState) {
+                            return AccountTransactinWidget(
+                                account: state.account);
+                          } else {
+                            return const SizedBox.shrink();
+                          }
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ),
               floatingActionButton: FloatingActionButton.large(
                 onPressed: _addCard,
                 heroTag: 'add_account',

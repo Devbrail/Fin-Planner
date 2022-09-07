@@ -27,42 +27,30 @@ class AddAccountPage extends StatefulWidget {
 }
 
 class AddAccountPageState extends State<AddAccountPage> {
-  late final cardNumberController = TextEditingController()
-    ..addListener(() {
-      setState(() {});
-    });
-
-  late final cardHolderController = TextEditingController()
-    ..addListener(() {
-      setState(() {});
-    });
-  late final bankNameController = TextEditingController()
-    ..addListener(() {
-      setState(() {});
-    });
   final AccountsBloc accountsBloc = locator.get();
+
+  late final cardNumberController = TextEditingController(
+    text: widget.account?.number ?? '',
+  )..addListener(() {
+      setState(() {});
+    });
+
+  late final cardHolderController = TextEditingController(
+    text: widget.account?.name ?? '',
+  )..addListener(() {
+      setState(() {});
+    });
+  late final bankNameController = TextEditingController(
+    text: widget.account?.bankName ?? '',
+  )..addListener(() {
+      setState(() {});
+    });
+  late DateTime selectedDate = widget.account?.validThru ?? DateTime.now();
+  late CardType selectedType = widget.account?.cardType ?? CardType.cash;
+
   String selectedDateString = '';
-  DateTime selectedDate = DateTime.now();
-  CardType selectedType = CardType.cash;
-
-  @override
-  void initState() {
-    super.initState();
-    cardHolderController.value = TextEditingValue(
-      text: widget.account?.name ?? '',
-    );
-    cardNumberController.value = TextEditingValue(
-      text: widget.account?.number ?? '',
-    );
-    bankNameController.value = TextEditingValue(
-      text: widget.account?.bankName ?? '',
-    );
-
-    selectedDate = widget.account?.validThru ?? DateTime.now();
-    selectedType = widget.account?.cardType ?? CardType.cash;
-  }
-
   bool get isAddOrUpdate => widget.account == null;
+
   void _addOrUpddateAccount() {
     if (isAddOrUpdate) {
       accountsBloc.add(

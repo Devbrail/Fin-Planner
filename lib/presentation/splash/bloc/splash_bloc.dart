@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/enum/box_types.dart';
 import '../../../common/enum/card_type.dart';
@@ -49,7 +50,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     if (isAnyCategory) {
       final category = Category(
         name: 'Default',
-        icon: Icons.home_rounded.codePoint,
+        icon: MdiIcons.home.codePoint,
         description: 'All expenses',
       );
       final int id = await categorys.add(category);
