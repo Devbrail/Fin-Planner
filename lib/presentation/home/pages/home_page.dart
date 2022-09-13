@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/presentation/goal/page/goals_list_page.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../accounts/pages/accounts_page.dart';
@@ -64,9 +65,9 @@ class _LandingPageState extends State<LandingPage>
                   selectedIcon: const Icon(Icons.credit_card),
                 ),
                 NavigationDestination(
-                  label: AppLocalizations.of(context)!.categoryLable,
-                  icon: const Icon(Icons.category_outlined),
-                  selectedIcon: const Icon(Icons.category),
+                  label: AppLocalizations.of(context)!.goalsLable,
+                  icon: const Icon(Icons.flag_outlined),
+                  selectedIcon: const Icon(Icons.flag),
                 ),
                 NavigationDestination(
                   label: AppLocalizations.of(context)!.budgetLable,
@@ -168,7 +169,7 @@ class _ContentWidgetState extends State<ContentWidget> {
       child: const [
         SummaryPage(key: Key('home_page')),
         AccountsPage(key: Key('accounts_page')),
-        CategoryListPage(key: Key('category_page')),
+        GoalsListPage(key: Key('goals_page')),
         BudgetOverViewPage(key: Key('budget_page')),
         SettingsPage(key: Key('settings_page')),
       ][widget.index],

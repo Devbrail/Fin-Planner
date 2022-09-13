@@ -30,13 +30,20 @@ class Expense extends HiveObject {
   @HiveField(7)
   int? superId;
 
-  Expense({
-    required this.name,
-    required this.currency,
-    required this.time,
-    required this.categoryId,
-    required this.accountId,
-    this.addOrSub = false,
-    required this.type,
-  });
+  @HiveField(8, defaultValue: false)
+  bool isGoalExpense;
+
+  @HiveField(9)
+  int? goalId;
+
+  Expense(
+      {required this.name,
+      required this.currency,
+      required this.time,
+      required this.categoryId,
+      required this.accountId,
+      this.addOrSub = false,
+      required this.type,
+      required this.isGoalExpense,
+      required this.goalId});
 }

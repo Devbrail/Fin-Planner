@@ -14,6 +14,8 @@ class AddExpenseEvent extends ExpenseEvent {
   final int categoryId;
   final int accountId;
   final TransactonType type;
+  final bool isGoalExpense;
+  final int? goalId;
 
   const AddExpenseEvent({
     required this.amount,
@@ -22,6 +24,8 @@ class AddExpenseEvent extends ExpenseEvent {
     required this.categoryId,
     required this.accountId,
     required this.type,
+    this.isGoalExpense = false,
+    this.goalId,
   });
 }
 

@@ -34,6 +34,8 @@ class ExpenseUseCase {
     int category,
     int account,
     TransactonType type,
+    bool isGoalExpense,
+    int? goalId,
   ) async {
     await expenseRepository.addExpense(
       name,
@@ -42,6 +44,8 @@ class ExpenseUseCase {
       category,
       account,
       type,
+      isGoalExpense,
+      goalId,
     );
   }
 

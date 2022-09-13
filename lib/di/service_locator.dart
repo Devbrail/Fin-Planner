@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter_paisa/data/goals/model/goal.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -66,11 +67,13 @@ Future<void> _setupHive() async {
     ..registerAdapter(CategoryAdapter())
     ..registerAdapter(AccountAdapter())
     ..registerAdapter(TransactonTypeAdapter())
-    ..registerAdapter(CardTypeAdapter());
+    ..registerAdapter(CardTypeAdapter())
+    ..registerAdapter(GoalAdapter());
 
   await Hive.openBox<Expense>(BoxType.expense.stringValue);
   await Hive.openBox<Category>(BoxType.category.stringValue);
   await Hive.openBox<Account>(BoxType.accounts.stringValue);
+  await Hive.openBox<Goal>(BoxType.goals.stringValue);
   await Hive.openBox(BoxType.settings.stringValue);
 }
 

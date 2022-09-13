@@ -13,6 +13,8 @@ abstract class ExpenseRepository {
     int category,
     int account,
     TransactonType transactonType,
+    bool isGoalExpense,
+    int? goalId,
   );
   Future<void> clearExpenses();
   Future<void> clearExpense(Expense expense);

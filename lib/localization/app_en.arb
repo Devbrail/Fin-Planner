@@ -467,5 +467,9 @@
     "incomeDeletedSuccessfulLable": "Income deleted",
     "@incomeDeletedSuccessfulLable": {
         "description": "Expense deleted label"
+    },
+    "goalsLable": "Goals",
+    "@goalsLable": {
+        "description": "Goals label"
     }
 }

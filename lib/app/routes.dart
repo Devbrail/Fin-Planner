@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/common/constants/constants.dart';
+import 'package:flutter_paisa/data/goals/model/goal.dart';
+import 'package:flutter_paisa/presentation/goal/page/goals_details_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -24,6 +27,7 @@ const loginPath = '/login';
 const addExpensePath = 'add-expense';
 const addCategoryPath = 'add-category';
 const addAccountPath = 'add-account';
+const goalDetailsPath = 'goal-details';
 
 final settings = Hive.box(BoxType.settings.stringValue);
 
@@ -84,9 +88,19 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: 'add-expense',
           path: addExpensePath,
-          builder: (context, state) => ExpensePage(
-            expense: state.extra as Expense?,
-          ),
+          builder: (context, state) {
+            if (state.queryParams[addGoalExpense] == 'true') {
+              return ExpensePage(
+                expense: state.extra as Expense?,
+                isGoalExpense: true,
+                goalId: int.parse(state.queryParams[goalId] as String),
+              );
+            } else {
+              return ExpensePage(
+                expense: state.extra as Expense?,
+              );
+            }
+          },
         ),
         GoRoute(
           name: 'add-category',
@@ -100,6 +114,13 @@ final GoRouter goRouter = GoRouter(
           name: addAccountPath,
           builder: (context, state) => AddAccountPage(
             account: state.extra as Account?,
+          ),
+        ),
+        GoRoute(
+          path: 'goal-details',
+          name: goalDetailsPath,
+          builder: (context, state) => GoalsDetailsPage(
+            goal: state.extra as Goal,
           ),
         ),
       ],

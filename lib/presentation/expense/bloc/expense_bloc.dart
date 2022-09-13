@@ -37,6 +37,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       event.categoryId,
       event.accountId,
       event.type,
+      event.isGoalExpense,
+      event.goalId,
     );
     emit(const ExpenseAdded(isAddOrUpdate: true));
   }

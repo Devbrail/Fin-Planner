@@ -20,9 +20,13 @@ class ExpensePage extends StatefulWidget {
   const ExpensePage({
     Key? key,
     required this.expense,
+    this.isGoalExpense = false,
+    this.goalId,
   }) : super(key: key);
 
   final Expense? expense;
+  final bool isGoalExpense;
+  final int? goalId;
 
   @override
   State<ExpensePage> createState() => _ExpensePageState();
@@ -73,6 +77,8 @@ class _ExpensePageState extends State<ExpensePage> {
           categoryId: selectedCategoryId!,
           accountId: selectedAccountId!,
           type: selectedType,
+          isGoalExpense: widget.isGoalExpense,
+          goalId: widget.goalId,
         ),
       );
     } else {
@@ -83,8 +89,11 @@ class _ExpensePageState extends State<ExpensePage> {
         ..currency = amount
         ..name = nameTextController.text
         ..time = selectedDate
+        ..isGoalExpense = widget.isGoalExpense
         ..type = selectedType;
+
       await widget.expense!.save();
+
       expenseBloc.add(UpdateExpenseEvent(
         expense: widget.expense!,
         amount: initialAmount,

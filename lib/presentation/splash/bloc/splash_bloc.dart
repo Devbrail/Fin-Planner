@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/data/goals/model/goal.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -26,6 +27,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   late final settings = Hive.box(BoxType.settings.stringValue);
   late final accounts = Hive.box<Account>(BoxType.accounts.stringValue);
   late final categorys = Hive.box<Category>(BoxType.category.stringValue);
+  late final goals = Hive.box<Goal>(BoxType.goals.stringValue);
 
   FutureOr<void> _checkLogin(
     CheckLoginEvent event,
@@ -56,6 +58,19 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       final int id = await categorys.add(category);
       category.superId = id;
       category.save();
+    }
+
+    final isAnyGoals = goals.values.isEmpty;
+    if (isAnyGoals) {
+      final goal = Goal(
+        amount: 1000,
+        description: 'Demo Goal',
+        endTime: DateTime.now().add(const Duration(days: 30)),
+        title: 'Save money',
+      );
+      final int id = await goals.add(goal);
+      goal.superId = id;
+      goal.save();
     }
 
     final languageCode = settings.get(userLanguageKey, defaultValue: 'DEF');

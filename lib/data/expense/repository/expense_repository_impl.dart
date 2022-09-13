@@ -29,6 +29,8 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     int category,
     int account,
     TransactonType transactonType,
+    bool isGoalExpense,
+    int? goalId,
   ) async {
     final expense = Expense(
       name: name,
@@ -37,7 +39,10 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
       categoryId: category,
       accountId: account,
       type: transactonType,
+      isGoalExpense: isGoalExpense,
+      goalId: goalId,
     );
+
     await dataSource.addOrUpdateExpense(expense);
   }
 
