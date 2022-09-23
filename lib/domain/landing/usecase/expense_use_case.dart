@@ -49,11 +49,14 @@ class ExpenseUseCase {
     expenseRepository.clearExpenses();
   }
 
-  Future<void> clearExpense(Expense expense) async {
+  Future<void> clearExpense(int expense) async {
     expenseRepository.clearExpense(expense);
   }
 
   Future<void> updateExpense(Expense expense) async {
     expenseRepository.updateExpense(expense);
   }
+
+  Future<Expense?> fetchExpenseFromId(int expenseId) async =>
+      expenseRepository.fetchExpenseFromId(expenseId);
 }

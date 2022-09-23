@@ -15,6 +15,8 @@ abstract class ExpenseRepository {
     TransactonType transactonType,
   );
   Future<void> clearExpenses();
-  Future<void> clearExpense(Expense expense);
+  Future<void> clearExpense(int expenseId);
   Future<void> updateExpense(Expense expense);
+
+  Future<Expense?> fetchExpenseFromId(int expenseId);
 }

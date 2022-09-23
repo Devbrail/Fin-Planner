@@ -7,12 +7,18 @@ abstract class ExpenseEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class FetchExpenseFromIdEvent extends ExpenseEvent {
+  final int? expenseId;
+
+  const FetchExpenseFromIdEvent(this.expenseId);
+}
+
 class AddExpenseEvent extends ExpenseEvent {
-  final String amount;
-  final String name;
-  final DateTime time;
-  final int categoryId;
-  final int accountId;
+  final String? amount;
+  final String? name;
+  final DateTime? time;
+  final int? categoryId;
+  final int? accountId;
   final TransactonType type;
 
   const AddExpenseEvent({
@@ -26,18 +32,29 @@ class AddExpenseEvent extends ExpenseEvent {
 }
 
 class UpdateExpenseEvent extends ExpenseEvent {
-  final Expense expense;
-  final double amount;
+  final String? amount;
+  final String? name;
+  final DateTime? time;
+  final int? categoryId;
+  final int? accountId;
+  final TransactonType type;
+  final Expense? expense;
+
   const UpdateExpenseEvent({
-    required this.expense,
     required this.amount,
+    required this.name,
+    required this.time,
+    required this.categoryId,
+    required this.accountId,
+    required this.type,
+    required this.expense,
   });
 }
 
 class ClearExpenseEvent extends ExpenseEvent {
-  final Expense expense;
+  final int expenseId;
 
-  const ClearExpenseEvent(this.expense);
+  const ClearExpenseEvent(this.expenseId);
 }
 
 class ChangeExpenseEvent extends ExpenseEvent {

@@ -67,7 +67,7 @@ class _ExpensItemWidgetState extends State<ExpensItemWidget> {
     return InkWell(
       onTap: () => context.goNamed(
         addExpensePath,
-        extra: widget.expense,
+        queryParams: <String, String>{'eid': widget.expense.superId.toString()},
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(

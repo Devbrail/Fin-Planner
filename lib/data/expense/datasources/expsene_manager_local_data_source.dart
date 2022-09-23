@@ -39,4 +39,8 @@ class ExpenseManagerLocalDataSource implements ExpenseManagerDataSource {
     }).toList();
     return filteredExpenses;
   }
+
+  @override
+  Future<Expense?> fetchExpenseFromId(int expenseId) async =>
+      epenseBox.get(expenseId);
 }

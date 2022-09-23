@@ -74,8 +74,8 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   }
 
   @override
-  Future<void> clearExpense(Expense expense) async {
-    await dataSource.clearExpense(expense.key);
+  Future<void> clearExpense(int expenseId) async {
+    await dataSource.clearExpense(expenseId);
   }
 
   @override
@@ -94,4 +94,8 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     }
     return expensesList;
   }
+
+  @override
+  Future<Expense?> fetchExpenseFromId(int expenseId) =>
+      dataSource.fetchExpenseFromId(expenseId);
 }

@@ -24,3 +24,15 @@ class ChangeExpenseState extends ExpenseState {
   @override
   List<Object> get props => [transactionType];
 }
+
+class ExpenseErrorState extends ExpenseState {
+  final String errorString;
+
+  const ExpenseErrorState(this.errorString);
+}
+
+class ExpenseSuccessState extends ExpenseState {
+  final Expense expense;
+
+  const ExpenseSuccessState(this.expense);
+}

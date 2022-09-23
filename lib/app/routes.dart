@@ -5,7 +5,6 @@ import 'package:hive_flutter/adapters.dart';
 import '../common/enum/box_types.dart';
 import '../data/accounts/model/account.dart';
 import '../data/category/model/category.dart';
-import '../data/expense/model/expense.dart';
 import '../data/settings/settings_service.dart';
 import '../main.dart';
 import '../presentation/accounts/pages/add_account_page.dart';
@@ -84,9 +83,10 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: 'add-expense',
           path: addExpensePath,
-          builder: (context, state) => ExpensePage(
-            expense: state.extra as Expense?,
-          ),
+          builder: (context, state) {
+            int? expenseId = int.tryParse(state.queryParams['eid'].toString());
+            return ExpensePage(expenseId: expenseId);
+          },
         ),
         GoRoute(
           name: 'add-category',
