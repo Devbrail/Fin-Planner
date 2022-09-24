@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -24,6 +25,7 @@ const addExpensePath = 'add-expense';
 const editExpensePath = 'edit-expense';
 const addCategoryPath = 'add-category';
 const addAccountPath = 'add-account';
+const editAccountPath = 'edit-account';
 
 final settings = Hive.box(BoxType.settings.stringValue);
 
@@ -89,10 +91,8 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: editExpensePath,
           path: 'edit-expense/:eid',
-          builder: (context, state) {
-            final expenseId = state.params['eid'];
-            return ExpensePage(expenseId: expenseId);
-          },
+          builder: (context, state) =>
+              ExpensePage(expenseId: state.params['eid']),
         ),
         GoRoute(
           name: addCategoryPath,
@@ -102,10 +102,15 @@ final GoRouter goRouter = GoRouter(
           ),
         ),
         GoRoute(
-          path: addAccountPath,
           name: addAccountPath,
+          path: addAccountPath,
+          builder: (context, state) => const AddAccountPage(),
+        ),
+        GoRoute(
+          name: editAccountPath,
+          path: 'edit-account/:aid',
           builder: (context, state) => AddAccountPage(
-            account: state.extra as Account?,
+            accountId: state.params['aid'],
           ),
         ),
       ],

@@ -6,11 +6,11 @@ import '../model/account.dart';
 import 'account_data_source.dart';
 
 class AccountLocalDataSource implements AccountDataSource {
-  late final box = Hive.box<Account>(BoxType.accounts.stringValue);
+  late final accountBox = Hive.box<Account>(BoxType.accounts.stringValue);
 
   @override
   Future<void> addAccount(Account account) async {
-    final int id = await box.add(account);
+    final int id = await accountBox.add(account);
     account.superId = id;
     await account.save();
   }
@@ -22,23 +22,27 @@ class AccountLocalDataSource implements AccountDataSource {
         .where((element) => element.accountId == key)
         .map((e) => e.key);
     expenseBox.deleteAll(keys);
-    return box.delete(key);
+    return accountBox.delete(key);
   }
 
   @override
   Future<List<Account>> accounts() async {
-    final accounts = box.values.toList();
+    final accounts = accountBox.values.toList();
     accounts.sort((a, b) => a.name.compareTo(b.name));
     return accounts;
   }
 
   @override
   Account fetchAccount(int accountId) {
-    return box.values.firstWhere((element) => element.key == accountId);
+    return accountBox.values.firstWhere((element) => element.key == accountId);
   }
 
   @override
   Box<Account> getBox() {
-    return box;
+    return accountBox;
   }
+
+  @override
+  Future<Account?> fetchAccountFromId(int accountId) async =>
+      accountBox.get(accountId);
 }

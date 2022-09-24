@@ -14,4 +14,6 @@ abstract class AccountRepository {
   Future<void> deleteAccount(int key);
 
   Future<void> updateAccount(Account account);
+
+  Future<Account?> fetchAccountFromId(int accountId);
 }

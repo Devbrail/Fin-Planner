@@ -50,7 +50,7 @@ class _ExpensePageState extends State<ExpensePage> {
 
   bool get isAddExpense => widget.expenseId == null;
 
-  Future<void> addExpense() async {
+  void addExpense() {
     final isValid = _form.currentState!.validate();
     if (!isValid) {
       return;

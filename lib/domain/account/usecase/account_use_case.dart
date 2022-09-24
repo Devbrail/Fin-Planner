@@ -35,4 +35,7 @@ class AccountUseCase {
   Future<void> updateAccount(Account account) async {
     return await repository.updateAccount(account);
   }
+
+  Future<Account?> fetchAccountFromId(int expenseId) async =>
+      repository.fetchAccountFromId(expenseId);
 }

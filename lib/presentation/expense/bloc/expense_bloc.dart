@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../common/enum/transaction.dart';
@@ -26,9 +27,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     Emitter<ExpenseState> emit,
   ) async {
     final int? expenseId = int.tryParse(event.expenseId ?? '');
-    if (expenseId == null) {
-      return;
-    }
+    if (expenseId == null) return;
+
     final Expense? expense = await expenseUseCase.fetchExpenseFromId(expenseId);
     if (expense != null) {
       emit(ExpenseSuccessState(expense));

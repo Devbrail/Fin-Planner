@@ -1,19 +1,23 @@
 part of 'accounts_bloc.dart';
 
 @immutable
-abstract class AccountsEvent {}
+abstract class AccountsEvent extends Equatable {
+  const AccountsEvent();
+  @override
+  List<Object> get props => [];
+}
 
 class FetchAccountsEvent extends AccountsEvent {}
 
 class AddAccountEvent extends AccountsEvent {
-  final String holderName;
-  final String bankName;
-  final String number;
+  final String? holderName;
+  final String? bankName;
+  final String? number;
   final DateTime validThru;
   final int icon;
   final CardType cardType;
 
-  AddAccountEvent({
+  const AddAccountEvent({
     required this.bankName,
     required this.holderName,
     required this.number,
@@ -24,19 +28,45 @@ class AddAccountEvent extends AccountsEvent {
 }
 
 class UpdateAccountEvent extends AccountsEvent {
-  final Account account;
+  final Account? account;
+  final String? holderName;
+  final String? bankName;
+  final String? number;
+  final DateTime validThru;
+  final int icon;
+  final CardType cardType;
 
-  UpdateAccountEvent(this.account);
+  const UpdateAccountEvent({
+    required this.account,
+    required this.bankName,
+    required this.holderName,
+    required this.number,
+    required this.icon,
+    required this.validThru,
+    required this.cardType,
+  });
 }
 
 class DeleteAccountEvent extends AccountsEvent {
   final Account account;
 
-  DeleteAccountEvent(this.account);
+  const DeleteAccountEvent(this.account);
 }
 
 class AccountSeletedEvent extends AccountsEvent {
   final Account account;
 
-  AccountSeletedEvent(this.account);
+  const AccountSeletedEvent(this.account);
+}
+
+class FetchAccountFromIdEvent extends AccountsEvent {
+  final String? accountId;
+
+  const FetchAccountFromIdEvent(this.accountId);
+}
+
+class ClearAccountEvent extends AccountsEvent {
+  final String accountId;
+
+  const ClearAccountEvent(this.accountId);
 }

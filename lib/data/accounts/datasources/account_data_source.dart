@@ -8,4 +8,5 @@ abstract class AccountDataSource {
   Future<List<Account>> accounts();
   Account fetchAccount(int accountId);
   Box<Account> getBox();
+  Future<Account?> fetchAccountFromId(int accountId);
 }

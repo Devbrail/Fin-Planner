@@ -43,4 +43,8 @@ class AccountRepositoryImpl extends AccountRepository {
   Future<void> updateAccount(Account account) async {
     await dataSource.addAccount(account);
   }
+
+  @override
+  Future<Account?> fetchAccountFromId(int accountId) =>
+      dataSource.fetchAccountFromId(accountId);
 }

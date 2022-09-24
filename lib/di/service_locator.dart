@@ -116,11 +116,6 @@ void _setupBloc() {
   locator.registerFactory(() => SplashBloc());
   locator.registerFactory(() => CategoryBloc(categoryUseCase: locator.get()));
   locator.registerFactory(() => ExpenseBloc(locator.get()));
-  locator.registerFactory(
-    () => AccountsBloc(
-      accountUseCase: locator.get(),
-      expenseUseCase: locator.get(),
-    ),
-  );
+  locator.registerFactory(() => AccountsBloc(accountUseCase: locator.get()));
   locator.registerFactory(() => HomeBloc());
 }
