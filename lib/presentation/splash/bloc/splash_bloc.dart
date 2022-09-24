@@ -92,5 +92,5 @@ const Map<String, Locale> locales = {
   "Taiwan Dollar": Locale('zh-tw'),
   "Sri Lanka Rupee": Locale('si'),
   "Pakistan Rupee": Locale('ur'),
-  "Swiss Franc": Locale('gsw'),
+  "Swiss Franc": Locale('fr_CH'),
 };
