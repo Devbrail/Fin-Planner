@@ -77,7 +77,7 @@ class UserNamePage extends StatelessWidget {
                         ),
                         keyboardType: TextInputType.name,
                         validator: (val) {
-                          if (val!.length > 3) {
+                          if (val!.length >= 3) {
                             return null;
                           } else {
                             return AppLocalizations.of(context)!.enterNameLable;
