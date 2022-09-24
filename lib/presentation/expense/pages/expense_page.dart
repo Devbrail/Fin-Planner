@@ -29,7 +29,7 @@ class ExpensePage extends StatefulWidget {
     required this.expenseId,
   }) : super(key: key);
 
-  final int? expenseId;
+  final String? expenseId;
 
   @override
   State<ExpensePage> createState() => _ExpensePageState();

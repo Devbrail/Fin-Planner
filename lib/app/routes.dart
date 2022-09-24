@@ -20,7 +20,7 @@ const userNamePath = '/user-name';
 const userImagePath = '/user-image';
 const landingPath = '/landing';
 const loginPath = '/login';
-const addExpensePath = 'add-expense';
+const addExpensePath = 'add-expense/:eid';
 const addCategoryPath = 'add-category';
 const addAccountPath = 'add-account';
 
@@ -84,7 +84,8 @@ final GoRouter goRouter = GoRouter(
           name: 'add-expense',
           path: addExpensePath,
           builder: (context, state) {
-            int? expenseId = int.tryParse(state.queryParams['eid'].toString());
+            final expenseId = state.params['eid'];
+            state.queryParams.clear();
             return ExpensePage(expenseId: expenseId);
           },
         ),

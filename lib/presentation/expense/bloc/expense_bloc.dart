@@ -25,7 +25,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     FetchExpenseFromIdEvent event,
     Emitter<ExpenseState> emit,
   ) async {
-    final int? expenseId = event.expenseId;
+    final int? expenseId = int.tryParse(event.expenseId ?? '');
     if (expenseId == null) {
       return;
     }
@@ -120,7 +120,9 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     ClearExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) async {
-    await expenseUseCase.clearExpense(event.expenseId);
+    final int? expenseId = int.tryParse(event.expenseId);
+    if (expenseId == null) return;
+    await expenseUseCase.clearExpense(expenseId);
     emit(ExpenseDeletedState());
   }
 
