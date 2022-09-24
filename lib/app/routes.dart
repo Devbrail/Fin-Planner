@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../common/enum/box_types.dart';
-import '../data/category/model/category.dart' as category;
 import '../data/settings/settings_service.dart';
 import '../main.dart';
 import '../presentation/accounts/pages/add_account_page.dart';
