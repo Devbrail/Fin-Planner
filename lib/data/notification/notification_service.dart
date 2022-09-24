@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
+
 import 'package:timezone/timezone.dart' as tz;
 
 @pragma('vm:entry-point')
@@ -46,7 +46,7 @@ class NotificationService {
           android: androidSettings,
         );
 
-        tz.initializeTimeZones();
+        //tz.initializeTimeZones();
         final String timeZoneName =
             await FlutterNativeTimezone.getLocalTimezone();
         tz.setLocalLocation(tz.getLocation(timeZoneName));
@@ -76,7 +76,7 @@ class NotificationService {
     if (kIsWeb || Platform.isLinux) {
       return;
     }
-    tz.initializeTimeZones();
+    //tz.initializeTimeZones();
     final String? timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZoneName!));
   }

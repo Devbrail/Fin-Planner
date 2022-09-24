@@ -6,11 +6,11 @@ import '../model/category.dart';
 import 'category_datasource.dart';
 
 class CategoryLocalDataSources implements CategoryDataSource {
-  late final box = Hive.box<Category>(BoxType.category.stringValue);
+  late final categoryBox = Hive.box<Category>(BoxType.category.stringValue);
 
   @override
   Future<void> addCategory(Category category) async {
-    final int id = await box.add(category);
+    final int id = await categoryBox.add(category);
     category.superId = id;
     category.save();
   }
@@ -25,12 +25,12 @@ class CategoryLocalDataSources implements CategoryDataSource {
         .toList();
     await expenseBox.deleteAll(keys);
 
-    await box.delete(key);
+    await categoryBox.delete(key);
   }
 
   @override
   Future<List<Category>> categories() async {
-    return box.values.toList();
+    return categoryBox.values.toList();
   }
 
   @override
@@ -38,4 +38,8 @@ class CategoryLocalDataSources implements CategoryDataSource {
     final box = Hive.box<Category>(BoxType.category.stringValue);
     return box.values.firstWhere((element) => element.key == categoryId);
   }
+
+  @override
+  Future<Category?> fetchCategoryFromId(int categoryId) async =>
+      categoryBox.get(categoryId);
 }

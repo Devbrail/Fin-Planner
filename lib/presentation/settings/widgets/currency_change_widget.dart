@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+
+import '../../../main.dart';
 
 class CurrencyChangeWidget extends StatelessWidget {
   const CurrencyChangeWidget({Key? key}) : super(key: key);

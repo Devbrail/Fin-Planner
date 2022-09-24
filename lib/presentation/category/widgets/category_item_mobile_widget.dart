@@ -20,8 +20,8 @@ class CategoryItemMobileWidget extends StatelessWidget {
     return MaterialYouCard(
       child: InkWell(
         onTap: () => context.goNamed(
-          addCategoryPath,
-          extra: category,
+          editCategoryPath,
+          params: <String, String>{'cid': category.superId.toString()},
         ),
         child: Stack(
           children: [

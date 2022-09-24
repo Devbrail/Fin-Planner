@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -23,6 +22,7 @@ const loginPath = '/login';
 const addExpensePath = 'add-expense';
 const editExpensePath = 'edit-expense';
 const addCategoryPath = 'add-category';
+const editCategoryPath = 'edit-category';
 const addAccountPath = 'add-account';
 const editAccountPath = 'edit-account';
 
@@ -96,8 +96,13 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: addCategoryPath,
           path: addCategoryPath,
+          builder: (context, state) => const AddCategoryPage(),
+        ),
+        GoRoute(
+          name: editCategoryPath,
+          path: 'edit-category/:cid',
           builder: (context, state) => AddCategoryPage(
-            category: state.extra as category.Category?,
+            categoryId: state.params['cid'],
           ),
         ),
         GoRoute(

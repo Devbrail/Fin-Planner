@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -18,7 +19,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<EditCategoryEvent>((event, emit) => _addCategory(event, emit));
     on<CategoryDeleteEvent>((event, emit) => _deleteCategory(event, emit));
     on<CategoryRefreshEvent>((event, emit) => _refresh(emit));
-    on<CategoryUpdateEvent>((event, emit) => _update(event, emit));
+    on<CategoryUpdateEvent>((event, emit) => _updateCategory(event, emit));
+    on<FetchCategoryFromIdEvent>(
+        (event, emit) => _fetchCategoryFromId(event, emit));
   }
   final CategoryUseCase categoryUseCase;
   late final box = Hive.box<Category>(BoxType.category.stringValue);
@@ -32,13 +35,27 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     EditCategoryEvent event,
     Emitter<CategoryState> emit,
   ) async {
+    final String? categoryTitle = event.title;
+    final String? categoryDescription = event.description;
+    final int icon = event.icon;
+    final double? budget = double.tryParse(event.budget ?? '');
+
+    if (categoryTitle == null) {
+      return emit(const CategoryErrorState('Add category title'));
+    }
+
+    if (categoryDescription == null) {
+      return emit(const CategoryErrorState('Add category title'));
+    }
+
     await categoryUseCase.addCategory(
-      icon: event.icon,
-      desc: event.description,
-      name: event.title,
-      budget: event.budget,
+      icon: icon,
+      desc: categoryDescription,
+      name: categoryTitle,
+      budget: budget,
     );
-    emit(CategoryAddedState());
+
+    emit(const CategoryAddedState(isCategoryAddedOrUpdate: true));
   }
 
   _deleteCategory(
@@ -54,8 +71,41 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     add(FetchCategoriesEvent());
   }
 
-  _update(CategoryUpdateEvent event, Emitter<CategoryState> emit) async {
-    await categoryUseCase.updateCategory(event.category);
-    emit(CategoryAddedState());
+  _updateCategory(
+      CategoryUpdateEvent event, Emitter<CategoryState> emit) async {
+    final String? categoryTitle = event.title;
+    final String? categoryDescription = event.description;
+    final int icon = event.icon;
+    final double? budget = double.tryParse(event.budget ?? '');
+
+    if (categoryTitle == null) {
+      return emit(const CategoryErrorState('Add category title'));
+    }
+
+    if (categoryDescription == null) {
+      return emit(const CategoryErrorState('Add category title'));
+    }
+    event.category!
+      ..budget = budget
+      ..description = categoryDescription
+      ..icon = icon
+      ..name = categoryTitle;
+
+    await event.category!.save();
+    emit(const CategoryAddedState());
+  }
+
+  _fetchCategoryFromId(
+    FetchCategoryFromIdEvent event,
+    Emitter<CategoryState> emit,
+  ) async {
+    final int? categoryId = int.tryParse(event.categoryId ?? '');
+    if (categoryId == null) return;
+
+    final Category? category =
+        await categoryUseCase.fetchCategoryFromId(categoryId);
+    if (category != null) {
+      emit(CategorySuccessState(category));
+    }
   }
 }

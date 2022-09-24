@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/presentation/settings/widgets/currency_change_widget.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app/app_builder.dart';
@@ -9,6 +8,7 @@ import '../../../di/service_locator.dart';
 import '../bloc/settings_controller.dart';
 import '../widgets/choose_theme_mode_widget.dart';
 import '../widgets/color_picker_widget.dart';
+import '../widgets/currency_change_widget.dart';
 import '../widgets/export_expenses_widget.dart';
 import '../widgets/schedule_notification_widget.dart';
 import '../widgets/setting_option.dart';

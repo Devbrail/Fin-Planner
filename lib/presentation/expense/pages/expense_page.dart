@@ -61,8 +61,8 @@ class _ExpensePageState extends State<ExpensePage> {
         amount: amountController.text,
         name: nameController.text,
         time: selectedDate,
-        categoryId: selectedCategoryId!,
-        accountId: selectedAccountId!,
+        categoryId: selectedCategoryId,
+        accountId: selectedAccountId,
         type: selectedType,
       ));
     } else {
@@ -108,6 +108,7 @@ class _ExpensePageState extends State<ExpensePage> {
             context.pop();
           }
         },
+        buildWhen: (previous, current) => current is ExpenseSuccessState,
         builder: (context, state) {
           if (state is ExpenseSuccessState) {
             expense = state.expense;

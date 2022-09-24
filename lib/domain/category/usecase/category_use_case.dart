@@ -22,15 +22,14 @@ class CategoryUseCase {
     );
   }
 
-  Future<List<Category>> categories() async {
-    return categoryRepository.categories();
-  }
+  Future<List<Category>> categories() => categoryRepository.categories();
 
-  Future<void> deleteCategory(int key) async {
-    return categoryRepository.deleteCategory(key);
-  }
+  Future<void> deleteCategory(int key) =>
+      categoryRepository.deleteCategory(key);
 
-  Future<void> updateCategory(Category category) async {
-    return categoryRepository.updateCategory(category);
-  }
+  Future<void> updateCategory(Category category) =>
+      categoryRepository.updateCategory(category);
+
+  Future<Category?> fetchCategoryFromId(int categoryId) =>
+      categoryRepository.fetchCategoryFromId(categoryId);
 }

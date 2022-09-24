@@ -20,7 +20,6 @@ class _SetBudgetWidgetState extends State<SetBudgetWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SwitchListTile(
           secondary: Icon(
@@ -39,15 +38,18 @@ class _SetBudgetWidgetState extends State<SetBudgetWidget> {
           value: budget,
         ),
         budget
-            ? TextField(
-                controller: widget.controller,
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.budgetLable,
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: TextField(
+                  controller: widget.controller,
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context)!.budgetLable,
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  ],
                 ),
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                ],
               )
             : const SizedBox.shrink(),
       ],

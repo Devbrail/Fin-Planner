@@ -12,4 +12,6 @@ abstract class CategoryRepository {
   Future<List<Category>> categories();
 
   Future<void> updateCategory(Category category);
+
+  Future<Category?> fetchCategoryFromId(int categoryId);
 }

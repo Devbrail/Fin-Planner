@@ -17,31 +17,60 @@ import '../widgets/set_budget_widget.dart';
 class AddCategoryPage extends StatefulWidget {
   const AddCategoryPage({
     Key? key,
-    this.category,
+    this.categoryId,
   }) : super(key: key);
 
-  final Category? category;
+  final String? categoryId;
 
   @override
   State<AddCategoryPage> createState() => _AddCategoryPageState();
 }
 
 class _AddCategoryPageState extends State<AddCategoryPage> {
-  final addCategoryBloc = locator.get<CategoryBloc>();
-  final formKey = GlobalKey<FormState>();
-  late final budgetController =
-      TextEditingController(text: widget.category?.budget.toString() ?? '');
-  late final categoryController =
-      TextEditingController(text: widget.category?.name ?? '');
-  late final descController =
-      TextEditingController(text: widget.category?.description ?? '');
-  late int selectedIcon = widget.category?.icon ?? MdiIcons.home.codePoint;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  late final CategoryBloc categoryBloc = locator.get()
+    ..add(FetchCategoryFromIdEvent(widget.categoryId));
+  late TextEditingController budgetController;
+  late TextEditingController categoryController;
+  late TextEditingController descController;
+  late int selectedIcon;
   late bool setBudget = _checkBudget();
+
+  Category? category;
+
+  void _submitCategory() {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+
+    if (isAddCategory) {
+      categoryBloc.add(
+        EditCategoryEvent(
+          title: categoryController.text,
+          description: descController.text,
+          icon: selectedIcon,
+          budget: budgetController.text,
+        ),
+      );
+    } else {
+      categoryBloc.add(
+        CategoryUpdateEvent(
+          title: categoryController.text,
+          description: descController.text,
+          icon: selectedIcon,
+          budget: budgetController.text,
+          category: category,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener(
-      bloc: addCategoryBloc,
+    return BlocConsumer(
+      bloc: categoryBloc,
       listener: (context, state) {
         if (state is CategoryAddedState) {
           showMaterialSnackBar(
@@ -53,98 +82,108 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           context.pop();
         }
       },
-      child: ScreenTypeLayout(
-        mobile: Scaffold(
-          appBar: appBar(),
-          body: SafeArea(
-            child: SingleChildScrollView(
+      builder: (context, state) {
+        if (state is CategorySuccessState) {
+          category = state.category;
+        }
+        selectedIcon = category?.icon ?? MdiIcons.home.codePoint;
+        budgetController =
+            TextEditingController(text: category?.budget.toString());
+        categoryController = TextEditingController(text: category?.name);
+        descController = TextEditingController(text: category?.description);
+        return ScreenTypeLayout(
+          mobile: Scaffold(
+            appBar: appBar(),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: _inputForm(),
+                ),
+              ),
+            ),
+            bottomNavigationBar: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: _submitButton(),
+              ),
+            ),
+          ),
+          tablet: Scaffold(
+            appBar: materialYouAppBar(
+              context,
+              isAddCategory
+                  ? AppLocalizations.of(context)!.addCategoryLable
+                  : AppLocalizations.of(context)!.updateCategoryLable,
+              actions: [
+                TextButton(
+                  onPressed: _submitCategory,
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.all(16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                  ),
+                  child: Text(
+                    isAddCategory
+                        ? AppLocalizations.of(context)!.addCategoryLable
+                        : AppLocalizations.of(context)!.updateLable,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: Theme.of(context).textTheme.headline6?.fontSize,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 24),
+              ],
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(24.0),
               child: Form(
                 key: formKey,
-                child: _inputForm(),
-              ),
-            ),
-          ),
-          bottomNavigationBar: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: _submitButton(),
-            ),
-          ),
-        ),
-        tablet: Scaffold(
-          appBar: materialYouAppBar(
-            context,
-            isAddCategory
-                ? AppLocalizations.of(context)!.addCategoryLable
-                : AppLocalizations.of(context)!.updateCategoryLable,
-            actions: [
-              TextButton(
-                onPressed: _submitCategory,
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32.0),
-                  ),
-                ),
-                child: Text(
-                  isAddCategory
-                      ? AppLocalizations.of(context)!.addCategoryLable
-                      : AppLocalizations.of(context)!.updateLable,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: Theme.of(context).textTheme.headline6?.fontSize,
-                  ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          SelectIconWidget(
+                            codePoint: selectedIcon,
+                            onSelectedIcon: (codePoint) {
+                              selectedIcon = codePoint;
+                            },
+                          ),
+                          SetBudgetWidget(
+                            controller: budgetController,
+                            setBudget: setBudget,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 24),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          _categoryField(),
+                          const SizedBox(height: 24),
+                          _descriptionField(),
+                          _submitButton(),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(width: 24),
-            ],
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Form(
-              key: formKey,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        SelectIconWidget(
-                          codePoint: selectedIcon,
-                          onSelectedIcon: (codePoint) {
-                            selectedIcon = codePoint;
-                          },
-                        ),
-                        SetBudgetWidget(
-                          controller: budgetController,
-                          setBudget: setBudget,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 24),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        _categoryField(),
-                        const SizedBox(height: 24),
-                        _descriptionField(),
-                        _submitButton(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
-  bool get isAddCategory => widget.category == null;
+  bool get isAddCategory => widget.categoryId == null;
 
-  bool get isBudgetActive => widget.category?.budget == null;
+  bool get isBudgetActive => category?.budget == null;
 
   AppBar appBar() {
     return materialYouAppBar(
@@ -203,58 +242,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     );
   }
 
-  void _submitCategory() {
-    if (formKey.currentState!.validate()) {
-      if (selectedIcon != -1) {
-        if (isAddCategory) {
-          double? budget = 0;
-          if (setBudget) {
-            try {
-              budget = double.tryParse(budgetController.text);
-            } catch (_) {
-              debugPrint(_.toString());
-              return;
-            }
-          }
-
-          addCategoryBloc.add(EditCategoryEvent(
-            title: categoryController.text,
-            description: descController.text,
-            icon: selectedIcon,
-            budget: budget,
-          ));
-        } else {
-          double? budget = 0;
-          if (setBudget) {
-            try {
-              budget = double.tryParse(budgetController.text);
-            } catch (_) {
-              debugPrint(_.toString());
-              return;
-            }
-          }
-
-          widget.category!
-            ..description = descController.text
-            ..name = categoryController.text
-            ..icon = selectedIcon
-            ..budget = budget
-            ..save();
-          showMaterialSnackBar(
-            context,
-            AppLocalizations.of(context)!.updatedCategoryLable,
-          );
-          context.pop();
-        }
-      } else {
-        showMaterialSnackBar(
-          context,
-          AppLocalizations.of(context)!.selectCategoryIconLable,
-        );
-      }
-    }
-  }
-
   Widget _inputForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -265,8 +252,12 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             selectedIcon = codePoint;
           },
         ),
+        SetBudgetWidget(
+          controller: budgetController,
+          setBudget: setBudget,
+        ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -274,11 +265,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               _categoryField(),
               const SizedBox(height: 16),
               _descriptionField(),
-              SetBudgetWidget(
-                controller: budgetController,
-                setBudget: setBudget,
-              ),
-              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -287,7 +273,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   }
 
   bool _checkBudget() {
-    final double budget = widget.category?.budget ?? 0.0;
+    final double budget = category?.budget ?? 0.0;
     if (budget > 0.0) {
       return true;
     }

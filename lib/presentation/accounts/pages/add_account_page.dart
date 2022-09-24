@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -9,6 +8,7 @@ import '../../../common/constants/util.dart';
 import '../../../common/enum/card_type.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
 import '../../../data/accounts/model/account.dart';
+import '../../../di/service_locator.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_card.dart';
 import '../widgets/card_type_drop_down.dart';

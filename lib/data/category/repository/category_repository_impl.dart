@@ -15,9 +15,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
   }
 
   @override
-  Future<void> deleteCategory(int key) async {
-    await dataSources.deleteCategory(key);
-  }
+  Future<void> deleteCategory(int key) => dataSources.deleteCategory(key);
 
   @override
   Future<void> addCategory({
@@ -26,18 +24,20 @@ class CategoryRepositoryImpl extends CategoryRepository {
     required int icon,
     bool isPredefined = false,
     double? budget = -1,
-  }) async {
-    await dataSources.addCategory(Category(
-      description: desc,
-      name: name,
-      icon: icon,
-      isPredefined: isPredefined,
-      budget: budget,
-    ));
-  }
+  }) =>
+      dataSources.addCategory(Category(
+        description: desc,
+        name: name,
+        icon: icon,
+        isPredefined: isPredefined,
+        budget: budget,
+      ));
 
   @override
-  Future<void> updateCategory(Category category) async {
-    await dataSources.addCategory(category);
-  }
+  Future<void> updateCategory(Category category) =>
+      dataSources.addCategory(category);
+
+  @override
+  Future<Category?> fetchCategoryFromId(int categoryId) =>
+      dataSources.fetchCategoryFromId(categoryId);
 }
