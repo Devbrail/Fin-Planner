@@ -129,6 +129,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                         _categoryField(),
                         const SizedBox(height: 24),
                         _descriptionField(),
+                        _submitButton(),
                       ],
                     ),
                   ),

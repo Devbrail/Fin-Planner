@@ -96,13 +96,54 @@ class _SummaryPageState extends State<SummaryPage> {
             children: [
               Expanded(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    WelcomeNameWidget(),
+                    ExpenseTotalWidget(),
+                  ],
+                ),
+              ),
+              const Expanded(
+                child: SingleChildScrollView(child: ExpenseHistory()),
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: floatinActionButton(),
+      ),
+      desktop: Scaffold(
+        appBar: materialYouAppBar(
+          context,
+          '',
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchPage(),
+                );
+              },
+            ),
+          ],
+        ),
+        body: SafeArea(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
                   children: const [
                     ExpenseTotalWidget(),
                   ],
                 ),
               ),
               const Expanded(
-                child: ExpenseHistory(),
+                child: SingleChildScrollView(child: ExpenseHistory()),
               ),
             ],
           ),

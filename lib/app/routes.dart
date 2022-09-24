@@ -1,11 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../common/enum/box_types.dart';
-import '../data/accounts/model/account.dart';
-import '../data/category/model/category.dart';
+import '../data/category/model/category.dart' as category;
 import '../data/settings/settings_service.dart';
 import '../main.dart';
 import '../presentation/accounts/pages/add_account_page.dart';
@@ -98,7 +97,7 @@ final GoRouter goRouter = GoRouter(
           name: addCategoryPath,
           path: addCategoryPath,
           builder: (context, state) => AddCategoryPage(
-            category: state.extra as Category?,
+            category: state.extra as category.Category?,
           ),
         ),
         GoRoute(

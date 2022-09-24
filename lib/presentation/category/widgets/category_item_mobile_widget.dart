@@ -28,23 +28,17 @@ class CategoryItemMobileWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Icon(
-                        IconData(
-                          category.icon,
-                          fontFamily: 'Material Design Icons',
-                          fontPackage: 'material_design_icons_flutter',
-                        ),
-                        size: 28,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(
+                    IconData(
+                      category.icon,
+                      fontFamily: 'Material Design Icons',
+                      fontPackage: 'material_design_icons_flutter',
                     ),
-                  ],
+                    size: 28,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
                 const Spacer(),
                 Padding(

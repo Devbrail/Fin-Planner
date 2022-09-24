@@ -212,7 +212,17 @@ class AddAccountPageState extends State<AddAccountPage> {
                   IconButton(
                     onPressed: _showInfo,
                     icon: const Icon(Icons.info_rounded),
-                  )
+                  ),
+                  isAccountAddOrUpdate
+                      ? const SizedBox.shrink()
+                      : IconButton(
+                          onPressed: () => accountsBloc
+                              .add(ClearAccountEvent(widget.accountId!)),
+                          icon: Icon(
+                            Icons.delete_rounded,
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                        )
                 ],
               ),
               body: SingleChildScrollView(

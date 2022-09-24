@@ -27,12 +27,7 @@ class BudgetItemTableWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                top: 24,
-                left: 24,
-                right: 16,
-                bottom: 12,
-              ),
+              padding: const EdgeInsets.all(12),
               child: Icon(
                 IconData(category.icon, fontFamily: 'MaterialIcons'),
                 color: Theme.of(context).colorScheme.secondary,
@@ -40,11 +35,11 @@ class BudgetItemTableWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: Text(
                 category.name,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline5?.copyWith(
+                style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),
@@ -65,11 +60,11 @@ class BudgetItemTableWidget extends StatelessWidget {
             ),
             const Spacer(),
             Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.all(12.0),
               child: Text(
                 totalExpenseWithSymbol(expenses),
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline5?.copyWith(
+                style: Theme.of(context).textTheme.subtitle1?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),

@@ -45,16 +45,39 @@ class WelcomeWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: CircleAvatar(
                       foregroundImage: FileImage(
-                        File(
-                          image,
-                        ),
+                        File(image),
                       ),
                     ),
                   );
                 }
               },
             ),
-            tablet: Column(
+            tablet: Builder(
+              builder: (context) {
+                if (image.isEmpty) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      child: Icon(
+                        Icons.account_circle_outlined,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ),
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: CircleAvatar(
+                      foregroundImage: FileImage(
+                        File(image),
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
+            desktop: Column(
               children: [
                 Builder(
                   builder: (context) {
@@ -83,7 +106,7 @@ class WelcomeWidget extends StatelessWidget {
                       AppLocalizations.of(context)!.welcomeMessage,
                       style: Theme.of(context)
                           .textTheme
-                          .headline5
+                          .subtitle1
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),

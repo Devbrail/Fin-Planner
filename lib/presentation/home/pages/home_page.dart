@@ -35,6 +35,11 @@ class _LandingPageState extends State<LandingPage>
         return false;
       },
       child: ScreenTypeLayout(
+        breakpoints: const ScreenBreakpoints(
+          tablet: 600,
+          desktop: 700,
+          watch: 300,
+        ),
         mobile: Scaffold(
           body: ContentWidget(index: index),
           bottomNavigationBar: Material(
@@ -82,7 +87,7 @@ class _LandingPageState extends State<LandingPage>
             ),
           ),
         ),
-        tablet: Row(
+        desktop: Row(
           children: [
             NavigationRail(
               selectedIndex: index,

@@ -65,6 +65,11 @@ class _AccountCardState extends State<AccountCard>
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
+      breakpoints: const ScreenBreakpoints(
+        tablet: 600,
+        desktop: 700,
+        watch: 300,
+      ),
       mobile: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Stack(
@@ -234,7 +239,149 @@ class _AccountCardState extends State<AccountCard>
           ],
         ),
       ),
-      tablet: Padding(
+      tablet: Stack(
+        children: [
+          SlideTransition(
+            position: _posititionAnimation,
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.blue.shade400,
+                    Colors.purpleAccent.shade700,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: ScaleTransition(
+              scale: _scaleAnimation,
+              child: Container(
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(150),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.green.shade400,
+                      Colors.orangeAccent.shade700,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: GestureDetector(
+              onTap: widget.onTap,
+              child: GlassmorphicContainer(
+                height: 500,
+                width: MediaQuery.of(context).size.width,
+                borderRadius: 16,
+                blur: 10,
+                alignment: Alignment.bottomCenter,
+                border: 2,
+                linearGradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Theme.of(context)
+                        .textTheme
+                        .subtitle1!
+                        .color!
+                        .withOpacity(0.1),
+                    Theme.of(context)
+                        .textTheme
+                        .subtitle1!
+                        .color!
+                        .withOpacity(0.05),
+                  ],
+                  stops: const [0.1, 1],
+                ),
+                borderGradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Theme.of(context)
+                        .textTheme
+                        .subtitle1!
+                        .color!
+                        .withOpacity(0.5),
+                    Theme.of(context)
+                        .textTheme
+                        .subtitle1!
+                        .color!
+                        .withOpacity(0.5),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.bankName,
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          Icon(widget.cardType.icon, size: 32),
+                        ],
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          text: '**** ',
+                          style: GoogleFonts.jetBrainsMono(
+                            textStyle: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          children: [
+                            const TextSpan(text: '**** '),
+                            const TextSpan(text: '**** '),
+                            TextSpan(text: widget.cardNumber)
+                          ],
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            AppLocalizations.of(context)!
+                                .cardholderLable
+                                .toUpperCase(),
+                            style:
+                                Theme.of(context).textTheme.caption?.copyWith(),
+                          ),
+                          Text(
+                            widget.cardHolder.toUpperCase(),
+                            style:
+                                Theme.of(context).textTheme.subtitle1?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      desktop: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Stack(
           children: [
@@ -280,102 +427,107 @@ class _AccountCardState extends State<AccountCard>
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: GlassmorphicContainer(
-                height: 350,
-                width: MediaQuery.of(context).size.width,
-                borderRadius: 16,
-                blur: 10,
-                alignment: Alignment.bottomCenter,
-                border: 2,
-                linearGradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Theme.of(context)
-                        .textTheme
-                        .subtitle1!
-                        .color!
-                        .withOpacity(0.1),
-                    Theme.of(context)
-                        .textTheme
-                        .subtitle1!
-                        .color!
-                        .withOpacity(0.05),
-                  ],
-                  stops: const [0.1, 1],
-                ),
-                borderGradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Theme.of(context)
-                        .textTheme
-                        .subtitle1!
-                        .color!
-                        .withOpacity(0.5),
-                    Theme.of(context)
-                        .textTheme
-                        .subtitle1!
-                        .color!
-                        .withOpacity(0.5),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            widget.bankName,
-                            style: Theme.of(context).textTheme.headline5,
-                          ),
-                          Icon(widget.cardType.icon, size: 32),
-                        ],
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          text: '**** ',
-                          style: GoogleFonts.jetBrainsMono(
-                            textStyle: Theme.of(context).textTheme.headline4,
-                          ),
+              child: GestureDetector(
+                onTap: widget.onTap,
+                child: GlassmorphicContainer(
+                  height: 350,
+                  width: MediaQuery.of(context).size.width,
+                  borderRadius: 16,
+                  blur: 10,
+                  alignment: Alignment.bottomCenter,
+                  border: 2,
+                  linearGradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Theme.of(context)
+                          .textTheme
+                          .subtitle1!
+                          .color!
+                          .withOpacity(0.1),
+                      Theme.of(context)
+                          .textTheme
+                          .subtitle1!
+                          .color!
+                          .withOpacity(0.05),
+                    ],
+                    stops: const [0.1, 1],
+                  ),
+                  borderGradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Theme.of(context)
+                          .textTheme
+                          .subtitle1!
+                          .color!
+                          .withOpacity(0.5),
+                      Theme.of(context)
+                          .textTheme
+                          .subtitle1!
+                          .color!
+                          .withOpacity(0.5),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const TextSpan(text: '**** '),
-                            const TextSpan(text: '**** '),
-                            TextSpan(text: widget.cardNumber)
+                            Text(
+                              widget.bankName,
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                            Icon(widget.cardType.icon, size: 32),
                           ],
                         ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            AppLocalizations.of(context)!
-                                .cardholderLable
-                                .toUpperCase(),
-                            style:
-                                Theme.of(context).textTheme.caption?.copyWith(
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .color!
-                                          .withOpacity(0.5),
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                        RichText(
+                          text: TextSpan(
+                            text: '**** ',
+                            style: GoogleFonts.jetBrainsMono(
+                              textStyle: Theme.of(context).textTheme.headline4,
+                            ),
+                            children: [
+                              const TextSpan(text: '**** '),
+                              const TextSpan(text: '**** '),
+                              TextSpan(text: widget.cardNumber)
+                            ],
                           ),
-                          Text(
-                            widget.cardHolder.toUpperCase(),
-                            style:
-                                Theme.of(context).textTheme.headline6?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                          )
-                        ],
-                      ),
-                    ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .cardholderLable
+                                  .toUpperCase(),
+                              style:
+                                  Theme.of(context).textTheme.caption?.copyWith(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .color!
+                                            .withOpacity(0.5),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                            ),
+                            Text(
+                              widget.cardHolder.toUpperCase(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -16,7 +16,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     required this.accountUseCase,
   }) : super(AccountsInitial()) {
     on<AccountsEvent>((event, emit) {});
-    on<FetchAccountsEvent>((event, emit) => _fetchAccount(emit));
+    on<FetchAccountsEvent>((event, emit) => _fetchAccounts(emit));
     on<AddAccountEvent>((event, emit) => _addAccount(event, emit));
     on<DeleteAccountEvent>((event, emit) => _deleteAccount(event, emit));
     on<AccountSeletedEvent>((event, emit) => _accountSelected(event, emit));
@@ -28,7 +28,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   final AccountUseCase accountUseCase;
   late final box = Hive.box<Account>(BoxType.accounts.stringValue);
 
-  _fetchAccount(Emitter<AccountsState> emit) async {
+  _fetchAccounts(Emitter<AccountsState> emit) async {
     final accounts = await accountUseCase.accounts();
     emit(AccountListState(accounts));
   }
@@ -115,6 +115,8 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final Account? account = await accountUseCase.fetchAccountFromId(accountId);
     if (account != null) {
       emit(AccountSuccessState(account));
+    } else {
+      emit(const AccountErrorState('Account not found!'));
     }
   }
 

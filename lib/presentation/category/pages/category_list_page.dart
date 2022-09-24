@@ -27,11 +27,20 @@ class CategoryListPageState extends State<CategoryListPage> {
         AppLocalizations.of(context)!.categoriesLable,
       ),
       body: ScreenTypeLayout(
+        breakpoints: const ScreenBreakpoints(
+          tablet: 600,
+          desktop: 700,
+          watch: 300,
+        ),
         mobile: CategoryListWidget(
           addCategoryBloc: addCategoryBloc,
           crossAxisCount: 2,
         ),
         tablet: CategoryListWidget(
+          addCategoryBloc: addCategoryBloc,
+          crossAxisCount: 3,
+        ),
+        desktop: CategoryListWidget(
           addCategoryBloc: addCategoryBloc,
           crossAxisCount: 5,
         ),

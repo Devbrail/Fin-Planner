@@ -28,7 +28,7 @@ class CategoryItemTabletWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
                   Icon(
@@ -37,7 +37,7 @@ class CategoryItemTabletWidget extends StatelessWidget {
                       fontFamily: 'Material Design Icons',
                       fontPackage: 'material_design_icons_flutter',
                     ),
-                    size: 32,
+                    size: 42,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                   const Spacer(),
@@ -62,14 +62,14 @@ class CategoryItemTabletWidget extends StatelessWidget {
                 children: [
                   Text(
                     category.name,
-                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                     textAlign: TextAlign.center,
                   ),
                   Text(
                     category.description,
-                    style: Theme.of(context).textTheme.caption?.copyWith(
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                     textAlign: TextAlign.center,

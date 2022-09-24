@@ -22,6 +22,10 @@ class CategoryItemWidget extends StatelessWidget {
         category: category,
         onPressed: onPressed,
       ),
+      desktop: CategoryItemTabletWidget(
+        category: category,
+        onPressed: onPressed,
+      ),
       mobile: CategoryItemMobileWidget(
         category: category,
         onPressed: onPressed,
