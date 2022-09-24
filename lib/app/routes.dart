@@ -31,8 +31,7 @@ final GoRouter goRouter = GoRouter(
   errorBuilder: (context, state) => Center(
     child: Text(state.error.toString()),
   ),
-  urlPathStrategy: UrlPathStrategy.path,
-  redirect: (state) {
+  redirect: (_, state) {
     final isLogging = state.location == loginPath;
     final String name = settings.get(userNameKey, defaultValue: '');
     if (name.isEmpty && isLogging) {

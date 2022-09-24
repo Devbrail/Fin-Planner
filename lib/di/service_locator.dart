@@ -1,3 +1,4 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -36,7 +37,7 @@ final locator = GetIt.instance;
 Future<void> setupLocator() async {
   await _setupHive();
   _localSoruces();
-  await _setupNotification();
+  //await _setupNotification();
   _setupRepository();
   _setupUseCase();
   _setupBloc();

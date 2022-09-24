@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 
+import '../../common/theme/paisa_theme.dart';
 import 'app/app_builder.dart';
 import 'app/routes.dart';
-import '../../common/theme/paisa_theme.dart';
 import 'common/enum/box_types.dart';
 import 'data/settings/settings_service.dart';
 import 'di/service_locator.dart';
@@ -16,6 +17,7 @@ import 'presentation/home/bloc/home_bloc.dart';
 
 late String currentLocale;
 Future<void> main() async {
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
   runApp(const MyApp());
@@ -69,6 +71,7 @@ class _MyAppState extends State<MyApp> {
                     BlocProvider(create: (context) => locator.get<HomeBloc>()),
                   ],
                   child: MaterialApp.router(
+                    routeInformationProvider: goRouter.routeInformationProvider,
                     routeInformationParser: goRouter.routeInformationParser,
                     routerDelegate: goRouter.routerDelegate,
                     debugShowCheckedModeBanner: false,
