@@ -20,7 +20,8 @@ const userNamePath = '/user-name';
 const userImagePath = '/user-image';
 const landingPath = '/landing';
 const loginPath = '/login';
-const addExpensePath = 'add-expense/:eid';
+const addExpensePath = 'add-expense';
+const editExpensePath = 'edit-expense';
 const addCategoryPath = 'add-category';
 const addAccountPath = 'add-account';
 
@@ -81,23 +82,28 @@ final GoRouter goRouter = GoRouter(
       builder: (context, state) => const LandingPage(),
       routes: [
         GoRoute(
-          name: 'add-expense',
           path: addExpensePath,
           builder: (context, state) {
+            return const ExpensePage();
+          },
+        ),
+        GoRoute(
+          name: editExpensePath,
+          path: 'edit-expense/:eid',
+          builder: (context, state) {
             final expenseId = state.params['eid'];
-            state.queryParams.clear();
             return ExpensePage(expenseId: expenseId);
           },
         ),
         GoRoute(
-          name: 'add-category',
+          name: addCategoryPath,
           path: addCategoryPath,
           builder: (context, state) => AddCategoryPage(
             category: state.extra as Category?,
           ),
         ),
         GoRoute(
-          path: 'add-account',
+          path: addAccountPath,
           name: addAccountPath,
           builder: (context, state) => AddAccountPage(
             account: state.extra as Account?,

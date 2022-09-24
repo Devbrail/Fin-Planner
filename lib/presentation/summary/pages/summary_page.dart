@@ -122,5 +122,5 @@ class _SummaryPageState extends State<SummaryPage> {
     );
   }
 
-  void _addExpense() async => context.goNamed(addExpensePath);
+  void _addExpense() async => context.push('/landing/$addExpensePath');
 }

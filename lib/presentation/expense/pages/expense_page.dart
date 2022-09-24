@@ -26,7 +26,7 @@ String formattedDate(DateTime? date) {
 class ExpensePage extends StatefulWidget {
   const ExpensePage({
     Key? key,
-    required this.expenseId,
+    this.expenseId,
   }) : super(key: key);
 
   final String? expenseId;
