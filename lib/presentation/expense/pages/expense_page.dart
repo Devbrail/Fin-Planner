@@ -106,6 +106,8 @@ class _ExpensePageState extends State<ExpensePage> {
 
             showMaterialSnackBar(context, content);
             context.pop();
+          } else if (state is ExpenseErrorState) {
+            showMaterialSnackBar(context, state.errorString);
           }
         },
         buildWhen: (previous, current) => current is ExpenseSuccessState,
@@ -185,7 +187,6 @@ class _ExpensePageState extends State<ExpensePage> {
                               },
                             ),
                             const SizedBox(height: 16),
-                            const ExpenseErrorWidget(),
                           ],
                         ),
                       ),
@@ -294,8 +295,6 @@ class _ExpensePageState extends State<ExpensePage> {
                                 selectedDate = date;
                               },
                             ),
-                            const SizedBox(height: 16),
-                            const ExpenseErrorWidget(),
                             const SizedBox(height: 16),
                             _addButton(),
                             const SizedBox(height: 16),
@@ -457,29 +456,6 @@ class ExpenseAmountWidget extends StatelessWidget {
         } else {
           return AppLocalizations.of(context)!.validAmountLable;
         }
-      },
-    );
-  }
-}
-
-class ExpenseErrorWidget extends StatelessWidget {
-  const ExpenseErrorWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<ExpenseBloc>(context),
-      buildWhen: (previous, current) => current is ExpenseErrorState,
-      builder: (context, state) {
-        if (state is ExpenseErrorState) {
-          return Text(
-            state.errorString,
-            style: TextStyle(color: Theme.of(context).colorScheme.error),
-          );
-        }
-        return const SizedBox.shrink();
       },
     );
   }

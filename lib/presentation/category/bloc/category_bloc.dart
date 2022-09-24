@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<CategoryUpdateEvent>((event, emit) => _updateCategory(event, emit));
     on<FetchCategoryFromIdEvent>(
         (event, emit) => _fetchCategoryFromId(event, emit));
+    on<CategoryIconSelectedEvent>((event, emit) => _categoryIcon(event, emit));
   }
   final CategoryUseCase categoryUseCase;
   late final box = Hive.box<Category>(BoxType.category.stringValue);
@@ -37,7 +40,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   ) async {
     final String? categoryTitle = event.title;
     final String? categoryDescription = event.description;
-    final int icon = event.icon;
+    final int? icon = event.icon;
     final double? budget = double.tryParse(event.budget ?? '');
 
     if (categoryTitle == null) {
@@ -45,7 +48,11 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     }
 
     if (categoryDescription == null) {
-      return emit(const CategoryErrorState('Add category title'));
+      return emit(const CategoryErrorState('Add category description'));
+    }
+
+    if (icon == null) {
+      return emit(const CategoryErrorState('Select category icon'));
     }
 
     await categoryUseCase.addCategory(
@@ -56,6 +63,36 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     );
 
     emit(const CategoryAddedState(isCategoryAddedOrUpdate: true));
+  }
+
+  _updateCategory(
+    CategoryUpdateEvent event,
+    Emitter<CategoryState> emit,
+  ) async {
+    final String? categoryTitle = event.title;
+    final String? categoryDescription = event.description;
+    final int? icon = event.icon;
+    final double? budget = double.tryParse(event.budget ?? '');
+
+    if (categoryTitle == null) {
+      return emit(const CategoryErrorState('Add category title'));
+    }
+
+    if (categoryDescription == null) {
+      return emit(const CategoryErrorState('Add category title'));
+    }
+    if (icon == null) {
+      return emit(const CategoryErrorState('Select category icon'));
+    }
+
+    event.category!
+      ..budget = budget
+      ..description = categoryDescription
+      ..icon = icon
+      ..name = categoryTitle;
+
+    await event.category!.save();
+    emit(const CategoryAddedState());
   }
 
   _deleteCategory(
@@ -71,30 +108,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     add(FetchCategoriesEvent());
   }
 
-  _updateCategory(
-      CategoryUpdateEvent event, Emitter<CategoryState> emit) async {
-    final String? categoryTitle = event.title;
-    final String? categoryDescription = event.description;
-    final int icon = event.icon;
-    final double? budget = double.tryParse(event.budget ?? '');
-
-    if (categoryTitle == null) {
-      return emit(const CategoryErrorState('Add category title'));
-    }
-
-    if (categoryDescription == null) {
-      return emit(const CategoryErrorState('Add category title'));
-    }
-    event.category!
-      ..budget = budget
-      ..description = categoryDescription
-      ..icon = icon
-      ..name = categoryTitle;
-
-    await event.category!.save();
-    emit(const CategoryAddedState());
-  }
-
   _fetchCategoryFromId(
     FetchCategoryFromIdEvent event,
     Emitter<CategoryState> emit,
@@ -107,5 +120,12 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     if (category != null) {
       emit(CategorySuccessState(category));
     }
+  }
+
+  _categoryIcon(
+    CategoryIconSelectedEvent event,
+    Emitter<CategoryState> emit,
+  ) {
+    emit(CategoryIconSelectedState(event.categoryIcon));
   }
 }

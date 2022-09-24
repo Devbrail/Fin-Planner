@@ -100,6 +100,8 @@ class AddAccountPageState extends State<AddAccountPage> {
               context,
               AppLocalizations.of(context)!.deletedCardLable,
             );
+          } else if (state is AccountErrorState) {
+            showMaterialSnackBar(context, state.errorString);
           }
         },
         buildWhen: (previous, current) => current is AccountSuccessState,

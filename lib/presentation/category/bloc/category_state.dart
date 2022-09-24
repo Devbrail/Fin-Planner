@@ -44,3 +44,12 @@ class CategorySuccessState extends CategoryState {
   @override
   List<Object?> get props => [category];
 }
+
+class CategoryIconSelectedState extends CategoryState {
+  final int categoryIcon;
+
+  const CategoryIconSelectedState(this.categoryIcon);
+
+  @override
+  List<Object?> get props => [categoryIcon];
+}

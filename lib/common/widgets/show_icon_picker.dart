@@ -14,6 +14,7 @@ Future<void> showIconPicker({
   await showDialog(
     context: context,
     builder: (_) => AlertDialog(
+      icon: Icon(defaultIcon),
       title: Text(AppLocalizations.of(context)!.selectIconLable),
       content: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
