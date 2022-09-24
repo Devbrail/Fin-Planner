@@ -8,7 +8,7 @@ abstract class ExpenseEvent extends Equatable {
 }
 
 class FetchExpenseFromIdEvent extends ExpenseEvent {
-  final int? expenseId;
+  final String? expenseId;
 
   const FetchExpenseFromIdEvent(this.expenseId);
 }
@@ -52,7 +52,7 @@ class UpdateExpenseEvent extends ExpenseEvent {
 }
 
 class ClearExpenseEvent extends ExpenseEvent {
-  final int expenseId;
+  final String expenseId;
 
   const ClearExpenseEvent(this.expenseId);
 }

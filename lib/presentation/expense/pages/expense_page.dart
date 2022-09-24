@@ -26,10 +26,10 @@ String formattedDate(DateTime? date) {
 class ExpensePage extends StatefulWidget {
   const ExpensePage({
     Key? key,
-    required this.expenseId,
+    this.expenseId,
   }) : super(key: key);
 
-  final int? expenseId;
+  final String? expenseId;
 
   @override
   State<ExpensePage> createState() => _ExpensePageState();
