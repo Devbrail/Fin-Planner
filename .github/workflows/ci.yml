@@ -1,4 +1,4 @@
-name: CI
+name: Flutter CI
 on:
   push:
     branches:
@@ -16,10 +16,11 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
+      - run: flutter format --set-exit-if-changed .
       - run: flutter clean
-      - run: flutter build apk --debug --split-per-abi
+      - run: flutter build apk --flavor dev --debug
       - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/debug/*"
+          artifacts: "build/app/outputs/flutter-apk/*"
           tag: v1.8.${{ github.run_number }}
