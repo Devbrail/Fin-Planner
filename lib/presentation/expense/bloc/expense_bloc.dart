@@ -21,6 +21,13 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   }
 
   final ExpenseUseCase expenseUseCase;
+  String? expenseName;
+  double? expenseAmount;
+  int? selectedCategoryId;
+  int? selectedAccountId;
+  Expense? currentExpense;
+  late DateTime? selectedDate = DateTime.now();
+  late TransactonType selectedType = TransactonType.expense;
 
   Future<void> _fetchExpenseFromId(
     FetchExpenseFromIdEvent event,
@@ -32,6 +39,13 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     final Expense? expense = await expenseUseCase.fetchExpenseFromId(expenseId);
     if (expense != null) {
       emit(ExpenseSuccessState(expense));
+      expenseAmount = expense.currency;
+      expenseName = expense.name;
+      selectedCategoryId = expense.categoryId;
+      selectedAccountId = expense.accountId;
+      selectedDate = expense.time;
+      selectedType = expense.type ?? TransactonType.expense;
+      currentExpense = expense;
     }
   }
 
@@ -39,16 +53,17 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     AddExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) async {
-    final double? validAmount = double.tryParse(event.amount ?? '0.0');
-    final String? expenseName = event.name;
-    final int? categoryId = event.categoryId;
-    final int? accountId = event.accountId;
-    final DateTime? dateTime = event.time;
+    final double? validAmount = expenseAmount;
+    final String? name = expenseName;
+    final int? categoryId = selectedCategoryId;
+    final int? accountId = selectedAccountId;
+    final DateTime? dateTime = selectedDate;
+
     if (validAmount == null || validAmount == 0.0) {
       return emit(const ExpenseErrorState('Enter valid amout'));
     }
 
-    if (expenseName == null) {
+    if (name == null) {
       return emit(const ExpenseErrorState('Enter expense name'));
     }
 
@@ -63,12 +78,12 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     }
 
     await expenseUseCase.addExpense(
-      expenseName,
+      name,
       validAmount,
       dateTime,
       categoryId,
       accountId,
-      event.type,
+      selectedType,
     );
 
     emit(const ExpenseAdded(isAddOrUpdate: true));
@@ -78,16 +93,16 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     UpdateExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) async {
-    final double? validAmount = double.tryParse(event.amount ?? '0.0');
-    final String? expenseName = event.name;
-    final int? categoryId = event.categoryId;
-    final int? accountId = event.accountId;
-    final DateTime? dateTime = event.time;
+    final double? validAmount = expenseAmount;
+    final String? name = expenseName;
+    final int? categoryId = selectedCategoryId;
+    final int? accountId = selectedAccountId;
+    final DateTime? dateTime = selectedDate;
     if (validAmount == null || validAmount == 0.0) {
       return emit(const ExpenseErrorState('Enter valid amout'));
     }
 
-    if (expenseName == null) {
+    if (name == null) {
       return emit(const ExpenseErrorState('Enter expense name'));
     }
 
@@ -100,20 +115,19 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     if (dateTime == null) {
       return emit(const ExpenseErrorState('Select time'));
     }
-    if (event.expense == null) {
-      return;
+    if (currentExpense != null) {
+      currentExpense!
+        ..accountId = accountId
+        ..categoryId = categoryId
+        ..currency = validAmount
+        ..name = name
+        ..time = dateTime
+        ..type = selectedType;
+
+      await currentExpense!.save();
+
+      emit(const ExpenseAdded());
     }
-    event.expense!
-      ..accountId = accountId
-      ..categoryId = categoryId
-      ..currency = validAmount
-      ..name = expenseName
-      ..time = dateTime
-      ..type = event.type;
-
-    await event.expense!.save();
-
-    emit(const ExpenseAdded());
   }
 
   Future<void> _clearExpense(

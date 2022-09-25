@@ -14,43 +14,9 @@ class FetchExpenseFromIdEvent extends ExpenseEvent {
   const FetchExpenseFromIdEvent(this.expenseId);
 }
 
-class AddExpenseEvent extends ExpenseEvent {
-  final String? amount;
-  final String? name;
-  final DateTime? time;
-  final int? categoryId;
-  final int? accountId;
-  final TransactonType type;
+class AddExpenseEvent extends ExpenseEvent {}
 
-  const AddExpenseEvent({
-    required this.amount,
-    required this.name,
-    required this.time,
-    required this.categoryId,
-    required this.accountId,
-    required this.type,
-  });
-}
-
-class UpdateExpenseEvent extends ExpenseEvent {
-  final String? amount;
-  final String? name;
-  final DateTime? time;
-  final int? categoryId;
-  final int? accountId;
-  final TransactonType type;
-  final Expense? expense;
-
-  const UpdateExpenseEvent({
-    required this.amount,
-    required this.name,
-    required this.time,
-    required this.categoryId,
-    required this.accountId,
-    required this.type,
-    required this.expense,
-  });
-}
+class UpdateExpenseEvent extends ExpenseEvent {}
 
 class ClearExpenseEvent extends ExpenseEvent {
   final String expenseId;

@@ -16,6 +16,8 @@ import '../widgets/select_account_widget.dart';
 import '../widgets/select_category_widget.dart';
 import '../widgets/toggle_buttons_widget.dart';
 
+final GlobalKey<FormState> _form = GlobalKey<FormState>();
+
 String formattedDate(DateTime? date) {
   if (date == null) {
     return '';
@@ -36,47 +38,11 @@ class ExpensePage extends StatefulWidget {
 }
 
 class _ExpensePageState extends State<ExpensePage> {
-  final GlobalKey<FormState> _form = GlobalKey<FormState>();
-  late ExpenseBloc expenseBloc = locator.get<ExpenseBloc>()
+  late final ExpenseBloc expenseBloc = locator.get<ExpenseBloc>()
     ..add(FetchExpenseFromIdEvent(widget.expenseId));
-  late TextEditingController nameController;
-  late TextEditingController amountController;
-  late TextEditingController dateTextController;
-  late DateTime? selectedDate = DateTime.now();
-  late int? selectedCategoryId;
-  late int? selectedAccountId;
-  late TransactonType selectedType;
-  Expense? expense;
-
-  bool get isAddExpense => widget.expenseId == null;
-
-  void addExpense() {
-    final isValid = _form.currentState!.validate();
-    if (!isValid) {
-      return;
-    }
-
-    if (isAddExpense) {
-      expenseBloc.add(AddExpenseEvent(
-        amount: amountController.text,
-        name: nameController.text,
-        time: selectedDate,
-        categoryId: selectedCategoryId,
-        accountId: selectedAccountId,
-        type: selectedType,
-      ));
-    } else {
-      expenseBloc.add(UpdateExpenseEvent(
-        expense: expense,
-        accountId: selectedAccountId,
-        amount: amountController.text,
-        categoryId: selectedCategoryId,
-        name: nameController.text,
-        time: selectedDate,
-        type: selectedType,
-      ));
-    }
-  }
+  late TextEditingController nameController = TextEditingController();
+  late TextEditingController amountController = TextEditingController();
+  late TextEditingController dateTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,18 +51,17 @@ class _ExpensePageState extends State<ExpensePage> {
       child: BlocConsumer(
         bloc: expenseBloc,
         listener: (context, state) {
+          print(state);
           if (state is ExpenseDeletedState) {
             showMaterialSnackBar(
               context,
-              selectedType == TransactonType.expense
+              expenseBloc.selectedType == TransactonType.expense
                   ? AppLocalizations.of(context)!.expenseDeletedSuccessfulLable
                   : AppLocalizations.of(context)!.incomeDeletedSuccessfulLable,
             );
             context.pop();
-          } else if (state is ExpenseSuccessState) {
-            final Expense e = state.expense;
           } else if (state is ExpenseAdded) {
-            final content = selectedType == TransactonType.expense
+            final content = expenseBloc.selectedType == TransactonType.expense
                 ? state.isAddOrUpdate
                     ? AppLocalizations.of(context)!.expenseAddedSuccessfulLable
                     : AppLocalizations.of(context)!.expenseUpdateSuccessfulLable
@@ -108,23 +73,18 @@ class _ExpensePageState extends State<ExpensePage> {
             context.pop();
           } else if (state is ExpenseErrorState) {
             showMaterialSnackBar(context, state.errorString);
+          } else if (state is ExpenseSuccessState) {
+            dateTextController.text = formattedDate(expenseBloc.selectedDate);
+            nameController.text = state.expense.name;
+            nameController.selection =
+                TextSelection.collapsed(offset: state.expense.name.length);
+
+            amountController.text = state.expense.currency.toString();
+            amountController.selection = TextSelection.collapsed(
+                offset: state.expense.currency.toString().length);
           }
         },
-        buildWhen: (previous, current) => current is ExpenseSuccessState,
         builder: (context, state) {
-          if (state is ExpenseSuccessState) {
-            expense = state.expense;
-          }
-          selectedDate = expense?.time;
-          selectedCategoryId = expense?.categoryId;
-          selectedAccountId = expense?.accountId;
-          selectedType = expense?.type ?? TransactonType.expense;
-          dateTextController =
-              TextEditingController(text: formattedDate(selectedDate));
-          nameController = TextEditingController(text: expense?.name);
-          amountController = TextEditingController(
-            text: expense?.currency.toString(),
-          );
           return ScreenTypeLayout(
             mobile: Scaffold(
               appBar: materialYouAppBar(
@@ -152,20 +112,20 @@ class _ExpensePageState extends State<ExpensePage> {
                   children: [
                     TransactionToggleButtons(
                       onSelected: (type) {
-                        selectedType = type;
+                        expenseBloc.selectedType = type;
                         expenseBloc.add(ChangeExpenseEvent(type));
                       },
-                      selectedType: selectedType,
+                      selectedType: expenseBloc.selectedType,
                     ),
                     SelectCategoryIcon(
                       onSelected: (category) {
-                        selectedCategoryId = category.key;
+                        expenseBloc.selectedCategoryId = category.key;
                       },
                     ),
                     SelectedAccount(
-                      accountId: selectedAccountId ?? -1,
+                      accountId: expenseBloc.selectedAccountId ?? -1,
                       onSelected: (account) {
-                        selectedAccountId = account.key;
+                        expenseBloc.selectedAccountId = account.key;
                       },
                     ),
                     Padding(
@@ -181,9 +141,9 @@ class _ExpensePageState extends State<ExpensePage> {
                             const SizedBox(height: 16),
                             ExpenseDatePickerWidget(
                               controller: dateTextController,
-                              selectedDate: selectedDate,
+                              selectedDate: expenseBloc.selectedDate,
                               onSelectedDate: (date) {
-                                selectedDate = date;
+                                expenseBloc.selectedDate = date;
                               },
                             ),
                             const SizedBox(height: 16),
@@ -229,10 +189,10 @@ class _ExpensePageState extends State<ExpensePage> {
                 actions: [
                   TransactionToggleButtons(
                     onSelected: (type) {
-                      selectedType = type;
+                      expenseBloc.selectedType = type;
                       expenseBloc.add(ChangeExpenseEvent(type));
                     },
-                    selectedType: selectedType,
+                    selectedType: expenseBloc.selectedType,
                   ),
                   isAddExpense
                       ? const SizedBox.shrink()
@@ -262,14 +222,14 @@ class _ExpensePageState extends State<ExpensePage> {
                         children: [
                           SelectCategoryIcon(
                             onSelected: (category) {
-                              selectedCategoryId = category.key;
+                              expenseBloc.selectedCategoryId = category.key;
                             },
                           ),
                           const SizedBox(height: 24),
                           SelectedAccount(
-                            accountId: selectedAccountId ?? -1,
+                            accountId: expenseBloc.selectedAccountId ?? -1,
                             onSelected: (account) {
-                              selectedAccountId = account.key;
+                              expenseBloc.selectedAccountId = account.key;
                             },
                           ),
                         ],
@@ -290,9 +250,9 @@ class _ExpensePageState extends State<ExpensePage> {
                             const SizedBox(height: 16),
                             ExpenseDatePickerWidget(
                               controller: dateTextController,
-                              selectedDate: selectedDate,
+                              selectedDate: expenseBloc.selectedDate,
                               onSelectedDate: (date) {
-                                selectedDate = date;
+                                expenseBloc.selectedDate = date;
                               },
                             ),
                             const SizedBox(height: 16),
@@ -331,6 +291,21 @@ class _ExpensePageState extends State<ExpensePage> {
         ),
       ),
     );
+  }
+
+  bool get isAddExpense => widget.expenseId == null;
+
+  void addExpense() {
+    final isValid = _form.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+
+    if (isAddExpense) {
+      expenseBloc.add(AddExpenseEvent());
+    } else {
+      expenseBloc.add(UpdateExpenseEvent());
+    }
   }
 }
 
@@ -411,7 +386,6 @@ class ExpenseNameWidget extends StatelessWidget {
                   ? AppLocalizations.of(context)!.expenseNameLable
                   : AppLocalizations.of(context)!.incomeNameLable,
             ),
-            onChanged: (value) {},
             validator: (value) {
               if (value!.length >= 3) {
                 return null;
@@ -419,6 +393,8 @@ class ExpenseNameWidget extends StatelessWidget {
                 return AppLocalizations.of(context)!.validNameLable;
               }
             },
+            onChanged: (value) =>
+                BlocProvider.of<ExpenseBloc>(context).expenseName = value,
           );
         } else {
           return const SizedBox.shrink();
@@ -449,6 +425,10 @@ class ExpenseAmountWidget extends StatelessWidget {
         ),
         filled: true,
       ),
+      onChanged: (value) {
+        double? amount = double.tryParse(value);
+        BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
+      },
       maxLength: 13,
       validator: (value) {
         if (value!.length > 1) {
