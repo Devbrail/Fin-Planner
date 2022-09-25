@@ -24,25 +24,24 @@
 
 ### Screen shots
 
-#### Android
+#### Mobile
 
-| <img src="paisa-images/1642589160039.png" width="200"/> | <img src="paisa-images/1642589316445.png" width="200"/> | <img src="paisa-images/1642589351674.png" width="200"/> |
+| <img src="paisa-images/Screenshot_1664124547.png" width="200"/> | <img src="paisa-images/Screenshot_1664124582.png" width="200"/> | <img src="paisa-images/Screenshot_1664124633.png" width="200"/> |
 | :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
-|                          Home                           |                       Categories                        |                        Accounts                         |
+|                          Home                           |                       Accounts                        |                        Categories                         |
+
+#### Foldable
+
+| <img src="paisa-images/Screenshot_1664124560.png" width="200"/> | <img src="paisa-images/Screenshot_1664124899.png" width="200"/> | <img src="paisa-images/Screenshot_1664125090.png" width="200"/> |
+| :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
+|                          Home                           |                       Accounts                        |                        Categories                         |
 
 #### Tablet
 
-| <img src="paisa-images/tablet.png" width="200"/> | <img src="paisa-images/tablet_1.png" width="200"/> | <img src="paisa-images/tablet_2.png" width="200"/> |<img src="paisa-images/tablet_3.png" width="200"/> |
-| :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
-|                          Locale Select                           |                       Account                        |                        Home                         |  Budget Overview                         |
+ <img src="paisa-images/Screenshot_1664124566.png" width="200"/> | <img src="paisa-images/Screenshot_1664124906.png" width="200"/> |<img src="paisa-images/Screenshot_1664125201.png" width="200"/> |
+  | :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
+ |                       Home                           |                       Accounts                        |                        Categories                         |
 
-#### Windows
-
-| <img src="paisa-images/windows-1.jpg" width="200"/> | <img src="paisa-images/windows-2.jpg" width="200"/> | <img src="paisa-images/windows-3.jpg" width="200"/> | <img src="paisa-images/windows-5.jpg" width="200"/> |
-| :-------------------------------------------------: | :-------------------------------------------------: | :-------------------------------------------------: | :-------------------------------------------------: |
-|                        Home                         |                     Categories                      |                       Summary                       |                       Account                       |
-
-Built with fashion of Material Desgin
 
 ### Expense Tracking
 

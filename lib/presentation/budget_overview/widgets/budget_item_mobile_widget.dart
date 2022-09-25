@@ -71,8 +71,11 @@ class BudgetItemMobileWidget extends StatelessWidget {
                               right: 8,
                             ),
                             child: Icon(
-                              IconData(category.icon,
-                                  fontFamily: 'MaterialIcons'),
+                              IconData(
+                                category.icon,
+                                fontFamily: 'Material Design Icons',
+                                fontPackage: 'material_design_icons_flutter',
+                              ),
                               color: Theme.of(context).colorScheme.secondary,
                             ),
                           ),
