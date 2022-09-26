@@ -48,7 +48,7 @@ extension DateUtils on DateTime {
     return woy;
   }
 
-  String formated(FilterBudget filterBudget) {
+  String formatted(FilterBudget filterBudget) {
     switch (filterBudget) {
       case FilterBudget.daily:
         return DateFormat('dd EEEE').format(this);

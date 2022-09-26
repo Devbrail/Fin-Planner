@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MaterialYouTextFeild extends StatelessWidget {
-  const MaterialYouTextFeild({
+class MaterialYouTextFelid extends StatelessWidget {
+  const MaterialYouTextFelid({
     Key? key,
     this.controller,
     this.keyboardType = TextInputType.none,

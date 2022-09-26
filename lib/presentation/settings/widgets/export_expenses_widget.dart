@@ -37,13 +37,13 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
   }
 
   Future<void> exportData(String subject) async {
-    final intialDateRange = DateTimeRange(
+    final initialDateRange = DateTimeRange(
       start: DateTime.now().subtract(const Duration(days: 3)),
       end: DateTime.now(),
     );
     final newDateRange = await showDateRangePicker(
       context: context,
-      initialDateRange: dateTimeRange ?? intialDateRange,
+      initialDateRange: dateTimeRange ?? initialDateRange,
       firstDate: DateTime.now().subtract(const Duration(days: 7)),
       lastDate: DateTime.now(),
       initialEntryMode: DatePickerEntryMode.calendarOnly,

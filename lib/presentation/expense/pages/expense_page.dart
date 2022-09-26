@@ -6,10 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/util.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
-import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/expense_bloc.dart';
 import '../widgets/select_account_widget.dart';
@@ -51,7 +49,6 @@ class _ExpensePageState extends State<ExpensePage> {
       child: BlocConsumer(
         bloc: expenseBloc,
         listener: (context, state) {
-          print(state);
           if (state is ExpenseDeletedState) {
             showMaterialSnackBar(
               context,

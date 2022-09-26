@@ -384,7 +384,7 @@ class AccountCardHolderNameWidget extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.name,
       decoration: InputDecoration(
-        hintText: AppLocalizations.of(context)!.cardHoderLabel,
+        hintText: AppLocalizations.of(context)!.cardHolderLabel,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),

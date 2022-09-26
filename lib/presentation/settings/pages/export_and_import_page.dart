@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/presentation/settings/widgets/export_expenses_widget.dart';
-import 'package:flutter_paisa/presentation/settings/widgets/setting_option.dart';
-import 'package:flutter_paisa/presentation/settings/widgets/settings_group_card.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/widgets/material_you_app_bar_widget.dart';
 import '../../../data/settings/file_handler.dart';
 import '../../../di/service_locator.dart';
+import '../widgets/settings_group_card.dart';
 
 class ExportAndImportPage extends StatelessWidget {
   ExportAndImportPage({super.key});

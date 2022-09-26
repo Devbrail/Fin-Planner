@@ -51,7 +51,7 @@ class _SelectedAccountState extends State<SelectedAccount> {
                 AppLocalizations.of(context)!.addAccountLabel,
               ),
               subtitle: Text(
-                AppLocalizations.of(context)!.noAccountAvaiLabelLabel,
+                AppLocalizations.of(context)!.noAccountAvailableLabel,
               ),
               trailing: const Icon(Icons.keyboard_arrow_right),
             );

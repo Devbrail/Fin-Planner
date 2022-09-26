@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/util.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
 import '../../../common/widgets/material_you_textfield.dart';
 import '../../../data/category/model/category.dart';
@@ -224,7 +223,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   }
 
   Widget _categoryField() {
-    return MaterialYouTextFeild(
+    return MaterialYouTextFelid(
       controller: categoryController,
       keyboardType: TextInputType.name,
       maxLength: 10,
@@ -241,7 +240,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   }
 
   Widget _descriptionField() {
-    return MaterialYouTextFeild(
+    return MaterialYouTextFelid(
       maxLength: 15,
       controller: descController,
       keyboardType: TextInputType.name,

@@ -46,8 +46,8 @@ class _ExpenseHistoryState extends State<ExpenseHistory> {
           );
         }
         expenses.sort(((a, b) => b.time.compareTo(a.time)));
-        final maps = groupBy(
-            expenses, (Expense element) => element.time.formated(selectedType));
+        final maps = groupBy(expenses,
+            (Expense element) => element.time.formatted(selectedType));
         return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

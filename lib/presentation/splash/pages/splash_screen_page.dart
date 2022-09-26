@@ -7,7 +7,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../app/routes.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/splash_bloc.dart';
-import '../widgets/local_gridview_widget.dart';
+import '../widgets/local_grid_view_widget.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({
@@ -45,7 +45,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                 children: [
                   ListTile(
                     title: Text(
-                      AppLocalizations.of(context)!.selecteCountryLabel,
+                      AppLocalizations.of(context)!.selectedCountryLabel,
                       style: Theme.of(context)
                           .textTheme
                           .headline5

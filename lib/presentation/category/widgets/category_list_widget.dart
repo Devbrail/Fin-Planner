@@ -30,7 +30,7 @@ class CategoryListWidget extends StatelessWidget {
             description:
                 AppLocalizations.of(context)!.errorNoCategoriesDescriptionLabel,
             icon: Icons.category,
-            title: AppLocalizations.of(context)!.errorNoCatgoriesLabel,
+            title: AppLocalizations.of(context)!.errorNoCatagoriesLabel,
           );
         }
         return GridView.builder(

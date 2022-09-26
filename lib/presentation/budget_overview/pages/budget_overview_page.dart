@@ -29,7 +29,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
   DateTimeRange? dateTimeRange;
 
   Future<void> _dateRangePicker() async {
-    final intialDateRange = DateTimeRange(
+    final initialDateRange = DateTimeRange(
       start: DateTime.now().subtract(const Duration(days: 3)),
       end: DateTime.now(),
     );
@@ -37,7 +37,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
       context: context,
       firstDate: DateTime(DateTime.now().year - 5),
       lastDate: DateTime(DateTime.now().year + 5),
-      initialDateRange: dateTimeRange ?? intialDateRange,
+      initialDateRange: dateTimeRange ?? initialDateRange,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       builder: (_, child) {
         return Theme(
@@ -88,7 +88,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
             expenses.sort((a, b) => a.time.compareTo(b.time));
 
             final filterBudget = groupBy(expenses,
-                    (Expense element) => element.time.formated(selectedType))
+                    (Expense element) => element.time.formatted(selectedType))
                 .entries
                 .toList();
             return Column(
@@ -158,7 +158,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
             expenses.sort((a, b) => a.time.compareTo(b.time));
 
             final filterBudget = groupBy(expenses,
-                    (Expense element) => element.time.formated(selectedType))
+                    (Expense element) => element.time.formatted(selectedType))
                 .entries
                 .toList();
             return ListView.builder(
