@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/presentation/budget_overview/pages/expense_list_page.dart';
+import 'package:flutter_paisa/presentation/settings/pages/export_and_import_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -24,6 +26,8 @@ const addCategoryPath = 'add-category';
 const editCategoryPath = 'edit-category';
 const addAccountPath = 'add-account';
 const editAccountPath = 'edit-account';
+const expensesByCategory = 'expenses';
+const exportAndImport = 'export-import';
 
 final settings = Hive.box(BoxType.settings.stringValue);
 
@@ -115,6 +119,18 @@ final GoRouter goRouter = GoRouter(
           builder: (context, state) => AddAccountPage(
             accountId: state.params['aid'],
           ),
+        ),
+        GoRoute(
+          name: expensesByCategory,
+          path: 'expenses/:cid',
+          builder: (context, state) => ExpenseListPage(
+            categoryId: state.params['cid'],
+          ),
+        ),
+        GoRoute(
+          name: exportAndImport,
+          path: 'export-import',
+          builder: (context, state) => ExportAndImportPage(),
         ),
       ],
     ),

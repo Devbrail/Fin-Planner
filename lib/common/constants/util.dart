@@ -1,20 +1,5 @@
 import 'package:flutter/material.dart';
 
-showMaterialSnackBar(BuildContext context, String content) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(
-        content,
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.onSurface,
-        ),
-      ),
-      behavior: SnackBarBehavior.floating,
-      backgroundColor: Theme.of(context).colorScheme.surface,
-    ),
-  );
-}
-
 /// Groups the elements in [values] by the value returned by [key].
 ///
 /// Returns a map from keys computed by [key] to a list of all values for which

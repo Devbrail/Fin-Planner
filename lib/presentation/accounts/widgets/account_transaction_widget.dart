@@ -8,7 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../common/constants/extensions.dart';
 import '../../../common/enum/box_types.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
-import '../../../data/accounts/datasources/account_data_source.dart';
+import '../../../data/accounts/datasources/account_local_data_source.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
@@ -124,7 +124,7 @@ class AccountTransactinWidget extends StatelessWidget {
                       return ExpensItemWidget(
                         expense: expenses[index],
                         account: locator
-                            .get<AccountDataSource>()
+                            .get<AccountLocalDataSource>()
                             .fetchAccount(expenses[index].accountId),
                       );
                     },
@@ -153,7 +153,7 @@ class AccountTransactinWidget extends StatelessWidget {
                     itemCount: expenses.length,
                     itemBuilder: (_, index) {
                       final account = locator
-                          .get<AccountDataSource>()
+                          .get<AccountLocalDataSource>()
                           .fetchAccount(expenses[index].accountId);
                       return ExpensItemWidget(
                         expense: expenses[index],

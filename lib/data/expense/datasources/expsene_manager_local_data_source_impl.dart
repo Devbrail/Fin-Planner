@@ -1,37 +1,40 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../../../common/enum/box_types.dart';
 import '../model/expense.dart';
-import 'expense_manager_data_source.dart';
+import 'expense_manager_local_data_source.dart';
 
-class ExpenseManagerLocalDataSource implements ExpenseManagerDataSource {
-  late final epenseBox = Hive.box<Expense>(BoxType.expense.stringValue);
+class ExpenseManagerLocalDataSourceImpl
+    implements ExpenseManagerLocalDataSource {
+  late final expenseBox = Hive.box<Expense>(BoxType.expense.stringValue);
   @override
   Future<void> addOrUpdateExpense(Expense expense) async {
-    final id = await epenseBox.add(expense);
+    final id = await expenseBox.add(expense);
     expense.superId = id;
     expense.save();
   }
 
   @override
   Future<List<Expense>> expenses() async {
-    return epenseBox.values.toList();
+    return expenseBox.values.toList();
   }
 
   @override
   Future<void> clearExpenses() async {
-    await epenseBox.clear();
+    await expenseBox.clear();
   }
 
   @override
   Future<void> clearExpense(int key) async {
-    await epenseBox.delete(key);
+    await expenseBox.delete(key);
   }
 
   @override
   Future<List<Expense>> filteredExpenses(DateTimeRange dateTimeRange) async {
-    final List<Expense> expenses = epenseBox.values.toList();
+    final List<Expense> expenses = expenseBox.values.toList();
     expenses.sort((a, b) => b.time.compareTo(a.time));
     final filteredExpenses = expenses.takeWhile((value) {
       return value.time.isAfter(dateTimeRange.start) &&
@@ -42,5 +45,8 @@ class ExpenseManagerLocalDataSource implements ExpenseManagerDataSource {
 
   @override
   Future<Expense?> fetchExpenseFromId(int expenseId) async =>
-      epenseBox.get(expenseId);
+      expenseBox.get(expenseId);
+
+  @override
+  Future<Iterable<Expense>> exportData() async => expenseBox.values;
 }

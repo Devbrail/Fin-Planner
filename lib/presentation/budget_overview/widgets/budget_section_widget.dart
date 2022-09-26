@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/util.dart';
-import '../../../data/category/datasources/category_datasource.dart';
+import '../../../data/category/datasources/category_local_data_source.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 import 'budget_item_widget.dart';
@@ -17,7 +17,7 @@ class BudgetSection extends StatelessWidget {
 
   final String name;
   final List<Expense> values;
-  final CategoryDataSource dataSource;
+  final CategoryLocalDataSource dataSource;
 
   List<MapEntry<Category, List<Expense>>> _filterCategory(
     List<Expense> expenses,

@@ -10,7 +10,7 @@ import '../../../common/enum/box_types.dart';
 import '../../../common/enum/filter_budget.dart';
 import '../../../common/widgets/empty_widget.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
-import '../../../data/category/datasources/category_datasource.dart';
+import '../../../data/category/datasources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
 import '../widgets/budget_section_widget.dart';
@@ -24,7 +24,7 @@ class BudgetOverViewPage extends StatefulWidget {
 }
 
 class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
-  final CategoryDataSource categoryDataSource = locator.get();
+  final CategoryLocalDataSource categoryDataSource = locator.get();
   FilterBudget selectedType = FilterBudget.daily;
   DateTimeRange? dateTimeRange;
 
@@ -70,53 +70,54 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
           child: const Icon(Icons.date_range),
         ),
         body: ValueListenableBuilder<Box<Expense>>(
-            valueListenable:
-                Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
-            builder: (context, value, _) {
-              List<Expense> expenses = value.budgetOverView;
-              if (dateTimeRange != null) {
-                expenses = value.isFilterTimeBetween(dateTimeRange!);
-              }
-              if (expenses.isEmpty) {
-                return EmptyWidget(
-                  icon: Icons.paid,
-                  title: AppLocalizations.of(context)!.errorNoBudgetLable,
-                  description: AppLocalizations.of(context)!
-                      .errorNoBudgetDescriptionLable,
-                );
-              }
-              expenses.sort((a, b) => a.time.compareTo(b.time));
+          valueListenable:
+              Hive.box<Expense>(BoxType.expense.stringValue).listenable(),
+          builder: (context, value, _) {
+            List<Expense> expenses = value.budgetOverView;
+            if (dateTimeRange != null) {
+              expenses = value.isFilterTimeBetween(dateTimeRange!);
+            }
+            if (expenses.isEmpty) {
+              return EmptyWidget(
+                icon: Icons.paid,
+                title: AppLocalizations.of(context)!.errorNoBudgetLable,
+                description:
+                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLable,
+              );
+            }
+            expenses.sort((a, b) => a.time.compareTo(b.time));
 
-              final filterBudget = groupBy(expenses,
-                      (Expense element) => element.time.formated(selectedType))
-                  .entries
-                  .toList();
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FilterBudgetWidget(
-                    onSelected: (budget) {
-                      selectedType = budget;
-                      setState(() {});
+            final filterBudget = groupBy(expenses,
+                    (Expense element) => element.time.formated(selectedType))
+                .entries
+                .toList();
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FilterBudgetWidget(
+                  onSelected: (budget) {
+                    selectedType = budget;
+                    setState(() {});
+                  },
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.only(bottom: 128),
+                    itemCount: filterBudget.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return BudgetSection(
+                        name: filterBudget[index].key,
+                        dataSource: categoryDataSource,
+                        values: filterBudget[index].value,
+                      );
                     },
                   ),
-                  Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.only(bottom: 128),
-                      itemCount: filterBudget.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return BudgetSection(
-                          name: filterBudget[index].key,
-                          dataSource: categoryDataSource,
-                          values: filterBudget[index].value,
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              );
-            }),
+                ),
+              ],
+            );
+          },
+        ),
       ),
       tablet: Scaffold(
         appBar: materialYouAppBar(

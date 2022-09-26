@@ -40,7 +40,10 @@ class BudgetItemMobileWidget extends StatelessWidget {
 
     return MaterialYouCard(
       child: InkWell(
-        onTap: () => context.goNamed(addCategoryPath, extra: category),
+        onTap: () => context.goNamed(
+          expensesByCategory,
+          params: <String, String>{'cid': category.superId.toString()},
+        ),
         child: Stack(
           children: [
             isBudgetActive

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../../data/accounts/datasources/account_data_source.dart';
+import '../../../data/accounts/datasources/account_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
 import 'expense_item_widget.dart';
@@ -13,7 +13,7 @@ class ExpenseListWidget extends StatelessWidget {
 
   final List<Expense> expenses;
 
-  final AccountDataSource dataSource = locator.get();
+  final AccountLocalDataSource dataSource = locator.get();
 
   @override
   Widget build(BuildContext context) {

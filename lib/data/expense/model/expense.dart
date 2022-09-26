@@ -12,9 +12,6 @@ class Expense extends HiveObject {
   @HiveField(1)
   double currency;
 
-  @HiveField(2)
-  bool addOrSub;
-
   @HiveField(3)
   DateTime time;
 
@@ -36,7 +33,25 @@ class Expense extends HiveObject {
     required this.time,
     required this.categoryId,
     required this.accountId,
-    this.addOrSub = false,
     required this.type,
   });
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'currency': currency,
+        'time': time.toIso8601String(),
+        'type': type?.nameString,
+        'accountId': accountId,
+        'categoryId': categoryId,
+        'superId': superId,
+      };
+
+  factory Expense.fromJson(Map<String, dynamic> json) => Expense(
+        name: json['name'],
+        currency: json['currency'],
+        time: DateTime.parse(json['time']),
+        categoryId: json['categoryId'],
+        accountId: json['accountId'],
+        type: (json['type'] as String).type,
+      )..superId = json['superId'];
 }

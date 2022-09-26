@@ -23,20 +23,17 @@ class AccountAdapter extends TypeAdapter<Account> {
       validThru: fields[4] as DateTime,
       number: fields[5] as String,
       cardType: fields[6] == null ? CardType.debitcard : fields[6] as CardType?,
-      isPredefined: fields[2] as bool,
     )..superId = fields[7] == null ? 0 : fields[7] as int?;
   }
 
   @override
   void write(BinaryWriter writer, Account obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.icon)
-      ..writeByte(2)
-      ..write(obj.isPredefined)
       ..writeByte(3)
       ..write(obj.bankName)
       ..writeByte(4)

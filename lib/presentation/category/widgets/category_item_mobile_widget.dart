@@ -59,20 +59,18 @@ class CategoryItemMobileWidget extends StatelessWidget {
                 const SizedBox(height: 16),
               ],
             ),
-            category.isPredefined
-                ? const SizedBox.shrink()
-                : Positioned(
-                    right: 0,
-                    child: IconButton(
-                      onPressed: () {
-                        onPressed(category);
-                      },
-                      icon: Icon(
-                        Icons.delete_rounded,
-                        color: Theme.of(context).colorScheme.error,
-                      ),
-                    ),
-                  ),
+            Positioned(
+              right: 0,
+              child: IconButton(
+                onPressed: () {
+                  onPressed(category);
+                },
+                icon: Icon(
+                  Icons.delete_rounded,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
+            ),
           ],
         ),
       ),

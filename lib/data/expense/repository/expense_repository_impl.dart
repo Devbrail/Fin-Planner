@@ -6,7 +6,7 @@ import '../../../common/constants/util.dart';
 import '../../../common/enum/filter_days.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../domain/landing/repository/expense_repository.dart';
-import '../datasources/expense_manager_data_source.dart';
+import '../datasources/expense_manager_local_data_source.dart';
 import '../model/expense.dart';
 
 class ExpenseRepositoryImpl extends ExpenseRepository {
@@ -15,7 +15,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   });
 
   List<Expense> expensesList = [];
-  final ExpenseManagerDataSource dataSource;
+  final ExpenseManagerLocalDataSource dataSource;
   @override
   Future<void> updateExpense(Expense expense) async {
     await dataSource.addOrUpdateExpense(expense);

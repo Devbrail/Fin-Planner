@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/common/enum/card_type.dart';
 import 'package:hive/hive.dart';
 
 part 'transaction.g.dart';
@@ -24,5 +25,26 @@ extension TransactonTypeMapping on TransactonType {
       /*  case TransactonType.deposit:
         return AppLocalizations.of(context)!.deposit; */
     }
+  }
+
+  String get nameString {
+    switch (this) {
+      case TransactonType.expense:
+        return 'expense';
+      case TransactonType.income:
+        return 'income';
+    }
+  }
+}
+
+extension TransactionMap on String {
+  TransactonType get type {
+    switch (this) {
+      case 'expense':
+        return TransactonType.expense;
+      case 'income':
+        return TransactonType.income;
+    }
+    return TransactonType.expense;
   }
 }

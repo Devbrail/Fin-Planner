@@ -14,9 +14,6 @@ class Category extends HiveObject with EquatableMixin {
   @HiveField(2)
   int icon;
 
-  @HiveField(3)
-  final bool isPredefined;
-
   @HiveField(4, defaultValue: 0)
   int? superId;
 
@@ -27,10 +24,24 @@ class Category extends HiveObject with EquatableMixin {
     required this.description,
     required this.name,
     this.icon = -1,
-    this.isPredefined = false,
     this.budget = -1,
   });
 
   @override
   List<Object?> get props => [name, icon, description];
+
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        name: json["name"],
+        description: json["description"],
+        icon: json["icon"],
+        budget: json["budget"],
+      )..superId = json["superId"];
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'description': description,
+        'icon': icon,
+        'superId': superId,
+        'budget': budget,
+      };
 }

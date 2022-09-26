@@ -159,14 +159,6 @@
     "@reminderDescriptionLable": {
         "description": "Show schedule notifications to add expense label"
     },
-    "exportExpensesLable": "Export data to excel",
-    "@exportExpensesLable": {
-        "description": "Export data to excel label"
-    },
-    "exportExpensesDescriptionLable": "All expenses will be exported as a CSV file to share",
-    "@exportExpensesDescriptionLable": {
-        "description": "All expenses will be exported as a CSV file to share label"
-    },
     "chooseThemeLable": "Choose theme",
     "@chooseThemeLable": {
         "description": "Choose theme label"
@@ -399,7 +391,7 @@
     "setBudgetLable": "Set budget for category",
     "@setBudgetLable": {
         "description": "Set budget label"
-    }, 
+    },
     "incomeLable": "Income",
     "@incomeLable": {
         "description": "income label"
@@ -467,5 +459,34 @@
     "incomeDeletedSuccessfulLable": "Income deleted",
     "@incomeDeletedSuccessfulLable": {
         "description": "Expense deleted label"
+    },
+    "expenseByCategoryLable": "Expense by category",
+    "@expenseByCategoryLable": {
+        "description": "Expense by category label"
+    },
+    "backupAndRestoreLable": "Backup and Restore",
+    "@backupAndRestoreLable": {
+        "description": "Backup and Restore label"
+    },
+    "backupAndRestoreDescLable": "Backup and restore your data",
+    "@backupAndRestoreDescLable": {
+        "description": "Backup and restore your data label"
+    },
+    "createLable": "Create",
+    "@createLable": {
+        "description": "create label"
+    },
+    "restoreLable": "Restore",
+    "@restoreLable": {
+        "description": "Restore label"
+    }
+    ,
+    "creatingBackupLable": "Creating bakup",
+    "@creatingBackupLable": {
+        "description": "Creating bakup label"
+    },
+    "restoringBackupLable": "Restoring bakup",
+    "@restoringBackupLable": {
+        "description": "Creating bakup label"
     }
 }

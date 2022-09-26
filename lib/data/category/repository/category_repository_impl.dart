@@ -1,9 +1,9 @@
 import '../../../domain/category/repository/category_repository.dart';
-import '../datasources/category_datasource.dart';
+import '../datasources/category_local_data_source.dart';
 import '../model/category.dart';
 
 class CategoryRepositoryImpl extends CategoryRepository {
-  final CategoryDataSource dataSources;
+  final CategoryLocalDataSource dataSources;
 
   CategoryRepositoryImpl({required this.dataSources});
 
@@ -22,14 +22,12 @@ class CategoryRepositoryImpl extends CategoryRepository {
     required String name,
     required String desc,
     required int icon,
-    bool isPredefined = false,
     double? budget = -1,
   }) =>
       dataSources.addCategory(Category(
         description: desc,
         name: name,
         icon: icon,
-        isPredefined: isPredefined,
         budget: budget,
       ));
 

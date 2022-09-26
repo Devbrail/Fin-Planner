@@ -1,19 +1,20 @@
+import 'package:flutter_paisa/data/settings/file_handler.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../common/enum/box_types.dart';
 import '../common/enum/card_type.dart';
 import '../common/enum/transaction.dart';
-import '../data/accounts/datasources/account_data_source.dart';
 import '../data/accounts/datasources/account_local_data_source.dart';
+import '../data/accounts/datasources/account_local_data_source_impl.dart';
 import '../data/accounts/model/account.dart';
 import '../data/accounts/repository/account_repository_impl.dart';
-import '../data/category/datasources/category_datasource.dart';
 import '../data/category/datasources/category_local_data_source.dart';
+import '../data/category/datasources/category_local_data_source_impl.dart';
 import '../data/category/model/category.dart';
 import '../data/category/repository/category_repository_impl.dart';
-import '../data/expense/datasources/expense_manager_data_source.dart';
-import '../data/expense/datasources/expsene_manager_local_data_source.dart';
+import '../data/expense/datasources/expense_manager_local_data_source.dart';
+import '../data/expense/datasources/expsene_manager_local_data_source_impl.dart';
 import '../data/expense/model/expense.dart';
 import '../data/expense/repository/expense_repository_impl.dart';
 import '../data/notification/notification_service.dart';
@@ -58,7 +59,7 @@ Future<void> _setupController() async {
 }
 
 Future<void> _setupHive() async {
-  await Hive.initFlutter('hive');
+  await Hive.initFlutter();
   Hive
     ..registerAdapter(ExpenseAdapter())
     ..registerAdapter(CategoryAdapter())
@@ -73,11 +74,15 @@ Future<void> _setupHive() async {
 }
 
 void _localSoruces() {
-  locator.registerSingleton<ExpenseManagerDataSource>(
-      ExpenseManagerLocalDataSource());
-  locator.registerSingleton<CategoryDataSource>(CategoryLocalDataSources());
-  locator.registerSingleton<AccountDataSource>(AccountLocalDataSource());
+  final manager = ExpenseManagerLocalDataSourceImpl();
+  manager.exportData();
+  locator.registerSingleton<ExpenseManagerLocalDataSource>(manager);
+  locator.registerSingleton<CategoryLocalDataSource>(
+      CategoryLocalDataSourceImpl());
+  locator
+      .registerSingleton<AccountLocalDataSource>(AccountLocalDataSourceImpl());
   locator.registerSingleton<SettingsService>(SettingsServiceImpl());
+  locator.registerSingleton<FileHandler>(FileHandler());
 }
 
 void _setupRepository() {

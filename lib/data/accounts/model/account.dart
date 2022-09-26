@@ -13,9 +13,6 @@ class Account extends HiveObject with EquatableMixin {
   @HiveField(1)
   int icon;
 
-  @HiveField(2)
-  bool isPredefined;
-
   @HiveField(3)
   String bankName;
 
@@ -38,9 +35,27 @@ class Account extends HiveObject with EquatableMixin {
     required this.validThru,
     required this.number,
     required this.cardType,
-    this.isPredefined = false,
   });
 
   @override
   List<Object?> get props => [name, icon, bankName];
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'bankName': bankName,
+        'icon': icon,
+        'validThru': validThru.toIso8601String(),
+        'number': number,
+        'cardType': cardType?.name,
+        'superId': superId,
+      };
+
+  factory Account.fromJson(Map<String, dynamic> json) => Account(
+        name: json["name"],
+        bankName: json["bankName"],
+        icon: json["icon"],
+        validThru: DateTime.parse(json["validThru"]),
+        number: json["number"],
+        cardType: (json["cardType"] as String).type,
+      )..superId = json["superId"];
 }

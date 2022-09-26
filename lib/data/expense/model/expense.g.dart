@@ -22,7 +22,6 @@ class ExpenseAdapter extends TypeAdapter<Expense> {
       time: fields[3] as DateTime,
       categoryId: fields[6] as int,
       accountId: fields[5] as int,
-      addOrSub: fields[2] as bool,
       type: fields[4] == null
           ? TransactonType.expense
           : fields[4] as TransactonType?,
@@ -32,13 +31,11 @@ class ExpenseAdapter extends TypeAdapter<Expense> {
   @override
   void write(BinaryWriter writer, Expense obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.currency)
-      ..writeByte(2)
-      ..write(obj.addOrSub)
       ..writeByte(3)
       ..write(obj.time)
       ..writeByte(4)
