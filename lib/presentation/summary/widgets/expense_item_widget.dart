@@ -12,8 +12,8 @@ import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../common/enum/card_type.dart';
 
-class ExpensItemWidget extends StatefulWidget {
-  const ExpensItemWidget({
+class ExpenseItemWidget extends StatefulWidget {
+  const ExpenseItemWidget({
     Key? key,
     required this.expense,
     required this.account,
@@ -22,12 +22,12 @@ class ExpensItemWidget extends StatefulWidget {
   final Expense expense;
 
   @override
-  State<ExpensItemWidget> createState() => _ExpensItemWidgetState();
+  State<ExpenseItemWidget> createState() => _ExpenseItemWidgetState();
 }
 
-class _ExpensItemWidgetState extends State<ExpensItemWidget> {
+class _ExpenseItemWidgetState extends State<ExpenseItemWidget> {
   Color? get _typeColor {
-    if (widget.expense.type == TransactonType.expense) {
+    if (widget.expense.type == TransactionType.expense) {
       return Theme.of(context).extension<CustomColors>()!.red;
     } else {
       return Theme.of(context).extension<CustomColors>()!.green;
@@ -35,7 +35,7 @@ class _ExpensItemWidgetState extends State<ExpensItemWidget> {
   }
 
   String get _typeSign {
-    if (widget.expense.type == TransactonType.expense) {
+    if (widget.expense.type == TransactionType.expense) {
       return '-';
     } else {
       return '+';

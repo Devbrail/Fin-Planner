@@ -55,19 +55,19 @@ class _ExpensePageState extends State<ExpensePage> {
           if (state is ExpenseDeletedState) {
             showMaterialSnackBar(
               context,
-              expenseBloc.selectedType == TransactonType.expense
-                  ? AppLocalizations.of(context)!.expenseDeletedSuccessfulLable
-                  : AppLocalizations.of(context)!.incomeDeletedSuccessfulLable,
+              expenseBloc.selectedType == TransactionType.expense
+                  ? AppLocalizations.of(context)!.expenseDeletedSuccessfulLabel
+                  : AppLocalizations.of(context)!.incomeDeletedSuccessfulLabel,
             );
             context.pop();
           } else if (state is ExpenseAdded) {
-            final content = expenseBloc.selectedType == TransactonType.expense
+            final content = expenseBloc.selectedType == TransactionType.expense
                 ? state.isAddOrUpdate
-                    ? AppLocalizations.of(context)!.expenseAddedSuccessfulLable
-                    : AppLocalizations.of(context)!.expenseUpdateSuccessfulLable
+                    ? AppLocalizations.of(context)!.expenseAddedSuccessfulLabel
+                    : AppLocalizations.of(context)!.expenseUpdateSuccessfulLabel
                 : state.isAddOrUpdate
-                    ? AppLocalizations.of(context)!.incomeAddedSuccessfulLable
-                    : AppLocalizations.of(context)!.incomeUpdateSuccessfulLable;
+                    ? AppLocalizations.of(context)!.incomeAddedSuccessfulLabel
+                    : AppLocalizations.of(context)!.incomeUpdateSuccessfulLabel;
 
             showMaterialSnackBar(context, content);
             context.pop();
@@ -90,8 +90,8 @@ class _ExpensePageState extends State<ExpensePage> {
               appBar: materialYouAppBar(
                 context,
                 isAddExpense
-                    ? AppLocalizations.of(context)!.addExpenseLable
-                    : AppLocalizations.of(context)!.updateExpenseLable,
+                    ? AppLocalizations.of(context)!.addExpenseLabel
+                    : AppLocalizations.of(context)!.updateExpenseLabel,
                 actions: [
                   isAddExpense
                       ? const SizedBox.shrink()
@@ -179,8 +179,8 @@ class _ExpensePageState extends State<ExpensePage> {
                 backgroundColor: Colors.transparent,
                 title: Text(
                   isAddExpense
-                      ? AppLocalizations.of(context)!.addExpenseLable
-                      : AppLocalizations.of(context)!.updateExpenseLable,
+                      ? AppLocalizations.of(context)!.addExpenseLabel
+                      : AppLocalizations.of(context)!.updateExpenseLabel,
                   style: Theme.of(context)
                       .textTheme
                       .headline6
@@ -283,8 +283,8 @@ class _ExpensePageState extends State<ExpensePage> {
       ),
       child: Text(
         isAddExpense
-            ? AppLocalizations.of(context)!.addLable
-            : AppLocalizations.of(context)!.updateLable,
+            ? AppLocalizations.of(context)!.addLabel
+            : AppLocalizations.of(context)!.updateLabel,
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: Theme.of(context).textTheme.headline6?.fontSize,
@@ -334,7 +334,7 @@ class ExpenseDatePickerWidget extends StatelessWidget {
             controller: controller,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.dateLable,
+              hintText: AppLocalizations.of(context)!.dateLabel,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
@@ -382,15 +382,15 @@ class ExpenseNameWidget extends StatelessWidget {
             controller: controller,
             keyboardType: TextInputType.name,
             decoration: InputDecoration(
-              hintText: state.transactionType == TransactonType.expense
-                  ? AppLocalizations.of(context)!.expenseNameLable
-                  : AppLocalizations.of(context)!.incomeNameLable,
+              hintText: state.transactionType == TransactionType.expense
+                  ? AppLocalizations.of(context)!.expenseNameLabel
+                  : AppLocalizations.of(context)!.incomeNameLabel,
             ),
             validator: (value) {
               if (value!.length >= 3) {
                 return null;
               } else {
-                return AppLocalizations.of(context)!.validNameLable;
+                return AppLocalizations.of(context)!.validNameLabel;
               }
             },
             onChanged: (value) =>
@@ -419,7 +419,7 @@ class ExpenseAmountWidget extends StatelessWidget {
       keyboardType: TextInputType.number,
       maxLines: 1,
       decoration: InputDecoration(
-        hintText: AppLocalizations.of(context)!.amountLable,
+        hintText: AppLocalizations.of(context)!.amountLabel,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
@@ -434,7 +434,7 @@ class ExpenseAmountWidget extends StatelessWidget {
         if (value!.length > 1) {
           return null;
         } else {
-          return AppLocalizations.of(context)!.validAmountLable;
+          return AppLocalizations.of(context)!.validAmountLabel;
         }
       },
     );

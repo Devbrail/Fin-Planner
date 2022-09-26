@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_paisa/common/enum/box_types.dart';
-import 'package:flutter_paisa/data/accounts/datasources/account_local_data_source.dart';
+import 'package:flutter_paisa/data/accounts/data_sources/account_local_data_source.dart';
 import 'package:flutter_paisa/data/accounts/model/account.dart';
-import 'package:flutter_paisa/data/category/datasources/category_local_data_source.dart';
+import 'package:flutter_paisa/data/category/data_sources/category_local_data_source.dart';
 import 'package:flutter_paisa/data/category/model/category.dart';
-import 'package:flutter_paisa/data/expense/datasources/expense_manager_local_data_source.dart';
+import 'package:flutter_paisa/data/expense/data_sources/expense_manager_local_data_source.dart';
 import 'package:flutter_paisa/data/expense/model/expense.dart';
 import 'package:flutter_paisa/data/settings/data.dart';
 import 'package:flutter_paisa/di/service_locator.dart';

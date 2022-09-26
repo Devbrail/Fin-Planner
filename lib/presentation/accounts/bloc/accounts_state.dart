@@ -27,10 +27,10 @@ class AddAccountState extends AccountsState {
 
 class AccountDeletedState extends AccountsState {}
 
-class AccountSeletedState extends AccountsState {
+class AccountSelectedState extends AccountsState {
   final Account account;
 
-  const AccountSeletedState(this.account);
+  const AccountSelectedState(this.account);
 
   @override
   List<Object> get props => [account];

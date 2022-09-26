@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import '../../../common/enum/box_types.dart';
 import '../../../common/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
-import '../../../domain/account/usecase/account_use_case.dart';
+import '../../../domain/account/use_case/account_use_case.dart';
 
 part 'accounts_event.dart';
 part 'accounts_state.dart';
@@ -19,7 +19,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     on<FetchAccountsEvent>((event, emit) => _fetchAccounts(emit));
     on<AddAccountEvent>((event, emit) => _addAccount(event, emit));
     on<DeleteAccountEvent>((event, emit) => _deleteAccount(event, emit));
-    on<AccountSeletedEvent>((event, emit) => _accountSelected(event, emit));
+    on<AccountSelectedEvent>((event, emit) => _accountSelected(event, emit));
     on<UpdateAccountEvent>((event, emit) => _updateAccount(event, emit));
     on<ClearAccountEvent>((event, emit) => _clearAccount(event, emit));
     on<FetchAccountFromIdEvent>(
@@ -101,8 +101,8 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     emit(AccountDeletedState());
   }
 
-  _accountSelected(AccountSeletedEvent event, Emitter<AccountsState> emit) {
-    emit(AccountSeletedState(event.account));
+  _accountSelected(AccountSelectedEvent event, Emitter<AccountsState> emit) {
+    emit(AccountSelectedState(event.account));
   }
 
   _fetchAccountFromId(

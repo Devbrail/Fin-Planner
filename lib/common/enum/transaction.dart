@@ -1,50 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/common/enum/card_type.dart';
 import 'package:hive/hive.dart';
 
 part 'transaction.g.dart';
 
 @HiveType(typeId: 11)
-enum TransactonType {
+enum TransactionType {
   @HiveField(1)
   expense,
   @HiveField(0)
-  income /* ,
+  income,
   @HiveField(2)
-  deposit */
+  transfer
 }
 
-extension TransactonTypeMapping on TransactonType {
+extension TransactionTypeMapping on TransactionType {
   String name(BuildContext context) {
     switch (this) {
-      case TransactonType.income:
-        return AppLocalizations.of(context)!.incomeLable;
-      case TransactonType.expense:
-        return AppLocalizations.of(context)!.expenseLable;
-      /*  case TransactonType.deposit:
-        return AppLocalizations.of(context)!.deposit; */
+      case TransactionType.income:
+        return AppLocalizations.of(context)!.incomeLabel;
+      case TransactionType.expense:
+        return AppLocalizations.of(context)!.expenseLabel;
+      case TransactionType.transfer:
+        return AppLocalizations.of(context)!.transferLabel;
     }
   }
 
   String get nameString {
     switch (this) {
-      case TransactonType.expense:
+      case TransactionType.expense:
         return 'expense';
-      case TransactonType.income:
+      case TransactionType.income:
         return 'income';
+      case TransactionType.transfer:
+        return 'transfer';
     }
   }
 }
 
 extension TransactionMap on String {
-  TransactonType get type {
+  TransactionType get type {
     switch (this) {
       case 'expense':
-        return TransactonType.expense;
+        return TransactionType.expense;
       case 'income':
-        return TransactonType.income;
+        return TransactionType.income;
+      case 'transfer':
+        return TransactionType.transfer;
     }
-    return TransactonType.expense;
+    return TransactionType.expense;
   }
 }

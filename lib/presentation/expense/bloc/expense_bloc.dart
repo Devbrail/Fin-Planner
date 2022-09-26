@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 import '../../../common/enum/transaction.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../domain/landing/usecase/expense_use_case.dart';
+import '../../../domain/expense/use_case/expense_use_case.dart';
 
 part 'expense_event.dart';
 part 'expense_state.dart';
@@ -27,7 +27,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   int? selectedAccountId;
   Expense? currentExpense;
   late DateTime? selectedDate = DateTime.now();
-  late TransactonType selectedType = TransactonType.expense;
+  late TransactionType selectedType = TransactionType.expense;
 
   Future<void> _fetchExpenseFromId(
     FetchExpenseFromIdEvent event,
@@ -44,7 +44,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       selectedCategoryId = expense.categoryId;
       selectedAccountId = expense.accountId;
       selectedDate = expense.time;
-      selectedType = expense.type ?? TransactonType.expense;
+      selectedType = expense.type ?? TransactionType.expense;
       currentExpense = expense;
     }
   }

@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../common/enum/box_types.dart';
 import '../../../data/category/model/category.dart';
-import '../../../domain/category/usecase/category_use_case.dart';
+import '../../../domain/category/use_case/category_use_case.dart';
 
 part 'category_event.dart';
 part 'category_state.dart';

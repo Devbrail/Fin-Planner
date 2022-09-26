@@ -15,7 +15,7 @@ Future<void> showIconPicker({
     context: context,
     builder: (_) => AlertDialog(
       icon: Icon(defaultIcon),
-      title: Text(AppLocalizations.of(context)!.selectIconLable),
+      title: Text(AppLocalizations.of(context)!.selectIconLabel),
       content: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.5,
@@ -31,7 +31,7 @@ Future<void> showIconPicker({
       actions: [
         ElevatedButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(AppLocalizations.of(context)!.cancelLable),
+          child: Text(AppLocalizations.of(context)!.cancelLabel),
         )
       ],
     ),

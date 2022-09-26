@@ -23,8 +23,8 @@ class ExpenseAdapter extends TypeAdapter<Expense> {
       categoryId: fields[6] as int,
       accountId: fields[5] as int,
       type: fields[4] == null
-          ? TransactonType.expense
-          : fields[4] as TransactonType?,
+          ? TransactionType.expense
+          : fields[4] as TransactionType?,
     )..superId = fields[7] as int?;
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/util.dart';
-import '../../../data/category/datasources/category_local_data_source.dart';
+import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 import 'budget_item_widget.dart';

@@ -49,7 +49,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               children: [
                 ListTile(
                   title: Text(
-                    AppLocalizations.of(context)!.profileLable,
+                    AppLocalizations.of(context)!.profileLabel,
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
@@ -76,7 +76,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     ),
                     onPressed: _updateDetails,
                     child: Text(
-                      AppLocalizations.of(context)!.updateLable,
+                      AppLocalizations.of(context)!.updateLabel,
                     ),
                   ),
                 ),
@@ -112,7 +112,7 @@ class UserTextField extends StatelessWidget {
             controller: nameController,
             keyboardType: TextInputType.name,
             decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.userNameLable,
+              hintText: AppLocalizations.of(context)!.userNameLabel,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
@@ -122,7 +122,7 @@ class UserTextField extends StatelessWidget {
               if (value!.length >= 3) {
                 return null;
               } else {
-                return AppLocalizations.of(context)!.validNameLable;
+                return AppLocalizations.of(context)!.validNameLabel;
               }
             },
           ),

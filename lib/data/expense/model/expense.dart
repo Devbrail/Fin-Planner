@@ -15,8 +15,8 @@ class Expense extends HiveObject {
   @HiveField(3)
   DateTime time;
 
-  @HiveField(4, defaultValue: TransactonType.expense)
-  TransactonType? type;
+  @HiveField(4, defaultValue: TransactionType.expense)
+  TransactionType? type;
 
   @HiveField(5)
   int accountId;

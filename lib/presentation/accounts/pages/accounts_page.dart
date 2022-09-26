@@ -13,7 +13,7 @@ import '../../../data/accounts/model/account.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_transaction_widget.dart';
-import '../widgets/accounts_pageview_widget.dart';
+import '../widgets/accounts_page_view_widget.dart';
 
 class AccountsPage extends StatefulWidget {
   const AccountsPage({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class AccountsPageState extends State<AccountsPage> {
               key: const Key('accounts_mobile'),
               appBar: materialYouAppBar(
                 context,
-                AppLocalizations.of(context)!.accountsLable,
+                AppLocalizations.of(context)!.accountsLabel,
               ),
               body: ValueListenableBuilder<Box<Account>>(
                 valueListenable: Hive.box<Account>(BoxType.accounts.stringValue)
@@ -49,25 +49,25 @@ class AccountsPageState extends State<AccountsPage> {
                   if (accounts.isEmpty) {
                     return EmptyWidget(
                       icon: Icons.credit_card,
-                      title: AppLocalizations.of(context)!.errorNoCardsLable,
+                      title: AppLocalizations.of(context)!.errorNoCardsLabel,
                       description: AppLocalizations.of(context)!
-                          .errorNoCardsDescriptionLable,
+                          .errorNoCardsDescriptionLabel,
                     );
                   }
-                  accountsBloc.add(AccountSeletedEvent(accounts[0]));
+                  accountsBloc.add(AccountSelectedEvent(accounts[0]));
                   return ListView(
                     shrinkWrap: true,
-                    key: const Key('accounts_listview'),
+                    key: const Key('accounts_list_view'),
                     padding: const EdgeInsets.only(bottom: 124),
                     children: [
                       AccountPageViewWidget(accounts: accounts),
                       BlocBuilder(
                         bloc: accountsBloc,
                         buildWhen: (previous, current) =>
-                            current is AccountSeletedState,
+                            current is AccountSelectedState,
                         builder: (context, state) {
-                          if (state is AccountSeletedState) {
-                            return AccountTransactinWidget(
+                          if (state is AccountSelectedState) {
+                            return AccountTransactionWidget(
                                 account: state.account);
                           } else {
                             return const SizedBox.shrink();
@@ -82,7 +82,7 @@ class AccountsPageState extends State<AccountsPage> {
                 onPressed: _addCard,
                 heroTag: 'add_account',
                 key: const Key('add_account'),
-                tooltip: AppLocalizations.of(context)!.addAccountLable,
+                tooltip: AppLocalizations.of(context)!.addAccountLabel,
                 child: const Icon(Icons.add),
               ),
             );
@@ -91,7 +91,7 @@ class AccountsPageState extends State<AccountsPage> {
         tablet: Scaffold(
           appBar: materialYouAppBar(
             context,
-            AppLocalizations.of(context)!.accountsLable,
+            AppLocalizations.of(context)!.accountsLabel,
           ),
           body: ValueListenableBuilder<Box<Account>>(
             valueListenable:
@@ -101,12 +101,12 @@ class AccountsPageState extends State<AccountsPage> {
               if (accounts.isEmpty) {
                 return EmptyWidget(
                   icon: Icons.credit_card,
-                  title: AppLocalizations.of(context)!.errorNoCardsLable,
+                  title: AppLocalizations.of(context)!.errorNoCardsLabel,
                   description: AppLocalizations.of(context)!
-                      .errorNoCardsDescriptionLable,
+                      .errorNoCardsDescriptionLabel,
                 );
               }
-              accountsBloc.add(AccountSeletedEvent(accounts[0]));
+              accountsBloc.add(AccountSelectedEvent(accounts[0]));
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -119,10 +119,10 @@ class AccountsPageState extends State<AccountsPage> {
                     child: BlocBuilder(
                       bloc: accountsBloc,
                       buildWhen: (previous, current) =>
-                          current is AccountSeletedState,
+                          current is AccountSelectedState,
                       builder: (context, state) {
-                        if (state is AccountSeletedState) {
-                          return AccountTransactinWidget(
+                        if (state is AccountSelectedState) {
+                          return AccountTransactionWidget(
                               account: state.account);
                         } else {
                           return const SizedBox.shrink();
@@ -138,7 +138,7 @@ class AccountsPageState extends State<AccountsPage> {
             onPressed: _addCard,
             heroTag: 'add_account',
             key: const Key('add_account'),
-            tooltip: AppLocalizations.of(context)!.addAccountLable,
+            tooltip: AppLocalizations.of(context)!.addAccountLabel,
             child: const Icon(Icons.add),
           ),
         ),

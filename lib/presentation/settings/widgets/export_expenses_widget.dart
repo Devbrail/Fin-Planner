@@ -1,19 +1,16 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/app/routes.dart';
-import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../data/accounts/datasources/account_local_data_source.dart';
+import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/accounts/model/account.dart';
-import '../../../data/category/datasources/category_local_data_source.dart';
+import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/category/model/category.dart';
-import '../../../data/expense/datasources/expense_manager_local_data_source.dart';
+import '../../../data/expense/data_sources/expense_manager_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
 import 'setting_option.dart';
@@ -33,9 +30,9 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
   @override
   Widget build(BuildContext context) {
     return SettingsOption(
-      onTap: () => GoRouter.of(context).goNamed(exportAndImport),
-      title: AppLocalizations.of(context)!.backupAndRestoreLable,
-      subtitle: AppLocalizations.of(context)!.backupAndRestoreDescLable,
+      onTap: () => exportData('Export'),
+      title: AppLocalizations.of(context)!.saveAsCSVLabel,
+      subtitle: AppLocalizations.of(context)!.saveAsCSVDescLabel,
     );
   }
 

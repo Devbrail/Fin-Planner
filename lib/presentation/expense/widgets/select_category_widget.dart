@@ -36,8 +36,8 @@ class SelectCategoryIconState extends State<SelectCategoryIcon> {
         if (categories.isEmpty) {
           return ListTile(
             onTap: () => context.pushNamed(addCategoryPath),
-            title: Text(AppLocalizations.of(context)!.addCategoryLable),
-            subtitle: Text(AppLocalizations.of(context)!.noCategoryLable),
+            title: Text(AppLocalizations.of(context)!.addCategoryLabel),
+            subtitle: Text(AppLocalizations.of(context)!.noCategoryLabel),
             trailing: const Icon(Icons.keyboard_arrow_right),
           );
         }
@@ -49,7 +49,7 @@ class SelectCategoryIconState extends State<SelectCategoryIcon> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  AppLocalizations.of(context)!.selectCategoryLable,
+                  AppLocalizations.of(context)!.selectCategoryLabel,
                   style: Theme.of(context).textTheme.headline6?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -87,7 +87,7 @@ class SelectCategoryIconState extends State<SelectCategoryIcon> {
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            AppLocalizations.of(context)!.selectCategoryLable,
+                            AppLocalizations.of(context)!.selectCategoryLabel,
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6
@@ -110,7 +110,7 @@ class SelectCategoryIconState extends State<SelectCategoryIcon> {
               );
             },
             title: Text(
-              AppLocalizations.of(context)!.selectCategoryLable,
+              AppLocalizations.of(context)!.selectCategoryLabel,
             ),
             subtitle: Text(
               categories[selectedIndex].name,

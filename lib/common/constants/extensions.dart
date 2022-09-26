@@ -11,8 +11,9 @@ extension ExpenseListMapping on Box<Expense> {
     return values.where((element) => element.accountId == accountId).toList();
   }
 
-  List<Expense> get budgetOverView =>
-      values.where((element) => element.type != TransactonType.income).toList();
+  List<Expense> get budgetOverView => values
+      .where((element) => element.type != TransactionType.income)
+      .toList();
 
   List<Expense> isFilterTimeBetween(DateTimeRange range) {
     return values
@@ -32,7 +33,7 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
   String get balance => formattedCurrency(totalIncome - totalExpense);
 
   double get filterTotal => fold<double>(0, (previousValue, element) {
-        if (element.type == TransactonType.expense) {
+        if (element.type == TransactionType.expense) {
           return previousValue - element.currency;
         } else {
           return previousValue + element.currency;
@@ -40,12 +41,12 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
       });
 
   double get totalExpense =>
-      where((element) => element.type == TransactonType.expense)
+      where((element) => element.type == TransactionType.expense)
           .map((e) => e.currency)
           .fold<double>(0, (previousValue, element) => previousValue + element);
 
   double get totalIncome =>
-      where((element) => element.type == TransactonType.income)
+      where((element) => element.type == TransactionType.income)
           .map((e) => e.currency)
           .fold<double>(0, (previousValue, element) => previousValue + element);
 
@@ -55,13 +56,13 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
   String get totalWithCurrenySymbol => formattedCurrency(total);
 
   double get thisMonthExpense =>
-      where((element) => element.type == TransactonType.expense)
+      where((element) => element.type == TransactionType.expense)
           .where((element) => element.time.month == DateTime.now().month)
           .map((e) => e.currency)
           .fold<double>(0, (previousValue, element) => previousValue + element);
 
   double get thisMonthIncome =>
-      where((element) => element.type == TransactonType.income)
+      where((element) => element.type == TransactionType.income)
           .where((element) => element.time.month == DateTime.now().month)
           .map((e) => e.currency)
           .fold<double>(0, (previousValue, element) => previousValue + element);

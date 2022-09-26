@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../../data/accounts/datasources/account_local_data_source.dart';
+import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
 import 'expense_item_widget.dart';
@@ -24,7 +24,7 @@ class ExpenseListWidget extends StatelessWidget {
       itemBuilder: (_, index) {
         final expense = expenses[index];
         final account = dataSource.fetchAccount(expense.accountId);
-        return ExpensItemWidget(
+        return ExpenseItemWidget(
           expense: expense,
           account: account,
         );

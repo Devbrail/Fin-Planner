@@ -81,8 +81,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             showMaterialSnackBar(
               context,
               isAddCategory
-                  ? AppLocalizations.of(context)!.successAddCategoryLable
-                  : AppLocalizations.of(context)!.updatedCategoryLable,
+                  ? AppLocalizations.of(context)!.successAddCategoryLabel
+                  : AppLocalizations.of(context)!.updatedCategoryLabel,
             );
             context.pop();
           } else if (state is CategoryErrorState) {
@@ -121,8 +121,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               appBar: materialYouAppBar(
                 context,
                 isAddCategory
-                    ? AppLocalizations.of(context)!.addCategoryLable
-                    : AppLocalizations.of(context)!.updateCategoryLable,
+                    ? AppLocalizations.of(context)!.addCategoryLabel
+                    : AppLocalizations.of(context)!.updateCategoryLabel,
                 actions: [
                   TextButton(
                     onPressed: _submitCategory,
@@ -134,8 +134,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                     ),
                     child: Text(
                       isAddCategory
-                          ? AppLocalizations.of(context)!.addCategoryLable
-                          : AppLocalizations.of(context)!.updateLable,
+                          ? AppLocalizations.of(context)!.addCategoryLabel
+                          : AppLocalizations.of(context)!.updateLabel,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize:
@@ -197,8 +197,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     return materialYouAppBar(
       context,
       isAddCategory
-          ? AppLocalizations.of(context)!.addCategoryLable
-          : AppLocalizations.of(context)!.updateCategoryLable,
+          ? AppLocalizations.of(context)!.addCategoryLabel
+          : AppLocalizations.of(context)!.updateCategoryLabel,
     );
   }
 
@@ -213,8 +213,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       ),
       child: Text(
         isAddCategory
-            ? AppLocalizations.of(context)!.addCategoryLable
-            : AppLocalizations.of(context)!.updateLable,
+            ? AppLocalizations.of(context)!.addCategoryLabel
+            : AppLocalizations.of(context)!.updateLabel,
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: Theme.of(context).textTheme.headline6?.fontSize,
@@ -228,13 +228,13 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       controller: categoryController,
       keyboardType: TextInputType.name,
       maxLength: 10,
-      label: AppLocalizations.of(context)!.categoryLable,
+      label: AppLocalizations.of(context)!.categoryLabel,
       hintText: 'Enter category',
       validator: (value) {
         if (value!.length >= 3 && value.length < 10) {
           return null;
         } else {
-          return AppLocalizations.of(context)!.validNameLable;
+          return AppLocalizations.of(context)!.validNameLabel;
         }
       },
     );
@@ -245,7 +245,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       maxLength: 15,
       controller: descController,
       keyboardType: TextInputType.name,
-      label: AppLocalizations.of(context)!.descriptionLable,
+      label: AppLocalizations.of(context)!.descriptionLabel,
       hintText: 'Enter description',
     );
   }

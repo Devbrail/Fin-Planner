@@ -51,7 +51,7 @@ class UserNamePage extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).colorScheme.onSurface,
                             ),
-                        text: AppLocalizations.of(context)!.welcomeLable,
+                        text: AppLocalizations.of(context)!.welcomeLabel,
                         children: [
                           TextSpan(
                             text: ' ${AppLocalizations.of(context)!.appTitle}',
@@ -63,7 +63,7 @@ class UserNamePage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context)!.welcomeDescLable,
+                      AppLocalizations.of(context)!.welcomeDescLabel,
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                     const SizedBox(height: 16),
@@ -73,14 +73,14 @@ class UserNamePage extends StatelessWidget {
                         key: const Key('user_name_textfield'),
                         controller: _nameController,
                         decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.nameLable,
+                          hintText: AppLocalizations.of(context)!.nameLabel,
                         ),
                         keyboardType: TextInputType.name,
                         validator: (val) {
                           if (val!.length >= 3) {
                             return null;
                           } else {
-                            return AppLocalizations.of(context)!.enterNameLable;
+                            return AppLocalizations.of(context)!.enterNameLabel;
                           }
                         },
                       ),
@@ -109,7 +109,7 @@ class UserNamePage extends StatelessWidget {
                               .then((value) => context.go(userImagePath));
                         }
                       },
-                      child: Text(AppLocalizations.of(context)!.nextLable),
+                      child: Text(AppLocalizations.of(context)!.nextLabel),
                     ),
                   ),
                 ],

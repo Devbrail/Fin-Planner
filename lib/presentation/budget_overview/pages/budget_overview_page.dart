@@ -10,7 +10,7 @@ import '../../../common/enum/box_types.dart';
 import '../../../common/enum/filter_budget.dart';
 import '../../../common/widgets/empty_widget.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
-import '../../../data/category/datasources/category_local_data_source.dart';
+import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
 import '../widgets/budget_section_widget.dart';
@@ -60,13 +60,13 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
       mobile: Scaffold(
         appBar: materialYouAppBar(
           context,
-          AppLocalizations.of(context)!.budgetOverViewLable,
+          AppLocalizations.of(context)!.budgetOverViewLabel,
         ),
         floatingActionButton: FloatingActionButton.large(
           onPressed: _dateRangePicker,
           heroTag: 'date_range',
           key: const Key('date_range'),
-          tooltip: AppLocalizations.of(context)!.addCategoryLable,
+          tooltip: AppLocalizations.of(context)!.addCategoryLabel,
           child: const Icon(Icons.date_range),
         ),
         body: ValueListenableBuilder<Box<Expense>>(
@@ -80,9 +80,9 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
             if (expenses.isEmpty) {
               return EmptyWidget(
                 icon: Icons.paid,
-                title: AppLocalizations.of(context)!.errorNoBudgetLable,
+                title: AppLocalizations.of(context)!.errorNoBudgetLabel,
                 description:
-                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLable,
+                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLabel,
               );
             }
             expenses.sort((a, b) => a.time.compareTo(b.time));
@@ -122,7 +122,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
       tablet: Scaffold(
         appBar: materialYouAppBar(
           context,
-          AppLocalizations.of(context)!.budgetOverViewLable,
+          AppLocalizations.of(context)!.budgetOverViewLabel,
           actions: [
             FilterBudgetWidget(
               onSelected: (budget) {
@@ -136,7 +136,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
           onPressed: _dateRangePicker,
           heroTag: 'date_range',
           key: const Key('date_range'),
-          tooltip: AppLocalizations.of(context)!.addCategoryLable,
+          tooltip: AppLocalizations.of(context)!.addCategoryLabel,
           child: const Icon(Icons.date_range),
         ),
         body: ValueListenableBuilder<Box<Expense>>(
@@ -150,9 +150,9 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
             if (expenses.isEmpty) {
               return EmptyWidget(
                 icon: Icons.paid,
-                title: AppLocalizations.of(context)!.errorNoBudgetLable,
+                title: AppLocalizations.of(context)!.errorNoBudgetLabel,
                 description:
-                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLable,
+                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLabel,
               );
             }
             expenses.sort((a, b) => a.time.compareTo(b.time));

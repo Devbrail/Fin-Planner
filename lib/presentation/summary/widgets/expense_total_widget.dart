@@ -33,7 +33,7 @@ class ExpenseTotalWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TotalBalanceWidget(
-                    title: AppLocalizations.of(context)!.totalBalanceLable,
+                    title: AppLocalizations.of(context)!.totalBalanceLabel,
                     amount: totalIncome,
                   ),
                   const SizedBox(height: 24),

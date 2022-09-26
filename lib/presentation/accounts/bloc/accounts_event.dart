@@ -53,10 +53,10 @@ class DeleteAccountEvent extends AccountsEvent {
   const DeleteAccountEvent(this.account);
 }
 
-class AccountSeletedEvent extends AccountsEvent {
+class AccountSelectedEvent extends AccountsEvent {
   final Account account;
 
-  const AccountSeletedEvent(this.account);
+  const AccountSelectedEvent(this.account);
 }
 
 class FetchAccountFromIdEvent extends AccountsEvent {

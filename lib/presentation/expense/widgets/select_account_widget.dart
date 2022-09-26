@@ -48,10 +48,10 @@ class _SelectedAccountState extends State<SelectedAccount> {
             return ListTile(
               onTap: () => context.pushNamed(addAccountPath),
               title: Text(
-                AppLocalizations.of(context)!.addAccountLable,
+                AppLocalizations.of(context)!.addAccountLabel,
               ),
               subtitle: Text(
-                AppLocalizations.of(context)!.noAccountAvailableLable,
+                AppLocalizations.of(context)!.noAccountAvaiLabelLabel,
               ),
               trailing: const Icon(Icons.keyboard_arrow_right),
             );
@@ -72,7 +72,7 @@ class _SelectedAccountState extends State<SelectedAccount> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    AppLocalizations.of(context)!.selectAccountLable,
+                    AppLocalizations.of(context)!.selectAccountLabel,
                     style: Theme.of(context).textTheme.headline6?.copyWith(
                           fontWeight: FontWeight.bold,
                           color:
@@ -111,7 +111,7 @@ class _SelectedAccountState extends State<SelectedAccount> {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
-                              AppLocalizations.of(context)!.selectAccountLable,
+                              AppLocalizations.of(context)!.selectAccountLabel,
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6
@@ -133,7 +133,7 @@ class _SelectedAccountState extends State<SelectedAccount> {
                 );
               },
               title: Text(
-                AppLocalizations.of(context)!.selectAccountLable,
+                AppLocalizations.of(context)!.selectAccountLabel,
               ),
               subtitle: Text(selectedAccount!.name),
             ),

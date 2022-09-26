@@ -35,14 +35,14 @@ class _UserImagePageState extends State<UserImagePage> {
               children: [
                 const SizedBox(height: 16),
                 Text(
-                  AppLocalizations.of(context)!.imageLable,
+                  AppLocalizations.of(context)!.imageLabel,
                   style: Theme.of(context).textTheme.headline5?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
                 Text(
-                  AppLocalizations.of(context)!.imageDescLable,
+                  AppLocalizations.of(context)!.imageDescLabel,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 const SizedBox(height: 16),
@@ -66,7 +66,7 @@ class _UserImagePageState extends State<UserImagePage> {
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   onPressed: () => context.pop(),
-                  child: Text(AppLocalizations.of(context)!.backLable),
+                  child: Text(AppLocalizations.of(context)!.backLabel),
                 ),
               ),
               Padding(
@@ -80,7 +80,7 @@ class _UserImagePageState extends State<UserImagePage> {
                     }
                     context.go(splashPath);
                   },
-                  child: Text(AppLocalizations.of(context)!.nextLable),
+                  child: Text(AppLocalizations.of(context)!.nextLabel),
                 ),
               ),
             ],

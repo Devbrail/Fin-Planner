@@ -31,12 +31,12 @@ class _VersionWidgetState extends State<VersionWidget> {
     if (packageInfo == null) {
       return SettingsOption(
         icon: MdiIcons.numeric0Box,
-        title: AppLocalizations.of(context)!.versionLable,
+        title: AppLocalizations.of(context)!.versionLabel,
       );
     }
     final version = packageInfo?.version ?? '';
     return SettingsOption(
-      title: AppLocalizations.of(context)!.versionLable,
+      title: AppLocalizations.of(context)!.versionLabel,
       subtitle: AppLocalizations.of(context)!.versionNumber(version),
     );
   }

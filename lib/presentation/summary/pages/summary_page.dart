@@ -156,7 +156,7 @@ class _SummaryPageState extends State<SummaryPage> {
   FloatingActionButton floatinActionButton() {
     return FloatingActionButton.large(
       onPressed: _addExpense,
-      tooltip: AppLocalizations.of(context)!.addExpenseLable,
+      tooltip: AppLocalizations.of(context)!.addExpenseLabel,
       heroTag: 'add_expense',
       key: const Key('add_expense'),
       child: const Icon(Icons.add),

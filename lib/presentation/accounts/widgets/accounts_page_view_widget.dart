@@ -29,7 +29,7 @@ class AccountPageViewWidget extends StatelessWidget {
             padEnds: true,
             itemCount: accounts.length,
             onPageChanged: (index) => BlocProvider.of<AccountsBloc>(context)
-                .add(AccountSeletedEvent(accounts[index])),
+                .add(AccountSelectedEvent(accounts[index])),
             itemBuilder: (_, index) {
               final account = accounts[index];
               return AccountCard(

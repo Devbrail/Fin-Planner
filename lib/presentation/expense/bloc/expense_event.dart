@@ -25,7 +25,7 @@ class ClearExpenseEvent extends ExpenseEvent {
 }
 
 class ChangeExpenseEvent extends ExpenseEvent {
-  final TransactonType transactionType;
+  final TransactionType transactionType;
 
   const ChangeExpenseEvent(this.transactionType);
 }

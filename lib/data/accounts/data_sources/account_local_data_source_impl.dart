@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:hive/hive.dart';
 
 import '../../../common/enum/box_types.dart';

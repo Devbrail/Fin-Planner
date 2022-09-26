@@ -24,7 +24,7 @@ class ExpenseUseCase {
     return expenseRepository.expenses(isRefresh);
   }
 
-  Future<String> totalTransactionType(TransactonType type) =>
+  Future<String> totalTransactionType(TransactionType type) =>
       expenseRepository.totalExpenses(type);
 
   Future<void> addExpense(
@@ -33,7 +33,7 @@ class ExpenseUseCase {
     DateTime time,
     int category,
     int account,
-    TransactonType type,
+    TransactionType type,
   ) async {
     await expenseRepository.addExpense(
       name,

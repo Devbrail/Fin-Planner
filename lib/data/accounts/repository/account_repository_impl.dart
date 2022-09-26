@@ -1,6 +1,6 @@
 import '../../../common/enum/card_type.dart';
 import '../../../domain/account/repository/account_repository.dart';
-import '../datasources/account_local_data_source.dart';
+import '../data_sources/account_local_data_source.dart';
 import '../model/account.dart';
 
 class AccountRepositoryImpl extends AccountRepository {

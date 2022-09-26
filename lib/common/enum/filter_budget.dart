@@ -13,15 +13,15 @@ extension FilterBudgetMapping on FilterBudget {
   String name(BuildContext context) {
     switch (this) {
       case FilterBudget.daily:
-        return AppLocalizations.of(context)!.dailyLable;
+        return AppLocalizations.of(context)!.dailyLabel;
       case FilterBudget.weekly:
-        return AppLocalizations.of(context)!.weeklyLable;
+        return AppLocalizations.of(context)!.weeklyLabel;
       case FilterBudget.monthly:
-        return AppLocalizations.of(context)!.monthlyLable;
+        return AppLocalizations.of(context)!.monthlyLabel;
       case FilterBudget.yearly:
-        return AppLocalizations.of(context)!.yearlyLable;
+        return AppLocalizations.of(context)!.yearlyLabel;
       case FilterBudget.all:
-        return AppLocalizations.of(context)!.allLable;
+        return AppLocalizations.of(context)!.allLabel;
     }
   }
 }

@@ -31,7 +31,7 @@ class SearchListWidget extends StatelessWidget {
                   Icons.search,
                   size: 72,
                 ),
-                Text(AppLocalizations.of(context)!.searchMessageLable),
+                Text(AppLocalizations.of(context)!.searchMessageLabel),
               ],
             ),
           );
@@ -52,7 +52,7 @@ class SearchListWidget extends StatelessWidget {
                   Icons.sentiment_satisfied_rounded,
                   size: 72,
                 ),
-                Text(AppLocalizations.of(context)!.emptySearchMessageLable),
+                Text(AppLocalizations.of(context)!.emptySearchMessageLabel),
               ],
             ),
           );
@@ -60,7 +60,7 @@ class SearchListWidget extends StatelessWidget {
         return results.isEmpty
             ? Center(
                 child: Text(
-                  AppLocalizations.of(context)!.noResultFoundLable,
+                  AppLocalizations.of(context)!.noResultFoundLabel,
                   style: Theme.of(context).textTheme.headline6,
                 ),
               )

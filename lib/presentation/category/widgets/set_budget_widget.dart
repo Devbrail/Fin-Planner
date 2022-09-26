@@ -27,8 +27,8 @@ class _SetBudgetWidgetState extends State<SetBudgetWidget> {
             color: Theme.of(context).colorScheme.primary,
           ),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          title: Text(AppLocalizations.of(context)!.budgetLable),
-          subtitle: Text(AppLocalizations.of(context)!.setBudgetLable),
+          title: Text(AppLocalizations.of(context)!.budgetLabel),
+          subtitle: Text(AppLocalizations.of(context)!.setBudgetLabel),
           activeColor: Theme.of(context).colorScheme.primary,
           onChanged: (bool value) {
             setState(() {
@@ -43,7 +43,7 @@ class _SetBudgetWidgetState extends State<SetBudgetWidget> {
                 child: TextField(
                   controller: widget.controller,
                   decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.budgetLable,
+                    hintText: AppLocalizations.of(context)!.budgetLabel,
                   ),
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[

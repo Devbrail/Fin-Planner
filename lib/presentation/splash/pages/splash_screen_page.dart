@@ -45,7 +45,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                 children: [
                   ListTile(
                     title: Text(
-                      AppLocalizations.of(context)!.selecteCountryLable,
+                      AppLocalizations.of(context)!.selecteCountryLabel,
                       style: Theme.of(context)
                           .textTheme
                           .headline5

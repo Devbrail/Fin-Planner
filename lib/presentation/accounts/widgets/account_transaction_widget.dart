@@ -8,14 +8,14 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../common/constants/extensions.dart';
 import '../../../common/enum/box_types.dart';
 import '../../../common/widgets/material_you_card_widget.dart';
-import '../../../data/accounts/datasources/account_local_data_source.dart';
+import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
 import '../../summary/widgets/expense_item_widget.dart';
 
-class AccountTransactinWidget extends StatelessWidget {
-  const AccountTransactinWidget({
+class AccountTransactionWidget extends StatelessWidget {
+  const AccountTransactionWidget({
     Key? key,
     required this.account,
   }) : super(key: key);
@@ -61,7 +61,7 @@ class AccountTransactinWidget extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(AppLocalizations.of(context)!.balanceLable),
+                              Text(AppLocalizations.of(context)!.balanceLabel),
                               const SizedBox(height: 6),
                               Text(
                                 expenses.balance,
@@ -84,7 +84,7 @@ class AccountTransactinWidget extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(AppLocalizations.of(context)!.expenseLable),
+                              Text(AppLocalizations.of(context)!.expenseLabel),
                               const SizedBox(height: 6),
                               Text(
                                 formattedCurrency(expenses.totalExpense),
@@ -106,7 +106,7 @@ class AccountTransactinWidget extends StatelessWidget {
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                 title: Text(
-                  AppLocalizations.of(context)!.transactionHistoryLable,
+                  AppLocalizations.of(context)!.transactionHistoryLabel,
                   style: Theme.of(context)
                       .textTheme
                       .headline6
@@ -121,7 +121,7 @@ class AccountTransactinWidget extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: expenses.length,
                     itemBuilder: (_, index) {
-                      return ExpensItemWidget(
+                      return ExpenseItemWidget(
                         expense: expenses[index],
                         account: locator
                             .get<AccountLocalDataSource>()
@@ -138,7 +138,7 @@ class AccountTransactinWidget extends StatelessWidget {
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                 title: Text(
-                  AppLocalizations.of(context)!.transactionHistoryLable,
+                  AppLocalizations.of(context)!.transactionHistoryLabel,
                   style: Theme.of(context)
                       .textTheme
                       .headline6
@@ -155,7 +155,7 @@ class AccountTransactinWidget extends StatelessWidget {
                       final account = locator
                           .get<AccountLocalDataSource>()
                           .fetchAccount(expenses[index].accountId);
-                      return ExpensItemWidget(
+                      return ExpenseItemWidget(
                         expense: expenses[index],
                         account: account,
                       );

@@ -29,7 +29,7 @@ class DynamicColorSwitchWidgetState extends State<DynamicColorSwitchWidget> {
   @override
   Widget build(BuildContext context) {
     return SettingsOption(
-      title: AppLocalizations.of(context)!.dynamicColorLable,
+      title: AppLocalizations.of(context)!.dynamicColorLabel,
       trailing: Switch(
         value: isDynamic,
         onChanged: (value) {

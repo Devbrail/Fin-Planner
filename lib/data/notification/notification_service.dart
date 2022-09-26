@@ -21,7 +21,7 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
 
 const _androidDetails = AndroidNotificationDetails(
   'pasia_channel_id',
-  'Reminder noticaitions',
+  'Reminder notifications',
   channelDescription: 'Show notifications whenever possible to add expense',
   priority: Priority.low,
   importance: Importance.high,
@@ -95,7 +95,7 @@ class NotificationService {
     );
   }
 
-  Future<void> sechuldeNotification() async {
+  Future<void> secludeNotification() async {
     await notification.zonedSchedule(
       0,
       'Add expense',

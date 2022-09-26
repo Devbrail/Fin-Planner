@@ -4,7 +4,7 @@ import '../../../data/expense/model/expense.dart';
 
 abstract class ExpenseRepository {
   Future<Map<String, List<Expense>>> expenses(bool isRefresh);
-  Future<String> totalExpenses(TransactonType type);
+  Future<String> totalExpenses(TransactionType type);
   Future<String> filterExpensesTotal(FilterDays filterDays);
   Future<void> addExpense(
     String name,
@@ -12,7 +12,7 @@ abstract class ExpenseRepository {
     DateTime time,
     int category,
     int account,
-    TransactonType transactonType,
+    TransactionType transactionType,
   );
   Future<void> clearExpenses();
   Future<void> clearExpense(int expenseId);

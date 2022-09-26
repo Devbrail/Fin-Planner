@@ -13,7 +13,7 @@ class CurrencyChangeWidget extends StatelessWidget {
     return ListTile(
       onTap: () =>
           context.go('/splash', extra: {'force_change_currency': true}),
-      title: Text(AppLocalizations.of(context)!.currencySignLable),
+      title: Text(AppLocalizations.of(context)!.currencySignLabel),
       subtitle: Text(NumberFormat.compactSimpleCurrency(locale: currentLocale)
               .currencyName ??
           ''),

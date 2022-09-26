@@ -1,5 +1,5 @@
 import '../../../domain/category/repository/category_repository.dart';
-import '../datasources/category_local_data_source.dart';
+import '../data_sources/category_local_data_source.dart';
 import '../model/category.dart';
 
 class CategoryRepositoryImpl extends CategoryRepository {

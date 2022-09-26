@@ -10,15 +10,15 @@ class TransactionToggleButtons extends StatefulWidget {
     required this.selectedType,
   }) : super(key: key);
 
-  final Function(TransactonType) onSelected;
-  final TransactonType selectedType;
+  final Function(TransactionType) onSelected;
+  final TransactionType selectedType;
   @override
   TransactionToggleButtonsState createState() =>
       TransactionToggleButtonsState();
 }
 
 class TransactionToggleButtonsState extends State<TransactionToggleButtons> {
-  late TransactonType selectedType = widget.selectedType;
+  late TransactionType selectedType = widget.selectedType;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class TransactionToggleButtonsState extends State<TransactionToggleButtons> {
     widget.onSelected(selectedType);
   }
 
-  void _update(TransactonType type) {
+  void _update(TransactionType type) {
     selectedType = type;
     setState(() {});
     widget.onSelected(type);
@@ -37,7 +37,7 @@ class TransactionToggleButtonsState extends State<TransactionToggleButtons> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
-        children: TransactonType.values.map((type) {
+        children: TransactionType.values.map((type) {
           final isSelected = selectedType == type;
           return MaterialYouChip(
             title: type.name(context),

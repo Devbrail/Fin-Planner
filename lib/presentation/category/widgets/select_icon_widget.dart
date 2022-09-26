@@ -27,8 +27,8 @@ class SelectIconWidget extends StatelessWidget {
         }
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          title: Text(AppLocalizations.of(context)!.selectIconLable),
-          subtitle: Text(AppLocalizations.of(context)!.selectIconDescLable),
+          title: Text(AppLocalizations.of(context)!.selectIconLabel),
+          subtitle: Text(AppLocalizations.of(context)!.selectIconDescLabel),
           leading: Icon(
             IconData(
               codePoint,

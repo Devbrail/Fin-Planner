@@ -21,7 +21,7 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.thisMonthLable,
+          AppLocalizations.of(context)!.thisMonthLabel,
           style: Theme.of(context).textTheme.headline6,
         ),
         const SizedBox(height: 8),
@@ -41,7 +41,7 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                           ),
                       children: [
                         TextSpan(
-                          text: AppLocalizations.of(context)!.incomeLable,
+                          text: AppLocalizations.of(context)!.incomeLabel,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
@@ -72,7 +72,7 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                           ),
                       children: [
                         TextSpan(
-                          text: AppLocalizations.of(context)!.outcomeLable,
+                          text: AppLocalizations.of(context)!.outcomeLabel,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),

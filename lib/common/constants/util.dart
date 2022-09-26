@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 /// Groups the elements in [values] by the value returned by [key].
 ///
 /// Returns a map from keys computed by [key] to a list of all values for which

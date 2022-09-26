@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app/app_builder.dart';
+import '../../../app/routes.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/settings_controller.dart';
 import '../widgets/choose_theme_mode_widget.dart';
 import '../widgets/color_picker_widget.dart';
 import '../widgets/currency_change_widget.dart';
-import '../widgets/export_expenses_widget.dart';
 import '../widgets/schedule_notification_widget.dart';
 import '../widgets/setting_option.dart';
 import '../widgets/settings_group_card.dart';
@@ -30,13 +31,13 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: materialYouAppBar(
         context,
-        AppLocalizations.of(context)!.settingsLable,
+        AppLocalizations.of(context)!.settingsLabel,
       ),
       body: ListView(
         shrinkWrap: true,
         children: [
           SettingsOption(
-            title: AppLocalizations.of(context)!.profileLable,
+            title: AppLocalizations.of(context)!.profileLabel,
             onTap: () {
               showModalBottomSheet(
                 constraints: BoxConstraints(
@@ -55,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
             trailing: const Icon(Icons.keyboard_arrow_right),
           ),
           SettingsGroup(
-            title: AppLocalizations.of(context)!.colorsLable,
+            title: AppLocalizations.of(context)!.colorsLabel,
             options: [
               const ChooseThemeModeWidget(),
               const Divider(),
@@ -67,32 +68,37 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
           SettingsGroup(
-            title: AppLocalizations.of(context)!.othersLable,
-            options: const [
-              CurrencyChangeWidget(),
-              Divider(),
-              ScheduleNotificationWidget(),
-              Divider(),
-              ExportExpensesWidget(),
+            title: AppLocalizations.of(context)!.othersLabel,
+            options: [
+              const CurrencyChangeWidget(),
+              const Divider(),
+              const ScheduleNotificationWidget(),
+              const Divider(),
+              SettingsOption(
+                title: AppLocalizations.of(context)!.backupAndRestoreLabel,
+                subtitle:
+                    AppLocalizations.of(context)!.backupAndRestoreDescLabel,
+                onTap: () => GoRouter.of(context).goNamed(exportAndImport),
+              ),
             ],
           ),
           SettingsGroup(
-            title: AppLocalizations.of(context)!.socialLinksLable,
+            title: AppLocalizations.of(context)!.socialLinksLabel,
             options: [
               SettingsOption(
-                title: AppLocalizations.of(context)!.githubLable,
-                subtitle: AppLocalizations.of(context)!.githubTextLable,
+                title: AppLocalizations.of(context)!.githubLabel,
+                subtitle: AppLocalizations.of(context)!.githubTextLabel,
                 onTap: () => launchUrlString('https://github.com/h4h13/paisa'),
               ),
               const Divider(),
               SettingsOption(
-                title: AppLocalizations.of(context)!.telegramLable,
-                subtitle: AppLocalizations.of(context)!.telegramGroupLable,
+                title: AppLocalizations.of(context)!.telegramLabel,
+                subtitle: AppLocalizations.of(context)!.telegramGroupLabel,
                 onTap: () => launchUrlString('https://t.me/app_paisa'),
               ),
               const Divider(),
               SettingsOption(
-                title: AppLocalizations.of(context)!.privacyPolicyLable,
+                title: AppLocalizations.of(context)!.privacyPolicyLabel,
                 onTap: () => launchUrlString('https://hemanths.dev/privacy'),
               ),
               const Divider(),
@@ -101,7 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text(AppLocalizations.of(context)!.madeWithLoveInIndiaLable),
+            child: Text(AppLocalizations.of(context)!.madeWithLoveInIndiaLabel),
           ),
         ],
       ),

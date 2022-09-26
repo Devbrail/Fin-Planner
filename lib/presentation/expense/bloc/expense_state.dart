@@ -21,7 +21,7 @@ class ExpenseAdded extends ExpenseState {
 class ExpenseDeletedState extends ExpenseState {}
 
 class ChangeExpenseState extends ExpenseState {
-  final TransactonType transactionType;
+  final TransactionType transactionType;
 
   const ChangeExpenseState(this.transactionType);
 

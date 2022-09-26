@@ -5,8 +5,8 @@ import '../../../common/constants/time.dart';
 import '../../../common/constants/util.dart';
 import '../../../common/enum/filter_days.dart';
 import '../../../common/enum/transaction.dart';
-import '../../../domain/landing/repository/expense_repository.dart';
-import '../datasources/expense_manager_local_data_source.dart';
+import '../../../domain/expense/repository/expense_repository.dart';
+import '../data_sources/expense_manager_local_data_source.dart';
 import '../model/expense.dart';
 
 class ExpenseRepositoryImpl extends ExpenseRepository {
@@ -28,7 +28,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     DateTime time,
     int category,
     int account,
-    TransactonType transactonType,
+    TransactionType transactionType,
   ) async {
     final expense = Expense(
       name: name,
@@ -36,7 +36,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
       time: time,
       categoryId: category,
       accountId: account,
-      type: transactonType,
+      type: transactionType,
     );
     await dataSource.addOrUpdateExpense(expense);
   }
@@ -79,7 +79,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   }
 
   @override
-  Future<String> totalExpenses(TransactonType type) async {
+  Future<String> totalExpenses(TransactionType type) async {
     final List<Expense> expenses = await fetchAndCache();
     final total = expenses
         .where((element) => element.type == type)

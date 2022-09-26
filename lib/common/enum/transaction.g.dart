@@ -6,30 +6,35 @@ part of 'transaction.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TransactonTypeAdapter extends TypeAdapter<TransactonType> {
+class TransactionTypeAdapter extends TypeAdapter<TransactionType> {
   @override
   final int typeId = 11;
 
   @override
-  TransactonType read(BinaryReader reader) {
+  TransactionType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 1:
-        return TransactonType.expense;
+        return TransactionType.expense;
       case 0:
-        return TransactonType.income;
+        return TransactionType.income;
+      case 2:
+        return TransactionType.transfer;
       default:
-        return TransactonType.expense;
+        return TransactionType.expense;
     }
   }
 
   @override
-  void write(BinaryWriter writer, TransactonType obj) {
+  void write(BinaryWriter writer, TransactionType obj) {
     switch (obj) {
-      case TransactonType.expense:
+      case TransactionType.expense:
         writer.writeByte(1);
         break;
-      case TransactonType.income:
+      case TransactionType.income:
         writer.writeByte(0);
+        break;
+      case TransactionType.transfer:
+        writer.writeByte(2);
         break;
     }
   }
@@ -40,7 +45,7 @@ class TransactonTypeAdapter extends TypeAdapter<TransactonType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TransactonTypeAdapter &&
+      other is TransactionTypeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
