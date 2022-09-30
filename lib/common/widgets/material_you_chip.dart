@@ -18,10 +18,10 @@ class MaterialYouChip extends StatelessWidget {
     final borderRadius =
         isSelected ? BorderRadius.circular(28) : BorderRadius.circular(12);
     final colorPrimary = isSelected
-        ? Theme.of(context).colorScheme.primaryContainer
+        ? Theme.of(context).colorScheme.primary
         : Theme.of(context).colorScheme.surfaceVariant;
     final colorOnPrimary = isSelected
-        ? Theme.of(context).colorScheme.onPrimaryContainer
+        ? Theme.of(context).colorScheme.onPrimary
         : Theme.of(context).colorScheme.onSurfaceVariant;
     return Row(
       children: [

@@ -12,40 +12,9 @@ class FetchCategoriesEvent extends CategoryEvent {}
 
 class CategoryRefreshEvent extends CategoryEvent {}
 
-class EditCategoryEvent extends CategoryEvent {
-  final String? title;
-  final String? description;
-  final int? icon;
-  final String? budget;
+class EditCategoryEvent extends CategoryEvent {}
 
-  const EditCategoryEvent({
-    required this.title,
-    required this.description,
-    required this.icon,
-    required this.budget,
-  });
-  @override
-  List<Object?> get props => [title, description, icon, budget];
-}
-
-class CategoryUpdateEvent extends CategoryEvent {
-  final Category? category;
-  final String? title;
-  final String? description;
-  final int? icon;
-  final String? budget;
-
-  const CategoryUpdateEvent({
-    required this.title,
-    required this.description,
-    required this.icon,
-    required this.budget,
-    required this.category,
-  });
-
-  @override
-  List<Object?> get props => [title, description, icon, budget, category];
-}
+class CategoryUpdateEvent extends CategoryEvent {}
 
 class CategoryDeleteEvent extends CategoryEvent {
   final Category category;

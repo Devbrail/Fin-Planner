@@ -33,60 +33,55 @@ class AccountsPageState extends State<AccountsPage> {
       create: (_) => accountsBloc,
       child: ScreenTypeLayout(
         key: const Key('accounts'),
-        mobile: Builder(
-          builder: (_) {
-            return Scaffold(
-              key: const Key('accounts_mobile'),
-              appBar: materialYouAppBar(
-                context,
-                AppLocalizations.of(context)!.accountsLabel,
-              ),
-              body: ValueListenableBuilder<Box<Account>>(
-                valueListenable: Hive.box<Account>(BoxType.accounts.stringValue)
-                    .listenable(),
-                builder: (_, value, __) {
-                  final List<Account> accounts = value.values.toList();
-                  if (accounts.isEmpty) {
-                    return EmptyWidget(
-                      icon: Icons.credit_card,
-                      title: AppLocalizations.of(context)!.errorNoCardsLabel,
-                      description: AppLocalizations.of(context)!
-                          .errorNoCardsDescriptionLabel,
-                    );
-                  }
-                  accountsBloc.add(AccountSelectedEvent(accounts[0]));
-                  return ListView(
-                    shrinkWrap: true,
-                    key: const Key('accounts_list_view'),
-                    padding: const EdgeInsets.only(bottom: 124),
-                    children: [
-                      AccountPageViewWidget(accounts: accounts),
-                      BlocBuilder(
-                        bloc: accountsBloc,
-                        buildWhen: (previous, current) =>
-                            current is AccountSelectedState,
-                        builder: (context, state) {
-                          if (state is AccountSelectedState) {
-                            return AccountTransactionWidget(
-                                account: state.account);
-                          } else {
-                            return const SizedBox.shrink();
-                          }
-                        },
-                      ),
-                    ],
-                  );
-                },
-              ),
-              floatingActionButton: FloatingActionButton.large(
-                onPressed: _addCard,
-                heroTag: 'add_account',
-                key: const Key('add_account'),
-                tooltip: AppLocalizations.of(context)!.addAccountLabel,
-                child: const Icon(Icons.add),
-              ),
-            );
-          },
+        mobile: Scaffold(
+          key: const Key('accounts_mobile'),
+          appBar: materialYouAppBar(
+            context,
+            AppLocalizations.of(context)!.accountsLabel,
+          ),
+          body: ValueListenableBuilder<Box<Account>>(
+            valueListenable:
+                Hive.box<Account>(BoxType.accounts.stringValue).listenable(),
+            builder: (_, value, __) {
+              final List<Account> accounts = value.values.toList();
+              if (accounts.isEmpty) {
+                return EmptyWidget(
+                  icon: Icons.credit_card,
+                  title: AppLocalizations.of(context)!.errorNoCardsLabel,
+                  description: AppLocalizations.of(context)!
+                      .errorNoCardsDescriptionLabel,
+                );
+              }
+              accountsBloc.add(AccountSelectedEvent(accounts[0]));
+              return ListView(
+                shrinkWrap: true,
+                key: const Key('accounts_list_view'),
+                padding: const EdgeInsets.only(bottom: 124),
+                children: [
+                  AccountPageViewWidget(accounts: accounts),
+                  BlocBuilder(
+                    bloc: accountsBloc,
+                    buildWhen: (previous, current) =>
+                        current is AccountSelectedState,
+                    builder: (context, state) {
+                      if (state is AccountSelectedState) {
+                        return AccountTransactionWidget(account: state.account);
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
+          floatingActionButton: FloatingActionButton.large(
+            onPressed: _addCard,
+            heroTag: 'add_account',
+            key: const Key('add_account'),
+            tooltip: AppLocalizations.of(context)!.addAccountLabel,
+            child: const Icon(Icons.add),
+          ),
         ),
         tablet: Scaffold(
           appBar: materialYouAppBar(

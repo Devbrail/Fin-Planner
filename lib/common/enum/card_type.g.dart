@@ -16,7 +16,7 @@ class CardTypeAdapter extends TypeAdapter<CardType> {
       case 0:
         return CardType.cash;
       case 1:
-        return CardType.debitcard;
+        return CardType.debitCard;
       case 2:
         return CardType.creditCard;
       case 3:
@@ -32,7 +32,7 @@ class CardTypeAdapter extends TypeAdapter<CardType> {
       case CardType.cash:
         writer.writeByte(0);
         break;
-      case CardType.debitcard:
+      case CardType.debitCard:
         writer.writeByte(1);
         break;
       case CardType.creditCard:

@@ -28,37 +28,62 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   final AccountUseCase accountUseCase;
   late final box = Hive.box<Account>(BoxType.accounts.stringValue);
 
-  _fetchAccounts(Emitter<AccountsState> emit) async {
+  late CardType selectedType = CardType.cash;
+  String? accountName;
+  String? accountHolderName;
+  String? accountNumber;
+  Account? currentAccount;
+
+  Future<void> _fetchAccounts(Emitter<AccountsState> emit) async {
     final accounts = await accountUseCase.accounts();
     emit(AccountListState(accounts));
+  }
+
+  Future<void> _fetchAccountFromId(
+    FetchAccountFromIdEvent event,
+    Emitter<AccountsState> emit,
+  ) async {
+    final int? accountId = int.tryParse(event.accountId ?? '');
+    if (accountId == null) return;
+
+    final Account? account = await accountUseCase.fetchAccountFromId(accountId);
+    if (account != null) {
+      emit(AccountSuccessState(account));
+      accountName == account.bankName;
+      accountHolderName == account.name;
+      accountNumber == account.name;
+      selectedType = account.cardType ?? CardType.cash;
+      currentAccount = account;
+    } else {
+      emit(const AccountErrorState('Account not found!'));
+    }
   }
 
   Future<void> _addAccount(
     AddAccountEvent event,
     Emitter<AccountsState> emit,
   ) async {
-    final String? bankName = event.bankName;
-    final String? accountHolderName = event.holderName;
-    final String? accountNumber = event.number;
-    final icon = event.icon;
-    final cardType = event.cardType;
+    final String? bankName = accountName;
+    final String? holderName = accountHolderName;
+    final String? number = accountNumber;
+
+    final cardType = selectedType = CardType.cash;
 
     if (bankName == null) {
       return emit(const AccountErrorState('Set bank name'));
     }
-    if (accountHolderName == null) {
+    if (holderName == null) {
       return emit(const AccountErrorState('Set account holder name'));
     }
-    if (accountNumber == null) {
+    if (number == null) {
       return emit(const AccountErrorState('Set account number'));
     }
 
     await accountUseCase.addAccount(
       bankName: bankName,
-      holderName: accountHolderName,
-      number: accountHolderName,
-      icon: icon,
-      validThru: event.validThru,
+      holderName: holderName,
+      number: holderName,
+      icon: cardType.icon.codePoint,
       cardType: cardType,
     );
 
@@ -69,31 +94,32 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     UpdateAccountEvent event,
     Emitter<AccountsState> emit,
   ) async {
-    final String? bankName = event.bankName;
-    final String? accountHolderName = event.holderName;
-    final String? accountNumber = event.number;
-    final icon = event.icon;
-    final cardType = event.cardType;
+    final String? bankName = accountName;
+    final String? holderName = accountHolderName;
+    final String? number = accountNumber;
+
+    final cardType = selectedType = CardType.cash;
 
     if (bankName == null) {
       return emit(const AccountErrorState('Set bank name'));
     }
-    if (accountHolderName == null) {
+    if (holderName == null) {
       return emit(const AccountErrorState('Set account holder name'));
     }
-    if (accountNumber == null) {
+    if (number == null) {
       return emit(const AccountErrorState('Set account number'));
     }
-    event.account!
-      ..bankName = bankName
-      ..cardType = cardType
-      ..icon = icon
-      ..name = accountHolderName
-      ..validThru = event.validThru
-      ..cardType = cardType;
+    if (currentAccount != null) {
+      currentAccount!
+        ..bankName = bankName
+        ..cardType = cardType
+        ..icon = cardType.icon.codePoint
+        ..name = holderName
+        ..cardType = cardType;
 
-    await event.account!.save();
-    emit(const AddAccountState());
+      await currentAccount!.save();
+      emit(const AddAccountState());
+    }
   }
 
   _deleteAccount(DeleteAccountEvent event, Emitter<AccountsState> emit) async {
@@ -103,21 +129,6 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   _accountSelected(AccountSelectedEvent event, Emitter<AccountsState> emit) {
     emit(AccountSelectedState(event.account));
-  }
-
-  _fetchAccountFromId(
-    FetchAccountFromIdEvent event,
-    Emitter<AccountsState> emit,
-  ) async {
-    final int? accountId = int.tryParse(event.accountId ?? '');
-    if (accountId == null) return;
-
-    final Account? account = await accountUseCase.fetchAccountFromId(accountId);
-    if (account != null) {
-      emit(AccountSuccessState(account));
-    } else {
-      emit(const AccountErrorState('Account not found!'));
-    }
   }
 
   _clearAccount(

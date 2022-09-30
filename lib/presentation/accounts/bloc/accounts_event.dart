@@ -9,43 +9,9 @@ abstract class AccountsEvent extends Equatable {
 
 class FetchAccountsEvent extends AccountsEvent {}
 
-class AddAccountEvent extends AccountsEvent {
-  final String? holderName;
-  final String? bankName;
-  final String? number;
-  final DateTime validThru;
-  final int icon;
-  final CardType cardType;
+class AddAccountEvent extends AccountsEvent {}
 
-  const AddAccountEvent({
-    required this.bankName,
-    required this.holderName,
-    required this.number,
-    required this.icon,
-    required this.validThru,
-    required this.cardType,
-  });
-}
-
-class UpdateAccountEvent extends AccountsEvent {
-  final Account? account;
-  final String? holderName;
-  final String? bankName;
-  final String? number;
-  final DateTime validThru;
-  final int icon;
-  final CardType cardType;
-
-  const UpdateAccountEvent({
-    required this.account,
-    required this.bankName,
-    required this.holderName,
-    required this.number,
-    required this.icon,
-    required this.validThru,
-    required this.cardType,
-  });
-}
+class UpdateAccountEvent extends AccountsEvent {}
 
 class DeleteAccountEvent extends AccountsEvent {
   final Account account;

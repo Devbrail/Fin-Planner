@@ -25,7 +25,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   final service = locator.get<SettingsService>();
   late final settings = Hive.box(BoxType.settings.stringValue);
   late final accounts = Hive.box<Account>(BoxType.accounts.stringValue);
-  late final categorys = Hive.box<Category>(BoxType.category.stringValue);
+  late final categories = Hive.box<Category>(BoxType.category.stringValue);
 
   FutureOr<void> _checkLogin(
     CheckLoginEvent event,
@@ -37,7 +37,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         name: 'Holder name',
         icon: Icons.credit_card.codePoint,
         bankName: 'Bank name',
-        validThru: DateTime.now(),
         number: '1234',
         cardType: CardType.cash,
       );
@@ -46,14 +45,14 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       await account.save();
     }
 
-    final isAnyCategory = categorys.values.isEmpty;
+    final isAnyCategory = categories.values.isEmpty;
     if (isAnyCategory) {
       final category = Category(
         name: 'Default',
         icon: MdiIcons.home.codePoint,
         description: 'All expenses',
       );
-      final int id = await categorys.add(category);
+      final int id = await categories.add(category);
       category.superId = id;
       category.save();
     }

@@ -30,13 +30,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
 
   late final CategoryBloc categoryBloc = locator.get()
     ..add(FetchCategoryFromIdEvent(widget.categoryId));
-  late TextEditingController budgetController;
-  late TextEditingController categoryController;
-  late TextEditingController descController;
-  late int? selectedIcon;
-  late bool setBudget = _checkBudget();
-
-  Category? category;
+  late TextEditingController budgetController = TextEditingController();
+  late TextEditingController categoryController = TextEditingController();
+  late TextEditingController descController = TextEditingController();
 
   void _submitCategory() {
     final isValid = formKey.currentState!.validate();
@@ -45,24 +41,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     }
 
     if (isAddCategory) {
-      categoryBloc.add(
-        EditCategoryEvent(
-          title: categoryController.text,
-          description: descController.text,
-          icon: selectedIcon,
-          budget: budgetController.text,
-        ),
-      );
+      categoryBloc.add(EditCategoryEvent());
     } else {
-      categoryBloc.add(
-        CategoryUpdateEvent(
-          title: categoryController.text,
-          description: descController.text,
-          icon: selectedIcon,
-          budget: budgetController.text,
-          category: category,
-        ),
-      );
+      categoryBloc.add(CategoryUpdateEvent());
     }
   }
 
@@ -73,9 +54,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       child: BlocConsumer(
         bloc: categoryBloc,
         listener: (context, state) {
-          if (state is CategoryIconSelectedState) {
-            selectedIcon = state.categoryIcon;
-          }
           if (state is CategoryAddedState) {
             showMaterialSnackBar(
               context,
@@ -86,18 +64,25 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             context.pop();
           } else if (state is CategoryErrorState) {
             showMaterialSnackBar(context, state.errorString);
+          } else if (state is CategorySuccessState) {
+            budgetController.text = state.category.budget.toString();
+            budgetController.selection = TextSelection.collapsed(
+              offset: state.category.budget.toString().length,
+            );
+
+            categoryController.text = state.category.name;
+            categoryController.selection = TextSelection.collapsed(
+              offset: state.category.name.length,
+            );
+
+            descController.text = state.category.description;
+            descController.selection = TextSelection.collapsed(
+              offset: state.category.description.length,
+            );
           }
         },
         buildWhen: (previous, current) => current is CategorySuccessState,
         builder: (context, state) {
-          if (state is CategorySuccessState) {
-            category = state.category;
-          }
-          selectedIcon = category?.icon;
-          budgetController =
-              TextEditingController(text: category?.budget.toString());
-          categoryController = TextEditingController(text: category?.name);
-          descController = TextEditingController(text: category?.description);
           return ScreenTypeLayout(
             mobile: Scaffold(
               appBar: appBar(),
@@ -155,12 +140,12 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                         child: Column(
                           children: [
                             SelectIconWidget(
-                              codePoint:
-                                  selectedIcon ?? MdiIcons.home.codePoint,
+                              codePoint: categoryBloc.selectedIcon ??
+                                  MdiIcons.home.codePoint,
                             ),
                             SetBudgetWidget(
                               controller: budgetController,
-                              setBudget: setBudget,
+                              setBudget: categoryBloc.checkBudget(),
                             ),
                           ],
                         ),
@@ -189,8 +174,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   }
 
   bool get isAddCategory => widget.categoryId == null;
-
-  bool get isBudgetActive => category?.budget == null;
 
   AppBar appBar() {
     return materialYouAppBar(
@@ -254,11 +237,11 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SelectIconWidget(
-          codePoint: selectedIcon ?? MdiIcons.home.codePoint,
+          codePoint: categoryBloc.selectedIcon ?? MdiIcons.home.codePoint,
         ),
         SetBudgetWidget(
           controller: budgetController,
-          setBudget: setBudget,
+          setBudget: categoryBloc.checkBudget(),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -274,13 +257,5 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         ),
       ],
     );
-  }
-
-  bool _checkBudget() {
-    final double budget = category?.budget ?? 0.0;
-    if (budget > 0.0) {
-      return true;
-    }
-    return false;
   }
 }

@@ -21,7 +21,6 @@ class AccountRepositoryImpl extends AccountRepository {
     required String holderName,
     required String number,
     required int icon,
-    required DateTime validThru,
     required CardType cardType,
   }) async {
     await dataSource.addAccount(Account(
@@ -29,7 +28,6 @@ class AccountRepositoryImpl extends AccountRepository {
       icon: icon,
       bankName: bankName,
       number: number,
-      validThru: validThru,
       cardType: cardType,
     ));
   }

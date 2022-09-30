@@ -26,6 +26,30 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   }
   final CategoryUseCase categoryUseCase;
   late final box = Hive.box<Category>(BoxType.category.stringValue);
+  int? selectedIcon;
+  String? categoryTitle;
+  String? categoryDesc;
+  double? categoryBudget;
+  Category? currentCategory;
+
+  Future<void> _fetchCategoryFromId(
+    FetchCategoryFromIdEvent event,
+    Emitter<CategoryState> emit,
+  ) async {
+    final int? categoryId = int.tryParse(event.categoryId ?? '');
+    if (categoryId == null) return;
+
+    final Category? category =
+        await categoryUseCase.fetchCategoryFromId(categoryId);
+    if (category != null) {
+      categoryTitle = category.name;
+      categoryDesc = category.description;
+      categoryBudget = category.budget;
+      selectedIcon = category.icon;
+      currentCategory = category;
+      emit(CategorySuccessState(category));
+    }
+  }
 
   _fetchCategories(Emitter<CategoryState> emit) async {
     final categories = await categoryUseCase.categories();
@@ -36,16 +60,16 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     EditCategoryEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    final String? categoryTitle = event.title;
-    final String? categoryDescription = event.description;
-    final int? icon = event.icon;
-    final double? budget = double.tryParse(event.budget ?? '');
+    final String? title = categoryTitle;
+    final String? description = categoryDesc;
+    final int? icon = selectedIcon;
+    final double? budget = categoryBudget;
 
-    if (categoryTitle == null) {
+    if (title == null) {
       return emit(const CategoryErrorState('Add category title'));
     }
 
-    if (categoryDescription == null) {
+    if (description == null) {
       return emit(const CategoryErrorState('Add category description'));
     }
 
@@ -55,42 +79,44 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
     await categoryUseCase.addCategory(
       icon: icon,
-      desc: categoryDescription,
-      name: categoryTitle,
+      desc: description,
+      name: title,
       budget: budget,
     );
 
     emit(const CategoryAddedState(isCategoryAddedOrUpdate: true));
   }
 
-  _updateCategory(
+  Future<void> _updateCategory(
     CategoryUpdateEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    final String? categoryTitle = event.title;
-    final String? categoryDescription = event.description;
-    final int? icon = event.icon;
-    final double? budget = double.tryParse(event.budget ?? '');
+    final String? title = categoryTitle;
+    final String? description = categoryDesc;
+    final int? icon = selectedIcon;
+    final double? budget = categoryBudget;
 
-    if (categoryTitle == null) {
+    if (title == null) {
       return emit(const CategoryErrorState('Add category title'));
     }
 
-    if (categoryDescription == null) {
-      return emit(const CategoryErrorState('Add category title'));
+    if (description == null) {
+      return emit(const CategoryErrorState('Add category description'));
     }
+
     if (icon == null) {
       return emit(const CategoryErrorState('Select category icon'));
     }
+    if (currentCategory != null) {
+      currentCategory!
+        ..budget = budget
+        ..description = description
+        ..icon = icon
+        ..name = title;
 
-    event.category!
-      ..budget = budget
-      ..description = categoryDescription
-      ..icon = icon
-      ..name = categoryTitle;
-
-    await event.category!.save();
-    emit(const CategoryAddedState());
+      await currentCategory!.save();
+      emit(const CategoryAddedState());
+    }
   }
 
   _deleteCategory(
@@ -106,24 +132,18 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     add(FetchCategoriesEvent());
   }
 
-  _fetchCategoryFromId(
-    FetchCategoryFromIdEvent event,
-    Emitter<CategoryState> emit,
-  ) async {
-    final int? categoryId = int.tryParse(event.categoryId ?? '');
-    if (categoryId == null) return;
-
-    final Category? category =
-        await categoryUseCase.fetchCategoryFromId(categoryId);
-    if (category != null) {
-      emit(CategorySuccessState(category));
-    }
-  }
-
   _categoryIcon(
     CategoryIconSelectedEvent event,
     Emitter<CategoryState> emit,
   ) {
     emit(CategoryIconSelectedState(event.categoryIcon));
+  }
+
+  bool checkBudget() {
+    final double budget = currentCategory?.budget ?? 0.0;
+    if (budget > 0.0) {
+      return true;
+    }
+    return false;
   }
 }

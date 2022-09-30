@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/constants/currency.dart';
 
-class ExpsenseTotalForMonthWidget extends StatelessWidget {
-  const ExpsenseTotalForMonthWidget({
+class ExpenseTotalForMonthWidget extends StatelessWidget {
+  const ExpenseTotalForMonthWidget({
     Key? key,
     this.income = 0,
     required this.outcome,
@@ -22,7 +22,9 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
       children: [
         Text(
           AppLocalizations.of(context)!.thisMonthLabel,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.headline6?.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
         ),
         const SizedBox(height: 8),
         Row(
@@ -43,7 +45,7 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                         TextSpan(
                           text: AppLocalizations.of(context)!.incomeLabel,
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.onSurface,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         )
                       ],
@@ -52,7 +54,10 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                   Text(
                     '+${formattedCurrency(income)}',
                     style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context).textTheme.headline6,
+                      textStyle:
+                          Theme.of(context).textTheme.headline6?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                     ),
                   ),
                 ],
@@ -74,7 +79,7 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                         TextSpan(
                           text: AppLocalizations.of(context)!.outcomeLabel,
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.onSurface,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         )
                       ],
@@ -83,7 +88,10 @@ class ExpsenseTotalForMonthWidget extends StatelessWidget {
                   Text(
                     '-${formattedCurrency(outcome)}',
                     style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context).textTheme.headline6,
+                      textStyle:
+                          Theme.of(context).textTheme.headline6?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                     ),
                   ),
                 ],

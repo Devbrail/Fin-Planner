@@ -8,7 +8,7 @@ enum CardType {
   @HiveField(0)
   cash,
   @HiveField(1)
-  debitcard,
+  debitCard,
   @HiveField(2)
   creditCard,
   @HiveField(3)
@@ -20,7 +20,7 @@ extension CardTypeMapping on CardType {
     switch (this) {
       case CardType.cash:
         return 'Cash';
-      case CardType.debitcard:
+      case CardType.debitCard:
         return 'Debit card';
       case CardType.creditCard:
         return 'Credit card';
@@ -33,7 +33,7 @@ extension CardTypeMapping on CardType {
     switch (this) {
       case CardType.cash:
         return Icons.attach_money;
-      case CardType.debitcard:
+      case CardType.debitCard:
         return Icons.local_atm;
       case CardType.creditCard:
         return Icons.credit_card;
@@ -49,12 +49,12 @@ extension CardTypeMap on String {
       case 'Cash':
         return CardType.cash;
       case 'Debit card':
-        return CardType.debitcard;
+        return CardType.debitCard;
       case 'Credit card':
         return CardType.creditCard;
       case 'UPI':
         return CardType.upi;
     }
-    return CardType.debitcard;
+    return CardType.debitCard;
   }
 }

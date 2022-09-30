@@ -19,15 +19,17 @@ class TotalBalanceWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.headline6?.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
         ),
         const SizedBox(height: 8),
         Text(
           formattedCurrency(amount),
           style: GoogleFonts.manrope(
             textStyle: Theme.of(context).textTheme.headline4?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontWeight: FontWeight.w700,
                 ),
           ),
         ),

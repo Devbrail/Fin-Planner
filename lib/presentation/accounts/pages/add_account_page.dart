@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/enum/card_type.dart';
@@ -29,22 +30,13 @@ class AddAccountPageState extends State<AddAccountPage> {
 
   late final AccountsBloc accountsBloc = locator.get()
     ..add(FetchAccountFromIdEvent(widget.accountId));
-  late final TextEditingController accountNumberController =
-      TextEditingController()..addListener(_updateValues);
-  late final TextEditingController accountCardHolderController =
-      TextEditingController()..addListener(_updateValues);
-  late final TextEditingController accountNameController =
-      TextEditingController()..addListener(_updateValues);
-  late final DateTime selectedDate = DateTime.now();
-  late CardType selectedType = CardType.cash;
+
+  late TextEditingController accountNumberController = TextEditingController();
+  late TextEditingController accountCardHolderController =
+      TextEditingController();
+  late TextEditingController accountNameController = TextEditingController();
 
   bool get isAccountAddOrUpdate => widget.accountId == null;
-
-  Account? account;
-
-  void _updateValues() {
-    setState(() {});
-  }
 
   void _addOrUpdateAccount() {
     final isValid = _form.currentState!.validate();
@@ -53,30 +45,10 @@ class AddAccountPageState extends State<AddAccountPage> {
     }
 
     if (isAccountAddOrUpdate) {
-      accountsBloc.add(
-        AddAccountEvent(
-          bankName: accountNameController.text,
-          icon: Icons.credit_card.codePoint,
-          holderName: accountCardHolderController.text,
-          number: accountNumberController.text,
-          validThru: selectedDate,
-          cardType: selectedType,
-        ),
-      );
+      accountsBloc.add(AddAccountEvent());
     } else {
-      accountsBloc.add(
-        UpdateAccountEvent(
-          bankName: accountNameController.text,
-          icon: Icons.credit_card.codePoint,
-          holderName: accountCardHolderController.text,
-          number: accountNumberController.text,
-          validThru: selectedDate,
-          cardType: selectedType,
-          account: account,
-        ),
-      );
+      accountsBloc.add(UpdateAccountEvent());
     }
-    context.pop();
   }
 
   @override
@@ -101,18 +73,20 @@ class AddAccountPageState extends State<AddAccountPage> {
             );
           } else if (state is AccountErrorState) {
             showMaterialSnackBar(context, state.errorString);
+          } else if (state is AccountSuccessState) {
+            accountNameController.text = state.account.bankName;
+            accountNameController.selection =
+                TextSelection.collapsed(offset: state.account.bankName.length);
+            accountNumberController.text = state.account.number;
+            accountNumberController.selection =
+                TextSelection.collapsed(offset: state.account.number.length);
+            accountCardHolderController.text = state.account.name;
+            accountCardHolderController.selection =
+                TextSelection.collapsed(offset: state.account.name.length);
           }
         },
         buildWhen: (previous, current) => current is AccountSuccessState,
         builder: (context, state) {
-          if (state is AccountSuccessState) {
-            account = state.account;
-            selectedType = account?.cardType ?? CardType.cash;
-            accountNameController.text = account?.bankName ?? '';
-            accountNumberController.text = account?.number ?? '';
-            accountCardHolderController.text = account?.name ?? '';
-          }
-
           return ScreenTypeLayout(
             mobile: Scaffold(
               appBar: materialYouAppBar(
@@ -145,16 +119,16 @@ class AddAccountPageState extends State<AddAccountPage> {
                       ),
                       child: CardTypeButtons(
                         onSelected: (cardType) {
-                          selectedType = cardType;
+                          accountsBloc.selectedType = cardType;
                         },
-                        selectedCardType: selectedType,
+                        selectedCardType: accountsBloc.selectedType,
                       ),
                     ),
                     AccountCard(
                       cardNumber: accountNumberController.value.text,
                       cardHolder: accountCardHolderController.value.text,
                       bankName: accountNameController.value.text,
-                      cardType: selectedType,
+                      cardType: accountsBloc.selectedType,
                     ),
                     Form(
                       key: _form,
@@ -235,7 +209,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                         cardNumber: accountNumberController.value.text,
                         cardHolder: accountCardHolderController.value.text,
                         bankName: accountNameController.value.text,
-                        cardType: selectedType,
+                        cardType: accountsBloc.selectedType,
                       ),
                     ),
                     Expanded(
@@ -254,9 +228,10 @@ class AddAccountPageState extends State<AddAccountPage> {
                                   children: [
                                     CardTypeButtons(
                                       onSelected: (cardType) {
-                                        selectedType = cardType;
+                                        accountsBloc.selectedType = cardType;
                                       },
-                                      selectedCardType: selectedType,
+                                      selectedCardType:
+                                          accountsBloc.selectedType,
                                     ),
                                     const SizedBox(height: 16),
                                     AccountCardHolderNameWidget(
@@ -327,12 +302,20 @@ class AddAccountPageState extends State<AddAccountPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  AppLocalizations.of(context)!.accountInfoLabel,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6
-                      ?.copyWith(fontWeight: FontWeight.bold),
+                child: Row(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(Icons.info_rounded),
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.accountInfoLabel,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
               ),
               Padding(

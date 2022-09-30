@@ -25,6 +25,7 @@ class ExpenseTotalWidget extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: MaterialYouCard(
+            color: Theme.of(context).colorScheme.primary,
             child: Padding(
               padding: const EdgeInsets.all(22.0),
               child: Column(
@@ -37,7 +38,7 @@ class ExpenseTotalWidget extends StatelessWidget {
                     amount: totalIncome,
                   ),
                   const SizedBox(height: 24),
-                  ExpsenseTotalForMonthWidget(
+                  ExpenseTotalForMonthWidget(
                     outcome: thisMonthExpenses,
                     income: thisMonthIncome,
                   ),

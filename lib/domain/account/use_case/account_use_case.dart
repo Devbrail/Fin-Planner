@@ -15,7 +15,6 @@ class AccountUseCase {
     required String holderName,
     required String number,
     required int icon,
-    required DateTime validThru,
     required CardType cardType,
   }) async {
     await repository.addAccount(
@@ -23,7 +22,6 @@ class AccountUseCase {
       holderName: holderName,
       icon: icon,
       number: number,
-      validThru: validThru,
       cardType: cardType,
     );
   }

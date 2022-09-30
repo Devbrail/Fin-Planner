@@ -16,13 +16,10 @@ class Account extends HiveObject with EquatableMixin {
   @HiveField(3)
   String bankName;
 
-  @HiveField(4)
-  DateTime validThru;
-
   @HiveField(5)
   String number;
 
-  @HiveField(6, defaultValue: CardType.debitcard)
+  @HiveField(6, defaultValue: CardType.debitCard)
   CardType? cardType;
 
   @HiveField(7, defaultValue: 0)
@@ -32,7 +29,6 @@ class Account extends HiveObject with EquatableMixin {
     required this.name,
     required this.icon,
     required this.bankName,
-    required this.validThru,
     required this.number,
     required this.cardType,
   });
@@ -44,7 +40,6 @@ class Account extends HiveObject with EquatableMixin {
         'name': name,
         'bankName': bankName,
         'icon': icon,
-        'validThru': validThru.toIso8601String(),
         'number': number,
         'cardType': cardType?.name,
         'superId': superId,
@@ -54,7 +49,6 @@ class Account extends HiveObject with EquatableMixin {
         name: json["name"],
         bankName: json["bankName"],
         icon: json["icon"],
-        validThru: DateTime.parse(json["validThru"]),
         number: json["number"],
         cardType: (json["cardType"] as String).type,
       )..superId = json["superId"];
