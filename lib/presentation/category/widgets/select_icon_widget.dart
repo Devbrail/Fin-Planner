@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/presentation/category/bloc/category_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/widgets/show_icon_picker.dart';
+import '../bloc/category_bloc.dart';
 
 class SelectIconWidget extends StatelessWidget {
   const SelectIconWidget({

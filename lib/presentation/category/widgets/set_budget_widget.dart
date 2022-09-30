@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../bloc/category_bloc.dart';
 
 class SetBudgetWidget extends StatefulWidget {
   const SetBudgetWidget({
@@ -40,18 +43,32 @@ class _SetBudgetWidgetState extends State<SetBudgetWidget> {
         budget
             ? Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: TextField(
-                  controller: widget.controller,
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.budgetLabel,
-                  ),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                  ],
-                ),
+                child: CategoryBudgetWidget(controller: widget.controller),
               )
             : const SizedBox.shrink(),
+      ],
+    );
+  }
+}
+
+class CategoryBudgetWidget extends StatelessWidget {
+  const CategoryBudgetWidget({super.key, required this.controller});
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: AppLocalizations.of(context)!.budgetLabel,
+      ),
+      onChanged: (value) {
+        double? amount = double.tryParse(value);
+        BlocProvider.of<CategoryBloc>(context).categoryBudget = amount;
+      },
+      keyboardType: TextInputType.number,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
       ],
     );
   }

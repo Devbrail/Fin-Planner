@@ -6,8 +6,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/widgets/material_you_app_bar_widget.dart';
-import '../../../common/widgets/material_you_textfield.dart';
-import '../../../data/category/model/category.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/select_icon_widget.dart';
@@ -155,9 +153,10 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            _categoryField(),
+                            CategoryNameWidget(controller: categoryController),
                             const SizedBox(height: 24),
-                            _descriptionField(),
+                            CategoryDescriptionWidget(
+                                controller: descController),
                             _submitButton(),
                           ],
                         ),
@@ -205,33 +204,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     );
   }
 
-  Widget _categoryField() {
-    return MaterialYouTextFelid(
-      controller: categoryController,
-      keyboardType: TextInputType.name,
-      maxLength: 10,
-      label: AppLocalizations.of(context)!.categoryLabel,
-      hintText: 'Enter category',
-      validator: (value) {
-        if (value!.length >= 3 && value.length < 10) {
-          return null;
-        } else {
-          return AppLocalizations.of(context)!.validNameLabel;
-        }
-      },
-    );
-  }
-
-  Widget _descriptionField() {
-    return MaterialYouTextFelid(
-      maxLength: 15,
-      controller: descController,
-      keyboardType: TextInputType.name,
-      label: AppLocalizations.of(context)!.descriptionLabel,
-      hintText: 'Enter description',
-    );
-  }
-
   Widget _inputForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -249,13 +221,56 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 16),
-              _categoryField(),
+              CategoryNameWidget(controller: categoryController),
               const SizedBox(height: 16),
-              _descriptionField(),
+              CategoryDescriptionWidget(controller: descController),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class CategoryNameWidget extends StatelessWidget {
+  const CategoryNameWidget({super.key, required this.controller});
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: TextInputType.name,
+      maxLength: 10,
+      decoration: InputDecoration(
+        label: Text(AppLocalizations.of(context)!.categoryLabel),
+        hintText: 'Enter category',
+      ),
+      validator: (value) {
+        if (value!.length >= 3 && value.length < 10) {
+          return null;
+        } else {
+          return AppLocalizations.of(context)!.validNameLabel;
+        }
+      },
+    );
+  }
+}
+
+class CategoryDescriptionWidget extends StatelessWidget {
+  const CategoryDescriptionWidget({super.key, required this.controller});
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      maxLength: 15,
+      controller: controller,
+      keyboardType: TextInputType.name,
+      decoration: InputDecoration(
+        label: Text(AppLocalizations.of(context)!.descriptionLabel),
+        hintText: 'Enter description',
+      ),
     );
   }
 }

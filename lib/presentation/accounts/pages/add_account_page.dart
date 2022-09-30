@@ -373,6 +373,8 @@ class AccountCardHolderNameWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
         ),
       ),
+      onChanged: (value) =>
+          BlocProvider.of<AccountsBloc>(context).accountHolderName = value,
     );
   }
 }
@@ -394,6 +396,8 @@ class AccountNameWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
         ),
       ),
+      onChanged: (value) =>
+          BlocProvider.of<AccountsBloc>(context).accountName = value,
     );
   }
 }
@@ -416,6 +420,8 @@ class AccountNumberWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
         ),
       ),
+      onChanged: (value) =>
+          BlocProvider.of<AccountsBloc>(context).accountNumber = value,
     );
   }
 }
