@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 AppBar materialYouAppBar(BuildContext context, String title,
-    {List<Widget>? actions, Widget? leadeingWidget}) {
+    {List<Widget>? actions, Widget? leadingWidget}) {
   return AppBar(
-    leading: leadeingWidget,
+    leading: leadingWidget,
     title: Text(title),
     titleTextStyle: Theme.of(context)
         .textTheme
