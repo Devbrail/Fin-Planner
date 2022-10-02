@@ -108,7 +108,9 @@ class AddAccountPageState extends State<AddAccountPage> {
             mobile: Scaffold(
               appBar: materialYouAppBar(
                 context,
-                AppLocalizations.of(context)!.addCardLabel,
+                isAccountAddOrUpdate
+                    ? AppLocalizations.of(context)!.addCardLabel
+                    : AppLocalizations.of(context)!.updateCardLabel,
                 actions: [
                   IconButton(
                     onPressed: _showInfo,
@@ -184,7 +186,9 @@ class AddAccountPageState extends State<AddAccountPage> {
                       ),
                     ),
                     child: Text(
-                      AppLocalizations.of(context)!.addCardLabel,
+                      isAccountAddOrUpdate
+                          ? AppLocalizations.of(context)!.addCardLabel
+                          : AppLocalizations.of(context)!.updateLabel,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize:

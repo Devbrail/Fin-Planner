@@ -84,7 +84,6 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
       bankName: bankName,
       holderName: holderName,
       number: number,
-      icon: cardType.icon.codePoint,
       cardType: cardType,
     );
 

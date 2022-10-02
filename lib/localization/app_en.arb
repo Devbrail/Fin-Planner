@@ -23,6 +23,11 @@
     "@updateExpenseLabel": {
         "description": "Update Expense label"
     },
+    
+    "updateCardLabel": "Update card",
+    "@updateCardLabel": {
+        "description": "Update card label"
+    },
     "addAccountLabel": "Add Account",
     "@addAccountLabel": {
         "description": "Add Account label"

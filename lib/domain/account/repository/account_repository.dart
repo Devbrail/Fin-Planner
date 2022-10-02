@@ -7,7 +7,6 @@ abstract class AccountRepository {
     required String bankName,
     required String holderName,
     required String number,
-    required int icon,
     required CardType cardType,
   });
   Future<void> deleteAccount(int key);

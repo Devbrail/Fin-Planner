@@ -20,12 +20,11 @@ class AccountRepositoryImpl extends AccountRepository {
     required String bankName,
     required String holderName,
     required String number,
-    required int icon,
     required CardType cardType,
   }) async {
     await dataSource.addAccount(Account(
       name: holderName,
-      icon: icon,
+      icon: cardType.icon.codePoint,
       bankName: bankName,
       number: number,
       cardType: cardType,

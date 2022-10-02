@@ -14,13 +14,11 @@ class AccountUseCase {
     required String bankName,
     required String holderName,
     required String number,
-    required int icon,
     required CardType cardType,
   }) async {
     await repository.addAccount(
       bankName: bankName,
       holderName: holderName,
-      icon: icon,
       number: number,
       cardType: cardType,
     );
