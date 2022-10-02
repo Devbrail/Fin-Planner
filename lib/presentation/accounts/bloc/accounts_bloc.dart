@@ -82,7 +82,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     await accountUseCase.addAccount(
       bankName: bankName,
       holderName: holderName,
-      number: holderName,
+      number: number,
       icon: cardType.icon.codePoint,
       cardType: cardType,
     );
@@ -115,6 +115,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
         ..cardType = cardType
         ..icon = cardType.icon.codePoint
         ..name = holderName
+        ..number = number
         ..cardType = cardType;
 
       await currentAccount!.save();
