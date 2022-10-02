@@ -111,9 +111,9 @@ class ColorPalette extends StatelessWidget {
             color: Theme.of(context).colorScheme.surfaceTint,
             child: Center(
               child: Text(
-                'Text onSurface ',
+                'Text onSurfaceVariant ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ),

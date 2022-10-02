@@ -1,7 +1,7 @@
-body, html {
+body {
   margin:0;
   height:100%;
-  background: #fcfcfc;
+  background: #ffffff;
   
   background-size: 100% 100%;
 }
@@ -36,7 +36,7 @@ body, html {
   body {
     margin:0;
     height:100%;
-    background: #201a17;
+    background: #121212;
     
     background-size: 100% 100%;
   }
