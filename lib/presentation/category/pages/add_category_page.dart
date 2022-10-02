@@ -258,7 +258,7 @@ class CategoryNameWidget extends StatelessWidget {
       onChanged: (value) =>
           BlocProvider.of<CategoryBloc>(context).categoryTitle = value,
       validator: (value) {
-        if (value!.length >= 3 && value.length < 10) {
+        if (value!.length >= 3 && value.length < 15) {
           return null;
         } else {
           return AppLocalizations.of(context)!.validNameLabel;

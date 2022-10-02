@@ -92,4 +92,5 @@ const Map<String, Locale> locales = {
   "Sri Lanka Rupee": Locale('si'),
   "Pakistan Rupee": Locale('ur'),
   "Swiss Franc": Locale('fr_CH'),
+  "Egyptian Pound": Locale('ar_EG'),
 };
