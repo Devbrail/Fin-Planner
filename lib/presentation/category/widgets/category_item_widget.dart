@@ -3,7 +3,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../data/category/model/category.dart';
 import 'category_item_mobile_widget.dart';
-import 'categoty_item_tablet_widget.dart';
+import 'category_item_tablet_widget.dart';
 
 class CategoryItemWidget extends StatelessWidget {
   const CategoryItemWidget({

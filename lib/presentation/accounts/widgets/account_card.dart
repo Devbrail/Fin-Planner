@@ -35,7 +35,7 @@ class _AccountCardState extends State<AccountCard>
     duration: const Duration(seconds: 10),
   )..repeat(reverse: true);
 
-  late final Animation<Offset> _posititionAnimation = Tween<Offset>(
+  late final Animation<Offset> _positionAnimation = Tween<Offset>(
     begin: Offset.zero,
     end: const Offset(0.3, 0.4),
   ).animate(
@@ -75,7 +75,7 @@ class _AccountCardState extends State<AccountCard>
         child: Stack(
           children: [
             SlideTransition(
-              position: _posititionAnimation,
+              position: _positionAnimation,
               child: Container(
                 width: 100,
                 height: 100,
@@ -242,7 +242,7 @@ class _AccountCardState extends State<AccountCard>
       tablet: Stack(
         children: [
           SlideTransition(
-            position: _posititionAnimation,
+            position: _positionAnimation,
             child: Container(
               width: 100,
               height: 100,
@@ -386,7 +386,7 @@ class _AccountCardState extends State<AccountCard>
         child: Stack(
           children: [
             SlideTransition(
-              position: _posititionAnimation,
+              position: _positionAnimation,
               child: Container(
                 width: 200,
                 height: 200,

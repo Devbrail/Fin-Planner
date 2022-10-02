@@ -23,6 +23,8 @@ class AddAccountState extends AccountsState {
   final bool isAddOrUpdate;
 
   const AddAccountState({this.isAddOrUpdate = false});
+  @override
+  List<Object> get props => [isAddOrUpdate];
 }
 
 class AccountDeletedState extends AccountsState {}
@@ -49,4 +51,15 @@ class AccountSuccessState extends AccountsState {
   final Account account;
 
   const AccountSuccessState(this.account);
+  @override
+  List<Object> get props => [account];
+}
+
+class UpdateCardTypeState extends AccountsState {
+  final CardType cardType;
+
+  const UpdateCardTypeState(this.cardType);
+
+  @override
+  List<Object> get props => [cardType];
 }

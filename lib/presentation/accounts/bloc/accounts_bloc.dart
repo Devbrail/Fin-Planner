@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart' show Bloc, Emitter;
+import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:meta/meta.dart';
@@ -22,6 +22,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     on<AccountSelectedEvent>((event, emit) => _accountSelected(event, emit));
     on<UpdateAccountEvent>((event, emit) => _updateAccount(event, emit));
     on<ClearAccountEvent>((event, emit) => _clearAccount(event, emit));
+    on<UpdateCardTypeEvent>((event, emit) => _updateCardType(event, emit));
     on<FetchAccountFromIdEvent>(
         (event, emit) => _fetchAccountFromId(event, emit));
   }
@@ -49,9 +50,9 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final Account? account = await accountUseCase.fetchAccountFromId(accountId);
     if (account != null) {
       emit(AccountSuccessState(account));
-      accountName == account.bankName;
-      accountHolderName == account.name;
-      accountNumber == account.name;
+      accountName = account.bankName;
+      accountHolderName = account.name;
+      accountNumber = account.number;
       selectedType = account.cardType ?? CardType.cash;
       currentAccount = account;
     } else {
@@ -141,4 +142,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     await accountUseCase.deleteAccount(expenseId);
     emit(AccountDeletedState());
   }
+
+  _updateCardType(UpdateCardTypeEvent event, Emitter<AccountsState> emit) =>
+      emit(UpdateCardTypeState(event.cardType));
 }

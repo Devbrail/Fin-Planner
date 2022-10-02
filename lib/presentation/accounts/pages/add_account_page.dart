@@ -30,8 +30,8 @@ class AddAccountPageState extends State<AddAccountPage> {
 
   late TextEditingController accountNumberController = TextEditingController()
     ..addListener(_updated);
-  late TextEditingController accountCardHolderController =
-      TextEditingController()..addListener(_updated);
+  late TextEditingController accountHolderController = TextEditingController()
+    ..addListener(_updated);
   late TextEditingController accountNameController = TextEditingController()
     ..addListener(_updated);
 
@@ -91,15 +91,18 @@ class AddAccountPageState extends State<AddAccountPage> {
             accountNameController.text = state.account.bankName;
             accountNameController.selection =
                 TextSelection.collapsed(offset: state.account.bankName.length);
+
             accountNumberController.text = state.account.number;
             accountNumberController.selection =
                 TextSelection.collapsed(offset: state.account.number.length);
-            accountCardHolderController.text = state.account.name;
-            accountCardHolderController.selection =
+
+            accountHolderController.text = state.account.name;
+            accountHolderController.selection =
                 TextSelection.collapsed(offset: state.account.name.length);
+          } else if (state is UpdateCardTypeState) {
+            accountsBloc.selectedType = state.cardType;
           }
         },
-        buildWhen: (previous, current) => current is AccountSuccessState,
         builder: (context, state) {
           return ScreenTypeLayout(
             mobile: Scaffold(
@@ -132,15 +135,14 @@ class AddAccountPageState extends State<AddAccountPage> {
                         vertical: 8,
                       ),
                       child: CardTypeButtons(
-                        onSelected: (cardType) {
-                          accountsBloc.selectedType = cardType;
-                        },
+                        onSelected: (cardType) =>
+                            accountsBloc.add(UpdateCardTypeEvent(cardType)),
                         selectedCardType: accountsBloc.selectedType,
                       ),
                     ),
                     AccountCard(
                       cardNumber: accountNumberController.value.text,
-                      cardHolder: accountCardHolderController.value.text,
+                      cardHolder: accountHolderController.value.text,
                       bankName: accountNameController.value.text,
                       cardType: accountsBloc.selectedType,
                     ),
@@ -153,7 +155,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                           children: [
                             const SizedBox(height: 16),
                             AccountCardHolderNameWidget(
-                              controller: accountCardHolderController,
+                              controller: accountHolderController,
                             ),
                             const SizedBox(height: 16),
                             AccountNameWidget(
@@ -221,7 +223,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                     Expanded(
                       child: AccountCard(
                         cardNumber: accountNumberController.value.text,
-                        cardHolder: accountCardHolderController.value.text,
+                        cardHolder: accountHolderController.value.text,
                         bankName: accountNameController.value.text,
                         cardType: accountsBloc.selectedType,
                       ),
@@ -249,7 +251,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                                     ),
                                     const SizedBox(height: 16),
                                     AccountCardHolderNameWidget(
-                                      controller: accountCardHolderController,
+                                      controller: accountHolderController,
                                     ),
                                     const SizedBox(height: 16),
                                     AccountNameWidget(
