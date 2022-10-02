@@ -14,18 +14,23 @@ AppBar materialYouAppBar(BuildContext context, String title,
   );
 }
 
-showMaterialSnackBar(BuildContext context, String content) {
+showMaterialSnackBar(
+  BuildContext context,
+  String content, {
+  Color? backgroundColor,
+  Color? color,
+}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       content: Text(
         content,
         style: TextStyle(
-          color: Theme.of(context).colorScheme.onSurface,
+          color: color ?? Theme.of(context).colorScheme.onSurface,
         ),
       ),
       behavior: SnackBarBehavior.floating,
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: backgroundColor ?? Theme.of(context).colorScheme.surface,
       elevation: 20,
     ),
   );

@@ -23,7 +23,10 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
         Text(
           AppLocalizations.of(context)!.thisMonthLabel,
           style: Theme.of(context).textTheme.headline6?.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context)
+                    .colorScheme
+                    .onPrimaryContainer
+                    .withOpacity(0.85),
               ),
         ),
         const SizedBox(height: 8),
@@ -45,7 +48,9 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                         TextSpan(
                           text: AppLocalizations.of(context)!.incomeLabel,
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
                           ),
                         )
                       ],
@@ -56,7 +61,9 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                     style: GoogleFonts.manrope(
                       textStyle:
                           Theme.of(context).textTheme.headline6?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer,
                               ),
                     ),
                   ),
@@ -79,7 +86,9 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                         TextSpan(
                           text: AppLocalizations.of(context)!.outcomeLabel,
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
                           ),
                         )
                       ],
@@ -90,7 +99,9 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                     style: GoogleFonts.manrope(
                       textStyle:
                           Theme.of(context).textTheme.headline6?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer,
                               ),
                     ),
                   ),

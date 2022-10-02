@@ -32,10 +32,12 @@ class WelcomeWidget extends StatelessWidget {
                       child: Container(
                         width: 42,
                         height: 42,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                         child: Icon(
                           Icons.account_circle_outlined,
-                          color: Theme.of(context).colorScheme.onPrimary,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer,
                         ),
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/presentation/goal/widget/color_palette.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -40,6 +41,10 @@ class _SummaryPageState extends State<SummaryPage> {
           backgroundColor: Colors.transparent,
           actions: [
             GestureDetector(
+              onLongPress: (() {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const ColorPalette()));
+              }),
               onTap: () => showModalBottomSheet(
                 constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width >= 700
@@ -68,7 +73,7 @@ class _SummaryPageState extends State<SummaryPage> {
             ],
           ),
         ),
-        floatingActionButton: floatinActionButton(),
+        floatingActionButton: floatingActionButton(),
       ),
       tablet: Scaffold(
         appBar: materialYouAppBar(
@@ -109,7 +114,7 @@ class _SummaryPageState extends State<SummaryPage> {
             ],
           ),
         ),
-        floatingActionButton: floatinActionButton(),
+        floatingActionButton: floatingActionButton(),
       ),
       desktop: Scaffold(
         appBar: materialYouAppBar(
@@ -148,12 +153,12 @@ class _SummaryPageState extends State<SummaryPage> {
             ],
           ),
         ),
-        floatingActionButton: floatinActionButton(),
+        floatingActionButton: floatingActionButton(),
       ),
     );
   }
 
-  FloatingActionButton floatinActionButton() {
+  FloatingActionButton floatingActionButton() {
     return FloatingActionButton.large(
       onPressed: _addExpense,
       tooltip: AppLocalizations.of(context)!.addExpenseLabel,

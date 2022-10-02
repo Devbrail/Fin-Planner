@@ -20,7 +20,10 @@ class TotalBalanceWidget extends StatelessWidget {
         Text(
           title,
           style: Theme.of(context).textTheme.headline6?.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context)
+                    .colorScheme
+                    .onPrimaryContainer
+                    .withOpacity(0.85),
               ),
         ),
         const SizedBox(height: 8),
@@ -28,7 +31,7 @@ class TotalBalanceWidget extends StatelessWidget {
           formattedCurrency(amount),
           style: GoogleFonts.manrope(
             textStyle: Theme.of(context).textTheme.headline4?.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
                   fontWeight: FontWeight.w700,
                 ),
           ),

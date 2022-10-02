@@ -56,12 +56,21 @@ class AccountTransactionWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: MaterialYouCard(
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(AppLocalizations.of(context)!.balanceLabel),
+                              Text(
+                                AppLocalizations.of(context)!.balanceLabel,
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondaryContainer
+                                      .withOpacity(0.75),
+                                ),
+                              ),
                               const SizedBox(height: 6),
                               Text(
                                 expenses.balance,
@@ -79,12 +88,21 @@ class AccountTransactionWidget extends StatelessWidget {
                     ),
                     Expanded(
                       child: MaterialYouCard(
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(AppLocalizations.of(context)!.expenseLabel),
+                              Text(
+                                AppLocalizations.of(context)!.expenseLabel,
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondaryContainer
+                                      .withOpacity(0.75),
+                                ),
+                              ),
                               const SizedBox(height: 6),
                               Text(
                                 formattedCurrency(expenses.totalExpense),

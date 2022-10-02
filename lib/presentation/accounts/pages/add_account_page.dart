@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/enum/card_type.dart';
 import '../../../common/widgets/material_you_app_bar_widget.dart';
-import '../../../data/accounts/model/account.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_card.dart';
@@ -31,10 +28,12 @@ class AddAccountPageState extends State<AddAccountPage> {
   late final AccountsBloc accountsBloc = locator.get()
     ..add(FetchAccountFromIdEvent(widget.accountId));
 
-  late TextEditingController accountNumberController = TextEditingController();
+  late TextEditingController accountNumberController = TextEditingController()
+    ..addListener(_updated);
   late TextEditingController accountCardHolderController =
-      TextEditingController();
-  late TextEditingController accountNameController = TextEditingController();
+      TextEditingController()..addListener(_updated);
+  late TextEditingController accountNameController = TextEditingController()
+    ..addListener(_updated);
 
   bool get isAccountAddOrUpdate => widget.accountId == null;
 
@@ -51,6 +50,10 @@ class AddAccountPageState extends State<AddAccountPage> {
     }
   }
 
+  void _updated() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -64,15 +67,26 @@ class AddAccountPageState extends State<AddAccountPage> {
               isAccountAddOrUpdate
                   ? AppLocalizations.of(context)!.addedCardLabel
                   : AppLocalizations.of(context)!.updatedCardLabel,
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
             );
+            context.pop();
           }
           if (state is AccountDeletedState) {
             showMaterialSnackBar(
               context,
               AppLocalizations.of(context)!.deletedCardLabel,
+              backgroundColor: Theme.of(context).colorScheme.error,
+              color: Theme.of(context).colorScheme.onError,
             );
+            context.pop();
           } else if (state is AccountErrorState) {
-            showMaterialSnackBar(context, state.errorString);
+            showMaterialSnackBar(
+              context,
+              state.errorString,
+              backgroundColor: Theme.of(context).colorScheme.errorContainer,
+              color: Theme.of(context).colorScheme.onErrorContainer,
+            );
           } else if (state is AccountSuccessState) {
             accountNameController.text = state.account.bankName;
             accountNameController.selection =

@@ -55,6 +55,8 @@ class _ExpensePageState extends State<ExpensePage> {
               expenseBloc.selectedType == TransactionType.expense
                   ? AppLocalizations.of(context)!.expenseDeletedSuccessfulLabel
                   : AppLocalizations.of(context)!.incomeDeletedSuccessfulLabel,
+              backgroundColor: Theme.of(context).colorScheme.error,
+              color: Theme.of(context).colorScheme.onError,
             );
             context.pop();
           } else if (state is ExpenseAdded) {
@@ -66,19 +68,31 @@ class _ExpensePageState extends State<ExpensePage> {
                     ? AppLocalizations.of(context)!.incomeAddedSuccessfulLabel
                     : AppLocalizations.of(context)!.incomeUpdateSuccessfulLabel;
 
-            showMaterialSnackBar(context, content);
+            showMaterialSnackBar(
+              context,
+              content,
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+            );
             context.pop();
           } else if (state is ExpenseErrorState) {
-            showMaterialSnackBar(context, state.errorString);
+            showMaterialSnackBar(
+              context,
+              state.errorString,
+              backgroundColor: Theme.of(context).colorScheme.errorContainer,
+              color: Theme.of(context).colorScheme.onErrorContainer,
+            );
           } else if (state is ExpenseSuccessState) {
             dateTextController.text = formattedDate(expenseBloc.selectedDate);
             nameController.text = state.expense.name;
-            nameController.selection =
-                TextSelection.collapsed(offset: state.expense.name.length);
+            nameController.selection = TextSelection.collapsed(
+              offset: state.expense.name.length,
+            );
 
             amountController.text = state.expense.currency.toString();
             amountController.selection = TextSelection.collapsed(
-                offset: state.expense.currency.toString().length);
+              offset: state.expense.currency.toString().length,
+            );
           }
         },
         builder: (context, state) {

@@ -33,7 +33,7 @@ class ExpenseListPage extends StatelessWidget {
               .where((element) => element.categoryId == cid)
               .toList();
           if (expenses.isEmpty) {
-            return Text('No data');
+            return const Text('No data');
           }
 
           return ListView.builder(

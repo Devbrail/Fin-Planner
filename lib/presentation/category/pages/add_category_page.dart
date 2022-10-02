@@ -58,10 +58,18 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               isAddCategory
                   ? AppLocalizations.of(context)!.successAddCategoryLabel
                   : AppLocalizations.of(context)!.updatedCategoryLabel,
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
             );
             context.pop();
           } else if (state is CategoryErrorState) {
-            showMaterialSnackBar(context, state.errorString);
+            showMaterialSnackBar(
+              context,
+              state.errorString,
+              backgroundColor: Theme.of(context).colorScheme.errorContainer,
+              color: Theme.of(context).colorScheme.onErrorContainer,
+            );
+            context.pop();
           } else if (state is CategorySuccessState) {
             budgetController.text = state.category.budget.toString();
             budgetController.selection = TextSelection.collapsed(
@@ -246,6 +254,8 @@ class CategoryNameWidget extends StatelessWidget {
         label: Text(AppLocalizations.of(context)!.categoryLabel),
         hintText: 'Enter category',
       ),
+      onChanged: (value) =>
+          BlocProvider.of<CategoryBloc>(context).categoryTitle = value,
       validator: (value) {
         if (value!.length >= 3 && value.length < 10) {
           return null;
@@ -267,6 +277,8 @@ class CategoryDescriptionWidget extends StatelessWidget {
       maxLength: 15,
       controller: controller,
       keyboardType: TextInputType.name,
+      onChanged: (value) =>
+          BlocProvider.of<CategoryBloc>(context).categoryDesc = value,
       decoration: InputDecoration(
         label: Text(AppLocalizations.of(context)!.descriptionLabel),
         hintText: 'Enter description',
