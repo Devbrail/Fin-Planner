@@ -37,7 +37,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
                       fontPackage: 'material_design_icons_flutter',
                     ),
                     size: 28,
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const Spacer(),
@@ -45,7 +45,9 @@ class CategoryItemMobileWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
                     category.name,
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -53,7 +55,12 @@ class CategoryItemMobileWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
                     category.description,
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurfaceVariant
+                              .withOpacity(0.75),
+                        ),
                   ),
                 ),
                 const SizedBox(height: 16),

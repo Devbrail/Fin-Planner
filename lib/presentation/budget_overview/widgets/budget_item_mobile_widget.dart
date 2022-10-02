@@ -78,7 +78,14 @@ class BudgetItemMobileWidget extends StatelessWidget {
                               left: 14.0,
                               right: 8,
                             ),
-                            child: Text(category.name),
+                            child: Text(
+                              category.name,
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -122,7 +129,13 @@ class BudgetItemMobileWidget extends StatelessWidget {
                   child: Text(
                     '${isBudgetActive ? 'Balance:' : ''} ${formattedCurrency(difference)}',
                     style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context).textTheme.bodyText1,
+                      textStyle: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          ?.copyWith(
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
                     ),
                   ),
                 ),
