@@ -24,6 +24,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         (event, emit) => _fetchCategoryFromId(event, emit));
     on<CategoryIconSelectedEvent>((event, emit) => _categoryIcon(event, emit));
   }
+
   final CategoryUseCase categoryUseCase;
   late final box = Hive.box<Category>(BoxType.category.stringValue);
   int? selectedIcon;
@@ -119,7 +120,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     }
   }
 
-  _deleteCategory(
+  Future<void> _deleteCategory(
     CategoryDeleteEvent event,
     Emitter<CategoryState> emit,
   ) async {
@@ -128,11 +129,11 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     add(FetchCategoriesEvent());
   }
 
-  _refresh(Emitter<CategoryState> emit) {
+  void _refresh(Emitter<CategoryState> emit) {
     add(FetchCategoriesEvent());
   }
 
-  _categoryIcon(
+  void _categoryIcon(
     CategoryIconSelectedEvent event,
     Emitter<CategoryState> emit,
   ) {

@@ -85,9 +85,10 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             descController.selection = TextSelection.collapsed(
               offset: state.category.description.length,
             );
+          } else if (state is CategoryIconSelectedState) {
+            categoryBloc.selectedIcon = state.categoryIcon;
           }
         },
-        buildWhen: (previous, current) => current is CategorySuccessState,
         builder: (context, state) {
           return ScreenTypeLayout(
             mobile: Scaffold(

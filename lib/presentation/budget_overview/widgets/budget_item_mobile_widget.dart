@@ -46,16 +46,6 @@ class BudgetItemMobileWidget extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            isBudgetActive
-                ? SizedBox(
-                    height: double.infinity,
-                    child: LinearProgressIndicator(
-                      value: totalExpenses / totalBudget,
-                      color: Theme.of(context).colorScheme.tertiaryContainer,
-                      backgroundColor: Theme.of(context).colorScheme.surface,
-                    ),
-                  )
-                : const SizedBox.shrink(),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,6 +83,20 @@ class BudgetItemMobileWidget extends StatelessWidget {
                         ],
                       ),
                     ),
+                    isBudgetActive
+                        ? Padding(
+                            padding: const EdgeInsets.only(right: 16),
+                            child: SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(
+                                value: totalExpenses / totalBudget,
+                                color: Theme.of(context).colorScheme.primary,
+                                backgroundColor: Colors.transparent,
+                              ),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                   ],
                 ),
                 SizedBox(
@@ -127,6 +131,49 @@ class BudgetItemMobileWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ProgressBar extends StatelessWidget {
+  final double max;
+  final double current;
+  final Color? color;
+
+  const ProgressBar({
+    Key? key,
+    required this.max,
+    required this.current,
+    this.color,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (_, boxConstraints) {
+        var x = boxConstraints.maxWidth;
+        var percent = (current / max) * x;
+        return Stack(
+          children: [
+            Container(
+              width: x,
+              height: 7,
+              decoration: BoxDecoration(
+                color: Color(0xffd3d3d3),
+                borderRadius: BorderRadius.circular(35),
+              ),
+            ),
+            AnimatedContainer(
+              duration: Duration(milliseconds: 500),
+              width: percent,
+              height: 7,
+              decoration: BoxDecoration(
+                color: color ?? Theme.of(context).colorScheme.primary,
+                borderRadius: BorderRadius.circular(35),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
