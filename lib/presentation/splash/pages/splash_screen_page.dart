@@ -40,16 +40,32 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             if (state is CountryLocalesState) {
               final locales = state.locales.entries.toList();
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  ListTile(
-                    title: Text(
-                      AppLocalizations.of(context)!.selectedCountryLabel,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                  const SizedBox(height: 16),
+                  FractionallySizedBox(
+                    widthFactor: 0.8,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Icon(
+                            Icons.language_rounded,
+                            size: 72,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.selectedCountryLabel,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        )
+                      ],
                     ),
                   ),
                   const Padding(

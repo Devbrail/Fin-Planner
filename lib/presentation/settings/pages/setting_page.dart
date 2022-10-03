@@ -86,6 +86,13 @@ class _SettingsPageState extends State<SettingsPage> {
             title: AppLocalizations.of(context)!.socialLinksLabel,
             options: [
               SettingsOption(
+                title: AppLocalizations.of(context)!.appRateLabel,
+                subtitle: AppLocalizations.of(context)!.appRateDescLabel,
+                onTap: () => launchUrlString(
+                    'https://play.google.com/store/apps/details?id=dev.hemanths.paisa'),
+              ),
+              const Divider(),
+              SettingsOption(
                 title: AppLocalizations.of(context)!.githubLabel,
                 subtitle: AppLocalizations.of(context)!.githubTextLabel,
                 onTap: () => launchUrlString('https://github.com/h4h13/paisa'),

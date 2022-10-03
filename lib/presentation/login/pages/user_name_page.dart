@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/enum/box_types.dart';
@@ -38,10 +39,9 @@ class UserNamePage extends StatelessWidget {
                         Theme.of(context).colorScheme.primary,
                         BlendMode.srcIn,
                       ),
-                      child: Image.asset(
-                        'assets/images/icon.png',
-                        width: 72,
-                        height: 72,
+                      child: const Icon(
+                        Icons.wallet,
+                        size: 72,
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -62,9 +62,15 @@ class UserNamePage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 6),
                     Text(
                       AppLocalizations.of(context)!.welcomeDescLabel,
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSurface
+                                .withOpacity(0.75),
+                          ),
                     ),
                     const SizedBox(height: 16),
                     Form(
@@ -73,7 +79,9 @@ class UserNamePage extends StatelessWidget {
                         key: const Key('user_name_textfield'),
                         controller: _nameController,
                         decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.nameLabel,
+                          hintText:
+                              AppLocalizations.of(context)!.enterNameLabel,
+                          label: Text(AppLocalizations.of(context)!.nameLabel),
                         ),
                         keyboardType: TextInputType.name,
                         validator: (val) {

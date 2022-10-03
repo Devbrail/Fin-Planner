@@ -34,6 +34,17 @@ class _UserImagePageState extends State<UserImagePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 16),
+                ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.primary,
+                    BlendMode.srcIn,
+                  ),
+                  child: const Icon(
+                    Icons.person_add_rounded,
+                    size: 72,
+                  ),
+                ),
+                const SizedBox(height: 16),
                 Text(
                   AppLocalizations.of(context)!.imageLabel,
                   style: Theme.of(context).textTheme.headline5?.copyWith(
@@ -43,12 +54,19 @@ class _UserImagePageState extends State<UserImagePage> {
                 ),
                 Text(
                   AppLocalizations.of(context)!.imageDescLabel,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(0.75),
+                      ),
                 ),
                 const SizedBox(height: 16),
-                UserImageWidget(
-                  pickImage: _pickImage,
-                  maxRadius: 42,
+                Center(
+                  child: UserImageWidget(
+                    pickImage: _pickImage,
+                    maxRadius: 72,
+                  ),
                 ),
               ],
             ),

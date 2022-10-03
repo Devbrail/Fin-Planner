@@ -23,7 +23,6 @@
     "@updateExpenseLabel": {
         "description": "Update Expense label"
     },
-    
     "updateCardLabel": "Update card",
     "@updateCardLabel": {
         "description": "Update card label"
@@ -504,5 +503,13 @@
     "transferLabel": "Transfer",
     "@transferLabel": {
         "description": "Transfer label"
+    },
+    "appRateLabel": "Rate the app",
+    "@appRateLabel": {
+        "description": "Rate label"
+    },
+    "appRateDescLabel": "Love this app? Let us know in the Google Play Store how we can make it even better",
+    "@appRateDescLabel": {
+        "description": "Rate label"
     }
 }

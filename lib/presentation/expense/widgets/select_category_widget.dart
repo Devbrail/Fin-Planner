@@ -241,7 +241,8 @@ class _SelectedItemState extends State<SelectedItem> {
                         child: Icon(
                           IconData(
                             category.icon,
-                            fontFamily: 'MaterialIcons',
+                            fontFamily: 'Material Design Icons',
+                            fontPackage: 'material_design_icons_flutter',
                           ),
                           color: Theme.of(context).colorScheme.onPrimary,
                         ),
