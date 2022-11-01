@@ -2,8 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 import '../../../common/enum/debt_type.dart';
-import '../../../di/service_locator.dart';
-import 'transaction.dart';
 
 part 'debt.g.dart';
 
@@ -29,12 +27,6 @@ class Debt extends HiveObject with EquatableMixin {
 
   @HiveField(6, defaultValue: 0)
   int? superId;
-
-  @HiveField(8)
-  final HiveList<Transaction> transactions = HiveList(
-    locator.get<Box<Transaction>>(),
-    objects: [],
-  );
 
   Debt({
     required this.description,

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../app/routes.dart';
 import '../../../common/constants/extensions.dart';
 import '../../../common/widgets/empty_widget.dart';
 import '../../../data/accounts/model/account.dart';
@@ -23,8 +21,6 @@ class AccountsPage extends StatefulWidget {
 
 class AccountsPageState extends State<AccountsPage> {
   final AccountsBloc accountsBloc = locator.get();
-
-  void _addCard() => context.goNamed(addAccountPath);
 
   @override
   Widget build(BuildContext context) {
@@ -72,13 +68,6 @@ class AccountsPageState extends State<AccountsPage> {
               );
             },
           ),
-          floatingActionButton: FloatingActionButton.large(
-            onPressed: _addCard,
-            heroTag: 'add_account',
-            key: const Key('add_account'),
-            tooltip: AppLocalizations.of(context)!.addAccountLabel,
-            child: const Icon(Icons.add),
-          ),
         ),
         tablet: Scaffold(
           appBar: context.materialYouAppBar(
@@ -123,13 +112,6 @@ class AccountsPageState extends State<AccountsPage> {
                 ],
               );
             },
-          ),
-          floatingActionButton: FloatingActionButton.large(
-            onPressed: _addCard,
-            heroTag: 'add_account',
-            key: const Key('add_account'),
-            tooltip: AppLocalizations.of(context)!.addAccountLabel,
-            child: const Icon(Icons.add),
           ),
         ),
       ),

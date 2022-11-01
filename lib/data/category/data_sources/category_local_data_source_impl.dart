@@ -12,7 +12,7 @@ class CategoryLocalDataSourceImpl implements CategoryLocalDataSource {
   Future<void> addCategory(Category category) async {
     final int id = await categoryBox.add(category);
     category.superId = id;
-    category.save();
+    await category.save();
   }
 
   @override

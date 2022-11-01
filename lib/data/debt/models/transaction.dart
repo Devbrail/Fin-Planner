@@ -14,8 +14,19 @@ class Transaction extends HiveObject with EquatableMixin {
   @HiveField(3)
   int? superId;
 
-  Transaction(this.amount, this.now);
+  @HiveField(4, defaultValue: -1)
+  int? parentId;
+
+  Transaction({
+    required this.amount,
+    required this.now,
+    required this.parentId,
+  });
 
   @override
-  List<Object?> get props => [now, amount];
+  List<Object?> get props => [
+        now,
+        amount,
+        parentId,
+      ];
 }

@@ -12,7 +12,7 @@ class FetchCategoriesEvent extends CategoryEvent {}
 
 class CategoryRefreshEvent extends CategoryEvent {}
 
-class EditCategoryEvent extends CategoryEvent {}
+class AddCategoryEvent extends CategoryEvent {}
 
 class CategoryUpdateEvent extends CategoryEvent {}
 

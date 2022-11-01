@@ -39,12 +39,14 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     AddTransactionToDebtEvent event,
     Emitter<DebtsState> emit,
   ) async {
-    final Transaction transaction = Transaction(event.amount, DateTime.now());
+    final transaction = Transaction(
+      amount: event.amount,
+      now: DateTime.now(),
+      parentId: event.debt.superId!,
+    );
     final int id = await transactionBox.add(transaction);
     transaction.superId = id;
-    transaction.save();
-    event.debt.transactions.add(transaction);
-    event.debt.save();
+    await transaction.save();
   }
 
   void _changeType(
@@ -105,6 +107,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     }
     if (event.isUpdate) {
       currentDebt!
+        ..name = name
         ..amount = amount
         ..dateTime = dateTime
         ..expiryDateTime = dueDateTime

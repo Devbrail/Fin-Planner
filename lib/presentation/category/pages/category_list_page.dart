@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../app/routes.dart';
 import '../../../common/constants/extensions.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/category_bloc.dart';
@@ -43,13 +41,6 @@ class CategoryListPageState extends State<CategoryListPage> {
           addCategoryBloc: addCategoryBloc,
           crossAxisCount: 5,
         ),
-      ),
-      floatingActionButton: FloatingActionButton.large(
-        onPressed: () => context.goNamed(addCategoryPath),
-        heroTag: 'add_category',
-        key: const Key('add_category'),
-        tooltip: AppLocalizations.of(context)!.addCategoryLabel,
-        child: const Icon(Icons.add),
       ),
     );
   }

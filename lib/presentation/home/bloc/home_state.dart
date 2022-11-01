@@ -6,3 +6,9 @@ abstract class HomeState {}
 class ExpenseInitial extends HomeState {}
 
 class UserDetailsUpdatedState extends HomeState {}
+
+class CurrentIndexState extends HomeState {
+  final PaisaPage currentPage;
+
+  CurrentIndexState(this.currentPage);
+}

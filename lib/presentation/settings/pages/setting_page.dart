@@ -61,9 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
               const ChooseThemeModeWidget(),
               const Divider(),
               ColorSelectorWidget(
-                onSelectedColor: (color) {
-                  AppBuilder.of(context)?.rebuild();
-                },
+                onSelectedColor: (color) => AppBuilder.of(context)?.rebuild(),
               ),
             ],
           ),

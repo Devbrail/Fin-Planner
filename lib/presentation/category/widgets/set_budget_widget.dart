@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/common/widgets/paisa_text_field.dart';
 
 import '../bloc/category_bloc.dart';
 
@@ -57,11 +58,10 @@ class CategoryBudgetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return PaisaTextFormField(
       controller: controller,
-      decoration: InputDecoration(
-        hintText: AppLocalizations.of(context)!.budgetLabel,
-      ),
+      hintText: AppLocalizations.of(context)!.enterBudgetLabel,
+      label: AppLocalizations.of(context)!.budgetLabel,
       onChanged: (value) {
         double? amount = double.tryParse(value);
         BlocProvider.of<CategoryBloc>(context).categoryBudget = amount;

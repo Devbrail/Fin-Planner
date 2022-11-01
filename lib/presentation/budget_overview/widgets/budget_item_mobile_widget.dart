@@ -51,6 +51,7 @@ class BudgetItemMobileWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: Column(
@@ -58,9 +59,9 @@ class BudgetItemMobileWidget extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                              top: 14.0,
+                              top: 16.0,
                               bottom: 8,
-                              left: 14.0,
+                              left: 16.0,
                               right: 8,
                             ),
                             child: Icon(
@@ -75,7 +76,7 @@ class BudgetItemMobileWidget extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(
                               bottom: 8,
-                              left: 14.0,
+                              left: 16.0,
                               right: 8,
                             ),
                             child: Text(
@@ -92,7 +93,10 @@ class BudgetItemMobileWidget extends StatelessWidget {
                     ),
                     isBudgetActive
                         ? Padding(
-                            padding: const EdgeInsets.only(right: 16),
+                            padding: const EdgeInsets.only(
+                              right: 16,
+                              top: 16,
+                            ),
                             child: SizedBox(
                               height: 24,
                               width: 24,

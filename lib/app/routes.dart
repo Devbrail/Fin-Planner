@@ -98,6 +98,7 @@ final GoRouter goRouter = GoRouter(
       routes: [
         GoRoute(
           path: addExpensePath,
+          name: addExpensePath,
           builder: (context, state) => const ExpensePage(),
         ),
         GoRoute(

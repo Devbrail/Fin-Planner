@@ -418,6 +418,8 @@ class AccountNumberWidget extends StatelessWidget {
       controller: controller,
       hintText: AppLocalizations.of(context)!.lastFourDigitLabel,
       keyboardType: TextInputType.number,
+      onChanged: (value) =>
+          BlocProvider.of<AccountsBloc>(context).accountNumber = value,
     );
   }
 }

@@ -266,8 +266,9 @@ InputDecorationTheme get inputDecorationTheme {
   );
 }
 
-NavigationBarThemeData get navigationBarThemeData {
+NavigationBarThemeData navigationBarThemeData(ColorScheme colorScheme) {
   return NavigationBarThemeData(
+    backgroundColor: colorScheme.surface,
     labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
     labelTextStyle: MaterialStateProperty.all(GoogleFonts.outfit()),
   );
@@ -280,13 +281,20 @@ FloatingActionButtonThemeData floatingActionButton(ColorScheme colorScheme) {
   );
 }
 
-AppBarTheme appBarTheme(Brightness brightness) {
+AppBarTheme appBarThemeLight(ColorScheme colorScheme) {
   return AppBarTheme(
     elevation: 0,
-    systemOverlayStyle: SystemUiOverlayStyle(
+    systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
       statusBarColor: Colors.transparent,
-      systemNavigationBarColor: Colors.transparent,
-      statusBarIconBrightness: brightness,
+    ),
+  );
+}
+
+AppBarTheme appBarThemeDark(ColorScheme colorScheme) {
+  return AppBarTheme(
+    elevation: 0,
+    systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
+      statusBarColor: Colors.transparent,
     ),
   );
 }

@@ -19,6 +19,7 @@ class ExpenseListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: expenses.length,
       itemBuilder: (_, index) {

@@ -14,3 +14,9 @@ class UpdateUserDetailsEvent extends HomeEvent {
 }
 
 class PickImageEvent extends HomeEvent {}
+
+class CurrentIndexEvent extends HomeEvent {
+  final PaisaPage currentPage;
+
+  CurrentIndexEvent(this.currentPage);
+}

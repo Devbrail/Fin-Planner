@@ -7,6 +7,10 @@
     "@homeLabel": {
         "description": "Home label"
     },
+    "dueDateLabel": "Due date",
+    "@dueDateLabel": {
+        "description": "Home label"
+    },
     "categoryLabel": "Category",
     "@categoryLabel": {
         "description": "Category label"
@@ -548,6 +552,10 @@
     "@addCreditLabel": {
         "description": "Add credit label"
     },
+    "enterBudgetLabel": "Enter budget",
+    "@enterBudgetLabel": {
+        "description": "Enter budget label"
+    },
     "enterDescriptionLabel": "Enter description",
     "@enterDescriptionLabel": {
         "description": "Enter description label"
@@ -555,5 +563,33 @@
     "validDescriptionLabel": "Enter valid description",
     "@validDescriptionLabel": {
         "description": "Enter valid description label"
+    },
+    "payDebtLabel": "Pay debt",
+    "@payDebtLabel": {
+        "description": "Pay debt label"
+    },
+    "payCreditLabel": "Pay credit",
+    "@payCreditLabel": {
+        "description": "Pay credit label"
+    },
+    "enterAmountLabel": "Enter amount",
+    "@enterAmountLabel": {
+        "description": "Enter amount label"
+    },
+    "emptyDebtsLabel": "Empty in debts",
+    "@emptyDebtsLabel": {
+        "description": "Empty in debts label"
+    },
+    "emptyDebtsDescLabel": "Looks like you have no debts, add them it will show here ",
+    "@emptyDebtsDescLabel": {
+        "description": "Looks like you have no debts label"
+    },
+    "emptyCreditLabel": "Empty in credits",
+    "@emptyCreditLabel": {
+        "description": "Empty in credits label"
+    },
+    "emptyCreditDescLabel": "Looks like you have no credits, add them it will show here ",
+    "@emptyCreditDescLabel": {
+        "description": "Looks like you have no credits label"
     }
 }

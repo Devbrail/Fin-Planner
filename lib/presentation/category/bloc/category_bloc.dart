@@ -16,7 +16,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   }) : super(AddCategoryInitial()) {
     on<CategoryEvent>((event, emit) {});
     on<FetchCategoriesEvent>((event, emit) => _fetchCategories(emit));
-    on<EditCategoryEvent>((event, emit) => _addCategory(event, emit));
+    on<AddCategoryEvent>((event, emit) => _addCategory(event, emit));
     on<CategoryDeleteEvent>((event, emit) => _deleteCategory(event, emit));
     on<CategoryRefreshEvent>((event, emit) => _refresh(emit));
     on<CategoryUpdateEvent>((event, emit) => _updateCategory(event, emit));
@@ -58,7 +58,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   }
 
   _addCategory(
-    EditCategoryEvent event,
+    AddCategoryEvent event,
     Emitter<CategoryState> emit,
   ) async {
     final String? title = categoryTitle;
@@ -68,10 +68,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
     if (title == null) {
       return emit(const CategoryErrorState('Add category title'));
-    }
-
-    if (description == null) {
-      return emit(const CategoryErrorState('Add category description'));
     }
 
     if (icon == null) {

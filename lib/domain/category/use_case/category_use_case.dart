@@ -8,7 +8,7 @@ class CategoryUseCase {
 
   Future<void> addCategory({
     required String name,
-    required String desc,
+    required String? desc,
     required int icon,
     double? budget = -1,
   }) async {

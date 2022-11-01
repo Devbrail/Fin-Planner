@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../../common/constants/currency.dart';
 import '../../../common/constants/extensions.dart';
 import '../../../common/enum/debt_type.dart';
 import '../../../common/widgets/paisa_text_field.dart';
+import '../../../data/debt/models/transaction.dart';
 import '../../../di/service_locator.dart';
 import '../../expense/pages/expense_page.dart';
 import '../cubit/debts_cubit.dart';
@@ -26,7 +29,7 @@ class DebtAddOrEditPage extends StatefulWidget {
 class _DebtAddOrEditPageState extends State<DebtAddOrEditPage> {
   late final bool isUpdate = widget.debtId != null;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late final DebtsBloc debtCubit = locator.get<DebtsBloc>()
+  late final DebtsBloc debtBloc = locator.get<DebtsBloc>()
     ..add(FetchDebtOrCreditFromIdEvent(widget.debtId))
     ..add(const ChangeDebtTypeEvent(DebtType.debt));
   final TextEditingController amountController = TextEditingController();
@@ -36,9 +39,9 @@ class _DebtAddOrEditPageState extends State<DebtAddOrEditPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => debtCubit,
+      create: (_) => debtBloc,
       child: BlocConsumer(
-        bloc: debtCubit,
+        bloc: debtBloc,
         listener: (context, state) {
           if (state is DebtsAdded) {
             GoRouter.of(context).pop();
@@ -60,111 +63,122 @@ class _DebtAddOrEditPageState extends State<DebtAddOrEditPage> {
           }
         },
         builder: (context, state) {
-          if (state is DebtsSuccessState) {
-            return Scaffold(
-              appBar: context.materialYouAppBar(
-                'title,',
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      state.debt.delete().then((value) => context.pop());
-                    },
-                    icon: Icon(
-                      Icons.delete_rounded,
-                      color: Theme.of(context).colorScheme.error,
+          return Scaffold(
+            appBar: context.materialYouAppBar(
+              AppLocalizations.of(context)!.addDebtLabel,
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    debtBloc.currentDebt
+                        ?.delete()
+                        .then((value) => context.pop());
+                  },
+                  icon: Icon(
+                    Icons.delete_rounded,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                )
+              ],
+            ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    DebtToggleButtonsWidget(
+                      onSelected: (p0) => debtBloc.currentDebtType = p0,
+                      selectedType: debtBloc.currentDebtType,
                     ),
-                  )
-                ],
+                    const SizedBox(height: 16),
+                    AmountWidget(controller: amountController),
+                    const SizedBox(height: 16),
+                    NameWidget(controller: nameController),
+                    const SizedBox(height: 16),
+                    DescriptionWidget(controller: descController),
+                    const SizedBox(height: 16),
+                    DatePickerWidget(
+                      onSelected: (date) => debtBloc.currentDateTime = date,
+                      title: AppLocalizations.of(context)!.dateLabel,
+                      subtitle: AppLocalizations.of(context)!.validDateLabel,
+                      icon: MdiIcons.calendarStart,
+                      lastDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                    ),
+                    DatePickerWidget(
+                      onSelected: (date) => debtBloc.currentDueDateTime = date,
+                      title: AppLocalizations.of(context)!.dueDateLabel,
+                      subtitle: AppLocalizations.of(context)!.validDateLabel,
+                      icon: MdiIcons.calendarEnd,
+                      lastDate: DateTime(2050),
+                      firstDate: DateTime.now(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        AppLocalizations.of(context)!.transactionHistoryLabel,
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                    ),
+                    ValueListenableBuilder<Box<Transaction>>(
+                      valueListenable:
+                          locator.get<Box<Transaction>>().listenable(),
+                      builder: (context, value, child) {
+                        final result = value.values
+                            .where((element) =>
+                                element.parentId ==
+                                (int.tryParse(widget.debtId ?? '') ?? -1))
+                            .toList();
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: result.length,
+                          itemBuilder: (_, index) {
+                            final transaction = result[index];
+                            return ListTile(
+                              trailing:
+                                  Text(formattedCurrency(transaction.amount)),
+                              title: Text(
+                                formattedDate(transaction.now),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    )
+                  ],
+                ),
               ),
-              body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Form(
-                  key: _formKey,
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      DebtToggleButtonsWidget(
-                        onSelected: (p0) => debtCubit.currentDebtType = p0,
-                        selectedType: debtCubit.currentDebtType,
-                      ),
-                      const SizedBox(height: 16),
-                      AmountWidget(controller: amountController),
-                      const SizedBox(height: 16),
-                      NameWidget(controller: nameController),
-                      const SizedBox(height: 16),
-                      DescriptionWidget(controller: descController),
-                      const SizedBox(height: 16),
-                      DatePickerWidget(
-                        onSelected: (date) => debtCubit.currentDateTime = date,
-                        title: 'Date',
-                        subtitle: 'Selected date',
-                        icon: MdiIcons.calendarStart,
-                        lastDate: DateTime.now(),
-                        firstDate: DateTime(2000),
-                      ),
-                      DatePickerWidget(
-                        onSelected: (date) =>
-                            debtCubit.currentDueDateTime = date,
-                        title: 'Due date',
-                        subtitle: 'Selected date',
-                        icon: MdiIcons.calendarEnd,
-                        lastDate: DateTime(2050),
-                        firstDate: DateTime.now(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text('Transactions'),
-                      ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.debt.transactions.length,
-                        itemBuilder: (_, index) {
-                          final transaction = state.debt.transactions[index];
-                          return ListTile(
-                            leading: Text(transaction.amount.toString()),
-                            title: Text(
-                              formattedDate(transaction.now),
-                            ),
-                          );
-                        },
-                      )
-                    ],
+            ),
+            bottomNavigationBar: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    final isValid = _formKey.currentState!.validate();
+                    if (!isValid) {
+                      return;
+                    }
+                    debtBloc.add(AddOrUpdateEvent(isUpdate));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.addLabel,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: Theme.of(context).textTheme.headline6?.fontSize,
+                    ),
                   ),
                 ),
               ),
-              bottomNavigationBar: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      final isValid = _formKey.currentState!.validate();
-                      if (!isValid) {
-                        return;
-                      }
-                      debtCubit.add(AddOrUpdateEvent(isUpdate));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
-                    ),
-                    child: Text(
-                      AppLocalizations.of(context)!.addLabel,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize:
-                            Theme.of(context).textTheme.headline6?.fontSize,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            );
-          } else {
-            return const SizedBox.shrink();
-          }
+            ),
+          );
         },
       ),
     );

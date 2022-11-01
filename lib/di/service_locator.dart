@@ -1,3 +1,4 @@
+import 'package:flutter_paisa/presentation/summary/cubit/summary_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -81,73 +82,73 @@ Future<void> _setupHive() async {
 
   final transactionBox =
       await Hive.openBox<Transaction>(BoxType.transactions.stringValue);
-  locator.registerSingleton<Box<Transaction>>(transactionBox);
+  locator.registerLazySingleton<Box<Transaction>>(() => transactionBox);
 
   final expenseBox = await Hive.openBox<Expense>(BoxType.expense.stringValue);
-  locator.registerSingleton<Box<Expense>>(expenseBox);
+  locator.registerLazySingleton<Box<Expense>>(() => expenseBox);
 
   final categoryBox =
       await Hive.openBox<Category>(BoxType.category.stringValue);
-  locator.registerSingleton<Box<Category>>(categoryBox);
+  locator.registerLazySingleton<Box<Category>>(() => categoryBox);
 
   final accountBox = await Hive.openBox<Account>(BoxType.accounts.stringValue);
-  locator.registerSingleton<Box<Account>>(accountBox);
+  locator.registerLazySingleton<Box<Account>>(() => accountBox);
 
   final debtBox = await Hive.openBox<Debt>(BoxType.debts.stringValue);
-  locator.registerSingleton<Box<Debt>>(debtBox);
+  locator.registerLazySingleton<Box<Debt>>(() => debtBox);
 
   await Hive.openBox(BoxType.settings.stringValue);
 }
 
 void _localSources() {
-  final manager = ExpenseManagerLocalDataSourceImpl();
-  manager.exportData();
-  locator.registerSingleton<ExpenseManagerLocalDataSource>(manager);
-  locator.registerSingleton<CategoryLocalDataSource>(
-      CategoryLocalDataSourceImpl());
-  locator
-      .registerSingleton<AccountLocalDataSource>(AccountLocalDataSourceImpl());
-  locator.registerSingleton<DebtLocalDataSource>(DebtLocalDataSourceImpl());
-  locator.registerSingleton<SettingsService>(SettingsServiceImpl());
-  locator.registerSingleton<FileHandler>(FileHandler());
+  locator.registerLazySingleton<ExpenseManagerLocalDataSource>(
+      () => ExpenseManagerLocalDataSourceImpl());
+  locator.registerLazySingleton<CategoryLocalDataSource>(
+      () => CategoryLocalDataSourceImpl());
+  locator.registerLazySingleton<AccountLocalDataSource>(
+      () => AccountLocalDataSourceImpl());
+  locator.registerLazySingleton<DebtLocalDataSource>(
+      () => DebtLocalDataSourceImpl());
+  locator.registerLazySingleton<SettingsService>(() => SettingsServiceImpl());
+  locator.registerLazySingleton<FileHandler>(() => FileHandler());
 }
 
 void _setupRepository() {
-  locator.registerSingleton<ExpenseRepository>(
-    ExpenseRepositoryImpl(
+  locator.registerLazySingleton<ExpenseRepository>(
+    () => ExpenseRepositoryImpl(
       dataSource: locator.get(),
     ),
   );
-  locator.registerSingleton<CategoryRepository>(
-    CategoryRepositoryImpl(
+  locator.registerLazySingleton<CategoryRepository>(
+    () => CategoryRepositoryImpl(
       dataSources: locator.get(),
     ),
   );
-  locator.registerSingleton<AccountRepository>(
-    AccountRepositoryImpl(
+  locator.registerLazySingleton<AccountRepository>(
+    () => AccountRepositoryImpl(
       dataSource: locator.get(),
     ),
   );
-  locator.registerSingleton<DebtRepository>(
-    DebtRepositoryImpl(
+  locator.registerLazySingleton<DebtRepository>(
+    () => DebtRepositoryImpl(
       dataSource: locator.get(),
     ),
   );
 }
 
 void _setupUseCase() {
-  locator.registerSingleton(
-    ExpenseUseCase(expenseRepository: locator.get()),
+  locator.registerLazySingleton(
+    () => ExpenseUseCase(expenseRepository: locator.get()),
   );
 
-  locator.registerSingleton(
-    CategoryUseCase(categoryRepository: locator.get()),
+  locator.registerLazySingleton(
+    () => CategoryUseCase(categoryRepository: locator.get()),
   );
-  locator.registerSingleton(
-    AccountUseCase(repository: locator.get()),
+  locator.registerLazySingleton(
+    () => AccountUseCase(repository: locator.get()),
   );
-  locator.registerSingleton(
-    DebtUseCase(repository: locator.get()),
+  locator.registerLazySingleton(
+    () => DebtUseCase(repository: locator.get()),
   );
 }
 
@@ -158,4 +159,5 @@ void _setupBloc() {
   locator.registerFactory(() => AccountsBloc(accountUseCase: locator.get()));
   locator.registerFactory(() => HomeBloc());
   locator.registerFactory(() => DebtsBloc(useCase: locator.get()));
+  locator.registerFactory(() => SummaryCubit());
 }

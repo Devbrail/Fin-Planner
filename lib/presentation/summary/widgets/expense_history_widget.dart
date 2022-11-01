@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/presentation/summary/cubit/summary_cubit.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../common/constants/extensions.dart';
@@ -8,7 +10,6 @@ import '../../../common/constants/util.dart';
 import '../../../common/enum/filter_budget.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
-import '../../budget_overview/widgets/filter_budget_widget.dart';
 import 'expense_month_card.dart';
 
 class ExpenseHistory extends StatefulWidget {
@@ -19,7 +20,6 @@ class ExpenseHistory extends StatefulWidget {
 }
 
 class _ExpenseHistoryState extends State<ExpenseHistory> {
-  FilterBudget selectedType = FilterBudget.daily;
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<Expense>>(
@@ -45,36 +45,31 @@ class _ExpenseHistoryState extends State<ExpenseHistory> {
           );
         }
         expenses.sort(((a, b) => b.time.compareTo(a.time)));
-        final maps = groupBy(expenses,
-            (Expense element) => element.time.formatted(selectedType));
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 16,
-            ),
-            FilterBudgetWidget(
-              onSelected: (budget) {
-                selectedType = budget;
-                setState(() {});
-              },
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: maps.entries.length,
-              itemBuilder: (_, mapIndex) {
-                final expenses = maps.values.toList()[mapIndex];
-                expenses.sort((a, b) => b.time.compareTo(a.time));
-                return ExpenseMonthCardWidget(
-                  title: maps.keys.toList()[mapIndex],
-                  total: expenses.filterTotal,
-                  expenses: expenses,
-                );
-              },
-            ),
-          ],
+        return BlocBuilder(
+          bloc: BlocProvider.of<SummaryCubit>(context),
+          builder: (context, state) {
+            if (state is SummaryFilterBudgetState) {
+              final maps = groupBy(expenses,
+                  (Expense element) => element.time.formatted(state.budget));
+              return ListView.builder(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: maps.entries.length,
+                itemBuilder: (_, mapIndex) {
+                  final expenses = maps.values.toList()[mapIndex];
+                  expenses.sort((a, b) => b.time.compareTo(a.time));
+                  return ExpenseMonthCardWidget(
+                    title: maps.keys.toList()[mapIndex],
+                    total: expenses.filterTotal,
+                    expenses: expenses,
+                  );
+                },
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
         );
       },
     );

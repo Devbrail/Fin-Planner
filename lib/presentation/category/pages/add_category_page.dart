@@ -12,6 +12,8 @@ import '../bloc/category_bloc.dart';
 import '../widgets/select_icon_widget.dart';
 import '../widgets/set_budget_widget.dart';
 
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
 class AddCategoryPage extends StatefulWidget {
   const AddCategoryPage({
     Key? key,
@@ -25,8 +27,6 @@ class AddCategoryPage extends StatefulWidget {
 }
 
 class _AddCategoryPageState extends State<AddCategoryPage> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   late final CategoryBloc categoryBloc = locator.get()
     ..add(FetchCategoryFromIdEvent(widget.categoryId));
   late TextEditingController budgetController = TextEditingController();
@@ -34,13 +34,13 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   late TextEditingController descController = TextEditingController();
 
   void _submitCategory() {
-    final isValid = formKey.currentState!.validate();
+    final isValid = _formKey.currentState!.validate();
     if (!isValid) {
       return;
     }
 
     if (isAddCategory) {
-      categoryBloc.add(EditCategoryEvent());
+      categoryBloc.add(AddCategoryEvent());
     } else {
       categoryBloc.add(CategoryUpdateEvent());
     }
@@ -68,7 +68,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               backgroundColor: Theme.of(context).colorScheme.errorContainer,
               color: Theme.of(context).colorScheme.onErrorContainer,
             );
-            context.pop();
           } else if (state is CategorySuccessState) {
             budgetController.text = state.category.budget.toString();
             budgetController.selection = TextSelection.collapsed(
@@ -92,12 +91,10 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           return ScreenTypeLayout(
             mobile: Scaffold(
               appBar: appBar(),
-              body: SafeArea(
-                child: SingleChildScrollView(
-                  child: Form(
-                    key: formKey,
-                    child: _inputForm(),
-                  ),
+              body: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: _inputForm(),
                 ),
               ),
               bottomNavigationBar: SafeArea(
@@ -138,7 +135,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               body: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Form(
-                  key: formKey,
+                  key: _formKey,
                   child: Row(
                     children: [
                       Expanded(
@@ -249,14 +246,13 @@ class CategoryNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      maxLength: 10,
       hintText: AppLocalizations.of(context)!.enterCategoryLabel,
       label: AppLocalizations.of(context)!.categoryLabel,
       keyboardType: TextInputType.name,
       onChanged: (value) =>
           BlocProvider.of<CategoryBloc>(context).categoryTitle = value,
       validator: (value) {
-        if (value!.length >= 3 && value.length < 15) {
+        if (value!.isNotEmpty) {
           return null;
         } else {
           return AppLocalizations.of(context)!.validNameLabel;
@@ -276,7 +272,6 @@ class CategoryDescriptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PaisaTextFormField(
-      maxLength: 15,
       controller: controller,
       hintText: AppLocalizations.of(context)!.enterDescriptionLabel,
       keyboardType: TextInputType.name,

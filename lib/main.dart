@@ -20,6 +20,7 @@ Future<void> main() async {
   usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
+
   runApp(const MyApp());
 }
 
@@ -42,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
       valueListenable: settings,
-      builder: (BuildContext context, Box<dynamic> value, Widget? child) {
+      builder: (context, value, child) {
         final isDynamic = value.get(dynamicColorKey, defaultValue: true);
         final themeModeValue = value.get(themeModeKey, defaultValue: 0);
         final color = value.get(appColorKey, defaultValue: 0xFF795548);
@@ -75,17 +76,20 @@ class _MyAppState extends State<MyApp> {
                     routeInformationParser: goRouter.routeInformationParser,
                     routerDelegate: goRouter.routerDelegate,
                     debugShowCheckedModeBanner: false,
-                    theme: ThemeData.light().copyWith(
+                    theme: ThemeData.from(
+                      colorScheme: lightColorScheme,
+                    ).copyWith(
                       colorScheme: lightColorScheme,
                       dialogTheme: dialogTheme(),
-                      appBarTheme: appBarTheme(Brightness.dark),
+                      appBarTheme: appBarThemeLight(lightColorScheme),
                       useMaterial3: true,
                       textTheme: GoogleFonts.outfitTextTheme(
                         ThemeData.light().textTheme,
                       ),
                       scaffoldBackgroundColor: lightColorScheme.background,
                       dialogBackgroundColor: lightColorScheme.background,
-                      navigationBarTheme: navigationBarThemeData,
+                      navigationBarTheme:
+                          navigationBarThemeData(lightColorScheme),
                       applyElevationOverlayColor: true,
                       inputDecorationTheme: inputDecorationTheme,
                       elevatedButtonTheme: elevatedButtonTheme(
@@ -94,17 +98,20 @@ class _MyAppState extends State<MyApp> {
                       ),
                       extensions: [lightCustomColor],
                     ),
-                    darkTheme: ThemeData.dark().copyWith(
+                    darkTheme: ThemeData.from(
+                      colorScheme: darkColorScheme,
+                    ).copyWith(
                       colorScheme: darkColorScheme,
                       dialogTheme: dialogTheme(),
-                      appBarTheme: appBarTheme(Brightness.light),
+                      appBarTheme: appBarThemeDark(darkColorScheme),
                       useMaterial3: true,
                       textTheme: GoogleFonts.outfitTextTheme(
                         ThemeData.dark().textTheme,
                       ),
                       scaffoldBackgroundColor: darkColorScheme.background,
                       dialogBackgroundColor: darkColorScheme.background,
-                      navigationBarTheme: navigationBarThemeData,
+                      navigationBarTheme:
+                          navigationBarThemeData(darkColorScheme),
                       applyElevationOverlayColor: true,
                       inputDecorationTheme: inputDecorationTheme,
                       elevatedButtonTheme: elevatedButtonTheme(

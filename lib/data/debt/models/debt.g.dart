@@ -29,7 +29,7 @@ class DebtAdapter extends TypeAdapter<Debt> {
   @override
   void write(BinaryWriter writer, Debt obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(7)
       ..writeByte(1)
       ..write(obj.description)
       ..writeByte(7)
@@ -43,9 +43,7 @@ class DebtAdapter extends TypeAdapter<Debt> {
       ..writeByte(5)
       ..write(obj.debtType)
       ..writeByte(6)
-      ..write(obj.superId)
-      ..writeByte(8)
-      ..write(obj.transactions);
+      ..write(obj.superId);
   }
 
   @override

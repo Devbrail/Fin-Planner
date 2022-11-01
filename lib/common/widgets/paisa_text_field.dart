@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PaisaTextFormField extends StatelessWidget {
   const PaisaTextFormField({
@@ -12,6 +13,7 @@ class PaisaTextFormField extends StatelessWidget {
     this.maxLength,
     this.maxLines,
     this.label,
+    this.inputFormatters,
   });
 
   final TextEditingController controller;
@@ -23,6 +25,7 @@ class PaisaTextFormField extends StatelessWidget {
   final int? maxLength;
   final int? maxLines;
   final String? label;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,7 @@ class PaisaTextFormField extends StatelessWidget {
       ),
       validator: validator,
       onChanged: onChanged,
+      inputFormatters: inputFormatters,
     );
   }
 }

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../common/widgets/paisa_card.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../app/routes.dart';
-import '../../../common/constants/currency.dart';
 import '../../../common/enum/debt_type.dart';
+import '../../../common/widgets/empty_widget.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../di/service_locator.dart';
-import '../cubit/debts_cubit.dart';
+import '../widgets/debt_item_widget.dart';
 
 class DebtsPage extends StatefulWidget {
   const DebtsPage({super.key});
@@ -41,16 +39,12 @@ class _DebtsPageState extends State<DebtsPage>
               floating: true,
               bottom: TabBar(
                 controller: controller,
-                labelStyle: Theme.of(context).textTheme.bodyText2,
+                labelStyle: Theme.of(context).textTheme.subtitle1,
                 labelColor: Theme.of(context).colorScheme.primary,
                 indicatorColor: Theme.of(context).colorScheme.primary,
                 tabs: [
-                  Tab(
-                    text: AppLocalizations.of(context)!.debtLabel,
-                  ),
-                  Tab(
-                    text: AppLocalizations.of(context)!.creditLabel,
-                  ),
+                  Tab(text: AppLocalizations.of(context)!.debtLabel),
+                  Tab(text: AppLocalizations.of(context)!.creditLabel),
                 ],
               ),
             ),
@@ -70,21 +64,29 @@ class _DebtsPageState extends State<DebtsPage>
             return TabBarView(
               controller: controller,
               children: [
-                Builder(builder: (context) {
-                  if (debts.isNotEmpty) {
-                    return DebtsListWidget(debts: debts);
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }),
+                Builder(
+                  builder: (context) {
+                    if (debts.isNotEmpty) {
+                      return DebtsListWidget(debts: debts);
+                    }
+                    return EmptyWidget(
+                      title: AppLocalizations.of(context)!.emptyDebtsLabel,
+                      icon: MdiIcons.cashMinus,
+                      description:
+                          AppLocalizations.of(context)!.emptyDebtsDescLabel,
+                    );
+                  },
+                ),
                 Builder(
                   builder: (context) {
                     if (debts.isNotEmpty) {
                       return DebtsListWidget(debts: credits);
                     }
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return EmptyWidget(
+                      title: AppLocalizations.of(context)!.emptyCreditLabel,
+                      icon: MdiIcons.cashMinus,
+                      description:
+                          AppLocalizations.of(context)!.emptyCreditDescLabel,
                     );
                   },
                 ),
@@ -92,15 +94,6 @@ class _DebtsPageState extends State<DebtsPage>
             );
           },
         ),
-      ),
-      floatingActionButton: FloatingActionButton.large(
-        onPressed: () {
-          GoRouter.of(context).goNamed(addDebitName);
-        },
-        heroTag: 'add_account',
-        key: const Key('add_account'),
-        tooltip: AppLocalizations.of(context)!.addAccountLabel,
-        child: const Icon(Icons.add),
       ),
     );
   }
@@ -116,40 +109,12 @@ class DebtsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       shrinkWrap: true,
-      padding: EdgeInsets.zero,
       itemCount: debts.length,
-      itemBuilder: (context, index) {
-        final double amount = debts[index].transactions.fold<double>(
-            0, (previousValue, element) => previousValue + element.amount);
-        return PaisaCard(
-          child: ListTile(
-            onTap: () => context.goNamed(
-              debitAddOrEditPath,
-              params: {'did': debts[index].superId.toString()},
-            ),
-            leading: GestureDetector(
-              onTap: () {
-                locator.get<DebtsBloc>().add(
-                      AddTransactionToDebtEvent(
-                        debts[index],
-                        10,
-                      ),
-                    );
-              },
-              child: const Text('Pay'),
-            ),
-            title: Text(debts[index].name),
-            subtitle: Text(debts[index].description),
-            trailing: Text(
-              formattedCurrency(debts[index].amount - amount),
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.error,
-              ),
-            ),
-          ),
-        );
-      },
+      itemBuilder: (context, index) => DebtItemWidget(
+        debt: debts[index],
+      ),
     );
   }
 }

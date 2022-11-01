@@ -423,7 +423,7 @@ class ExpenseAmountWidget extends StatelessWidget {
         BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
       },
       validator: (value) {
-        if (value!.length > 1) {
+        if (value!.isNotEmpty) {
           return null;
         } else {
           return AppLocalizations.of(context)!.validAmountLabel;
