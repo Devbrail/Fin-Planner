@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/app_builder.dart';
 import '../../../app/routes.dart';
@@ -86,24 +86,36 @@ class _SettingsPageState extends State<SettingsPage> {
               SettingsOption(
                 title: AppLocalizations.of(context)!.appRateLabel,
                 subtitle: AppLocalizations.of(context)!.appRateDescLabel,
-                onTap: () => launchUrlString(playStoreUrl),
+                onTap: () => launchUrl(
+                  Uri.parse(playStoreUrl),
+                  mode: LaunchMode.externalApplication,
+                ),
               ),
               const Divider(),
               SettingsOption(
                 title: AppLocalizations.of(context)!.githubLabel,
                 subtitle: AppLocalizations.of(context)!.githubTextLabel,
-                onTap: () => launchUrlString(gitHubUrl),
+                onTap: () => launchUrl(
+                  Uri.parse(gitHubUrl),
+                  mode: LaunchMode.externalApplication,
+                ),
               ),
               const Divider(),
               SettingsOption(
                 title: AppLocalizations.of(context)!.telegramLabel,
                 subtitle: AppLocalizations.of(context)!.telegramGroupLabel,
-                onTap: () => launchUrlString(telegramGroupUrl),
+                onTap: () => launchUrl(
+                  Uri.parse(telegramGroupUrl),
+                  mode: LaunchMode.externalApplication,
+                ),
               ),
               const Divider(),
               SettingsOption(
                 title: AppLocalizations.of(context)!.privacyPolicyLabel,
-                onTap: () => launchUrlString(termsAndConditionsUrl),
+                onTap: () => launchUrl(
+                  Uri.parse(termsAndConditionsUrl),
+                  mode: LaunchMode.externalApplication,
+                ),
               ),
               const Divider(),
               const VersionWidget(),
