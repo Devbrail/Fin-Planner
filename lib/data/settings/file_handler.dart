@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/animation.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -34,29 +35,34 @@ class FileHandler {
     return json.encode(data);
   }
 
-  Future<void> createBackUpFile() async {
-    await Permission.storage.request();
-    final String data = await _fetchExpensesAndEncode();
-    final directory = await getApplicationSupportDirectory();
-    final path = "${directory.path}/paisa-expense-manager.json";
-    final file = File(path);
-    await file.writeAsString(data);
-    await Share.shareFiles([path], subject: 'Export JSON');
-  }
-
-  Future<File?> _pickJSONFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['json'],
-    );
-    if (result != null) {
-      return File(result.files.single.path!);
+  Future<void> createBackUpFile(VoidCallback callback) async {
+    final result = await _checkPermission();
+    if (!result) {
+      return;
     }
-    return null;
+
+    final String data = await _fetchExpensesAndEncode();
+    final directory = await getExternalStorageDirectory();
+    final dir = await Directory(directory!.path).create(recursive: true);
+    final file = File('${dir.path}/${DateTime.now().toIso8601String()}.json');
+    await file.writeAsString(data);
+    callback.call();
   }
 
-  Future<void> restoreBackUpFile() async {
-    File? file = await _pickJSONFile();
+  Future<void> restoreBackUpFile({
+    FileSystemEntity? fileSystemEntity,
+  }) async {
+    final result = await _checkPermission();
+    if (!result) {
+      return;
+    }
+
+    File? file;
+    if (fileSystemEntity != null) {
+      file = File(fileSystemEntity.path);
+    } else {
+      file = await _pickJSONFile();
+    }
     if (file != null) {
       final jsonString = await file.readAsString();
       final data = Data.fromRawJson(jsonString);
@@ -71,5 +77,27 @@ class FileHandler {
       await categoryBox.addAll(data.categories);
       await accountBox.addAll(data.accounts);
     }
+  }
+
+  Future<File?> _pickJSONFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.any,
+    );
+    if (result != null) {
+      return File(result.files.single.path!);
+    }
+    return null;
+  }
+
+  Future<bool> _checkPermission() async {
+    final result = await Permission.storage.status;
+    if (result.isGranted) {
+      return true;
+    } else if (result.isDenied) {
+      if (await Permission.storage.request().isGranted) {
+        return true;
+      }
+    }
+    return false;
   }
 }

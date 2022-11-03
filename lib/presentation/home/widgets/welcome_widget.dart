@@ -48,9 +48,7 @@ class WelcomeWidget extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: CircleAvatar(
-                    foregroundImage: FileImage(
-                      File(image),
-                    ),
+                    foregroundImage: FileImage(File(image)),
                   ),
                 );
               }

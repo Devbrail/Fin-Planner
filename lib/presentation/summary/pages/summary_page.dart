@@ -79,7 +79,7 @@ class _SummaryPageState extends State<SummaryPage> {
                   },
                 ),
                 pinned: true,
-                expandedHeight: 366.0 + kToolbarHeight,
+                expandedHeight: 372.0 + kToolbarHeight,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.pin,
                   background: SafeArea(
@@ -94,7 +94,7 @@ class _SummaryPageState extends State<SummaryPage> {
                   ),
                 ),
                 bottom: PreferredSize(
-                  preferredSize: const Size(double.infinity, 56),
+                  preferredSize: const Size(double.infinity, 66),
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: FilterBudgetWidget(

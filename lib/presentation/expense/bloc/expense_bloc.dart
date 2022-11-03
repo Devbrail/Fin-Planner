@@ -96,9 +96,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
         await currentExpense!.save();
       }
-
-      emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
     }
+    emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
   }
 
   Future<void> _clearExpense(

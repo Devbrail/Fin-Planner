@@ -76,7 +76,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: AppLocalizations.of(context)!.backupAndRestoreLabel,
                 subtitle:
                     AppLocalizations.of(context)!.backupAndRestoreDescLabel,
-                onTap: () => GoRouter.of(context).goNamed(exportAndImport),
+                onTap: () => GoRouter.of(context).pushNamed(exportAndImport),
               ),
             ],
           ),

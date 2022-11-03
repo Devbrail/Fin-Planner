@@ -34,7 +34,9 @@ class AccountLocalDataSourceImpl implements AccountLocalDataSource {
 
   @override
   Account fetchAccount(int accountId) {
-    return accountBox.values.firstWhere((element) => element.key == accountId);
+    return accountBox.values.firstWhere((element) {
+      return element.superId == accountId;
+    });
   }
 
   @override

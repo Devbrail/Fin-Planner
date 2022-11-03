@@ -57,7 +57,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     style: Theme.of(context).textTheme.headline6,
                   ),
                   trailing: IconButton(
-                    onPressed: () => GoRouter.of(context).goNamed(settingsPath),
+                    onPressed: () =>
+                        GoRouter.of(context).pushNamed(settingsPath),
                     icon: const Icon(MdiIcons.cog),
                   ),
                 ),

@@ -146,7 +146,7 @@ final GoRouter goRouter = GoRouter(
         ),
         GoRoute(
           name: exportAndImport,
-          path: 'export-import',
+          path: exportAndImport,
           builder: (context, state) => ExportAndImportPage(),
         ),
         GoRoute(
