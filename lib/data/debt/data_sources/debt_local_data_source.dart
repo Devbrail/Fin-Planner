@@ -1,4 +1,4 @@
-import 'package:flutter_paisa/data/debt/models/transaction.dart';
+import '../models/transaction.dart';
 
 import '../models/debt.dart';
 

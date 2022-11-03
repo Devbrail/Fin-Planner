@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_paisa/common/enum/filter_budget.dart';
+import '../../../common/enum/filter_budget.dart';
 
 part 'filter_state.dart';
 

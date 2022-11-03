@@ -1,6 +1,6 @@
-import 'package:flutter_paisa/presentation/budget_overview/cubit/filter_cubit.dart';
-import 'package:flutter_paisa/presentation/settings/cubit/user_image_cubit.dart';
-import 'package:flutter_paisa/presentation/summary/cubit/summary_cubit.dart';
+import '../presentation/budget_overview/cubit/filter_cubit.dart';
+import '../presentation/settings/cubit/user_image_cubit.dart';
+import '../presentation/summary/cubit/summary_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 

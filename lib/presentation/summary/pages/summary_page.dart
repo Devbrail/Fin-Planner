@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_paisa/di/service_locator.dart';
-import 'package:flutter_paisa/presentation/summary/cubit/summary_cubit.dart';
+import '../../../di/service_locator.dart';
+import '../cubit/summary_cubit.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/extensions.dart';

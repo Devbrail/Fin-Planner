@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/presentation/splash/bloc/splash_bloc.dart';
+import '../bloc/splash_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 

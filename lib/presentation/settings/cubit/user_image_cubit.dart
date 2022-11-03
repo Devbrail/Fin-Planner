@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_paisa/common/enum/box_types.dart';
-import 'package:flutter_paisa/data/settings/settings_service.dart';
+import '../../../common/enum/box_types.dart';
+import '../../../data/settings/settings_service.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 

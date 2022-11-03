@@ -1,4 +1,4 @@
-import 'package:flutter_paisa/data/debt/models/transaction.dart';
+import '../models/transaction.dart';
 import 'package:hive/hive.dart';
 
 import '../../../common/enum/box_types.dart';
