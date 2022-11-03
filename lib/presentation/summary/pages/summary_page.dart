@@ -15,32 +15,42 @@ import '../widgets/expense_total_widget.dart';
 import '../widgets/welcome_name_widget.dart';
 
 class SummaryPage extends StatefulWidget {
-  const SummaryPage({Key? key}) : super(key: key);
+  const SummaryPage({
+    Key? key,
+    required this.summaryCubit,
+  }) : super(key: key);
+
+  final SummaryCubit summaryCubit;
 
   @override
   State<SummaryPage> createState() => _SummaryPageState();
 }
 
 class _SummaryPageState extends State<SummaryPage> {
-  final SummaryCubit summaryCubit = locator.get();
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => summaryCubit,
+      create: (context) => widget.summaryCubit,
       child: ScreenTypeLayout(
+        breakpoints: const ScreenBreakpoints(
+          tablet: 673,
+          desktop: 1280,
+          watch: 300,
+        ),
         mobile: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
                 actions: [
                   GestureDetector(
-                    onLongPress: (() {
+                    onLongPress: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const ColorPalette()));
-                    }),
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ColorPalette(),
+                        ),
+                      );
+                    },
                     onTap: () => showModalBottomSheet(
                       constraints: BoxConstraints(
                         maxWidth: MediaQuery.of(context).size.width >= 700
@@ -87,9 +97,8 @@ class _SummaryPageState extends State<SummaryPage> {
                 bottom: PreferredSize(
                   preferredSize: const Size(double.infinity, 56),
                   child: FilterBudgetWidget(
-                    onSelected: (budget) {
-                      summaryCubit.updateFilter(budget);
-                    },
+                    onSelected: (budget) =>
+                        widget.summaryCubit.updateFilter(budget),
                   ),
                 ),
               ),
@@ -108,18 +117,42 @@ class _SummaryPageState extends State<SummaryPage> {
         tablet: Scaffold(
           appBar: context.materialYouAppBar(
             '',
+            leadingWidget: IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchPage(),
+                );
+              },
+            ),
             actions: [
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
-                onPressed: () {
-                  showSearch(
-                    context: context,
-                    delegate: SearchPage(),
+              GestureDetector(
+                onLongPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ColorPalette(),
+                    ),
                   );
                 },
+                onTap: () => showModalBottomSheet(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width >= 700
+                        ? 700
+                        : double.infinity,
+                  ),
+                  isScrollControlled: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  context: context,
+                  builder: (_) => const UserProfilePage(),
+                ),
+                child: const WelcomeWidget(),
               ),
             ],
           ),
@@ -130,15 +163,26 @@ class _SummaryPageState extends State<SummaryPage> {
               children: [
                 Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: const [
                       WelcomeNameWidget(),
                       ExpenseTotalWidget(),
                     ],
                   ),
                 ),
-                const Expanded(
-                  child: SingleChildScrollView(child: ExpenseHistory()),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FilterBudgetWidget(
+                          onSelected: (budget) =>
+                              widget.summaryCubit.updateFilter(budget),
+                        ),
+                        const ExpenseHistory(),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),

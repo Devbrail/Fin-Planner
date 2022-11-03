@@ -18,71 +18,47 @@ class CategoryItemMobileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PaisaCard(
-      child: InkWell(
+      child: ListTile(
         onTap: () => context.goNamed(
           editCategoryPath,
           params: <String, String>{'cid': category.superId.toString()},
         ),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(
-                    IconData(
-                      category.icon,
-                      fontFamily: 'Material Design Icons',
-                      fontPackage: 'material_design_icons_flutter',
-                    ),
-                    size: 28,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    category.name,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    category.description,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurfaceVariant
-                              .withOpacity(0.75),
-                        ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-              ],
-            ),
-            Positioned(
-              right: 0,
-              child: IconButton(
-                onPressed: () {
-                  onPressed(category);
-                },
-                icon: Icon(
-                  Icons.delete_rounded,
-                  color: Theme.of(context).colorScheme.error,
-                ),
+        leading: Icon(
+          IconData(
+            category.icon,
+            fontFamily: 'Material Design Icons',
+            fontPackage: 'material_design_icons_flutter',
+          ),
+          size: 28,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+        ),
+        title: Text(
+          category.name,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
-            ),
-          ],
+        ),
+        subtitle: Text(
+          category.description,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                color: Theme.of(context)
+                    .colorScheme
+                    .onSurfaceVariant
+                    .withOpacity(0.75),
+              ),
+        ),
+        trailing: IconButton(
+          onPressed: () {
+            onPressed(category);
+          },
+          icon: Icon(
+            Icons.delete_rounded,
+            color: Theme.of(context).colorScheme.error,
+          ),
         ),
       ),
     );

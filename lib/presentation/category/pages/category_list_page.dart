@@ -8,15 +8,18 @@ import '../bloc/category_bloc.dart';
 import '../widgets/category_list_widget.dart';
 
 class CategoryListPage extends StatefulWidget {
-  const CategoryListPage({Key? key}) : super(key: key);
+  const CategoryListPage({
+    Key? key,
+    required this.addCategoryBloc,
+  }) : super(key: key);
+
+  final CategoryBloc addCategoryBloc;
 
   @override
   CategoryListPageState createState() => CategoryListPageState();
 }
 
 class CategoryListPageState extends State<CategoryListPage> {
-  final CategoryBloc addCategoryBloc = locator.get();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,15 +33,14 @@ class CategoryListPageState extends State<CategoryListPage> {
           watch: 300,
         ),
         mobile: CategoryListWidget(
-          addCategoryBloc: addCategoryBloc,
-          crossAxisCount: 2,
+          addCategoryBloc: widget.addCategoryBloc,
         ),
         tablet: CategoryListWidget(
-          addCategoryBloc: addCategoryBloc,
+          addCategoryBloc: widget.addCategoryBloc,
           crossAxisCount: 3,
         ),
         desktop: CategoryListWidget(
-          addCategoryBloc: addCategoryBloc,
+          addCategoryBloc: widget.addCategoryBloc,
           crossAxisCount: 5,
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/presentation/budget_overview/cubit/filter_cubit.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -16,15 +18,19 @@ import '../widgets/budget_section_widget.dart';
 import '../widgets/filter_budget_widget.dart';
 
 class BudgetOverViewPage extends StatefulWidget {
-  const BudgetOverViewPage({Key? key}) : super(key: key);
+  const BudgetOverViewPage({
+    Key? key,
+    required this.categoryDataSource,
+  }) : super(key: key);
 
+  final CategoryLocalDataSource categoryDataSource;
   @override
   State<BudgetOverViewPage> createState() => _BudgetOverViewPageState();
 }
 
 class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
-  final CategoryLocalDataSource categoryDataSource = locator.get();
-  FilterBudget selectedType = FilterBudget.daily;
+  final FilterCubit filterCubit = locator.get();
+
   DateTimeRange? dateTimeRange;
 
   Future<void> _dateRangePicker() async {
@@ -84,33 +90,40 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
               );
             }
             expenses.sort((a, b) => a.time.compareTo(b.time));
-
-            final filterBudget = groupBy(expenses,
-                    (Expense element) => element.time.formatted(selectedType))
-                .entries
-                .toList();
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FilterBudgetWidget(
-                  onSelected: (budget) {
-                    selectedType = budget;
-                    setState(() {});
-                  },
+                  onSelected: (budget) => filterCubit.updateFilter(budget),
                 ),
-                Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(bottom: 128),
-                    itemCount: filterBudget.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return BudgetSection(
-                        name: filterBudget[index].key,
-                        dataSource: categoryDataSource,
-                        values: filterBudget[index].value,
+                BlocBuilder(
+                  bloc: filterCubit,
+                  builder: (context, state) {
+                    if (state is FilterBudgetState) {
+                      final filterBudget = groupBy(
+                              expenses,
+                              (Expense element) =>
+                                  element.time.formatted(state.filterBudget))
+                          .entries
+                          .toList();
+                      return Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.only(bottom: 128),
+                          itemCount: filterBudget.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return BudgetSection(
+                              name: filterBudget[index].key,
+                              dataSource: widget.categoryDataSource,
+                              values: filterBudget[index].value,
+                            );
+                          },
+                        ),
                       );
-                    },
-                  ),
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
                 ),
               ],
             );
@@ -122,10 +135,7 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
           AppLocalizations.of(context)!.budgetOverViewLabel,
           actions: [
             FilterBudgetWidget(
-              onSelected: (budget) {
-                selectedType = budget;
-                setState(() {});
-              },
+              onSelected: (budget) => filterCubit.updateFilter(budget),
             ),
           ],
         ),
@@ -152,20 +162,30 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
               );
             }
             expenses.sort((a, b) => a.time.compareTo(b.time));
-
-            final filterBudget = groupBy(expenses,
-                    (Expense element) => element.time.formatted(selectedType))
-                .entries
-                .toList();
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: filterBudget.length,
-              itemBuilder: (BuildContext context, int index) {
-                return BudgetSection(
-                  name: filterBudget[index].key,
-                  values: filterBudget[index].value,
-                  dataSource: categoryDataSource,
-                );
+            return BlocBuilder(
+              bloc: filterCubit,
+              builder: (context, state) {
+                if (state is FilterBudgetState) {
+                  final filterBudget = groupBy(
+                          expenses,
+                          (Expense element) =>
+                              element.time.formatted(state.filterBudget))
+                      .entries
+                      .toList();
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: filterBudget.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return BudgetSection(
+                        name: filterBudget[index].key,
+                        values: filterBudget[index].value,
+                        dataSource: widget.categoryDataSource,
+                      );
+                    },
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
               },
             );
           },

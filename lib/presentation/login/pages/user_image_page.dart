@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -7,7 +6,8 @@ import 'package:hive_flutter/adapters.dart';
 import '../../../app/routes.dart';
 import '../../../common/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
-import '../../home/bloc/home_bloc.dart';
+import '../../../di/service_locator.dart';
+import '../../settings/cubit/user_image_cubit.dart';
 import '../../settings/widgets/user_profile_widget.dart';
 
 class UserImagePage extends StatefulWidget {
@@ -18,9 +18,11 @@ class UserImagePage extends StatefulWidget {
 }
 
 class _UserImagePageState extends State<UserImagePage> {
-  void _pickImage() => expenseBloc.add(PickImageEvent());
-  late final expenseBloc = BlocProvider.of<HomeBloc>(context);
+  late final UserNameImageCubit nameImageCubit = locator.get();
   late final value = Hive.box(BoxType.settings.stringValue);
+
+  void _pickImage() => nameImageCubit.pickImage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -28,10 +28,11 @@ class ExpensePage extends StatefulWidget {
   const ExpensePage({
     Key? key,
     this.expenseId,
+    required this.expenseBloc,
   }) : super(key: key);
 
   final String? expenseId;
-
+  final ExpenseBloc expenseBloc;
   @override
   State<ExpensePage> createState() => _ExpensePageState();
 }

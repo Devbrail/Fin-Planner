@@ -13,19 +13,22 @@ import '../widgets/account_transaction_widget.dart';
 import '../widgets/accounts_page_view_widget.dart';
 
 class AccountsPage extends StatefulWidget {
-  const AccountsPage({Key? key}) : super(key: key);
+  const AccountsPage({
+    Key? key,
+    required this.accountsBloc,
+  }) : super(key: key);
+
+  final AccountsBloc accountsBloc;
 
   @override
   AccountsPageState createState() => AccountsPageState();
 }
 
 class AccountsPageState extends State<AccountsPage> {
-  final AccountsBloc accountsBloc = locator.get();
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => accountsBloc,
+      create: (_) => widget.accountsBloc,
       child: ScreenTypeLayout(
         key: const Key('accounts'),
         mobile: Scaffold(
@@ -45,7 +48,7 @@ class AccountsPageState extends State<AccountsPage> {
                       .errorNoCardsDescriptionLabel,
                 );
               }
-              accountsBloc.add(AccountSelectedEvent(accounts[0]));
+              widget.accountsBloc.add(AccountSelectedEvent(accounts[0]));
               return ListView(
                 shrinkWrap: true,
                 key: const Key('accounts_list_view'),
@@ -53,7 +56,7 @@ class AccountsPageState extends State<AccountsPage> {
                 children: [
                   AccountPageViewWidget(accounts: accounts),
                   BlocBuilder(
-                    bloc: accountsBloc,
+                    bloc: widget.accountsBloc,
                     buildWhen: (previous, current) =>
                         current is AccountSelectedState,
                     builder: (context, state) {
@@ -85,7 +88,7 @@ class AccountsPageState extends State<AccountsPage> {
                       .errorNoCardsDescriptionLabel,
                 );
               }
-              accountsBloc.add(AccountSelectedEvent(accounts[0]));
+              widget.accountsBloc.add(AccountSelectedEvent(accounts[0]));
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -96,7 +99,7 @@ class AccountsPageState extends State<AccountsPage> {
                   ),
                   Expanded(
                     child: BlocBuilder(
-                      bloc: accountsBloc,
+                      bloc: widget.accountsBloc,
                       buildWhen: (previous, current) =>
                           current is AccountSelectedState,
                       builder: (context, state) {

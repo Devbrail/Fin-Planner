@@ -26,21 +26,21 @@
 
 #### Mobile
 
-| <img src="paisa-images/Screenshot_1664124547.png" width="200"/> | <img src="paisa-images/Screenshot_1664124582.png" width="200"/> | <img src="paisa-images/Screenshot_1664124633.png" width="200"/> |
-| :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
-|                          Home                           |                       Accounts                        |                        Categories                         |
+| <img src="paisa-images/Screenshot_1664124547.png" width="200"/> | <img src="paisa-images/Screenshot_1664124582.png" width="200"/> | <img src="paisa-images/Screenshot_1664124633.png" width="200"/> |<img src="paisa-images/Screenshot_1664124878.png" width="200"/> |
+| :--: | :--: | :--: | :--: |
+|Home|Accounts|Categories|Budget overview|
 
 #### Foldable
 
-| <img src="paisa-images/Screenshot_1664124560.png" width="200"/> | <img src="paisa-images/Screenshot_1664124899.png" width="200"/> | <img src="paisa-images/Screenshot_1664125090.png" width="200"/> |
-| :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
-|                          Home                           |                       Accounts                        |                        Categories                         |
+| <img src="paisa-images/Screenshot_1667485291.png" width="200"/> | <img src="paisa-images/Screenshot_1667485297.png" width="200"/> | <img src="paisa-images/Screenshot_1667485299.png" width="200"/> |<img src="paisa-images/Screenshot_1667485301.png" width="200"/> |
+| :--: | :--: | :--: | :--: |
+|Home|Accounts|Categories|Budget overview|
 
-#### Tablet
+#### Tablet & Desktop
 
- <img src="paisa-images/Screenshot_1664124566.png" width="200"/> | <img src="paisa-images/Screenshot_1664124906.png" width="200"/> |<img src="paisa-images/Screenshot_1664125201.png" width="200"/> |
-  | :-----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
- |                       Home                           |                       Accounts                        |                        Categories                         |
+ | <img src="paisa-images/Screenshot_1667485316.png" width="200"/> | <img src="paisa-images/Screenshot_1667485342.png" width="200"/> | <img src="paisa-images/Screenshot_1667485319.png" width="200"/> |<img src="paisa-images/Screenshot_1667485320.png" width="200"/> |
+| :--: | :--: | :--: | :--: |
+|Home|Accounts|Categories|Budget overview|
 
 
 ### Expense Tracking

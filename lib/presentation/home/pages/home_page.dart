@@ -2,6 +2,10 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/common/constants/extensions.dart';
+import 'package:flutter_paisa/presentation/goal/widget/color_palette.dart';
+import 'package:flutter_paisa/presentation/settings/widgets/user_profile_widget.dart';
+import 'package:flutter_paisa/presentation/summary/widgets/welcome_name_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -16,14 +20,20 @@ import '../../summary/pages/summary_page.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/welcome_widget.dart';
 
-enum PaisaPage { home, accounts, category, budgetOverview, debts }
-
 final Map<PaisaPage, Widget> _pages = {
-  PaisaPage.home: const SummaryPage(key: Key('home_page')),
-  PaisaPage.accounts: const AccountsPage(key: Key('accounts_page')),
-  PaisaPage.category: const CategoryListPage(key: Key('category_page')),
-  PaisaPage.budgetOverview: const BudgetOverViewPage(key: Key('budget_page')),
-  PaisaPage.debts: const DebtsPage(key: Key('settings_page')),
+  PaisaPage.home: SummaryPage(
+    summaryCubit: locator.get(),
+  ),
+  PaisaPage.accounts: AccountsPage(
+    accountsBloc: locator.get(),
+  ),
+  PaisaPage.category: CategoryListPage(
+    addCategoryBloc: locator.get(),
+  ),
+  PaisaPage.budgetOverview: BudgetOverViewPage(
+    categoryDataSource: locator.get(),
+  ),
+  PaisaPage.debts: const DebtsPage(),
 };
 
 class LandingPage extends StatefulWidget {
@@ -173,138 +183,97 @@ class _LandingPageState extends State<LandingPage>
                   builder: (context, state) {
                     if (state is CurrentIndexState) {
                       return Drawer(
-                        child: ListView(
-                          children: [
-                            ListTile(
-                              title: Text('Header'),
-                            ),
-                            NavigationBarItem(
-                              title: AppLocalizations.of(context)!.homeLabel,
-                              icon: Icons.home_outlined,
-                              isSelected: state.currentPage == PaisaPage.home,
-                              onPressed: () => homeBloc
-                                  .add(CurrentIndexEvent(PaisaPage.home)),
-                            ),
-                            NavigationBarItem(
-                              title:
-                                  AppLocalizations.of(context)!.accountsLabel,
-                              icon: Icons.credit_card,
-                              isSelected:
-                                  state.currentPage == PaisaPage.accounts,
-                              onPressed: () => homeBloc
-                                  .add(CurrentIndexEvent(PaisaPage.accounts)),
-                            ),
-                            NavigationBarItem(
-                              title:
-                                  AppLocalizations.of(context)!.categoryLabel,
-                              icon: Icons.category,
-                              isSelected:
-                                  state.currentPage == PaisaPage.category,
-                              onPressed: () => homeBloc
-                                  .add(CurrentIndexEvent(PaisaPage.category)),
-                            ),
-                            NavigationBarItem(
-                              title: AppLocalizations.of(context)!.budgetLabel,
-                              icon: Icons.account_balance_wallet,
-                              isSelected:
-                                  state.currentPage == PaisaPage.budgetOverview,
-                              onPressed: () => homeBloc.add(
-                                  CurrentIndexEvent(PaisaPage.budgetOverview)),
-                            ),
-                            NavigationBarItem(
-                              title: AppLocalizations.of(context)!.debtsLabel,
-                              icon: MdiIcons.accountCash,
-                              isSelected: state.currentPage == PaisaPage.debts,
-                              onPressed: () => homeBloc
-                                  .add(CurrentIndexEvent(PaisaPage.debts)),
-                            )
-                          ],
+                        child: SafeArea(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 24),
+                              GestureDetector(
+                                onTap: () => showModalBottomSheet(
+                                  constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width >= 700
+                                            ? 700
+                                            : double.infinity,
+                                  ),
+                                  isScrollControlled: true,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  context: context,
+                                  builder: (_) => const UserProfilePage(),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onLongPress: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) =>
+                                                const ColorPalette(),
+                                          ),
+                                        );
+                                      },
+                                      child: const WelcomeWidget(),
+                                    ),
+                                    const WelcomeNameWidget(),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              NavigationBarItem(
+                                title: AppLocalizations.of(context)!.homeLabel,
+                                icon: Icons.home_outlined,
+                                isSelected: state.currentPage == PaisaPage.home,
+                                onPressed: () => homeBloc
+                                    .add(CurrentIndexEvent(PaisaPage.home)),
+                              ),
+                              NavigationBarItem(
+                                title:
+                                    AppLocalizations.of(context)!.accountsLabel,
+                                icon: Icons.credit_card,
+                                isSelected:
+                                    state.currentPage == PaisaPage.accounts,
+                                onPressed: () => homeBloc
+                                    .add(CurrentIndexEvent(PaisaPage.accounts)),
+                              ),
+                              NavigationBarItem(
+                                title:
+                                    AppLocalizations.of(context)!.categoryLabel,
+                                icon: Icons.category,
+                                isSelected:
+                                    state.currentPage == PaisaPage.category,
+                                onPressed: () => homeBloc
+                                    .add(CurrentIndexEvent(PaisaPage.category)),
+                              ),
+                              NavigationBarItem(
+                                title:
+                                    AppLocalizations.of(context)!.budgetLabel,
+                                icon: Icons.account_balance_wallet,
+                                isSelected: state.currentPage ==
+                                    PaisaPage.budgetOverview,
+                                onPressed: () => homeBloc.add(CurrentIndexEvent(
+                                    PaisaPage.budgetOverview)),
+                              ),
+                              NavigationBarItem(
+                                title: AppLocalizations.of(context)!.debtsLabel,
+                                icon: MdiIcons.accountCash,
+                                isSelected:
+                                    state.currentPage == PaisaPage.debts,
+                                onPressed: () => homeBloc
+                                    .add(CurrentIndexEvent(PaisaPage.debts)),
+                              )
+                            ],
+                          ),
                         ),
                       );
                     } else {
                       return const SizedBox.shrink();
                     }
-                    return NavigationRail(
-                      selectedIndex:
-                          homeBloc.getIndexFromPage(homeBloc.currentPage),
-                      onDestinationSelected: (index) => homeBloc.add(
-                          CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
-                      groupAlignment: 1,
-                      extended: true,
-                      leading: SafeArea(
-                        child: Expanded(
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: _floatingActionButton(),
-                          ),
-                        ),
-                      ),
-                      trailing: const Expanded(
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: WelcomeWidget(),
-                        ),
-                      ),
-                      selectedLabelTextStyle:
-                          Theme.of(context).textTheme.subtitle1?.copyWith(),
-                      unselectedLabelTextStyle:
-                          Theme.of(context).textTheme.subtitle1?.copyWith(),
-                      destinations: [
-                        NavigationRailDestination(
-                          label: Text(AppLocalizations.of(context)!.homeLabel),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 8,
-                          ),
-                          icon: const Icon(Icons.home_outlined),
-                          selectedIcon: const Icon(Icons.home),
-                        ),
-                        NavigationRailDestination(
-                          icon: const Icon(Icons.credit_card_outlined),
-                          selectedIcon: const Icon(Icons.credit_card),
-                          label:
-                              Text(AppLocalizations.of(context)!.accountsLabel),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 8,
-                          ),
-                        ),
-                        NavigationRailDestination(
-                          icon: const Icon(Icons.category_outlined),
-                          selectedIcon: const Icon(Icons.category),
-                          label:
-                              Text(AppLocalizations.of(context)!.categoryLabel),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 8,
-                          ),
-                        ),
-                        NavigationRailDestination(
-                          icon:
-                              const Icon(Icons.account_balance_wallet_outlined),
-                          selectedIcon:
-                              const Icon(Icons.account_balance_wallet),
-                          label:
-                              Text(AppLocalizations.of(context)!.budgetLabel),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 8,
-                          ),
-                        ),
-                        NavigationRailDestination(
-                          icon: const Icon(MdiIcons.accountCashOutline),
-                          selectedIcon: const Icon(MdiIcons.accountCash),
-                          label: Text(AppLocalizations.of(context)!.debtsLabel),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 8,
-                          ),
-                        ),
-                      ],
-                    );
                   },
                 ),
-                const SafeArea(child: VerticalDivider(thickness: 1, width: 1)),
                 const Expanded(child: ContentWidget()),
               ],
             ),
@@ -331,34 +300,38 @@ class NavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = isSelected
+        ? Theme.of(context).colorScheme.onSecondaryContainer
+        : Theme.of(context).textTheme.headline6?.color;
     return Padding(
       padding: const EdgeInsets.only(
         right: 12,
         bottom: 8,
         left: 8,
-        top: 8,
       ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(40),
         onTap: onPressed,
         child: Container(
           decoration: isSelected
               ? BoxDecoration(
                   shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(40),
                   color: Theme.of(context).colorScheme.secondaryContainer,
                 )
               : null,
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Icon(icon),
+                padding: const EdgeInsets.all(18.0),
+                child: Icon(icon, color: color),
               ),
               Text(
                 title,
-                style: Theme.of(context).textTheme.headline6?.copyWith(
-                    color: Theme.of(context).colorScheme.onSecondaryContainer),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    ?.copyWith(color: color),
               ),
             ],
           ),

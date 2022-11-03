@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -94,18 +95,20 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: landingName,
       path: landingPath,
-      builder: (context, state) => const LandingPage(),
+      builder: (context, state) => LandingPage(),
       routes: [
         GoRoute(
           path: addExpensePath,
           name: addExpensePath,
-          builder: (context, state) => const ExpensePage(),
+          builder: (context, state) => ExpensePage(expenseBloc: locator.get()),
         ),
         GoRoute(
           name: editExpensePath,
           path: 'edit-expense/:eid',
-          builder: (context, state) =>
-              ExpensePage(expenseId: state.params['eid']),
+          builder: (context, state) => ExpensePage(
+            expenseId: state.params['eid'],
+            expenseBloc: locator.get(),
+          ),
         ),
         GoRoute(
           name: addCategoryPath,

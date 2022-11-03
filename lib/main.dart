@@ -67,72 +67,66 @@ class _MyAppState extends State<MyApp> {
                   );
                 }
 
-                return MultiBlocProvider(
-                  providers: [
-                    BlocProvider(create: (context) => locator.get<HomeBloc>()),
-                  ],
-                  child: MaterialApp.router(
-                    routeInformationProvider: goRouter.routeInformationProvider,
-                    routeInformationParser: goRouter.routeInformationParser,
-                    routerDelegate: goRouter.routerDelegate,
-                    debugShowCheckedModeBanner: false,
-                    theme: ThemeData.from(
-                      colorScheme: lightColorScheme,
-                    ).copyWith(
-                      colorScheme: lightColorScheme,
-                      dialogTheme: dialogTheme(),
-                      appBarTheme: appBarThemeLight(lightColorScheme),
-                      useMaterial3: true,
-                      textTheme: GoogleFonts.outfitTextTheme(
-                        ThemeData.light().textTheme,
-                      ),
-                      scaffoldBackgroundColor: lightColorScheme.background,
-                      dialogBackgroundColor: lightColorScheme.background,
-                      navigationBarTheme:
-                          navigationBarThemeData(lightColorScheme),
-                      applyElevationOverlayColor: true,
-                      inputDecorationTheme: inputDecorationTheme,
-                      elevatedButtonTheme: elevatedButtonTheme(
-                        context,
-                        lightColorScheme,
-                      ),
-                      extensions: [lightCustomColor],
+                return MaterialApp.router(
+                  routeInformationProvider: goRouter.routeInformationProvider,
+                  routeInformationParser: goRouter.routeInformationParser,
+                  routerDelegate: goRouter.routerDelegate,
+                  debugShowCheckedModeBanner: false,
+                  theme: ThemeData.from(
+                    colorScheme: lightColorScheme,
+                  ).copyWith(
+                    colorScheme: lightColorScheme,
+                    dialogTheme: dialogTheme(),
+                    appBarTheme: appBarThemeLight(lightColorScheme),
+                    useMaterial3: true,
+                    textTheme: GoogleFonts.outfitTextTheme(
+                      ThemeData.light().textTheme,
                     ),
-                    darkTheme: ThemeData.from(
-                      colorScheme: darkColorScheme,
-                    ).copyWith(
-                      colorScheme: darkColorScheme,
-                      dialogTheme: dialogTheme(),
-                      appBarTheme: appBarThemeDark(darkColorScheme),
-                      useMaterial3: true,
-                      textTheme: GoogleFonts.outfitTextTheme(
-                        ThemeData.dark().textTheme,
-                      ),
-                      scaffoldBackgroundColor: darkColorScheme.background,
-                      dialogBackgroundColor: darkColorScheme.background,
-                      navigationBarTheme:
-                          navigationBarThemeData(darkColorScheme),
-                      applyElevationOverlayColor: true,
-                      inputDecorationTheme: inputDecorationTheme,
-                      elevatedButtonTheme: elevatedButtonTheme(
-                        context,
-                        darkColorScheme,
-                      ),
-                      extensions: [darkCustomColor],
+                    scaffoldBackgroundColor: lightColorScheme.background,
+                    dialogBackgroundColor: lightColorScheme.background,
+                    navigationBarTheme:
+                        navigationBarThemeData(lightColorScheme),
+                    applyElevationOverlayColor: true,
+                    inputDecorationTheme: inputDecorationTheme,
+                    elevatedButtonTheme: elevatedButtonTheme(
+                      context,
+                      lightColorScheme,
                     ),
-                    themeMode: ThemeMode.values[themeModeValue],
-                    localizationsDelegates: const [
-                      AppLocalizations.delegate, // Add this line
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    supportedLocales: const [
-                      Locale('en', ''),
-                    ],
-                    onGenerateTitle: (BuildContext context) =>
-                        AppLocalizations.of(context)!.appTitle,
+                    extensions: [lightCustomColor],
                   ),
+                  darkTheme: ThemeData.from(
+                    colorScheme: darkColorScheme,
+                  ).copyWith(
+                    colorScheme: darkColorScheme,
+                    dialogTheme: dialogTheme(),
+                    appBarTheme: appBarThemeDark(darkColorScheme),
+                    useMaterial3: true,
+                    textTheme: GoogleFonts.outfitTextTheme(
+                      ThemeData.dark().textTheme,
+                    ),
+                    scaffoldBackgroundColor: darkColorScheme.background,
+                    dialogBackgroundColor: darkColorScheme.background,
+                    navigationBarTheme: navigationBarThemeData(darkColorScheme),
+                    applyElevationOverlayColor: true,
+                    inputDecorationTheme: inputDecorationTheme,
+                    elevatedButtonTheme: elevatedButtonTheme(
+                      context,
+                      darkColorScheme,
+                    ),
+                    extensions: [darkCustomColor],
+                  ),
+                  themeMode: ThemeMode.values[themeModeValue],
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate, // Add this line
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: const [
+                    Locale('en', ''),
+                  ],
+                  onGenerateTitle: (BuildContext context) =>
+                      AppLocalizations.of(context)!.appTitle,
                 );
               },
             );

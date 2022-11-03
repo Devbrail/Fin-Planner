@@ -3,14 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../app/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../../app/routes.dart';
 import '../../../common/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
-import '../../home/bloc/home_bloc.dart';
+import '../../../di/service_locator.dart';
+import '../cubit/user_image_cubit.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -21,14 +22,14 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   final nameController = TextEditingController();
-  late final expenseBloc = BlocProvider.of<HomeBloc>(context);
+  final UserNameImageCubit nameImageCubit = locator.get();
 
   void _updateDetails() {
-    expenseBloc.add(UpdateUserDetailsEvent(name: nameController.text));
+    nameImageCubit.updateUserDetails(nameController.text);
     Navigator.pop(context);
   }
 
-  void _pickImage() => expenseBloc.add(PickImageEvent());
+  void _pickImage() => nameImageCubit.pickImage();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: BlocListener(
-            bloc: expenseBloc,
+            bloc: nameImageCubit,
             listener: (context, state) {
               if (state is UserDetailsUpdatedState) {
                 Navigator.pop(context);

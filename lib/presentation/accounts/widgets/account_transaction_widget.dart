@@ -165,6 +165,7 @@ class AccountTransactionWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: PaisaCard(
                   child: ListView.builder(
+                    padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     itemCount: expenses.length,
                     itemBuilder: (_, index) {

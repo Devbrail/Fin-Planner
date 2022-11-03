@@ -109,28 +109,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                 isAddCategory
                     ? AppLocalizations.of(context)!.addCategoryLabel
                     : AppLocalizations.of(context)!.updateCategoryLabel,
-                actions: [
-                  TextButton(
-                    onPressed: _submitCategory,
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
-                    ),
-                    child: Text(
-                      isAddCategory
-                          ? AppLocalizations.of(context)!.addCategoryLabel
-                          : AppLocalizations.of(context)!.updateLabel,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize:
-                            Theme.of(context).textTheme.headline6?.fontSize,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 24),
-                ],
               ),
               body: Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -161,6 +139,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                             const SizedBox(height: 24),
                             CategoryDescriptionWidget(
                                 controller: descController),
+                            const SizedBox(height: 24),
                             _submitButton(),
                           ],
                         ),

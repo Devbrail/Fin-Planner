@@ -19,18 +19,20 @@ class _FilterBudgetWidgetState extends State<FilterBudgetWidget> {
   FilterBudget selectedType = FilterBudget.daily;
 
   void _update(FilterBudget type) {
+    widget.onSelected(type);
     selectedType = type;
     setState(() {});
-    widget.onSelected(type);
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: FilterBudget.values.map((type) {
             final isSelected = selectedType == type;
             return MaterialYouChip(

@@ -1,3 +1,5 @@
+import 'package:flutter_paisa/presentation/budget_overview/cubit/filter_cubit.dart';
+import 'package:flutter_paisa/presentation/settings/cubit/user_image_cubit.dart';
 import 'package:flutter_paisa/presentation/summary/cubit/summary_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -160,4 +162,6 @@ void _setupBloc() {
   locator.registerFactory(() => HomeBloc());
   locator.registerFactory(() => DebtsBloc(useCase: locator.get()));
   locator.registerFactory(() => SummaryCubit());
+  locator.registerFactory(() => UserNameImageCubit());
+  locator.registerFactory(() => FilterCubit());
 }

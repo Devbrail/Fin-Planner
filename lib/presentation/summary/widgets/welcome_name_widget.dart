@@ -16,12 +16,7 @@ class WelcomeNameWidget extends StatelessWidget {
       builder: (context, value, _) {
         final name = value.get(userNameKey, defaultValue: 'Name');
         return Padding(
-          padding: const EdgeInsets.only(
-            bottom: 16,
-            left: 16,
-            right: 16,
-            top: 8,
-          ),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
