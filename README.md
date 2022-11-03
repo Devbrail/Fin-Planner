@@ -26,7 +26,7 @@
 
 #### Mobile
 
-| <img src="paisa-images/Screenshot_1664124547.png" width="200"/> | <img src="paisa-images/Screenshot_1664124582.png" width="200"/> | <img src="paisa-images/Screenshot_1664124633.png" width="200"/> |<img src="paisa-images/Screenshot_1664124878.png" width="200"/> |
+| <img src="paisa-images/Screenshot_1667486038.png" width="200"/> | <img src="paisa-images/Screenshot_1667486042.png" width="200"/> | <img src="paisa-images/Screenshot_1667486044.png" width="200"/> |<img src="paisa-images/Screenshot_1667486046.png" width="200"/> |
 | :--: | :--: | :--: | :--: |
 |Home|Accounts|Categories|Budget overview|
 
@@ -38,7 +38,7 @@
 
 #### Tablet & Desktop
 
- | <img src="paisa-images/Screenshot_1667485316.png" width="200"/> | <img src="paisa-images/Screenshot_1667485342.png" width="200"/> | <img src="paisa-images/Screenshot_1667485319.png" width="200"/> |<img src="paisa-images/Screenshot_1667485320.png" width="200"/> |
+ | <img src="paisa-images/Screenshot_1667485280.png" width="200"/> | <img src="paisa-images/Screenshot_1667485342.png" width="200"/> | <img src="paisa-images/Screenshot_1667485319.png" width="200"/> |<img src="paisa-images/Screenshot_1667485320.png" width="200"/> |
 | :--: | :--: | :--: | :--: |
 |Home|Accounts|Categories|Budget overview|
 
