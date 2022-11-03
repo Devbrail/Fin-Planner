@@ -14,9 +14,11 @@ class FetchExpenseFromIdEvent extends ExpenseEvent {
   const FetchExpenseFromIdEvent(this.expenseId);
 }
 
-class AddExpenseEvent extends ExpenseEvent {}
+class AddOrUpdateExpenseEvent extends ExpenseEvent {
+  final bool isAdding;
 
-class UpdateExpenseEvent extends ExpenseEvent {}
+  const AddOrUpdateExpenseEvent(this.isAdding);
+}
 
 class ClearExpenseEvent extends ExpenseEvent {
   final String expenseId;

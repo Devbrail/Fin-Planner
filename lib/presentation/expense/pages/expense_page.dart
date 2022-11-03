@@ -44,6 +44,8 @@ class _ExpensePageState extends State<ExpensePage> {
   late TextEditingController amountController = TextEditingController();
   late TextEditingController dateTextController = TextEditingController();
 
+  bool get isAddExpense => widget.expenseId == null;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -302,19 +304,13 @@ class _ExpensePageState extends State<ExpensePage> {
     );
   }
 
-  bool get isAddExpense => widget.expenseId == null;
-
   void addExpense() {
     final isValid = _form.currentState!.validate();
     if (!isValid) {
       return;
     }
 
-    if (isAddExpense) {
-      expenseBloc.add(AddExpenseEvent());
-    } else {
-      expenseBloc.add(UpdateExpenseEvent());
-    }
+    expenseBloc.add(AddOrUpdateExpenseEvent(isAddExpense));
   }
 }
 

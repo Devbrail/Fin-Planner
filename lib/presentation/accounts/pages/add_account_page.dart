@@ -44,12 +44,7 @@ class AddAccountPageState extends State<AddAccountPage> {
     if (!isValid) {
       return;
     }
-
-    if (isAccountAddOrUpdate) {
-      accountsBloc.add(AddAccountEvent());
-    } else {
-      accountsBloc.add(UpdateAccountEvent());
-    }
+    accountsBloc.add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
   }
 
   void _updated() {
@@ -110,10 +105,6 @@ class AddAccountPageState extends State<AddAccountPage> {
                     ? AppLocalizations.of(context)!.addCardLabel
                     : AppLocalizations.of(context)!.updateCardLabel,
                 actions: [
-                  IconButton(
-                    onPressed: _showInfo,
-                    icon: const Icon(Icons.info_rounded),
-                  ),
                   isAccountAddOrUpdate
                       ? const SizedBox.shrink()
                       : IconButton(
@@ -123,7 +114,11 @@ class AddAccountPageState extends State<AddAccountPage> {
                             Icons.delete_rounded,
                             color: Theme.of(context).colorScheme.error,
                           ),
-                        )
+                        ),
+                  IconButton(
+                    onPressed: _showInfo,
+                    icon: const Icon(Icons.info_rounded),
+                  ),
                 ],
               ),
               body: SingleChildScrollView(
@@ -301,76 +296,67 @@ class AddAccountPageState extends State<AddAccountPage> {
     );
   }
 
-  void _showInfo() {
-    showModalBottomSheet(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24),
-          topRight: Radius.circular(24),
+  void _showInfo() => showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
         ),
-      ),
-      context: context,
-      builder: (context) {
-        return SafeArea(
-          maintainBottomViewPadding: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(Icons.info_rounded),
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.accountInfoLabel,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
+        context: context,
+        builder: (context) {
+          return SafeArea(
+            maintainBottomViewPadding: true,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  horizontalTitleGap: 0,
+                  leading: const Icon(Icons.info_rounded),
+                  title: Text(
+                    AppLocalizations.of(context)!.accountInfoLabel,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  AppLocalizations.of(context)!.accountInfoDescLabel,
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    AppLocalizations.of(context)!.accountInfoDescLabel,
+                  ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 12,
+                        ),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 12,
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                      child: Text(
+                        AppLocalizations.of(context)!.acceptLabel,
                       ),
-                    ),
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.acceptLabel,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 10)
-            ],
-          ),
-        );
-      },
-    );
-  }
+                const SizedBox(height: 10)
+              ],
+            ),
+          );
+        },
+      );
 }
 
 class AccountCardHolderNameWidget extends StatelessWidget {

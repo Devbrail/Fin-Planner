@@ -21,6 +21,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(SplashInitial()) {
     on<SplashEvent>((event, emit) {});
     on<CheckLoginEvent>(_checkLogin);
+    on<FilterLocaleEvent>(_filterLocale);
   }
   final service = locator.get<SettingsService>();
   late final settings = Hive.box(BoxType.settings.stringValue);
@@ -61,7 +62,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     //emit(CountryLocalesState(locales));
 
     if (languageCode == 'DEF' || event.forceChangeCurrency) {
-      emit(const CountryLocalesState(locales));
+      emit(CountryLocalesState(locales));
     } else {
       currentLocale = languageCode;
       emit(NavigateToHome());
@@ -72,25 +73,43 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     await settings.put(userLanguageKey, locale.languageCode);
     add(const CheckLoginEvent());
   }
+
+  void _filterLocale(
+    FilterLocaleEvent event,
+    Emitter<SplashState> emit,
+  ) {
+    final query = event.query.toLowerCase();
+    final result = locales
+        .where((element) => element.name.toLowerCase().contains(query))
+        .toList();
+    emit(CountryLocalesState(result));
+  }
 }
 
-const Map<String, Locale> locales = {
-  "US Doller": Locale('en'),
-  "Indian Rupee": Locale('hi'),
-  "Malaysia Ringgit": Locale('ms'),
-  "Ukrainian Hryvnia": Locale('uk'),
-  "Polish Złoty": Locale('pl'),
-  "Austria Euro": Locale('de'),
-  "Bangladesh Taka": Locale('bn'),
-  "Turkish lira": Locale('tr'),
-  "Mexican Peso": Locale('es-mx'),
-  "Philippine Peso": Locale('fil'),
-  "Indonesian Rupiah": Locale('id'),
-  "Vietnamese Dong": Locale('vi'),
-  "Lebanese Pound": Locale('ar-lb'),
-  "Taiwan Dollar": Locale('zh-tw'),
-  "Sri Lanka Rupee": Locale('si'),
-  "Pakistan Rupee": Locale('ur'),
-  "Swiss Franc": Locale('fr_CH'),
-  "Egyptian Pound": Locale('ar_EG'),
-};
+final locales = [
+  CountryMap("US Dollar", const Locale('en')),
+  CountryMap("Indian Rupee", const Locale('hi')),
+  CountryMap("Malaysia Ringgit", const Locale('ms')),
+  CountryMap("Ukrainian Hryvnia", const Locale('uk')),
+  CountryMap("Polish Złoty", const Locale('pl')),
+  CountryMap("Austria Euro", const Locale('de')),
+  CountryMap("Bangladesh Taka", const Locale('bn')),
+  CountryMap("Turkish lira", const Locale('tr')),
+  CountryMap("Mexican Peso", const Locale('es-mx')),
+  CountryMap("Philippine Peso", const Locale('fil')),
+  CountryMap("Indonesian Rupiah", const Locale('id')),
+  CountryMap("Vietnamese Dong", const Locale('vi')),
+  CountryMap("Lebanese Pound", const Locale('ar-lb')),
+  CountryMap("Taiwan Dollar", const Locale('zh-tw')),
+  CountryMap("Sri Lanka Rupee", const Locale('si')),
+  CountryMap("Pakistan Rupee", const Locale('ur')),
+  CountryMap("Swiss Franc", const Locale('fr_CH')),
+  CountryMap("Egyptian Pound", const Locale('ar_EG')),
+];
+
+class CountryMap {
+  final String name;
+  final Locale locale;
+
+  CountryMap(this.name, this.locale);
+}

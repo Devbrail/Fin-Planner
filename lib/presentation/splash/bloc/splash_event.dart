@@ -12,3 +12,9 @@ class CheckLoginEvent extends SplashEvent {
 
   const CheckLoginEvent({this.forceChangeCurrency = false});
 }
+
+class FilterLocaleEvent extends SplashEvent {
+  final String query;
+
+  const FilterLocaleEvent(this.query);
+}

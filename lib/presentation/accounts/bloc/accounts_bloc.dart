@@ -17,10 +17,9 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   }) : super(AccountsInitial()) {
     on<AccountsEvent>((event, emit) {});
     on<FetchAccountsEvent>((event, emit) => _fetchAccounts(emit));
-    on<AddAccountEvent>((event, emit) => _addAccount(event, emit));
+    on<AddOrUpdateAccountEvent>((event, emit) => _addAccount(event, emit));
     on<DeleteAccountEvent>((event, emit) => _deleteAccount(event, emit));
     on<AccountSelectedEvent>((event, emit) => _accountSelected(event, emit));
-    on<UpdateAccountEvent>((event, emit) => _updateAccount(event, emit));
     on<ClearAccountEvent>((event, emit) => _clearAccount(event, emit));
     on<UpdateCardTypeEvent>((event, emit) => _updateCardType(event, emit));
     on<FetchAccountFromIdEvent>(
@@ -61,7 +60,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   }
 
   Future<void> _addAccount(
-    AddAccountEvent event,
+    AddOrUpdateAccountEvent event,
     Emitter<AccountsState> emit,
   ) async {
     final String? bankName = accountName;
@@ -78,47 +77,27 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     if (number == null) {
       return emit(const AccountErrorState('Set account number'));
     }
+    if (event.isAdding) {
+      await accountUseCase.addAccount(
+        bankName: bankName,
+        holderName: holderName,
+        number: number,
+        cardType: cardType,
+      );
+    } else {
+      if (currentAccount != null) {
+        currentAccount!
+          ..bankName = bankName
+          ..cardType = cardType
+          ..icon = cardType.icon.codePoint
+          ..name = holderName
+          ..number = number
+          ..cardType = cardType;
 
-    await accountUseCase.addAccount(
-      bankName: bankName,
-      holderName: holderName,
-      number: number,
-      cardType: cardType,
-    );
-
-    emit(const AddAccountState(isAddOrUpdate: true));
-  }
-
-  Future<void> _updateAccount(
-    UpdateAccountEvent event,
-    Emitter<AccountsState> emit,
-  ) async {
-    final String? bankName = accountName;
-    final String? holderName = accountHolderName;
-    final String? number = accountNumber;
-    final CardType cardType = selectedType;
-
-    if (bankName == null) {
-      return emit(const AccountErrorState('Set bank name'));
+        await currentAccount!.save();
+      }
     }
-    if (holderName == null) {
-      return emit(const AccountErrorState('Set account holder name'));
-    }
-    if (number == null) {
-      return emit(const AccountErrorState('Set account number'));
-    }
-    if (currentAccount != null) {
-      currentAccount!
-        ..bankName = bankName
-        ..cardType = cardType
-        ..icon = cardType.icon.codePoint
-        ..name = holderName
-        ..number = number
-        ..cardType = cardType;
-
-      await currentAccount!.save();
-      emit(const AddAccountState());
-    }
+    emit(AddAccountState(isAddOrUpdate: event.isAdding));
   }
 
   _deleteAccount(DeleteAccountEvent event, Emitter<AccountsState> emit) async {

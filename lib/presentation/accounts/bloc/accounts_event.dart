@@ -9,9 +9,11 @@ abstract class AccountsEvent extends Equatable {
 
 class FetchAccountsEvent extends AccountsEvent {}
 
-class AddAccountEvent extends AccountsEvent {}
+class AddOrUpdateAccountEvent extends AccountsEvent {
+  final bool isAdding;
 
-class UpdateAccountEvent extends AccountsEvent {}
+  const AddOrUpdateAccountEvent(this.isAdding);
+}
 
 class DeleteAccountEvent extends AccountsEvent {
   final Account account;

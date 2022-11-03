@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/presentation/splash/bloc/splash_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -12,7 +13,7 @@ class LocaleGridView extends StatelessWidget {
     required this.crossAxisCount,
   }) : super(key: key);
 
-  final List<MapEntry<String, Locale>> locales;
+  final List<CountryMap> locales;
   final Function(Locale) onPressed;
   final int crossAxisCount;
 
@@ -28,12 +29,12 @@ class LocaleGridView extends StatelessWidget {
       itemBuilder: (_, index) {
         final map = locales[index];
         final format = NumberFormat.compactSimpleCurrency(
-          locale: locales[index].value.toString(),
+          locale: locales[index].locale.toString(),
         );
 
         return PaisaCard(
           child: InkWell(
-            onTap: () => onPressed(locales[index].value),
+            onTap: () => onPressed(locales[index].locale),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -52,9 +53,7 @@ class LocaleGridView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        map.key,
-                      ),
+                      Text(map.name),
                       const SizedBox(height: 6),
                       Text(
                         '${format.currencyName}',
