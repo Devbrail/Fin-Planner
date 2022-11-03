@@ -95,9 +95,12 @@ class _SummaryPageState extends State<SummaryPage> {
                 ),
                 bottom: PreferredSize(
                   preferredSize: const Size(double.infinity, 56),
-                  child: FilterBudgetWidget(
-                    onSelected: (budget) =>
-                        widget.summaryCubit.updateFilter(budget),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: FilterBudgetWidget(
+                      onSelected: (budget) =>
+                          widget.summaryCubit.updateFilter(budget),
+                    ),
                   ),
                 ),
               ),
