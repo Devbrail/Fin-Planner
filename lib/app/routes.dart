@@ -95,7 +95,7 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: landingName,
       path: landingPath,
-      builder: (context, state) => LandingPage(),
+      builder: (context, state) => const LandingPage(),
       routes: [
         GoRoute(
           path: addExpensePath,
@@ -125,13 +125,16 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: addAccountPath,
           path: addAccountPath,
-          builder: (context, state) => const AddAccountPage(),
+          builder: (context, state) => AddAccountPage(
+            accountsBloc: locator.get(),
+          ),
         ),
         GoRoute(
           name: editAccountPath,
           path: 'edit-account/:aid',
           builder: (context, state) => AddAccountPage(
             accountId: state.params['aid'],
+            accountsBloc: locator.get(),
           ),
         ),
         GoRoute(

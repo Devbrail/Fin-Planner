@@ -6,7 +6,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/extensions.dart';
 import '../../../common/widgets/paisa_text_field.dart';
-import '../../../di/service_locator.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_card.dart';
 import '../widgets/card_type_drop_down.dart';
@@ -15,9 +14,11 @@ class AddAccountPage extends StatefulWidget {
   const AddAccountPage({
     Key? key,
     this.accountId,
+    required this.accountsBloc,
   }) : super(key: key);
 
   final String? accountId;
+  final AccountsBloc accountsBloc;
 
   @override
   AddAccountPageState createState() => AddAccountPageState();
@@ -26,7 +27,7 @@ class AddAccountPage extends StatefulWidget {
 class AddAccountPageState extends State<AddAccountPage> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
-  late final AccountsBloc accountsBloc = locator.get()
+  late final AccountsBloc accountsBloc = widget.accountsBloc
     ..add(FetchAccountFromIdEvent(widget.accountId));
 
   late TextEditingController accountNumberController = TextEditingController()

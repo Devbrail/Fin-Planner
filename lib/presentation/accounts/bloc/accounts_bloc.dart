@@ -67,8 +67,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final String? bankName = accountName;
     final String? holderName = accountHolderName;
     final String? number = accountNumber;
-
-    final cardType = selectedType = CardType.cash;
+    final CardType cardType = selectedType;
 
     if (bankName == null) {
       return emit(const AccountErrorState('Set bank name'));
@@ -97,8 +96,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final String? bankName = accountName;
     final String? holderName = accountHolderName;
     final String? number = accountNumber;
-
-    final cardType = selectedType = CardType.cash;
+    final CardType cardType = selectedType;
 
     if (bankName == null) {
       return emit(const AccountErrorState('Set bank name'));
