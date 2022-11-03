@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../di/service_locator.dart';
-import '../cubit/summary_cubit.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/extensions.dart';
@@ -10,6 +8,7 @@ import '../../goal/widget/color_palette.dart';
 import '../../home/widgets/welcome_widget.dart';
 import '../../search/pages/search_page.dart';
 import '../../settings/widgets/user_profile_widget.dart';
+import '../cubit/summary_cubit.dart';
 import '../widgets/expense_history_widget.dart';
 import '../widgets/expense_total_widget.dart';
 import '../widgets/welcome_name_widget.dart';

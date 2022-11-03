@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../bloc/splash_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/widgets/paisa_card.dart';
+import '../bloc/splash_bloc.dart';
 
 class LocaleGridView extends StatelessWidget {
   const LocaleGridView({

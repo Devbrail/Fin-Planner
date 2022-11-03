@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../common/theme/custom_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/constants/currency.dart';
+import '../../../common/theme/custom_color.dart';
 
 class ExpenseTotalForMonthWidget extends StatelessWidget {
   const ExpenseTotalForMonthWidget({

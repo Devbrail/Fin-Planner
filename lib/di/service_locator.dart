@@ -1,6 +1,3 @@
-import '../presentation/budget_overview/cubit/filter_cubit.dart';
-import '../presentation/settings/cubit/user_image_cubit.dart';
-import '../presentation/summary/cubit/summary_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -37,12 +34,15 @@ import '../domain/debt/use_case/debt_use_case.dart';
 import '../domain/expense/repository/expense_repository.dart';
 import '../domain/expense/use_case/expense_use_case.dart';
 import '../presentation/accounts/bloc/accounts_bloc.dart';
+import '../presentation/budget_overview/cubit/filter_cubit.dart';
 import '../presentation/category/bloc/category_bloc.dart';
 import '../presentation/debits/cubit/debts_cubit.dart';
 import '../presentation/expense/bloc/expense_bloc.dart';
 import '../presentation/home/bloc/home_bloc.dart';
 import '../presentation/settings/bloc/settings_controller.dart';
+import '../presentation/settings/cubit/user_image_cubit.dart';
 import '../presentation/splash/bloc/splash_bloc.dart';
+import '../presentation/summary/cubit/summary_cubit.dart';
 
 final locator = GetIt.instance;
 

@@ -2,21 +2,21 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../common/constants/extensions.dart';
-import '../../goal/widget/color_palette.dart';
-import '../../settings/widgets/user_profile_widget.dart';
-import '../../summary/widgets/welcome_name_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
+import '../../../common/constants/extensions.dart';
 import '../../../di/service_locator.dart';
 import '../../accounts/pages/accounts_page.dart';
 import '../../budget_overview/pages/budget_overview_page.dart';
 import '../../category/pages/category_list_page.dart';
 import '../../debits/pages/debts_page.dart';
+import '../../goal/widget/color_palette.dart';
+import '../../settings/widgets/user_profile_widget.dart';
 import '../../summary/pages/summary_page.dart';
+import '../../summary/widgets/welcome_name_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/welcome_widget.dart';
 

@@ -19,12 +19,6 @@ class DebtToggleButtonsWidget extends StatefulWidget {
 class DebtToggleButtonsWidgetState extends State<DebtToggleButtonsWidget> {
   late DebtType selectedType = widget.selectedType;
 
-  @override
-  void initState() {
-    super.initState();
-    widget.onSelected(selectedType);
-  }
-
   void _update(DebtType type) {
     selectedType = type;
     setState(() {});

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../widgets/debt_toggle_buttons_widget.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -18,82 +19,69 @@ class DebtsPage extends StatefulWidget {
 
 class _DebtsPageState extends State<DebtsPage>
     with SingleTickerProviderStateMixin {
-  late final TabController controller = TabController(
-    length: 2,
-    vsync: this,
-  );
+  DebtType selectedType = DebtType.debt;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              title: Text(AppLocalizations.of(context)!.debtsLabel),
-              pinned: true,
-              titleTextStyle: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  ?.copyWith(fontWeight: FontWeight.bold),
-              floating: true,
-              bottom: TabBar(
-                controller: controller,
-                labelStyle: Theme.of(context).textTheme.subtitle1,
-                labelColor: Theme.of(context).colorScheme.primary,
-                indicatorColor: Theme.of(context).colorScheme.primary,
-                tabs: [
-                  Tab(text: AppLocalizations.of(context)!.debtLabel),
-                  Tab(text: AppLocalizations.of(context)!.creditLabel),
-                ],
-              ),
-            ),
-          ];
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.debtsLabel),
+        titleTextStyle: Theme.of(context)
+            .textTheme
+            .headline6
+            ?.copyWith(fontWeight: FontWeight.bold),
+        actions: [
+          DebtToggleButtonsWidget(
+            onSelected: (type) {
+              setState(() {
+                selectedType = type;
+              });
+            },
+            selectedType: selectedType,
+          )
+        ],
+      ),
+      body: ValueListenableBuilder<Box<Debt>>(
+        valueListenable: locator.get<Box<Debt>>().listenable(),
+        builder: (context, value, child) {
+          final debts = value.values
+              .where((element) => element.debtType == DebtType.debt)
+              .toList();
+
+          final credits = value.values
+              .where((element) => element.debtType == DebtType.credit)
+              .toList();
+
+          return Builder(
+            builder: (context) {
+              if (selectedType == DebtType.debt) {
+                return debts.isNotEmpty
+                    ? DebtsListWidget(debts: debts)
+                    : EmptyWidget(
+                        title: AppLocalizations.of(context)!.emptyDebtsLabel,
+                        icon: MdiIcons.cashMinus,
+                        description:
+                            AppLocalizations.of(context)!.emptyDebtsDescLabel,
+                      );
+              }
+              if (selectedType == DebtType.credit) {
+                return credits.isNotEmpty
+                    ? DebtsListWidget(debts: credits)
+                    : EmptyWidget(
+                        title: AppLocalizations.of(context)!.emptyCreditLabel,
+                        icon: MdiIcons.cashMinus,
+                        description:
+                            AppLocalizations.of(context)!.emptyCreditDescLabel,
+                      );
+              }
+              return EmptyWidget(
+                title: AppLocalizations.of(context)!.emptyDebtsLabel,
+                icon: MdiIcons.cashMinus,
+                description: AppLocalizations.of(context)!.emptyDebtsDescLabel,
+              );
+            },
+          );
         },
-        body: ValueListenableBuilder<Box<Debt>>(
-          valueListenable: locator.get<Box<Debt>>().listenable(),
-          builder: (context, value, child) {
-            final debts = value.values
-                .where((element) => element.debtType == DebtType.debt)
-                .toList();
-
-            final credits = value.values
-                .where((element) => element.debtType == DebtType.credit)
-                .toList();
-
-            return TabBarView(
-              controller: controller,
-              children: [
-                Builder(
-                  builder: (context) {
-                    if (debts.isNotEmpty) {
-                      return DebtsListWidget(debts: debts);
-                    }
-                    return EmptyWidget(
-                      title: AppLocalizations.of(context)!.emptyDebtsLabel,
-                      icon: MdiIcons.cashMinus,
-                      description:
-                          AppLocalizations.of(context)!.emptyDebtsDescLabel,
-                    );
-                  },
-                ),
-                Builder(
-                  builder: (context) {
-                    if (debts.isNotEmpty) {
-                      return DebtsListWidget(debts: credits);
-                    }
-                    return EmptyWidget(
-                      title: AppLocalizations.of(context)!.emptyCreditLabel,
-                      icon: MdiIcons.cashMinus,
-                      description:
-                          AppLocalizations.of(context)!.emptyCreditDescLabel,
-                    );
-                  },
-                ),
-              ],
-            );
-          },
-        ),
       ),
     );
   }

@@ -1,8 +1,8 @@
-import '../models/transaction.dart';
 import 'package:hive/hive.dart';
 
 import '../../../common/enum/box_types.dart';
 import '../models/debt.dart';
+import '../models/transaction.dart';
 import 'debt_local_data_source.dart';
 
 class DebtLocalDataSourceImpl extends DebtLocalDataSource {
