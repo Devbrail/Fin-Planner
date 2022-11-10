@@ -1,24 +1,29 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:meta/meta.dart';
 
-import '../../../common/constants/extensions.dart';
+import '../../../common/common.dart';
 import '../../../common/enum/box_types.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(CurrentIndexState(PaisaPage.home)) {
+  HomeBloc() : super(const CurrentIndexState(PaisaPage.home)) {
     on<HomeEvent>((event, emit) {});
-    on<CurrentIndexEvent>((event, emit) => _currentIndex(event, emit));
+    on<CurrentIndexEvent>(_currentIndex);
   }
 
   late final settings = Hive.box(BoxType.settings.stringValue);
 
   PaisaPage currentPage = PaisaPage.home;
 
-  void _currentIndex(CurrentIndexEvent event, Emitter<HomeState> emit) {
+  void _currentIndex(
+    CurrentIndexEvent event,
+    Emitter<HomeState> emit,
+  ) {
     if (currentPage != event.currentPage) {
       currentPage = event.currentPage;
       emit(CurrentIndexState(event.currentPage));

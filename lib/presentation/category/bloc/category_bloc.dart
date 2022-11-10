@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +18,13 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   }) : super(AddCategoryInitial()) {
     on<CategoryEvent>((event, emit) {});
     on<FetchCategoriesEvent>((event, emit) => _fetchCategories(emit));
-    on<AddCategoryEvent>((event, emit) => _addCategory(event, emit));
-    on<CategoryDeleteEvent>((event, emit) => _deleteCategory(event, emit));
+    on<AddOrUpdateCategoryEvent>(_addOrUpdateCategory);
+    on<CategoryDeleteEvent>(_deleteCategory);
     on<CategoryRefreshEvent>((event, emit) => _refresh(emit));
-    on<CategoryUpdateEvent>((event, emit) => _updateCategory(event, emit));
-    on<FetchCategoryFromIdEvent>(
-        (event, emit) => _fetchCategoryFromId(event, emit));
-    on<CategoryIconSelectedEvent>((event, emit) => _categoryIcon(event, emit));
+    on<FetchCategoryFromIdEvent>(_fetchCategoryFromId);
+    on<CategoryIconSelectedEvent>(_categoryIcon);
+    on<UpdateCategoryBudgetEvent>(_updateCategoryBudget);
+    on<CategoryColorSelectedEvent>(_updateCategoryColor);
   }
 
   final CategoryUseCase categoryUseCase;
@@ -32,6 +34,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   String? categoryDesc;
   double? categoryBudget;
   Category? currentCategory;
+  bool isBudgetSet = false;
+  int? selectedColor;
 
   Future<void> _fetchCategoryFromId(
     FetchCategoryFromIdEvent event,
@@ -48,6 +52,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       categoryBudget = category.budget;
       selectedIcon = category.icon;
       currentCategory = category;
+      isBudgetSet = category.isBudget;
+      selectedColor = category.color;
       emit(CategorySuccessState(category));
     }
   }
@@ -57,63 +63,49 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     emit(CategoriesListState(categories));
   }
 
-  _addCategory(
-    AddCategoryEvent event,
+  _addOrUpdateCategory(
+    AddOrUpdateCategoryEvent event,
     Emitter<CategoryState> emit,
   ) async {
     final String? title = categoryTitle;
     final String? description = categoryDesc;
     final int? icon = selectedIcon;
     final double? budget = categoryBudget;
-
+    final bool setBudget = isBudgetSet;
+    final int? color = selectedColor;
+    if (icon == null) {
+      return emit(const CategoryErrorState('Select category icon'));
+    }
     if (title == null) {
       return emit(const CategoryErrorState('Add category title'));
     }
 
-    if (icon == null) {
-      return emit(const CategoryErrorState('Select category icon'));
+    if (color == null) {
+      return emit(const CategoryErrorState('Select category color'));
     }
+    if (event.isAddOrUpdate) {
+      await categoryUseCase.addCategory(
+        icon: icon,
+        desc: description,
+        name: title,
+        budget: budget ?? 0,
+        isBudget: setBudget,
+        color: color,
+      );
+    } else {
+      if (currentCategory != null) {
+        currentCategory!
+          ..budget = budget ?? 0
+          ..description = description ?? ''
+          ..icon = icon
+          ..isBudget = setBudget
+          ..color = color
+          ..name = title;
 
-    await categoryUseCase.addCategory(
-      icon: icon,
-      desc: description,
-      name: title,
-      budget: budget,
-    );
-
-    emit(const CategoryAddedState(isCategoryAddedOrUpdate: true));
-  }
-
-  Future<void> _updateCategory(
-    CategoryUpdateEvent event,
-    Emitter<CategoryState> emit,
-  ) async {
-    final String? title = categoryTitle;
-    final String? description = categoryDesc;
-    final int? icon = selectedIcon;
-    final double? budget = categoryBudget;
-
-    if (title == null) {
-      return emit(const CategoryErrorState('Add category title'));
+        await currentCategory!.save();
+      }
     }
-
-    if (description == null) {
-      return emit(const CategoryErrorState('Add category description'));
-    }
-
-    if (icon == null) {
-      return emit(const CategoryErrorState('Select category icon'));
-    }
-    if (currentCategory != null) {
-      currentCategory!
-        ..budget = budget
-        ..description = description
-        ..icon = icon
-        ..name = title;
-
-      await currentCategory!.save();
-      emit(const CategoryAddedState());
-    }
+    emit(CategoryAddedState(isCategoryAddedOrUpdate: event.isAddOrUpdate));
   }
 
   Future<void> _deleteCategory(
@@ -136,11 +128,19 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     emit(CategoryIconSelectedState(event.categoryIcon));
   }
 
-  bool checkBudget() {
-    final double budget = currentCategory?.budget ?? 0.0;
-    if (budget > 0.0) {
-      return true;
-    }
-    return false;
+  _updateCategoryBudget(
+    UpdateCategoryBudgetEvent event,
+    Emitter<CategoryState> emit,
+  ) {
+    isBudgetSet = event.isBudget;
+    emit(UpdateCategoryBudgetState(event.isBudget));
+  }
+
+  _updateCategoryColor(
+    CategoryColorSelectedEvent event,
+    Emitter<CategoryState> emit,
+  ) {
+    selectedColor = event.categoryColor;
+    emit(CategoryColorSelectedState(event.categoryColor));
   }
 }

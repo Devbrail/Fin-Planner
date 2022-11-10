@@ -1,69 +1,36 @@
 import 'package:flutter/material.dart';
-import '../../../common/theme/custom_color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/constants/currency.dart';
-import '../../../common/theme/paisa_theme.dart';
+import '../../../common/enum/card_type.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../data/accounts/model/account.dart';
+import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../common/enum/card_type.dart';
 
 class ExpenseItemWidget extends StatefulWidget {
   const ExpenseItemWidget({
     Key? key,
     required this.expense,
     required this.account,
+    required this.category,
   }) : super(key: key);
   final Account account;
   final Expense expense;
+  final Category category;
 
   @override
   State<ExpenseItemWidget> createState() => _ExpenseItemWidgetState();
 }
 
 class _ExpenseItemWidgetState extends State<ExpenseItemWidget> {
-  Color? get _typeColor {
-    if (widget.expense.type == TransactionType.expense) {
-      return Theme.of(context).extension<CustomColors>()!.red;
-    } else {
-      return Theme.of(context).extension<CustomColors>()!.green;
-    }
-  }
-
-  String get _typeSign {
-    if (widget.expense.type == TransactionType.expense) {
-      return '-';
-    } else {
-      return '+';
-    }
-  }
-
-  Widget _type() {
-    return RichText(
-      text: TextSpan(
-        text: _typeSign,
-        style: GoogleFonts.manrope(
-          textStyle: TextStyle(color: _typeColor),
-        ),
-        children: [
-          TextSpan(text: formattedCurrency(widget.expense.currency)),
-        ],
-      ),
-    );
-  }
-
-  String _readableDateWeekTime(DateTime time) {
-    return DateFormat('dd EEE').format(time);
-  }
+  String get _typeSign =>
+      widget.expense.type == TransactionType.expense ? '-' : '+';
 
   @override
   Widget build(BuildContext context) {
-    final date = _readableDateWeekTime(widget.expense.time);
-
     return InkWell(
       onTap: () => context.goNamed(
         editExpensePath,
@@ -74,27 +41,28 @@ class _ExpenseItemWidgetState extends State<ExpenseItemWidget> {
           horizontal: 16,
           vertical: 6,
         ),
-        leading: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              date.substring(0, 2),
-              style: GoogleFonts.lato(
-                textStyle:
-                    Theme.of(context).textTheme.headline6?.onSurface(context),
-              ),
-            ),
-            Text(
-              date.substring(2, date.length),
-              style: Theme.of(context).textTheme.bodyText1?.onSurface(context),
-            ),
-          ],
+        horizontalTitleGap: 0,
+        leading: Icon(
+          IconData(
+            widget.category.icon,
+            fontFamily: 'Material Design Icons',
+            fontPackage: 'material_design_icons_flutter',
+          ),
+          size: 28,
         ),
         title: Text(widget.expense.name),
         subtitle: Text(
             '${widget.account.cardType?.name} • ${widget.account.bankName}'),
-        trailing: _type(),
+        trailing: Text(
+          '$_typeSign${formattedCurrency(widget.expense.currency)}',
+          style: GoogleFonts.manrope(
+            textStyle: TextStyle(
+              fontSize: Theme.of(context).textTheme.subtitle1?.fontSize,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -6,54 +6,67 @@ import '../../../common/widgets/paisa_text_field.dart';
 
 import '../bloc/category_bloc.dart';
 
-class SetBudgetWidget extends StatefulWidget {
+class SetBudgetWidget extends StatelessWidget {
   const SetBudgetWidget({
     super.key,
     required this.controller,
-    required this.setBudget,
   });
   final TextEditingController controller;
-  final bool setBudget;
 
-  @override
-  State<SetBudgetWidget> createState() => _SetBudgetWidgetState();
-}
-
-class _SetBudgetWidgetState extends State<SetBudgetWidget> {
-  late bool budget = widget.setBudget;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SwitchListTile(
-          secondary: Icon(
-            Icons.wallet,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          title: Text(AppLocalizations.of(context)!.budgetLabel),
-          subtitle: Text(AppLocalizations.of(context)!.setBudgetLabel),
-          activeColor: Theme.of(context).colorScheme.primary,
-          onChanged: (bool value) {
-            setState(() {
-              budget = value;
-            });
-          },
-          value: budget,
-        ),
-        budget
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: CategoryBudgetWidget(controller: widget.controller),
-              )
-            : const SizedBox.shrink(),
-      ],
+    return BlocBuilder(
+      buildWhen: (previous, current) =>
+          current is CategorySuccessState ||
+          current is UpdateCategoryBudgetState,
+      bloc: BlocProvider.of<CategoryBloc>(context),
+      builder: (context, state) {
+        bool budget = false;
+        if (state is CategorySuccessState) {
+          budget = BlocProvider.of<CategoryBloc>(context).isBudgetSet;
+        }
+        if (state is UpdateCategoryBudgetState) {
+          budget = state.isBudget;
+        }
+        return Column(
+          children: [
+            SwitchListTile(
+              secondary: Icon(
+                Icons.wallet,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              title: Text(AppLocalizations.of(context)!.budgetLabel),
+              subtitle: Text(AppLocalizations.of(context)!.setBudgetLabel),
+              activeColor: Theme.of(context).colorScheme.primary,
+              onChanged: (bool value) => BlocProvider.of<CategoryBloc>(context)
+                  .add(UpdateCategoryBudgetEvent(value)),
+              value: budget,
+            ),
+            Builder(
+              builder: (context) {
+                return budget
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: CategoryBudgetWidget(controller: controller),
+                      )
+                    : const SizedBox.shrink();
+              },
+            )
+          ],
+        );
+      },
     );
   }
 }
 
 class CategoryBudgetWidget extends StatelessWidget {
-  const CategoryBudgetWidget({super.key, required this.controller});
+  const CategoryBudgetWidget({
+    super.key,
+    required this.controller,
+  });
+
   final TextEditingController controller;
 
   @override

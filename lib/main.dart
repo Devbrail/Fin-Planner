@@ -1,6 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -13,7 +12,6 @@ import 'app/routes.dart';
 import 'common/enum/box_types.dart';
 import 'data/settings/settings_service.dart';
 import 'di/service_locator.dart';
-import 'presentation/home/bloc/home_bloc.dart';
 
 late String currentLocale;
 Future<void> main() async {

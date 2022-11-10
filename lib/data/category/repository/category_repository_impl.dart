@@ -22,6 +22,8 @@ class CategoryRepositoryImpl extends CategoryRepository {
     required String name,
     required String? desc,
     required int icon,
+    required bool isBudget,
+    required int color,
     double? budget = -1,
   }) =>
       dataSources.addCategory(Category(
@@ -29,6 +31,8 @@ class CategoryRepositoryImpl extends CategoryRepository {
         name: name,
         icon: icon,
         budget: budget,
+        isBudget: isBudget,
+        color: color,
       ));
 
   @override

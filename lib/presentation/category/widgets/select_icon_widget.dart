@@ -3,27 +3,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../common/widgets/show_icon_picker.dart';
+import '../../../common/widgets/paisa_icon_picker.dart';
 import '../bloc/category_bloc.dart';
 
 class SelectIconWidget extends StatelessWidget {
-  const SelectIconWidget({
-    super.key,
-    required this.codePoint,
-  });
-
-  final int codePoint;
+  const SelectIconWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      buildWhen: (previous, current) => current is CategoryIconSelectedState,
-      bloc: BlocProvider.of<CategoryBloc>(context)
-        ..add(CategoryIconSelectedEvent(codePoint)),
+      buildWhen: (previous, current) =>
+          current is CategoryIconSelectedState ||
+          current is CategorySuccessState,
+      bloc: BlocProvider.of<CategoryBloc>(context),
       builder: (context, state) {
         int codePoint = MdiIcons.home.codePoint;
         if (state is CategoryIconSelectedState) {
           codePoint = state.categoryIcon;
+        }
+        if (state is CategorySuccessState) {
+          codePoint = state.category.icon;
         }
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

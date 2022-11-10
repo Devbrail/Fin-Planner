@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/util.dart';
+import '../../../common/common.dart';
+import '../../../common/constants/list_util.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
@@ -95,6 +96,49 @@ class BudgetOverViewList extends StatelessWidget {
         return BudgetItem(
           category: maps[index].key,
           expenses: maps[index].value,
+        );
+      },
+    );
+  }
+}
+
+class ProgressBar extends StatelessWidget {
+  final double max;
+  final double current;
+  final Color color;
+
+  const ProgressBar({
+    Key? key,
+    required this.max,
+    required this.current,
+    this.color = Colors.black,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (_, boxConstraints) {
+        var x = boxConstraints.maxWidth;
+        var percent = (current / max) * x;
+        return Stack(
+          children: [
+            Container(
+              width: x,
+              height: 6,
+              decoration: BoxDecoration(
+                color: Theme.of(context).disabledColor,
+                borderRadius: BorderRadius.circular(35),
+              ),
+            ),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              width: percent,
+              height: 6,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(35),
+              ),
+            ),
+          ],
         );
       },
     );

@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/currency.dart';
-import '../../../common/constants/extensions.dart';
+import '../../../common/common.dart';
 import '../../../common/widgets/paisa_card.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/accounts/model/account.dart';
+import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
 import '../../summary/widgets/expense_item_widget.dart';
@@ -17,10 +17,14 @@ class AccountTransactionWidget extends StatelessWidget {
   const AccountTransactionWidget({
     Key? key,
     required this.account,
+    required this.accountLocalDataSource,
+    required this.categoryLocalDataSource,
   }) : super(key: key);
 
   final Account account;
 
+  final AccountLocalDataSource accountLocalDataSource;
+  final CategoryLocalDataSource categoryLocalDataSource;
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<Expense>>(
@@ -139,9 +143,10 @@ class AccountTransactionWidget extends StatelessWidget {
                     itemBuilder: (_, index) {
                       return ExpenseItemWidget(
                         expense: expenses[index],
-                        account: locator
-                            .get<AccountLocalDataSource>()
+                        account: accountLocalDataSource
                             .fetchAccount(expenses[index].accountId),
+                        category: categoryLocalDataSource
+                            .fetchCategory(expenses[index].categoryId),
                       );
                     },
                   ),
@@ -169,12 +174,12 @@ class AccountTransactionWidget extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: expenses.length,
                     itemBuilder: (_, index) {
-                      final account = locator
-                          .get<AccountLocalDataSource>()
-                          .fetchAccount(expenses[index].accountId);
                       return ExpenseItemWidget(
                         expense: expenses[index],
-                        account: account,
+                        account: accountLocalDataSource
+                            .fetchAccount(expenses[index].accountId),
+                        category: categoryLocalDataSource
+                            .fetchCategory(expenses[index].categoryId),
                       );
                     },
                   ),

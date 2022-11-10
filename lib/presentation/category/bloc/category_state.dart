@@ -53,3 +53,21 @@ class CategoryIconSelectedState extends CategoryState {
   @override
   List<Object?> get props => [categoryIcon];
 }
+
+class CategoryColorSelectedState extends CategoryState {
+  final int categoryColor;
+
+  const CategoryColorSelectedState(this.categoryColor);
+
+  @override
+  List<Object?> get props => [categoryColor];
+}
+
+class UpdateCategoryBudgetState extends CategoryState {
+  final bool isBudget;
+
+  const UpdateCategoryBudgetState(this.isBudget);
+
+  @override
+  List<Object?> get props => [isBudget];
+}

@@ -63,7 +63,11 @@ class SearchListWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                 ),
               )
-            : ExpenseListWidget(expenses: results);
+            : ExpenseListWidget(
+                expenses: results,
+                accountLocalDataSource: locator.get(),
+                categoryLocalDataSource: locator.get(),
+              );
       },
     );
   }

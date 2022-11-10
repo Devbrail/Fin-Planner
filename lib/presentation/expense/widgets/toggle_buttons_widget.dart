@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/enum/transaction.dart';
-import '../../../common/widgets/material_you_chip.dart';
+import '../../../common/widgets/paisa_chip.dart';
 
 class TransactionToggleButtons extends StatefulWidget {
   const TransactionToggleButtons({

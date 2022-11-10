@@ -32,7 +32,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       body: SafeArea(
         child: BlocListener(
           listener: (context, state) {
-            print(state);
             if (state is NavigateToHome) {
               context.go(landingPath);
             }

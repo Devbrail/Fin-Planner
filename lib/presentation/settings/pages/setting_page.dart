@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../app/app_builder.dart';
 import '../../../app/routes.dart';
 import '../../../common/constants/constants.dart';
-import '../../../common/constants/extensions.dart';
+import '../../../common/constants/context_extensions.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/settings_controller.dart';
 import '../widgets/choose_theme_mode_widget.dart';

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/extensions.dart';
+import '../../../common/constants/context_extensions.dart';
 import '../../../common/widgets/paisa_text_field.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/category_bloc.dart';
+import '../widgets/color_picker_widget.dart';
 import '../widgets/select_icon_widget.dart';
 import '../widgets/set_budget_widget.dart';
 
@@ -39,11 +39,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       return;
     }
 
-    if (isAddCategory) {
-      categoryBloc.add(AddCategoryEvent());
-    } else {
-      categoryBloc.add(CategoryUpdateEvent());
-    }
+    categoryBloc.add(AddOrUpdateCategoryEvent(isAddCategory));
   }
 
   @override
@@ -119,14 +115,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                       Expanded(
                         child: Column(
                           children: [
-                            SelectIconWidget(
-                              codePoint: categoryBloc.selectedIcon ??
-                                  MdiIcons.home.codePoint,
-                            ),
-                            SetBudgetWidget(
-                              controller: budgetController,
-                              setBudget: categoryBloc.checkBudget(),
-                            ),
+                            const SelectIconWidget(),
+                            SetBudgetWidget(controller: budgetController),
                           ],
                         ),
                       ),
@@ -190,13 +180,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SelectIconWidget(
-          codePoint: categoryBloc.selectedIcon ?? MdiIcons.home.codePoint,
-        ),
-        SetBudgetWidget(
-          controller: budgetController,
-          setBudget: categoryBloc.checkBudget(),
-        ),
+        const SelectIconWidget(),
+        SetBudgetWidget(controller: budgetController),
+        const ColorPickerWidget(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
@@ -255,6 +241,8 @@ class CategoryDescriptionWidget extends StatelessWidget {
       hintText: AppLocalizations.of(context)!.enterDescriptionLabel,
       keyboardType: TextInputType.name,
       label: AppLocalizations.of(context)!.descriptionLabel,
+      onChanged: (value) =>
+          BlocProvider.of<CategoryBloc>(context).categoryDesc = value,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/constants/currency.dart';
@@ -30,13 +31,13 @@ class ExpenseMonthCardWidget extends StatelessWidget {
             title,
             style: Theme.of(context)
                 .textTheme
-                .headline6
+                .subtitle1
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
           trailing: Text(
             formattedCurrency(total),
             style: GoogleFonts.manrope(
-              textStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
+              textStyle: Theme.of(context).textTheme.subtitle2?.copyWith(
                     color: total.isNegative
                         ? Theme.of(context).extension<CustomColors>()!.red
                         : Theme.of(context).extension<CustomColors>()!.green,
@@ -47,7 +48,11 @@ class ExpenseMonthCardWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: PaisaCard(
-            child: ExpenseListWidget(expenses: expenses),
+            child: ExpenseListWidget(
+              expenses: expenses,
+              accountLocalDataSource: locator.get(),
+              categoryLocalDataSource: locator.get(),
+            ),
           ),
         ),
       ],

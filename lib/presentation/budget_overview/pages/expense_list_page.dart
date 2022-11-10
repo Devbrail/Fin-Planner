@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/data/category/data_sources/category_local_data_source.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../../../common/constants/extensions.dart';
+import '../../../common/constants/context_extensions.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
@@ -12,10 +13,14 @@ class ExpenseListPage extends StatelessWidget {
   const ExpenseListPage({
     super.key,
     required this.categoryId,
+    required this.accountLocalDataSource,
+    required this.categoryLocalDataSource,
   });
 
   final String? categoryId;
 
+  final AccountLocalDataSource accountLocalDataSource;
+  final CategoryLocalDataSource categoryLocalDataSource;
   @override
   Widget build(BuildContext context) {
     final int? cid = int.tryParse(categoryId ?? '');
@@ -39,9 +44,10 @@ class ExpenseListPage extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return ExpenseItemWidget(
                 expense: expenses[index],
-                account: locator
-                    .get<AccountLocalDataSource>()
+                account: accountLocalDataSource
                     .fetchAccount(expenses[index].accountId),
+                category: categoryLocalDataSource
+                    .fetchCategory(expenses[index].categoryId),
               );
             },
           );

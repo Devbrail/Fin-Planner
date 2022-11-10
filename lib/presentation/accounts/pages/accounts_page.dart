@@ -4,8 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/extensions.dart';
-import '../../../common/widgets/empty_widget.dart';
+import '../../../common/constants/context_extensions.dart';
+import '../../../common/widgets/paisa_empty_widget.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/accounts_bloc.dart';
@@ -61,7 +61,11 @@ class AccountsPageState extends State<AccountsPage> {
                         current is AccountSelectedState,
                     builder: (context, state) {
                       if (state is AccountSelectedState) {
-                        return AccountTransactionWidget(account: state.account);
+                        return AccountTransactionWidget(
+                          account: state.account,
+                          accountLocalDataSource: locator.get(),
+                          categoryLocalDataSource: locator.get(),
+                        );
                       } else {
                         return const SizedBox.shrink();
                       }
@@ -105,7 +109,10 @@ class AccountsPageState extends State<AccountsPage> {
                       builder: (context, state) {
                         if (state is AccountSelectedState) {
                           return AccountTransactionWidget(
-                              account: state.account);
+                            account: state.account,
+                            accountLocalDataSource: locator.get(),
+                            categoryLocalDataSource: locator.get(),
+                          );
                         } else {
                           return const SizedBox.shrink();
                         }

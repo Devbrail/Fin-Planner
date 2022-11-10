@@ -12,9 +12,13 @@ class FetchCategoriesEvent extends CategoryEvent {}
 
 class CategoryRefreshEvent extends CategoryEvent {}
 
-class AddCategoryEvent extends CategoryEvent {}
+class AddOrUpdateCategoryEvent extends CategoryEvent {
+  final bool isAddOrUpdate;
 
-class CategoryUpdateEvent extends CategoryEvent {}
+  const AddOrUpdateCategoryEvent(this.isAddOrUpdate);
+  @override
+  List<Object?> get props => [isAddOrUpdate];
+}
 
 class CategoryDeleteEvent extends CategoryEvent {
   final Category category;
@@ -41,4 +45,21 @@ class CategoryIconSelectedEvent extends CategoryEvent {
 
   @override
   List<Object?> get props => [categoryIcon];
+}
+
+class CategoryColorSelectedEvent extends CategoryEvent {
+  final int categoryColor;
+
+  const CategoryColorSelectedEvent(this.categoryColor);
+
+  @override
+  List<Object?> get props => [categoryColor];
+}
+
+class UpdateCategoryBudgetEvent extends CategoryEvent {
+  final bool isBudget;
+
+  const UpdateCategoryBudgetEvent(this.isBudget);
+  @override
+  List<Object?> get props => [isBudget];
 }

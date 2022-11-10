@@ -2,12 +2,13 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/presentation/budget_overview/cubit/filter_date_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/constants/extensions.dart';
+import '../../../common/common.dart';
 import '../../../di/service_locator.dart';
 import '../../accounts/pages/accounts_page.dart';
 import '../../budget_overview/pages/budget_overview_page.dart';
@@ -20,21 +21,7 @@ import '../../summary/widgets/welcome_name_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/welcome_widget.dart';
 
-final Map<PaisaPage, Widget> _pages = {
-  PaisaPage.home: SummaryPage(
-    summaryCubit: locator.get(),
-  ),
-  PaisaPage.accounts: AccountsPage(
-    accountsBloc: locator.get(),
-  ),
-  PaisaPage.category: CategoryListPage(
-    addCategoryBloc: locator.get(),
-  ),
-  PaisaPage.budgetOverview: BudgetOverViewPage(
-    categoryDataSource: locator.get(),
-  ),
-  PaisaPage.debts: const DebtsPage(),
-};
+late final Function(DateTimeRange dateTimeRange) dateTimeRange;
 
 class LandingPage extends StatefulWidget {
   const LandingPage({
@@ -47,7 +34,24 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage>
     with SingleTickerProviderStateMixin {
-  late final HomeBloc homeBloc = locator.get<HomeBloc>();
+  final HomeBloc homeBloc = locator.get<HomeBloc>();
+  final FilterDateCubit filterDateCubit = locator.get<FilterDateCubit>();
+  DateTimeRange? dateTimeRange;
+
+  late final Map<PaisaPage, Widget> _pages = {
+    PaisaPage.home: const SummaryPage(),
+    PaisaPage.accounts: AccountsPage(
+      accountsBloc: locator.get(),
+    ),
+    PaisaPage.category: CategoryListPage(
+      addCategoryBloc: locator.get(),
+    ),
+    PaisaPage.budgetOverview: BudgetOverViewPage(
+      categoryDataSource: locator.get(),
+      filterDateCubit: filterDateCubit,
+    ),
+    PaisaPage.debts: const DebtsPage(),
+  };
 
   void _handleClick(PaisaPage page) {
     switch (page) {
@@ -63,7 +67,9 @@ class _LandingPageState extends State<LandingPage>
       case PaisaPage.debts:
         context.goNamed(addDebitName);
         break;
-      default:
+      case PaisaPage.budgetOverview:
+        _dateRangePicker();
+        break;
     }
   }
 
@@ -71,36 +77,45 @@ class _LandingPageState extends State<LandingPage>
     return BlocBuilder(
       bloc: homeBloc,
       builder: (context, state) {
-        return state is CurrentIndexState &&
-                state.currentPage != PaisaPage.budgetOverview
-            ? FloatingActionButton.large(
-                onPressed: () => _handleClick(state.currentPage),
-                tooltip: AppLocalizations.of(context)!.addExpenseLabel,
-                heroTag: 'add_expense',
-                key: const Key('add_expense'),
-                child: const Icon(Icons.add),
-              )
-            : const SizedBox.shrink();
+        if (state is CurrentIndexState) {
+          return FloatingActionButton.large(
+            onPressed: () => _handleClick(state.currentPage),
+            tooltip: AppLocalizations.of(context)!.addExpenseLabel,
+            child: state.currentPage != PaisaPage.budgetOverview
+                ? const Icon(Icons.add)
+                : const Icon(Icons.date_range),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
       },
     );
   }
 
-  Widget _floatingActionButton() {
-    return BlocBuilder(
-      bloc: homeBloc,
-      builder: (context, state) {
-        return state is CurrentIndexState &&
-                state.currentPage != PaisaPage.budgetOverview
-            ? FloatingActionButton(
-                onPressed: () => _handleClick(state.currentPage),
-                tooltip: AppLocalizations.of(context)!.addExpenseLabel,
-                heroTag: 'add_expense',
-                key: const Key('add_expense'),
-                child: const Icon(Icons.add),
-              )
-            : const SizedBox.shrink();
+  Future<void> _dateRangePicker() async {
+    final initialDateRange = DateTimeRange(
+      start: DateTime.now().subtract(const Duration(days: 3)),
+      end: DateTime.now(),
+    );
+    final newDateRange = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+      initialDateRange: dateTimeRange ?? initialDateRange,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      builder: (_, child) {
+        return Theme(
+          data: ThemeData.from(colorScheme: Theme.of(context).colorScheme)
+              .copyWith(
+            appBarTheme: Theme.of(context).appBarTheme,
+          ),
+          child: child!,
+        );
       },
     );
+    if (newDateRange == null || newDateRange == dateTimeRange) return;
+    dateTimeRange = newDateRange;
+    filterDateCubit.filterDate(newDateRange);
   }
 
   @override
@@ -112,7 +127,7 @@ class _LandingPageState extends State<LandingPage>
           if (homeBloc.currentPage == PaisaPage.home) {
             return true;
           }
-          homeBloc.add(CurrentIndexEvent(PaisaPage.home));
+          homeBloc.add(const CurrentIndexEvent(PaisaPage.home));
           return false;
         },
         child: ScreenTypeLayout(
@@ -122,7 +137,7 @@ class _LandingPageState extends State<LandingPage>
             watch: 300,
           ),
           mobile: Scaffold(
-            body: const ContentWidget(),
+            body: ContentWidget(pages: _pages),
             floatingActionButton: _floatingActionButtonBig(),
             bottomNavigationBar: Material(
               clipBehavior: Clip.antiAlias,
@@ -227,8 +242,8 @@ class _LandingPageState extends State<LandingPage>
                                 title: AppLocalizations.of(context)!.homeLabel,
                                 icon: Icons.home_outlined,
                                 isSelected: state.currentPage == PaisaPage.home,
-                                onPressed: () => homeBloc
-                                    .add(CurrentIndexEvent(PaisaPage.home)),
+                                onPressed: () => homeBloc.add(
+                                    const CurrentIndexEvent(PaisaPage.home)),
                               ),
                               NavigationBarItem(
                                 title:
@@ -236,8 +251,9 @@ class _LandingPageState extends State<LandingPage>
                                 icon: Icons.credit_card,
                                 isSelected:
                                     state.currentPage == PaisaPage.accounts,
-                                onPressed: () => homeBloc
-                                    .add(CurrentIndexEvent(PaisaPage.accounts)),
+                                onPressed: () => homeBloc.add(
+                                    const CurrentIndexEvent(
+                                        PaisaPage.accounts)),
                               ),
                               NavigationBarItem(
                                 title:
@@ -245,8 +261,9 @@ class _LandingPageState extends State<LandingPage>
                                 icon: Icons.category,
                                 isSelected:
                                     state.currentPage == PaisaPage.category,
-                                onPressed: () => homeBloc
-                                    .add(CurrentIndexEvent(PaisaPage.category)),
+                                onPressed: () => homeBloc.add(
+                                    const CurrentIndexEvent(
+                                        PaisaPage.category)),
                               ),
                               NavigationBarItem(
                                 title:
@@ -254,16 +271,17 @@ class _LandingPageState extends State<LandingPage>
                                 icon: Icons.account_balance_wallet,
                                 isSelected: state.currentPage ==
                                     PaisaPage.budgetOverview,
-                                onPressed: () => homeBloc.add(CurrentIndexEvent(
-                                    PaisaPage.budgetOverview)),
+                                onPressed: () => homeBloc.add(
+                                    const CurrentIndexEvent(
+                                        PaisaPage.budgetOverview)),
                               ),
                               NavigationBarItem(
                                 title: AppLocalizations.of(context)!.debtsLabel,
                                 icon: MdiIcons.accountCash,
                                 isSelected:
                                     state.currentPage == PaisaPage.debts,
-                                onPressed: () => homeBloc
-                                    .add(CurrentIndexEvent(PaisaPage.debts)),
+                                onPressed: () => homeBloc.add(
+                                    const CurrentIndexEvent(PaisaPage.debts)),
                               )
                             ],
                           ),
@@ -274,7 +292,10 @@ class _LandingPageState extends State<LandingPage>
                     }
                   },
                 ),
-                const Expanded(child: ContentWidget()),
+                Expanded(
+                    child: ContentWidget(
+                  pages: _pages,
+                )),
               ],
             ),
           ),
@@ -341,16 +362,14 @@ class NavigationBarItem extends StatelessWidget {
   }
 }
 
-class ContentWidget extends StatefulWidget {
+class ContentWidget extends StatelessWidget {
   const ContentWidget({
     Key? key,
+    required this.pages,
   }) : super(key: key);
 
-  @override
-  State<ContentWidget> createState() => _ContentWidgetState();
-}
+  final Map<PaisaPage, Widget> pages;
 
-class _ContentWidgetState extends State<ContentWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
@@ -369,7 +388,7 @@ class _ContentWidgetState extends State<ContentWidget> {
               child: child,
             ),
             duration: const Duration(milliseconds: 300),
-            child: _pages[state.currentPage],
+            child: pages[state.currentPage],
           );
         }
         return SizedBox.fromSize();

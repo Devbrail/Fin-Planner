@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../data/expense/model/expense.dart';
+import '../common.dart';
+import '../enum/filter_budget.dart';
 import '../enum/transaction.dart';
-import 'currency.dart';
-import 'time.dart';
 
 extension ExpenseListMapping on Box<Expense> {
   List<Expense> allAccount(int accountId) {
     return values.where((element) => element.accountId == accountId).toList();
   }
 
-  List<Expense> get budgetOverView => values
-      .where((element) => element.type != TransactionType.income)
-      .toList();
+  List<Expense> get budgetOverView {
+    final list = values
+        .where((element) => element.type != TransactionType.income)
+        .toList();
+    list.sort((a, b) => a.time.compareTo(b.time));
+    return list;
+  }
 
   List<Expense> isFilterTimeBetween(DateTimeRange range) {
     return values
@@ -22,15 +26,12 @@ extension ExpenseListMapping on Box<Expense> {
   }
 }
 
-extension TextStyleHelpers on TextStyle {
-  TextStyle toBigTextBold(BuildContext context) => copyWith(
-        fontWeight: FontWeight.w700,
-        fontSize: Theme.of(context).textTheme.headline6?.fontSize,
-      );
-}
-
 extension TotalAmountOnExpenses on Iterable<Expense> {
   String get balance => formattedCurrency(totalIncome - totalExpense);
+
+  List<Expense> isFilterTimeBetween(DateTimeRange range) {
+    return where((element) => element.time.isAfterBeforeTime(range)).toList();
+  }
 
   double get filterTotal => fold<double>(0, (previousValue, element) {
         if (element.type == TransactionType.expense) {
@@ -66,63 +67,11 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
           .where((element) => element.time.month == DateTime.now().month)
           .map((e) => e.currency)
           .fold<double>(0, (previousValue, element) => previousValue + element);
-}
 
-extension BuildContextMapping on BuildContext {
-  AppBar materialYouAppBar(
-    String title, {
-    List<Widget>? actions,
-    Widget? leadingWidget,
-  }) {
-    return AppBar(
-      leading: leadingWidget,
-      title: Text(title),
-      titleTextStyle: Theme.of(this)
-          .textTheme
-          .headline6
-          ?.copyWith(fontWeight: FontWeight.bold),
-      backgroundColor: Colors.transparent,
-      actions: actions ?? [],
-    );
-  }
-
-  showMaterialSnackBar(
-    String content, {
-    Color? backgroundColor,
-    Color? color,
-  }) {
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        content: Text(
-          content,
-          style: TextStyle(
-            color: color ?? Theme.of(this).colorScheme.onSurface,
-          ),
-        ),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: backgroundColor ?? Theme.of(this).colorScheme.surface,
-        elevation: 20,
-      ),
-    );
-  }
-}
-
-enum PaisaPage { home, accounts, category, budgetOverview, debts }
-
-extension MapPaisaPage on PaisaPage {
-  int get toIndex {
-    switch (this) {
-      case PaisaPage.home:
-        return 0;
-      case PaisaPage.accounts:
-        return 1;
-      case PaisaPage.category:
-        return 2;
-      case PaisaPage.budgetOverview:
-        return 3;
-      case PaisaPage.debts:
-        return 4;
-    }
+  List<MapEntry<String, List<Expense>>> groupByTime(FilterBudget filterBudget) {
+    return groupBy(
+            this, (Expense element) => element.time.formatted(filterBudget))
+        .entries
+        .toList();
   }
 }

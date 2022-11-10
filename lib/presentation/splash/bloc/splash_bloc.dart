@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -52,6 +53,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         name: 'Default',
         icon: MdiIcons.home.codePoint,
         description: 'All expenses',
+        color:
+            Colors.primaries[Random().nextInt(Colors.primaries.length)].value,
       );
       final int id = await categories.add(category);
       category.superId = id;
@@ -105,6 +108,7 @@ final locales = [
   CountryMap("Pakistan Rupee", const Locale('ur')),
   CountryMap("Swiss Franc", const Locale('fr_CH')),
   CountryMap("Egyptian Pound", const Locale('ar_EG')),
+  CountryMap("Brazilian Real", const Locale('pt')),
 ];
 
 class CountryMap {

@@ -6,7 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/constants/currency.dart';
-import '../../../common/constants/extensions.dart';
+import '../../../common/constants/context_extensions.dart';
 import '../../../common/enum/debt_type.dart';
 import '../../../common/widgets/paisa_text_field.dart';
 import '../../../data/debt/models/transaction.dart';

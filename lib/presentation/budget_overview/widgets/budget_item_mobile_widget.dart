@@ -4,8 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/constants/currency.dart';
-import '../../../common/constants/extensions.dart';
+import '../../../common/common.dart';
 import '../../../common/widgets/paisa_card.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
@@ -131,7 +130,7 @@ class BudgetItemMobileWidget extends StatelessWidget {
                     right: 16,
                   ),
                   child: Text(
-                    '${isBudgetActive ? 'Balance:' : ''} ${formattedCurrency(difference)}',
+                    ' ${formattedCurrency(difference)}',
                     style: GoogleFonts.manrope(
                       textStyle: Theme.of(context)
                           .textTheme

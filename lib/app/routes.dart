@@ -142,12 +142,14 @@ final GoRouter goRouter = GoRouter(
           path: 'expenses/:cid',
           builder: (context, state) => ExpenseListPage(
             categoryId: state.params['cid'],
+            accountLocalDataSource: locator.get(),
+            categoryLocalDataSource: locator.get(),
           ),
         ),
         GoRoute(
           name: exportAndImport,
           path: exportAndImport,
-          builder: (context, state) => ExportAndImportPage(),
+          builder: (context, state) => const ExportAndImportPage(),
         ),
         GoRoute(
           name: settingsName,

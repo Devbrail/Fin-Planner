@@ -169,10 +169,7 @@ class ColorSelectionWidgetState extends State<ColorSelectionWidget> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24, vertical: 12),
                   ),
-                  onPressed: () {
-                    //widget.onSelectedColor(selectedColor);
-                    Navigator.pop(context);
-                  },
+                  onPressed: () => Navigator.pop(context),
                   child: Text(AppLocalizations.of(context)!.doneLabel),
                 ),
               ),
