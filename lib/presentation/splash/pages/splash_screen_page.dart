@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/widgets/paisa_text_field.dart';
+import '../../widgets/paisa_text_field.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/splash_bloc.dart';
 import '../widgets/local_grid_view_widget.dart';

@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/common.dart';
-import '../../../common/widgets/paisa_card.dart';
+import '../../widgets/paisa_card.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 

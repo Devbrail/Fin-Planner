@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/context_extensions.dart';
-import '../../../common/widgets/paisa_empty_widget.dart';
+import '../../widgets/paisa_empty_widget.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/accounts_bloc.dart';

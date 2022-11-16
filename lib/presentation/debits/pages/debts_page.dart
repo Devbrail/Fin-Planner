@@ -5,7 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/enum/debt_type.dart';
-import '../../../common/widgets/paisa_empty_widget.dart';
+import '../../widgets/paisa_empty_widget.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../di/service_locator.dart';
 import '../widgets/debt_item_widget.dart';

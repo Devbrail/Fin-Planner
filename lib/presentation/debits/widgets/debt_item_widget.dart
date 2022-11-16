@@ -7,8 +7,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../app/routes.dart';
 import '../../../common/constants/currency.dart';
-import '../../../common/widgets/paisa_card.dart';
-import '../../../common/widgets/paisa_text_field.dart';
+import '../../widgets/paisa_card.dart';
+import '../../widgets/paisa_text_field.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../data/debt/models/transaction.dart';
 import '../../../di/service_locator.dart';

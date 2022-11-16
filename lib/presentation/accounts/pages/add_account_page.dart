@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/context_extensions.dart';
-import '../../../common/widgets/paisa_text_field.dart';
+import '../../widgets/paisa_text_field.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_card.dart';
 import '../widgets/card_type_drop_down.dart';

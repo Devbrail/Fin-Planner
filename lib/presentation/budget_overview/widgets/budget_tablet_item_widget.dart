@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/constants/currency.dart';
-import '../../../common/widgets/paisa_card.dart';
+import '../../widgets/paisa_card.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 

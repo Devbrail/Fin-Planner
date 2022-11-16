@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/enum/filter_budget.dart';
-import '../../common/widgets/paisa_chip.dart';
+import '../widgets/paisa_chip.dart';
 import 'cubit/filter_cubit.dart';
 
 class FilterBudgetToggleWidget extends StatelessWidget {

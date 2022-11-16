@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/enum/debt_type.dart';
-import '../../../common/widgets/paisa_chip.dart';
+import '../../widgets/paisa_chip.dart';
 
 class DebtToggleButtonsWidget extends StatefulWidget {
   const DebtToggleButtonsWidget({

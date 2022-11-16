@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/constants/context_extensions.dart';
-import '../../../common/widgets/paisa_text_field.dart';
+import '../../widgets/paisa_text_field.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/color_picker_widget.dart';

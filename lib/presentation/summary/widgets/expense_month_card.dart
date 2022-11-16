@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/constants/currency.dart';
 import '../../../common/theme/custom_color.dart';
-import '../../../common/widgets/paisa_card.dart';
+import '../../widgets/paisa_card.dart';
 import '../../../data/expense/model/expense.dart';
 import 'expense_list_widget.dart';
 

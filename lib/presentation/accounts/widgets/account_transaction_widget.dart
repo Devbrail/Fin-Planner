@@ -5,7 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/common.dart';
-import '../../../common/widgets/paisa_card.dart';
+import '../../widgets/paisa_card.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';

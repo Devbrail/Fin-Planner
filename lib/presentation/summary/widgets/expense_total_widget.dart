@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../common/common.dart';
-import '../../../common/widgets/paisa_card.dart';
+import '../../widgets/paisa_card.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
 import 'expense_total_for_month_widget.dart';
