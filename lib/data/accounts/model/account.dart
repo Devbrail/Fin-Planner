@@ -19,7 +19,7 @@ class Account extends HiveObject with EquatableMixin {
   @HiveField(5)
   String number;
 
-  @HiveField(6, defaultValue: CardType.debitCard)
+  @HiveField(6, defaultValue: CardType.bank)
   CardType? cardType;
 
   @HiveField(7, defaultValue: 0)

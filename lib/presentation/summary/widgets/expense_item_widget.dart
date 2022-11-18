@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/common/theme/custom_color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/constants/currency.dart';
@@ -28,6 +30,12 @@ class ExpenseItemWidget extends StatefulWidget {
 class _ExpenseItemWidgetState extends State<ExpenseItemWidget> {
   String get _typeSign =>
       widget.expense.type == TransactionType.expense ? '-' : '+';
+  Color? get color => widget.expense.type == TransactionType.expense
+      ? Theme.of(context).extension<CustomColors>()!.red
+      : Theme.of(context).extension<CustomColors>()!.green;
+
+  String get day => DateFormat('dd').format(widget.expense.time);
+  String get week => DateFormat('EEE').format(widget.expense.time);
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +50,29 @@ class _ExpenseItemWidgetState extends State<ExpenseItemWidget> {
           vertical: 6,
         ),
         horizontalTitleGap: 0,
-        leading: Icon(
-          IconData(
-            widget.category.icon,
-            fontFamily: 'Material Design Icons',
-            fontPackage: 'material_design_icons_flutter',
-          ),
-          size: 28,
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              day,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.manrope(
+                textStyle: Theme.of(context).textTheme.headline6?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+              ),
+            ),
+            Text(
+              week,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.manrope(
+                textStyle: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+              ),
+            ),
+          ],
         ),
         title: Text(widget.expense.name),
         subtitle: Text(
@@ -58,7 +82,7 @@ class _ExpenseItemWidgetState extends State<ExpenseItemWidget> {
           style: GoogleFonts.manrope(
             textStyle: TextStyle(
               fontSize: Theme.of(context).textTheme.subtitle1?.fontSize,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              color: color,
               fontWeight: FontWeight.w600,
             ),
           ),

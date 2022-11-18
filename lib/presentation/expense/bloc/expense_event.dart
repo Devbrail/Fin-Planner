@@ -31,3 +31,15 @@ class ChangeExpenseEvent extends ExpenseEvent {
 
   const ChangeExpenseEvent(this.transactionType);
 }
+
+class ChangeCategoryEvent extends ExpenseEvent {
+  final Category category;
+
+  const ChangeCategoryEvent(this.category);
+}
+
+class ChangeAccountEvent extends ExpenseEvent {
+  final Account account;
+
+  const ChangeAccountEvent(this.account);
+}

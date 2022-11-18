@@ -37,7 +37,7 @@ class AccountPageViewWidget extends StatelessWidget {
                 cardHolder: account.name,
                 cardNumber: account.number,
                 bankName: account.bankName,
-                cardType: account.cardType ?? CardType.debitCard,
+                cardType: account.cardType ?? CardType.bank,
                 onDelete: () => BlocProvider.of<AccountsBloc>(context)
                     .add(DeleteAccountEvent(account)),
                 onTap: () => context.goNamed(

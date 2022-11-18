@@ -8,10 +8,10 @@ String getCurrency() {
   return format.currencySymbol;
 }
 
-String formattedCurrency(double currency) {
+String formattedCurrency(double currency, {int? decimalDigits = 2}) {
   return NumberFormat.simpleCurrency(
     locale: currentLocale.toString(),
-    decimalDigits: 2,
+    decimalDigits: decimalDigits,
   ).format(currency);
 }
 

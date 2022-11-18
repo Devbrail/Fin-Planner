@@ -37,6 +37,11 @@ class _ExportAndImportPageState extends State<ExportAndImportPage> {
           SettingsGroup(
             title: 'Backup as JSON file',
             options: [
+              ListTile(
+                title: Text(
+                  'Restore will clear all the existing data and replace with imported data',
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -50,9 +55,9 @@ class _ExportAndImportPageState extends State<ExportAndImportPage> {
                               Theme.of(context).colorScheme.onPrimary,
                         ),
                         onPressed: () async {
-                          context.showMaterialSnackBar('Creating backup');
                           await fileHandler.createBackUpFile(
-                            () {
+                            (message) {
+                              context.showMaterialSnackBar(message);
                               setState(() {});
                             },
                           );

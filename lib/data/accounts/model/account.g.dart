@@ -21,7 +21,7 @@ class AccountAdapter extends TypeAdapter<Account> {
       icon: fields[1] as int,
       bankName: fields[3] as String,
       number: fields[5] as String,
-      cardType: fields[6] == null ? CardType.debitCard : fields[6] as CardType?,
+      cardType: fields[6] == null ? CardType.bank : fields[6] as CardType?,
     )..superId = fields[7] == null ? 0 : fields[7] as int?;
   }
 

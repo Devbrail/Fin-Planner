@@ -128,17 +128,7 @@ class _ExpensePageState extends State<ExpensePage> {
                       },
                       selectedType: expenseBloc.selectedType,
                     ),
-                    SelectCategoryIcon(
-                      onSelected: (category) {
-                        expenseBloc.selectedCategoryId = category.key;
-                      },
-                    ),
-                    SelectedAccount(
-                      accountId: expenseBloc.selectedAccountId ?? -1,
-                      onSelected: (account) {
-                        expenseBloc.selectedAccountId = account.key;
-                      },
-                    ),
+                    const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Form(
@@ -162,6 +152,8 @@ class _ExpensePageState extends State<ExpensePage> {
                         ),
                       ),
                     ),
+                    const SelectedAccount(),
+                    const SelectCategoryIcon(),
                   ],
                 ),
               ),
@@ -230,19 +222,9 @@ class _ExpensePageState extends State<ExpensePage> {
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          SelectCategoryIcon(
-                            onSelected: (category) {
-                              expenseBloc.selectedCategoryId = category.key;
-                            },
-                          ),
-                          const SizedBox(height: 24),
-                          SelectedAccount(
-                            accountId: expenseBloc.selectedAccountId ?? -1,
-                            onSelected: (account) {
-                              expenseBloc.selectedAccountId = account.key;
-                            },
-                          ),
+                        children: const [
+                          SelectedAccount(),
+                          SelectCategoryIcon(),
                         ],
                       ),
                     ),
@@ -335,7 +317,8 @@ class ExpenseDatePickerWidget extends StatelessWidget {
         Expanded(
           child: PaisaTextFormField(
             enabled: false,
-            controller: controller,
+            controller: controller
+              ..text = formattedDate(selectedDate ?? DateTime.now()),
             keyboardType: TextInputType.number,
             hintText: 'Select date',
           ),

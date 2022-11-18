@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'selectable_item_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
 import '../../../data/category/model/category.dart';
 import '../../../di/service_locator.dart';
-import '../../category/bloc/category_bloc.dart';
+import '../bloc/expense_bloc.dart';
 
-class SelectCategoryIcon extends StatefulWidget {
-  const SelectCategoryIcon({
-    Key? key,
-    required this.onSelected,
-  }) : super(key: key);
-
-  final Function(Category) onSelected;
-
-  @override
-  SelectCategoryIconState createState() => SelectCategoryIconState();
-}
-
-class SelectCategoryIconState extends State<SelectCategoryIcon> {
-  final CategoryBloc addCategoryBloc = locator.get();
-  int selectedIndex = 0;
+class SelectCategoryIcon extends StatelessWidget {
+  const SelectCategoryIcon({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    late final expenseBloc = BlocProvider.of<ExpenseBloc>(context);
     return ValueListenableBuilder<Box<Category>>(
       valueListenable: locator.get<Box<Category>>().listenable(),
       builder: (context, value, child) {
         final categories = value.values.toList();
+        categories.sort(((a, b) => a.name.compareTo(b.name)));
         if (categories.isEmpty) {
           return ListTile(
             onTap: () => context.pushNamed(addCategoryPath),
@@ -39,7 +31,7 @@ class SelectCategoryIconState extends State<SelectCategoryIcon> {
             trailing: const Icon(Icons.keyboard_arrow_right),
           );
         }
-        widget.onSelected(categories[selectedIndex]);
+
         return ScreenTypeLayout(
           tablet: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,71 +40,34 @@ class SelectCategoryIconState extends State<SelectCategoryIcon> {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   AppLocalizations.of(context)!.selectCategoryLabel,
-                  style: Theme.of(context).textTheme.headline6?.copyWith(
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
                       ),
                 ),
               ),
               SelectedItem(
                 categories: categories,
-                onSelected: (index) {
-                  selectedIndex = index;
-                  widget.onSelected(categories[index]);
-                  setState(() {});
-                },
-                selectedIndex: selectedIndex,
+                expenseBloc: expenseBloc,
               )
             ],
           ),
-          mobile: ListTile(
-            onTap: () {
-              showModalBottomSheet(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24),
-                  ),
+          mobile: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  AppLocalizations.of(context)!.selectCategoryLabel,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
-                context: context,
-                builder: (_) {
-                  return SafeArea(
-                    maintainBottomViewPadding: true,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            AppLocalizations.of(context)!.selectCategoryLabel,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SelectedItem(
-                          categories: categories,
-                          onSelected: (index) {
-                            selectedIndex = index;
-                            widget.onSelected(categories[index]);
-                            setState(() {});
-                          },
-                          selectedIndex: selectedIndex,
-                        )
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-            title: Text(
-              AppLocalizations.of(context)!.selectCategoryLabel,
-            ),
-            subtitle: Text(
-              categories[selectedIndex].name,
-            ),
+              ),
+              SelectedItem(
+                categories: categories,
+                expenseBloc: expenseBloc,
+              )
+            ],
           ),
         );
       },
@@ -120,151 +75,109 @@ class SelectCategoryIconState extends State<SelectCategoryIcon> {
   }
 }
 
-class SelectedItem extends StatefulWidget {
+class SelectedItem extends StatelessWidget {
   const SelectedItem({
-    Key? key,
+    super.key,
     required this.categories,
-    required this.onSelected,
-    required this.selectedIndex,
-  }) : super(key: key);
+    required this.expenseBloc,
+  });
 
   final List<Category> categories;
-  final Function(int) onSelected;
-  final int selectedIndex;
-
-  @override
-  State<SelectedItem> createState() => _SelectedItemState();
-}
-
-class _SelectedItemState extends State<SelectedItem> {
-  int selectedIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedIndex = widget.selectedIndex;
-  }
-
+  final ExpenseBloc expenseBloc;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 220,
-      child: ListView.builder(
-        padding: const EdgeInsets.only(
-          bottom: 16,
-          left: 16,
-          right: 16,
-        ),
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: widget.categories.length + 1,
-        itemBuilder: (_, index) {
-          if (index == widget.categories.length) {
-            return AspectRatio(
-              aspectRatio: 10 / 14,
-              child: Card(
-                color: Theme.of(context).colorScheme.surface,
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                child: InkWell(
-                  onTap: () => context.pushNamed(addCategoryPath),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: CircleAvatar(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          child: Icon(
-                            Icons.add,
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          'Add New',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1
-                              ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }
-
-          final category = widget.categories[index];
-          return AspectRatio(
-            aspectRatio: 10 / 14,
-            child: Card(
-              color: Theme.of(context).colorScheme.surface,
-              clipBehavior: Clip.antiAlias,
-              shape: selectedIndex == index
-                  ? RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                      side: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
-                        width: 2,
-                      ),
-                    )
-                  : RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-              child: InkWell(
-                onTap: () {
-                  selectedIndex = index;
-                  widget.onSelected(selectedIndex);
-                  setState(() {});
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: CircleAvatar(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        child: Icon(
+    return BlocBuilder(
+      bloc: expenseBloc,
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Wrap(
+            spacing: 4.0,
+            runSpacing: 8.0,
+            children: categories
+                .map((category) => Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: FilterChip(
+                        selected:
+                            category.key == expenseBloc.selectedCategoryId,
+                        onSelected: (value) =>
+                            expenseBloc.add(ChangeCategoryEvent(category)),
+                        avatar: Icon(
+                          color: category.key == expenseBloc.selectedCategoryId
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.onSurfaceVariant,
                           IconData(
                             category.icon,
                             fontFamily: 'Material Design Icons',
                             fontPackage: 'material_design_icons_flutter',
                           ),
-                          color: Theme.of(context).colorScheme.onPrimary,
                         ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(28),
+                          side: BorderSide(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                        showCheckmark: false,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        label: Text(category.name),
+                        labelStyle: Theme.of(context)
+                            .textTheme
+                            .subtitle1
+                            ?.copyWith(
+                                color: category.key ==
+                                        expenseBloc.selectedCategoryId
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant),
+                        padding: const EdgeInsets.all(12),
                       ),
-                    ),
-                    const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        category.name,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onSurface,
-                            ),
-                      ),
-                    )
-                  ],
+                    ))
+                .toList(),
+          ),
+        );
+        return ListView.builder(
+          padding: const EdgeInsets.only(
+            bottom: 16,
+            left: 16,
+            right: 16,
+          ),
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          itemBuilder: (_, index) {
+            final category = categories[index];
+            return Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: FilterChip(
+                selected: category.key == expenseBloc.selectedCategoryId,
+                onSelected: (value) =>
+                    expenseBloc.add(ChangeCategoryEvent(category)),
+                avatar: Icon(
+                  IconData(
+                    category.icon,
+                    fontFamily: 'Material Design Icons',
+                    fontPackage: 'material_design_icons_flutter',
+                  ),
                 ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(width: 1),
+                ),
+                side: BorderSide(width: 1),
+                showCheckmark: false,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                label: Text(category.name),
+                labelStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant),
+                padding: const EdgeInsets.all(16),
               ),
-            ),
-          );
-        },
-      ),
+            );
+          },
+        );
+      },
     );
   }
 }

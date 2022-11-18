@@ -34,10 +34,10 @@ class FileHandler {
     return json.encode(data);
   }
 
-  Future<void> createBackUpFile(VoidCallback callback) async {
+  Future<void> createBackUpFile(Function(String) callback) async {
     final result = await _checkPermission();
     if (!result) {
-      return;
+      return callback.call('Permission error');
     }
 
     final String data = await _fetchExpensesAndEncode();
@@ -45,7 +45,7 @@ class FileHandler {
     final dir = await Directory(directory!.path).create(recursive: true);
     final file = File('${dir.path}/${DateTime.now().toIso8601String()}.json');
     await file.writeAsString(data);
-    callback.call();
+    callback.call('Creating backup');
   }
 
   Future<void> restoreBackUpFile({

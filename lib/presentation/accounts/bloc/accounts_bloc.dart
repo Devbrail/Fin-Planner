@@ -28,7 +28,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   final AccountUseCase accountUseCase;
   late final box = Hive.box<Account>(BoxType.accounts.stringValue);
 
-  late CardType selectedType = CardType.cash;
+  late CardType selectedType = CardType.bank;
   String? accountName;
   String? accountHolderName;
   String? accountNumber;
@@ -52,7 +52,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
       accountName = account.bankName;
       accountHolderName = account.name;
       accountNumber = account.number;
-      selectedType = account.cardType ?? CardType.cash;
+      selectedType = account.cardType ?? CardType.bank;
       currentAccount = account;
     } else {
       emit(const AccountErrorState('Account not found!'));
@@ -74,14 +74,12 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     if (holderName == null) {
       return emit(const AccountErrorState('Set account holder name'));
     }
-    if (number == null) {
-      return emit(const AccountErrorState('Set account number'));
-    }
+
     if (event.isAdding) {
       await accountUseCase.addAccount(
         bankName: bankName,
         holderName: holderName,
-        number: number,
+        number: number ?? '',
         cardType: cardType,
       );
     } else {
@@ -91,7 +89,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
           ..cardType = cardType
           ..icon = cardType.icon.codePoint
           ..name = holderName
-          ..number = number
+          ..number = number ?? ''
           ..cardType = cardType;
 
         await currentAccount!.save();

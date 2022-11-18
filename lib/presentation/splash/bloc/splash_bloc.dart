@@ -37,10 +37,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     if (isAnyAccount) {
       final account = Account(
         name: 'Holder name',
-        icon: Icons.credit_card.codePoint,
+        icon: MdiIcons.creditCard.codePoint,
         bankName: 'Bank name',
         number: '1234',
-        cardType: CardType.cash,
+        cardType: CardType.bank,
       );
       final int id = await accounts.add(account);
       account.superId = id;
@@ -65,6 +65,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     //emit(CountryLocalesState(locales));
 
     if (languageCode == 'DEF' || event.forceChangeCurrency) {
+      locales.sort(((a, b) => a.name.compareTo(b.name)));
       emit(CountryLocalesState(locales));
     } else {
       currentLocale = languageCode;
@@ -85,6 +86,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     final result = locales
         .where((element) => element.name.toLowerCase().contains(query))
         .toList();
+    result.sort(((a, b) => a.name.compareTo(b.name)));
     emit(CountryLocalesState(result));
   }
 }

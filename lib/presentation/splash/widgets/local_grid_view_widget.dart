@@ -23,6 +23,7 @@ class LocaleGridView extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
+        childAspectRatio: 16 / 12,
       ),
       shrinkWrap: true,
       itemCount: locales.length,
@@ -47,20 +48,12 @@ class LocaleGridView extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(map.name),
-                      const SizedBox(height: 6),
-                      Text(
-                        '${format.currencyName}',
-                      ),
-                    ],
+                ListTile(
+                  title: Text(map.name),
+                  subtitle: Text(
+                    '${format.currencyName}',
                   ),
-                ),
+                )
               ],
             ),
           ),

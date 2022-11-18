@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
 import '../../../common/enum/box_types.dart';
@@ -75,37 +76,16 @@ class _UserImagePageState extends State<UserImagePage> {
           ),
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: MediaQuery.of(context).viewInsets,
-        child: SafeArea(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ElevatedButton(
-                  onPressed: () => context.pop(),
-                  child: Text(AppLocalizations.of(context)!.backLabel),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    final String image =
-                        value.get(userImageKey, defaultValue: '');
-                    if (image.isEmpty) {
-                      value.put(userImageKey, 'no-image');
-                    }
-                    context.go(splashPath);
-                  },
-                  child: Text(AppLocalizations.of(context)!.nextLabel),
-                ),
-              ),
-            ],
-          ),
-        ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          final String image = value.get(userImageKey, defaultValue: '');
+          if (image.isEmpty) {
+            value.put(userImageKey, 'no-image');
+          }
+          context.go(splashPath);
+        },
+        label: Text(AppLocalizations.of(context)!.nextLabel),
+        icon: const Icon(MdiIcons.arrowRight),
       ),
     );
   }

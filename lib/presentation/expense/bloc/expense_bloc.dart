@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_paisa/data/accounts/model/account.dart';
+import 'package:flutter_paisa/data/category/model/category.dart';
 import 'package:meta/meta.dart';
 
 import '../../../common/enum/transaction.dart';
@@ -12,11 +16,12 @@ part 'expense_state.dart';
 class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   ExpenseBloc(this.expenseUseCase) : super(ExpenseInitial()) {
     on<ExpenseEvent>((event, emit) {});
-    on<AddOrUpdateExpenseEvent>((event, emit) => _addExpense(event, emit));
-    on<ClearExpenseEvent>((event, emit) => _clearExpense(event, emit));
-    on<ChangeExpenseEvent>((event, emit) => _changeExpense(event, emit));
-    on<FetchExpenseFromIdEvent>(
-        (event, emit) => _fetchExpenseFromId(event, emit));
+    on<AddOrUpdateExpenseEvent>(_addExpense);
+    on<ClearExpenseEvent>(_clearExpense);
+    on<ChangeExpenseEvent>(_changeExpense);
+    on<FetchExpenseFromIdEvent>(_fetchExpenseFromId);
+    on<ChangeCategoryEvent>(_changeCategory);
+    on<ChangeAccountEvent>(_changeAccount);
   }
 
   final ExpenseUseCase expenseUseCase;
@@ -37,7 +42,6 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
     final Expense? expense = await expenseUseCase.fetchExpenseFromId(expenseId);
     if (expense != null) {
-      emit(ExpenseSuccessState(expense));
       expenseAmount = expense.currency;
       expenseName = expense.name;
       selectedCategoryId = expense.categoryId;
@@ -45,6 +49,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       selectedDate = expense.time;
       selectedType = expense.type ?? TransactionType.expense;
       currentExpense = expense;
+      emit(ExpenseSuccessState(expense));
     }
   }
 
@@ -112,5 +117,21 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
   void _changeExpense(ChangeExpenseEvent event, Emitter<ExpenseState> emit) {
     emit(ChangeExpenseState(event.transactionType));
+  }
+
+  FutureOr<void> _changeCategory(
+    ChangeCategoryEvent event,
+    Emitter<ExpenseState> emit,
+  ) {
+    selectedCategoryId = event.category.key;
+    emit(ChangeCategoryState(event.category));
+  }
+
+  FutureOr<void> _changeAccount(
+    ChangeAccountEvent event,
+    Emitter<ExpenseState> emit,
+  ) {
+    selectedAccountId = event.account.key;
+    emit(ChangeAccountState(event.account));
   }
 }

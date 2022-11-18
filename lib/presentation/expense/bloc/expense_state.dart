@@ -46,3 +46,21 @@ class ExpenseSuccessState extends ExpenseState {
   @override
   List<Object> get props => [expense];
 }
+
+class ChangeCategoryState extends ExpenseState {
+  final Category category;
+
+  const ChangeCategoryState(this.category);
+
+  @override
+  List<Object> get props => [category];
+}
+
+class ChangeAccountState extends ExpenseState {
+  final Account account;
+
+  const ChangeAccountState(this.account);
+
+  @override
+  List<Object> get props => [account];
+}

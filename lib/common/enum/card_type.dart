@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 part 'card_type.g.dart';
 
@@ -8,11 +9,9 @@ enum CardType {
   @HiveField(0)
   cash,
   @HiveField(1)
-  debitCard,
+  bank,
   @HiveField(2)
-  creditCard,
-  @HiveField(3)
-  upi
+  wallet,
 }
 
 extension CardTypeMapping on CardType {
@@ -20,25 +19,21 @@ extension CardTypeMapping on CardType {
     switch (this) {
       case CardType.cash:
         return 'Cash';
-      case CardType.debitCard:
-        return 'Debit card';
-      case CardType.creditCard:
-        return 'Credit card';
-      case CardType.upi:
-        return 'UPI';
+      case CardType.bank:
+        return 'Bank';
+      case CardType.wallet:
+        return 'Wallet';
     }
   }
 
   IconData get icon {
     switch (this) {
       case CardType.cash:
-        return Icons.attach_money;
-      case CardType.debitCard:
-        return Icons.local_atm;
-      case CardType.creditCard:
-        return Icons.credit_card;
-      case CardType.upi:
-        return Icons.currency_rupee;
+        return MdiIcons.cashMultiple;
+      case CardType.bank:
+        return MdiIcons.creditCardChip;
+      case CardType.wallet:
+        return MdiIcons.creditCard;
     }
   }
 }
@@ -48,13 +43,11 @@ extension CardTypeMap on String {
     switch (this) {
       case 'Cash':
         return CardType.cash;
-      case 'Debit card':
-        return CardType.debitCard;
-      case 'Credit card':
-        return CardType.creditCard;
-      case 'UPI':
-        return CardType.upi;
+      case 'Bank':
+        return CardType.bank;
+      case 'Wallet':
+        return CardType.wallet;
     }
-    return CardType.debitCard;
+    return CardType.bank;
   }
 }

@@ -27,6 +27,12 @@ extension ExpenseListMapping on Box<Expense> {
 }
 
 extension TotalAmountOnExpenses on Iterable<Expense> {
+  List<Expense> get expenseList =>
+      where((element) => element.type == TransactionType.expense).toList();
+
+  List<Expense> get incomeList =>
+      where((element) => element.type == TransactionType.income).toList();
+
   String get balance => formattedCurrency(totalIncome - totalExpense);
 
   List<Expense> isFilterTimeBetween(DateTimeRange range) {
