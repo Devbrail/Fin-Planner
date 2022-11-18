@@ -21,7 +21,7 @@ class AccountLocalDataSourceImpl implements AccountLocalDataSource {
     final keys = expenseBox.values
         .where((element) => element.accountId == key)
         .map((e) => e.key);
-    expenseBox.deleteAll(keys);
+    await expenseBox.deleteAll(keys);
     return accountBox.delete(key);
   }
 

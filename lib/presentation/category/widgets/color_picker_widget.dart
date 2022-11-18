@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_paisa/presentation/category/bloc/category_bloc.dart';
+import '../bloc/category_bloc.dart';
 
 class ColorPickerWidget extends StatelessWidget {
   const ColorPickerWidget({super.key});

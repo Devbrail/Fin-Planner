@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_paisa/data/accounts/model/account.dart';
-import 'package:flutter_paisa/data/category/model/category.dart';
+import '../../../data/accounts/model/account.dart';
+import '../../../data/category/model/category.dart';
 import 'package:meta/meta.dart';
 
 import '../../../common/enum/transaction.dart';
@@ -70,12 +70,11 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     if (name == null) {
       return emit(const ExpenseErrorState('Enter expense name'));
     }
-
-    if (categoryId == null) {
-      return emit(const ExpenseErrorState('Select category'));
-    }
     if (accountId == null) {
       return emit(const ExpenseErrorState('Select account'));
+    }
+    if (categoryId == null) {
+      return emit(const ExpenseErrorState('Select category'));
     }
     if (dateTime == null) {
       return emit(const ExpenseErrorState('Select time'));

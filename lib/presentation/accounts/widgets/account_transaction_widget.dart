@@ -21,6 +21,19 @@ class AccountTransactionWidget extends StatelessWidget {
   final List<Expense> expenses;
   @override
   Widget build(BuildContext context) {
+    if (expenses.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            children: [
+              const Icon(Icons.money_off_rounded, size: 72),
+              Text(AppLocalizations.of(context)!.emptyExpensesMessage),
+            ],
+          ),
+        ),
+      );
+    }
     return ScreenTypeLayout(
       mobile: ListView(
         physics: const NeverScrollableScrollPhysics(),

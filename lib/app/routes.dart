@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../di/service_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../common/enum/box_types.dart';
 import '../data/settings/settings_service.dart';
+import '../di/service_locator.dart';
 import '../main.dart';
 import '../presentation/accounts/pages/add_account_page.dart';
 import '../presentation/budget_overview/pages/expense_list_page.dart';
@@ -69,6 +69,7 @@ final GoRouter goRouter = GoRouter(
     }
     return null;
   },
+  observers: [HeroController()],
   refreshListenable: settings.listenable(),
   debugLogDiagnostics: true,
   routes: [
@@ -159,12 +160,12 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: addDebitName,
           path: addDebitName,
-          builder: (context, state) => const DebtAddOrEditPage(),
+          builder: (context, state) => const AddOrEditDebtPage(),
         ),
         GoRoute(
           name: debitAddOrEditPath,
           path: 'debt/:did',
-          builder: (context, state) => DebtAddOrEditPage(
+          builder: (context, state) => AddOrEditDebtPage(
             debtId: state.params['did'],
           ),
         ),

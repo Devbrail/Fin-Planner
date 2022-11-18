@@ -24,8 +24,8 @@ class AccountUseCase {
     );
   }
 
-  Future<void> deleteAccount(int key) async {
-    return await repository.deleteAccount(key);
+  Future<void> deleteAccount(int key) {
+    return repository.deleteAccount(key);
   }
 
   Future<void> updateAccount(Account account) async {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/presentation/widgets/paisa_chip.dart';
+import '../../widgets/paisa_chip.dart';
 
 import '../../../common/enum/card_type.dart';
 

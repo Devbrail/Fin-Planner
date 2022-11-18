@@ -32,8 +32,8 @@ class AccountRepositoryImpl extends AccountRepository {
   }
 
   @override
-  Future<void> deleteAccount(int key) async {
-    await dataSource.deleteAccount(key);
+  Future<void> deleteAccount(int key) {
+    return dataSource.deleteAccount(key);
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../accounts/widgets/account_summary_widget.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../common/common.dart';
@@ -21,30 +22,36 @@ class ExpenseTotalWidget extends StatelessWidget {
         final totalIncome = expenses.totalIncome - expenses.totalExpense;
         final thisMonthExpenses = expenses.thisMonthExpense;
         final thisMonthIncome = expenses.thisMonthIncome;
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: PaisaCard(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            child: Padding(
-              padding: const EdgeInsets.all(22.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TotalBalanceWidget(
-                    title: AppLocalizations.of(context)!.totalBalanceLabel,
-                    amount: totalIncome,
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: PaisaCard(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                child: Padding(
+                  padding: const EdgeInsets.all(22.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TotalBalanceWidget(
+                        title: AppLocalizations.of(context)!.totalBalanceLabel,
+                        amount: totalIncome,
+                      ),
+                      const SizedBox(height: 24),
+                      ExpenseTotalForMonthWidget(
+                        outcome: thisMonthExpenses,
+                        income: thisMonthIncome,
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 24),
-                  ExpenseTotalForMonthWidget(
-                    outcome: thisMonthExpenses,
-                    income: thisMonthIncome,
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
+            const SizedBox(height: 8),
+            AccountSummaryWidget(expenses: expenses),
+          ],
         );
       },
     );

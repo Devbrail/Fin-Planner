@@ -1,24 +1,15 @@
-import 'package:chart_sparkline/chart_sparkline.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common/common.dart';
 import '../../../common/constants/context_extensions.dart';
-import '../../../common/theme/custom_color.dart';
-import '../../../data/accounts/model/account.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../data/expense/model/expense.dart';
 import '../../../di/service_locator.dart';
-import '../../../di/service_locator.dart';
-import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_summary_widget.dart';
@@ -67,32 +58,23 @@ class AccountsPageState extends State<AccountsPage> {
                     builder: (context, value, child) {
                       final expenses = value.allAccount(state.account.key);
                       expenses.sort((a, b) => b.time.compareTo(a.time));
-                      if (expenses.isEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Center(
-                            child: Column(
-                              children: [
-                                const Icon(Icons.money_off_rounded, size: 72),
-                                Text(AppLocalizations.of(context)!
-                                    .emptyExpensesMessage),
-                              ],
-                            ),
-                          ),
-                        );
-                      }
+
                       return ScreenTypeLayout(
                         mobile: ListView(
                           shrinkWrap: true,
                           key: const Key('accounts_list_view'),
                           padding: const EdgeInsets.only(bottom: 124),
                           children: [
-                            AccountPageViewWidget(accounts: accounts),
+                            AccountPageViewWidget(
+                              accounts: accounts,
+                              accountBloc: widget.accountsBloc,
+                            ),
                             AccountSummaryWidget(expenses: expenses),
                             AccountTransactionWidget(
-                                accountLocalDataSource: locator.get(),
-                                categoryLocalDataSource: locator.get(),
-                                expenses: expenses)
+                              accountLocalDataSource: locator.get(),
+                              categoryLocalDataSource: locator.get(),
+                              expenses: expenses,
+                            )
                           ],
                         ),
                         tablet: Row(
@@ -103,6 +85,7 @@ class AccountsPageState extends State<AccountsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   AccountPageViewWidget(
+                                    accountBloc: widget.accountsBloc,
                                     accounts: accounts,
                                   ),
                                   AccountSummaryWidget(expenses: expenses)

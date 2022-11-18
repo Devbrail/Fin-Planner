@@ -17,13 +17,12 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   }) : super(AccountsInitial()) {
     on<AccountsEvent>((event, emit) {});
     on<FetchAccountsEvent>((event, emit) => _fetchAccounts(emit));
-    on<AddOrUpdateAccountEvent>((event, emit) => _addAccount(event, emit));
-    on<DeleteAccountEvent>((event, emit) => _deleteAccount(event, emit));
-    on<AccountSelectedEvent>((event, emit) => _accountSelected(event, emit));
-    on<ClearAccountEvent>((event, emit) => _clearAccount(event, emit));
-    on<UpdateCardTypeEvent>((event, emit) => _updateCardType(event, emit));
-    on<FetchAccountFromIdEvent>(
-        (event, emit) => _fetchAccountFromId(event, emit));
+    on<AddOrUpdateAccountEvent>(_addAccount);
+    on<DeleteAccountEvent>(_deleteAccount);
+    on<AccountSelectedEvent>(_accountSelected);
+    on<ClearAccountEvent>(_clearAccount);
+    on<UpdateCardTypeEvent>(_updateCardType);
+    on<FetchAccountFromIdEvent>(_fetchAccountFromId);
   }
   final AccountUseCase accountUseCase;
   late final box = Hive.box<Account>(BoxType.accounts.stringValue);

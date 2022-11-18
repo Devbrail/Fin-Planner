@@ -5,28 +5,28 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../common/constants/currency.dart';
 import '../../../common/constants/context_extensions.dart';
+import '../../../common/constants/currency.dart';
 import '../../../common/enum/debt_type.dart';
-import '../../widgets/paisa_text_field.dart';
 import '../../../data/debt/models/transaction.dart';
 import '../../../di/service_locator.dart';
 import '../../expense/pages/expense_page.dart';
+import '../../widgets/paisa_text_field.dart';
 import '../cubit/debts_cubit.dart';
 import '../widgets/debt_toggle_buttons_widget.dart';
 
-class DebtAddOrEditPage extends StatefulWidget {
-  const DebtAddOrEditPage({
+class AddOrEditDebtPage extends StatefulWidget {
+  const AddOrEditDebtPage({
     super.key,
     this.debtId,
   });
   final String? debtId;
 
   @override
-  State<DebtAddOrEditPage> createState() => _DebtAddOrEditPageState();
+  State<AddOrEditDebtPage> createState() => _AddOrEditDebtPageState();
 }
 
-class _DebtAddOrEditPageState extends State<DebtAddOrEditPage> {
+class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
   late final bool isUpdate = widget.debtId != null;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late final DebtsBloc debtBloc = locator.get<DebtsBloc>()

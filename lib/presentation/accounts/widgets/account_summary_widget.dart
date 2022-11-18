@@ -72,6 +72,7 @@ class AccountSummaryWidget extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(width: 8),
           Expanded(
             child: PaisaCard(
               color: Theme.of(context).colorScheme.secondaryContainer,

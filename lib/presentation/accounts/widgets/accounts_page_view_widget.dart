@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
@@ -12,10 +11,12 @@ class AccountPageViewWidget extends StatelessWidget {
   AccountPageViewWidget({
     Key? key,
     required this.accounts,
+    required this.accountBloc,
   }) : super(key: key);
 
   final PageController _controller = PageController();
   final List<Account> accounts;
+  final AccountsBloc accountBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,8 @@ class AccountPageViewWidget extends StatelessWidget {
             controller: _controller,
             padEnds: true,
             itemCount: accounts.length,
-            onPageChanged: (index) => BlocProvider.of<AccountsBloc>(context)
-                .add(AccountSelectedEvent(accounts[index])),
+            onPageChanged: (index) =>
+                accountBloc.add(AccountSelectedEvent(accounts[index])),
             itemBuilder: (_, index) {
               final account = accounts[index];
               return AccountCard(
@@ -38,8 +39,7 @@ class AccountPageViewWidget extends StatelessWidget {
                 cardNumber: account.number,
                 bankName: account.bankName,
                 cardType: account.cardType ?? CardType.bank,
-                onDelete: () => BlocProvider.of<AccountsBloc>(context)
-                    .add(DeleteAccountEvent(account)),
+                onDelete: () => accountBloc.add(DeleteAccountEvent(account)),
                 onTap: () => context.goNamed(
                   editAccountPath,
                   params: <String, String>{'aid': account.superId.toString()},
