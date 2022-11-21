@@ -15,7 +15,6 @@ extension ExpenseListMapping on Box<Expense> {
     final list = values
         .where((element) => element.type != TransactionType.income)
         .toList();
-    list.sort((a, b) => a.time.compareTo(b.time));
     return list;
   }
 
