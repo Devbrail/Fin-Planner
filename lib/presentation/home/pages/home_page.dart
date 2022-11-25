@@ -203,6 +203,13 @@ class _LandingPageState extends State<LandingPage>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: 24),
+                              NavigationBarItem(
+                                title: AppLocalizations.of(context)!.addLabel,
+                                icon: MdiIcons.plus,
+                                isSelected: true,
+                                onPressed: () =>
+                                    _handleClick(state.currentPage),
+                              ),
                               GestureDetector(
                                 onTap: () => showModalBottomSheet(
                                   constraints: BoxConstraints(
@@ -240,7 +247,7 @@ class _LandingPageState extends State<LandingPage>
                               const SizedBox(height: 24),
                               NavigationBarItem(
                                 title: AppLocalizations.of(context)!.homeLabel,
-                                icon: Icons.home_outlined,
+                                icon: MdiIcons.home,
                                 isSelected: state.currentPage == PaisaPage.home,
                                 onPressed: () => homeBloc.add(
                                     const CurrentIndexEvent(PaisaPage.home)),
@@ -248,7 +255,7 @@ class _LandingPageState extends State<LandingPage>
                               NavigationBarItem(
                                 title:
                                     AppLocalizations.of(context)!.accountsLabel,
-                                icon: Icons.credit_card,
+                                icon: MdiIcons.creditCard,
                                 isSelected:
                                     state.currentPage == PaisaPage.accounts,
                                 onPressed: () => homeBloc.add(
@@ -268,7 +275,7 @@ class _LandingPageState extends State<LandingPage>
                               NavigationBarItem(
                                 title:
                                     AppLocalizations.of(context)!.budgetLabel,
-                                icon: Icons.account_balance_wallet,
+                                icon: MdiIcons.accountBadgeOutline,
                                 isSelected: state.currentPage ==
                                     PaisaPage.budgetOverview,
                                 onPressed: () => homeBloc.add(
@@ -322,7 +329,7 @@ class NavigationBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = isSelected
-        ? Theme.of(context).colorScheme.onSecondaryContainer
+        ? Theme.of(context).colorScheme.primary
         : Theme.of(context).textTheme.headline6?.color;
     return Padding(
       padding: const EdgeInsets.only(
@@ -331,13 +338,13 @@ class NavigationBarItem extends StatelessWidget {
         left: 8,
       ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(16),
         onTap: onPressed,
         child: Container(
           decoration: isSelected
               ? BoxDecoration(
                   shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(40),
+                  borderRadius: BorderRadius.circular(16),
                   color: Theme.of(context).colorScheme.secondaryContainer,
                 )
               : null,

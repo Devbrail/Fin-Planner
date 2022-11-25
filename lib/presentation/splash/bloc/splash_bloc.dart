@@ -26,8 +26,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
   final service = locator.get<SettingsService>();
   late final settings = Hive.box(BoxType.settings.stringValue);
-  late final accounts = Hive.box<Account>(BoxType.accounts.stringValue);
-  late final categories = Hive.box<Category>(BoxType.category.stringValue);
+  late final accounts = locator.get<Box<Account>>();
+  late final categories = locator.get<Box<Category>>();
 
   FutureOr<void> _checkLogin(
     CheckLoginEvent event,
@@ -41,6 +41,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         bankName: 'Bank name',
         number: '1234',
         cardType: CardType.bank,
+        amount: 0,
       );
       final int id = await accounts.add(account);
       account.superId = id;
@@ -111,6 +112,7 @@ final locales = [
   CountryMap("Swiss Franc", const Locale('fr_CH')),
   CountryMap("Egyptian Pound", const Locale('ar_EG')),
   CountryMap("Brazilian Real", const Locale('pt')),
+  CountryMap("Russian Ruble", const Locale('ru')),
 ];
 
 class CountryMap {

@@ -4,7 +4,7 @@ import '../../../di/service_locator.dart';
 import '../../filter_widget/cubit/filter_cubit.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/context_extensions.dart';
+import '../../../common/context_extensions.dart';
 import '../../filter_widget/filter_budget_widget.dart';
 import '../../goal/widget/color_palette.dart';
 import '../../home/widgets/welcome_widget.dart';
@@ -42,7 +42,7 @@ class _SummaryPageState extends State<SummaryPage> {
         child: ScreenTypeLayout(
           breakpoints: const ScreenBreakpoints(
             tablet: 673,
-            desktop: 1280,
+            desktop: 799,
             watch: 300,
           ),
           mobile: Scaffold(
@@ -168,38 +168,38 @@ class _SummaryPageState extends State<SummaryPage> {
               ),
             ),
           ),
-          desktop: Scaffold(
-            appBar: context.materialYouAppBar(
-              '',
-              actions: [
-                IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-                  onPressed: () {
-                    showSearch(
-                      context: context,
-                      delegate: SearchPage(),
-                    );
-                  },
-                ),
-              ],
-            ),
-            body: SafeArea(
-              child: Row(
+          desktop: Material(
+            child: SafeArea(
+              bottom: false,
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.search,
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                    onPressed: () {
+                      showSearch(
+                        context: context,
+                        delegate: SearchPage(),
+                      );
+                    },
+                  ),
                   Expanded(
-                    child: Column(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
-                        ExpenseTotalWidget(),
+                        Expanded(
+                          child: ExpenseTotalWidget(),
+                        ),
+                        Expanded(
+                          child: SingleChildScrollView(child: ExpenseHistory()),
+                        ),
                       ],
                     ),
-                  ),
-                  const Expanded(
-                    child: SingleChildScrollView(child: ExpenseHistory()),
                   ),
                 ],
               ),

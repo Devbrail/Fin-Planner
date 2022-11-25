@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../../data/expense/model/expense.dart';
-import '../common.dart';
-import '../enum/filter_budget.dart';
-import '../enum/transaction.dart';
+import '../data/expense/model/expense.dart';
+import 'common.dart';
+import 'enum/filter_budget.dart';
+import 'enum/transaction.dart';
 
 extension ExpenseListMapping on Box<Expense> {
   List<Expense> allAccount(int accountId) {
@@ -32,7 +32,7 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
   List<Expense> get incomeList =>
       where((element) => element.type == TransactionType.income).toList();
 
-  String get balance => formattedCurrency(totalIncome - totalExpense);
+  String get balance => (totalIncome - totalExpense).toCurrency();
 
   List<Expense> isFilterTimeBetween(DateTimeRange range) {
     return where((element) => element.time.isAfterBeforeTime(range)).toList();
@@ -59,8 +59,6 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
   double get total => map((e) => e.currency)
       .fold<double>(0, (previousValue, element) => previousValue + element);
 
-  String get totalWithCurrencySymbol => formattedCurrency(total);
-
   double get thisMonthExpense =>
       where((element) => element.type == TransactionType.expense)
           .where((element) => element.time.month == DateTime.now().month)
@@ -79,4 +77,7 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
         .entries
         .toList();
   }
+
+  double expensesByAccount(int accountId) =>
+      where((element) => element.accountId == accountId).filterTotal;
 }

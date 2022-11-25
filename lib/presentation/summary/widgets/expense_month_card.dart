@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../di/service_locator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../common/constants/currency.dart';
+import '../../../common/currency_util.dart';
 import '../../../common/theme/custom_color.dart';
 import '../../widgets/paisa_card.dart';
 import '../../../data/expense/model/expense.dart';
@@ -35,7 +35,7 @@ class ExpenseMonthCardWidget extends StatelessWidget {
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
           trailing: Text(
-            formattedCurrency(total),
+            total.toCurrency(),
             style: GoogleFonts.manrope(
               textStyle: Theme.of(context).textTheme.subtitle2?.copyWith(
                     color: total.isNegative

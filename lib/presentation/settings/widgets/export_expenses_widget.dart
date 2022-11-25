@@ -82,7 +82,7 @@ List<String> expenseRow(
     '${expense.currency}',
     expense.time.toIso8601String(),
     category.name,
-    category.description,
+    category.description ?? '',
     account.name,
     account.bankName,
     account.cardType!.name,

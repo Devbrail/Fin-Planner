@@ -1,3 +1,4 @@
+import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:hive/hive.dart';
 
 import '../../../common/enum/box_types.dart';
@@ -17,7 +18,7 @@ class CategoryLocalDataSourceImpl implements CategoryLocalDataSource {
 
   @override
   Future<void> deleteCategory(int key) async {
-    final expenseBox = Hive.box<Expense>('expense');
+    final expenseBox = locator.get<Box<Expense>>();
     final values = expenseBox.values.toList();
     final keys = values
         .where((element) => element.categoryId == key)
@@ -42,6 +43,7 @@ class CategoryLocalDataSourceImpl implements CategoryLocalDataSource {
   @override
   Future<Category?> fetchCategoryFromId(int categoryId) async =>
       categoryBox.get(categoryId);
+
   @override
   Future<Iterable<Category>> exportData() async => categoryBox.values;
 }

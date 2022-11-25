@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/context_extensions.dart';
+import '../../../common/context_extensions.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_card.dart';
@@ -36,6 +36,8 @@ class AddAccountPageState extends State<AddAccountPage> {
     ..addListener(_updated);
   late TextEditingController accountNameController = TextEditingController()
     ..addListener(_updated);
+  late TextEditingController accountInitialAmountController =
+      TextEditingController()..addListener(_updated);
 
   bool get isAccountAddOrUpdate => widget.accountId == null;
 
@@ -93,6 +95,11 @@ class AddAccountPageState extends State<AddAccountPage> {
             accountHolderController.text = state.account.name;
             accountHolderController.selection =
                 TextSelection.collapsed(offset: state.account.name.length);
+
+            accountInitialAmountController.text =
+                state.account.amount.toString();
+            accountInitialAmountController.selection = TextSelection.collapsed(
+                offset: state.account.amount.toString().length);
           } else if (state is UpdateCardTypeState) {
             accountsBloc.selectedType = state.cardType;
           }
@@ -157,9 +164,14 @@ class AddAccountPageState extends State<AddAccountPage> {
                               controller: accountNameController,
                             ),
                             const SizedBox(height: 16),
+                            AccountInitialAmountWidget(
+                              controller: accountInitialAmountController,
+                            ),
+                            const SizedBox(height: 16),
                             AccountNumberWidget(
                               controller: accountNumberController,
                             ),
+                            const SizedBox(height: 16),
                           ],
                         ),
                       ),
@@ -225,64 +237,57 @@ class AddAccountPageState extends State<AddAccountPage> {
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 32),
-                        child: Column(
-                          children: [
-                            Form(
-                              key: _form,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    CardTypeButtons(
-                                      onSelected: (cardType) {
-                                        accountsBloc.selectedType = cardType;
-                                      },
-                                      selectedCardType:
-                                          accountsBloc.selectedType,
-                                    ),
-                                    const SizedBox(height: 16),
-                                    AccountCardHolderNameWidget(
-                                      controller: accountHolderController,
-                                    ),
-                                    const SizedBox(height: 16),
-                                    AccountNameWidget(
-                                      controller: accountNameController,
-                                    ),
-                                    const SizedBox(height: 16),
-                                    AccountNumberWidget(
-                                      controller: accountNumberController,
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: _addOrUpdateAccount,
-                                      style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.all(24),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(32.0),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .addCardLabel,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: Theme.of(context)
-                                              .textTheme
-                                              .headline6
-                                              ?.fontSize,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                      child: Form(
+                        key: _form,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              CardTypeButtons(
+                                onSelected: (cardType) {
+                                  accountsBloc.selectedType = cardType;
+                                },
+                                selectedCardType: accountsBloc.selectedType,
+                              ),
+                              const SizedBox(height: 16),
+                              AccountCardHolderNameWidget(
+                                controller: accountHolderController,
+                              ),
+                              const SizedBox(height: 16),
+                              AccountNameWidget(
+                                controller: accountNameController,
+                              ),
+                              const SizedBox(height: 16),
+                              AccountInitialAmountWidget(
+                                controller: accountInitialAmountController,
+                              ),
+                              const SizedBox(height: 16),
+                              AccountNumberWidget(
+                                controller: accountNumberController,
+                              ),
+                              const SizedBox(height: 16),
+                              ElevatedButton(
+                                onPressed: _addOrUpdateAccount,
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.all(24),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(32.0),
+                                  ),
+                                ),
+                                child: Text(
+                                  AppLocalizations.of(context)!.addCardLabel,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: Theme.of(context)
+                                        .textTheme
+                                        .headline6
+                                        ?.fontSize,
+                                  ),
                                 ),
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -368,7 +373,8 @@ class AccountCardHolderNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: AppLocalizations.of(context)!.cardHolderLabel,
+      label: AppLocalizations.of(context)!.cardHolderLabel,
+      hintText: AppLocalizations.of(context)!.enterCardHolderNameLabel,
       keyboardType: TextInputType.name,
       onChanged: (value) =>
           BlocProvider.of<AccountsBloc>(context).accountHolderName = value,
@@ -385,7 +391,8 @@ class AccountNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: AppLocalizations.of(context)!.accountNameLabel,
+      label: AppLocalizations.of(context)!.accountNameLabel,
+      hintText: AppLocalizations.of(context)!.enterAccountNameLabel,
       keyboardType: TextInputType.name,
       onChanged: (value) =>
           BlocProvider.of<AccountsBloc>(context).accountName = value,
@@ -403,10 +410,31 @@ class AccountNumberWidget extends StatelessWidget {
     return PaisaTextFormField(
       maxLength: 4,
       controller: controller,
-      hintText: AppLocalizations.of(context)!.lastFourDigitLabel,
+      label: AppLocalizations.of(context)!.lastFourDigitLabel,
+      hintText: AppLocalizations.of(context)!.enterNumberOptionalLabel,
       keyboardType: TextInputType.number,
       onChanged: (value) =>
           BlocProvider.of<AccountsBloc>(context).accountNumber = value,
+    );
+  }
+}
+
+class AccountInitialAmountWidget extends StatelessWidget {
+  final TextEditingController controller;
+
+  const AccountInitialAmountWidget({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return PaisaTextFormField(
+      controller: controller,
+      hintText: AppLocalizations.of(context)!.enterAmountLabel,
+      label: AppLocalizations.of(context)!.initialAmountLabel,
+      keyboardType: TextInputType.number,
+      onChanged: (value) {
+        double? amount = double.tryParse(value);
+        BlocProvider.of<AccountsBloc>(context).initialAmount = amount;
+      },
     );
   }
 }

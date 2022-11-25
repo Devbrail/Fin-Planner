@@ -21,6 +21,7 @@ class AccountRepositoryImpl extends AccountRepository {
     required String holderName,
     required String number,
     required CardType cardType,
+    required double amount,
   }) async {
     await dataSource.addAccount(Account(
       name: holderName,
@@ -28,6 +29,7 @@ class AccountRepositoryImpl extends AccountRepository {
       bankName: bankName,
       number: number,
       cardType: cardType,
+      amount: amount,
     ));
   }
 

@@ -1,20 +1,24 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../data/accounts/model/account.dart';
-import '../../../data/category/model/category.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../common/enum/transaction.dart';
+import '../../../data/accounts/model/account.dart';
+import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
+import '../../../domain/account/use_case/account_use_case.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
 
 part 'expense_event.dart';
 part 'expense_state.dart';
 
 class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
-  ExpenseBloc(this.expenseUseCase) : super(ExpenseInitial()) {
+  ExpenseBloc({
+    required this.expenseUseCase,
+    required this.accountUseCase,
+  }) : super(ExpenseInitial()) {
     on<ExpenseEvent>((event, emit) {});
     on<AddOrUpdateExpenseEvent>(_addExpense);
     on<ClearExpenseEvent>(_clearExpense);
@@ -25,13 +29,14 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   }
 
   final ExpenseUseCase expenseUseCase;
+  final AccountUseCase accountUseCase;
   String? expenseName;
   double? expenseAmount;
   int? selectedCategoryId;
   int? selectedAccountId;
   Expense? currentExpense;
   late DateTime? selectedDate = DateTime.now();
-  late TransactionType selectedType = TransactionType.expense;
+  late TransactionType transactionType = TransactionType.expense;
 
   Future<void> _fetchExpenseFromId(
     FetchExpenseFromIdEvent event,
@@ -47,7 +52,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       selectedCategoryId = expense.categoryId;
       selectedAccountId = expense.accountId;
       selectedDate = expense.time;
-      selectedType = expense.type ?? TransactionType.expense;
+      transactionType = expense.type ?? TransactionType.expense;
       currentExpense = expense;
       emit(ExpenseSuccessState(expense));
     }
@@ -79,6 +84,18 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     if (dateTime == null) {
       return emit(const ExpenseErrorState('Select time'));
     }
+
+    final account = await accountUseCase.fetchAccountFromId(accountId);
+    if (account != null) {
+      double finalAmount;
+      if (transactionType == TransactionType.income) {
+        finalAmount = (validAmount + account.amount!);
+      } else {
+        finalAmount = (account.amount! - validAmount);
+      }
+      account.amount = finalAmount;
+      await account.save();
+    }
     if (event.isAdding) {
       await expenseUseCase.addExpense(
         name,
@@ -86,7 +103,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         dateTime,
         categoryId,
         accountId,
-        selectedType,
+        transactionType,
       );
     } else {
       if (currentExpense != null) {
@@ -96,7 +113,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
           ..currency = validAmount
           ..name = name
           ..time = dateTime
-          ..type = selectedType;
+          ..type = transactionType;
 
         await currentExpense!.save();
       }
@@ -108,10 +125,18 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     ClearExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) async {
-    final int? expenseId = int.tryParse(event.expenseId);
-    if (expenseId == null) return;
-    await expenseUseCase.clearExpense(expenseId);
-    emit(ExpenseDeletedState());
+    if (currentExpense != null) {
+      final account =
+          await accountUseCase.fetchAccountFromId(currentExpense!.accountId);
+      if (account != null) {
+        account.amount = (currentExpense!.currency + account.amount!);
+        await account.save();
+      }
+      await expenseUseCase.clearExpense(currentExpense!.key);
+      emit(ExpenseDeletedState());
+    } else {
+      emit(const ExpenseErrorState('Error deleting expense'));
+    }
   }
 
   void _changeExpense(ChangeExpenseEvent event, Emitter<ExpenseState> emit) {

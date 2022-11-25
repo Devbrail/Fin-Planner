@@ -4,7 +4,6 @@ import '../../../data/expense/model/expense.dart';
 
 abstract class ExpenseRepository {
   Future<Map<String, List<Expense>>> expenses(bool isRefresh);
-  Future<String> totalExpenses(TransactionType type);
   Future<String> filterExpensesTotal(FilterDays filterDays);
   Future<void> addExpense(
     String name,

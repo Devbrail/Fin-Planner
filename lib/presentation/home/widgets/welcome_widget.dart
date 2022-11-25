@@ -58,11 +58,11 @@ class WelcomeWidget extends StatelessWidget {
             builder: (context) {
               if (image.isEmpty) {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: CircleAvatar(
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     child: Icon(
-                      Icons.account_circle_outlined,
+                      Icons.account_circle,
                       color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),

@@ -32,6 +32,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   String? accountHolderName;
   String? accountNumber;
   Account? currentAccount;
+  double? initialAmount;
 
   Future<void> _fetchAccounts(Emitter<AccountsState> emit) async {
     final accounts = await accountUseCase.accounts();
@@ -47,12 +48,13 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
     final Account? account = await accountUseCase.fetchAccountFromId(accountId);
     if (account != null) {
-      emit(AccountSuccessState(account));
       accountName = account.bankName;
       accountHolderName = account.name;
       accountNumber = account.number;
       selectedType = account.cardType ?? CardType.bank;
+      initialAmount = account.amount;
       currentAccount = account;
+      emit(AccountSuccessState(account));
     } else {
       emit(const AccountErrorState('Account not found!'));
     }
@@ -66,6 +68,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final String? holderName = accountHolderName;
     final String? number = accountNumber;
     final CardType cardType = selectedType;
+    final double? amount = initialAmount;
 
     if (bankName == null) {
       return emit(const AccountErrorState('Set bank name'));
@@ -80,6 +83,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
         holderName: holderName,
         number: number ?? '',
         cardType: cardType,
+        amount: amount ?? 0,
       );
     } else {
       if (currentAccount != null) {
@@ -89,7 +93,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
           ..icon = cardType.icon.codePoint
           ..name = holderName
           ..number = number ?? ''
-          ..cardType = cardType;
+          ..amount = amount;
 
         await currentAccount!.save();
       }

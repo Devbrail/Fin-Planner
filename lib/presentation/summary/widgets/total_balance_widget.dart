@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../common/constants/currency.dart';
+import '../../../common/currency_util.dart';
 
 class TotalBalanceWidget extends StatelessWidget {
   const TotalBalanceWidget({
@@ -28,7 +28,7 @@ class TotalBalanceWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          formattedCurrency(amount),
+          amount.toCurrency(),
           style: GoogleFonts.manrope(
             textStyle: Theme.of(context).textTheme.headline4?.copyWith(
                   color: Theme.of(context).colorScheme.onPrimaryContainer,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../enum/filter_budget.dart';
+import 'enum/filter_budget.dart';
 
 extension DateUtils on DateTime {
   bool get isToday {

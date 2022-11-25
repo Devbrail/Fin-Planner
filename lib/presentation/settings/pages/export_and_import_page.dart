@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../common/constants/context_extensions.dart';
+import '../../../common/context_extensions.dart';
 import '../../../data/settings/file_handler.dart';
 import '../../../di/service_locator.dart';
 import '../widgets/settings_group_card.dart';

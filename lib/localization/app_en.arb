@@ -115,9 +115,9 @@
     "@creditCardLabel": {
         "description": "Credit Card label"
     },
-    "cardHolderLabel": "Card holder name",
+    "cardHolderLabel": "Cardholder name",
     "@cardHolderLabel": {
-        "description": "Card holder name label"
+        "description": "Cardholder name label"
     },
     "accountNameLabel": "Account name",
     "@accountNameLabel": {
@@ -235,6 +235,10 @@
     "@amountLabel": {
         "description": "Amount label"
     },
+    "initialAmountLabel": "Initial amount",
+    "@initialAmountLabel": {
+        "description": "Initial amount label"
+    },
     "validAmountLabel": "Enter valid amount",
     "@validAmountLabel": {
         "description": "Enter valid amount label"
@@ -334,6 +338,10 @@
     },
     "pickColorLabel": "Pick color",
     "@pickColorLabel": {
+        "description": "Pick color label"
+    },
+    "pickColorDescLabel": "Set color to your category",
+    "@pickColorDescLabel": {
         "description": "Pick color label"
     },
     "colorsLabel": "Colors",
@@ -591,5 +599,21 @@
     "emptyCreditDescLabel": "Looks like you have no credits, add them it will show here ",
     "@emptyCreditDescLabel": {
         "description": "Looks like you have no credits label"
+    },
+    "enterInitialAmountLabel": "Enter initial amount",
+    "@enterInitialAmountLabel": {
+        "description": "Enter initial amount label"
+    },
+    "enterNumberOptionalLabel": "Enter last 4 digit (optional)",
+    "@enterNumberOptionalLabel": {
+        "description": "Optional number"
+    },
+    "enterAccountNameLabel": "Enter account name",
+    "@enterAccountNameLabel": {
+        "description": "Enter account name label"
+    },
+    "enterCardHolderNameLabel": "'Enter cardholder name'",
+    "@enterCardHolderNameLabel": {
+        "description": "Enter account name label"
     }
 }

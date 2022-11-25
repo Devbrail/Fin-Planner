@@ -130,7 +130,7 @@ class BudgetItemMobileWidget extends StatelessWidget {
                     right: 16,
                   ),
                   child: Text(
-                    ' ${formattedCurrency(difference)}',
+                    ' ${difference.toCurrency()}',
                     style: GoogleFonts.manrope(
                       textStyle: Theme.of(context)
                           .textTheme

@@ -8,6 +8,7 @@ abstract class AccountRepository {
     required String holderName,
     required String number,
     required CardType cardType,
+    required double amount,
   });
   Future<void> deleteAccount(int key);
 

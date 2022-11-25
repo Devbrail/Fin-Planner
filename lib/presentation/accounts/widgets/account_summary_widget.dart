@@ -41,7 +41,7 @@ class AccountSummaryWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      formattedCurrency(expenses.totalIncome, decimalDigits: 0),
+                      expenses.totalIncome.toCurrency(decimalDigits: 0),
                       style: GoogleFonts.manrope(
                         textStyle: Theme.of(context)
                             .textTheme
@@ -92,8 +92,7 @@ class AccountSummaryWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      formattedCurrency(expenses.totalExpense,
-                          decimalDigits: 0),
+                      expenses.totalExpense.toCurrency(decimalDigits: 0),
                       style: GoogleFonts.manrope(
                         textStyle: Theme.of(context)
                             .textTheme

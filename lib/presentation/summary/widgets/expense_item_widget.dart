@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/constants/currency.dart';
+import '../../../common/currency_util.dart';
 import '../../../common/enum/card_type.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../data/accounts/model/account.dart';
@@ -78,7 +78,7 @@ class _ExpenseItemWidgetState extends State<ExpenseItemWidget> {
         subtitle: Text(
             '${widget.account.cardType?.name} • ${widget.account.bankName}'),
         trailing: Text(
-          '$_typeSign${formattedCurrency(widget.expense.currency)}',
+          '$_typeSign${widget.expense.currency.toCurrency()}',
           style: GoogleFonts.manrope(
             textStyle: TextStyle(
               fontSize: Theme.of(context).textTheme.subtitle1?.fontSize,

@@ -106,11 +106,14 @@ class SelectedItem extends StatelessWidget {
             itemCount: accounts.length + 1,
             itemBuilder: (_, index) {
               if (index == accounts.length) {
-                return ItemWidget(
-                  isSelected: false,
-                  title: 'Add New',
-                  icon: MdiIcons.plus.codePoint,
-                  onPressed: () => context.pushNamed(addCategoryPath),
+                return Hero(
+                  tag: 'account',
+                  child: ItemWidget(
+                    isSelected: false,
+                    title: 'Add New',
+                    icon: MdiIcons.plus.codePoint,
+                    onPressed: () => context.pushNamed(addAccountPath),
+                  ),
                 );
               }
 

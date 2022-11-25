@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../common/enum/box_types.dart';
 import '../common/enum/card_type.dart';
@@ -106,8 +108,9 @@ Future<void> _setupHive() async {
 void _localSources() {
   locator.registerLazySingleton<ExpenseManagerLocalDataSource>(
       () => ExpenseManagerLocalDataSourceImpl());
-  locator.registerLazySingleton<CategoryLocalDataSource>(
-      () => CategoryLocalDataSourceImpl());
+  locator.registerLazySingleton<CategoryLocalDataSource>(() {
+    return CategoryLocalDataSourceImpl();
+  });
   locator.registerLazySingleton<AccountLocalDataSource>(
       () => AccountLocalDataSourceImpl());
   locator.registerLazySingleton<DebtLocalDataSource>(
@@ -158,7 +161,10 @@ void _setupUseCase() {
 void _setupBloc() {
   locator.registerFactory(() => SplashBloc());
   locator.registerFactory(() => CategoryBloc(categoryUseCase: locator.get()));
-  locator.registerFactory(() => ExpenseBloc(locator.get()));
+  locator.registerFactory(() => ExpenseBloc(
+        accountUseCase: locator.get(),
+        expenseUseCase: locator.get(),
+      ));
   locator.registerFactory(() => AccountsBloc(accountUseCase: locator.get()));
   locator.registerFactory(() => HomeBloc());
   locator.registerFactory(() => DebtsBloc(useCase: locator.get()));

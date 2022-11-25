@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/category_bloc.dart';
 
 class ColorPickerWidget extends StatelessWidget {
@@ -21,8 +22,9 @@ class ColorPickerWidget extends StatelessWidget {
           color = state.category.icon;
         }
         return ListTile(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           onTap: () {
-            showColorPicker(context).then((color) {
+            showColorPicker(context, defaultColor: Colors.red).then((color) {
               if (color != null) {
                 BlocProvider.of<CategoryBloc>(context)
                     .add(CategoryColorSelectedEvent(color.value));
@@ -33,8 +35,8 @@ class ColorPickerWidget extends StatelessWidget {
             Icons.color_lens,
             color: Theme.of(context).colorScheme.primary,
           ),
-          title: Text('Color picker'),
-          subtitle: Text('set colour to your category'),
+          title: Text(AppLocalizations.of(context)!.pickColorLabel),
+          subtitle: Text(AppLocalizations.of(context)!.pickColorDescLabel),
           trailing: Container(
             width: 32,
             height: 32,

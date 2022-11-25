@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/constants/currency.dart';
+import '../../../common/common.dart';
 import '../../widgets/paisa_card.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
@@ -66,7 +66,7 @@ class BudgetItemTableWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Text(
-                totalExpenseWithSymbol(expenses),
+                expenses.total.toCurrency(),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,

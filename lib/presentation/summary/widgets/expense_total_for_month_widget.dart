@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../common/constants/currency.dart';
+import '../../../common/currency_util.dart';
 import '../../../common/theme/custom_color.dart';
 
 class ExpenseTotalForMonthWidget extends StatelessWidget {
@@ -57,7 +57,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '+${formattedCurrency(income)}',
+                    '+${income.toCurrency()}',
                     style: GoogleFonts.manrope(
                       textStyle:
                           Theme.of(context).textTheme.headline6?.copyWith(
@@ -95,7 +95,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '-${formattedCurrency(outcome)}',
+                    '-${outcome.toCurrency()}',
                     style: GoogleFonts.manrope(
                       textStyle:
                           Theme.of(context).textTheme.headline6?.copyWith(

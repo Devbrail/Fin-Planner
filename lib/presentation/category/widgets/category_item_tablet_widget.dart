@@ -68,7 +68,7 @@ class CategoryItemTabletWidget extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    category.description,
+                    category.description == null ? '' : category.description!,
                     style: Theme.of(context).textTheme.caption?.copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                         ),

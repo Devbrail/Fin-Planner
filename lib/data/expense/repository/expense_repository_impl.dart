@@ -1,8 +1,8 @@
 import 'package:intl/intl.dart';
 
-import '../../../common/constants/currency.dart';
-import '../../../common/constants/list_util.dart';
-import '../../../common/constants/time_extension.dart';
+import '../../../common/currency_util.dart';
+import '../../../common/list_util.dart';
+import '../../../common/time_extension.dart';
 import '../../../common/enum/filter_days.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../domain/expense/repository/expense_repository.dart';
@@ -66,7 +66,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
         })
         .map((e) => e.currency)
         .fold<double>(0, (previousValue, element) => previousValue + element);
-    return formattedCurrency(total);
+    return total.toCurrency();
   }
 
   String _readableMonth(DateTime time) {
@@ -76,16 +76,6 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   @override
   Future<void> clearExpense(int expenseId) async {
     await dataSource.clearExpense(expenseId);
-  }
-
-  @override
-  Future<String> totalExpenses(TransactionType type) async {
-    final List<Expense> expenses = await fetchAndCache();
-    final total = expenses
-        .where((element) => element.type == type)
-        .map((e) => e.currency)
-        .fold<double>(0, (previousValue, element) => previousValue + element);
-    return formattedCurrency(total);
   }
 
   Future<List<Expense>> fetchAndCache({bool isRefresh = false}) async {

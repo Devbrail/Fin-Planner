@@ -70,163 +70,168 @@ class _AccountCardState extends State<AccountCard>
         desktop: 700,
         watch: 300,
       ),
-      mobile: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Stack(
-          children: [
-            SlideTransition(
-              position: _positionAnimation,
-              child: GradientCircle(
-                width: 100,
-                height: 100,
-                colo1: Theme.of(context).colorScheme.primary,
-                color2: Theme.of(context).colorScheme.tertiary,
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: ScaleTransition(
-                scale: _scaleAnimation,
+      mobile: Hero(
+        tag: 'account',
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            children: [
+              SlideTransition(
+                position: _positionAnimation,
                 child: GradientCircle(
-                  width: 200,
-                  height: 200,
-                  colo1: Theme.of(context).colorScheme.secondary,
-                  color2: Theme.of(context).colorScheme.primaryContainer,
+                  width: 100,
+                  height: 100,
+                  colo1: Theme.of(context).colorScheme.primaryContainer,
+                  color2: Theme.of(context).colorScheme.primary,
                 ),
               ),
-            ),
-            GestureDetector(
-              onTap: widget.onTap,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GlassmorphicContainer(
-                  height: 220,
-                  width: MediaQuery.of(context).size.width,
-                  borderRadius: 16,
-                  blur: 10,
-                  alignment: Alignment.bottomCenter,
-                  border: 2,
-                  linearGradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Theme.of(context)
-                          .textTheme
-                          .subtitle1!
-                          .color!
-                          .withOpacity(0.1),
-                      Theme.of(context)
-                          .textTheme
-                          .subtitle1!
-                          .color!
-                          .withOpacity(0.05),
-                    ],
-                    stops: const [0.1, 1],
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: ScaleTransition(
+                  scale: _scaleAnimation,
+                  child: GradientCircle(
+                    width: 200,
+                    height: 200,
+                    colo1: Theme.of(context).colorScheme.tertiary,
+                    color2: Theme.of(context).colorScheme.tertiaryContainer,
                   ),
-                  borderGradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Theme.of(context)
-                          .textTheme
-                          .subtitle1!
-                          .color!
-                          .withOpacity(0.5),
-                      Theme.of(context)
-                          .textTheme
-                          .subtitle1!
-                          .color!
-                          .withOpacity(0.5),
-                    ],
-                  ),
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  widget.bankName.toUpperCase(),
-                                  style: Theme.of(context).textTheme.subtitle1,
-                                ),
-                                Icon(widget.cardType.icon),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 16.0),
-                              child: RichText(
-                                text: TextSpan(
-                                  text: '**** ',
-                                  style: GoogleFonts.jetBrainsMono(
-                                    textStyle:
-                                        Theme.of(context).textTheme.headline5,
+                ),
+              ),
+              GestureDetector(
+                onTap: widget.onTap,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GlassmorphicContainer(
+                    height: 220,
+                    width: MediaQuery.of(context).size.width,
+                    borderRadius: 24,
+                    blur: 10,
+                    alignment: Alignment.bottomCenter,
+                    border: 2,
+                    linearGradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .color!
+                            .withOpacity(0.1),
+                        Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .color!
+                            .withOpacity(0.05),
+                      ],
+                      stops: const [0.1, 1],
+                    ),
+                    borderGradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .color!
+                            .withOpacity(0.5),
+                        Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .color!
+                            .withOpacity(0.5),
+                      ],
+                    ),
+                    child: Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    widget.bankName.toUpperCase(),
+                                    style:
+                                        Theme.of(context).textTheme.subtitle1,
                                   ),
-                                  children: [
-                                    const TextSpan(text: '**** '),
-                                    const TextSpan(text: '**** '),
-                                    TextSpan(
-                                        text: widget.cardNumber.isEmpty
-                                            ? '----'
-                                            : widget.cardNumber)
-                                  ],
-                                ),
+                                  Icon(widget.cardType.icon),
+                                ],
                               ),
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .cardholderLabel
-                                            .toUpperCase(),
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .color!
-                                                .withOpacity(0.5),
-                                            fontSize: 9,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        widget.cardHolder.toUpperCase(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      )
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: '**** ',
+                                    style: GoogleFonts.jetBrainsMono(
+                                      textStyle:
+                                          Theme.of(context).textTheme.headline5,
+                                    ),
+                                    children: [
+                                      const TextSpan(text: '**** '),
+                                      const TextSpan(text: '**** '),
+                                      TextSpan(
+                                          text: widget.cardNumber.isEmpty
+                                              ? '----'
+                                              : widget.cardNumber)
                                     ],
                                   ),
                                 ),
-                                widget.onDelete != null
-                                    ? IconButton(
-                                        onPressed: widget.onDelete,
-                                        icon: const Icon(Icons.delete),
-                                      )
-                                    : const SizedBox.shrink(),
-                              ],
-                            ),
-                          ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .cardholderLabel
+                                              .toUpperCase(),
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle1!
+                                                  .color!
+                                                  .withOpacity(0.5),
+                                              fontSize: 9,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          widget.cardHolder.toUpperCase(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  widget.onDelete != null
+                                      ? IconButton(
+                                          onPressed: widget.onDelete,
+                                          icon: const Icon(Icons.delete),
+                                        )
+                                      : const SizedBox.shrink(),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       tablet: Stack(

@@ -6,7 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/constants/currency.dart';
+import '../../../common/currency_util.dart';
 import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../../../data/debt/models/debt.dart';
@@ -58,7 +58,7 @@ class DebtItemWidget extends StatelessWidget {
                       ),
                     ),
                     trailing: Text(
-                      formattedCurrency(debt.amount - amount),
+                      (debt.amount - amount).toCurrency(),
                       style: Theme.of(context).textTheme.headline6?.copyWith(
                             color: Theme.of(context).colorScheme.error,
                           ),

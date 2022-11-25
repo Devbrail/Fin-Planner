@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
@@ -70,7 +71,13 @@ class AccountTransactionWidget extends StatelessWidget {
           ),
         ],
       ),
-      tablet: Column(
+      tablet: ListView(
+        padding: const EdgeInsets.only(
+          bottom: 128,
+          left: 8,
+          right: 8,
+        ),
+        shrinkWrap: true,
         children: [
           ListTile(
             contentPadding: const EdgeInsets.symmetric(horizontal: 16),
@@ -82,23 +89,21 @@ class AccountTransactionWidget extends StatelessWidget {
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: PaisaCard(
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                itemCount: expenses.length,
-                itemBuilder: (_, index) {
-                  return ExpenseItemWidget(
-                    expense: expenses[index],
-                    account: accountLocalDataSource
-                        .fetchAccount(expenses[index].accountId),
-                    category: categoryLocalDataSource
-                        .fetchCategory(expenses[index].categoryId),
-                  );
-                },
-              ),
+          PaisaCard(
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: expenses.length,
+              itemBuilder: (_, index) {
+                return ExpenseItemWidget(
+                  expense: expenses[index],
+                  account: accountLocalDataSource
+                      .fetchAccount(expenses[index].accountId),
+                  category: categoryLocalDataSource
+                      .fetchCategory(expenses[index].categoryId),
+                );
+              },
             ),
           ),
         ],

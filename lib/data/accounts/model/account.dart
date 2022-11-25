@@ -25,12 +25,16 @@ class Account extends HiveObject with EquatableMixin {
   @HiveField(7, defaultValue: 0)
   int? superId;
 
+  @HiveField(8, defaultValue: 0)
+  double? amount;
+
   Account({
     required this.name,
     required this.icon,
     required this.bankName,
     required this.number,
     required this.cardType,
+    required this.amount,
   });
 
   @override
@@ -43,13 +47,15 @@ class Account extends HiveObject with EquatableMixin {
         'number': number,
         'cardType': cardType?.name,
         'superId': superId,
+        'amount': amount,
       };
 
   factory Account.fromJson(Map<String, dynamic> json) => Account(
-        name: json["name"],
-        bankName: json["bankName"],
-        icon: json["icon"],
-        number: json["number"],
-        cardType: (json["cardType"] as String).type,
-      )..superId = json["superId"];
+      name: json["name"],
+      bankName: json["bankName"],
+      icon: json["icon"],
+      number: json["number"],
+      cardType: (json["cardType"] as String).type,
+      amount: json["amount"])
+    ..superId = json["superId"];
 }

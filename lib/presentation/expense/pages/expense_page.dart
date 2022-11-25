@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/context_extensions.dart';
+import '../../../common/context_extensions.dart';
 import '../../../common/enum/transaction.dart';
 import '../../../di/service_locator.dart';
 import '../../widgets/paisa_text_field.dart';
@@ -55,7 +55,7 @@ class _ExpensePageState extends State<ExpensePage> {
         listener: (context, state) {
           if (state is ExpenseDeletedState) {
             context.showMaterialSnackBar(
-              expenseBloc.selectedType == TransactionType.expense
+              expenseBloc.transactionType == TransactionType.expense
                   ? AppLocalizations.of(context)!.expenseDeletedSuccessfulLabel
                   : AppLocalizations.of(context)!.incomeDeletedSuccessfulLabel,
               backgroundColor: Theme.of(context).colorScheme.error,
@@ -63,7 +63,8 @@ class _ExpensePageState extends State<ExpensePage> {
             );
             context.pop();
           } else if (state is ExpenseAdded) {
-            final content = expenseBloc.selectedType == TransactionType.expense
+            final content = expenseBloc.transactionType ==
+                    TransactionType.expense
                 ? state.isAddOrUpdate
                     ? AppLocalizations.of(context)!.expenseAddedSuccessfulLabel
                     : AppLocalizations.of(context)!.expenseUpdateSuccessfulLabel
@@ -123,10 +124,10 @@ class _ExpensePageState extends State<ExpensePage> {
                   children: [
                     TransactionToggleButtons(
                       onSelected: (type) {
-                        expenseBloc.selectedType = type;
+                        expenseBloc.transactionType = type;
                         expenseBloc.add(ChangeExpenseEvent(type));
                       },
-                      selectedType: expenseBloc.selectedType,
+                      selectedType: expenseBloc.transactionType,
                     ),
                     const SizedBox(height: 16),
                     Padding(
@@ -192,10 +193,10 @@ class _ExpensePageState extends State<ExpensePage> {
                 actions: [
                   TransactionToggleButtons(
                     onSelected: (type) {
-                      expenseBloc.selectedType = type;
+                      expenseBloc.transactionType = type;
                       expenseBloc.add(ChangeExpenseEvent(type));
                     },
-                    selectedType: expenseBloc.selectedType,
+                    selectedType: expenseBloc.transactionType,
                   ),
                   isAddExpense
                       ? const SizedBox.shrink()

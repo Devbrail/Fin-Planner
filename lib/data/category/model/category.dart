@@ -9,7 +9,7 @@ class Category extends HiveObject with EquatableMixin {
   String name;
 
   @HiveField(1)
-  String description;
+  String? description;
 
   @HiveField(2)
   int icon;
@@ -26,13 +26,17 @@ class Category extends HiveObject with EquatableMixin {
   @HiveField(8, defaultValue: 0xFFFFC107)
   int? color;
 
+  @HiveField(9, defaultValue: false)
+  bool? isDefault;
+
   Category({
-    required this.description,
+    required this.icon,
     required this.name,
     required this.color,
+    this.description,
     this.isBudget = false,
-    this.icon = -1,
     this.budget = -1,
+    this.isDefault = false,
   });
 
   @override

@@ -7,7 +7,7 @@
         {
             "name": "Paisa - Dev",
             "request": "launch",
-            "type": "dart", 
+            "type": "dart",
             "args": [
                 "--flavor",
                 "dev",
@@ -16,23 +16,21 @@
         {
             "name": "Paisa - Prod",
             "request": "launch",
-            "type": "dart", 
+            "type": "dart",
             "args": [
                 "--flavor",
                 "prod",
             ]
         },
         {
-            "name": "flutter_expense (profile mode)",
+            "name": "Paisa - Dev (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
-        }
-        , {
-            "name": "flutter_expense (Release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
+            "flutterMode": "profile",
+            "args": [
+                "--flavor",
+                "dev",
+            ]
+        },
     ]
 }

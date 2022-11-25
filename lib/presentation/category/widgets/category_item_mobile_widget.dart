@@ -40,17 +40,19 @@ class CategoryItemMobileWidget extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
         ),
-        subtitle: Text(
-          category.description,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurfaceVariant
-                    .withOpacity(0.75),
+        subtitle: category.description == null
+            ? null
+            : Text(
+                category.description!,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurfaceVariant
+                          .withOpacity(0.75),
+                    ),
               ),
-        ),
         trailing: IconButton(
           onPressed: () {
             onPressed(category);

@@ -15,12 +15,14 @@ class AccountUseCase {
     required String holderName,
     required String number,
     required CardType cardType,
+    required double amount,
   }) async {
     await repository.addAccount(
       bankName: bankName,
       holderName: holderName,
       number: number,
       cardType: cardType,
+      amount: amount,
     );
   }
 
@@ -32,6 +34,6 @@ class AccountUseCase {
     return await repository.updateAccount(account);
   }
 
-  Future<Account?> fetchAccountFromId(int expenseId) async =>
-      repository.fetchAccountFromId(expenseId);
+  Future<Account?> fetchAccountFromId(int accountId) async =>
+      repository.fetchAccountFromId(accountId);
 }

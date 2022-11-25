@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/constants/context_extensions.dart';
+import '../../../common/context_extensions.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/category_bloc.dart';
@@ -75,9 +75,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               offset: state.category.name.length,
             );
 
-            descController.text = state.category.description;
+            descController.text = state.category.description ?? '';
             descController.selection = TextSelection.collapsed(
-              offset: state.category.description.length,
+              offset: state.category.description?.length ?? 0,
             );
           } else if (state is CategoryIconSelectedState) {
             categoryBloc.selectedIcon = state.categoryIcon;

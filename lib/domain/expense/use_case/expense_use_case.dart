@@ -24,9 +24,6 @@ class ExpenseUseCase {
     return expenseRepository.expenses(isRefresh);
   }
 
-  Future<String> totalTransactionType(TransactionType type) =>
-      expenseRepository.totalExpenses(type);
-
   Future<void> addExpense(
     String name,
     double amount,

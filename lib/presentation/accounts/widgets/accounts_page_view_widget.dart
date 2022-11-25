@@ -27,7 +27,6 @@ class AccountPageViewWidget extends StatelessWidget {
           child: PageView.builder(
             key: const Key('accounts_page_view'),
             controller: _controller,
-            padEnds: true,
             itemCount: accounts.length,
             onPageChanged: (index) =>
                 accountBloc.add(AccountSelectedEvent(accounts[index])),

@@ -20,10 +20,10 @@ class CategoryRepositoryImpl extends CategoryRepository {
   @override
   Future<void> addCategory({
     required String name,
-    required String? desc,
     required int icon,
-    required bool isBudget,
     required int color,
+    String? desc,
+    bool isBudget = false,
     double? budget = -1,
   }) =>
       dataSources.addCategory(Category(
