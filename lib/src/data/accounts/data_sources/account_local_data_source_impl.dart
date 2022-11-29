@@ -33,20 +33,15 @@ class AccountLocalDataSourceImpl implements AccountLocalDataSource {
   }
 
   @override
+  Account? fetchAccountFromId(int accountId) => accountBox.get(accountId);
+
+  @override
+  Future<Iterable<Account>> exportData() async => accountBox.values;
+
+  @override
   Account fetchAccount(int accountId) {
     return accountBox.values.firstWhere((element) {
       return element.superId == accountId;
     });
   }
-
-  @override
-  Box<Account> getBox() {
-    return accountBox;
-  }
-
-  @override
-  Future<Account?> fetchAccountFromId(int accountId) async =>
-      accountBox.get(accountId);
-  @override
-  Future<Iterable<Account>> exportData() async => accountBox.values;
 }

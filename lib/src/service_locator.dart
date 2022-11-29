@@ -174,7 +174,7 @@ void _setupBloc() {
         deleteExpenseUseCase: locator.get(),
       ));
   locator.registerFactory(() => AccountsBloc(
-        accountUseCase: locator.get(),
+        getAccountUseCase: locator.get(),
         addAccountUseCase: locator.get(),
         deleteAccountUseCase: locator.get(),
       ));

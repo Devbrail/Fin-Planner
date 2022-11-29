@@ -2,7 +2,6 @@ import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 
 abstract class AccountRepository {
-  Future<List<Account>> accounts();
   Future<void> addAccount({
     required String bankName,
     required String holderName,
@@ -14,5 +13,5 @@ abstract class AccountRepository {
 
   Future<void> updateAccount(Account account);
 
-  Future<Account?> fetchAccountFromId(int accountId);
+  Account? fetchAccountFromId(int accountId);
 }

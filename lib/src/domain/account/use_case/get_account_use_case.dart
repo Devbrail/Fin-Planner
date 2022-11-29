@@ -6,6 +6,5 @@ class GetAccountUseCase {
 
   GetAccountUseCase(this.repository);
 
-  Future<Account?> execute(int accountId) async =>
-      repository.fetchAccountFromId(accountId);
+  Account? execute(int accountId) => repository.fetchAccountFromId(accountId);
 }

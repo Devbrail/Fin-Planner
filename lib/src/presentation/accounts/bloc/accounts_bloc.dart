@@ -13,7 +13,7 @@ part 'accounts_state.dart';
 
 class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   AccountsBloc({
-    required this.accountUseCase,
+    required this.getAccountUseCase,
     required this.deleteAccountUseCase,
     required this.addAccountUseCase,
   }) : super(AccountsInitial()) {
@@ -26,7 +26,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     on<FetchAccountFromIdEvent>(_fetchAccountFromId);
   }
 
-  final GetAccountUseCase accountUseCase;
+  final GetAccountUseCase getAccountUseCase;
   final DeleteAccountUseCase deleteAccountUseCase;
   final AddAccountUseCase addAccountUseCase;
 
@@ -44,7 +44,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final int? accountId = int.tryParse(event.accountId ?? '');
     if (accountId == null) return;
 
-    final Account? account = await accountUseCase.execute(accountId);
+    final Account? account = await getAccountUseCase.execute(accountId);
     if (account != null) {
       accountName = account.bankName;
       accountHolderName = account.name;

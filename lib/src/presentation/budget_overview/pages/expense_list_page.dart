@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../data/category/data_sources/category_local_data_source.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/context_extensions.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
+import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../service_locator.dart';
 import '../../summary/widgets/expense_item_widget.dart';

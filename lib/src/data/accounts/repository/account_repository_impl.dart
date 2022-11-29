@@ -9,13 +9,6 @@ class AccountRepositoryImpl extends AccountRepository {
   final AccountLocalDataSource dataSource;
 
   @override
-  Future<List<Account>> accounts() async {
-    final accounts = await dataSource.accounts();
-    accounts.sort((a, b) => a.name.compareTo(b.name));
-    return accounts;
-  }
-
-  @override
   Future<void> addAccount({
     required String bankName,
     required String holderName,
@@ -44,6 +37,6 @@ class AccountRepositoryImpl extends AccountRepository {
   }
 
   @override
-  Future<Account?> fetchAccountFromId(int accountId) =>
+  Account? fetchAccountFromId(int accountId) =>
       dataSource.fetchAccountFromId(accountId);
 }
