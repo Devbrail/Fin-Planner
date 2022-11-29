@@ -31,7 +31,7 @@ import 'data/settings/settings_service.dart';
 import 'domain/account/repository/account_repository.dart';
 import 'domain/account/use_case/get_account_use_case.dart';
 import 'domain/category/repository/category_repository.dart';
-import 'domain/category/use_case/category_use_case.dart';
+import 'domain/category/use_case/get_category_use_case.dart';
 import 'domain/debt/repository/debit_repository.dart';
 import 'domain/debt/use_case/debt_use_case.dart';
 import 'domain/expense/repository/expense_repository.dart';
@@ -148,7 +148,7 @@ void _setupUseCase() {
   locator.registerLazySingleton(() => DeleteExpenseUseCase(locator.get()));
   locator.registerLazySingleton(() => AddExpenseUseCase(locator.get()));
   locator.registerLazySingleton(
-    () => CategoryUseCase(categoryRepository: locator.get()),
+    () => GetCategoryUseCase(categoryRepository: locator.get()),
   );
   locator.registerLazySingleton(() => GetAccountUseCase(locator.get()));
   locator.registerLazySingleton(() => AddAccountUseCase(locator.get()));
@@ -160,7 +160,8 @@ void _setupUseCase() {
 
 void _setupBloc() {
   locator.registerFactory(() => SplashBloc());
-  locator.registerFactory(() => CategoryBloc(categoryUseCase: locator.get()));
+  locator
+      .registerFactory(() => CategoryBloc(getCategoryUseCase: locator.get()));
   locator.registerFactory(() => ExpenseBloc(
         accountUseCase: locator.get(),
         expenseUseCase: locator.get(),

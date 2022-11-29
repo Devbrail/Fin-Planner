@@ -8,10 +8,6 @@ abstract class CategoryEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class FetchCategoriesEvent extends CategoryEvent {}
-
-class CategoryRefreshEvent extends CategoryEvent {}
-
 class AddOrUpdateCategoryEvent extends CategoryEvent {
   final bool isAddOrUpdate;
 

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../core/enum/box_types.dart';
@@ -14,20 +14,22 @@ part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc({
-    required this.categoryUseCase,
+    required this.getCategoryUseCase,
+    required this.addCategoryUseCase,
+    required this.deleteCategoryUseCase,
   }) : super(AddCategoryInitial()) {
     on<CategoryEvent>((event, emit) {});
-    on<FetchCategoriesEvent>((event, emit) => _fetchCategories(emit));
     on<AddOrUpdateCategoryEvent>(_addOrUpdateCategory);
     on<CategoryDeleteEvent>(_deleteCategory);
-    on<CategoryRefreshEvent>((event, emit) => _refresh(emit));
     on<FetchCategoryFromIdEvent>(_fetchCategoryFromId);
     on<CategoryIconSelectedEvent>(_categoryIcon);
     on<UpdateCategoryBudgetEvent>(_updateCategoryBudget);
     on<CategoryColorSelectedEvent>(_updateCategoryColor);
   }
 
-  final CategoryUseCase categoryUseCase;
+  final GetCategoryUseCase getCategoryUseCase;
+  final AddCategoryUseCase addCategoryUseCase;
+  final DeleteCategoryUseCase deleteCategoryUseCase;
   late final box = Hive.box<Category>(BoxType.category.stringValue);
   int? selectedIcon;
   String? categoryTitle;
@@ -44,8 +46,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final int? categoryId = int.tryParse(event.categoryId ?? '');
     if (categoryId == null) return;
 
-    final Category? category =
-        await categoryUseCase.fetchCategoryFromId(categoryId);
+    final Category? category = await getCategoryUseCase.execute(categoryId);
     if (category != null) {
       categoryTitle = category.name;
       categoryDesc = category.description;
@@ -56,11 +57,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       selectedColor = category.color;
       emit(CategorySuccessState(category));
     }
-  }
-
-  _fetchCategories(Emitter<CategoryState> emit) async {
-    final categories = await categoryUseCase.categories();
-    emit(CategoriesListState(categories));
   }
 
   _addOrUpdateCategory(
@@ -84,7 +80,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       return emit(const CategoryErrorState('Select category color'));
     }
     if (event.isAddOrUpdate) {
-      await categoryUseCase.addCategory(
+      await addCategoryUseCase.execute(
         icon: icon,
         desc: description,
         name: title,
@@ -112,13 +108,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     CategoryDeleteEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    await categoryUseCase.deleteCategory(event.category.key);
+    await deleteCategoryUseCase.execute(event.category.key);
     emit(CategoryDeletedState());
-    add(FetchCategoriesEvent());
-  }
-
-  void _refresh(Emitter<CategoryState> emit) {
-    add(FetchCategoriesEvent());
   }
 
   void _categoryIcon(

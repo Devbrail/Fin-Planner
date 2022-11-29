@@ -10,9 +10,6 @@ abstract class CategoryRepository {
     bool isBudget = false,
   });
   Future<void> deleteCategory(int key);
-  Future<List<Category>> categories();
-
-  Future<void> updateCategory(Category category);
 
   Future<Category?> fetchCategoryFromId(int categoryId);
 }
