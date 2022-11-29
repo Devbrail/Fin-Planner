@@ -62,7 +62,7 @@ class WelcomeWidget extends StatelessWidget {
                   child: CircleAvatar(
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     child: Icon(
-                      Icons.account_circle,
+                      Icons.account_circle_outlined,
                       color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),

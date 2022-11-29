@@ -200,16 +200,8 @@ class _LandingPageState extends State<LandingPage>
                       return Drawer(
                         child: SafeArea(
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              const SizedBox(height: 24),
-                              NavigationBarItem(
-                                title: AppLocalizations.of(context)!.addLabel,
-                                icon: MdiIcons.plus,
-                                isSelected: true,
-                                onPressed: () =>
-                                    _handleClick(state.currentPage),
-                              ),
                               GestureDetector(
                                 onTap: () => showModalBottomSheet(
                                   constraints: BoxConstraints(
@@ -242,6 +234,37 @@ class _LandingPageState extends State<LandingPage>
                                     ),
                                     const WelcomeNameWidget(),
                                   ],
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: ElevatedButton.icon(
+                                  onPressed: () =>
+                                      _handleClick(state.currentPage),
+                                  icon: const Icon(MdiIcons.plus),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Theme.of(context).colorScheme.primary,
+                                    foregroundColor:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 24,
+                                      vertical: 16,
+                                    ),
+                                  ),
+                                  label: Text(
+                                    AppLocalizations.of(context)!.addLabel,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6
+                                        ?.copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary,
+                                        ),
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 24),
