@@ -7,8 +7,6 @@ abstract class AccountsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchAccountsEvent extends AccountsEvent {}
-
 class AddOrUpdateAccountEvent extends AccountsEvent {
   final bool isAdding;
 

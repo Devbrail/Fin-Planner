@@ -1,9 +1,9 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../domain/account/use_case/account_use_case.dart';
@@ -14,9 +14,10 @@ part 'accounts_state.dart';
 class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   AccountsBloc({
     required this.accountUseCase,
+    required this.deleteAccountUseCase,
+    required this.addAccountUseCase,
   }) : super(AccountsInitial()) {
     on<AccountsEvent>((event, emit) {});
-    on<FetchAccountsEvent>((event, emit) => _fetchAccounts(emit));
     on<AddOrUpdateAccountEvent>(_addAccount);
     on<DeleteAccountEvent>(_deleteAccount);
     on<AccountSelectedEvent>(_accountSelected);
@@ -24,8 +25,10 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     on<UpdateCardTypeEvent>(_updateCardType);
     on<FetchAccountFromIdEvent>(_fetchAccountFromId);
   }
-  final AccountUseCase accountUseCase;
-  late final box = Hive.box<Account>(BoxType.accounts.stringValue);
+
+  final GetAccountUseCase accountUseCase;
+  final DeleteAccountUseCase deleteAccountUseCase;
+  final AddAccountUseCase addAccountUseCase;
 
   late CardType selectedType = CardType.bank;
   String? accountName;
@@ -34,11 +37,6 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   Account? currentAccount;
   double? initialAmount;
 
-  Future<void> _fetchAccounts(Emitter<AccountsState> emit) async {
-    final accounts = await accountUseCase.accounts();
-    emit(AccountListState(accounts));
-  }
-
   Future<void> _fetchAccountFromId(
     FetchAccountFromIdEvent event,
     Emitter<AccountsState> emit,
@@ -46,7 +44,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final int? accountId = int.tryParse(event.accountId ?? '');
     if (accountId == null) return;
 
-    final Account? account = await accountUseCase.fetchAccountFromId(accountId);
+    final Account? account = await accountUseCase.execute(accountId);
     if (account != null) {
       accountName = account.bankName;
       accountHolderName = account.name;
@@ -78,7 +76,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     }
 
     if (event.isAdding) {
-      await accountUseCase.addAccount(
+      await addAccountUseCase.execute(
         bankName: bankName,
         holderName: holderName,
         number: number ?? '',
@@ -101,25 +99,33 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     emit(AddAccountState(isAddOrUpdate: event.isAdding));
   }
 
-  _deleteAccount(DeleteAccountEvent event, Emitter<AccountsState> emit) async {
-    await accountUseCase.deleteAccount(event.account.key);
+  FutureOr<void> _deleteAccount(
+    DeleteAccountEvent event,
+    Emitter<AccountsState> emit,
+  ) async {
+    await deleteAccountUseCase.execute(event.account.key);
     emit(AccountDeletedState());
   }
 
-  _accountSelected(AccountSelectedEvent event, Emitter<AccountsState> emit) {
-    emit(AccountSelectedState(event.account));
-  }
+  FutureOr<void> _accountSelected(
+    AccountSelectedEvent event,
+    Emitter<AccountsState> emit,
+  ) async =>
+      emit(AccountSelectedState(event.account));
 
-  _clearAccount(
+  FutureOr<void> _clearAccount(
     ClearAccountEvent event,
     Emitter<AccountsState> emit,
   ) async {
     final int? expenseId = int.tryParse(event.accountId);
     if (expenseId == null) return;
-    await accountUseCase.deleteAccount(expenseId);
+    await deleteAccountUseCase.execute(expenseId);
     emit(AccountDeletedState());
   }
 
-  _updateCardType(UpdateCardTypeEvent event, Emitter<AccountsState> emit) =>
+  FutureOr<void> _updateCardType(
+    UpdateCardTypeEvent event,
+    Emitter<AccountsState> emit,
+  ) async =>
       emit(UpdateCardTypeState(event.cardType));
 }

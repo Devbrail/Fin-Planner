@@ -1,3 +1,4 @@
+import 'package:flutter_paisa/src/domain/account/use_case/account_use_case.dart';
 import 'package:flutter_paisa/src/domain/expense/use_case/add_expenses_use_case.dart';
 import 'package:flutter_paisa/src/domain/expense/use_case/expense_use_case.dart';
 import 'package:get_it/get_it.dart';
@@ -28,7 +29,7 @@ import 'data/notification/notification_service.dart';
 import 'data/settings/file_handler.dart';
 import 'data/settings/settings_service.dart';
 import 'domain/account/repository/account_repository.dart';
-import 'domain/account/use_case/account_use_case.dart';
+import 'domain/account/use_case/get_account_use_case.dart';
 import 'domain/category/repository/category_repository.dart';
 import 'domain/category/use_case/category_use_case.dart';
 import 'domain/debt/repository/debit_repository.dart';
@@ -149,9 +150,9 @@ void _setupUseCase() {
   locator.registerLazySingleton(
     () => CategoryUseCase(categoryRepository: locator.get()),
   );
-  locator.registerLazySingleton(
-    () => AccountUseCase(repository: locator.get()),
-  );
+  locator.registerLazySingleton(() => GetAccountUseCase(locator.get()));
+  locator.registerLazySingleton(() => AddAccountUseCase(locator.get()));
+  locator.registerLazySingleton(() => DeleteAccountUseCase(locator.get()));
   locator.registerLazySingleton(
     () => DebtUseCase(repository: locator.get()),
   );
@@ -166,7 +167,11 @@ void _setupBloc() {
         addExpenseUseCase: locator.get(),
         deleteExpenseUseCase: locator.get(),
       ));
-  locator.registerFactory(() => AccountsBloc(accountUseCase: locator.get()));
+  locator.registerFactory(() => AccountsBloc(
+        accountUseCase: locator.get(),
+        addAccountUseCase: locator.get(),
+        deleteAccountUseCase: locator.get(),
+      ));
   locator.registerFactory(() => HomeBloc());
   locator.registerFactory(() => DebtsBloc(useCase: locator.get()));
   locator.registerFactory(() => SummaryCubit());

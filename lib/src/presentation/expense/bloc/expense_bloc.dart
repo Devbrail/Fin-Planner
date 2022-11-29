@@ -8,7 +8,7 @@ import '../../../core/enum/transaction.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../domain/account/use_case/account_use_case.dart';
+import '../../../domain/account/use_case/get_account_use_case.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
 
 part 'expense_event.dart';
@@ -32,7 +32,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
   final GetExpenseUseCase expenseUseCase;
   final AddExpenseUseCase addExpenseUseCase;
-  final AccountUseCase accountUseCase;
+  final GetAccountUseCase accountUseCase;
   final DeleteExpenseUseCase deleteExpenseUseCase;
   String? expenseName;
   double? expenseAmount;
@@ -89,7 +89,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       return emit(const ExpenseErrorState('Select time'));
     }
 
-    final account = await accountUseCase.fetchAccountFromId(accountId);
+    final account = await accountUseCase.execute(accountId);
     if (account != null) {
       double finalAmount;
       if (transactionType == TransactionType.income) {
@@ -102,12 +102,12 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     }
     if (event.isAdding) {
       await addExpenseUseCase.execute(
-        name,
-        validAmount,
-        dateTime,
-        categoryId,
-        accountId,
-        transactionType,
+        name: name,
+        amount: validAmount,
+        time: dateTime,
+        categoryId: categoryId,
+        accountId: accountId,
+        transactionType: transactionType,
       );
     } else {
       if (currentExpense != null) {
@@ -130,8 +130,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     Emitter<ExpenseState> emit,
   ) async {
     if (currentExpense != null) {
-      final account =
-          await accountUseCase.fetchAccountFromId(currentExpense!.accountId);
+      final account = await accountUseCase.execute(currentExpense!.accountId);
       if (account != null) {
         account.amount = (currentExpense!.currency + account.amount!);
         await account.save();

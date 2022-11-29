@@ -8,20 +8,20 @@ class AddExpenseUseCase {
 
   final ExpenseRepository expenseRepository;
 
-  Future<void> execute(
-    String name,
-    double amount,
-    DateTime time,
-    int category,
-    int account,
-    TransactionType type,
-  ) =>
+  Future<void> execute({
+    required String name,
+    required double amount,
+    required DateTime time,
+    required int categoryId,
+    required int accountId,
+    required TransactionType transactionType,
+  }) =>
       expenseRepository.addExpense(
         name,
         amount,
         time,
-        category,
-        account,
-        type,
+        categoryId,
+        accountId,
+        transactionType,
       );
 }
