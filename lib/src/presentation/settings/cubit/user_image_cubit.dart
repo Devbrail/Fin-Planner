@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
+import '../../../service_locator.dart';
 
 part 'user_image_state.dart';
 
 class UserNameImageCubit extends Cubit<UserImageState> {
   UserNameImageCubit() : super(UserImageInitial());
-  late final settings = Hive.box(BoxType.settings.stringValue);
+  final Box<dynamic> settings = locator.get();
   String selectedImage = '';
 
   void pickImage() {

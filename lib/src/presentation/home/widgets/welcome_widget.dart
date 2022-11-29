@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
+import '../../../service_locator.dart';
 
 class WelcomeWidget extends StatelessWidget {
   const WelcomeWidget({
@@ -18,7 +18,8 @@ class WelcomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: Hive.box(BoxType.settings.stringValue)
+      valueListenable: locator
+          .get<Box<dynamic>>()
           .listenable(keys: [userImageKey, userNameKey]),
       builder: (context, value, _) {
         String image = value.get(userImageKey, defaultValue: '');

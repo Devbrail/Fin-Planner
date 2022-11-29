@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../app/routes.dart';
-import '../../../core/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
+import '../../../service_locator.dart';
 
 class UserNamePage extends StatelessWidget {
   UserNamePage({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class UserNamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
       key: const Key('user_name_page_view'),
-      valueListenable: Hive.box(BoxType.settings.stringValue).listenable(
+      valueListenable: locator.get<Box<dynamic>>().listenable(
         keys: [userNameKey],
       ),
       builder: (context, value, _) {

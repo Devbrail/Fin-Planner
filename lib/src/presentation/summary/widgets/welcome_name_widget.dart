@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
+import '../../../service_locator.dart';
 
 class WelcomeNameWidget extends StatelessWidget {
   const WelcomeNameWidget({Key? key}) : super(key: key);
@@ -11,8 +11,8 @@ class WelcomeNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: Hive.box(BoxType.settings.stringValue)
-          .listenable(keys: [userNameKey]),
+      valueListenable:
+          locator.get<Box<dynamic>>().listenable(keys: [userNameKey]),
       builder: (context, value, _) {
         final name = value.get(userNameKey, defaultValue: 'Name');
         return Padding(

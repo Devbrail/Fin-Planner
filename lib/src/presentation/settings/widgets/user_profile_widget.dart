@@ -110,8 +110,8 @@ class UserTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: Hive.box(BoxType.settings.stringValue)
-          .listenable(keys: [userNameKey]),
+      valueListenable:
+          locator.get<Box<dynamic>>().listenable(keys: [userNameKey]),
       builder: (context, value, _) {
         nameController.text = value.get(userNameKey, defaultValue: 'Name');
         return Padding(
@@ -154,7 +154,7 @@ class UserImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: Hive.box(BoxType.settings.stringValue).listenable(
+      valueListenable: locator.get<Box<dynamic>>().listenable(
         keys: [userImageKey],
       ),
       builder: (context, value, _) {

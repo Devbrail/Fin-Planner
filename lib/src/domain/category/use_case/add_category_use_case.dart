@@ -5,21 +5,20 @@ class AddCategoryUseCase {
 
   AddCategoryUseCase(this.categoryRepository);
 
-  Future<void> addCategory({
+  Future<void> execute({
     required String name,
     required String? desc,
     required int icon,
     double? budget = -1,
     required bool isBudget,
     required int color,
-  }) async {
-    categoryRepository.addCategory(
-      name: name,
-      desc: desc,
-      icon: icon,
-      budget: budget,
-      isBudget: isBudget,
-      color: color,
-    );
-  }
+  }) async =>
+      categoryRepository.addCategory(
+        name: name,
+        desc: desc,
+        icon: icon,
+        budget: budget,
+        isBudget: isBudget,
+        color: color,
+      );
 }

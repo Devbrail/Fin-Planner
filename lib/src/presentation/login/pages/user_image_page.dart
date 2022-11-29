@@ -5,7 +5,6 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
-import '../../../core/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
 import '../../../service_locator.dart';
 import '../../settings/cubit/user_image_cubit.dart';
@@ -20,7 +19,7 @@ class UserImagePage extends StatefulWidget {
 
 class _UserImagePageState extends State<UserImagePage> {
   late final UserNameImageCubit nameImageCubit = locator.get();
-  late final value = Hive.box(BoxType.settings.stringValue);
+  final Box<dynamic> value = locator.get();
 
   void _pickImage() => nameImageCubit.pickImage();
 

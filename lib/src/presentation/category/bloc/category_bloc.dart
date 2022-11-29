@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../../../data/category/model/category.dart';
 import '../../../domain/category/use_case/category_use_case.dart';
 
@@ -30,7 +28,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final GetCategoryUseCase getCategoryUseCase;
   final AddCategoryUseCase addCategoryUseCase;
   final DeleteCategoryUseCase deleteCategoryUseCase;
-  late final box = Hive.box<Category>(BoxType.category.stringValue);
+
   int? selectedIcon;
   String? categoryTitle;
   String? categoryDesc;

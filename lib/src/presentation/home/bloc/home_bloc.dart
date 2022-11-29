@@ -1,22 +1,21 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(const CurrentIndexState(PageType.home)) {
+  HomeBloc(this.settings) : super(const CurrentIndexState(PageType.home)) {
     on<HomeEvent>((event, emit) {});
     on<CurrentIndexEvent>(_currentIndex);
   }
 
-  late final settings = Hive.box(BoxType.settings.stringValue);
+  final Box<dynamic> settings;
 
   PageType currentPage = PageType.home;
 

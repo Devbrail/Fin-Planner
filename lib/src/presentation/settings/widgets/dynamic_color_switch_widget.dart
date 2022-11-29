@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive/hive.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
+import '../../../service_locator.dart';
 import 'setting_option.dart';
 
 class DynamicColorSwitchWidget extends StatefulWidget {
@@ -15,7 +15,7 @@ class DynamicColorSwitchWidget extends StatefulWidget {
 }
 
 class DynamicColorSwitchWidgetState extends State<DynamicColorSwitchWidget> {
-  late final settings = Hive.box(BoxType.settings.stringValue);
+  final Box<dynamic> settings = locator.get();
   late bool isDynamic = settings.get(
     dynamicColorKey,
     defaultValue: false,

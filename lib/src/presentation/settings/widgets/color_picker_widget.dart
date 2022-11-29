@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
+import '../../../service_locator.dart';
 import 'dynamic_color_switch_widget.dart';
 import 'setting_option.dart';
 
@@ -22,13 +22,15 @@ class ColorSelectorWidget extends StatefulWidget {
 }
 
 class ColorSelectorWidgetState extends State<ColorSelectorWidget> {
-  late final settings = Hive.box(BoxType.settings.stringValue)
-      .listenable(keys: [appColorKey, dynamicColorKey]);
+  final Box<dynamic> settings = locator.get();
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: settings,
+      valueListenable: settings.listenable(keys: [
+        appColorKey,
+        dynamicColorKey,
+      ]),
       builder: (context, value, _) {
         final isDynamic = value.get(dynamicColorKey, defaultValue: false);
         final color = value.get(appColorKey, defaultValue: 0xFF795548);
@@ -57,7 +59,7 @@ class ColorSelectorWidgetState extends State<ColorSelectorWidget> {
                     : double.infinity,
               ),
               builder: (context) =>
-                  ColorSelectionWidget(valueListenable: settings),
+                  ColorSelectionWidget(valueListenable: settings.listenable()),
             );
           },
         );

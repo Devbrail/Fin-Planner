@@ -41,7 +41,9 @@ abstract class SettingsService {
 }
 
 class SettingsServiceImpl implements SettingsService {
-  late final box = Hive.box(BoxType.settings.stringValue);
+  final Box<dynamic> box;
+
+  SettingsServiceImpl(this.box);
 
   @override
   Future<String> userName() async {

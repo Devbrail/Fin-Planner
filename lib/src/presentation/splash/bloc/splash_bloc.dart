@@ -19,15 +19,20 @@ part 'splash_event.dart';
 part 'splash_state.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
-  SplashBloc() : super(SplashInitial()) {
+  SplashBloc({
+    required this.service,
+    required this.accounts,
+    required this.categories,
+    required this.settings,
+  }) : super(SplashInitial()) {
     on<SplashEvent>((event, emit) {});
     on<CheckLoginEvent>(_checkLogin);
     on<FilterLocaleEvent>(_filterLocale);
   }
-  final service = locator.get<SettingsService>();
-  late final settings = Hive.box(BoxType.settings.stringValue);
-  late final accounts = locator.get<Box<Account>>();
-  late final categories = locator.get<Box<Category>>();
+  final SettingsService service;
+  final Box<dynamic> settings;
+  final Box<Account> accounts;
+  final Box<Category> categories;
 
   FutureOr<void> _checkLogin(
     CheckLoginEvent event,
