@@ -9,7 +9,7 @@ import '../../../core/context_extensions.dart';
 import '../../../core/currency_util.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/transaction.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../../expense/pages/expense_page.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../cubit/debts_cubit.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../data/notification/notification_service.dart';
 import '../../../data/settings/settings_service.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 
 class SettingsController with ChangeNotifier {
   SettingsController({required this.settingsService});

@@ -4,7 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../../accounts/widgets/account_summary_widget.dart';
 import '../../widgets/paisa_card.dart';
 import 'expense_total_for_month_widget.dart';

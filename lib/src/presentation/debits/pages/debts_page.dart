@@ -5,7 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../widgets/debt_item_widget.dart';
 import '../widgets/debt_toggle_buttons_widget.dart';

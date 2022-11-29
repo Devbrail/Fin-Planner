@@ -13,7 +13,7 @@ import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/settings/settings_service.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 
 part 'splash_event.dart';
 part 'splash_state.dart';

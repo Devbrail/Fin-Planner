@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 import '../../../core/enum/box_types.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../../expense/model/expense.dart';
 import '../model/category.dart';
 import 'category_local_data_source.dart';

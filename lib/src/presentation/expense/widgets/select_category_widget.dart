@@ -7,7 +7,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
 import '../../../data/category/model/category.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../bloc/expense_bloc.dart';
 
 class SelectCategoryIcon extends StatelessWidget {

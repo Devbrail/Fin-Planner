@@ -8,7 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
 import '../../../data/accounts/model/account.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../bloc/expense_bloc.dart';
 import 'selectable_item_widget.dart';
 

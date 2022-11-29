@@ -8,7 +8,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/filter_budget.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../../filter_widget/cubit/filter_cubit.dart';
 import '../../filter_widget/filter_budget_widget.dart';
 import '../../widgets/paisa_empty_widget.dart';

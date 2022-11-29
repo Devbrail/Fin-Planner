@@ -7,7 +7,7 @@ import '../../widgets/app_builder.dart';
 import '../../../app/routes.dart';
 import '../../../core/constants.dart';
 import '../../../core/context_extensions.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../bloc/settings_controller.dart';
 import '../widgets/choose_theme_mode_widget.dart';
 import '../widgets/color_picker_widget.dart';

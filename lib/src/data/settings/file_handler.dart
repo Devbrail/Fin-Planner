@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../core/enum/box_types.dart';
-import '../../di/service_locator.dart';
+import '../../service_locator.dart';
 import '../accounts/data_sources/account_local_data_source.dart';
 import '../accounts/model/account.dart';
 import '../category/data_sources/category_local_data_source.dart';

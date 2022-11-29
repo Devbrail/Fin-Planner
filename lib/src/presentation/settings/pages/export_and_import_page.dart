@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../../core/context_extensions.dart';
 import '../../../data/settings/file_handler.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../widgets/settings_group_card.dart';
 
 extension FileExtension on FileSystemEntity {

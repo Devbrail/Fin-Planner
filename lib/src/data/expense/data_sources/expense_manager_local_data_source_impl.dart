@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/enum/box_types.dart';
 import '../model/expense.dart';
@@ -8,16 +8,16 @@ import 'expense_manager_local_data_source.dart';
 class ExpenseManagerLocalDataSourceImpl
     implements ExpenseManagerLocalDataSource {
   late final expenseBox = Hive.box<Expense>(BoxType.expense.stringValue);
+
+  Stream<BoxEvent> expenses() {
+    return expenseBox.watch();
+  }
+
   @override
   Future<void> addOrUpdateExpense(Expense expense) async {
     final id = await expenseBox.add(expense);
     expense.superId = id;
     expense.save();
-  }
-
-  @override
-  Future<List<Expense>> expenses() async {
-    return expenseBox.values.toList();
   }
 
   @override

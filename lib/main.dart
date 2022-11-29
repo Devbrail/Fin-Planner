@@ -11,7 +11,7 @@ import 'src/app/routes.dart';
 import 'src/core/enum/box_types.dart';
 import 'src/core/theme/paisa_theme.dart';
 import 'src/data/settings/settings_service.dart';
-import 'src/di/service_locator.dart';
+import 'src/service_locator.dart';
 import 'src/presentation/widgets/app_builder.dart';
 
 Future<void> main() async {

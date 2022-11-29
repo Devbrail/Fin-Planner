@@ -4,7 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 
 import '../core/enum/box_types.dart';
 import '../data/settings/settings_service.dart';
-import '../di/service_locator.dart';
+import '../service_locator.dart';
 import '../presentation/accounts/pages/add_account_page.dart';
 import '../presentation/budget_overview/pages/expense_list_page.dart';
 import '../presentation/category/pages/add_category_page.dart';

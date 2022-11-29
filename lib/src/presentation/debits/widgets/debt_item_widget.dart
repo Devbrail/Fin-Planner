@@ -11,7 +11,7 @@ import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../data/debt/models/transaction.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../cubit/debts_cubit.dart';
 
 class DebtItemWidget extends StatelessWidget {

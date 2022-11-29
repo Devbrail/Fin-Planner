@@ -8,7 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../core/common.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_summary_widget.dart';

@@ -10,7 +10,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../app/routes.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../cubit/user_image_cubit.dart';
 
 class UserProfilePage extends StatefulWidget {

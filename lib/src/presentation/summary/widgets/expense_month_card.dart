@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/currency_util.dart';

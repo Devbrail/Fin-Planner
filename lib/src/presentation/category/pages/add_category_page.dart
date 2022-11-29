@@ -6,7 +6,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/context_extensions.dart';
 import '../../widgets/paisa_text_field.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/color_picker_widget.dart';
 import '../widgets/select_icon_widget.dart';

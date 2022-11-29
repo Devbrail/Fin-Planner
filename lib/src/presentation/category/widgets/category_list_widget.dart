@@ -5,7 +5,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../widgets/paisa_empty_widget.dart';
 import '../../../data/category/model/category.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../bloc/category_bloc.dart';
 import 'category_item_widget.dart';
 

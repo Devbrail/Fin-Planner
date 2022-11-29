@@ -8,7 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../../accounts/pages/accounts_page.dart';
 import '../../budget_overview/cubit/filter_date_cubit.dart';
 import '../../budget_overview/pages/budget_overview_page.dart';

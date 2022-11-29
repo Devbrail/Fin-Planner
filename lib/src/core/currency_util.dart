@@ -1,4 +1,4 @@
-import '../di/service_locator.dart';
+import '../service_locator.dart';
 import 'package:intl/intl.dart';
 
 extension MappingOnDouble on double {

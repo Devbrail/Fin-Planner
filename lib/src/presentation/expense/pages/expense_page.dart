@@ -8,7 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/context_extensions.dart';
 import '../../../core/enum/transaction.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../bloc/expense_bloc.dart';
 import '../widgets/select_account_widget.dart';

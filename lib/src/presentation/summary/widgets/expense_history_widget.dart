@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../core/common.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../cubit/summary_cubit.dart';
 import 'expense_month_card.dart';
 

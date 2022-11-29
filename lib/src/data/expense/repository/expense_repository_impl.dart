@@ -1,10 +1,4 @@
-import 'package:intl/intl.dart';
-
-import '../../../core/currency_util.dart';
-import '../../../core/enum/filter_days.dart';
 import '../../../core/enum/transaction.dart';
-import '../../../core/list_util.dart';
-import '../../../core/time_extension.dart';
 import '../../../domain/expense/repository/expense_repository.dart';
 import '../data_sources/expense_manager_local_data_source.dart';
 import '../model/expense.dart';
@@ -14,12 +8,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     required this.dataSource,
   });
 
-  List<Expense> expensesList = [];
   final ExpenseManagerLocalDataSource dataSource;
-  @override
-  Future<void> updateExpense(Expense expense) async {
-    await dataSource.addOrUpdateExpense(expense);
-  }
 
   @override
   Future<void> addExpense(
@@ -42,47 +31,8 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   }
 
   @override
-  Future<void> clearExpenses() async {
-    await dataSource.clearExpenses();
-  }
-
-  @override
-  Future<Map<String, List<Expense>>> expenses(bool isRefresh) async {
-    final expenses = await fetchAndCache(isRefresh: isRefresh);
-    expenses.sort((a, b) => b.time.compareTo(a.time));
-    final Map<String, List<Expense>> groupedExpense =
-        groupBy(expenses, (Expense expense) => _readableMonth(expense.time));
-    return groupedExpense;
-  }
-
-  @override
-  Future<String> filterExpensesTotal(FilterDays filterDays) async {
-    final List<Expense> expenses = await fetchAndCache();
-    expenses.sort((a, b) => b.time.compareTo(a.time));
-    final total = expenses
-        .where((element) {
-          final int days = element.time.daysDifference;
-          return filterDays.filterDate(days);
-        })
-        .map((e) => e.currency)
-        .fold<double>(0, (previousValue, element) => previousValue + element);
-    return total.toCurrency();
-  }
-
-  String _readableMonth(DateTime time) {
-    return DateFormat('MMMM').format(time);
-  }
-
-  @override
   Future<void> clearExpense(int expenseId) async {
     await dataSource.clearExpense(expenseId);
-  }
-
-  Future<List<Expense>> fetchAndCache({bool isRefresh = false}) async {
-    if (expensesList.isEmpty || isRefresh) {
-      expensesList = await dataSource.expenses();
-    }
-    return expensesList;
   }
 
   @override

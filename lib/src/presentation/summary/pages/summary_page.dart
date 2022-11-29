@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/context_extensions.dart';
-import '../../../di/service_locator.dart';
+import '../../../service_locator.dart';
 import '../../filter_widget/cubit/filter_cubit.dart';
 import '../../filter_widget/filter_budget_widget.dart';
 import '../../goal/widget/color_palette.dart';
