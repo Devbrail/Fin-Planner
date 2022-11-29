@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
-import '../../../common/enum/debt_type.dart';
+import '../../../core/enum/debt_type.dart';
 
 part 'debt.g.dart';
 

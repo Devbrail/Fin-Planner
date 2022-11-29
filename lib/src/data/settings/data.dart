@@ -4,9 +4,9 @@
 
 import 'dart:convert';
 
-import 'package:flutter_paisa/data/accounts/model/account.dart';
-import 'package:flutter_paisa/data/category/model/category.dart';
-import 'package:flutter_paisa/data/expense/model/expense.dart';
+import 'package:flutter_paisa/src/data/accounts/model/account.dart';
+import 'package:flutter_paisa/src/data/category/model/category.dart';
+import 'package:flutter_paisa/src/data/expense/model/expense.dart';
 
 class Data {
   Data({

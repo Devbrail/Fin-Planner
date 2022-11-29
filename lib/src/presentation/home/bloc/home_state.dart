@@ -11,7 +11,7 @@ abstract class HomeState extends Equatable {
 class ExpenseInitial extends HomeState {}
 
 class CurrentIndexState extends HomeState {
-  final PaisaPage currentPage;
+  final PageType currentPage;
 
   const CurrentIndexState(this.currentPage);
 

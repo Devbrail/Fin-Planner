@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../common/common.dart';
-import '../../../common/theme/custom_color.dart';
+import '../../../core/common.dart';
+import '../../../core/theme/custom_color.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../widgets/paisa_card.dart';
 

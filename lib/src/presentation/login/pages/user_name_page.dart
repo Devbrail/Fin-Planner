@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/enum/box_types.dart';
+import '../../../core/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
 
 class UserNamePage extends StatelessWidget {

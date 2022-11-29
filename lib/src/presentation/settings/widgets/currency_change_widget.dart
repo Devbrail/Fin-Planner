@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-import '../../../main.dart';
+import '../../../di/service_locator.dart';
 
 class CurrencyChangeWidget extends StatelessWidget {
   const CurrencyChangeWidget({Key? key}) : super(key: key);
@@ -14,9 +14,13 @@ class CurrencyChangeWidget extends StatelessWidget {
       onTap: () =>
           context.go('/splash', extra: {'force_change_currency': true}),
       title: Text(AppLocalizations.of(context)!.currencySignLabel),
-      subtitle: Text(NumberFormat.compactSimpleCurrency(locale: currentLocale)
-              .currencyName ??
-          ''),
+      subtitle: Text(
+        NumberFormat.compactSimpleCurrency(
+                locale: locator.get(
+              instanceName: 'languageCode',
+            )).currencyName ??
+            '',
+      ),
     );
   }
 }

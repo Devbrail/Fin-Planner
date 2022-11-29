@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../common/enum/box_types.dart';
+import '../core/enum/box_types.dart';
 import '../data/settings/settings_service.dart';
 import '../di/service_locator.dart';
-import '../main.dart';
 import '../presentation/accounts/pages/add_account_page.dart';
 import '../presentation/budget_overview/pages/expense_list_page.dart';
 import '../presentation/category/pages/add_category_page.dart';
@@ -59,12 +58,16 @@ final GoRouter goRouter = GoRouter(
     if (image.isEmpty && isLogging) {
       return userImagePath;
     }
-    final languageCode = settings.get(userLanguageKey, defaultValue: 'DEF');
+    final String languageCode =
+        settings.get(userLanguageKey, defaultValue: 'DEF');
     if (languageCode == 'DEF' && isLogging) {
       return splashPath;
     }
     if (name.isNotEmpty && image.isNotEmpty && isLogging) {
-      currentLocale = languageCode;
+      locator.registerFactory<String>(
+        () => languageCode,
+        instanceName: 'languageCode',
+      );
       return landingPath;
     }
     return null;

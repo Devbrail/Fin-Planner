@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../common/enum/theme_mode.dart';
+import '../../../core/enum/theme_mode.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/settings_controller.dart';
 import 'setting_option.dart';

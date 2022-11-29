@@ -1,12 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../common/enum/box_types.dart';
-import '../common/enum/card_type.dart';
-import '../common/enum/debt_type.dart';
-import '../common/enum/transaction.dart';
+import '../core/enum/box_types.dart';
+import '../core/enum/card_type.dart';
+import '../core/enum/debt_type.dart';
+import '../core/enum/transaction.dart';
 import '../data/accounts/data_sources/account_local_data_source.dart';
 import '../data/accounts/data_sources/account_local_data_source_impl.dart';
 import '../data/accounts/model/account.dart';

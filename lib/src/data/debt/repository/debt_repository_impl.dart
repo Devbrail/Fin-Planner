@@ -1,4 +1,4 @@
-import '../../../common/enum/debt_type.dart';
+import '../../../core/enum/debt_type.dart';
 import '../../../domain/debt/repository/debit_repository.dart';
 import '../data_sources/debt_local_data_source.dart';
 import '../models/debt.dart';

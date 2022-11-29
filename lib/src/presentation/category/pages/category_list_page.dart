@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/context_extensions.dart';
+import '../../../core/context_extensions.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/category_list_widget.dart';
 

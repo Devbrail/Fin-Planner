@@ -1,7 +1,7 @@
-import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:hive/hive.dart';
 
-import '../../../common/enum/box_types.dart';
+import '../../../core/enum/box_types.dart';
+import '../../../di/service_locator.dart';
 import '../../expense/model/expense.dart';
 import '../model/category.dart';
 import 'category_local_data_source.dart';

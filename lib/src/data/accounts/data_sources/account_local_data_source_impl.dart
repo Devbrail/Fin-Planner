@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import '../../../common/enum/box_types.dart';
+import '../../../core/enum/box_types.dart';
 import '../../expense/model/expense.dart';
 import '../model/account.dart';
 import 'account_local_data_source.dart';

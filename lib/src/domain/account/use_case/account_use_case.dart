@@ -1,4 +1,4 @@
-import '../../../common/enum/card_type.dart';
+import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 import '../repository/account_repository.dart';
 

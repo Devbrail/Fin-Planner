@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../di/service_locator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../common/currency_util.dart';
-import '../../../common/theme/custom_color.dart';
+import '../../../core/currency_util.dart';
+import '../../../core/theme/custom_color.dart';
 import '../../widgets/paisa_card.dart';
 import '../../../data/expense/model/expense.dart';
 import 'expense_list_widget.dart';

@@ -2,15 +2,15 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../budget_overview/cubit/filter_date_cubit.dart';
+import 'package:flutter_paisa/src/core/common.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/common.dart';
 import '../../../di/service_locator.dart';
 import '../../accounts/pages/accounts_page.dart';
+import '../../budget_overview/cubit/filter_date_cubit.dart';
 import '../../budget_overview/pages/budget_overview_page.dart';
 import '../../category/pages/category_list_page.dart';
 import '../../debits/pages/debts_page.dart';
@@ -38,36 +38,36 @@ class _LandingPageState extends State<LandingPage>
   final FilterDateCubit filterDateCubit = locator.get<FilterDateCubit>();
   DateTimeRange? dateTimeRange;
 
-  late final Map<PaisaPage, Widget> _pages = {
-    PaisaPage.home: const SummaryPage(),
-    PaisaPage.accounts: AccountsPage(
+  late final Map<PageType, Widget> _pages = {
+    PageType.home: const SummaryPage(),
+    PageType.accounts: AccountsPage(
       accountsBloc: locator.get(),
     ),
-    PaisaPage.category: CategoryListPage(
+    PageType.category: CategoryListPage(
       addCategoryBloc: locator.get(),
     ),
-    PaisaPage.budgetOverview: BudgetOverViewPage(
+    PageType.budgetOverview: BudgetOverViewPage(
       categoryDataSource: locator.get(),
       filterDateCubit: filterDateCubit,
     ),
-    PaisaPage.debts: const DebtsPage(),
+    PageType.debts: const DebtsPage(),
   };
 
-  void _handleClick(PaisaPage page) {
+  void _handleClick(PageType page) {
     switch (page) {
-      case PaisaPage.accounts:
+      case PageType.accounts:
         context.goNamed(addAccountPath);
         break;
-      case PaisaPage.home:
+      case PageType.home:
         context.goNamed(addExpensePath);
         break;
-      case PaisaPage.category:
+      case PageType.category:
         context.goNamed(addCategoryPath);
         break;
-      case PaisaPage.debts:
+      case PageType.debts:
         context.goNamed(addDebitName);
         break;
-      case PaisaPage.budgetOverview:
+      case PageType.budgetOverview:
         _dateRangePicker();
         break;
     }
@@ -81,7 +81,7 @@ class _LandingPageState extends State<LandingPage>
           return FloatingActionButton.large(
             onPressed: () => _handleClick(state.currentPage),
             tooltip: AppLocalizations.of(context)!.addExpenseLabel,
-            child: state.currentPage != PaisaPage.budgetOverview
+            child: state.currentPage != PageType.budgetOverview
                 ? const Icon(Icons.add)
                 : const Icon(Icons.date_range),
           );
@@ -124,10 +124,10 @@ class _LandingPageState extends State<LandingPage>
       create: (context) => homeBloc,
       child: WillPopScope(
         onWillPop: () async {
-          if (homeBloc.currentPage == PaisaPage.home) {
+          if (homeBloc.currentPage == PageType.home) {
             return true;
           }
-          homeBloc.add(const CurrentIndexEvent(PaisaPage.home));
+          homeBloc.add(const CurrentIndexEvent(PageType.home));
           return false;
         },
         child: ScreenTypeLayout(
@@ -139,52 +139,43 @@ class _LandingPageState extends State<LandingPage>
           mobile: Scaffold(
             body: ContentWidget(pages: _pages),
             floatingActionButton: _floatingActionButtonBig(),
-            bottomNavigationBar: Material(
-              clipBehavior: Clip.antiAlias,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
-                ),
-              ),
-              child: BlocBuilder(
-                bloc: homeBloc,
-                builder: (context, state) {
-                  return NavigationBar(
-                    selectedIndex:
-                        homeBloc.getIndexFromPage(homeBloc.currentPage),
-                    onDestinationSelected: (index) => homeBloc.add(
-                        CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
-                    destinations: [
-                      NavigationDestination(
-                        label: AppLocalizations.of(context)!.homeLabel,
-                        icon: const Icon(Icons.home_outlined),
-                        selectedIcon: const Icon(Icons.home),
-                      ),
-                      NavigationDestination(
-                        label: AppLocalizations.of(context)!.accountsLabel,
-                        icon: const Icon(Icons.credit_card_outlined),
-                        selectedIcon: const Icon(Icons.credit_card),
-                      ),
-                      NavigationDestination(
-                        label: AppLocalizations.of(context)!.categoryLabel,
-                        icon: const Icon(Icons.category_outlined),
-                        selectedIcon: const Icon(Icons.category),
-                      ),
-                      NavigationDestination(
-                        label: AppLocalizations.of(context)!.budgetLabel,
-                        icon: const Icon(Icons.account_balance_wallet_outlined),
-                        selectedIcon: const Icon(Icons.account_balance_wallet),
-                      ),
-                      NavigationDestination(
-                        label: AppLocalizations.of(context)!.debtsLabel,
-                        icon: const Icon(MdiIcons.accountCashOutline),
-                        selectedIcon: const Icon(MdiIcons.accountCash),
-                      ),
-                    ],
-                  );
-                },
-              ),
+            bottomNavigationBar: BlocBuilder(
+              bloc: homeBloc,
+              builder: (context, state) {
+                return NavigationBar(
+                  selectedIndex:
+                      homeBloc.getIndexFromPage(homeBloc.currentPage),
+                  onDestinationSelected: (index) => homeBloc
+                      .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
+                  destinations: [
+                    NavigationDestination(
+                      label: AppLocalizations.of(context)!.homeLabel,
+                      icon: const Icon(Icons.home_outlined),
+                      selectedIcon: const Icon(Icons.home),
+                    ),
+                    NavigationDestination(
+                      label: AppLocalizations.of(context)!.accountsLabel,
+                      icon: const Icon(Icons.credit_card_outlined),
+                      selectedIcon: const Icon(Icons.credit_card),
+                    ),
+                    NavigationDestination(
+                      label: AppLocalizations.of(context)!.categoryLabel,
+                      icon: const Icon(Icons.category_outlined),
+                      selectedIcon: const Icon(Icons.category),
+                    ),
+                    NavigationDestination(
+                      label: AppLocalizations.of(context)!.budgetLabel,
+                      icon: const Icon(Icons.account_balance_wallet_outlined),
+                      selectedIcon: const Icon(Icons.account_balance_wallet),
+                    ),
+                    NavigationDestination(
+                      label: AppLocalizations.of(context)!.debtsLabel,
+                      icon: const Icon(MdiIcons.accountCashOutline),
+                      selectedIcon: const Icon(MdiIcons.accountCash),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           desktop: Padding(
@@ -271,47 +262,44 @@ class _LandingPageState extends State<LandingPage>
                               NavigationBarItem(
                                 title: AppLocalizations.of(context)!.homeLabel,
                                 icon: MdiIcons.home,
-                                isSelected: state.currentPage == PaisaPage.home,
+                                isSelected: state.currentPage == PageType.home,
                                 onPressed: () => homeBloc.add(
-                                    const CurrentIndexEvent(PaisaPage.home)),
+                                    const CurrentIndexEvent(PageType.home)),
                               ),
                               NavigationBarItem(
                                 title:
                                     AppLocalizations.of(context)!.accountsLabel,
                                 icon: MdiIcons.creditCard,
                                 isSelected:
-                                    state.currentPage == PaisaPage.accounts,
+                                    state.currentPage == PageType.accounts,
                                 onPressed: () => homeBloc.add(
-                                    const CurrentIndexEvent(
-                                        PaisaPage.accounts)),
+                                    const CurrentIndexEvent(PageType.accounts)),
                               ),
                               NavigationBarItem(
                                 title:
                                     AppLocalizations.of(context)!.categoryLabel,
                                 icon: Icons.category,
                                 isSelected:
-                                    state.currentPage == PaisaPage.category,
+                                    state.currentPage == PageType.category,
                                 onPressed: () => homeBloc.add(
-                                    const CurrentIndexEvent(
-                                        PaisaPage.category)),
+                                    const CurrentIndexEvent(PageType.category)),
                               ),
                               NavigationBarItem(
                                 title:
                                     AppLocalizations.of(context)!.budgetLabel,
                                 icon: MdiIcons.accountBadgeOutline,
                                 isSelected: state.currentPage ==
-                                    PaisaPage.budgetOverview,
+                                    PageType.budgetOverview,
                                 onPressed: () => homeBloc.add(
                                     const CurrentIndexEvent(
-                                        PaisaPage.budgetOverview)),
+                                        PageType.budgetOverview)),
                               ),
                               NavigationBarItem(
                                 title: AppLocalizations.of(context)!.debtsLabel,
                                 icon: MdiIcons.accountCash,
-                                isSelected:
-                                    state.currentPage == PaisaPage.debts,
+                                isSelected: state.currentPage == PageType.debts,
                                 onPressed: () => homeBloc.add(
-                                    const CurrentIndexEvent(PaisaPage.debts)),
+                                    const CurrentIndexEvent(PageType.debts)),
                               )
                             ],
                           ),
@@ -398,7 +386,7 @@ class ContentWidget extends StatelessWidget {
     required this.pages,
   }) : super(key: key);
 
-  final Map<PaisaPage, Widget> pages;
+  final Map<PageType, Widget> pages;
 
   @override
   Widget build(BuildContext context) {

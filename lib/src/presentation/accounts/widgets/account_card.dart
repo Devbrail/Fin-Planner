@@ -4,7 +4,7 @@ import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/enum/card_type.dart';
+import '../../../core/enum/card_type.dart';
 
 class AccountCard extends StatefulWidget {
   const AccountCard({

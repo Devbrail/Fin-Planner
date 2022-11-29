@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/di/service_locator.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../data/accounts/data_sources/account_local_data_source.dart';

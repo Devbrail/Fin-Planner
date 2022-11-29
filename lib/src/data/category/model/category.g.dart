@@ -23,9 +23,8 @@ class CategoryAdapter extends TypeAdapter<Category> {
       description: fields[1] as String?,
       isBudget: fields[7] == null ? false : fields[7] as bool,
       budget: fields[6] == null ? 0 : fields[6] as double?,
-    )
-      ..superId = fields[4] == null ? 0 : fields[4] as int?
-      ..isDefault = fields[9] == null ? false : fields[9] as bool?;
+      isDefault: fields[9] == null ? false : fields[9] as bool?,
+    )..superId = fields[4] == null ? 0 : fields[4] as int?;
   }
 
   @override

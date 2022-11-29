@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../../../common/enum/box_types.dart';
-import '../../../common/enum/debt_type.dart';
+import '../../../core/enum/box_types.dart';
+import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../data/debt/models/transaction.dart';
 import '../../../domain/debt/use_case/debt_use_case.dart';

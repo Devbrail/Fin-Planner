@@ -4,16 +4,16 @@ import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import '../../../../main.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../common/enum/box_types.dart';
-import '../../../common/enum/card_type.dart';
+import '../../../core/enum/box_types.dart';
+import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/settings/settings_service.dart';
 import '../../../di/service_locator.dart';
-import '../../../main.dart';
 
 part 'splash_event.dart';
 part 'splash_state.dart';
@@ -69,7 +69,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       locales.sort(((a, b) => a.name.compareTo(b.name)));
       emit(CountryLocalesState(locales));
     } else {
-      currentLocale = languageCode;
+      locator.registerFactory<String>(
+        () => languageCode,
+        instanceName: 'languageCode',
+      );
       emit(NavigateToHome());
     }
   }

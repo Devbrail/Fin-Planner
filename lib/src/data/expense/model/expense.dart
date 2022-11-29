@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import '../../../common/enum/transaction.dart';
+import '../../../core/enum/transaction.dart';
 
 part 'expense.g.dart';
 

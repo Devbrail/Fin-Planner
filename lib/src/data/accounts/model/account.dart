@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
-import '../../../common/enum/card_type.dart';
+import '../../../core/enum/card_type.dart';
 
 part 'account.g.dart';
 

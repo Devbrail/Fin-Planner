@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../../../common/enum/box_types.dart';
+import '../../../core/enum/box_types.dart';
 import '../model/expense.dart';
 import 'expense_manager_local_data_source.dart';
 

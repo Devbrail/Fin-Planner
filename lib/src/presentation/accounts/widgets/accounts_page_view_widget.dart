@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
-import '../../../common/enum/card_type.dart';
+import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 import '../bloc/accounts_bloc.dart';
 import 'account_card.dart';

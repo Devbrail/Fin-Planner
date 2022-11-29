@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../common/enum/box_types.dart';
+import '../../../core/enum/box_types.dart';
 import '../../../data/category/model/category.dart';
 import '../../../domain/category/use_case/category_use_case.dart';
 

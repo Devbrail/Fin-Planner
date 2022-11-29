@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../common/common.dart';
-import '../../../common/list_util.dart';
+import '../../../core/common.dart';
+import '../../../core/list_util.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';

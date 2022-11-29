@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:meta/meta.dart';
 
-import '../../../common/common.dart';
-import '../../../common/enum/box_types.dart';
+import '../../../core/common.dart';
+import '../../../core/enum/box_types.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(const CurrentIndexState(PaisaPage.home)) {
+  HomeBloc() : super(const CurrentIndexState(PageType.home)) {
     on<HomeEvent>((event, emit) {});
     on<CurrentIndexEvent>(_currentIndex);
   }
 
   late final settings = Hive.box(BoxType.settings.stringValue);
 
-  PaisaPage currentPage = PaisaPage.home;
+  PageType currentPage = PageType.home;
 
   void _currentIndex(
     CurrentIndexEvent event,
@@ -30,34 +30,34 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  int getIndexFromPage(PaisaPage currentPage) {
+  int getIndexFromPage(PageType currentPage) {
     switch (currentPage) {
-      case PaisaPage.home:
+      case PageType.home:
         return 0;
-      case PaisaPage.accounts:
+      case PageType.accounts:
         return 1;
-      case PaisaPage.category:
+      case PageType.category:
         return 2;
-      case PaisaPage.budgetOverview:
+      case PageType.budgetOverview:
         return 3;
-      case PaisaPage.debts:
+      case PageType.debts:
         return 4;
     }
   }
 
-  PaisaPage getPageFromIndex(int index) {
+  PageType getPageFromIndex(int index) {
     switch (index) {
       case 1:
-        return PaisaPage.accounts;
+        return PageType.accounts;
       case 2:
-        return PaisaPage.category;
+        return PageType.category;
       case 3:
-        return PaisaPage.budgetOverview;
+        return PageType.budgetOverview;
       case 4:
-        return PaisaPage.debts;
+        return PageType.debts;
       case 0:
       default:
-        return PaisaPage.home;
+        return PageType.home;
     }
   }
 }

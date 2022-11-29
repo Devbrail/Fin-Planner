@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../../common/enum/box_types.dart';
+import '../../core/enum/box_types.dart';
 
 const String themeModeKey = 'key_theme_mode';
 const String appColorKey = 'key_app_color';

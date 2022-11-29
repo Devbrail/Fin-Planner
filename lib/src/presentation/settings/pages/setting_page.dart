@@ -3,10 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../app/app_builder.dart';
+import '../../widgets/app_builder.dart';
 import '../../../app/routes.dart';
-import '../../../common/constants.dart';
-import '../../../common/context_extensions.dart';
+import '../../../core/constants.dart';
+import '../../../core/context_extensions.dart';
 import '../../../di/service_locator.dart';
 import '../bloc/settings_controller.dart';
 import '../widgets/choose_theme_mode_widget.dart';

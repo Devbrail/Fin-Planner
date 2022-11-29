@@ -5,9 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../common/context_extensions.dart';
-import '../../../common/currency_util.dart';
-import '../../../common/enum/debt_type.dart';
+import '../../../core/context_extensions.dart';
+import '../../../core/currency_util.dart';
+import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/transaction.dart';
 import '../../../di/service_locator.dart';
 import '../../expense/pages/expense_page.dart';

@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:meta/meta.dart';
 
-import '../../../common/enum/box_types.dart';
-import '../../../common/enum/card_type.dart';
+import '../../../core/enum/box_types.dart';
+import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../domain/account/use_case/account_use_case.dart';
 

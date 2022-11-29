@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../common/enum/transaction.dart';
+import '../../../core/enum/transaction.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
