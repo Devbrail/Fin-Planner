@@ -23,7 +23,6 @@ import 'data/expense/data_sources/expense_manager_local_data_source_impl.dart';
 import 'data/expense/model/expense.dart';
 import 'data/expense/repository/expense_repository_impl.dart';
 import 'data/settings/file_handler.dart';
-import 'data/settings/settings_service.dart';
 import 'domain/account/repository/account_repository.dart';
 import 'domain/account/use_case/account_use_case.dart';
 import 'domain/category/repository/category_repository.dart';
@@ -99,8 +98,6 @@ void _localSources() {
             debtBox: locator.get(),
             transactionsBox: locator.get(),
           ));
-  locator.registerLazySingletonAsync<SettingsService>(
-      () async => SettingsServiceImpl(locator.get()));
   locator.registerLazySingletonAsync<FileHandler>(() async => FileHandler());
 }
 

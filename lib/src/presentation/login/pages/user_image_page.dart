@@ -5,7 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
-import '../../../data/settings/settings_service.dart';
+import '../../../core/common.dart';
 import '../../../service_locator.dart';
 import '../../settings/cubit/user_image_cubit.dart';
 import '../../settings/widgets/user_profile_widget.dart';

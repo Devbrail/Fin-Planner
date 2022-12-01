@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import '../../../core/enum/box_types.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../data/settings/settings_service.dart';
+import '../../../core/common.dart';
+import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
 
 class WelcomeWidget extends StatelessWidget {

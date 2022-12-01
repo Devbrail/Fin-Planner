@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../core/enum/box_types.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../../../data/settings/settings_service.dart';
+import '../../../core/common.dart';
+import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
 
 class WelcomeNameWidget extends StatelessWidget {
