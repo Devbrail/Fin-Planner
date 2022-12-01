@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/core/enum/box_types.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -19,7 +20,8 @@ class UserImagePage extends StatefulWidget {
 
 class _UserImagePageState extends State<UserImagePage> {
   late final UserNameImageCubit nameImageCubit = locator.get();
-  final Box<dynamic> value = locator.get();
+  final Box<dynamic> value =
+      locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
 
   void _pickImage() => nameImageCubit.pickImage();
 
@@ -83,8 +85,9 @@ class _UserImagePageState extends State<UserImagePage> {
           }
           context.go(splashPath);
         },
-        label: Text(AppLocalizations.of(context)!.nextLabel),
-        icon: const Icon(MdiIcons.arrowRight),
+        extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
+        label: const Icon(MdiIcons.arrowRight),
+        icon: Text(AppLocalizations.of(context)!.nextLabel),
       ),
     );
   }

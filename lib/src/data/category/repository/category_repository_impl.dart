@@ -8,13 +8,6 @@ class CategoryRepositoryImpl extends CategoryRepository {
   CategoryRepositoryImpl({required this.dataSources});
 
   @override
-  Future<List<Category>> categories() async {
-    final categories = await dataSources.categories();
-    categories.sort((a, b) => a.name.compareTo(b.name));
-    return categories;
-  }
-
-  @override
   Future<void> deleteCategory(int key) => dataSources.deleteCategory(key);
 
   @override
@@ -34,10 +27,6 @@ class CategoryRepositoryImpl extends CategoryRepository {
         isBudget: isBudget,
         color: color,
       ));
-
-  @override
-  Future<void> updateCategory(Category category) =>
-      dataSources.addCategory(category);
 
   @override
   Future<Category?> fetchCategoryFromId(int categoryId) =>

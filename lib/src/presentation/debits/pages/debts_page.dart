@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/app/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../../app/routes.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../service_locator.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../widgets/debt_item_widget.dart';
-import '../widgets/debt_toggle_buttons_widget.dart';
 
 class DebtsPage extends StatefulWidget {
   const DebtsPage({super.key});

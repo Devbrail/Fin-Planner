@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/src/presentation/debits/pages/debts_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
+import '../core/common.dart';
 import '../core/enum/box_types.dart';
-import '../data/settings/settings_service.dart';
-import '../service_locator.dart';
 import '../presentation/accounts/pages/add_account_page.dart';
 import '../presentation/budget_overview/pages/expense_list_page.dart';
 import '../presentation/category/pages/add_category_page.dart';
 import '../presentation/debits/pages/add_debt_page.dart';
+import '../presentation/debits/pages/debts_page.dart';
 import '../presentation/expense/pages/expense_page.dart';
 import '../presentation/home/pages/home_page.dart';
 import '../presentation/login/pages/user_image_page.dart';
@@ -17,6 +16,7 @@ import '../presentation/login/pages/user_name_page.dart';
 import '../presentation/settings/pages/export_and_import_page.dart';
 import '../presentation/settings/pages/setting_page.dart';
 import '../presentation/splash/pages/splash_screen_page.dart';
+import '../service_locator.dart';
 
 const loginPath = '/login';
 const loginName = 'login';

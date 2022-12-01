@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/core/enum/box_types.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -16,7 +18,9 @@ class UserNamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
       key: const Key('user_name_page_view'),
-      valueListenable: locator.get<Box<dynamic>>().listenable(
+      valueListenable: locator
+          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+          .listenable(
         keys: [userNameKey],
       ),
       builder: (context, value, _) {
@@ -97,31 +101,17 @@ class UserNamePage extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: SafeArea(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ElevatedButton(
-                      key: const Key('next_button'),
-                      onPressed: () async {
-                        if (_formState.currentState!.validate()) {
-                          value
-                              .put(userNameKey, _nameController.text)
-                              .then((value) => context.go(userImagePath));
-                        }
-                      },
-                      child: Text(AppLocalizations.of(context)!.nextLabel),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              if (_formState.currentState!.validate()) {
+                value
+                    .put(userNameKey, _nameController.text)
+                    .then((value) => context.go(userImagePath));
+              }
+            },
+            extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
+            label: const Icon(MdiIcons.arrowRight),
+            icon: Text(AppLocalizations.of(context)!.nextLabel),
           ),
         );
       },

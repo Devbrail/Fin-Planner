@@ -12,7 +12,6 @@ import '../widgets/color_picker_widget.dart';
 import '../widgets/currency_change_widget.dart';
 import '../widgets/setting_option.dart';
 import '../widgets/settings_group_card.dart';
-import '../widgets/user_profile_widget.dart';
 import '../widgets/version_widget.dart';
 
 class SettingsPage extends StatefulWidget {
