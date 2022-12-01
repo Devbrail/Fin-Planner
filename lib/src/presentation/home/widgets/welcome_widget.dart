@@ -60,12 +60,17 @@ class WelcomeWidget extends StatelessWidget {
             builder: (context) {
               if (image.isEmpty) {
                 return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: CircleAvatar(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    child: Icon(
-                      Icons.account_circle_outlined,
-                      color: Theme.of(context).colorScheme.onPrimary,
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipOval(
+                    child: Container(
+                      width: 42,
+                      height: 42,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      child: Icon(
+                        Icons.account_circle_outlined,
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer,
+                      ),
                     ),
                   ),
                 );

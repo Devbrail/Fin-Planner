@@ -18,7 +18,6 @@ part 'splash_state.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc({
-    required this.service,
     required this.accounts,
     required this.categories,
     required this.settings,
@@ -27,7 +26,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     on<CheckLoginEvent>(_checkLogin);
     on<FilterLocaleEvent>(_filterLocale);
   }
-  final SettingsService service;
   final Box<dynamic> settings;
   final Box<Account> accounts;
   final Box<Category> categories;
@@ -72,6 +70,9 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       locales.sort(((a, b) => a.name.compareTo(b.name)));
       emit(CountryLocalesState(locales));
     } else {
+      if (locator.isRegistered<String>(instanceName: 'languageCode')) {
+        locator.unregister<String>(instanceName: 'languageCode');
+      }
       locator.registerFactory<String>(
         () => languageCode,
         instanceName: 'languageCode',

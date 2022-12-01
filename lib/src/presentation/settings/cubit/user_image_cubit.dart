@@ -11,6 +11,8 @@ part 'user_image_state.dart';
 
 class UserNameImageCubit extends Cubit<UserImageState> {
   UserNameImageCubit() : super(UserImageInitial());
+  final settings =
+      locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
   String selectedImage = '';
 
   void pickImage() {
@@ -18,16 +20,12 @@ class UserNameImageCubit extends Cubit<UserImageState> {
     picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
       if (pickedFile != null) {
         selectedImage = pickedFile.path;
-        locator
-            .getAsync<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
-            .then((value) => value.put(userImageKey, selectedImage));
+        settings.put(userImageKey, selectedImage);
       }
     });
   }
 
   void updateUserDetails(String name) {
-    locator
-        .getAsync<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
-        .then((value) => value.put(userNameKey, name));
+    settings.put(userNameKey, name);
   }
 }

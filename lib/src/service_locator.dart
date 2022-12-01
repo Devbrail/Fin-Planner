@@ -154,8 +154,8 @@ void _setupBloc() {
   locator.registerFactory(() => SplashBloc(
         accounts: locator.get(),
         categories: locator.get(),
-        service: locator.get(),
-        settings: locator.get(),
+        settings: locator.get<Box<dynamic>>(
+            instanceName: BoxType.settings.stringValue),
       ));
   locator.registerFactoryAsync(() async => CategoryBloc(
         getCategoryUseCase: await locator.getAsync(),
