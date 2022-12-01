@@ -76,11 +76,8 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
                 },
               );
               return ScreenTypeLayout(
-                mobile: Scaffold(
-                  appBar: context.materialYouAppBar(
-                    AppLocalizations.of(context)!.budgetOverViewLabel,
-                  ),
-                  body: Column(
+                mobile: Material(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FilterBudgetToggleWidget(filterCubit: filterCubit),
@@ -89,14 +86,13 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
                   ),
                 ),
                 tablet: Scaffold(
-                  appBar: context.materialYouAppBar(
-                    AppLocalizations.of(context)!.budgetOverViewLabel,
-                    actions: [
-                      FilterBudgetToggleWidget(filterCubit: filterCubit),
-                    ],
-                  ),
                   body: Column(
-                    children: [child],
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const SizedBox(height: 24),
+                      FilterBudgetToggleWidget(filterCubit: filterCubit),
+                      child
+                    ],
                   ),
                 ),
               );

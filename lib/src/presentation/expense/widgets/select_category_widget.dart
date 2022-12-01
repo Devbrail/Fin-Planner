@@ -136,45 +136,6 @@ class SelectedItem extends StatelessWidget {
                 .toList(),
           ),
         );
-        return ListView.builder(
-          padding: const EdgeInsets.only(
-            bottom: 16,
-            left: 16,
-            right: 16,
-          ),
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (_, index) {
-            final category = categories[index];
-            return Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: FilterChip(
-                selected: category.key == expenseBloc.selectedCategoryId,
-                onSelected: (value) =>
-                    expenseBloc.add(ChangeCategoryEvent(category)),
-                avatar: Icon(
-                  IconData(
-                    category.icon,
-                    fontFamily: 'Material Design Icons',
-                    fontPackage: 'material_design_icons_flutter',
-                  ),
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  side: const BorderSide(width: 1),
-                ),
-                side: const BorderSide(width: 1),
-                showCheckmark: false,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                label: Text(category.name),
-                labelStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant),
-                padding: const EdgeInsets.all(16),
-              ),
-            );
-          },
-        );
       },
     );
   }

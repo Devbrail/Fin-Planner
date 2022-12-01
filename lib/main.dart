@@ -11,8 +11,8 @@ import 'src/app/routes.dart';
 import 'src/core/enum/box_types.dart';
 import 'src/core/theme/paisa_theme.dart';
 import 'src/data/settings/settings_service.dart';
-import 'src/service_locator.dart';
 import 'src/presentation/widgets/app_builder.dart';
+import 'src/service_locator.dart';
 
 Future<void> main() async {
   usePathUrlStrategy();

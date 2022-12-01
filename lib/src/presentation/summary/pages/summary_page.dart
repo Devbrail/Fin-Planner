@@ -46,46 +46,6 @@ class _SummaryPageState extends State<SummaryPage> {
             watch: 300,
           ),
           mobile: Scaffold(
-            appBar: AppBar(
-              actions: [
-                GestureDetector(
-                  onLongPress: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const ColorPalette(),
-                      ),
-                    );
-                  },
-                  onTap: () => showModalBottomSheet(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width >= 700
-                          ? 700
-                          : double.infinity,
-                    ),
-                    isScrollControlled: true,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.0),
-                    ),
-                    context: context,
-                    builder: (_) => const UserProfilePage(),
-                  ),
-                  child: const WelcomeWidget(),
-                ),
-              ],
-              leading: IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
-                onPressed: () {
-                  showSearch(
-                    context: context,
-                    delegate: SearchPage(),
-                  );
-                },
-              ),
-            ),
             body: ListView(
               padding: const EdgeInsets.only(bottom: 124),
               children: [

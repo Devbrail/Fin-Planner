@@ -25,12 +25,9 @@ class AccountsPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data != null) {
           final AccountsBloc accountsBloc = snapshot.data!;
-          return Scaffold(
+          return Material(
             key: const Key('accounts_mobile'),
-            appBar: context.materialYouAppBar(
-              AppLocalizations.of(context)!.accountsLabel,
-            ),
-            body: ValueListenableBuilder<Box<Account>>(
+            child: ValueListenableBuilder<Box<Account>>(
               valueListenable: locator.get<Box<Account>>().listenable(),
               builder: (_, value, __) {
                 final List<Account> accounts = value.values.toList();

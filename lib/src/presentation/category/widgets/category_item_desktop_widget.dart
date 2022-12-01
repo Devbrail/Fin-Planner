@@ -5,8 +5,8 @@ import '../../../app/routes.dart';
 import '../../widgets/paisa_card.dart';
 import '../../../data/category/model/category.dart';
 
-class CategoryItemTabletWidget extends StatelessWidget {
-  const CategoryItemTabletWidget({
+class CategoryItemDesktopWidget extends StatelessWidget {
+  const CategoryItemDesktopWidget({
     Key? key,
     required this.category,
     required this.onPressed,

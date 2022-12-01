@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_paisa/src/core/enum/box_types.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,7 +11,6 @@ part 'user_image_state.dart';
 
 class UserNameImageCubit extends Cubit<UserImageState> {
   UserNameImageCubit() : super(UserImageInitial());
-  final Box<dynamic> settings = locator.get();
   String selectedImage = '';
 
   void pickImage() {
@@ -18,12 +18,16 @@ class UserNameImageCubit extends Cubit<UserImageState> {
     picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
       if (pickedFile != null) {
         selectedImage = pickedFile.path;
-        settings.put(userImageKey, selectedImage);
+        locator
+            .getAsync<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+            .then((value) => value.put(userImageKey, selectedImage));
       }
     });
   }
 
   void updateUserDetails(String name) {
-    settings.put(userNameKey, name);
+    locator
+        .getAsync<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+        .then((value) => value.put(userNameKey, name));
   }
 }

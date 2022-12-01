@@ -2,7 +2,8 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/core/common.dart';
+import 'package:flutter_paisa/src/presentation/search/pages/search_page.dart';
+import '../../../core/common.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -133,6 +134,92 @@ class _LandingPageState extends State<LandingPage>
             watch: 300,
           ),
           mobile: Scaffold(
+            appBar: AppBar(
+              title: BlocBuilder(
+                bloc: homeBloc,
+                builder: (context, state) {
+                  if (state is CurrentIndexState) {
+                    return Text(
+                      state.currentPage.name(context),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    );
+                  }
+                  return Text('data');
+                },
+              ),
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  onPressed: () {
+                    showSearch(
+                      context: context,
+                      delegate: SearchPage(),
+                    );
+                  },
+                ),
+                GestureDetector(
+                  onLongPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ColorPalette(),
+                      ),
+                    );
+                  },
+                  onTap: () => showModalBottomSheet(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width >= 700
+                          ? 700
+                          : double.infinity,
+                    ),
+                    isScrollControlled: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    context: context,
+                    builder: (_) => const UserProfilePage(),
+                  ),
+                  child: const WelcomeWidget(),
+                ),
+              ],
+            ),
+            drawer: Drawer(
+              child: BlocBuilder(
+                bloc: homeBloc,
+                builder: (context, state) {
+                  PageType pageType = PageType.home;
+                  if (state is CurrentIndexState) {
+                    pageType = state.currentPage;
+                  }
+                  return ListView(
+                    children: [
+                      ListTile(
+                        onTap: () {
+                          homeBloc.add(const CurrentIndexEvent(PageType.debts));
+                        },
+                        selected: pageType == PageType.debts,
+                        title: Text(AppLocalizations.of(context)!.debtsLabel),
+                        leading: const Icon(MdiIcons.accountCashOutline),
+                      ),
+                      ListTile(
+                        onTap: () {
+                          GoRouter.of(context).pushNamed(settingsPath);
+                        },
+                        title:
+                            Text(AppLocalizations.of(context)!.settingsLabel),
+                        leading: const Icon(MdiIcons.cog),
+                      )
+                    ],
+                  );
+                },
+              ),
+            ),
             body: ContentWidget(pages: _pages),
             floatingActionButton: _floatingActionButtonBig(),
             bottomNavigationBar: BlocBuilder(
@@ -163,11 +250,6 @@ class _LandingPageState extends State<LandingPage>
                       label: AppLocalizations.of(context)!.budgetLabel,
                       icon: const Icon(Icons.account_balance_wallet_outlined),
                       selectedIcon: const Icon(Icons.account_balance_wallet),
-                    ),
-                    NavigationDestination(
-                      label: AppLocalizations.of(context)!.debtsLabel,
-                      icon: const Icon(MdiIcons.accountCashOutline),
-                      selectedIcon: const Icon(MdiIcons.accountCash),
                     ),
                   ],
                 );
@@ -291,7 +373,8 @@ class _LandingPageState extends State<LandingPage>
                                         PageType.budgetOverview)),
                               ),
                               NavigationBarItem(
-                                title: AppLocalizations.of(context)!.debtsLabel,
+                                title:
+                                    AppLocalizations.of(context)!.budgetLabel,
                                 icon: MdiIcons.accountCash,
                                 isSelected: state.currentPage == PageType.debts,
                                 onPressed: () => homeBloc.add(
@@ -307,9 +390,10 @@ class _LandingPageState extends State<LandingPage>
                   },
                 ),
                 Expanded(
-                    child: ContentWidget(
-                  pages: _pages,
-                )),
+                  child: ContentWidget(
+                    pages: _pages,
+                  ),
+                ),
               ],
             ),
           ),

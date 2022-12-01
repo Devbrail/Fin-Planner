@@ -3,11 +3,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../widgets/paisa_empty_widget.dart';
 import '../../../data/category/model/category.dart';
 import '../../../service_locator.dart';
+import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/category_bloc.dart';
-import 'category_item_widget.dart';
+import 'category_item_desktop_widget.dart';
+import 'category_item_mobile_widget.dart';
+import 'category_item_tablet_widget.dart';
 
 class CategoryListWidget extends StatelessWidget {
   const CategoryListWidget({
@@ -34,6 +36,11 @@ class CategoryListWidget extends StatelessWidget {
           );
         }
         return ScreenTypeLayout(
+          breakpoints: const ScreenBreakpoints(
+            tablet: 600,
+            desktop: 700,
+            watch: 300,
+          ),
           mobile: ListView.builder(
             padding: const EdgeInsets.only(
               bottom: 124,
@@ -45,7 +52,7 @@ class CategoryListWidget extends StatelessWidget {
             shrinkWrap: true,
             itemBuilder: (_, index) {
               final category = categories[index];
-              return CategoryItemWidget(
+              return CategoryItemMobileWidget(
                 category: category,
                 onPressed: (category) {
                   addCategoryBloc.add(CategoryDeleteEvent(category));
@@ -60,14 +67,36 @@ class CategoryListWidget extends StatelessWidget {
               right: 8,
               top: 8,
             ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: crossAxisCount,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
             ),
             itemCount: categories.length,
             shrinkWrap: true,
             itemBuilder: (_, index) {
               final category = categories[index];
-              return CategoryItemWidget(
+              return CategoryItemTabletWidget(
+                category: category,
+                onPressed: (category) {
+                  addCategoryBloc.add(CategoryDeleteEvent(category));
+                },
+              );
+            },
+          ),
+          desktop: GridView.builder(
+            padding: const EdgeInsets.only(
+              bottom: 124,
+              left: 8,
+              right: 8,
+              top: 8,
+            ),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5,
+            ),
+            itemCount: categories.length,
+            shrinkWrap: true,
+            itemBuilder: (_, index) {
+              final category = categories[index];
+              return CategoryItemDesktopWidget(
                 category: category,
                 onPressed: (category) {
                   addCategoryBloc.add(CategoryDeleteEvent(category));

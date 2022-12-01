@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/service_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -10,26 +11,21 @@ import '../bloc/accounts_bloc.dart';
 import '../widgets/account_card.dart';
 import '../widgets/card_type_drop_down.dart';
 
+final GlobalKey<FormState> _form = GlobalKey<FormState>();
+
 class AddAccountPage extends StatefulWidget {
   const AddAccountPage({
     Key? key,
     this.accountId,
-    required this.accountsBloc,
   }) : super(key: key);
 
   final String? accountId;
-  final AccountsBloc accountsBloc;
 
   @override
   AddAccountPageState createState() => AddAccountPageState();
 }
 
 class AddAccountPageState extends State<AddAccountPage> {
-  final GlobalKey<FormState> _form = GlobalKey<FormState>();
-
-  late final AccountsBloc accountsBloc = widget.accountsBloc
-    ..add(FetchAccountFromIdEvent(widget.accountId));
-
   late TextEditingController accountNumberController = TextEditingController()
     ..addListener(_updated);
   late TextEditingController accountHolderController = TextEditingController()
@@ -41,263 +37,301 @@ class AddAccountPageState extends State<AddAccountPage> {
 
   bool get isAccountAddOrUpdate => widget.accountId == null;
 
-  void _addOrUpdateAccount() {
-    final isValid = _form.currentState!.validate();
-    if (!isValid) {
-      return;
-    }
-    accountsBloc.add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
-  }
-
   void _updated() {
-    setState(() {});
+    //setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => accountsBloc,
-      child: BlocConsumer(
-        bloc: accountsBloc,
-        listener: (context, state) {
-          if (state is AddAccountState) {
-            context.showMaterialSnackBar(
-              isAccountAddOrUpdate
-                  ? AppLocalizations.of(context)!.addedCardLabel
-                  : AppLocalizations.of(context)!.updatedCardLabel,
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
-            );
-            context.pop();
-          }
-          if (state is AccountDeletedState) {
-            context.showMaterialSnackBar(
-              AppLocalizations.of(context)!.deletedCardLabel,
-              backgroundColor: Theme.of(context).colorScheme.error,
-              color: Theme.of(context).colorScheme.onError,
-            );
-            context.pop();
-          } else if (state is AccountErrorState) {
-            context.showMaterialSnackBar(
-              state.errorString,
-              backgroundColor: Theme.of(context).colorScheme.errorContainer,
-              color: Theme.of(context).colorScheme.onErrorContainer,
-            );
-          } else if (state is AccountSuccessState) {
-            accountNameController.text = state.account.bankName;
-            accountNameController.selection =
-                TextSelection.collapsed(offset: state.account.bankName.length);
+    return FutureBuilder<AccountsBloc>(
+      future: locator.getAsync<AccountsBloc>(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data != null) {
+          final AccountsBloc accountsBloc = snapshot.data!
+            ..add(FetchAccountFromIdEvent(widget.accountId));
+          return BlocProvider(
+            create: (context) => accountsBloc,
+            child: BlocConsumer(
+              bloc: accountsBloc,
+              listener: (context, state) {
+                if (state is AddAccountState) {
+                  context.showMaterialSnackBar(
+                    isAccountAddOrUpdate
+                        ? AppLocalizations.of(context)!.addedCardLabel
+                        : AppLocalizations.of(context)!.updatedCardLabel,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primaryContainer,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  );
+                  context.pop();
+                }
+                if (state is AccountDeletedState) {
+                  context.showMaterialSnackBar(
+                    AppLocalizations.of(context)!.deletedCardLabel,
+                    backgroundColor: Theme.of(context).colorScheme.error,
+                    color: Theme.of(context).colorScheme.onError,
+                  );
+                  context.pop();
+                } else if (state is AccountErrorState) {
+                  context.showMaterialSnackBar(
+                    state.errorString,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.errorContainer,
+                    color: Theme.of(context).colorScheme.onErrorContainer,
+                  );
+                } else if (state is AccountSuccessState) {
+                  accountNameController.text = state.account.bankName;
+                  accountNameController.selection = TextSelection.collapsed(
+                      offset: state.account.bankName.length);
 
-            accountNumberController.text = state.account.number;
-            accountNumberController.selection =
-                TextSelection.collapsed(offset: state.account.number.length);
+                  accountNumberController.text = state.account.number;
+                  accountNumberController.selection = TextSelection.collapsed(
+                      offset: state.account.number.length);
 
-            accountHolderController.text = state.account.name;
-            accountHolderController.selection =
-                TextSelection.collapsed(offset: state.account.name.length);
+                  accountHolderController.text = state.account.name;
+                  accountHolderController.selection = TextSelection.collapsed(
+                      offset: state.account.name.length);
 
-            accountInitialAmountController.text =
-                state.account.amount.toString();
-            accountInitialAmountController.selection = TextSelection.collapsed(
-                offset: state.account.amount.toString().length);
-          } else if (state is UpdateCardTypeState) {
-            accountsBloc.selectedType = state.cardType;
-          }
-        },
-        builder: (context, state) {
-          return ScreenTypeLayout(
-            mobile: Scaffold(
-              appBar: context.materialYouAppBar(
-                isAccountAddOrUpdate
-                    ? AppLocalizations.of(context)!.addCardLabel
-                    : AppLocalizations.of(context)!.updateCardLabel,
-                actions: [
-                  isAccountAddOrUpdate
-                      ? const SizedBox.shrink()
-                      : IconButton(
-                          onPressed: () => accountsBloc
-                              .add(ClearAccountEvent(widget.accountId!)),
-                          icon: Icon(
-                            Icons.delete_rounded,
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                        ),
-                  IconButton(
-                    onPressed: _showInfo,
-                    icon: const Icon(Icons.info_rounded),
-                  ),
-                ],
-              ),
-              body: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      child: CardTypeButtons(
-                        onSelected: (cardType) =>
-                            accountsBloc.add(UpdateCardTypeEvent(cardType)),
-                        selectedCardType: accountsBloc.selectedType,
-                      ),
-                    ),
-                    AccountCard(
-                      cardNumber: accountNumberController.value.text,
-                      cardHolder: accountHolderController.value.text,
-                      bankName: accountNameController.value.text,
-                      cardType: accountsBloc.selectedType,
-                    ),
-                    Form(
-                      key: _form,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            const SizedBox(height: 16),
-                            AccountCardHolderNameWidget(
-                              controller: accountHolderController,
-                            ),
-                            const SizedBox(height: 16),
-                            AccountNameWidget(
-                              controller: accountNameController,
-                            ),
-                            const SizedBox(height: 16),
-                            AccountInitialAmountWidget(
-                              controller: accountInitialAmountController,
-                            ),
-                            const SizedBox(height: 16),
-                            AccountNumberWidget(
-                              controller: accountNumberController,
-                            ),
-                            const SizedBox(height: 16),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              bottomNavigationBar: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    onPressed: _addOrUpdateAccount,
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
-                    ),
-                    child: Text(
+                  accountInitialAmountController.text =
+                      state.account.amount.toString();
+                  accountInitialAmountController.selection =
+                      TextSelection.collapsed(
+                          offset: state.account.amount.toString().length);
+                } else if (state is UpdateCardTypeState) {
+                  accountsBloc.selectedType = state.cardType;
+                }
+              },
+              builder: (context, state) {
+                return ScreenTypeLayout(
+                  mobile: Scaffold(
+                    appBar: context.materialYouAppBar(
                       isAccountAddOrUpdate
                           ? AppLocalizations.of(context)!.addCardLabel
-                          : AppLocalizations.of(context)!.updateLabel,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize:
-                            Theme.of(context).textTheme.headline6?.fontSize,
-                      ),
+                          : AppLocalizations.of(context)!.updateCardLabel,
+                      actions: [
+                        isAccountAddOrUpdate
+                            ? const SizedBox.shrink()
+                            : IconButton(
+                                onPressed: () => accountsBloc
+                                    .add(ClearAccountEvent(widget.accountId!)),
+                                icon: Icon(
+                                  Icons.delete_rounded,
+                                  color: Theme.of(context).colorScheme.error,
+                                ),
+                              ),
+                        IconButton(
+                          onPressed: _showInfo,
+                          icon: const Icon(Icons.info_rounded),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ),
-            ),
-            tablet: Scaffold(
-              appBar: context.materialYouAppBar(
-                AppLocalizations.of(context)!.addCardLabel,
-                actions: [
-                  IconButton(
-                    onPressed: _showInfo,
-                    icon: const Icon(Icons.info_rounded),
-                  ),
-                  isAccountAddOrUpdate
-                      ? const SizedBox.shrink()
-                      : IconButton(
-                          onPressed: () => accountsBloc
-                              .add(ClearAccountEvent(widget.accountId!)),
-                          icon: Icon(
-                            Icons.delete_rounded,
-                            color: Theme.of(context).colorScheme.error,
+                    body: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            child: CardTypeButtons(
+                              onSelected: (cardType) => accountsBloc
+                                  .add(UpdateCardTypeEvent(cardType)),
+                              selectedCardType: accountsBloc.selectedType,
+                            ),
                           ),
-                        )
-                ],
-              ),
-              body: SingleChildScrollView(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: AccountCard(
-                        cardNumber: accountNumberController.value.text,
-                        cardHolder: accountHolderController.value.text,
-                        bankName: accountNameController.value.text,
-                        cardType: accountsBloc.selectedType,
+                          AccountCard(
+                            cardNumber: accountNumberController.value.text,
+                            cardHolder: accountHolderController.value.text,
+                            bankName: accountNameController.value.text,
+                            cardType: accountsBloc.selectedType,
+                          ),
+                          Form(
+                            key: _form,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  const SizedBox(height: 16),
+                                  AccountCardHolderNameWidget(
+                                    controller: accountHolderController,
+                                    accountBloc: accountsBloc,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  AccountNameWidget(
+                                    controller: accountNameController,
+                                    accountBloc: accountsBloc,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  AccountInitialAmountWidget(
+                                    controller: accountInitialAmountController,
+                                    accountBloc: accountsBloc,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  AccountNumberWidget(
+                                    controller: accountNumberController,
+                                    accountBloc: accountsBloc,
+                                  ),
+                                  const SizedBox(height: 16),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                    Expanded(
-                      child: Form(
-                        key: _form,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              CardTypeButtons(
-                                onSelected: (cardType) {
-                                  accountsBloc.selectedType = cardType;
-                                },
-                                selectedCardType: accountsBloc.selectedType,
-                              ),
-                              const SizedBox(height: 16),
-                              AccountCardHolderNameWidget(
-                                controller: accountHolderController,
-                              ),
-                              const SizedBox(height: 16),
-                              AccountNameWidget(
-                                controller: accountNameController,
-                              ),
-                              const SizedBox(height: 16),
-                              AccountInitialAmountWidget(
-                                controller: accountInitialAmountController,
-                              ),
-                              const SizedBox(height: 16),
-                              AccountNumberWidget(
-                                controller: accountNumberController,
-                              ),
-                              const SizedBox(height: 16),
-                              ElevatedButton(
-                                onPressed: _addOrUpdateAccount,
-                                style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.all(24),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(32.0),
-                                  ),
-                                ),
-                                child: Text(
-                                  AppLocalizations.of(context)!.addCardLabel,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .headline6
-                                        ?.fontSize,
-                                  ),
-                                ),
-                              ),
-                            ],
+                    bottomNavigationBar: SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            final isValid = _form.currentState!.validate();
+                            if (!isValid) {
+                              return;
+                            }
+                            accountsBloc.add(
+                                AddOrUpdateAccountEvent(isAccountAddOrUpdate));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.all(16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32.0),
+                            ),
+                          ),
+                          child: Text(
+                            isAccountAddOrUpdate
+                                ? AppLocalizations.of(context)!.addCardLabel
+                                : AppLocalizations.of(context)!.updateLabel,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.fontSize,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                  tablet: Scaffold(
+                    appBar: context.materialYouAppBar(
+                      AppLocalizations.of(context)!.addCardLabel,
+                      actions: [
+                        IconButton(
+                          onPressed: _showInfo,
+                          icon: const Icon(Icons.info_rounded),
+                        ),
+                        isAccountAddOrUpdate
+                            ? const SizedBox.shrink()
+                            : IconButton(
+                                onPressed: () => accountsBloc
+                                    .add(ClearAccountEvent(widget.accountId!)),
+                                icon: Icon(
+                                  Icons.delete_rounded,
+                                  color: Theme.of(context).colorScheme.error,
+                                ),
+                              )
+                      ],
+                    ),
+                    body: SingleChildScrollView(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: AccountCard(
+                              cardNumber: accountNumberController.value.text,
+                              cardHolder: accountHolderController.value.text,
+                              bankName: accountNameController.value.text,
+                              cardType: accountsBloc.selectedType,
+                            ),
+                          ),
+                          Expanded(
+                            child: Form(
+                              key: _form,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    CardTypeButtons(
+                                      onSelected: (cardType) {
+                                        accountsBloc.selectedType = cardType;
+                                      },
+                                      selectedCardType:
+                                          accountsBloc.selectedType,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    AccountCardHolderNameWidget(
+                                      controller: accountHolderController,
+                                      accountBloc: accountsBloc,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    AccountNameWidget(
+                                      controller: accountNameController,
+                                      accountBloc: accountsBloc,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    AccountInitialAmountWidget(
+                                      controller:
+                                          accountInitialAmountController,
+                                      accountBloc: accountsBloc,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    AccountNumberWidget(
+                                      controller: accountNumberController,
+                                      accountBloc: accountsBloc,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        final isValid =
+                                            _form.currentState!.validate();
+                                        if (!isValid) {
+                                          return;
+                                        }
+                                        accountsBloc.add(
+                                            AddOrUpdateAccountEvent(
+                                                isAccountAddOrUpdate));
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        padding: const EdgeInsets.all(24),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(32.0),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        AppLocalizations.of(context)!
+                                            .addCardLabel,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: Theme.of(context)
+                                              .textTheme
+                                              .headline6
+                                              ?.fontSize,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           );
-        },
-      ),
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 
@@ -365,46 +399,63 @@ class AddAccountPageState extends State<AddAccountPage> {
 }
 
 class AccountCardHolderNameWidget extends StatelessWidget {
+  const AccountCardHolderNameWidget({
+    super.key,
+    required this.controller,
+    required this.accountBloc,
+  });
   final TextEditingController controller;
-
-  const AccountCardHolderNameWidget({super.key, required this.controller});
+  final AccountsBloc accountBloc;
 
   @override
   Widget build(BuildContext context) {
-    return PaisaTextFormField(
-      controller: controller,
-      label: AppLocalizations.of(context)!.cardHolderLabel,
-      hintText: AppLocalizations.of(context)!.enterCardHolderNameLabel,
-      keyboardType: TextInputType.name,
-      onChanged: (value) =>
-          BlocProvider.of<AccountsBloc>(context).accountHolderName = value,
+    return Builder(
+      builder: (context) {
+        return PaisaTextFormField(
+          controller: controller,
+          label: AppLocalizations.of(context)!.cardHolderLabel,
+          hintText: AppLocalizations.of(context)!.enterCardHolderNameLabel,
+          keyboardType: TextInputType.name,
+          onChanged: (value) => accountBloc.accountHolderName = value,
+        );
+      },
     );
   }
 }
 
 class AccountNameWidget extends StatelessWidget {
+  const AccountNameWidget({
+    super.key,
+    required this.controller,
+    required this.accountBloc,
+  });
   final TextEditingController controller;
-
-  const AccountNameWidget({super.key, required this.controller});
+  final AccountsBloc accountBloc;
 
   @override
   Widget build(BuildContext context) {
-    return PaisaTextFormField(
-      controller: controller,
-      label: AppLocalizations.of(context)!.accountNameLabel,
-      hintText: AppLocalizations.of(context)!.enterAccountNameLabel,
-      keyboardType: TextInputType.name,
-      onChanged: (value) =>
-          BlocProvider.of<AccountsBloc>(context).accountName = value,
-    );
+    return Builder(builder: (context) {
+      return PaisaTextFormField(
+        controller: controller,
+        label: AppLocalizations.of(context)!.accountNameLabel,
+        hintText: AppLocalizations.of(context)!.enterAccountNameLabel,
+        keyboardType: TextInputType.name,
+        onChanged: (value) {
+          accountBloc.accountName = value;
+        },
+      );
+    });
   }
 }
 
 class AccountNumberWidget extends StatelessWidget {
+  const AccountNumberWidget({
+    super.key,
+    required this.controller,
+    required this.accountBloc,
+  });
   final TextEditingController controller;
-
-  const AccountNumberWidget({super.key, required this.controller});
-
+  final AccountsBloc accountBloc;
   @override
   Widget build(BuildContext context) {
     return PaisaTextFormField(
@@ -413,17 +464,19 @@ class AccountNumberWidget extends StatelessWidget {
       label: AppLocalizations.of(context)!.lastFourDigitLabel,
       hintText: AppLocalizations.of(context)!.enterNumberOptionalLabel,
       keyboardType: TextInputType.number,
-      onChanged: (value) =>
-          BlocProvider.of<AccountsBloc>(context).accountNumber = value,
+      onChanged: (value) => accountBloc.accountNumber = value,
     );
   }
 }
 
 class AccountInitialAmountWidget extends StatelessWidget {
+  const AccountInitialAmountWidget({
+    super.key,
+    required this.controller,
+    required this.accountBloc,
+  });
   final TextEditingController controller;
-
-  const AccountInitialAmountWidget({super.key, required this.controller});
-
+  final AccountsBloc accountBloc;
   @override
   Widget build(BuildContext context) {
     return PaisaTextFormField(
@@ -433,7 +486,7 @@ class AccountInitialAmountWidget extends StatelessWidget {
       keyboardType: TextInputType.number,
       onChanged: (value) {
         double? amount = double.tryParse(value);
-        BlocProvider.of<AccountsBloc>(context).initialAmount = amount;
+        accountBloc.initialAmount = amount;
       },
     );
   }

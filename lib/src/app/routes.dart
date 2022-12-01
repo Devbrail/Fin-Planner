@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/src/presentation/debits/pages/debts_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -38,7 +39,8 @@ const expensesByCategory = 'expenses';
 const exportAndImport = 'export-import';
 const settingsPath = 'settings';
 const settingsName = 'settings';
-const debitAddOrEditPath = 'edit-debit';
+const debtAddOrEditPath = 'edit-debt';
+const debtPage = 'debt';
 const addDebitName = 'debit-add';
 
 final settings = Hive.box(BoxType.settings.stringValue);
@@ -128,16 +130,13 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: addAccountPath,
           path: addAccountPath,
-          builder: (context, state) => AddAccountPage(
-            accountsBloc: locator.get(),
-          ),
+          builder: (context, state) => const AddAccountPage(),
         ),
         GoRoute(
           name: editAccountPath,
           path: 'edit-account/:aid',
           builder: (context, state) => AddAccountPage(
             accountId: state.params['aid'],
-            accountsBloc: locator.get(),
           ),
         ),
         GoRoute(
@@ -165,11 +164,16 @@ final GoRouter goRouter = GoRouter(
           builder: (context, state) => const AddOrEditDebtPage(),
         ),
         GoRoute(
-          name: debitAddOrEditPath,
+          name: debtAddOrEditPath,
           path: 'debt/:did',
           builder: (context, state) => AddOrEditDebtPage(
             debtId: state.params['did'],
           ),
+        ),
+        GoRoute(
+          name: debtPage,
+          path: 'debt',
+          builder: (context, state) => const DebtsPage(),
         ),
       ],
     ),

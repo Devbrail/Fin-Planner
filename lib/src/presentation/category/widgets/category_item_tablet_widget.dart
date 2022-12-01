@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
-import '../../widgets/paisa_card.dart';
 import '../../../data/category/model/category.dart';
+import '../../widgets/paisa_card.dart';
 
 class CategoryItemTabletWidget extends StatelessWidget {
   const CategoryItemTabletWidget({

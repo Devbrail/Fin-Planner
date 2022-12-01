@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/core/enum/box_types.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -55,11 +56,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     AppLocalizations.of(context)!.profileLabel,
                     style: Theme.of(context).textTheme.headline6,
                   ),
-                  trailing: IconButton(
-                    onPressed: () =>
-                        GoRouter.of(context).pushNamed(settingsPath),
-                    icon: const Icon(MdiIcons.cog),
-                  ),
                 ),
                 Row(
                   children: [
@@ -109,8 +105,9 @@ class UserTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable:
-          locator.get<Box<dynamic>>().listenable(keys: [userNameKey]),
+      valueListenable: locator
+          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+          .listenable(keys: [userNameKey]),
       builder: (context, value, _) {
         nameController.text = value.get(userNameKey, defaultValue: 'Name');
         return Padding(
@@ -153,7 +150,9 @@ class UserImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: locator.get<Box<dynamic>>().listenable(
+      valueListenable: locator
+          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+          .listenable(
         keys: [userImageKey],
       ),
       builder: (context, value, _) {

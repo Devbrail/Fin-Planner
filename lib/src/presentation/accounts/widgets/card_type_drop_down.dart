@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../widgets/paisa_chip.dart';
 
 import '../../../core/enum/card_type.dart';
+import '../../widgets/paisa_chip.dart';
 
 class CardTypeButtons extends StatefulWidget {
   const CardTypeButtons({

@@ -2,6 +2,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/core/enum/box_types.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../data/settings/settings_service.dart';
@@ -22,47 +23,56 @@ class ColorSelectorWidget extends StatefulWidget {
 }
 
 class ColorSelectorWidgetState extends State<ColorSelectorWidget> {
-  final Box<dynamic> settings = locator.get();
-
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box>(
-      valueListenable: settings.listenable(keys: [
-        appColorKey,
-        dynamicColorKey,
-      ]),
-      builder: (context, value, _) {
-        final isDynamic = value.get(dynamicColorKey, defaultValue: false);
-        final color = value.get(appColorKey, defaultValue: 0xFF795548);
-        return SettingsOption(
-          title: AppLocalizations.of(context)!.accentColorLabel,
-          subtitle: isDynamic
-              ? AppLocalizations.of(context)!.dynamicColorLabel
-              : AppLocalizations.of(context)!.customLabel,
-          trailing: CircleAvatar(
-            backgroundColor: Color(color),
-            maxRadius: 16,
-          ),
-          onTap: () {
-            showModalBottomSheet(
-              isScrollControlled: true,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+    return FutureBuilder<Box<dynamic>>(
+      future: locator.getAsync<Box<dynamic>>(
+          instanceName: BoxType.settings.stringValue),
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data != null) {
+          return ValueListenableBuilder<Box<dynamic>>(
+            valueListenable: snapshot.data!.listenable(keys: [
+              appColorKey,
+              dynamicColorKey,
+            ]),
+            builder: (context, value, _) {
+              final isDynamic = value.get(dynamicColorKey, defaultValue: false);
+              final color = value.get(appColorKey, defaultValue: 0xFF795548);
+              return SettingsOption(
+                title: AppLocalizations.of(context)!.accentColorLabel,
+                subtitle: isDynamic
+                    ? AppLocalizations.of(context)!.dynamicColorLabel
+                    : AppLocalizations.of(context)!.customLabel,
+                trailing: CircleAvatar(
+                  backgroundColor: Color(color),
+                  maxRadius: 16,
                 ),
-              ),
-              context: context,
-              constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width >= 700
-                    ? 700
-                    : double.infinity,
-              ),
-              builder: (context) =>
-                  ColorSelectionWidget(valueListenable: settings.listenable()),
-            );
-          },
-        );
+                onTap: () {
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
+                      ),
+                    ),
+                    context: context,
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width >= 700
+                          ? 700
+                          : double.infinity,
+                    ),
+                    builder: (context) => ColorSelectionWidget(
+                      valueListenable: snapshot.data!.listenable(),
+                    ),
+                  );
+                },
+              );
+            },
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
       },
     );
   }

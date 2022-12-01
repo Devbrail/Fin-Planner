@@ -32,30 +32,10 @@ class _SettingsPageState extends State<SettingsPage> {
       body: ListView(
         shrinkWrap: true,
         children: [
-          SettingsOption(
-            title: AppLocalizations.of(context)!.profileLabel,
-            onTap: () {
-              showModalBottomSheet(
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width >= 700
-                      ? 700
-                      : double.infinity,
-                ),
-                isScrollControlled: true,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                context: context,
-                builder: (_) => const UserProfilePage(),
-              );
-            },
-            trailing: const Icon(Icons.keyboard_arrow_right),
-          ),
           SettingsGroup(
             title: AppLocalizations.of(context)!.colorsLabel,
             options: [
               const ChooseThemeModeWidget(),
-              const Divider(),
               ColorSelectorWidget(
                 onSelectedColor: (color) => AppBuilder.of(context)?.rebuild(),
               ),

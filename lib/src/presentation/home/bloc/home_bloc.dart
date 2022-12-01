@@ -39,8 +39,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         return 2;
       case PageType.budgetOverview:
         return 3;
-      case PageType.debts:
-        return 4;
+      default:
+        return 0;
     }
   }
 
