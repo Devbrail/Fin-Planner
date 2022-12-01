@@ -114,6 +114,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                                 children: [
                                   const SelectIconWidget(),
                                   SetBudgetWidget(controller: budgetController),
+                                  const ColorPickerWidget(),
                                 ],
                               ),
                             ),
