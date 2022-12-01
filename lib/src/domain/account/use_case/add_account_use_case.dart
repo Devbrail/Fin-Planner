@@ -2,9 +2,9 @@ import '../../../core/enum/card_type.dart';
 import '../repository/account_repository.dart';
 
 class AddAccountUseCase {
-  final AccountRepository repository;
+  final AccountRepository accountRepository;
 
-  AddAccountUseCase(this.repository);
+  AddAccountUseCase({required this.accountRepository});
 
   Future<void> execute({
     required String bankName,
@@ -13,7 +13,7 @@ class AddAccountUseCase {
     required CardType cardType,
     required double amount,
   }) =>
-      repository.addAccount(
+      accountRepository.addAccount(
         bankName: bankName,
         holderName: holderName,
         number: number,

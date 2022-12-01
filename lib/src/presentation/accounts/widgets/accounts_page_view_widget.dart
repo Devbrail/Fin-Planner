@@ -39,7 +39,7 @@ class AccountPageViewWidget extends StatelessWidget {
                 bankName: account.bankName,
                 cardType: account.cardType ?? CardType.bank,
                 onDelete: () => accountBloc.add(DeleteAccountEvent(account)),
-                onTap: () => context.goNamed(
+                onTap: () => GoRouter.of(context).goNamed(
                   editAccountPath,
                   params: <String, String>{'aid': account.superId.toString()},
                 ),

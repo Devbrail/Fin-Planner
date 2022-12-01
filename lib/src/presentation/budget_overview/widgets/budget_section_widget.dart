@@ -18,7 +18,7 @@ class BudgetSection extends StatelessWidget {
 
   final String name;
   final List<Expense> values;
-  final CategoryLocalDataSource dataSource;
+  final LocalCategoryManagerDataSource dataSource;
 
   List<MapEntry<Category, List<Expense>>> _filterCategory(
     List<Expense> expenses,

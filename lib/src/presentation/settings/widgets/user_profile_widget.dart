@@ -8,7 +8,6 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
-import '../../../core/enum/box_types.dart';
 import '../../../data/settings/settings_service.dart';
 import '../../../service_locator.dart';
 import '../cubit/user_image_cubit.dart';

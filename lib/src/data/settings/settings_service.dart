@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../../core/enum/box_types.dart';
-
 const String themeModeKey = 'key_theme_mode';
 const String appColorKey = 'key_app_color';
 const String dynamicColorKey = 'keydynamicColor';
-const String pushNotificationKey = 'key_push_notification';
 const String biometricKey = 'key_biometric';
 const String userNameKey = 'user_name_key';
-const String userLoginKey = 'user_login_key';
 const String userImageKey = 'user_image_key';
 const String userLanguageKey = 'user_laguage_key';
 const String scheduleTime = 'schedule_time_key';
 
 abstract class SettingsService {
-  Future<void> setThemeMode(ThemeMode themeMode);
-  Future<ThemeMode> themeMode();
-
-  Future<void> setUpdateNotification(bool mode);
-  Future<bool> notification();
-
   Future<void> setThemeColor(Color color);
   Future<Color> themeColor();
 
@@ -29,9 +19,6 @@ abstract class SettingsService {
 
   Future<String> userName();
   Future<void> setUserName(String name);
-
-  Future<bool> isLoggedIn();
-  Future<void> setLoggedIn(bool isLogin);
 
   Future<String> userImage();
   Future<void> setUserImage(String name);
@@ -56,16 +43,6 @@ class SettingsServiceImpl implements SettingsService {
   }
 
   @override
-  Future<bool> isLoggedIn() async {
-    return box.get(userLoginKey, defaultValue: false) ?? false;
-  }
-
-  @override
-  Future<void> setLoggedIn(bool isLogin) async {
-    await box.put(userLoginKey, isLogin);
-  }
-
-  @override
   Future<String> userImage() async {
     return box.get(userImageKey, defaultValue: '');
   }
@@ -83,26 +60,6 @@ class SettingsServiceImpl implements SettingsService {
   @override
   Future<void> setLanguage(Locale locale) async {
     await box.put(userLanguageKey, locale.languageCode);
-  }
-
-  @override
-  Future<void> setThemeMode(ThemeMode themeMode) async {
-    await box.put(themeModeKey, themeMode.index);
-  }
-
-  @override
-  Future<ThemeMode> themeMode() async {
-    return ThemeMode.values[box.get(themeModeKey, defaultValue: 0)];
-  }
-
-  @override
-  Future<void> setUpdateNotification(bool mode) async {
-    await box.put(pushNotificationKey, mode);
-  }
-
-  @override
-  Future<bool> notification() async {
-    return box.get(pushNotificationKey, defaultValue: false);
   }
 
   @override

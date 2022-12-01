@@ -162,9 +162,9 @@ class SelectedItem extends StatelessWidget {
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
-                  side: BorderSide(width: 1),
+                  side: const BorderSide(width: 1),
                 ),
-                side: BorderSide(width: 1),
+                side: const BorderSide(width: 1),
                 showCheckmark: false,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 label: Text(category.name),

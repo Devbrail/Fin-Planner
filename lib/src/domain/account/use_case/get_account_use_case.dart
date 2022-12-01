@@ -2,9 +2,10 @@ import '../../../data/accounts/model/account.dart';
 import '../repository/account_repository.dart';
 
 class GetAccountUseCase {
-  final AccountRepository repository;
+  final AccountRepository accountRepository;
 
-  GetAccountUseCase(this.repository);
+  GetAccountUseCase({required this.accountRepository});
 
-  Account? execute(int accountId) => repository.fetchAccountFromId(accountId);
+  Account? execute(int accountId) =>
+      accountRepository.fetchAccountFromId(accountId);
 }

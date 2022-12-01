@@ -1,13 +1,15 @@
 import 'package:hive/hive.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
 import '../../expense/model/expense.dart';
 import '../model/category.dart';
 import 'category_local_data_source.dart';
 
-class CategoryLocalDataSourceImpl implements CategoryLocalDataSource {
-  late final categoryBox = Hive.box<Category>(BoxType.category.stringValue);
+class LocalCategoryManagerDataSourceImpl
+    implements LocalCategoryManagerDataSource {
+  final Box<Category> categoryBox;
+
+  LocalCategoryManagerDataSourceImpl(this.categoryBox);
 
   @override
   Future<void> addCategory(Category category) async {
@@ -19,8 +21,7 @@ class CategoryLocalDataSourceImpl implements CategoryLocalDataSource {
   @override
   Future<void> deleteCategory(int key) async {
     final expenseBox = locator.get<Box<Expense>>();
-    final values = expenseBox.values.toList();
-    final keys = values
+    final keys = expenseBox.values
         .where((element) => element.categoryId == key)
         .map((e) => e.key)
         .toList();
@@ -35,10 +36,8 @@ class CategoryLocalDataSourceImpl implements CategoryLocalDataSource {
   }
 
   @override
-  Category fetchCategory(int categoryId) {
-    final box = Hive.box<Category>(BoxType.category.stringValue);
-    return box.values.firstWhere((element) => element.key == categoryId);
-  }
+  Category fetchCategory(int categoryId) =>
+      categoryBox.values.firstWhere((element) => element.key == categoryId);
 
   @override
   Future<Category?> fetchCategoryFromId(int categoryId) async =>

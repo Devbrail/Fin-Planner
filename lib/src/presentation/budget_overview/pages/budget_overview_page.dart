@@ -22,7 +22,7 @@ class BudgetOverViewPage extends StatefulWidget {
     required this.filterDateCubit,
   }) : super(key: key);
 
-  final CategoryLocalDataSource categoryDataSource;
+  final Future<LocalCategoryManagerDataSource> categoryDataSource;
   final FilterDateCubit filterDateCubit;
   @override
   State<BudgetOverViewPage> createState() => _BudgetOverViewPageState();
@@ -33,69 +33,78 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box<Expense>>(
-      valueListenable: locator.get<Box<Expense>>().listenable(),
-      builder: (context, value, _) {
-        List<Expense> expenses = value.budgetOverView;
-        if (expenses.isEmpty) {
-          return EmptyWidget(
-            icon: Icons.paid,
-            title: AppLocalizations.of(context)!.errorNoBudgetLabel,
-            description:
-                AppLocalizations.of(context)!.errorNoBudgetDescriptionLabel,
-          );
-        }
-        final child = FilterDateRangeWidget(
-          filterDateCubit: widget.filterDateCubit,
-          expenses: expenses,
-          builder: (List<Expense> expenses) {
-            return FilterBudgetWidget(
-              filterCubit: filterCubit,
-              expenses: expenses,
-              builder: (filteredBudger) {
-                return Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(bottom: 128),
-                    itemCount: filteredBudger.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return BudgetSection(
-                        dataSource: widget.categoryDataSource,
-                        name: filteredBudger[index].key,
-                        values: filteredBudger[index].value,
+    return FutureBuilder<LocalCategoryManagerDataSource>(
+      future: widget.categoryDataSource,
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data != null) {
+          return ValueListenableBuilder<Box<Expense>>(
+            valueListenable: locator.get<Box<Expense>>().listenable(),
+            builder: (context, value, _) {
+              List<Expense> expenses = value.budgetOverView;
+              if (expenses.isEmpty) {
+                return EmptyWidget(
+                  icon: Icons.paid,
+                  title: AppLocalizations.of(context)!.errorNoBudgetLabel,
+                  description: AppLocalizations.of(context)!
+                      .errorNoBudgetDescriptionLabel,
+                );
+              }
+              final child = FilterDateRangeWidget(
+                filterDateCubit: widget.filterDateCubit,
+                expenses: expenses,
+                builder: (List<Expense> expenses) {
+                  return FilterBudgetWidget(
+                    filterCubit: filterCubit,
+                    expenses: expenses,
+                    builder: (filteredBudger) {
+                      return Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.only(bottom: 128),
+                          itemCount: filteredBudger.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return BudgetSection(
+                              dataSource: snapshot.data!,
+                              name: filteredBudger[index].key,
+                              values: filteredBudger[index].value,
+                            );
+                          },
+                        ),
                       );
                     },
+                  );
+                },
+              );
+              return ScreenTypeLayout(
+                mobile: Scaffold(
+                  appBar: context.materialYouAppBar(
+                    AppLocalizations.of(context)!.budgetOverViewLabel,
                   ),
-                );
-              },
-            );
-          },
-        );
-        return ScreenTypeLayout(
-          mobile: Scaffold(
-            appBar: context.materialYouAppBar(
-              AppLocalizations.of(context)!.budgetOverViewLabel,
-            ),
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FilterBudgetToggleWidget(filterCubit: filterCubit),
-                child,
-              ],
-            ),
-          ),
-          tablet: Scaffold(
-            appBar: context.materialYouAppBar(
-              AppLocalizations.of(context)!.budgetOverViewLabel,
-              actions: [
-                FilterBudgetToggleWidget(filterCubit: filterCubit),
-              ],
-            ),
-            body: Column(
-              children: [child],
-            ),
-          ),
-        );
+                  body: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      FilterBudgetToggleWidget(filterCubit: filterCubit),
+                      child,
+                    ],
+                  ),
+                ),
+                tablet: Scaffold(
+                  appBar: context.materialYouAppBar(
+                    AppLocalizations.of(context)!.budgetOverViewLabel,
+                    actions: [
+                      FilterBudgetToggleWidget(filterCubit: filterCubit),
+                    ],
+                  ),
+                  body: Column(
+                    children: [child],
+                  ),
+                ),
+              );
+            },
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
       },
     );
   }

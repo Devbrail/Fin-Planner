@@ -1,7 +1,7 @@
 import '../repository/expense_repository.dart';
 
 class DeleteExpenseUseCase {
-  DeleteExpenseUseCase(this.expenseRepository);
+  DeleteExpenseUseCase({required this.expenseRepository});
 
   final ExpenseRepository expenseRepository;
 

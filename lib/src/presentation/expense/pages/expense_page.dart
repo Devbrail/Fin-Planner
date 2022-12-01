@@ -28,18 +28,14 @@ class ExpensePage extends StatefulWidget {
   const ExpensePage({
     Key? key,
     this.expenseId,
-    required this.expenseBloc,
   }) : super(key: key);
 
   final String? expenseId;
-  final ExpenseBloc expenseBloc;
   @override
   State<ExpensePage> createState() => _ExpensePageState();
 }
 
 class _ExpensePageState extends State<ExpensePage> {
-  late final ExpenseBloc expenseBloc = locator.get<ExpenseBloc>()
-    ..add(FetchExpenseFromIdEvent(widget.expenseId));
   late TextEditingController nameController = TextEditingController();
   late TextEditingController amountController = TextEditingController();
   late TextEditingController dateTextController = TextEditingController();
@@ -48,227 +44,262 @@ class _ExpensePageState extends State<ExpensePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => expenseBloc,
-      child: BlocConsumer(
-        bloc: expenseBloc,
-        listener: (context, state) {
-          if (state is ExpenseDeletedState) {
-            context.showMaterialSnackBar(
-              expenseBloc.transactionType == TransactionType.expense
-                  ? AppLocalizations.of(context)!.expenseDeletedSuccessfulLabel
-                  : AppLocalizations.of(context)!.incomeDeletedSuccessfulLabel,
-              backgroundColor: Theme.of(context).colorScheme.error,
-              color: Theme.of(context).colorScheme.onError,
-            );
-            context.pop();
-          } else if (state is ExpenseAdded) {
-            final content = expenseBloc.transactionType ==
-                    TransactionType.expense
-                ? state.isAddOrUpdate
-                    ? AppLocalizations.of(context)!.expenseAddedSuccessfulLabel
-                    : AppLocalizations.of(context)!.expenseUpdateSuccessfulLabel
-                : state.isAddOrUpdate
-                    ? AppLocalizations.of(context)!.incomeAddedSuccessfulLabel
-                    : AppLocalizations.of(context)!.incomeUpdateSuccessfulLabel;
+    return FutureBuilder<ExpenseBloc>(
+        future: locator.getAsync<ExpenseBloc>(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData && snapshot.data != null) {
+            final ExpenseBloc expenseBloc = snapshot.data!
+              ..add(FetchExpenseFromIdEvent(widget.expenseId));
+            return BlocProvider(
+              create: (context) => expenseBloc,
+              child: BlocConsumer(
+                bloc: expenseBloc,
+                listener: (context, state) {
+                  if (state is ExpenseDeletedState) {
+                    context.showMaterialSnackBar(
+                      expenseBloc.transactionType == TransactionType.expense
+                          ? AppLocalizations.of(context)!
+                              .expenseDeletedSuccessfulLabel
+                          : AppLocalizations.of(context)!
+                              .incomeDeletedSuccessfulLabel,
+                      backgroundColor: Theme.of(context).colorScheme.error,
+                      color: Theme.of(context).colorScheme.onError,
+                    );
+                    context.pop();
+                  } else if (state is ExpenseAdded) {
+                    final content =
+                        expenseBloc.transactionType == TransactionType.expense
+                            ? state.isAddOrUpdate
+                                ? AppLocalizations.of(context)!
+                                    .expenseAddedSuccessfulLabel
+                                : AppLocalizations.of(context)!
+                                    .expenseUpdateSuccessfulLabel
+                            : state.isAddOrUpdate
+                                ? AppLocalizations.of(context)!
+                                    .incomeAddedSuccessfulLabel
+                                : AppLocalizations.of(context)!
+                                    .incomeUpdateSuccessfulLabel;
 
-            context.showMaterialSnackBar(
-              content,
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
-            );
-            context.pop();
-          } else if (state is ExpenseErrorState) {
-            context.showMaterialSnackBar(
-              state.errorString,
-              backgroundColor: Theme.of(context).colorScheme.errorContainer,
-              color: Theme.of(context).colorScheme.onErrorContainer,
-            );
-          } else if (state is ExpenseSuccessState) {
-            dateTextController.text = formattedDate(expenseBloc.selectedDate);
-            nameController.text = state.expense.name;
-            nameController.selection = TextSelection.collapsed(
-              offset: state.expense.name.length,
-            );
+                    context.showMaterialSnackBar(
+                      content,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.primaryContainer,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    );
+                    context.pop();
+                  } else if (state is ExpenseErrorState) {
+                    context.showMaterialSnackBar(
+                      state.errorString,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.errorContainer,
+                      color: Theme.of(context).colorScheme.onErrorContainer,
+                    );
+                  } else if (state is ExpenseSuccessState) {
+                    dateTextController.text =
+                        formattedDate(expenseBloc.selectedDate);
+                    nameController.text = state.expense.name;
+                    nameController.selection = TextSelection.collapsed(
+                      offset: state.expense.name.length,
+                    );
 
-            amountController.text = state.expense.currency.toString();
-            amountController.selection = TextSelection.collapsed(
-              offset: state.expense.currency.toString().length,
-            );
-          }
-        },
-        builder: (context, state) {
-          return ScreenTypeLayout(
-            mobile: Scaffold(
-              appBar: context.materialYouAppBar(
-                isAddExpense
-                    ? AppLocalizations.of(context)!.addExpenseLabel
-                    : AppLocalizations.of(context)!.updateExpenseLabel,
-                actions: [
-                  isAddExpense
-                      ? const SizedBox.shrink()
-                      : IconButton(
-                          onPressed: () => expenseBloc
-                              .add(ClearExpenseEvent(widget.expenseId!)),
-                          icon: Icon(
-                            Icons.delete_rounded,
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                        )
-                ],
-              ),
-              body: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    TransactionToggleButtons(
-                      onSelected: (type) {
-                        expenseBloc.transactionType = type;
-                        expenseBloc.add(ChangeExpenseEvent(type));
-                      },
-                      selectedType: expenseBloc.transactionType,
-                    ),
-                    const SizedBox(height: 16),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Form(
-                        key: _form,
+                    amountController.text = state.expense.currency.toString();
+                    amountController.selection = TextSelection.collapsed(
+                      offset: state.expense.currency.toString().length,
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  return ScreenTypeLayout(
+                    mobile: Scaffold(
+                      appBar: context.materialYouAppBar(
+                        isAddExpense
+                            ? AppLocalizations.of(context)!.addExpenseLabel
+                            : AppLocalizations.of(context)!.updateExpenseLabel,
+                        actions: [
+                          isAddExpense
+                              ? const SizedBox.shrink()
+                              : IconButton(
+                                  onPressed: () => expenseBloc.add(
+                                      ClearExpenseEvent(widget.expenseId!)),
+                                  icon: Icon(
+                                    Icons.delete_rounded,
+                                    color: Theme.of(context).colorScheme.error,
+                                  ),
+                                )
+                        ],
+                      ),
+                      body: SingleChildScrollView(
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            ExpenseNameWidget(controller: nameController),
-                            const SizedBox(height: 16),
-                            ExpenseAmountWidget(controller: amountController),
-                            const SizedBox(height: 16),
-                            ExpenseDatePickerWidget(
-                              controller: dateTextController,
-                              selectedDate: expenseBloc.selectedDate,
-                              onSelectedDate: (date) {
-                                expenseBloc.selectedDate = date;
+                            TransactionToggleButtons(
+                              onSelected: (type) {
+                                expenseBloc.transactionType = type;
+                                expenseBloc.add(ChangeExpenseEvent(type));
                               },
+                              selectedType: expenseBloc.transactionType,
                             ),
                             const SizedBox(height: 16),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Form(
+                                key: _form,
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    ExpenseNameWidget(
+                                        controller: nameController),
+                                    const SizedBox(height: 16),
+                                    ExpenseAmountWidget(
+                                        controller: amountController),
+                                    const SizedBox(height: 16),
+                                    ExpenseDatePickerWidget(
+                                      controller: dateTextController,
+                                      selectedDate: expenseBloc.selectedDate,
+                                      onSelectedDate: (date) {
+                                        expenseBloc.selectedDate = date;
+                                      },
+                                    ),
+                                    const SizedBox(height: 16),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SelectedAccount(),
+                            const SelectCategoryIcon(),
                           ],
                         ),
                       ),
-                    ),
-                    const SelectedAccount(),
-                    const SelectCategoryIcon(),
-                  ],
-                ),
-              ),
-              bottomNavigationBar: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: _addButton(),
-                ),
-              ),
-            ),
-            tablet: Scaffold(
-              appBar: AppBar(
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: Colors.transparent,
-                  systemNavigationBarColor: Colors.transparent,
-                  statusBarIconBrightness:
-                      MediaQuery.of(context).platformBrightness ==
-                              Brightness.dark
-                          ? Brightness.light
-                          : Brightness.dark,
-                ),
-                iconTheme: IconThemeData(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                title: Text(
-                  isAddExpense
-                      ? AppLocalizations.of(context)!.addExpenseLabel
-                      : AppLocalizations.of(context)!.updateExpenseLabel,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6
-                      ?.copyWith(fontWeight: FontWeight.w700),
-                ),
-                actions: [
-                  TransactionToggleButtons(
-                    onSelected: (type) {
-                      expenseBloc.transactionType = type;
-                      expenseBloc.add(ChangeExpenseEvent(type));
-                    },
-                    selectedType: expenseBloc.transactionType,
-                  ),
-                  isAddExpense
-                      ? const SizedBox.shrink()
-                      : IconButton(
-                          onPressed: () {
-                            expenseBloc
-                                .add(ClearExpenseEvent(widget.expenseId!));
-                          },
-                          icon: Icon(
-                            Icons.delete_rounded,
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                        )
-                ],
-              ),
-              body: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 12,
-                        right: 12,
+                      bottomNavigationBar: SafeArea(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: _addButton(context),
+                        ),
                       ),
-                      child: Column(
+                    ),
+                    tablet: Scaffold(
+                      appBar: AppBar(
+                        systemOverlayStyle: SystemUiOverlayStyle(
+                          statusBarColor: Colors.transparent,
+                          systemNavigationBarColor: Colors.transparent,
+                          statusBarIconBrightness:
+                              MediaQuery.of(context).platformBrightness ==
+                                      Brightness.dark
+                                  ? Brightness.light
+                                  : Brightness.dark,
+                        ),
+                        iconTheme: IconThemeData(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        elevation: 0,
+                        backgroundColor: Colors.transparent,
+                        title: Text(
+                          isAddExpense
+                              ? AppLocalizations.of(context)!.addExpenseLabel
+                              : AppLocalizations.of(context)!
+                                  .updateExpenseLabel,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              ?.copyWith(fontWeight: FontWeight.w700),
+                        ),
+                        actions: [
+                          TransactionToggleButtons(
+                            onSelected: (type) {
+                              expenseBloc.transactionType = type;
+                              expenseBloc.add(ChangeExpenseEvent(type));
+                            },
+                            selectedType: expenseBloc.transactionType,
+                          ),
+                          isAddExpense
+                              ? const SizedBox.shrink()
+                              : IconButton(
+                                  onPressed: () {
+                                    expenseBloc.add(
+                                        ClearExpenseEvent(widget.expenseId!));
+                                  },
+                                  icon: Icon(
+                                    Icons.delete_rounded,
+                                    color: Theme.of(context).colorScheme.error,
+                                  ),
+                                )
+                        ],
+                      ),
+                      body: Row(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: const [
-                          SelectedAccount(),
-                          SelectCategoryIcon(),
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 12,
+                                right: 12,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: const [
+                                  SelectedAccount(),
+                                  SelectCategoryIcon(),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Form(
+                              key: _form,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    ExpenseNameWidget(
+                                        controller: nameController),
+                                    const SizedBox(height: 16),
+                                    ExpenseAmountWidget(
+                                        controller: amountController),
+                                    const SizedBox(height: 16),
+                                    ExpenseDatePickerWidget(
+                                      controller: dateTextController,
+                                      selectedDate: expenseBloc.selectedDate,
+                                      onSelectedDate: (date) {
+                                        expenseBloc.selectedDate = date;
+                                      },
+                                    ),
+                                    const SizedBox(height: 16),
+                                    _addButton(context),
+                                    const SizedBox(height: 16),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Form(
-                      key: _form,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            ExpenseNameWidget(controller: nameController),
-                            const SizedBox(height: 16),
-                            ExpenseAmountWidget(controller: amountController),
-                            const SizedBox(height: 16),
-                            ExpenseDatePickerWidget(
-                              controller: dateTextController,
-                              selectedDate: expenseBloc.selectedDate,
-                              onSelectedDate: (date) {
-                                expenseBloc.selectedDate = date;
-                              },
-                            ),
-                            const SizedBox(height: 16),
-                            _addButton(),
-                            const SizedBox(height: 16),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
-            ),
-          );
-        },
-      ),
-    );
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
+        });
   }
 
-  Widget _addButton() {
+  Widget _addButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: addExpense,
+      onPressed: () {
+        final isValid = _form.currentState!.validate();
+        if (!isValid) {
+          return;
+        }
+
+        BlocProvider.of<ExpenseBloc>(context)
+            .add(AddOrUpdateExpenseEvent(isAddExpense));
+      },
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(16),
         shape: RoundedRectangleBorder(
@@ -285,15 +316,6 @@ class _ExpensePageState extends State<ExpensePage> {
         ),
       ),
     );
-  }
-
-  void addExpense() {
-    final isValid = _form.currentState!.validate();
-    if (!isValid) {
-      return;
-    }
-
-    expenseBloc.add(AddOrUpdateExpenseEvent(isAddExpense));
   }
 }
 

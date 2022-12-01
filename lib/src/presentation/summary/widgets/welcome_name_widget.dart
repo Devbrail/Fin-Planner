@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/core/enum/box_types.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../data/settings/settings_service.dart';
@@ -11,8 +12,9 @@ class WelcomeNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable:
-          locator.get<Box<dynamic>>().listenable(keys: [userNameKey]),
+      valueListenable: locator
+          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+          .listenable(keys: [userNameKey]),
       builder: (context, value, _) {
         final name = value.get(userNameKey, defaultValue: 'Name');
         return Padding(

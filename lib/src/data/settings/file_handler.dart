@@ -19,11 +19,11 @@ import 'data.dart';
 class FileHandler {
   Future<String> _fetchExpensesAndEncode() async {
     final Iterable<Expense> expenses =
-        await locator.get<ExpenseManagerLocalDataSource>().exportData();
+        await locator.get<LocalExpenseManagerDataSource>().exportData();
     final Iterable<Account> accounts =
-        await locator.get<AccountLocalDataSource>().exportData();
+        await locator.get<LocalAccountManagerDataSource>().exportData();
     final Iterable<Category> categories =
-        await locator.get<CategoryLocalDataSource>().exportData();
+        await locator.get<LocalCategoryManagerDataSource>().exportData();
 
     final data = {
       'expenses': expenses.map((e) => e.toJson()).toList(),

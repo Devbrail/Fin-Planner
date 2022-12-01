@@ -40,14 +40,10 @@ class _LandingPageState extends State<LandingPage>
 
   late final Map<PageType, Widget> _pages = {
     PageType.home: const SummaryPage(),
-    PageType.accounts: AccountsPage(
-      accountsBloc: locator.get(),
-    ),
-    PageType.category: CategoryListPage(
-      addCategoryBloc: locator.get(),
-    ),
+    PageType.accounts: const AccountsPage(),
+    PageType.category: const CategoryListPage(),
     PageType.budgetOverview: BudgetOverViewPage(
-      categoryDataSource: locator.get(),
+      categoryDataSource: locator.getAsync(),
       filterDateCubit: filterDateCubit,
     ),
     PageType.debts: const DebtsPage(),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../model/expense.dart';
 import 'expense_manager_local_data_source.dart';
 
-class ExpenseManagerLocalDataSourceImpl
-    implements ExpenseManagerLocalDataSource {
-  late final expenseBox = Hive.box<Expense>(BoxType.expense.stringValue);
+class LocalExpenseManagerDataSourceImpl
+    implements LocalExpenseManagerDataSource {
+  final Box<Expense> expenseBox;
+
+  LocalExpenseManagerDataSourceImpl(this.expenseBox);
 
   Stream<BoxEvent> expenses() {
     return expenseBox.watch();

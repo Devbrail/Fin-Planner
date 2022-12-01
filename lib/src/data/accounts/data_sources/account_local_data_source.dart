@@ -1,6 +1,6 @@
 import '../model/account.dart';
 
-abstract class AccountLocalDataSource {
+abstract class LocalAccountManagerDataSource {
   Future<void> addAccount(Account account);
   Future<void> deleteAccount(int key);
   Future<List<Account>> accounts();

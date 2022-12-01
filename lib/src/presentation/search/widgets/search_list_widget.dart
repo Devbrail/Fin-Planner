@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/data/accounts/data_sources/account_local_data_source.dart';
+import 'package:flutter_paisa/src/data/category/data_sources/category_local_data_source.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../data/expense/model/expense.dart';
@@ -63,10 +65,24 @@ class SearchListWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                 ),
               )
-            : ExpenseListWidget(
-                expenses: results,
-                accountLocalDataSource: locator.get(),
-                categoryLocalDataSource: locator.get(),
+            : FutureBuilder<List<dynamic>>(
+                future: Future.wait([
+                  locator.getAsync<LocalAccountManagerDataSource>(),
+                  locator.getAsync<LocalCategoryManagerDataSource>(),
+                ]),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && snapshot.data != null) {
+                    return ExpenseListWidget(
+                      expenses: results,
+                      accountLocalDataSource:
+                          snapshot.data![0] as LocalAccountManagerDataSource,
+                      categoryLocalDataSource:
+                          snapshot.data![1] as LocalCategoryManagerDataSource,
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
               );
       },
     );

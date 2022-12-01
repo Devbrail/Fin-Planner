@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../service_locator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/currency_util.dart';
 import '../../../core/theme/custom_color.dart';
-import '../../widgets/paisa_card.dart';
+import '../../../data/accounts/data_sources/account_local_data_source.dart';
+import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
+import '../../widgets/paisa_card.dart';
 import 'expense_list_widget.dart';
 
 class ExpenseMonthCardWidget extends StatelessWidget {
@@ -14,11 +15,15 @@ class ExpenseMonthCardWidget extends StatelessWidget {
     required this.title,
     required this.total,
     required this.expenses,
+    required this.accountSource,
+    required this.categorySource,
   }) : super(key: key);
 
   final String title;
   final double total;
   final List<Expense> expenses;
+  final LocalAccountManagerDataSource accountSource;
+  final LocalCategoryManagerDataSource categorySource;
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +55,8 @@ class ExpenseMonthCardWidget extends StatelessWidget {
           child: PaisaCard(
             child: ExpenseListWidget(
               expenses: expenses,
-              accountLocalDataSource: locator.get(),
-              categoryLocalDataSource: locator.get(),
+              accountLocalDataSource: accountSource,
+              categoryLocalDataSource: categorySource,
             ),
           ),
         ),

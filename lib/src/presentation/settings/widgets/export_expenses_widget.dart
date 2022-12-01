@@ -23,9 +23,9 @@ class ExportExpensesWidget extends StatefulWidget {
 }
 
 class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
-  final dataSource = locator.get<ExpenseManagerLocalDataSource>();
-  final accountDataSource = locator.get<AccountLocalDataSource>();
-  final categoryDataSource = locator.get<CategoryLocalDataSource>();
+  final dataSource = locator.get<LocalExpenseManagerDataSource>();
+  final accountDataSource = locator.get<LocalAccountManagerDataSource>();
+  final categoryDataSource = locator.get<LocalCategoryManagerDataSource>();
   DateTimeRange? dateTimeRange;
   @override
   Widget build(BuildContext context) {
@@ -91,8 +91,8 @@ List<String> expenseRow(
 
 List<List<String>> csvDataList(
   List<Expense> expenses,
-  AccountLocalDataSource accountDataSource,
-  CategoryLocalDataSource categoryDataSource,
+  LocalAccountManagerDataSource accountDataSource,
+  LocalCategoryManagerDataSource categoryDataSource,
 ) {
   return [
     [

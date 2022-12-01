@@ -6,7 +6,7 @@ import '../model/account.dart';
 class AccountRepositoryImpl extends AccountRepository {
   AccountRepositoryImpl({required this.dataSource});
 
-  final AccountLocalDataSource dataSource;
+  final LocalAccountManagerDataSource dataSource;
 
   @override
   Future<void> addAccount({
@@ -15,8 +15,8 @@ class AccountRepositoryImpl extends AccountRepository {
     required String number,
     required CardType cardType,
     required double amount,
-  }) async {
-    await dataSource.addAccount(Account(
+  }) {
+    return dataSource.addAccount(Account(
       name: holderName,
       icon: cardType.icon.codePoint,
       bankName: bankName,
@@ -27,14 +27,11 @@ class AccountRepositoryImpl extends AccountRepository {
   }
 
   @override
-  Future<void> deleteAccount(int key) {
-    return dataSource.deleteAccount(key);
-  }
+  Future<void> deleteAccount(int key) => dataSource.deleteAccount(key);
 
   @override
-  Future<void> updateAccount(Account account) async {
-    await dataSource.addAccount(account);
-  }
+  Future<void> updateAccount(Account account) async =>
+      dataSource.addAccount(account);
 
   @override
   Account? fetchAccountFromId(int accountId) =>

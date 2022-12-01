@@ -14,8 +14,8 @@ class ExpenseListWidget extends StatelessWidget {
   }) : super(key: key);
 
   final List<Expense> expenses;
-  final AccountLocalDataSource accountLocalDataSource;
-  final CategoryLocalDataSource categoryLocalDataSource;
+  final LocalAccountManagerDataSource accountLocalDataSource;
+  final LocalCategoryManagerDataSource categoryLocalDataSource;
 
   @override
   Widget build(BuildContext context) {

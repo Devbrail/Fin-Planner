@@ -3,7 +3,7 @@ import '../data_sources/category_local_data_source.dart';
 import '../model/category.dart';
 
 class CategoryRepositoryImpl extends CategoryRepository {
-  final CategoryLocalDataSource dataSources;
+  final LocalCategoryManagerDataSource dataSources;
 
   CategoryRepositoryImpl({required this.dataSources});
 

@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/context_extensions.dart';
-import '../../widgets/paisa_text_field.dart';
 import '../../../service_locator.dart';
+import '../../widgets/paisa_text_field.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/color_picker_widget.dart';
 import '../widgets/select_icon_widget.dart';
@@ -27,121 +27,124 @@ class AddCategoryPage extends StatefulWidget {
 }
 
 class _AddCategoryPageState extends State<AddCategoryPage> {
-  late final CategoryBloc categoryBloc = locator.get()
-    ..add(FetchCategoryFromIdEvent(widget.categoryId));
   late TextEditingController budgetController = TextEditingController();
   late TextEditingController categoryController = TextEditingController();
   late TextEditingController descController = TextEditingController();
 
-  void _submitCategory() {
-    final isValid = _formKey.currentState!.validate();
-    if (!isValid) {
-      return;
-    }
-
-    categoryBloc.add(AddOrUpdateCategoryEvent(isAddCategory));
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => categoryBloc,
-      child: BlocConsumer(
-        bloc: categoryBloc,
-        listener: (context, state) {
-          if (state is CategoryAddedState) {
-            context.showMaterialSnackBar(
-              isAddCategory
-                  ? AppLocalizations.of(context)!.successAddCategoryLabel
-                  : AppLocalizations.of(context)!.updatedCategoryLabel,
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
-            );
-            context.pop();
-          } else if (state is CategoryErrorState) {
-            context.showMaterialSnackBar(
-              state.errorString,
-              backgroundColor: Theme.of(context).colorScheme.errorContainer,
-              color: Theme.of(context).colorScheme.onErrorContainer,
-            );
-          } else if (state is CategorySuccessState) {
-            budgetController.text = state.category.budget.toString();
-            budgetController.selection = TextSelection.collapsed(
-              offset: state.category.budget.toString().length,
-            );
+    return FutureBuilder<CategoryBloc>(
+      future: locator.getAsync<CategoryBloc>(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data != null) {
+          final CategoryBloc categoryBloc = snapshot.data!
+            ..add(FetchCategoryFromIdEvent(widget.categoryId));
+          return BlocProvider(
+            create: (context) => categoryBloc,
+            child: BlocConsumer(
+              bloc: categoryBloc,
+              listener: (context, state) {
+                if (state is CategoryAddedState) {
+                  context.showMaterialSnackBar(
+                    isAddCategory
+                        ? AppLocalizations.of(context)!.successAddCategoryLabel
+                        : AppLocalizations.of(context)!.updatedCategoryLabel,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primaryContainer,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  );
+                  context.pop();
+                } else if (state is CategoryErrorState) {
+                  context.showMaterialSnackBar(
+                    state.errorString,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.errorContainer,
+                    color: Theme.of(context).colorScheme.onErrorContainer,
+                  );
+                } else if (state is CategorySuccessState) {
+                  budgetController.text = state.category.budget.toString();
+                  budgetController.selection = TextSelection.collapsed(
+                    offset: state.category.budget.toString().length,
+                  );
 
-            categoryController.text = state.category.name;
-            categoryController.selection = TextSelection.collapsed(
-              offset: state.category.name.length,
-            );
+                  categoryController.text = state.category.name;
+                  categoryController.selection = TextSelection.collapsed(
+                    offset: state.category.name.length,
+                  );
 
-            descController.text = state.category.description ?? '';
-            descController.selection = TextSelection.collapsed(
-              offset: state.category.description?.length ?? 0,
-            );
-          } else if (state is CategoryIconSelectedState) {
-            categoryBloc.selectedIcon = state.categoryIcon;
-          }
-        },
-        builder: (context, state) {
-          return ScreenTypeLayout(
-            mobile: Scaffold(
-              appBar: appBar(),
-              body: SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: _inputForm(),
-                ),
-              ),
-              bottomNavigationBar: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: _submitButton(),
-                ),
-              ),
-            ),
-            tablet: Scaffold(
-              appBar: context.materialYouAppBar(
-                isAddCategory
-                    ? AppLocalizations.of(context)!.addCategoryLabel
-                    : AppLocalizations.of(context)!.updateCategoryLabel,
-              ),
-              body: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Form(
-                  key: _formKey,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const SelectIconWidget(),
-                            SetBudgetWidget(controller: budgetController),
-                          ],
-                        ),
+                  descController.text = state.category.description ?? '';
+                  descController.selection = TextSelection.collapsed(
+                    offset: state.category.description?.length ?? 0,
+                  );
+                } else if (state is CategoryIconSelectedState) {
+                  categoryBloc.selectedIcon = state.categoryIcon;
+                }
+              },
+              builder: (context, state) {
+                return ScreenTypeLayout(
+                  mobile: Scaffold(
+                    appBar: appBar(),
+                    body: SingleChildScrollView(
+                      child: Form(
+                        key: _formKey,
+                        child: _inputForm(),
                       ),
-                      const SizedBox(width: 24),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            CategoryNameWidget(controller: categoryController),
-                            const SizedBox(height: 24),
-                            CategoryDescriptionWidget(
-                                controller: descController),
-                            const SizedBox(height: 24),
-                            _submitButton(),
-                          ],
-                        ),
+                    ),
+                    bottomNavigationBar: SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: _submitButton(context),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                  tablet: Scaffold(
+                    appBar: context.materialYouAppBar(
+                      isAddCategory
+                          ? AppLocalizations.of(context)!.addCategoryLabel
+                          : AppLocalizations.of(context)!.updateCategoryLabel,
+                    ),
+                    body: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Form(
+                        key: _formKey,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  const SelectIconWidget(),
+                                  SetBudgetWidget(controller: budgetController),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 24),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  CategoryNameWidget(
+                                      controller: categoryController),
+                                  const SizedBox(height: 24),
+                                  CategoryDescriptionWidget(
+                                      controller: descController),
+                                  const SizedBox(height: 24),
+                                  _submitButton(context),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           );
-        },
-      ),
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 
@@ -155,9 +158,17 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     );
   }
 
-  Widget _submitButton() {
+  Widget _submitButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: _submitCategory,
+      onPressed: () {
+        final isValid = _formKey.currentState!.validate();
+        if (!isValid) {
+          return;
+        }
+
+        BlocProvider.of<CategoryBloc>(context)
+            .add(AddOrUpdateCategoryEvent(isAddCategory));
+      },
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(16),
         shape: RoundedRectangleBorder(

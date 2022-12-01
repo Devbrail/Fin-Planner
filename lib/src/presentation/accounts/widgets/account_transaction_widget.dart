@@ -16,8 +16,8 @@ class AccountTransactionWidget extends StatelessWidget {
     required this.expenses,
   }) : super(key: key);
 
-  final AccountLocalDataSource accountLocalDataSource;
-  final CategoryLocalDataSource categoryLocalDataSource;
+  final LocalAccountManagerDataSource accountLocalDataSource;
+  final LocalCategoryManagerDataSource categoryLocalDataSource;
   final List<Expense> expenses;
   @override
   Widget build(BuildContext context) {

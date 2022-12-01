@@ -37,7 +37,7 @@ class _ExportAndImportPageState extends State<ExportAndImportPage> {
           SettingsGroup(
             title: 'Backup as JSON file',
             options: [
-              ListTile(
+              const ListTile(
                 title: Text(
                   'Restore will clear all the existing data and replace with imported data',
                 ),

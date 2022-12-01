@@ -104,14 +104,13 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           path: addExpensePath,
           name: addExpensePath,
-          builder: (context, state) => ExpensePage(expenseBloc: locator.get()),
+          builder: (context, state) => const ExpensePage(),
         ),
         GoRoute(
           name: editExpensePath,
           path: 'edit-expense/:eid',
           builder: (context, state) => ExpensePage(
             expenseId: state.params['eid'],
-            expenseBloc: locator.get(),
           ),
         ),
         GoRoute(

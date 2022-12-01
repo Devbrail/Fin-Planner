@@ -3,7 +3,7 @@ import 'package:flutter_paisa/src/domain/category/repository/category_repository
 class AddCategoryUseCase {
   final CategoryRepository categoryRepository;
 
-  AddCategoryUseCase(this.categoryRepository);
+  AddCategoryUseCase({required this.categoryRepository});
 
   Future<void> execute({
     required String name,

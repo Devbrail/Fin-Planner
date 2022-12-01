@@ -3,9 +3,9 @@ import '../../../data/debt/models/debt.dart';
 import '../repository/debit_repository.dart';
 
 class DebtUseCase {
-  final DebtRepository repository;
+  final DebtRepository debtRepository;
 
-  DebtUseCase({required this.repository});
+  DebtUseCase({required this.debtRepository});
 
   Future<void> addDebtOrCredit({
     required String description,
@@ -15,7 +15,7 @@ class DebtUseCase {
     required DateTime dueDateTime,
     required DebtType debtType,
   }) =>
-      repository.addDebtOrCredit(
+      debtRepository.addDebtOrCredit(
         description,
         name,
         amount,
@@ -25,5 +25,5 @@ class DebtUseCase {
       );
 
   Future<Debt?> fetchDebtOrCreditFromId(int debtId) =>
-      repository.fetchDebtOrCreditFromId(debtId);
+      debtRepository.fetchDebtOrCreditFromId(debtId);
 }

@@ -8,7 +8,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     required this.dataSource,
   });
 
-  final ExpenseManagerLocalDataSource dataSource;
+  final LocalExpenseManagerDataSource dataSource;
 
   @override
   Future<void> addExpense(

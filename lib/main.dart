@@ -30,7 +30,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late final settings = locator.get<Box<dynamic>>().listenable(
+  late final settings = locator
+      .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+      .listenable(
     keys: [
       appColorKey,
       dynamicColorKey,

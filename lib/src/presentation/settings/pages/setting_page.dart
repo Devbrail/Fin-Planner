@@ -3,16 +3,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../widgets/app_builder.dart';
 import '../../../app/routes.dart';
 import '../../../core/constants.dart';
 import '../../../core/context_extensions.dart';
-import '../../../service_locator.dart';
-import '../bloc/settings_controller.dart';
+import '../../widgets/app_builder.dart';
 import '../widgets/choose_theme_mode_widget.dart';
 import '../widgets/color_picker_widget.dart';
 import '../widgets/currency_change_widget.dart';
-import '../widgets/schedule_notification_widget.dart';
 import '../widgets/setting_option.dart';
 import '../widgets/settings_group_card.dart';
 import '../widgets/user_profile_widget.dart';
@@ -26,7 +23,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  final SettingsController settingsController = locator.get();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,8 +65,6 @@ class _SettingsPageState extends State<SettingsPage> {
             title: AppLocalizations.of(context)!.othersLabel,
             options: [
               const CurrencyChangeWidget(),
-              const Divider(),
-              const ScheduleNotificationWidget(),
               const Divider(),
               SettingsOption(
                 title: AppLocalizations.of(context)!.backupAndRestoreLabel,

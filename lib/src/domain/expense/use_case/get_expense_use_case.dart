@@ -2,7 +2,7 @@ import '../../../data/expense/model/expense.dart';
 import '../repository/expense_repository.dart';
 
 class GetExpenseUseCase {
-  GetExpenseUseCase(this.expenseRepository);
+  GetExpenseUseCase({required this.expenseRepository});
 
   final ExpenseRepository expenseRepository;
 

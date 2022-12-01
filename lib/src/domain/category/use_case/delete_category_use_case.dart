@@ -3,7 +3,7 @@ import 'package:flutter_paisa/src/domain/category/repository/category_repository
 class DeleteCategoryUseCase {
   final CategoryRepository categoryRepository;
 
-  DeleteCategoryUseCase(this.categoryRepository);
+  DeleteCategoryUseCase({required this.categoryRepository});
 
   Future<void> execute(int key) => categoryRepository.deleteCategory(key);
 }

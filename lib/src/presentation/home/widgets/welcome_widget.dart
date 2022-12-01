@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/src/core/enum/box_types.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -19,7 +20,7 @@ class WelcomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
       valueListenable: locator
-          .get<Box<dynamic>>()
+          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
           .listenable(keys: [userImageKey, userNameKey]),
       builder: (context, value, _) {
         String image = value.get(userImageKey, defaultValue: '');

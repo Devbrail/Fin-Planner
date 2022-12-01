@@ -1,14 +1,18 @@
 import 'package:hive/hive.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../models/debt.dart';
 import '../models/transaction.dart';
 import 'debt_local_data_source.dart';
 
 class DebtLocalDataSourceImpl extends DebtLocalDataSource {
-  late final debtBox = Hive.box<Debt>(BoxType.debts.stringValue);
-  late final transactionsBox =
-      Hive.box<Transaction>(BoxType.transactions.stringValue);
+  final Box<Debt> debtBox;
+  final Box<Transaction> transactionsBox;
+
+  DebtLocalDataSourceImpl({
+    required this.debtBox,
+    required this.transactionsBox,
+  });
+
   @override
   Future<void> addDebtOrCredit(Debt debt) async {
     final int id = await debtBox.add(debt);

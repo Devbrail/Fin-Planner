@@ -44,7 +44,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final int? accountId = int.tryParse(event.accountId ?? '');
     if (accountId == null) return;
 
-    final Account? account = await getAccountUseCase.execute(accountId);
+    final Account? account = getAccountUseCase.execute(accountId);
     if (account != null) {
       accountName = account.bankName;
       accountHolderName = account.name;

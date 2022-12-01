@@ -89,7 +89,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       return emit(const ExpenseErrorState('Select time'));
     }
 
-    final account = await accountUseCase.execute(accountId);
+    final account = accountUseCase.execute(accountId);
     if (account != null) {
       double finalAmount;
       if (transactionType == TransactionType.income) {
@@ -130,7 +130,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     Emitter<ExpenseState> emit,
   ) async {
     if (currentExpense != null) {
-      final account = await accountUseCase.execute(currentExpense!.accountId);
+      final account = accountUseCase.execute(currentExpense!.accountId);
       if (account != null) {
         account.amount = (currentExpense!.currency + account.amount!);
         await account.save();

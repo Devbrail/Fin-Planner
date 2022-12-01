@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive_flutter/adapters.dart';
 
+import '../../../core/enum/box_types.dart';
 import '../../../core/enum/theme_mode.dart';
+import '../../../data/settings/settings_service.dart';
 import '../../../service_locator.dart';
-import '../bloc/settings_controller.dart';
 import 'setting_option.dart';
 
 class ChooseThemeModeWidget extends StatefulWidget {
@@ -16,13 +18,8 @@ class ChooseThemeModeWidget extends StatefulWidget {
 }
 
 class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
-  final SettingsController settingsController = locator.get();
-  late ThemeMode selectedThemeMode = ThemeMode.system;
-  @override
-  void initState() {
-    super.initState();
-    selectedThemeMode = settingsController.themeMode;
-  }
+  final Box<dynamic> settings =
+      locator.get(instanceName: BoxType.settings.stringValue);
 
   void showThemeDialog() {
     showModalBottomSheet(
@@ -38,21 +35,25 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
       ),
       context: context,
       builder: (context) => ThemeModeWidget(
-        onSelected: (selected) {
-          selectedThemeMode = selected;
-          settingsController.updateThemeMode(selectedThemeMode);
-        },
-        currentTheme: selectedThemeMode,
+        onSelected: (selected) => settings.put(themeModeKey, selected.index),
+        currentTheme:
+            ThemeMode.values[settings.get(themeModeKey, defaultValue: 0)],
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SettingsOption(
-      title: AppLocalizations.of(context)!.themeLabel,
-      subtitle: selectedThemeMode.themeName,
-      onTap: () => showThemeDialog(),
+    return ValueListenableBuilder<Box<dynamic>>(
+      valueListenable: settings.listenable(keys: [themeModeKey]),
+      builder: (context, value, child) {
+        final index = value.get(themeModeKey, defaultValue: 0);
+        return SettingsOption(
+          title: AppLocalizations.of(context)!.themeLabel,
+          subtitle: ThemeMode.values[index].themeName,
+          onTap: () => showThemeDialog(),
+        );
+      },
     );
   }
 }

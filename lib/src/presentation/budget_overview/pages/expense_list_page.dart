@@ -19,8 +19,8 @@ class ExpenseListPage extends StatelessWidget {
 
   final String? categoryId;
 
-  final AccountLocalDataSource accountLocalDataSource;
-  final CategoryLocalDataSource categoryLocalDataSource;
+  final LocalAccountManagerDataSource accountLocalDataSource;
+  final LocalCategoryManagerDataSource categoryLocalDataSource;
   @override
   Widget build(BuildContext context) {
     final int? cid = int.tryParse(categoryId ?? '');

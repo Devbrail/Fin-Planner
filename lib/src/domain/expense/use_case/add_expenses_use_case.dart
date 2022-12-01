@@ -2,9 +2,7 @@ import 'package:flutter_paisa/src/core/enum/transaction.dart';
 import 'package:flutter_paisa/src/domain/expense/repository/expense_repository.dart';
 
 class AddExpenseUseCase {
-  AddExpenseUseCase(
-    this.expenseRepository,
-  );
+  AddExpenseUseCase({required this.expenseRepository});
 
   final ExpenseRepository expenseRepository;
 
