@@ -58,47 +58,6 @@ class _SummaryPageState extends State<SummaryPage> {
             ),
           ),
           tablet: Scaffold(
-            appBar: context.materialYouAppBar(
-              '',
-              leadingWidget: IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
-                onPressed: () {
-                  showSearch(
-                    context: context,
-                    delegate: SearchPage(),
-                  );
-                },
-              ),
-              actions: [
-                GestureDetector(
-                  onLongPress: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const ColorPalette(),
-                      ),
-                    );
-                  },
-                  onTap: () => showModalBottomSheet(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width >= 700
-                          ? 700
-                          : double.infinity,
-                    ),
-                    isScrollControlled: true,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.0),
-                    ),
-                    context: context,
-                    builder: (_) => const UserProfilePage(),
-                  ),
-                  child: const WelcomeWidget(),
-                ),
-              ],
-            ),
             body: SafeArea(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
