@@ -24,8 +24,6 @@ class ExportAndImportPage extends StatefulWidget {
 }
 
 class _ExportAndImportPageState extends State<ExportAndImportPage> {
-  final FileHandler fileHandler = locator.get();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +53,8 @@ class _ExportAndImportPageState extends State<ExportAndImportPage> {
                               Theme.of(context).colorScheme.onPrimary,
                         ),
                         onPressed: () async {
+                          final FileHandler fileHandler =
+                              await locator.getAsync<FileHandler>();
                           await fileHandler.createBackUpFile(
                             (message) {
                               context.showMaterialSnackBar(message);
@@ -69,7 +69,11 @@ class _ExportAndImportPageState extends State<ExportAndImportPage> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: () => fileHandler.restoreBackUpFile(),
+                        onPressed: () async {
+                          final FileHandler fileHandler =
+                              await locator.getAsync<FileHandler>();
+                          fileHandler.restoreBackUpFile();
+                        },
                         label: Text(AppLocalizations.of(context)!.restoreLabel),
                         icon: const Icon(MdiIcons.fileImport),
                       ),
@@ -90,8 +94,12 @@ class _ExportAndImportPageState extends State<ExportAndImportPage> {
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(files[index].name.toString()),
-                      onTap: () => fileHandler.restoreBackUpFile(
-                          fileSystemEntity: files[index]),
+                      onTap: () async {
+                        final FileHandler fileHandler =
+                            await locator.getAsync<FileHandler>();
+                        await fileHandler.restoreBackUpFile(
+                            fileSystemEntity: files[index]);
+                      },
                     );
                   },
                 );

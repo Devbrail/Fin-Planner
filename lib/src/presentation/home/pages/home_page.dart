@@ -202,6 +202,7 @@ class _LandingPageState extends State<LandingPage>
                       ListTile(
                         onTap: () {
                           homeBloc.add(const CurrentIndexEvent(PageType.debts));
+                          Navigator.pop(context);
                         },
                         selected: pageType == PageType.debts,
                         title: Text(AppLocalizations.of(context)!.debtsLabel),
@@ -210,6 +211,7 @@ class _LandingPageState extends State<LandingPage>
                       ListTile(
                         onTap: () {
                           GoRouter.of(context).pushNamed(settingsPath);
+                          Navigator.pop(context);
                         },
                         title:
                             Text(AppLocalizations.of(context)!.settingsLabel),
