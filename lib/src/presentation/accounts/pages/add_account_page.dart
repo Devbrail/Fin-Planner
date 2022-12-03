@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/core/enum/card_type.dart';
 import 'package:flutter_paisa/src/service_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -163,14 +164,33 @@ class AddAccountPageState extends State<AddAccountPage> {
                                     accountBloc: accountsBloc,
                                   ),
                                   const SizedBox(height: 16),
-                                  AccountInitialAmountWidget(
-                                    controller: accountInitialAmountController,
-                                    accountBloc: accountsBloc,
-                                  ),
+                                  Builder(builder: (context) {
+                                    if (state is UpdateCardTypeState &&
+                                        (state.cardType == CardType.bank ||
+                                            state.cardType ==
+                                                CardType.wallet)) {
+                                      return AccountInitialAmountWidget(
+                                        controller:
+                                            accountInitialAmountController,
+                                        accountBloc: accountsBloc,
+                                      );
+                                    } else {
+                                      return const SizedBox.shrink();
+                                    }
+                                  }),
                                   const SizedBox(height: 16),
-                                  AccountNumberWidget(
-                                    controller: accountNumberController,
-                                    accountBloc: accountsBloc,
+                                  Builder(
+                                    builder: (context) {
+                                      if (state is UpdateCardTypeState &&
+                                          state.cardType == CardType.bank) {
+                                        return AccountNumberWidget(
+                                          controller: accountNumberController,
+                                          accountBloc: accountsBloc,
+                                        );
+                                      } else {
+                                        return const SizedBox.shrink();
+                                      }
+                                    },
                                   ),
                                   const SizedBox(height: 16),
                                 ],

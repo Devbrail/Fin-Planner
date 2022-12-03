@@ -53,7 +53,7 @@ extension DateUtils on DateTime {
       case FilterBudget.daily:
         return DateFormat('dd EEEE MMM').format(this);
       case FilterBudget.weekly:
-        return "$weekOfYear Week of ${DateFormat('yyyy').format(this)}";
+        return "Week $weekOfYear of ${DateFormat('yyyy').format(this)}";
       case FilterBudget.monthly:
         return DateFormat('MMMM yyyy').format(this);
       case FilterBudget.yearly:
