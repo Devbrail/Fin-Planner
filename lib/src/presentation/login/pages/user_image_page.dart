@@ -3,12 +3,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_paisa/src/core/enum/box_types.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../service_locator.dart';
-import '../../settings/cubit/user_image_cubit.dart';
 import '../../settings/widgets/user_profile_widget.dart';
 
 class UserImagePage extends StatefulWidget {
@@ -19,11 +19,17 @@ class UserImagePage extends StatefulWidget {
 }
 
 class _UserImagePageState extends State<UserImagePage> {
-  late final UserNameImageCubit nameImageCubit = locator.get();
   final Box<dynamic> value =
       locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
 
-  void _pickImage() => nameImageCubit.pickImage();
+  void _pickImage() {
+    final ImagePicker picker = ImagePicker();
+    picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
+      if (pickedFile != null) {
+        settings.put(userImageKey, pickedFile.path);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../data/accounts/data_sources/account_local_data_source.dart';
-import '../../../data/category/data_sources/category_local_data_source.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../core/common.dart';
+import '../../../core/enum/filter_budget.dart';
+import '../../../data/accounts/data_sources/account_local_data_source.dart';
+import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../service_locator.dart';
-import '../cubit/summary_cubit.dart';
 import 'expense_month_card.dart';
 
-class ExpenseHistory extends StatefulWidget {
-  const ExpenseHistory({Key? key}) : super(key: key);
+class ExpenseHistory extends StatelessWidget {
+  const ExpenseHistory({
+    super.key,
+    required this.valueNotifier,
+  });
 
-  @override
-  State<ExpenseHistory> createState() => _ExpenseHistoryState();
-}
+  final ValueNotifier<FilterBudget> valueNotifier;
 
-class _ExpenseHistoryState extends State<ExpenseHistory> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<Expense>>(
@@ -51,14 +50,11 @@ class _ExpenseHistoryState extends State<ExpenseHistory> {
           ]),
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data != null) {
-              return BlocBuilder(
-                bloc: BlocProvider.of<SummaryCubit>(context),
-                builder: (context, state) {
-                  if (state is SummaryFilterBudgetState) {
-                    final maps = groupBy(
-                        expenses,
-                        (Expense element) =>
-                            element.time.formatted(state.budget));
+              return ValueListenableBuilder<FilterBudget>(
+                  valueListenable: valueNotifier,
+                  builder: (context, value, child) {
+                    final maps = groupBy(expenses,
+                        (Expense element) => element.time.formatted(value));
                     return ListView.builder(
                       shrinkWrap: true,
                       padding: EdgeInsets.zero,
@@ -78,11 +74,7 @@ class _ExpenseHistoryState extends State<ExpenseHistory> {
                         );
                       },
                     );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
-              );
+                  });
             } else {
               return const SizedBox.shrink();
             }

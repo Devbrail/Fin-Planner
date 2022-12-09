@@ -1,14 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
-import '../cubit/user_image_cubit.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -18,15 +17,26 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
-  final nameController = TextEditingController();
-  final UserNameImageCubit nameImageCubit = locator.get();
+  final settings =
+      locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
 
+  final nameController = TextEditingController();
   void _updateDetails() {
-    nameImageCubit.updateUserDetails(nameController.text);
-    Navigator.pop(context);
+    settings
+        .put(userNameKey, nameController.text)
+        .then((value) => Navigator.pop(context));
   }
 
-  void _pickImage() => nameImageCubit.pickImage();
+  void _pickImage() {
+    final ImagePicker picker = ImagePicker();
+    picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
+      if (pickedFile != null) {
+        settings
+            .put(userImageKey, pickedFile.path)
+            .then((value) => Navigator.pop(context));
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,53 +47,45 @@ class _UserProfilePageState extends State<UserProfilePage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
-          child: BlocListener(
-            bloc: nameImageCubit,
-            listener: (context, state) {
-              if (state is UserDetailsUpdatedState) {
-                Navigator.pop(context);
-              }
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                ListTile(
-                  title: Text(
-                    AppLocalizations.of(context)!.profileLabel,
-                    style: Theme.of(context).textTheme.headline6,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              ListTile(
+                title: Text(
+                  AppLocalizations.of(context)!.profileLabel,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ),
+              Row(
+                children: [
+                  const SizedBox(width: 16),
+                  UserImageWidget(pickImage: _pickImage),
+                  Expanded(
+                    child: UserTextField(nameController: nameController),
                   ),
-                ),
-                Row(
-                  children: [
-                    const SizedBox(width: 16),
-                    UserImageWidget(pickImage: _pickImage),
-                    Expanded(
-                      child: UserTextField(nameController: nameController),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
                     ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 12,
-                      ),
-                    ),
-                    onPressed: _updateDetails,
-                    child: Text(
-                      AppLocalizations.of(context)!.updateLabel,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
                     ),
                   ),
+                  onPressed: _updateDetails,
+                  child: Text(
+                    AppLocalizations.of(context)!.updateLabel,
+                  ),
                 ),
-                const SizedBox(height: 10)
-              ],
-            ),
+              ),
+              const SizedBox(height: 10)
+            ],
           ),
         ),
       ),

@@ -10,7 +10,6 @@ import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../service_locator.dart';
 import '../../accounts/pages/accounts_page.dart';
-import '../../budget_overview/cubit/filter_date_cubit.dart';
 import '../../budget_overview/pages/budget_overview_page.dart';
 import '../../category/pages/category_list_page.dart';
 import '../../debits/pages/debts_page.dart';
@@ -36,8 +35,8 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage>
     with SingleTickerProviderStateMixin {
   final HomeBloc homeBloc = locator.get<HomeBloc>();
-  final FilterDateCubit filterDateCubit = locator.get<FilterDateCubit>();
-  DateTimeRange? dateTimeRange;
+  final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier =
+      ValueNotifier<DateTimeRange?>(null);
 
   late final Map<PageType, Widget> _pages = {
     PageType.home: const SummaryPage(),
@@ -45,11 +44,12 @@ class _LandingPageState extends State<LandingPage>
     PageType.category: const CategoryListPage(),
     PageType.budgetOverview: BudgetOverViewPage(
       categoryDataSource: locator.getAsync(),
-      filterDateCubit: filterDateCubit,
+      dateTimeRangeNotifier: dateTimeRangeNotifier,
     ),
     PageType.debts: const DebtsPage(),
   };
 
+  DateTimeRange? dateTimeRange;
   void _handleClick(PageType page) {
     switch (page) {
       case PageType.accounts:
@@ -77,7 +77,6 @@ class _LandingPageState extends State<LandingPage>
         if (state is CurrentIndexState) {
           return FloatingActionButton.large(
             onPressed: () => _handleClick(state.currentPage),
-            tooltip: AppLocalizations.of(context)!.addExpenseLabel,
             child: state.currentPage != PageType.budgetOverview
                 ? const Icon(Icons.add)
                 : const Icon(Icons.date_range),
@@ -112,7 +111,7 @@ class _LandingPageState extends State<LandingPage>
     );
     if (newDateRange == null || newDateRange == dateTimeRange) return;
     dateTimeRange = newDateRange;
-    filterDateCubit.filterDate(newDateRange);
+    dateTimeRangeNotifier.value = newDateRange;
   }
 
   @override
