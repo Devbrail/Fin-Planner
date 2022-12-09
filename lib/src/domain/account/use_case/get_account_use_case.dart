@@ -6,6 +6,5 @@ class GetAccountUseCase {
 
   GetAccountUseCase({required this.accountRepository});
 
-  Account? execute(int accountId) =>
-      accountRepository.fetchAccountFromId(accountId);
+  Account? call(int params) => accountRepository.fetchAccountFromId(params);
 }

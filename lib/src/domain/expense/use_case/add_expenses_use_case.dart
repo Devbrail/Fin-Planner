@@ -6,7 +6,7 @@ class AddExpenseUseCase {
 
   final ExpenseRepository expenseRepository;
 
-  Future<void> execute({
+  Future<void> call({
     required String name,
     required double amount,
     required DateTime time,

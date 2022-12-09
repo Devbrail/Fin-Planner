@@ -14,4 +14,6 @@ abstract class AccountRepository {
   Future<void> updateAccount(Account account);
 
   Account? fetchAccountFromId(int accountId);
+
+  Future<List<Account>> getAccounts();
 }

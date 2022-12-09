@@ -115,7 +115,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
         ..debtType = debtType;
       currentDebt!.save();
     } else {
-      await useCase.addDebtOrCredit(
+      await useCase(
         description: description,
         name: name,
         amount: amount,

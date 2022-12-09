@@ -44,7 +44,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final int? categoryId = int.tryParse(event.categoryId ?? '');
     if (categoryId == null) return;
 
-    final Category? category = await getCategoryUseCase.execute(categoryId);
+    final Category? category = await getCategoryUseCase(categoryId);
     if (category != null) {
       categoryTitle = category.name;
       categoryDesc = category.description;
@@ -78,7 +78,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       return emit(const CategoryErrorState('Select category color'));
     }
     if (event.isAddOrUpdate) {
-      await addCategoryUseCase.execute(
+      await addCategoryUseCase(
         icon: icon,
         desc: description,
         name: title,
@@ -106,7 +106,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     CategoryDeleteEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    await deleteCategoryUseCase.execute(event.category.key);
+    await deleteCategoryUseCase(event.category.key);
     emit(CategoryDeletedState());
   }
 

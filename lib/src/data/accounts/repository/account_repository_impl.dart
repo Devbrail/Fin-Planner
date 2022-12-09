@@ -36,4 +36,7 @@ class AccountRepositoryImpl extends AccountRepository {
   @override
   Account? fetchAccountFromId(int accountId) =>
       dataSource.fetchAccountFromId(accountId);
+
+  @override
+  Future<List<Account>> getAccounts() => dataSource.accounts();
 }

@@ -5,5 +5,5 @@ class DeleteCategoryUseCase {
 
   DeleteCategoryUseCase({required this.categoryRepository});
 
-  Future<void> execute(int key) => categoryRepository.deleteCategory(key);
+  Future<void> call(int key) => categoryRepository.deleteCategory(key);
 }

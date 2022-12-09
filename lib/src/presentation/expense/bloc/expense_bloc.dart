@@ -49,7 +49,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     final int? expenseId = int.tryParse(event.expenseId ?? '');
     if (expenseId == null) return;
 
-    final Expense? expense = await expenseUseCase.execute(expenseId);
+    final Expense? expense = await expenseUseCase(expenseId);
     if (expense != null) {
       expenseAmount = expense.currency;
       expenseName = expense.name;
@@ -89,7 +89,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       return emit(const ExpenseErrorState('Select time'));
     }
 
-    final account = accountUseCase.execute(accountId);
+    final Account? account = accountUseCase(accountId);
     if (account != null) {
       double finalAmount;
       if (transactionType == TransactionType.income) {
@@ -101,7 +101,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       await account.save();
     }
     if (event.isAdding) {
-      await addExpenseUseCase.execute(
+      await addExpenseUseCase(
         name: name,
         amount: validAmount,
         time: dateTime,
@@ -130,12 +130,12 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     Emitter<ExpenseState> emit,
   ) async {
     if (currentExpense != null) {
-      final account = accountUseCase.execute(currentExpense!.accountId);
+      final Account? account = accountUseCase(currentExpense!.accountId);
       if (account != null) {
         account.amount = (currentExpense!.currency + account.amount!);
         await account.save();
       }
-      await deleteExpenseUseCase.execute(currentExpense!.key);
+      await deleteExpenseUseCase(currentExpense!.key);
       emit(ExpenseDeletedState());
     } else {
       emit(const ExpenseErrorState('Error deleting expense'));

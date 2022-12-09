@@ -5,6 +5,6 @@ class DeleteExpenseUseCase {
 
   final ExpenseRepository expenseRepository;
 
-  Future<void> execute(int expense) async =>
+  Future<void> call(int expense) async =>
       expenseRepository.clearExpense(expense);
 }

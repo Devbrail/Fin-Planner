@@ -2,13 +2,12 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/presentation/search/pages/search_page.dart';
-import '../../../core/common.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
+import '../../../core/common.dart';
 import '../../../service_locator.dart';
 import '../../accounts/pages/accounts_page.dart';
 import '../../budget_overview/cubit/filter_date_cubit.dart';
@@ -16,6 +15,7 @@ import '../../budget_overview/pages/budget_overview_page.dart';
 import '../../category/pages/category_list_page.dart';
 import '../../debits/pages/debts_page.dart';
 import '../../goal/widget/color_palette.dart';
+import '../../search/pages/search_page.dart';
 import '../../settings/widgets/user_profile_widget.dart';
 import '../../summary/pages/summary_page.dart';
 import '../../summary/widgets/welcome_name_widget.dart';
@@ -199,6 +199,12 @@ class _LandingPageState extends State<LandingPage>
                   }
                   return ListView(
                     children: [
+                      ListTile(
+                        title: Text(
+                          AppLocalizations.of(context)!.appTitle,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ),
                       ListTile(
                         onTap: () {
                           homeBloc.add(const CurrentIndexEvent(PageType.debts));

@@ -44,7 +44,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final int? accountId = int.tryParse(event.accountId ?? '');
     if (accountId == null) return;
 
-    final Account? account = getAccountUseCase.execute(accountId);
+    final Account? account = getAccountUseCase(accountId);
     if (account != null) {
       accountName = account.bankName;
       accountHolderName = account.name;
@@ -76,7 +76,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     }
 
     if (event.isAdding) {
-      await addAccountUseCase.execute(
+      await addAccountUseCase(
         bankName: bankName,
         holderName: holderName,
         number: number ?? '',
@@ -103,7 +103,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     DeleteAccountEvent event,
     Emitter<AccountsState> emit,
   ) async {
-    await deleteAccountUseCase.execute(event.account.key);
+    await deleteAccountUseCase(event.account.key);
     emit(AccountDeletedState());
   }
 
@@ -119,7 +119,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   ) async {
     final int? expenseId = int.tryParse(event.accountId);
     if (expenseId == null) return;
-    await deleteAccountUseCase.execute(expenseId);
+    await deleteAccountUseCase(expenseId);
     emit(AccountDeletedState());
   }
 

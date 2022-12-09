@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../app/routes.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../service_locator.dart';
@@ -101,11 +99,6 @@ class _DebtsPageState extends State<DebtsPage>
               ],
             );
           },
-        ),
-        floatingActionButton: FloatingActionButton.large(
-          onPressed: () => context.goNamed(addDebitName),
-          tooltip: AppLocalizations.of(context)!.addExpenseLabel,
-          child: const Icon(Icons.add),
         ),
       ),
     );

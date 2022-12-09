@@ -270,7 +270,13 @@ NavigationBarThemeData navigationBarThemeData(ColorScheme colorScheme) {
   return NavigationBarThemeData(
     backgroundColor: colorScheme.surface,
     labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-    labelTextStyle: MaterialStateProperty.all(GoogleFonts.outfit()),
+    labelTextStyle: MaterialStateProperty.resolveWith((states) {
+      if (states.contains(MaterialState.selected)) {
+        return GoogleFonts.outfit().copyWith(fontWeight: FontWeight.bold);
+      } else {
+        return GoogleFonts.outfit();
+      }
+    }),
   );
 }
 

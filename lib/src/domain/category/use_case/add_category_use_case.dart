@@ -5,7 +5,7 @@ class AddCategoryUseCase {
 
   AddCategoryUseCase({required this.categoryRepository});
 
-  Future<void> execute({
+  Future<void> call({
     required String name,
     required String? desc,
     required int icon,

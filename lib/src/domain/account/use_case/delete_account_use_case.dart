@@ -5,5 +5,5 @@ class DeleteAccountUseCase {
 
   DeleteAccountUseCase({required this.accountRepository});
 
-  Future<void> execute(int key) async => accountRepository.deleteAccount(key);
+  Future<void> call(int key) async => accountRepository.deleteAccount(key);
 }

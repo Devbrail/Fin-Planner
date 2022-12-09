@@ -7,7 +7,7 @@ class DebtUseCase {
 
   DebtUseCase({required this.debtRepository});
 
-  Future<void> addDebtOrCredit({
+  Future<void> call({
     required String description,
     required String name,
     required double amount,

@@ -6,7 +6,7 @@ class AddAccountUseCase {
 
   AddAccountUseCase({required this.accountRepository});
 
-  Future<void> execute({
+  Future<void> call({
     required String bankName,
     required String holderName,
     required String number,
