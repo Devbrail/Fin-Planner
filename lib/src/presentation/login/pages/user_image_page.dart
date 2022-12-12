@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/core/enum/box_types.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,8 +9,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
+import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
-import '../../settings/widgets/user_profile_widget.dart';
 
 class UserImagePage extends StatefulWidget {
   const UserImagePage({Key? key}) : super(key: key);
@@ -93,8 +94,65 @@ class _UserImagePageState extends State<UserImagePage> {
         },
         extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
         label: const Icon(MdiIcons.arrowRight),
-        icon: Text(AppLocalizations.of(context)!.nextLabel),
+        icon: Text(
+          AppLocalizations.of(context)!.nextLabel,
+          style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1,
+              ),
+        ),
       ),
+    );
+  }
+}
+
+class UserImageWidget extends StatelessWidget {
+  const UserImageWidget({
+    Key? key,
+    required this.pickImage,
+    this.maxRadius,
+  }) : super(key: key);
+
+  final VoidCallback pickImage;
+  final double? maxRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<Box>(
+      valueListenable: locator
+          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+          .listenable(
+        keys: [userImageKey],
+      ),
+      builder: (context, value, _) {
+        String image = value.get(userImageKey, defaultValue: '');
+        if (image == 'no-image') {
+          image = '';
+        }
+        return GestureDetector(
+          onTap: pickImage,
+          child: Builder(
+            builder: (context) {
+              if (image.isEmpty) {
+                return CircleAvatar(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  maxRadius: maxRadius,
+                  child: Icon(
+                    Icons.account_circle_outlined,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    size: 72,
+                  ),
+                );
+              } else {
+                return CircleAvatar(
+                  foregroundImage: FileImage(File(image)),
+                  maxRadius: maxRadius,
+                );
+              }
+            },
+          ),
+        );
+      },
     );
   }
 }

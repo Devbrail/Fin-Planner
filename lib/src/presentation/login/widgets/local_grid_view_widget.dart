@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../widgets/paisa_card.dart';
-import '../bloc/splash_bloc.dart';
+import '../data.dart';
 
-class LocaleGridView extends StatelessWidget {
+class LocaleGridView extends StatefulWidget {
   const LocaleGridView({
     Key? key,
     required this.locales,
@@ -18,24 +18,45 @@ class LocaleGridView extends StatelessWidget {
   final int crossAxisCount;
 
   @override
+  State<LocaleGridView> createState() => _LocaleGridViewState();
+}
+
+class _LocaleGridViewState extends State<LocaleGridView> {
+  CountryMap? selectedIndex;
+
+  @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.only(bottom: 82, left: 8, right: 8),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
+        crossAxisCount: widget.crossAxisCount,
         childAspectRatio: 16 / 12,
       ),
       shrinkWrap: true,
-      itemCount: locales.length,
+      itemCount: widget.locales.length,
       itemBuilder: (_, index) {
-        final map = locales[index];
+        final map = widget.locales[index];
         final format = NumberFormat.compactSimpleCurrency(
-          locale: locales[index].locale.toString(),
+          locale: widget.locales[index].locale.toString(),
         );
 
         return PaisaCard(
+          shape: selectedIndex == map
+              ? RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  side: BorderSide(
+                    width: 2,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                )
+              : null,
           child: InkWell(
-            onTap: () => onPressed(locales[index].locale),
+            onTap: () {
+              setState(() {
+                selectedIndex = map;
+              });
+              widget.onPressed(map.locale);
+            },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

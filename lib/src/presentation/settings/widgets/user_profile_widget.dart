@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -8,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
+import '../../login/pages/user_image_page.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -127,56 +126,6 @@ class UserTextField extends StatelessWidget {
                 return null;
               } else {
                 return AppLocalizations.of(context)!.validNameLabel;
-              }
-            },
-          ),
-        );
-      },
-    );
-  }
-}
-
-class UserImageWidget extends StatelessWidget {
-  const UserImageWidget({
-    Key? key,
-    required this.pickImage,
-    this.maxRadius,
-  }) : super(key: key);
-
-  final VoidCallback pickImage;
-  final double? maxRadius;
-
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box>(
-      valueListenable: locator
-          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
-          .listenable(
-        keys: [userImageKey],
-      ),
-      builder: (context, value, _) {
-        String image = value.get(userImageKey, defaultValue: '');
-        if (image == 'no-image') {
-          image = '';
-        }
-        return GestureDetector(
-          onTap: pickImage,
-          child: Builder(
-            builder: (context) {
-              if (image.isEmpty) {
-                return CircleAvatar(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  maxRadius: maxRadius,
-                  child: Icon(
-                    Icons.account_circle_outlined,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                );
-              } else {
-                return CircleAvatar(
-                  foregroundImage: FileImage(File(image)),
-                  maxRadius: maxRadius,
-                );
               }
             },
           ),

@@ -36,7 +36,7 @@ import 'presentation/category/bloc/category_bloc.dart';
 import 'presentation/debits/cubit/debts_cubit.dart';
 import 'presentation/expense/bloc/expense_bloc.dart';
 import 'presentation/home/bloc/home_bloc.dart';
-import 'presentation/splash/bloc/splash_bloc.dart';
+import 'presentation/login/bloc/currency_selector_bloc.dart';
 
 final locator = GetIt.instance;
 
@@ -144,7 +144,7 @@ void _setupUseCase() {
 }
 
 void _setupBloc() {
-  locator.registerFactory(() => SplashBloc(
+  locator.registerFactory(() => CurrencySelectorBloc(
         accounts: locator.get(),
         categories: locator.get(),
         settings: locator.get<Box<dynamic>>(

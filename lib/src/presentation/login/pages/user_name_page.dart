@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/core/enum/box_types.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
+import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
 
 class UserNamePage extends StatelessWidget {
@@ -53,6 +53,7 @@ class UserNamePage extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline5?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).colorScheme.onSurface,
+                              letterSpacing: 0.8,
                             ),
                         text: AppLocalizations.of(context)!.welcomeLabel,
                         children: [
@@ -73,6 +74,7 @@ class UserNamePage extends StatelessWidget {
                                 .colorScheme
                                 .onSurface
                                 .withOpacity(0.75),
+                            letterSpacing: 0.6,
                           ),
                     ),
                     const SizedBox(height: 16),
@@ -111,7 +113,13 @@ class UserNamePage extends StatelessWidget {
             },
             extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
             label: const Icon(MdiIcons.arrowRight),
-            icon: Text(AppLocalizations.of(context)!.nextLabel),
+            icon: Text(
+              AppLocalizations.of(context)!.nextLabel,
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                  ),
+            ),
           ),
         );
       },

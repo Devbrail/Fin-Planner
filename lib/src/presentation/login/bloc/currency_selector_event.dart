@@ -1,4 +1,4 @@
-part of 'splash_bloc.dart';
+part of 'currency_selector_bloc.dart';
 
 abstract class SplashEvent extends Equatable {
   const SplashEvent();
@@ -17,4 +17,10 @@ class FilterLocaleEvent extends SplashEvent {
   final String query;
 
   const FilterLocaleEvent(this.query);
+}
+
+class SelectedLocaleEvent extends SplashEvent {
+  final Locale locale;
+
+  const SelectedLocaleEvent(this.locale);
 }

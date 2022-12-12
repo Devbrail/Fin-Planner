@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_paisa/src/presentation/login/data.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -11,13 +12,12 @@ import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/category/model/category.dart';
-import '../../../service_locator.dart';
 
-part 'splash_event.dart';
-part 'splash_state.dart';
+part 'currency_selector_event.dart';
+part 'currency_selector_state.dart';
 
-class SplashBloc extends Bloc<SplashEvent, SplashState> {
-  SplashBloc({
+class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
+  CurrencySelectorBloc({
     required this.accounts,
     required this.categories,
     required this.settings,
@@ -25,6 +25,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     on<SplashEvent>((event, emit) {});
     on<CheckLoginEvent>(_checkLogin);
     on<FilterLocaleEvent>(_filterLocale);
+    on<SelectedLocaleEvent>(_selectedLocale);
   }
   final Box<dynamic> settings;
   final Box<Account> accounts;
@@ -64,26 +65,15 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     }
 
     final languageCode = settings.get(userLanguageKey, defaultValue: 'DEF');
-    //emit(CountryLocalesState(locales));
 
     if (languageCode == 'DEF' || event.forceChangeCurrency) {
+      final locales = getLocales();
       locales.sort(((a, b) => a.name.compareTo(b.name)));
       emit(CountryLocalesState(locales));
     } else {
-      if (locator.isRegistered<String>(instanceName: 'languageCode')) {
-        locator.unregister<String>(instanceName: 'languageCode');
-      }
-      locator.registerFactory<String>(
-        () => languageCode,
-        instanceName: 'languageCode',
-      );
+      await settings.put(userLanguageKey, languageCode);
       emit(NavigateToHome());
     }
-  }
-
-  Future<void> setSelectedLocale(Locale locale) async {
-    await settings.put(userLanguageKey, locale.languageCode);
-    add(const CheckLoginEvent());
   }
 
   void _filterLocale(
@@ -91,40 +81,18 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     Emitter<SplashState> emit,
   ) {
     final query = event.query.toLowerCase();
-    final result = locales
+    final result = getLocales()
         .where((element) => element.name.toLowerCase().contains(query))
         .toList();
     result.sort(((a, b) => a.name.compareTo(b.name)));
     emit(CountryLocalesState(result));
   }
-}
 
-final locales = [
-  CountryMap("US Dollar", const Locale('en')),
-  CountryMap("Indian Rupee", const Locale('hi')),
-  CountryMap("Malaysia Ringgit", const Locale('ms')),
-  CountryMap("Ukrainian Hryvnia", const Locale('uk')),
-  CountryMap("Polish Złoty", const Locale('pl')),
-  CountryMap("Austria Euro", const Locale('de')),
-  CountryMap("Bangladesh Taka", const Locale('bn')),
-  CountryMap("Turkish lira", const Locale('tr')),
-  CountryMap("Mexican Peso", const Locale('es-mx')),
-  CountryMap("Philippine Peso", const Locale('fil')),
-  CountryMap("Indonesian Rupiah", const Locale('id')),
-  CountryMap("Vietnamese Dong", const Locale('vi')),
-  CountryMap("Lebanese Pound", const Locale('ar-lb')),
-  CountryMap("Taiwan Dollar", const Locale('zh-tw')),
-  CountryMap("Sri Lanka Rupee", const Locale('si')),
-  CountryMap("Pakistan Rupee", const Locale('ur')),
-  CountryMap("Swiss Franc", const Locale('fr_CH')),
-  CountryMap("Egyptian Pound", const Locale('ar_EG')),
-  CountryMap("Brazilian Real", const Locale('pt')),
-  CountryMap("Russian Ruble", const Locale('ru')),
-];
-
-class CountryMap {
-  final String name;
-  final Locale locale;
-
-  CountryMap(this.name, this.locale);
+  Future<FutureOr<void>> _selectedLocale(
+    SelectedLocaleEvent event,
+    Emitter<SplashState> emit,
+  ) async {
+    await settings.put(userLanguageKey, event.locale.languageCode);
+    emit(NavigateToHome());
+  }
 }

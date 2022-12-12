@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/src/presentation/login/pages/curreny_selector_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -15,7 +16,6 @@ import '../presentation/login/pages/user_image_page.dart';
 import '../presentation/login/pages/user_name_page.dart';
 import '../presentation/settings/pages/export_and_import_page.dart';
 import '../presentation/settings/pages/setting_page.dart';
-import '../presentation/splash/pages/splash_screen_page.dart';
 import '../service_locator.dart';
 
 const loginPath = '/login';
@@ -66,10 +66,7 @@ final GoRouter goRouter = GoRouter(
       return splashPath;
     }
     if (name.isNotEmpty && image.isNotEmpty && isLogging) {
-      locator.registerFactory<String>(
-        () => languageCode,
-        instanceName: 'languageCode',
-      );
+      //await settings.put(userLanguageKey, languageCode);
       return landingPath;
     }
     return null;
@@ -90,11 +87,11 @@ final GoRouter goRouter = GoRouter(
       builder: (context, state) {
         if (state.extra is Map) {
           final map = state.extra as Map;
-          return SplashScreenPage(
+          return CurrencySelectorPage(
             forceChangeCurrency: map['force_change_currency'] as bool,
           );
         } else {
-          return const SplashScreenPage();
+          return const CurrencySelectorPage();
         }
       },
     ),

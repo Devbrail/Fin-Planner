@@ -1,4 +1,4 @@
-part of 'splash_bloc.dart';
+part of 'currency_selector_bloc.dart';
 
 abstract class SplashState extends Equatable {
   const SplashState();
