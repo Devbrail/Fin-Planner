@@ -232,33 +232,37 @@ class _LandingPageState extends State<LandingPage>
             bottomNavigationBar: BlocBuilder(
               bloc: homeBloc,
               builder: (context, state) {
-                return NavigationBar(
-                  selectedIndex:
-                      homeBloc.getIndexFromPage(homeBloc.currentPage),
-                  onDestinationSelected: (index) => homeBloc
-                      .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
-                  destinations: [
-                    NavigationDestination(
-                      label: AppLocalizations.of(context)!.homeLabel,
-                      icon: const Icon(Icons.home_outlined),
-                      selectedIcon: const Icon(Icons.home),
-                    ),
-                    NavigationDestination(
-                      label: AppLocalizations.of(context)!.accountsLabel,
-                      icon: const Icon(Icons.credit_card_outlined),
-                      selectedIcon: const Icon(Icons.credit_card),
-                    ),
-                    NavigationDestination(
-                      label: AppLocalizations.of(context)!.categoryLabel,
-                      icon: const Icon(Icons.category_outlined),
-                      selectedIcon: const Icon(Icons.category),
-                    ),
-                    NavigationDestination(
-                      label: AppLocalizations.of(context)!.budgetLabel,
-                      icon: const Icon(Icons.account_balance_wallet_outlined),
-                      selectedIcon: const Icon(Icons.account_balance_wallet),
-                    ),
-                  ],
+                return Theme(
+                  data: Theme.of(context)
+                      .copyWith(splashFactory: NoSplash.splashFactory),
+                  child: NavigationBar(
+                    selectedIndex:
+                        homeBloc.getIndexFromPage(homeBloc.currentPage),
+                    onDestinationSelected: (index) => homeBloc.add(
+                        CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
+                    destinations: [
+                      NavigationDestination(
+                        label: AppLocalizations.of(context)!.homeLabel,
+                        icon: const Icon(Icons.home_outlined),
+                        selectedIcon: const Icon(Icons.home),
+                      ),
+                      NavigationDestination(
+                        label: AppLocalizations.of(context)!.accountsLabel,
+                        icon: const Icon(Icons.credit_card_outlined),
+                        selectedIcon: const Icon(Icons.credit_card),
+                      ),
+                      NavigationDestination(
+                        label: AppLocalizations.of(context)!.categoryLabel,
+                        icon: const Icon(Icons.category_outlined),
+                        selectedIcon: const Icon(Icons.category),
+                      ),
+                      NavigationDestination(
+                        label: AppLocalizations.of(context)!.budgetLabel,
+                        icon: const Icon(Icons.account_balance_wallet_outlined),
+                        selectedIcon: const Icon(Icons.account_balance_wallet),
+                      ),
+                    ],
+                  ),
                 );
               },
             ),
