@@ -49,7 +49,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
       accountName = account.bankName;
       accountHolderName = account.name;
       accountNumber = account.number;
-      selectedType = account.cardType ?? CardType.bank;
+      selectedType = account.cardType ?? CardType.cash;
       initialAmount = account.amount;
       currentAccount = account;
       emit(AccountSuccessState(account));

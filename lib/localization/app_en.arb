@@ -612,8 +612,12 @@
     "@enterAccountNameLabel": {
         "description": "Enter account name label"
     },
-    "enterCardHolderNameLabel": "'Enter cardholder name'",
+    "enterCardHolderNameLabel": "Enter cardholder name",
     "@enterCardHolderNameLabel": {
         "description": "Enter account name label"
+    },
+    "searchLabel": "Search",
+    "@searchLabel": {
+        "description": "Search label"
     }
 }

@@ -28,31 +28,35 @@ class _DebtsPageState extends State<DebtsPage>
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size(double.infinity, kToolbarHeight),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Material(
-              borderRadius: BorderRadius.circular(32),
-              color: Theme.of(context).colorScheme.secondaryContainer,
-              child: TabBar(
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  color: Theme.of(context).colorScheme.primary,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Material(
+                borderRadius: BorderRadius.circular(32),
+                color: Theme.of(context).colorScheme.secondaryContainer,
+                child: TabBar(
+                  splashBorderRadius: BorderRadius.circular(32),
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  labelStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                  unselectedLabelStyle: Theme.of(context)
+                      .textTheme
+                      .subtitle1
+                      ?.copyWith(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer,
+                        fontWeight: FontWeight.bold,
+                      ),
+                  tabs: [
+                    Tab(text: AppLocalizations.of(context)!.debtLabel),
+                    Tab(text: AppLocalizations.of(context)!.creditLabel),
+                  ],
                 ),
-                labelStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                unselectedLabelStyle: Theme.of(context)
-                    .textTheme
-                    .subtitle1
-                    ?.copyWith(
-                      color: Theme.of(context).colorScheme.onSecondaryContainer,
-                      fontWeight: FontWeight.bold,
-                    ),
-                tabs: [
-                  Tab(text: AppLocalizations.of(context)!.debtLabel),
-                  Tab(text: AppLocalizations.of(context)!.creditLabel),
-                ],
               ),
             ),
           ),

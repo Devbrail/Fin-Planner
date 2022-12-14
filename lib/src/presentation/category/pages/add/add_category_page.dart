@@ -4,13 +4,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../core/context_extensions.dart';
-import '../../../service_locator.dart';
-import '../../widgets/paisa_text_field.dart';
-import '../bloc/category_bloc.dart';
-import '../widgets/color_picker_widget.dart';
-import '../widgets/select_icon_widget.dart';
-import '../widgets/set_budget_widget.dart';
+import '../../../../core/context_extensions.dart';
+import '../../../../service_locator.dart';
+import '../../../widgets/paisa_text_field.dart';
+import '../../bloc/category_bloc.dart';
+import '../../widgets/color_picker_widget.dart';
+import '../../widgets/select_icon_widget.dart';
+import '../../widgets/set_budget_widget.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -30,6 +30,13 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   late TextEditingController budgetController = TextEditingController();
   late TextEditingController categoryController = TextEditingController();
   late TextEditingController descController = TextEditingController();
+  @override
+  void dispose() {
+    budgetController.dispose();
+    categoryController.dispose();
+    descController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

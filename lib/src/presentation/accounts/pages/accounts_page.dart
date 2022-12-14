@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/presentation/widgets/future_resolve.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -10,11 +9,11 @@ import '../../../core/common.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../service_locator.dart';
+import '../../widgets/future_resolve.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
-import '../widgets/account_summary_widget.dart';
-import '../widgets/account_transaction_widget.dart';
-import '../widgets/accounts_page_view_widget.dart';
+import 'accounts_mobile_page.dart';
+import 'accounts_tablet_page.dart';
 
 class AccountsPage extends StatelessWidget {
   const AccountsPage({super.key});
@@ -39,7 +38,7 @@ class AccountsPage extends StatelessWidget {
                       .errorNoCardsDescriptionLabel,
                 );
               }
-              accountsBloc.add(AccountSelectedEvent(accounts[0]));
+              accountsBloc.add(AccountSelectedEvent(accounts.first));
               return BlocBuilder(
                 bloc: accountsBloc,
                 builder: (context, state) {
@@ -49,49 +48,16 @@ class AccountsPage extends StatelessWidget {
                       builder: (context, value, child) {
                         final expenses = value.allAccount(state.account.key);
                         expenses.sort((a, b) => b.time.compareTo(a.time));
-
                         return ScreenTypeLayout(
-                          mobile: ListView(
-                            shrinkWrap: true,
-                            key: const Key('accounts_list_view'),
-                            padding: const EdgeInsets.only(bottom: 124),
-                            children: [
-                              AccountPageViewWidget(
-                                accounts: accounts,
-                                accountBloc: accountsBloc,
-                              ),
-                              AccountSummaryWidget(expenses: expenses),
-                              AccountTransactionWidget(
-                                accountLocalDataSource: locator.get(),
-                                categoryLocalDataSource: locator.get(),
-                                expenses: expenses,
-                              )
-                            ],
+                          mobile: AccountsMobilePage(
+                            accounts: accounts,
+                            accountsBloc: accountsBloc,
+                            expenses: expenses,
                           ),
-                          tablet: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    AccountPageViewWidget(
-                                      accountBloc: accountsBloc,
-                                      accounts: accounts,
-                                    ),
-                                    AccountSummaryWidget(expenses: expenses)
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: AccountTransactionWidget(
-                                  accountLocalDataSource: locator.get(),
-                                  categoryLocalDataSource: locator.get(),
-                                  expenses: expenses,
-                                ),
-                              ),
-                            ],
+                          tablet: AccountsTabletPage(
+                            accounts: accounts,
+                            accountsBloc: accountsBloc,
+                            expenses: expenses,
                           ),
                         );
                       },
