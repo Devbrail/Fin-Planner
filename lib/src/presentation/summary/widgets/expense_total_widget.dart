@@ -19,7 +19,7 @@ class ExpenseTotalWidget extends StatelessWidget {
       valueListenable: locator.get<Box<Expense>>().listenable(),
       builder: (_, value, child) {
         final expenses = value.values.toList();
-        final totalIncome = expenses.totalIncome - expenses.totalExpense;
+        final currentTotal = expenses.fullTotal;
         final thisMonthExpenses = expenses.thisMonthExpense;
         final thisMonthIncome = expenses.thisMonthIncome;
         return Column(
@@ -37,7 +37,7 @@ class ExpenseTotalWidget extends StatelessWidget {
                     children: [
                       TotalBalanceWidget(
                         title: AppLocalizations.of(context)!.totalBalanceLabel,
-                        amount: totalIncome,
+                        amount: currentTotal,
                       ),
                       const SizedBox(height: 24),
                       ExpenseTotalForMonthWidget(

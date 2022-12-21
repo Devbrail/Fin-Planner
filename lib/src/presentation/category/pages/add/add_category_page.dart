@@ -30,6 +30,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   late TextEditingController budgetController = TextEditingController();
   late TextEditingController categoryController = TextEditingController();
   late TextEditingController descController = TextEditingController();
+
   @override
   void dispose() {
     budgetController.dispose();

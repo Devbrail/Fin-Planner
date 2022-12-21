@@ -140,7 +140,6 @@ class UserImageWidget extends StatelessWidget {
                   child: Icon(
                     Icons.account_circle_outlined,
                     color: Theme.of(context).colorScheme.onPrimary,
-                    size: 72,
                   ),
                 );
               } else {

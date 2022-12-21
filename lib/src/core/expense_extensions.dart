@@ -45,7 +45,7 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
           return previousValue + element.currency;
         }
       });
-
+  double get fullTotal => totalIncome - totalExpense;
   double get totalExpense =>
       where((element) => element.type == TransactionType.expense)
           .map((e) => e.currency)

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/core/enum/card_type.dart';
-import 'package:flutter_paisa/src/presentation/widgets/future_resolve.dart';
-import 'package:flutter_paisa/src/presentation/widgets/multi_value_listenable_builder.dart';
-import 'package:flutter_paisa/src/service_locator.dart';
+import '../../../../core/enum/card_type.dart';
+import '../../../widgets/future_resolve.dart';
+import '../../../widgets/multi_value_listenable_builder.dart';
+import '../../../../service_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -46,6 +46,9 @@ class AddAccountPageState extends State<AddAccountPage> {
     accountInitialAmountController.dispose();
     accountNumberController.dispose();
     accountNameController.dispose();
+    accountNameNotifier.dispose();
+    accountNumberNotifier.dispose();
+    accountHolderNotifier.dispose();
     super.dispose();
   }
 
