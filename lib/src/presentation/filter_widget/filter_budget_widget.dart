@@ -7,9 +7,11 @@ class FilterBudgetToggleWidget extends StatelessWidget {
   const FilterBudgetToggleWidget({
     Key? key,
     required this.valueNotifier,
+    this.showAsList = false,
   }) : super(key: key);
 
   final ValueNotifier<FilterBudget> valueNotifier;
+  final bool showAsList;
 
   @override
   Widget build(BuildContext context) {

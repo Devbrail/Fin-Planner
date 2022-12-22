@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/presentation/budget_overview/widgets/filter_budget_widget.dart';
-import 'package:flutter_paisa/src/presentation/budget_overview/widgets/filter_date_range_widget.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../core/common.dart';
-import '../../../core/enum/filter_budget.dart';
-import '../../../data/category/data_sources/category_local_data_source.dart';
-import '../../../data/expense/model/expense.dart';
-import '../../../service_locator.dart';
-import '../../filter_widget/filter_budget_widget.dart';
-import '../../widgets/paisa_empty_widget.dart';
-import '../widgets/budget_section_widget.dart';
+import '../../../../core/common.dart';
+import '../../../../core/enum/filter_budget.dart';
+import '../../../../data/category/data_sources/category_local_data_source.dart';
+import '../../../../data/expense/model/expense.dart';
+import '../../../../service_locator.dart';
+import '../../../widgets/paisa_empty_widget.dart';
+import '../../widgets/budget_section_widget.dart';
+import '../../widgets/filter_budget_widget.dart';
+import '../../widgets/filter_date_range_widget.dart';
+import 'budget_overview_mobile_page.dart';
+import 'budget_overview_tablet_page.dart';
 
 class BudgetOverViewPage extends StatefulWidget {
   const BudgetOverViewPage({
@@ -76,26 +77,13 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
                 },
               );
               return ScreenTypeLayout(
-                mobile: Material(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FilterBudgetToggleWidget(valueNotifier: valueNotifier),
-                      child,
-                    ],
-                  ),
+                mobile: BudgetOverviewMobilePage(
+                  valueNotifier: valueNotifier,
+                  child: child,
                 ),
-                tablet: Scaffold(
-                  body: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const SizedBox(height: 24),
-                      FilterBudgetToggleWidget(
-                        valueNotifier: valueNotifier,
-                      ),
-                      child
-                    ],
-                  ),
+                tablet: BudgetOverviewTabletPage(
+                  valueNotifier: valueNotifier,
+                  child: child,
                 ),
               );
             },

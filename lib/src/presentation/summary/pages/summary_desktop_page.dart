@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/src/presentation/widgets/paisa_search_bar.dart';
 
 import '../../../core/enum/filter_budget.dart';
 import '../../goal/widget/color_palette.dart';
 import '../../home/widgets/welcome_widget.dart';
 import '../../settings/widgets/user_profile_widget.dart';
-import '../../widgets/paisa_search.dart';
 import '../widgets/expense_history_widget.dart';
 import '../widgets/expense_total_widget.dart';
 import '../widgets/welcome_name_widget.dart';
@@ -61,7 +61,7 @@ class SummaryDesktopPage extends StatelessWidget {
                 ),
                 Row(
                   children: const [
-                    PaisaSearch(),
+                    PaisaSearchBar(),
                     SizedBox(width: 24),
                   ],
                 ),

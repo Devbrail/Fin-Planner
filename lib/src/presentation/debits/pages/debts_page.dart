@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/presentation/widgets/paisa_search_button_widget.dart';
+import 'package:flutter_paisa/src/presentation/widgets/paisa_title_widget.dart';
+import 'package:flutter_paisa/src/presentation/widgets/paisa_user_widget.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -27,34 +31,32 @@ class _DebtsPageState extends State<DebtsPage>
       initialIndex: 0,
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: const Size(double.infinity, kToolbarHeight),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Material(
-                borderRadius: BorderRadius.circular(32),
-                color: Theme.of(context).colorScheme.surfaceVariant,
-                child: TabBar(
-                  splashBorderRadius: BorderRadius.circular(32),
-                  indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(32),
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  labelColor: Theme.of(context).colorScheme.onPrimary,
-                  unselectedLabelColor:
-                      Theme.of(context).colorScheme.onSurfaceVariant,
-                  labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                  unselectedLabelStyle:
-                      Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                  tabs: [
-                    Tab(text: AppLocalizations.of(context)!.debtLabel),
-                    Tab(text: AppLocalizations.of(context)!.creditLabel),
-                  ],
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Material(
+              borderRadius: BorderRadius.circular(32),
+              color: Theme.of(context).colorScheme.surfaceVariant,
+              child: TabBar(
+                splashBorderRadius: BorderRadius.circular(32),
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: Theme.of(context).colorScheme.primary,
                 ),
+                labelColor: Theme.of(context).colorScheme.onPrimary,
+                unselectedLabelColor:
+                    Theme.of(context).colorScheme.onSurfaceVariant,
+                labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                unselectedLabelStyle:
+                    Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                tabs: [
+                  Tab(text: AppLocalizations.of(context)!.debtLabel),
+                  Tab(text: AppLocalizations.of(context)!.creditLabel),
+                ],
               ),
             ),
           ),
