@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class MaterialYouChip extends StatelessWidget {
-  const MaterialYouChip({
+class PaisaMaterialYouChip extends StatelessWidget {
+  const PaisaMaterialYouChip({
     super.key,
     required this.title,
     required this.onPressed,

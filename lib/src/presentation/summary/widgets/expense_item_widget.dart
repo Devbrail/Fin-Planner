@@ -1,61 +1,42 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/custom_color.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 import '../../../app/routes.dart';
-import '../../../core/currency_util.dart';
+import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../core/enum/transaction.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 
-class ExpenseItemWidget extends StatefulWidget {
+class ExpenseItemWidget extends StatelessWidget {
   const ExpenseItemWidget({
     Key? key,
     required this.expense,
     required this.account,
     required this.category,
   }) : super(key: key);
+
   final Account account;
   final Expense expense;
   final Category category;
-
-  @override
-  State<ExpenseItemWidget> createState() => _ExpenseItemWidgetState();
-}
-
-class _ExpenseItemWidgetState extends State<ExpenseItemWidget> {
-  String get _typeSign =>
-      widget.expense.type == TransactionType.expense ? '-' : '+';
-  Color? get color => widget.expense.type == TransactionType.expense
-      ? Theme.of(context).extension<CustomColors>()!.red
-      : Theme.of(context).extension<CustomColors>()!.green;
-
-  String get day => DateFormat('dd').format(widget.expense.time);
-  String get week => DateFormat('EEE').format(widget.expense.time);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => context.goNamed(
         editExpensePath,
-        params: <String, String>{'eid': widget.expense.superId.toString()},
+        params: <String, String>{'eid': expense.superId.toString()},
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 6,
-        ),
         horizontalTitleGap: 0,
         leading: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              day,
+              expense.time.dayString,
               textAlign: TextAlign.center,
               style: GoogleFonts.manrope(
                 textStyle: Theme.of(context).textTheme.headline6?.copyWith(
@@ -64,7 +45,7 @@ class _ExpenseItemWidgetState extends State<ExpenseItemWidget> {
               ),
             ),
             Text(
-              week,
+              expense.time.weekString,
               textAlign: TextAlign.center,
               style: GoogleFonts.manrope(
                 textStyle: Theme.of(context).textTheme.bodyText1?.copyWith(
@@ -74,15 +55,16 @@ class _ExpenseItemWidgetState extends State<ExpenseItemWidget> {
             ),
           ],
         ),
-        title: Text(widget.expense.name),
+        title: Text(expense.name),
         subtitle: Text(
-            '${widget.account.cardType?.name} • ${widget.account.bankName}'),
+          '${account.cardType?.name} • ${account.bankName}',
+        ),
         trailing: Text(
-          '$_typeSign${widget.expense.currency.toCurrency()}',
+          '${expense.type?.sign}${expense.currency.toCurrency()}',
           style: GoogleFonts.manrope(
             textStyle: TextStyle(
               fontSize: Theme.of(context).textTheme.subtitle1?.fontSize,
-              color: color,
+              color: expense.type?.color(context),
               fontWeight: FontWeight.w600,
             ),
           ),

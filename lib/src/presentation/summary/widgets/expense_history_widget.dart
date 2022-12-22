@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/presentation/widgets/future_resolve.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../core/common.dart';
@@ -43,41 +44,37 @@ class ExpenseHistory extends StatelessWidget {
           );
         }
         expenses.sort(((a, b) => b.time.compareTo(a.time)));
-        return FutureBuilder<List<dynamic>>(
+        return FutureResolve<List<dynamic>>(
           future: Future.wait([
             locator.getAsync<LocalAccountManagerDataSource>(),
             locator.getAsync<LocalCategoryManagerDataSource>(),
           ]),
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
-              return ValueListenableBuilder<FilterBudget>(
-                  valueListenable: valueNotifier,
-                  builder: (context, value, child) {
-                    final maps = groupBy(expenses,
-                        (Expense element) => element.time.formatted(value));
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: maps.entries.length,
-                      itemBuilder: (_, mapIndex) {
-                        final expenses = maps.values.toList()[mapIndex];
-                        expenses.sort((a, b) => b.time.compareTo(a.time));
-                        return ExpenseMonthCardWidget(
-                          title: maps.keys.toList()[mapIndex],
-                          total: expenses.filterTotal,
-                          expenses: expenses,
-                          accountSource: snapshot.data![0]
-                              as LocalAccountManagerDataSource,
-                          categorySource: snapshot.data![1]
-                              as LocalCategoryManagerDataSource,
-                        );
-                      },
+          builder: (result) {
+            return ValueListenableBuilder<FilterBudget>(
+              valueListenable: valueNotifier,
+              builder: (__, value, _) {
+                final maps = groupBy(expenses,
+                    (Expense element) => element.time.formatted(value));
+                return ListView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: maps.entries.length,
+                  itemBuilder: (_, mapIndex) {
+                    final expenses = maps.values.toList()[mapIndex];
+                    expenses.sort((a, b) => b.time.compareTo(a.time));
+                    return ExpenseMonthCardWidget(
+                      title: maps.keys.toList()[mapIndex],
+                      total: expenses.filterTotal,
+                      expenses: expenses,
+                      accountSource: result[0] as LocalAccountManagerDataSource,
+                      categorySource:
+                          result[1] as LocalCategoryManagerDataSource,
                     );
-                  });
-            } else {
-              return const SizedBox.shrink();
-            }
+                  },
+                );
+              },
+            );
           },
         );
       },

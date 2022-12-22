@@ -3,9 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
+import '../../../core/common.dart';
 import '../../../app/routes.dart';
-import '../../../core/currency_util.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../data/debt/models/transaction.dart';
@@ -22,27 +21,19 @@ class DebtItemWidget extends StatelessWidget {
     return ValueListenableBuilder<Box<Transaction>>(
       valueListenable: locator.get<Box<Transaction>>().listenable(),
       builder: (context, value, child) {
-        final transactions = getTransactionsFromId(value.values, debt.superId);
+        final transactions = value.getTransactionsFromId(debt.superId);
         final double amount = transactions.fold<double>(
             0, (previousValue, element) => previousValue + element.amount);
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: PaisaCard(
-            elevation: 0,
-            color: Theme.of(context).colorScheme.surfaceVariant,
             child: InkWell(
               onTap: () => GoRouter.of(context).goNamed(
                 debtAddOrEditPath,
                 params: {'did': debt.superId.toString()},
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  LinearProgressIndicator(
-                    value: amount / debt.amount,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                  ),
                   ListTile(
                     title: Text(
                       debt.name,
@@ -54,80 +45,107 @@ class DebtItemWidget extends StatelessWidget {
                     subtitle: Text(
                       debt.description,
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurfaceVariant
+                            .withOpacity(0.75),
                       ),
                     ),
                     trailing: Text(
                       (debt.amount - amount).toCurrency(),
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                            color: Theme.of(context).colorScheme.error,
-                          ),
+                      style: Theme.of(context).textTheme.headline6?.copyWith(),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: OutlinedButton.icon(
-                      icon: Icon(
-                        MdiIcons.cashClock,
-                        color:
-                            Theme.of(context).colorScheme.onSecondaryContainer,
-                      ),
-                      label: Text(
-                        debt.debtType == DebtType.debt
-                            ? AppLocalizations.of(context)!.payDebtLabel
-                            : AppLocalizations.of(context)!.payDebtLabel,
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSecondaryContainer,
-                            ),
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        elevation: 0,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: LinearProgressIndicator(
+                        value: amount / debt.amount,
                         backgroundColor:
-                            Theme.of(context).colorScheme.background,
+                            Theme.of(context).colorScheme.secondaryContainer,
                       ),
-                      onPressed: () {
-                        final controller = TextEditingController();
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Text(
-                              AppLocalizations.of(context)!.payDebtLabel,
-                            ),
-                            content: PaisaTextFormField(
-                              controller: controller,
-                              hintText: AppLocalizations.of(context)!
-                                  .enterAmountLabel,
-                              keyboardType: TextInputType.number,
-                            ),
-                            actions: [
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(24),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 24,
-                                    vertical: 12,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  final double amount =
-                                      double.tryParse(controller.text) ?? 0;
-                                  locator.get<DebtsBloc>().add(
-                                      AddTransactionToDebtEvent(debt, amount));
-                                  Navigator.pop(context);
-                                },
-                                child: Text(
-                                  AppLocalizations.of(context)!.updateLabel,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
                     ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            '${debt.expiryDateTime.daysDifference} Days Left',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: TextButton.icon(
+                          icon: Icon(
+                            MdiIcons.cashClock,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                          label: Text(
+                            debt.debtType == DebtType.debt
+                                ? AppLocalizations.of(context)!.payDebtLabel
+                                : AppLocalizations.of(context)!.payDebtLabel,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant,
+                                ),
+                          ),
+                          style: TextButton.styleFrom(),
+                          onPressed: () {
+                            final controller = TextEditingController();
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text(
+                                  AppLocalizations.of(context)!.payDebtLabel,
+                                ),
+                                content: PaisaTextFormField(
+                                  controller: controller,
+                                  hintText: AppLocalizations.of(context)!
+                                      .enterAmountLabel,
+                                  keyboardType: TextInputType.number,
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(24),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 24,
+                                        vertical: 12,
+                                      ),
+                                    ),
+                                    onPressed: () async {
+                                      final double amount =
+                                          double.tryParse(controller.text) ?? 0;
+                                      final cubit =
+                                          await locator.getAsync<DebtsBloc>();
+                                      cubit.add(AddTransactionToDebtEvent(
+                                        debt,
+                                        amount,
+                                      ));
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      AppLocalizations.of(context)!.updateLabel,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -137,9 +155,4 @@ class DebtItemWidget extends StatelessWidget {
       },
     );
   }
-}
-
-List<Transaction> getTransactionsFromId(Iterable<Transaction> debts, int? id) {
-  if (id == null) return [];
-  return debts.where((element) => element.parentId == id).toList();
 }

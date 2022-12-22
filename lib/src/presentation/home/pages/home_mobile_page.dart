@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/presentation/widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -29,7 +30,10 @@ class HomeMobilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const PaisaTitleWidget(),
-        actions: const [PaisaSearchButtonWidget(), PaisaUserWidget()],
+        actions: const [
+          PaisaSearchButtonWidget(),
+          PaisaUserWidget(),
+        ],
       ),
       drawer: Drawer(
         child: BlocBuilder(

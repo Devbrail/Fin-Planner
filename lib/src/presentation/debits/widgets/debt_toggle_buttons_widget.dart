@@ -30,7 +30,7 @@ class DebtToggleButtonsWidgetState extends State<DebtToggleButtonsWidget> {
     return Row(
       children: DebtType.values.map((type) {
         final isSelected = selectedType == type;
-        return MaterialYouChip(
+        return PaisaMaterialYouChip(
           title: type.name(context),
           isSelected: isSelected,
           onPressed: () => _update(type),

@@ -23,8 +23,7 @@ class AccountSummaryWidget extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: PaisaCard(
-              color: Theme.of(context).colorScheme.secondaryContainer,
+            child: PaisaFilledCard(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -35,7 +34,7 @@ class AccountSummaryWidget extends StatelessWidget {
                       style: TextStyle(
                         color: Theme.of(context)
                             .colorScheme
-                            .onSecondaryContainer
+                            .onSurface
                             .withOpacity(0.75),
                       ),
                     ),
@@ -74,8 +73,7 @@ class AccountSummaryWidget extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: PaisaCard(
-              color: Theme.of(context).colorScheme.secondaryContainer,
+            child: PaisaFilledCard(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(

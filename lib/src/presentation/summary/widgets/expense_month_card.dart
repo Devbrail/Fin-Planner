@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/src/presentation/widgets/paisa_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/currency_util.dart';
@@ -6,7 +7,7 @@ import '../../../core/theme/custom_color.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../widgets/paisa_card.dart';
+
 import 'expense_list_widget.dart';
 
 class ExpenseMonthCardWidget extends StatelessWidget {
@@ -31,7 +32,6 @@ class ExpenseMonthCardWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           title: Text(
             title,
             style: Theme.of(context)

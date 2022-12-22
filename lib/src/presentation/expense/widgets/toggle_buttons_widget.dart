@@ -39,7 +39,7 @@ class TransactionToggleButtonsState extends State<TransactionToggleButtons> {
       child: Row(
         children: TransactionType.values.map((type) {
           final isSelected = selectedType == type;
-          return MaterialYouChip(
+          return PaisaMaterialYouChip(
             title: type.name(context),
             isSelected: isSelected,
             onPressed: () => _update(type),

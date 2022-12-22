@@ -36,7 +36,7 @@ class CardTypeButtonsState extends State<CardTypeButtons> {
     return Row(
       children: CardType.values.map((type) {
         final isSelected = selectedType == type;
-        return MaterialYouChip(
+        return PaisaMaterialYouChip(
           title: type.name,
           isSelected: isSelected,
           onPressed: () => _update(type),

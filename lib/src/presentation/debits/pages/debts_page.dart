@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/presentation/widgets/paisa_search_button_widget.dart';
-import 'package:flutter_paisa/src/presentation/widgets/paisa_title_widget.dart';
-import 'package:flutter_paisa/src/presentation/widgets/paisa_user_widget.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -110,12 +106,13 @@ class _DebtsPageState extends State<DebtsPage>
 }
 
 class DebtsListWidget extends StatelessWidget {
-  final List<Debt> debts;
-
   const DebtsListWidget({
     super.key,
     required this.debts,
   });
+
+  final List<Debt> debts;
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
