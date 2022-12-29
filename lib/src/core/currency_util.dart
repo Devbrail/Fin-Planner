@@ -1,5 +1,5 @@
-import 'package:flutter_paisa/src/core/common.dart';
-import 'package:flutter_paisa/src/core/enum/box_types.dart';
+import 'common.dart';
+import 'enum/box_types.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../service_locator.dart';

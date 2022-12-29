@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/src/presentation/login/pages/curreny_selector_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -12,6 +11,8 @@ import '../presentation/debits/pages/add/add_debt_page.dart';
 import '../presentation/debits/pages/debts_page.dart';
 import '../presentation/expense/pages/expense_page.dart';
 import '../presentation/home/pages/home_page.dart';
+import '../presentation/login/intro/into_page.dart';
+import '../presentation/login/pages/curreny_selector_page.dart';
 import '../presentation/login/pages/user_image_page.dart';
 import '../presentation/login/pages/user_name_page.dart';
 import '../presentation/settings/pages/export_and_import_page.dart';
@@ -43,38 +44,22 @@ const debtAddOrEditPath = 'edit-debt';
 const debtPage = 'debt';
 const addDebitName = 'debit-add';
 
+const introPageName = 'intro';
+const introPagePath = '/intro';
+
 final settings = Hive.box(BoxType.settings.stringValue);
 
 final GoRouter goRouter = GoRouter(
-  initialLocation: loginPath,
-  errorBuilder: (context, state) => Center(
-    child: Text(state.error.toString()),
-  ),
-  redirect: (_, state) {
-    final isLogging = state.location == loginPath;
-    final String name = settings.get(userNameKey, defaultValue: '');
-    if (name.isEmpty && isLogging) {
-      return userNamePath;
-    }
-    final String image = settings.get(userImageKey, defaultValue: '');
-    if (image.isEmpty && isLogging) {
-      return userImagePath;
-    }
-    final String languageCode =
-        settings.get(userLanguageKey, defaultValue: 'DEF');
-    if (languageCode == 'DEF' && isLogging) {
-      return splashPath;
-    }
-    if (name.isNotEmpty && image.isNotEmpty && isLogging) {
-      //await settings.put(userLanguageKey, languageCode);
-      return landingPath;
-    }
-    return null;
-  },
+  initialLocation: introPagePath,
   observers: [HeroController()],
   refreshListenable: settings.listenable(),
   debugLogDiagnostics: true,
   routes: [
+    GoRoute(
+      name: introPageName,
+      path: introPagePath,
+      builder: (context, state) => const IntroPage(),
+    ),
     GoRoute(
       name: loginName,
       path: loginPath,
@@ -185,4 +170,32 @@ final GoRouter goRouter = GoRouter(
       builder: (context, state) => const UserImagePage(),
     ),
   ],
+  errorBuilder: (context, state) => Center(
+    child: Text(state.error.toString()),
+  ),
+  redirect: (_, state) {
+    final isLogging = state.location == introPagePath;
+    bool isIntroDone = settings.get(userIntroKey, defaultValue: false);
+    if (!isIntroDone) {
+      return introPagePath;
+    }
+    final String name = settings.get(userNameKey, defaultValue: '');
+    if (name.isEmpty && isLogging) {
+      return userNamePath;
+    }
+    final String image = settings.get(userImageKey, defaultValue: '');
+    if (image.isEmpty && isLogging) {
+      return userImagePath;
+    }
+    final String languageCode =
+        settings.get(userLanguageKey, defaultValue: 'DEF');
+    if (languageCode == 'DEF' && isLogging) {
+      return splashPath;
+    }
+    if (name.isNotEmpty && image.isNotEmpty && isLogging) {
+      //await settings.put(userLanguageKey, languageCode);
+      return landingPath;
+    }
+    return null;
+  },
 );

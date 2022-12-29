@@ -4,8 +4,11 @@ import '../../../../core/enum/filter_budget.dart';
 import '../../../widgets/filter_widget/filter_budget_widget.dart';
 
 class BudgetOverviewTabletPage extends StatelessWidget {
-  const BudgetOverviewTabletPage(
-      {super.key, required this.valueNotifier, required this.child});
+  const BudgetOverviewTabletPage({
+    super.key,
+    required this.valueNotifier,
+    required this.child,
+  });
 
   final ValueNotifier<FilterBudget> valueNotifier;
   final Widget child;

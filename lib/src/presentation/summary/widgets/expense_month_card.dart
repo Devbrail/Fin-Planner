@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/src/presentation/widgets/paisa_card.dart';
+import '../../widgets/paisa_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/currency_util.dart';
@@ -52,7 +52,7 @@ class ExpenseMonthCardWidget extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: PaisaCard(
+          child: PaisaFilledCard(
             child: ExpenseListWidget(
               expenses: expenses,
               accountLocalDataSource: accountSource,

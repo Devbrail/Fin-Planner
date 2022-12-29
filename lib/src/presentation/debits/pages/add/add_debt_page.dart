@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/presentation/widgets/future_resolve.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../../core/context_extensions.dart';
-import '../../../../core/currency_util.dart';
+import '../../../../core/common.dart';
 import '../../../../core/enum/debt_type.dart';
 import '../../../../data/debt/models/transaction.dart';
 import '../../../../service_locator.dart';
-import '../../../expense/pages/expense_page.dart';
+import '../../../widgets/future_resolve.dart';
 import '../../../widgets/paisa_text_field.dart';
 import '../../cubit/debts_cubit.dart';
 import '../../widgets/debt_toggle_buttons_widget.dart';
@@ -76,6 +74,11 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
               }
             },
             builder: (context, state) {
+              String? startDate, endDate;
+              if (state is DebtsSuccessState) {
+                startDate = state.debt.dateTime.formattedDate;
+                endDate = state.debt.expiryDateTime.formattedDate;
+              }
               return Scaffold(
                 appBar: context.materialYouAppBar(
                   AppLocalizations.of(context)!.addDebtLabel,
@@ -93,89 +96,91 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                     )
                   ],
                 ),
-                body: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Form(
-                    key: _formKey,
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: [
-                        DebtToggleButtonsWidget(
-                          onSelected: (p0) => debtBloc.currentDebtType = p0,
-                          selectedType: debtBloc.currentDebtType,
-                        ),
-                        const SizedBox(height: 16),
-                        AmountWidget(controller: amountController),
-                        const SizedBox(height: 16),
-                        NameWidget(controller: nameController),
-                        const SizedBox(height: 16),
-                        DescriptionWidget(controller: descController),
-                        const SizedBox(height: 16),
-                        Row(
+                body: Form(
+                  key: _formKey,
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
                           children: [
-                            Expanded(
-                              child: DatePickerWidget(
-                                onSelected: (date) =>
-                                    debtBloc.currentDateTime = date,
-                                title: AppLocalizations.of(context)!.dateLabel,
-                                subtitle: AppLocalizations.of(context)!
-                                    .validDateLabel,
-                                icon: MdiIcons.calendarStart,
-                                lastDate: DateTime.now(),
-                                firstDate: DateTime(2000),
-                              ),
+                            DebtToggleButtonsWidget(
+                              onSelected: (p0) => debtBloc.currentDebtType = p0,
+                              selectedType: debtBloc.currentDebtType,
                             ),
-                            Expanded(
-                              child: DatePickerWidget(
-                                onSelected: (date) =>
-                                    debtBloc.currentDueDateTime = date,
-                                title:
-                                    AppLocalizations.of(context)!.dueDateLabel,
-                                subtitle: AppLocalizations.of(context)!
-                                    .validDateLabel,
-                                icon: MdiIcons.calendarEnd,
-                                lastDate: DateTime(2050),
-                                firstDate: DateTime.now(),
-                              ),
-                            ),
+                            const SizedBox(height: 16),
+                            AmountWidget(controller: amountController),
+                            const SizedBox(height: 16),
+                            NameWidget(controller: nameController),
+                            const SizedBox(height: 16),
+                            DescriptionWidget(controller: descController),
+                            const SizedBox(height: 16),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            AppLocalizations.of(context)!
-                                .transactionHistoryLabel,
-                            style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: DatePickerWidget(
+                              onSelected: (date) =>
+                                  debtBloc.currentDateTime = date,
+                              title:
+                                  AppLocalizations.of(context)!.startDateLabel,
+                              subtitle: startDate ??
+                                  AppLocalizations.of(context)!.validDateLabel,
+                              icon: MdiIcons.calendarStart,
+                              lastDate: DateTime.now(),
+                              firstDate: DateTime(2000),
+                            ),
                           ),
+                          Expanded(
+                            child: DatePickerWidget(
+                              onSelected: (date) =>
+                                  debtBloc.currentDueDateTime = date,
+                              title: AppLocalizations.of(context)!.dueDateLabel,
+                              subtitle: endDate ??
+                                  AppLocalizations.of(context)!.validDateLabel,
+                              icon: MdiIcons.calendarEnd,
+                              lastDate: DateTime(2050),
+                              firstDate: DateTime.now(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      ListTile(
+                        title: Text(
+                          AppLocalizations.of(context)!.transactionHistoryLabel,
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
-                        ValueListenableBuilder<Box<Transaction>>(
-                          valueListenable:
-                              locator.get<Box<Transaction>>().listenable(),
-                          builder: (context, value, child) {
-                            final result = value.values
-                                .where((element) =>
-                                    element.parentId ==
-                                    (int.tryParse(widget.debtId ?? '') ?? -1))
-                                .toList();
-                            return ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: result.length,
-                              itemBuilder: (_, index) {
-                                final transaction = result[index];
-                                return ListTile(
-                                  trailing:
-                                      Text(transaction.amount.toCurrency()),
-                                  title: Text(
-                                    formattedDate(transaction.now),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        )
-                      ],
-                    ),
+                      ),
+                      ValueListenableBuilder<Box<Transaction>>(
+                        valueListenable:
+                            locator.get<Box<Transaction>>().listenable(),
+                        builder: (context, value, child) {
+                          final result = value.values
+                              .where((element) =>
+                                  element.parentId ==
+                                  (int.tryParse(widget.debtId ?? '') ?? -1))
+                              .toList();
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: result.length,
+                            itemBuilder: (_, index) {
+                              final transaction = result[index];
+                              return ListTile(
+                                trailing: Text(transaction.amount.toCurrency()),
+                                title: Text(transaction.now.formattedDate),
+                              );
+                            },
+                          );
+                        },
+                      )
+                    ],
                   ),
                 ),
                 bottomNavigationBar: SafeArea(
@@ -241,6 +246,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      horizontalTitleGap: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -254,7 +260,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
         if (result == null) return;
         widget.onSelected.call(result);
         setState(() {
-          subtitle = formattedDate(result);
+          subtitle = result.formattedDate;
         });
       },
       leading: Icon(widget.icon),

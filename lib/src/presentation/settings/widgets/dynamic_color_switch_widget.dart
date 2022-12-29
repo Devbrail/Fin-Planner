@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/core/enum/box_types.dart';
+import '../../../core/enum/box_types.dart';
 import 'package:hive/hive.dart';
 
 import '../../../core/common.dart';
@@ -19,7 +19,7 @@ class DynamicColorSwitchWidgetState extends State<DynamicColorSwitchWidget> {
   final Box<dynamic> settings =
       locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
   late bool isDynamic = settings.get(
-    dynamicColorKey,
+    dynamicThemeKey,
     defaultValue: false,
   );
 
@@ -34,11 +34,11 @@ class DynamicColorSwitchWidgetState extends State<DynamicColorSwitchWidget> {
       title: AppLocalizations.of(context)!.dynamicColorLabel,
       trailing: Switch(
         value: settings.get(
-          dynamicColorKey,
+          dynamicThemeKey,
           defaultValue: false,
         ),
         onChanged: (value) {
-          settings.put(dynamicColorKey, value);
+          settings.put(dynamicThemeKey, value);
           setState(() {});
         },
       ),

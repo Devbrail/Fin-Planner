@@ -41,6 +41,7 @@ class _LocaleGridViewState extends State<LocaleGridView> {
         );
 
         return PaisaCard(
+          color: Theme.of(context).colorScheme.surface,
           shape: selectedIndex == map
               ? RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),

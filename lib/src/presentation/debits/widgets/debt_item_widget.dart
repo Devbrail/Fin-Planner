@@ -3,8 +3,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../core/common.dart';
+
 import '../../../app/routes.dart';
+import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../data/debt/models/transaction.dart';
@@ -26,7 +27,7 @@ class DebtItemWidget extends StatelessWidget {
             0, (previousValue, element) => previousValue + element.amount);
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: PaisaCard(
+          child: PaisaFilledCard(
             child: InkWell(
               onTap: () => GoRouter.of(context).goNamed(
                 debtAddOrEditPath,
@@ -71,14 +72,14 @@ class DebtItemWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.only(left: 16),
                           child: Text(
                             '${debt.expiryDateTime.daysDifference} Days Left',
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.only(bottom: 12.0, right: 14),
                         child: TextButton.icon(
                           icon: Icon(
                             MdiIcons.cashClock,
@@ -124,15 +125,18 @@ class DebtItemWidget extends StatelessWidget {
                                         vertical: 12,
                                       ),
                                     ),
-                                    onPressed: () async {
+                                    onPressed: () {
                                       final double amount =
                                           double.tryParse(controller.text) ?? 0;
-                                      final cubit =
-                                          await locator.getAsync<DebtsBloc>();
-                                      cubit.add(AddTransactionToDebtEvent(
-                                        debt,
-                                        amount,
-                                      ));
+                                      locator.getAsync<DebtsBloc>().then(
+                                            (cubit) => cubit.add(
+                                              AddTransactionToDebtEvent(
+                                                debt,
+                                                amount,
+                                              ),
+                                            ),
+                                          );
+
                                       Navigator.pop(context);
                                     },
                                     child: Text(

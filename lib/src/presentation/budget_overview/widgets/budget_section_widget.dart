@@ -35,17 +35,12 @@ class BudgetSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(
-            left: 16,
-            bottom: 8,
-            right: 16,
-            top: 16,
-          ),
+          padding: const EdgeInsets.only(left: 16, top: 12),
           child: Text(
             name,
             style: Theme.of(context)
                 .textTheme
-                .headline6
+                .subtitle1
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),

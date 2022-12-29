@@ -31,6 +31,7 @@ class HomeMobilePage extends StatelessWidget {
       appBar: AppBar(
         title: const PaisaTitleWidget(),
         actions: const [
+          PaisaFilterTransactionWidget(),
           PaisaSearchButtonWidget(),
           PaisaUserWidget(),
         ],

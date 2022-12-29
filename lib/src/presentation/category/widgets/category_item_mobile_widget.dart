@@ -17,7 +17,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaCard(
+    return PaisaFilledCard(
       child: ListTile(
         onTap: () => context.goNamed(
           editCategoryPath,

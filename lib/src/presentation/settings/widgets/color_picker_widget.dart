@@ -30,10 +30,10 @@ class ColorSelectorWidgetState extends State<ColorSelectorWidget> {
     return ValueListenableBuilder<Box<dynamic>>(
       valueListenable: settings.listenable(keys: [
         appColorKey,
-        dynamicColorKey,
+        dynamicThemeKey,
       ]),
       builder: (context, value, _) {
-        final isDynamic = value.get(dynamicColorKey, defaultValue: false);
+        final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
         final color = value.get(appColorKey, defaultValue: 0xFF795548);
         return SettingsOption(
           title: AppLocalizations.of(context)!.accentColorLabel,
@@ -70,7 +70,7 @@ class ColorSelectorWidgetState extends State<ColorSelectorWidget> {
   }
 }
 
-class ColorSelectionWidget extends StatefulWidget {
+class ColorSelectionWidget extends StatelessWidget {
   final ValueListenable<Box<dynamic>> valueListenable;
   const ColorSelectionWidget({
     Key? key,
@@ -78,108 +78,107 @@ class ColorSelectionWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  ColorSelectionWidgetState createState() => ColorSelectionWidgetState();
-}
-
-class ColorSelectionWidgetState extends State<ColorSelectionWidget> {
-  late bool isAndroid12 = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchInfo();
-  }
-
-  Future<void> _fetchInfo() async {
-    try {
-      final AndroidDeviceInfo info = await DeviceInfoPlugin().androidInfo;
-      final sdk = info.version.sdkInt ?? 0;
-      isAndroid12 = sdk <= 29;
-      setState(() {});
-    } catch (_) {}
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box>(
-      valueListenable: widget.valueListenable,
-      builder: (context, value, _) {
-        final isDynamic = value.get(dynamicColorKey, defaultValue: false);
-        final selectedColor = value.get(appColorKey, defaultValue: 0xFF795548);
+    return FutureBuilder<AndroidDeviceInfo>(
+      future: DeviceInfoPlugin().androidInfo,
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data != null) {
+          final AndroidDeviceInfo info = snapshot.data!;
+          final sdk = info.version.sdkInt ?? 0;
+          bool isAndroid12 = sdk >= 29;
+          return ValueListenableBuilder<Box>(
+            valueListenable: valueListenable,
+            builder: (context, value, _) {
+              final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
+              final selectedColor =
+                  value.get(appColorKey, defaultValue: 0xFF795548);
 
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              ListTile(
-                title: Text(
-                  AppLocalizations.of(context)!.pickColorLabel,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-              ),
-              if (!isAndroid12) const DynamicColorSwitchWidget(),
-              AbsorbPointer(
-                absorbing: isDynamic,
-                child: Opacity(
-                  opacity: isDynamic ? 0.3 : 1,
-                  child: GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.only(
-                      bottom: 16,
+              return SafeArea(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    ListTile(
+                      title: Text(
+                        AppLocalizations.of(context)!.pickColorLabel,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
                     ),
-                    shrinkWrap: true,
-                    itemCount: Colors.primaries.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount:
-                          MediaQuery.of(context).size.width >= 700 ? 9 : 6,
+                    Visibility(
+                      visible: isAndroid12,
+                      child: const DynamicColorSwitchWidget(),
                     ),
-                    itemBuilder: (_, index) {
-                      final color = Colors.primaries[index].shade500;
-                      if (color == selectedColor) {
-                        return Stack(
-                          children: [
-                            Center(child: CircleAvatar(backgroundColor: color)),
-                            const Center(child: Icon(Icons.check)),
-                          ],
-                        );
-                      } else {
-                        return GestureDetector(
-                          onTap: () {
-                            value.put(appColorKey, color.value);
-                          },
-                          child: Stack(
-                            children: [
-                              Center(
-                                child: CircleAvatar(
-                                  backgroundColor: color,
-                                ),
-                              ),
-                            ],
+                    AbsorbPointer(
+                      absorbing: isDynamic,
+                      child: Opacity(
+                        opacity: isDynamic ? 0.3 : 1,
+                        child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.only(
+                            bottom: 16,
                           ),
-                        );
-                      }
-                    },
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0, bottom: 16),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
+                          shrinkWrap: true,
+                          itemCount: Colors.primaries.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount:
+                                MediaQuery.of(context).size.width >= 700
+                                    ? 9
+                                    : 6,
+                          ),
+                          itemBuilder: (_, index) {
+                            final color = Colors.primaries[index];
+                            if (color == selectedColor) {
+                              return Stack(
+                                children: [
+                                  Center(
+                                      child:
+                                          CircleAvatar(backgroundColor: color)),
+                                  const Center(child: Icon(Icons.check)),
+                                ],
+                              );
+                            } else {
+                              return GestureDetector(
+                                onTap: () {
+                                  value.put(appColorKey, color.value);
+                                },
+                                child: Stack(
+                                  children: [
+                                    Center(
+                                      child: CircleAvatar(
+                                        backgroundColor: color,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 12),
-                  ),
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(AppLocalizations.of(context)!.doneLabel),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        child: Text(AppLocalizations.of(context)!.doneLabel),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        );
+              );
+            },
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
       },
     );
   }

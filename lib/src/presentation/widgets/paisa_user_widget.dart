@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../goal/widget/color_palette.dart';
+import 'color_palette.dart';
 import '../home/widgets/welcome_widget.dart';
 import '../settings/widgets/user_profile_widget.dart';
 

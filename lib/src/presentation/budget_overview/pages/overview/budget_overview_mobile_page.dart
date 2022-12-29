@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/enum/filter_budget.dart';
-import '../../../widgets/filter_widget/filter_budget_widget.dart';
 
 class BudgetOverviewMobilePage extends StatelessWidget {
   const BudgetOverviewMobilePage({
@@ -14,14 +13,6 @@ class BudgetOverviewMobilePage extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FilterBudgetToggleWidget(valueNotifier: valueNotifier),
-          child,
-        ],
-      ),
-    );
+    return Scaffold(body: child);
   }
 }

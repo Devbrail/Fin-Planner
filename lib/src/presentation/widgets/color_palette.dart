@@ -11,6 +11,50 @@ class ColorPalette extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
+            margin: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.outline,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text('data'),
+                ),
+                Divider(
+                  indent: 0,
+                  thickness: 1,
+                  height: 1,
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+                Container(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'data',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+                Divider(
+                  indent: 0,
+                  thickness: 1,
+                  height: 1,
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text('data'),
+                ),
+              ],
+            ),
+          ),
+          Container(
             height: 50,
             color: Theme.of(context).colorScheme.primary,
             child: Center(

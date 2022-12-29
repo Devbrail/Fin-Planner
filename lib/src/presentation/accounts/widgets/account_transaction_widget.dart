@@ -45,13 +45,13 @@ class AccountTransactionWidget extends StatelessWidget {
               AppLocalizations.of(context)!.transactionHistoryLabel,
               style: Theme.of(context)
                   .textTheme
-                  .headline6
+                  .subtitle1
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: PaisaCard(
+            child: PaisaFilledCard(
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),

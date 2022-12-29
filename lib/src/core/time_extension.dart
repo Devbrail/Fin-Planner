@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'enum/filter_budget.dart';
 
 extension DateUtils on DateTime {
+  String get formattedDate => DateFormat('dd/MM/yyyy').format(this);
   String get dayString => DateFormat('dd').format(this);
   String get weekString => DateFormat('EEE').format(this);
 

@@ -37,7 +37,7 @@ class BudgetItemMobileWidget extends StatelessWidget {
       difference = totalExpenses;
     }
 
-    return PaisaCard(
+    return PaisaFilledCard(
       child: InkWell(
         onTap: () => context.goNamed(
           expensesByCategory,
@@ -74,12 +74,13 @@ class BudgetItemMobileWidget extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                              bottom: 8,
                               left: 16.0,
                               right: 8,
                             ),
                             child: Text(
                               category.name,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: Theme.of(context)
                                     .colorScheme
@@ -109,26 +110,25 @@ class BudgetItemMobileWidget extends StatelessWidget {
                         : const SizedBox.shrink(),
                   ],
                 ),
-                SizedBox(
-                  height: 40,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Sparkline(
-                      data: expenses.map((e) => e.currency).toList(),
-                      useCubicSmoothing: true,
-                      cubicSmoothingFactor: 0.2,
-                      lineWidth: 3,
-                      lineColor: Theme.of(context).colorScheme.secondary,
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: SizedBox(
+                    height: 40,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Sparkline(
+                        data: expenses.map((e) => e.currency).toList(),
+                        useCubicSmoothing: true,
+                        cubicSmoothingFactor: 0.2,
+                        lineWidth: 3,
+                        lineColor: Theme.of(context).colorScheme.secondary,
+                      ),
                     ),
                   ),
                 ),
-                const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 16,
-                    left: 16,
-                    right: 16,
-                  ),
+                  padding: const EdgeInsets.all(16),
                   child: Text(
                     ' ${difference.toCurrency()}',
                     style: GoogleFonts.manrope(

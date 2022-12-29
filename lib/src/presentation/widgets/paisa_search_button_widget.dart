@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/src/presentation/search/pages/search_page.dart';
+import '../search/pages/search_page.dart';
 
 class PaisaSearchButtonWidget extends StatelessWidget {
   const PaisaSearchButtonWidget({super.key});

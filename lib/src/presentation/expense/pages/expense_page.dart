@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../widgets/future_resolve.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../core/common.dart';
 import '../../../core/context_extensions.dart';
 import '../../../core/enum/transaction.dart';
 import '../../../service_locator.dart';
+import '../../widgets/future_resolve.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../bloc/expense_bloc.dart';
 import '../widgets/select_account_widget.dart';
@@ -17,13 +17,6 @@ import '../widgets/select_category_widget.dart';
 import '../widgets/toggle_buttons_widget.dart';
 
 final GlobalKey<FormState> _form = GlobalKey<FormState>();
-
-String formattedDate(DateTime? date) {
-  if (date == null) {
-    return '';
-  }
-  return DateFormat('dd/MM/yyyy').format(date);
-}
 
 class ExpensePage extends StatefulWidget {
   const ExpensePage({
@@ -102,8 +95,10 @@ class _ExpensePageState extends State<ExpensePage> {
                   color: Theme.of(context).colorScheme.onErrorContainer,
                 );
               } else if (state is ExpenseSuccessState) {
-                dateTextController.text =
-                    formattedDate(expenseBloc.selectedDate);
+                if (expenseBloc.selectedDate != null) {
+                  dateTextController.text =
+                      expenseBloc.selectedDate!.formattedDate;
+                }
                 nameController.text = state.expense.name;
                 nameController.selection = TextSelection.collapsed(
                   offset: state.expense.name.length,
@@ -340,7 +335,7 @@ class ExpenseDatePickerWidget extends StatelessWidget {
           child: PaisaTextFormField(
             enabled: false,
             controller: controller
-              ..text = formattedDate(selectedDate ?? DateTime.now()),
+              ..text = (selectedDate ?? DateTime.now()).formattedDate,
             keyboardType: TextInputType.number,
             hintText: 'Select date',
           ),
@@ -354,7 +349,7 @@ class ExpenseDatePickerWidget extends StatelessWidget {
               lastDate: DateTime.now(),
             );
             if (date != null) {
-              final dateString = formattedDate(date);
+              final dateString = date.formattedDate;
               controller.text = dateString;
               onSelectedDate.call(date);
             }

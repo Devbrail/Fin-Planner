@@ -1,4 +1,4 @@
-import 'package:flutter_paisa/src/data/debt/models/transaction.dart';
+import '../data/debt/models/transaction.dart';
 import 'package:hive_flutter/adapters.dart';
 
 extension TransactionMapping on Box<Transaction> {

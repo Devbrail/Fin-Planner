@@ -7,9 +7,13 @@
     "@homeLabel": {
         "description": "Home label"
     },
-    "dueDateLabel": "Due date",
+    "dueDateLabel": "End date",
     "@dueDateLabel": {
-        "description": "Home label"
+        "description": "End date label"
+    },
+    "startDateLabel": "Start date",
+    "@startDateLabel": {
+        "description": "Start date label"
     },
     "categoryLabel": "Category",
     "@categoryLabel": {
