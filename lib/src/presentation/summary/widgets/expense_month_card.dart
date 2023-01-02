@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../widgets/paisa_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/currency_util.dart';
@@ -7,7 +6,6 @@ import '../../../core/theme/custom_color.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
-
 import 'expense_list_widget.dart';
 
 class ExpenseMonthCardWidget extends StatelessWidget {
@@ -31,34 +29,35 @@ class ExpenseMonthCardWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        ListTile(
-          title: Text(
-            title,
-            style: Theme.of(context)
-                .textTheme
-                .subtitle1
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ),
-          trailing: Text(
-            total.toCurrency(),
-            style: GoogleFonts.manrope(
-              textStyle: Theme.of(context).textTheme.subtitle2?.copyWith(
-                    color: total.isNegative
-                        ? Theme.of(context).extension<CustomColors>()!.red
-                        : Theme.of(context).extension<CustomColors>()!.green,
-                  ),
-            ),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+              ),
+              Text(
+                total.toCurrency(),
+                style: GoogleFonts.manrope(
+                  textStyle: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        color: total.isNegative
+                            ? Theme.of(context).extension<CustomColors>()!.red
+                            : Theme.of(context)
+                                .extension<CustomColors>()!
+                                .green,
+                      ),
+                ),
+              )
+            ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: PaisaFilledCard(
-            child: ExpenseListWidget(
-              expenses: expenses,
-              accountLocalDataSource: accountSource,
-              categoryLocalDataSource: categorySource,
-            ),
-          ),
+        ExpenseListWidget(
+          expenses: expenses,
+          accountLocalDataSource: accountSource,
+          categoryLocalDataSource: categorySource,
         ),
       ],
     );

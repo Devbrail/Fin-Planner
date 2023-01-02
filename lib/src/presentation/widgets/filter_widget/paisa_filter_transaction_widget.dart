@@ -35,12 +35,10 @@ class PaisaFilterTransactionWidget extends StatelessWidget {
                     topRight: Radius.circular(16),
                   ),
                 ),
-                builder: (context) {
-                  return FilterBudgetToggleWidget(
-                    valueNotifier: valueNotifier,
-                    showAsList: true,
-                  );
-                },
+                builder: (context) => FilterBudgetToggleWidget(
+                  valueNotifier: valueNotifier,
+                  showAsList: true,
+                ),
               );
             },
             icon: const Icon(MdiIcons.filter),

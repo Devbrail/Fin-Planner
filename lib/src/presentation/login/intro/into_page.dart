@@ -33,10 +33,54 @@ class IntroPage extends StatelessWidget {
                     ),
               ),
               Text(
-                'Let\'s manage your expenses',
-                style: Theme.of(context).textTheme.headline6?.copyWith(
+                'Simple way to help control your savings',
+                style: Theme.of(context).textTheme.headline4?.copyWith(
                       color: Theme.of(context).colorScheme.secondary,
                     ),
+              ),
+              const SizedBox(height: 24),
+              Column(
+                children: [
+                  ListTile(
+                    horizontalTitleGap: 0,
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(
+                      Icons.check_circle,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    dense: true,
+                    title: Text(
+                      'Manage your money with our app',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  ),
+                  ListTile(
+                    horizontalTitleGap: 0,
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(
+                      Icons.check_circle,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    dense: true,
+                    title: Text(
+                      'Easy expense tracking for a better budget',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  ),
+                  ListTile(
+                    horizontalTitleGap: 0,
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(
+                      Icons.check_circle,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    dense: true,
+                    title: Text(
+                      'Stay on top of your expenses, anytime, anywhere',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  )
+                ],
               ),
             ],
           ),
@@ -44,16 +88,16 @@ class IntroPage extends StatelessWidget {
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 24),
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(24)),
+            style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(18)),
             onPressed: () {
               locator
                   .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
                   .put(userIntroKey, true);
             },
             child: Text(
-              'Let\'s start saving',
+              'Get started',
               style: Theme.of(context).textTheme.headline6?.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,

@@ -7,25 +7,26 @@ import 'enum/filter_budget.dart';
 import 'enum/transaction.dart';
 
 extension ExpenseListMapping on Box<Expense> {
-  List<Expense> allAccount(int accountId) {
-    return values.where((element) => element.accountId == accountId).toList();
-  }
+  List<Expense> get expenses =>
+      values.toList()..sort(((a, b) => b.time.compareTo(a.time)));
 
-  List<Expense> get budgetOverView {
-    final list = values
-        .where((element) => element.type != TransactionType.income)
-        .toList();
-    return list;
-  }
+  List<Expense> allAccount(int accountId) =>
+      values.where((element) => element.accountId == accountId).toList();
 
-  List<Expense> isFilterTimeBetween(DateTimeRange range) {
-    return values
-        .where((element) => element.time.isAfterBeforeTime(range))
-        .toList();
-  }
+  List<Expense> get budgetOverView =>
+      values.where((element) => element.type != TransactionType.income).toList()
+        ..sort(
+          (a, b) => b.time.compareTo(a.time),
+        );
+
+  List<Expense> isFilterTimeBetween(DateTimeRange range) =>
+      values.where((element) => element.time.isAfterBeforeTime(range)).toList();
 }
 
 extension TotalAmountOnExpenses on Iterable<Expense> {
+  List<Expense> get expenses =>
+      toList()..sort(((a, b) => b.time.compareTo(a.time)));
+
   List<Expense> get expenseList =>
       where((element) => element.type == TransactionType.expense).toList();
 
@@ -34,9 +35,8 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
 
   String get balance => (totalIncome - totalExpense).toCurrency();
 
-  List<Expense> isFilterTimeBetween(DateTimeRange range) {
-    return where((element) => element.time.isAfterBeforeTime(range)).toList();
-  }
+  List<Expense> isFilterTimeBetween(DateTimeRange range) =>
+      where((element) => element.time.isAfterBeforeTime(range)).toList();
 
   double get filterTotal => fold<double>(0, (previousValue, element) {
         if (element.type == TransactionType.expense) {

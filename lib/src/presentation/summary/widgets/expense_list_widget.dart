@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
@@ -20,7 +19,7 @@ class ExpenseListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
@@ -36,6 +35,8 @@ class ExpenseListWidget extends StatelessWidget {
           category: category,
         );
       },
+      separatorBuilder: (BuildContext context, int index) =>
+          const Divider(indent: 52, height: 0),
     );
   }
 }

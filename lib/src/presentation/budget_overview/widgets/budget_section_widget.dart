@@ -22,12 +22,10 @@ class BudgetSection extends StatelessWidget {
 
   List<MapEntry<Category, List<Expense>>> _filterCategory(
     List<Expense> expenses,
-  ) {
-    return groupBy(expenses,
+  ) => groupBy(expenses,
             (Expense element) => dataSource.fetchCategory(element.categoryId))
         .entries
         .toList();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,13 +78,13 @@ class BudgetOverViewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
       ),
       padding: const EdgeInsets.all(8),
       shrinkWrap: true,
       itemCount: maps.length,
-      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (_, index) {
         return BudgetItem(
           category: maps[index].key,

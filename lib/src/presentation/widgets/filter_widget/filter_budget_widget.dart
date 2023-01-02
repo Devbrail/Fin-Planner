@@ -46,6 +46,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       PaisaToggleButton(
+                        itemIndex: ItemIndex.first,
                         title: FilterBudget.daily.name(context),
                         isSelected: FilterBudget.daily == value,
                         onPressed: () =>
@@ -94,6 +95,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         color: Theme.of(context).colorScheme.outline,
                       ),
                       PaisaToggleButton(
+                        itemIndex: ItemIndex.last,
                         title: FilterBudget.all.name(context),
                         isSelected: FilterBudget.all == value,
                         onPressed: () => valueNotifier.value = FilterBudget.all,

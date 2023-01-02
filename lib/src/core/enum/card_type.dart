@@ -15,7 +15,7 @@ enum CardType {
 }
 
 extension CardTypeMapping on CardType {
-  String get name {
+  String get nameString {
     switch (this) {
       case CardType.cash:
         return 'Cash';

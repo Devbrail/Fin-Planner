@@ -24,7 +24,7 @@ class ExpenseHistory extends StatelessWidget {
     return ValueListenableBuilder<Box<Expense>>(
       valueListenable: locator.get<Box<Expense>>().listenable(),
       builder: (_, value, child) {
-        final expenses = value.values.toList();
+        final expenses = value.expenses;
         if (expenses.isEmpty) {
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -43,39 +43,32 @@ class ExpenseHistory extends StatelessWidget {
             ),
           );
         }
-        expenses.sort(((a, b) => b.time.compareTo(a.time)));
+
         return FutureResolve<List<dynamic>>(
           future: Future.wait([
             locator.getAsync<LocalAccountManagerDataSource>(),
             locator.getAsync<LocalCategoryManagerDataSource>(),
           ]),
-          builder: (result) {
-            return ValueListenableBuilder<FilterBudget>(
-              valueListenable: valueNotifier,
-              builder: (__, value, _) {
-                final maps = groupBy(expenses,
-                    (Expense element) => element.time.formatted(value));
-                return ListView.builder(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: maps.entries.length,
-                  itemBuilder: (_, mapIndex) {
-                    final expenses = maps.values.toList()[mapIndex];
-                    expenses.sort((a, b) => b.time.compareTo(a.time));
-                    return ExpenseMonthCardWidget(
-                      title: maps.keys.toList()[mapIndex],
-                      total: expenses.filterTotal,
-                      expenses: expenses,
-                      accountSource: result[0] as LocalAccountManagerDataSource,
-                      categorySource:
-                          result[1] as LocalCategoryManagerDataSource,
-                    );
-                  },
-                );
-              },
-            );
-          },
+          builder: (result) => ValueListenableBuilder<FilterBudget>(
+            valueListenable: valueNotifier,
+            builder: (__, value, _) {
+              final maps = groupBy(
+                  expenses, (Expense element) => element.time.formatted(value));
+              return ListView.builder(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: maps.entries.length,
+                itemBuilder: (_, mapIndex) => ExpenseMonthCardWidget(
+                  title: maps.keys.elementAt(mapIndex),
+                  total: maps.values.elementAt(mapIndex).filterTotal,
+                  expenses: maps.values.elementAt(mapIndex),
+                  accountSource: result[0] as LocalAccountManagerDataSource,
+                  categorySource: result[1] as LocalCategoryManagerDataSource,
+                ),
+              );
+            },
+          ),
         );
       },
     );
