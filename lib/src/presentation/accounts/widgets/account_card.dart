@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_paisa/src/lava/lava_clock.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/enum/card_type.dart';
+import '../../../lava/lava_clock.dart';
 
 class AccountCard extends StatefulWidget {
   const AccountCard({
@@ -31,17 +31,6 @@ class AccountCard extends StatefulWidget {
 
 class _AccountCardState extends State<AccountCard>
     with TickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    vsync: this,
-    duration: const Duration(seconds: 10),
-  )..repeat(reverse: true);
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
@@ -101,135 +90,114 @@ class MobileAccountCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'account',
-      child: LavaAnimation(
-        child: GestureDetector(
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GlassmorphicContainer(
-              height: 220,
-              width: MediaQuery.of(context).size.width,
-              borderRadius: 24,
-              blur: 10,
-              alignment: Alignment.bottomCenter,
-              border: 2,
-              linearGradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .color!
-                      .withOpacity(0.1),
-                  Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .color!
-                      .withOpacity(0.05),
-                ],
-                stops: const [0.1, 1],
-              ),
-              borderGradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .color!
-                      .withOpacity(0.5),
-                  Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .color!
-                      .withOpacity(0.5),
-                ],
-              ),
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              bankName.toUpperCase(),
-                              style: Theme.of(context).textTheme.subtitle1,
+    return LavaAnimation(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GlassmorphicContainer(
+            height: 220,
+            width: MediaQuery.of(context).size.width,
+            borderRadius: 24,
+            blur: 10,
+            alignment: Alignment.bottomCenter,
+            border: 2,
+            linearGradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.1),
+                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.05),
+              ],
+              stops: const [0.1, 1],
+            ),
+            borderGradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
+                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
+              ],
+            ),
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            bankName.toUpperCase(),
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          Icon(cardType.icon),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: RichText(
+                          text: TextSpan(
+                            text: '**** ',
+                            style: GoogleFonts.jetBrainsMono(
+                              textStyle: Theme.of(context).textTheme.headline5,
                             ),
-                            Icon(cardType.icon),
-                          ],
+                            children: [
+                              const TextSpan(text: '**** '),
+                              const TextSpan(text: '**** '),
+                              TextSpan(
+                                  text:
+                                      cardNumber.isEmpty ? '----' : cardNumber)
+                            ],
+                          ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16.0),
-                          child: RichText(
-                            text: TextSpan(
-                              text: '**** ',
-                              style: GoogleFonts.jetBrainsMono(
-                                textStyle:
-                                    Theme.of(context).textTheme.headline5,
-                              ),
-                              children: [
-                                const TextSpan(text: '**** '),
-                                const TextSpan(text: '**** '),
-                                TextSpan(
-                                    text: cardNumber.isEmpty
-                                        ? '----'
-                                        : cardNumber)
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  AppLocalizations.of(context)!
+                                      .cardholderLabel
+                                      .toUpperCase(),
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .color!
+                                          .withOpacity(0.5),
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  cardHolder.toUpperCase(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                )
                               ],
                             ),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    AppLocalizations.of(context)!
-                                        .cardholderLabel
-                                        .toUpperCase(),
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .color!
-                                            .withOpacity(0.5),
-                                        fontSize: 9,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    cardHolder.toUpperCase(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            onDelete != null
-                                ? IconButton(
-                                    onPressed: onDelete,
-                                    icon: const Icon(Icons.delete),
-                                  )
-                                : const SizedBox.shrink(),
-                          ],
-                        ),
-                      ],
-                    ),
+                          onDelete != null
+                              ? IconButton(
+                                  onPressed: onDelete,
+                                  icon: const Icon(Icons.delete),
+                                )
+                              : const SizedBox.shrink(),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

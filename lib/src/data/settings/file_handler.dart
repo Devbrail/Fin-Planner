@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -17,13 +19,18 @@ import '../expense/model/expense.dart';
 import 'data.dart';
 
 class FileHandler {
-  Future<String> _fetchExpensesAndEncode() async {
-    final Iterable<Expense> expenses =
-        await locator.get<LocalExpenseManagerDataSource>().exportData();
-    final Iterable<Account> accounts =
-        await locator.get<LocalAccountManagerDataSource>().exportData();
-    final Iterable<Category> categories =
-        await locator.get<LocalCategoryManagerDataSource>().exportData();
+  Future<String> fetchExpensesAndEncode() async {
+    final expenseDataStore =
+        await locator.getAsync<LocalExpenseManagerDataSource>();
+    final Iterable<Expense> expenses = await expenseDataStore.exportData();
+
+    final accountDataStore =
+        await locator.getAsync<LocalAccountManagerDataSource>();
+    final Iterable<Account> accounts = await accountDataStore.exportData();
+
+    final categoryDataStore =
+        await locator.getAsync<LocalCategoryManagerDataSource>();
+    final Iterable<Category> categories = await categoryDataStore.exportData();
 
     final data = {
       'expenses': expenses.map((e) => e.toJson()).toList(),
@@ -39,7 +46,7 @@ class FileHandler {
       return callback.call('Permission error');
     }
 
-    final String data = await _fetchExpensesAndEncode();
+    final String data = await fetchExpensesAndEncode();
     final directory = await getExternalStorageDirectory();
     final dir = await Directory(directory!.path).create(recursive: true);
     final file = File('${dir.path}/${DateTime.now().toIso8601String()}.json');
@@ -88,7 +95,7 @@ class FileHandler {
   }
 
   Future<bool> _checkPermission() async {
-    final result = await Permission.storage.status;
+    final result = await Permission.manageExternalStorage.status;
     if (result.isGranted) {
       return true;
     } else if (result.isDenied) {

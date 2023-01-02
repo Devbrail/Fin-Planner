@@ -40,7 +40,10 @@ class AccountTransactionWidget extends StatelessWidget {
         shrinkWrap: true,
         children: [
           ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 0,
+            ),
             title: Text(
               AppLocalizations.of(context)!.transactionHistoryLabel,
               style: Theme.of(context)
@@ -49,23 +52,18 @@ class AccountTransactionWidget extends StatelessWidget {
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: PaisaFilledCard(
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: expenses.length,
-                itemBuilder: (_, index) {
-                  return ExpenseItemWidget(
-                    expense: expenses[index],
-                    account: accountLocalDataSource
-                        .fetchAccount(expenses[index].accountId),
-                    category: categoryLocalDataSource
-                        .fetchCategory(expenses[index].categoryId),
-                  );
-                },
-              ),
+          ListView.separated(
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(indent: 52, height: 0),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: expenses.length,
+            itemBuilder: (_, index) => ExpenseItemWidget(
+              expense: expenses[index],
+              account: accountLocalDataSource
+                  .fetchAccount(expenses[index].accountId),
+              category: categoryLocalDataSource
+                  .fetchCategory(expenses[index].categoryId),
             ),
           ),
         ],
