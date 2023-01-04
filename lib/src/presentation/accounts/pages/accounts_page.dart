@@ -22,55 +22,52 @@ class AccountsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureResolve<AccountsBloc>(
       future: locator.getAsync<AccountsBloc>(),
-      builder: (value) {
-        final AccountsBloc accountsBloc = value;
-        return Material(
-          key: const Key('accounts_mobile'),
-          child: ValueListenableBuilder<Box<Account>>(
-            valueListenable: locator.get<Box<Account>>().listenable(),
-            builder: (_, value, __) {
-              final List<Account> accounts = value.values.toList();
-              if (accounts.isEmpty) {
-                return EmptyWidget(
-                  icon: Icons.credit_card,
-                  title: AppLocalizations.of(context)!.errorNoCardsLabel,
-                  description: AppLocalizations.of(context)!
-                      .errorNoCardsDescriptionLabel,
-                );
-              }
-              accountsBloc.add(AccountSelectedEvent(accounts.first));
-              return BlocBuilder(
-                bloc: accountsBloc,
-                builder: (context, state) {
-                  if (state is AccountSelectedState) {
-                    return ValueListenableBuilder<Box<Expense>>(
-                      valueListenable: locator.get<Box<Expense>>().listenable(),
-                      builder: (context, value, child) {
-                        final expenses = value.allAccount(state.account.key);
-                        expenses.sort((a, b) => b.time.compareTo(a.time));
-                        return ScreenTypeLayout(
-                          mobile: AccountsMobilePage(
-                            accounts: accounts,
-                            accountsBloc: accountsBloc,
-                            expenses: expenses,
-                          ),
-                          tablet: AccountsTabletPage(
-                            accounts: accounts,
-                            accountsBloc: accountsBloc,
-                            expenses: expenses,
-                          ),
-                        );
-                      },
-                    );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
+      builder: (accountsBloc) => Material(
+        key: const Key('accounts_mobile'),
+        child: ValueListenableBuilder<Box<Account>>(
+          valueListenable: locator.get<Box<Account>>().listenable(),
+          builder: (_, value, __) {
+            final List<Account> accounts = value.values.toList();
+            if (accounts.isEmpty) {
+              return EmptyWidget(
+                icon: Icons.credit_card,
+                title: AppLocalizations.of(context)!.errorNoCardsLabel,
+                description:
+                    AppLocalizations.of(context)!.errorNoCardsDescriptionLabel,
               );
-            },
-          ),
-        );
-      },
+            }
+            accountsBloc.add(AccountSelectedEvent(accounts.first));
+            return BlocBuilder(
+              bloc: accountsBloc,
+              builder: (context, state) {
+                if (state is AccountSelectedState) {
+                  return ValueListenableBuilder<Box<Expense>>(
+                    valueListenable: locator.get<Box<Expense>>().listenable(),
+                    builder: (context, value, child) {
+                      final expenses = value.allAccount(state.account.key);
+
+                      return ScreenTypeLayout(
+                        mobile: AccountsMobilePage(
+                          accounts: accounts,
+                          accountsBloc: accountsBloc,
+                          expenses: expenses,
+                        ),
+                        tablet: AccountsTabletPage(
+                          accounts: accounts,
+                          accountsBloc: accountsBloc,
+                          expenses: expenses,
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+            );
+          },
+        ),
+      ),
     );
   }
 }

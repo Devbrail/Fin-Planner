@@ -43,8 +43,11 @@ class _UserProfilePageState extends State<UserProfilePage> {
       padding: MediaQuery.of(context).viewInsets,
       child: SafeArea(
         child: Material(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(16),
+              topRight: Radius.circular(16),
+            ),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,11 +36,13 @@ class HomeDesktopWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(height: kToolbarHeight),
+                      const SizedBox(height: kIsWeb ? 24 : kToolbarHeight),
                       ListTile(
                         title: Text(
                           AppLocalizations.of(context)!.appTitle,
-                          style: Theme.of(context).textTheme.headline6,
+                          style: kIsWeb
+                              ? Theme.of(context).textTheme.headline4
+                              : Theme.of(context).textTheme.headline6,
                         ),
                       ),
                       const SizedBox(height: 24),
@@ -95,7 +98,7 @@ class HomeDesktopWidget extends StatelessWidget {
               }
             },
           ),
-          const VerticalDivider(),
+          const VerticalDivider(width: 0),
           Expanded(
             child: Material(
               elevation: 10,

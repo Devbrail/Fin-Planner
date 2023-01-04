@@ -28,31 +28,33 @@ class _DebtsPageState extends State<DebtsPage>
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Material(
-              borderRadius: BorderRadius.circular(32),
-              color: Theme.of(context).colorScheme.surfaceVariant,
-              child: TabBar(
-                splashBorderRadius: BorderRadius.circular(32),
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  color: Theme.of(context).colorScheme.primary,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Material(
+                borderRadius: BorderRadius.circular(32),
+                color: Theme.of(context).colorScheme.surfaceVariant,
+                child: TabBar(
+                  splashBorderRadius: BorderRadius.circular(32),
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  labelColor: Theme.of(context).colorScheme.onPrimary,
+                  unselectedLabelColor:
+                      Theme.of(context).colorScheme.onSurfaceVariant,
+                  labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                  unselectedLabelStyle:
+                      Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                  tabs: [
+                    Tab(text: AppLocalizations.of(context)!.debtLabel),
+                    Tab(text: AppLocalizations.of(context)!.creditLabel),
+                  ],
                 ),
-                labelColor: Theme.of(context).colorScheme.onPrimary,
-                unselectedLabelColor:
-                    Theme.of(context).colorScheme.onSurfaceVariant,
-                labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                unselectedLabelStyle:
-                    Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                tabs: [
-                  Tab(text: AppLocalizations.of(context)!.debtLabel),
-                  Tab(text: AppLocalizations.of(context)!.creditLabel),
-                ],
               ),
             ),
           ),

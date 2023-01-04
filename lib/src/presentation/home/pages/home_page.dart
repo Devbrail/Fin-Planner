@@ -55,7 +55,7 @@ class _LandingPageState extends State<LandingPage>
         if (state is CurrentIndexState) {
           return FloatingActionButton.large(
             onPressed: () => _handleClick(state.currentPage),
-            child: const Icon(Icons.wallet),
+            child: const Icon(Icons.add),
           );
         } else {
           return const SizedBox.shrink();

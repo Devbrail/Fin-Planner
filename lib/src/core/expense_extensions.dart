@@ -11,13 +11,11 @@ extension ExpenseListMapping on Box<Expense> {
       values.toList()..sort(((a, b) => b.time.compareTo(a.time)));
 
   List<Expense> allAccount(int accountId) =>
-      values.where((element) => element.accountId == accountId).toList();
+      expenses.where((element) => element.accountId == accountId).toList();
 
   List<Expense> get budgetOverView =>
       values.where((element) => element.type != TransactionType.income).toList()
-        ..sort(
-          (a, b) => b.time.compareTo(a.time),
-        );
+        ..sort((a, b) => b.time.compareTo(a.time));
 
   List<Expense> isFilterTimeBetween(DateTimeRange range) =>
       values.where((element) => element.time.isAfterBeforeTime(range)).toList();

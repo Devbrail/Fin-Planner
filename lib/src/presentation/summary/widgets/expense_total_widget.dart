@@ -50,7 +50,7 @@ class ExpenseTotalWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            //AccountSummaryWidget(expenses: expenses),
+            AccountSummaryWidget(expenses: expenses),
           ],
         );
       },

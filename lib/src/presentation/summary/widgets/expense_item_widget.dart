@@ -24,6 +24,7 @@ class ExpenseItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(8),
       onTap: () => context.goNamed(
         editExpensePath,
         params: <String, String>{'eid': expense.superId.toString()},

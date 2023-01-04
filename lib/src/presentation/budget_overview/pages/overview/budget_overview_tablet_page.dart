@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 
 import '../../../../core/enum/filter_budget.dart';
-import '../../../widgets/filter_widget/filter_budget_widget.dart';
 
 class BudgetOverviewTabletPage extends StatelessWidget {
   const BudgetOverviewTabletPage({
@@ -15,16 +15,12 @@ class BudgetOverviewTabletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          const SizedBox(height: 24),
-          FilterBudgetToggleWidget(
-            valueNotifier: valueNotifier,
-          ),
-          child
+      appBar: AppBar(
+        actions: const [
+          PaisaFilterTransactionWidget(),
         ],
       ),
+      body: child,
     );
   }
 }

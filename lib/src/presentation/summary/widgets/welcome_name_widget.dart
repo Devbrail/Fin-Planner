@@ -24,12 +24,14 @@ class WelcomeNameWidget extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: Theme.of(context).textTheme.headline5?.copyWith(
+                style: Theme.of(context).textTheme.subtitle1?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
               Text(
                 AppLocalizations.of(context)!.welcomeMessage,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: Theme.of(context).textTheme.caption?.color),
               ),
             ],
           ),

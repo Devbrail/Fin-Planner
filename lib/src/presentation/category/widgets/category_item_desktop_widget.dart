@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
-import '../../widgets/paisa_card.dart';
 import '../../../data/category/model/category.dart';
+import '../../widgets/paisa_card.dart';
 
 class CategoryItemDesktopWidget extends StatelessWidget {
   const CategoryItemDesktopWidget({
@@ -13,7 +13,7 @@ class CategoryItemDesktopWidget extends StatelessWidget {
   }) : super(key: key);
 
   final Category category;
-  final Function(Category category) onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,7 @@ class CategoryItemDesktopWidget extends StatelessWidget {
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () {
-                      onPressed(category);
-                    },
+                    onPressed: onPressed,
                     icon: Icon(
                       Icons.delete_rounded,
                       color: Theme.of(context).colorScheme.error,

@@ -54,9 +54,8 @@ class CategoryListWidget extends StatelessWidget {
               final category = categories[index];
               return CategoryItemMobileWidget(
                 category: category,
-                onPressed: (category) {
-                  addCategoryBloc.add(CategoryDeleteEvent(category));
-                },
+                onPressed: () =>
+                    addCategoryBloc.add(CategoryDeleteEvent(category)),
               );
             },
           ),
@@ -76,33 +75,33 @@ class CategoryListWidget extends StatelessWidget {
               final category = categories[index];
               return CategoryItemTabletWidget(
                 category: category,
-                onPressed: (category) {
-                  addCategoryBloc.add(CategoryDeleteEvent(category));
-                },
+                onPressed: () =>
+                    addCategoryBloc.add(CategoryDeleteEvent(category)),
               );
             },
           ),
-          desktop: GridView.builder(
-            padding: const EdgeInsets.only(
-              bottom: 124,
-              left: 8,
-              right: 8,
-              top: 8,
+          desktop: SafeArea(
+            child: GridView.builder(
+              padding: const EdgeInsets.only(
+                bottom: 124,
+                left: 8,
+                right: 8,
+                top: 8,
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+              ),
+              itemCount: categories.length,
+              shrinkWrap: true,
+              itemBuilder: (_, index) {
+                final category = categories[index];
+                return CategoryItemDesktopWidget(
+                  category: category,
+                  onPressed: () =>
+                      addCategoryBloc.add(CategoryDeleteEvent(category)),
+                );
+              },
             ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5,
-            ),
-            itemCount: categories.length,
-            shrinkWrap: true,
-            itemBuilder: (_, index) {
-              final category = categories[index];
-              return CategoryItemDesktopWidget(
-                category: category,
-                onPressed: (category) {
-                  addCategoryBloc.add(CategoryDeleteEvent(category));
-                },
-              );
-            },
           ),
         );
       },

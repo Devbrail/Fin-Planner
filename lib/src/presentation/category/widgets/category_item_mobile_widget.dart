@@ -13,7 +13,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
   }) : super(key: key);
 
   final Category category;
-  final Function(Category) onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +54,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
                     ),
               ),
         trailing: IconButton(
-          onPressed: () {
-            onPressed(category);
-          },
+          onPressed: onPressed,
           icon: Icon(
             Icons.delete_rounded,
             color: Theme.of(context).colorScheme.error,

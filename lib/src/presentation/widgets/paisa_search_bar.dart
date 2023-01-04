@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../search/pages/search_page.dart';
 
 class PaisaSearchBar extends StatelessWidget {

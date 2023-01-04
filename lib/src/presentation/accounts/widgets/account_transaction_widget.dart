@@ -6,7 +6,6 @@ import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../summary/widgets/expense_item_widget.dart';
-import '../../widgets/paisa_card.dart';
 
 class AccountTransactionWidget extends StatelessWidget {
   const AccountTransactionWidget({
@@ -14,11 +13,13 @@ class AccountTransactionWidget extends StatelessWidget {
     required this.accountLocalDataSource,
     required this.categoryLocalDataSource,
     required this.expenses,
+    this.isScroll = false,
   }) : super(key: key);
 
   final LocalAccountManagerDataSource accountLocalDataSource;
   final LocalCategoryManagerDataSource categoryLocalDataSource;
   final List<Expense> expenses;
+  final bool isScroll;
   @override
   Widget build(BuildContext context) {
     if (expenses.isEmpty) {
@@ -36,7 +37,7 @@ class AccountTransactionWidget extends StatelessWidget {
     }
     return ScreenTypeLayout(
       mobile: ListView(
-        physics: const NeverScrollableScrollPhysics(),
+        physics: isScroll ? null : const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         children: [
           ListTile(
@@ -48,7 +49,7 @@ class AccountTransactionWidget extends StatelessWidget {
               AppLocalizations.of(context)!.transactionHistoryLabel,
               style: Theme.of(context)
                   .textTheme
-                  .subtitle1
+                  .titleSmall
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
@@ -69,39 +70,36 @@ class AccountTransactionWidget extends StatelessWidget {
         ],
       ),
       tablet: ListView(
-        padding: const EdgeInsets.only(
-          bottom: 128,
-          left: 8,
-          right: 8,
-        ),
+        padding: const EdgeInsets.only(bottom: 128),
         shrinkWrap: true,
         children: [
           ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 0,
+            ),
             title: Text(
               AppLocalizations.of(context)!.transactionHistoryLabel,
               style: Theme.of(context)
                   .textTheme
-                  .headline6
+                  .titleSmall
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
-          PaisaCard(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: expenses.length,
-              itemBuilder: (_, index) {
-                return ExpenseItemWidget(
-                  expense: expenses[index],
-                  account: accountLocalDataSource
-                      .fetchAccount(expenses[index].accountId),
-                  category: categoryLocalDataSource
-                      .fetchCategory(expenses[index].categoryId),
-                );
-              },
-            ),
+          ListView.builder(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: expenses.length,
+            itemBuilder: (_, index) {
+              return ExpenseItemWidget(
+                expense: expenses[index],
+                account: accountLocalDataSource
+                    .fetchAccount(expenses[index].accountId),
+                category: categoryLocalDataSource
+                    .fetchCategory(expenses[index].categoryId),
+              );
+            },
           ),
         ],
       ),

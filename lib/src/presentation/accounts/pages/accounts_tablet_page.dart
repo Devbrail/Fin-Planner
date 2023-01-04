@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../service_locator.dart';
+import '../../widgets/paisa_search_bar.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_summary_widget.dart';
 import '../widgets/account_transaction_widget.dart';
@@ -22,29 +23,48 @@ class AccountsTabletPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+    return SafeArea(
+      child: ListView(
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              AccountPageViewWidget(
-                accountBloc: accountsBloc,
-                accounts: accounts,
+              Row(
+                children: const [
+                  PaisaSearchBar(),
+                  SizedBox(width: 24),
+                ],
               ),
-              AccountSummaryWidget(expenses: expenses)
             ],
           ),
-        ),
-        Expanded(
-          child: AccountTransactionWidget(
-            accountLocalDataSource: locator.get(),
-            categoryLocalDataSource: locator.get(),
-            expenses: expenses,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    AccountPageViewWidget(
+                      accountBloc: accountsBloc,
+                      accounts: accounts,
+                    ),
+                    AccountSummaryWidget(expenses: expenses)
+                  ],
+                ),
+              ),
+              Expanded(
+                child: AccountTransactionWidget(
+                  accountLocalDataSource: locator.get(),
+                  categoryLocalDataSource: locator.get(),
+                  expenses: expenses,
+                  isScroll: true,
+                ),
+              ),
+            ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

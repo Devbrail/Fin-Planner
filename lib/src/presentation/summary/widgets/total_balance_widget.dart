@@ -19,7 +19,7 @@ class TotalBalanceWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.headline6?.copyWith(
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: Theme.of(context)
                     .colorScheme
                     .onPrimaryContainer

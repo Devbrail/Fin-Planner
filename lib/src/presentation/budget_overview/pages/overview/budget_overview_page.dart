@@ -51,26 +51,21 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
             final child = FilterDateRangeWidget(
               dateTimeRangeNotifier: widget.dateTimeRangeNotifier,
               expenses: expenses,
-              builder: (List<Expense> expenses) {
-                return FilterBudgetWidget(
-                  valueNotifier: valueNotifier,
-                  expenses: expenses,
-                  builder: (filteredBudger) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.only(bottom: 128),
-                      itemCount: filteredBudger.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return BudgetSection(
-                          dataSource: dataSource,
-                          name: filteredBudger[index].key,
-                          values: filteredBudger[index].value,
-                        );
-                      },
-                    );
-                  },
-                );
-              },
+              builder: (List<Expense> expenses) => FilterBudgetWidget(
+                valueNotifier: valueNotifier,
+                expenses: expenses,
+                builder: (filteredBudger) => ListView.builder(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.only(bottom: 128),
+                  itemCount: filteredBudger.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      BudgetSection(
+                    dataSource: dataSource,
+                    name: filteredBudger[index].key,
+                    values: filteredBudger[index].value,
+                  ),
+                ),
+              ),
             );
             return ScreenTypeLayout(
               mobile: BudgetOverviewMobilePage(

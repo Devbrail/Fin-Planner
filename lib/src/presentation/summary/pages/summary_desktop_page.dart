@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../widgets/paisa_search_bar.dart';
 
 import '../../../core/enum/filter_budget.dart';
-import '../../widgets/color_palette.dart';
 import '../../home/widgets/welcome_widget.dart';
 import '../../settings/widgets/user_profile_widget.dart';
+import '../../widgets/color_palette.dart';
+import '../../widgets/filter_widget/filter_budget_widget.dart';
+import '../../widgets/paisa_search_bar.dart';
 import '../widgets/expense_history_widget.dart';
 import '../widgets/expense_total_widget.dart';
 import '../widgets/welcome_name_widget.dart';
@@ -76,10 +77,12 @@ class SummaryDesktopPage extends StatelessWidget {
                     child: ExpenseTotalWidget(),
                   ),
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: ExpenseHistory(
-                        valueNotifier: valueNotifier,
-                      ),
+                    child: ListView(
+                      padding: const EdgeInsets.only(bottom: 124),
+                      children: [
+                        FilterBudgetToggleWidget(valueNotifier: valueNotifier),
+                        ExpenseHistory(valueNotifier: valueNotifier),
+                      ],
                     ),
                   ),
                 ],

@@ -13,7 +13,7 @@ class CategoryItemWidget extends StatelessWidget {
   }) : super(key: key);
 
   final Category category;
-  final Function(Category) onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {

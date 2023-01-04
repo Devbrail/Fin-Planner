@@ -22,7 +22,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
       children: [
         Text(
           AppLocalizations.of(context)!.thisMonthLabel,
-          style: Theme.of(context).textTheme.headline6?.copyWith(
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: Theme.of(context)
                     .colorScheme
                     .onPrimaryContainer
@@ -39,7 +39,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                   RichText(
                     text: TextSpan(
                       text: '▼',
-                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Theme.of(context)
                                 .extension<CustomColors>()!
                                 .green,
@@ -77,7 +77,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                   RichText(
                     text: TextSpan(
                       text: '▲',
-                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Theme.of(context)
                                 .extension<CustomColors>()!
                                 .red,

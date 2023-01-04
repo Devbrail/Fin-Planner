@@ -13,11 +13,11 @@ class CategoryItemTabletWidget extends StatelessWidget {
   }) : super(key: key);
 
   final Category category;
-  final Function(Category category) onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return PaisaCard(
+    return PaisaOutlineCard(
       child: InkWell(
         onTap: () => context.goNamed(
           editCategoryPath,
@@ -38,13 +38,12 @@ class CategoryItemTabletWidget extends StatelessWidget {
                       fontPackage: 'material_design_icons_flutter',
                     ),
                     size: 32,
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: Color(category.color ??
+                        Theme.of(context).colorScheme.primary.value),
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () {
-                      onPressed(category);
-                    },
+                    onPressed: onPressed,
                     icon: Icon(
                       Icons.delete_rounded,
                       color: Theme.of(context).colorScheme.error,

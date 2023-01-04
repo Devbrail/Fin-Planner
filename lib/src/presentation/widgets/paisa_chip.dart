@@ -39,7 +39,7 @@ class PaisaMaterialYouChip extends StatelessWidget {
               ),
               child: Text(
                 title,
-                style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: colorOnPrimary,
                       fontWeight: FontWeight.w600,
                     ),

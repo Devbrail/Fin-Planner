@@ -22,10 +22,11 @@ class BudgetSection extends StatelessWidget {
 
   List<MapEntry<Category, List<Expense>>> _filterCategory(
     List<Expense> expenses,
-  ) => groupBy(expenses,
-            (Expense element) => dataSource.fetchCategory(element.categoryId))
-        .entries
-        .toList();
+  ) =>
+      groupBy(expenses,
+              (Expense element) => dataSource.fetchCategory(element.categoryId))
+          .entries
+          .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class BudgetSection extends StatelessWidget {
             name,
             style: Theme.of(context)
                 .textTheme
-                .subtitle1
+                .titleSmall
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
@@ -54,11 +55,11 @@ class BudgetSection extends StatelessWidget {
           ),
           tablet: BudgetOverViewList(
             maps: _filterCategory(values),
-            crossAxisCount: 3,
+            crossAxisCount: 4,
           ),
           desktop: BudgetOverViewList(
             maps: _filterCategory(values),
-            crossAxisCount: 4,
+            crossAxisCount: 5,
           ),
         )
       ],

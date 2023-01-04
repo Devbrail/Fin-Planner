@@ -30,14 +30,12 @@ class SummaryTabletPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FilterBudgetToggleWidget(valueNotifier: valueNotifier),
-                    ExpenseHistory(valueNotifier: valueNotifier),
-                  ],
-                ),
+              child: ListView(
+                padding: const EdgeInsets.only(bottom: 124),
+                children: [
+                  FilterBudgetToggleWidget(valueNotifier: valueNotifier),
+                  ExpenseHistory(valueNotifier: valueNotifier),
+                ],
               ),
             ),
           ],
