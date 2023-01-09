@@ -23,48 +23,30 @@ class AccountsTabletPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ListView(
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                children: const [
-                  PaisaSearchBar(),
-                  SizedBox(width: 24),
-                ],
+              AccountPageViewWidget(
+                accountBloc: accountsBloc,
+                accounts: accounts,
               ),
+              AccountSummaryWidget(expenses: expenses)
             ],
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    AccountPageViewWidget(
-                      accountBloc: accountsBloc,
-                      accounts: accounts,
-                    ),
-                    AccountSummaryWidget(expenses: expenses)
-                  ],
-                ),
-              ),
-              Expanded(
-                child: AccountTransactionWidget(
-                  accountLocalDataSource: locator.get(),
-                  categoryLocalDataSource: locator.get(),
-                  expenses: expenses,
-                  isScroll: true,
-                ),
-              ),
-            ],
+        ),
+        Expanded(
+          child: AccountTransactionWidget(
+            accountLocalDataSource: locator.get(),
+            categoryLocalDataSource: locator.get(),
+            expenses: expenses,
+            isScroll: true,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

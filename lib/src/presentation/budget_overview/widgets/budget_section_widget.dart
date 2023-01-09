@@ -55,7 +55,7 @@ class BudgetSection extends StatelessWidget {
           ),
           tablet: BudgetOverViewList(
             maps: _filterCategory(values),
-            crossAxisCount: 4,
+            crossAxisCount: 3,
           ),
           desktop: BudgetOverViewList(
             maps: _filterCategory(values),

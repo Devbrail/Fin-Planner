@@ -5,15 +5,18 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/category_bloc.dart';
 
 class ColorPickerWidget extends StatelessWidget {
-  const ColorPickerWidget({super.key});
-
+  const ColorPickerWidget({
+    super.key,
+    required this.categoryBloc,
+  });
+  final CategoryBloc categoryBloc;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
       buildWhen: (previous, current) =>
           current is CategoryColorSelectedState ||
           current is CategorySuccessState,
-      bloc: BlocProvider.of<CategoryBloc>(context),
+      bloc: categoryBloc,
       builder: (context, state) {
         int color = Colors.red.value;
         if (state is CategoryColorSelectedState) {
@@ -24,14 +27,13 @@ class ColorPickerWidget extends StatelessWidget {
         }
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          onTap: () {
-            showColorPicker(context, defaultColor: Colors.red).then((color) {
-              if (color != null) {
-                BlocProvider.of<CategoryBloc>(context)
-                    .add(CategoryColorSelectedEvent(color.value));
-              }
-            });
-          },
+          onTap: () =>
+              showColorPicker(context, defaultColor: Colors.red).then((color) {
+            if (color != null) {
+              BlocProvider.of<CategoryBloc>(context)
+                  .add(CategoryColorSelectedEvent(color.value));
+            }
+          }),
           leading: Icon(
             Icons.color_lens,
             color: Theme.of(context).colorScheme.primary,

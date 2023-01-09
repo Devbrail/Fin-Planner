@@ -1,6 +1,5 @@
-import '../models/transaction.dart';
-
 import '../models/debt.dart';
+import '../models/transaction.dart';
 
 abstract class DebtLocalDataSource {
   Future<void> addDebtOrCredit(Debt debt);

@@ -34,11 +34,6 @@ class _AccountCardState extends State<AccountCard>
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
-      breakpoints: const ScreenBreakpoints(
-        tablet: 600,
-        desktop: 700,
-        watch: 300,
-      ),
       mobile: MobileAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
@@ -55,16 +50,13 @@ class _AccountCardState extends State<AccountCard>
         onDelete: widget.onDelete,
         onTap: widget.onTap,
       ),
-      desktop: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: DesktopAccountCard(
-          bankName: widget.bankName,
-          cardHolder: widget.cardHolder,
-          cardNumber: widget.cardNumber,
-          cardType: widget.cardType,
-          onDelete: widget.onDelete,
-          onTap: widget.onTap,
-        ),
+      desktop: DesktopAccountCard(
+        bankName: widget.bankName,
+        cardHolder: widget.cardHolder,
+        cardNumber: widget.cardNumber,
+        cardType: widget.cardType,
+        onDelete: widget.onDelete,
+        onTap: widget.onTap,
       ),
     );
   }
@@ -337,7 +329,7 @@ class DesktopAccountCard extends StatelessWidget {
         child: GestureDetector(
           onTap: onTap,
           child: GlassmorphicContainer(
-            height: 350,
+            height: 450,
             width: MediaQuery.of(context).size.width,
             borderRadius: 16,
             blur: 10,
@@ -371,7 +363,7 @@ class DesktopAccountCard extends StatelessWidget {
                     children: [
                       Text(
                         bankName,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headline3,
                       ),
                       Icon(cardType.icon, size: 32),
                     ],
@@ -380,7 +372,7 @@ class DesktopAccountCard extends StatelessWidget {
                     text: TextSpan(
                       text: '**** ',
                       style: GoogleFonts.jetBrainsMono(
-                        textStyle: Theme.of(context).textTheme.headline5,
+                        textStyle: Theme.of(context).textTheme.headline2,
                       ),
                       children: [
                         const TextSpan(text: '**** '),
@@ -407,7 +399,7 @@ class DesktopAccountCard extends StatelessWidget {
                       ),
                       Text(
                         cardHolder.toUpperCase(),
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                        style: Theme.of(context).textTheme.headline4?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
                       )

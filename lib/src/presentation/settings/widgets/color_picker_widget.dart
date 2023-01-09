@@ -5,26 +5,18 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
+import '../../widgets/future_resolve.dart';
 import 'dynamic_color_switch_widget.dart';
 import 'setting_option.dart';
 
-class ColorSelectorWidget extends StatefulWidget {
-  final Function(Color) onSelectedColor;
-
+class ColorSelectorWidget extends StatelessWidget {
   const ColorSelectorWidget({
     Key? key,
-    required this.onSelectedColor,
+    required this.settings,
   }) : super(key: key);
 
-  @override
-  ColorSelectorWidgetState createState() => ColorSelectorWidgetState();
-}
+  final Box<dynamic> settings;
 
-class ColorSelectorWidgetState extends State<ColorSelectorWidget> {
-  final settings =
-      locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<dynamic>>(
@@ -44,26 +36,24 @@ class ColorSelectorWidgetState extends State<ColorSelectorWidget> {
             backgroundColor: Color(color),
             maxRadius: 16,
           ),
-          onTap: () {
-            showModalBottomSheet(
-              isScrollControlled: true,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
-                ),
+          onTap: () => showModalBottomSheet(
+            isScrollControlled: true,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
               ),
-              context: context,
-              constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width >= 700
-                    ? 700
-                    : double.infinity,
-              ),
-              builder: (context) => ColorSelectionWidget(
-                valueListenable: settings.listenable(),
-              ),
-            );
-          },
+            ),
+            context: context,
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width >= 700
+                  ? 700
+                  : double.infinity,
+            ),
+            builder: (context) => ColorSelectionWidget(
+              valueListenable: settings.listenable(),
+            ),
+          ),
         );
       },
     );
@@ -71,114 +61,110 @@ class ColorSelectorWidgetState extends State<ColorSelectorWidget> {
 }
 
 class ColorSelectionWidget extends StatelessWidget {
-  final ValueListenable<Box<dynamic>> valueListenable;
   const ColorSelectionWidget({
     Key? key,
     required this.valueListenable,
   }) : super(key: key);
 
+  final ValueListenable<Box<dynamic>> valueListenable;
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<AndroidDeviceInfo>(
+    return FutureResolve<AndroidDeviceInfo>(
       future: DeviceInfoPlugin().androidInfo,
-      builder: (context, snapshot) {
-        if (snapshot.hasData && snapshot.data != null) {
-          final AndroidDeviceInfo info = snapshot.data!;
-          final sdk = info.version.sdkInt ?? 0;
-          bool isAndroid12 = sdk >= 29;
-          return ValueListenableBuilder<Box>(
-            valueListenable: valueListenable,
-            builder: (context, value, _) {
-              final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
-              final selectedColor =
-                  value.get(appColorKey, defaultValue: 0xFF795548);
+      builder: (value) {
+        final AndroidDeviceInfo info = value;
+        final sdk = info.version.sdkInt ?? 0;
+        bool isAndroid12 = sdk >= 29;
+        return ValueListenableBuilder<Box<dynamic>>(
+          valueListenable: valueListenable,
+          builder: (context, value, _) {
+            final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
+            final selectedColor =
+                value.get(appColorKey, defaultValue: 0xFF795548);
 
-              return SafeArea(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    ListTile(
-                      title: Text(
-                        AppLocalizations.of(context)!.pickColorLabel,
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
+            return SafeArea(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  ListTile(
+                    title: Text(
+                      AppLocalizations.of(context)!.pickColorLabel,
+                      style: Theme.of(context).textTheme.headline6,
                     ),
-                    Visibility(
-                      visible: isAndroid12,
-                      child: const DynamicColorSwitchWidget(),
+                  ),
+                  Visibility(
+                    visible: isAndroid12,
+                    child: DynamicColorSwitchWidget(
+                      settings: value,
                     ),
-                    AbsorbPointer(
-                      absorbing: isDynamic,
-                      child: Opacity(
-                        opacity: isDynamic ? 0.3 : 1,
-                        child: GridView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: const EdgeInsets.only(
-                            bottom: 16,
-                          ),
-                          shrinkWrap: true,
-                          itemCount: Colors.primaries.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount:
-                                MediaQuery.of(context).size.width >= 700
-                                    ? 9
-                                    : 6,
-                          ),
-                          itemBuilder: (_, index) {
-                            final color = Colors.primaries[index];
-                            if (color == selectedColor) {
-                              return Stack(
+                  ),
+                  AbsorbPointer(
+                    absorbing: isDynamic,
+                    child: Opacity(
+                      opacity: isDynamic ? 0.3 : 1,
+                      child: GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.only(
+                          bottom: 16,
+                        ),
+                        shrinkWrap: true,
+                        itemCount: Colors.primaries.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:
+                              MediaQuery.of(context).size.width >= 700 ? 9 : 6,
+                        ),
+                        itemBuilder: (_, index) {
+                          final color = Colors.primaries[index];
+                          if (color == selectedColor) {
+                            return Stack(
+                              children: [
+                                Center(
+                                    child:
+                                        CircleAvatar(backgroundColor: color)),
+                                const Center(child: Icon(Icons.check)),
+                              ],
+                            );
+                          } else {
+                            return GestureDetector(
+                              onTap: () {
+                                value.put(appColorKey, color.value);
+                              },
+                              child: Stack(
                                 children: [
                                   Center(
-                                      child:
-                                          CircleAvatar(backgroundColor: color)),
-                                  const Center(child: Icon(Icons.check)),
-                                ],
-                              );
-                            } else {
-                              return GestureDetector(
-                                onTap: () {
-                                  value.put(appColorKey, color.value);
-                                },
-                                child: Stack(
-                                  children: [
-                                    Center(
-                                      child: CircleAvatar(
-                                        backgroundColor: color,
-                                      ),
+                                    child: CircleAvatar(
+                                      backgroundColor: color,
                                     ),
-                                  ],
-                                ),
-                              );
-                            }
-                          },
-                        ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 16.0, bottom: 16),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 12),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
                         ),
-                        onPressed: () => Navigator.pop(context),
-                        child: Text(AppLocalizations.of(context)!.doneLabel),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 12),
                       ),
+                      onPressed: () => Navigator.pop(context),
+                      child: Text(AppLocalizations.of(context)!.doneLabel),
                     ),
-                  ],
-                ),
-              );
-            },
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
+                  ),
+                ],
+              ),
+            );
+          },
+        );
       },
     );
   }

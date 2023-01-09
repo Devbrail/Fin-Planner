@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../widgets/paisa_search_bar.dart';
 
 import '../../../data/category/model/category.dart';
+import '../../widgets/paisa_search_bar.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/category_item_tablet_widget.dart';
 
@@ -18,40 +18,22 @@ class CategoryListTabletWidget extends StatelessWidget {
   final List<Category> categories;
 
   @override
-  Widget build(BuildContext context) => SafeArea(
-        child: ListView(
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Row(
-                  children: const [
-                    PaisaSearchBar(),
-                    SizedBox(width: 24),
-                  ],
-                ),
-              ],
-            ),
-            GridView.builder(
-              padding: const EdgeInsets.only(
-                bottom: 124,
-                left: 8,
-                right: 8,
-                top: 8,
-              ),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
-              ),
-              itemCount: categories.length,
-              shrinkWrap: true,
-              itemBuilder: (_, index) => CategoryItemTabletWidget(
-                category: categories[index],
-                onPressed: () =>
-                    addCategoryBloc.add(CategoryDeleteEvent(categories[index])),
-              ),
-            ),
-          ],
+  Widget build(BuildContext context) => GridView.builder(
+        padding: const EdgeInsets.only(
+          bottom: 124,
+          left: 8,
+          right: 8,
+          top: 8,
+        ),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount,
+        ),
+        itemCount: categories.length,
+        shrinkWrap: true,
+        itemBuilder: (_, index) => CategoryItemTabletWidget(
+          category: categories[index],
+          onPressed: () =>
+              addCategoryBloc.add(CategoryDeleteEvent(categories[index])),
         ),
       );
 }

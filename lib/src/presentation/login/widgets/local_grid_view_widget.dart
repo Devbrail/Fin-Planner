@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/src/core/constants.dart';
+import 'package:flutter_paisa/src/core/enum/box_types.dart';
+import 'package:flutter_paisa/src/service_locator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 
 import '../../widgets/paisa_card.dart';
@@ -22,7 +26,11 @@ class LocaleGridView extends StatefulWidget {
 }
 
 class _LocaleGridViewState extends State<LocaleGridView> {
-  CountryMap? selectedIndex;
+  final Box<dynamic> settings =
+      locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
+
+  late CountryMap? selectedIndex = widget.locales.firstWhere((element) =>
+      element.locale.languageCode == (settings.get(userLanguageKey) as String));
 
   @override
   Widget build(BuildContext context) {

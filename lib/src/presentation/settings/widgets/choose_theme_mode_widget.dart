@@ -3,25 +3,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
 import '../../../core/enum/theme_mode.dart';
-import '../../../service_locator.dart';
 import 'setting_option.dart';
 
-class ChooseThemeModeWidget extends StatefulWidget {
+class ChooseThemeModeWidget extends StatelessWidget {
   const ChooseThemeModeWidget({
     Key? key,
+    required this.settings,
   }) : super(key: key);
+  final Box<dynamic> settings;
 
-  @override
-  ChooseThemeModeWidgetState createState() => ChooseThemeModeWidgetState();
-}
-
-class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
-  final Box<dynamic> settings =
-      locator.get(instanceName: BoxType.settings.stringValue);
-
-  void showThemeDialog() {
+  void showThemeDialog(BuildContext context) {
     showModalBottomSheet(
       constraints: BoxConstraints(
         maxWidth:
@@ -51,7 +43,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
         return SettingsOption(
           title: AppLocalizations.of(context)!.themeLabel,
           subtitle: ThemeMode.values[index].themeName,
-          onTap: () => showThemeDialog(),
+          onTap: () => showThemeDialog(context),
         );
       },
     );
@@ -91,7 +83,7 @@ class ThemeModeWidgetState extends State<ThemeModeWidget> {
               .map(
                 (e) => RadioListTile(
                   value: e,
-                  activeColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  activeColor: Theme.of(context).colorScheme.primary,
                   groupValue: currentIndex,
                   onChanged: (ThemeMode? value) {
                     currentIndex = value!;

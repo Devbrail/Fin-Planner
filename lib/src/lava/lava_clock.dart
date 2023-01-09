@@ -34,19 +34,17 @@ class LavaAnimationState extends State<LavaAnimation>
     return LayoutBuilder(
       builder: (context, constraints) => AnimatedBuilder(
         animation: _animation,
-        builder: (BuildContext context, _) {
-          return CustomPaint(
-            size: const Size(100, 100),
-            painter: LavaPainter(
-              lava,
-              color: widget.color ?? Theme.of(context).colorScheme.primary,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: widget.child,
-            ),
-          );
-        },
+        builder: (BuildContext context, _) => CustomPaint(
+          size: const Size(100, 100),
+          painter: LavaPainter(
+            lava,
+            color: widget.color ?? Theme.of(context).colorScheme.primary,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: widget.child,
+          ),
+        ),
       ),
     );
   }

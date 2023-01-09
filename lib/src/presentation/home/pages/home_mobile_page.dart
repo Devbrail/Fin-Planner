@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -28,102 +27,93 @@ class HomeMobilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Theme.of(context).colorScheme.surface,
-        systemNavigationBarContrastEnforced: true,
-        systemNavigationBarIconBrightness: ThemeData.estimateBrightnessForColor(
-            Theme.of(context).colorScheme.primary),
+    return Scaffold(
+      appBar: AppBar(
+        title: const PaisaTitleWidget(),
+        actions: const [
+          PaisaFilterTransactionWidget(),
+          PaisaSearchButtonWidget(),
+          PaisaUserWidget(),
+        ],
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const PaisaTitleWidget(),
-          actions: const [
-            PaisaFilterTransactionWidget(),
-            PaisaSearchButtonWidget(),
-            PaisaUserWidget(),
-          ],
-        ),
-        drawer: Drawer(
-          child: BlocBuilder(
-            bloc: homeBloc,
-            builder: (context, state) {
-              PageType pageType = PageType.home;
-              if (state is CurrentIndexState) {
-                pageType = state.currentPage;
-              }
-              bool isSelected = pageType == PageType.debts;
-              return ListView(
-                children: [
-                  ListTile(
-                    title: Text(
-                      AppLocalizations.of(context)!.appTitle,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                  DrawerItemWidget(
-                    isSelected: isSelected,
-                    onPressed: () {
-                      homeBloc.add(const CurrentIndexEvent(PageType.debts));
-                      Navigator.pop(context);
-                    },
-                    icon: MdiIcons.accountCashOutline,
-                    title: AppLocalizations.of(context)!.debtsLabel,
-                  ),
-                  DrawerItemWidget(
-                    isSelected: false,
-                    onPressed: () {
-                      GoRouter.of(context).pushNamed(settingsPath);
-                      Navigator.pop(context);
-                    },
-                    icon: MdiIcons.cog,
-                    title: AppLocalizations.of(context)!.settingsLabel,
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-        body: ContentWidget(dateTimeRangeNotifier: dateTimeRangeNotifier),
-        floatingActionButton: floatingActionButton,
-        bottomNavigationBar: BlocBuilder(
+      drawer: Drawer(
+        child: BlocBuilder(
           bloc: homeBloc,
           builder: (context, state) {
-            return Theme(
-              data: Theme.of(context)
-                  .copyWith(splashFactory: NoSplash.splashFactory),
-              child: NavigationBar(
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                selectedIndex: homeBloc.getIndexFromPage(homeBloc.currentPage),
-                onDestinationSelected: (index) => homeBloc
-                    .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
-                destinations: [
-                  NavigationDestination(
-                    label: AppLocalizations.of(context)!.homeLabel,
-                    icon: const Icon(Icons.home_outlined),
-                    selectedIcon: const Icon(Icons.home),
+            PageType pageType = PageType.home;
+            if (state is CurrentIndexState) {
+              pageType = state.currentPage;
+            }
+            bool isSelected = pageType == PageType.debts;
+            return ListView(
+              children: [
+                ListTile(
+                  title: Text(
+                    AppLocalizations.of(context)!.appTitle,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
-                  NavigationDestination(
-                    label: AppLocalizations.of(context)!.accountsLabel,
-                    icon: const Icon(Icons.credit_card_outlined),
-                    selectedIcon: const Icon(Icons.credit_card),
-                  ),
-                  NavigationDestination(
-                    label: AppLocalizations.of(context)!.categoryLabel,
-                    icon: const Icon(Icons.category_outlined),
-                    selectedIcon: const Icon(Icons.category),
-                  ),
-                  NavigationDestination(
-                    label: AppLocalizations.of(context)!.budgetLabel,
-                    icon: const Icon(Icons.account_balance_wallet_outlined),
-                    selectedIcon: const Icon(Icons.account_balance_wallet),
-                  ),
-                ],
-              ),
+                ),
+                DrawerItemWidget(
+                  isSelected: isSelected,
+                  onPressed: () {
+                    homeBloc.add(const CurrentIndexEvent(PageType.debts));
+                    Navigator.pop(context);
+                  },
+                  icon: MdiIcons.accountCashOutline,
+                  title: AppLocalizations.of(context)!.debtsLabel,
+                ),
+                DrawerItemWidget(
+                  isSelected: false,
+                  onPressed: () {
+                    GoRouter.of(context).pushNamed(settingsPath);
+                    Navigator.pop(context);
+                  },
+                  icon: MdiIcons.cog,
+                  title: AppLocalizations.of(context)!.settingsLabel,
+                ),
+              ],
             );
           },
         ),
+      ),
+      body: ContentWidget(dateTimeRangeNotifier: dateTimeRangeNotifier),
+      floatingActionButton: floatingActionButton,
+      bottomNavigationBar: BlocBuilder(
+        bloc: homeBloc,
+        builder: (context, state) {
+          return Theme(
+            data: Theme.of(context)
+                .copyWith(splashFactory: NoSplash.splashFactory),
+            child: NavigationBar(
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              selectedIndex: homeBloc.getIndexFromPage(homeBloc.currentPage),
+              onDestinationSelected: (index) => homeBloc
+                  .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
+              destinations: [
+                NavigationDestination(
+                  label: AppLocalizations.of(context)!.homeLabel,
+                  icon: const Icon(Icons.home_outlined),
+                  selectedIcon: const Icon(Icons.home),
+                ),
+                NavigationDestination(
+                  label: AppLocalizations.of(context)!.accountsLabel,
+                  icon: const Icon(Icons.credit_card_outlined),
+                  selectedIcon: const Icon(Icons.credit_card),
+                ),
+                NavigationDestination(
+                  label: AppLocalizations.of(context)!.categoryLabel,
+                  icon: const Icon(Icons.category_outlined),
+                  selectedIcon: const Icon(Icons.category),
+                ),
+                NavigationDestination(
+                  label: AppLocalizations.of(context)!.budgetLabel,
+                  icon: const Icon(Icons.account_balance_wallet_outlined),
+                  selectedIcon: const Icon(Icons.account_balance_wallet),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

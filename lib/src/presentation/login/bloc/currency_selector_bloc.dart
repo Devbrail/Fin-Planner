@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../data.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -12,6 +11,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/category/model/category.dart';
+import '../data.dart';
 
 part 'currency_selector_event.dart';
 part 'currency_selector_state.dart';
@@ -30,6 +30,7 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
   final Box<dynamic> settings;
   final Box<Account> accounts;
   final Box<Category> categories;
+  Locale? selectedLocale;
 
   FutureOr<void> _checkLogin(
     CheckLoginEvent event,
@@ -88,11 +89,12 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
     emit(CountryLocalesState(result));
   }
 
-  Future<FutureOr<void>> _selectedLocale(
+  FutureOr<void> _selectedLocale(
     SelectedLocaleEvent event,
     Emitter<SplashState> emit,
   ) async {
-    await settings.put(userLanguageKey, event.locale.languageCode);
+    if (selectedLocale == null) return;
+    await settings.put(userLanguageKey, selectedLocale!.languageCode);
     emit(NavigateToHome());
   }
 }

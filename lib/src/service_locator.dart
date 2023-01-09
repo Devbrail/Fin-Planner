@@ -144,7 +144,7 @@ void _setupUseCase() {
 }
 
 void _setupBloc() {
-  locator.registerFactory(() => CurrencySelectorBloc(
+  locator.registerFactoryAsync(() async => CurrencySelectorBloc(
         accounts: locator.get(),
         categories: locator.get(),
         settings: locator.get<Box<dynamic>>(

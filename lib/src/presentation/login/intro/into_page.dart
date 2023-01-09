@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../lava/lava_clock.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../service_locator.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});

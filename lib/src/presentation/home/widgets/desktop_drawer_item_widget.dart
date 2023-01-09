@@ -20,39 +20,37 @@ class NavigationBarItem extends StatelessWidget {
         ? Theme.of(context).colorScheme.primary
         : Theme.of(context).textTheme.button?.color;
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(16),
-      onTap: onPressed,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Container(
-            width: 4,
-            height: 62,
-            decoration: isSelected
-                ? BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: const BorderRadius.only(
-                      bottomRight: Radius.circular(8),
-                      topRight: Radius.circular(8),
-                    ),
-                    color: Theme.of(context).colorScheme.primary,
-                  )
-                : null,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Icon(
-              icon,
-              color: color,
-              size: 28,
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: isSelected
+          ? BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(32),
+              color: Theme.of(context).colorScheme.primaryContainer,
+            )
+          : null,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(32),
+        onTap: onPressed,
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 18.0,
+                vertical: 14,
+              ),
+              child: Icon(
+                icon,
+                color: color,
+                size: 28,
+              ),
             ),
-          ),
-          Text(
-            title,
-            style: TextStyle(color: color),
-          )
-        ],
+            Text(
+              title,
+              style: TextStyle(color: color),
+            )
+          ],
+        ),
       ),
     );
   }
