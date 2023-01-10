@@ -8,25 +8,22 @@ import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
 import '../../login/pages/user_image_page.dart';
 
-class UserProfilePage extends StatefulWidget {
-  const UserProfilePage({Key? key}) : super(key: key);
+class UserProfilePage extends StatelessWidget {
+  const UserProfilePage({
+    Key? key,
+    required this.settings,
+    required this.nameController,
+  }) : super(key: key);
 
-  @override
-  State<UserProfilePage> createState() => _UserProfilePageState();
-}
+  final Box<dynamic> settings;
 
-class _UserProfilePageState extends State<UserProfilePage> {
-  final settings =
-      locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
+  final TextEditingController nameController;
 
-  final nameController = TextEditingController();
-  void _updateDetails() {
-    settings
-        .put(userNameKey, nameController.text)
-        .then((value) => Navigator.pop(context));
-  }
+  void _updateDetails(BuildContext context) => settings
+      .put(userNameKey, nameController.text)
+      .then((value) => Navigator.pop(context));
 
-  void _pickImage() {
+  void _pickImage(BuildContext context) {
     final ImagePicker picker = ImagePicker();
     picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
       if (pickedFile != null) {
@@ -62,7 +59,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               Row(
                 children: [
                   const SizedBox(width: 16),
-                  UserImageWidget(pickImage: _pickImage),
+                  UserImageWidget(pickImage: () => _pickImage(context)),
                   Expanded(
                     child: UserTextField(nameController: nameController),
                   ),
@@ -80,7 +77,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       vertical: 12,
                     ),
                   ),
-                  onPressed: _updateDetails,
+                  onPressed: () => _updateDetails(context),
                   child: Text(
                     AppLocalizations.of(context)!.updateLabel,
                   ),

@@ -104,15 +104,8 @@ class _PaisaAppState extends State<PaisaApp> {
                 extensions: [darkCustomColor],
               ),
               themeMode: themeMode,
-              localizationsDelegates: const [
-                AppLocalizations.delegate, // Add this line
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('en', ''),
-              ],
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
               onGenerateTitle: (BuildContext context) =>
                   AppLocalizations.of(context)!.appTitle,
             );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
 
 import '../../../data/category/model/category.dart';
 import '../bloc/category_bloc.dart';
@@ -26,8 +27,31 @@ class CategoryListMobileWidget extends StatelessWidget {
         shrinkWrap: true,
         itemBuilder: (_, index) => CategoryItemMobileWidget(
           category: categories[index],
-          onPressed: () =>
-              addCategoryBloc.add(CategoryDeleteEvent(categories[index])),
+          onPressed: () => paisaAlertDialog(
+            context,
+            title: const Text('Permanently confirmation'),
+            child: RichText(
+              text: TextSpan(
+                text:
+                    'Deleting the category deletes all expenses which tied to this category ',
+                children: [
+                  TextSpan(
+                      text: categories[index].name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      )),
+                ],
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+            confirmationButton: ElevatedButton(
+              onPressed: () {
+                addCategoryBloc.add(CategoryDeleteEvent(categories[index]));
+                Navigator.pop(context);
+              },
+              child: const Text('Delete'),
+            ),
+          ),
         ),
       );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
@@ -38,7 +39,19 @@ class AccountPageViewWidget extends StatelessWidget {
                 cardNumber: account.number,
                 bankName: account.bankName,
                 cardType: account.cardType ?? CardType.bank,
-                onDelete: () => accountBloc.add(DeleteAccountEvent(account)),
+                onDelete: () => paisaAlertDialog(
+                  context,
+                  title: const Text('Permanently confirmation'),
+                  child: Text(
+                      'Deleting the account deletes all expenses which tied to this account ${account.name}'),
+                  confirmationButton: ElevatedButton(
+                    onPressed: () {
+                      accountBloc.add(DeleteAccountEvent(account));
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Delete'),
+                  ),
+                ),
                 onTap: () => GoRouter.of(context).goNamed(
                   editAccountPath,
                   params: <String, String>{'aid': account.superId.toString()},

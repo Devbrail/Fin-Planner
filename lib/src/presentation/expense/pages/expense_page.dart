@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
@@ -128,8 +129,27 @@ class _ExpensePageState extends State<ExpensePage> {
                       isAddExpense
                           ? const SizedBox.shrink()
                           : IconButton(
-                              onPressed: () => expenseBloc
-                                  .add(ClearExpenseEvent(widget.expenseId!)),
+                              onPressed: () {
+                                paisaAlertDialog(
+                                  context,
+                                  title: const Text('Permanently delete'),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: 'Deleting the expense',
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                  ),
+                                  confirmationButton: ElevatedButton(
+                                    onPressed: () {
+                                      expenseBloc.add(
+                                          ClearExpenseEvent(widget.expenseId!));
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Delete'),
+                                  ),
+                                );
+                              },
                               icon: Icon(
                                 Icons.delete_rounded,
                                 color: Theme.of(context).colorScheme.error,
