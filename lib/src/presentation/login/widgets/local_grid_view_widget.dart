@@ -29,8 +29,12 @@ class _LocaleGridViewState extends State<LocaleGridView> {
   final Box<dynamic> settings =
       locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
 
-  late CountryMap? selectedIndex = widget.locales.firstWhere((element) =>
-      element.locale.languageCode == (settings.get(userLanguageKey) as String));
+  late CountryMap? selectedIndex = widget.locales.firstWhere(
+    (element) =>
+        element.locale.languageCode ==
+        (settings.get(userLanguageKey, defaultValue: 'DEF') as String),
+    orElse: () => CountryMap("US Dollar", const Locale('en')),
+  );
 
   @override
   Widget build(BuildContext context) {
