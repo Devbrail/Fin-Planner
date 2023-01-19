@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:paisa/src/core/enum/box_types.dart';
-import 'package:paisa/src/service_locator.dart';
+import '../../../core/enum/box_types.dart';
+import '../../../service_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 

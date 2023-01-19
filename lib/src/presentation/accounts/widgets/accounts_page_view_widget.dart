@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/lava/lava_clock.dart';
-import 'package:paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
+import '../../../lava/lava_clock.dart';
+import '../../widgets/paisa_bottom_sheet.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';

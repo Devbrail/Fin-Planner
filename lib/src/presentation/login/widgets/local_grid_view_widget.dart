@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/core/constants.dart';
-import 'package:paisa/src/core/enum/box_types.dart';
-import 'package:paisa/src/service_locator.dart';
+import '../../../core/constants.dart';
+import '../../../core/enum/box_types.dart';
+import '../../../service_locator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';

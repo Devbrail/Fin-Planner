@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../service_locator.dart';
-import '../../widgets/paisa_search_bar.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_summary_widget.dart';
 import '../widgets/account_transaction_widget.dart';
