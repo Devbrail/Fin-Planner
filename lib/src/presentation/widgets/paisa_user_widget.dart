@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paisa/src/core/enum/box_types.dart';
-import 'package:flutter_paisa/src/service_locator.dart';
+import 'package:paisa/src/core/enum/box_types.dart';
+import 'package:paisa/src/service_locator.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../home/widgets/welcome_widget.dart';
