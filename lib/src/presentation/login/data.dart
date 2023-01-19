@@ -25,6 +25,7 @@ List<CountryMap> getLocales() => [
       CountryMap("Australia Dollar", const Locale('en_AU')),
       CountryMap("Canadian Dollar", const Locale('en_CA')),
       CountryMap("British Pound", const Locale('en_GB')),
+      CountryMap("Swedish Krona", const Locale('sv')),
     ];
 
 class CountryMap {
