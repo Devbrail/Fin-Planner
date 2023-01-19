@@ -183,9 +183,9 @@
     "@userNameLabel": {
         "description": "User name label"
     },
-    "selectedCountryLabel": "Select country",
+    "selectedCountryLabel": "Select currency",
     "@selectedCountryLabel": {
-        "description": "Select country label"
+        "description": "Select currency label"
     },
     "errorAuthLabel": "Error authentication",
     "@errorAuthLabel": {

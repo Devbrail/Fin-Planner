@@ -21,7 +21,8 @@ List<CountryMap> getLocales() => [
       CountryMap("Egyptian Pound", const Locale('ar_EG')),
       CountryMap("Brazilian Real", const Locale('pt')),
       CountryMap("Russian Ruble", const Locale('ru')),
-      CountryMap("Chinese Yuan", const Locale('zh')), 
+      CountryMap("Chinese Yuan", const Locale('zh')),
+      CountryMap("Australia Dollar", const Locale('en_AU')),
     ];
 
 class CountryMap {
