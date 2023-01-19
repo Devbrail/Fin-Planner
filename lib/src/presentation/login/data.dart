@@ -23,6 +23,7 @@ List<CountryMap> getLocales() => [
       CountryMap("Russian Ruble", const Locale('ru')),
       CountryMap("Chinese Yuan", const Locale('zh')),
       CountryMap("Australia Dollar", const Locale('en_AU')),
+      CountryMap("Canadian Dollar", const Locale('en_CA')),
     ];
 
 class CountryMap {
