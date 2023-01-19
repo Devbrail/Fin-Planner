@@ -21,10 +21,6 @@ import '../widgets/select_category_widget.dart';
 import '../widgets/toggle_buttons_widget.dart';
 
 final GlobalKey<FormState> _form = GlobalKey<FormState>();
-String formatNumber(double s) => NumberFormat.decimalPattern(locator
-        .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
-        .get(userLanguageKey))
-    .format(s);
 
 class ExpensePage extends StatefulWidget {
   const ExpensePage({
@@ -111,10 +107,9 @@ class _ExpensePageState extends State<ExpensePage> {
                 nameController.selection = TextSelection.collapsed(
                   offset: state.expense.name.length,
                 );
-                final value = formatNumber(state.expense.currency);
-                amountController.text = value;
+                amountController.text = state.expense.currency.toString();
                 amountController.selection = TextSelection.collapsed(
-                  offset: value.length,
+                  offset: state.expense.currency.toString().length,
                 );
               }
             },
@@ -443,12 +438,7 @@ class ExpenseAmountWidget extends StatelessWidget {
       maxLength: 13,
       maxLines: 1,
       onChanged: (value) {
-        value = formatNumber(double.parse(value));
-        controller.value = TextEditingValue(
-          text: value,
-          selection: TextSelection.collapsed(offset: value.length),
-        );
-        double? amount = double.tryParse(value.replaceAll(',', ''));
+        double? amount = double.tryParse(value);
         BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
       },
       validator: (value) {

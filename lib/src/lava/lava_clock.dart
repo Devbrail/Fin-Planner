@@ -40,10 +40,7 @@ class LavaAnimationState extends State<LavaAnimation>
             lava,
             color: widget.color ?? Theme.of(context).colorScheme.primary,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: widget.child,
-          ),
+          child: widget.child,
         ),
       ),
     );

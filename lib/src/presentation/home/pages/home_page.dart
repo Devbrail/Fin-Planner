@@ -10,8 +10,6 @@ import '../bloc/home_bloc.dart';
 import 'home_desktop_widget.dart';
 import 'home_mobile_page.dart';
 
-late final Function(DateTimeRange dateTimeRange) dateTimeRange;
-
 class LandingPage extends StatefulWidget {
   const LandingPage({
     Key? key,

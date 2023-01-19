@@ -48,9 +48,17 @@ class HomeMobilePage extends StatelessWidget {
             return ListView(
               children: [
                 ListTile(
+                  horizontalTitleGap: 0,
+                  leading: Icon(
+                    Icons.wallet,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 28,
+                  ),
                   title: Text(
                     AppLocalizations.of(context)!.appTitle,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.headline5?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                   ),
                 ),
                 DrawerItemWidget(

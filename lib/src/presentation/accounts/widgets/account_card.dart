@@ -82,54 +82,53 @@ class MobileAccountCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LavaAnimation(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GlassmorphicContainer(
-            height: 220,
-            width: MediaQuery.of(context).size.width,
-            borderRadius: 24,
-            blur: 10,
-            alignment: Alignment.bottomCenter,
-            border: 2,
-            linearGradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.1),
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.05),
-              ],
-              stops: const [0.1, 1],
-            ),
-            borderGradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
-              ],
-            ),
-            child: Stack(
+    return GestureDetector(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GlassmorphicContainer(
+          height: 240,
+          width: MediaQuery.of(context).size.width,
+          borderRadius: 24,
+          blur: 10,
+          alignment: Alignment.bottomCenter,
+          border: 2,
+          linearGradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.1),
+              Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.05),
+            ],
+            stops: const [0.1, 1],
+          ),
+          borderGradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
+              Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            bankName.toUpperCase(),
-                            style: Theme.of(context).textTheme.subtitle1,
-                          ),
-                          Icon(cardType.icon),
-                        ],
-                      ),
-                      Padding(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      bankName.toUpperCase(),
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                    Icon(cardType.icon),
+                  ],
+                ),
+                cardNumber.isEmpty
+                    ? const SizedBox.shrink()
+                    : Padding(
                         padding: const EdgeInsets.only(top: 16.0),
                         child: RichText(
                           text: TextSpan(
@@ -147,47 +146,42 @@ class MobileAccountCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  AppLocalizations.of(context)!
-                                      .cardholderLabel
-                                      .toUpperCase(),
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .color!
-                                          .withOpacity(0.5),
-                                      fontSize: 9,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  cardHolder.toUpperCase(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                )
-                              ],
-                            ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            AppLocalizations.of(context)!
+                                .cardholderLabel
+                                .toUpperCase(),
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .color!
+                                    .withOpacity(0.5),
+                                fontSize: 9,
+                                fontWeight: FontWeight.bold),
                           ),
-                          onDelete != null
-                              ? IconButton(
-                                  onPressed: onDelete,
-                                  icon: const Icon(Icons.delete),
-                                )
-                              : const SizedBox.shrink(),
+                          Text(
+                            cardHolder.toUpperCase(),
+                            style:
+                                Theme.of(context).textTheme.headline6?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                          )
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    onDelete != null
+                        ? IconButton(
+                            onPressed: onDelete,
+                            icon: const Icon(Icons.delete),
+                          )
+                        : const SizedBox.shrink(),
+                  ],
                 ),
               ],
             ),
