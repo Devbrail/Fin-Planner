@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../core/constants.dart';
-import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/constants.dart';
+import '../../../core/enum/box_types.dart';
+import '../../../service_locator.dart';
 import '../../widgets/paisa_card.dart';
 import '../data.dart';
 
@@ -31,7 +31,7 @@ class _LocaleGridViewState extends State<LocaleGridView> {
 
   late CountryMap? selectedIndex = widget.locales.firstWhere(
     (element) =>
-        element.locale.languageCode ==
+        element.name ==
         (settings.get(userLanguageKey, defaultValue: 'DEF') as String),
     orElse: () => CountryMap("US Dollar", const Locale('en')),
   );
@@ -51,7 +51,6 @@ class _LocaleGridViewState extends State<LocaleGridView> {
         final format = NumberFormat.compactSimpleCurrency(
           locale: widget.locales[index].locale.toString(),
         );
-
         return PaisaCard(
           color: Theme.of(context).colorScheme.surface,
           shape: selectedIndex == map
@@ -78,7 +77,7 @@ class _LocaleGridViewState extends State<LocaleGridView> {
                   child: Text(
                     format.currencySymbol,
                     style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context).textTheme.headline6,
+                      textStyle: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                 ),

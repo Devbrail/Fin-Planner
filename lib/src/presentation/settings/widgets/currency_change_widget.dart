@@ -14,6 +14,17 @@ class CurrencyChangeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String title;
+    try {
+      title = NumberFormat.compactSimpleCurrency(
+            locale: locator
+                .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+                .get(userLanguageKey),
+          ).currencyName ??
+          '';
+    } catch (er) {
+      title = '';
+    }
     return ListTile(
       onTap: () => context.pushNamed(
         splashName,
@@ -22,14 +33,7 @@ class CurrencyChangeWidget extends StatelessWidget {
         },
       ),
       title: Text(AppLocalizations.of(context)!.currencySignLabel),
-      subtitle: Text(
-        NumberFormat.compactSimpleCurrency(
-              locale: locator
-                  .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
-                  .get(userLanguageKey),
-            ).currencyName ??
-            '',
-      ),
+      subtitle: Text(title),
     );
   }
 }

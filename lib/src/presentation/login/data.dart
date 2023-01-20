@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+class CountryMap {
+  final String name;
+  final Locale locale;
+
+  CountryMap(this.name, this.locale);
+}
+
 List<CountryMap> getLocales() => [
       CountryMap("US Dollar", const Locale('en')),
       CountryMap("Indian Rupee", const Locale('hi')),
@@ -26,11 +33,6 @@ List<CountryMap> getLocales() => [
       CountryMap("Canadian Dollar", const Locale('en_CA')),
       CountryMap("British Pound", const Locale('en_GB')),
       CountryMap("Swedish Krona", const Locale('sv')),
+      CountryMap("Iranian Rial", const Locale('fa')),
+      CountryMap("Albanian Lek", const Locale('sq')),
     ];
-
-class CountryMap {
-  final String name;
-  final Locale locale;
-
-  CountryMap(this.name, this.locale);
-}

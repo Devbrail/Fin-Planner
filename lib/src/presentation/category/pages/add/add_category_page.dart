@@ -235,7 +235,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             : AppLocalizations.of(context)!.updateLabel,
         style: TextStyle(
           fontWeight: FontWeight.w700,
-          fontSize: Theme.of(context).textTheme.headline6?.fontSize,
+          fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
         ),
       ),
     );

@@ -251,8 +251,10 @@ class AddAccountPageState extends State<AddAccountPage> {
                               : AppLocalizations.of(context)!.updateLabel,
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            fontSize:
-                                Theme.of(context).textTheme.headline6?.fontSize,
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.fontSize,
                           ),
                         ),
                       ),
@@ -354,7 +356,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                                         fontWeight: FontWeight.w700,
                                         fontSize: Theme.of(context)
                                             .textTheme
-                                            .headline6
+                                            .titleLarge
                                             ?.fontSize,
                                       ),
                                     ),
@@ -398,7 +400,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                     AppLocalizations.of(context)!.accountInfoLabel,
                     style: Theme.of(context)
                         .textTheme
-                        .headline6
+                        .titleLarge
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),

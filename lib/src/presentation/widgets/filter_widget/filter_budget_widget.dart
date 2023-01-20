@@ -28,7 +28,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                 ListTile(
                   title: Text(
                     'Filter list',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 Container(

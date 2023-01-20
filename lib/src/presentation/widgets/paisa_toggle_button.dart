@@ -41,7 +41,7 @@ class PaisaToggleButton extends StatelessWidget {
         padding: const EdgeInsets.all(14.0),
         child: Text(
           title,
-          style: Theme.of(context).textTheme.bodyText2?.copyWith(
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: textColor,
                 fontWeight: FontWeight.bold,
               ),

@@ -34,7 +34,7 @@ class EmptyWidget extends StatelessWidget {
               child: Text(
                 title,
                 style:
-                    Theme.of(context).textTheme.headline6?.onSurface(context),
+                    Theme.of(context).textTheme.titleLarge?.onSurface(context),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -46,7 +46,7 @@ class EmptyWidget extends StatelessWidget {
               child: Text(
                 description,
                 style:
-                    Theme.of(context).textTheme.bodyText1?.onSurface(context),
+                    Theme.of(context).textTheme.bodyLarge?.onSurface(context),
                 textAlign: TextAlign.center,
               ),
             ),

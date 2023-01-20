@@ -58,7 +58,7 @@ class ItemWidget extends StatelessWidget {
               ListTile(
                 title: Text(
                   title,
-                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
