@@ -72,16 +72,20 @@ class ColorSelectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureResolve<AndroidDeviceInfo>(
       future: DeviceInfoPlugin().androidInfo,
-      builder: (value) {
-        final AndroidDeviceInfo info = value;
+      builder: (info) {
         final sdk = info.version.sdkInt ?? 0;
         bool isAndroid12 = sdk >= 29;
         return ValueListenableBuilder<Box<dynamic>>(
           valueListenable: valueListenable,
           builder: (context, value, _) {
-            final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
-            final selectedColor =
-                value.get(appColorKey, defaultValue: 0xFF795548);
+            final bool isDynamic = value.get(
+              dynamicThemeKey,
+              defaultValue: false,
+            );
+            int selectedColor = value.get(
+              appColorKey,
+              defaultValue: 0xFF795548,
+            );
 
             return SafeArea(
               child: Column(
@@ -96,53 +100,17 @@ class ColorSelectionWidget extends StatelessWidget {
                   ),
                   Visibility(
                     visible: isAndroid12,
-                    child: DynamicColorSwitchWidget(
-                      settings: value,
-                    ),
+                    child: DynamicColorSwitchWidget(settings: value),
                   ),
                   AbsorbPointer(
                     absorbing: isDynamic,
                     child: Opacity(
                       opacity: isDynamic ? 0.3 : 1,
-                      child: GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.only(
-                          bottom: 16,
-                        ),
-                        shrinkWrap: true,
-                        itemCount: Colors.primaries.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount:
-                              MediaQuery.of(context).size.width >= 700 ? 9 : 6,
-                        ),
-                        itemBuilder: (_, index) {
-                          final color = Colors.primaries[index];
-                          if (color == selectedColor) {
-                            return Stack(
-                              children: [
-                                Center(
-                                    child:
-                                        CircleAvatar(backgroundColor: color)),
-                                const Center(child: Icon(Icons.check)),
-                              ],
-                            );
-                          } else {
-                            return GestureDetector(
-                              onTap: () {
-                                value.put(appColorKey, color.value);
-                              },
-                              child: Stack(
-                                children: [
-                                  Center(
-                                    child: CircleAvatar(
-                                      backgroundColor: color,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
+                      child: ColorPickerGridWidget(
+                        onSelected: (color) {
+                          selectedColor = color;
                         },
+                        selectedColor: selectedColor,
                       ),
                     ),
                   ),
@@ -154,9 +122,13 @@ class ColorSelectionWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(24),
                         ),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 12),
+                          horizontal: 24,
+                          vertical: 12,
+                        ),
                       ),
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => value
+                          .put(appColorKey, selectedColor)
+                          .then((value) => Navigator.pop(context)),
                       child: Text(AppLocalizations.of(context)!.doneLabel),
                     ),
                   ),
@@ -165,6 +137,80 @@ class ColorSelectionWidget extends StatelessWidget {
             );
           },
         );
+      },
+    );
+  }
+}
+
+class ColorPickerGridWidget extends StatefulWidget {
+  const ColorPickerGridWidget({
+    super.key,
+    required this.onSelected,
+    required this.selectedColor,
+  });
+  final Function(int) onSelected;
+  final int selectedColor;
+
+  @override
+  State<ColorPickerGridWidget> createState() => _ColorPickerGridWidgetState();
+}
+
+class _ColorPickerGridWidgetState extends State<ColorPickerGridWidget> {
+  late int selectedColor = widget.selectedColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.only(bottom: 16),
+      shrinkWrap: true,
+      itemCount: Colors.primaries.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: MediaQuery.of(context).size.width >= 700 ? 9 : 6,
+      ),
+      itemBuilder: (_, index) {
+        final color = Colors.primaries[index].value;
+        if (color == selectedColor) {
+          return Stack(
+            children: [
+              Center(
+                child: SizedBox(
+                  height: 42,
+                  width: 42,
+                  child: Container(
+                    padding: EdgeInsets.zero,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(width: 2, color: Color(color)),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(color),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      margin: const EdgeInsets.all(4),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        } else {
+          return InkWell(
+            borderRadius: BorderRadius.circular(50),
+            onTap: () {
+              widget.onSelected.call(color);
+              setState(() {
+                selectedColor = color;
+              });
+            },
+            child: Center(
+              child: CircleAvatar(
+                backgroundColor: Color(color),
+              ),
+            ),
+          );
+        }
       },
     );
   }

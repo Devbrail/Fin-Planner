@@ -84,6 +84,7 @@ class SelectedItem extends StatelessWidget {
 
   final List<Category> categories;
   final ExpenseBloc expenseBloc;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
