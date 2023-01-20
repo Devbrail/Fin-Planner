@@ -17,7 +17,7 @@ class PaisaTitleWidget extends StatelessWidget {
             state.currentPage.name(context),
             style: Theme.of(context)
                 .textTheme
-                .titleLarge
+                .headline6
                 ?.copyWith(fontWeight: FontWeight.bold),
           );
         }

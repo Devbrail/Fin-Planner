@@ -26,6 +26,31 @@ extension FileExtension on FileSystemEntity {
 class ExportAndImportPage extends StatelessWidget {
   const ExportAndImportPage({super.key});
 
+  Future<void> _pickDateRange(BuildContext context) async {
+    final initialDateRange = DateTimeRange(
+      start: DateTime.now().subtract(const Duration(days: 3)),
+      end: DateTime.now(),
+    );
+    final newDateRange = await showDateRangePicker(
+      context: context,
+      initialDateRange: initialDateRange,
+      firstDate: DateTime.now().subtract(const Duration(days: 7)),
+      lastDate: DateTime.now(),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      builder: (_, child) {
+        return Theme(
+          data: ThemeData.from(colorScheme: Theme.of(context).colorScheme)
+              .copyWith(
+            appBarTheme: Theme.of(context).appBarTheme,
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (newDateRange == null) return;
+    await _fetchAndShareJSONData();
+  }
+
   Future<void> _fetchAndShareJSONData() async {
     final FileHandler fileHandler = await locator.getAsync<FileHandler>();
     final jsonString = await fileHandler.fetchExpensesAndEncode();

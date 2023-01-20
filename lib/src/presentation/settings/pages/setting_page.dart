@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-import '../../../core/constants.dart';
-import '../../../core/context_extensions.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
+import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../app/routes.dart';
+import '../../../core/constants.dart';
+import '../../../core/context_extensions.dart';
+import '../../widgets/app_builder.dart';
 import '../widgets/choose_theme_mode_widget.dart';
 import '../widgets/color_picker_widget.dart';
 import '../widgets/currency_change_widget.dart';
@@ -49,7 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
             title: AppLocalizations.of(context)!.othersLabel,
             options: [
               const CurrencyChangeWidget(),
-              Divider(color: Theme.of(context).dividerColor),
+              const Divider(),
               SettingsOption(
                 title: AppLocalizations.of(context)!.backupAndRestoreLabel,
                 subtitle:
@@ -59,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     SnackBar(
                       content: Text(
                         'Disabled',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        style: Theme.of(context).textTheme.bodyText1?.copyWith(
                               color: Theme.of(context)
                                   .colorScheme
                                   .onPrimaryContainer,

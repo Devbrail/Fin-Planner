@@ -60,7 +60,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                     '+${income.toCurrency()}',
                     style: GoogleFonts.manrope(
                       textStyle:
-                          Theme.of(context).textTheme.titleLarge?.copyWith(
+                          Theme.of(context).textTheme.headline6?.copyWith(
                                 color: Theme.of(context)
                                     .colorScheme
                                     .onPrimaryContainer,
@@ -98,7 +98,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                     '-${outcome.toCurrency()}',
                     style: GoogleFonts.manrope(
                       textStyle:
-                          Theme.of(context).textTheme.titleLarge?.copyWith(
+                          Theme.of(context).textTheme.headline6?.copyWith(
                                 color: Theme.of(context)
                                     .colorScheme
                                     .onPrimaryContainer,

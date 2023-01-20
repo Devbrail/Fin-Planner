@@ -76,7 +76,7 @@ class ThemeModeWidgetState extends State<ThemeModeWidget> {
           ListTile(
             title: Text(
               AppLocalizations.of(context)!.themeLabel,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.headline6,
             ),
           ),
           ...ThemeMode.values

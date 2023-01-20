@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../data/category/model/category.dart';
+import '../../widgets/paisa_search_bar.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/category_item_tablet_widget.dart';
 

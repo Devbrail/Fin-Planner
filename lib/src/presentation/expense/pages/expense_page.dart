@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../widgets/paisa_bottom_sheet.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
+import '../../../core/context_extensions.dart';
+import '../../../core/enum/box_types.dart';
 import '../../../core/enum/transaction.dart';
 import '../../../service_locator.dart';
 import '../../widgets/future_resolve.dart';
-import '../../widgets/paisa_bottom_sheet.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../bloc/expense_bloc.dart';
 import '../widgets/select_account_widget.dart';
@@ -128,7 +132,7 @@ class _ExpensePageState extends State<ExpensePage> {
                                     text: TextSpan(
                                       text: 'Deleting the expense',
                                       style:
-                                          Theme.of(context).textTheme.bodyLarge,
+                                          Theme.of(context).textTheme.bodyText1,
                                     ),
                                   ),
                                   confirmationButton: ElevatedButton(
@@ -219,7 +223,7 @@ class _ExpensePageState extends State<ExpensePage> {
                           : AppLocalizations.of(context)!.updateExpenseLabel,
                       style: Theme.of(context)
                           .textTheme
-                          .titleLarge
+                          .headline6
                           ?.copyWith(fontWeight: FontWeight.w700),
                     ),
                     actions: [
@@ -324,7 +328,7 @@ class _ExpensePageState extends State<ExpensePage> {
             : AppLocalizations.of(context)!.updateLabel,
         style: TextStyle(
           fontWeight: FontWeight.w700,
-          fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
+          fontSize: Theme.of(context).textTheme.headline6?.fontSize,
         ),
       ),
     );

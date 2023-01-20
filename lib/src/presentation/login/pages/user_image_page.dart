@@ -58,14 +58,14 @@ class _UserImagePageState extends State<UserImagePage> {
                 const SizedBox(height: 16),
                 Text(
                   AppLocalizations.of(context)!.imageLabel,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  style: Theme.of(context).textTheme.headline5?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
                 Text(
                   AppLocalizations.of(context)!.imageDescLabel,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
                         color: Theme.of(context)
                             .colorScheme
                             .onSurface
@@ -96,7 +96,7 @@ class _UserImagePageState extends State<UserImagePage> {
         label: const Icon(MdiIcons.arrowRight),
         icon: Text(
           AppLocalizations.of(context)!.nextLabel,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+          style: Theme.of(context).textTheme.bodyText1?.copyWith(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
               ),

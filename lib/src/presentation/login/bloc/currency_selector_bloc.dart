@@ -68,9 +68,9 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
     final languageCode = settings.get(userLanguageKey, defaultValue: 'DEF');
 
     if (languageCode == 'DEF' || event.forceChangeCurrency) {
-      final currencies = getLocales();
-      currencies.sort(((a, b) => a.name.compareTo(b.name)));
-      emit(CountryLocalesState(currencies));
+      final locales = getLocales();
+      locales.sort(((a, b) => a.name.compareTo(b.name)));
+      emit(CountryLocalesState(locales));
     } else {
       await settings.put(userLanguageKey, languageCode);
       emit(NavigateToHome());

@@ -80,9 +80,6 @@ class _PaisaAppState extends State<PaisaApp> {
                   lightColorScheme,
                 ),
                 extensions: [lightCustomColor],
-                dividerTheme: DividerThemeData(
-                  color: ThemeData.light().dividerColor,
-                ),
               ),
               darkTheme: ThemeData.from(
                 colorScheme: darkColorScheme,
@@ -104,9 +101,6 @@ class _PaisaAppState extends State<PaisaApp> {
                   darkColorScheme,
                 ),
                 extensions: [darkCustomColor],
-                dividerTheme: DividerThemeData(
-                  color: ThemeData.dark().dividerColor,
-                ),
               ),
               themeMode: themeMode,
               localizationsDelegates: AppLocalizations.localizationsDelegates,

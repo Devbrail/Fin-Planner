@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../core/enum/box_types.dart';
+import '../../../service_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -8,8 +11,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
 import '../../settings/widgets/user_profile_widget.dart';
 import '../../summary/widgets/welcome_name_widget.dart';
 import '../../widgets/color_palette.dart';
@@ -55,7 +56,7 @@ class HomeDesktopWidget extends StatelessWidget {
                           AppLocalizations.of(context)!.appTitle,
                           style: Theme.of(context)
                               .textTheme
-                              .headlineMedium
+                              .headline4
                               ?.copyWith(
                                 color: Theme.of(context).colorScheme.primary,
                               ),

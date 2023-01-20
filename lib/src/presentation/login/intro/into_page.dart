@@ -38,7 +38,7 @@ class IntroPage extends StatelessWidget {
                           AppLocalizations.of(context)!.appTitle,
                           style: Theme.of(context)
                               .textTheme
-                              .displayMedium
+                              .headline2
                               ?.copyWith(
                                 color: Theme.of(context).colorScheme.primary,
                               ),
@@ -47,11 +47,8 @@ class IntroPage extends StatelessWidget {
                     ),
                     Text(
                       'Simple way to help control your savings',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurface),
+                      style: Theme.of(context).textTheme.headline4?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface),
                     ),
                     const SizedBox(height: 24),
                     Column(
@@ -69,7 +66,7 @@ class IntroPage extends StatelessWidget {
                             'Manage your money with our app',
                             style: Theme.of(context)
                                 .textTheme
-                                .titleMedium
+                                .subtitle1
                                 ?.copyWith(
                                     color: Theme.of(context)
                                         .colorScheme
@@ -88,7 +85,7 @@ class IntroPage extends StatelessWidget {
                             'Easy expense tracking for a better budget',
                             style: Theme.of(context)
                                 .textTheme
-                                .titleMedium
+                                .subtitle1
                                 ?.copyWith(
                                     color: Theme.of(context)
                                         .colorScheme
@@ -107,7 +104,7 @@ class IntroPage extends StatelessWidget {
                             'Stay on top of your expenses, anytime, anywhere',
                             style: Theme.of(context)
                                 .textTheme
-                                .titleMedium
+                                .subtitle1
                                 ?.copyWith(
                                     color: Theme.of(context)
                                         .colorScheme
@@ -126,7 +123,7 @@ class IntroPage extends StatelessWidget {
                             'Get started',
                             style: Theme.of(context)
                                 .textTheme
-                                .titleLarge
+                                .headline6
                                 ?.copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                   fontWeight: FontWeight.bold,
@@ -174,17 +171,15 @@ class IntroPage extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.appTitle,
-                      style:
-                          Theme.of(context).textTheme.displayMedium?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
+                      style: Theme.of(context).textTheme.headline2?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                     ),
                     Text(
                       'Simple way to help control your savings',
-                      style:
-                          Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
+                      style: Theme.of(context).textTheme.headline4?.copyWith(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
                     ),
                     const SizedBox(height: 24),
                     Column(
@@ -199,7 +194,7 @@ class IntroPage extends StatelessWidget {
                           dense: true,
                           title: Text(
                             'Manage your money with our app',
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                         ),
                         ListTile(
@@ -212,7 +207,7 @@ class IntroPage extends StatelessWidget {
                           dense: true,
                           title: Text(
                             'Easy expense tracking for a better budget',
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                         ),
                         ListTile(
@@ -225,7 +220,7 @@ class IntroPage extends StatelessWidget {
                           dense: true,
                           title: Text(
                             'Stay on top of your expenses, anytime, anywhere',
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                         )
                       ],
@@ -250,7 +245,7 @@ class IntroPage extends StatelessWidget {
               },
               child: Text(
                 'Get started',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                style: Theme.of(context).textTheme.headline6?.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),

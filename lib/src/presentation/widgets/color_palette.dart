@@ -21,8 +21,8 @@ class ColorPalette extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
                   child: Text('data'),
                 ),
                 Divider(
@@ -47,8 +47,8 @@ class ColorPalette extends StatelessWidget {
                   height: 1,
                   color: Theme.of(context).colorScheme.outline,
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
                   child: Text('data'),
                 ),
               ],

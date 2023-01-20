@@ -74,7 +74,7 @@ class ColorSelectionWidget extends StatelessWidget {
       future: DeviceInfoPlugin().androidInfo,
       builder: (value) {
         final AndroidDeviceInfo info = value;
-        final sdk = info.version.sdkInt;
+        final sdk = info.version.sdkInt ?? 0;
         bool isAndroid12 = sdk >= 29;
         return ValueListenableBuilder<Box<dynamic>>(
           valueListenable: valueListenable,
@@ -91,7 +91,7 @@ class ColorSelectionWidget extends StatelessWidget {
                   ListTile(
                     title: Text(
                       AppLocalizations.of(context)!.pickColorLabel,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                   ),
                   Visibility(

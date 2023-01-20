@@ -41,7 +41,7 @@ class CategoryListMobileWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       )),
                 ],
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
             confirmationButton: ElevatedButton(

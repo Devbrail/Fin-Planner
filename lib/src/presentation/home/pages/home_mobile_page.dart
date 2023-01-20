@@ -56,7 +56,7 @@ class HomeMobilePage extends StatelessWidget {
                   ),
                   title: Text(
                     AppLocalizations.of(context)!.appTitle,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    style: Theme.of(context).textTheme.headline5?.copyWith(
                           color: Theme.of(context).colorScheme.primary,
                         ),
                   ),

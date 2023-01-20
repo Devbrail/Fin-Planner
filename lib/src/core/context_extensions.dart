@@ -11,7 +11,7 @@ extension BuildContextMapping on BuildContext {
       title: Text(title),
       titleTextStyle: Theme.of(this)
           .textTheme
-          .titleLarge
+          .headline6
           ?.copyWith(fontWeight: FontWeight.bold),
       backgroundColor: Colors.transparent,
       actions: actions ?? [],

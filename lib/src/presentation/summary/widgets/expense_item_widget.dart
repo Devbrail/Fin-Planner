@@ -49,7 +49,7 @@ class ExpenseItemWidget extends StatelessWidget {
         trailing: Text(
           '${expense.type?.sign}${expense.currency.toCurrency()}',
           style: GoogleFonts.manrope(
-            textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            textStyle: Theme.of(context).textTheme.bodyText1?.copyWith(
                   color: expense.type?.color(context),
                 ),
           ),

@@ -134,7 +134,7 @@ class BudgetItemMobileWidget extends StatelessWidget {
                     style: GoogleFonts.manrope(
                       textStyle: Theme.of(context)
                           .textTheme
-                          .bodyLarge
+                          .bodyText1
                           ?.copyWith(
                             color:
                                 Theme.of(context).colorScheme.onSurfaceVariant,
