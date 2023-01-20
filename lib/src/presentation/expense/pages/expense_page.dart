@@ -148,47 +148,42 @@ class _ExpensePageState extends State<ExpensePage> {
                             )
                     ],
                   ),
-                  body: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        TransactionToggleButtons(
-                          onSelected: (type) {
-                            expenseBloc.transactionType = type;
-                            expenseBloc.add(ChangeExpenseEvent(type));
-                          },
-                          selectedType: expenseBloc.transactionType,
-                        ),
-                        const SizedBox(height: 16),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Form(
-                            key: _form,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                ExpenseNameWidget(controller: nameController),
-                                const SizedBox(height: 16),
-                                ExpenseAmountWidget(
-                                    controller: amountController),
-                                const SizedBox(height: 16),
-                                ExpenseDatePickerWidget(
-                                  controller: dateTextController,
-                                  selectedDate: expenseBloc.selectedDate,
-                                  onSelectedDate: (date) {
-                                    expenseBloc.selectedDate = date;
-                                  },
-                                ),
-                                const SizedBox(height: 16),
-                              ],
-                            ),
+                  body: ListView(
+                    children: [
+                      TransactionToggleButtons(
+                        onSelected: (type) {
+                          expenseBloc.transactionType = type;
+                          expenseBloc.add(ChangeExpenseEvent(type));
+                        },
+                        selectedType: expenseBloc.transactionType,
+                      ),
+                      const SizedBox(height: 16),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Form(
+                          key: _form,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              ExpenseNameWidget(controller: nameController),
+                              const SizedBox(height: 16),
+                              ExpenseAmountWidget(controller: amountController),
+                              const SizedBox(height: 16),
+                              ExpenseDatePickerWidget(
+                                controller: dateTextController,
+                                selectedDate: expenseBloc.selectedDate,
+                                onSelectedDate: (date) {
+                                  expenseBloc.selectedDate = date;
+                                },
+                              ),
+                              const SizedBox(height: 16),
+                            ],
                           ),
                         ),
-                        const SelectedAccount(),
-                        const SelectCategoryIcon(),
-                      ],
-                    ),
+                      ),
+                      const SelectedAccount(),
+                      const SelectCategoryIcon(),
+                    ],
                   ),
                   bottomNavigationBar: SafeArea(
                     child: Padding(

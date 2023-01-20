@@ -105,7 +105,7 @@ class SelectedItem extends StatelessWidget {
             shrinkWrap: true,
             itemCount: accounts.length + 1,
             itemBuilder: (_, index) {
-              if (index == accounts.length) {
+              if (index == 0) {
                 return Hero(
                   tag: 'account',
                   child: ItemWidget(
@@ -117,7 +117,7 @@ class SelectedItem extends StatelessWidget {
                 );
               }
 
-              final account = accounts[index];
+              final account = accounts[index - 1];
               return ItemWidget(
                 isSelected: account.key == expenseBloc.selectedAccountId,
                 title: account.name,
