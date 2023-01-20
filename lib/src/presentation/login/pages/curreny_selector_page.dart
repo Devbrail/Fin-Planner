@@ -39,7 +39,6 @@ class CurrencySelectorPage extends StatelessWidget {
                 },
                 child: Column(
                   children: [
-                    const SizedBox(height: 16),
                     FractionallySizedBox(
                       widthFactor: 0.8,
                       child: Column(

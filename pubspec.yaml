@@ -54,6 +54,9 @@ dev_dependencies:
     sdk: flutter
   hive_generator: ^2.0.0
 
+dependency_overrides:
+  intl: ^0.18.0 
+
 flutter_app_name:
   name: "Paisa"
 

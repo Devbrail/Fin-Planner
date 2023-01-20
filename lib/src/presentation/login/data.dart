@@ -26,6 +26,10 @@ List<CountryMap> getLocales() => [
       CountryMap("Canadian Dollar", const Locale('en_CA')),
       CountryMap("British Pound", const Locale('en_GB')),
       CountryMap("Swedish Krona", const Locale('sv')),
+      CountryMap("Iranian Rial", const Locale('fa')),
+      CountryMap("South African Rand", const Locale('zu')),
+      CountryMap("New Taiwan dollar", const Locale('zh_TW')),
+      CountryMap("Ethiopian Birr", const Locale('am')),
     ];
 
 class CountryMap {
