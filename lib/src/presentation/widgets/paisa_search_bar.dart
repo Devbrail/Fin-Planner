@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../core/common.dart';
 import '../search/pages/search_page.dart';
 
 class PaisaSearchBar extends StatelessWidget {
@@ -33,7 +33,7 @@ class PaisaSearchBar extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Text(AppLocalizations.of(context)!.searchLabel),
+                child: Text(context.loc.searchLabel),
               ),
             ],
           ),

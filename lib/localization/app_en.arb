@@ -626,6 +626,10 @@
     },
     "addNewLabel": "Add new",
     "@addNewLabel": {
-        "description": "Search label"
+        "description": "Add new label"
+    },
+    "deleteLabel": "Delete",
+    "@deleteLabel": {
+        "description": "Delete label"
     }
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../widgets/paisa_icon_picker.dart';
 import '../bloc/category_bloc.dart';
+
+import '../../../core/common.dart';
 
 class SelectIconWidget extends StatelessWidget {
   const SelectIconWidget({super.key});
@@ -26,8 +28,8 @@ class SelectIconWidget extends StatelessWidget {
         }
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          title: Text(AppLocalizations.of(context)!.selectIconLabel),
-          subtitle: Text(AppLocalizations.of(context)!.selectIconDescLabel),
+          title: Text(context.loc.selectIconLabel),
+          subtitle: Text(context.loc.selectIconDescLabel),
           leading: Icon(
             IconData(
               codePoint,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive/hive.dart';
 
 import '../../../core/common.dart';
@@ -18,7 +18,7 @@ class DynamicColorSwitchWidget extends StatelessWidget {
     return StatefulBuilder(
       builder: (context, setState) {
         return SettingsOption(
-          title: AppLocalizations.of(context)!.dynamicColorLabel,
+          title: context.loc.dynamicColorLabel,
           trailing: Switch(
             activeColor: Theme.of(context).colorScheme.primary,
             value: settings.get(

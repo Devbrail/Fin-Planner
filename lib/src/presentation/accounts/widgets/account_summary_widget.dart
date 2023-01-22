@@ -1,6 +1,6 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/common.dart';
@@ -30,7 +30,7 @@ class AccountSummaryWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.incomeLabel,
+                      context.loc.incomeLabel,
                       style: TextStyle(
                         color: Theme.of(context)
                             .colorScheme
@@ -80,7 +80,7 @@ class AccountSummaryWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.expenseLabel,
+                      context.loc.expenseLabel,
                       style: TextStyle(
                         color: Theme.of(context)
                             .colorScheme

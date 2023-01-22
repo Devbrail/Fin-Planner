@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -55,10 +55,10 @@ class UserNamePage extends StatelessWidget {
                               color: Theme.of(context).colorScheme.onSurface,
                               letterSpacing: 0.8,
                             ),
-                        text: AppLocalizations.of(context)!.welcomeLabel,
+                        text: context.loc.welcomeLabel,
                         children: [
                           TextSpan(
-                            text: ' ${AppLocalizations.of(context)!.appTitle}',
+                            text: ' ${context.loc.appTitle}',
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.primary,
                             ),
@@ -68,7 +68,7 @@ class UserNamePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      AppLocalizations.of(context)!.welcomeDescLabel,
+                      context.loc.welcomeDescLabel,
                       style: Theme.of(context).textTheme.subtitle1?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
@@ -84,16 +84,15 @@ class UserNamePage extends StatelessWidget {
                         key: const Key('user_name_textfield'),
                         controller: _nameController,
                         decoration: InputDecoration(
-                          hintText:
-                              AppLocalizations.of(context)!.enterNameLabel,
-                          label: Text(AppLocalizations.of(context)!.nameLabel),
+                          hintText: context.loc.enterNameLabel,
+                          label: Text(context.loc.nameLabel),
                         ),
                         keyboardType: TextInputType.name,
                         validator: (val) {
                           if (val!.length >= 3) {
                             return null;
                           } else {
-                            return AppLocalizations.of(context)!.enterNameLabel;
+                            return context.loc.enterNameLabel;
                           }
                         },
                       ),
@@ -114,7 +113,7 @@ class UserNamePage extends StatelessWidget {
             extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
             label: const Icon(MdiIcons.arrowRight),
             icon: Text(
-              AppLocalizations.of(context)!.nextLabel,
+              context.loc.nextLabel,
               style: Theme.of(context).textTheme.bodyText1?.copyWith(
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,

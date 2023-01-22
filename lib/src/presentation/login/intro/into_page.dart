@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -35,7 +35,7 @@ class IntroPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          AppLocalizations.of(context)!.appTitle,
+                          context.loc.appTitle,
                           style: Theme.of(context)
                               .textTheme
                               .headline2
@@ -170,7 +170,7 @@ class IntroPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.appTitle,
+                      context.loc.appTitle,
                       style: Theme.of(context).textTheme.headline2?.copyWith(
                             color: Theme.of(context).colorScheme.primary,
                           ),

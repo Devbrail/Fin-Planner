@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../common.dart';
 
 enum PageType { home, accounts, category, budgetOverview, debts }
 
@@ -22,15 +22,15 @@ extension MapPaisaPage on PageType {
   String name(BuildContext context) {
     switch (this) {
       case PageType.home:
-        return AppLocalizations.of(context)!.homeLabel;
+        return context.loc.homeLabel;
       case PageType.accounts:
-        return AppLocalizations.of(context)!.accountsLabel;
+        return context.loc.accountsLabel;
       case PageType.budgetOverview:
-        return AppLocalizations.of(context)!.budgetOverViewLabel;
+        return context.loc.budgetOverViewLabel;
       case PageType.category:
-        return AppLocalizations.of(context)!.categoryLabel;
+        return context.loc.categoryLabel;
       case PageType.debts:
-        return AppLocalizations.of(context)!.debtsLabel;
+        return context.loc.debtsLabel;
     }
   }
 }

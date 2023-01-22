@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
 import 'package:go_router/go_router.dart';
@@ -53,7 +53,7 @@ class HomeDesktopWidget extends StatelessWidget {
                       ),
                       ListTile(
                         title: Text(
-                          AppLocalizations.of(context)!.appTitle,
+                          context.loc.appTitle,
                           style: Theme.of(context)
                               .textTheme
                               .headline4
@@ -64,28 +64,28 @@ class HomeDesktopWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 24),
                       NavigationBarItem(
-                        title: AppLocalizations.of(context)!.homeLabel,
+                        title: context.loc.homeLabel,
                         icon: MdiIcons.home,
                         isSelected: state.currentPage == PageType.home,
                         onPressed: () => homeBloc
                             .add(const CurrentIndexEvent(PageType.home)),
                       ),
                       NavigationBarItem(
-                        title: AppLocalizations.of(context)!.accountsLabel,
+                        title: context.loc.accountsLabel,
                         icon: MdiIcons.creditCard,
                         isSelected: state.currentPage == PageType.accounts,
                         onPressed: () => homeBloc
                             .add(const CurrentIndexEvent(PageType.accounts)),
                       ),
                       NavigationBarItem(
-                        title: AppLocalizations.of(context)!.categoryLabel,
+                        title: context.loc.categoryLabel,
                         icon: Icons.category,
                         isSelected: state.currentPage == PageType.category,
                         onPressed: () => homeBloc
                             .add(const CurrentIndexEvent(PageType.category)),
                       ),
                       NavigationBarItem(
-                        title: AppLocalizations.of(context)!.budgetLabel,
+                        title: context.loc.budgetLabel,
                         icon: MdiIcons.wallet,
                         isSelected:
                             state.currentPage == PageType.budgetOverview,
@@ -93,7 +93,7 @@ class HomeDesktopWidget extends StatelessWidget {
                             const CurrentIndexEvent(PageType.budgetOverview)),
                       ),
                       NavigationBarItem(
-                        title: AppLocalizations.of(context)!.debtsLabel,
+                        title: context.loc.debtsLabel,
                         icon: MdiIcons.accountCash,
                         isSelected: state.currentPage == PageType.debts,
                         onPressed: () => homeBloc
@@ -101,7 +101,7 @@ class HomeDesktopWidget extends StatelessWidget {
                       ),
                       const Divider(),
                       NavigationBarItem(
-                        title: AppLocalizations.of(context)!.settingsLabel,
+                        title: context.loc.settingsLabel,
                         icon: MdiIcons.cog,
                         isSelected: false,
                         onPressed: () =>

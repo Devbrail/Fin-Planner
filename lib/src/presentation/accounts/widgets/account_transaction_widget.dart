@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../core/common.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
@@ -29,7 +30,7 @@ class AccountTransactionWidget extends StatelessWidget {
           child: Column(
             children: [
               const Icon(Icons.money_off_rounded, size: 72),
-              Text(AppLocalizations.of(context)!.emptyExpensesMessage),
+              Text(context.loc.emptyExpensesMessage),
             ],
           ),
         ),
@@ -46,7 +47,7 @@ class AccountTransactionWidget extends StatelessWidget {
               vertical: 0,
             ),
             title: Text(
-              AppLocalizations.of(context)!.transactionHistoryLabel,
+              context.loc.transactionHistoryLabel,
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
@@ -79,7 +80,7 @@ class AccountTransactionWidget extends StatelessWidget {
               vertical: 0,
             ),
             title: Text(
-              AppLocalizations.of(context)!.transactionHistoryLabel,
+              context.loc.transactionHistoryLabel,
               style: Theme.of(context)
                   .textTheme
                   .titleSmall

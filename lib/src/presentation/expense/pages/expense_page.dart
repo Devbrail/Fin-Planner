@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -59,10 +59,8 @@ class _ExpensePageState extends State<ExpensePage> {
               if (state is ExpenseDeletedState) {
                 context.showMaterialSnackBar(
                   expenseBloc.transactionType == TransactionType.expense
-                      ? AppLocalizations.of(context)!
-                          .expenseDeletedSuccessfulLabel
-                      : AppLocalizations.of(context)!
-                          .incomeDeletedSuccessfulLabel,
+                      ? context.loc.expenseDeletedSuccessfulLabel
+                      : context.loc.incomeDeletedSuccessfulLabel,
                   backgroundColor: Theme.of(context).colorScheme.error,
                   color: Theme.of(context).colorScheme.onError,
                 );
@@ -71,15 +69,11 @@ class _ExpensePageState extends State<ExpensePage> {
                 final content =
                     expenseBloc.transactionType == TransactionType.expense
                         ? state.isAddOrUpdate
-                            ? AppLocalizations.of(context)!
-                                .expenseAddedSuccessfulLabel
-                            : AppLocalizations.of(context)!
-                                .expenseUpdateSuccessfulLabel
+                            ? context.loc.expenseAddedSuccessfulLabel
+                            : context.loc.expenseUpdateSuccessfulLabel
                         : state.isAddOrUpdate
-                            ? AppLocalizations.of(context)!
-                                .incomeAddedSuccessfulLabel
-                            : AppLocalizations.of(context)!
-                                .incomeUpdateSuccessfulLabel;
+                            ? context.loc.incomeAddedSuccessfulLabel
+                            : context.loc.incomeUpdateSuccessfulLabel;
 
                 context.showMaterialSnackBar(
                   content,
@@ -114,33 +108,32 @@ class _ExpensePageState extends State<ExpensePage> {
                 mobile: Scaffold(
                   appBar: context.materialYouAppBar(
                     isAddExpense
-                        ? AppLocalizations.of(context)!.addExpenseLabel
-                        : AppLocalizations.of(context)!.updateExpenseLabel,
+                        ? context.loc.addExpenseLabel
+                        : context.loc.updateExpenseLabel,
                     actions: [
                       isAddExpense
                           ? const SizedBox.shrink()
                           : IconButton(
-                              onPressed: () {
-                                paisaAlertDialog(
-                                  context,
-                                  title: const Text('Permanently delete'),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: 'Deleting the expense',
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1,
-                                    ),
+                              onPressed: () => paisaAlertDialog(
+                                context,
+                                title: const Text('Permanently delete'),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text:
+                                        'Expense will be permanently removed from account',
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
                                   ),
-                                  confirmationButton: ElevatedButton(
-                                    onPressed: () {
-                                      expenseBloc.add(
-                                          ClearExpenseEvent(widget.expenseId!));
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Delete'),
-                                  ),
-                                );
-                              },
+                                ),
+                                confirmationButton: ElevatedButton(
+                                  onPressed: () {
+                                    expenseBloc.add(
+                                        ClearExpenseEvent(widget.expenseId!));
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(context.loc.deleteLabel),
+                                ),
+                              ),
                               icon: Icon(
                                 Icons.delete_rounded,
                                 color: Theme.of(context).colorScheme.error,
@@ -210,8 +203,8 @@ class _ExpensePageState extends State<ExpensePage> {
                     backgroundColor: Colors.transparent,
                     title: Text(
                       isAddExpense
-                          ? AppLocalizations.of(context)!.addExpenseLabel
-                          : AppLocalizations.of(context)!.updateExpenseLabel,
+                          ? context.loc.addExpenseLabel
+                          : context.loc.updateExpenseLabel,
                       style: Theme.of(context)
                           .textTheme
                           .headline6
@@ -314,9 +307,7 @@ class _ExpensePageState extends State<ExpensePage> {
         ),
       ),
       child: Text(
-        isAddExpense
-            ? AppLocalizations.of(context)!.addLabel
-            : AppLocalizations.of(context)!.updateLabel,
+        isAddExpense ? context.loc.addLabel : context.loc.updateLabel,
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: Theme.of(context).textTheme.headline6?.fontSize,
@@ -398,7 +389,7 @@ class ExpenseNameWidget extends StatelessWidget {
               if (value!.length >= 3) {
                 return null;
               } else {
-                return AppLocalizations.of(context)!.validNameLabel;
+                return context.loc.validNameLabel;
               }
             },
             onChanged: (value) =>
@@ -424,7 +415,7 @@ class ExpenseAmountWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: AppLocalizations.of(context)!.amountLabel,
+      hintText: context.loc.amountLabel,
       keyboardType: TextInputType.number,
       maxLength: 13,
       maxLines: 1,
@@ -436,7 +427,7 @@ class ExpenseAmountWidget extends StatelessWidget {
         if (value!.isNotEmpty) {
           return null;
         } else {
-          return AppLocalizations.of(context)!.validAmountLabel;
+          return context.loc.validAmountLabel;
         }
       },
     );

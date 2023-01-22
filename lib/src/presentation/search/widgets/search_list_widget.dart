@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
@@ -7,6 +7,8 @@ import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../service_locator.dart';
 import '../../summary/widgets/expense_list_widget.dart';
+
+import '../../../core/common.dart';
 
 class SearchListWidget extends StatelessWidget {
   const SearchListWidget({
@@ -32,7 +34,7 @@ class SearchListWidget extends StatelessWidget {
                   Icons.search,
                   size: 72,
                 ),
-                Text(AppLocalizations.of(context)!.searchMessageLabel),
+                Text(context.loc.searchMessageLabel),
               ],
             ),
           );
@@ -53,7 +55,7 @@ class SearchListWidget extends StatelessWidget {
                   Icons.sentiment_satisfied_rounded,
                   size: 72,
                 ),
-                Text(AppLocalizations.of(context)!.emptySearchMessageLabel),
+                Text(context.loc.emptySearchMessageLabel),
               ],
             ),
           );
@@ -61,7 +63,7 @@ class SearchListWidget extends StatelessWidget {
         return results.isEmpty
             ? Center(
                 child: Text(
-                  AppLocalizations.of(context)!.noResultFoundLabel,
+                  context.loc.noResultFoundLabel,
                   style: Theme.of(context).textTheme.headline6,
                 ),
               )

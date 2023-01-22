@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';
@@ -36,7 +36,7 @@ class ExpenseTotalWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TotalBalanceWidget(
-                        title: AppLocalizations.of(context)!.totalBalanceLabel,
+                        title: context.loc.totalBalanceLabel,
                         amount: currentTotal,
                       ),
                       const SizedBox(height: 24),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';
@@ -29,7 +29,7 @@ class WelcomeNameWidget extends StatelessWidget {
                     ),
               ),
               Text(
-                AppLocalizations.of(context)!.welcomeMessage,
+                context.loc.welcomeMessage,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: Theme.of(context).textTheme.caption?.color),
               ),

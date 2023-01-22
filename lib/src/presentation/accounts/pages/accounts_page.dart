@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -31,9 +31,8 @@ class AccountsPage extends StatelessWidget {
             if (accounts.isEmpty) {
               return EmptyWidget(
                 icon: Icons.credit_card,
-                title: AppLocalizations.of(context)!.errorNoCardsLabel,
-                description:
-                    AppLocalizations.of(context)!.errorNoCardsDescriptionLabel,
+                title: context.loc.errorNoCardsLabel,
+                description: context.loc.errorNoCardsDescriptionLabel,
               );
             }
             accountsBloc.add(AccountSelectedEvent(accounts.first));

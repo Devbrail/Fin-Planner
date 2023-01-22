@@ -1,12 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../core/context_extensions.dart';
+import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/accounts/model/account.dart';
@@ -79,7 +78,7 @@ class ExportAndImportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: context.materialYouAppBar(
-        AppLocalizations.of(context)!.backupAndRestoreLabel,
+        context.loc.backupAndRestoreLabel,
       ),
       body: ListView(
         children: [
@@ -104,7 +103,7 @@ class ExportAndImportPage extends StatelessWidget {
                               Theme.of(context).colorScheme.onPrimary,
                         ),
                         onPressed: () => _fetchAndShareJSONData(),
-                        label: Text(AppLocalizations.of(context)!.createLabel),
+                        label: Text(context.loc.createLabel),
                         icon: const Icon(MdiIcons.fileExport),
                       ),
                     ),
@@ -116,7 +115,7 @@ class ExportAndImportPage extends StatelessWidget {
                               await locator.getAsync<FileHandler>();
                           fileHandler.restoreBackUpFile();
                         },
-                        label: Text(AppLocalizations.of(context)!.restoreLabel),
+                        label: Text( context.loc.restoreLabel),
                         icon: const Icon(MdiIcons.fileImport),
                       ),
                     ), */
@@ -146,7 +145,7 @@ class ExportAndImportPage extends StatelessWidget {
                               Theme.of(context).colorScheme.onPrimary,
                         ),
                         onPressed: () => _fetchAndShareCSVData(),
-                        label: Text(AppLocalizations.of(context)!.createLabel),
+                        label: Text(context.loc.createLabel),
                         icon: const Icon(MdiIcons.fileExport),
                       ),
                     ),
@@ -158,7 +157,7 @@ class ExportAndImportPage extends StatelessWidget {
                               await locator.getAsync<FileHandler>();
                           fileHandler.restoreBackUpFile();
                         },
-                        label: Text(AppLocalizations.of(context)!.restoreLabel),
+                        label: Text( context.loc.restoreLabel),
                         icon: const Icon(MdiIcons.fileImport),
                       ),
                     ), */

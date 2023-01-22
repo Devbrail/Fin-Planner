@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -10,6 +10,8 @@ import '../../../app/routes.dart';
 import '../../../data/category/model/category.dart';
 import '../../../service_locator.dart';
 import '../bloc/expense_bloc.dart';
+
+import '../../../core/common.dart';
 
 class SelectCategoryIcon extends StatelessWidget {
   const SelectCategoryIcon({Key? key}) : super(key: key);
@@ -25,8 +27,8 @@ class SelectCategoryIcon extends StatelessWidget {
         if (categories.isEmpty) {
           return ListTile(
             onTap: () => context.pushNamed(addCategoryPath),
-            title: Text(AppLocalizations.of(context)!.addCategoryLabel),
-            subtitle: Text(AppLocalizations.of(context)!.noCategoryLabel),
+            title: Text(context.loc.addCategoryLabel),
+            subtitle: Text(context.loc.noCategoryLabel),
             trailing: const Icon(Icons.keyboard_arrow_right),
           );
         }
@@ -38,7 +40,7 @@ class SelectCategoryIcon extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  AppLocalizations.of(context)!.selectCategoryLabel,
+                  context.loc.selectCategoryLabel,
                   style: Theme.of(context).textTheme.subtitle1?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -56,7 +58,7 @@ class SelectCategoryIcon extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  AppLocalizations.of(context)!.selectCategoryLabel,
+                  context.loc.selectCategoryLabel,
                   style: Theme.of(context)
                       .textTheme
                       .subtitle1
@@ -118,7 +120,7 @@ class SelectedItem extends StatelessWidget {
                       showCheckmark: false,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       label: Text(
-                        AppLocalizations.of(context)!.addNewLabel,
+                        context.loc.addNewLabel,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                         ),

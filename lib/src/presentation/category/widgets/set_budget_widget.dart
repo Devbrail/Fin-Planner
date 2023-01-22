@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../core/common.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../bloc/category_bloc.dart';
 
@@ -37,8 +37,8 @@ class SetBudgetWidget extends StatelessWidget {
               ),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
-              title: Text(AppLocalizations.of(context)!.budgetLabel),
-              subtitle: Text(AppLocalizations.of(context)!.setBudgetLabel),
+              title: Text(context.loc.budgetLabel),
+              subtitle: Text(context.loc.setBudgetLabel),
               activeColor: Theme.of(context).colorScheme.primary,
               onChanged: (bool value) => BlocProvider.of<CategoryBloc>(context)
                   .add(UpdateCategoryBudgetEvent(value)),
@@ -73,8 +73,8 @@ class CategoryBudgetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: AppLocalizations.of(context)!.enterBudgetLabel,
-      label: AppLocalizations.of(context)!.budgetLabel,
+      hintText: context.loc.enterBudgetLabel,
+      label: context.loc.budgetLabel,
       onChanged: (value) {
         double? amount = double.tryParse(value);
         BlocProvider.of<CategoryBloc>(context).categoryBudget = amount;

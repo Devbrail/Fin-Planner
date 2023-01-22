@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../core/common.dart';
 import '../../../data/category/model/category.dart';
 import '../../../service_locator.dart';
 import '../../widgets/future_resolve.dart';
@@ -25,10 +25,9 @@ class CategoryListPage extends StatelessWidget {
                 final categories = value.values.toList();
                 if (categories.isEmpty) {
                   return EmptyWidget(
-                    description: AppLocalizations.of(context)!
-                        .errorNoCategoriesDescriptionLabel,
+                    description: context.loc.errorNoCategoriesDescriptionLabel,
                     icon: Icons.category,
-                    title: AppLocalizations.of(context)!.errorNoCatagoriesLabel,
+                    title: context.loc.errorNoCatagoriesLabel,
                   );
                 }
                 return ScreenTypeLayout(

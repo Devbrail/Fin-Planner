@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -43,9 +43,8 @@ class _BudgetOverViewPageState extends State<BudgetOverViewPage> {
             if (expenses.isEmpty) {
               return EmptyWidget(
                 icon: Icons.paid,
-                title: AppLocalizations.of(context)!.errorNoBudgetLabel,
-                description:
-                    AppLocalizations.of(context)!.errorNoBudgetDescriptionLabel,
+                title: context.loc.errorNoBudgetLabel,
+                description: context.loc.errorNoBudgetDescriptionLabel,
               );
             }
             final child = FilterDateRangeWidget(

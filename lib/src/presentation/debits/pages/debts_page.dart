@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -8,6 +8,8 @@ import '../../../data/debt/models/debt.dart';
 import '../../../service_locator.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../widgets/debt_item_widget.dart';
+
+import '../../../core/common.dart';
 
 class DebtsPage extends StatefulWidget {
   const DebtsPage({super.key});
@@ -51,8 +53,8 @@ class _DebtsPageState extends State<DebtsPage>
                             fontWeight: FontWeight.bold,
                           ),
                   tabs: [
-                    Tab(text: AppLocalizations.of(context)!.debtLabel),
-                    Tab(text: AppLocalizations.of(context)!.creditLabel),
+                    Tab(text: context.loc.debtLabel),
+                    Tab(text: context.loc.creditLabel),
                   ],
                 ),
               ),
@@ -77,11 +79,9 @@ class _DebtsPageState extends State<DebtsPage>
                     return debts.isNotEmpty
                         ? DebtsListWidget(debts: debts)
                         : EmptyWidget(
-                            title:
-                                AppLocalizations.of(context)!.emptyDebtsLabel,
+                            title: context.loc.emptyDebtsLabel,
                             icon: MdiIcons.cashMinus,
-                            description: AppLocalizations.of(context)!
-                                .emptyDebtsDescLabel,
+                            description: context.loc.emptyDebtsDescLabel,
                           );
                   },
                 ),
@@ -90,11 +90,9 @@ class _DebtsPageState extends State<DebtsPage>
                     return credits.isNotEmpty
                         ? DebtsListWidget(debts: credits)
                         : EmptyWidget(
-                            title:
-                                AppLocalizations.of(context)!.emptyCreditLabel,
+                            title: context.loc.emptyCreditLabel,
                             icon: MdiIcons.cashMinus,
-                            description: AppLocalizations.of(context)!
-                                .emptyCreditDescLabel,
+                            description: context.loc.emptyCreditDescLabel,
                           );
                   },
                 )

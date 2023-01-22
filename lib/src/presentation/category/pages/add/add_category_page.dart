@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../../core/context_extensions.dart';
+import '../../../../core/common.dart';
 import '../../../../service_locator.dart';
 import '../../../widgets/future_resolve.dart';
 import '../../../widgets/paisa_text_field.dart';
@@ -54,8 +53,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               if (state is CategoryAddedState) {
                 context.showMaterialSnackBar(
                   isAddCategory
-                      ? AppLocalizations.of(context)!.successAddCategoryLabel
-                      : AppLocalizations.of(context)!.updatedCategoryLabel,
+                      ? context.loc.successAddCategoryLabel
+                      : context.loc.updatedCategoryLabel,
                   backgroundColor:
                       Theme.of(context).colorScheme.primaryContainer,
                   color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -113,10 +112,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                               Icons.color_lens,
                               color: Theme.of(context).colorScheme.primary,
                             ),
-                            title: Text(
-                                AppLocalizations.of(context)!.pickColorLabel),
-                            subtitle: Text(AppLocalizations.of(context)!
-                                .pickColorDescLabel),
+                            title: Text(context.loc.pickColorLabel),
+                            subtitle: Text(context.loc.pickColorDescLabel),
                             trailing: Container(
                               width: 32,
                               height: 32,
@@ -156,8 +153,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                 tablet: Scaffold(
                   appBar: context.materialYouAppBar(
                     isAddCategory
-                        ? AppLocalizations.of(context)!.addCategoryLabel
-                        : AppLocalizations.of(context)!.updateCategoryLabel,
+                        ? context.loc.addCategoryLabel
+                        : context.loc.updateCategoryLabel,
                   ),
                   body: Padding(
                     padding: const EdgeInsets.all(24.0),
@@ -207,8 +204,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   AppBar appBar() {
     return context.materialYouAppBar(
       isAddCategory
-          ? AppLocalizations.of(context)!.addCategoryLabel
-          : AppLocalizations.of(context)!.updateCategoryLabel,
+          ? context.loc.addCategoryLabel
+          : context.loc.updateCategoryLabel,
     );
   }
 
@@ -230,9 +227,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         ),
       ),
       child: Text(
-        isAddCategory
-            ? AppLocalizations.of(context)!.addCategoryLabel
-            : AppLocalizations.of(context)!.updateLabel,
+        isAddCategory ? context.loc.addCategoryLabel : context.loc.updateLabel,
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: Theme.of(context).textTheme.headline6?.fontSize,
@@ -253,8 +248,8 @@ class CategoryNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: AppLocalizations.of(context)!.enterCategoryLabel,
-      label: AppLocalizations.of(context)!.categoryLabel,
+      hintText: context.loc.enterCategoryLabel,
+      label: context.loc.categoryLabel,
       keyboardType: TextInputType.name,
       onChanged: (value) =>
           BlocProvider.of<CategoryBloc>(context).categoryTitle = value,
@@ -262,7 +257,7 @@ class CategoryNameWidget extends StatelessWidget {
         if (value!.isNotEmpty) {
           return null;
         } else {
-          return AppLocalizations.of(context)!.validNameLabel;
+          return context.loc.validNameLabel;
         }
       },
     );
@@ -280,9 +275,9 @@ class CategoryDescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: AppLocalizations.of(context)!.enterDescriptionLabel,
+      hintText: context.loc.enterDescriptionLabel,
       keyboardType: TextInputType.name,
-      label: AppLocalizations.of(context)!.descriptionLabel,
+      label: context.loc.descriptionLabel,
       onChanged: (value) =>
           BlocProvider.of<CategoryBloc>(context).categoryDesc = value,
     );

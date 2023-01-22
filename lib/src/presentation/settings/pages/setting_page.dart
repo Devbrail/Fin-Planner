@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
-import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../app/routes.dart';
-import '../../../core/constants.dart';
-import '../../../core/context_extensions.dart';
-import '../../widgets/app_builder.dart';
+import '../../../core/common.dart';
+import '../../../core/enum/box_types.dart';
+import '../../../service_locator.dart';
 import '../widgets/choose_theme_mode_widget.dart';
 import '../widgets/color_picker_widget.dart';
 import '../widgets/currency_change_widget.dart';
@@ -28,13 +23,13 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: context.materialYouAppBar(
-        AppLocalizations.of(context)!.settingsLabel,
+        context.loc.settingsLabel,
       ),
       body: ListView(
         shrinkWrap: true,
         children: [
           SettingsGroup(
-            title: AppLocalizations.of(context)!.colorsLabel,
+            title: context.loc.colorsLabel,
             options: [
               ChooseThemeModeWidget(
                 settings: locator.get(
@@ -49,14 +44,13 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
           SettingsGroup(
-            title: AppLocalizations.of(context)!.othersLabel,
+            title: context.loc.othersLabel,
             options: [
               const CurrencyChangeWidget(),
               const Divider(),
               SettingsOption(
-                title: AppLocalizations.of(context)!.backupAndRestoreLabel,
-                subtitle:
-                    AppLocalizations.of(context)!.backupAndRestoreDescLabel,
+                title: context.loc.backupAndRestoreLabel,
+                subtitle: context.loc.backupAndRestoreDescLabel,
                 onTap: () {
                   ScaffoldMessenger.maybeOf(context)?.showSnackBar(
                     SnackBar(
@@ -80,11 +74,11 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
           SettingsGroup(
-            title: AppLocalizations.of(context)!.socialLinksLabel,
+            title: context.loc.socialLinksLabel,
             options: [
               SettingsOption(
-                title: AppLocalizations.of(context)!.appRateLabel,
-                subtitle: AppLocalizations.of(context)!.appRateDescLabel,
+                title: context.loc.appRateLabel,
+                subtitle: context.loc.appRateDescLabel,
                 onTap: () => launchUrl(
                   Uri.parse(playStoreUrl),
                   mode: LaunchMode.externalApplication,
@@ -92,8 +86,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const Divider(),
               SettingsOption(
-                title: AppLocalizations.of(context)!.githubLabel,
-                subtitle: AppLocalizations.of(context)!.githubTextLabel,
+                title: context.loc.githubLabel,
+                subtitle: context.loc.githubTextLabel,
                 onTap: () => launchUrl(
                   Uri.parse(gitHubUrl),
                   mode: LaunchMode.externalApplication,
@@ -101,8 +95,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const Divider(),
               SettingsOption(
-                title: AppLocalizations.of(context)!.telegramLabel,
-                subtitle: AppLocalizations.of(context)!.telegramGroupLabel,
+                title: context.loc.telegramLabel,
+                subtitle: context.loc.telegramGroupLabel,
                 onTap: () => launchUrl(
                   Uri.parse(telegramGroupUrl),
                   mode: LaunchMode.externalApplication,
@@ -110,7 +104,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const Divider(),
               SettingsOption(
-                title: AppLocalizations.of(context)!.privacyPolicyLabel,
+                title: context.loc.privacyPolicyLabel,
                 onTap: () => launchUrl(
                   Uri.parse(termsAndConditionsUrl),
                   mode: LaunchMode.externalApplication,
@@ -122,7 +116,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text(AppLocalizations.of(context)!.madeWithLoveInIndiaLabel),
+            child: Text(context.loc.madeWithLoveInIndiaLabel),
           ),
         ],
       ),

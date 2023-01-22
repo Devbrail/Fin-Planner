@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../bloc/category_bloc.dart';
+
+import '../../../core/common.dart';
 
 class ColorPickerWidget extends StatelessWidget {
   const ColorPickerWidget({
@@ -38,8 +39,8 @@ class ColorPickerWidget extends StatelessWidget {
             Icons.color_lens,
             color: Theme.of(context).colorScheme.primary,
           ),
-          title: Text(AppLocalizations.of(context)!.pickColorLabel),
-          subtitle: Text(AppLocalizations.of(context)!.pickColorDescLabel),
+          title: Text(context.loc.pickColorLabel),
+          subtitle: Text(context.loc.pickColorDescLabel),
           trailing: Container(
             width: 32,
             height: 32,

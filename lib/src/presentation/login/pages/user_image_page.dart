@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
@@ -57,14 +57,14 @@ class _UserImagePageState extends State<UserImagePage> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  AppLocalizations.of(context)!.imageLabel,
+                  context.loc.imageLabel,
                   style: Theme.of(context).textTheme.headline5?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
                 Text(
-                  AppLocalizations.of(context)!.imageDescLabel,
+                  context.loc.imageDescLabel,
                   style: Theme.of(context).textTheme.subtitle1?.copyWith(
                         color: Theme.of(context)
                             .colorScheme
@@ -95,7 +95,7 @@ class _UserImagePageState extends State<UserImagePage> {
         extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
         label: const Icon(MdiIcons.arrowRight),
         icon: Text(
-          AppLocalizations.of(context)!.nextLabel,
+          context.loc.nextLabel,
           style: Theme.of(context).textTheme.bodyText1?.copyWith(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,

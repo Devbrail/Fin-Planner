@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../core/common.dart';
@@ -36,7 +36,7 @@ class ExpenseHistory extends StatelessWidget {
                     size: 72,
                   ),
                   Text(
-                    AppLocalizations.of(context)!.emptyExpensesMessage,
+                    context.loc.emptyExpensesMessage,
                   ),
                 ],
               ),

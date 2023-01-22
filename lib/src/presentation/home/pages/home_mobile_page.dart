@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -55,7 +55,7 @@ class HomeMobilePage extends StatelessWidget {
                     size: 28,
                   ),
                   title: Text(
-                    AppLocalizations.of(context)!.appTitle,
+                    context.loc.appTitle,
                     style: Theme.of(context).textTheme.headline5?.copyWith(
                           color: Theme.of(context).colorScheme.primary,
                         ),
@@ -68,7 +68,7 @@ class HomeMobilePage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   icon: MdiIcons.accountCashOutline,
-                  title: AppLocalizations.of(context)!.debtsLabel,
+                  title: context.loc.debtsLabel,
                 ),
                 DrawerItemWidget(
                   isSelected: false,
@@ -77,7 +77,7 @@ class HomeMobilePage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   icon: MdiIcons.cog,
-                  title: AppLocalizations.of(context)!.settingsLabel,
+                  title: context.loc.settingsLabel,
                 ),
               ],
             );
@@ -99,22 +99,22 @@ class HomeMobilePage extends StatelessWidget {
                   .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
               destinations: [
                 NavigationDestination(
-                  label: AppLocalizations.of(context)!.homeLabel,
+                  label: context.loc.homeLabel,
                   icon: const Icon(Icons.home_outlined),
                   selectedIcon: const Icon(Icons.home),
                 ),
                 NavigationDestination(
-                  label: AppLocalizations.of(context)!.accountsLabel,
+                  label: context.loc.accountsLabel,
                   icon: const Icon(Icons.credit_card_outlined),
                   selectedIcon: const Icon(Icons.credit_card),
                 ),
                 NavigationDestination(
-                  label: AppLocalizations.of(context)!.categoryLabel,
+                  label: context.loc.categoryLabel,
                   icon: const Icon(Icons.category_outlined),
                   selectedIcon: const Icon(Icons.category),
                 ),
                 NavigationDestination(
-                  label: AppLocalizations.of(context)!.budgetLabel,
+                  label: context.loc.budgetLabel,
                   icon: const Icon(Icons.account_balance_wallet_outlined),
                   selectedIcon: const Icon(Icons.account_balance_wallet),
                 ),

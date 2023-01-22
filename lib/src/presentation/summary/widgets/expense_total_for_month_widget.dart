@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/currency_util.dart';
+import '../../../core/common.dart';
 import '../../../core/theme/custom_color.dart';
 
 class ExpenseTotalForMonthWidget extends StatelessWidget {
@@ -21,7 +20,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.thisMonthLabel,
+          context.loc.thisMonthLabel,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: Theme.of(context)
                     .colorScheme
@@ -46,7 +45,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                           ),
                       children: [
                         TextSpan(
-                          text: AppLocalizations.of(context)!.incomeLabel,
+                          text: context.loc.incomeLabel,
                           style: TextStyle(
                             color: Theme.of(context)
                                 .colorScheme
@@ -84,7 +83,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                           ),
                       children: [
                         TextSpan(
-                          text: AppLocalizations.of(context)!.outcomeLabel,
+                          text: context.loc.outcomeLabel,
                           style: TextStyle(
                             color: Theme.of(context)
                                 .colorScheme

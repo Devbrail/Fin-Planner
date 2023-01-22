@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../lava/lava_clock.dart';
 
@@ -153,9 +154,7 @@ class MobileAccountCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            AppLocalizations.of(context)!
-                                .cardholderLabel
-                                .toUpperCase(),
+                            context.loc.cardholderLabel.toUpperCase(),
                             style: TextStyle(
                                 color: Theme.of(context)
                                     .textTheme
@@ -274,9 +273,7 @@ class TabletAccountCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        AppLocalizations.of(context)!
-                            .cardholderLabel
-                            .toUpperCase(),
+                        context.loc.cardholderLabel.toUpperCase(),
                         style: Theme.of(context).textTheme.caption?.copyWith(),
                       ),
                       Text(
@@ -379,9 +376,7 @@ class DesktopAccountCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        AppLocalizations.of(context)!
-                            .cardholderLabel
-                            .toUpperCase(),
+                        context.loc.cardholderLabel.toUpperCase(),
                         style: Theme.of(context).textTheme.caption?.copyWith(
                               color: Theme.of(context)
                                   .textTheme

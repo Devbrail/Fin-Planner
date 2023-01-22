@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -14,6 +14,8 @@ import '../../../data/expense/data_sources/expense_manager_local_data_source.dar
 import '../../../data/expense/model/expense.dart';
 import '../../../service_locator.dart';
 import 'setting_option.dart';
+
+import '../../../core/common.dart';
 
 class ExportExpensesWidget extends StatefulWidget {
   const ExportExpensesWidget({Key? key}) : super(key: key);
@@ -31,8 +33,8 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
   Widget build(BuildContext context) {
     return SettingsOption(
       onTap: () => exportData('Export'),
-      title: AppLocalizations.of(context)!.saveAsCSVLabel,
-      subtitle: AppLocalizations.of(context)!.saveAsCSVDescLabel,
+      title: context.loc.saveAsCSVLabel,
+      subtitle: context.loc.saveAsCSVDescLabel,
     );
   }
 

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/src/lava/lava_clock.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../../core/context_extensions.dart';
+import '../../../../core/common.dart';
 import '../../../../core/enum/card_type.dart';
+import '../../../../lava/lava_clock.dart';
 import '../../../../service_locator.dart';
 import '../../../widgets/future_resolve.dart';
 import '../../../widgets/multi_value_listenable_builder.dart';
@@ -68,8 +67,8 @@ class AddAccountPageState extends State<AddAccountPage> {
               if (state is AddAccountState) {
                 context.showMaterialSnackBar(
                   isAccountAddOrUpdate
-                      ? AppLocalizations.of(context)!.addedCardLabel
-                      : AppLocalizations.of(context)!.updatedCardLabel,
+                      ? context.loc.addedCardLabel
+                      : context.loc.updatedCardLabel,
                   backgroundColor:
                       Theme.of(context).colorScheme.primaryContainer,
                   color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -78,7 +77,7 @@ class AddAccountPageState extends State<AddAccountPage> {
               }
               if (state is AccountDeletedState) {
                 context.showMaterialSnackBar(
-                  AppLocalizations.of(context)!.deletedCardLabel,
+                  context.loc.deletedCardLabel,
                   backgroundColor: Theme.of(context).colorScheme.error,
                   color: Theme.of(context).colorScheme.onError,
                 );
@@ -119,8 +118,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                 mobile: Scaffold(
                   appBar: context.materialYouAppBar(
                     isAccountAddOrUpdate
-                        ? AppLocalizations.of(context)!.addCardLabel
-                        : AppLocalizations.of(context)!.updateCardLabel,
+                        ? context.loc.addCardLabel
+                        : context.loc.updateCardLabel,
                     actions: [
                       isAccountAddOrUpdate
                           ? const SizedBox.shrink()
@@ -250,8 +249,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                         ),
                         child: Text(
                           isAccountAddOrUpdate
-                              ? AppLocalizations.of(context)!.addCardLabel
-                              : AppLocalizations.of(context)!.updateLabel,
+                              ? context.loc.addCardLabel
+                              : context.loc.updateLabel,
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize:
@@ -264,7 +263,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                 ),
                 tablet: Scaffold(
                   appBar: context.materialYouAppBar(
-                    AppLocalizations.of(context)!.addCardLabel,
+                    context.loc.addCardLabel,
                     actions: [
                       IconButton(
                         onPressed: _showInfo,
@@ -351,8 +350,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                                       ),
                                     ),
                                     child: Text(
-                                      AppLocalizations.of(context)!
-                                          .addCardLabel,
+                                      context.loc.addCardLabel,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: Theme.of(context)
@@ -398,7 +396,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                   horizontalTitleGap: 0,
                   leading: const Icon(Icons.info_rounded),
                   title: Text(
-                    AppLocalizations.of(context)!.accountInfoLabel,
+                    context.loc.accountInfoLabel,
                     style: Theme.of(context)
                         .textTheme
                         .headline6
@@ -408,7 +406,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    AppLocalizations.of(context)!.accountInfoDescLabel,
+                    context.loc.accountInfoDescLabel,
                   ),
                 ),
                 Align(
@@ -429,7 +427,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                         GoRouter.of(context).pop();
                       },
                       child: Text(
-                        AppLocalizations.of(context)!.acceptLabel,
+                        context.loc.acceptLabel,
                       ),
                     ),
                   ),
@@ -459,8 +457,8 @@ class AccountCardHolderNameWidget extends StatelessWidget {
       builder: (context) {
         return PaisaTextFormField(
           controller: controller,
-          label: AppLocalizations.of(context)!.cardHolderLabel,
-          hintText: AppLocalizations.of(context)!.enterCardHolderNameLabel,
+          label: context.loc.cardHolderLabel,
+          hintText: context.loc.enterCardHolderNameLabel,
           keyboardType: TextInputType.name,
           onChanged: (value) {
             valueNotifier.value = value;
@@ -489,8 +487,8 @@ class AccountNameWidget extends StatelessWidget {
       builder: (context) {
         return PaisaTextFormField(
           controller: controller,
-          label: AppLocalizations.of(context)!.accountNameLabel,
-          hintText: AppLocalizations.of(context)!.enterAccountNameLabel,
+          label: context.loc.accountNameLabel,
+          hintText: context.loc.enterAccountNameLabel,
           keyboardType: TextInputType.name,
           onChanged: (value) {
             valueNotifier.value = value;
@@ -517,8 +515,8 @@ class AccountNumberWidget extends StatelessWidget {
     return PaisaTextFormField(
       maxLength: 4,
       controller: controller,
-      label: AppLocalizations.of(context)!.lastFourDigitLabel,
-      hintText: AppLocalizations.of(context)!.enterNumberOptionalLabel,
+      label: context.loc.lastFourDigitLabel,
+      hintText: context.loc.enterNumberOptionalLabel,
       keyboardType: TextInputType.number,
       onChanged: (value) {
         valueNotifier.value = value;
@@ -540,8 +538,8 @@ class AccountInitialAmountWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: AppLocalizations.of(context)!.enterAmountLabel,
-      label: AppLocalizations.of(context)!.initialAmountLabel,
+      hintText: context.loc.enterAmountLabel,
+      label: context.loc.initialAmountLabel,
       keyboardType: TextInputType.number,
       onChanged: (value) {
         double? amount = double.tryParse(value);

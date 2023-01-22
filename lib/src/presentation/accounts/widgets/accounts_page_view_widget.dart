@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../lava/lava_clock.dart';
-import '../../widgets/paisa_bottom_sheet.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
+import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
+import '../../../lava/lava_clock.dart';
+import '../../widgets/paisa_bottom_sheet.dart';
 import '../bloc/accounts_bloc.dart';
 import 'account_card.dart';
 
@@ -59,14 +60,27 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                   onDelete: () => paisaAlertDialog(
                     context,
                     title: const Text('Permanently confirmation'),
-                    child: Text(
-                        'Deleting the account deletes all expenses which tied to this account ${account.name}'),
+                    child: RichText(
+                      text: TextSpan(
+                        text:
+                            'Deleting the account deletes all expenses which tied to this account ',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        children: [
+                          TextSpan(
+                            text: account.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     confirmationButton: ElevatedButton(
                       onPressed: () {
                         widget.accountBloc.add(DeleteAccountEvent(account));
                         Navigator.pop(context);
                       },
-                      child: const Text('Delete'),
+                      child: Text(context.loc.deleteLabel),
                     ),
                   ),
                   onTap: () => GoRouter.of(context).goNamed(
@@ -88,14 +102,15 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
 
   Widget _buildPageIndicator() => Row(
         mainAxisSize: MainAxisSize.min,
-        children: List.generate(widget.accounts.length, (index) {
-          return GestureDetector(
+        children: List.generate(
+          widget.accounts.length,
+          (index) => GestureDetector(
             onTap: () => _controller.jumpToPage(index),
             child: _indicator(
               index == selectedIndex,
             ),
-          );
-        }),
+          ),
+        ),
       );
 
   Widget _indicator(bool isActive) {

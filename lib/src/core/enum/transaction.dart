@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:hive/hive.dart';
 
+import 'package:hive/hive.dart';
+import '../common.dart';
 import '../theme/custom_color.dart';
 
 part 'transaction.g.dart';
@@ -26,22 +26,22 @@ extension TransactionTypeMapping on TransactionType {
   String name(BuildContext context) {
     switch (this) {
       case TransactionType.income:
-        return AppLocalizations.of(context)!.incomeLabel;
+        return context.loc.incomeLabel;
       case TransactionType.expense:
-        return AppLocalizations.of(context)!.expenseLabel;
+        return context.loc.expenseLabel;
       /* case TransactionType.transfer:
-        return AppLocalizations.of(context)!.transferLabel; */
+       return context.loc.transferLabel; */
     }
   }
 
   String hintName(BuildContext context) {
     switch (this) {
       case TransactionType.income:
-        return AppLocalizations.of(context)!.incomeNameLabel;
+        return context.loc.incomeNameLabel;
       case TransactionType.expense:
-        return AppLocalizations.of(context)!.expenseNameLabel;
+        return context.loc.expenseNameLabel;
       /*  case TransactionType.transfer:
-        return AppLocalizations.of(context)!.transferNameLabel; */
+       return context.loc.transferNameLabel; */
     }
   }
 

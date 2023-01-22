@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -52,7 +52,7 @@ class UserProfilePage extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(
-                  AppLocalizations.of(context)!.profileLabel,
+                  context.loc.profileLabel,
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
@@ -79,7 +79,7 @@ class UserProfilePage extends StatelessWidget {
                   ),
                   onPressed: () => _updateDetails(context),
                   child: Text(
-                    AppLocalizations.of(context)!.updateLabel,
+                    context.loc.updateLabel,
                   ),
                 ),
               ),
@@ -115,7 +115,7 @@ class UserTextField extends StatelessWidget {
             controller: nameController,
             keyboardType: TextInputType.name,
             decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.userNameLabel,
+              hintText: context.loc.userNameLabel,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
@@ -125,7 +125,7 @@ class UserTextField extends StatelessWidget {
               if (value!.length >= 3) {
                 return null;
               } else {
-                return AppLocalizations.of(context)!.validNameLabel;
+                return context.loc.validNameLabel;
               }
             },
           ),

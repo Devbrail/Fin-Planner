@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../../../core/context_extensions.dart';
+import '../../../core/common.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
@@ -26,7 +25,7 @@ class ExpenseListPage extends StatelessWidget {
     final int? cid = int.tryParse(categoryId ?? '');
     return Scaffold(
       appBar: context.materialYouAppBar(
-        AppLocalizations.of(context)!.expenseByCategoryLabel,
+        context.loc.expenseByCategoryLabel,
       ),
       body: ValueListenableBuilder<Box<Expense>>(
         valueListenable: locator.get<Box<Expense>>().listenable(),

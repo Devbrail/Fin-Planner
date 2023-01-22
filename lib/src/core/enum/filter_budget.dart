@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../common.dart';
 
 enum FilterBudget {
   daily,
@@ -13,15 +13,15 @@ extension FilterBudgetMapping on FilterBudget {
   String name(BuildContext context) {
     switch (this) {
       case FilterBudget.daily:
-        return AppLocalizations.of(context)!.dailyLabel;
+        return context.loc.dailyLabel;
       case FilterBudget.weekly:
-        return AppLocalizations.of(context)!.weeklyLabel;
+        return context.loc.weeklyLabel;
       case FilterBudget.monthly:
-        return AppLocalizations.of(context)!.monthlyLabel;
+        return context.loc.monthlyLabel;
       case FilterBudget.yearly:
-        return AppLocalizations.of(context)!.yearlyLabel;
+        return context.loc.yearlyLabel;
       case FilterBudget.all:
-        return AppLocalizations.of(context)!.allLabel;
+        return context.loc.allLabel;
     }
   }
 }

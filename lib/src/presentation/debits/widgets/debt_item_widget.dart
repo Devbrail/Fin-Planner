@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -88,8 +88,8 @@ class DebtItemWidget extends StatelessWidget {
                           ),
                           label: Text(
                             debt.debtType == DebtType.debt
-                                ? AppLocalizations.of(context)!.payDebtLabel
-                                : AppLocalizations.of(context)!.payDebtLabel,
+                                ? context.loc.payDebtLabel
+                                : context.loc.payDebtLabel,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge
@@ -106,12 +106,11 @@ class DebtItemWidget extends StatelessWidget {
                               context: context,
                               builder: (context) => AlertDialog(
                                 title: Text(
-                                  AppLocalizations.of(context)!.payDebtLabel,
+                                  context.loc.payDebtLabel,
                                 ),
                                 content: PaisaTextFormField(
                                   controller: controller,
-                                  hintText: AppLocalizations.of(context)!
-                                      .enterAmountLabel,
+                                  hintText: context.loc.enterAmountLabel,
                                   keyboardType: TextInputType.number,
                                 ),
                                 actions: [
@@ -140,7 +139,7 @@ class DebtItemWidget extends StatelessWidget {
                                       Navigator.pop(context);
                                     },
                                     child: Text(
-                                      AppLocalizations.of(context)!.updateLabel,
+                                      context.loc.updateLabel,
                                     ),
                                   ),
                                 ],

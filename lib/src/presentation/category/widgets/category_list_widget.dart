@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -10,6 +10,8 @@ import '../bloc/category_bloc.dart';
 import 'category_item_desktop_widget.dart';
 import 'category_item_mobile_widget.dart';
 import 'category_item_tablet_widget.dart';
+
+import '../../../core/common.dart';
 
 class CategoryListWidget extends StatelessWidget {
   const CategoryListWidget({
@@ -29,10 +31,9 @@ class CategoryListWidget extends StatelessWidget {
         final categories = value.values.toList();
         if (categories.isEmpty) {
           return EmptyWidget(
-            description:
-                AppLocalizations.of(context)!.errorNoCategoriesDescriptionLabel,
+            description: context.loc.errorNoCategoriesDescriptionLabel,
             icon: Icons.category,
-            title: AppLocalizations.of(context)!.errorNoCatagoriesLabel,
+            title: context.loc.errorNoCatagoriesLabel,
           );
         }
         return ScreenTypeLayout(

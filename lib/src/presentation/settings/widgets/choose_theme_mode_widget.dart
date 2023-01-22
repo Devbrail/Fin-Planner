@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';
@@ -41,7 +41,7 @@ class ChooseThemeModeWidget extends StatelessWidget {
       builder: (context, value, child) {
         final index = value.get(themeModeKey, defaultValue: 0);
         return SettingsOption(
-          title: AppLocalizations.of(context)!.themeLabel,
+          title: context.loc.themeLabel,
           subtitle: ThemeMode.values[index].themeName,
           onTap: () => showThemeDialog(context),
         );
@@ -75,7 +75,7 @@ class ThemeModeWidgetState extends State<ThemeModeWidget> {
         children: [
           ListTile(
             title: Text(
-              AppLocalizations.of(context)!.themeLabel,
+              context.loc.themeLabel,
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
@@ -112,7 +112,7 @@ class ThemeModeWidgetState extends State<ThemeModeWidget> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text(AppLocalizations.of(context)!.cancelLabel),
+              child: Text(context.loc.cancelLabel),
             ),
           ),
         ],

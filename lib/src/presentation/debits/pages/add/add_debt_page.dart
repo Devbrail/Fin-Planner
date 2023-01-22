@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -81,7 +81,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
               }
               return Scaffold(
                 appBar: context.materialYouAppBar(
-                  AppLocalizations.of(context)!.addDebtLabel,
+                  context.loc.addDebtLabel,
                   actions: [
                     IconButton(
                       onPressed: () {
@@ -125,10 +125,8 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                             child: DatePickerWidget(
                               onSelected: (date) =>
                                   debtBloc.currentDateTime = date,
-                              title:
-                                  AppLocalizations.of(context)!.startDateLabel,
-                              subtitle: startDate ??
-                                  AppLocalizations.of(context)!.validDateLabel,
+                              title: context.loc.startDateLabel,
+                              subtitle: startDate ?? context.loc.validDateLabel,
                               icon: MdiIcons.calendarStart,
                               lastDate: DateTime.now(),
                               firstDate: DateTime(2000),
@@ -138,9 +136,8 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                             child: DatePickerWidget(
                               onSelected: (date) =>
                                   debtBloc.currentDueDateTime = date,
-                              title: AppLocalizations.of(context)!.dueDateLabel,
-                              subtitle: endDate ??
-                                  AppLocalizations.of(context)!.validDateLabel,
+                              title: context.loc.dueDateLabel,
+                              subtitle: endDate ?? context.loc.validDateLabel,
                               icon: MdiIcons.calendarEnd,
                               lastDate: DateTime(2050),
                               firstDate: DateTime.now(),
@@ -150,7 +147,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                       ),
                       ListTile(
                         title: Text(
-                          AppLocalizations.of(context)!.transactionHistoryLabel,
+                          context.loc.transactionHistoryLabel,
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1
@@ -201,7 +198,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                         ),
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.addLabel,
+                        context.loc.addLabel,
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize:
@@ -283,12 +280,12 @@ class NameWidget extends StatelessWidget {
     return PaisaTextFormField(
       controller: controller,
       keyboardType: TextInputType.name,
-      hintText: AppLocalizations.of(context)!.nameLabel,
+      hintText: context.loc.nameLabel,
       validator: (value) {
         if (value!.length >= 2) {
           return null;
         } else {
-          return AppLocalizations.of(context)!.validNameLabel;
+          return context.loc.validNameLabel;
         }
       },
       onChanged: (value) =>
@@ -310,12 +307,12 @@ class DescriptionWidget extends StatelessWidget {
     return PaisaTextFormField(
       controller: controller,
       keyboardType: TextInputType.name,
-      hintText: AppLocalizations.of(context)!.descriptionLabel,
+      hintText: context.loc.descriptionLabel,
       validator: (value) {
         if (value!.length >= 3) {
           return null;
         } else {
-          return AppLocalizations.of(context)!.validDescriptionLabel;
+          return context.loc.validDescriptionLabel;
         }
       },
       onChanged: (value) =>
@@ -337,7 +334,7 @@ class AmountWidget extends StatelessWidget {
     return PaisaTextFormField(
       controller: controller,
       keyboardType: TextInputType.number,
-      hintText: AppLocalizations.of(context)!.amountLabel,
+      hintText: context.loc.amountLabel,
       onChanged: (value) {
         double? amount = double.tryParse(value);
         BlocProvider.of<DebtsBloc>(context).currentAmount = amount;
@@ -346,7 +343,7 @@ class AmountWidget extends StatelessWidget {
         if (value!.isNotEmpty) {
           return null;
         } else {
-          return AppLocalizations.of(context)!.validAmountLabel;
+          return context.loc.validAmountLabel;
         }
       },
     );

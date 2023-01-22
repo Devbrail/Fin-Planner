@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive/hive.dart';
+
+import '../common.dart';
 
 part 'debt_type.g.dart';
 
@@ -16,9 +17,9 @@ extension DebtTypeMapping on DebtType {
   String name(BuildContext context) {
     switch (this) {
       case DebtType.debt:
-        return AppLocalizations.of(context)!.debtLabel;
+        return context.loc.debtLabel;
       case DebtType.credit:
-        return AppLocalizations.of(context)!.creditLabel;
+        return context.loc.creditLabel;
     }
   }
 

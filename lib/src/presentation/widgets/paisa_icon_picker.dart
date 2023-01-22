@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:material_design_icons_flutter/icon_map.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import '../../core/common.dart';
 
 Future<void> showIconPicker({
   required BuildContext context,
@@ -15,7 +17,7 @@ Future<void> showIconPicker({
     context: context,
     builder: (_) => AlertDialog(
       icon: Icon(defaultIcon),
-      title: Text(AppLocalizations.of(context)!.selectIconLabel),
+      title: Text(context.loc.selectIconLabel),
       content: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.5,
@@ -31,7 +33,7 @@ Future<void> showIconPicker({
       actions: [
         ElevatedButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(AppLocalizations.of(context)!.cancelLabel),
+          child: Text(context.loc.cancelLabel),
         )
       ],
     ),

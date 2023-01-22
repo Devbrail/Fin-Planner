@@ -105,8 +105,7 @@ class _PaisaAppState extends State<PaisaApp> {
               themeMode: themeMode,
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
-              onGenerateTitle: (BuildContext context) =>
-                  AppLocalizations.of(context)!.appTitle,
+              onGenerateTitle: (BuildContext context) => context.loc.appTitle,
             );
           },
         );

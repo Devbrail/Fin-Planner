@@ -1,7 +1,7 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';
@@ -28,10 +28,10 @@ class ColorSelectorWidget extends StatelessWidget {
         final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
         final color = value.get(appColorKey, defaultValue: 0xFF795548);
         return SettingsOption(
-          title: AppLocalizations.of(context)!.accentColorLabel,
+          title: context.loc.accentColorLabel,
           subtitle: isDynamic
-              ? AppLocalizations.of(context)!.dynamicColorLabel
-              : AppLocalizations.of(context)!.customLabel,
+              ? context.loc.dynamicColorLabel
+              : context.loc.customLabel,
           trailing: CircleAvatar(
             backgroundColor: Color(color),
             maxRadius: 16,
@@ -94,7 +94,7 @@ class ColorSelectionWidget extends StatelessWidget {
                 children: [
                   ListTile(
                     title: Text(
-                      AppLocalizations.of(context)!.pickColorLabel,
+                      context.loc.pickColorLabel,
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   ),
@@ -129,7 +129,7 @@ class ColorSelectionWidget extends StatelessWidget {
                       onPressed: () => value
                           .put(appColorKey, selectedColor)
                           .then((value) => Navigator.pop(context)),
-                      child: Text(AppLocalizations.of(context)!.doneLabel),
+                      child: Text(context.loc.doneLabel),
                     ),
                   ),
                 ],

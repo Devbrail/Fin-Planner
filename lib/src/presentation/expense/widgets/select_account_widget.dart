@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
+import '../../../core/common.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../service_locator.dart';
 import '../bloc/expense_bloc.dart';
@@ -26,10 +26,10 @@ class SelectedAccount extends StatelessWidget {
           return ListTile(
             onTap: () => context.pushNamed(addAccountPath),
             title: Text(
-              AppLocalizations.of(context)!.addAccountLabel,
+              context.loc.addAccountLabel,
             ),
             subtitle: Text(
-              AppLocalizations.of(context)!.noAccountAvailableLabel,
+              context.loc.noAccountAvailableLabel,
             ),
             trailing: const Icon(Icons.keyboard_arrow_right),
           );
@@ -42,7 +42,7 @@ class SelectedAccount extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  AppLocalizations.of(context)!.selectAccountLabel,
+                  context.loc.selectAccountLabel,
                   style: Theme.of(context).textTheme.subtitle1?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -60,7 +60,7 @@ class SelectedAccount extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  AppLocalizations.of(context)!.selectAccountLabel,
+                  context.loc.selectAccountLabel,
                   style: Theme.of(context).textTheme.subtitle1?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -21,7 +21,7 @@ class CurrencyChangeWidget extends StatelessWidget {
           'force_change_currency': true,
         },
       ),
-      title: Text(AppLocalizations.of(context)!.currencySignLabel),
+      title: Text(context.loc.currencySignLabel),
       subtitle: Text(
         NumberFormat.compactSimpleCurrency(
               locale: locator

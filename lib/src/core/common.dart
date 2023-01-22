@@ -8,3 +8,4 @@ export 'expense_extensions.dart';
 export 'list_util.dart';
 export 'time_extension.dart';
 export 'transaction_extension.dart';
+export 'build_context_extension.dart';

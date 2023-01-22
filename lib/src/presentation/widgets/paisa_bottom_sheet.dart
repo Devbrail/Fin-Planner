@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/common.dart';
+
 Future<void> paisaBottomSheet(
   BuildContext context,
   Widget child,
@@ -36,7 +38,7 @@ Future<void> paisaAlertDialog(
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(context.loc.cancelLabel),
           ),
           confirmationButton,
         ],
