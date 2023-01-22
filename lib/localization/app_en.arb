@@ -316,13 +316,18 @@
             }
         }
     },
+    "deleteAccountLabel": "Deleting the account deletes all expenses which tied to this account ",
+    "@deleteAccountLabel": {
+        "description": "Delete account label"
+         
+    },
     "deleteExpenseLabel": "Expense will be permanently removed from account",
     "@deleteExpenseLabel": {
         "description": "Version number label"
     },
-    "dialogDeleteTitleLabel": "Permanently delete",
+    "dialogDeleteTitleLabel": "Permanently confirmation",
     "@dialogDeleteTitleLabel": {
-        "description": "Permanently delete label"
+        "description": "Permanently confirmation label"
     },
     "updatedCategoryLabel": "Category updated",
     "@updatedCategoryLabel": {

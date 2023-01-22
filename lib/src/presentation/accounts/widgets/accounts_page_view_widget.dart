@@ -59,11 +59,10 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                   cardType: account.cardType ?? CardType.bank,
                   onDelete: () => paisaAlertDialog(
                     context,
-                    title: const Text('Permanently confirmation'),
+                    title: Text(context.loc.dialogDeleteTitleLabel),
                     child: RichText(
                       text: TextSpan(
-                        text:
-                            'Deleting the account deletes all expenses which tied to this account ',
+                        text: context.loc.deleteAccountLabel,
                         style: Theme.of(context).textTheme.bodyMedium,
                         children: [
                           TextSpan(
