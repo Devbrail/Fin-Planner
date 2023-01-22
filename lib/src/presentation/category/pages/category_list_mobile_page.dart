@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../widgets/paisa_bottom_sheet.dart';
 
+import '../../../core/common.dart';
 import '../../../data/category/model/category.dart';
+import '../../widgets/paisa_bottom_sheet.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/category_item_mobile_widget.dart';
 
@@ -29,11 +30,10 @@ class CategoryListMobileWidget extends StatelessWidget {
           category: categories[index],
           onPressed: () => paisaAlertDialog(
             context,
-            title: const Text('Permanently confirmation'),
+            title: Text(context.loc.dialogDeleteTitleLabel),
             child: RichText(
               text: TextSpan(
-                text:
-                    'Deleting the category deletes all expenses which tied to this category ',
+                text: context.loc.deleteCategoryLabel,
                 children: [
                   TextSpan(
                       text: categories[index].name,

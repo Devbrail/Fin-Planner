@@ -321,13 +321,18 @@
         "description": "Delete account label"
          
     },
+    "deleteCategoryLabel": "Deleting the category deletes all expenses which tied to this category ",
+    "@deleteCategoryLabel": {
+        "description": "Delete category label"
+         
+    },
     "deleteExpenseLabel": "Expense will be permanently removed from account",
     "@deleteExpenseLabel": {
         "description": "Version number label"
     },
-    "dialogDeleteTitleLabel": "Permanently confirmation",
+    "dialogDeleteTitleLabel": "Permanently delete?",
     "@dialogDeleteTitleLabel": {
-        "description": "Permanently confirmation label"
+        "description": "Permanently delete label"
     },
     "updatedCategoryLabel": "Category updated",
     "@updatedCategoryLabel": {
