@@ -85,7 +85,7 @@ class MobileAccountCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: GlassmorphicContainer(
           height: 240,
           width: MediaQuery.of(context).size.width,

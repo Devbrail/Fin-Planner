@@ -86,57 +86,24 @@ class SelectedItem extends StatelessWidget {
   final ExpenseBloc expenseBloc;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: expenseBloc,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Wrap(
-            spacing: 4.0,
-            runSpacing: 8.0,
-            children: List.generate(
-              categories.length + 1,
-              (index) {
-                if (index == 0) {
-                  return FilterChip(
-                    onSelected: (value) {},
-                    avatar: Icon(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      IconData(
-                        MdiIcons.plus.codePoint,
-                        fontFamily: 'Material Design Icons',
-                        fontPackage: 'material_design_icons_flutter',
-                      ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(28),
-                      side: BorderSide(
-                        width: 1,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    showCheckmark: false,
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    label: Text('Add New'),
-                    labelStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant),
-                    padding: const EdgeInsets.all(12),
-                  );
-                } else {
-                  final category = categories[index - 1];
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: FilterChip(
-                      selected: category.key == expenseBloc.selectedCategoryId,
-                      onSelected: (value) =>
-                          expenseBloc.add(ChangeCategoryEvent(category)),
+  Widget build(BuildContext context) => BlocBuilder(
+        bloc: expenseBloc,
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Wrap(
+              spacing: 4.0,
+              runSpacing: 8.0,
+              children: List.generate(
+                categories.length + 1,
+                (index) {
+                  if (index == 0) {
+                    return FilterChip(
+                      onSelected: (value) {},
                       avatar: Icon(
-                        color: category.key == expenseBloc.selectedCategoryId
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
+                        color: Theme.of(context).colorScheme.primary,
                         IconData(
-                          category.icon,
+                          MdiIcons.plus.codePoint,
                           fontFamily: 'Material Design Icons',
                           fontPackage: 'material_design_icons_flutter',
                         ),
@@ -150,26 +117,68 @@ class SelectedItem extends StatelessWidget {
                       ),
                       showCheckmark: false,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      label: Text(category.name),
+                      label: Text(
+                        AppLocalizations.of(context)!.addNewLabel,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
                       labelStyle: Theme.of(context)
                           .textTheme
                           .subtitle1
                           ?.copyWith(
-                              color:
-                                  category.key == expenseBloc.selectedCategoryId
-                                      ? Theme.of(context).colorScheme.primary
-                                      : Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant),
                       padding: const EdgeInsets.all(12),
-                    ),
-                  );
-                }
-              },
+                    );
+                  } else {
+                    final category = categories[index - 1];
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: FilterChip(
+                        selected:
+                            category.key == expenseBloc.selectedCategoryId,
+                        onSelected: (value) =>
+                            expenseBloc.add(ChangeCategoryEvent(category)),
+                        avatar: Icon(
+                          color: category.key == expenseBloc.selectedCategoryId
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.onSurfaceVariant,
+                          IconData(
+                            category.icon,
+                            fontFamily: 'Material Design Icons',
+                            fontPackage: 'material_design_icons_flutter',
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(28),
+                          side: BorderSide(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                        showCheckmark: false,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        label: Text(category.name),
+                        labelStyle: Theme.of(context)
+                            .textTheme
+                            .subtitle1
+                            ?.copyWith(
+                                color: category.key ==
+                                        expenseBloc.selectedCategoryId
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant),
+                        padding: const EdgeInsets.all(12),
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
-          ),
-        );
-      },
-    );
-  }
+          );
+        },
+      );
 }

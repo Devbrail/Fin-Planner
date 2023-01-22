@@ -34,7 +34,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
       children: [
         LavaAnimation(
           child: AspectRatio(
-            aspectRatio: 16 / 9,
+            aspectRatio: 16 / 10,
             child: PageView.builder(
               padEnds: true,
               pageSnapping: true,
@@ -86,16 +86,17 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
     );
   }
 
-  Widget _buildPageIndicator() {
-    List<Widget> list = [];
-    for (int i = 0; i < widget.accounts.length; i++) {
-      list.add(i == selectedIndex ? _indicator(true) : _indicator(false));
-    }
-    return Row(
-      children: list,
-      mainAxisSize: MainAxisSize.min,
-    );
-  }
+  Widget _buildPageIndicator() => Row(
+        mainAxisSize: MainAxisSize.min,
+        children: List.generate(widget.accounts.length, (index) {
+          return GestureDetector(
+            onTap: () => _controller.jumpToPage(index),
+            child: _indicator(
+              index == selectedIndex,
+            ),
+          );
+        }),
+      );
 
   Widget _indicator(bool isActive) {
     return AnimatedContainer(

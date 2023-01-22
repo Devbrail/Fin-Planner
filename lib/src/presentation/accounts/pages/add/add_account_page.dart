@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:paisa/src/lava/lava_clock.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../core/context_extensions.dart';
@@ -160,11 +161,13 @@ class AddAccountPageState extends State<AddAccountPage> {
                             accountNumberNotifier,
                           ],
                           builder: (context, values, child) {
-                            return AccountCard(
-                              cardNumber: values.elementAt(2),
-                              cardHolder: values.elementAt(1),
-                              bankName: values.elementAt(0),
-                              cardType: accountsBloc.selectedType,
+                            return LavaAnimation(
+                              child: AccountCard(
+                                cardNumber: values.elementAt(2),
+                                cardHolder: values.elementAt(1),
+                                bankName: values.elementAt(0),
+                                cardType: accountsBloc.selectedType,
+                              ),
                             );
                           },
                         ),

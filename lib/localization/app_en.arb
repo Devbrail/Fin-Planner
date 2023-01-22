@@ -623,5 +623,9 @@
     "searchLabel": "Search",
     "@searchLabel": {
         "description": "Search label"
+    },
+    "addNewLabel": "Add new",
+    "@addNewLabel": {
+        "description": "Search label"
     }
 }
