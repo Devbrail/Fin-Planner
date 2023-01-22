@@ -116,11 +116,10 @@ class _ExpensePageState extends State<ExpensePage> {
                           : IconButton(
                               onPressed: () => paisaAlertDialog(
                                 context,
-                                title: const Text('Permanently delete'),
+                                title: Text(context.loc.dialogDeleteTitleLabel),
                                 child: RichText(
                                   text: TextSpan(
-                                    text:
-                                        'Expense will be permanently removed from account',
+                                    text: context.loc.deleteExpenseLabel,
                                     style:
                                         Theme.of(context).textTheme.bodyText1,
                                   ),

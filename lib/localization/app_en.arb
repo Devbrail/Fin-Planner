@@ -316,6 +316,14 @@
             }
         }
     },
+    "deleteExpenseLabel": "Expense will be permanently removed from account",
+    "@deleteExpenseLabel": {
+        "description": "Version number label"
+    },
+    "dialogDeleteTitleLabel": "Permanently delete",
+    "@dialogDeleteTitleLabel": {
+        "description": "Permanently delete label"
+    },
     "updatedCategoryLabel": "Category updated",
     "@updatedCategoryLabel": {
         "description": "Category updated label"
