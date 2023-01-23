@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
+import '../../widgets/choose_theme_mode_widget.dart';
 import '../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../widgets/paisa_search_button_widget.dart';
 import '../../widgets/paisa_title_widget.dart';
@@ -69,6 +69,33 @@ class HomeMobilePage extends StatelessWidget {
                   },
                   icon: MdiIcons.accountCashOutline,
                   title: context.loc.debtsLabel,
+                ),
+                const Divider(),
+                DrawerItemWidget(
+                  isSelected: false,
+                  onPressed: () async {
+                    context.pop();
+                    await showModalBottomSheet(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width >= 700
+                            ? 700
+                            : double.infinity,
+                      ),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                          topRight: Radius.circular(16),
+                        ),
+                      ),
+                      context: context,
+                      builder: (_) => ChooseThemeModeWidget(
+                        currentTheme: ThemeMode.values[
+                            settings.get(themeModeKey, defaultValue: 0)],
+                      ),
+                    );
+                  },
+                  icon: MdiIcons.brightness4,
+                  title: context.loc.chooseThemeLabel,
                 ),
                 DrawerItemWidget(
                   isSelected: false,

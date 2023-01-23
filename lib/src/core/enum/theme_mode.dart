@@ -4,7 +4,7 @@ extension ThemeModeName on ThemeMode {
   String get themeName {
     switch (this) {
       case ThemeMode.system:
-        return 'System';
+        return 'System default';
       case ThemeMode.light:
         return 'Light';
       case ThemeMode.dark:

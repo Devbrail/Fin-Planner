@@ -319,12 +319,10 @@
     "deleteAccountLabel": "Deleting the account deletes all expenses which tied to this account ",
     "@deleteAccountLabel": {
         "description": "Delete account label"
-         
     },
     "deleteCategoryLabel": "Deleting the category deletes all expenses which tied to this category ",
     "@deleteCategoryLabel": {
         "description": "Delete category label"
-         
     },
     "deleteExpenseLabel": "Expense will be permanently removed from account",
     "@deleteExpenseLabel": {
@@ -453,6 +451,10 @@
     "acceptLabel": "Accept",
     "@acceptLabel": {
         "description": "Accept label"
+    },
+    "okLabel": "Ok",
+    "@okLabel": {
+        "description": "Ok label"
     },
     "searchMessageLabel": "Start searching something!",
     "@searchMessageLabel": {
