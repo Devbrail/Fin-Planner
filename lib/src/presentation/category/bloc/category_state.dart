@@ -60,7 +60,7 @@ class CategoryColorSelectedState extends CategoryState {
   const CategoryColorSelectedState(this.categoryColor);
 
   @override
-  List<Object?> get props => [categoryColor];
+  List<Object?> get props => [categoryColor, identityHashCode(this)];
 }
 
 class UpdateCategoryBudgetState extends CategoryState {

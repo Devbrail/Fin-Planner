@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:paisa/src/presentation/widgets/paisa_color_picker.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../core/common.dart';
@@ -42,7 +43,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   @override
   Widget build(BuildContext context) {
     return FutureResolve<CategoryBloc>(
-      future: locator.getAsync<CategoryBloc>(),
+      future: locator.getAsync<CategoryBloc>(param1: widget.categoryId),
       builder: (categoryBloc) {
         categoryBloc.add(FetchCategoryFromIdEvent(widget.categoryId));
         return BlocProvider(
@@ -81,8 +82,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                 descController.selection = TextSelection.collapsed(
                   offset: state.category.description?.length ?? 0,
                 );
-              } else if (state is CategoryIconSelectedState) {
-                categoryBloc.selectedIcon = state.categoryIcon;
               }
             },
             builder: (context, state) {
@@ -100,14 +99,16 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                           ListTile(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8)),
-                            onTap: () => showColorPicker(context,
-                                    defaultColor: Colors.red)
-                                .then((color) {
-                              if (color != null) {
-                                BlocProvider.of<CategoryBloc>(context).add(
-                                    CategoryColorSelectedEvent(color.value));
-                              }
-                            }),
+                            onTap: () {
+                              paisaColorPicker(context,
+                                      defaultColor:
+                                          categoryBloc.selectedColor ??
+                                              Colors.red.value)
+                                  .then((color) {
+                                BlocProvider.of<CategoryBloc>(context)
+                                    .add(CategoryColorSelectedEvent(color));
+                              });
+                            },
                             leading: Icon(
                               Icons.color_lens,
                               color: Theme.of(context).colorScheme.primary,

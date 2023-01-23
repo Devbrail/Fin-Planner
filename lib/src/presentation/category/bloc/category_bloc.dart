@@ -57,7 +57,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     }
   }
 
-  _addOrUpdateCategory(
+  FutureOr<void> _addOrUpdateCategory(
     AddOrUpdateCategoryEvent event,
     Emitter<CategoryState> emit,
   ) async {
@@ -110,14 +110,15 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     emit(CategoryDeletedState());
   }
 
-  void _categoryIcon(
+  FutureOr<void> _categoryIcon(
     CategoryIconSelectedEvent event,
     Emitter<CategoryState> emit,
   ) {
+    selectedIcon = event.categoryIcon;
     emit(CategoryIconSelectedState(event.categoryIcon));
   }
 
-  _updateCategoryBudget(
+  FutureOr<void> _updateCategoryBudget(
     UpdateCategoryBudgetEvent event,
     Emitter<CategoryState> emit,
   ) {
@@ -125,7 +126,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     emit(UpdateCategoryBudgetState(event.isBudget));
   }
 
-  _updateCategoryColor(
+  FutureOr<void> _updateCategoryColor(
     CategoryColorSelectedEvent event,
     Emitter<CategoryState> emit,
   ) {

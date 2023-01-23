@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:paisa/src/presentation/widgets/paisa_color_picker.dart';
 
 import '../bloc/category_bloc.dart';
 
@@ -28,13 +29,9 @@ class ColorPickerWidget extends StatelessWidget {
         }
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          onTap: () =>
-              showColorPicker(context, defaultColor: Colors.red).then((color) {
-            if (color != null) {
+          onTap: () => paisaColorPicker(context).then((color) =>
               BlocProvider.of<CategoryBloc>(context)
-                  .add(CategoryColorSelectedEvent(color.value));
-            }
-          }),
+                  .add(CategoryColorSelectedEvent(color))),
           leading: Icon(
             Icons.color_lens,
             color: Theme.of(context).colorScheme.primary,
@@ -53,53 +50,4 @@ class ColorPickerWidget extends StatelessWidget {
       },
     );
   }
-}
-
-Future<Color?> showColorPicker(
-  BuildContext context, {
-  Color defaultColor = Colors.red,
-}) async {
-  final color = await showModalBottomSheet<Color>(
-    context: context,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(16),
-        topRight: Radius.circular(16),
-      ),
-    ),
-    constraints: BoxConstraints(
-      maxWidth:
-          MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
-    ),
-    elevation: 10,
-    builder: (context) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.only(
-            bottom: 16,
-          ),
-          shrinkWrap: true,
-          itemCount: Colors.primaries.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: MediaQuery.of(context).size.width >= 700 ? 9 : 6,
-          ),
-          itemBuilder: (_, index) {
-            final color = Colors.primaries[index].shade500;
-            return GestureDetector(
-              onTap: () => Navigator.pop(context, color),
-              child: Center(
-                child: CircleAvatar(
-                  backgroundColor: color,
-                ),
-              ),
-            );
-          },
-        ),
-      );
-    },
-  );
-  return color ?? defaultColor;
 }

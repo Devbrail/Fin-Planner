@@ -1,16 +1,16 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';
 import '../../widgets/future_resolve.dart';
+import '../../widgets/paisa_color_picker.dart';
 import 'dynamic_color_switch_widget.dart';
 import 'setting_option.dart';
 
-class ColorSelectorWidget extends StatelessWidget {
-  const ColorSelectorWidget({
+class SettingsColorPickerWidget extends StatelessWidget {
+  const SettingsColorPickerWidget({
     Key? key,
     required this.settings,
   }) : super(key: key);
@@ -50,7 +50,7 @@ class ColorSelectorWidget extends StatelessWidget {
                   ? 700
                   : double.infinity,
             ),
-            builder: (context) => ColorSelectionWidget(
+            builder: (context) => ColorPickerDialogWidget(
               valueListenable: settings.listenable(),
             ),
           ),
@@ -60,8 +60,8 @@ class ColorSelectorWidget extends StatelessWidget {
   }
 }
 
-class ColorSelectionWidget extends StatelessWidget {
-  const ColorSelectionWidget({
+class ColorPickerDialogWidget extends StatelessWidget {
+  const ColorPickerDialogWidget({
     Key? key,
     required this.valueListenable,
   }) : super(key: key);
@@ -137,80 +137,6 @@ class ColorSelectionWidget extends StatelessWidget {
             );
           },
         );
-      },
-    );
-  }
-}
-
-class ColorPickerGridWidget extends StatefulWidget {
-  const ColorPickerGridWidget({
-    super.key,
-    required this.onSelected,
-    required this.selectedColor,
-  });
-  final Function(int) onSelected;
-  final int selectedColor;
-
-  @override
-  State<ColorPickerGridWidget> createState() => _ColorPickerGridWidgetState();
-}
-
-class _ColorPickerGridWidgetState extends State<ColorPickerGridWidget> {
-  late int selectedColor = widget.selectedColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.only(bottom: 16),
-      shrinkWrap: true,
-      itemCount: Colors.primaries.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: MediaQuery.of(context).size.width >= 700 ? 9 : 6,
-      ),
-      itemBuilder: (_, index) {
-        final color = Colors.primaries[index].value;
-        if (color == selectedColor) {
-          return Stack(
-            children: [
-              Center(
-                child: SizedBox(
-                  height: 42,
-                  width: 42,
-                  child: Container(
-                    padding: EdgeInsets.zero,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(width: 2, color: Color(color)),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Color(color),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      margin: const EdgeInsets.all(4),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          );
-        } else {
-          return InkWell(
-            borderRadius: BorderRadius.circular(50),
-            onTap: () {
-              widget.onSelected.call(color);
-              setState(() {
-                selectedColor = color;
-              });
-            },
-            child: Center(
-              child: CircleAvatar(
-                backgroundColor: Color(color),
-              ),
-            ),
-          );
-        }
       },
     );
   }

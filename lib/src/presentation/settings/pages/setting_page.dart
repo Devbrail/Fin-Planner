@@ -5,7 +5,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
 import '../widgets/choose_theme_mode_widget.dart';
-import '../widgets/color_picker_widget.dart';
+import '../widgets/settings_color_picker_widget.dart';
 import '../widgets/currency_change_widget.dart';
 import '../widgets/setting_option.dart';
 import '../widgets/settings_group_card.dart';
@@ -36,7 +36,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   instanceName: BoxType.settings.stringValue,
                 ),
               ),
-              ColorSelectorWidget(
+              SettingsColorPickerWidget(
                 settings: locator.get(
                   instanceName: BoxType.settings.stringValue,
                 ),
