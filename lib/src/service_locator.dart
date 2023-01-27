@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'data/settings/authenticate.dart';
 
 import 'core/enum/box_types.dart';
 import 'core/enum/card_type.dart';
@@ -95,6 +96,7 @@ void _localSources() {
             transactionsBox: locator.get(),
           ));
   locator.registerLazySingletonAsync<FileHandler>(() async => FileHandler());
+  locator.registerSingletonAsync(() async => Authenticate());
 }
 
 void _setupRepository() {

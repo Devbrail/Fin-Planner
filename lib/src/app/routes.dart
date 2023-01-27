@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/data/settings/authenticate.dart';
 
 import '../core/common.dart';
 import '../core/enum/box_types.dart';
@@ -173,7 +174,7 @@ final GoRouter goRouter = GoRouter(
   errorBuilder: (context, state) => Center(
     child: Text(state.error.toString()),
   ),
-  redirect: (_, state) {
+  redirect: (_, state) async {
     final isLogging = state.location == introPagePath;
     bool isIntroDone = settings.get(userIntroKey, defaultValue: false);
     if (!isIntroDone) {
@@ -192,9 +193,19 @@ final GoRouter goRouter = GoRouter(
     if (languageCode == 'DEF' && isLogging) {
       return splashPath;
     }
-    if (name.isNotEmpty && image.isNotEmpty && isLogging) {
-      //await settings.put(userLanguageKey, languageCode);
-      return landingPath;
+    if (settings.get(userAuthKey, defaultValue: false) &&
+        name.isNotEmpty &&
+        image.isNotEmpty &&
+        isLogging) {
+      final auth = await locator.getAsync<Authenticate>();
+      final bool result = await auth.authenticateWithBiometrics();
+      if (result) {
+        return landingPath;
+      }
+    } else {
+      if (name.isNotEmpty && image.isNotEmpty && isLogging) {
+        return landingPath;
+      }
     }
     return null;
   },

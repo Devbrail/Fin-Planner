@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../../data/settings/authenticate.dart';
+import '../../widgets/future_resolve.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
+import '../widgets/biometrics_auth_widget.dart';
 import '../widgets/currency_change_widget.dart';
 import '../widgets/setting_option.dart';
 import '../widgets/settings_color_picker_widget.dart';
@@ -42,6 +45,25 @@ class _SettingsPageState extends State<SettingsPage> {
             options: [
               const CurrencyChangeWidget(),
               const Divider(),
+              FutureResolve<Authenticate>(
+                future: locator.getAsync<Authenticate>(),
+                builder: (value) => FutureResolve<bool>(
+                  future: value.auth.isDeviceSupported(),
+                  builder: (supported) {
+                    return Visibility(
+                      visible: supported,
+                      child: Column(
+                        children: [
+                          BiometricAuthWidget(
+                            authenticate: locator.get<Authenticate>(),
+                          ),
+                          const Divider(),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
               SettingsOption(
                 title: context.loc.backupAndRestoreLabel,
                 subtitle: context.loc.backupAndRestoreDescLabel,

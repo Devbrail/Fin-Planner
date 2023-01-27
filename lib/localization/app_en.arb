@@ -59,6 +59,10 @@
     "@settingsLabel": {
         "description": "Settings label"
     },
+    "localAppLabel": "Lock app",
+    "@localAppLabel": {
+        "description": "Lock app label"
+    },
     "totalLabel": "Total",
     "@totalLabel": {
         "description": "Total label"

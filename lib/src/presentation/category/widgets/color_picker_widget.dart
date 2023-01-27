@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../widgets/paisa_color_picker.dart';
-
-import '../bloc/category_bloc.dart';
 
 import '../../../core/common.dart';
+import '../../widgets/paisa_color_picker.dart';
+import '../bloc/category_bloc.dart';
 
 class ColorPickerWidget extends StatelessWidget {
   const ColorPickerWidget({

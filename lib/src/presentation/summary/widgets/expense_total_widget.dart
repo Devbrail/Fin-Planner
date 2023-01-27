@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';

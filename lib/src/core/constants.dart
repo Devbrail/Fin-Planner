@@ -11,5 +11,6 @@ const String biometricKey = 'key_biometric';
 const String userNameKey = 'user_name_key';
 const String userIntroKey = 'user_intro_key';
 const String userImageKey = 'user_image_key';
+const String userAuthKey = 'user_auth_key';
 const String userLanguageKey = 'user_language_key';
 const String scheduleTime = 'schedule_time_key';
