@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../core/common.dart';
 import '../../../data/category/model/category.dart';
 import '../../../service_locator.dart';
 import '../../widgets/paisa_empty_widget.dart';
@@ -10,8 +10,6 @@ import '../bloc/category_bloc.dart';
 import 'category_item_desktop_widget.dart';
 import 'category_item_mobile_widget.dart';
 import 'category_item_tablet_widget.dart';
-
-import '../../../core/common.dart';
 
 class CategoryListWidget extends StatelessWidget {
   const CategoryListWidget({

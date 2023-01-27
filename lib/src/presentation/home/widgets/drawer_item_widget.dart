@@ -44,7 +44,7 @@ class DrawerItemWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Text(
                     title,
-                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: isSelected
                               ? Theme.of(context)
                                   .colorScheme

@@ -5,18 +5,16 @@ extension BuildContextMapping on BuildContext {
     String title, {
     List<Widget>? actions,
     Widget? leadingWidget,
-  }) {
-    return AppBar(
-      leading: leadingWidget,
-      title: Text(title),
-      titleTextStyle: Theme.of(this)
-          .textTheme
-          .headline6
-          ?.copyWith(fontWeight: FontWeight.bold),
-      backgroundColor: Colors.transparent,
-      actions: actions ?? [],
-    );
-  }
+  }) =>
+      AppBar(
+        leading: leadingWidget,
+        title: Text(title),
+        titleTextStyle: Theme.of(this)
+            .textTheme
+            .titleLarge
+            ?.copyWith(fontWeight: FontWeight.bold),
+        actions: actions ?? [],
+      );
 
   showMaterialSnackBar(
     String content, {

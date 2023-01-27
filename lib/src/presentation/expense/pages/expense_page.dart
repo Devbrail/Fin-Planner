@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -121,7 +120,7 @@ class _ExpensePageState extends State<ExpensePage> {
                                   text: TextSpan(
                                     text: context.loc.deleteExpenseLabel,
                                     style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                        Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ),
                                 confirmationButton: ElevatedButton(
@@ -206,7 +205,7 @@ class _ExpensePageState extends State<ExpensePage> {
                           : context.loc.updateExpenseLabel,
                       style: Theme.of(context)
                           .textTheme
-                          .headline6
+                          .titleLarge
                           ?.copyWith(fontWeight: FontWeight.w700),
                     ),
                     actions: [
@@ -309,7 +308,7 @@ class _ExpensePageState extends State<ExpensePage> {
         isAddExpense ? context.loc.addLabel : context.loc.updateLabel,
         style: TextStyle(
           fontWeight: FontWeight.w700,
-          fontSize: Theme.of(context).textTheme.headline6?.fontSize,
+          fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
         ),
       ),
     );

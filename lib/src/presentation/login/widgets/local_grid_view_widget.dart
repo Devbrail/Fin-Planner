@@ -78,7 +78,7 @@ class _LocaleGridViewState extends State<LocaleGridView> {
                   child: Text(
                     format.currencySymbol,
                     style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context).textTheme.headline6,
+                      textStyle: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                 ),

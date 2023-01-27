@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../service_locator.dart';
-import '../../widgets/choose_theme_mode_widget.dart';
 import '../widgets/currency_change_widget.dart';
 import '../widgets/setting_option.dart';
 import '../widgets/settings_color_picker_widget.dart';
@@ -51,7 +50,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     SnackBar(
                       content: Text(
                         'Disabled',
-                        style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: Theme.of(context)
                                   .colorScheme
                                   .onPrimaryContainer,

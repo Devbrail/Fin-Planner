@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:hive/hive.dart';
+
 import '../common.dart';
 import '../theme/custom_color.dart';
 

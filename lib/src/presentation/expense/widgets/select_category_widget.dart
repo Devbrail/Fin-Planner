@@ -41,7 +41,7 @@ class SelectCategoryIcon extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   context.loc.selectCategoryLabel,
-                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),
@@ -61,7 +61,7 @@ class SelectCategoryIcon extends StatelessWidget {
                   context.loc.selectCategoryLabel,
                   style: Theme.of(context)
                       .textTheme
-                      .subtitle1
+                      .titleMedium
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -127,7 +127,7 @@ class SelectedItem extends StatelessWidget {
                       ),
                       labelStyle: Theme.of(context)
                           .textTheme
-                          .subtitle1
+                          .titleMedium
                           ?.copyWith(
                               color: Theme.of(context)
                                   .colorScheme
@@ -165,7 +165,7 @@ class SelectedItem extends StatelessWidget {
                         label: Text(category.name),
                         labelStyle: Theme.of(context)
                             .textTheme
-                            .subtitle1
+                            .titleMedium
                             ?.copyWith(
                                 color: category.key ==
                                         expenseBloc.selectedCategoryId

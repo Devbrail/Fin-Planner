@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';
@@ -24,14 +23,14 @@ class WelcomeNameWidget extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
               Text(
                 context.loc.welcomeMessage,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Theme.of(context).textTheme.caption?.color),
+                    color: Theme.of(context).textTheme.bodySmall?.color),
               ),
             ],
           ),

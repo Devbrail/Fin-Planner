@@ -44,7 +44,7 @@ class AccountSummaryWidget extends StatelessWidget {
                       style: GoogleFonts.manrope(
                         textStyle: Theme.of(context)
                             .textTheme
-                            .headline6
+                            .titleLarge
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -94,7 +94,7 @@ class AccountSummaryWidget extends StatelessWidget {
                       style: GoogleFonts.manrope(
                         textStyle: Theme.of(context)
                             .textTheme
-                            .headline6
+                            .titleLarge
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),

@@ -98,8 +98,8 @@ class MobileAccountCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.1),
-              Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.05),
+              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.1),
+              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.05),
             ],
             stops: const [0.1, 1],
           ),
@@ -107,8 +107,8 @@ class MobileAccountCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
-              Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
+              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.5),
+              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.5),
             ],
           ),
           child: Padding(
@@ -122,7 +122,7 @@ class MobileAccountCard extends StatelessWidget {
                   children: [
                     Text(
                       bankName.toUpperCase(),
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(cardType.icon),
                   ],
@@ -135,7 +135,8 @@ class MobileAccountCard extends StatelessWidget {
                           text: TextSpan(
                             text: '**** ',
                             style: GoogleFonts.jetBrainsMono(
-                              textStyle: Theme.of(context).textTheme.headline5,
+                              textStyle:
+                                  Theme.of(context).textTheme.headlineSmall,
                             ),
                             children: [
                               const TextSpan(text: '**** '),
@@ -158,7 +159,7 @@ class MobileAccountCard extends StatelessWidget {
                             style: TextStyle(
                                 color: Theme.of(context)
                                     .textTheme
-                                    .subtitle1!
+                                    .titleMedium!
                                     .color!
                                     .withOpacity(0.5),
                                 fontSize: 9,
@@ -166,10 +167,12 @@ class MobileAccountCard extends StatelessWidget {
                           ),
                           Text(
                             cardHolder.toUpperCase(),
-                            style:
-                                Theme.of(context).textTheme.headline6?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
                           )
                         ],
                       ),
@@ -227,8 +230,16 @@ class TabletAccountCard extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.1),
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.05),
+                Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .color!
+                    .withOpacity(0.1),
+                Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .color!
+                    .withOpacity(0.05),
               ],
               stops: const [0.1, 1],
             ),
@@ -236,8 +247,16 @@ class TabletAccountCard extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
+                Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .color!
+                    .withOpacity(0.5),
+                Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .color!
+                    .withOpacity(0.5),
               ],
             ),
             child: Padding(
@@ -251,7 +270,7 @@ class TabletAccountCard extends StatelessWidget {
                     children: [
                       Text(
                         bankName,
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                       Icon(cardType.icon, size: 32),
                     ],
@@ -260,7 +279,7 @@ class TabletAccountCard extends StatelessWidget {
                     text: TextSpan(
                       text: '**** ',
                       style: GoogleFonts.jetBrainsMono(
-                        textStyle: Theme.of(context).textTheme.subtitle1,
+                        textStyle: Theme.of(context).textTheme.titleMedium,
                       ),
                       children: [
                         const TextSpan(text: '**** '),
@@ -274,13 +293,15 @@ class TabletAccountCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         context.loc.cardholderLabel.toUpperCase(),
-                        style: Theme.of(context).textTheme.caption?.copyWith(),
+                        style:
+                            Theme.of(context).textTheme.bodySmall?.copyWith(),
                       ),
                       Text(
                         cardHolder.toUpperCase(),
-                        style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       )
                     ],
                   ),
@@ -330,8 +351,16 @@ class DesktopAccountCard extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.1),
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.05),
+                Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .color!
+                    .withOpacity(0.1),
+                Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .color!
+                    .withOpacity(0.05),
               ],
               stops: const [0.1, 1],
             ),
@@ -339,8 +368,16 @@ class DesktopAccountCard extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
-                Theme.of(context).textTheme.subtitle1!.color!.withOpacity(0.5),
+                Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .color!
+                    .withOpacity(0.5),
+                Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .color!
+                    .withOpacity(0.5),
               ],
             ),
             child: Padding(
@@ -354,7 +391,7 @@ class DesktopAccountCard extends StatelessWidget {
                     children: [
                       Text(
                         bankName,
-                        style: Theme.of(context).textTheme.headline3,
+                        style: Theme.of(context).textTheme.displaySmall,
                       ),
                       Icon(cardType.icon, size: 32),
                     ],
@@ -363,7 +400,7 @@ class DesktopAccountCard extends StatelessWidget {
                     text: TextSpan(
                       text: '**** ',
                       style: GoogleFonts.jetBrainsMono(
-                        textStyle: Theme.of(context).textTheme.headline2,
+                        textStyle: Theme.of(context).textTheme.displayMedium,
                       ),
                       children: [
                         const TextSpan(text: '**** '),
@@ -377,10 +414,10 @@ class DesktopAccountCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         context.loc.cardholderLabel.toUpperCase(),
-                        style: Theme.of(context).textTheme.caption?.copyWith(
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: Theme.of(context)
                                   .textTheme
-                                  .subtitle1!
+                                  .titleMedium!
                                   .color!
                                   .withOpacity(0.5),
                               fontWeight: FontWeight.bold,
@@ -388,7 +425,10 @@ class DesktopAccountCard extends StatelessWidget {
                       ),
                       Text(
                         cardHolder.toUpperCase(),
-                        style: Theme.of(context).textTheme.headline4?.copyWith(
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
                       )

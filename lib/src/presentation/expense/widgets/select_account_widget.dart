@@ -43,7 +43,7 @@ class SelectedAccount extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   context.loc.selectAccountLabel,
-                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),
@@ -61,7 +61,7 @@ class SelectedAccount extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   context.loc.selectAccountLabel,
-                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),

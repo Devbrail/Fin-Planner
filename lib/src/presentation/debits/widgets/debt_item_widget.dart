@@ -38,7 +38,10 @@ class DebtItemWidget extends StatelessWidget {
                   ListTile(
                     title: Text(
                       debt.name,
-                      style: Theme.of(context).textTheme.headline5?.copyWith(
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(
                             color:
                                 Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
@@ -54,7 +57,7 @@ class DebtItemWidget extends StatelessWidget {
                     ),
                     trailing: Text(
                       (debt.amount - amount).toCurrency(),
-                      style: Theme.of(context).textTheme.headline6?.copyWith(),
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(),
                     ),
                   ),
                   Padding(

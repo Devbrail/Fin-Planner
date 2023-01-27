@@ -60,14 +60,14 @@ class CategoryItemDesktopWidget extends StatelessWidget {
                 children: [
                   Text(
                     category.name,
-                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                     textAlign: TextAlign.center,
                   ),
                   Text(
                     category.description == null ? '' : category.description!,
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                     textAlign: TextAlign.center,

@@ -30,7 +30,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
           ListTile(
             title: Text(
               context.loc.themeLabel,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           ...ThemeMode.values

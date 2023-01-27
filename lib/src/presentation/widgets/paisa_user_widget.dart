@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../core/enum/box_types.dart';
-import '../../service_locator.dart';
 import 'package:hive_flutter/adapters.dart';
 
+import '../../core/enum/box_types.dart';
+import '../../service_locator.dart';
 import '../home/widgets/welcome_widget.dart';
 import '../settings/widgets/user_profile_widget.dart';
 import 'color_palette.dart';

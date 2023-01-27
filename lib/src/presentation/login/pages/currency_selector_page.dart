@@ -34,7 +34,7 @@ class CurrencySelectorPage extends StatelessWidget {
                 bloc: splashCubit,
                 listener: (context, state) {
                   if (state is NavigateToHome) {
-                    context.replace(landingPath);
+                    context.push(landingPath);
                   }
                 },
                 child: Column(
@@ -56,7 +56,7 @@ class CurrencySelectorPage extends StatelessWidget {
                             context.loc.selectedCountryLabel,
                             style: Theme.of(context)
                                 .textTheme
-                                .headline5
+                                .headlineSmall
                                 ?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color:
@@ -121,7 +121,7 @@ class CurrencySelectorPage extends StatelessWidget {
               label: const Icon(MdiIcons.arrowRight),
               icon: Text(
                 context.loc.nextLabel,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1,
                     ),

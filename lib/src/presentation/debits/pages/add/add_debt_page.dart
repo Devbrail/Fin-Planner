@@ -150,7 +150,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                           context.loc.transactionHistoryLabel,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle1
+                              .titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -202,7 +202,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize:
-                              Theme.of(context).textTheme.headline6?.fontSize,
+                              Theme.of(context).textTheme.titleLarge?.fontSize,
                         ),
                       ),
                     ),

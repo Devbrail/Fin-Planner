@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
@@ -58,14 +57,14 @@ class _UserImagePageState extends State<UserImagePage> {
                 const SizedBox(height: 16),
                 Text(
                   context.loc.imageLabel,
-                  style: Theme.of(context).textTheme.headline5?.copyWith(
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
                 Text(
                   context.loc.imageDescLabel,
-                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Theme.of(context)
                             .colorScheme
                             .onSurface
@@ -96,7 +95,7 @@ class _UserImagePageState extends State<UserImagePage> {
         label: const Icon(MdiIcons.arrowRight),
         icon: Text(
           context.loc.nextLabel,
-          style: Theme.of(context).textTheme.bodyText1?.copyWith(
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
               ),

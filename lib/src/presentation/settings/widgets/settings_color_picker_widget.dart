@@ -73,7 +73,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
     return FutureResolve<AndroidDeviceInfo>(
       future: DeviceInfoPlugin().androidInfo,
       builder: (info) {
-        final sdk = info.version.sdkInt ?? 0;
+        final sdk = info.version.sdkInt;
         bool isAndroid12 = sdk >= 29;
         return ValueListenableBuilder<Box<dynamic>>(
           valueListenable: valueListenable,
@@ -95,7 +95,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                   ListTile(
                     title: Text(
                       context.loc.pickColorLabel,
-                      style: Theme.of(context).textTheme.headline6,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                   Visibility(

@@ -50,7 +50,10 @@ class UserNamePage extends StatelessWidget {
                     const SizedBox(height: 16),
                     RichText(
                       text: TextSpan(
-                        style: Theme.of(context).textTheme.headline5?.copyWith(
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).colorScheme.onSurface,
                               letterSpacing: 0.8,
@@ -69,7 +72,7 @@ class UserNamePage extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       context.loc.welcomeDescLabel,
-                      style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
                                 .onSurface
@@ -114,7 +117,7 @@ class UserNamePage extends StatelessWidget {
             label: const Icon(MdiIcons.arrowRight),
             icon: Text(
               context.loc.nextLabel,
-              style: Theme.of(context).textTheme.bodyText1?.copyWith(
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,
                   ),

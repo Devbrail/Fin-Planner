@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import 'setting_option.dart';
-
 import '../../../core/common.dart';
+import 'setting_option.dart';
 
 class VersionWidget extends StatefulWidget {
   const VersionWidget({Key? key}) : super(key: key);

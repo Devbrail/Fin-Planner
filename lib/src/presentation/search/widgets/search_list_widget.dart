@@ -64,7 +64,7 @@ class SearchListWidget extends StatelessWidget {
             ? Center(
                 child: Text(
                   context.loc.noResultFoundLabel,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               )
             : FutureBuilder<List<dynamic>>(
