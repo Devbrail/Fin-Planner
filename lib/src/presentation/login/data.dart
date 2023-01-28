@@ -30,6 +30,7 @@ List<CountryMap> getLocales() => [
       CountryMap("South African Rand", const Locale('zu')),
       CountryMap("New Taiwan dollar", const Locale('zh_TW')),
       CountryMap("Ethiopian Birr", const Locale('am')),
+      CountryMap("Singapore Dollar", const Locale('en_SG')),
     ];
 
 class CountryMap {

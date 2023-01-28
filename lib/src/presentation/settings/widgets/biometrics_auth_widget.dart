@@ -7,8 +7,13 @@ import '../../../data/settings/authenticate.dart';
 import '../../../service_locator.dart';
 
 class BiometricAuthWidget extends StatefulWidget {
-  const BiometricAuthWidget({super.key, required this.authenticate});
+  const BiometricAuthWidget({
+    super.key,
+    required this.authenticate,
+  });
+
   final Authenticate authenticate;
+
   @override
   State<BiometricAuthWidget> createState() => _BiometricAuthWidgetState();
 }
@@ -20,37 +25,33 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
   late bool isSelected = settings.get(userAuthKey, defaultValue: false);
 
   @override
-  Widget build(BuildContext context) {
-    return SwitchListTile(
-      title: Text(context.loc.localAppLabel),
-      onChanged: (bool value) async {
-        final canAuth = await widget.authenticate.checkBiometrics();
-        if (canAuth && value) {
-          await widget.authenticate.authenticateWithBiometrics();
-        }
-        setState(() {
-          isSelected = canAuth && value;
-        });
-        _showSnackBar(isSelected);
-      },
-      value: isSelected,
-    );
-  }
+  Widget build(BuildContext context) => SwitchListTile(
+        title: Text(context.loc.localAppLabel),
+        onChanged: (bool value) async {
+          final canAuth = await widget.authenticate.checkBiometrics();
+          if (canAuth && value) {
+            await widget.authenticate.authenticateWithBiometrics();
+          }
+          setState(() {
+            isSelected = canAuth && value;
+          });
+          _showSnackBar(isSelected);
+        },
+        value: isSelected,
+      );
 
-  void _showSnackBar(bool result) {
-    settings
-        .put(userAuthKey, result)
-        .then((value) => ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-              SnackBar(
-                content: Text(
-                  result ? 'Authenticated' : 'Not authenticated',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  ),
+  void _showSnackBar(bool result) => settings
+      .put(userAuthKey, result)
+      .then((value) => ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+            SnackBar(
+              content: Text(
+                result ? 'Authenticated' : 'Not authenticated',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
                 ),
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               ),
-            ));
-  }
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+            ),
+          ));
 }
