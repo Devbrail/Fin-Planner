@@ -20,7 +20,7 @@ class WelcomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
       valueListenable: locator
-          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+          .get<Box<dynamic>>(instanceName: BoxType.settings.name)
           .listenable(keys: [userImageKey, userNameKey]),
       builder: (context, value, _) {
         String image = value.get(userImageKey, defaultValue: '');

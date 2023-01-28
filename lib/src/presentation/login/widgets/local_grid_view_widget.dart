@@ -27,7 +27,7 @@ class LocaleGridView extends StatefulWidget {
 
 class _LocaleGridViewState extends State<LocaleGridView> {
   final Box<dynamic> settings =
-      locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
+      locator.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   late CountryMap? selectedIndex = widget.locales.firstWhere(
     (element) =>

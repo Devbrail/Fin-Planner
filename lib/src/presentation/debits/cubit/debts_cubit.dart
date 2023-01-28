@@ -23,8 +23,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
         (event, emit) => _fetchDebtOrCreditFromId(event, emit));
     on<AddOrUpdateEvent>((event, emit) => addDebt(event, emit));
   }
-  late final transactionBox =
-      Hive.box<Transaction>(BoxType.transactions.stringValue);
+  late final transactionBox = Hive.box<Transaction>(BoxType.transactions.name);
 
   final DebtUseCase useCase;
   late DebtType currentDebtType = DebtType.debt;

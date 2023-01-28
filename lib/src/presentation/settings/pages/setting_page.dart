@@ -35,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
             options: [
               SettingsColorPickerWidget(
                 settings: locator.get(
-                  instanceName: BoxType.settings.stringValue,
+                  instanceName: BoxType.settings.name,
                 ),
               ),
             ],

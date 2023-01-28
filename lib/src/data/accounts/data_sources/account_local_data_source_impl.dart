@@ -30,7 +30,7 @@ class LocalAccountManagerDataSourceImpl
 
   @override
   Future<void> deleteAccount(int key) async {
-    final expenseBox = Hive.box<Expense>(BoxType.expense.stringValue);
+    final expenseBox = Hive.box<Expense>(BoxType.expense.name);
     final keys = expenseBox.values
         .where((element) => element.accountId == key)
         .map((e) => e.key);

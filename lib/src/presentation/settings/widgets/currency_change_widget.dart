@@ -25,7 +25,7 @@ class CurrencyChangeWidget extends StatelessWidget {
       subtitle: Text(
         NumberFormat.compactSimpleCurrency(
               locale: locator
-                  .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+                  .get<Box<dynamic>>(instanceName: BoxType.settings.name)
                   .get(userLanguageKey),
             ).currencyName ??
             '',

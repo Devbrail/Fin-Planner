@@ -20,7 +20,7 @@ class UserImagePage extends StatefulWidget {
 
 class _UserImagePageState extends State<UserImagePage> {
   final Box<dynamic> value =
-      locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue);
+      locator.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   void _pickImage() {
     final ImagePicker picker = ImagePicker();
@@ -119,7 +119,7 @@ class UserImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
       valueListenable: locator
-          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+          .get<Box<dynamic>>(instanceName: BoxType.settings.name)
           .listenable(
         keys: [userImageKey],
       ),

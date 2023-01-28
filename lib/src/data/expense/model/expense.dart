@@ -40,7 +40,7 @@ class Expense extends HiveObject {
         'name': name,
         'currency': currency,
         'time': time.toIso8601String(),
-        'type': type?.nameString,
+        'type': type?.type,
         'accountId': accountId,
         'categoryId': categoryId,
         'superId': superId,

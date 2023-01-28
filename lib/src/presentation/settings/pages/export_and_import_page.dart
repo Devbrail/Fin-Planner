@@ -6,7 +6,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/common.dart';
-import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
@@ -244,6 +243,6 @@ class ExportAndImportPage extends StatelessWidget {
         category.description ?? '',
         account.name,
         account.bankName,
-        account.cardType!.nameString,
+        account.cardType!.name,
       ];
 }

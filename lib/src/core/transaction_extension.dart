@@ -4,10 +4,7 @@ import '../data/debt/models/transaction.dart';
 
 extension TransactionMapping on Box<Transaction> {
   List<Transaction> getTransactionsFromId(int? id) {
-    if (id == null) {
-      return [];
-    } else {
-      return values.where((element) => element.parentId == id).toList();
-    }
+    if (id == null) return [];
+    return values.where((element) => element.parentId == id).toList();
   }
 }

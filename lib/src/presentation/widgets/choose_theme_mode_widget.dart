@@ -83,8 +83,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
                   ),
                   onPressed: () {
                     locator
-                        .get<Box<dynamic>>(
-                            instanceName: BoxType.settings.stringValue)
+                        .get<Box<dynamic>>(instanceName: BoxType.settings.name)
                         .put(themeModeKey, currentIndex.index)
                         .then((value) => Navigator.pop(context));
                   },

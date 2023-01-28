@@ -48,7 +48,7 @@ const addDebitName = 'debit-add';
 const introPageName = 'intro';
 const introPagePath = '/intro';
 
-final settings = Hive.box(BoxType.settings.stringValue);
+final settings = Hive.box(BoxType.settings.name);
 
 final GoRouter goRouter = GoRouter(
   initialLocation: introPagePath,

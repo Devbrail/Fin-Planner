@@ -62,25 +62,24 @@ Future<void> _setupHive() async {
     ..registerAdapter(CardTypeAdapter());
 
   final transactionBox =
-      await Hive.openBox<Transaction>(BoxType.transactions.stringValue);
+      await Hive.openBox<Transaction>(BoxType.transactions.name);
   locator.registerLazySingleton<Box<Transaction>>(() => transactionBox);
 
-  final expenseBox = await Hive.openBox<Expense>(BoxType.expense.stringValue);
+  final expenseBox = await Hive.openBox<Expense>(BoxType.expense.name);
   locator.registerLazySingleton<Box<Expense>>(() => expenseBox);
 
-  final categoryBox =
-      await Hive.openBox<Category>(BoxType.category.stringValue);
+  final categoryBox = await Hive.openBox<Category>(BoxType.category.name);
   locator.registerLazySingleton<Box<Category>>(() => categoryBox);
 
-  final accountBox = await Hive.openBox<Account>(BoxType.accounts.stringValue);
+  final accountBox = await Hive.openBox<Account>(BoxType.accounts.name);
   locator.registerLazySingleton<Box<Account>>(() => accountBox);
 
-  final debtBox = await Hive.openBox<Debt>(BoxType.debts.stringValue);
+  final debtBox = await Hive.openBox<Debt>(BoxType.debts.name);
   locator.registerLazySingleton<Box<Debt>>(() => debtBox);
 
-  final boxDynamic = await Hive.openBox(BoxType.settings.stringValue);
+  final boxDynamic = await Hive.openBox(BoxType.settings.name);
   locator.registerLazySingleton<Box<dynamic>>(() => boxDynamic,
-      instanceName: BoxType.settings.stringValue);
+      instanceName: BoxType.settings.name);
 }
 
 void _localSources() {
@@ -149,8 +148,8 @@ void _setupBloc() {
   locator.registerFactoryAsync(() async => CurrencySelectorBloc(
         accounts: locator.get(),
         categories: locator.get(),
-        settings: locator.get<Box<dynamic>>(
-            instanceName: BoxType.settings.stringValue),
+        settings:
+            locator.get<Box<dynamic>>(instanceName: BoxType.settings.name),
       ));
   locator.registerFactoryAsync(() async => CategoryBloc(
         getCategoryUseCase: await locator.getAsync(),
@@ -168,8 +167,8 @@ void _setupBloc() {
         addAccountUseCase: await locator.getAsync(),
         deleteAccountUseCase: await locator.getAsync(),
       ));
-  locator.registerFactory(() => HomeBloc(
-      locator.get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)));
+  locator.registerFactory(() =>
+      HomeBloc(locator.get<Box<dynamic>>(instanceName: BoxType.settings.name)));
   locator.registerFactoryAsync(
       () async => DebtsBloc(useCase: await locator.getAsync()));
 }

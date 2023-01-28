@@ -33,7 +33,7 @@ class PaisaUserWidget extends StatelessWidget {
         context: context,
         builder: (_) => UserProfilePage(
           settings: locator.get<Box<dynamic>>(
-            instanceName: BoxType.settings.stringValue,
+            instanceName: BoxType.settings.name,
           ),
           nameController: TextEditingController(),
         ),

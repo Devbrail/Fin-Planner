@@ -20,7 +20,7 @@ class BiometricAuthWidget extends StatefulWidget {
 
 class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
   final settings = locator.get<Box<dynamic>>(
-    instanceName: BoxType.settings.stringValue,
+    instanceName: BoxType.settings.name,
   );
   late bool isSelected = settings.get(userAuthKey, defaultValue: false);
 

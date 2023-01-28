@@ -9,14 +9,15 @@ part 'transaction.g.dart';
 @HiveType(typeId: 11)
 enum TransactionType {
   @HiveField(1)
-  expense,
+  expense('expense'),
   @HiveField(0)
-  income,
+  income('income');
   /*  @HiveField(2)
   transfer */
-}
 
-extension TransactionTypeMapping on TransactionType {
+  final String type;
+  const TransactionType(this.type);
+
   String get sign => this == TransactionType.expense ? '-' : '+';
 
   Color? color(BuildContext context) => this == TransactionType.expense
@@ -42,17 +43,6 @@ extension TransactionTypeMapping on TransactionType {
         return context.loc.expenseNameLabel;
       /*  case TransactionType.transfer:
        return context.loc.transferNameLabel; */
-    }
-  }
-
-  String get nameString {
-    switch (this) {
-      case TransactionType.expense:
-        return 'expense';
-      case TransactionType.income:
-        return 'income';
-      /*  case TransactionType.transfer:
-        return 'transfer'; */
     }
   }
 }

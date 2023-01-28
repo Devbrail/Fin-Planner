@@ -125,7 +125,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                             padding: const EdgeInsets.all(28)),
                         onPressed: () => locator
                             .get<Box<dynamic>>(
-                                instanceName: BoxType.settings.stringValue)
+                                instanceName: BoxType.settings.name)
                             .put(userIntroKey, true),
                         child: Text(
                           'Get started',
@@ -256,7 +256,7 @@ class IntoMobileWidget extends StatelessWidget {
             style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(18)),
             onPressed: () {
               locator
-                  .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+                  .get<Box<dynamic>>(instanceName: BoxType.settings.name)
                   .put(userIntroKey, true);
             },
             child: Text(

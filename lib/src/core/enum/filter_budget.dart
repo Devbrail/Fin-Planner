@@ -7,10 +7,8 @@ enum FilterBudget {
   weekly,
   monthly,
   yearly,
-  all,
-}
+  all;
 
-extension FilterBudgetMapping on FilterBudget {
   String name(BuildContext context) {
     switch (this) {
       case FilterBudget.daily:

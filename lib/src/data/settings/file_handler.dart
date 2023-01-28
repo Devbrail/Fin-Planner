@@ -69,9 +69,9 @@ class FileHandler {
     if (file != null) {
       final jsonString = await file.readAsString();
       final data = Data.fromRawJson(jsonString);
-      final accountBox = Hive.box<Account>(BoxType.accounts.stringValue);
-      final categoryBox = Hive.box<Category>(BoxType.category.stringValue);
-      final expenseBox = Hive.box<Expense>(BoxType.expense.stringValue);
+      final accountBox = Hive.box<Account>(BoxType.accounts.name);
+      final categoryBox = Hive.box<Category>(BoxType.category.name);
+      final expenseBox = Hive.box<Expense>(BoxType.expense.name);
       await expenseBox.clear();
       await categoryBox.clear();
       await accountBox.clear();

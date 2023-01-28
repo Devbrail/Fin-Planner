@@ -12,7 +12,7 @@ class WelcomeNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
       valueListenable: locator
-          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+          .get<Box<dynamic>>(instanceName: BoxType.settings.name)
           .listenable(keys: [userNameKey]),
       builder: (context, value, _) {
         final name = value.get(userNameKey, defaultValue: 'Name');

@@ -1,20 +1,12 @@
-enum BoxType { expense, accounts, category, settings, debts, transactions }
+enum BoxType {
+  expense('expense'),
+  accounts('accounts'),
+  category('category'),
+  settings('settings'),
+  debts('debts'),
+  transactions('transactions');
 
-extension BoxTypeMapping on BoxType {
-  String get stringValue {
-    switch (this) {
-      case BoxType.accounts:
-        return 'accounts';
-      case BoxType.category:
-        return 'category';
-      case BoxType.expense:
-        return 'expense';
-      case BoxType.settings:
-        return 'settings';
-      case BoxType.debts:
-        return 'debts';
-      case BoxType.transactions:
-        return 'transactions';
-    }
-  }
+  final String name;
+
+  const BoxType(this.name);
 }

@@ -19,6 +19,14 @@
     "@categoryLabel": {
         "description": "Category label"
     },
+    "enterDebtLabel": "Enter debt amount",
+    "@enterDebtLabel": {
+        "description": "Enter debt amount label"
+    },
+    "enterCreditLabel": "Enter credit amount",
+    "@enterCreditLabel": {
+        "description": "Enter credit amount label"
+    },
     "addCategoryLabel": "Add Category",
     "@addCategoryLabel": {
         "description": "Add Category label"

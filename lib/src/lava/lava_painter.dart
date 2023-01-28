@@ -107,10 +107,9 @@ class Lava {
       final dx = ix[a + 12];
       final dy = ix[a + 16];
       double force = matrix[sx + dx]![sy + dy]!.force;
-      if (force > 0 && sign < 0 ||
-          force < 0 && sign > 0 ||
-          force == null ||
-          force == 0) force = computeForce(sx + dx, sy + dy);
+      if (force > 0 && sign < 0 || force < 0 && sign > 0 || force == 0) {
+        force = computeForce(sx + dx, sy + dy);
+      }
       if (force.abs() > 1) mscase += pow(2, a).toInt();
     }
 

@@ -9,7 +9,7 @@ extension MappingOnDouble on double {
   String toCurrency({int decimalDigits = 2}) {
     return NumberFormat.simpleCurrency(
       locale: locator
-          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+          .get<Box<dynamic>>(instanceName: BoxType.settings.name)
           .get(userLanguageKey),
       decimalDigits: decimalDigits,
     ).format(this);

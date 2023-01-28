@@ -10,10 +10,8 @@ enum DebtType {
   @HiveField(1)
   debt,
   @HiveField(2)
-  credit
-}
+  credit;
 
-extension DebtTypeMapping on DebtType {
   String name(BuildContext context) {
     switch (this) {
       case DebtType.debt:
@@ -26,9 +24,9 @@ extension DebtTypeMapping on DebtType {
   String hintName(BuildContext context) {
     switch (this) {
       case DebtType.debt:
-        return 'Enter debt amount';
+        return context.loc.enterDebtLabel;
       case DebtType.credit:
-        return 'Enter credit amount';
+        return context.loc.enterCreditLabel;
     }
   }
 }

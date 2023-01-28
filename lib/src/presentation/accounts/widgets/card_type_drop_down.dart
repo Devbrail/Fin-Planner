@@ -36,7 +36,7 @@ class CardTypeButtonsState extends State<CardTypeButtons> {
   Widget build(BuildContext context) => Row(
         children: CardType.values
             .map((type) => PaisaMaterialYouChip(
-                  title: type.nameString,
+                  title: type.name,
                   isSelected: selectedType == type,
                   onPressed: () => _update(type),
                 ))

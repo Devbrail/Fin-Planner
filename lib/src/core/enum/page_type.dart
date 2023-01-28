@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../common.dart';
 
-enum PageType { home, accounts, category, budgetOverview, debts }
+enum PageType {
+  home,
+  accounts,
+  category,
+  budgetOverview,
+  debts;
 
-extension MapPaisaPage on PageType {
   int get toIndex {
     switch (this) {
       case PageType.home:

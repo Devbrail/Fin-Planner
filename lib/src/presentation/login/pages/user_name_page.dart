@@ -19,7 +19,7 @@ class UserNamePage extends StatelessWidget {
     return ValueListenableBuilder<Box>(
       key: const Key('user_name_page_view'),
       valueListenable: locator
-          .get<Box<dynamic>>(instanceName: BoxType.settings.stringValue)
+          .get<Box<dynamic>>(instanceName: BoxType.settings.name)
           .listenable(
         keys: [userNameKey],
       ),

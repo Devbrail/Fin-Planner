@@ -7,35 +7,28 @@ part 'card_type.g.dart';
 @HiveType(typeId: 12)
 enum CardType {
   @HiveField(0)
-  cash,
+  cash(
+    name: 'Cash',
+    icon: MdiIcons.cashMultiple,
+  ),
   @HiveField(1)
-  bank,
+  bank(
+    name: 'Bank',
+    icon: MdiIcons.creditCardChip,
+  ),
   @HiveField(2)
-  wallet,
-}
+  wallet(
+    name: 'Wallet',
+    icon: MdiIcons.creditCard,
+  );
 
-extension CardTypeMapping on CardType {
-  String get nameString {
-    switch (this) {
-      case CardType.cash:
-        return 'Cash';
-      case CardType.bank:
-        return 'Bank';
-      case CardType.wallet:
-        return 'Wallet';
-    }
-  }
+  final String name;
+  final IconData icon;
 
-  IconData get icon {
-    switch (this) {
-      case CardType.cash:
-        return MdiIcons.cashMultiple;
-      case CardType.bank:
-        return MdiIcons.creditCardChip;
-      case CardType.wallet:
-        return MdiIcons.creditCard;
-    }
-  }
+  const CardType({
+    required this.name,
+    required this.icon,
+  });
 }
 
 extension CardTypeMap on String {

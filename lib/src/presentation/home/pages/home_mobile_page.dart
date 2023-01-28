@@ -40,11 +40,10 @@ class HomeMobilePage extends StatelessWidget {
         child: BlocBuilder(
           bloc: homeBloc,
           builder: (context, state) {
-            PageType pageType = PageType.home;
+            bool isSelected = false;
             if (state is CurrentIndexState) {
-              pageType = state.currentPage;
+              isSelected = state.currentPage == PageType.debts;
             }
-            bool isSelected = pageType == PageType.debts;
             return ListView(
               children: [
                 ListTile(
