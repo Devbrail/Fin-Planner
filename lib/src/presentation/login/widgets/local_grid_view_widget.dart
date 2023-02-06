@@ -71,10 +71,14 @@ class _LocaleGridViewState extends State<LocaleGridView> {
               widget.onPressed(map.locale);
             },
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.only(
+                    top: 16.0,
+                    left: 16,
+                  ),
                   child: Text(
                     format.currencySymbol,
                     style: GoogleFonts.manrope(
@@ -82,10 +86,15 @@ class _LocaleGridViewState extends State<LocaleGridView> {
                     ),
                   ),
                 ),
+                const Spacer(),
                 ListTile(
-                  title: Text(map.name),
+                  title: Text(
+                    map.name,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   subtitle: Text(
                     '${format.currencyName}',
+                    overflow: TextOverflow.ellipsis,
                   ),
                 )
               ],
