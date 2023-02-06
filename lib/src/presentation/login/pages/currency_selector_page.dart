@@ -21,8 +21,7 @@ class CurrencySelectorPage extends StatelessWidget {
   final bool forceChangeCurrency;
 
   @override
-  Widget build(BuildContext context) {
-    return FutureResolve<CurrencySelectorBloc>(
+  Widget build(BuildContext context) => FutureResolve<CurrencySelectorBloc>(
         future: locator.getAsync<CurrencySelectorBloc>(),
         builder: (splashCubit) {
           splashCubit
@@ -69,12 +68,11 @@ class CurrencySelectorPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: PaisaTextFormField(
-                        hintText: 'Search',
+                        hintText: context.loc.searchLabel,
                         controller: TextEditingController(),
                         keyboardType: TextInputType.name,
-                        onChanged: (value) {
-                          splashCubit.add(FilterLocaleEvent(value));
-                        },
+                        onChanged: (value) =>
+                            splashCubit.add(FilterLocaleEvent(value)),
                       ),
                     ),
                     Expanded(
@@ -128,6 +126,6 @@ class CurrencySelectorPage extends StatelessWidget {
               ),
             ),
           );
-        });
-  }
+        },
+      );
 }

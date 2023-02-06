@@ -44,7 +44,13 @@ class CategoryListMobileWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
-            confirmationButton: ElevatedButton(
+            confirmationButton: TextButton(
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                foregroundColor:
+                    Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
               onPressed: () {
                 addCategoryBloc.add(CategoryDeleteEvent(categories[index]));
                 Navigator.pop(context);

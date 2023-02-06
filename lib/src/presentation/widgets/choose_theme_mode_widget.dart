@@ -57,8 +57,8 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 16.0, bottom: 16),
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
+                child: TextButton(
+                  style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                     ),
@@ -71,8 +71,12 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 16.0, bottom: 16),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primaryContainer,
+                    foregroundColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                     ),
@@ -81,12 +85,10 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
                       vertical: 12,
                     ),
                   ),
-                  onPressed: () {
-                    locator
-                        .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-                        .put(themeModeKey, currentIndex.index)
-                        .then((value) => Navigator.pop(context));
-                  },
+                  onPressed: () => locator
+                      .get<Box<dynamic>>(instanceName: BoxType.settings.name)
+                      .put(themeModeKey, currentIndex.index)
+                      .then((value) => Navigator.pop(context)),
                   child: Text(context.loc.okLabel),
                 ),
               ),

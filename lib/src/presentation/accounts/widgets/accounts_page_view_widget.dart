@@ -74,7 +74,14 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                         ],
                       ),
                     ),
-                    confirmationButton: ElevatedButton(
+                    confirmationButton: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.primaryContainer,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
                       onPressed: () {
                         widget.accountBloc.add(DeleteAccountEvent(account));
                         Navigator.pop(context);

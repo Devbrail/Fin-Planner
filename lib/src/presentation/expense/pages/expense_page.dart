@@ -123,7 +123,17 @@ class _ExpensePageState extends State<ExpensePage> {
                                         Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ),
-                                confirmationButton: ElevatedButton(
+                                confirmationButton: TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    backgroundColor: Theme.of(context)
+                                        .colorScheme
+                                        .primaryContainer,
+                                    foregroundColor: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimaryContainer,
+                                  ),
                                   onPressed: () {
                                     expenseBloc.add(
                                         ClearExpenseEvent(widget.expenseId!));
