@@ -13,6 +13,7 @@ class AddExpenseUseCase {
     required int categoryId,
     required int accountId,
     required TransactionType transactionType,
+    required String? description,
   }) =>
       expenseRepository.addExpense(
         name,
@@ -21,5 +22,6 @@ class AddExpenseUseCase {
         categoryId,
         accountId,
         transactionType,
+        description,
       );
 }

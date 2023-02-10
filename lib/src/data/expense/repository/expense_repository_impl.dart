@@ -4,9 +4,7 @@ import '../data_sources/expense_manager_local_data_source.dart';
 import '../model/expense.dart';
 
 class ExpenseRepositoryImpl extends ExpenseRepository {
-  ExpenseRepositoryImpl({
-    required this.dataSource,
-  });
+  ExpenseRepositoryImpl({required this.dataSource});
 
   final LocalExpenseManagerDataSource dataSource;
 
@@ -18,22 +16,23 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     int category,
     int account,
     TransactionType transactionType,
-  ) async {
-    final expense = Expense(
-      name: name,
-      currency: amount,
-      time: time,
-      categoryId: category,
-      accountId: account,
-      type: transactionType,
-    );
-    await dataSource.addOrUpdateExpense(expense);
-  }
+    String? description,
+  ) async =>
+      dataSource.addOrUpdateExpense(
+        Expense(
+          name: name,
+          currency: amount,
+          time: time,
+          categoryId: category,
+          accountId: account,
+          type: transactionType,
+          description: description,
+        ),
+      );
 
   @override
-  Future<void> clearExpense(int expenseId) async {
-    await dataSource.clearExpense(expenseId);
-  }
+  Future<void> clearExpense(int expenseId) async =>
+      dataSource.clearExpense(expenseId);
 
   @override
   Future<Expense?> fetchExpenseFromId(int expenseId) =>

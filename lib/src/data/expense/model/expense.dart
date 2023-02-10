@@ -27,6 +27,9 @@ class Expense extends HiveObject {
   @HiveField(7)
   int? superId;
 
+  @HiveField(8)
+  String? description;
+
   Expense({
     required this.name,
     required this.currency,
@@ -34,6 +37,7 @@ class Expense extends HiveObject {
     required this.categoryId,
     required this.accountId,
     required this.type,
+    this.description,
   });
 
   Map<String, dynamic> toJson() => {
@@ -44,6 +48,7 @@ class Expense extends HiveObject {
         'accountId': accountId,
         'categoryId': categoryId,
         'superId': superId,
+        'description': description,
       };
 
   factory Expense.fromJson(Map<String, dynamic> json) => Expense(
@@ -53,5 +58,6 @@ class Expense extends HiveObject {
         categoryId: json['categoryId'],
         accountId: json['accountId'],
         type: (json['type'] as String).type,
+        description: (json['description'] as String),
       )..superId = json['superId'];
 }

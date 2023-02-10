@@ -39,6 +39,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   int? selectedCategoryId;
   int? selectedAccountId;
   Expense? currentExpense;
+  String? currentDescription;
   late DateTime? selectedDate = DateTime.now();
   late TransactionType transactionType = TransactionType.expense;
 
@@ -57,6 +58,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       selectedAccountId = expense.accountId;
       selectedDate = expense.time;
       transactionType = expense.type ?? TransactionType.expense;
+      currentDescription = expense.description;
       currentExpense = expense;
       emit(ExpenseSuccessState(expense));
     }
@@ -71,6 +73,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     final int? categoryId = selectedCategoryId;
     final int? accountId = selectedAccountId;
     final DateTime? dateTime = selectedDate;
+    final String? description = currentDescription;
 
     if (validAmount == null || validAmount == 0.0) {
       return emit(const ExpenseErrorState('Enter valid amount'));
@@ -108,6 +111,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         categoryId: categoryId,
         accountId: accountId,
         transactionType: transactionType,
+        description: description,
       );
     } else {
       if (currentExpense != null) {
@@ -117,7 +121,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
           ..currency = validAmount
           ..name = name
           ..time = dateTime
-          ..type = transactionType;
+          ..type = transactionType
+          ..description = description;
 
         await currentExpense!.save();
       }

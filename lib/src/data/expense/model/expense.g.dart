@@ -25,13 +25,14 @@ class ExpenseAdapter extends TypeAdapter<Expense> {
       type: fields[4] == null
           ? TransactionType.expense
           : fields[4] as TransactionType?,
+      description: fields[8] as String?,
     )..superId = fields[7] as int?;
   }
 
   @override
   void write(BinaryWriter writer, Expense obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -45,7 +46,9 @@ class ExpenseAdapter extends TypeAdapter<Expense> {
       ..writeByte(6)
       ..write(obj.categoryId)
       ..writeByte(7)
-      ..write(obj.superId);
+      ..write(obj.superId)
+      ..writeByte(8)
+      ..write(obj.description);
   }
 
   @override

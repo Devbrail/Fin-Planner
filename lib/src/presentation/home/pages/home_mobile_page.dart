@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../search/pages/search_page.dart';
-import '../../widgets/choose_theme_mode_widget.dart';
 import '../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../widgets/paisa_user_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/content_widget.dart';
-import '../widgets/drawer_item_widget.dart';
 
 class HomeMobilePage extends StatelessWidget {
   const HomeMobilePage({

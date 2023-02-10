@@ -31,6 +31,7 @@ class ExpensePage extends StatefulWidget {
 class _ExpensePageState extends State<ExpensePage> {
   late TextEditingController nameController = TextEditingController();
   late TextEditingController amountController = TextEditingController();
+  late TextEditingController descriptionController = TextEditingController();
   late TextEditingController dateTextController = TextEditingController();
 
   bool get isAddExpense => widget.expenseId == null;
@@ -40,6 +41,7 @@ class _ExpensePageState extends State<ExpensePage> {
     nameController.dispose();
     amountController.dispose();
     dateTextController.dispose();
+    descriptionController.dispose();
     super.dispose();
   }
 
@@ -99,6 +101,11 @@ class _ExpensePageState extends State<ExpensePage> {
                 amountController.text = state.expense.currency.toString();
                 amountController.selection = TextSelection.collapsed(
                   offset: state.expense.currency.toString().length,
+                );
+                descriptionController.text =
+                    state.expense.description.toString();
+                descriptionController.selection = TextSelection.collapsed(
+                  offset: state.expense.description.toString().length,
                 );
               }
             },
@@ -167,6 +174,9 @@ class _ExpensePageState extends State<ExpensePage> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               ExpenseNameWidget(controller: nameController),
+                              const SizedBox(height: 16),
+                              ExpenseDescriptionWidget(
+                                  controller: descriptionController),
                               const SizedBox(height: 16),
                               ExpenseAmountWidget(controller: amountController),
                               const SizedBox(height: 16),
@@ -267,6 +277,9 @@ class _ExpensePageState extends State<ExpensePage> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 ExpenseNameWidget(controller: nameController),
+                                const SizedBox(height: 16),
+                                ExpenseDescriptionWidget(
+                                    controller: descriptionController),
                                 const SizedBox(height: 16),
                                 ExpenseAmountWidget(
                                     controller: amountController),
@@ -394,7 +407,7 @@ class ExpenseNameWidget extends StatelessWidget {
             hintText: state.transactionType.hintName(context),
             keyboardType: TextInputType.name,
             validator: (value) {
-              if (value!.length >= 3) {
+              if (value!.isNotEmpty) {
                 return null;
               } else {
                 return context.loc.validNameLabel;
@@ -402,6 +415,44 @@ class ExpenseNameWidget extends StatelessWidget {
             },
             onChanged: (value) =>
                 BlocProvider.of<ExpenseBloc>(context).expenseName = value,
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
+    );
+  }
+}
+
+class ExpenseDescriptionWidget extends StatelessWidget {
+  const ExpenseDescriptionWidget({
+    super.key,
+    required this.controller,
+  });
+
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder(
+      bloc: BlocProvider.of<ExpenseBloc>(context),
+      buildWhen: (oldState, newState) => newState is ChangeExpenseState,
+      builder: (context, state) {
+        if (state is ChangeExpenseState) {
+          return PaisaTextFormField(
+            maxLines: 1,
+            controller: controller,
+            hintText: context.loc.descriptionLabel,
+            keyboardType: TextInputType.name,
+            validator: (value) {
+              if (value!.isNotEmpty) {
+                return null;
+              } else {
+                return context.loc.validNameLabel;
+              }
+            },
+            onChanged: (value) => BlocProvider.of<ExpenseBloc>(context)
+                .currentDescription = value,
           );
         } else {
           return const SizedBox.shrink();

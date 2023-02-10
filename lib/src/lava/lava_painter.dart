@@ -184,10 +184,10 @@ class Lava {
     } catch (_) {}
 
     if (debug) {
-      balls.forEach((ball) => canvas.drawCircle(
-          Offset(ball.pos.x.toDouble(), ball.pos.y.toDouble()),
-          ball.size,
-          Paint()..color = Colors.black.withOpacity(0.5)));
+      for (final ball in balls) {
+        canvas.drawCircle(Offset(ball.pos.x.toDouble(), ball.pos.y.toDouble()),
+            ball.size, Paint()..color = Colors.black.withOpacity(0.5));
+      }
 
       matrix.forEach(
         (_, item) => item.forEach(

@@ -1,14 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/core/enum/box_types.dart';
-import 'package:paisa/src/presentation/settings/widgets/user_profile_widget.dart';
-import 'package:paisa/src/service_locator.dart';
 
 import '../../core/common.dart';
+import '../../core/enum/box_types.dart';
+import '../../service_locator.dart';
 
 enum UserMenuPopup { debts, chooseTheme, settings, userDetails }
 

@@ -9,6 +9,7 @@ abstract class ExpenseRepository {
     int category,
     int account,
     TransactionType transactionType,
+    String? description,
   );
   Future<void> clearExpense(int expenseId);
 
