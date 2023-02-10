@@ -664,4 +664,8 @@
     "@deleteLabel": {
         "description": "Delete label"
     }
+   , "appBarSearchLabel": "Search expenses, accounts, categories",
+    "@appBarSearchLabel": {
+        "description": "Delete label"
+    }
 }

@@ -14,17 +14,16 @@ class SummaryMobilePage extends StatelessWidget {
   final ValueNotifier<FilterBudget> valueNotifier;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.only(bottom: 124),
-        children: [
-          const WelcomeNameWidget(),
-          const ExpenseTotalWidget(),
-          const SizedBox(height: 8),
-          FilterBudgetToggleWidget(valueNotifier: valueNotifier),
-          ExpenseHistory(valueNotifier: valueNotifier),
-        ],
-      ),
+    return ListView(
+      shrinkWrap: true,
+      padding: const EdgeInsets.only(bottom: 124),
+      children: [
+        const WelcomeNameWidget(),
+        const ExpenseTotalWidget(),
+        const SizedBox(height: 8),
+        FilterBudgetToggleWidget(valueNotifier: valueNotifier),
+        ExpenseHistory(valueNotifier: valueNotifier),
+      ],
     );
   }
 }
