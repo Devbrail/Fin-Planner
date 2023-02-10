@@ -5,15 +5,12 @@ import 'package:flutter/scheduler.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/src/core/enum/box_types.dart';
+import 'package:paisa/src/presentation/settings/widgets/user_profile_widget.dart';
 import 'package:paisa/src/service_locator.dart';
 
 import '../../core/common.dart';
 
-enum UserMenuPopup {
-  debts,
-  chooseTheme,
-  settings,
-}
+enum UserMenuPopup { debts, chooseTheme, settings, userDetails }
 
 Future<void> paisaBottomSheet(
   BuildContext context,
@@ -114,6 +111,8 @@ Future<void> showUserDialog(
                                 final name = value.get(userNameKey,
                                     defaultValue: 'Name');
                                 return ListTile(
+                                  onTap: () => userMenuPopup
+                                      .call(UserMenuPopup.userDetails),
                                   leading: Builder(
                                     builder: (context) {
                                       if (image.isEmpty) {

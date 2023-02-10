@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/app/routes.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/core/enum/page_type.dart';
-import 'package:paisa/src/presentation/home/bloc/home_bloc.dart';
-import 'package:paisa/src/presentation/widgets/choose_theme_mode_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:paisa/src/core/enum/box_types.dart';
+import 'package:paisa/src/presentation/settings/widgets/user_profile_widget.dart';
+import 'package:paisa/src/service_locator.dart';
 
-import '../../core/enum/box_types.dart';
-import '../../service_locator.dart';
+import '../../app/routes.dart';
+import '../../core/common.dart';
+import '../../core/enum/page_type.dart';
+import '../home/bloc/home_bloc.dart';
 import '../home/widgets/welcome_widget.dart';
-import '../settings/widgets/user_profile_widget.dart';
+import 'choose_theme_mode_widget.dart';
 import 'color_palette.dart';
+import 'paisa_bottom_sheet.dart';
 
 class PaisaUserWidget extends StatelessWidget {
   const PaisaUserWidget({
@@ -37,13 +37,12 @@ class PaisaUserWidget extends StatelessWidget {
         showUserDialog(
           context,
           userMenuPopup: (userMenuPopup) async {
+            Navigator.of(context).pop();
             switch (userMenuPopup) {
               case UserMenuPopup.debts:
                 homeBloc.add(const CurrentIndexEvent(PageType.debts));
-                Navigator.of(context).pop();
                 break;
               case UserMenuPopup.chooseTheme:
-                Navigator.of(context).pop();
                 await showModalBottomSheet(
                   constraints: BoxConstraints(
                     maxWidth: MediaQuery.of(context).size.width >= 700
@@ -64,30 +63,31 @@ class PaisaUserWidget extends StatelessWidget {
                 );
                 break;
               case UserMenuPopup.settings:
-                Navigator.of(context).pop();
                 GoRouter.of(context).pushNamed(settingsPath);
+                break;
+              case UserMenuPopup.userDetails:
+                showModalBottomSheet(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width >= 700
+                        ? 700
+                        : double.infinity,
+                  ),
+                  isScrollControlled: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  context: context,
+                  builder: (_) => UserProfilePage(
+                    settings: locator.get<Box<dynamic>>(
+                      instanceName: BoxType.settings.name,
+                    ),
+                    nameController: TextEditingController(),
+                  ),
+                );
                 break;
             }
           },
         );
-        /* showModalBottomSheet(
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width >= 700
-                ? 700
-                : double.infinity,
-          ),
-          isScrollControlled: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          context: context,
-          builder: (_) => UserProfilePage(
-            settings: locator.get<Box<dynamic>>(
-              instanceName: BoxType.settings.name,
-            ),
-            nameController: TextEditingController(),
-          ),
-        ); */
       },
       child: const WelcomeWidget(),
     );
