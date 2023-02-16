@@ -92,7 +92,7 @@ class UserNamePage extends StatelessWidget {
                         ),
                         keyboardType: TextInputType.name,
                         validator: (val) {
-                          if (val!.length >= 3) {
+                          if (val!.isNotEmpty) {
                             return null;
                           } else {
                             return context.loc.enterNameLabel;
