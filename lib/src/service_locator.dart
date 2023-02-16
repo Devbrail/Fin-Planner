@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'data/settings/authenticate.dart';
@@ -47,6 +50,50 @@ Future<void> setupLocator() async {
   _setupRepository();
   _setupUseCase();
   _setupBloc();
+}
+
+Future<void> _addDummy() async {
+  for (int i = 0; i < 10; i++) {
+    await locator
+        .getAsync<LocalAccountManagerDataSource>()
+        .then((value) => value.addAccount(
+              Account(
+                name: 'Index $i',
+                amount: Random().nextDouble() * 100000.0,
+                bankName: 'Index bank $i',
+                cardType: Random().nextBool() ? CardType.bank : CardType.wallet,
+                number: '${Random().nextInt(1000)}',
+                icon: Icons.abc.codePoint,
+              ),
+            ));
+  }
+
+  for (int i = 0; i < 10; i++) {
+    await locator
+        .getAsync<LocalCategoryManagerDataSource>()
+        .then((value) => value.addCategory(
+              Category(
+                name: 'Index $i',
+                color: Colors.amber.value,
+                description: 'Index deesc $i',
+                icon: Icons.abc.codePoint,
+              ),
+            ));
+  }
+
+  for (int i = 0; i < 100; i++) {
+    await locator.getAsync<LocalExpenseManagerDataSource>().then((value) =>
+        value.addOrUpdateExpense(Expense(
+            name: 'Index $i',
+            currency: Random().nextDouble() * 100000.0,
+            time:
+                DateTime.now().subtract(Duration(days: Random().nextInt(1000))),
+            categoryId: Random().nextInt(10),
+            accountId: Random().nextInt(10),
+            type: Random().nextBool()
+                ? TransactionType.income
+                : TransactionType.expense)));
+  }
 }
 
 Future<void> _setupHive() async {

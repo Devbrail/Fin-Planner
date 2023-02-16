@@ -25,19 +25,29 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
   late bool isSelected = settings.get(userAuthKey, defaultValue: false);
 
   @override
-  Widget build(BuildContext context) => SwitchListTile(
-        title: Text(context.loc.localAppLabel),
-        onChanged: (bool value) async {
-          final canAuth = await widget.authenticate.checkBiometrics();
-          if (canAuth && value) {
-            await widget.authenticate.authenticateWithBiometrics();
+  Widget build(BuildContext context) => FutureBuilder<bool>(
+        future: widget.authenticate.checkBiometrics(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData && snapshot.data != null && snapshot.data!) {
+            return SwitchListTile(
+              title: Text(context.loc.localAppLabel),
+              onChanged: (bool value) async {
+                bool isAuthenticated = false;
+                if (value) {
+                  isAuthenticated =
+                      await widget.authenticate.authenticateWithBiometrics();
+                }
+                setState(() {
+                  isSelected = value && isAuthenticated;
+                });
+                _showSnackBar(isSelected);
+              },
+              value: isSelected,
+            );
+          } else {
+            return const SizedBox.shrink();
           }
-          setState(() {
-            isSelected = canAuth && value;
-          });
-          _showSnackBar(isSelected);
         },
-        value: isSelected,
       );
 
   void _showSnackBar(bool result) => settings
