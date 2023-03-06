@@ -178,9 +178,12 @@ class MobileAccountCard extends StatelessWidget {
                       ),
                     ),
                     onDelete != null
-                        ? IconButton(
-                            onPressed: onDelete,
-                            icon: const Icon(Icons.delete),
+                        ? GestureDetector(
+                            onTap: onDelete,
+                            child: Icon(
+                              Icons.delete,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
                           )
                         : const SizedBox.shrink(),
                   ],

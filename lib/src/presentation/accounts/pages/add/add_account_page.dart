@@ -29,9 +29,11 @@ class AddAccountPage extends StatefulWidget {
 }
 
 class AddAccountPageState extends State<AddAccountPage> {
-  final ValueNotifier<String> accountNameNotifier = ValueNotifier('');
-  final ValueNotifier<String> accountNumberNotifier = ValueNotifier('');
-  final ValueNotifier<String> accountHolderNotifier = ValueNotifier('');
+  final ValueNotifier<String> accountNameNotifier =
+      ValueNotifier('Account Name');
+  final ValueNotifier<String> accountNumberNotifier = ValueNotifier('0000');
+  final ValueNotifier<String> accountHolderNotifier =
+      ValueNotifier('Holder Name');
 
   final accountNumberController = TextEditingController();
   final accountHolderController = TextEditingController();
@@ -56,9 +58,8 @@ class AddAccountPageState extends State<AddAccountPage> {
   Widget build(BuildContext context) {
     return FutureResolve<AccountsBloc>(
       future: locator.getAsync<AccountsBloc>(),
-      builder: (value) {
-        final AccountsBloc accountsBloc = value
-          ..add(FetchAccountFromIdEvent(widget.accountId));
+      builder: (accountsBloc) {
+        accountsBloc.add(FetchAccountFromIdEvent(widget.accountId));
         return BlocProvider(
           create: (context) => accountsBloc,
           child: BlocConsumer(
