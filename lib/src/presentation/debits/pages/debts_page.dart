@@ -35,7 +35,7 @@ class _DebtsPageState extends State<DebtsPage>
                 borderRadius: BorderRadius.circular(32),
                 color: Theme.of(context).colorScheme.surfaceVariant,
                 child: TabBar(
-                  //dividerColor: Colors.transparent,
+                  dividerColor: Colors.transparent,
                   splashBorderRadius: BorderRadius.circular(32),
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(32),

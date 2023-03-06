@@ -137,7 +137,7 @@ class HomeDesktopWidget extends StatelessWidget {
                             settings: locator.get<Box<dynamic>>(
                               instanceName: BoxType.settings.name,
                             ),
-                            nameController: TextEditingController(),
+                            controller: TextEditingController(),
                           ),
                         ),
                         child: Row(

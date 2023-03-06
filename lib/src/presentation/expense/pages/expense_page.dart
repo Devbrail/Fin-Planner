@@ -176,7 +176,8 @@ class _ExpensePageState extends State<ExpensePage> {
                               ExpenseNameWidget(controller: nameController),
                               const SizedBox(height: 16),
                               ExpenseDescriptionWidget(
-                                  controller: descriptionController),
+                                controller: descriptionController,
+                              ),
                               const SizedBox(height: 16),
                               ExpenseAmountWidget(controller: amountController),
                               const SizedBox(height: 16),

@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
-
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
 import '../../login/pages/user_image_page.dart';
+import '../../widgets/paisa_text_field.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({
     Key? key,
     required this.settings,
-    required this.nameController,
+    required this.controller,
   }) : super(key: key);
 
   final Box<dynamic> settings;
 
-  final TextEditingController nameController;
+  final TextEditingController controller;
 
   void _updateDetails(BuildContext context) => settings
-      .put(userNameKey, nameController.text)
+      .put(userNameKey, controller.text)
       .then((value) => Navigator.pop(context));
 
   void _pickImage(BuildContext context) {
@@ -36,6 +34,9 @@ class UserProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String name = settings.get(userNameKey, defaultValue: '');
+    controller.text = name;
+    controller.selection = TextSelection.collapsed(offset: name.length);
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
       child: SafeArea(
@@ -61,7 +62,14 @@ class UserProfilePage extends StatelessWidget {
                   const SizedBox(width: 16),
                   UserImageWidget(pickImage: () => _pickImage(context)),
                   Expanded(
-                    child: UserTextField(nameController: nameController),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: PaisaTextFormField(
+                        controller: controller,
+                        hintText: 'Enter name',
+                        keyboardType: TextInputType.name,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -88,49 +96,6 @@ class UserProfilePage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class UserTextField extends StatelessWidget {
-  final TextEditingController nameController;
-
-  const UserTextField({
-    Key? key,
-    required this.nameController,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box>(
-      valueListenable: locator
-          .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-          .listenable(keys: [userNameKey]),
-      builder: (context, value, _) {
-        nameController.text = value.get(userNameKey, defaultValue: 'Name');
-        return Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: TextFormField(
-            autocorrect: true,
-            controller: nameController,
-            keyboardType: TextInputType.name,
-            decoration: InputDecoration(
-              hintText: context.loc.userNameLabel,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              filled: true,
-            ),
-            validator: (value) {
-              if (value!.length >= 3) {
-                return null;
-              } else {
-                return context.loc.validNameLabel;
-              }
-            },
-          ),
-        );
-      },
     );
   }
 }
