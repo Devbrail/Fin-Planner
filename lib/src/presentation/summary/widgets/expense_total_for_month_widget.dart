@@ -7,7 +7,7 @@ import '../../../core/theme/custom_color.dart';
 class ExpenseTotalForMonthWidget extends StatelessWidget {
   const ExpenseTotalForMonthWidget({
     Key? key,
-    this.income = 0,
+    required this.income,
     required this.outcome,
   }) : super(key: key);
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:paisa/src/app/app_level_constants.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
@@ -12,6 +13,7 @@ import '../../widgets/future_resolve.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
 import 'accounts_mobile_page.dart';
+import 'accounts_new/accounts_new_page.dart';
 import 'accounts_tablet_page.dart';
 
 class AccountsPage extends StatelessWidget {
@@ -27,6 +29,9 @@ class AccountsPage extends StatelessWidget {
           valueListenable: locator.get<Box<Account>>().listenable(),
           builder: (_, value, __) {
             final List<Account> accounts = value.values.toList();
+            if (useAccountsList) {
+              return NewAccountsPage(accounts: accounts);
+            }
             if (accounts.isEmpty) {
               return EmptyWidget(
                 icon: Icons.credit_card,

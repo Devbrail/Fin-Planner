@@ -110,9 +110,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                 accountInitialAmountController.selection =
                     TextSelection.collapsed(
                         offset: state.account.amount.toString().length);
-              } /* else if (state is UpdateCardTypeState) {
-                accountsBloc.selectedType = state.cardType;
-              } */
+              }
             },
             builder: (context, state) {
               return ScreenTypeLayout(
@@ -147,10 +145,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                             vertical: 8,
                           ),
                           child: CardTypeButtons(
-                            onSelected: (cardType) {
-                              accountsBloc.selectedType = cardType;
-                              accountsBloc.add(UpdateCardTypeEvent(cardType));
-                            },
+                            onSelected: (cardType) =>
+                                accountsBloc.add(UpdateCardTypeEvent(cardType)),
                             selectedCardType: accountsBloc.selectedType,
                           ),
                         ),

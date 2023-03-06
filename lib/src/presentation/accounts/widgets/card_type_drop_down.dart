@@ -20,12 +20,6 @@ class CardTypeButtons extends StatefulWidget {
 class CardTypeButtonsState extends State<CardTypeButtons> {
   late CardType selectedType = widget.selectedCardType;
 
-  @override
-  void initState() {
-    super.initState();
-    widget.onSelected(selectedType);
-  }
-
   void _update(CardType type) {
     selectedType = type;
     setState(() {});
@@ -33,13 +27,15 @@ class CardTypeButtonsState extends State<CardTypeButtons> {
   }
 
   @override
-  Widget build(BuildContext context) => Row(
-        children: CardType.values
-            .map((type) => PaisaMaterialYouChip(
-                  title: type.name,
-                  isSelected: selectedType == type,
-                  onPressed: () => _update(type),
-                ))
-            .toList(),
-      );
+  Widget build(BuildContext context) {
+    return Row(
+      children: CardType.values
+          .map((type) => PaisaMaterialYouChip(
+                title: type.name,
+                isSelected: widget.selectedCardType == type,
+                onPressed: () => _update(type),
+              ))
+          .toList(),
+    );
+  }
 }

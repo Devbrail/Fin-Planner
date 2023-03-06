@@ -352,39 +352,37 @@ class ExpenseDatePickerWidget extends StatelessWidget {
   final Function(DateTime) onSelectedDate;
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: PaisaTextFormField(
-            enabled: false,
-            controller: controller
-              ..text = (selectedDate ?? DateTime.now()).formattedDate,
-            keyboardType: TextInputType.number,
-            hintText: 'Select date',
+  Widget build(BuildContext context) => Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: PaisaTextFormField(
+              enabled: false,
+              controller: controller
+                ..text = (selectedDate ?? DateTime.now()).formattedDate,
+              keyboardType: TextInputType.number,
+              hintText: 'Select date',
+            ),
           ),
-        ),
-        IconButton(
-          onPressed: () async {
-            final date = await showDatePicker(
-              context: context,
-              initialDate: selectedDate ?? DateTime.now(),
-              firstDate: DateTime(1950),
-              lastDate: DateTime.now(),
-            );
-            if (date != null) {
-              final dateString = date.formattedDate;
-              controller.text = dateString;
-              onSelectedDate.call(date);
-            }
-          },
-          icon: const Icon(Icons.today_rounded),
-        )
-      ],
-    );
-  }
+          IconButton(
+            onPressed: () async {
+              final date = await showDatePicker(
+                context: context,
+                initialDate: selectedDate ?? DateTime.now(),
+                firstDate: DateTime(1950),
+                lastDate: DateTime.now(),
+              );
+              if (date != null) {
+                final dateString = date.formattedDate;
+                controller.text = dateString;
+                onSelectedDate.call(date);
+              }
+            },
+            icon: const Icon(Icons.today_rounded),
+          )
+        ],
+      );
 }
 
 class ExpenseNameWidget extends StatelessWidget {
@@ -396,33 +394,31 @@ class ExpenseNameWidget extends StatelessWidget {
   final TextEditingController controller;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<ExpenseBloc>(context),
-      buildWhen: (oldState, newState) => newState is ChangeExpenseState,
-      builder: (context, state) {
-        if (state is ChangeExpenseState) {
-          return PaisaTextFormField(
-            maxLines: 1,
-            controller: controller,
-            hintText: state.transactionType.hintName(context),
-            keyboardType: TextInputType.name,
-            validator: (value) {
-              if (value!.isNotEmpty) {
-                return null;
-              } else {
-                return context.loc.validNameLabel;
-              }
-            },
-            onChanged: (value) =>
-                BlocProvider.of<ExpenseBloc>(context).expenseName = value,
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      },
-    );
-  }
+  Widget build(BuildContext context) => BlocBuilder(
+        bloc: BlocProvider.of<ExpenseBloc>(context),
+        buildWhen: (oldState, newState) => newState is ChangeExpenseState,
+        builder: (context, state) {
+          if (state is ChangeExpenseState) {
+            return PaisaTextFormField(
+              maxLines: 1,
+              controller: controller,
+              hintText: state.transactionType.hintName(context),
+              keyboardType: TextInputType.name,
+              validator: (value) {
+                if (value!.isNotEmpty) {
+                  return null;
+                } else {
+                  return context.loc.validNameLabel;
+                }
+              },
+              onChanged: (value) =>
+                  BlocProvider.of<ExpenseBloc>(context).expenseName = value,
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
+        },
+      );
 }
 
 class ExpenseDescriptionWidget extends StatelessWidget {
@@ -434,33 +430,21 @@ class ExpenseDescriptionWidget extends StatelessWidget {
   final TextEditingController controller;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<ExpenseBloc>(context),
-      buildWhen: (oldState, newState) => newState is ChangeExpenseState,
-      builder: (context, state) {
-        if (state is ChangeExpenseState) {
-          return PaisaTextFormField(
-            maxLines: 1,
-            controller: controller,
-            hintText: context.loc.descriptionLabel,
-            keyboardType: TextInputType.name,
-            validator: (value) {
-              if (value!.isNotEmpty) {
-                return null;
-              } else {
-                return context.loc.validNameLabel;
-              }
-            },
-            onChanged: (value) => BlocProvider.of<ExpenseBloc>(context)
-                .currentDescription = value,
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      },
-    );
-  }
+  Widget build(BuildContext context) => PaisaTextFormField(
+        maxLines: 1,
+        controller: controller,
+        hintText: context.loc.descriptionLabel,
+        keyboardType: TextInputType.name,
+        validator: (value) {
+          if (value!.isNotEmpty) {
+            return null;
+          } else {
+            return context.loc.validNameLabel;
+          }
+        },
+        onChanged: (value) =>
+            BlocProvider.of<ExpenseBloc>(context).currentDescription = value,
+      );
 }
 
 class ExpenseAmountWidget extends StatelessWidget {
@@ -472,24 +456,22 @@ class ExpenseAmountWidget extends StatelessWidget {
   final TextEditingController controller;
 
   @override
-  Widget build(BuildContext context) {
-    return PaisaTextFormField(
-      controller: controller,
-      hintText: context.loc.amountLabel,
-      keyboardType: TextInputType.number,
-      maxLength: 13,
-      maxLines: 1,
-      onChanged: (value) {
-        double? amount = double.tryParse(value);
-        BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
-      },
-      validator: (value) {
-        if (value!.isNotEmpty) {
-          return null;
-        } else {
-          return context.loc.validAmountLabel;
-        }
-      },
-    );
-  }
+  Widget build(BuildContext context) => PaisaTextFormField(
+        controller: controller,
+        hintText: context.loc.amountLabel,
+        keyboardType: TextInputType.number,
+        maxLength: 13,
+        maxLines: 1,
+        onChanged: (value) {
+          double? amount = double.tryParse(value);
+          BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
+        },
+        validator: (value) {
+          if (value!.isNotEmpty) {
+            return null;
+          } else {
+            return context.loc.validAmountLabel;
+          }
+        },
+      );
 }

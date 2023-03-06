@@ -30,7 +30,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   final DeleteAccountUseCase deleteAccountUseCase;
   final AddAccountUseCase addAccountUseCase;
 
-  late CardType selectedType = CardType.bank;
+  CardType selectedType = CardType.cash;
   String? accountName;
   String? accountHolderName;
   String? accountNumber;
@@ -126,6 +126,8 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   FutureOr<void> _updateCardType(
     UpdateCardTypeEvent event,
     Emitter<AccountsState> emit,
-  ) async =>
-      emit(UpdateCardTypeState(event.cardType));
+  ) async {
+    selectedType = event.cardType;
+    emit(UpdateCardTypeState(event.cardType));
+  }
 }
