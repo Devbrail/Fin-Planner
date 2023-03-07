@@ -40,60 +40,50 @@ class UserProfilePage extends StatelessWidget {
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
       child: SafeArea(
-        child: Material(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ListTile(
+              title: Text(
+                context.loc.profileLabel,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             ),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              ListTile(
-                title: Text(
-                  context.loc.profileLabel,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-              Row(
-                children: [
-                  const SizedBox(width: 16),
-                  UserImageWidget(pickImage: () => _pickImage(context)),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: PaisaTextFormField(
-                        controller: controller,
-                        hintText: 'Enter name',
-                        keyboardType: TextInputType.name,
-                      ),
+            Row(
+              children: [
+                const SizedBox(width: 16),
+                UserImageWidget(pickImage: () => _pickImage(context)),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: PaisaTextFormField(
+                      controller: controller,
+                      hintText: 'Enter name',
+                      keyboardType: TextInputType.name,
                     ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
-                    ),
-                  ),
-                  onPressed: () => _updateDetails(context),
-                  child: Text(
-                    context.loc.updateLabel,
                   ),
                 ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                ),
+                onPressed: () => _updateDetails(context),
+                child: Text(context.loc.updateLabel),
               ),
-              const SizedBox(height: 10)
-            ],
-          ),
+            ),
+            const SizedBox(height: 10)
+          ],
         ),
       ),
     );

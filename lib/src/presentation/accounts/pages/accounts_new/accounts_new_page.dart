@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/app/app_level_constants.dart';
 
 import '../../../../app/routes.dart';
 import '../../../../core/common.dart';
@@ -75,6 +76,7 @@ class NewAccountsPage extends StatelessWidget {
                     Spacer(),
                     AccountSummaryWidget(
                       expenses: expenses,
+                      useAccountsList: useAccountsList,
                     ),
                     Spacer(),
                   ],

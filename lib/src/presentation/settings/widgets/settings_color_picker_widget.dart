@@ -102,6 +102,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                     visible: isAndroid12,
                     child: DynamicColorSwitchWidget(settings: value),
                   ),
+                  const Divider(),
                   AbsorbPointer(
                     absorbing: isDynamic,
                     child: Opacity(
@@ -116,8 +117,8 @@ class ColorPickerDialogWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 16.0, bottom: 16),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
                         ),

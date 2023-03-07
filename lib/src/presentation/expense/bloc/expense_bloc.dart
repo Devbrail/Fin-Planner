@@ -114,18 +114,16 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         description: description,
       );
     } else {
-      if (currentExpense != null) {
-        currentExpense!
-          ..accountId = accountId
-          ..categoryId = categoryId
-          ..currency = validAmount
-          ..name = name
-          ..time = dateTime
-          ..type = transactionType
-          ..description = description;
-
-        await currentExpense!.save();
-      }
+      if (currentExpense == null) return;
+      currentExpense!
+        ..accountId = accountId
+        ..categoryId = categoryId
+        ..currency = validAmount
+        ..name = name
+        ..time = dateTime
+        ..type = transactionType
+        ..description = description;
+      await currentExpense!.save();
     }
     emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
   }

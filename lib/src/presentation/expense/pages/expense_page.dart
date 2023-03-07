@@ -49,9 +49,10 @@ class _ExpensePageState extends State<ExpensePage> {
   Widget build(BuildContext context) {
     return FutureResolve<ExpenseBloc>(
       future: locator.getAsync<ExpenseBloc>(),
-      builder: (value) {
-        final ExpenseBloc expenseBloc = value
-          ..add(FetchExpenseFromIdEvent(widget.expenseId));
+      builder: (expenseBloc) {
+        expenseBloc
+          ..add(FetchExpenseFromIdEvent(widget.expenseId))
+          ..add(const ChangeExpenseEvent(TransactionType.expense));
         return BlocProvider(
           create: (context) => expenseBloc,
           child: BlocConsumer(

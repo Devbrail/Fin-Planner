@@ -13,10 +13,11 @@ class AccountSummaryWidget extends StatelessWidget {
   const AccountSummaryWidget({
     super.key,
     required this.expenses,
+    this.useAccountsList = false,
   });
 
   final List<Expense> expenses;
-
+  final bool useAccountsList;
   @override
   Widget build(BuildContext context) {
     if (useAccountsList) {
