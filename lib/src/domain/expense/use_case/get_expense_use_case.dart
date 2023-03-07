@@ -1,6 +1,9 @@
+import 'package:injectable/injectable.dart';
+
 import '../../../data/expense/model/expense.dart';
 import '../repository/expense_repository.dart';
 
+@injectable
 class GetExpenseUseCase {
   GetExpenseUseCase({required this.expenseRepository});
 

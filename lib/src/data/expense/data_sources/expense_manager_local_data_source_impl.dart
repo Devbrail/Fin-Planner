@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:injectable/injectable.dart';
 
 import '../model/expense.dart';
 import 'expense_manager_local_data_source.dart';
 
+@Singleton(as: LocalExpenseManagerDataSource)
 class LocalExpenseManagerDataSourceImpl
     implements LocalExpenseManagerDataSource {
   final Box<Expense> expenseBox;

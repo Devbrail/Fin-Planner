@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
@@ -18,7 +19,7 @@ class UserNamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
       key: const Key('user_name_page_view'),
-      valueListenable: locator
+      valueListenable: getIt
           .get<Box<dynamic>>(instanceName: BoxType.settings.name)
           .listenable(
         keys: [userNameKey],

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
-import '../../../service_locator.dart';
 import '../../accounts/pages/accounts_page.dart';
 import '../../budget_overview/pages/overview/budget_overview_page.dart';
 import '../../category/pages/category_list_page.dart';
@@ -24,7 +23,6 @@ class ContentWidget extends StatelessWidget {
     PageType.accounts: const AccountsPage(),
     PageType.category: const CategoryListPage(),
     PageType.budgetOverview: BudgetOverViewPage(
-      categoryDataSource: locator.getAsync(),
       dateTimeRangeNotifier: dateTimeRangeNotifier,
     ),
     PageType.debts: const DebtsPage(),

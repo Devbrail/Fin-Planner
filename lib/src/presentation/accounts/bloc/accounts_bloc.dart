@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/enum/card_type.dart';
@@ -11,6 +12,7 @@ import '../../../domain/account/use_case/account_use_case.dart';
 part 'accounts_event.dart';
 part 'accounts_state.dart';
 
+@injectable
 class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   AccountsBloc({
     required this.getAccountUseCase,

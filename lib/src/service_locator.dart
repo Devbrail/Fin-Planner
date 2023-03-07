@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
+import '../main.dart';
 import 'data/settings/authenticate.dart';
 
 import 'core/enum/box_types.dart';
@@ -42,58 +43,12 @@ import 'presentation/expense/bloc/expense_bloc.dart';
 import 'presentation/home/bloc/home_bloc.dart';
 import 'presentation/login/bloc/currency_selector_bloc.dart';
 
-final locator = GetIt.instance;
-
 Future<void> setupLocator() async {
   await _setupHive();
   _localSources();
   _setupRepository();
-  _setupUseCase();
-  _setupBloc();
-}
-
-Future<void> _addDummy() async {
-  for (int i = 0; i < 10; i++) {
-    await locator
-        .getAsync<LocalAccountManagerDataSource>()
-        .then((value) => value.addAccount(
-              Account(
-                name: 'Index $i',
-                amount: Random().nextDouble() * 100000.0,
-                bankName: 'Index bank $i',
-                cardType: Random().nextBool() ? CardType.bank : CardType.wallet,
-                number: '${Random().nextInt(1000)}',
-                icon: Icons.abc.codePoint,
-              ),
-            ));
-  }
-
-  for (int i = 0; i < 10; i++) {
-    await locator
-        .getAsync<LocalCategoryManagerDataSource>()
-        .then((value) => value.addCategory(
-              Category(
-                name: 'Index $i',
-                color: Colors.amber.value,
-                description: 'Index deesc $i',
-                icon: Icons.abc.codePoint,
-              ),
-            ));
-  }
-
-  for (int i = 0; i < 100; i++) {
-    await locator.getAsync<LocalExpenseManagerDataSource>().then((value) =>
-        value.addOrUpdateExpense(Expense(
-            name: 'Index $i',
-            currency: Random().nextDouble() * 100000.0,
-            time:
-                DateTime.now().subtract(Duration(days: Random().nextInt(1000))),
-            categoryId: Random().nextInt(10),
-            accountId: Random().nextInt(10),
-            type: Random().nextBool()
-                ? TransactionType.income
-                : TransactionType.expense)));
-  }
+  //_setupUseCase();
+  //_setupBloc();
 }
 
 Future<void> _setupHive() async {
@@ -108,114 +63,114 @@ Future<void> _setupHive() async {
     ..registerAdapter(TransactionAdapter())
     ..registerAdapter(CardTypeAdapter());
 
-  final transactionBox =
+  /* final transactionBox =
       await Hive.openBox<Transaction>(BoxType.transactions.name);
-  locator.registerLazySingleton<Box<Transaction>>(() => transactionBox);
+  getIt.registerLazySingleton<Box<Transaction>>(() => transactionBox);
 
   final expenseBox = await Hive.openBox<Expense>(BoxType.expense.name);
-  locator.registerLazySingleton<Box<Expense>>(() => expenseBox);
+  getIt.registerLazySingleton<Box<Expense>>(() => expenseBox);
 
   final categoryBox = await Hive.openBox<Category>(BoxType.category.name);
-  locator.registerLazySingleton<Box<Category>>(() => categoryBox);
+  getIt.registerLazySingleton<Box<Category>>(() => categoryBox);
 
   final accountBox = await Hive.openBox<Account>(BoxType.accounts.name);
-  locator.registerLazySingleton<Box<Account>>(() => accountBox);
+  getIt.registerLazySingleton<Box<Account>>(() => accountBox);
 
   final debtBox = await Hive.openBox<Debt>(BoxType.debts.name);
-  locator.registerLazySingleton<Box<Debt>>(() => debtBox);
+  getIt.registerLazySingleton<Box<Debt>>(() => debtBox); */
 
-  final boxDynamic = await Hive.openBox(BoxType.settings.name);
-  locator.registerLazySingleton<Box<dynamic>>(() => boxDynamic,
-      instanceName: BoxType.settings.name);
+  /* final boxDynamic = await Hive.openBox(BoxType.settings.name);
+  getIt.registerLazySingleton<Box<dynamic>>(() => boxDynamic,
+      instanceName: BoxType.settings.name); */
 }
 
 void _localSources() {
-  locator.registerLazySingletonAsync<LocalExpenseManagerDataSource>(
-      () async => LocalExpenseManagerDataSourceImpl(locator.get()));
-  locator.registerLazySingletonAsync<LocalCategoryManagerDataSource>(
-      () async => LocalCategoryManagerDataSourceImpl(locator.get()));
-  locator.registerLazySingletonAsync<LocalAccountManagerDataSource>(
-      () async => LocalAccountManagerDataSourceImpl(locator.get()));
-  locator.registerLazySingletonAsync<DebtLocalDataSource>(
+  /* getIt.registerLazySingletonAsync<LocalExpenseManagerDataSource>(
+      () async => LocalExpenseManagerDataSourceImpl(getIt.get()));
+  getIt.registerLazySingletonAsync<LocalCategoryManagerDataSource>(
+      () async => LocalCategoryManagerDataSourceImpl(getIt.get()));
+  getIt.registerLazySingletonAsync<LocalAccountManagerDataSource>(
+      () async => LocalAccountManagerDataSourceImpl(getIt.get())); 
+  getIt.registerLazySingletonAsync<DebtLocalDataSource>(
       () async => DebtLocalDataSourceImpl(
-            debtBox: locator.get(),
-            transactionsBox: locator.get(),
-          ));
-  locator.registerLazySingletonAsync<FileHandler>(() async => FileHandler());
-  locator.registerSingletonAsync(() async => Authenticate());
+            debtBox: getIt.get(),
+            transactionsBox: getIt.get(),
+          ));*/
+  getIt.registerLazySingletonAsync<FileHandler>(() async => FileHandler());
+  getIt.registerSingletonAsync(() async => Authenticate());
 }
 
 void _setupRepository() {
-  locator.registerLazySingletonAsync<ExpenseRepository>(
+  /* getIt.registerLazySingletonAsync<ExpenseRepository>(
     () async => ExpenseRepositoryImpl(
-      dataSource: await locator.getAsync<LocalExpenseManagerDataSource>(),
+      dataSource: await getIt.getAsync<LocalExpenseManagerDataSource>(),
     ),
   );
-  locator.registerLazySingletonAsync<CategoryRepository>(
+  getIt.registerLazySingletonAsync<CategoryRepository>(
     () async => CategoryRepositoryImpl(
-      dataSources: await locator.getAsync<LocalCategoryManagerDataSource>(),
+      dataSources: await getIt.getAsync<LocalCategoryManagerDataSource>(),
     ),
   );
-  locator.registerLazySingletonAsync<AccountRepository>(
+  getIt.registerLazySingletonAsync<AccountRepository>(
     () async => AccountRepositoryImpl(
-      dataSource: await locator.getAsync<LocalAccountManagerDataSource>(),
+      dataSource: await getIt.getAsync<LocalAccountManagerDataSource>(),
     ),
   );
-  locator.registerLazySingletonAsync<DebtRepository>(
+  getIt.registerLazySingletonAsync<DebtRepository>(
     () async => DebtRepositoryImpl(
-      dataSource: await locator.getAsync(),
+      dataSource: await getIt.getAsync(),
     ),
-  );
+  ); */
 }
 
 void _setupUseCase() {
-  locator.registerLazySingletonAsync(() async =>
-      GetExpenseUseCase(expenseRepository: await locator.getAsync()));
-  locator.registerLazySingletonAsync(() async =>
-      DeleteExpenseUseCase(expenseRepository: await locator.getAsync()));
-  locator.registerLazySingletonAsync(() async =>
-      AddExpenseUseCase(expenseRepository: await locator.getAsync()));
-  locator.registerLazySingletonAsync(() async =>
-      GetCategoryUseCase(categoryRepository: await locator.getAsync()));
-  locator.registerLazySingletonAsync(() async =>
-      AddCategoryUseCase(categoryRepository: await locator.getAsync()));
-  locator.registerLazySingletonAsync(() async =>
-      DeleteCategoryUseCase(categoryRepository: await locator.getAsync()));
-  locator.registerLazySingletonAsync(() async =>
-      GetAccountUseCase(accountRepository: await locator.getAsync()));
-  locator.registerLazySingletonAsync(() async =>
-      AddAccountUseCase(accountRepository: await locator.getAsync()));
-  locator.registerLazySingletonAsync(() async =>
-      DeleteAccountUseCase(accountRepository: await locator.getAsync()));
-  locator.registerLazySingletonAsync(
-      () async => DebtUseCase(debtRepository: await locator.getAsync()));
+  /*  getIt.registerLazySingletonAsync(() async =>
+      GetExpenseUseCase(expenseRepository: await getIt.getAsync()));
+  getIt.registerLazySingletonAsync(() async =>
+      DeleteExpenseUseCase(expenseRepository: await getIt.getAsync()));
+  getIt.registerLazySingletonAsync(() async =>
+      AddExpenseUseCase(expenseRepository: await getIt.getAsync()));
+  getIt.registerLazySingletonAsync(() async =>
+      GetCategoryUseCase(categoryRepository: await getIt.getAsync()));
+  getIt.registerLazySingletonAsync(() async =>
+      AddCategoryUseCase(categoryRepository: await getIt.getAsync()));
+  getIt.registerLazySingletonAsync(() async =>
+      DeleteCategoryUseCase(categoryRepository: await getIt.getAsync()));
+  getIt.registerLazySingletonAsync(() async =>
+      GetAccountUseCase(accountRepository: await getIt.getAsync()));
+  getIt.registerLazySingletonAsync(() async =>
+      AddAccountUseCase(accountRepository: await getIt.getAsync()));
+  getIt.registerLazySingletonAsync(() async =>
+      DeleteAccountUseCase(accountRepository: await getIt.getAsync()));
+  getIt.registerLazySingletonAsync(
+      () async => DebtUseCase(debtRepository: await getIt.getAsync())); */
 }
 
 void _setupBloc() {
-  locator.registerFactoryAsync(() async => CurrencySelectorBloc(
-        accounts: locator.get(),
-        categories: locator.get(),
+  /* getIt.registerFactoryAsync(() async => CurrencySelectorBloc(
+        accounts: getIt.get(),
+        categories: getIt.get(),
         settings:
-            locator.get<Box<dynamic>>(instanceName: BoxType.settings.name),
+            getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name),
       ));
-  locator.registerFactoryAsync(() async => CategoryBloc(
-        getCategoryUseCase: await locator.getAsync(),
-        addCategoryUseCase: await locator.getAsync(),
-        deleteCategoryUseCase: await locator.getAsync(),
+  getIt.registerFactoryAsync(() async => CategoryBloc(
+        getCategoryUseCase: await getIt.getAsync(),
+        addCategoryUseCase: await getIt.getAsync(),
+        deleteCategoryUseCase: await getIt.getAsync(),
       ));
-  locator.registerFactoryAsync(() async => ExpenseBloc(
-        accountUseCase: await locator.getAsync(),
-        expenseUseCase: await locator.getAsync(),
-        addExpenseUseCase: await locator.getAsync(),
-        deleteExpenseUseCase: await locator.getAsync(),
+  getIt.registerFactoryAsync(() async => ExpenseBloc(
+        accountUseCase: await getIt.getAsync(),
+        expenseUseCase: await getIt.getAsync(),
+        addExpenseUseCase: await getIt.getAsync(),
+        deleteExpenseUseCase: await getIt.getAsync(),
       ));
-  locator.registerFactoryAsync(() async => AccountsBloc(
-        getAccountUseCase: await locator.getAsync(),
-        addAccountUseCase: await locator.getAsync(),
-        deleteAccountUseCase: await locator.getAsync(),
+  getIt.registerFactoryAsync(() async => AccountsBloc(
+        getAccountUseCase: await getIt.getAsync(),
+        addAccountUseCase: await getIt.getAsync(),
+        deleteAccountUseCase: await getIt.getAsync(),
       ));
-  locator.registerFactory(() =>
-      HomeBloc(locator.get<Box<dynamic>>(instanceName: BoxType.settings.name)));
-  locator.registerFactoryAsync(
-      () async => DebtsBloc(useCase: await locator.getAsync()));
+  getIt.registerFactory(() =>
+      HomeBloc(getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name)));
+  getIt.registerFactoryAsync(
+      () async => DebtsBloc(useCase: await getIt.getAsync())); */
 }

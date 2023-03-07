@@ -1,11 +1,12 @@
-import 'package:hive/hive.dart';
+import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/enum/transaction.dart';
 
 part 'expense.g.dart';
 
 @HiveType(typeId: 0)
-class Expense extends HiveObject {
+class Expense extends HiveObject with EquatableMixin {
   @HiveField(0)
   String name;
 
@@ -60,4 +61,7 @@ class Expense extends HiveObject {
         type: (json['type'] as String).type,
         description: (json['description'] as String),
       )..superId = json['superId'];
+
+  @override
+  List<Object?> get props => [name, type];
 }

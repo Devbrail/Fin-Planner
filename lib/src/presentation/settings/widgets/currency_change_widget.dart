@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import '../../../../main.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -24,7 +25,7 @@ class CurrencyChangeWidget extends StatelessWidget {
       title: Text(context.loc.currencySignLabel),
       subtitle: Text(
         NumberFormat.compactSimpleCurrency(
-              locale: locator
+              locale: getIt
                   .get<Box<dynamic>>(instanceName: BoxType.settings.name)
                   .get(userLanguageKey),
             ).currencyName ??

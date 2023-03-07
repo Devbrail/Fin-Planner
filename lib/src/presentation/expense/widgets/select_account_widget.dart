@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
@@ -19,7 +20,7 @@ class SelectedAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     late final expenseBloc = BlocProvider.of<ExpenseBloc>(context);
     return ValueListenableBuilder<Box<Account>>(
-      valueListenable: locator.get<Box<Account>>().listenable(),
+      valueListenable: getIt.get<Box<Account>>().listenable(),
       builder: (context, value, child) {
         final accounts = value.values.toList();
         if (accounts.isEmpty) {

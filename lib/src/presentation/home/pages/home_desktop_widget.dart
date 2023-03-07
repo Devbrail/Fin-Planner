@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
@@ -134,7 +135,7 @@ class HomeDesktopWidget extends StatelessWidget {
                           ),
                           context: context,
                           builder: (_) => UserProfilePage(
-                            settings: locator.get<Box<dynamic>>(
+                            settings: getIt.get<Box<dynamic>>(
                               instanceName: BoxType.settings.name,
                             ),
                             controller: TextEditingController(),

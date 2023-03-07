@@ -1,3 +1,5 @@
+import 'package:injectable/injectable.dart';
+
 import '../model/category.dart';
 
 abstract class LocalCategoryManagerDataSource {

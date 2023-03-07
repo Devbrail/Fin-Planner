@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../../main.dart';
 
 import '../../../../core/common.dart';
 import '../../../../core/enum/debt_type.dart';
@@ -43,7 +44,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
   @override
   Widget build(BuildContext context) {
     return FutureResolve<DebtsBloc>(
-      future: locator.getAsync<DebtsBloc>(),
+      future: getIt.getAsync<DebtsBloc>(),
       builder: (value) {
         final DebtsBloc debtBloc = value;
         debtBloc
@@ -156,7 +157,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                       ),
                       ValueListenableBuilder<Box<Transaction>>(
                         valueListenable:
-                            locator.get<Box<Transaction>>().listenable(),
+                            getIt.get<Box<Transaction>>().listenable(),
                         builder: (context, value, child) {
                           final result = value.values
                               .where((element) =>

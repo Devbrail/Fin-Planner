@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
+import '../../../../main.dart';
 
 import '../../../core/constants.dart';
 import '../../../core/enum/box_types.dart';
@@ -27,7 +28,7 @@ class LocaleGridView extends StatefulWidget {
 
 class _LocaleGridViewState extends State<LocaleGridView> {
   final Box<dynamic> settings =
-      locator.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+      getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   late CountryMap? selectedIndex = widget.locales.firstWhere(
     (element) =>

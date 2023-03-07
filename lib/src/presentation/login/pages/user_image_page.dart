@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../main.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -20,7 +21,7 @@ class UserImagePage extends StatefulWidget {
 
 class _UserImagePageState extends State<UserImagePage> {
   final Box<dynamic> value =
-      locator.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+      getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   void _pickImage() {
     final ImagePicker picker = ImagePicker();
@@ -118,7 +119,7 @@ class UserImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: locator
+      valueListenable: getIt
           .get<Box<dynamic>>(instanceName: BoxType.settings.name)
           .listenable(
         keys: [userImageKey],

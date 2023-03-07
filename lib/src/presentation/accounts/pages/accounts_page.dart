@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:paisa/src/app/app_level_constants.dart';
+import '../../../../main.dart';
+import '../../../app/app_level_constants.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
@@ -22,11 +23,11 @@ class AccountsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureResolve<AccountsBloc>(
-      future: locator.getAsync<AccountsBloc>(),
+      future: getIt.getAsync<AccountsBloc>(),
       builder: (accountsBloc) => Material(
         key: const Key('accounts_mobile'),
         child: ValueListenableBuilder<Box<Account>>(
-          valueListenable: locator.get<Box<Account>>().listenable(),
+          valueListenable: getIt.get<Box<Account>>().listenable(),
           builder: (_, value, __) {
             final List<Account> accounts = value.values.toList();
             if (useAccountsList) {
@@ -45,7 +46,7 @@ class AccountsPage extends StatelessWidget {
               builder: (context, state) {
                 if (state is AccountSelectedState) {
                   return ValueListenableBuilder<Box<Expense>>(
-                    valueListenable: locator.get<Box<Expense>>().listenable(),
+                    valueListenable: getIt.get<Box<Expense>>().listenable(),
                     builder: (context, value, child) {
                       final expenses = value.allAccount(state.account.key);
 

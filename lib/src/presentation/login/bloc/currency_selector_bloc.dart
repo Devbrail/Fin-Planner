@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:injectable/injectable.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/common.dart';
@@ -16,6 +17,7 @@ import '../data.dart';
 part 'currency_selector_event.dart';
 part 'currency_selector_state.dart';
 
+@injectable
 class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
   CurrencySelectorBloc({
     required this.accounts,
@@ -27,6 +29,7 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
     on<FilterLocaleEvent>(_filterLocale);
     on<SelectedLocaleEvent>(_selectedLocale);
   }
+
   final Box<dynamic> settings;
   final Box<Account> accounts;
   final Box<Category> categories;

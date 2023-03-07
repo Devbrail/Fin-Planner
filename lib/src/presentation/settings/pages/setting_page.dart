@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../main.dart';
 import '../../../data/settings/authenticate.dart';
 import '../../widgets/future_resolve.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -34,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
             title: context.loc.colorsLabel,
             options: [
               SettingsColorPickerWidget(
-                settings: locator.get(
+                settings: getIt.get(
                   instanceName: BoxType.settings.name,
                 ),
               ),
@@ -46,7 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
               const CurrencyChangeWidget(),
               const Divider(),
               FutureResolve<Authenticate>(
-                future: locator.getAsync<Authenticate>(),
+                future: getIt.getAsync<Authenticate>(),
                 builder: (value) => FutureResolve<bool>(
                   future: value.auth.isDeviceSupported(),
                   builder: (supported) {
@@ -55,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       child: Column(
                         children: [
                           BiometricAuthWidget(
-                            authenticate: locator.get<Authenticate>(),
+                            authenticate: getIt.get<Authenticate>(),
                           ),
                           const Divider(),
                         ],

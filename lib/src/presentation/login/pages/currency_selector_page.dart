@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../service_locator.dart';
@@ -22,7 +23,7 @@ class CurrencySelectorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FutureResolve<CurrencySelectorBloc>(
-        future: locator.getAsync<CurrencySelectorBloc>(),
+        future: getIt.getAsync<CurrencySelectorBloc>(),
         builder: (splashCubit) {
           splashCubit
               .add(CheckLoginEvent(forceChangeCurrency: forceChangeCurrency));

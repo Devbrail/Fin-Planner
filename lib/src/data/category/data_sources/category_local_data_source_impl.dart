@@ -1,10 +1,13 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../main.dart';
 
 import '../../../service_locator.dart';
 import '../../expense/model/expense.dart';
 import '../model/category.dart';
 import 'category_local_data_source.dart';
 
+@Singleton(as: LocalCategoryManagerDataSource)
 class LocalCategoryManagerDataSourceImpl
     implements LocalCategoryManagerDataSource {
   final Box<Category> categoryBox;
@@ -20,7 +23,7 @@ class LocalCategoryManagerDataSourceImpl
 
   @override
   Future<void> deleteCategory(int key) async {
-    final expenseBox = locator.get<Box<Expense>>();
+    final expenseBox = getIt.get<Box<Expense>>();
     final keys = expenseBox.values
         .where((element) => element.categoryId == key)
         .map((e) => e.key)

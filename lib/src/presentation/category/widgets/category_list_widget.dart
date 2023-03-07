@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import '../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
@@ -24,7 +25,7 @@ class CategoryListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<Category>>(
-      valueListenable: locator.get<Box<Category>>().listenable(),
+      valueListenable: getIt.get<Box<Category>>().listenable(),
       builder: (BuildContext context, value, Widget? child) {
         final categories = value.values.toList();
         if (categories.isEmpty) {

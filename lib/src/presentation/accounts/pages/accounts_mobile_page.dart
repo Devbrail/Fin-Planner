@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../main.dart';
 
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
@@ -34,8 +35,8 @@ class AccountsMobilePage extends StatelessWidget {
           ),
           AccountSummaryWidget(expenses: expenses),
           AccountTransactionWidget(
-            accountLocalDataSource: locator.get(),
-            categoryLocalDataSource: locator.get(),
+            accountLocalDataSource: getIt.get(),
+            categoryLocalDataSource: getIt.get(),
             expenses: expenses,
           )
         ],

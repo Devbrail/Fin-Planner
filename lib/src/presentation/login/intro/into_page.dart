@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
+import '../../../../main.dart';
+import '../../widgets/paisa_annotate_region_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
@@ -133,7 +134,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.all(28)),
-                          onPressed: () => locator
+                          onPressed: () => getIt
                               .get<Box<dynamic>>(
                                   instanceName: BoxType.settings.name)
                               .put(userIntroKey, true),
@@ -266,7 +267,7 @@ class IntoMobileWidget extends StatelessWidget {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(18)),
             onPressed: () {
-              locator
+              getIt
                   .get<Box<dynamic>>(instanceName: BoxType.settings.name)
                   .put(userIntroKey, true);
             },

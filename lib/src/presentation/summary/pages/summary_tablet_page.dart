@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../controller/summary_controller.dart';
 
 import '../../../core/enum/filter_budget.dart';
 import '../../widgets/filter_widget/filter_budget_widget.dart';
@@ -10,8 +11,10 @@ class SummaryTabletPage extends StatelessWidget {
   const SummaryTabletPage({
     super.key,
     required this.valueNotifier,
+    required this.controller,
   });
   final ValueNotifier<FilterBudget> valueNotifier;
+  final SummaryController controller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +37,9 @@ class SummaryTabletPage extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 124),
                 children: [
                   FilterBudgetToggleWidget(valueNotifier: valueNotifier),
-                  ExpenseHistory(valueNotifier: valueNotifier),
+                  ExpenseHistory(
+                      valueNotifier: valueNotifier,
+                      expenseBox: controller.expenseBox),
                 ],
               ),
             ),

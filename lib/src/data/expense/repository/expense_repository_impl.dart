@@ -1,8 +1,11 @@
+import 'package:injectable/injectable.dart';
+
 import '../../../core/enum/transaction.dart';
 import '../../../domain/expense/repository/expense_repository.dart';
 import '../data_sources/expense_manager_local_data_source.dart';
 import '../model/expense.dart';
 
+@Singleton(as: ExpenseRepository)
 class ExpenseRepositoryImpl extends ExpenseRepository {
   ExpenseRepositoryImpl({required this.dataSource});
 

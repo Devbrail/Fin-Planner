@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../main.dart';
 
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
@@ -39,8 +40,8 @@ class AccountsTabletPage extends StatelessWidget {
         ),
         Expanded(
           child: AccountTransactionWidget(
-            accountLocalDataSource: locator.get(),
-            categoryLocalDataSource: locator.get(),
+            accountLocalDataSource: getIt.get(),
+            categoryLocalDataSource: getIt.get(),
             expenses: expenses,
             isScroll: true,
           ),

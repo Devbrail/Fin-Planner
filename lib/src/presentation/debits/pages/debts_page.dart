@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../main.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
@@ -63,7 +64,7 @@ class _DebtsPageState extends State<DebtsPage>
           ),
         ),
         body: ValueListenableBuilder<Box<Debt>>(
-          valueListenable: locator.get<Box<Debt>>().listenable(),
+          valueListenable: getIt.get<Box<Debt>>().listenable(),
           builder: (context, value, child) {
             final debts = value.values
                 .where((element) => element.debtType == DebtType.debt)

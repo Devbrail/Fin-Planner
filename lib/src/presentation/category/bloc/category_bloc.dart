@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../data/category/model/category.dart';
 import '../../../domain/category/use_case/category_use_case.dart';
@@ -10,6 +11,7 @@ import '../../../domain/category/use_case/category_use_case.dart';
 part 'category_event.dart';
 part 'category_state.dart';
 
+@injectable
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc({
     required this.getCategoryUseCase,

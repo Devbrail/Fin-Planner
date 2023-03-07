@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import '../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
@@ -17,43 +18,41 @@ class CategoryListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: FutureResolve<CategoryBloc>(
-          future: locator.getAsync<CategoryBloc>(),
-          builder: (bloc) {
-            return ValueListenableBuilder<Box<Category>>(
-              valueListenable: locator.get<Box<Category>>().listenable(),
-              builder: (BuildContext context, value, Widget? child) {
-                final categories = value.values.toList();
-                if (categories.isEmpty) {
-                  return EmptyWidget(
-                    description: context.loc.errorNoCategoriesDescriptionLabel,
-                    icon: Icons.category,
-                    title: context.loc.errorNoCatagoriesLabel,
-                  );
-                }
-                return ScreenTypeLayout(
-                  breakpoints: const ScreenBreakpoints(
-                    tablet: 600,
-                    desktop: 700,
-                    watch: 300,
-                  ),
-                  mobile: CategoryListMobileWidget(
-                    addCategoryBloc: bloc,
-                    categories: categories,
-                  ),
-                  tablet: CategoryListTabletWidget(
-                    addCategoryBloc: bloc,
-                    crossAxisCount: 3,
-                    categories: categories,
-                  ),
-                  desktop: CategoryListTabletWidget(
-                    addCategoryBloc: bloc,
-                    crossAxisCount: 5,
-                    categories: categories,
-                  ),
+          future: getIt.getAsync<CategoryBloc>(),
+          builder: (bloc) => ValueListenableBuilder<Box<Category>>(
+            valueListenable: getIt.get<Box<Category>>().listenable(),
+            builder: (BuildContext context, value, Widget? child) {
+              final categories = value.values.toList();
+              if (categories.isEmpty) {
+                return EmptyWidget(
+                  description: context.loc.errorNoCategoriesDescriptionLabel,
+                  icon: Icons.category,
+                  title: context.loc.errorNoCatagoriesLabel,
                 );
-              },
-            );
-          },
+              }
+              return ScreenTypeLayout(
+                breakpoints: const ScreenBreakpoints(
+                  tablet: 600,
+                  desktop: 700,
+                  watch: 300,
+                ),
+                mobile: CategoryListMobileWidget(
+                  addCategoryBloc: bloc,
+                  categories: categories,
+                ),
+                tablet: CategoryListTabletWidget(
+                  addCategoryBloc: bloc,
+                  crossAxisCount: 3,
+                  categories: categories,
+                ),
+                desktop: CategoryListTabletWidget(
+                  addCategoryBloc: bloc,
+                  crossAxisCount: 5,
+                  categories: categories,
+                ),
+              );
+            },
+          ),
         ),
       );
 }

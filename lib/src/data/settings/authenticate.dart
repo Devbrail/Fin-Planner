@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import 'package:local_auth/local_auth.dart';
 
+@Singleton()
 class Authenticate {
   final LocalAuthentication auth = LocalAuthentication();
 

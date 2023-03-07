@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../main.dart';
 
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
@@ -57,8 +58,7 @@ Future<void> showUserDialog(
   BuildContext context, {
   required Function(UserMenuPopup userMenuPopup) userMenuPopup,
 }) {
-  final settings =
-      locator.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+  final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
   final int themeModeValue = settings.get(themeModeKey, defaultValue: 0);
   var themeMode = ThemeMode.values[themeModeValue];
   bool isDarkMode = themeMode == ThemeMode.dark;
@@ -92,7 +92,7 @@ Future<void> showUserDialog(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ValueListenableBuilder<Box>(
-                            valueListenable: locator
+                            valueListenable: getIt
                                 .get<Box<dynamic>>(
                                     instanceName: BoxType.settings.name)
                                 .listenable(

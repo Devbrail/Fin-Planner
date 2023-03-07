@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
@@ -48,10 +49,10 @@ class _ExpensePageState extends State<ExpensePage> {
   @override
   Widget build(BuildContext context) {
     return FutureResolve<ExpenseBloc>(
-      future: locator.getAsync<ExpenseBloc>(),
-      builder: (value) {
-        final ExpenseBloc expenseBloc = value
-          ..add(FetchExpenseFromIdEvent(widget.expenseId));
+      future: getIt.getAsync<ExpenseBloc>(),
+      builder: (expenseBloc) {
+        expenseBloc.add(const ChangeExpenseEvent(TransactionType.expense));
+        expenseBloc.add(FetchExpenseFromIdEvent(widget.expenseId));
         return BlocProvider(
           create: (context) => expenseBloc,
           child: BlocConsumer(
@@ -339,52 +340,6 @@ class _ExpensePageState extends State<ExpensePage> {
   }
 }
 
-class ExpenseDatePickerWidget extends StatelessWidget {
-  const ExpenseDatePickerWidget({
-    super.key,
-    required this.controller,
-    required this.selectedDate,
-    required this.onSelectedDate,
-  });
-
-  final TextEditingController controller;
-  final DateTime? selectedDate;
-  final Function(DateTime) onSelectedDate;
-
-  @override
-  Widget build(BuildContext context) => Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: PaisaTextFormField(
-              enabled: false,
-              controller: controller
-                ..text = (selectedDate ?? DateTime.now()).formattedDate,
-              keyboardType: TextInputType.number,
-              hintText: 'Select date',
-            ),
-          ),
-          IconButton(
-            onPressed: () async {
-              final date = await showDatePicker(
-                context: context,
-                initialDate: selectedDate ?? DateTime.now(),
-                firstDate: DateTime(1950),
-                lastDate: DateTime.now(),
-              );
-              if (date != null) {
-                final dateString = date.formattedDate;
-                controller.text = dateString;
-                onSelectedDate.call(date);
-              }
-            },
-            icon: const Icon(Icons.today_rounded),
-          )
-        ],
-      );
-}
-
 class ExpenseNameWidget extends StatelessWidget {
   const ExpenseNameWidget({
     super.key,
@@ -473,5 +428,51 @@ class ExpenseAmountWidget extends StatelessWidget {
             return context.loc.validAmountLabel;
           }
         },
+      );
+}
+
+class ExpenseDatePickerWidget extends StatelessWidget {
+  const ExpenseDatePickerWidget({
+    super.key,
+    required this.controller,
+    required this.selectedDate,
+    required this.onSelectedDate,
+  });
+
+  final TextEditingController controller;
+  final DateTime? selectedDate;
+  final Function(DateTime) onSelectedDate;
+
+  @override
+  Widget build(BuildContext context) => Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: PaisaTextFormField(
+              enabled: false,
+              controller: controller
+                ..text = (selectedDate ?? DateTime.now()).formattedDate,
+              keyboardType: TextInputType.number,
+              hintText: 'Select date',
+            ),
+          ),
+          IconButton(
+            onPressed: () async {
+              final date = await showDatePicker(
+                context: context,
+                initialDate: selectedDate ?? DateTime.now(),
+                firstDate: DateTime(1950),
+                lastDate: DateTime.now(),
+              );
+              if (date != null) {
+                final dateString = date.formattedDate;
+                controller.text = dateString;
+                onSelectedDate.call(date);
+              }
+            },
+            icon: const Icon(Icons.today_rounded),
+          )
+        ],
       );
 }

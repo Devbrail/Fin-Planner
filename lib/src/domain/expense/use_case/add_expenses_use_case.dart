@@ -1,6 +1,9 @@
+import 'package:injectable/injectable.dart';
+
 import '../../../core/enum/transaction.dart';
 import '../repository/expense_repository.dart';
 
+@injectable
 class AddExpenseUseCase {
   AddExpenseUseCase({required this.expenseRepository});
 

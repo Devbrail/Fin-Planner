@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
+import '../../../../main.dart';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -25,9 +26,9 @@ class ExportExpensesWidget extends StatefulWidget {
 }
 
 class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
-  final dataSource = locator.get<LocalExpenseManagerDataSource>();
-  final accountDataSource = locator.get<LocalAccountManagerDataSource>();
-  final categoryDataSource = locator.get<LocalCategoryManagerDataSource>();
+  final dataSource = getIt.get<LocalExpenseManagerDataSource>();
+  final accountDataSource = getIt.get<LocalAccountManagerDataSource>();
+  final categoryDataSource = getIt.get<LocalCategoryManagerDataSource>();
   DateTimeRange? dateTimeRange;
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../core/common.dart';
@@ -57,7 +58,7 @@ class AddAccountPageState extends State<AddAccountPage> {
   @override
   Widget build(BuildContext context) {
     return FutureResolve<AccountsBloc>(
-      future: locator.getAsync<AccountsBloc>(),
+      future: getIt.getAsync<AccountsBloc>(),
       builder: (accountsBloc) {
         accountsBloc.add(FetchAccountFromIdEvent(widget.accountId));
         return BlocProvider(

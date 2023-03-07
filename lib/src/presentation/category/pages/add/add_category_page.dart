@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../core/common.dart';
@@ -43,7 +44,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   @override
   Widget build(BuildContext context) {
     return FutureResolve<CategoryBloc>(
-      future: locator.getAsync<CategoryBloc>(param1: widget.categoryId),
+      future: getIt.getAsync<CategoryBloc>(param1: widget.categoryId),
       builder: (categoryBloc) {
         categoryBloc.add(FetchCategoryFromIdEvent(widget.categoryId));
         return BlocProvider(

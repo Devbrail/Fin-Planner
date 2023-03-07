@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/data/settings/authenticate.dart';
+import '../../main.dart';
+import '../data/settings/authenticate.dart';
 
 import '../core/common.dart';
 import '../core/enum/box_types.dart';
@@ -127,8 +128,8 @@ final GoRouter goRouter = GoRouter(
           path: 'expenses/:cid',
           builder: (context, state) => ExpenseListPage(
             categoryId: state.params['cid'],
-            accountLocalDataSource: locator.get(),
-            categoryLocalDataSource: locator.get(),
+            accountLocalDataSource: getIt.get(),
+            categoryLocalDataSource: getIt.get(),
           ),
         ),
         GoRoute(
@@ -197,7 +198,7 @@ final GoRouter goRouter = GoRouter(
         name.isNotEmpty &&
         image.isNotEmpty &&
         isLogging) {
-      final auth = await locator.getAsync<Authenticate>();
+      final auth = await getIt.getAsync<Authenticate>();
       final bool result = await auth.authenticateWithBiometrics();
       if (result) {
         return landingPath;

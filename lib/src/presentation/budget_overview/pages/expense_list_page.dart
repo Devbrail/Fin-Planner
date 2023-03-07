@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import '../../../../main.dart';
 
 import '../../../core/common.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
@@ -29,7 +30,7 @@ class ExpenseListPage extends StatelessWidget {
         context.loc.expenseByCategoryLabel,
       ),
       body: ValueListenableBuilder<Box<Expense>>(
-        valueListenable: locator.get<Box<Expense>>().listenable(),
+        valueListenable: getIt.get<Box<Expense>>().listenable(),
         builder: (context, value, _) {
           final expenses = value.values
               .where((element) => element.categoryId == cid)

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/enum/transaction.dart';
@@ -14,6 +15,7 @@ import '../../../domain/expense/use_case/expense_use_case.dart';
 part 'expense_event.dart';
 part 'expense_state.dart';
 
+@injectable
 class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   ExpenseBloc({
     required this.expenseUseCase,
@@ -34,14 +36,15 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   final AddExpenseUseCase addExpenseUseCase;
   final GetAccountUseCase accountUseCase;
   final DeleteExpenseUseCase deleteExpenseUseCase;
+
   String? expenseName;
   double? expenseAmount;
   int? selectedCategoryId;
   int? selectedAccountId;
   Expense? currentExpense;
   String? currentDescription;
-  late DateTime? selectedDate = DateTime.now();
-  late TransactionType transactionType = TransactionType.expense;
+  DateTime? selectedDate = DateTime.now();
+  TransactionType transactionType = TransactionType.expense;
 
   Future<void> _fetchExpenseFromId(
     FetchExpenseFromIdEvent event,
@@ -61,6 +64,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       currentDescription = expense.description;
       currentExpense = expense;
       emit(ExpenseSuccessState(expense));
+      add(ChangeExpenseEvent(transactionType));
     }
   }
 
