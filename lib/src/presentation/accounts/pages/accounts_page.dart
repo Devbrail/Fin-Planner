@@ -18,59 +18,58 @@ import 'accounts_new/accounts_new_page.dart';
 import 'accounts_tablet_page.dart';
 
 class AccountsPage extends StatelessWidget {
-  const AccountsPage({super.key});
+  AccountsPage({super.key});
+
+  final AccountsBloc accountsBloc = getIt.get();
 
   @override
   Widget build(BuildContext context) {
-    return FutureResolve<AccountsBloc>(
-      future: getIt.getAsync<AccountsBloc>(),
-      builder: (accountsBloc) => Material(
-        key: const Key('accounts_mobile'),
-        child: ValueListenableBuilder<Box<Account>>(
-          valueListenable: getIt.get<Box<Account>>().listenable(),
-          builder: (_, value, __) {
-            final List<Account> accounts = value.values.toList();
-            if (useAccountsList) {
-              return NewAccountsPage(accounts: accounts);
-            }
-            if (accounts.isEmpty) {
-              return EmptyWidget(
-                icon: Icons.credit_card,
-                title: context.loc.errorNoCardsLabel,
-                description: context.loc.errorNoCardsDescriptionLabel,
-              );
-            }
-            accountsBloc.add(AccountSelectedEvent(accounts.first));
-            return BlocBuilder(
-              bloc: accountsBloc,
-              builder: (context, state) {
-                if (state is AccountSelectedState) {
-                  return ValueListenableBuilder<Box<Expense>>(
-                    valueListenable: getIt.get<Box<Expense>>().listenable(),
-                    builder: (context, value, child) {
-                      final expenses = value.allAccount(state.account.key);
-
-                      return ScreenTypeLayout(
-                        mobile: AccountsMobilePage(
-                          accounts: accounts,
-                          accountsBloc: accountsBloc,
-                          expenses: expenses,
-                        ),
-                        tablet: AccountsTabletPage(
-                          accounts: accounts,
-                          accountsBloc: accountsBloc,
-                          expenses: expenses,
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
+    return Material(
+      key: const Key('accounts_mobile'),
+      child: ValueListenableBuilder<Box<Account>>(
+        valueListenable: getIt.get<Box<Account>>().listenable(),
+        builder: (_, value, __) {
+          final List<Account> accounts = value.values.toList();
+          if (useAccountsList) {
+            return NewAccountsPage(accounts: accounts);
+          }
+          if (accounts.isEmpty) {
+            return EmptyWidget(
+              icon: Icons.credit_card,
+              title: context.loc.errorNoCardsLabel,
+              description: context.loc.errorNoCardsDescriptionLabel,
             );
-          },
-        ),
+          }
+          accountsBloc.add(AccountSelectedEvent(accounts.first));
+          return BlocBuilder(
+            bloc: accountsBloc,
+            builder: (context, state) {
+              if (state is AccountSelectedState) {
+                return ValueListenableBuilder<Box<Expense>>(
+                  valueListenable: getIt.get<Box<Expense>>().listenable(),
+                  builder: (context, value, child) {
+                    final expenses = value.allAccount(state.account.key);
+
+                    return ScreenTypeLayout(
+                      mobile: AccountsMobilePage(
+                        accounts: accounts,
+                        accountsBloc: accountsBloc,
+                        expenses: expenses,
+                      ),
+                      tablet: AccountsTabletPage(
+                        accounts: accounts,
+                        accountsBloc: accountsBloc,
+                        expenses: expenses,
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
+          );
+        },
       ),
     );
   }

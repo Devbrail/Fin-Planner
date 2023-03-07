@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
-import '../../../../main.dart';
-import '../controller/summary_controller.dart';
 
 import '../../../core/enum/filter_budget.dart';
 import '../../widgets/filter_widget/filter_budget_widget.dart';
@@ -13,11 +10,9 @@ class SummaryMobilePage extends StatelessWidget {
   const SummaryMobilePage({
     super.key,
     required this.valueNotifier,
-    required this.controller,
   });
 
   final ValueNotifier<FilterBudget> valueNotifier;
-  final SummaryController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +32,6 @@ class SummaryMobilePage extends StatelessWidget {
         } else if (index == 4) {
           return ExpenseHistory(
             valueNotifier: valueNotifier,
-            expenseBox: controller.expenseBox,
           );
         }
       },

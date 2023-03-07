@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:paisa/main.dart';
+import 'package:paisa/src/core/enum/box_types.dart';
 
 import '../../../core/common.dart';
 
@@ -12,12 +14,13 @@ part 'home_state.dart';
 
 @injectable
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc(this.settings) : super(const CurrentIndexState(PageType.home)) {
+  HomeBloc() : super(const CurrentIndexState(PageType.home)) {
     on<HomeEvent>((event, emit) {});
     on<CurrentIndexEvent>(_currentIndex);
   }
 
-  final Box<dynamic> settings;
+  final Box<dynamic> settings =
+      getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   PageType currentPage = PageType.home;
 

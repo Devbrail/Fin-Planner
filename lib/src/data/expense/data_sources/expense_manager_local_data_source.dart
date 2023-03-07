@@ -9,4 +9,5 @@ abstract class LocalExpenseManagerDataSource {
   Future<void> clearExpense(int key);
   Future<Expense?> fetchExpenseFromId(int expenseId);
   Future<Iterable<Expense>> exportData();
+  List<Expense> expenses();
 }

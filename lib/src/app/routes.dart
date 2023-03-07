@@ -78,7 +78,7 @@ final GoRouter goRouter = GoRouter(
             forceChangeCurrency: map['force_change_currency'] as bool,
           );
         } else {
-          return const CurrencySelectorPage();
+          return CurrencySelectorPage();
         }
       },
     ),

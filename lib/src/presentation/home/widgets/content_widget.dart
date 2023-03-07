@@ -20,7 +20,7 @@ class ContentWidget extends StatelessWidget {
 
   late final Map<PageType, Widget> pages = {
     PageType.home: const SummaryPage(),
-    PageType.accounts: const AccountsPage(),
+    PageType.accounts: AccountsPage(),
     PageType.category: const CategoryListPage(),
     PageType.budgetOverview: BudgetOverViewPage(
       dateTimeRangeNotifier: dateTimeRangeNotifier,

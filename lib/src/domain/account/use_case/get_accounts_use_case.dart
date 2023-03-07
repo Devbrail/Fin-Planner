@@ -9,5 +9,5 @@ class GetAccountsUseCase {
 
   GetAccountsUseCase({required this.accountRepository});
 
-  Future<List<Account>> call() => accountRepository.getAccounts();
+  List<Account> call() => accountRepository.getAccounts();
 }

@@ -15,5 +15,5 @@ abstract class AccountRepository {
 
   Account? fetchAccountFromId(int accountId);
 
-  Future<List<Account>> getAccounts();
+  List<Account> getAccounts();
 }

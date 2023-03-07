@@ -27,51 +27,46 @@ class BudgetOverViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureResolve<Box<Expense>>(
-        future: getIt.getAsync<Box<Expense>>(),
-        builder: (context) {
-          return ValueListenableBuilder<Box<Expense>>(
-            valueListenable: context.listenable(),
-            builder: (context, value, _) {
-              List<Expense> expenses = value.budgetOverView;
-              if (expenses.isEmpty) {
-                return EmptyWidget(
-                  icon: Icons.paid,
-                  title: context.loc.errorNoBudgetLabel,
-                  description: context.loc.errorNoBudgetDescriptionLabel,
-                );
-              }
-              final child = FilterDateRangeWidget(
-                dateTimeRangeNotifier: dateTimeRangeNotifier,
-                expenses: expenses,
-                builder: (List<Expense> expenses) => FilterBudgetWidget(
-                  valueNotifier: valueNotifier,
-                  expenses: expenses,
-                  builder: (filteredBudger) => ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(bottom: 128),
-                    itemCount: filteredBudger.length,
-                    itemBuilder: (BuildContext context, int index) =>
-                        BudgetSection(
-                      dataSource: getIt.get<LocalCategoryManagerDataSource>(),
-                      name: filteredBudger[index].key,
-                      values: filteredBudger[index].value,
-                    ),
-                  ),
-                ),
-              );
-              return ScreenTypeLayout(
-                mobile: BudgetOverviewMobilePage(
-                  valueNotifier: valueNotifier,
-                  child: child,
-                ),
-                tablet: BudgetOverviewTabletPage(
-                  valueNotifier: valueNotifier,
-                  child: child,
-                ),
-              );
-            },
+    return ValueListenableBuilder<Box<Expense>>(
+      valueListenable: getIt.get<Box<Expense>>().listenable(),
+      builder: (context, value, _) {
+        List<Expense> expenses = value.budgetOverView;
+        if (expenses.isEmpty) {
+          return EmptyWidget(
+            icon: Icons.paid,
+            title: context.loc.errorNoBudgetLabel,
+            description: context.loc.errorNoBudgetDescriptionLabel,
           );
-        });
+        }
+        final child = FilterDateRangeWidget(
+          dateTimeRangeNotifier: dateTimeRangeNotifier,
+          expenses: expenses,
+          builder: (List<Expense> expenses) => FilterBudgetWidget(
+            valueNotifier: valueNotifier,
+            expenses: expenses,
+            builder: (filteredBudger) => ListView.builder(
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(bottom: 128),
+              itemCount: filteredBudger.length,
+              itemBuilder: (BuildContext context, int index) => BudgetSection(
+                dataSource: getIt.get<LocalCategoryManagerDataSource>(),
+                name: filteredBudger[index].key,
+                values: filteredBudger[index].value,
+              ),
+            ),
+          ),
+        );
+        return ScreenTypeLayout(
+          mobile: BudgetOverviewMobilePage(
+            valueNotifier: valueNotifier,
+            child: child,
+          ),
+          tablet: BudgetOverviewTabletPage(
+            valueNotifier: valueNotifier,
+            child: child,
+          ),
+        );
+      },
+    );
   }
 }

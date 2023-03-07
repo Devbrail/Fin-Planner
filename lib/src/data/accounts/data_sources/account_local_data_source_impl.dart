@@ -10,8 +10,12 @@ import 'account_local_data_source.dart';
 class LocalAccountManagerDataSourceImpl
     implements LocalAccountManagerDataSource {
   final Box<Account> accountBox;
+  final Box<Expense> expenseBox;
 
-  LocalAccountManagerDataSourceImpl(this.accountBox);
+  LocalAccountManagerDataSourceImpl({
+    required this.accountBox,
+    required this.expenseBox,
+  });
 
   @override
   Future<void> addAccount(Account account) async {
@@ -21,18 +25,13 @@ class LocalAccountManagerDataSourceImpl
   }
 
   @override
-  Future<List<Account>> accounts() async {
-    final accounts = accountBox.values.toList();
-    accounts.sort((a, b) => a.name.compareTo(b.name));
-    return accounts;
-  }
+  List<Account> accounts() => accountBox.values.toList();
 
   @override
   Account? fetchAccountFromId(int accountId) => accountBox.get(accountId);
 
   @override
   Future<void> deleteAccount(int key) async {
-    final expenseBox = Hive.box<Expense>(BoxType.expense.name);
     final keys = expenseBox.values
         .where((element) => element.accountId == key)
         .map((e) => e.key);
@@ -41,7 +40,7 @@ class LocalAccountManagerDataSourceImpl
   }
 
   @override
-  Future<Iterable<Account>> exportData() async => accountBox.values;
+  Iterable<Account> exportData() => accountBox.values;
 
   @override
   Account fetchAccount(int accountId) {

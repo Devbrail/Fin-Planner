@@ -40,4 +40,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   @override
   Future<Expense?> fetchExpenseFromId(int expenseId) =>
       dataSource.fetchExpenseFromId(expenseId);
+
+  @override
+  List<Expense> expenses() => dataSource.expenses();
 }
