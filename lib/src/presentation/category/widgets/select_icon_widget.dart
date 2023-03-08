@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../../core/common.dart';
 import '../../widgets/paisa_icon_picker.dart';
 import '../bloc/category_bloc.dart';
-
-import '../../../core/common.dart';
 
 class SelectIconWidget extends StatelessWidget {
   const SelectIconWidget({super.key});
@@ -14,9 +12,6 @@ class SelectIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      buildWhen: (previous, current) =>
-          current is CategoryIconSelectedState ||
-          current is CategorySuccessState,
       bloc: BlocProvider.of<CategoryBloc>(context),
       builder: (context, state) {
         int codePoint = MdiIcons.home.codePoint;

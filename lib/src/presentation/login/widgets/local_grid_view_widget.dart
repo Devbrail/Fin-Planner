@@ -6,7 +6,6 @@ import '../../../../main.dart';
 
 import '../../../core/constants.dart';
 import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
 import '../../widgets/paisa_card.dart';
 import '../data.dart';
 

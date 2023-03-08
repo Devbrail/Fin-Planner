@@ -18,10 +18,10 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     required this.addCategoryUseCase,
     required this.deleteCategoryUseCase,
   }) : super(AddCategoryInitial()) {
+    on<FetchCategoryFromIdEvent>(_fetchCategoryFromId);
     on<CategoryEvent>((event, emit) {});
     on<AddOrUpdateCategoryEvent>(_addOrUpdateCategory);
     on<CategoryDeleteEvent>(_deleteCategory);
-    on<FetchCategoryFromIdEvent>(_fetchCategoryFromId);
     on<CategoryIconSelectedEvent>(_categoryIcon);
     on<UpdateCategoryBudgetEvent>(_updateCategoryBudget);
     on<CategoryColorSelectedEvent>(_updateCategoryColor);

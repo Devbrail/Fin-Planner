@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../../main.dart';
-import '../../../data/settings/authenticate.dart';
-import '../../widgets/future_resolve.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
+import '../../../data/settings/authenticate.dart';
+import '../../widgets/future_resolve.dart';
 import '../widgets/biometrics_auth_widget.dart';
 import '../widgets/currency_change_widget.dart';
 import '../widgets/setting_option.dart';

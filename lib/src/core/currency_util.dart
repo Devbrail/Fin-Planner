@@ -2,7 +2,6 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import '../../main.dart';
 
-import '../service_locator.dart';
 import 'common.dart';
 import 'enum/box_types.dart';
 

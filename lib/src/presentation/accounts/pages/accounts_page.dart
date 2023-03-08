@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../../../../main.dart';
-import '../../../app/app_level_constants.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../../main.dart';
+import '../../../app/app_level_constants.dart';
 import '../../../core/common.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../service_locator.dart';
-import '../../widgets/future_resolve.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
 import 'accounts_mobile_page.dart';
@@ -24,9 +22,9 @@ class AccountsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return Scaffold(
       key: const Key('accounts_mobile'),
-      child: ValueListenableBuilder<Box<Account>>(
+      body: ValueListenableBuilder<Box<Account>>(
         valueListenable: getIt.get<Box<Account>>().listenable(),
         builder: (_, value, __) {
           final List<Account> accounts = value.values.toList();

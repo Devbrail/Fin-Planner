@@ -5,7 +5,6 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../data/settings/authenticate.dart';
-import '../../../service_locator.dart';
 
 class BiometricAuthWidget extends StatefulWidget {
   const BiometricAuthWidget({

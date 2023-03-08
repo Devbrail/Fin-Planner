@@ -10,7 +10,6 @@ import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../data/debt/models/transaction.dart';
-import '../../../service_locator.dart';
 import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../cubit/debts_cubit.dart';

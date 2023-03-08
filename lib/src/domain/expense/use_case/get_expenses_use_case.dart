@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import '../../../data/expense/model/expense.dart';
 import '../repository/expense_repository.dart';
 
-@injectable
+@singleton
 class GetExpensesUseCase {
   GetExpensesUseCase({required this.expenseRepository});
 

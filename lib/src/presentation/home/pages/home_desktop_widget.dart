@@ -9,7 +9,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
 import '../../settings/widgets/user_profile_widget.dart';
 import '../../summary/widgets/welcome_name_widget.dart';
 import '../../widgets/color_palette.dart';

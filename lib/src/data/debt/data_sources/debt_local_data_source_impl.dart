@@ -5,7 +5,7 @@ import '../models/debt.dart';
 import '../models/transaction.dart';
 import 'debt_local_data_source.dart';
 
-@LazySingleton(as: DebtLocalDataSource)
+@Singleton(as: DebtLocalDataSource)
 class DebtLocalDataSourceImpl extends DebtLocalDataSource {
   final Box<Debt> debtBox;
   final Box<Transaction> transactionsBox;

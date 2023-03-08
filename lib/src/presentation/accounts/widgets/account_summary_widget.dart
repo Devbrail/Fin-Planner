@@ -42,10 +42,7 @@ class AccountSummaryWidget extends StatelessWidget {
                   Text(
                     expenses.thisMonthIncome.toCurrency(decimalDigits: 0),
                     style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                      textStyle: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                 ],
@@ -72,10 +69,7 @@ class AccountSummaryWidget extends StatelessWidget {
                   Text(
                     expenses.thisMonthExpense.toCurrency(decimalDigits: 0),
                     style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                      textStyle: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                 ],

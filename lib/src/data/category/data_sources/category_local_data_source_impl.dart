@@ -2,7 +2,6 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../main.dart';
 
-import '../../../service_locator.dart';
 import '../../expense/model/expense.dart';
 import '../model/category.dart';
 import 'category_local_data_source.dart';

@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/main.dart';
-import 'package:paisa/src/core/enum/box_types.dart';
+import '../../../../main.dart';
+import '../../../core/enum/box_types.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';

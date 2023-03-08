@@ -10,7 +10,6 @@ import 'app/routes.dart';
 import 'core/common.dart';
 import 'core/enum/box_types.dart';
 import 'core/theme/paisa_theme.dart';
-import 'service_locator.dart';
 
 class PaisaApp extends StatefulWidget {
   const PaisaApp({Key? key}) : super(key: key);

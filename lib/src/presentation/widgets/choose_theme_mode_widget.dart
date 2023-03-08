@@ -5,7 +5,6 @@ import '../../../main.dart';
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
 import '../../core/enum/theme_mode.dart';
-import '../../service_locator.dart';
 
 class ChooseThemeModeWidget extends StatefulWidget {
   const ChooseThemeModeWidget({

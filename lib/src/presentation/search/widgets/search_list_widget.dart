@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../../../../main.dart';
-import '../../../data/accounts/model/account.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../service_locator.dart';
 import '../../summary/widgets/expense_list_widget.dart';
 
 class SearchListWidget extends StatelessWidget {

@@ -7,7 +7,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
 
 class WelcomeWidget extends StatelessWidget {
   const WelcomeWidget({

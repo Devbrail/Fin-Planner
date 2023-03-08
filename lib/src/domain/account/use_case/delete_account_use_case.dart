@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../repository/account_repository.dart';
 
-@injectable
+@singleton
 class DeleteAccountUseCase {
   final AccountRepository accountRepository;
 

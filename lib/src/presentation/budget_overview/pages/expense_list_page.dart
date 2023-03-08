@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import '../../../../main.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../service_locator.dart';
 import '../../summary/widgets/expense_item_widget.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
 
 class ExpenseListPage extends StatelessWidget {
   const ExpenseListPage({

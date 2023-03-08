@@ -8,7 +8,6 @@ import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
 
 class CurrencyChangeWidget extends StatelessWidget {
   const CurrencyChangeWidget({Key? key}) : super(key: key);

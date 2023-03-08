@@ -7,7 +7,6 @@ import '../../../main.dart';
 
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
-import '../../service_locator.dart';
 
 enum UserMenuPopup { debts, chooseTheme, settings, userDetails }
 

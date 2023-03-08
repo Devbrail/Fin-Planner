@@ -1,7 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../core/enum/box_types.dart';
 import '../../expense/model/expense.dart';
 import '../model/account.dart';
 import 'account_local_data_source.dart';

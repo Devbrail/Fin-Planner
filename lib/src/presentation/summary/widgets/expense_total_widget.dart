@@ -4,7 +4,6 @@ import 'package:hive_flutter/adapters.dart';
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../accounts/widgets/account_summary_widget.dart';
 import '../../widgets/paisa_card.dart';
 import 'expense_total_for_month_widget.dart';
 import 'total_balance_widget.dart';
@@ -22,6 +21,7 @@ class ExpenseTotalWidget extends StatelessWidget {
         final thisMonthExpenses = expenses.thisMonthExpense;
         final thisMonthIncome = expenses.thisMonthIncome;
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -48,8 +48,6 @@ class ExpenseTotalWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-            AccountSummaryWidget(expenses: expenses),
           ],
         );
       },

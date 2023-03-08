@@ -9,7 +9,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../core/enum/box_types.dart';
-import '../../service_locator.dart';
 import '../accounts/data_sources/account_local_data_source.dart';
 import '../accounts/model/account.dart';
 import '../category/data_sources/category_local_data_source.dart';
@@ -21,16 +20,13 @@ import 'data.dart';
 @Singleton()
 class FileHandler {
   Future<String> fetchExpensesAndEncode() async {
-    final expenseDataStore =
-        await getIt.getAsync<LocalExpenseManagerDataSource>();
+    final expenseDataStore = getIt.get<LocalExpenseManagerDataSource>();
     final Iterable<Expense> expenses = await expenseDataStore.exportData();
 
-    final accountDataStore =
-        await getIt.getAsync<LocalAccountManagerDataSource>();
-    final Iterable<Account> accounts = await accountDataStore.exportData();
+    final accountDataStore = getIt.get<LocalAccountManagerDataSource>();
+    final Iterable<Account> accounts = accountDataStore.exportData();
 
-    final categoryDataStore =
-        await getIt.getAsync<LocalCategoryManagerDataSource>();
+    final categoryDataStore = getIt.get<LocalCategoryManagerDataSource>();
     final Iterable<Category> categories = await categoryDataStore.exportData();
 
     final data = {

@@ -5,12 +5,11 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../../main.dart';
 
+import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
 
 class UserImagePage extends StatefulWidget {
   const UserImagePage({Key? key}) : super(key: key);

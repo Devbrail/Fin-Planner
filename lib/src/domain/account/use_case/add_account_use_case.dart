@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/enum/card_type.dart';
 import '../repository/account_repository.dart';
 
-@injectable
+@singleton
 class AddAccountUseCase {
   final AccountRepository accountRepository;
 

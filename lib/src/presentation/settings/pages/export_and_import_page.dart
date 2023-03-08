@@ -13,7 +13,6 @@ import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../data/settings/file_handler.dart';
-import '../../../service_locator.dart';
 import '../widgets/settings_group_card.dart';
 
 extension FileExtension on FileSystemEntity {

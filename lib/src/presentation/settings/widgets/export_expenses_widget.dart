@@ -13,7 +13,6 @@ import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/data_sources/expense_manager_local_data_source.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../service_locator.dart';
 import 'setting_option.dart';
 
 import '../../../core/common.dart';

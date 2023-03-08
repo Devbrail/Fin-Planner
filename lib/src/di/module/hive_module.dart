@@ -10,7 +10,7 @@ import '../../data/expense/model/expense.dart';
 
 @module
 abstract class HiveModule {
-  @FactoryMethod(preResolve: true)
+  @factoryMethod
   @singleton
   Box<Expense> get expenseBox => Hive.box<Expense>(BoxType.expense.name);
 

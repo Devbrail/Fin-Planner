@@ -7,7 +7,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../widgets/future_resolve.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../bloc/currency_selector_bloc.dart';
 import '../widgets/local_grid_view_widget.dart';

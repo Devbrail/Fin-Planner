@@ -19,7 +19,6 @@ import '../presentation/login/pages/user_image_page.dart';
 import '../presentation/login/pages/user_name_page.dart';
 import '../presentation/settings/pages/export_and_import_page.dart';
 import '../presentation/settings/pages/setting_page.dart';
-import '../service_locator.dart';
 
 const loginPath = '/login';
 const loginName = 'login';
@@ -198,7 +197,7 @@ final GoRouter goRouter = GoRouter(
         name.isNotEmpty &&
         image.isNotEmpty &&
         isLogging) {
-      final auth = await getIt.getAsync<Authenticate>();
+      final auth = getIt.get<Authenticate>();
       final bool result = await auth.authenticateWithBiometrics();
       if (result) {
         return landingPath;
