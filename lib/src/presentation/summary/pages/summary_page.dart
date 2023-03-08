@@ -27,9 +27,15 @@ class _SummaryPageState extends State<SummaryPage> {
         desktop: 799,
         watch: 300,
       ),
-      mobile: SummaryMobilePage(valueNotifier: valueNotifier),
-      tablet: SummaryTabletPage(valueNotifier: valueNotifier),
-      desktop: SummaryDesktopPage(valueNotifier: valueNotifier),
+      mobile: SummaryMobilePage(
+        valueNotifier: valueNotifier,
+      ),
+      tablet: SummaryTabletPage(
+        valueNotifier: valueNotifier,
+      ),
+      desktop: SummaryDesktopPage(
+        valueNotifier: valueNotifier,
+      ),
     );
   }
 }

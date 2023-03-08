@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/category/model/category.dart';
-import '../../../service_locator.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/category_bloc.dart';
 import 'category_item_desktop_widget.dart';
@@ -24,7 +24,7 @@ class CategoryListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<Category>>(
-      valueListenable: locator.get<Box<Category>>().listenable(),
+      valueListenable: getIt.get<Box<Category>>().listenable(),
       builder: (BuildContext context, value, Widget? child) {
         final categories = value.values.toList();
         if (categories.isEmpty) {

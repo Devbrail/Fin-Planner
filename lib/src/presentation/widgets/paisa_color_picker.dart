@@ -20,7 +20,6 @@ Future<int> paisaColorPicker(
       maxWidth:
           MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
     ),
-    elevation: 10,
     builder: (context) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -39,8 +38,8 @@ Future<int> paisaColorPicker(
           ),
           Padding(
             padding: const EdgeInsets.only(right: 16.0, bottom: 16),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
+            child: TextButton(
+              style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
                 ),

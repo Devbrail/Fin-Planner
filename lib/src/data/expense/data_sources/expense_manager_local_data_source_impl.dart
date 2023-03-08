@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:injectable/injectable.dart';
 
 import '../model/expense.dart';
 import 'expense_manager_local_data_source.dart';
 
+@Injectable(as: LocalExpenseManagerDataSource)
 class LocalExpenseManagerDataSourceImpl
     implements LocalExpenseManagerDataSource {
   final Box<Expense> expenseBox;
 
   LocalExpenseManagerDataSourceImpl(this.expenseBox);
 
-  Stream<BoxEvent> expenses() {
-    return expenseBox.watch();
-  }
+  @override
+  List<Expense> expenses() => expenseBox.values.toList();
 
   @override
   Future<void> addOrUpdateExpense(Expense expense) async {

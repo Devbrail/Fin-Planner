@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../main.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt.dart';
 import '../../../data/debt/models/transaction.dart';
-import '../../../service_locator.dart';
 import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../cubit/debts_cubit.dart';
@@ -20,7 +20,7 @@ class DebtItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<Transaction>>(
-      valueListenable: locator.get<Box<Transaction>>().listenable(),
+      valueListenable: getIt.get<Box<Transaction>>().listenable(),
       builder: (context, value, child) {
         final transactions = value.getTransactionsFromId(debt.superId);
         final double amount = transactions.fold<double>(
@@ -130,7 +130,7 @@ class DebtItemWidget extends StatelessWidget {
                                     onPressed: () {
                                       final double amount =
                                           double.tryParse(controller.text) ?? 0;
-                                      locator.getAsync<DebtsBloc>().then(
+                                      getIt.getAsync<DebtsBloc>().then(
                                             (cubit) => cubit.add(
                                               AddTransactionToDebtEvent(
                                                 debt,

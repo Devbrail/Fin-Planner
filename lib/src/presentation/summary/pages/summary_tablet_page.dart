@@ -34,7 +34,9 @@ class SummaryTabletPage extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 124),
                 children: [
                   FilterBudgetToggleWidget(valueNotifier: valueNotifier),
-                  ExpenseHistory(valueNotifier: valueNotifier),
+                  ExpenseHistory(
+                    valueNotifier: valueNotifier,
+                  ),
                 ],
               ),
             ),

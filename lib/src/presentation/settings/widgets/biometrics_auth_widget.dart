@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import '../../../../main.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../data/settings/authenticate.dart';
-import '../../../service_locator.dart';
 
 class BiometricAuthWidget extends StatefulWidget {
   const BiometricAuthWidget({
@@ -19,7 +19,7 @@ class BiometricAuthWidget extends StatefulWidget {
 }
 
 class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
-  final settings = locator.get<Box<dynamic>>(
+  final settings = getIt.get<Box<dynamic>>(
     instanceName: BoxType.settings.name,
   );
   late bool isSelected = settings.get(userAuthKey, defaultValue: false);

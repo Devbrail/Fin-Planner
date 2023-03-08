@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../core/enum/box_types.dart';
 import '../../../core/enum/debt_type.dart';
@@ -12,6 +13,7 @@ import '../../../domain/debt/use_case/debt_use_case.dart';
 part 'debts_event.dart';
 part 'debts_state.dart';
 
+@injectable
 class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
   DebtsBloc({
     required this.useCase,

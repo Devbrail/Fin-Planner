@@ -32,6 +32,11 @@ class FetchCategoryFromIdEvent extends CategoryEvent {
 
   @override
   List<Object?> get props => [categoryId];
+
+  FetchCategoryFromIdEvent copyWith({
+    String? categoryId,
+  }) =>
+      FetchCategoryFromIdEvent(categoryId ?? this.categoryId);
 }
 
 class CategoryIconSelectedEvent extends CategoryEvent {

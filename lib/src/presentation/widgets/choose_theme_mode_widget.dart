@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import '../../../main.dart';
 
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
 import '../../core/enum/theme_mode.dart';
-import '../../service_locator.dart';
 
 class ChooseThemeModeWidget extends StatefulWidget {
   const ChooseThemeModeWidget({
@@ -81,7 +81,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
                       vertical: 12,
                     ),
                   ),
-                  onPressed: () => locator
+                  onPressed: () => getIt
                       .get<Box<dynamic>>(instanceName: BoxType.settings.name)
                       .put(themeModeKey, currentIndex.index)
                       .then((value) => Navigator.pop(context)),

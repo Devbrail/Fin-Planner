@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../main.dart';
 import '../../core/enum/box_types.dart';
-import '../../service_locator.dart';
 import '../home/bloc/home_bloc.dart';
 import '../home/widgets/welcome_widget.dart';
 import '../settings/widgets/user_profile_widget.dart';
@@ -41,7 +41,7 @@ class PaisaUserWidget extends StatelessWidget {
           ),
           context: context,
           builder: (_) => UserProfilePage(
-            settings: locator.get<Box<dynamic>>(
+            settings: getIt.get<Box<dynamic>>(
               instanceName: BoxType.settings.name,
             ),
             controller: TextEditingController(),

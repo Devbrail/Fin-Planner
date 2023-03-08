@@ -4,11 +4,10 @@ import '../../../data/expense/model/expense.dart';
 import '../repository/expense_repository.dart';
 
 @singleton
-class GetExpenseUseCase {
-  GetExpenseUseCase({required this.expenseRepository});
+class GetExpensesUseCase {
+  GetExpensesUseCase({required this.expenseRepository});
 
   final ExpenseRepository expenseRepository;
 
-  Future<Expense?> call(int expenseId) async =>
-      expenseRepository.fetchExpenseFromId(expenseId);
+  List<Expense> call() => expenseRepository.expenses();
 }

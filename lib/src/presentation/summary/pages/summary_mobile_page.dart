@@ -11,26 +11,29 @@ class SummaryMobilePage extends StatelessWidget {
     super.key,
     required this.valueNotifier,
   });
+
   final ValueNotifier<FilterBudget> valueNotifier;
+
   @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: 5,
-      padding: const EdgeInsets.only(bottom: 124),
-      itemBuilder: (context, index) {
-        if (index == 0) {
-          return const WelcomeNameWidget();
-        } else if (index == 1) {
-          return const ExpenseTotalWidget();
-        } else if (index == 2) {
-          return const SizedBox(height: 8);
-        } else if (index == 3) {
-          return FilterBudgetToggleWidget(valueNotifier: valueNotifier);
-        } else if (index == 4) {
-          return ExpenseHistory(valueNotifier: valueNotifier);
-        }
-      },
-    );
-  }
+  Widget build(BuildContext context) => ListView.builder(
+        shrinkWrap: true,
+        itemCount: 5,
+        padding: const EdgeInsets.only(bottom: 124),
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return const WelcomeNameWidget();
+          } else if (index == 1) {
+            return const ExpenseTotalWidget();
+          } else if (index == 2) {
+            return const SizedBox(height: 8);
+          } else if (index == 3) {
+            return FilterBudgetToggleWidget(valueNotifier: valueNotifier);
+          } else if (index == 4) {
+            return ExpenseHistory(
+              valueNotifier: valueNotifier,
+            );
+          }
+          return const SizedBox.shrink();
+        },
+      );
 }

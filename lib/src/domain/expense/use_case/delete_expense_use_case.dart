@@ -1,5 +1,8 @@
+import 'package:injectable/injectable.dart';
+
 import '../repository/expense_repository.dart';
 
+@singleton
 class DeleteExpenseUseCase {
   DeleteExpenseUseCase({required this.expenseRepository});
 

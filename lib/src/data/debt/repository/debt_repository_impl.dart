@@ -1,8 +1,11 @@
+import 'package:injectable/injectable.dart';
+
 import '../../../core/enum/debt_type.dart';
 import '../../../domain/debt/repository/debit_repository.dart';
 import '../data_sources/debt_local_data_source.dart';
 import '../models/debt.dart';
 
+@Singleton(as: DebtRepository)
 class DebtRepositoryImpl extends DebtRepository {
   final DebtLocalDataSource dataSource;
 

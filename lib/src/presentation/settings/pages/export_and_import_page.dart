@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../main.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -12,7 +13,6 @@ import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/category/model/category.dart';
 import '../../../data/expense/model/expense.dart';
 import '../../../data/settings/file_handler.dart';
-import '../../../service_locator.dart';
 import '../widgets/settings_group_card.dart';
 
 extension FileExtension on FileSystemEntity {
@@ -50,7 +50,7 @@ class ExportAndImportPage extends StatelessWidget {
   }
 
   Future<void> _fetchAndShareJSONData() async {
-    final FileHandler fileHandler = await locator.getAsync<FileHandler>();
+    final FileHandler fileHandler = await getIt.getAsync<FileHandler>();
     final jsonString = await fileHandler.fetchExpensesAndEncode();
 
     final directory = await getTemporaryDirectory();
@@ -62,7 +62,7 @@ class ExportAndImportPage extends StatelessWidget {
   }
 
   Future<void> _fetchAndShareCSVData() async {
-    final FileHandler fileHandler = await locator.getAsync<FileHandler>();
+    final FileHandler fileHandler = await getIt.getAsync<FileHandler>();
     final jsonString = await fileHandler.fetchExpensesAndEncode();
 
     final directory = await getTemporaryDirectory();
@@ -111,7 +111,7 @@ class ExportAndImportPage extends StatelessWidget {
                       child: ElevatedButton.icon(
                         onPressed: () async {
                           final FileHandler fileHandler =
-                              await locator.getAsync<FileHandler>();
+                              await getIt.getAsync<FileHandler>();
                           fileHandler.restoreBackUpFile();
                         },
                         label: Text( context.loc.restoreLabel),
@@ -153,7 +153,7 @@ class ExportAndImportPage extends StatelessWidget {
                       child: ElevatedButton.icon(
                         onPressed: () async {
                           final FileHandler fileHandler =
-                              await locator.getAsync<FileHandler>();
+                              await getIt.getAsync<FileHandler>();
                           fileHandler.restoreBackUpFile();
                         },
                         label: Text( context.loc.restoreLabel),
@@ -178,7 +178,7 @@ class ExportAndImportPage extends StatelessWidget {
                       title: Text(files[index].name.toString()),
                       onTap: () async {
                         final FileHandler fileHandler =
-                            await locator.getAsync<FileHandler>();
+                            await getIt.getAsync<FileHandler>();
                         await fileHandler.restoreBackUpFile(
                             fileSystemEntity: files[index]);
                       },

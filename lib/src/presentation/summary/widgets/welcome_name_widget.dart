@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
 
 class WelcomeNameWidget extends StatelessWidget {
   const WelcomeNameWidget({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class WelcomeNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: locator
+      valueListenable: getIt
           .get<Box<dynamic>>(instanceName: BoxType.settings.name)
           .listenable(keys: [userNameKey]),
       builder: (context, value, _) {

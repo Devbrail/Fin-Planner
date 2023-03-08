@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
+import '../main.dart';
+import 'presentation/widgets/paisa_annotate_region_widget.dart';
 
 import 'app/routes.dart';
 import 'core/common.dart';
 import 'core/enum/box_types.dart';
 import 'core/theme/paisa_theme.dart';
-import 'service_locator.dart';
 
 class PaisaApp extends StatefulWidget {
   const PaisaApp({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class PaisaApp extends StatefulWidget {
 
 class _PaisaAppState extends State<PaisaApp> {
   late final settings =
-      locator.get<Box<dynamic>>(instanceName: BoxType.settings.name).listenable(
+      getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name).listenable(
     keys: [
       appColorKey,
       dynamicThemeKey,

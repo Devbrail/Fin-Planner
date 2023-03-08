@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:injectable/injectable.dart';
+import 'package:meta/meta.dart' show immutable;
 
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
@@ -11,11 +12,13 @@ import '../../../domain/account/use_case/account_use_case.dart';
 part 'accounts_event.dart';
 part 'accounts_state.dart';
 
+@injectable
 class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   AccountsBloc({
     required this.getAccountUseCase,
     required this.deleteAccountUseCase,
     required this.addAccountUseCase,
+    required this.getAccountsUseCase,
   }) : super(AccountsInitial()) {
     on<AccountsEvent>((event, emit) {});
     on<AddOrUpdateAccountEvent>(_addAccount);
@@ -29,6 +32,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   final GetAccountUseCase getAccountUseCase;
   final DeleteAccountUseCase deleteAccountUseCase;
   final AddAccountUseCase addAccountUseCase;
+  final GetAccountsUseCase getAccountsUseCase;
 
   CardType selectedType = CardType.cash;
   String? accountName;

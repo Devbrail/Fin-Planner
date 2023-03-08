@@ -1,5 +1,8 @@
+import 'package:injectable/injectable.dart';
+
 import '../repository/category_repository.dart';
 
+@singleton
 class AddCategoryUseCase {
   final CategoryRepository categoryRepository;
 

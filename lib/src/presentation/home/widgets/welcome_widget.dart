@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import '../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
-import '../../../service_locator.dart';
 
 class WelcomeWidget extends StatelessWidget {
   const WelcomeWidget({
@@ -19,7 +19,7 @@ class WelcomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: locator
+      valueListenable: getIt
           .get<Box<dynamic>>(instanceName: BoxType.settings.name)
           .listenable(keys: [userImageKey, userNameKey]),
       builder: (context, value, _) {

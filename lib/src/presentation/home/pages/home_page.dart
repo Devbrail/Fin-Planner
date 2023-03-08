@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../../service_locator.dart';
 import '../bloc/home_bloc.dart';
 import 'home_desktop_widget.dart';
 import 'home_mobile_page.dart';
@@ -21,7 +20,7 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  final HomeBloc homeBloc = locator.get<HomeBloc>();
+  final HomeBloc homeBloc = getIt.get<HomeBloc>();
   final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier =
       ValueNotifier<DateTimeRange?>(null);
 

@@ -1,8 +1,11 @@
+import 'package:injectable/injectable.dart';
+
 import '../../../core/enum/card_type.dart';
 import '../../../domain/account/repository/account_repository.dart';
 import '../data_sources/account_local_data_source.dart';
 import '../model/account.dart';
 
+@Singleton(as: AccountRepository)
 class AccountRepositoryImpl extends AccountRepository {
   AccountRepositoryImpl({required this.dataSource});
 
@@ -38,5 +41,5 @@ class AccountRepositoryImpl extends AccountRepository {
       dataSource.fetchAccountFromId(accountId);
 
   @override
-  Future<List<Account>> getAccounts() => dataSource.accounts();
+  List<Account> getAccounts() => dataSource.accounts();
 }

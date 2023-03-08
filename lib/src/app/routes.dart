@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/data/settings/authenticate.dart';
+import '../../main.dart';
+import '../data/settings/authenticate.dart';
 
 import '../core/common.dart';
 import '../core/enum/box_types.dart';
@@ -18,7 +19,6 @@ import '../presentation/login/pages/user_image_page.dart';
 import '../presentation/login/pages/user_name_page.dart';
 import '../presentation/settings/pages/export_and_import_page.dart';
 import '../presentation/settings/pages/setting_page.dart';
-import '../service_locator.dart';
 
 const loginPath = '/login';
 const loginName = 'login';
@@ -77,7 +77,7 @@ final GoRouter goRouter = GoRouter(
             forceChangeCurrency: map['force_change_currency'] as bool,
           );
         } else {
-          return const CurrencySelectorPage();
+          return CurrencySelectorPage();
         }
       },
     ),
@@ -127,8 +127,8 @@ final GoRouter goRouter = GoRouter(
           path: 'expenses/:cid',
           builder: (context, state) => ExpenseListPage(
             categoryId: state.params['cid'],
-            accountLocalDataSource: locator.get(),
-            categoryLocalDataSource: locator.get(),
+            accountLocalDataSource: getIt.get(),
+            categoryLocalDataSource: getIt.get(),
           ),
         ),
         GoRoute(
@@ -197,7 +197,7 @@ final GoRouter goRouter = GoRouter(
         name.isNotEmpty &&
         image.isNotEmpty &&
         isLogging) {
-      final auth = await locator.getAsync<Authenticate>();
+      final auth = getIt.get<Authenticate>();
       final bool result = await auth.authenticateWithBiometrics();
       if (result) {
         return landingPath;

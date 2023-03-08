@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
 import '../../../data/category/model/category.dart';
-import '../../../service_locator.dart';
 import '../bloc/expense_bloc.dart';
 
 import '../../../core/common.dart';
@@ -20,7 +20,7 @@ class SelectCategoryIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     late final expenseBloc = BlocProvider.of<ExpenseBloc>(context);
     return ValueListenableBuilder<Box<Category>>(
-      valueListenable: locator.get<Box<Category>>().listenable(),
+      valueListenable: getIt.get<Box<Category>>().listenable(),
       builder: (context, value, child) {
         final categories = value.values.toList();
         categories.sort(((a, b) => a.name.compareTo(b.name)));

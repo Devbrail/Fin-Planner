@@ -14,4 +14,5 @@ abstract class ExpenseRepository {
   Future<void> clearExpense(int expenseId);
 
   Future<Expense?> fetchExpenseFromId(int expenseId);
+  List<Expense> expenses();
 }

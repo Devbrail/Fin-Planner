@@ -2,7 +2,6 @@ import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paisa/src/app/app_level_constants.dart';
 
 import '../../../core/common.dart';
 import '../../../core/theme/custom_color.dart';
@@ -18,6 +17,7 @@ class AccountSummaryWidget extends StatelessWidget {
 
   final List<Expense> expenses;
   final bool useAccountsList;
+ 
   @override
   Widget build(BuildContext context) {
     if (useAccountsList) {
@@ -40,12 +40,9 @@ class AccountSummaryWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    expenses.totalIncome.toCurrency(decimalDigits: 0),
+                    expenses.thisMonthIncome.toCurrency(decimalDigits: 0),
                     style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                      textStyle: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                 ],
@@ -70,12 +67,9 @@ class AccountSummaryWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    expenses.totalExpense.toCurrency(decimalDigits: 0),
+                    expenses.thisMonthExpense.toCurrency(decimalDigits: 0),
                     style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                      textStyle: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                 ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../main.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/expense/model/expense.dart';
-import '../../../service_locator.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_summary_widget.dart';
 import '../widgets/account_transaction_widget.dart';
@@ -21,9 +21,7 @@ class AccountsMobilePage extends StatelessWidget {
   final AccountsBloc accountsBloc;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
+  Widget build(BuildContext context) => ListView(
         shrinkWrap: true,
         key: const Key('accounts_list_view'),
         padding: const EdgeInsets.only(bottom: 124),
@@ -34,12 +32,10 @@ class AccountsMobilePage extends StatelessWidget {
           ),
           AccountSummaryWidget(expenses: expenses),
           AccountTransactionWidget(
-            accountLocalDataSource: locator.get(),
-            categoryLocalDataSource: locator.get(),
+            accountLocalDataSource: getIt.get(),
+            categoryLocalDataSource: getIt.get(),
             expenses: expenses,
           )
         ],
-      ),
-    );
-  }
+      );
 }

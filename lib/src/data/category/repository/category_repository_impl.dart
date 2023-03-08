@@ -1,7 +1,10 @@
+import 'package:injectable/injectable.dart';
+
 import '../../../domain/category/repository/category_repository.dart';
 import '../data_sources/category_local_data_source.dart';
 import '../model/category.dart';
 
+@Singleton(as: CategoryRepository)
 class CategoryRepositoryImpl extends CategoryRepository {
   final LocalCategoryManagerDataSource dataSources;
 
