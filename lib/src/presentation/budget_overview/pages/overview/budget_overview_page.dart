@@ -53,12 +53,12 @@ class BudgetOverViewPage extends StatelessWidget {
             ),
           ),
         );
-        return ScreenTypeLayout(
-          mobile: BudgetOverviewMobilePage(
+        return ScreenTypeLayout.builder(
+          mobile: (_) => BudgetOverviewMobilePage(
             valueNotifier: valueNotifier,
             child: child,
           ),
-          tablet: BudgetOverviewTabletPage(
+          tablet: (_) => BudgetOverviewTabletPage(
             valueNotifier: valueNotifier,
             child: child,
           ),

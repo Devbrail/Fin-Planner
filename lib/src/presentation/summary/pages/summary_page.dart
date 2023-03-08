@@ -21,19 +21,19 @@ class _SummaryPageState extends State<SummaryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
+    return ScreenTypeLayout.builder(
       breakpoints: const ScreenBreakpoints(
         tablet: 673,
         desktop: 799,
         watch: 300,
       ),
-      mobile: SummaryMobilePage(
+      mobile: (_) => SummaryMobilePage(
         valueNotifier: valueNotifier,
       ),
-      tablet: SummaryTabletPage(
+      tablet: (_) => SummaryTabletPage(
         valueNotifier: valueNotifier,
       ),
-      desktop: SummaryDesktopPage(
+      desktop: (_) => SummaryDesktopPage(
         valueNotifier: valueNotifier,
       ),
     );

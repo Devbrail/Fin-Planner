@@ -17,7 +17,7 @@ class AccountSummaryWidget extends StatelessWidget {
 
   final List<Expense> expenses;
   final bool useAccountsList;
- 
+
   @override
   Widget build(BuildContext context) {
     if (useAccountsList) {

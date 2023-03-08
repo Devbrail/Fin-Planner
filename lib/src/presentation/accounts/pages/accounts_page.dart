@@ -29,7 +29,10 @@ class AccountsPage extends StatelessWidget {
         builder: (_, value, __) {
           final List<Account> accounts = value.values.toList();
           if (useAccountsList) {
-            return NewAccountsPage(accounts: accounts);
+            return NewAccountsPage(
+              accounts: accounts,
+              accountsBloc: accountsBloc,
+            );
           }
           if (accounts.isEmpty) {
             return EmptyWidget(
@@ -48,13 +51,13 @@ class AccountsPage extends StatelessWidget {
                   builder: (context, value, child) {
                     final expenses = value.allAccount(state.account.key);
 
-                    return ScreenTypeLayout(
-                      mobile: AccountsMobilePage(
+                    return ScreenTypeLayout.builder(
+                      mobile: (_) => AccountsMobilePage(
                         accounts: accounts,
                         accountsBloc: accountsBloc,
                         expenses: expenses,
                       ),
-                      tablet: AccountsTabletPage(
+                      tablet: (_) => AccountsTabletPage(
                         accounts: accounts,
                         accountsBloc: accountsBloc,
                         expenses: expenses,

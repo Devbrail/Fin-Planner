@@ -44,10 +44,10 @@ class HomeDesktopWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ScreenTypeLayout(
-                        mobile: const SizedBox(height: kToolbarHeight),
-                        tablet: const SizedBox(height: 32),
-                        desktop: const SizedBox(height: kToolbarHeight),
+                      ScreenTypeLayout.builder(
+                        mobile: (_) => const SizedBox(height: kToolbarHeight),
+                        tablet: (_) => const SizedBox(height: 32),
+                        desktop: (_) => const SizedBox(height: kToolbarHeight),
                       ),
                       ListTile(
                         title: Text(

@@ -36,8 +36,8 @@ class AccountTransactionWidget extends StatelessWidget {
         ),
       );
     }
-    return ScreenTypeLayout(
-      mobile: ListView(
+    return ScreenTypeLayout.builder(
+      mobile: (_) => ListView(
         physics: isScroll ? null : const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         children: [
@@ -70,7 +70,7 @@ class AccountTransactionWidget extends StatelessWidget {
           ),
         ],
       ),
-      tablet: ListView(
+      tablet: (_) => ListView(
         padding: const EdgeInsets.only(bottom: 128),
         shrinkWrap: true,
         children: [

@@ -19,6 +19,20 @@ extension ExpenseListMapping on Box<Expense> {
 
   List<Expense> isFilterTimeBetween(DateTimeRange range) =>
       values.where((element) => element.time.isAfterBeforeTime(range)).toList();
+
+  Iterable<Expense> get expenseList =>
+      values.where((element) => element.type == TransactionType.expense);
+
+  Iterable<Expense> get incomeList =>
+      values.where((element) => element.type == TransactionType.income);
+
+  double get totalExpense => expenseList
+      .map((e) => e.currency)
+      .fold<double>(0, (previousValue, element) => previousValue + element);
+
+  double get totalIncome => incomeList
+      .map((e) => e.currency)
+      .fold<double>(0, (previousValue, element) => previousValue + element);
 }
 
 extension TotalAmountOnExpenses on Iterable<Expense> {
@@ -45,15 +59,13 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
       });
   double get fullTotal => totalIncome - totalExpense;
 
-  double get totalExpense =>
-      where((element) => element.type == TransactionType.expense)
-          .map((e) => e.currency)
-          .fold<double>(0, (previousValue, element) => previousValue + element);
+  double get totalExpense => expenseList
+      .map((e) => e.currency)
+      .fold<double>(0, (previousValue, element) => previousValue + element);
 
-  double get totalIncome =>
-      where((element) => element.type == TransactionType.income)
-          .map((e) => e.currency)
-          .fold<double>(0, (previousValue, element) => previousValue + element);
+  double get totalIncome => incomeList
+      .map((e) => e.currency)
+      .fold<double>(0, (previousValue, element) => previousValue + element);
 
   double get total => map((e) => e.currency)
       .fold<double>(0, (previousValue, element) => previousValue + element);

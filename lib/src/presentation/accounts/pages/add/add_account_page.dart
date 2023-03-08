@@ -107,8 +107,8 @@ class AddAccountPageState extends State<AddAccountPage> {
           }
         },
         builder: (context, state) {
-          return ScreenTypeLayout(
-            mobile: Scaffold(
+          return ScreenTypeLayout.builder(
+            mobile: (_) => Scaffold(
               appBar: context.materialYouAppBar(
                 isAccountAddOrUpdate
                     ? context.loc.addCardLabel
@@ -250,7 +250,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                 ),
               ),
             ),
-            tablet: Scaffold(
+            tablet: (_) => Scaffold(
               appBar: context.materialYouAppBar(
                 context.loc.addCardLabel,
                 actions: [

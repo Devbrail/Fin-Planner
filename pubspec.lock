@@ -416,16 +416,6 @@ packages:
     description:
       name: flutter_plugin_android_lifecycle
       sha256: c224ac897bed083dabf11f238dd11a239809b446740be0c2044608c50029ffdf
- 
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.9"
-  flutter_svg:
-    dependency: "direct main"
-    description:
-      name: flutter_svg
-      sha256: c9bb2757b8a0bbf8e45f4069a90d2b9dbafc80b1a5e28d43e29088be533e6df4
- 
       url: "https://pub.dev"
     source: hosted
     version: "2.0.9"
@@ -596,7 +586,6 @@ packages:
     description:
       name: image_picker_platform_interface
       sha256: "1991219d9dbc42a99aff77e663af8ca51ced592cd6685c9485e3458302d3d4f8"
- 
       url: "https://pub.dev"
     source: hosted
     version: "2.6.3"
@@ -616,7 +605,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
- 
   intl:
     dependency: "direct main"
     description:
@@ -961,7 +949,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.2"
- 
   recase:
     dependency: transitive
     description:
@@ -970,7 +957,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
- 
   responsive_builder:
     dependency: "direct main"
     description:

@@ -117,18 +117,18 @@ class _LandingPageState extends State<LandingPage> {
           homeBloc.add(const CurrentIndexEvent(PageType.home));
           return false;
         },
-        child: ScreenTypeLayout(
+        child: ScreenTypeLayout.builder(
           breakpoints: const ScreenBreakpoints(
             tablet: 600,
             desktop: 700,
             watch: 300,
           ),
-          mobile: HomeMobilePage(
+          mobile: (_) => HomeMobilePage(
             homeBloc: homeBloc,
             dateTimeRangeNotifier: dateTimeRangeNotifier,
             floatingActionButton: _floatingActionButtonBig(),
           ),
-          desktop: HomeDesktopWidget(
+          desktop: (_) => HomeDesktopWidget(
             homeBloc: homeBloc,
             dateTimeRangeNotifier: dateTimeRangeNotifier,
             floatingActionButton: _desktopButton(),

@@ -81,8 +81,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           }
         },
         builder: (context, state) {
-          return ScreenTypeLayout(
-            mobile: Scaffold(
+          return ScreenTypeLayout.builder(
+            mobile: (_) => Scaffold(
               appBar: appBar(),
               body: SingleChildScrollView(
                 child: Form(
@@ -144,7 +144,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                 ),
               ),
             ),
-            tablet: Scaffold(
+            tablet: (_) => Scaffold(
               appBar: context.materialYouAppBar(
                 isAddCategory
                     ? context.loc.addCategoryLabel

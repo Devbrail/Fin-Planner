@@ -34,8 +34,8 @@ class _AccountCardState extends State<AccountCard>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
-      mobile: MobileAccountCard(
+    return ScreenTypeLayout.builder(
+      mobile: (_) => MobileAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
         cardNumber: widget.cardNumber,
@@ -43,7 +43,7 @@ class _AccountCardState extends State<AccountCard>
         onDelete: widget.onDelete,
         onTap: widget.onTap,
       ),
-      tablet: TabletAccountCard(
+      tablet: (_) => TabletAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
         cardNumber: widget.cardNumber,
@@ -51,7 +51,7 @@ class _AccountCardState extends State<AccountCard>
         onDelete: widget.onDelete,
         onTap: widget.onTap,
       ),
-      desktop: DesktopAccountCard(
+      desktop: (_) => DesktopAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
         cardNumber: widget.cardNumber,

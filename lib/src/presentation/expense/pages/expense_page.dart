@@ -49,7 +49,6 @@ class _ExpensePageState extends State<ExpensePage> {
 
   @override
   Widget build(BuildContext context) {
- 
     return BlocProvider(
       create: (context) => expenseBloc,
       child: BlocConsumer(
@@ -73,7 +72,6 @@ class _ExpensePageState extends State<ExpensePage> {
                     : state.isAddOrUpdate
                         ? context.loc.incomeAddedSuccessfulLabel
                         : context.loc.incomeUpdateSuccessfulLabel;
- 
 
             context.showMaterialSnackBar(
               content,
@@ -106,8 +104,8 @@ class _ExpensePageState extends State<ExpensePage> {
           }
         },
         builder: (context, state) {
-          return ScreenTypeLayout(
-            mobile: Scaffold(
+          return ScreenTypeLayout.builder(
+            mobile: (_) => Scaffold(
               appBar: context.materialYouAppBar(
                 isAddExpense
                     ? context.loc.addExpenseLabel
@@ -199,7 +197,7 @@ class _ExpensePageState extends State<ExpensePage> {
                 ),
               ),
             ),
-            tablet: Scaffold(
+            tablet: (_) => Scaffold(
               appBar: AppBar(
                 systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarColor: Colors.transparent,

@@ -14,9 +14,9 @@ class IntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
-      tablet: const IntroBigScreenWidget(),
-      mobile: const IntoMobileWidget(),
+    return ScreenTypeLayout.builder(
+      tablet: (_) => const IntroBigScreenWidget(),
+      mobile: (_) => const IntoMobileWidget(),
     );
   }
 }
@@ -192,70 +192,68 @@ class IntoMobileWidget extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         child: LavaAnimation(
           color: Theme.of(context).colorScheme.primaryContainer,
-          child: ScreenTypeLayout(
-            mobile: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    context.loc.appTitle,
-                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                  ),
-                  Text(
-                    'Simple way to help control your savings',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                  ),
-                  const SizedBox(height: 24),
-                  Column(
-                    children: [
-                      ListTile(
-                        horizontalTitleGap: 0,
-                        contentPadding: EdgeInsets.zero,
-                        leading: Icon(
-                          Icons.check_circle,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        dense: true,
-                        title: Text(
-                          'Manage your money with our app',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  context.loc.appTitle,
+                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
                       ),
-                      ListTile(
-                        horizontalTitleGap: 0,
-                        contentPadding: EdgeInsets.zero,
-                        leading: Icon(
-                          Icons.check_circle,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        dense: true,
-                        title: Text(
-                          'Easy expense tracking for a better budget',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
+                ),
+                Text(
+                  'Simple way to help control your savings',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
-                      ListTile(
-                        horizontalTitleGap: 0,
-                        contentPadding: EdgeInsets.zero,
-                        leading: Icon(
-                          Icons.check_circle,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        dense: true,
-                        title: Text(
-                          'Stay on top of your expenses, anytime, anywhere',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 24),
+                Column(
+                  children: [
+                    ListTile(
+                      horizontalTitleGap: 0,
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(
+                        Icons.check_circle,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      dense: true,
+                      title: Text(
+                        'Manage your money with our app',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ),
+                    ListTile(
+                      horizontalTitleGap: 0,
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(
+                        Icons.check_circle,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      dense: true,
+                      title: Text(
+                        'Easy expense tracking for a better budget',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ),
+                    ListTile(
+                      horizontalTitleGap: 0,
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(
+                        Icons.check_circle,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      dense: true,
+                      title: Text(
+                        'Stay on top of your expenses, anytime, anywhere',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
           ),
         ),
