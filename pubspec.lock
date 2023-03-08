@@ -416,6 +416,7 @@ packages:
     description:
       name: flutter_plugin_android_lifecycle
       sha256: c224ac897bed083dabf11f238dd11a239809b446740be0c2044608c50029ffdf
+ 
       url: "https://pub.dev"
     source: hosted
     version: "2.0.9"
@@ -424,9 +425,10 @@ packages:
     description:
       name: flutter_svg
       sha256: c9bb2757b8a0bbf8e45f4069a90d2b9dbafc80b1a5e28d43e29088be533e6df4
+ 
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "2.0.9"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -481,10 +483,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_fonts
-      sha256: "8f099045e2f2a30e4d4d0a35f40c6bc941a8f2ca0e10ad9d214ee9edd3f37483"
+      sha256: "927573f2e8a8d65c17931e21918ad0ab0666b1b636537de7c4932bdb487b190f"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "4.0.3"
   graphs:
     dependency: transitive
     description:
@@ -594,6 +596,7 @@ packages:
     description:
       name: image_picker_platform_interface
       sha256: "1991219d9dbc42a99aff77e663af8ca51ced592cd6685c9485e3458302d3d4f8"
+ 
       url: "https://pub.dev"
     source: hosted
     version: "2.6.3"
@@ -613,6 +616,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+ 
   intl:
     dependency: "direct main"
     description:
@@ -789,22 +793,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.2"
-  path_drawing:
-    dependency: transitive
-    description:
-      name: path_drawing
-      sha256: bbb1934c0cbb03091af082a6389ca2080345291ef07a5fa6d6e078ba8682f977
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
-  path_parsing:
-    dependency: transitive
-    description:
-      name: path_parsing
-      sha256: e3e67b1629e6f7e8100b367d3db6ba6af4b1f0bb80f64db18ef1fbabd2fa9ccf
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   path_provider:
     dependency: "direct main"
     description:
@@ -973,6 +961,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.2"
+ 
   recase:
     dependency: transitive
     description:
@@ -981,14 +970,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+ 
   responsive_builder:
     dependency: "direct main"
     description:
       name: responsive_builder
-      sha256: "8eed603781a53fe1804a9ba50089ceb4882887f9c5b84ff139b03d8583a12fc9"
+      sha256: "22a9f79e1a70a163cb8c69440cefc2d976c10c689a0fd5682a5e855cd408cc93"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1"
+    version: "0.6.3"
   share_plus:
     dependency: "direct main"
     description:

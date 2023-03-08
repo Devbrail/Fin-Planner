@@ -49,6 +49,7 @@ class _ExpensePageState extends State<ExpensePage> {
 
   @override
   Widget build(BuildContext context) {
+ 
     return BlocProvider(
       create: (context) => expenseBloc,
       child: BlocConsumer(
@@ -72,6 +73,7 @@ class _ExpensePageState extends State<ExpensePage> {
                     : state.isAddOrUpdate
                         ? context.loc.incomeAddedSuccessfulLabel
                         : context.loc.incomeUpdateSuccessfulLabel;
+ 
 
             context.showMaterialSnackBar(
               content,

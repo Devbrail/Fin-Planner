@@ -29,7 +29,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
         children: [
           ListTile(
             title: Text(
-              context.loc.themeLabel,
+              context.loc.chooseThemeLabel,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
@@ -56,7 +56,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+                padding: const EdgeInsets.only(bottom: 16),
                 child: TextButton(
                   style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -73,10 +73,6 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
                 padding: const EdgeInsets.only(right: 16.0, bottom: 16),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primaryContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onPrimaryContainer,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                     ),
