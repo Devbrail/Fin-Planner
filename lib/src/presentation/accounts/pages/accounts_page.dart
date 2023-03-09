@@ -33,43 +33,44 @@ class AccountsPage extends StatelessWidget {
               accounts: accounts,
               accountsBloc: accountsBloc,
             );
-          }
-          if (accounts.isEmpty) {
-            return EmptyWidget(
-              icon: Icons.credit_card,
-              title: context.loc.errorNoCardsLabel,
-              description: context.loc.errorNoCardsDescriptionLabel,
+          } else {
+            if (accounts.isEmpty) {
+              return EmptyWidget(
+                icon: Icons.credit_card,
+                title: context.loc.errorNoCardsLabel,
+                description: context.loc.errorNoCardsDescriptionLabel,
+              );
+            }
+            accountsBloc.add(AccountSelectedEvent(accounts.first));
+            return BlocBuilder(
+              bloc: accountsBloc,
+              builder: (context, state) {
+                if (state is AccountSelectedState) {
+                  return ValueListenableBuilder<Box<Expense>>(
+                    valueListenable: getIt.get<Box<Expense>>().listenable(),
+                    builder: (context, value, child) {
+                      final expenses = value.allAccount(state.account.key);
+
+                      return ScreenTypeLayout.builder(
+                        mobile: (_) => AccountsMobilePage(
+                          accounts: accounts,
+                          accountsBloc: accountsBloc,
+                          expenses: expenses,
+                        ),
+                        tablet: (_) => AccountsTabletPage(
+                          accounts: accounts,
+                          accountsBloc: accountsBloc,
+                          expenses: expenses,
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
             );
           }
-          accountsBloc.add(AccountSelectedEvent(accounts.first));
-          return BlocBuilder(
-            bloc: accountsBloc,
-            builder: (context, state) {
-              if (state is AccountSelectedState) {
-                return ValueListenableBuilder<Box<Expense>>(
-                  valueListenable: getIt.get<Box<Expense>>().listenable(),
-                  builder: (context, value, child) {
-                    final expenses = value.allAccount(state.account.key);
-
-                    return ScreenTypeLayout.builder(
-                      mobile: (_) => AccountsMobilePage(
-                        accounts: accounts,
-                        accountsBloc: accountsBloc,
-                        expenses: expenses,
-                      ),
-                      tablet: (_) => AccountsTabletPage(
-                        accounts: accounts,
-                        accountsBloc: accountsBloc,
-                        expenses: expenses,
-                      ),
-                    );
-                  },
-                );
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
-          );
         },
       ),
     );

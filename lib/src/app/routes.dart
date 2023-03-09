@@ -197,10 +197,20 @@ final GoRouter goRouter = GoRouter(
         name.isNotEmpty &&
         image.isNotEmpty &&
         isLogging) {
-      final auth = getIt.get<Authenticate>();
-      final bool result = await auth.authenticateWithBiometrics();
-      if (result) {
-        return landingPath;
+      final localAuth = getIt.get<Authenticate>();
+
+      final bool canAuthenticateWithBiometrics =
+          await localAuth.canCheckBiometrics();
+      final bool canAuthenticate =
+          canAuthenticateWithBiometrics || await localAuth.isDeviceSupported();
+      if (canAuthenticate) {
+        if (!canAuthenticate) return landingPath;
+        final bool result = await localAuth.authenticateWithBiometrics();
+        if (result) {
+          return landingPath;
+        } else {
+          return landingPath;
+        }
       }
     } else {
       if (name.isNotEmpty && image.isNotEmpty && isLogging) {

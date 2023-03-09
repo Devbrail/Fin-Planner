@@ -3,7 +3,11 @@ import 'package:injectable/injectable.dart';
 
 import 'di.config.dart';
 
-@InjectableInit(asExtension: false)
+@InjectableInit(
+  asExtension: false,
+  preferRelativeImports: true,
+  throwOnMissingDependencies: true,
+)
 Future<GetIt> configInjector(
   GetIt getIt, {
   String? env,

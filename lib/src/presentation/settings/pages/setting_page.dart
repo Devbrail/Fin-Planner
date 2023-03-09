@@ -5,7 +5,6 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../data/settings/authenticate.dart';
-import '../../widgets/future_resolve.dart';
 import '../widgets/biometrics_auth_widget.dart';
 import '../widgets/currency_change_widget.dart';
 import '../widgets/setting_option.dart';
@@ -45,24 +44,8 @@ class _SettingsPageState extends State<SettingsPage> {
             options: [
               const CurrencyChangeWidget(),
               const Divider(),
-              FutureResolve<Authenticate>(
-                future: getIt.getAsync<Authenticate>(),
-                builder: (value) => FutureResolve<bool>(
-                  future: value.auth.isDeviceSupported(),
-                  builder: (supported) {
-                    return Visibility(
-                      visible: supported,
-                      child: Column(
-                        children: [
-                          BiometricAuthWidget(
-                            authenticate: getIt.get<Authenticate>(),
-                          ),
-                          const Divider(),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+              BiometricAuthWidget(
+                authenticate: getIt.get<Authenticate>(),
               ),
               SettingsOption(
                 title: context.loc.backupAndRestoreLabel,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/widgets/future_resolve.dart';
 import '../../../../main.dart';
 
 import '../../../core/common.dart';
@@ -25,28 +26,35 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
   late bool isSelected = settings.get(userAuthKey, defaultValue: false);
 
   @override
-  Widget build(BuildContext context) => FutureBuilder<bool>(
-        future: widget.authenticate.checkBiometrics(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.data != null && snapshot.data!) {
-            return SwitchListTile(
-              title: Text(context.loc.localAppLabel),
-              onChanged: (bool value) async {
-                bool isAuthenticated = false;
-                if (value) {
-                  isAuthenticated =
-                      await widget.authenticate.authenticateWithBiometrics();
-                }
-                setState(() {
-                  isSelected = value && isAuthenticated;
-                });
-                _showSnackBar(isSelected);
-              },
-              value: isSelected,
-            );
-          } else {
-            return const SizedBox.shrink();
-          }
+  Widget build(BuildContext context) => FutureResolve<List<bool>>(
+        future: Future.wait([
+          widget.authenticate.isDeviceSupported(),
+          widget.authenticate.canCheckBiometrics()
+        ]),
+        builder: (supported) {
+          return Visibility(
+            visible: supported.every((element) => element),
+            child: Column(
+              children: [
+                SwitchListTile(
+                  title: Text(context.loc.localAppLabel),
+                  onChanged: (bool value) async {
+                    bool isAuthenticated = false;
+                    if (value) {
+                      isAuthenticated = await widget.authenticate
+                          .authenticateWithBiometrics();
+                    }
+                    setState(() {
+                      isSelected = value && isAuthenticated;
+                    });
+                    _showSnackBar(isSelected);
+                  },
+                  value: isSelected,
+                ),
+                const Divider(),
+              ],
+            ),
+          );
         },
       );
 

@@ -4,12 +4,12 @@ import 'package:local_auth/local_auth.dart';
 
 @Singleton()
 class Authenticate {
-  final LocalAuthentication auth = LocalAuthentication();
+  final LocalAuthentication localAuth = LocalAuthentication();
 
-  Future<bool> checkBiometrics() async {
+  Future<bool> canCheckBiometrics() async {
     late bool canCheckBiometrics;
     try {
-      canCheckBiometrics = await auth.canCheckBiometrics;
+      canCheckBiometrics = await localAuth.canCheckBiometrics;
     } on PlatformException catch (_) {
       canCheckBiometrics = false;
     }
@@ -19,7 +19,7 @@ class Authenticate {
   Future<List<BiometricType>> getAvailableBiometrics() async {
     late List<BiometricType> availableBiometrics;
     try {
-      availableBiometrics = await auth.getAvailableBiometrics();
+      availableBiometrics = await localAuth.getAvailableBiometrics();
     } on PlatformException catch (_) {
       availableBiometrics = <BiometricType>[];
     }
@@ -29,7 +29,7 @@ class Authenticate {
   Future<bool> authenticateWithBiometrics() async {
     bool authenticated = false;
     try {
-      authenticated = await auth.authenticate(
+      authenticated = await localAuth.authenticate(
         localizedReason:
             'Scan your fingerprint (or face or whatever) to authenticate',
         options: const AuthenticationOptions(
@@ -43,7 +43,8 @@ class Authenticate {
     return authenticated;
   }
 
-  Future<void> cancelAuthentication() async => await auth.stopAuthentication();
+  Future<void> cancelAuthentication() async =>
+      await localAuth.stopAuthentication();
 
-  Future<bool> isDeviceSupported() => auth.isDeviceSupported();
+  Future<bool> isDeviceSupported() => localAuth.isDeviceSupported();
 }
