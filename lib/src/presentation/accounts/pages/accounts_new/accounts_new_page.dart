@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/accounts/bloc/accounts_bloc.dart';
-import 'package:paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
 
 import '../../../../../main.dart';
 import '../../../../app/app_level_constants.dart';
@@ -12,6 +10,8 @@ import '../../../../core/enum/card_type.dart';
 import '../../../../data/accounts/model/account.dart';
 import '../../../../data/expense/model/expense.dart';
 import '../../../widgets/paisa_card.dart';
+import '../../../widgets/paisa_empty_widget.dart';
+import '../../bloc/accounts_bloc.dart';
 import '../../widgets/account_summary_widget.dart';
 
 class NewAccountsPage extends StatelessWidget {
@@ -23,9 +23,17 @@ class NewAccountsPage extends StatelessWidget {
 
   final List<Account> accounts;
   final AccountsBloc accountsBloc;
+
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box<Expense>>(
+    if (accounts.isEmpty) {
+      return EmptyWidget(
+        icon: Icons.credit_card,
+        title: context.loc.errorNoCardsLabel,
+        description: context.loc.errorNoCardsDescriptionLabel,
+      );
+    } else {
+      return ValueListenableBuilder<Box<Expense>>(
         valueListenable: getIt.get<Box<Expense>>().listenable(),
         builder: (context, value, child) {
           final totalIncome = value.totalIncome;
@@ -50,45 +58,8 @@ class NewAccountsPage extends StatelessWidget {
                       aspectRatio: 16 / 9,
                       child: PaisaCard(
                         child: InkWell(
-                          onLongPress: () {
-                            paisaAlertDialog(
-                              context,
-                              title: Text(context.loc.dialogDeleteTitleLabel),
-                              child: RichText(
-                                text: TextSpan(
-                                  text: context.loc.deleteAccountLabel,
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                  children: [
-                                    TextSpan(
-                                      text: account.name,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              confirmationButton: TextButton(
-                                style: TextButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                  backgroundColor: Theme.of(context)
-                                      .colorScheme
-                                      .primaryContainer,
-                                  foregroundColor: Theme.of(context)
-                                      .colorScheme
-                                      .onPrimaryContainer,
-                                ),
-                                onPressed: () {
-                                  accountsBloc.add(DeleteAccountEvent(account));
-                                  Navigator.pop(context);
-                                },
-                                child: Text(context.loc.deleteLabel),
-                              ),
-                            );
-                          },
                           onTap: () => GoRouter.of(context).goNamed(
-                            editAccountPath,
+                            accountTransactionPath,
                             params: <String, String>{
                               'aid': account.superId.toString()
                             },
@@ -157,6 +128,8 @@ class NewAccountsPage extends StatelessWidget {
               ),
             ],
           );
-        });
+        },
+      );
+    }
   }
 }

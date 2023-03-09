@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/accounts/pages/accounts_new/account_transaction_page.dart';
 import '../../main.dart';
 import '../data/settings/authenticate.dart';
 
@@ -37,6 +38,7 @@ const addCategoryPath = 'add-category';
 const editCategoryPath = 'edit-category';
 const addAccountPath = 'add-account';
 const editAccountPath = 'edit-account';
+const accountTransactionPath = 'account-transaction';
 const expensesByCategory = 'expenses';
 const exportAndImport = 'export-import';
 const settingsPath = 'settings';
@@ -120,6 +122,13 @@ final GoRouter goRouter = GoRouter(
           path: 'edit-account/:aid',
           builder: (context, state) => AddAccountPage(
             accountId: state.params['aid'],
+          ),
+        ),
+        GoRoute(
+          name: accountTransactionPath,
+          path: 'account/:aid',
+          builder: (context, state) => AccountTransactionPage(
+            accountId: state.params['aid'] as String,
           ),
         ),
         GoRoute(

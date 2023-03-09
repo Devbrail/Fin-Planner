@@ -31,6 +31,10 @@ class ExpenseItemWidget extends StatelessWidget {
           params: <String, String>{'eid': expense.superId.toString()},
         ),
         child: ListTile(
+          title: Text(expense.name),
+          subtitle: Text(
+            '${account.bankName} • ${expense.time.shortDayString}',
+          ),
           leading: CircleAvatar(
             backgroundColor:
                 Color(category.color ?? Colors.amber.shade100.value)
@@ -43,10 +47,6 @@ class ExpenseItemWidget extends StatelessWidget {
               ),
               color: Color(category.color ?? Colors.amber.shade100.value),
             ),
-          ),
-          title: Text(expense.name),
-          subtitle: Text(
-            '${account.bankName} • ${expense.time.shortDayString}',
           ),
           trailing: Text(
             '${expense.type?.sign}${expense.currency.toCurrency()}',
