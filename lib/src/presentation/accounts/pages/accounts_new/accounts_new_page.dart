@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/lava/lava_clock.dart';
 
 import '../../../../../main.dart';
 import '../../../../app/app_level_constants.dart';
@@ -40,9 +41,32 @@ class NewAccountsPage extends StatelessWidget {
           final totalExpense = value.totalExpense;
           return ListView(
             children: [
-              ListTile(
-                title: Text(context.loc.totalBalanceLabel),
-                subtitle: Text((totalIncome - totalExpense).toCurrency()),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: PaisaOutlineCard(
+                  child: LavaAnimation(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    child: Padding(
+                      padding: const EdgeInsets.all(34.0),
+                      child: Column(
+                        children: [
+                          Text(context.loc.totalBalanceLabel),
+                          Text(
+                            (totalIncome - totalExpense).toCurrency(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
