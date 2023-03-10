@@ -663,9 +663,13 @@
     "deleteLabel": "Delete",
     "@deleteLabel": {
         "description": "Delete label"
-    }
-   , "appBarSearchLabel": "Search expenses, accounts, categories",
+    },
+    "appBarSearchLabel": "Search expenses, accounts, categories",
     "@appBarSearchLabel": {
         "description": "Delete label"
+    },
+    "noTransactionLabel": "Empty in transaction",
+    "@noTransactionLabel": {
+        "description": "Empty in transaction"
     }
 }

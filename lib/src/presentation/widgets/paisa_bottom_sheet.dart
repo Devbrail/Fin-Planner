@@ -32,13 +32,13 @@ Future<void> paisaBottomSheet(
       ),
     );
 
-Future<void> paisaAlertDialog(
+Future<T?> paisaAlertDialog<T>(
   BuildContext context, {
   required Widget child,
   required Widget title,
   required Widget confirmationButton,
 }) =>
-    showDialog(
+    showDialog<T>(
       context: context,
       builder: (context) => AlertDialog(
         title: title,

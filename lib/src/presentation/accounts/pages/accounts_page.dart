@@ -12,7 +12,7 @@ import '../../../data/expense/model/expense.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
 import 'accounts_mobile_page.dart';
-import 'accounts_new/accounts_new_page.dart';
+import 'accounts_new/accounts_page_v2.dart';
 import 'accounts_tablet_page.dart';
 
 class AccountsPage extends StatelessWidget {
@@ -29,7 +29,7 @@ class AccountsPage extends StatelessWidget {
         builder: (_, value, __) {
           final List<Account> accounts = value.values.toList();
           if (useAccountsList) {
-            return NewAccountsPage(
+            return AccountsPageV2(
               accounts: accounts,
               accountsBloc: accountsBloc,
             );

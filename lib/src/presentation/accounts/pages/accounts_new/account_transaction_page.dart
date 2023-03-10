@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/app/routes.dart';
+import 'package:paisa/src/presentation/widgets/paisa_empty_widget.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
@@ -28,6 +31,7 @@ class AccountTransactionPage extends StatelessWidget {
     final int accountIdInt = int.parse(accountId);
     final expenses = getIt.get<Box<Expense>>().allAccount(accountIdInt);
     final account = accountLocalDataSource.fetchAccount(accountIdInt);
+
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
@@ -38,7 +42,16 @@ class AccountTransactionPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () => paisaAlertDialog(
+            onPressed: () {
+              GoRouter.of(context).goNamed(
+                editAccountPath,
+                params: <String, String>{'aid': account.superId.toString()},
+              );
+            },
+            icon: const Icon(MdiIcons.pencil),
+          ),
+          IconButton(
+            onPressed: () async => paisaAlertDialog<bool>(
               context,
               title: Text(context.loc.dialogDeleteTitleLabel),
               child: RichText(
@@ -61,11 +74,13 @@ class AccountTransactionPage extends StatelessWidget {
                 ),
                 onPressed: () {
                   accountsBloc.add(DeleteAccountEvent(account));
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 },
                 child: Text(context.loc.deleteLabel),
               ),
-            ),
+            ).then((value) {
+              if (value != null && value) context.pop();
+            }),
             icon: Icon(
               MdiIcons.delete,
               color: Theme.of(context).extension<CustomColors>()!.red,
@@ -73,16 +88,28 @@ class AccountTransactionPage extends StatelessWidget {
           )
         ],
       ),
-      body: ListView.builder(
-        shrinkWrap: true,
-        itemCount: expenses.length,
-        itemBuilder: (context, index) {
-          return ExpenseItemWidget(
-            expense: expenses[index],
-            account: account,
-            category: categoryLocalDataSource
-                .fetchCategory(expenses[index].categoryId),
-          );
+      body: Builder(
+        builder: (context) {
+          if (expenses.isEmpty) {
+            return EmptyWidget(
+              icon: Icons.credit_card,
+              title: context.loc.noTransactionLabel,
+              description: context.loc.errorNoCardsDescriptionLabel,
+            );
+          } else {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: expenses.length,
+              itemBuilder: (context, index) {
+                return ExpenseItemWidget(
+                  expense: expenses[index],
+                  account: account,
+                  category: categoryLocalDataSource
+                      .fetchCategory(expenses[index].categoryId),
+                );
+              },
+            );
+          }
         },
       ),
     );
