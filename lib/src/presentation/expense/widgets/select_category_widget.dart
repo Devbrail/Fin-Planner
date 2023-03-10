@@ -101,7 +101,7 @@ class SelectedItem extends StatelessWidget {
                 (index) {
                   if (index == 0) {
                     return FilterChip(
-                      onSelected: (value) => context.goNamed(addCategoryPath),
+                      onSelected: (value) => context.pushNamed(addCategoryPath),
                       avatar: Icon(
                         color: Theme.of(context).colorScheme.primary,
                         IconData(
