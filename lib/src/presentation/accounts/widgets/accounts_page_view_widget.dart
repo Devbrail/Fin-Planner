@@ -5,7 +5,7 @@ import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
-import '../../../lava/lava_clock.dart';
+import '../../widgets/lava/lava_clock.dart';
 import '../../widgets/paisa_bottom_sheet.dart';
 import '../bloc/accounts_bloc.dart';
 import 'account_card.dart';

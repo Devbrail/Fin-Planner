@@ -6,7 +6,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
-import '../../../lava/lava_clock.dart';
+import '../../widgets/lava/lava_clock.dart';
 
 class AccountCard extends StatefulWidget {
   const AccountCard({

@@ -15,7 +15,7 @@ import '../presentation/debits/pages/debts_page.dart';
 import '../presentation/expense/pages/expense_page.dart';
 import '../presentation/home/pages/home_page.dart';
 import '../presentation/login/intro/into_page.dart';
-import '../presentation/login/pages/currency_selector_page.dart';
+import '../presentation/currency_selector/pages/currency_selector_page.dart';
 import '../presentation/login/pages/user_image_page.dart';
 import '../presentation/login/pages/user_name_page.dart';
 import '../presentation/settings/pages/export_and_import_page.dart';

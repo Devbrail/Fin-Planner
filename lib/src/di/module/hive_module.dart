@@ -10,28 +10,22 @@ import '../../data/expense/model/expense.dart';
 
 @module
 abstract class HiveModule {
-  @factoryMethod
   @singleton
   Box<Expense> get expenseBox => Hive.box<Expense>(BoxType.expense.name);
 
-  @FactoryMethod(preResolve: true)
   @singleton
   Box<Account> get accountBox => Hive.box<Account>(BoxType.accounts.name);
 
-  @FactoryMethod(preResolve: true)
   @singleton
   Box<Category> get categoryBox => Hive.box<Category>(BoxType.category.name);
 
-  @FactoryMethod(preResolve: true)
   @singleton
   Box<Debt> get debtsBox => Hive.box<Debt>(BoxType.debts.name);
 
-  @FactoryMethod(preResolve: true)
   @singleton
   Box<Transaction> get transactionsBox =>
       Hive.box<Transaction>(BoxType.transactions.name);
 
-  @FactoryMethod()
   @singleton
   @Named('settings')
   Box<dynamic> get boxDynamic => Hive.box<dynamic>(BoxType.settings.name);

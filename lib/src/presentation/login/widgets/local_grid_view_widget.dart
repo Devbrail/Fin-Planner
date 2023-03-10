@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
-import '../../../../main.dart';
 
+import '../../../../main.dart';
 import '../../../core/constants.dart';
 import '../../../core/enum/box_types.dart';
+import '../../../data/currencies/models/currency.dart';
 import '../../widgets/paisa_card.dart';
-import '../data.dart';
 
 class LocaleGridView extends StatefulWidget {
   const LocaleGridView({
@@ -17,7 +17,7 @@ class LocaleGridView extends StatefulWidget {
     required this.crossAxisCount,
   }) : super(key: key);
 
-  final List<CountryMap> locales;
+  final List<Currency> locales;
   final Function(Locale) onPressed;
   final int crossAxisCount;
 
@@ -29,11 +29,11 @@ class _LocaleGridViewState extends State<LocaleGridView> {
   final Box<dynamic> settings =
       getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
-  late CountryMap? selectedIndex = widget.locales.firstWhere(
+  late Currency? selectedIndex = widget.locales.firstWhere(
     (element) =>
         element.locale.languageCode ==
         (settings.get(userLanguageKey, defaultValue: 'DEF') as String),
-    orElse: () => CountryMap("US Dollar", const Locale('en')),
+    orElse: () => Currency("US Dollar", const Locale('en')),
   );
 
   @override

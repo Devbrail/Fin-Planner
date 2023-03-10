@@ -7,14 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../../main.dart';
-import '../../../core/enum/box_types.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
+import '../../../core/enum/box_types.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 import '../../../data/category/model/category.dart';
-import '../data.dart';
+import '../../../data/currencies/models/currency.dart';
+import '../../../domain/currencies/use_case/get_currencies_use_case.dart';
 
 part 'currency_selector_event.dart';
 part 'currency_selector_state.dart';
@@ -24,6 +25,7 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
   CurrencySelectorBloc({
     required this.accounts,
     required this.categories,
+    required this.currenciesUseCase,
   }) : super(SplashInitial()) {
     on<SplashEvent>((event, emit) {});
     on<CheckLoginEvent>(_checkLogin);
@@ -31,6 +33,7 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
     on<SelectedLocaleEvent>(_selectedLocale);
   }
 
+  final GetCurrenciesUseCase currenciesUseCase;
   final Box<dynamic> settings =
       getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
   final Box<Account> accounts;
@@ -73,7 +76,7 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
     final languageCode = settings.get(userLanguageKey, defaultValue: 'DEF');
 
     if (languageCode == 'DEF' || event.forceChangeCurrency) {
-      final locales = getLocales();
+      final locales = currenciesUseCase();
       locales.sort(((a, b) => a.name.compareTo(b.name)));
       emit(CountryLocalesState(locales));
     } else {
@@ -87,7 +90,7 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
     Emitter<SplashState> emit,
   ) {
     final query = event.query.toLowerCase();
-    final result = getLocales()
+    final result = currenciesUseCase()
         .where((element) => element.name.toLowerCase().contains(query))
         .toList();
     result.sort(((a, b) => a.name.compareTo(b.name)));

@@ -10,7 +10,7 @@ abstract class SplashState extends Equatable {
 class SplashInitial extends SplashState {}
 
 class CountryLocalesState extends SplashState {
-  final List<CountryMap> locales;
+  final List<Currency> locales;
 
   const CountryLocalesState(this.locales);
   @override

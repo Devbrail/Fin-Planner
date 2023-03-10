@@ -7,7 +7,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
-import '../../../lava/lava_clock.dart';
+import '../../widgets/lava/lava_clock.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});

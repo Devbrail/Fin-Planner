@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/presentation/currency_selector/bloc/currency_selector_bloc.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../widgets/paisa_text_field.dart';
-import '../bloc/currency_selector_bloc.dart';
-import '../widgets/local_grid_view_widget.dart';
+import '../../login/widgets/local_grid_view_widget.dart';
 
 class CurrencySelectorPage extends StatelessWidget {
   CurrencySelectorPage({

@@ -50,5 +50,5 @@ Future<void> hiveOpenBoxes() async {
   await Hive.openBox<box.Category>(BoxType.category.name);
   await Hive.openBox<Account>(BoxType.accounts.name);
   await Hive.openBox<Debt>(BoxType.debts.name);
-  await Hive.openBox(BoxType.settings.name);
+  await Hive.openBox<dynamic>(BoxType.settings.name);
 }
