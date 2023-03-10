@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/src/presentation/accounts/pages/accounts_new/account_transaction_page.dart';
+import 'package:paisa/src/presentation/category/pages/category_list_page.dart';
 import '../../main.dart';
 import '../data/settings/authenticate.dart';
 
@@ -46,6 +47,7 @@ const settingsName = 'settings';
 const debtAddOrEditPath = 'edit-debt';
 const debtPage = 'debt';
 const addDebitName = 'debit-add';
+const manageCategories = 'categories';
 
 const introPageName = 'intro';
 const introPagePath = '/intro';
@@ -104,6 +106,11 @@ final GoRouter goRouter = GoRouter(
           name: addCategoryPath,
           path: addCategoryPath,
           builder: (context, state) => const AddCategoryPage(),
+        ),
+        GoRoute(
+          name: manageCategories,
+          path: manageCategories,
+          builder: (context, state) => const CategoryListPage(),
         ),
         GoRoute(
           name: editCategoryPath,

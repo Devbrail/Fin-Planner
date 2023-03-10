@@ -57,12 +57,22 @@ class SelectCategoryIcon extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  context.loc.selectCategoryLabel,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        context.loc.selectCategoryLabel,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () => context.pushNamed(manageCategories),
+                      icon: const Icon(MdiIcons.pencil),
+                    )
+                  ],
                 ),
               ),
               SelectedItem(

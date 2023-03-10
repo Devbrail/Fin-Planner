@@ -38,80 +38,6 @@ class HomeMobilePage extends StatelessWidget {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: BlocBuilder(
-          bloc: homeBloc,
-          builder: (context, state) {
-            bool isSelected = false;
-            if (state is CurrentIndexState) {
-              isSelected = state.currentPage == PageType.debts;
-            }
-            return ListView(
-              children: [
-                ListTile(
-                  horizontalTitleGap: 0,
-                  leading: Icon(
-                    Icons.wallet,
-                    color: Theme.of(context).colorScheme.primary,
-                    size: 28,
-                  ),
-                  title: Text(
-                    context.loc.appTitle,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                  ),
-                ),
-                DrawerItemWidget(
-                  isSelected: isSelected,
-                  onPressed: () {
-                    homeBloc.add(const CurrentIndexEvent(PageType.debts));
-                    Navigator.pop(context);
-                  },
-                  icon: MdiIcons.accountCashOutline,
-                  title: context.loc.debtsLabel,
-                ),
-                const Divider(),
-                DrawerItemWidget(
-                  isSelected: false,
-                  onPressed: () async {
-                    context.pop();
-                    await showModalBottomSheet(
-                      constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width >= 700
-                            ? 700
-                            : double.infinity,
-                      ),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(16),
-                          topRight: Radius.circular(16),
-                        ),
-                      ),
-                      context: context,
-                      builder: (_) => ChooseThemeModeWidget(
-                        currentTheme: ThemeMode.values[
-                            settings.get(themeModeKey, defaultValue: 0)],
-                      ),
-                    );
-                  },
-                  icon: MdiIcons.brightness4,
-                  title: context.loc.chooseThemeLabel,
-                ),
-                DrawerItemWidget(
-                  isSelected: false,
-                  onPressed: () {
-                    GoRouter.of(context).pushNamed(settingsPath);
-                    Navigator.pop(context);
-                  },
-                  icon: MdiIcons.cog,
-                  title: context.loc.settingsLabel,
-                ),
-              ],
-            );
-          },
-        ),
-      ),
       body: ContentWidget(
         dateTimeRangeNotifier: dateTimeRangeNotifier,
       ),
@@ -140,9 +66,9 @@ class HomeMobilePage extends StatelessWidget {
                 selectedIcon: const Icon(Icons.credit_card),
               ),
               NavigationDestination(
-                label: context.loc.categoryLabel,
-                icon: const Icon(Icons.category_outlined),
-                selectedIcon: const Icon(Icons.category),
+                label: context.loc.debtsLabel,
+                icon: const Icon(MdiIcons.accountCash),
+                selectedIcon: const Icon(MdiIcons.accountCashOutline),
               ),
               NavigationDestination(
                 label: context.loc.budgetLabel,
