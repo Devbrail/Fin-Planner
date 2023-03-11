@@ -26,7 +26,7 @@ class AccountCardWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: AspectRatio(
         aspectRatio: 16 / 9,
-        child: PaisaCard(
+        child: PaisaFilledCard(
           child: InkWell(
             onTap: () => GoRouter.of(context).goNamed(
               accountTransactionPath,

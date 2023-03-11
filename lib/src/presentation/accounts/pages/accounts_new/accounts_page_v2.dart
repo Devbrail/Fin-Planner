@@ -12,6 +12,7 @@ import '../../../widgets/multi_value_listenable_builder.dart';
 import '../../../widgets/paisa_empty_widget.dart';
 import '../../bloc/accounts_bloc.dart';
 import '../../widgets/acccount_card_widget.dart';
+import '../../widgets/account_summary_widget.dart';
 
 class AccountsPageV2 extends StatelessWidget {
   const AccountsPageV2({
@@ -45,72 +46,8 @@ class AccountsPageV2 extends StatelessWidget {
           final totalAccountAmount = accountValue.totalAccountInitialAmount;
           return ListView(
             children: [
-              LavaAnimation(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: GlassmorphicContainer(
-                    height: 156,
-                    width: MediaQuery.of(context).size.width,
-                    borderRadius: 24,
-                    blur: 7,
-                    alignment: Alignment.bottomCenter,
-                    border: 2,
-                    linearGradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .color!
-                            .withOpacity(0.1),
-                        Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .color!
-                            .withOpacity(0.05),
-                      ],
-                      stops: const [0.1, 1],
-                    ),
-                    borderGradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .color!
-                            .withOpacity(0.5),
-                        Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .color!
-                            .withOpacity(0.5),
-                      ],
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(context.loc.totalBalanceLabel),
-                          Text(
-                            (totalAccountAmount + totalIncome - totalExpense)
-                                .toCurrency(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              const SizedBox(height: 8),
+              AccountSummaryWidget(expenses: expenseValue.values.toList()),
               ListView.builder(
                 padding: const EdgeInsets.only(bottom: 124),
                 physics: const NeverScrollableScrollPhysics(),

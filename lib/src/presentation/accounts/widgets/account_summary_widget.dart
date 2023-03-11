@@ -84,7 +84,7 @@ class AccountSummaryWidget extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: PaisaFilledCard(
+              child: PaisaCard(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -105,7 +105,7 @@ class AccountSummaryWidget extends StatelessWidget {
                         style: GoogleFonts.manrope(
                           textStyle: Theme.of(context)
                               .textTheme
-                              .titleLarge
+                              .titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -134,7 +134,7 @@ class AccountSummaryWidget extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: PaisaFilledCard(
+              child: PaisaCard(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -155,7 +155,7 @@ class AccountSummaryWidget extends StatelessWidget {
                         style: GoogleFonts.manrope(
                           textStyle: Theme.of(context)
                               .textTheme
-                              .titleLarge
+                              .titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
