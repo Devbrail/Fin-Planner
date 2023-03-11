@@ -103,17 +103,16 @@ class ColorPickerDialogWidget extends StatelessWidget {
                     child: DynamicColorSwitchWidget(settings: value),
                   ),
                   const Divider(),
-                  AbsorbPointer(
-                    absorbing: isDynamic,
-                    child: Opacity(
-                      opacity: isDynamic ? 0.3 : 1,
-                      child: ColorPickerGridWidget(
-                        onSelected: (color) {
-                          selectedColor = color;
-                        },
-                        selectedColor: selectedColor,
-                      ),
-                    ),
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    child: isDynamic
+                        ? const SizedBox.shrink()
+                        : ColorPickerGridWidget(
+                            onSelected: (color) {
+                              selectedColor = color;
+                            },
+                            selectedColor: selectedColor,
+                          ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 16.0, bottom: 16),

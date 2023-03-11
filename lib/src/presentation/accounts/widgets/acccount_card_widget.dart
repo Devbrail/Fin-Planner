@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/main.dart';
-import 'package:paisa/src/app/app_level_constants.dart';
-import 'package:paisa/src/app/routes.dart';
-import 'package:paisa/src/core/account_extension.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/core/enum/card_type.dart';
-import 'package:paisa/src/data/accounts/model/account.dart';
-import 'package:paisa/src/data/expense/model/expense.dart';
-import 'package:paisa/src/presentation/accounts/widgets/account_summary_widget.dart';
 
+import '../../../../main.dart';
+import '../../../app/app_level_constants.dart';
+import '../../../app/routes.dart';
+import '../../../core/account_extension.dart';
+import '../../../core/common.dart';
+import '../../../core/enum/card_type.dart';
+import '../../../data/accounts/model/account.dart';
+import '../../../data/expense/model/expense.dart';
 import '../../widgets/paisa_card.dart';
+import 'account_summary_widget.dart';
 
 class AccountCardWidget extends StatelessWidget {
   const AccountCardWidget({

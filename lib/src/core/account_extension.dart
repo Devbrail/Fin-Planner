@@ -1,7 +1,7 @@
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/main.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/data/accounts/model/account.dart';
+import '../../main.dart';
+import 'common.dart';
+import '../data/accounts/model/account.dart';
 
 extension AccountMapping on Account {
   double get initialAmount => amount ?? 0;

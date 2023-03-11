@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import '../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 

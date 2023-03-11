@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/main.dart';
-import 'package:paisa/src/data/accounts/data_sources/account_local_data_source.dart';
+import '../../main.dart';
+import '../data/accounts/data_sources/account_local_data_source.dart';
 
 import '../data/expense/model/expense.dart';
 import 'common.dart';

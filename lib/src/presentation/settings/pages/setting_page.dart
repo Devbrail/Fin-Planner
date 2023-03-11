@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../main.dart';
@@ -33,7 +34,7 @@ class _SettingsPageState extends State<SettingsPage> {
             title: context.loc.colorsLabel,
             options: [
               SettingsColorPickerWidget(
-                settings: getIt.get(
+                settings: getIt.get<Box<dynamic>>(
                   instanceName: BoxType.settings.name,
                 ),
               ),

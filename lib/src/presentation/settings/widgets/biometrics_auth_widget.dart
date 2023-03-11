@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/widgets/future_resolve.dart';
+import '../../widgets/future_resolve.dart';
 import '../../../../main.dart';
 
 import '../../../core/common.dart';

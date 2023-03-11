@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+
 import '../../../data/currencies/models/currency.dart';
 import '../repository/currencies_repository.dart';
 

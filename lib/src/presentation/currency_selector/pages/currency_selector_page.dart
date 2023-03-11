@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/presentation/currency_selector/bloc/currency_selector_bloc.dart';
+import '../bloc/currency_selector_bloc.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
@@ -30,7 +30,7 @@ class CurrencySelectorPage extends StatelessWidget {
           bloc: splashCubit,
           listener: (context, state) {
             if (state is NavigateToHome) {
-              context.push(landingPath);
+              context.go(landingPath);
             }
           },
           child: Column(
