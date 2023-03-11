@@ -18,6 +18,8 @@ class SearchListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categorySource = getIt.get<LocalCategoryManagerDataSource>();
+    final accountSource = getIt.get<LocalAccountManagerDataSource>();
     return ValueListenableBuilder<Box<Expense>>(
       valueListenable: getIt.get<Box<Expense>>().listenable(),
       builder: (context, value, child) {
@@ -39,7 +41,8 @@ class SearchListWidget extends StatelessWidget {
         }
 
         final results = value.values
-            .where((Expense c) => c.name.toLowerCase().contains(query))
+            .where(
+                (Expense expense) => expense.name.toLowerCase().contains(query))
             .toList();
 
         if (results.isEmpty) {
@@ -58,24 +61,10 @@ class SearchListWidget extends StatelessWidget {
             ),
           );
         }
-        return FutureBuilder<List<dynamic>>(
-          future: Future.wait([
-            getIt.getAsync<LocalAccountManagerDataSource>(),
-            getIt.getAsync<LocalCategoryManagerDataSource>(),
-          ]),
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
-              return ExpenseListWidget(
-                expenses: results,
-                accountLocalDataSource:
-                    snapshot.data![0] as LocalAccountManagerDataSource,
-                categoryLocalDataSource:
-                    snapshot.data![1] as LocalCategoryManagerDataSource,
-              );
-            } else {
-              return const SizedBox.shrink();
-            }
-          },
+        return ExpenseListWidget(
+          expenses: results,
+          accountLocalDataSource: accountSource,
+          categoryLocalDataSource: categorySource,
         );
       },
     );
