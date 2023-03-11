@@ -106,42 +106,43 @@ class FilterBudgetToggleWidget extends StatelessWidget {
               ],
             ),
           );
-        }
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                PaisaMaterialYouChip(
-                  title: FilterBudget.daily.name(context),
-                  isSelected: FilterBudget.daily == value,
-                  onPressed: () => valueNotifier.value = FilterBudget.daily,
-                ),
-                PaisaMaterialYouChip(
-                  title: FilterBudget.weekly.name(context),
-                  isSelected: FilterBudget.weekly == value,
-                  onPressed: () => valueNotifier.value = FilterBudget.weekly,
-                ),
-                PaisaMaterialYouChip(
-                  title: FilterBudget.monthly.name(context),
-                  isSelected: FilterBudget.monthly == value,
-                  onPressed: () => valueNotifier.value = FilterBudget.monthly,
-                ),
-                PaisaMaterialYouChip(
-                  title: FilterBudget.yearly.name(context),
-                  isSelected: FilterBudget.yearly == value,
-                  onPressed: () => valueNotifier.value = FilterBudget.yearly,
-                ),
-                PaisaMaterialYouChip(
-                  title: FilterBudget.all.name(context),
-                  isSelected: FilterBudget.all == value,
-                  onPressed: () => valueNotifier.value = FilterBudget.all,
-                ),
-              ],
+        } else {
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  PaisaMaterialYouChip(
+                    title: FilterBudget.daily.name(context),
+                    isSelected: FilterBudget.daily == value,
+                    onPressed: () => valueNotifier.value = FilterBudget.daily,
+                  ),
+                  PaisaMaterialYouChip(
+                    title: FilterBudget.weekly.name(context),
+                    isSelected: FilterBudget.weekly == value,
+                    onPressed: () => valueNotifier.value = FilterBudget.weekly,
+                  ),
+                  PaisaMaterialYouChip(
+                    title: FilterBudget.monthly.name(context),
+                    isSelected: FilterBudget.monthly == value,
+                    onPressed: () => valueNotifier.value = FilterBudget.monthly,
+                  ),
+                  PaisaMaterialYouChip(
+                    title: FilterBudget.yearly.name(context),
+                    isSelected: FilterBudget.yearly == value,
+                    onPressed: () => valueNotifier.value = FilterBudget.yearly,
+                  ),
+                  PaisaMaterialYouChip(
+                    title: FilterBudget.all.name(context),
+                    isSelected: FilterBudget.all == value,
+                    onPressed: () => valueNotifier.value = FilterBudget.all,
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
+          );
+        }
       },
     );
   }

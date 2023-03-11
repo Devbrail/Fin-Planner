@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/data/expense/model/expense.dart';
 
 import '../../../core/enum/filter_budget.dart';
 import '../../widgets/filter_widget/filter_budget_widget.dart';
@@ -10,8 +11,12 @@ class SummaryTabletPage extends StatelessWidget {
   const SummaryTabletPage({
     super.key,
     required this.valueNotifier,
+    required this.expenses,
   });
+
   final ValueNotifier<FilterBudget> valueNotifier;
+  final List<Expense> expenses;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +28,9 @@ class SummaryTabletPage extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: const [
-                  WelcomeNameWidget(),
-                  ExpenseTotalWidget(),
+                children: [
+                  const WelcomeNameWidget(),
+                  ExpenseTotalWidget(expenses: expenses),
                 ],
               ),
             ),
@@ -36,6 +41,7 @@ class SummaryTabletPage extends StatelessWidget {
                   FilterBudgetToggleWidget(valueNotifier: valueNotifier),
                   ExpenseHistory(
                     valueNotifier: valueNotifier,
+                    expenses: expenses,
                   ),
                 ],
               ),

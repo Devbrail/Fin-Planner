@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
+import '../../../../main.dart';
+import '../../../data/expense/model/expense.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/enum/filter_budget.dart';
@@ -21,21 +25,30 @@ class _SummaryPageState extends State<SummaryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout.builder(
-      breakpoints: const ScreenBreakpoints(
-        tablet: 673,
-        desktop: 799,
-        watch: 300,
-      ),
-      mobile: (_) => SummaryMobilePage(
-        valueNotifier: valueNotifier,
-      ),
-      tablet: (_) => SummaryTabletPage(
-        valueNotifier: valueNotifier,
-      ),
-      desktop: (_) => SummaryDesktopPage(
-        valueNotifier: valueNotifier,
-      ),
+    return ValueListenableBuilder<Box<Expense>>(
+      valueListenable: getIt.get<Box<Expense>>().listenable(),
+      builder: (_, value, child) {
+        final expenses = value.values.toList();
+        return ScreenTypeLayout.builder(
+          breakpoints: const ScreenBreakpoints(
+            tablet: 673,
+            desktop: 799,
+            watch: 300,
+          ),
+          mobile: (_) => SummaryMobilePage(
+            valueNotifier: valueNotifier,
+            expenses: expenses,
+          ),
+          tablet: (_) => SummaryTabletPage(
+            valueNotifier: valueNotifier,
+            expenses: expenses,
+          ),
+          desktop: (_) => SummaryDesktopPage(
+            valueNotifier: valueNotifier,
+            expenses: expenses,
+          ),
+        );
+      },
     );
   }
 }

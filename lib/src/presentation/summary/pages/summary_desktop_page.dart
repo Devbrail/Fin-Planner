@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/data/expense/model/expense.dart';
 
 import '../../../core/enum/filter_budget.dart';
 import '../../widgets/filter_widget/filter_budget_widget.dart';
@@ -9,8 +10,10 @@ class SummaryDesktopPage extends StatelessWidget {
   const SummaryDesktopPage({
     super.key,
     required this.valueNotifier,
+    required this.expenses,
   });
   final ValueNotifier<FilterBudget> valueNotifier;
+  final List<Expense> expenses;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +29,8 @@ class SummaryDesktopPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Expanded(
-                    child: ExpenseTotalWidget(),
+                  Expanded(
+                    child: ExpenseTotalWidget(expenses: expenses),
                   ),
                   Expanded(
                     child: ListView(
@@ -36,6 +39,7 @@ class SummaryDesktopPage extends StatelessWidget {
                         FilterBudgetToggleWidget(valueNotifier: valueNotifier),
                         ExpenseHistory(
                           valueNotifier: valueNotifier,
+                          expenses: expenses,
                         ),
                       ],
                     ),

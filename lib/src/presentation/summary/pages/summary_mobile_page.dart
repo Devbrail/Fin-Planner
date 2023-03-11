@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/data/expense/model/expense.dart';
 
 import '../../../core/enum/filter_budget.dart';
 import '../../widgets/filter_widget/filter_budget_widget.dart';
@@ -10,9 +11,11 @@ class SummaryMobilePage extends StatelessWidget {
   const SummaryMobilePage({
     super.key,
     required this.valueNotifier,
+    required this.expenses,
   });
 
   final ValueNotifier<FilterBudget> valueNotifier;
+  final List<Expense> expenses;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -24,7 +27,7 @@ class SummaryMobilePage extends StatelessWidget {
             if (index == 0) {
               return const WelcomeNameWidget();
             } else if (index == 1) {
-              return const ExpenseTotalWidget();
+              return ExpenseTotalWidget(expenses: expenses);
             } else if (index == 2) {
               return const SizedBox(height: 8);
             } else if (index == 3) {
@@ -32,6 +35,7 @@ class SummaryMobilePage extends StatelessWidget {
             } else if (index == 4) {
               return ExpenseHistory(
                 valueNotifier: valueNotifier,
+                expenses: expenses,
               );
             }
             return const SizedBox.shrink();
