@@ -83,7 +83,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                           ),
                       children: [
                         TextSpan(
-                          text: context.loc.outcomeLabel,
+                          text: context.loc.expenseLabel,
                           style: TextStyle(
                             color: Theme.of(context)
                                 .colorScheme

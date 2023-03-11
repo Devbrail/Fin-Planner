@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/adapters.dart';
 
-import '../../../../main.dart';
 import '../../../app/app_level_constants.dart';
 import '../../../app/routes.dart';
 import '../../../core/account_extension.dart';
@@ -17,12 +15,13 @@ class AccountCardWidget extends StatelessWidget {
   const AccountCardWidget({
     super.key,
     required this.account,
+    required this.expenses,
   });
   final Account account;
+  final List<Expense> expenses;
 
   @override
   Widget build(BuildContext context) {
-    final expenses = getIt.get<Box<Expense>>().allAccount(account.key);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: AspectRatio(

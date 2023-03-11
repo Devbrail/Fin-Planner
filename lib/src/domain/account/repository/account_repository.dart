@@ -1,3 +1,5 @@
+import 'package:paisa/src/data/expense/model/expense.dart';
+
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
 
@@ -10,10 +12,8 @@ abstract class AccountRepository {
     required double amount,
   });
   Future<void> deleteAccount(int key);
-
   Future<void> updateAccount(Account account);
-
   Account? fetchAccountFromId(int accountId);
-
   List<Account> getAccounts();
+  List<Expense> fetchExpensesFromAccountId(int accountId);
 }

@@ -10,7 +10,7 @@ extension ExpenseListMapping on Box<Expense> {
   List<Expense> get expenses =>
       values.toList()..sort(((a, b) => b.time.compareTo(a.time)));
 
-  List<Expense> allAccount(int accountId) =>
+  List<Expense> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
 
   List<Expense> get budgetOverView =>

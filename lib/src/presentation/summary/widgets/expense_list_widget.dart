@@ -26,9 +26,10 @@ class ExpenseListWidget extends StatelessWidget {
       itemCount: expenses.length,
       itemBuilder: (_, index) {
         final expense = expenses[index];
-        final account = accountLocalDataSource.fetchAccount(expense.accountId);
+        final account =
+            accountLocalDataSource.fetchAccountFromId(expense.accountId);
         final category =
-            categoryLocalDataSource.fetchCategory(expense.categoryId);
+            categoryLocalDataSource.fetchCategoryFromId(expense.categoryId);
         return ExpenseItemWidget(
           expense: expense,
           account: account,

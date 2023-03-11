@@ -49,7 +49,8 @@ class AccountsPage extends StatelessWidget {
                   return ValueListenableBuilder<Box<Expense>>(
                     valueListenable: getIt.get<Box<Expense>>().listenable(),
                     builder: (context, value, child) {
-                      final expenses = value.allAccount(state.account.key);
+                      final expenses =
+                          value.expensesFromAccountId(state.account.key);
 
                       return ScreenTypeLayout.builder(
                         mobile: (_) => AccountsMobilePage(

@@ -38,12 +38,8 @@ class LocalCategoryManagerDataSourceImpl
   }
 
   @override
-  Category fetchCategory(int categoryId) =>
+  Category fetchCategoryFromId(int categoryId) =>
       categoryBox.values.firstWhere((element) => element.key == categoryId);
-
-  @override
-  Future<Category?> fetchCategoryFromId(int categoryId) async =>
-      categoryBox.get(categoryId);
 
   @override
   Future<Iterable<Category>> exportData() async => categoryBox.values;

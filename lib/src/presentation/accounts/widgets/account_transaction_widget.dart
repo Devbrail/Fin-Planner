@@ -63,9 +63,9 @@ class AccountTransactionWidget extends StatelessWidget {
             itemBuilder: (_, index) => ExpenseItemWidget(
               expense: expenses[index],
               account: accountLocalDataSource
-                  .fetchAccount(expenses[index].accountId),
+                  .fetchAccountFromId(expenses[index].accountId),
               category: categoryLocalDataSource
-                  .fetchCategory(expenses[index].categoryId),
+                  .fetchCategoryFromId(expenses[index].categoryId),
             ),
           ),
         ],
@@ -96,9 +96,9 @@ class AccountTransactionWidget extends StatelessWidget {
               return ExpenseItemWidget(
                 expense: expenses[index],
                 account: accountLocalDataSource
-                    .fetchAccount(expenses[index].accountId),
+                    .fetchAccountFromId(expenses[index].accountId),
                 category: categoryLocalDataSource
-                    .fetchCategory(expenses[index].categoryId),
+                    .fetchCategoryFromId(expenses[index].categoryId),
               );
             },
           ),

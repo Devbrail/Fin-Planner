@@ -112,8 +112,9 @@ List<List<String>> csvDataList(
       expenses.length,
       (index) {
         final expense = expenses[index];
-        final account = accountDataSource.fetchAccount(expense.accountId);
-        final category = categoryDataSource.fetchCategory(expense.categoryId);
+        final account = accountDataSource.fetchAccountFromId(expense.accountId);
+        final category =
+            categoryDataSource.fetchCategoryFromId(expense.categoryId);
         return expenseRow(
           index,
           expense: expense,

@@ -215,9 +215,10 @@ class ExportAndImportPage extends StatelessWidget {
           expenses.length,
           (index) {
             final expense = expenses[index];
-            final account = accountDataSource.fetchAccount(expense.accountId);
+            final account =
+                accountDataSource.fetchAccountFromId(expense.accountId);
             final category =
-                categoryDataSource.fetchCategory(expense.categoryId);
+                categoryDataSource.fetchCategoryFromId(expense.categoryId);
             return expenseRow(
               index,
               expense: expense,

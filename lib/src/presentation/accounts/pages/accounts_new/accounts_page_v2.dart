@@ -116,8 +116,11 @@ class AccountsPageV2 extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: accounts.length,
-                itemBuilder: (context, index) =>
-                    AccountCardWidget(account: accounts[index]),
+                itemBuilder: (context, index) => AccountCardWidget(
+                  account: accounts[index],
+                  expenses:
+                      expenseValue.expensesFromAccountId(accounts[index].key),
+                ),
               ),
             ],
           );

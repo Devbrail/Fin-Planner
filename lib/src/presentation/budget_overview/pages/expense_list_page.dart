@@ -44,9 +44,9 @@ class ExpenseListPage extends StatelessWidget {
               return ExpenseItemWidget(
                 expense: expenses[index],
                 account: accountLocalDataSource
-                    .fetchAccount(expenses[index].accountId),
+                    .fetchAccountFromId(expenses[index].accountId),
                 category: categoryLocalDataSource
-                    .fetchCategory(expenses[index].categoryId),
+                    .fetchCategoryFromId(expenses[index].categoryId),
               );
             },
           );

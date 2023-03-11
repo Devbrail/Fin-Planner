@@ -33,6 +33,9 @@ class FetchAccountFromIdEvent extends AccountsEvent {
   final String? accountId;
 
   const FetchAccountFromIdEvent(this.accountId);
+
+  @override
+  List<Object> get props => [accountId ?? ''];
 }
 
 class ClearAccountEvent extends AccountsEvent {

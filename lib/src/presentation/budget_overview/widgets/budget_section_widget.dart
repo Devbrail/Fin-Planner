@@ -23,8 +23,10 @@ class BudgetSection extends StatelessWidget {
   List<MapEntry<Category, List<Expense>>> _filterCategory(
     List<Expense> expenses,
   ) =>
-      groupBy(expenses,
-              (Expense element) => dataSource.fetchCategory(element.categoryId))
+      groupBy(
+              expenses,
+              (Expense element) =>
+                  dataSource.fetchCategoryFromId(element.categoryId))
           .entries
           .toList();
 

@@ -4,6 +4,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart' show immutable;
+import 'package:paisa/src/data/category/model/category.dart';
+import 'package:paisa/src/data/expense/model/expense.dart';
+import 'package:paisa/src/domain/category/use_case/category_use_case.dart';
 
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account.dart';
@@ -17,8 +20,10 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   AccountsBloc({
     required this.getAccountUseCase,
     required this.deleteAccountUseCase,
+    required this.getExpensesFromAccountUseCase,
     required this.addAccountUseCase,
     required this.getAccountsUseCase,
+    required this.getCategoryUseCase,
   }) : super(AccountsInitial()) {
     on<AccountsEvent>((event, emit) {});
     on<AddOrUpdateAccountEvent>(_addAccount);
@@ -28,11 +33,12 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     on<UpdateCardTypeEvent>(_updateCardType);
     on<FetchAccountFromIdEvent>(_fetchAccountFromId);
   }
-
+  final GetExpensesFromAccountUseCase getExpensesFromAccountUseCase;
   final GetAccountUseCase getAccountUseCase;
   final DeleteAccountUseCase deleteAccountUseCase;
   final AddAccountUseCase addAccountUseCase;
   final GetAccountsUseCase getAccountsUseCase;
+  final GetCategoryUseCase getCategoryUseCase;
 
   CardType selectedType = CardType.cash;
   String? accountName;
@@ -134,4 +140,10 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     selectedType = event.cardType;
     emit(UpdateCardTypeState(event.cardType));
   }
+
+  Category fetchCategoryFromId(int categoryId) =>
+      getCategoryUseCase(categoryId);
+
+  List<Expense> fetchExpenseFromAccountId(int accountId) =>
+      getExpensesFromAccountUseCase(accountId);
 }

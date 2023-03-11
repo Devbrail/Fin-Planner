@@ -51,6 +51,7 @@ class AccountSuccessState extends AccountsState {
   final Account account;
 
   const AccountSuccessState(this.account);
+
   @override
   List<Object> get props => [account];
 }

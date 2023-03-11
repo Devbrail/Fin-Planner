@@ -32,6 +32,6 @@ class CategoryRepositoryImpl extends CategoryRepository {
       ));
 
   @override
-  Future<Category?> fetchCategoryFromId(int categoryId) =>
+  Category fetchCategoryFromId(int categoryId) =>
       dataSources.fetchCategoryFromId(categoryId);
 }

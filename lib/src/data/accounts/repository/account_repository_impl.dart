@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/data/expense/model/expense.dart';
 
 import '../../../core/enum/card_type.dart';
 import '../../../domain/account/repository/account_repository.dart';
@@ -42,4 +43,8 @@ class AccountRepositoryImpl extends AccountRepository {
 
   @override
   List<Account> getAccounts() => dataSource.accounts();
+
+  @override
+  List<Expense> fetchExpensesFromAccountId(int accountId) =>
+      dataSource.fetchExpensesFromAccountId(accountId);
 }
