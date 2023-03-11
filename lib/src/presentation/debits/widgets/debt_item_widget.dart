@@ -130,12 +130,10 @@ class DebtItemWidget extends StatelessWidget {
                                     onPressed: () {
                                       final double amount =
                                           double.tryParse(controller.text) ?? 0;
-                                      getIt.getAsync<DebtsBloc>().then(
-                                            (cubit) => cubit.add(
-                                              AddTransactionToDebtEvent(
-                                                debt,
-                                                amount,
-                                              ),
+                                      getIt.get<DebtsBloc>().add(
+                                            AddTransactionToDebtEvent(
+                                              debt,
+                                              amount,
                                             ),
                                           );
 
