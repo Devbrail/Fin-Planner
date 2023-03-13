@@ -41,6 +41,7 @@ class HomeDesktopWidget extends StatelessWidget {
             builder: (context, state) {
               if (state is CurrentIndexState) {
                 return Drawer(
+                  elevation: 0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

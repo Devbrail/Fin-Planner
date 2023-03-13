@@ -27,14 +27,14 @@ Future<void> main() async {
   await fn();
   await hiveOpenBoxes();
   await configInjector(getIt);
-  if (!kIsWeb && !Platform.isIOS) {
+  if (Platform.isAndroid) {
     await FlutterDisplayMode.setHighRefreshRate();
   }
   runApp(const PaisaApp());
 }
 
 Future<void> fn() async {
-  await Hive.initFlutter();
+  await Hive.initFlutter(Platform.isWindows ? 'paisa' : null);
   Hive
     ..registerAdapter(ExpenseAdapter())
     ..registerAdapter(box.CategoryAdapter())
