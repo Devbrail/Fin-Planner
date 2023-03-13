@@ -15,6 +15,7 @@ class CurrencySelectorRepositoryImpl implements CurrenciesRepository {
 List<Currency> _getLocales() => [
       Currency("US Dollar", const Locale('en')),
       Currency("Indian Rupee", const Locale('hi')),
+      Currency("Nepalese Rupee", const Locale('ne')),
       Currency("Malaysia Ringgit", const Locale('ms')),
       Currency("Ukrainian Hryvnia", const Locale('uk')),
       Currency("Polish Złoty", const Locale('pl')),
