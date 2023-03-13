@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
+import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/category/model/category.dart';
 import '../../widgets/paisa_empty_widget.dart';
@@ -17,6 +19,10 @@ class CategoryListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = getIt.get<CategoryBloc>();
     return Scaffold(
+      floatingActionButton: FloatingActionButton.large(
+        onPressed: () => context.pushNamed(addCategoryPath),
+        child: const Icon(Icons.add),
+      ),
       appBar: context.materialYouAppBar(context.loc.categoriesLabel),
       body: ValueListenableBuilder<Box<Category>>(
         valueListenable: getIt.get<Box<Category>>().listenable(),
