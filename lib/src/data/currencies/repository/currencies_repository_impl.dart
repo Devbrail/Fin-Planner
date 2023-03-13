@@ -45,4 +45,5 @@ List<Currency> _getLocales() => [
       Currency("Singapore Dollar", const Locale('en_SG')),
       Currency("Hungarian Forint", const Locale('hu')),
       Currency("Romanian Leu", const Locale('ro')),
+      Currency("Macedonian Denar", const Locale('mk')),
     ];
