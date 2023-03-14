@@ -53,49 +53,16 @@ class UserProfilePage extends StatelessWidget {
                 context.loc.profileLabel,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    tooltip: context.loc.chooseThemeLabel,
-                    onPressed: () {
-                      context.pop();
-                      showModalBottomSheet(
-                        constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width >= 700
-                              ? 700
-                              : double.infinity,
-                        ),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                          ),
-                        ),
-                        context: context,
-                        builder: (_) => ChooseThemeModeWidget(
-                          currentTheme: ThemeMode.values[
-                              settings.get(themeModeKey, defaultValue: 0)],
-                        ),
-                      );
-                    },
-                    icon: Icon(
-                      MdiIcons.brightness4,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                  IconButton(
-                    tooltip: context.loc.settingsLabel,
-                    onPressed: () {
-                      context.pop();
-                      GoRouter.of(context).pushNamed(settingsPath);
-                    },
-                    icon: Icon(
-                      MdiIcons.cog,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                ],
+              trailing: IconButton(
+                tooltip: context.loc.settingsLabel,
+                onPressed: () {
+                  context.pop();
+                  GoRouter.of(context).pushNamed(settingsPath);
+                },
+                icon: Icon(
+                  MdiIcons.cog,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
             ),
             Row(

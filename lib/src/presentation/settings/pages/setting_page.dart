@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/core/enum/theme_mode.dart';
+import 'package:paisa/src/presentation/widgets/choose_theme_mode_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../main.dart';
@@ -13,16 +16,17 @@ import '../widgets/settings_color_picker_widget.dart';
 import '../widgets/settings_group_card.dart';
 import '../widgets/version_widget.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
-  @override
   Widget build(BuildContext context) {
+    final settings = getIt.get<Box<dynamic>>(
+      instanceName: BoxType.settings.name,
+    );
+    final currentTheme = ThemeMode.values[getIt
+        .get<Box<dynamic>>(instanceName: BoxType.settings.name)
+        .get(themeModeKey, defaultValue: 0)];
     return Scaffold(
       appBar: context.materialYouAppBar(
         context.loc.settingsLabel,
@@ -33,11 +37,30 @@ class _SettingsPageState extends State<SettingsPage> {
           SettingsGroup(
             title: context.loc.colorsLabel,
             options: [
-              SettingsColorPickerWidget(
-                settings: getIt.get<Box<dynamic>>(
-                  instanceName: BoxType.settings.name,
-                ),
-              ),
+              SettingsColorPickerWidget(settings: settings),
+              SettingsOption(
+                title: context.loc.chooseThemeLabel,
+                subtitle: currentTheme.themeName,
+                onTap: () {
+                  showModalBottomSheet(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width >= 700
+                          ? 700
+                          : double.infinity,
+                    ),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
+                      ),
+                    ),
+                    context: context,
+                    builder: (_) => ChooseThemeModeWidget(
+                      currentTheme: currentTheme,
+                    ),
+                  );
+                },
+              )
             ],
           ),
           SettingsGroup(

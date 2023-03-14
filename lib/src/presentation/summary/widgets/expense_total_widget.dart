@@ -21,15 +21,15 @@ class ExpenseTotalWidget extends StatelessWidget {
     final currentTotal = expenses.accountTotal;
     final thisMonthExpenses = expenses.thisMonthExpense;
     final thisMonthIncome = expenses.thisMonthIncome;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: LavaAnimation(
+    return LavaAnimation(
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
         child: GlassmorphicContainer(
           height: 226,
           width: MediaQuery.of(context).size.width,
           borderRadius: 24,
           blur: 7,
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.center,
           border: 2,
           linearGradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -49,7 +49,9 @@ class ExpenseTotalWidget extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(22.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 22,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

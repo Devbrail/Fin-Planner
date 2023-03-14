@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:paisa/src/di/module/work.dart';
+import 'package:workmanager/workmanager.dart';
 
 import '../../../main.dart';
 import '../../core/enum/box_types.dart';
@@ -18,6 +20,13 @@ class PaisaUserWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
+        onDoubleTap: () {
+          Workmanager().registerPeriodicTask(
+            'task_name_1',
+            periodicTaskName,
+            frequency: Duration(minutes: 15),
+          );
+        },
         onLongPress: () {
           Navigator.push(
             context,
