@@ -4,6 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../core/common.dart';
 import '../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
+import '../../widgets/paisa_icon_title.dart';
 import '../../widgets/paisa_search_button_widget.dart';
 import '../../widgets/paisa_title_widget.dart';
 import '../../widgets/paisa_user_widget.dart';
@@ -25,7 +26,7 @@ class HomeMobilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const PaisaTitleWidget(),
+        title: const PaisaIconTitle(),
         actions: [
           const PaisaFilterTransactionWidget(),
           const PaisaSearchButtonWidget(),
