@@ -13,6 +13,7 @@ class PaisaIconTitle extends StatelessWidget {
         Icon(
           Icons.wallet,
           color: Theme.of(context).colorScheme.primary,
+          size: 28,
         ),
         const SizedBox(
           width: 8,

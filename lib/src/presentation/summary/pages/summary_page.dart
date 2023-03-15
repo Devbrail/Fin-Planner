@@ -9,18 +9,13 @@ import 'summary_desktop_page.dart';
 import 'summary_mobile_page.dart';
 import 'summary_tablet_page.dart';
 
-class SummaryPage extends StatefulWidget {
+class SummaryPage extends StatelessWidget {
   const SummaryPage({
     Key? key,
+    required this.valueNotifier,
   }) : super(key: key);
 
-  @override
-  State<SummaryPage> createState() => _SummaryPageState();
-}
-
-class _SummaryPageState extends State<SummaryPage> {
-  final ValueNotifier<FilterBudget> valueNotifier =
-      ValueNotifier<FilterBudget>(FilterBudget.daily);
+  final ValueNotifier<FilterBudget> valueNotifier;
 
   @override
   Widget build(BuildContext context) {

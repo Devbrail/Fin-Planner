@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
+import '../../../core/enum/filter_budget.dart';
 import '../../accounts/pages/accounts_page.dart';
 import '../../budget_overview/pages/overview/budget_overview_page.dart';
 import '../../category/pages/category_list_page.dart';
@@ -19,7 +20,9 @@ class ContentWidget extends StatelessWidget {
   final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier;
 
   late final Map<PageType, Widget> pages = {
-    PageType.home: const SummaryPage(),
+    PageType.home: SummaryPage(
+      valueNotifier: ValueNotifier<FilterBudget>(FilterBudget.daily),
+    ),
     PageType.accounts: AccountsPage(),
     PageType.category: const CategoryListPage(),
     PageType.budgetOverview: BudgetOverViewPage(
@@ -48,8 +51,9 @@ class ContentWidget extends StatelessWidget {
             duration: const Duration(milliseconds: 300),
             child: pages[state.currentPage],
           );
+        } else {
+          return SizedBox.fromSize();
         }
-        return SizedBox.fromSize();
       },
     );
   }
