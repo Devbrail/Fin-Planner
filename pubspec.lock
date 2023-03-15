@@ -17,14 +17,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
-  analyzer_plugin:
-    dependency: transitive
-    description:
-      name: analyzer_plugin
-      sha256: c1d5f167683de03d5ab6c3b53fc9aeefc5d59476e7810ba7bbddff50c6f4392d
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.11.2"
   animations:
     dependency: "direct main"
     description:
@@ -33,14 +25,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
-  ansicolor:
-    dependency: transitive
-    description:
-      name: ansicolor
-      sha256: "607f8fa9786f392043f169898923e6c59b4518242b68b8862eb8a8b7d9c30b4a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.1"
   archive:
     dependency: transitive
     description:
@@ -233,14 +217,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
-  csslib:
-    dependency: transitive
-    description:
-      name: csslib
-      sha256: b36c7f7e24c0bdf1bf9a3da461c837d1de64b9f8beb190c9011d8c72a3dfd745
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.17.2"
   csv:
     dependency: "direct main"
     description:
@@ -249,22 +225,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.1"
-  dart_code_metrics:
-    dependency: "direct main"
-    description:
-      name: dart_code_metrics
-      sha256: "026e28da197a03caeccccc0b174ec98ef03da3c81c4543314d7add121aab4375"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.6.0"
-  dart_code_metrics_presets:
-    dependency: transitive
-    description:
-      name: dart_code_metrics_presets
-      sha256: d3c36f97470f478c8432cee163058750db3d167c0a7af9bf291f48dd86c75086
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.1"
   dart_style:
     dependency: transitive
     description:
@@ -509,14 +469,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  html:
-    dependency: transitive
-    description:
-      name: html
-      sha256: "79d498e6d6761925a34ee5ea8fa6dfef38607781d2fa91e37523474282af55cb"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.15.2"
   http:
     dependency: transitive
     description:
@@ -589,6 +541,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.3"
+  in_app_review:
+    dependency: "direct main"
+    description:
+      name: in_app_review
+      sha256: "16328b8202d36522322b95804ae5d975577aa9f584d634985849ba1099645850"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.6"
+  in_app_review_platform_interface:
+    dependency: transitive
+    description:
+      name: in_app_review_platform_interface
+      sha256: b12ec9aaf6b34d3a72aa95895eb252b381896246bdad4ef378d444affe8410ef
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.4"
   injectable:
     dependency: "direct main"
     description:
@@ -933,14 +901,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.3"
-  pub_updater:
-    dependency: transitive
-    description:
-      name: pub_updater
-      sha256: "42890302ab2672adf567dc2b20e55b4ecc29d7e19c63b6b98143ab68dd717d3a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.4"
   pubspec_parse:
     dependency: transitive
     description:

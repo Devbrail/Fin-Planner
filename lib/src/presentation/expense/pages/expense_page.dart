@@ -13,6 +13,7 @@ import '../bloc/expense_bloc.dart';
 import '../widgets/select_account_widget.dart';
 import '../widgets/select_category_widget.dart';
 import '../widgets/toggle_buttons_widget.dart';
+import 'package:in_app_review/in_app_review.dart';
 
 final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
@@ -78,7 +79,12 @@ class _ExpensePageState extends State<ExpensePage> {
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               color: Theme.of(context).colorScheme.onPrimaryContainer,
             );
-            context.pop();
+            final InAppReview inAppReview = InAppReview.instance;
+
+            inAppReview
+                .isAvailable()
+                .then((value) => inAppReview.requestReview())
+                .then((value) => context.pop());
           } else if (state is ExpenseErrorState) {
             context.showMaterialSnackBar(
               state.errorString,

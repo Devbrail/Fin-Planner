@@ -11,8 +11,7 @@ environment:
 dependencies:  
   animations: ^2.0.7
   chart_sparkline: ^1.0.12 
-  csv: ^5.0.1 
-  dart_code_metrics: ^5.3.0
+  csv: ^5.0.1  
   date_picker_timeline: ^1.2.3 
   device_info_plus:  
   dynamic_color: ^1.5.4
@@ -31,6 +30,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   image_picker: ^0.8.6
+  in_app_review: ^2.0.6
   injectable: ^2.1.0
   intl: ^0.17.0 
   local_auth: ^2.1.3
