@@ -26,6 +26,7 @@ class FileHandler {
       Uint8List.fromList(jsonString.codeUnits),
       name: 'paisa_backup_${DateTime.now().toIso8601String()}.json',
       mimeType: 'application/json',
+      lastModified: DateTime.now(),
     );
   }
 
