@@ -1,25 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../data/accounts/data_sources/account_local_data_source.dart';
-import '../../../data/accounts/model/account.dart';
-import '../../../data/category/data_sources/category_local_data_source.dart';
-import '../../../data/category/model/category.dart';
-import '../../../data/expense/model/expense.dart';
 import '../../../data/settings/file_handler.dart';
 import '../widgets/settings_group_card.dart';
-
-extension FileExtension on FileSystemEntity {
-  String? get name {
-    return path.split("/").last;
-  }
-}
 
 class ExportAndImportPage extends StatelessWidget {
   const ExportAndImportPage({super.key});
@@ -46,31 +32,19 @@ class ExportAndImportPage extends StatelessWidget {
       },
     );
     if (newDateRange == null) return;
-    await _fetchAndShareJSONData();
+    await _fetchAndShareJSONFile();
   }
 
-  Future<void> _fetchAndShareJSONData() async {
+  Future<void> _fetchAndShareJSONFile() async {
     final FileHandler fileHandler = await getIt.getAsync<FileHandler>();
-    final jsonString = await fileHandler.fetchExpensesAndEncode();
-
-    final directory = await getTemporaryDirectory();
-    final File jsonFile = File(
-        '${directory.path}/paisa_manager_${DateTime.now().toIso8601String()}.json');
-    await jsonFile.writeAsBytes(jsonString.codeUnits);
-
-    Share.shareFiles([jsonFile.path], subject: 'Paisa expensive manager file');
+    final XFile xFile = await fileHandler.fetchXFileJSONToShare();
+    Share.shareXFiles([xFile], subject: 'Paisa expensive manager file');
   }
 
   Future<void> _fetchAndShareCSVData() async {
     final FileHandler fileHandler = await getIt.getAsync<FileHandler>();
-    final jsonString = await fileHandler.fetchExpensesAndEncode();
-
-    final directory = await getTemporaryDirectory();
-    final File jsonFile = File(
-        '${directory.path}/paisa_manager_${DateTime.now().toIso8601String()}.csv');
-    await jsonFile.writeAsBytes(jsonString.codeUnits);
-
-    Share.shareFiles([jsonFile.path], subject: 'Paisa expensive manager file');
+    final XFile xFile = await fileHandler.fetchXFileJSONToShare();
+    Share.shareXFiles([xFile], subject: 'Paisa expensive manager file');
   }
 
   @override
@@ -82,168 +56,35 @@ class ExportAndImportPage extends StatelessWidget {
       body: ListView(
         children: [
           SettingsGroup(
-            title: 'Backup as JSON file',
+            title: 'Export data as JSON file',
             options: [
-              /* const ListTile(
+              const ListTile(
                 title: Text(
-                  'Restore will clear all the existing data and replace with imported data',
-                ),
-              ), */
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onPrimary,
-                        ),
-                        onPressed: () => _fetchAndShareJSONData(),
-                        label: Text(context.loc.createLabel),
-                        icon: const Icon(MdiIcons.fileExport),
-                      ),
-                    ),
-                    /*  const SizedBox(width: 12),
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          final FileHandler fileHandler =
-                              await getIt.getAsync<FileHandler>();
-                          fileHandler.restoreBackUpFile();
-                        },
-                        label: Text( context.loc.restoreLabel),
-                        icon: const Icon(MdiIcons.fileImport),
-                      ),
-                    ), */
-                  ],
+                  'The file will be a plain JSON file created and exported to save. Please note that if in case anything changes happen in the future in Paisa then this file will be invalid to import.',
                 ),
               ),
-            ],
-          ),
-          SettingsGroup(
-            title: 'Backup as CSV file',
-            options: [
-              /*  const ListTile(
-                title: Text(
-                  'Restore will clear all the existing data and replace with imported data',
-                ),
-              ), */
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onPrimary,
-                        ),
-                        onPressed: () => _fetchAndShareCSVData(),
-                        label: Text(context.loc.createLabel),
-                        icon: const Icon(MdiIcons.fileExport),
-                      ),
-                    ),
-                    /*  const SizedBox(width: 12),
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          final FileHandler fileHandler =
-                              await getIt.getAsync<FileHandler>();
-                          fileHandler.restoreBackUpFile();
-                        },
-                        label: Text( context.loc.restoreLabel),
-                        icon: const Icon(MdiIcons.fileImport),
-                      ),
-                    ), */
-                  ],
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  onPressed: () => _fetchAndShareJSONFile(),
+                  label: Text(context.loc.createLabel),
+                  icon: const Icon(MdiIcons.fileExport),
                 ),
               ),
+              const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Text(
+                  '*The restore option is not implemented as the development not stable',
+                ),
+              )
             ],
           ),
-          /* FutureBuilder<Directory?>(
-            future: getExternalStorageDirectory(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final files = snapshot.data!.listSync();
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: files.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(files[index].name.toString()),
-                      onTap: () async {
-                        final FileHandler fileHandler =
-                            await getIt.getAsync<FileHandler>();
-                        await fileHandler.restoreBackUpFile(
-                            fileSystemEntity: files[index]);
-                      },
-                    );
-                  },
-                );
-              }
-              return const SizedBox.shrink();
-            },
-          ) */
         ],
       ),
     );
   }
-
-  List<List<String>> csvDataList(
-    List<Expense> expenses,
-    LocalAccountManagerDataSource accountDataSource,
-    LocalCategoryManagerDataSource categoryDataSource,
-  ) =>
-      [
-        [
-          'No',
-          'Transaction',
-          'Amount',
-          'Date',
-          'Category Name',
-          'Category Description',
-          'Account Name',
-          'Bank Name',
-          'Account Type',
-        ],
-        ...List.generate(
-          expenses.length,
-          (index) {
-            final expense = expenses[index];
-            final account =
-                accountDataSource.fetchAccountFromId(expense.accountId);
-            final category =
-                categoryDataSource.fetchCategoryFromId(expense.categoryId);
-            return expenseRow(
-              index,
-              expense: expense,
-              account: account,
-              category: category,
-            );
-          },
-        ),
-      ];
-
-  List<String> expenseRow(
-    int index, {
-    required Expense expense,
-    required Account account,
-    required Category category,
-  }) =>
-      [
-        '$index',
-        expense.name,
-        '${expense.currency}',
-        expense.time.toIso8601String(),
-        category.name,
-        category.description ?? '',
-        account.name,
-        account.bankName,
-        account.cardType!.name,
-      ];
 }

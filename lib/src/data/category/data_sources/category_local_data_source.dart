@@ -5,5 +5,5 @@ abstract class LocalCategoryManagerDataSource {
   Future<void> deleteCategory(int key);
   Future<List<Category>> categories();
   Category fetchCategoryFromId(int categoryId);
-  Future<Iterable<Category>> exportData();
+  Iterable<Category> exportData();
 }

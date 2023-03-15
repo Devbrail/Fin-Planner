@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/app/routes.dart';
 import 'package:paisa/src/core/enum/theme_mode.dart';
 import 'package:paisa/src/presentation/widgets/choose_theme_mode_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -75,23 +77,7 @@ class SettingsPage extends StatelessWidget {
                 title: context.loc.backupAndRestoreLabel,
                 subtitle: context.loc.backupAndRestoreDescLabel,
                 onTap: () {
-                  ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        'Disabled',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimaryContainer,
-                            ),
-                      ),
-                      backgroundColor:
-                          Theme.of(context).colorScheme.primaryContainer,
-                      elevation: 6,
-                      behavior: SnackBarBehavior.floating,
-                    ),
-                  );
-                  //GoRouter.of(context).pushNamed(exportAndImport);
+                  GoRouter.of(context).pushNamed(exportAndImport);
                 },
               ),
             ],

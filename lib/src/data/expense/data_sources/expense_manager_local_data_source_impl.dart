@@ -48,5 +48,5 @@ class LocalExpenseManagerDataSourceImpl
       expenseBox.get(expenseId);
 
   @override
-  Future<Iterable<Expense>> exportData() async => expenseBox.values;
+  Iterable<Expense> exportData() => expenseBox.values;
 }

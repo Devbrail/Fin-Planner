@@ -42,5 +42,5 @@ class LocalCategoryManagerDataSourceImpl
       categoryBox.values.firstWhere((element) => element.key == categoryId);
 
   @override
-  Future<Iterable<Category>> exportData() async => categoryBox.values;
+  Iterable<Category> exportData() => categoryBox.values;
 }
