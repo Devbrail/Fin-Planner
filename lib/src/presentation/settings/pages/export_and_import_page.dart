@@ -10,39 +10,8 @@ import '../widgets/settings_group_card.dart';
 class ExportAndImportPage extends StatelessWidget {
   const ExportAndImportPage({super.key});
 
-  Future<void> _pickDateRange(BuildContext context) async {
-    final initialDateRange = DateTimeRange(
-      start: DateTime.now().subtract(const Duration(days: 3)),
-      end: DateTime.now(),
-    );
-    final newDateRange = await showDateRangePicker(
-      context: context,
-      initialDateRange: initialDateRange,
-      firstDate: DateTime.now().subtract(const Duration(days: 7)),
-      lastDate: DateTime.now(),
-      initialEntryMode: DatePickerEntryMode.calendarOnly,
-      builder: (_, child) {
-        return Theme(
-          data: ThemeData.from(colorScheme: Theme.of(context).colorScheme)
-              .copyWith(
-            appBarTheme: Theme.of(context).appBarTheme,
-          ),
-          child: child!,
-        );
-      },
-    );
-    if (newDateRange == null) return;
-    await _fetchAndShareJSONFile();
-  }
-
   Future<void> _fetchAndShareJSONFile() async {
-    final FileHandler fileHandler = await getIt.getAsync<FileHandler>();
-    final XFile xFile = await fileHandler.fetchXFileJSONToShare();
-    Share.shareXFiles([xFile], subject: 'Paisa expensive manager file');
-  }
-
-  Future<void> _fetchAndShareCSVData() async {
-    final FileHandler fileHandler = await getIt.getAsync<FileHandler>();
+    final FileHandler fileHandler = getIt.get<FileHandler>();
     final XFile xFile = await fileHandler.fetchXFileJSONToShare();
     Share.shareXFiles([xFile], subject: 'Paisa expensive manager file');
   }
