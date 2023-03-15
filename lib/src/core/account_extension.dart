@@ -12,6 +12,6 @@ extension AccountsMapping on Box<Account> {
       groupBy(values, (Account account) => account.key)
           .keys
           .map((accountId) => get(accountId)!)
-          .map((account) => account.amount ?? 0)
+          .map((account) => account.initialAmount)
           .fold<double>(0, (previousValue, element) => previousValue + element);
 }

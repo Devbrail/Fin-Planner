@@ -83,8 +83,8 @@ class _ExpensePageState extends State<ExpensePage> {
 
             inAppReview
                 .isAvailable()
-                .then((value) => inAppReview.requestReview())
-                .then((value) => context.pop());
+                .then((value) => inAppReview.requestReview());
+            context.pop();
           } else if (state is ExpenseErrorState) {
             context.showMaterialSnackBar(
               state.errorString,

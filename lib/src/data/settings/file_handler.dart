@@ -90,12 +90,16 @@ class FileHandler {
                 accountDataSource.fetchAccountFromId(expense.accountId);
             final category =
                 categoryDataSource.fetchCategoryFromId(expense.categoryId);
-            return expenseRow(
-              index,
-              expense: expense,
-              account: account,
-              category: category,
-            );
+            if (account != null && category != null) {
+              return expenseRow(
+                index,
+                expense: expense,
+                account: account,
+                category: category,
+              );
+            } else {
+              return [];
+            }
           },
         ),
       ];

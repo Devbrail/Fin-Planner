@@ -32,8 +32,8 @@ class ExpenseListWidget extends StatelessWidget {
             categoryLocalDataSource.fetchCategoryFromId(expense.categoryId);
         return ExpenseItemWidget(
           expense: expense,
-          account: account,
-          category: category,
+          account: account!,
+          category: category!,
         );
       },
       separatorBuilder: (BuildContext context, int index) =>

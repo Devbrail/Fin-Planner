@@ -7,6 +7,6 @@ abstract class LocalAccountManagerDataSource {
   Future<void> deleteAccount(int key);
   List<Account> accounts();
   List<Expense> fetchExpensesFromAccountId(int accountId);
-  Account fetchAccountFromId(int accountId);
+  Account? fetchAccountFromId(int accountId);
   Iterable<Account> exportData();
 }

@@ -42,14 +42,10 @@ class AccountTransactionPage extends StatelessWidget {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {
-                    GoRouter.of(context).goNamed(
-                      editAccountPath,
-                      params: <String, String>{
-                        'aid': account.superId.toString()
-                      },
-                    );
-                  },
+                  onPressed: () => context.goNamed(
+                    editAccountPath,
+                    params: <String, String>{'aid': account.key.toString()},
+                  ),
                   icon: const Icon(MdiIcons.pencil),
                 ),
                 IconButton(
@@ -109,7 +105,7 @@ class AccountTransactionPage extends StatelessWidget {
                         expense: expenses[index],
                         account: account,
                         category: accountsBloc
-                            .fetchCategoryFromId(expenses[index].categoryId),
+                            .fetchCategoryFromId(expenses[index].categoryId)!,
                       );
                     },
                   );

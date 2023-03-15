@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/main.dart';
-import 'package:paisa/src/core/account_extension.dart';
-import 'package:paisa/src/data/accounts/data_sources/account_local_data_source.dart';
 
 import '../data/expense/model/expense.dart';
 import 'common.dart';
@@ -90,15 +87,4 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
       groupBy(this, (Expense element) => element.time.formatted(filterBudget))
           .entries
           .toList();
-
-  double expensesByAccount(int accountId) =>
-      where((element) => element.accountId == accountId).filterTotal;
-
-  double get accountTotal => map((Expense expense) => expense.accountId)
-      .map((accountId) => getIt
-          .get<LocalAccountManagerDataSource>()
-          .fetchAccountFromId(accountId)
-          .initialAmount)
-      .fold<double>(
-          fullTotal, (previousValue, element) => previousValue + element);
 }

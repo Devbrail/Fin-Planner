@@ -9,7 +9,6 @@ import '../../../../data/expense/model/expense.dart';
 import '../../../widgets/paisa_empty_widget.dart';
 import '../../bloc/accounts_bloc.dart';
 import '../../widgets/acccount_card_widget.dart';
-import '../../widgets/account_summary_widget.dart';
 
 class AccountsPageV2 extends StatelessWidget {
   const AccountsPageV2({
@@ -36,7 +35,6 @@ class AccountsPageV2 extends StatelessWidget {
           return ListView(
             children: [
               const SizedBox(height: 8),
-              AccountSummaryWidget(expenses: value.values.toList()),
               ScreenTypeLayout.builder(
                 mobile: (_) => ListView.builder(
                   padding: const EdgeInsets.only(bottom: 124),

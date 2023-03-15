@@ -9,6 +9,6 @@ class GetCategoryUseCase {
 
   GetCategoryUseCase({required this.categoryRepository});
 
-  Category call(int categoryId) =>
+  Category? call(int categoryId) =>
       categoryRepository.fetchCategoryFromId(categoryId);
 }

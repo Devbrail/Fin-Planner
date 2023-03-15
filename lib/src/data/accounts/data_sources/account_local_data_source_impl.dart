@@ -1,5 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
+import 'package:collection/collection.dart';
 import 'package:paisa/src/core/common.dart';
 
 import '../../expense/model/expense.dart';
@@ -40,11 +41,8 @@ class LocalAccountManagerDataSourceImpl
   Iterable<Account> exportData() => accountBox.values;
 
   @override
-  Account fetchAccountFromId(int accountId) {
-    return accountBox.values.firstWhere((element) {
-      return element.superId == accountId;
-    });
-  }
+  Account? fetchAccountFromId(int accountId) => accountBox.values
+      .firstWhereOrNull((element) => element.superId == accountId);
 
   @override
   List<Expense> fetchExpensesFromAccountId(int accountId) =>

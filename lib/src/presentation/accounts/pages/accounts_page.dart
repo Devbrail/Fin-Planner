@@ -21,59 +21,57 @@ class AccountsPage extends StatelessWidget {
   final AccountsBloc accountsBloc = getIt.get();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      key: const Key('accounts_mobile'),
-      body: ValueListenableBuilder<Box<Account>>(
-        valueListenable: getIt.get<Box<Account>>().listenable(),
-        builder: (_, value, __) {
-          final List<Account> accounts = value.values.toList();
-          if (useAccountsList) {
-            return AccountsPageV2(
-              accounts: accounts,
-              accountsBloc: accountsBloc,
-            );
-          } else {
-            if (accounts.isEmpty) {
-              return EmptyWidget(
-                icon: Icons.credit_card,
-                title: context.loc.errorNoCardsLabel,
-                description: context.loc.errorNoCardsDescriptionLabel,
+  Widget build(BuildContext context) => Scaffold(
+        key: const Key('accounts_mobile'),
+        body: ValueListenableBuilder<Box<Account>>(
+          valueListenable: getIt.get<Box<Account>>().listenable(),
+          builder: (_, value, __) {
+            final List<Account> accounts = value.values.toList();
+            if (useAccountsList) {
+              return AccountsPageV2(
+                accounts: accounts,
+                accountsBloc: accountsBloc,
+              );
+            } else {
+              if (accounts.isEmpty) {
+                return EmptyWidget(
+                  icon: Icons.credit_card,
+                  title: context.loc.errorNoCardsLabel,
+                  description: context.loc.errorNoCardsDescriptionLabel,
+                );
+              }
+              accountsBloc.add(AccountSelectedEvent(accounts.first));
+              return BlocBuilder(
+                bloc: accountsBloc,
+                builder: (context, state) {
+                  if (state is AccountSelectedState) {
+                    return ValueListenableBuilder<Box<Expense>>(
+                      valueListenable: getIt.get<Box<Expense>>().listenable(),
+                      builder: (context, value, child) {
+                        final expenses =
+                            value.expensesFromAccountId(state.account.key);
+
+                        return ScreenTypeLayout.builder(
+                          mobile: (_) => AccountsMobilePage(
+                            accounts: accounts,
+                            accountsBloc: accountsBloc,
+                            expenses: expenses,
+                          ),
+                          tablet: (_) => AccountsTabletPage(
+                            accounts: accounts,
+                            accountsBloc: accountsBloc,
+                            expenses: expenses,
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
               );
             }
-            accountsBloc.add(AccountSelectedEvent(accounts.first));
-            return BlocBuilder(
-              bloc: accountsBloc,
-              builder: (context, state) {
-                if (state is AccountSelectedState) {
-                  return ValueListenableBuilder<Box<Expense>>(
-                    valueListenable: getIt.get<Box<Expense>>().listenable(),
-                    builder: (context, value, child) {
-                      final expenses =
-                          value.expensesFromAccountId(state.account.key);
-
-                      return ScreenTypeLayout.builder(
-                        mobile: (_) => AccountsMobilePage(
-                          accounts: accounts,
-                          accountsBloc: accountsBloc,
-                          expenses: expenses,
-                        ),
-                        tablet: (_) => AccountsTabletPage(
-                          accounts: accounts,
-                          accountsBloc: accountsBloc,
-                          expenses: expenses,
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-            );
-          }
-        },
-      ),
-    );
-  }
+          },
+        ),
+      );
 }

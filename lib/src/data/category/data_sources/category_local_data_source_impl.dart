@@ -1,7 +1,8 @@
+import 'package:collection/collection.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../main.dart';
 
+import '../../../../main.dart';
 import '../../expense/model/expense.dart';
 import '../model/category.dart';
 import 'category_local_data_source.dart';
@@ -38,8 +39,10 @@ class LocalCategoryManagerDataSourceImpl
   }
 
   @override
-  Category fetchCategoryFromId(int categoryId) =>
-      categoryBox.values.firstWhere((element) => element.key == categoryId);
+  Category? fetchCategoryFromId(int categoryId) =>
+      categoryBox.values.firstWhereOrNull(
+        (element) => element.key == categoryId,
+      );
 
   @override
   Iterable<Category> exportData() => categoryBox.values;

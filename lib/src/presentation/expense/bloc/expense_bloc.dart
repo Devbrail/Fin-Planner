@@ -96,17 +96,6 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       return emit(const ExpenseErrorState('Select time'));
     }
 
-    /* final Account? account = accountUseCase(accountId);
-    if (account != null) {
-      double finalAmount;
-      if (transactionType == TransactionType.income) {
-        finalAmount = (validAmount + account.amount!);
-      } else {
-        finalAmount = (account.amount! - validAmount);
-      }
-      //account.amount = finalAmount;
-      await account.save();
-    } */
     if (event.isAdding) {
       await addExpenseUseCase(
         name: name,

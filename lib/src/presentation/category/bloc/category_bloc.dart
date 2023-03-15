@@ -46,17 +46,15 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final int? categoryId = int.tryParse(event.categoryId ?? '');
     if (categoryId == null) return;
 
-    final Category? category = await getCategoryUseCase(categoryId);
-    if (category != null) {
-      categoryTitle = category.name;
-      categoryDesc = category.description;
-      categoryBudget = category.budget;
-      selectedIcon = category.icon;
-      currentCategory = category;
-      isBudgetSet = category.isBudget;
-      selectedColor = category.color;
-      emit(CategorySuccessState(category));
-    }
+    final Category category = getCategoryUseCase(categoryId);
+    categoryTitle = category.name;
+    categoryDesc = category.description;
+    categoryBudget = category.budget;
+    selectedIcon = category.icon;
+    currentCategory = category;
+    isBudgetSet = category.isBudget;
+    selectedColor = category.color;
+    emit(CategorySuccessState(category));
   }
 
   FutureOr<void> _addOrUpdateCategory(

@@ -29,82 +29,80 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
   int selectedIndex = 0;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        LavaAnimation(
-          child: AspectRatio(
-            aspectRatio: 16 / 10,
-            child: PageView.builder(
-              padEnds: true,
-              pageSnapping: true,
-              key: const Key('accounts_page_view'),
-              controller: _controller,
-              itemCount: widget.accounts.length,
-              onPageChanged: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-                widget.accountBloc
-                    .add(AccountSelectedEvent(widget.accounts[index]));
-              },
-              itemBuilder: (_, index) {
-                final account = widget.accounts[index];
-                return AccountCard(
-                  key: ValueKey(account.hashCode),
-                  cardHolder: account.name,
-                  cardNumber: account.number,
-                  bankName: account.bankName,
-                  cardType: account.cardType ?? CardType.bank,
-                  onDelete: () => paisaAlertDialog(
-                    context,
-                    title: Text(context.loc.dialogDeleteTitleLabel),
-                    child: RichText(
-                      text: TextSpan(
-                        text: context.loc.deleteAccountLabel,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        children: [
-                          TextSpan(
-                            text: account.name,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          LavaAnimation(
+            child: AspectRatio(
+              aspectRatio: 16 / 10,
+              child: PageView.builder(
+                padEnds: true,
+                pageSnapping: true,
+                key: const Key('accounts_page_view'),
+                controller: _controller,
+                itemCount: widget.accounts.length,
+                onPageChanged: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                  widget.accountBloc
+                      .add(AccountSelectedEvent(widget.accounts[index]));
+                },
+                itemBuilder: (_, index) {
+                  final account = widget.accounts[index];
+                  return AccountCard(
+                    key: ValueKey(account.hashCode),
+                    cardHolder: account.name,
+                    cardNumber: account.number,
+                    bankName: account.bankName,
+                    cardType: account.cardType ?? CardType.bank,
+                    onDelete: () => paisaAlertDialog(
+                      context,
+                      title: Text(context.loc.dialogDeleteTitleLabel),
+                      child: RichText(
+                        text: TextSpan(
+                          text: context.loc.deleteAccountLabel,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          children: [
+                            TextSpan(
+                              text: account.name,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
+                      ),
+                      confirmationButton: TextButton(
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primaryContainer,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
+                        onPressed: () {
+                          widget.accountBloc.add(DeleteAccountEvent(account));
+                          Navigator.pop(context);
+                        },
+                        child: Text(context.loc.deleteLabel),
                       ),
                     ),
-                    confirmationButton: TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        backgroundColor:
-                            Theme.of(context).colorScheme.primaryContainer,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                      onPressed: () {
-                        widget.accountBloc.add(DeleteAccountEvent(account));
-                        Navigator.pop(context);
-                      },
-                      child: Text(context.loc.deleteLabel),
+                    onTap: () => context.goNamed(
+                      editAccountPath,
+                      params: <String, String>{'aid': account.key.toString()},
                     ),
-                  ),
-                  onTap: () => GoRouter.of(context).goNamed(
-                    editAccountPath,
-                    params: <String, String>{'aid': account.superId.toString()},
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: _buildPageIndicator(),
-        ),
-      ],
-    );
-  }
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _buildPageIndicator(),
+          ),
+        ],
+      );
 
   Widget _buildPageIndicator() => Row(
         mainAxisSize: MainAxisSize.min,

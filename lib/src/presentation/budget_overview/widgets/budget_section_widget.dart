@@ -26,7 +26,7 @@ class BudgetSection extends StatelessWidget {
       groupBy(
               expenses,
               (Expense element) =>
-                  dataSource.fetchCategoryFromId(element.categoryId))
+                  dataSource.fetchCategoryFromId(element.categoryId)!)
           .entries
           .toList();
 

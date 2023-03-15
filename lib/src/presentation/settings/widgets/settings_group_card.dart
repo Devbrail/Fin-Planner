@@ -24,6 +24,7 @@ class SettingsGroup extends StatelessWidget {
         ),
       ),
       child: ListView(
+        padding: EdgeInsets.zero,
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         children: [
