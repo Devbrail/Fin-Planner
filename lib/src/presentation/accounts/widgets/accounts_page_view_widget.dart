@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
-import '../../../data/accounts/model/account.dart';
+import '../../../domain/account/entities/account.dart';
 import '../../widgets/lava/lava_clock.dart';
 import '../../widgets/paisa_bottom_sheet.dart';
 import '../bloc/accounts_bloc.dart';

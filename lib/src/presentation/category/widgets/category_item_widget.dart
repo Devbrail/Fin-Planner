@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../data/category/model/category.dart';
+import '../../../data/category/model/category_model.dart';
 import 'category_item_mobile_widget.dart';
 import 'category_item_tablet_widget.dart';
 
@@ -12,7 +12,7 @@ class CategoryItemWidget extends StatelessWidget {
     required this.onPressed,
   }) : super(key: key);
 
-  final Category category;
+  final CategoryModel category;
   final VoidCallback onPressed;
 
   @override

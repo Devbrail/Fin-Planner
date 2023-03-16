@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../domain/debt/repository/debit_repository.dart';
 import '../data_sources/debt_local_data_source.dart';
-import '../models/debt.dart';
+import '../models/debt_model.dart';
 
 @Singleton(as: DebtRepository)
 class DebtRepositoryImpl extends DebtRepository {
@@ -20,7 +20,7 @@ class DebtRepositoryImpl extends DebtRepository {
     DebtType debtType,
   ) async {
     await dataSource.addDebtOrCredit(
-      Debt(
+      DebtModel(
         description: description,
         amount: amount,
         dateTime: currentDateTime,
@@ -32,6 +32,6 @@ class DebtRepositoryImpl extends DebtRepository {
   }
 
   @override
-  Future<Debt?> fetchDebtOrCreditFromId(int debtId) =>
+  Future<DebtModel?> fetchDebtOrCreditFromId(int debtId) =>
       dataSource.fetchDebtOrCreditFromId(debtId);
 }

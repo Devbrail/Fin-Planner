@@ -1,11 +1,11 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
-import '../../../core/list_util.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
-import '../../../data/category/model/category.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../domain/category/entities/category.dart';
+import '../../../domain/expense/entities/expense.dart';
 import 'budget_item_widget.dart';
 
 class BudgetSection extends StatelessWidget {
@@ -24,11 +24,10 @@ class BudgetSection extends StatelessWidget {
     List<Expense> expenses,
   ) =>
       groupBy(
-              expenses,
-              (Expense element) =>
-                  dataSource.fetchCategoryFromId(element.categoryId)!)
-          .entries
-          .toList();
+          expenses,
+          (Expense element) => dataSource
+              .fetchCategoryFromId(element.categoryId)!
+              .toEntity()).entries.toList();
 
   @override
   Widget build(BuildContext context) {

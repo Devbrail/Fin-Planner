@@ -1,29 +1,31 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/domain/expense/entities/expense.dart';
 
-import '../data/expense/model/expense.dart';
-import 'common.dart';
-import 'enum/filter_budget.dart';
-import 'enum/transaction.dart';
+import '../../data/expense/model/expense_model.dart';
+import '../common.dart';
+import '../enum/filter_budget.dart';
+import '../enum/transaction.dart';
 
-extension ExpenseListMapping on Box<Expense> {
-  List<Expense> get expenses =>
+extension ExpenseListMapping on Box<ExpenseModel> {
+  List<ExpenseModel> get expenses =>
       values.toList()..sort(((a, b) => b.time.compareTo(a.time)));
 
-  List<Expense> expensesFromAccountId(int accountId) =>
+  List<ExpenseModel> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
 
-  List<Expense> get budgetOverView =>
+  List<ExpenseModel> get budgetOverView =>
       values.where((element) => element.type != TransactionType.income).toList()
         ..sort((a, b) => b.time.compareTo(a.time));
 
-  List<Expense> isFilterTimeBetween(DateTimeRange range) =>
+  List<ExpenseModel> isFilterTimeBetween(DateTimeRange range) =>
       values.where((element) => element.time.isAfterBeforeTime(range)).toList();
 
-  Iterable<Expense> get expenseList =>
+  Iterable<ExpenseModel> get expenseList =>
       values.where((element) => element.type == TransactionType.expense);
 
-  Iterable<Expense> get incomeList =>
+  Iterable<ExpenseModel> get incomeList =>
       values.where((element) => element.type == TransactionType.income);
 
   double get totalExpense => expenseList
@@ -84,7 +86,28 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
 
   List<MapEntry<String, List<Expense>>> groupByTime(
           FilterBudget filterBudget) =>
-      groupBy(this, (Expense element) => element.time.formatted(filterBudget))
+      groupBy(this,
+              (ExpenseModel element) => element.time.formatted(filterBudget))
           .entries
           .toList();
+
+  List<Expense> toEntities() =>
+      map((expenseModel) => expenseModel.toEntity()).toList();
+}
+
+extension ExpenseMapping on ExpenseModel {
+  Expense toEntity() => Expense(
+        name: name,
+        currency: currency,
+        time: time,
+        categoryId: categoryId,
+        accountId: accountId,
+        type: type,
+      );
+}
+
+extension ExpensesMapping on Iterable<ExpenseModel> {
+  List<Expense> toEntities() => map((expenseModel) => expenseModel.toEntity())
+      .sorted((a, b) => b.time.compareTo(a.time))
+      .toList();
 }

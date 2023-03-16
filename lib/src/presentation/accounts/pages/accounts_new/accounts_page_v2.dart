@@ -4,8 +4,9 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
-import '../../../../data/accounts/model/account.dart';
-import '../../../../data/expense/model/expense.dart';
+import '../../../../data/expense/model/expense_model.dart';
+import '../../../../domain/account/entities/account.dart';
+import '../../../../domain/expense/entities/expense.dart';
 import '../../../widgets/paisa_empty_widget.dart';
 import '../../bloc/accounts_bloc.dart';
 import '../../widgets/acccount_card_widget.dart';
@@ -29,8 +30,8 @@ class AccountsPageV2 extends StatelessWidget {
         description: context.loc.errorNoCardsDescriptionLabel,
       );
     } else {
-      return ValueListenableBuilder<Box<Expense>>(
-        valueListenable: getIt.get<Box<Expense>>().listenable(),
+      return ValueListenableBuilder<Box<ExpenseModel>>(
+        valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
         builder: (context, value, child) {
           return ListView(
             children: [
@@ -41,10 +42,16 @@ class AccountsPageV2 extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: accounts.length,
-                  itemBuilder: (context, index) => AccountCardWidget(
-                    account: accounts[index],
-                    expenses: value.expensesFromAccountId(accounts[index].key),
-                  ),
+                  itemBuilder: (context, index) {
+                    final List<Expense> expenses = value
+                        .expensesFromAccountId(accounts[index].superId!)
+                        .map((e) => e.toEntity())
+                        .toList();
+                    return AccountCardWidget(
+                      account: accounts[index],
+                      expenses: expenses,
+                    );
+                  },
                 ),
                 tablet: (_) => GridView.builder(
                   padding: const EdgeInsets.only(bottom: 124),
@@ -53,11 +60,16 @@ class AccountsPageV2 extends StatelessWidget {
                   itemCount: accounts.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
-                  itemBuilder: (BuildContext context, int index) =>
-                      AccountCardWidget(
-                    account: accounts[index],
-                    expenses: value.expensesFromAccountId(accounts[index].key),
-                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    final List<Expense> expenses = value
+                        .expensesFromAccountId(accounts[index].key)
+                        .map((e) => e.toEntity())
+                        .toList();
+                    return AccountCardWidget(
+                      account: accounts[index],
+                      expenses: expenses,
+                    );
+                  },
                 ),
               ),
             ],

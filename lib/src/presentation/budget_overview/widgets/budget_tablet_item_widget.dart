@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../../data/category/model/category.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../domain/category/entities/category.dart';
+import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/paisa_card.dart';
 
 class BudgetItemTableWidget extends StatelessWidget {

@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../main.dart';
 import '../../../core/currency_util.dart';
 import '../../../core/theme/custom_color.dart';
-import '../../../data/accounts/data_sources/account_local_data_source.dart';
+import '../../../data/accounts/data_sources/local_account_data_manager.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../domain/expense/entities/expense.dart';
 import 'expense_list_widget.dart';
 
 class ExpenseMonthCardWidget extends StatelessWidget {
@@ -21,7 +21,7 @@ class ExpenseMonthCardWidget extends StatelessWidget {
   final double total;
   final List<Expense> expenses;
   final categorySource = getIt.get<LocalCategoryManagerDataSource>();
-  final accountSource = getIt.get<LocalAccountManagerDataSource>();
+  final accountSource = getIt.get<LocalAccountDataManager>();
 
   @override
   Widget build(BuildContext context) {

@@ -2,29 +2,32 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../core/enum/box_types.dart';
-import '../../data/accounts/model/account.dart';
-import '../../data/category/model/category.dart';
-import '../../data/debt/models/debt.dart';
-import '../../data/debt/models/transaction.dart';
-import '../../data/expense/model/expense.dart';
+import '../../data/accounts/model/account_model.dart';
+import '../../data/category/model/category_model.dart';
+import '../../data/debt/models/debt_model.dart';
+import '../../data/debt/models/transactions_model.dart';
+import '../../data/expense/model/expense_model.dart';
 
 @module
 abstract class HiveModule {
   @singleton
-  Box<Expense> get expenseBox => Hive.box<Expense>(BoxType.expense.name);
+  Box<ExpenseModel> get expenseBox =>
+      Hive.box<ExpenseModel>(BoxType.expense.name);
 
   @singleton
-  Box<Account> get accountBox => Hive.box<Account>(BoxType.accounts.name);
+  Box<AccountModel> get accountBox =>
+      Hive.box<AccountModel>(BoxType.accounts.name);
 
   @singleton
-  Box<Category> get categoryBox => Hive.box<Category>(BoxType.category.name);
+  Box<CategoryModel> get categoryBox =>
+      Hive.box<CategoryModel>(BoxType.category.name);
 
   @singleton
-  Box<Debt> get debtsBox => Hive.box<Debt>(BoxType.debts.name);
+  Box<DebtModel> get debtsBox => Hive.box<DebtModel>(BoxType.debts.name);
 
   @singleton
-  Box<Transaction> get transactionsBox =>
-      Hive.box<Transaction>(BoxType.transactions.name);
+  Box<TransactionsModel> get transactionsBox =>
+      Hive.box<TransactionsModel>(BoxType.transactions.name);
 
   @singleton
   @Named('settings')

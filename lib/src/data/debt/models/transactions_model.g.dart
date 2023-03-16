@@ -1,30 +1,31 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'transaction.dart';
+part of 'transactions_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TransactionAdapter extends TypeAdapter<Transaction> {
+class TransactionsModelAdapter extends TypeAdapter<TransactionsModel> {
   @override
   final int typeId = 3;
 
   @override
-  Transaction read(BinaryReader reader) {
+  TransactionsModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Transaction(
+    return TransactionsModel(
       amount: fields[1] as double,
       now: fields[2] as DateTime,
       parentId: fields[4] == null ? -1 : fields[4] as int?,
-    )..superId = fields[3] as int?;
+      superId: fields[3] as int?,
+    );
   }
 
   @override
-  void write(BinaryWriter writer, Transaction obj) {
+  void write(BinaryWriter writer, TransactionsModel obj) {
     writer
       ..writeByte(4)
       ..writeByte(1)
@@ -43,7 +44,7 @@ class TransactionAdapter extends TypeAdapter<Transaction> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TransactionAdapter &&
+      other is TransactionsModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

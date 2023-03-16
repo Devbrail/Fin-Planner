@@ -7,12 +7,12 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../data/accounts/data_sources/account_local_data_source.dart';
-import '../../../data/accounts/model/account.dart';
+import '../../../data/accounts/data_sources/local_account_data_manager.dart';
+import '../../../data/accounts/model/account_model.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
-import '../../../data/category/model/category.dart';
-import '../../../data/expense/data_sources/expense_manager_local_data_source.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../data/category/model/category_model.dart';
+import '../../../data/expense/data_sources/local_expense_data_manager.dart';
+import '../../../data/expense/model/expense_model.dart';
 import 'setting_option.dart';
 
 class ExportExpensesWidget extends StatefulWidget {
@@ -23,8 +23,8 @@ class ExportExpensesWidget extends StatefulWidget {
 }
 
 class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
-  final dataSource = getIt.get<LocalExpenseManagerDataSource>();
-  final accountDataSource = getIt.get<LocalAccountManagerDataSource>();
+  final dataSource = getIt.get<LocalExpenseDataManager>();
+  final accountDataSource = getIt.get<LocalAccountDataManager>();
   final categoryDataSource = getIt.get<LocalCategoryManagerDataSource>();
   DateTimeRange? dateTimeRange;
   @override
@@ -72,9 +72,9 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
 
 List<String> expenseRow(
   int index, {
-  required Expense expense,
-  required Account account,
-  required Category category,
+  required ExpenseModel expense,
+  required AccountModel account,
+  required CategoryModel category,
 }) {
   return [
     '$index',
@@ -90,8 +90,8 @@ List<String> expenseRow(
 }
 
 List<List<String>> csvDataList(
-  List<Expense> expenses,
-  LocalAccountManagerDataSource accountDataSource,
+  List<ExpenseModel> expenses,
+  LocalAccountDataManager accountDataSource,
   LocalCategoryManagerDataSource categoryDataSource,
 ) {
   return [
@@ -116,8 +116,8 @@ List<List<String>> csvDataList(
         return expenseRow(
           index,
           expense: expense,
-          account: account,
-          category: category,
+          account: account!,
+          category: category!,
         );
       },
     ),

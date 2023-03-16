@@ -3,10 +3,10 @@ import 'package:hive/hive.dart';
 
 import '../../../core/enum/card_type.dart';
 
-part 'account.g.dart';
+part 'account_model.g.dart';
 
 @HiveType(typeId: 2)
-class Account extends HiveObject with EquatableMixin {
+class AccountModel extends HiveObject with EquatableMixin {
   @HiveField(0)
   String name;
 
@@ -28,13 +28,14 @@ class Account extends HiveObject with EquatableMixin {
   @HiveField(8, defaultValue: 0)
   double? amount;
 
-  Account({
+  AccountModel({
     required this.name,
     required this.icon,
     required this.bankName,
     required this.number,
     required this.cardType,
     required this.amount,
+    this.superId,
   });
 
   @override
@@ -50,7 +51,7 @@ class Account extends HiveObject with EquatableMixin {
         'amount': amount,
       };
 
-  factory Account.fromJson(Map<String, dynamic> json) => Account(
+  factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
       name: json["name"],
       bankName: json["bankName"],
       icon: json["icon"],

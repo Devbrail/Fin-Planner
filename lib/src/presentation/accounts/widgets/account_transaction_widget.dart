@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
-import '../../../data/accounts/data_sources/account_local_data_source.dart';
+import '../../../core/extensions/account_extension.dart';
+import '../../../data/accounts/data_sources/local_account_data_manager.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../domain/account/entities/account.dart';
+import '../../../domain/category/entities/category.dart';
+import '../../../domain/expense/entities/expense.dart';
 import '../../summary/widgets/expense_item_widget.dart';
 
 class AccountTransactionWidget extends StatelessWidget {
@@ -17,7 +19,7 @@ class AccountTransactionWidget extends StatelessWidget {
     this.isScroll = false,
   }) : super(key: key);
 
-  final LocalAccountManagerDataSource accountLocalDataSource;
+  final LocalAccountDataManager accountLocalDataSource;
   final LocalCategoryManagerDataSource categoryLocalDataSource;
   final List<Expense> expenses;
   final bool isScroll;
@@ -60,13 +62,19 @@ class AccountTransactionWidget extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: expenses.length,
-            itemBuilder: (_, index) => ExpenseItemWidget(
-              expense: expenses[index],
-              account: accountLocalDataSource
-                  .fetchAccountFromId(expenses[index].accountId),
-              category: categoryLocalDataSource
-                  .fetchCategoryFromId(expenses[index].categoryId),
-            ),
+            itemBuilder: (_, index) {
+              final Account account = accountLocalDataSource
+                  .fetchAccountFromId(expenses[index].accountId)!
+                  .toEntity();
+              final Category category = categoryLocalDataSource
+                  .fetchCategoryFromId(expenses[index].categoryId)!
+                  .toEntity();
+              return ExpenseItemWidget(
+                expense: expenses[index],
+                account: account,
+                category: category,
+              );
+            },
           ),
         ],
       ),
@@ -93,12 +101,16 @@ class AccountTransactionWidget extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: expenses.length,
             itemBuilder: (_, index) {
+              final Account account = accountLocalDataSource
+                  .fetchAccountFromId(expenses[index].accountId)!
+                  .toEntity();
+              final Category category = categoryLocalDataSource
+                  .fetchCategoryFromId(expenses[index].categoryId)!
+                  .toEntity();
               return ExpenseItemWidget(
                 expense: expenses[index],
-                account: accountLocalDataSource
-                    .fetchAccountFromId(expenses[index].accountId),
-                category: categoryLocalDataSource
-                    .fetchCategoryFromId(expenses[index].categoryId),
+                account: account,
+                category: category,
               );
             },
           ),

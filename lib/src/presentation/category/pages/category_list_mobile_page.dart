@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/common.dart';
-import '../../../data/category/model/category.dart';
+import '../../../domain/category/entities/category.dart';
 import '../../widgets/paisa_bottom_sheet.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/category_item_mobile_widget.dart';

@@ -6,9 +6,9 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/enum/transaction.dart';
-import '../../../data/accounts/model/account.dart';
-import '../../../data/category/model/category.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../data/accounts/model/account_model.dart';
+import '../../../data/category/model/category_model.dart';
+import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/account/use_case/get_account_use_case.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
 
@@ -41,7 +41,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   double? expenseAmount;
   int? selectedCategoryId;
   int? selectedAccountId;
-  Expense? currentExpense;
+  ExpenseModel? currentExpense;
   String? currentDescription;
   DateTime? selectedDate = DateTime.now();
   TransactionType transactionType = TransactionType.expense;
@@ -53,7 +53,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     final int? expenseId = int.tryParse(event.expenseId ?? '');
     if (expenseId == null) return;
 
-    final Expense? expense = await expenseUseCase(expenseId);
+    final ExpenseModel? expense = await expenseUseCase(expenseId);
     if (expense != null) {
       expenseAmount = expense.currency;
       expenseName = expense.name;
@@ -126,7 +126,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     Emitter<ExpenseState> emit,
   ) async {
     if (currentExpense != null) {
-      final Account? account = accountUseCase(currentExpense!.accountId);
+      final AccountModel? account = accountUseCase(currentExpense!.accountId);
       if (account != null) {
         account.amount = (currentExpense!.currency + account.amount!);
         await account.save();

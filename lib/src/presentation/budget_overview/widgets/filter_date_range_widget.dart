@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/common.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../domain/expense/entities/expense.dart';
 
 class FilterDateRangeWidget extends StatelessWidget {
   const FilterDateRangeWidget({

@@ -4,8 +4,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/domain/category/entities/category.dart';
+import 'package:paisa/src/domain/expense/use_case/expense_use_case.dart';
 
-import '../../../data/category/model/category.dart';
+import '../../../data/category/model/category_model.dart';
 import '../../../domain/category/use_case/category_use_case.dart';
 
 part 'category_event.dart';
@@ -17,6 +19,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     required this.getCategoryUseCase,
     required this.addCategoryUseCase,
     required this.deleteCategoryUseCase,
+    required this.deleteExpensesFromCategoryIdUseCase,
   }) : super(AddCategoryInitial()) {
     on<FetchCategoryFromIdEvent>(_fetchCategoryFromId);
     on<CategoryEvent>((event, emit) {});
@@ -30,12 +33,13 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final GetCategoryUseCase getCategoryUseCase;
   final AddCategoryUseCase addCategoryUseCase;
   final DeleteCategoryUseCase deleteCategoryUseCase;
+  final DeleteExpensesFromCategoryIdUseCase deleteExpensesFromCategoryIdUseCase;
 
   int? selectedIcon;
   String? categoryTitle;
   String? categoryDesc;
   double? categoryBudget;
-  Category? currentCategory;
+  CategoryModel? currentCategory;
   bool isBudgetSet = false;
   int? selectedColor;
 
@@ -46,15 +50,17 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final int? categoryId = int.tryParse(event.categoryId ?? '');
     if (categoryId == null) return;
 
-    final Category category = getCategoryUseCase(categoryId);
-    categoryTitle = category.name;
-    categoryDesc = category.description;
-    categoryBudget = category.budget;
-    selectedIcon = category.icon;
-    currentCategory = category;
-    isBudgetSet = category.isBudget;
-    selectedColor = category.color;
-    emit(CategorySuccessState(category));
+    final CategoryModel? category = getCategoryUseCase(categoryId);
+    if (category != null) {
+      categoryTitle = category.name;
+      categoryDesc = category.description;
+      categoryBudget = category.budget;
+      selectedIcon = category.icon;
+      currentCategory = category;
+      isBudgetSet = category.isBudget;
+      selectedColor = category.color;
+      emit(CategorySuccessState(category));
+    }
   }
 
   FutureOr<void> _addOrUpdateCategory(
@@ -106,7 +112,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     CategoryDeleteEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    await deleteCategoryUseCase(event.category.key);
+    await deleteCategoryUseCase(event.category.superId!);
+    await deleteExpensesFromCategoryIdUseCase(event.category.superId!);
     emit(CategoryDeletedState());
   }
 

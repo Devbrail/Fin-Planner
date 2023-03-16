@@ -5,7 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
-import '../../../data/debt/models/debt.dart';
+import '../../../data/debt/models/debt_model.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../widgets/debt_item_widget.dart';
 
@@ -62,8 +62,8 @@ class _DebtsPageState extends State<DebtsPage>
             ),
           ),
         ),
-        body: ValueListenableBuilder<Box<Debt>>(
-          valueListenable: getIt.get<Box<Debt>>().listenable(),
+        body: ValueListenableBuilder<Box<DebtModel>>(
+          valueListenable: getIt.get<Box<DebtModel>>().listenable(),
           builder: (context, value, child) {
             final debts = value.values
                 .where((element) => element.debtType == DebtType.debt)
@@ -112,7 +112,7 @@ class DebtsListWidget extends StatelessWidget {
     required this.debts,
   });
 
-  final List<Debt> debts;
+  final List<DebtModel> debts;
 
   @override
   Widget build(BuildContext context) {

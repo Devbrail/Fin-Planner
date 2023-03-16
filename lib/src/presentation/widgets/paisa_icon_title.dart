@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/build_context_extension.dart';
+import '../../core/extensions/build_context_extension.dart';
 
 class PaisaIconTitle extends StatelessWidget {
   const PaisaIconTitle({super.key});

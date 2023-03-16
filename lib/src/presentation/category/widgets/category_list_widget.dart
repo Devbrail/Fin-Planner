@@ -4,7 +4,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../data/category/model/category.dart';
+import '../../../data/category/model/category_model.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/category_bloc.dart';
 import 'category_item_desktop_widget.dart';
@@ -23,10 +23,10 @@ class CategoryListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box<Category>>(
-      valueListenable: getIt.get<Box<Category>>().listenable(),
+    return ValueListenableBuilder<Box<CategoryModel>>(
+      valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
       builder: (BuildContext context, value, Widget? child) {
-        final categories = value.values.toList();
+        final categories = value.values.toEntities();
         if (categories.isEmpty) {
           return EmptyWidget(
             description: context.loc.errorNoCategoriesDescriptionLabel,

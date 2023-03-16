@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../main.dart';
-import '../../../data/accounts/model/account.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../domain/account/entities/account.dart';
+import '../../../domain/expense/entities/expense.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_summary_widget.dart';
 import '../widgets/account_transaction_widget.dart';

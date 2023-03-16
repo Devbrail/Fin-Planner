@@ -142,9 +142,10 @@ final GoRouter goRouter = GoRouter(
           name: expensesByCategory,
           path: 'expenses/:cid',
           builder: (context, state) => ExpenseListPage(
-            categoryId: state.params['cid'],
+            categoryId: state.params['cid'] as String,
             accountLocalDataSource: getIt.get(),
             categoryLocalDataSource: getIt.get(),
+            expenseDataManager: getIt.get(),
           ),
         ),
         GoRoute(

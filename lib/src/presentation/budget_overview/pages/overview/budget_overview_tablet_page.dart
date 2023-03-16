@@ -12,9 +12,5 @@ class BudgetOverviewTabletPage extends StatelessWidget {
   final ValueNotifier<FilterBudget> valueNotifier;
   final Widget child;
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: child,
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(body: child);
 }

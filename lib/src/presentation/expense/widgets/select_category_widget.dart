@@ -8,7 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../../data/category/model/category.dart';
+import '../../../data/category/model/category_model.dart';
 import '../bloc/expense_bloc.dart';
 
 class SelectCategoryIcon extends StatelessWidget {
@@ -17,8 +17,8 @@ class SelectCategoryIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late final expenseBloc = BlocProvider.of<ExpenseBloc>(context);
-    return ValueListenableBuilder<Box<Category>>(
-      valueListenable: getIt.get<Box<Category>>().listenable(),
+    return ValueListenableBuilder<Box<CategoryModel>>(
+      valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
       builder: (context, value, child) {
         final categories = value.values.toList();
         categories.sort(((a, b) => a.name.compareTo(b.name)));
@@ -92,7 +92,7 @@ class SelectedItem extends StatelessWidget {
     required this.expenseBloc,
   });
 
-  final List<Category> categories;
+  final List<CategoryModel> categories;
   final ExpenseBloc expenseBloc;
 
   @override

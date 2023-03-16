@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/expense/model/expense.dart';
+import '../../../data/expense/model/expense_model.dart';
 import '../widgets/search_list_widget.dart';
 
-class SearchPage extends SearchDelegate<Expense?> {
+class SearchPage extends SearchDelegate<ExpenseModel?> {
   @override
   List<Widget> buildActions(BuildContext context) {
     return [

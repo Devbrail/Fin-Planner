@@ -1,33 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'debt.dart';
+part of 'debt_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class DebtAdapter extends TypeAdapter<Debt> {
+class DebtModelAdapter extends TypeAdapter<DebtModel> {
   @override
   final int typeId = 4;
 
   @override
-  Debt read(BinaryReader reader) {
+  DebtModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Debt(
+    return DebtModel(
       description: fields[1] as String,
       name: fields[7] == null ? '' : fields[7] as String,
       amount: fields[2] as double,
       dateTime: fields[3] as DateTime,
       expiryDateTime: fields[4] as DateTime,
       debtType: fields[5] == null ? DebtType.debt : fields[5] as DebtType,
-    )..superId = fields[6] == null ? 0 : fields[6] as int?;
+      superId: fields[6] == null ? 0 : fields[6] as int?,
+    );
   }
 
   @override
-  void write(BinaryWriter writer, Debt obj) {
+  void write(BinaryWriter writer, DebtModel obj) {
     writer
       ..writeByte(7)
       ..writeByte(1)
@@ -52,7 +53,7 @@ class DebtAdapter extends TypeAdapter<Debt> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DebtAdapter &&
+      other is DebtModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

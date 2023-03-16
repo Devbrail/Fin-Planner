@@ -1,9 +1,9 @@
-import '../model/category.dart';
+import '../model/category_model.dart';
 
 abstract class LocalCategoryManagerDataSource {
-  Future<void> addCategory(Category category);
+  Future<void> addCategory(CategoryModel category);
   Future<void> deleteCategory(int key);
-  Future<List<Category>> categories();
-  Category? fetchCategoryFromId(int categoryId);
-  Iterable<Category> exportData();
+  Future<List<CategoryModel>> categories();
+  CategoryModel? fetchCategoryFromId(int categoryId);
+  Iterable<CategoryModel> exportData();
 }

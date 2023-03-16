@@ -2,14 +2,14 @@ import 'package:injectable/injectable.dart';
 
 import '../../../core/enum/transaction.dart';
 import '../../../domain/expense/repository/expense_repository.dart';
-import '../data_sources/expense_manager_local_data_source.dart';
-import '../model/expense.dart';
+import '../data_sources/local_expense_data_manager.dart';
+import '../model/expense_model.dart';
 
 @Singleton(as: ExpenseRepository)
 class ExpenseRepositoryImpl extends ExpenseRepository {
   ExpenseRepositoryImpl({required this.dataSource});
 
-  final LocalExpenseManagerDataSource dataSource;
+  final LocalExpenseDataManager dataSource;
 
   @override
   Future<void> addExpense(
@@ -22,7 +22,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     String? description,
   ) async =>
       dataSource.addOrUpdateExpense(
-        Expense(
+        ExpenseModel(
           name: name,
           currency: amount,
           time: time,
@@ -38,9 +38,25 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
       dataSource.clearExpense(expenseId);
 
   @override
-  Future<Expense?> fetchExpenseFromId(int expenseId) =>
+  ExpenseModel? fetchExpenseFromId(int expenseId) =>
       dataSource.fetchExpenseFromId(expenseId);
 
   @override
-  List<Expense> expenses() => dataSource.expenses();
+  List<ExpenseModel> expenses() => dataSource.expenses();
+
+  @override
+  Future<void> deleteExpensesByAccountId(int accountId) =>
+      dataSource.deleteExpensesByAccountId(accountId);
+
+  @override
+  Future<void> deleteExpensesByCategoryId(int categoryId) =>
+      dataSource.deleteExpensesByCategoryId(categoryId);
+
+  @override
+  List<ExpenseModel> fetchExpensesFromAccountId(int accountId) =>
+      dataSource.fetchExpensesFromAccountId(accountId);
+
+  @override
+  List<ExpenseModel> fetchExpensesFromCategoryId(int accountId) =>
+      dataSource.fetchExpensesFromCategoryId(accountId);
 }

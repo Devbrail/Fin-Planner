@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/category/model/category.dart';
+import '../../../domain/category/entities/category.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/category_item_tablet_widget.dart';
 

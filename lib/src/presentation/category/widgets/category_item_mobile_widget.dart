@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
-import '../../../data/category/model/category.dart';
+import '../../../data/category/model/category_model.dart';
 import '../../widgets/paisa_card.dart';
 
 class CategoryItemMobileWidget extends StatelessWidget {
@@ -12,7 +12,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
     required this.onPressed,
   }) : super(key: key);
 
-  final Category category;
+  final CategoryModel category;
   final VoidCallback onPressed;
 
   @override

@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:paisa/src/core/extensions/account_extension.dart';
+import 'package:paisa/src/domain/expense/entities/expense.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
 import '../../../app/app_level_constants.dart';
 import '../../../core/common.dart';
-import '../../../data/accounts/model/account.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../data/accounts/model/account_model.dart';
+import '../../../data/expense/model/expense_model.dart';
+import '../../../domain/account/entities/account.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
 import 'accounts_mobile_page.dart';
@@ -23,10 +26,10 @@ class AccountsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         key: const Key('accounts_mobile'),
-        body: ValueListenableBuilder<Box<Account>>(
-          valueListenable: getIt.get<Box<Account>>().listenable(),
+        body: ValueListenableBuilder<Box<AccountModel>>(
+          valueListenable: getIt.get<Box<AccountModel>>().listenable(),
           builder: (_, value, __) {
-            final List<Account> accounts = value.values.toList();
+            final List<Account> accounts = value.toEntities();
             if (useAccountsList) {
               return AccountsPageV2(
                 accounts: accounts,
@@ -45,12 +48,14 @@ class AccountsPage extends StatelessWidget {
                 bloc: accountsBloc,
                 builder: (context, state) {
                   if (state is AccountSelectedState) {
-                    return ValueListenableBuilder<Box<Expense>>(
-                      valueListenable: getIt.get<Box<Expense>>().listenable(),
+                    return ValueListenableBuilder<Box<ExpenseModel>>(
+                      valueListenable:
+                          getIt.get<Box<ExpenseModel>>().listenable(),
                       builder: (context, value, child) {
-                        final expenses =
-                            value.expensesFromAccountId(state.account.key);
-
+                        final List<Expense> expenses = value
+                            .expensesFromAccountId(state.account.key)
+                            .map((e) => e.toEntity())
+                            .toList();
                         return ScreenTypeLayout.builder(
                           mobile: (_) => AccountsMobilePage(
                             accounts: accounts,

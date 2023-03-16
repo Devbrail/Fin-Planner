@@ -8,7 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../../data/accounts/model/account.dart';
+import '../../../data/accounts/model/account_model.dart';
 import '../bloc/expense_bloc.dart';
 import 'selectable_item_widget.dart';
 
@@ -18,8 +18,8 @@ class SelectedAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late final expenseBloc = BlocProvider.of<ExpenseBloc>(context);
-    return ValueListenableBuilder<Box<Account>>(
-      valueListenable: getIt.get<Box<Account>>().listenable(),
+    return ValueListenableBuilder<Box<AccountModel>>(
+      valueListenable: getIt.get<Box<AccountModel>>().listenable(),
       builder: (context, value, child) {
         final accounts = value.values.toList();
         if (accounts.isEmpty) {
@@ -85,7 +85,7 @@ class SelectedItem extends StatelessWidget {
     required this.expenseBloc,
   }) : super(key: key);
 
-  final List<Account> accounts;
+  final List<AccountModel> accounts;
   final ExpenseBloc expenseBloc;
 
   @override

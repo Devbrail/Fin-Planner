@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/domain/expense/entities/expense.dart';
 
 import '../../../core/enum/transaction.dart';
 
-part 'expense.g.dart';
+part 'expense_model.g.dart';
 
 @HiveType(typeId: 0)
-class Expense extends HiveObject with EquatableMixin {
+class ExpenseModel extends HiveObject with EquatableMixin {
   @HiveField(0)
   String name;
 
@@ -31,7 +32,7 @@ class Expense extends HiveObject with EquatableMixin {
   @HiveField(8)
   String? description;
 
-  Expense({
+  ExpenseModel({
     required this.name,
     required this.currency,
     required this.time,
@@ -39,6 +40,7 @@ class Expense extends HiveObject with EquatableMixin {
     required this.accountId,
     required this.type,
     this.description,
+    this.superId,
   });
 
   Map<String, dynamic> toJson() => {
@@ -52,7 +54,7 @@ class Expense extends HiveObject with EquatableMixin {
         'description': description,
       };
 
-  factory Expense.fromJson(Map<String, dynamic> json) => Expense(
+  factory ExpenseModel.fromJson(Map<String, dynamic> json) => ExpenseModel(
         name: json['name'],
         currency: json['currency'],
         time: DateTime.parse(json['time']),
@@ -64,4 +66,15 @@ class Expense extends HiveObject with EquatableMixin {
 
   @override
   List<Object?> get props => [name, type];
+
+  Expense toEntity() => Expense(
+        name: name,
+        currency: currency,
+        time: time,
+        categoryId: categoryId,
+        accountId: accountId,
+        type: type,
+        description: description,
+        superId: superId,
+      );
 }

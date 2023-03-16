@@ -1,54 +1,50 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'expense.dart';
+part of 'account_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ExpenseAdapter extends TypeAdapter<Expense> {
+class AccountModelAdapter extends TypeAdapter<AccountModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 2;
 
   @override
-  Expense read(BinaryReader reader) {
+  AccountModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Expense(
+    return AccountModel(
       name: fields[0] as String,
-      currency: fields[1] as double,
-      time: fields[3] as DateTime,
-      categoryId: fields[6] as int,
-      accountId: fields[5] as int,
-      type: fields[4] == null
-          ? TransactionType.expense
-          : fields[4] as TransactionType?,
-      description: fields[8] as String?,
-    )..superId = fields[7] as int?;
+      icon: fields[1] as int,
+      bankName: fields[3] as String,
+      number: fields[5] as String,
+      cardType: fields[6] == null ? CardType.bank : fields[6] as CardType?,
+      amount: fields[8] == null ? 0 : fields[8] as double?,
+      superId: fields[7] == null ? 0 : fields[7] as int?,
+    );
   }
 
   @override
-  void write(BinaryWriter writer, Expense obj) {
+  void write(BinaryWriter writer, AccountModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
-      ..write(obj.currency)
+      ..write(obj.icon)
       ..writeByte(3)
-      ..write(obj.time)
-      ..writeByte(4)
-      ..write(obj.type)
+      ..write(obj.bankName)
       ..writeByte(5)
-      ..write(obj.accountId)
+      ..write(obj.number)
       ..writeByte(6)
-      ..write(obj.categoryId)
+      ..write(obj.cardType)
       ..writeByte(7)
       ..write(obj.superId)
       ..writeByte(8)
-      ..write(obj.description);
+      ..write(obj.amount);
   }
 
   @override
@@ -57,7 +53,7 @@ class ExpenseAdapter extends TypeAdapter<Expense> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ExpenseAdapter &&
+      other is AccountModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

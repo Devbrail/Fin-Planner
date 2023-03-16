@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/main.dart';
-import 'package:paisa/src/core/account_extension.dart';
-import 'package:paisa/src/data/accounts/model/account.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../core/extensions/account_extension.dart';
+import '../../../data/accounts/model/account_model.dart';
+import '../../../domain/expense/entities/expense.dart';
 import '../../accounts/widgets/account_summary_widget.dart';
 import '../../widgets/lava/lava_clock.dart';
 import 'expense_total_for_month_widget.dart';
@@ -24,7 +24,7 @@ class ExpenseTotalWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final totalExpenseBalance = expenses.fullTotal;
     final totalAccountBalance =
-        getIt.get<Box<Account>>().totalAccountInitialAmount;
+        getIt.get<Box<AccountModel>>().totalAccountInitialAmount;
     final thisMonthExpenses = expenses.thisMonthExpense;
     final thisMonthIncome = expenses.thisMonthIncome;
     return Column(

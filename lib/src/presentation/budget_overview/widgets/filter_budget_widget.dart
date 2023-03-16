@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/filter_budget.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../domain/expense/entities/expense.dart';
 
 class FilterBudgetWidget extends StatelessWidget {
   const FilterBudgetWidget({
@@ -16,6 +16,7 @@ class FilterBudgetWidget extends StatelessWidget {
   final Widget Function(
     List<MapEntry<String, List<Expense>>> filteredBudger,
   ) builder;
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<FilterBudget>(

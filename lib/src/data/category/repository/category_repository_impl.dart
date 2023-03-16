@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../domain/category/repository/category_repository.dart';
 import '../data_sources/category_local_data_source.dart';
-import '../model/category.dart';
+import '../model/category_model.dart';
 
 @Singleton(as: CategoryRepository)
 class CategoryRepositoryImpl extends CategoryRepository {
@@ -22,7 +22,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
     bool isBudget = false,
     double? budget = -1,
   }) =>
-      dataSources.addCategory(Category(
+      dataSources.addCategory(CategoryModel(
         description: desc ?? '',
         name: name,
         icon: icon,
@@ -32,6 +32,6 @@ class CategoryRepositoryImpl extends CategoryRepository {
       ));
 
   @override
-  Category? fetchCategoryFromId(int categoryId) =>
+  CategoryModel? fetchCategoryFromId(int categoryId) =>
       dataSources.fetchCategoryFromId(categoryId);
 }

@@ -1,14 +1,14 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 
-import '../models/debt.dart';
-import '../models/transaction.dart';
+import '../models/debt_model.dart';
+import '../models/transactions_model.dart';
 import 'debt_local_data_source.dart';
 
 @Singleton(as: DebtLocalDataSource)
 class DebtLocalDataSourceImpl extends DebtLocalDataSource {
-  final Box<Debt> debtBox;
-  final Box<Transaction> transactionsBox;
+  final Box<DebtModel> debtBox;
+  final Box<TransactionsModel> transactionsBox;
 
   DebtLocalDataSourceImpl({
     required this.debtBox,
@@ -16,18 +16,18 @@ class DebtLocalDataSourceImpl extends DebtLocalDataSource {
   });
 
   @override
-  Future<void> addDebtOrCredit(Debt debt) async {
+  Future<void> addDebtOrCredit(DebtModel debt) async {
     final int id = await debtBox.add(debt);
     debt.superId = id;
     await debt.save();
   }
 
   @override
-  Future<Debt?> fetchDebtOrCreditFromId(int debtId) async =>
+  Future<DebtModel?> fetchDebtOrCreditFromId(int debtId) async =>
       debtBox.get(debtId);
 
   @override
-  List<Transaction> getTransactionsFromId(int? id) {
+  List<TransactionsModel> getTransactionsFromId(int? id) {
     if (id == null) return [];
     return transactionsBox.values
         .where((element) => element.parentId == id)

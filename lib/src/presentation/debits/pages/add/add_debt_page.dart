@@ -7,7 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../core/enum/debt_type.dart';
-import '../../../../data/debt/models/transaction.dart';
+import '../../../../data/debt/models/transactions_model.dart';
 import '../../../widgets/paisa_text_field.dart';
 import '../../cubit/debts_cubit.dart';
 import '../../widgets/debt_toggle_buttons_widget.dart';
@@ -147,8 +147,9 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  ValueListenableBuilder<Box<Transaction>>(
-                    valueListenable: getIt.get<Box<Transaction>>().listenable(),
+                  ValueListenableBuilder<Box<TransactionsModel>>(
+                    valueListenable:
+                        getIt.get<Box<TransactionsModel>>().listenable(),
                     builder: (context, value, child) {
                       final result = value.values
                           .where((element) =>

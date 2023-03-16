@@ -39,7 +39,7 @@ class ExpenseErrorState extends ExpenseState {
 }
 
 class ExpenseSuccessState extends ExpenseState {
-  final Expense expense;
+  final ExpenseModel expense;
 
   const ExpenseSuccessState(this.expense);
 
@@ -48,7 +48,7 @@ class ExpenseSuccessState extends ExpenseState {
 }
 
 class ChangeCategoryState extends ExpenseState {
-  final Category category;
+  final CategoryModel category;
 
   const ChangeCategoryState(this.category);
 
@@ -57,7 +57,7 @@ class ChangeCategoryState extends ExpenseState {
 }
 
 class ChangeAccountState extends ExpenseState {
-  final Account account;
+  final AccountModel account;
 
   const ChangeAccountState(this.account);
 

@@ -1,8 +1,8 @@
-import '../models/debt.dart';
-import '../models/transaction.dart';
+import '../models/debt_model.dart';
+import '../models/transactions_model.dart';
 
 abstract class DebtLocalDataSource {
-  Future<void> addDebtOrCredit(Debt debt);
-  List<Transaction> getTransactionsFromId(int? id);
-  Future<Debt?> fetchDebtOrCreditFromId(int debtId);
+  Future<void> addDebtOrCredit(DebtModel debt);
+  List<TransactionsModel> getTransactionsFromId(int? id);
+  Future<DebtModel?> fetchDebtOrCreditFromId(int debtId);
 }

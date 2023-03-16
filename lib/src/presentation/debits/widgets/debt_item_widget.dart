@@ -8,19 +8,19 @@ import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
-import '../../../data/debt/models/debt.dart';
-import '../../../data/debt/models/transaction.dart';
+import '../../../data/debt/models/debt_model.dart';
+import '../../../data/debt/models/transactions_model.dart';
 import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../cubit/debts_cubit.dart';
 
 class DebtItemWidget extends StatelessWidget {
   const DebtItemWidget({super.key, required this.debt});
-  final Debt debt;
+  final DebtModel debt;
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box<Transaction>>(
-      valueListenable: getIt.get<Box<Transaction>>().listenable(),
+    return ValueListenableBuilder<Box<TransactionsModel>>(
+      valueListenable: getIt.get<Box<TransactionsModel>>().listenable(),
       builder: (context, value, child) {
         final transactions = value.getTransactionsFromId(debt.superId);
         final double amount = transactions.fold<double>(

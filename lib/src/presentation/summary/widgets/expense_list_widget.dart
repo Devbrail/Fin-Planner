@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/accounts/data_sources/account_local_data_source.dart';
+import '../../../core/common.dart';
+import '../../../core/extensions/account_extension.dart';
+import '../../../data/accounts/data_sources/local_account_data_manager.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../domain/account/entities/account.dart';
+import '../../../domain/category/entities/category.dart';
+import '../../../domain/expense/entities/expense.dart';
 import 'expense_item_widget.dart';
 
 class ExpenseListWidget extends StatelessWidget {
@@ -14,7 +18,7 @@ class ExpenseListWidget extends StatelessWidget {
   }) : super(key: key);
 
   final List<Expense> expenses;
-  final LocalAccountManagerDataSource accountLocalDataSource;
+  final LocalAccountDataManager accountLocalDataSource;
   final LocalCategoryManagerDataSource categoryLocalDataSource;
 
   @override
@@ -26,14 +30,16 @@ class ExpenseListWidget extends StatelessWidget {
       itemCount: expenses.length,
       itemBuilder: (_, index) {
         final expense = expenses[index];
-        final account =
-            accountLocalDataSource.fetchAccountFromId(expense.accountId);
-        final category =
-            categoryLocalDataSource.fetchCategoryFromId(expense.categoryId);
+        final Account account = accountLocalDataSource
+            .fetchAccountFromId(expenses[index].accountId)!
+            .toEntity();
+        final Category category = categoryLocalDataSource
+            .fetchCategoryFromId(expenses[index].categoryId)!
+            .toEntity();
         return ExpenseItemWidget(
           expense: expense,
-          account: account!,
-          category: category!,
+          account: account,
+          category: category,
         );
       },
       separatorBuilder: (BuildContext context, int index) =>

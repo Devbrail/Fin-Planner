@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
 
-part 'transaction.g.dart';
+import '../../../domain/debt/entities/transaction.dart';
+
+part 'transactions_model.g.dart';
 
 @HiveType(typeId: 3)
-class Transaction extends HiveObject with EquatableMixin {
+class TransactionsModel extends HiveObject with EquatableMixin {
   @HiveField(1)
   final double amount;
 
@@ -17,10 +19,11 @@ class Transaction extends HiveObject with EquatableMixin {
   @HiveField(4, defaultValue: -1)
   int? parentId;
 
-  Transaction({
+  TransactionsModel({
     required this.amount,
     required this.now,
     required this.parentId,
+    this.superId,
   });
 
   @override
@@ -29,4 +32,11 @@ class Transaction extends HiveObject with EquatableMixin {
         amount,
         parentId,
       ];
+
+  Transaction toEntity() => Transaction(
+        amount: amount,
+        now: now,
+        parentId: parentId,
+        superId: superId,
+      );
 }

@@ -27,7 +27,7 @@ class DebtsTabState extends DebtsState {
 }
 
 class DebtsSuccessState extends DebtsState {
-  final Debt debt;
+  final DebtModel debt;
 
   const DebtsSuccessState(this.debt);
 

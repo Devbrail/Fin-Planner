@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 
-import '../../../data/accounts/model/account.dart';
+import '../../../core/extensions/account_extension.dart';
+import '../entities/account.dart';
 import '../repository/account_repository.dart';
 
 @singleton
@@ -9,5 +10,6 @@ class GetAccountUseCase {
 
   GetAccountUseCase({required this.accountRepository});
 
-  Account? call(int params) => accountRepository.fetchAccountFromId(params);
+  Account? call(int params) =>
+      accountRepository.fetchAccountFromId(params)?.toEntity();
 }

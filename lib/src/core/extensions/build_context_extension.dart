@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-extension BuildContextMapping on BuildContext {
+extension LocalizedBuildContext on BuildContext {
+  AppLocalizations get loc => AppLocalizations.of(this)!;
   AppBar materialYouAppBar(
     String title, {
     List<Widget>? actions,

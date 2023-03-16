@@ -1,11 +1,10 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/common.dart';
 import '../../../core/theme/custom_color.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/paisa_card.dart';
 
 class AccountSummaryWidget extends StatelessWidget {

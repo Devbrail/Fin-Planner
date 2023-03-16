@@ -33,13 +33,13 @@ class ChangeExpenseEvent extends ExpenseEvent {
 }
 
 class ChangeCategoryEvent extends ExpenseEvent {
-  final Category category;
+  final CategoryModel category;
 
   const ChangeCategoryEvent(this.category);
 }
 
 class ChangeAccountEvent extends ExpenseEvent {
-  final Account account;
+  final AccountModel account;
 
   const ChangeAccountEvent(this.account);
 }

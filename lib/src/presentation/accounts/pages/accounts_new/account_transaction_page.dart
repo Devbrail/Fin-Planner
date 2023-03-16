@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/domain/category/entities/category.dart';
 
 import '../../../../../main.dart';
 import '../../../../app/routes.dart';
@@ -101,11 +102,13 @@ class AccountTransactionPage extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: expenses.length,
                     itemBuilder: (context, index) {
+                      final Category category = accountsBloc
+                          .fetchCategoryFromId(expenses[index].categoryId)!
+                          .toEntity();
                       return ExpenseItemWidget(
                         expense: expenses[index],
                         account: account,
-                        category: accountsBloc
-                            .fetchCategoryFromId(expenses[index].categoryId)!,
+                        category: category,
                       );
                     },
                   );

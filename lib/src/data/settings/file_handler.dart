@@ -10,12 +10,12 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../main.dart';
 import '../../core/enum/box_types.dart';
-import '../accounts/data_sources/account_local_data_source.dart';
-import '../accounts/model/account.dart';
+import '../accounts/data_sources/local_account_data_manager.dart';
+import '../accounts/model/account_model.dart';
 import '../category/data_sources/category_local_data_source.dart';
-import '../category/model/category.dart';
-import '../expense/data_sources/expense_manager_local_data_source.dart';
-import '../expense/model/expense.dart';
+import '../category/model/category_model.dart';
+import '../expense/data_sources/local_expense_data_manager.dart';
+import '../expense/model/expense_model.dart';
 import 'data.dart';
 
 @Singleton()
@@ -40,14 +40,14 @@ class FileHandler {
   }
 
   Future<String> _fetchExpensesAndEncode() async {
-    final expenseDataStore = getIt.get<LocalExpenseManagerDataSource>();
-    final Iterable<Expense> expenses = expenseDataStore.exportData();
+    final expenseDataStore = getIt.get<LocalExpenseDataManager>();
+    final Iterable<ExpenseModel> expenses = expenseDataStore.exportData();
 
-    final accountDataStore = getIt.get<LocalAccountManagerDataSource>();
-    final Iterable<Account> accounts = accountDataStore.exportData();
+    final accountDataStore = getIt.get<LocalAccountDataManager>();
+    final Iterable<AccountModel> accounts = accountDataStore.exportData();
 
     final categoryDataStore = getIt.get<LocalCategoryManagerDataSource>();
-    final Iterable<Category> categories = categoryDataStore.exportData();
+    final Iterable<CategoryModel> categories = categoryDataStore.exportData();
 
     final data = {
       'expenses': expenses.map((e) => e.toJson()).toList(),
@@ -58,16 +58,16 @@ class FileHandler {
   }
 
   List<List<String>> fetch() {
-    final expenseDataStore = getIt.get<LocalExpenseManagerDataSource>();
-    final Iterable<Expense> expenses = expenseDataStore.exportData();
-    final accountDataStore = getIt.get<LocalAccountManagerDataSource>();
+    final expenseDataStore = getIt.get<LocalExpenseDataManager>();
+    final Iterable<ExpenseModel> expenses = expenseDataStore.exportData();
+    final accountDataStore = getIt.get<LocalAccountDataManager>();
     final categoryDataStore = getIt.get<LocalCategoryManagerDataSource>();
     return csvDataList(expenses.toList(), accountDataStore, categoryDataStore);
   }
 
   List<List<String>> csvDataList(
-    List<Expense> expenses,
-    LocalAccountManagerDataSource accountDataSource,
+    List<ExpenseModel> expenses,
+    LocalAccountDataManager accountDataSource,
     LocalCategoryManagerDataSource categoryDataSource,
   ) =>
       [
@@ -106,9 +106,9 @@ class FileHandler {
 
   List<String> expenseRow(
     int index, {
-    required Expense expense,
-    required Account account,
-    required Category category,
+    required ExpenseModel expense,
+    required AccountModel account,
+    required CategoryModel category,
   }) =>
       [
         '$index',
@@ -139,9 +139,9 @@ class FileHandler {
     if (file != null) {
       final jsonString = await file.readAsString();
       final data = Data.fromRawJson(jsonString);
-      final accountBox = Hive.box<Account>(BoxType.accounts.name);
-      final categoryBox = Hive.box<Category>(BoxType.category.name);
-      final expenseBox = Hive.box<Expense>(BoxType.expense.name);
+      final accountBox = Hive.box<AccountModel>(BoxType.accounts.name);
+      final categoryBox = Hive.box<CategoryModel>(BoxType.category.name);
+      final expenseBox = Hive.box<ExpenseModel>(BoxType.expense.name);
       await expenseBox.clear();
       await categoryBox.clear();
       await accountBox.clear();

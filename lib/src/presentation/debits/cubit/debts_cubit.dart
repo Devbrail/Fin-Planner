@@ -6,8 +6,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../../core/enum/box_types.dart';
 import '../../../core/enum/debt_type.dart';
-import '../../../data/debt/models/debt.dart';
-import '../../../data/debt/models/transaction.dart';
+import '../../../data/debt/models/debt_model.dart';
+import '../../../data/debt/models/transactions_model.dart';
 import '../../../domain/debt/use_case/debt_use_case.dart';
 
 part 'debts_event.dart';
@@ -25,11 +25,12 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
         (event, emit) => _fetchDebtOrCreditFromId(event, emit));
     on<AddOrUpdateEvent>((event, emit) => addDebt(event, emit));
   }
-  late final transactionBox = Hive.box<Transaction>(BoxType.transactions.name);
+  late final transactionBox =
+      Hive.box<TransactionsModel>(BoxType.transactions.name);
 
   final DebtUseCase useCase;
   late DebtType currentDebtType = DebtType.debt;
-  Debt? currentDebt;
+  DebtModel? currentDebt;
   String? currentName;
   String? currentDescription;
   double? currentAmount;
@@ -40,7 +41,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     AddTransactionToDebtEvent event,
     Emitter<DebtsState> emit,
   ) async {
-    final transaction = Transaction(
+    final transaction = TransactionsModel(
       amount: event.amount,
       now: DateTime.now(),
       parentId: event.debt.superId!,
@@ -62,7 +63,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
   ) {
     final int? debtId = int.tryParse(event.id ?? '');
     if (debtId == null) return;
-    useCase.fetchDebtOrCreditFromId(debtId).then((Debt? debt) {
+    useCase.fetchDebtOrCreditFromId(debtId).then((DebtModel? debt) {
       if (debt != null) {
         currentAmount = debt.amount;
         currentName = debt.name;

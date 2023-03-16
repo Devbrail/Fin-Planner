@@ -4,9 +4,9 @@
 
 import 'dart:convert';
 
-import 'package:paisa/src/data/accounts/model/account.dart';
-import 'package:paisa/src/data/category/model/category.dart';
-import 'package:paisa/src/data/expense/model/expense.dart';
+import 'package:paisa/src/data/accounts/model/account_model.dart';
+import 'package:paisa/src/data/category/model/category_model.dart';
+import 'package:paisa/src/data/expense/model/expense_model.dart';
 
 class Data {
   Data({
@@ -15,21 +15,21 @@ class Data {
     required this.categories,
   });
 
-  final List<Expense> expenses;
-  final List<Account> accounts;
-  final List<Category> categories;
+  final List<ExpenseModel> expenses;
+  final List<AccountModel> accounts;
+  final List<CategoryModel> categories;
 
   factory Data.fromRawJson(String str) => Data.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        expenses: List<Expense>.from(
-            json["expenses"].map((x) => Expense.fromJson(x))),
-        accounts: List<Account>.from(
-            json["accounts"].map((x) => Account.fromJson(x))),
-        categories: List<Category>.from(
-            json["categories"].map((x) => Category.fromJson(x))),
+        expenses: List<ExpenseModel>.from(
+            json["expenses"].map((x) => ExpenseModel.fromJson(x))),
+        accounts: List<AccountModel>.from(
+            json["accounts"].map((x) => AccountModel.fromJson(x))),
+        categories: List<CategoryModel>.from(
+            json["categories"].map((x) => CategoryModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

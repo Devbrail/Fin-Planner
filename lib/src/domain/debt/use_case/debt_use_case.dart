@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
 import '../../../core/enum/debt_type.dart';
-import '../../../data/debt/models/debt.dart';
+import '../../../data/debt/models/debt_model.dart';
 import '../repository/debit_repository.dart';
 
 @singleton
@@ -27,6 +27,6 @@ class DebtUseCase {
         debtType,
       );
 
-  Future<Debt?> fetchDebtOrCreditFromId(int debtId) =>
+  Future<DebtModel?> fetchDebtOrCreditFromId(int debtId) =>
       debtRepository.fetchDebtOrCreditFromId(debtId);
 }

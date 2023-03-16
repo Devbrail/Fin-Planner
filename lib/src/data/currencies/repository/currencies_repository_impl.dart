@@ -1,18 +1,18 @@
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/currencies/repository/currencies_repository.dart';
-import '../models/country.dart';
-import '../models/currency.dart';
+import '../models/country_model.dart';
+import '../models/currency_model.dart';
 
 @Singleton(as: CurrenciesRepository)
 class CurrencySelectorRepositoryImpl implements CurrenciesRepository {
   @override
-  List<Currency> fetchCurrencies() {
+  List<CurrencyModel> fetchCurrencies() {
     return getLocales();
   }
 
   @override
-  List<Country> fetchCountries() {
+  List<CountryModel> fetchCountries() {
     return countryFromJson();
   }
 }

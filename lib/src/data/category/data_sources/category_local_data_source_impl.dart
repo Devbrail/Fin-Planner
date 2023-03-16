@@ -2,20 +2,18 @@ import 'package:collection/collection.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../main.dart';
-import '../../expense/model/expense.dart';
-import '../model/category.dart';
+import '../model/category_model.dart';
 import 'category_local_data_source.dart';
 
 @Singleton(as: LocalCategoryManagerDataSource)
 class LocalCategoryManagerDataSourceImpl
     implements LocalCategoryManagerDataSource {
-  final Box<Category> categoryBox;
+  final Box<CategoryModel> categoryBox;
 
   LocalCategoryManagerDataSourceImpl(this.categoryBox);
 
   @override
-  Future<void> addCategory(Category category) async {
+  Future<void> addCategory(CategoryModel category) async {
     final int id = await categoryBox.add(category);
     category.superId = id;
     await category.save();
@@ -23,27 +21,20 @@ class LocalCategoryManagerDataSourceImpl
 
   @override
   Future<void> deleteCategory(int key) async {
-    final expenseBox = getIt.get<Box<Expense>>();
-    final keys = expenseBox.values
-        .where((element) => element.categoryId == key)
-        .map((e) => e.key)
-        .toList();
-    await expenseBox.deleteAll(keys);
-
     await categoryBox.delete(key);
   }
 
   @override
-  Future<List<Category>> categories() async {
+  Future<List<CategoryModel>> categories() async {
     return categoryBox.values.toList();
   }
 
   @override
-  Category? fetchCategoryFromId(int categoryId) =>
+  CategoryModel? fetchCategoryFromId(int categoryId) =>
       categoryBox.values.firstWhereOrNull(
         (element) => element.key == categoryId,
       );
 
   @override
-  Iterable<Category> exportData() => categoryBox.values;
+  Iterable<CategoryModel> exportData() => categoryBox.values;
 }

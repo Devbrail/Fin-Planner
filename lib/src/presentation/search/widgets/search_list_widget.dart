@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:paisa/src/domain/expense/entities/expense.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../data/accounts/data_sources/account_local_data_source.dart';
+import '../../../data/accounts/data_sources/local_account_data_manager.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../data/expense/model/expense_model.dart';
 import '../../summary/widgets/expense_list_widget.dart';
 
 class SearchListWidget extends StatelessWidget {
@@ -19,9 +20,9 @@ class SearchListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categorySource = getIt.get<LocalCategoryManagerDataSource>();
-    final accountSource = getIt.get<LocalAccountManagerDataSource>();
-    return ValueListenableBuilder<Box<Expense>>(
-      valueListenable: getIt.get<Box<Expense>>().listenable(),
+    final accountSource = getIt.get<LocalAccountDataManager>();
+    return ValueListenableBuilder<Box<ExpenseModel>>(
+      valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
       builder: (context, value, child) {
         if (query.isEmpty) {
           return Center(
@@ -41,6 +42,7 @@ class SearchListWidget extends StatelessWidget {
         }
 
         final results = value.values
+            .toEntities()
             .where(
                 (Expense expense) => expense.name.toLowerCase().contains(query))
             .toList();

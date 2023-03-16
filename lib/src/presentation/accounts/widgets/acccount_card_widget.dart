@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app/app_level_constants.dart';
 import '../../../app/routes.dart';
-import '../../../core/account_extension.dart';
+import '../../../core/extensions/account_extension.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
-import '../../../data/accounts/model/account.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../data/accounts/model/account_model.dart';
+import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/paisa_card.dart';
 import 'account_summary_widget.dart';
 
@@ -18,7 +18,7 @@ class AccountCardWidget extends StatelessWidget {
     required this.account,
     required this.expenses,
   });
-  final Account account;
+  final AccountModel account;
   final List<Expense> expenses;
 
   @override

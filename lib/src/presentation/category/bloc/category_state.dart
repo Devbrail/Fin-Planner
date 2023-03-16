@@ -11,7 +11,7 @@ abstract class CategoryState extends Equatable {
 class AddCategoryInitial extends CategoryState {}
 
 class CategoriesListState extends CategoryState {
-  final List<Category> categories;
+  final List<CategoryModel> categories;
 
   const CategoriesListState(this.categories);
 
@@ -37,7 +37,7 @@ class CategoryErrorState extends CategoryState {
 }
 
 class CategorySuccessState extends CategoryState {
-  final Category category;
+  final CategoryModel category;
 
   const CategorySuccessState(this.category);
 

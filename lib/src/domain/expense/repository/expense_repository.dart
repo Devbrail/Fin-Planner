@@ -1,5 +1,5 @@
 import '../../../core/enum/transaction.dart';
-import '../../../data/expense/model/expense.dart';
+import '../../../data/expense/model/expense_model.dart';
 
 abstract class ExpenseRepository {
   Future<void> addExpense(
@@ -12,7 +12,10 @@ abstract class ExpenseRepository {
     String? description,
   );
   Future<void> clearExpense(int expenseId);
-
-  Future<Expense?> fetchExpenseFromId(int expenseId);
-  List<Expense> expenses();
+  ExpenseModel? fetchExpenseFromId(int expenseId);
+  List<ExpenseModel> expenses();
+  List<ExpenseModel> fetchExpensesFromAccountId(int accountId);
+  List<ExpenseModel> fetchExpensesFromCategoryId(int accountId);
+  Future<void> deleteExpensesByAccountId(int accountId);
+  Future<void> deleteExpensesByCategoryId(int categoryId);
 }

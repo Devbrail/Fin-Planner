@@ -1,8 +1,8 @@
-import 'package:paisa/src/data/currencies/models/country.dart';
+import 'package:paisa/src/data/currencies/models/country_model.dart';
 
-import '../../../data/currencies/models/currency.dart';
+import '../../../data/currencies/models/currency_model.dart';
 
 abstract class CurrenciesRepository {
-  List<Currency> fetchCurrencies();
-  List<Country> fetchCountries();
+  List<CurrencyModel> fetchCurrencies();
+  List<CountryModel> fetchCountries();
 }

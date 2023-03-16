@@ -1,5 +1,5 @@
 import '../../../core/enum/debt_type.dart';
-import '../../../data/debt/models/debt.dart';
+import '../../../data/debt/models/debt_model.dart';
 
 abstract class DebtRepository {
   Future<void> addDebtOrCredit(
@@ -11,5 +11,5 @@ abstract class DebtRepository {
     DebtType debtType,
   );
 
-  Future<Debt?> fetchDebtOrCreditFromId(int debtId);
+  Future<DebtModel?> fetchDebtOrCreditFromId(int debtId);
 }

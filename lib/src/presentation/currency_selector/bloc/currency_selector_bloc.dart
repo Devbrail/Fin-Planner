@@ -12,9 +12,9 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../core/enum/card_type.dart';
-import '../../../data/accounts/model/account.dart';
-import '../../../data/category/model/category.dart';
-import '../../../data/currencies/models/currency.dart';
+import '../../../data/accounts/model/account_model.dart';
+import '../../../data/category/model/category_model.dart';
+import '../../../data/currencies/models/currency_model.dart';
 import '../../../domain/currencies/use_case/get_currencies_use_case.dart';
 
 part 'currency_selector_event.dart';
@@ -36,8 +36,8 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
   final GetCurrenciesUseCase currenciesUseCase;
   final Box<dynamic> settings =
       getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
-  final Box<Account> accounts;
-  final Box<Category> categories;
+  final Box<AccountModel> accounts;
+  final Box<CategoryModel> categories;
   Locale? selectedLocale;
 
   FutureOr<void> _checkLogin(
@@ -46,7 +46,7 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
   ) async {
     final isAnyAccount = accounts.values.isEmpty;
     if (isAnyAccount) {
-      final account = Account(
+      final account = AccountModel(
         name: 'Holder name',
         icon: MdiIcons.creditCard.codePoint,
         bankName: 'Bank name',
@@ -61,7 +61,7 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
 
     final isAnyCategory = categories.values.isEmpty;
     if (isAnyCategory) {
-      final category = Category(
+      final category = CategoryModel(
         name: 'Default',
         icon: MdiIcons.home.codePoint,
         description: 'All expenses',

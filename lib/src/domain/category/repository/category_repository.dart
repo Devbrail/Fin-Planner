@@ -1,4 +1,4 @@
-import '../../../data/category/model/category.dart';
+import '../../../data/category/model/category_model.dart';
 
 abstract class CategoryRepository {
   Future<void> addCategory({
@@ -10,5 +10,5 @@ abstract class CategoryRepository {
     bool isBudget = false,
   });
   Future<void> deleteCategory(int key);
-  Category? fetchCategoryFromId(int categoryId);
+  CategoryModel? fetchCategoryFromId(int categoryId);
 }

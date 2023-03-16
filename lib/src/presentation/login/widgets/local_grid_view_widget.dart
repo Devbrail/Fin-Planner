@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import '../../../../main.dart';
 import '../../../core/constants.dart';
 import '../../../core/enum/box_types.dart';
-import '../../../data/currencies/models/currency.dart';
+import '../../../data/currencies/models/currency_model.dart';
 import '../../widgets/paisa_card.dart';
 
 class LocaleGridView extends StatefulWidget {
@@ -17,7 +17,7 @@ class LocaleGridView extends StatefulWidget {
     required this.crossAxisCount,
   }) : super(key: key);
 
-  final List<Currency> locales;
+  final List<CurrencyModel> locales;
   final Function(Locale) onPressed;
   final int crossAxisCount;
 
@@ -29,11 +29,11 @@ class _LocaleGridViewState extends State<LocaleGridView> {
   final Box<dynamic> settings =
       getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
-  late Currency? selectedIndex = widget.locales.firstWhere(
+  late CurrencyModel? selectedIndex = widget.locales.firstWhere(
     (element) =>
         element.locale.languageCode ==
         (settings.get(userLanguageKey, defaultValue: 'DEF') as String),
-    orElse: () => Currency("US Dollar", const Locale('en')),
+    orElse: () => CurrencyModel("US Dollar", const Locale('en')),
   );
 
   @override

@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-List<Country> countryFromJson() =>
-    List<Country>.from(data().map((x) => Country.fromJson(x)));
+List<CountryModel> countryFromJson() =>
+    List<CountryModel>.from(data().map((x) => CountryModel.fromJson(x)));
 
-String countryToJson(List<Country> data) =>
+String countryToJson(List<CountryModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Country {
-  Country({
+class CountryModel {
+  CountryModel({
     required this.code,
     required this.name,
     required this.symbol,
@@ -33,7 +33,7 @@ class Country {
   final bool spaceBetweenAmountAndSymbol;
   final bool symbolOnLeft;
 
-  factory Country.fromJson(Map<String, dynamic> json) => Country(
+  factory CountryModel.fromJson(Map<String, dynamic> json) => CountryModel(
         code: json["code"],
         name: json["name"],
         symbol: json["symbol"],

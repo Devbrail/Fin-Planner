@@ -9,7 +9,7 @@ abstract class DebtsEvent extends Equatable {
 }
 
 class AddTransactionToDebtEvent extends DebtsEvent {
-  final Debt debt;
+  final DebtModel debt;
   final double amount;
 
   const AddTransactionToDebtEvent(this.debt, this.amount);
