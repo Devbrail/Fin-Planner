@@ -45,7 +45,8 @@ List<CurrencyModel> getLocales() => [
       CurrencyModel("Dominican Peso", const Locale('es-do')),
       CurrencyModel("United Arab Emirates Dirham", const Locale('ar_AE')),
       CurrencyModel("Kenyan Shilling", const Locale('en_KE')),
-      //Currency("Moroccan Dirham", const Locale('zgh_MA')),
+      CurrencyModel("Thai Baht ", const Locale('th')),
       CurrencyModel("Zambian Kwacha", const Locale('en_ZM')),
       CurrencyModel("Serbian Dinar", const Locale('sr_Latn')),
+      CurrencyModel("Kazakhstani Tenge", const Locale('kk')),
     ];
