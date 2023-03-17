@@ -24,7 +24,7 @@ class SelectedAccount extends StatelessWidget {
         final accounts = value.values.toList();
         if (accounts.isEmpty) {
           return ListTile(
-            onTap: () => context.pushNamed(addAccountPath),
+            onTap: () => context.pushNamed('add-account'),
             title: Text(
               context.loc.addAccountLabel,
             ),
@@ -112,7 +112,7 @@ class SelectedItem extends StatelessWidget {
                     isSelected: false,
                     title: 'Add New',
                     icon: MdiIcons.plus.codePoint,
-                    onPressed: () => context.pushNamed(addAccountPath),
+                    onPressed: () => context.pushNamed('add-account'),
                   ),
                 );
               }

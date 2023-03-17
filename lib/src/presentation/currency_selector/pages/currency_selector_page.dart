@@ -30,7 +30,7 @@ class CurrencySelectorPage extends StatelessWidget {
           bloc: splashCubit,
           listener: (context, state) {
             if (state is NavigateToHome) {
-              context.go(landingPath);
+              context.go('/home');
             }
           },
           child: Column(

@@ -14,13 +14,12 @@ import 'summary_tablet_page.dart';
 class SummaryPage extends StatelessWidget {
   const SummaryPage({
     Key? key,
-    required this.valueNotifier,
   }) : super(key: key);
-
-  final ValueNotifier<FilterBudget> valueNotifier;
 
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<FilterBudget> valueNotifier =
+        ValueNotifier<FilterBudget>(FilterBudget.daily);
     return ValueListenableBuilder<Box<ExpenseModel>>(
       valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
       builder: (_, value, child) {

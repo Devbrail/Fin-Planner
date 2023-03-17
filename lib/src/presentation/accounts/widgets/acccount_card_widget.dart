@@ -29,8 +29,8 @@ class AccountCardWidget extends StatelessWidget {
         aspectRatio: 16 / 9,
         child: PaisaFilledCard(
           child: InkWell(
-            onTap: () => GoRouter.of(context).goNamed(
-              accountTransactionPath,
+            onTap: () => GoRouter.of(context).pushNamed(
+              'account',
               params: <String, String>{'aid': account.superId.toString()},
             ),
             child: Column(

@@ -20,14 +20,10 @@ class ContentWidget extends StatelessWidget {
   final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier;
 
   late final Map<PageType, Widget> pages = {
-    PageType.home: SummaryPage(
-      valueNotifier: ValueNotifier<FilterBudget>(FilterBudget.daily),
-    ),
+    PageType.home: SummaryPage(),
     PageType.accounts: AccountsPage(),
     PageType.category: const CategoryListPage(),
-    PageType.budgetOverview: BudgetOverViewPage(
-      dateTimeRangeNotifier: dateTimeRangeNotifier,
-    ),
+    PageType.budgetOverview: BudgetOverViewPage(),
     PageType.debts: const DebtsPage(),
   };
 

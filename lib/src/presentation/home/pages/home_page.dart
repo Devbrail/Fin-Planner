@@ -8,7 +8,9 @@ import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../bloc/home_bloc.dart';
 import 'home_desktop_widget.dart';
-import 'home_mobile_page.dart';
+
+final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier =
+    ValueNotifier<DateTimeRange?>(null);
 
 class LandingPage extends StatefulWidget {
   const LandingPage({
@@ -28,7 +30,7 @@ class _LandingPageState extends State<LandingPage> {
   void _handleClick(PageType page) {
     switch (page) {
       case PageType.accounts:
-        context.goNamed(addAccountPath);
+        context.goNamed('add-account');
         break;
       case PageType.home:
         context.goNamed(addExpensePath);
@@ -123,11 +125,7 @@ class _LandingPageState extends State<LandingPage> {
             desktop: 700,
             watch: 300,
           ),
-          mobile: (_) => HomeMobilePage(
-            homeBloc: homeBloc,
-            dateTimeRangeNotifier: dateTimeRangeNotifier,
-            floatingActionButton: _floatingActionButtonBig(),
-          ),
+          mobile: (_) => Container(),
           desktop: (_) => HomeDesktopWidget(
             homeBloc: homeBloc,
             dateTimeRangeNotifier: dateTimeRangeNotifier,
@@ -137,4 +135,21 @@ class _LandingPageState extends State<LandingPage> {
       ),
     );
   }
+}
+
+class ScaffoldWithNavBarTabItem extends NavigationDestination {
+  const ScaffoldWithNavBarTabItem({
+    super.key,
+    required this.initialLocation,
+    required Widget icon,
+    required Widget activeIcon,
+    required String label,
+  }) : super(
+          icon: icon,
+          label: label,
+          selectedIcon: activeIcon,
+        );
+
+  /// The initial location/path
+  final String initialLocation;
 }

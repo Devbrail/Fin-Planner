@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:paisa/src/domain/expense/entities/expense.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../../data/expense/model/expense_model.dart';
+import '../../../../domain/expense/entities/expense.dart';
+import '../../../home/pages/home_page.dart';
 import '../../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../../widgets/paisa_empty_widget.dart';
 import '../../widgets/budget_section_widget.dart';
@@ -16,12 +17,7 @@ import 'budget_overview_mobile_page.dart';
 import 'budget_overview_tablet_page.dart';
 
 class BudgetOverViewPage extends StatelessWidget {
-  const BudgetOverViewPage({
-    Key? key,
-    required this.dateTimeRangeNotifier,
-  }) : super(key: key);
-
-  final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier;
+  const BudgetOverViewPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
