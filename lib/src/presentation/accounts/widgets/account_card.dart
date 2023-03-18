@@ -11,18 +11,21 @@ import '../../widgets/lava/lava_clock.dart';
 class AccountCard extends StatefulWidget {
   const AccountCard({
     Key? key,
-    required this.cardNumber,
+    required this.totalBalance,
     required this.cardHolder,
     required this.bankName,
     required this.cardType,
+    required this.income,
+    required this.expense,
     this.onDelete,
     this.onTap,
   }) : super(key: key);
 
-  final String cardNumber;
+  final String totalBalance;
   final String cardHolder;
   final String bankName;
   final CardType cardType;
+  final String income, expense;
   final VoidCallback? onDelete;
   final VoidCallback? onTap;
 
@@ -38,15 +41,17 @@ class _AccountCardState extends State<AccountCard>
       mobile: (_) => MobileAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
-        cardNumber: widget.cardNumber,
+        cardNumber: widget.totalBalance,
         cardType: widget.cardType,
         onDelete: widget.onDelete,
         onTap: widget.onTap,
+        expense: widget.expense,
+        income: widget.income,
       ),
       tablet: (_) => TabletAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
-        cardNumber: widget.cardNumber,
+        cardNumber: widget.totalBalance,
         cardType: widget.cardType,
         onDelete: widget.onDelete,
         onTap: widget.onTap,
@@ -54,7 +59,7 @@ class _AccountCardState extends State<AccountCard>
       desktop: (_) => DesktopAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
-        cardNumber: widget.cardNumber,
+        cardNumber: widget.totalBalance,
         cardType: widget.cardType,
         onDelete: widget.onDelete,
         onTap: widget.onTap,
@@ -72,12 +77,15 @@ class MobileAccountCard extends StatelessWidget {
     required this.cardType,
     this.onDelete,
     this.onTap,
+    required this.income,
+    required this.expense,
   }) : super(key: key);
 
   final String cardNumber;
   final String cardHolder;
   final String bankName;
   final CardType cardType;
+  final String income, expense;
   final VoidCallback? onDelete;
   final VoidCallback? onTap;
 
@@ -111,85 +119,105 @@ class MobileAccountCard extends StatelessWidget {
               Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.5),
             ],
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ListTile(
+                horizontalTitleGap: 0,
+                title: Text(bankName.toUpperCase()),
+                subtitle: Text(cardHolder.toUpperCase()),
+                leading: Icon(cardType.icon),
+                trailing: onDelete != null
+                    ? GestureDetector(
+                        onTap: onDelete,
+                        child: Icon(
+                          Icons.delete,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      bankName.toUpperCase(),
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Icon(cardType.icon),
-                  ],
-                ),
-                cardNumber.isEmpty
-                    ? const SizedBox.shrink()
-                    : Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
-                        child: RichText(
-                          text: TextSpan(
-                            text: '**** ',
-                            style: GoogleFonts.jetBrainsMono(
-                              textStyle:
-                                  Theme.of(context).textTheme.headlineSmall,
-                            ),
-                            children: [
-                              const TextSpan(text: '**** '),
-                              const TextSpan(text: '**** '),
-                              TextSpan(
-                                  text:
-                                      cardNumber.isEmpty ? '----' : cardNumber)
-                            ],
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(context.loc.totalBalanceLabel),
+                        Text(
+                          cardNumber,
+                          style: GoogleFonts.jetBrainsMono(
+                            textStyle:
+                                Theme.of(context).textTheme.headlineSmall,
                           ),
                         ),
-                      ),
-                Row(
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  bottom: 16.0,
+                  right: 16.0,
+                ),
+                child: Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
+                        children: [
                           Text(
-                            context.loc.cardholderLabel.toUpperCase(),
+                            context.loc.incomeLabel,
                             style: TextStyle(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium!
-                                    .color!
-                                    .withOpacity(0.5),
-                                fontSize: 9,
-                                fontWeight: FontWeight.bold),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurface
+                                  .withOpacity(0.75),
+                            ),
                           ),
+                          const SizedBox(height: 6),
                           Text(
-                            cardHolder.toUpperCase(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                          )
+                            income,
+                            style: GoogleFonts.manrope(
+                              textStyle: Theme.of(context).textTheme.titleLarge,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    onDelete != null
-                        ? GestureDetector(
-                            onTap: onDelete,
-                            child: Icon(
-                              Icons.delete,
-                              color: Theme.of(context).colorScheme.onSurface,
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            context.loc.expenseLabel,
+                            style: TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondaryContainer
+                                  .withOpacity(0.75),
                             ),
-                          )
-                        : const SizedBox.shrink(),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            expense,
+                            style: GoogleFonts.manrope(
+                              textStyle: Theme.of(context).textTheme.titleLarge,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

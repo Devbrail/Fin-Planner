@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,11 +80,12 @@ class _ExpensePageState extends State<ExpensePage> {
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               color: Theme.of(context).colorScheme.onPrimaryContainer,
             );
-            final InAppReview inAppReview = InAppReview.instance;
-
-            inAppReview
-                .isAvailable()
-                .then((value) => inAppReview.requestReview());
+            if (!kDebugMode) {
+              final InAppReview inAppReview = InAppReview.instance;
+              inAppReview
+                  .isAvailable()
+                  .then((value) => inAppReview.requestReview());
+            }
             context.pop();
           } else if (state is ExpenseErrorState) {
             context.showMaterialSnackBar(

@@ -39,7 +39,7 @@ class BudgetItemMobileWidget extends StatelessWidget {
 
     return PaisaFilledCard(
       child: InkWell(
-        onTap: () => context.goNamed(
+        onTap: () => context.pushNamed(
           expensesByCategory,
           params: <String, String>{'cid': category.superId.toString()},
         ),

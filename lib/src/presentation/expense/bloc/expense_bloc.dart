@@ -10,7 +10,9 @@ import '../../../data/accounts/model/account_model.dart';
 import '../../../data/category/model/category_model.dart';
 import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/account/use_case/get_account_use_case.dart';
+import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
+import '../../../domain/expense/use_case/update_expense_use_case.dart';
 
 part 'expense_event.dart';
 part 'expense_state.dart';
@@ -22,6 +24,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     required this.accountUseCase,
     required this.addExpenseUseCase,
     required this.deleteExpenseUseCase,
+    required this.updateExpensesUseCase,
   }) : super(ExpenseInitial()) {
     on<ExpenseEvent>((event, emit) {});
     on<AddOrUpdateExpenseEvent>(_addExpense);
@@ -36,12 +39,13 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   final AddExpenseUseCase addExpenseUseCase;
   final GetAccountUseCase accountUseCase;
   final DeleteExpenseUseCase deleteExpenseUseCase;
+  final UpdateExpensesUseCase updateExpensesUseCase;
 
   String? expenseName;
   double? expenseAmount;
   int? selectedCategoryId;
   int? selectedAccountId;
-  ExpenseModel? currentExpense;
+  Expense? currentExpense;
   String? currentDescription;
   DateTime? selectedDate = DateTime.now();
   TransactionType transactionType = TransactionType.expense;
@@ -53,7 +57,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     final int? expenseId = int.tryParse(event.expenseId ?? '');
     if (expenseId == null) return;
 
-    final ExpenseModel? expense = await expenseUseCase(expenseId);
+    final Expense? expense = await expenseUseCase(expenseId);
     if (expense != null) {
       expenseAmount = expense.currency;
       expenseName = expense.name;
@@ -116,7 +120,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         ..time = dateTime
         ..type = transactionType
         ..description = description;
-      await currentExpense!.save();
+      await updateExpensesUseCase(currentExpense!);
     }
     emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
   }

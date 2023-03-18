@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import '../../../data/expense/model/expense_model.dart';
+import '../entities/expense.dart';
 import '../repository/expense_repository.dart';
 
 @singleton
@@ -9,6 +9,6 @@ class GetExpenseUseCase {
 
   final ExpenseRepository expenseRepository;
 
-  Future<ExpenseModel?> call(int expenseId) async =>
-      expenseRepository.fetchExpenseFromId(expenseId);
+  Future<Expense?> call(int expenseId) async =>
+      expenseRepository.fetchExpenseFromId(expenseId)?.toEntity();
 }

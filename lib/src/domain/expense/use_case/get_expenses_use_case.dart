@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 
-import '../../../data/expense/model/expense_model.dart';
+import '../../../core/common.dart';
+import '../entities/expense.dart';
 import '../repository/expense_repository.dart';
 
 @singleton
@@ -9,5 +10,5 @@ class GetExpensesUseCase {
 
   final ExpenseRepository expenseRepository;
 
-  List<ExpenseModel> call() => expenseRepository.expenses();
+  List<Expense> call() => expenseRepository.expenses().toEntities();
 }

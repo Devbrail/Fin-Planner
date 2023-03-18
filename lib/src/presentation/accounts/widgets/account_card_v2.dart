@@ -12,8 +12,8 @@ import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/paisa_card.dart';
 import 'account_summary_widget.dart';
 
-class AccountCardWidget extends StatelessWidget {
-  const AccountCardWidget({
+class AccountCardV2 extends StatelessWidget {
+  const AccountCardV2({
     super.key,
     required this.account,
     required this.expenses,
@@ -29,7 +29,7 @@ class AccountCardWidget extends StatelessWidget {
         aspectRatio: 16 / 9,
         child: PaisaFilledCard(
           child: InkWell(
-            onTap: () => GoRouter.of(context).goNamed(
+            onTap: () => GoRouter.of(context).pushNamed(
               accountTransactionPath,
               params: <String, String>{'aid': account.superId.toString()},
             ),

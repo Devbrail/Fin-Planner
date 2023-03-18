@@ -17,14 +17,15 @@ class AddExpenseUseCase {
     required int accountId,
     required TransactionType transactionType,
     required String? description,
-  }) =>
-      expenseRepository.addExpense(
-        name,
-        amount,
-        time,
-        categoryId,
-        accountId,
-        transactionType,
-        description,
-      );
+  }) {
+    return expenseRepository.addExpense(
+      name,
+      amount,
+      time,
+      categoryId,
+      accountId,
+      transactionType,
+      description,
+    );
+  }
 }

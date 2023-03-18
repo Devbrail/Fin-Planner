@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:paisa/src/core/extensions/account_extension.dart';
+import 'package:paisa/src/domain/expense/entities/expense.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -49,11 +51,16 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                       .add(AccountSelectedEvent(widget.accounts[index]));
                 },
                 itemBuilder: (_, index) {
-                  final account = widget.accounts[index];
+                  final Account account = widget.accounts[index];
+                  final List<Expense> expenses = widget.accountBloc
+                      .fetchExpenseFromAccountId(account.superId!);
                   return AccountCard(
                     key: ValueKey(account.hashCode),
+                    expense: expenses.totalExpense.toCurrency(),
+                    income: expenses.totalIncome.toCurrency(),
+                    totalBalance: (expenses.fullTotal + account.initialAmount)
+                        .toCurrency(),
                     cardHolder: account.name,
-                    cardNumber: account.number,
                     bankName: account.bankName,
                     cardType: account.cardType ?? CardType.bank,
                     onDelete: () => paisaAlertDialog(
@@ -88,9 +95,11 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                         child: Text(context.loc.deleteLabel),
                       ),
                     ),
-                    onTap: () => context.goNamed(
+                    onTap: () => context.pushNamed(
                       editAccountPath,
-                      params: <String, String>{'aid': account.key.toString()},
+                      params: <String, String>{
+                        'aid': account.superId.toString()
+                      },
                     ),
                   );
                 },

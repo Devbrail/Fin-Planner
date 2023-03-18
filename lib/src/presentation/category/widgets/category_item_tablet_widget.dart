@@ -19,7 +19,7 @@ class CategoryItemTabletWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaOutlineCard(
       child: InkWell(
-        onTap: () => context.goNamed(
+        onTap: () => context.pushNamed(
           editCategoryPath,
           params: <String, String>{'cid': category.superId.toString()},
         ),

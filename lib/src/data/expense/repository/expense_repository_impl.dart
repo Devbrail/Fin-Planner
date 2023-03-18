@@ -59,4 +59,29 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   @override
   List<ExpenseModel> fetchExpensesFromCategoryId(int accountId) =>
       dataSource.fetchExpensesFromCategoryId(accountId);
+
+  @override
+  Future<void> updateExpense(
+    int key,
+    String name,
+    double currency,
+    DateTime time,
+    int categoryId,
+    int accountId,
+    TransactionType transactionType,
+    String? description,
+  ) {
+    return dataSource.updateExpense(
+      ExpenseModel(
+        name: name,
+        currency: currency,
+        time: time,
+        categoryId: categoryId,
+        accountId: accountId,
+        type: transactionType,
+        description: description,
+        superId: key,
+      ),
+    );
+  }
 }

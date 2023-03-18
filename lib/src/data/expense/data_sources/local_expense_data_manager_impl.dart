@@ -23,6 +23,11 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
   }
 
   @override
+  Future<void> updateExpense(ExpenseModel expenseModel) {
+    return expenseBox.put(expenseModel.superId!, expenseModel);
+  }
+
+  @override
   Future<void> clearExpenses() async {
     await expenseBox.clear();
   }

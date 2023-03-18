@@ -18,4 +18,14 @@ abstract class ExpenseRepository {
   List<ExpenseModel> fetchExpensesFromCategoryId(int accountId);
   Future<void> deleteExpensesByAccountId(int accountId);
   Future<void> deleteExpensesByCategoryId(int categoryId);
+  Future<void> updateExpense(
+    int key,
+    String name,
+    double currency,
+    DateTime time,
+    int categoryId,
+    int accountId,
+    TransactionType transactionType,
+    String? description,
+  );
 }

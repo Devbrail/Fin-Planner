@@ -31,11 +31,6 @@ class AddAccountPageState extends State<AddAccountPage> {
   late final bool isAccountAddOrUpdate = widget.accountId == null;
   late final accountsBloc = getIt.get<AccountsBloc>()
     ..add(FetchAccountFromIdEvent(widget.accountId));
-  final ValueNotifier<String> accountNameNotifier =
-      ValueNotifier('Account Name');
-  final ValueNotifier<String> accountNumberNotifier = ValueNotifier('0000');
-  final ValueNotifier<String> accountHolderNotifier =
-      ValueNotifier('Holder Name');
 
   final accountNumberController = TextEditingController();
   final accountHolderController = TextEditingController();
@@ -48,9 +43,6 @@ class AddAccountPageState extends State<AddAccountPage> {
     accountInitialAmountController.dispose();
     accountNumberController.dispose();
     accountNameController.dispose();
-    accountNameNotifier.dispose();
-    accountNumberNotifier.dispose();
-    accountHolderNotifier.dispose();
     super.dispose();
   }
 
@@ -85,17 +77,14 @@ class AddAccountPageState extends State<AddAccountPage> {
               color: Theme.of(context).colorScheme.onErrorContainer,
             );
           } else if (state is AccountSuccessState) {
-            accountNameNotifier.value = state.account.bankName;
             accountNameController.text = state.account.bankName;
             accountNameController.selection =
                 TextSelection.collapsed(offset: state.account.bankName.length);
 
-            accountNumberNotifier.value = state.account.number;
             accountNumberController.text = state.account.number;
             accountNumberController.selection =
                 TextSelection.collapsed(offset: state.account.number.length);
 
-            accountHolderNotifier.value = state.account.name;
             accountHolderController.text = state.account.name;
             accountHolderController.selection =
                 TextSelection.collapsed(offset: state.account.name.length);
@@ -144,23 +133,6 @@ class AddAccountPageState extends State<AddAccountPage> {
                         selectedCardType: accountsBloc.selectedType,
                       ),
                     ),
-                    MultiValueListenableBuilder(
-                      valueListenables: [
-                        accountNameNotifier,
-                        accountHolderNotifier,
-                        accountNumberNotifier,
-                      ],
-                      builder: (context, values, child) {
-                        return LavaAnimation(
-                          child: AccountCard(
-                            cardNumber: values.elementAt(2),
-                            cardHolder: values.elementAt(1),
-                            bankName: values.elementAt(0),
-                            cardType: accountsBloc.selectedType,
-                          ),
-                        );
-                      },
-                    ),
                     Form(
                       key: _form,
                       child: Padding(
@@ -172,13 +144,11 @@ class AddAccountPageState extends State<AddAccountPage> {
                             AccountCardHolderNameWidget(
                               controller: accountHolderController,
                               accountBloc: accountsBloc,
-                              valueNotifier: accountHolderNotifier,
                             ),
                             const SizedBox(height: 16),
                             AccountNameWidget(
                               controller: accountNameController,
                               accountBloc: accountsBloc,
-                              valueNotifier: accountNameNotifier,
                             ),
                             const SizedBox(height: 16),
                             Builder(
@@ -203,7 +173,6 @@ class AddAccountPageState extends State<AddAccountPage> {
                                   return AccountNumberWidget(
                                     controller: accountNumberController,
                                     accountBloc: accountsBloc,
-                                    valueNotifier: accountNumberNotifier,
                                   );
                                 } else {
                                   return const SizedBox.shrink();
@@ -275,14 +244,6 @@ class AddAccountPageState extends State<AddAccountPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: AccountCard(
-                        cardNumber: accountNumberController.value.text,
-                        cardHolder: accountHolderController.value.text,
-                        bankName: accountNameController.value.text,
-                        cardType: accountsBloc.selectedType,
-                      ),
-                    ),
-                    Expanded(
                       child: Form(
                         key: _form,
                         child: Padding(
@@ -300,13 +261,11 @@ class AddAccountPageState extends State<AddAccountPage> {
                               AccountCardHolderNameWidget(
                                 controller: accountHolderController,
                                 accountBloc: accountsBloc,
-                                valueNotifier: accountHolderNotifier,
                               ),
                               const SizedBox(height: 16),
                               AccountNameWidget(
                                 controller: accountNameController,
                                 accountBloc: accountsBloc,
-                                valueNotifier: accountNameNotifier,
                               ),
                               const SizedBox(height: 16),
                               AccountInitialAmountWidget(
@@ -317,7 +276,6 @@ class AddAccountPageState extends State<AddAccountPage> {
                               AccountNumberWidget(
                                 controller: accountNumberController,
                                 accountBloc: accountsBloc,
-                                valueNotifier: accountNumberNotifier,
                               ),
                               const SizedBox(height: 16),
                               ElevatedButton(
@@ -430,11 +388,9 @@ class AccountCardHolderNameWidget extends StatelessWidget {
     super.key,
     required this.controller,
     required this.accountBloc,
-    required this.valueNotifier,
   });
   final TextEditingController controller;
   final AccountsBloc accountBloc;
-  final ValueNotifier<String> valueNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -445,10 +401,7 @@ class AccountCardHolderNameWidget extends StatelessWidget {
           label: context.loc.cardHolderLabel,
           hintText: context.loc.enterCardHolderNameLabel,
           keyboardType: TextInputType.name,
-          onChanged: (value) {
-            valueNotifier.value = value;
-            accountBloc.accountHolderName = value;
-          },
+          onChanged: (value) => accountBloc.accountHolderName = value,
         );
       },
     );
@@ -460,11 +413,9 @@ class AccountNameWidget extends StatelessWidget {
     super.key,
     required this.controller,
     required this.accountBloc,
-    required this.valueNotifier,
   });
   final TextEditingController controller;
   final AccountsBloc accountBloc;
-  final ValueNotifier<String> valueNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -475,10 +426,7 @@ class AccountNameWidget extends StatelessWidget {
           label: context.loc.accountNameLabel,
           hintText: context.loc.enterAccountNameLabel,
           keyboardType: TextInputType.name,
-          onChanged: (value) {
-            valueNotifier.value = value;
-            accountBloc.accountName = value;
-          },
+          onChanged: (value) => accountBloc.accountName = value,
         );
       },
     );
@@ -490,11 +438,9 @@ class AccountNumberWidget extends StatelessWidget {
     super.key,
     required this.controller,
     required this.accountBloc,
-    required this.valueNotifier,
   });
   final TextEditingController controller;
   final AccountsBloc accountBloc;
-  final ValueNotifier<String> valueNotifier;
   @override
   Widget build(BuildContext context) {
     return PaisaTextFormField(
@@ -503,10 +449,7 @@ class AccountNumberWidget extends StatelessWidget {
       label: context.loc.lastFourDigitLabel,
       hintText: context.loc.enterNumberOptionalLabel,
       keyboardType: TextInputType.number,
-      onChanged: (value) {
-        valueNotifier.value = value;
-        accountBloc.accountNumber = value;
-      },
+      onChanged: (value) => accountBloc.accountNumber = value,
     );
   }
 }

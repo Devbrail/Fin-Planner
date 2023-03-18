@@ -1,1 +1,1 @@
-const bool useAccountsList = true;
+const bool useAccountsList = false;

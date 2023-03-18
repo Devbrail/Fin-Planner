@@ -9,8 +9,15 @@ abstract class AccountRepository {
     required CardType cardType,
     required double amount,
   });
+  Future<void> updateAccount({
+    required int key,
+    required String bankName,
+    required String holderName,
+    required String number,
+    required CardType cardType,
+    required double amount,
+  });
   Future<void> deleteAccount(int key);
-  Future<void> updateAccount(AccountModel account);
   AccountModel? fetchAccountFromId(int accountId);
   List<AccountModel> getAccounts();
 }

@@ -19,7 +19,7 @@ class CategoryItemDesktopWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaCard(
       child: InkWell(
-        onTap: () => context.goNamed(
+        onTap: () => context.pushNamed(
           editCategoryPath,
           params: <String, String>{'cid': category.superId.toString()},
         ),

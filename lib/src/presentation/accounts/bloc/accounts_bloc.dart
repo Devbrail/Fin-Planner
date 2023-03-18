@@ -29,6 +29,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     required this.getAccountsUseCase,
     required this.getCategoryUseCase,
     required this.deleteExpensesFromAccountIdUseCase,
+    required this.updateAccountUseCase,
   }) : super(AccountsInitial()) {
     on<AccountsEvent>((event, emit) {});
     on<AddOrUpdateAccountEvent>(_addAccount);
@@ -41,6 +42,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   final GetExpensesFromAccountIdUseCase getExpensesFromAccountIdUseCase;
   final DeleteExpensesFromAccountIdUseCase deleteExpensesFromAccountIdUseCase;
+  final UpdateAccountUseCase updateAccountUseCase;
   final GetAccountUseCase getAccountUseCase;
   final DeleteAccountUseCase deleteAccountUseCase;
   final AddAccountUseCase addAccountUseCase;
@@ -110,7 +112,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
           ..number = number ?? ''
           ..amount = amount;
 
-        await currentAccount!.save();
+        await updateAccountUseCase(account: currentAccount!);
       }
     }
     emit(AddAccountState(isAddOrUpdate: event.isAdding));

@@ -18,22 +18,41 @@ class AccountRepositoryImpl extends AccountRepository {
     required String number,
     required CardType cardType,
     required double amount,
-  }) =>
-      dataSource.addAccount(AccountModel(
+  }) {
+    return dataSource.addAccount(AccountModel(
+      name: holderName,
+      icon: cardType.icon.codePoint,
+      bankName: bankName,
+      number: number,
+      cardType: cardType,
+      amount: amount,
+    ));
+  }
+
+  @override
+  Future<void> updateAccount({
+    required int key,
+    required String bankName,
+    required String holderName,
+    required String number,
+    required CardType cardType,
+    required double amount,
+  }) {
+    return dataSource.updateAccount(
+      AccountModel(
         name: holderName,
         icon: cardType.icon.codePoint,
         bankName: bankName,
         number: number,
         cardType: cardType,
         amount: amount,
-      ));
+        superId: key,
+      ),
+    );
+  }
 
   @override
   Future<void> deleteAccount(int key) => dataSource.deleteAccount(key);
-
-  @override
-  Future<void> updateAccount(AccountModel account) async =>
-      dataSource.addAccount(account);
 
   @override
   AccountModel? fetchAccountFromId(int accountId) =>

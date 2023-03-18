@@ -53,7 +53,7 @@ class AccountsPage extends StatelessWidget {
                           getIt.get<Box<ExpenseModel>>().listenable(),
                       builder: (context, value, child) {
                         final List<Expense> expenses = value
-                            .expensesFromAccountId(state.account.key)
+                            .expensesFromAccountId(state.account.superId!)
                             .map((e) => e.toEntity())
                             .toList();
                         return ScreenTypeLayout.builder(

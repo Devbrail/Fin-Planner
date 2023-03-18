@@ -29,7 +29,7 @@ class DebtItemWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: PaisaFilledCard(
             child: InkWell(
-              onTap: () => GoRouter.of(context).goNamed(
+              onTap: () => context.pushNamed(
                 debtAddOrEditPath,
                 params: {'did': debt.superId.toString()},
               ),

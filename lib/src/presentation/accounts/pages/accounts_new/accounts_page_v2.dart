@@ -9,7 +9,7 @@ import '../../../../domain/account/entities/account.dart';
 import '../../../../domain/expense/entities/expense.dart';
 import '../../../widgets/paisa_empty_widget.dart';
 import '../../bloc/accounts_bloc.dart';
-import '../../widgets/acccount_card_widget.dart';
+import '../../widgets/account_card_v2.dart';
 
 class AccountsPageV2 extends StatelessWidget {
   const AccountsPageV2({
@@ -47,7 +47,7 @@ class AccountsPageV2 extends StatelessWidget {
                         .expensesFromAccountId(accounts[index].superId!)
                         .map((e) => e.toEntity())
                         .toList();
-                    return AccountCardWidget(
+                    return AccountCardV2(
                       account: accounts[index],
                       expenses: expenses,
                     );
@@ -65,7 +65,7 @@ class AccountsPageV2 extends StatelessWidget {
                         .expensesFromAccountId(accounts[index].key)
                         .map((e) => e.toEntity())
                         .toList();
-                    return AccountCardWidget(
+                    return AccountCardV2(
                       account: accounts[index],
                       expenses: expenses,
                     );

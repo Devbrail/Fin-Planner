@@ -30,6 +30,13 @@ class LocalAccountDataManagerImpl implements LocalAccountDataManager {
   Iterable<AccountModel> exportData() => accountBox.values;
 
   @override
-  AccountModel? fetchAccountFromId(int accountId) => accountBox.values
-      .firstWhereOrNull((element) => element.superId == accountId);
+  AccountModel? fetchAccountFromId(int accountId) {
+    return accountBox.values
+        .firstWhereOrNull((element) => element.superId == accountId);
+  }
+
+  @override
+  Future<void> updateAccount(AccountModel accountModel) {
+    return accountBox.put(accountModel.superId!, accountModel);
+  }
 }

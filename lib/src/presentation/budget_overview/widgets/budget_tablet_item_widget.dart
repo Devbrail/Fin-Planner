@@ -21,7 +21,7 @@ class BudgetItemTableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaCard(
       child: InkWell(
-        onTap: () => context.goNamed(addCategoryPath, extra: category),
+        onTap: () => context.pushNamed(addCategoryPath, extra: category),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

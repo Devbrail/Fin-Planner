@@ -26,7 +26,7 @@ extension AccountsMapping on Iterable<AccountModel> {
 extension AccountBoxMapping on Box<AccountModel> {
   List<Account> toEntities() => values
       .map((accountModel) => accountModel.toEntity())
-      .sorted((a, b) => b.name.compareTo(a.name))
+      .sorted((a, b) => a.name.compareTo(b.name))
       .toList();
 
   double get totalAccountInitialAmount =>

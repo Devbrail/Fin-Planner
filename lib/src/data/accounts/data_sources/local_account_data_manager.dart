@@ -6,4 +6,5 @@ abstract class LocalAccountDataManager {
   List<AccountModel> accounts();
   AccountModel? fetchAccountFromId(int accountId);
   Iterable<AccountModel> exportData();
+  Future<void> updateAccount(AccountModel accountModel);
 }

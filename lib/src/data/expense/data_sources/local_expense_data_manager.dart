@@ -14,4 +14,5 @@ abstract class LocalExpenseDataManager {
   Future<void> deleteExpensesByCategoryId(int categoryId);
   List<ExpenseModel> fetchExpensesFromAccountId(int accountId);
   List<ExpenseModel> fetchExpensesFromCategoryId(int category);
+  Future<void> updateExpense(ExpenseModel expenseModel);
 }
