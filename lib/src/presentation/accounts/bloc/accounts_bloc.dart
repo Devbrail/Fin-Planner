@@ -4,17 +4,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart' show immutable;
-import 'package:paisa/src/data/category/model/category_model.dart';
-import 'package:paisa/src/data/expense/model/expense_model.dart';
-import 'package:paisa/src/domain/account/entities/account.dart';
-import 'package:paisa/src/domain/category/use_case/category_use_case.dart';
-import 'package:paisa/src/domain/expense/entities/expense.dart';
-import 'package:paisa/src/domain/expense/use_case/expense_use_case.dart';
-import 'package:paisa/src/domain/expense/use_case/get_expense_from_account_id.dart';
 
 import '../../../core/enum/card_type.dart';
-import '../../../data/accounts/model/account_model.dart';
+import '../../../data/category/model/category_model.dart';
+import '../../../domain/account/entities/account.dart';
 import '../../../domain/account/use_case/account_use_case.dart';
+import '../../../domain/category/use_case/category_use_case.dart';
+import '../../../domain/expense/entities/expense.dart';
+import '../../../domain/expense/use_case/expense_use_case.dart';
 
 part 'accounts_event.dart';
 part 'accounts_state.dart';
@@ -35,7 +32,6 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     on<AddOrUpdateAccountEvent>(_addAccount);
     on<DeleteAccountEvent>(_deleteAccount);
     on<AccountSelectedEvent>(_accountSelected);
-    on<ClearAccountEvent>(_clearAccount);
     on<UpdateCardTypeEvent>(_updateCardType);
     on<FetchAccountFromIdEvent>(_fetchAccountFromId);
   }
@@ -72,6 +68,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
       initialAmount = account.amount;
       currentAccount = account;
       emit(AccountSuccessState(account));
+      emit(UpdateCardTypeState(selectedType));
     } else {
       emit(const AccountErrorState('Account not found!'));
     }
@@ -122,8 +119,8 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     DeleteAccountEvent event,
     Emitter<AccountsState> emit,
   ) async {
-    await deleteAccountUseCase(event.account.superId!);
-    await deleteExpensesFromAccountIdUseCase(event.account.superId!);
+    await deleteExpensesFromAccountIdUseCase(event.accountId);
+    await deleteAccountUseCase(event.accountId);
     emit(AccountDeletedState());
   }
 
@@ -132,16 +129,6 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     Emitter<AccountsState> emit,
   ) async =>
       emit(AccountSelectedState(event.account));
-
-  FutureOr<void> _clearAccount(
-    ClearAccountEvent event,
-    Emitter<AccountsState> emit,
-  ) async {
-    final int? expenseId = int.tryParse(event.accountId);
-    if (expenseId == null) return;
-    await deleteAccountUseCase(expenseId);
-    emit(AccountDeletedState());
-  }
 
   FutureOr<void> _updateCardType(
     UpdateCardTypeEvent event,

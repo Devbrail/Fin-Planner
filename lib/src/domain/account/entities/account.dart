@@ -1,4 +1,4 @@
-import 'package:paisa/src/data/accounts/model/account_model.dart';
+import '../../../data/accounts/model/account_model.dart';
 
 class Account extends AccountModel {
   Account({

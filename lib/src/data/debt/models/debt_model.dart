@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/domain/debt/entities/debt.dart';
+import '../../../domain/debt/entities/debt.dart';
 
 import '../../../core/enum/debt_type.dart';
 

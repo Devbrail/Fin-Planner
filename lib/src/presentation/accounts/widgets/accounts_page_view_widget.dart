@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/src/core/extensions/account_extension.dart';
-import 'package:paisa/src/domain/expense/entities/expense.dart';
+import '../../../core/extensions/account_extension.dart';
+import '../../../domain/expense/entities/expense.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -89,7 +89,8 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                               Theme.of(context).colorScheme.onPrimaryContainer,
                         ),
                         onPressed: () {
-                          widget.accountBloc.add(DeleteAccountEvent(account));
+                          widget.accountBloc
+                              .add(DeleteAccountEvent(account.superId!));
                           Navigator.pop(context);
                         },
                         child: Text(context.loc.deleteLabel),

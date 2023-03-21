@@ -7,7 +7,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../login/pages/user_image_page.dart';
-import '../../widgets/choose_theme_mode_widget.dart';
 import '../../widgets/paisa_text_field.dart';
 
 class UserProfilePage extends StatelessWidget {

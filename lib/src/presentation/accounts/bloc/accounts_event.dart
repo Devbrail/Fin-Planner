@@ -14,11 +14,11 @@ class AddOrUpdateAccountEvent extends AccountsEvent {
 }
 
 class DeleteAccountEvent extends AccountsEvent {
-  final Account account;
+  final int accountId;
 
-  const DeleteAccountEvent(this.account);
+  const DeleteAccountEvent(this.accountId);
   @override
-  List<Object> get props => [account];
+  List<Object> get props => [accountId];
 }
 
 class AccountSelectedEvent extends AccountsEvent {
@@ -36,14 +36,6 @@ class FetchAccountFromIdEvent extends AccountsEvent {
 
   @override
   List<Object> get props => [accountId ?? ''];
-}
-
-class ClearAccountEvent extends AccountsEvent {
-  final String accountId;
-
-  const ClearAccountEvent(this.accountId);
-  @override
-  List<Object> get props => [accountId];
 }
 
 class UpdateCardTypeEvent extends AccountsEvent {

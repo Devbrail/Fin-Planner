@@ -1,4 +1,4 @@
-import 'package:paisa/src/data/debt/models/transactions_model.dart';
+import '../../../data/debt/models/transactions_model.dart';
 
 class Transaction extends TransactionsModel {
   Transaction({

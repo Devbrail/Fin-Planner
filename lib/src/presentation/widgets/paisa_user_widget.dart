@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:paisa/src/di/module/work.dart';
+import '../../di/module/work.dart';
 import 'package:workmanager/workmanager.dart';
 
 import '../../../main.dart';

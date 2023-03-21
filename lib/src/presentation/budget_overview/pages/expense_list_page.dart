@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/domain/expense/entities/expense.dart';
+import '../../../domain/expense/entities/expense.dart';
 
 import '../../../core/common.dart';
 import '../../../core/extensions/account_extension.dart';

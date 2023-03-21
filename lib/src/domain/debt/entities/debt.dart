@@ -1,4 +1,4 @@
-import 'package:paisa/src/data/debt/models/debt_model.dart';
+import '../../../data/debt/models/debt_model.dart';
 
 class Debt extends DebtModel {
   Debt({

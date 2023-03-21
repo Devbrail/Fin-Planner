@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:paisa/src/domain/account/entities/account.dart';
 
 import '../../../core/enum/transaction.dart';
 import '../../../data/accounts/model/account_model.dart';

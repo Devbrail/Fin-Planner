@@ -23,7 +23,7 @@ class ContentWidget extends StatelessWidget {
     PageType.home: SummaryPage(
       valueNotifier: ValueNotifier<FilterBudget>(FilterBudget.daily),
     ),
-    PageType.accounts: AccountsPage(),
+    PageType.accounts: const AccountsPage(),
     PageType.category: const CategoryListPage(),
     PageType.budgetOverview: BudgetOverViewPage(
       dateTimeRangeNotifier: dateTimeRangeNotifier,

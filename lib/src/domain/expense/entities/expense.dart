@@ -1,4 +1,4 @@
-import 'package:paisa/src/data/expense/model/expense_model.dart';
+import '../../../data/expense/model/expense_model.dart';
 
 class Expense extends ExpenseModel {
   Expense({

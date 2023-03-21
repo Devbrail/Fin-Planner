@@ -230,8 +230,7 @@ final GoRouter goRouter = GoRouter(
       }
     } else if (name.isNotEmpty && image.isNotEmpty && isLogging) {
       return landingPath;
-    } else {
-      return null;
     }
+    return null;
   },
 );

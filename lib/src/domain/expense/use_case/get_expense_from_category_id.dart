@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/common.dart';
+import '../../../core/common.dart';
 
 import '../entities/expense.dart';
 import '../repository/expense_repository.dart';

@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../main.dart';
 import '../../../core/currency_util.dart';
 import '../../../core/theme/custom_color.dart';
-import '../../../data/accounts/data_sources/local_account_data_manager.dart';
-import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../domain/expense/entities/expense.dart';
 import 'expense_list_widget.dart';
 
 class ExpenseMonthCardWidget extends StatelessWidget {
-  ExpenseMonthCardWidget({
+  const ExpenseMonthCardWidget({
     Key? key,
     required this.title,
     required this.total,
@@ -20,8 +17,6 @@ class ExpenseMonthCardWidget extends StatelessWidget {
   final String title;
   final double total;
   final List<Expense> expenses;
-  final categorySource = getIt.get<LocalCategoryManagerDataSource>();
-  final accountSource = getIt.get<LocalAccountDataManager>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +52,6 @@ class ExpenseMonthCardWidget extends StatelessWidget {
         ),
         ExpenseListWidget(
           expenses: expenses,
-          accountLocalDataSource: accountSource,
-          categoryLocalDataSource: categorySource,
         ),
       ],
     );

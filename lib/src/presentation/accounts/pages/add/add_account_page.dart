@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../../widgets/paisa_bottom_sheet.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../core/enum/card_type.dart';
-import '../../../widgets/lava/lava_clock.dart';
-import '../../../widgets/multi_value_listenable_builder.dart';
 import '../../../widgets/paisa_text_field.dart';
 import '../../bloc/accounts_bloc.dart';
-import '../../widgets/account_card.dart';
 import '../../widgets/card_type_drop_down.dart';
 
 final GlobalKey<FormState> _form = GlobalKey<FormState>();
@@ -106,8 +104,45 @@ class AddAccountPageState extends State<AddAccountPage> {
                   isAccountAddOrUpdate
                       ? const SizedBox.shrink()
                       : IconButton(
-                          onPressed: () => accountsBloc
-                              .add(ClearAccountEvent(widget.accountId!)),
+                          onPressed: () {
+                            paisaAlertDialog(
+                              context,
+                              title: Text(context.loc.dialogDeleteTitleLabel),
+                              child: RichText(
+                                text: TextSpan(
+                                  text: context.loc.deleteAccountLabel,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  children: [
+                                    TextSpan(
+                                      text: accountsBloc.accountName,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              confirmationButton: TextButton(
+                                style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer,
+                                  foregroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                ),
+                                onPressed: () {
+                                  accountsBloc.add(DeleteAccountEvent(
+                                      int.parse(widget.accountId!)));
+
+                                  Navigator.pop(context);
+                                },
+                                child: Text(context.loc.deleteLabel),
+                              ),
+                            );
+                          },
                           icon: Icon(
                             Icons.delete_rounded,
                             color: Theme.of(context).colorScheme.error,
@@ -230,8 +265,45 @@ class AddAccountPageState extends State<AddAccountPage> {
                   isAccountAddOrUpdate
                       ? const SizedBox.shrink()
                       : IconButton(
-                          onPressed: () => accountsBloc
-                              .add(ClearAccountEvent(widget.accountId!)),
+                          onPressed: () {
+                            paisaAlertDialog(
+                              context,
+                              title: Text(context.loc.dialogDeleteTitleLabel),
+                              child: RichText(
+                                text: TextSpan(
+                                  text: context.loc.deleteAccountLabel,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  children: [
+                                    TextSpan(
+                                      text: accountsBloc.accountName,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              confirmationButton: TextButton(
+                                style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer,
+                                  foregroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                ),
+                                onPressed: () {
+                                  accountsBloc.add(DeleteAccountEvent(
+                                      int.parse(widget.accountId!)));
+
+                                  Navigator.pop(context);
+                                },
+                                child: Text(context.loc.deleteLabel),
+                              ),
+                            );
+                          },
                           icon: Icon(
                             Icons.delete_rounded,
                             color: Theme.of(context).colorScheme.error,
@@ -398,7 +470,6 @@ class AccountCardHolderNameWidget extends StatelessWidget {
       builder: (context) {
         return PaisaTextFormField(
           controller: controller,
-          label: context.loc.cardHolderLabel,
           hintText: context.loc.enterCardHolderNameLabel,
           keyboardType: TextInputType.name,
           onChanged: (value) => accountBloc.accountHolderName = value,
@@ -423,7 +494,6 @@ class AccountNameWidget extends StatelessWidget {
       builder: (context) {
         return PaisaTextFormField(
           controller: controller,
-          label: context.loc.accountNameLabel,
           hintText: context.loc.enterAccountNameLabel,
           keyboardType: TextInputType.name,
           onChanged: (value) => accountBloc.accountName = value,
@@ -446,7 +516,6 @@ class AccountNumberWidget extends StatelessWidget {
     return PaisaTextFormField(
       maxLength: 4,
       controller: controller,
-      label: context.loc.lastFourDigitLabel,
       hintText: context.loc.enterNumberOptionalLabel,
       keyboardType: TextInputType.number,
       onChanged: (value) => accountBloc.accountNumber = value,
@@ -467,7 +536,6 @@ class AccountInitialAmountWidget extends StatelessWidget {
     return PaisaTextFormField(
       controller: controller,
       hintText: context.loc.enterAmountLabel,
-      label: context.loc.initialAmountLabel,
       keyboardType: TextInputType.number,
       onChanged: (value) {
         double? amount = double.tryParse(value);

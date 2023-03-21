@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/domain/account/entities/account.dart';
+import '../entities/account.dart';
 
 import '../../../core/enum/card_type.dart';
 import '../repository/account_repository.dart';

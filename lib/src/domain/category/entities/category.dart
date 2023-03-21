@@ -1,4 +1,4 @@
-import 'package:paisa/src/data/category/model/category_model.dart';
+import '../../../data/category/model/category_model.dart';
 
 class Category extends CategoryModel {
   Category({
