@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:paisa/src/domain/account/entities/account.dart';
 
 import '../../../core/enum/transaction.dart';
 import '../../../data/accounts/model/account_model.dart';
@@ -129,17 +130,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     ClearExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) async {
-    if (currentExpense != null) {
-      final AccountModel? account = accountUseCase(currentExpense!.accountId);
-      if (account != null) {
-        account.amount = (currentExpense!.currency + account.amount!);
-        await account.save();
-      }
-      await deleteExpenseUseCase(currentExpense!.key);
-      emit(ExpenseDeletedState());
-    } else {
-      emit(const ExpenseErrorState('Error deleting expense'));
-    }
+    await deleteExpenseUseCase(int.parse(event.expenseId));
+    emit(ExpenseDeletedState());
   }
 
   void _changeExpense(ChangeExpenseEvent event, Emitter<ExpenseState> emit) {
