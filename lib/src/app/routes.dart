@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import '../presentation/accounts/pages/accounts_new/account_transaction_page.dart';
@@ -210,30 +211,27 @@ final GoRouter goRouter = GoRouter(
     if (languageCode == 'DEF' && isLogging) {
       return splashPath;
     }
-    if (settings.get(userAuthKey, defaultValue: false) &&
+    final isBiometricEnabled = settings.get(userAuthKey, defaultValue: false);
+    if (isBiometricEnabled &&
         name.isNotEmpty &&
         image.isNotEmpty &&
         isLogging) {
       final localAuth = getIt.get<Authenticate>();
 
-      final bool canAuthenticateWithBiometrics =
-          await localAuth.canCheckBiometrics();
-      final bool canAuthenticate =
-          canAuthenticateWithBiometrics || await localAuth.isDeviceSupported();
-      if (canAuthenticate) {
-        if (!canAuthenticate) return landingPath;
+      final bool canCheckBiometrics = await localAuth.canCheckBiometrics();
+
+      if (canCheckBiometrics) {
         final bool result = await localAuth.authenticateWithBiometrics();
         if (result) {
           return landingPath;
         } else {
-          return landingPath;
+          SystemNavigator.pop();
         }
       }
+    } else if (name.isNotEmpty && image.isNotEmpty && isLogging) {
+      return landingPath;
     } else {
-      if (name.isNotEmpty && image.isNotEmpty && isLogging) {
-        return landingPath;
-      }
+      return null;
     }
-    return null;
   },
 );
