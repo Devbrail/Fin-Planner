@@ -9,6 +9,7 @@ class TotalBalanceWidget extends StatelessWidget {
     required this.title,
     required this.amount,
   }) : super(key: key);
+
   final String title;
   final double amount;
 

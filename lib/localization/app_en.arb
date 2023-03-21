@@ -671,5 +671,25 @@
     "noTransactionLabel": "Empty in transaction",
     "@noTransactionLabel": {
         "description": "Empty in transaction"
+    },
+    "enterSymbolLabel": "Enter symbol",
+    "@enterSymbolLabel": {
+        "description": "Enter symbol"
+    },
+    "leftSymbolLabel": "Symbol on left",
+    "@leftSymbolLabel": {
+        "description": "Symbol on left label"
+    },
+    "rightSymbolLabel": "Symbol on right",
+    "@rightSymbolLabel": {
+        "description": "Symbol on right label"
+    },
+    "customSymbolLabel": "Custom symbol",
+    "@customSymbolLabel": {
+        "description": "Custom symbol label"
+    },
+    "selectCurrencyLabel": "Select currency",
+    "@selectCurrencyLabel": {
+        "description": "Select currency label"
     }
 }

@@ -149,7 +149,7 @@ class MobileAccountCard extends StatelessWidget {
                         Text(context.loc.totalBalanceLabel),
                         Text(
                           cardNumber,
-                          style: GoogleFonts.jetBrainsMono(
+                          style: GoogleFonts.manrope(
                             textStyle:
                                 Theme.of(context).textTheme.headlineSmall,
                           ),

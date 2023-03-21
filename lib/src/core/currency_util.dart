@@ -1,17 +1,18 @@
-import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 
-import '../../main.dart';
+import '../app/routes.dart';
 import 'common.dart';
-import 'enum/box_types.dart';
 
 extension MappingOnDouble on double {
   String toCurrency({int decimalDigits = 2}) {
-    return NumberFormat.simpleCurrency(
-      locale: getIt
-          .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-          .get(userLanguageKey),
-      decimalDigits: decimalDigits,
-    ).format(this);
+    if ((settings.get(userCustomCurrencyKey) as String).isNotEmpty) {
+      return settings.get(userCustomCurrencyKey, defaultValue: '\$') +
+          NumberFormat("#,##0.00", "en_US").format(this);
+    } else {
+      return NumberFormat.simpleCurrency(
+        locale: settings.get(userLanguageKey),
+        decimalDigits: decimalDigits,
+      ).format(this);
+    }
   }
 }

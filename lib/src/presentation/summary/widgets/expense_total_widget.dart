@@ -35,26 +35,20 @@ class ExpenseTotalWidget extends StatelessWidget {
             child: AspectRatio(
               aspectRatio: 16 / 9,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: TotalBalanceWidget(
-                        title: context.loc.totalBalanceLabel,
-                        amount: totalExpenseBalance + totalAccountBalance,
-                      ),
+                    TotalBalanceWidget(
+                      title: context.loc.totalBalanceLabel,
+                      amount: totalExpenseBalance + totalAccountBalance,
                     ),
                     const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: ExpenseTotalForMonthWidget(
-                        outcome: thisMonthExpenses,
-                        income: thisMonthIncome,
-                      ),
+                    ExpenseTotalForMonthWidget(
+                      outcome: thisMonthExpenses,
+                      income: thisMonthIncome,
                     ),
                   ],
                 ),
