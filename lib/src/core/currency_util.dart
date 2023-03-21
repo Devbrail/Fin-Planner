@@ -5,7 +5,8 @@ import 'common.dart';
 
 extension MappingOnDouble on double {
   String toCurrency({int decimalDigits = 2}) {
-    if ((settings.get(userCustomCurrencyKey) as String).isNotEmpty) {
+    final String? customCurrency = settings.get(userCustomCurrencyKey);
+    if (customCurrency != null) {
       return settings.get(userCustomCurrencyKey, defaultValue: '\$') +
           NumberFormat("#,##0.00", "en_US").format(this);
     } else {
