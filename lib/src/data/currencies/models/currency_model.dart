@@ -49,4 +49,6 @@ List<CurrencyModel> getLocales() => [
       CurrencyModel("Zambian Kwacha", const Locale('en_ZM')),
       CurrencyModel("Serbian Dinar", const Locale('sr_Latn')),
       CurrencyModel("Kazakhstani Tenge", const Locale('kk')),
+      CurrencyModel("Argentine Peso", const Locale('es_AR')),
+      CurrencyModel("Israeli Shekel", const Locale('iw_IL')),
     ];
