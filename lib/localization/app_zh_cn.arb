@@ -1,0 +1,695 @@
+{
+    "appTitle": "Paisa",
+    "@appTitle": {
+        "description": "The app name"
+    },
+    "homeLabel": "主页",
+    "@homeLabel": {
+        "description": "Home label"
+    },
+    "dueDateLabel": "结束日期",
+    "@dueDateLabel": {
+        "description": "End date label"
+    },
+    "startDateLabel": "开始日期",
+    "@startDateLabel": {
+        "description": "Start date label"
+    },
+    "categoryLabel": "分类",
+    "@categoryLabel": {
+        "description": "Category label"
+    },
+    "enterDebtLabel": "输入负债金额",
+    "@enterDebtLabel": {
+        "description": "Enter debt amount label"
+    },
+    "enterCreditLabel": "输入信用额度",
+    "@enterCreditLabel": {
+        "description": "Enter credit amount label"
+    },
+    "addCategoryLabel": "添加分类",
+    "@addCategoryLabel": {
+        "description": "Add Category label"
+    },
+    "addExpenseLabel": "添加开支",
+    "@addExpenseLabel": {
+        "description": "Add Expense label"
+    },
+    "updateExpenseLabel": "变更开支",
+    "@updateExpenseLabel": {
+        "description": "Update Expense label"
+    },
+    "updateCardLabel": "变更银行卡",
+    "@updateCardLabel": {
+        "description": "Update card label"
+    },
+    "addAccountLabel": "添加账户",
+    "@addAccountLabel": {
+        "description": "Add Account label"
+    },
+    "categoriesLabel": "分类",
+    "@categoriesLabel": {
+        "description": "Categories label"
+    },
+    "accountsLabel": "账户",
+    "@accountsLabel": {
+        "description": "Accounts label"
+    },
+    "budgetLabel": "预算",
+    "@budgetLabel": {
+        "description": "Budget label"
+    },
+    "welcomeMessage": "欢迎回来!",
+    "@welcomeMessage": {
+        "description": "Budget label"
+    },
+    "settingsLabel": "设置",
+    "@settingsLabel": {
+        "description": "Settings label"
+    },
+    "localAppLabel": "锁定应用",
+    "@localAppLabel": {
+        "description": "Lock app label"
+    },
+    "totalLabel": "总计",
+    "@totalLabel": {
+        "description": "Total label"
+    },
+    "expenseLabel": "开支",
+    "@expenseLabel": {
+        "description": "Expense label"
+    },
+    "expensesLabel": "开支",
+    "@expensesLabel": {
+        "description": "Expenses label"
+    },
+    "depositLabel": "存款",
+    "@depositLabel": {
+        "description": "Deposit label"
+    },
+    "dailyLabel": "每日",
+    "@dailyLabel": {
+        "description": "Daily label"
+    },
+    "weeklyLabel": "每周",
+    "@weeklyLabel": {
+        "description": "Weekly label"
+    },
+    "monthlyLabel": "每月",
+    "@monthlyLabel": {
+        "description": "Monthly label"
+    },
+    "yearlyLabel": "每年",
+    "@yearlyLabel": {
+        "description": "Yearly label"
+    },
+    "allLabel": "总计",
+    "@allLabel": {
+        "description": "All label"
+    },
+    "transactionHistoryLabel": "交易历史",
+    "@transactionHistoryLabel": {
+        "description": "Transaction history label"
+    },
+    "selectCategoryIconLabel": "选择分类图标",
+    "@selectCategoryIconLabel": {
+        "description": "Select category icon label"
+    },
+    "descriptionLabel": "描述",
+    "@descriptionLabel": {
+        "description": "Description label"
+    },
+    "cashLabel": "先进",
+    "@cashLabel": {
+        "description": "Cash label"
+    },
+    "debitCardLabel": "借记卡",
+    "@debitCardLabel": {
+        "description": "Debit Card label"
+    },
+    "creditCardLabel": "信用卡",
+    "@creditCardLabel": {
+        "description": "Credit Card label"
+    },
+    "cardHolderLabel": "持卡人姓名",
+    "@cardHolderLabel": {
+        "description": "Cardholder name label"
+    },
+    "accountNameLabel": "账户名",
+    "@accountNameLabel": {
+        "description": "Account label"
+    },
+    "lastFourDigitLabel": "最后4位数字",
+    "@lastFourDigitLabel": {
+        "description": "Last four digit number label"
+    },
+    "addCardLabel": "添加银行卡",
+    "@addCardLabel": {
+        "description": "Add card label"
+    },
+    "addedCardLabel": "账户已添加",
+    "@addedCardLabel": {
+        "description": "Account added label"
+    },
+    "updatedCardLabel": "账户已更新",
+    "@updatedCardLabel": {
+        "description": "Account updated label"
+    },
+    "deletedCardLabel": "账户已删除",
+    "@deletedCardLabel": {
+        "description": "Account deleted label"
+    },
+    "successAddCategoryLabel": "分类添加成功",
+    "@successAddCategoryLabel": {
+        "description": "Category added successful label"
+    },
+    "validNameLabel": "输入有效名称",
+    "@validNameLabel": {
+        "description": "Enter valid name label"
+    },
+    "profileLabel": "资料",
+    "@profileLabel": {
+        "description": "Profile label"
+    },
+    "themeLabel": "主题",
+    "@themeLabel": {
+        "description": "Theme label"
+    },
+    "reminderLabel": "提醒",
+    "@reminderLabel": {
+        "description": "Reminder label"
+    },
+    "reminderDescriptionLabel": "显示计划通知以增加支出",
+    "@reminderDescriptionLabel": {
+        "description": "Show schedule notifications to add expense label"
+    },
+    "chooseThemeLabel": "选择主题",
+    "@chooseThemeLabel": {
+        "description": "Choose theme label"
+    },
+    "updateLabel": "更新",
+    "@updateLabel": {
+        "description": "Update label"
+    },
+    "userNameLabel": "用户名",
+    "@userNameLabel": {
+        "description": "User name label"
+    },
+    "selectedCountryLabel": "选择货币",
+    "@selectedCountryLabel": {
+        "description": "Select currency label"
+    },
+    "errorAuthLabel": "验证失败",
+    "@errorAuthLabel": {
+        "description": "Error authentication label"
+    },
+    "errorNoCardsLabel": "银行卡为空",
+    "@errorNoCardsLabel": {
+        "description": "No cards label"
+    },
+    "errorNoCardsDescriptionLabel": "添加支出，以在此显示",
+    "@errorNoCardsDescriptionLabel": {
+        "description": "No cards description label"
+    },
+    "errorNoCatagoriesLabel": "分类为空",
+    "@errorNoCatagoriesLabel": {
+        "description": "No categories label"
+    },
+    "errorNoCategoriesDescriptionLabel": "添加分类，以在此显示",
+    "@errorNoCategoriesDescriptionLabel": {
+        "description": "No category description label"
+    },
+    "errorNoBudgetLabel": "预算概览为空",
+    "@errorNoBudgetLabel": {
+        "description": "Empty in budget overview label"
+    },
+    "errorNoBudgetDescriptionLabel": "添加预算，以在此显示",
+    "@errorNoBudgetDescriptionLabel": {
+        "description": "No budget overview description label"
+    },
+    "cardholderLabel": "持卡人",
+    "@cardholderLabel": {
+        "description": "CardHolder label"
+    },
+    "expenseAddedSuccessfulLabel": "支出已添加",
+    "@expenseAddedSuccessfulLabel": {
+        "description": "Expense added label"
+    },
+    "expenseUpdateSuccessfulLabel": "支出已更新",
+    "@expenseUpdateSuccessfulLabel": {
+        "description": "Expense updated label"
+    },
+    "expenseDeletedSuccessfulLabel": "支出已删除",
+    "@expenseDeletedSuccessfulLabel": {
+        "description": "Expense deleted label"
+    },
+    "expenseNameLabel": "支出名称",
+    "@expenseNameLabel": {
+        "description": "Expense name label"
+    },
+    "amountLabel": "总计",
+    "@amountLabel": {
+        "description": "Amount label"
+    },
+    "initialAmountLabel": "初始金额",
+    "@initialAmountLabel": {
+        "description": "Initial amount label"
+    },
+    "validAmountLabel": "输入有效金额",
+    "@validAmountLabel": {
+        "description": "Enter valid amount label"
+    },
+    "dateLabel": "日期",
+    "@dateLabel": {
+        "description": "date label"
+    },
+    "validDateLabel": "选择日期",
+    "@validDateLabel": {
+        "description": "Select date label"
+    },
+    "addLabel": "添加",
+    "@addLabel": {
+        "description": "add label"
+    },
+    "selectAccountLabel": "选择账户",
+    "@selectAccountLabel": {
+        "description": "Select account label"
+    },
+    "selectCategoryLabel": "选择分类",
+    "@selectCategoryLabel": {
+        "description": "Select category label"
+    },
+    "socialLinksLabel": "社交账户链接",
+    "@socialLinksLabel": {
+        "description": "Social links label"
+    },
+    "telegramLabel": "Telegram",
+    "@telegramLabel": {
+        "description": "Telegram label"
+    },
+    "telegramGroupLabel": "关注动态与和发布错误和功能请求的Telegram群组",
+    "@telegramGroupLabel": {
+        "description": "A group to follow and post bugs and feature requests label"
+    },
+    "budgetOverViewLabel": "预算概览",
+    "@budgetOverViewLabel": {
+        "description": "Budget overview label"
+    },
+    "noResultFoundLabel": "无结果",
+    "@noResultFoundLabel": {
+        "description": "No result found label"
+    },
+    "noCategoryLabel": "未选择分类",
+    "@noCategoryLabel": {
+        "description": "No category label"
+    },
+    "noAccountAvailableLabel": "未选择账户",
+    "@noAccountAvailableLabel": {
+        "description": "No account label"
+    },
+    "privacyPolicyLabel": "隐私与政策",
+    "@privacyPolicyLabel": {
+        "description": "Privacy & Policy label"
+    },
+    "githubLabel": "Github",
+    "@githubLabel": {
+        "description": "Github label"
+    },
+    "versionLabel": "版本",
+    "@versionLabel": {
+        "description": "Github label"
+    },
+    "versionNumber": "v{version}",
+    "@versionNumber": {
+        "description": "Version number label",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "deleteAccountLabel": "删除帐户，将会删除与此帐户相关的所有收支 ",
+    "@deleteAccountLabel": {
+        "description": "Delete account label"
+    },
+    "deleteCategoryLabel": "删除分类，将会删除与此分类相关的所有收支 ",
+    "@deleteCategoryLabel": {
+        "description": "Delete category label"
+    },
+    "deleteExpenseLabel": "支出将从账户中永久移除",
+    "@deleteExpenseLabel": {
+        "description": "Version number label"
+    },
+    "dialogDeleteTitleLabel": "永久删除?",
+    "@dialogDeleteTitleLabel": {
+        "description": "Permanently delete label"
+    },
+    "updatedCategoryLabel": "分类已更新",
+    "@updatedCategoryLabel": {
+        "description": "Category updated label"
+    },
+    "doneLabel": "完成",
+    "@doneLabel": {
+        "description": "Done label"
+    },
+    "cancelLabel": "取消",
+    "@cancelLabel": {
+        "description": "Cancel label"
+    },
+    "customLabel": "自定义",
+    "@customLabel": {
+        "description": "Custom label"
+    },
+    "accentColorLabel": "强调色",
+    "@accentColorLabel": {
+        "description": "Accent color label"
+    },
+    "dynamicColorLabel": "动态",
+    "@dynamicColorLabel": {
+        "description": "Dynamic label"
+    },
+    "pickColorLabel": "取色",
+    "@pickColorLabel": {
+        "description": "Pick color label"
+    },
+    "pickColorDescLabel": "为分类选取一种颜色",
+    "@pickColorDescLabel": {
+        "description": "Pick color label"
+    },
+    "colorsLabel": "颜色",
+    "@colorsLabel": {
+        "description": "Colors label"
+    },
+    "othersLabel": "其他",
+    "@othersLabel": {
+        "description": "Others label"
+    },
+    "githubTextLabel": "在Github上Fork该项目",
+    "@githubTextLabel": {
+        "description": "GitHub text label"
+    },
+    "madeWithLoveInIndiaLabel": "在印度开发了本项目",
+    "@madeWithLoveInIndiaLabel": {
+        "description": "Made with ♥ in India label"
+    },
+    "updateCategoryLabel": "更新分类",
+    "@updateCategoryLabel": {
+        "description": "Made with ♥ in India label"
+    },
+    "accountInfoLabel": "信息",
+    "@accountInfoLabel": {
+        "description": "information label"
+    },
+    "accountInfoDescLabel": "您输入的帐户详细信息不会与包括开发者在内的任何人共享，仅用于帐户详细信息的显示，您也可能输入非真实信息",
+    "@accountInfoDescLabel": {
+        "description": "information label"
+    },
+    "nextLabel": "下一步",
+    "@nextLabel": {
+        "description": "Next label"
+    },
+    "imageLabel": "头像",
+    "@imageLabel": {
+        "description": "Image label"
+    },
+    "welcomeLabel": "你好，欢迎",
+    "@welcomeLabel": {
+        "description": "Welcome label"
+    },
+    "welcomeDescLabel": "我们该如何称呼你",
+    "@welcomeDescLabel": {
+        "description": "Welcome desc label"
+    },
+    "nameLabel": "姓名",
+    "@nameLabel": {
+        "description": "Name label"
+    },
+    "enterNameLabel": "输入姓名",
+    "@enterNameLabel": {
+        "description": "Enter name label"
+    },
+    "imageDescLabel": "让我们为你设置一个头像",
+    "@imageDescLabel": {
+        "description": "Image desc label"
+    },
+    "backLabel": "上一步",
+    "@backLabel": {
+        "description": "Back label"
+    },
+    "setBudgetLabel": "为分类设置预算",
+    "@setBudgetLabel": {
+        "description": "Set budget label"
+    },
+    "incomeLabel": "收入",
+    "@incomeLabel": {
+        "description": "income label"
+    },
+    "outcomeLabel": "支出",
+    "@outcomeLabel": {
+        "description": "outcome label"
+    },
+    "thisMonthLabel": "本月",
+    "@thisMonthLabel": {
+        "description": "This month label"
+    },
+    "totalBalanceLabel": "总余额",
+    "@totalBalanceLabel": {
+        "description": "Total balance label"
+    },
+    "summaryLabel": "概览",
+    "@summaryLabel": {
+        "description": "Summary label"
+    },
+    "acceptLabel": "接受",
+    "@acceptLabel": {
+        "description": "Accept label"
+    },
+    "okLabel": "确定",
+    "@okLabel": {
+        "description": "Ok label"
+    },
+    "searchMessageLabel": "搜索你感兴趣的!",
+    "@searchMessageLabel": {
+        "description": "search message label"
+    },
+    "emptySearchMessageLabel": "没有找到相关信息!",
+    "@emptySearchMessageLabel": {
+        "description": "empty search message label"
+    },
+    "emptyExpensesMessage": "添加一些支出，它们会显示在这里",
+    "@emptyExpensesMessage": {
+        "description": "empty search message label"
+    },
+    "balanceLabel": "余额",
+    "@balanceLabel": {
+        "description": "Balance label"
+    },
+    "selectIconLabel": "选择图标",
+    "@selectIconLabel": {
+        "description": "Balance label"
+    },
+    "selectIconDescLabel": "点击来选择图标",
+    "@selectIconDescLabel": {
+        "description": "Balance label"
+    },
+    "incomeNameLabel": "收入名称",
+    "@incomeNameLabel": {
+        "description": "income name label"
+    },
+    "currencySignLabel": "货币种类",
+    "@currencySignLabel": {
+        "description": "Currency sign label"
+    },
+    "incomeAddedSuccessfulLabel": "收入已添加",
+    "@incomeAddedSuccessfulLabel": {
+        "description": "Expense added label"
+    },
+    "incomeUpdateSuccessfulLabel": "收入已更新",
+    "@incomeUpdateSuccessfulLabel": {
+        "description": "Expense updated label"
+    },
+    "incomeDeletedSuccessfulLabel": "收入已删除",
+    "@incomeDeletedSuccessfulLabel": {
+        "description": "Expense deleted label"
+    },
+    "expenseByCategoryLabel": "按类别分列的支出",
+    "@expenseByCategoryLabel": {
+        "description": "Expense by category label"
+    },
+    "backupAndRestoreLabel": "备份与恢复",
+    "@backupAndRestoreLabel": {
+        "description": "Backup and Restore label"
+    },
+    "backupAndRestoreDescLabel": "备份你的支出、账户与分类",
+    "@backupAndRestoreDescLabel": {
+        "description": "Backup and restore your data label"
+    },
+    "createLabel": "创建",
+    "@createLabel": {
+        "description": "create label"
+    },
+    "restoreLabel": "恢复",
+    "@restoreLabel": {
+        "description": "Restore label"
+    },
+    "creatingBackupLabel": "创建备份",
+    "@creatingBackupLabel": {
+        "description": "Creating backup label"
+    },
+    "restoringBackupLabel": "从备份恢复",
+    "@restoringBackupLabel": {
+        "description": "Creating backup label"
+    },
+    "saveAsCSVLabel": "保存为CSV",
+    "@saveAsCSVLabel": {
+        "description": "Save as CSV label"
+    },
+    "saveAsCSVDescLabel": "将数据导出为CSV文件格式",
+    "@saveAsCSVDescLabel": {
+        "description": "Save as CSV label"
+    },
+    "transferLabel": "传输",
+    "@transferLabel": {
+        "description": "Transfer label"
+    },
+    "appRateLabel": "为本应用评分",
+    "@appRateLabel": {
+        "description": "Rate label"
+    },
+    "appRateDescLabel": "喜欢本应用? 请在Google Play上为我们评分",
+    "@appRateDescLabel": {
+        "description": "Rate label"
+    },
+    "raiseABugOrRequestLabel": "反馈Bug",
+    "@raiseABugOrRequestLabel": {
+        "description": "Raise a bug or request label"
+    },
+    "raiseABugOrRequestDescLabel": "反馈Bug或请求添加功能",
+    "@raiseABugOrRequestDescLabel": {
+        "description": "Found a bug or need a feature to implement ask away label"
+    },
+    "transferNameLabel": "传输名称",
+    "@transferNameLabel": {
+        "description": "Transfer name label"
+    },
+    "debtsLabel": "债务",
+    "@debtsLabel": {
+        "description": "Debts label"
+    },
+    "debtLabel": "债务",
+    "@debtLabel": {
+        "description": "Debts label"
+    },
+    "creditLabel": "信用卡",
+    "@creditLabel": {
+        "description": "Credit label"
+    },
+    "enterCategoryLabel": "输入分类",
+    "@enterCategoryLabel": {
+        "description": "Enter category label"
+    },
+    "addDebtLabel": "添加债务",
+    "@addDebtLabel": {
+        "description": "Add debt label"
+    },
+    "addCreditLabel": "添加信用卡",
+    "@addCreditLabel": {
+        "description": "Add credit label"
+    },
+    "enterBudgetLabel": "输入预算",
+    "@enterBudgetLabel": {
+        "description": "Enter budget label"
+    },
+    "enterDescriptionLabel": "输入描述",
+    "@enterDescriptionLabel": {
+        "description": "Enter description label"
+    },
+    "validDescriptionLabel": "输入有效描述",
+    "@validDescriptionLabel": {
+        "description": "Enter valid description label"
+    },
+    "payDebtLabel": "偿还债务",
+    "@payDebtLabel": {
+        "description": "Pay debt label"
+    },
+    "payCreditLabel": "信用卡还款",
+    "@payCreditLabel": {
+        "description": "Pay credit label"
+    },
+    "enterAmountLabel": "输入金额",
+    "@enterAmountLabel": {
+        "description": "Enter amount label"
+    },
+    "emptyDebtsLabel": "债务为空",
+    "@emptyDebtsLabel": {
+        "description": "Empty in debts label"
+    },
+    "emptyDebtsDescLabel": "没有负债可显示 ",
+    "@emptyDebtsDescLabel": {
+        "description": "Looks like you have no debts label"
+    },
+    "emptyCreditLabel": "信用卡为空",
+    "@emptyCreditLabel": {
+        "description": "Empty in credits label"
+    },
+    "emptyCreditDescLabel": "没有信用卡可显示 ",
+    "@emptyCreditDescLabel": {
+        "description": "Looks like you have no credits label"
+    },
+    "enterInitialAmountLabel": "输入初始金额",
+    "@enterInitialAmountLabel": {
+        "description": "Enter initial amount label"
+    },
+    "enterNumberOptionalLabel": "输入卡号后4位 (可选)",
+    "@enterNumberOptionalLabel": {
+        "description": "Optional number"
+    },
+    "enterAccountNameLabel": "输入账户名称",
+    "@enterAccountNameLabel": {
+        "description": "Enter account name label"
+    },
+    "enterCardHolderNameLabel": "输入持卡人姓名",
+    "@enterCardHolderNameLabel": {
+        "description": "Enter account name label"
+    },
+    "searchLabel": "搜索",
+    "@searchLabel": {
+        "description": "Search label"
+    },
+    "addNewLabel": "添加",
+    "@addNewLabel": {
+        "description": "Add new label"
+    },
+    "deleteLabel": "删除",
+    "@deleteLabel": {
+        "description": "Delete label"
+    },
+    "appBarSearchLabel": "搜索支出、账户、类别",
+    "@appBarSearchLabel": {
+        "description": "Delete label"
+    },
+    "noTransactionLabel": "没有交易可显示",
+    "@noTransactionLabel": {
+        "description": "Empty in transaction"
+    },
+    "enterSymbolLabel": "输入符号",
+    "@enterSymbolLabel": {
+        "description": "Enter symbol"
+    },
+    "leftSymbolLabel": "符号居左",
+    "@leftSymbolLabel": {
+        "description": "Symbol on left label"
+    },
+    "rightSymbolLabel": "符号居右",
+    "@rightSymbolLabel": {
+        "description": "Symbol on right label"
+    },
+    "customSymbolLabel": "自定义符号",
+    "@customSymbolLabel": {
+        "description": "Custom symbol label"
+    },
+    "selectCurrencyLabel": "选择货币",
+    "@selectCurrencyLabel": {
+        "description": "Select currency label"
+    }
+}
