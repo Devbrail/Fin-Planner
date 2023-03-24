@@ -20,11 +20,11 @@ jobs:
     - name: Run build_runner
       run: flutter pub run build_runner build --delete-conflicting-outputs
     - name: Run pub get
-    - run: flutter pub get
+      run: flutter pub get
     - name: Run format code
-    - run: flutter format --set-exit-if-changed .
+      run: flutter format --set-exit-if-changed .
     - name: Run Flutter clean
-    - run: flutter clean
+      run: flutter clean
     - name: Run analyzer
       run: flutter analyze
     - name: Run tests
