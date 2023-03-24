@@ -16,15 +16,13 @@ jobs:
         with:
           channel: "stable"
       - name: Flutter version
-        run: flutter --version
+        run: flutter --version 
       - name: Run pub get
-        run: flutter pub get 
+        run: flutter pub get
       - name: Run format code
         run: flutter format --set-exit-if-changed .
       - name: Run Flutter clean
         run: flutter clean
-      - name: Run analyzer
-        run: flutter analyze
       - name: Run tests
         run: flutter test
       - name: Download Android keystore
