@@ -77,7 +77,7 @@ class DebtItemWidget extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 16),
                           child: Text(
-                            '${debt.expiryDateTime.daysDifference} Days Left',
+                            '${debt.expiryDateTime.daysDifference.isNegative ? '0' : debt.expiryDateTime.daysDifference}  Days Left',
                           ),
                         ),
                       ),
