@@ -54,5 +54,4 @@ List<CurrencyModel> getLocales() => [
       CurrencyModel("Bulgarian Lev", const Locale('bg')),
       CurrencyModel("Danish Krone", const Locale('da')),
       CurrencyModel("Belarusian ruble", const Locale('be')),
-      CurrencyModel("Romanian leu", const Locale('ro')),
     ];
