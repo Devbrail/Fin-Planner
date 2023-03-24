@@ -20,9 +20,10 @@ class UserProfilePage extends StatelessWidget {
 
   final TextEditingController controller;
 
-  void _updateDetails(BuildContext context) => settings
-      .put(userNameKey, controller.text)
-      .then((value) => Navigator.pop(context));
+  void _updateDetails(BuildContext context) {
+    String name = controller.text;
+    settings.put(userNameKey, name).then((value) => Navigator.pop(context));
+  }
 
   void _pickImage(BuildContext context) {
     final ImagePicker picker = ImagePicker();
@@ -75,6 +76,7 @@ class UserProfilePage extends StatelessWidget {
                       controller: controller,
                       hintText: 'Enter name',
                       keyboardType: TextInputType.name,
+                      onChanged: (value) {},
                     ),
                   ),
                 ),

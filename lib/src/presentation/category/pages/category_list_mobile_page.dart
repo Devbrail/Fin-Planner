@@ -18,12 +18,7 @@ class CategoryListMobileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListView.builder(
-        padding: const EdgeInsets.only(
-          bottom: 124,
-          left: 8,
-          right: 8,
-          top: 8,
-        ),
+        padding: const EdgeInsets.only(bottom: 124),
         itemCount: categories.length,
         shrinkWrap: true,
         itemBuilder: (_, index) => CategoryItemMobileWidget(
