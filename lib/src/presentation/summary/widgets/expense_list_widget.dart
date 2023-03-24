@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
+import '../../../../main.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
@@ -17,6 +17,7 @@ class ExpenseListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SummaryController summaryController = getIt.get();
     return ListView.separated(
       shrinkWrap: true,
       padding: EdgeInsets.zero,
@@ -24,10 +25,10 @@ class ExpenseListWidget extends StatelessWidget {
       itemCount: expenses.length,
       itemBuilder: (_, index) {
         final Expense expense = expenses[index];
-        final Account? account = Provider.of<SummaryController>(context)
-            .getAccount(expenses[index].accountId);
-        final Category? category = Provider.of<SummaryController>(context)
-            .getCategory(expenses[index].categoryId);
+        final Account? account =
+            summaryController.getAccount(expenses[index].accountId);
+        final Category? category =
+            summaryController.getCategory(expenses[index].categoryId);
         if (account == null || category == null) return const SizedBox.shrink();
         return ExpenseItemWidget(
           expense: expense,

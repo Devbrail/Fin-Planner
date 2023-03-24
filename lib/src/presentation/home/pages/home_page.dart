@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/src/presentation/summary/controller/settings_controller.dart';
-import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
+import '../../summary/controller/settings_controller.dart';
 import '../bloc/home_bloc.dart';
 import 'home_desktop_widget.dart';
 import 'home_mobile_page.dart';
@@ -110,15 +109,8 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => homeBloc,
-        ),
-        Provider<SettingsController>(
-          create: (context) => settingsController,
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => homeBloc,
       child: WillPopScope(
         onWillPop: () async {
           if (homeBloc.currentPage == PageType.home) {
