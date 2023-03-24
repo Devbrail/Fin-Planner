@@ -28,7 +28,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   }) : super(ExpenseInitial()) {
     on<ExpenseEvent>((event, emit) {});
     on<AddOrUpdateExpenseEvent>(_addExpense);
-    on<ClearExpenseEvent>(_clearExpense);
+    on<ClearExpenseEvent>(_deleteExpense);
     on<ChangeExpenseEvent>(_changeExpense);
     on<FetchExpenseFromIdEvent>(_fetchExpenseFromId);
     on<ChangeCategoryEvent>(_changeCategory);
@@ -69,6 +69,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       currentExpense = expense;
       emit(ExpenseSuccessState(expense));
       add(ChangeExpenseEvent(transactionType));
+    } else {
+      emit(const ExpenseErrorState('Expense not found!'));
     }
   }
 
@@ -125,7 +127,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
   }
 
-  Future<void> _clearExpense(
+  Future<void> _deleteExpense(
     ClearExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) async {
@@ -133,7 +135,10 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     emit(ExpenseDeletedState());
   }
 
-  void _changeExpense(ChangeExpenseEvent event, Emitter<ExpenseState> emit) {
+  void _changeExpense(
+    ChangeExpenseEvent event,
+    Emitter<ExpenseState> emit,
+  ) {
     emit(ChangeExpenseState(event.transactionType));
   }
 

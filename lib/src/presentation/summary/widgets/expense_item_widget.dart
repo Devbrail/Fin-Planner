@@ -30,6 +30,7 @@ class ExpenseItemWidget extends StatelessWidget {
             params: <String, String>{'eid': expense.superId.toString()},
           ),
           child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12),
             title: Text(expense.name),
             subtitle: Text(
               '${account.bankName} • ${expense.time.shortDayString}',

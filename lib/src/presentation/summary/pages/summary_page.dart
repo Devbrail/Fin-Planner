@@ -29,6 +29,7 @@ class SummaryPage extends StatelessWidget {
         valueListenable: getIt.get<Box<ExpenseModel>>().listenable(keys: [
           BoxType.accounts.name,
           BoxType.category.name,
+          BoxType.expense.name,
         ]),
         builder: (_, value, child) {
           final expenses = value.values.toEntities();

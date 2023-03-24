@@ -30,7 +30,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
             fontPackage: 'material_design_icons_flutter',
           ),
           size: 28,
-          color: Theme.of(context).colorScheme.onSurfaceVariant,
+          color: Color(category.color ?? Colors.amber.shade100.value),
         ),
         title: Text(
           category.name,

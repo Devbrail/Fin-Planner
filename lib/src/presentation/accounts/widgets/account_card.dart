@@ -150,8 +150,12 @@ class MobileAccountCard extends StatelessWidget {
                         Text(
                           cardNumber,
                           style: GoogleFonts.manrope(
-                            textStyle:
-                                Theme.of(context).textTheme.headlineSmall,
+                            textStyle: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                         ),
                       ],
@@ -184,7 +188,12 @@ class MobileAccountCard extends StatelessWidget {
                           Text(
                             income,
                             style: GoogleFonts.manrope(
-                              textStyle: Theme.of(context).textTheme.titleLarge,
+                              textStyle: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
                           ),
                         ],

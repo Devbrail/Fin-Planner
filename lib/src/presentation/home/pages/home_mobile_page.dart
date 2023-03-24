@@ -63,6 +63,11 @@ class HomeMobilePage extends StatelessWidget {
                 selectedIcon: const Icon(Icons.credit_card),
               ),
               NavigationDestination(
+                label: context.loc.categoriesLabel,
+                icon: const Icon(Icons.category_outlined),
+                selectedIcon: const Icon(Icons.category),
+              ),
+              NavigationDestination(
                 label: context.loc.debtsLabel,
                 icon: const Icon(MdiIcons.accountCash),
                 selectedIcon: const Icon(MdiIcons.accountCashOutline),
