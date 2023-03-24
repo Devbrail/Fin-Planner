@@ -34,4 +34,25 @@ class CategoryRepositoryImpl extends CategoryRepository {
   @override
   CategoryModel? fetchCategoryFromId(int categoryId) =>
       dataSources.fetchCategoryFromId(categoryId);
+
+  @override
+  Future<void> updateCategory({
+    required int key,
+    required String name,
+    required int icon,
+    required int color,
+    String? desc,
+    double? budget = -1,
+    bool isBudget = false,
+  }) {
+    return dataSources.updateCategory(CategoryModel(
+      description: desc ?? '',
+      name: name,
+      icon: icon,
+      budget: budget,
+      isBudget: isBudget,
+      color: color,
+      superId: key,
+    ));
+  }
 }

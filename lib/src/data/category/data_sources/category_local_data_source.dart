@@ -6,4 +6,5 @@ abstract class LocalCategoryManagerDataSource {
   Future<List<CategoryModel>> categories();
   CategoryModel? fetchCategoryFromId(int categoryId);
   Iterable<CategoryModel> exportData();
+  Future<void> updateCategory(CategoryModel categoryModel);
 }

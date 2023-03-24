@@ -12,9 +12,9 @@ class AddCategoryUseCase {
     required String name,
     required String? desc,
     required int icon,
-    double? budget = -1,
     required bool isBudget,
     required int color,
+    double? budget = -1,
   }) async =>
       categoryRepository.addCategory(
         name: name,

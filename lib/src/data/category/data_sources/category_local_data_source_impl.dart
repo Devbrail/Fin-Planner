@@ -37,4 +37,9 @@ class LocalCategoryManagerDataSourceImpl
 
   @override
   Iterable<CategoryModel> exportData() => categoryBox.values;
+
+  @override
+  Future<void> updateCategory(CategoryModel categoryModel) {
+    return categoryBox.put(categoryModel.superId!, categoryModel);
+  }
 }

@@ -11,4 +11,13 @@ abstract class CategoryRepository {
   });
   Future<void> deleteCategory(int key);
   CategoryModel? fetchCategoryFromId(int categoryId);
+  Future<void> updateCategory({
+    required int key,
+    required String name,
+    required int icon,
+    required int color,
+    String? desc,
+    double? budget = -1,
+    bool isBudget = false,
+  });
 }

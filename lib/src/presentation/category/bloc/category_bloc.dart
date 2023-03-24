@@ -20,6 +20,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     required this.addCategoryUseCase,
     required this.deleteCategoryUseCase,
     required this.deleteExpensesFromCategoryIdUseCase,
+    required this.updateCategoryUseCase,
   }) : super(AddCategoryInitial()) {
     on<FetchCategoryFromIdEvent>(_fetchCategoryFromId);
     on<CategoryEvent>((event, emit) {});
@@ -34,12 +35,13 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final AddCategoryUseCase addCategoryUseCase;
   final DeleteCategoryUseCase deleteCategoryUseCase;
   final DeleteExpensesFromCategoryIdUseCase deleteExpensesFromCategoryIdUseCase;
+  final UpdateCategoryUseCase updateCategoryUseCase;
 
   int? selectedIcon;
   String? categoryTitle;
   String? categoryDesc;
   double? categoryBudget;
-  CategoryModel? currentCategory;
+  Category? currentCategory;
   bool isBudgetSet = false;
   int? selectedColor;
 
@@ -50,7 +52,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final int? categoryId = int.tryParse(event.categoryId ?? '');
     if (categoryId == null) return;
 
-    final CategoryModel? category = getCategoryUseCase(categoryId);
+    final Category? category = getCategoryUseCase(categoryId);
     if (category != null) {
       categoryTitle = category.name;
       categoryDesc = category.description;
@@ -58,7 +60,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       selectedIcon = category.icon;
       currentCategory = category;
       isBudgetSet = category.isBudget;
-      selectedColor = category.color;
+      selectedColor = category.color ?? Colors.red.shade100.value;
       emit(CategorySuccessState(category));
     }
   }
@@ -93,17 +95,17 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         color: color,
       );
     } else {
-      if (currentCategory != null) {
-        currentCategory!
-          ..budget = budget ?? 0
-          ..description = description ?? ''
-          ..icon = icon
-          ..isBudget = setBudget
-          ..color = color
-          ..name = title;
+      if (currentCategory == null) return;
 
-        await currentCategory!.save();
-      }
+      currentCategory!
+        ..budget = budget ?? 0
+        ..description = description ?? ''
+        ..icon = icon
+        ..isBudget = setBudget
+        ..color = color
+        ..name = title;
+
+      await updateCategoryUseCase(currentCategory!);
     }
     emit(CategoryAddedState(isCategoryAddedOrUpdate: event.isAddOrUpdate));
   }
