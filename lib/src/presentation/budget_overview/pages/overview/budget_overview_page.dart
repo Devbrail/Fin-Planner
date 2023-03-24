@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../../../../domain/expense/entities/expense.dart';
+import 'package:paisa/src/presentation/budget_overview/pages/overview/budget_overview_page_v2.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../../data/expense/model/expense_model.dart';
+import '../../../../domain/expense/entities/expense.dart';
 import '../../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../../widgets/paisa_empty_widget.dart';
 import '../../widgets/budget_section_widget.dart';
@@ -28,8 +29,7 @@ class BudgetOverViewPage extends StatelessWidget {
     return ValueListenableBuilder<Box<ExpenseModel>>(
       valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
       builder: (context, value, _) {
-        List<Expense> expenses =
-            value.budgetOverView.map((e) => e.toEntity()).toList();
+        final List<Expense> expenses = value.budgetOverView.toEntities();
         if (expenses.isEmpty) {
           return EmptyWidget(
             icon: Icons.paid,
@@ -37,6 +37,7 @@ class BudgetOverViewPage extends StatelessWidget {
             description: context.loc.errorNoBudgetDescriptionLabel,
           );
         }
+        return BudgetOverviewPageV2(expenses: expenses);
         final child = FilterDateRangeWidget(
           dateTimeRangeNotifier: dateTimeRangeNotifier,
           expenses: expenses,

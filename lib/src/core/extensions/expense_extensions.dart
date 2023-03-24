@@ -91,6 +91,10 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
           .entries
           .toList();
 
+  Map<String, List<Expense>> groupByTimeList(FilterBudget filterBudget) =>
+      groupBy(
+          this, (ExpenseModel element) => element.time.formatted(filterBudget));
+
   List<Expense> toEntities() =>
       map((expenseModel) => expenseModel.toEntity()).toList();
 }

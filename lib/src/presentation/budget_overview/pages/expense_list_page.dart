@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../domain/expense/entities/expense.dart';
 
 import '../../../core/common.dart';
 import '../../../core/extensions/account_extension.dart';
@@ -8,6 +7,7 @@ import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/data_sources/local_expense_data_manager.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
+import '../../../domain/expense/entities/expense.dart';
 import '../../summary/widgets/expense_item_widget.dart';
 
 class ExpenseListPage extends StatelessWidget {
