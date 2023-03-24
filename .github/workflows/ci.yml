@@ -17,10 +17,10 @@ jobs:
           channel: "stable"
       - name: Flutter version
         run: flutter --version
-      - name: Run build_runner
-        run: flutter pub run build_runner build --delete-conflicting-outputs
       - name: Run pub get
         run: flutter pub get
+      - name: Run build_runner
+        run: flutter pub run build_runner build --delete-conflicting-outputs
       - name: Run format code
         run: flutter format --set-exit-if-changed .
       - name: Run Flutter clean
