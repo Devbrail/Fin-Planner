@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
-import '../../../core/enum/filter_budget.dart';
 import '../../accounts/pages/accounts_page.dart';
 import '../../budget_overview/pages/overview/budget_overview_page.dart';
 import '../../category/pages/category_list_page.dart';
@@ -20,9 +19,7 @@ class ContentWidget extends StatelessWidget {
   final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier;
 
   late final Map<PageType, Widget> pages = {
-    PageType.home: SummaryPage(
-      valueNotifier: ValueNotifier<FilterBudget>(FilterBudget.daily),
-    ),
+    PageType.home: const SummaryPage(),
     PageType.accounts: const AccountsPage(),
     PageType.category: const CategoryListPage(),
     PageType.budgetOverview: BudgetOverViewPage(

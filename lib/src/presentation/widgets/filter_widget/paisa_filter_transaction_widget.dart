@@ -7,8 +7,8 @@ import '../../../core/enum/filter_budget.dart';
 import '../../home/bloc/home_bloc.dart';
 import 'filter_budget_widget.dart';
 
-final ValueNotifier<FilterBudget> valueNotifier =
-    ValueNotifier<FilterBudget>(FilterBudget.daily);
+final ValueNotifier<FilterExpense> valueNotifier =
+    ValueNotifier<FilterExpense>(FilterExpense.daily);
 
 class PaisaFilterTransactionWidget extends StatelessWidget {
   const PaisaFilterTransactionWidget({super.key});

@@ -27,7 +27,7 @@ class _BudgetOverviewPageV2State extends State<BudgetOverviewPageV2> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<FilterBudget>(
+    return ValueListenableBuilder<FilterExpense>(
       valueListenable: valueNotifier,
       builder: (context, value, child) {
         final result = widget.expenses.groupByTime(value);

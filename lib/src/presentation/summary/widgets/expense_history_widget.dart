@@ -13,7 +13,7 @@ class ExpenseHistory extends StatelessWidget {
     required this.expenses,
   });
 
-  final ValueNotifier<FilterBudget> valueNotifier;
+  final ValueNotifier<FilterExpense> valueNotifier;
   final List<Expense> expenses;
 
   @override
@@ -36,7 +36,7 @@ class ExpenseHistory extends StatelessWidget {
         ),
       );
     } else {
-      return ValueListenableBuilder<FilterBudget>(
+      return ValueListenableBuilder<FilterExpense>(
         valueListenable: valueNotifier,
         builder: (_, value, __) {
           final maps = groupBy(

@@ -85,13 +85,13 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
           .fold<double>(0, (previousValue, element) => previousValue + element);
 
   List<MapEntry<String, List<Expense>>> groupByTime(
-          FilterBudget filterBudget) =>
+          FilterExpense filterBudget) =>
       groupBy(this,
               (ExpenseModel element) => element.time.formatted(filterBudget))
           .entries
           .toList();
 
-  Map<String, List<Expense>> groupByTimeList(FilterBudget filterBudget) =>
+  Map<String, List<Expense>> groupByTimeList(FilterExpense filterBudget) =>
       groupBy(
           this, (ExpenseModel element) => element.time.formatted(filterBudget));
 

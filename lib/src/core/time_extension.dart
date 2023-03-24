@@ -53,17 +53,17 @@ extension DateUtils on DateTime {
     return woy;
   }
 
-  String formatted(FilterBudget filterBudget) {
+  String formatted(FilterExpense filterBudget) {
     switch (filterBudget) {
-      case FilterBudget.daily:
+      case FilterExpense.daily:
         return DateFormat('EEEE dd MMM').format(this);
-      case FilterBudget.weekly:
+      case FilterExpense.weekly:
         return "Week $weekOfYear of ${DateFormat('yyyy').format(this)}";
-      case FilterBudget.monthly:
+      case FilterExpense.monthly:
         return DateFormat('MMMM yyyy').format(this);
-      case FilterBudget.yearly:
+      case FilterExpense.yearly:
         return DateFormat('yyyy').format(this);
-      case FilterBudget.all:
+      case FilterExpense.all:
         return 'All';
     }
   }

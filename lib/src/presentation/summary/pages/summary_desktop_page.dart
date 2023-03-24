@@ -12,7 +12,7 @@ class SummaryDesktopPage extends StatelessWidget {
     required this.valueNotifier,
     required this.expenses,
   });
-  final ValueNotifier<FilterBudget> valueNotifier;
+  final ValueNotifier<FilterExpense> valueNotifier;
   final List<Expense> expenses;
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,9 @@ class SummaryDesktopPage extends StatelessWidget {
                     child: ListView(
                       padding: const EdgeInsets.only(bottom: 124),
                       children: [
-                        FilterBudgetToggleWidget(valueNotifier: valueNotifier),
+                        FilterBudgetToggleWidget(
+                          valueNotifier: valueNotifier,
+                        ),
                         ExpenseHistory(
                           valueNotifier: valueNotifier,
                           expenses: expenses,

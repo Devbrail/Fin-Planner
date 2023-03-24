@@ -14,7 +14,7 @@ class SummaryTabletPage extends StatelessWidget {
     required this.expenses,
   });
 
-  final ValueNotifier<FilterBudget> valueNotifier;
+  final ValueNotifier<FilterExpense> valueNotifier;
   final List<Expense> expenses;
 
   @override
@@ -38,7 +38,9 @@ class SummaryTabletPage extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.only(bottom: 124),
                 children: [
-                  FilterBudgetToggleWidget(valueNotifier: valueNotifier),
+                  FilterBudgetToggleWidget(
+                    valueNotifier: valueNotifier,
+                  ),
                   ExpenseHistory(
                     valueNotifier: valueNotifier,
                     expenses: expenses,

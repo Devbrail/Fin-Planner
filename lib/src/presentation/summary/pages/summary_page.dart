@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/summary/controller/settings_controller.dart';
 import '../../../core/enum/box_types.dart';
 import '../controller/summary_controller.dart';
 import 'package:provider/provider.dart';
@@ -16,13 +17,15 @@ import 'summary_tablet_page.dart';
 class SummaryPage extends StatelessWidget {
   const SummaryPage({
     Key? key,
-    required this.valueNotifier,
   }) : super(key: key);
-
-  final ValueNotifier<FilterBudget> valueNotifier;
 
   @override
   Widget build(BuildContext context) {
+    final FilterExpense filterExpense =
+        Provider.of<SettingsController>(context, listen: false)
+            .fetchFilterExpense;
+    final ValueNotifier<FilterExpense> valueNotifier =
+        ValueNotifier<FilterExpense>(filterExpense);
     return Provider<SummaryController>(
       create: (context) => getIt.get<SummaryController>(),
       child: ValueListenableBuilder<Box<ExpenseModel>>(

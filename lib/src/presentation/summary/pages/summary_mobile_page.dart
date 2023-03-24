@@ -14,32 +14,34 @@ class SummaryMobilePage extends StatelessWidget {
     required this.expenses,
   });
 
-  final ValueNotifier<FilterBudget> valueNotifier;
+  final ValueNotifier<FilterExpense> valueNotifier;
   final List<Expense> expenses;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: ListView.builder(
-          shrinkWrap: true,
-          itemCount: 5,
-          padding: const EdgeInsets.only(bottom: 124),
-          itemBuilder: (context, index) {
-            if (index == 0) {
-              return const WelcomeNameWidget();
-            } else if (index == 1) {
-              return ExpenseTotalWidget(expenses: expenses);
-            } else if (index == 2) {
-              return const SizedBox(height: 16);
-            } else if (index == 3) {
-              return FilterBudgetToggleWidget(valueNotifier: valueNotifier);
-            } else if (index == 4) {
-              return ExpenseHistory(
-                valueNotifier: valueNotifier,
-                expenses: expenses,
-              );
-            }
-            return const SizedBox.shrink();
-          },
-        ),
-      );
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView.builder(
+        shrinkWrap: true,
+        itemCount: 5,
+        padding: const EdgeInsets.only(bottom: 124),
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return const WelcomeNameWidget();
+          } else if (index == 1) {
+            return ExpenseTotalWidget(expenses: expenses);
+          } else if (index == 2) {
+            return const SizedBox(height: 16);
+          } else if (index == 3) {
+            return FilterBudgetToggleWidget(valueNotifier: valueNotifier);
+          } else if (index == 4) {
+            return ExpenseHistory(
+              valueNotifier: valueNotifier,
+              expenses: expenses,
+            );
+          }
+          return const SizedBox.shrink();
+        },
+      ),
+    );
+  }
 }

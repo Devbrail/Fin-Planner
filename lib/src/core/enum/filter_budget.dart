@@ -1,25 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import '../common.dart';
 
-enum FilterBudget {
+part 'filter_budget.g.dart';
+
+@HiveType(typeId: 22)
+enum FilterExpense {
+  @HiveField(0)
   daily,
+  @HiveField(1)
   weekly,
+  @HiveField(2)
   monthly,
+  @HiveField(3)
   yearly,
+  @HiveField(4)
   all;
 
   String name(BuildContext context) {
     switch (this) {
-      case FilterBudget.daily:
+      case FilterExpense.daily:
         return context.loc.dailyLabel;
-      case FilterBudget.weekly:
+      case FilterExpense.weekly:
         return context.loc.weeklyLabel;
-      case FilterBudget.monthly:
+      case FilterExpense.monthly:
         return context.loc.monthlyLabel;
-      case FilterBudget.yearly:
+      case FilterExpense.yearly:
         return context.loc.yearlyLabel;
-      case FilterBudget.all:
+      case FilterExpense.all:
         return context.loc.allLabel;
     }
   }

@@ -5,6 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 import '../../core/enum/box_types.dart';
 import '../../core/enum/card_type.dart';
 import '../../core/enum/debt_type.dart';
+import '../../core/enum/filter_budget.dart';
 import '../../core/enum/transaction.dart';
 import '../../data/accounts/model/account_model.dart';
 import '../../data/category/model/category_model.dart';
@@ -22,7 +23,8 @@ Future<void> initHive() async {
     ..registerAdapter(DebtModelAdapter())
     ..registerAdapter(DebtTypeAdapter())
     ..registerAdapter(TransactionsModelAdapter())
-    ..registerAdapter(CardTypeAdapter());
+    ..registerAdapter(CardTypeAdapter())
+    ..registerAdapter(FilterExpenseAdapter());
   await hiveOpenBoxes();
 }
 
