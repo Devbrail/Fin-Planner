@@ -35,6 +35,7 @@ jobs:
           echo "keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}" >> android/key.properties
       - name: Run build release apk
         run: flutter run --release --flavor prod
+      - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/*"
