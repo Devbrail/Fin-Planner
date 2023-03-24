@@ -30,7 +30,7 @@ class ExpensePage extends StatefulWidget {
 }
 
 class _ExpensePageState extends State<ExpensePage> {
-  late final expenseBloc = getIt.get<ExpenseBloc>()
+  late final ExpenseBloc expenseBloc = getIt.get<ExpenseBloc>()
     ..add(const ChangeExpenseEvent(TransactionType.expense))
     ..add(FetchExpenseFromIdEvent(widget.expenseId));
   late TextEditingController nameController = TextEditingController();
@@ -158,6 +158,7 @@ class _ExpensePageState extends State<ExpensePage> {
                 ],
               ),
               body: ListView(
+                shrinkWrap: true,
                 children: [
                   TransactionToggleButtons(
                     onSelected: (type) {
@@ -170,7 +171,6 @@ class _ExpensePageState extends State<ExpensePage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Form(
-                      key: _form,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -312,11 +312,6 @@ class _ExpensePageState extends State<ExpensePage> {
   Widget _addButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        final isValid = _form.currentState!.validate();
-        if (!isValid) {
-          return;
-        }
-
         BlocProvider.of<ExpenseBloc>(context)
             .add(AddOrUpdateExpenseEvent(isAddExpense));
       },

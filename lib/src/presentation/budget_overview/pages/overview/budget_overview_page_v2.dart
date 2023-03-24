@@ -1,13 +1,15 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../core/enum/filter_budget.dart';
+import '../../../../domain/category/entities/category.dart';
 import '../../../../domain/expense/entities/expense.dart';
 import '../../../summary/controller/summary_controller.dart';
 import '../../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../../widgets/paisa_chip.dart';
+import '../../cubit/budget_cubit.dart';
 
 class BudgetOverviewPageV2 extends StatefulWidget {
   const BudgetOverviewPageV2({
@@ -23,46 +25,68 @@ class BudgetOverviewPageV2 extends StatefulWidget {
 
 class _BudgetOverviewPageV2State extends State<BudgetOverviewPageV2> {
   final SummaryController summaryController = getIt.get<SummaryController>();
-  String? selectedItem;
+  final BudgetCubit budgetCubit = getIt.get<BudgetCubit>();
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<FilterExpense>(
       valueListenable: valueNotifier,
       builder: (context, value, child) {
-        final result = widget.expenses.groupByTime(value);
-
-        return ListView(
-          shrinkWrap: true,
-          children: [
-            SizedBox(
-              height: 80,
-              child: ListView.builder(
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(16),
-                scrollDirection: Axis.horizontal,
-                itemCount: result.length,
-                itemBuilder: (context, index) {
-                  final item = result[index].key;
-                  return PaisaMaterialYouChip(
-                    title: item,
-                    onPressed: () {
-                      setState(() {
-                        selectedItem = item;
-                      });
-                    },
-                    isSelected: item == selectedItem,
-                  );
+        budgetCubit.fetchBudgetSummary(widget.expenses, value);
+        return Scaffold(
+          body: ListView(
+            shrinkWrap: true,
+            children: [
+              BlocBuilder(
+                bloc: budgetCubit,
+                buildWhen: (previous, current) =>
+                    current is InitialSelectedState,
+                builder: (context, state) {
+                  if (state is InitialSelectedState) {
+                    return SizedBox(
+                      height: 80,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(16),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: state.filerTimes.length,
+                        itemBuilder: (context, index) {
+                          final item = state.filerTimes[index];
+                          return PaisaMaterialYouChip(
+                            title: item,
+                            onPressed: () {
+                              if (budgetCubit.selectedTime != item) {
+                                budgetCubit.updateFilterTime(item);
+                              }
+                            },
+                            isSelected: item == budgetCubit.selectedTime,
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
                 },
               ),
-            ),
-            CategoryListWidget(
-              expenses:
-                  widget.expenses.groupByTimeList(value)[selectedItem] ?? [],
-              summaryController: summaryController,
-              totalExpense: widget.expenses.totalExpense,
-            ),
-          ],
+              BlocBuilder(
+                bloc: budgetCubit,
+                buildWhen: (previous, current) =>
+                    current is FilteredCategoryListState,
+                builder: (context, state) {
+                  if (state is FilteredCategoryListState) {
+                    return CategoryListWidget(
+                      categoryGrouped: state.categoryGrouped,
+                      summaryController: summaryController,
+                      totalExpense: state.totalExpense,
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
+            ],
+          ),
         );
       },
     );
@@ -72,52 +96,42 @@ class _BudgetOverviewPageV2State extends State<BudgetOverviewPageV2> {
 class CategoryListWidget extends StatelessWidget {
   const CategoryListWidget({
     super.key,
-    required this.expenses,
+    required this.categoryGrouped,
     required this.summaryController,
     required this.totalExpense,
   });
 
-  final List<Expense> expenses;
+  final List<MapEntry<Category, List<Expense>>> categoryGrouped;
   final double totalExpense;
   final SummaryController summaryController;
 
   @override
   Widget build(BuildContext context) {
-    final result = groupBy(
-            expenses,
-            (Expense expense) =>
-                summaryController.getCategory(expense.categoryId)!)
-        .entries
-        .toList();
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: result.length,
+      itemCount: categoryGrouped.length,
       itemBuilder: (context, index) {
-        final item = result[index];
+        final MapEntry<Category, List<Expense>> map = categoryGrouped[index];
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               Row(
                 children: [
-                  CircleAvatar(
-                    backgroundColor:
-                        Color(item.key.color ?? Colors.amber.shade100.value)
-                            .withOpacity(0.25),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Icon(
                       IconData(
-                        item.key.icon,
+                        map.key.icon,
                         fontFamily: 'Material Design Icons',
                         fontPackage: 'material_design_icons_flutter',
                       ),
-                      color:
-                          Color(item.key.color ?? Colors.amber.shade100.value),
                     ),
                   ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(item.key.name),
+                      child: Text(map.key.name),
                     ),
                   )
                 ],
@@ -127,11 +141,17 @@ class CategoryListWidget extends StatelessWidget {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: LinearProgressIndicator(
-                          value: expenses.totalExpense / totalExpense),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: LinearProgressIndicator(
+                          value: map.value.totalExpense / totalExpense,
+                          color: Color(
+                              map.key.color ?? Colors.amber.shade100.value),
+                        ),
+                      ),
                     ),
                   ),
-                  Text(item.value.totalExpense.toCurrency())
+                  Text(map.value.totalExpense.toCurrency())
                 ],
               )
             ],

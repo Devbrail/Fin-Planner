@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
+import '../../../../main.dart';
 import '../../../core/enum/filter_budget.dart';
 import '../../summary/controller/settings_controller.dart';
 import '../paisa_chip.dart';
@@ -20,8 +20,8 @@ class FilterBudgetToggleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<FilterExpense>(
       valueListenable: valueNotifier,
-      builder: (context, value, child) {
-        Provider.of<SettingsController>(context).setFilterExpense(value);
+      builder: (_, value, child) {
+        getIt.get<SettingsController>().setFilterExpense(value);
         if (showAsList) {
           return SafeArea(
             child: Column(
