@@ -11,8 +11,8 @@ import '../../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../../widgets/paisa_chip.dart';
 import '../../cubit/budget_cubit.dart';
 
-class BudgetOverviewPageV2 extends StatefulWidget {
-  const BudgetOverviewPageV2({
+class OverviewPageV2 extends StatefulWidget {
+  const OverviewPageV2({
     super.key,
     required this.expenses,
   });
@@ -20,10 +20,10 @@ class BudgetOverviewPageV2 extends StatefulWidget {
   final List<Expense> expenses;
 
   @override
-  State<BudgetOverviewPageV2> createState() => _BudgetOverviewPageV2State();
+  State<OverviewPageV2> createState() => _OverviewPageV2State();
 }
 
-class _BudgetOverviewPageV2State extends State<BudgetOverviewPageV2> {
+class _OverviewPageV2State extends State<OverviewPageV2> {
   final SummaryController summaryController = getIt.get<SummaryController>();
   final BudgetCubit budgetCubit = getIt.get<BudgetCubit>();
 

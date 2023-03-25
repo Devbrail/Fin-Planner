@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/enum/filter_budget.dart';
 
-class BudgetOverviewMobilePage extends StatelessWidget {
-  const BudgetOverviewMobilePage({
+class OverviewTabletPage extends StatelessWidget {
+  const OverviewTabletPage({
     super.key,
     required this.valueNotifier,
     required this.child,

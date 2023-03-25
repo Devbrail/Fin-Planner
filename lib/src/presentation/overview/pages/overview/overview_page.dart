@@ -7,10 +7,10 @@ import '../../../../data/expense/model/expense_model.dart';
 import '../../../../domain/expense/entities/expense.dart';
 import '../../../widgets/paisa_empty_widget.dart';
 import '../../widgets/filter_date_range_widget.dart';
-import 'budget_overview_page_v2.dart';
+import 'overview_page_v2.dart';
 
-class BudgetOverViewPage extends StatelessWidget {
-  const BudgetOverViewPage({
+class OverViewPage extends StatelessWidget {
+  const OverViewPage({
     Key? key,
     required this.dateTimeRangeNotifier,
   }) : super(key: key);
@@ -33,7 +33,7 @@ class BudgetOverViewPage extends StatelessWidget {
         return FilterDateRangeWidget(
           dateTimeRangeNotifier: dateTimeRangeNotifier,
           expenses: expenses,
-          builder: (expenses) => BudgetOverviewPageV2(expenses: expenses),
+          builder: (expenses) => OverviewPageV2(expenses: expenses),
         );
       },
     );

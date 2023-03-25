@@ -692,4 +692,9 @@
     "@selectCurrencyLabel": {
         "description": "Select currency label"
     }
+    ,
+    "overviewLabel": "Overview",
+    "@overviewLabel": {
+        "description": "Overview label"
+    }
 }

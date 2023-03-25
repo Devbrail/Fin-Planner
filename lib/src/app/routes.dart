@@ -10,7 +10,7 @@ import '../data/settings/authenticate.dart';
 import '../core/common.dart';
 import '../core/enum/box_types.dart';
 import '../presentation/accounts/pages/add/add_account_page.dart';
-import '../presentation/budget_overview/pages/expense_list_page.dart';
+import '../presentation/overview/pages/expense_list_page.dart';
 import '../presentation/category/pages/add/add_category_page.dart';
 import '../presentation/debits/pages/add/add_debt_page.dart';
 import '../presentation/debits/pages/debts_page.dart';
