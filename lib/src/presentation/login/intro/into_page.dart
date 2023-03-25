@@ -182,7 +182,6 @@ class IntoMobileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         toolbarHeight: 0,
@@ -253,6 +252,18 @@ class IntoMobileWidget extends StatelessWidget {
                     )
                   ],
                 ),
+                const Spacer(),
+                ListTile(
+                  horizontalTitleGap: 0,
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                  title: Text(
+                    '*This app still in beta, expect the unexpected behavior and UI changes',
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: Theme.of(context).textTheme.bodySmall?.color,
+                        ),
+                  ),
+                )
               ],
             ),
           ),
