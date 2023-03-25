@@ -10,6 +10,7 @@ import '../../summary/controller/settings_controller.dart';
 import '../bloc/home_bloc.dart';
 import 'home_desktop_widget.dart';
 import 'home_mobile_page.dart';
+import 'home_tablet_page.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({
@@ -129,6 +130,11 @@ class _LandingPageState extends State<LandingPage> {
             homeBloc: homeBloc,
             dateTimeRangeNotifier: dateTimeRangeNotifier,
             floatingActionButton: _floatingActionButtonBig(),
+          ),
+          tablet: (_) => HomeTabletPage(
+            homeBloc: homeBloc,
+            dateTimeRangeNotifier: dateTimeRangeNotifier,
+            floatingActionButton: _desktopButton(),
           ),
           desktop: (_) => HomeDesktopWidget(
             homeBloc: homeBloc,

@@ -17,7 +17,7 @@ class CategoryItemTabletWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaOutlineCard(
+    return PaisaFilledCard(
       child: InkWell(
         onTap: () => context.pushNamed(
           editCategoryPath,

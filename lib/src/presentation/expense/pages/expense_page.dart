@@ -272,7 +272,6 @@ class _ExpensePageState extends State<ExpensePage> {
                   ),
                   Expanded(
                     child: Form(
-                      key: _form,
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(

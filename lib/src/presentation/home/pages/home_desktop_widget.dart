@@ -51,6 +51,14 @@ class HomeDesktopWidget extends StatelessWidget {
                         desktop: (_) => const SizedBox(height: kToolbarHeight),
                       ),
                       ListTile(
+                        leading: Icon(
+                          Icons.wallet,
+                          size: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.fontSize,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         title: Text(
                           context.loc.appTitle,
                           style: Theme.of(context)
@@ -84,8 +92,8 @@ class HomeDesktopWidget extends StatelessWidget {
                             .add(const CurrentIndexEvent(PageType.category)),
                       ),
                       NavigationBarItem(
-                        title: context.loc.budgetLabel,
-                        icon: MdiIcons.wallet,
+                        title: context.loc.overviewLabel,
+                        icon: MdiIcons.sortVariant,
                         isSelected:
                             state.currentPage == PageType.budgetOverview,
                         onPressed: () => homeBloc.add(
