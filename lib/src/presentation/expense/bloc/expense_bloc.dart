@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
@@ -47,7 +48,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   int? selectedAccountId;
   Expense? currentExpense;
   String? currentDescription;
-  DateTime? selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime.now();
+  TimeOfDay timeOfDay = TimeOfDay.now();
   TransactionType transactionType = TransactionType.expense;
 
   Future<void> _fetchExpenseFromId(
@@ -64,6 +66,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       selectedCategoryId = expense.categoryId;
       selectedAccountId = expense.accountId;
       selectedDate = expense.time;
+      timeOfDay = TimeOfDay.fromDateTime(expense.time);
       transactionType = expense.type ?? TransactionType.expense;
       currentDescription = expense.description;
       currentExpense = expense;
@@ -82,7 +85,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     final String? name = expenseName;
     final int? categoryId = selectedCategoryId;
     final int? accountId = selectedAccountId;
-    final DateTime? dateTime = selectedDate;
+    final DateTime dateTime = selectedDate;
     final String? description = currentDescription;
 
     if (validAmount == null || validAmount == 0.0) {
@@ -98,15 +101,15 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     if (categoryId == null) {
       return emit(const ExpenseErrorState('Select category'));
     }
-    if (dateTime == null) {
-      return emit(const ExpenseErrorState('Select time'));
-    }
 
     if (event.isAdding) {
       await addExpenseUseCase(
         name: name,
         amount: validAmount,
-        time: dateTime,
+        time: dateTime.copyWith(
+          hour: timeOfDay.hour,
+          minute: timeOfDay.minute,
+        ),
         categoryId: categoryId,
         accountId: accountId,
         transactionType: transactionType,
@@ -119,7 +122,10 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         ..categoryId = categoryId
         ..currency = validAmount
         ..name = name
-        ..time = dateTime
+        ..time = dateTime.copyWith(
+          hour: timeOfDay.hour,
+          minute: timeOfDay.minute,
+        )
         ..type = transactionType
         ..description = description;
       await updateExpensesUseCase(currentExpense!);

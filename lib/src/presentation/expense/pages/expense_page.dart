@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
@@ -14,7 +16,6 @@ import '../bloc/expense_bloc.dart';
 import '../widgets/select_account_widget.dart';
 import '../widgets/select_category_widget.dart';
 import '../widgets/toggle_buttons_widget.dart';
-import 'package:in_app_review/in_app_review.dart';
 
 final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
@@ -36,7 +37,6 @@ class _ExpensePageState extends State<ExpensePage> {
   late TextEditingController nameController = TextEditingController();
   late TextEditingController amountController = TextEditingController();
   late TextEditingController descriptionController = TextEditingController();
-  late TextEditingController dateTextController = TextEditingController();
 
   bool get isAddExpense => widget.expenseId == null;
 
@@ -44,7 +44,6 @@ class _ExpensePageState extends State<ExpensePage> {
   void dispose() {
     nameController.dispose();
     amountController.dispose();
-    dateTextController.dispose();
     descriptionController.dispose();
     super.dispose();
   }
@@ -94,9 +93,6 @@ class _ExpensePageState extends State<ExpensePage> {
               color: Theme.of(context).colorScheme.onErrorContainer,
             );
           } else if (state is ExpenseSuccessState) {
-            if (expenseBloc.selectedDate != null) {
-              dateTextController.text = expenseBloc.selectedDate!.formattedDate;
-            }
             nameController.text = state.expense.name;
             nameController.selection = TextSelection.collapsed(
               offset: state.expense.name.length,
@@ -182,13 +178,7 @@ class _ExpensePageState extends State<ExpensePage> {
                           const SizedBox(height: 16),
                           ExpenseAmountWidget(controller: amountController),
                           const SizedBox(height: 16),
-                          ExpenseDatePickerWidget(
-                            controller: dateTextController,
-                            selectedDate: expenseBloc.selectedDate,
-                            onSelectedDate: (date) {
-                              expenseBloc.selectedDate = date;
-                            },
-                          ),
+                          const ExpenseDatePickerWidget(),
                           const SizedBox(height: 16),
                         ],
                       ),
@@ -284,13 +274,7 @@ class _ExpensePageState extends State<ExpensePage> {
                             const SizedBox(height: 16),
                             ExpenseAmountWidget(controller: amountController),
                             const SizedBox(height: 16),
-                            ExpenseDatePickerWidget(
-                              controller: dateTextController,
-                              selectedDate: expenseBloc.selectedDate,
-                              onSelectedDate: (date) {
-                                expenseBloc.selectedDate = date;
-                              },
-                            ),
+                            const ExpenseDatePickerWidget(),
                             const SizedBox(height: 16),
                             _addButton(context),
                             const SizedBox(height: 16),
@@ -421,49 +405,72 @@ class ExpenseAmountWidget extends StatelessWidget {
   }
 }
 
-class ExpenseDatePickerWidget extends StatelessWidget {
+class ExpenseDatePickerWidget extends StatefulWidget {
   const ExpenseDatePickerWidget({
     super.key,
-    required this.controller,
-    required this.selectedDate,
-    required this.onSelectedDate,
   });
 
-  final TextEditingController controller;
-  final DateTime? selectedDate;
-  final Function(DateTime) onSelectedDate;
+  @override
+  State<ExpenseDatePickerWidget> createState() =>
+      _ExpenseDatePickerWidgetState();
+}
+
+class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
+  late final ExpenseBloc expenseBloc = BlocProvider.of<ExpenseBloc>(context);
+  late DateTime selectedDateTime = expenseBloc.selectedDate;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
-          child: PaisaTextFormField(
-            enabled: false,
-            controller: controller
-              ..text = (selectedDate ?? DateTime.now()).formattedDate,
-            keyboardType: TextInputType.number,
-            hintText: 'Select date',
+          child: ListTile(
+            horizontalTitleGap: 0,
+            contentPadding: EdgeInsets.zero,
+            onTap: () async {
+              final DateTime? dateTime = await showDatePicker(
+                context: context,
+                initialDate: selectedDateTime,
+                firstDate: DateTime(1950),
+                lastDate: DateTime.now(),
+              );
+              if (dateTime != null) {
+                selectedDateTime = selectedDateTime.copyWith(
+                  day: dateTime.day,
+                  month: dateTime.month,
+                  year: dateTime.year,
+                );
+                expenseBloc.selectedDate = selectedDateTime;
+                setState(() {});
+              }
+            },
+            leading: const Icon(Icons.today_rounded),
+            title: Text(selectedDateTime.formattedDate),
           ),
         ),
-        IconButton(
-          onPressed: () async {
-            final date = await showDatePicker(
-              context: context,
-              initialDate: selectedDate ?? DateTime.now(),
-              firstDate: DateTime(1950),
-              lastDate: DateTime.now(),
-            );
-            if (date != null) {
-              final dateString = date.formattedDate;
-              controller.text = dateString;
-              onSelectedDate.call(date);
-            }
-          },
-          icon: const Icon(Icons.today_rounded),
-        )
+        Expanded(
+          child: ListTile(
+            horizontalTitleGap: 0,
+            contentPadding: EdgeInsets.zero,
+            onTap: () async {
+              final TimeOfDay? timeOfDay = await showTimePicker(
+                context: context,
+                initialTime: TimeOfDay.now(),
+                initialEntryMode: TimePickerEntryMode.dialOnly,
+              );
+              if (timeOfDay != null) {
+                selectedDateTime = selectedDateTime.copyWith(
+                  hour: timeOfDay.hour,
+                  minute: timeOfDay.minute,
+                );
+                expenseBloc.selectedDate = selectedDateTime;
+                setState(() {});
+              }
+            },
+            leading: const Icon(MdiIcons.clockOutline),
+            title: Text(selectedDateTime.formattedTime),
+          ),
+        ),
       ],
     );
   }

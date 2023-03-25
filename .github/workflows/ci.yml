@@ -15,12 +15,6 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
-      - name: Flutter version
-        run: flutter --version 
-      - name: Run pub get
-        run: flutter pub get
-      - name: Run format code
-        run: flutter format --set-exit-if-changed .
       - name: Download Android keystore
         id: android_keystore
         uses: timheuer/base64-to-file@v1.0.3
@@ -39,4 +33,4 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/*"
-          tag: v3.8.${{ github.run_number }}
+          tag: v4.0.${{ github.run_number }}
