@@ -667,5 +667,9 @@
    , "appBarSearchLabel": "Rechercher des dépenses, des comptes, des catégories",
     "@appBarSearchLabel": {
         "description": "Search expenses, accounts, categories label"
-    }
+    },
+    "deleteDebtOrCreditLabel": "La suppression de la dette / du crédit supprime tous les enregistrements qui s'y rapportent.",
+            "@deleteDebtOrCreditLabel": {
+                "description": "Delete debt or category label"
+            }
 }

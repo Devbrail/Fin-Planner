@@ -8,6 +8,7 @@ import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../core/enum/debt_type.dart';
 import '../../../../data/debt/models/transactions_model.dart';
+import '../../../widgets/paisa_bottom_sheet.dart';
 import '../../../widgets/paisa_text_field.dart';
 import '../../cubit/debts_cubit.dart';
 import '../../widgets/debt_toggle_buttons_widget.dart';
@@ -78,11 +79,36 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
               context.loc.addDebtLabel,
               actions: [
                 IconButton(
-                  onPressed: () {
-                    debtBloc.currentDebt
-                        ?.delete()
-                        .then((value) => context.pop());
-                  },
+                  onPressed: () => paisaAlertDialog(
+                    context,
+                    title: Text(context.loc.dialogDeleteTitleLabel),
+                    child: RichText(
+                      text: TextSpan(
+                        text: context.loc.deleteDebtOrCreditLabel,
+                        children: const [
+                          TextSpan(
+                              text: 'Are you sure?',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ],
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ),
+                    confirmationButton: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                        foregroundColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
+                      onPressed: () {
+                        debtBloc.currentDebt?.delete();
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Delete'),
+                    ),
+                  ).then((value) => context.pop()),
                   icon: Icon(
                     Icons.delete_rounded,
                     color: Theme.of(context).colorScheme.error,
