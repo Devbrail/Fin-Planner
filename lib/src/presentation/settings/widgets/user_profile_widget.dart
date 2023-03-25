@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -8,6 +10,7 @@ import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../login/pages/user_image_page.dart';
 import '../../widgets/paisa_text_field.dart';
+import '../../widgets/paisa_user_image_widget.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({
@@ -26,14 +29,19 @@ class UserProfilePage extends StatelessWidget {
   }
 
   void _pickImage(BuildContext context) {
-    final ImagePicker picker = ImagePicker();
-    picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
-      if (pickedFile != null) {
-        settings
-            .put(userImageKey, pickedFile.path)
-            .then((value) => Navigator.pop(context));
-      }
-    });
+    if (Platform.isAndroid) {
+      final ImagePicker picker = ImagePicker();
+      picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
+        if (pickedFile != null) {
+          settings
+              .put(userImageKey, pickedFile.path)
+              .then((value) => Navigator.pop(context));
+        }
+      });
+    } else {
+      context
+          .showMaterialSnackBar('Not supported in ${Platform.operatingSystem}');
+    }
   }
 
   @override
