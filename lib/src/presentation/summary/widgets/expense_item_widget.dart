@@ -21,42 +21,39 @@ class ExpenseItemWidget extends StatelessWidget {
   final Category category;
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(8),
-          onTap: () => context.goNamed(
-            editExpensePath,
-            params: <String, String>{'eid': expense.superId.toString()},
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24),
+        onTap: () => context.goNamed(
+          editExpensePath,
+          params: <String, String>{'eid': expense.superId.toString()},
+        ),
+        child: ListTile(
+          horizontalTitleGap: 4,
+          title: Text(expense.name),
+          subtitle: Text(
+            '${account.bankName} • ${expense.time.shortDayString}',
           ),
-          child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-            title: Text(expense.name),
-            subtitle: Text(
-              '${account.bankName} • ${expense.time.shortDayString}',
+          leading: Icon(
+            IconData(
+              category.icon,
+              fontFamily: 'Material Design Icons',
+              fontPackage: 'material_design_icons_flutter',
             ),
-            leading: CircleAvatar(
-              backgroundColor:
-                  Color(category.color ?? Colors.amber.shade100.value)
-                      .withOpacity(0.25),
-              child: Icon(
-                IconData(
-                  category.icon,
-                  fontFamily: 'Material Design Icons',
-                  fontPackage: 'material_design_icons_flutter',
-                ),
-                color: Color(category.color ?? Colors.amber.shade100.value),
-              ),
-            ),
-            trailing: Text(
-              '${expense.type?.sign}${expense.currency.toCurrency()}',
-              style: GoogleFonts.manrope(
-                textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: expense.type?.color(context),
-                    ),
-              ),
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+          trailing: Text(
+            '${expense.type?.sign}${expense.currency.toCurrency()}',
+            style: GoogleFonts.manrope(
+              textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: expense.type?.color(context),
+                  ),
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/presentation/widgets/paisa_card.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
@@ -56,25 +57,28 @@ class AccountTransactionWidget extends StatelessWidget {
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
-          ListView.separated(
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(indent: 52, height: 0),
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: expenses.length,
-            itemBuilder: (_, index) {
-              final Account account = accountLocalDataSource
-                  .fetchAccountFromId(expenses[index].accountId)!
-                  .toEntity();
-              final Category category = categoryLocalDataSource
-                  .fetchCategoryFromId(expenses[index].categoryId)!
-                  .toEntity();
-              return ExpenseItemWidget(
-                expense: expenses[index],
-                account: account,
-                category: category,
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: PaisaCard(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: expenses.length,
+                itemBuilder: (_, index) {
+                  final Account account = accountLocalDataSource
+                      .fetchAccountFromId(expenses[index].accountId)!
+                      .toEntity();
+                  final Category category = categoryLocalDataSource
+                      .fetchCategoryFromId(expenses[index].categoryId)!
+                      .toEntity();
+                  return ExpenseItemWidget(
+                    expense: expenses[index],
+                    account: account,
+                    category: category,
+                  );
+                },
+              ),
+            ),
           ),
         ],
       ),
@@ -95,24 +99,29 @@ class AccountTransactionWidget extends StatelessWidget {
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
-          ListView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: expenses.length,
-            itemBuilder: (_, index) {
-              final Account account = accountLocalDataSource
-                  .fetchAccountFromId(expenses[index].accountId)!
-                  .toEntity();
-              final Category category = categoryLocalDataSource
-                  .fetchCategoryFromId(expenses[index].categoryId)!
-                  .toEntity();
-              return ExpenseItemWidget(
-                expense: expenses[index],
-                account: account,
-                category: category,
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: PaisaCard(
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: expenses.length,
+                itemBuilder: (_, index) {
+                  final Account account = accountLocalDataSource
+                      .fetchAccountFromId(expenses[index].accountId)!
+                      .toEntity();
+                  final Category category = categoryLocalDataSource
+                      .fetchCategoryFromId(expenses[index].categoryId)!
+                      .toEntity();
+                  return ExpenseItemWidget(
+                    expense: expenses[index],
+                    account: account,
+                    category: category,
+                  );
+                },
+              ),
+            ),
           ),
         ],
       ),
