@@ -17,10 +17,10 @@ class SettingsColorPickerWidget extends StatelessWidget {
 
   final Box<dynamic> settings;
 
-  dynamic _extractColorValue(BuildContext context, dynamic value) {
+  int _extractColorValue(BuildContext context, dynamic value) {
     final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
     if (isDynamic) {
-      return Theme.of(context).primaryColor.value;
+      return Theme.of(context).colorScheme.primary.value;
     }
     final color = value.get(appColorKey, defaultValue: 0xFF795548);
     return color;
