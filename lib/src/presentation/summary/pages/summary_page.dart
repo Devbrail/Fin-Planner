@@ -4,7 +4,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
 import '../../../core/enum/filter_budget.dart';
 import '../../../data/expense/model/expense_model.dart';
 import '../controller/settings_controller.dart';
@@ -24,28 +23,24 @@ class SummaryPage extends StatelessWidget {
     final ValueNotifier<FilterExpense> valueNotifier =
         ValueNotifier<FilterExpense>(filterExpense);
     return ValueListenableBuilder<Box<ExpenseModel>>(
-      valueListenable: getIt.get<Box<ExpenseModel>>().listenable(keys: [
-        BoxType.accounts.name,
-        BoxType.category.name,
-        BoxType.expense.name,
-      ]),
+      valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
       builder: (_, value, child) {
         final expenses = value.values.toEntities();
-        return ScreenTypeLayout.builder(
+        return ScreenTypeLayout(
           breakpoints: const ScreenBreakpoints(
             tablet: 673,
             desktop: 799,
             watch: 300,
           ),
-          mobile: (_) => SummaryMobilePage(
+          mobile: SummaryMobilePage(
             valueNotifier: valueNotifier,
             expenses: expenses,
           ),
-          tablet: (_) => SummaryTabletPage(
+          tablet: SummaryTabletPage(
             valueNotifier: valueNotifier,
             expenses: expenses,
           ),
-          desktop: (_) => SummaryDesktopPage(
+          desktop: SummaryDesktopPage(
             valueNotifier: valueNotifier,
             expenses: expenses,
           ),

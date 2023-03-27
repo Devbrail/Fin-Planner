@@ -42,3 +42,25 @@ class DebtErrorState extends DebtsState {
   @override
   List<Object> get props => [errorString];
 }
+
+class TransactionAddedState extends DebtsState {}
+
+class SelectedDateState extends DebtsState {
+  final DateTime startDateTime;
+  final DateTime endDateTime;
+
+  const SelectedDateState(this.startDateTime, this.endDateTime);
+
+  @override
+  List<Object> get props => [startDateTime, endDateTime];
+
+  SelectedDateState copyWith({
+    DateTime? startDateTime,
+    DateTime? endDateTime,
+  }) {
+    return SelectedDateState(
+      startDateTime ?? this.startDateTime,
+      endDateTime ?? this.endDateTime,
+    );
+  }
+}

@@ -56,13 +56,13 @@ class AccountsPage extends StatelessWidget {
                           .expensesFromAccountId(state.account.superId!)
                           .map((e) => e.toEntity())
                           .toList();
-                      return ScreenTypeLayout.builder(
-                        mobile: (_) => AccountsMobilePage(
+                      return ScreenTypeLayout(
+                        mobile: AccountsMobilePage(
                           accounts: accounts,
                           accountsBloc: accountsBloc,
                           expenses: expenses,
                         ),
-                        tablet: (_) => AccountsTabletPage(
+                        tablet: AccountsTabletPage(
                           accounts: accounts,
                           accountsBloc: accountsBloc,
                           expenses: expenses,

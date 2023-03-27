@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../widgets/paisa_bottom_sheet.dart';
@@ -94,8 +95,8 @@ class AddAccountPageState extends State<AddAccountPage> {
           }
         },
         builder: (context, state) {
-          return ScreenTypeLayout.builder(
-            mobile: (_) => Scaffold(
+          return ScreenTypeLayout(
+            mobile: Scaffold(
               appBar: context.materialYouAppBar(
                 isAccountAddOrUpdate
                     ? context.loc.addCardLabel
@@ -171,7 +172,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                     Form(
                       key: _form,
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -254,7 +255,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                 ),
               ),
             ),
-            tablet: (_) => Scaffold(
+            tablet: Scaffold(
               appBar: context.materialYouAppBar(
                 context.loc.addCardLabel,
                 actions: [
@@ -472,6 +473,9 @@ class AccountCardHolderNameWidget extends StatelessWidget {
           controller: controller,
           hintText: context.loc.enterCardHolderNameLabel,
           keyboardType: TextInputType.name,
+          inputFormatters: [
+            FilteringTextInputFormatter.singleLineFormatter,
+          ],
           onChanged: (value) => accountBloc.accountHolderName = value,
         );
       },
@@ -496,6 +500,9 @@ class AccountNameWidget extends StatelessWidget {
           controller: controller,
           hintText: context.loc.enterAccountNameLabel,
           keyboardType: TextInputType.name,
+          inputFormatters: [
+            FilteringTextInputFormatter.singleLineFormatter,
+          ],
           onChanged: (value) => accountBloc.accountName = value,
         );
       },
@@ -516,6 +523,9 @@ class AccountNumberWidget extends StatelessWidget {
     return PaisaTextFormField(
       maxLength: 4,
       controller: controller,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       hintText: context.loc.enterNumberOptionalLabel,
       keyboardType: TextInputType.number,
       onChanged: (value) => accountBloc.accountNumber = value,
@@ -537,6 +547,9 @@ class AccountInitialAmountWidget extends StatelessWidget {
       controller: controller,
       hintText: context.loc.enterAmountLabel,
       keyboardType: TextInputType.number,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       onChanged: (value) {
         double? amount = double.tryParse(value);
         accountBloc.initialAmount = amount;

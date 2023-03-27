@@ -31,14 +31,13 @@ class ExpensePage extends StatefulWidget {
 }
 
 class _ExpensePageState extends State<ExpensePage> {
+  late final bool isAddExpense = widget.expenseId == null;
   late final ExpenseBloc expenseBloc = getIt.get<ExpenseBloc>()
     ..add(const ChangeExpenseEvent(TransactionType.expense))
     ..add(FetchExpenseFromIdEvent(widget.expenseId));
-  late TextEditingController nameController = TextEditingController();
-  late TextEditingController amountController = TextEditingController();
-  late TextEditingController descriptionController = TextEditingController();
-
-  bool get isAddExpense => widget.expenseId == null;
+  final nameController = TextEditingController();
+  final amountController = TextEditingController();
+  final descriptionController = TextEditingController();
 
   @override
   void dispose() {
@@ -101,15 +100,15 @@ class _ExpensePageState extends State<ExpensePage> {
             amountController.selection = TextSelection.collapsed(
               offset: state.expense.currency.toString().length,
             );
-            descriptionController.text = state.expense.description.toString();
+            descriptionController.text = state.expense.description ?? '';
             descriptionController.selection = TextSelection.collapsed(
               offset: state.expense.description.toString().length,
             );
           }
         },
         builder: (context, state) {
-          return ScreenTypeLayout.builder(
-            mobile: (_) => Scaffold(
+          return ScreenTypeLayout(
+            mobile: Scaffold(
               appBar: context.materialYouAppBar(
                 isAddExpense
                     ? context.loc.addExpenseLabel
@@ -156,17 +155,12 @@ class _ExpensePageState extends State<ExpensePage> {
               body: ListView(
                 shrinkWrap: true,
                 children: [
-                  TransactionToggleButtons(
-                    onSelected: (type) {
-                      expenseBloc.transactionType = type;
-                      expenseBloc.add(ChangeExpenseEvent(type));
-                    },
-                    selectedType: expenseBloc.transactionType,
-                  ),
+                  TransactionToggleButtons(expenseBloc: expenseBloc),
                   const SizedBox(height: 16),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Form(
+                      key: _form,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -195,7 +189,7 @@ class _ExpensePageState extends State<ExpensePage> {
                 ),
               ),
             ),
-            tablet: (_) => Scaffold(
+            tablet: Scaffold(
               appBar: AppBar(
                 systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarColor: Colors.transparent,
@@ -221,13 +215,7 @@ class _ExpensePageState extends State<ExpensePage> {
                       ?.copyWith(fontWeight: FontWeight.w700),
                 ),
                 actions: [
-                  TransactionToggleButtons(
-                    onSelected: (type) {
-                      expenseBloc.transactionType = type;
-                      expenseBloc.add(ChangeExpenseEvent(type));
-                    },
-                    selectedType: expenseBloc.transactionType,
-                  ),
+                  TransactionToggleButtons(expenseBloc: expenseBloc),
                   isAddExpense
                       ? const SizedBox.shrink()
                       : IconButton(
@@ -262,6 +250,7 @@ class _ExpensePageState extends State<ExpensePage> {
                   ),
                   Expanded(
                     child: Form(
+                      key: _form,
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(
@@ -335,6 +324,9 @@ class ExpenseNameWidget extends StatelessWidget {
             controller: controller,
             hintText: state.transactionType.hintName(context),
             keyboardType: TextInputType.name,
+            inputFormatters: [
+              FilteringTextInputFormatter.singleLineFormatter,
+            ],
             validator: (value) {
               if (value!.isNotEmpty) {
                 return null;
@@ -390,6 +382,9 @@ class ExpenseAmountWidget extends StatelessWidget {
       keyboardType: TextInputType.number,
       maxLength: 13,
       maxLines: 1,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       onChanged: (value) {
         double? amount = double.tryParse(value);
         BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
@@ -425,8 +420,9 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
       children: [
         Expanded(
           child: ListTile(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             horizontalTitleGap: 0,
-            contentPadding: EdgeInsets.zero,
             onTap: () async {
               final DateTime? dateTime = await showDatePicker(
                 context: context,
@@ -450,8 +446,9 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
         ),
         Expanded(
           child: ListTile(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             horizontalTitleGap: 0,
-            contentPadding: EdgeInsets.zero,
             onTap: () async {
               final TimeOfDay? timeOfDay = await showTimePicker(
                 context: context,

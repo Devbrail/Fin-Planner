@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 
@@ -19,18 +20,29 @@ class DebtLocalDataSourceImpl extends DebtLocalDataSource {
   Future<void> addDebtOrCredit(DebtModel debt) async {
     final int id = await debtBox.add(debt);
     debt.superId = id;
-    await debt.save();
+    return debt.save();
   }
 
   @override
-  Future<DebtModel?> fetchDebtOrCreditFromId(int debtId) async =>
-      debtBox.get(debtId);
+  DebtModel? fetchDebtOrCreditFromId(int debtId) =>
+      debtBox.values.firstWhereOrNull((element) => element.superId == debtId);
 
   @override
   List<TransactionsModel> getTransactionsFromId(int? id) {
-    if (id == null) return [];
     return transactionsBox.values
         .where((element) => element.parentId == id)
         .toList();
+  }
+
+  @override
+  Future<void> addTransaction(TransactionsModel transactionsModel) async {
+    final int id = await transactionsBox.add(transactionsModel);
+    transactionsModel.superId = id;
+    return transactionsModel.save();
+  }
+
+  @override
+  Future<void> updateDebt(DebtModel debtModel) {
+    return debtBox.put(debtModel.superId!, debtModel);
   }
 }

@@ -81,7 +81,7 @@ class CategoryBudgetWidget extends StatelessWidget {
       },
       keyboardType: TextInputType.number,
       inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+        FilteringTextInputFormatter.digitsOnly,
       ],
     );
   }

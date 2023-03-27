@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../../main.dart';
+import 'package:paisa/src/core/extensions/debt_extensions.dart';
+import 'package:paisa/src/domain/debt/entities/transaction.dart';
 
+import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
@@ -22,7 +23,8 @@ class DebtItemWidget extends StatelessWidget {
     return ValueListenableBuilder<Box<TransactionsModel>>(
       valueListenable: getIt.get<Box<TransactionsModel>>().listenable(),
       builder: (context, value, child) {
-        final transactions = value.getTransactionsFromId(debt.superId);
+        final List<Transaction> transactions =
+            value.getTransactionsFromId(debt.superId).toEntities();
         final double amount = transactions.fold<double>(
             0, (previousValue, element) => previousValue + element.amount);
         return Padding(

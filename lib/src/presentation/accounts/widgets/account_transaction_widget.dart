@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/presentation/widgets/paisa_card.dart';
+import '../../widgets/paisa_card.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
@@ -39,8 +39,8 @@ class AccountTransactionWidget extends StatelessWidget {
         ),
       );
     }
-    return ScreenTypeLayout.builder(
-      mobile: (_) => ListView(
+    return ScreenTypeLayout(
+      mobile: ListView(
         physics: isScroll ? null : const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         children: [
@@ -82,7 +82,7 @@ class AccountTransactionWidget extends StatelessWidget {
           ),
         ],
       ),
-      tablet: (_) => ListView(
+      tablet: ListView(
         padding: const EdgeInsets.only(bottom: 128),
         shrinkWrap: true,
         children: [

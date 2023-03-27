@@ -29,22 +29,22 @@ class CategoryListPage extends StatelessWidget {
               title: context.loc.errorNoCatagoriesLabel,
             );
           }
-          return ScreenTypeLayout.builder(
+          return ScreenTypeLayout(
             breakpoints: const ScreenBreakpoints(
               tablet: 600,
               desktop: 700,
               watch: 300,
             ),
-            mobile: (_) => CategoryListMobileWidget(
+            mobile: CategoryListMobileWidget(
               addCategoryBloc: bloc,
               categories: categories,
             ),
-            tablet: (_) => CategoryListTabletWidget(
+            tablet: CategoryListTabletWidget(
               addCategoryBloc: bloc,
               crossAxisCount: 3,
               categories: categories,
             ),
-            desktop: (_) => CategoryListTabletWidget(
+            desktop: CategoryListTabletWidget(
               addCategoryBloc: bloc,
               crossAxisCount: 5,
               categories: categories,

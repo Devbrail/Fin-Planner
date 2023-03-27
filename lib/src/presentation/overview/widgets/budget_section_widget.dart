@@ -44,21 +44,21 @@ class BudgetSection extends StatelessWidget {
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
-        ScreenTypeLayout.builder(
+        ScreenTypeLayout(
           breakpoints: const ScreenBreakpoints(
             tablet: 600,
             desktop: 700,
             watch: 300,
           ),
-          mobile: (_) => BudgetOverViewList(
+          mobile: BudgetOverViewList(
             maps: _filterCategory(values),
             crossAxisCount: 2,
           ),
-          tablet: (_) => BudgetOverViewList(
+          tablet: BudgetOverViewList(
             maps: _filterCategory(values),
             crossAxisCount: 3,
           ),
-          desktop: (_) => BudgetOverViewList(
+          desktop: BudgetOverViewList(
             maps: _filterCategory(values),
             crossAxisCount: 5,
           ),

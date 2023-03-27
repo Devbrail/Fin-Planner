@@ -10,7 +10,7 @@ import '../../data/expense/model/expense_model.dart';
 
 @module
 abstract class HiveModule {
-  @singleton
+  @injectable
   Box<ExpenseModel> get expenseBox =>
       Hive.box<ExpenseModel>(BoxType.expense.name);
 

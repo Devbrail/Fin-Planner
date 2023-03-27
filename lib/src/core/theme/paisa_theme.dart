@@ -305,11 +305,28 @@ AppBarTheme appBarThemeDark(ColorScheme colorScheme) {
   );
 }
 
-DialogTheme dialogTheme() {
+DialogTheme get dialogTheme {
   return DialogTheme(
+    titleTextStyle: GoogleFonts.manrope(
+      textStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+    ),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(24),
     ),
+  );
+}
+
+TimePickerThemeData get timePickerTheme {
+  return TimePickerThemeData(
+    helpTextStyle: GoogleFonts.manrope(
+      textStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+    hourMinuteShape: const CircleBorder(),
   );
 }
 

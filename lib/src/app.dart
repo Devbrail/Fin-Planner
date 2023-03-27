@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
-import '../main.dart';
-import 'presentation/widgets/paisa_annotate_region_widget.dart';
 
+import '../main.dart';
 import 'app/routes.dart';
 import 'core/common.dart';
 import 'core/enum/box_types.dart';
 import 'core/theme/paisa_theme.dart';
+import 'presentation/widgets/paisa_annotate_region_widget.dart';
 
 class PaisaApp extends StatefulWidget {
   const PaisaApp({Key? key}) : super(key: key);
@@ -65,7 +65,8 @@ class _PaisaAppState extends State<PaisaApp> {
                   colorScheme: lightColorScheme,
                 ).copyWith(
                   colorScheme: lightColorScheme,
-                  dialogTheme: dialogTheme(),
+                  dialogTheme: dialogTheme,
+                  timePickerTheme: timePickerTheme,
                   appBarTheme: appBarThemeLight(lightColorScheme),
                   useMaterial3: true,
                   textTheme: GoogleFonts.outfitTextTheme(
@@ -89,7 +90,8 @@ class _PaisaAppState extends State<PaisaApp> {
                   colorScheme: darkColorScheme,
                 ).copyWith(
                   colorScheme: darkColorScheme,
-                  dialogTheme: dialogTheme(),
+                  dialogTheme: dialogTheme,
+                  timePickerTheme: timePickerTheme,
                   appBarTheme: appBarThemeDark(darkColorScheme),
                   useMaterial3: true,
                   textTheme: GoogleFonts.outfitTextTheme(

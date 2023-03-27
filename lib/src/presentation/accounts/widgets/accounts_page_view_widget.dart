@@ -35,8 +35,8 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           LavaAnimation(
-            child: SizedBox(
-              height: 240,
+            child: AspectRatio(
+              aspectRatio: 16 / 10,
               child: PageView.builder(
                 padEnds: true,
                 pageSnapping: true,

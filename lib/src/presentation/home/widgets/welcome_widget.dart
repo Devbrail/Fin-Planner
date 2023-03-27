@@ -27,8 +27,8 @@ class WelcomeWidget extends StatelessWidget {
         if (image == 'no-image') {
           image = '';
         }
-        return ScreenTypeLayout.builder(
-          mobile: (_) => Builder(
+        return ScreenTypeLayout(
+          mobile: Builder(
             builder: (context) {
               if (image.isEmpty) {
                 return Padding(
@@ -56,7 +56,7 @@ class WelcomeWidget extends StatelessWidget {
               }
             },
           ),
-          tablet: (_) => Builder(
+          tablet: Builder(
             builder: (context) {
               if (image.isEmpty) {
                 return Padding(

@@ -36,8 +36,8 @@ class AccountsPageV2 extends StatelessWidget {
           return ListView(
             children: [
               const SizedBox(height: 8),
-              ScreenTypeLayout.builder(
-                mobile: (_) => ListView.builder(
+              ScreenTypeLayout(
+                mobile: ListView.builder(
                   padding: const EdgeInsets.only(bottom: 124),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -53,7 +53,7 @@ class AccountsPageV2 extends StatelessWidget {
                     );
                   },
                 ),
-                tablet: (_) => GridView.builder(
+                tablet: GridView.builder(
                   padding: const EdgeInsets.only(bottom: 124),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

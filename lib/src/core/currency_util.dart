@@ -1,8 +1,7 @@
 import 'package:intl/intl.dart';
-import 'package:paisa/src/core/extensions/commont.dart';
-import 'package:paisa/src/data/currencies/models/country_model.dart';
 
 import '../app/routes.dart';
+import '../data/currencies/models/country_model.dart';
 import 'common.dart';
 
 final model = CountryModel.fromJson(

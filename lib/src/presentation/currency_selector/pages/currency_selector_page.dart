@@ -75,20 +75,20 @@ class CurrencySelectorPage extends StatelessWidget {
                   builder: (context, state) {
                     if (state is CountryLocalesState) {
                       final locales = state.locales;
-                      return ScreenTypeLayout.builder(
-                        mobile: (_) => LocaleGridView(
+                      return ScreenTypeLayout(
+                        mobile: LocaleGridView(
                           locales: locales,
                           onPressed: (locale) =>
                               splashCubit.selectedLocale = locale,
                           crossAxisCount: 2,
                         ),
-                        tablet: (_) => LocaleGridView(
+                        tablet: LocaleGridView(
                           locales: locales,
                           onPressed: (locale) =>
                               splashCubit.selectedLocale = locale,
                           crossAxisCount: 3,
                         ),
-                        desktop: (_) => LocaleGridView(
+                        desktop: LocaleGridView(
                           locales: locales,
                           onPressed: (locale) =>
                               splashCubit.selectedLocale = locale,

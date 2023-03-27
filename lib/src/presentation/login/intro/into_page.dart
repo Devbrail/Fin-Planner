@@ -14,9 +14,9 @@ class IntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout.builder(
-      tablet: (_) => const IntroBigScreenWidget(),
-      mobile: (_) => const IntoMobileWidget(),
+    return ScreenTypeLayout(
+      tablet: const IntroBigScreenWidget(),
+      mobile: const IntoMobileWidget(),
     );
   }
 }

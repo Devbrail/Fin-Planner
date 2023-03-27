@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import '../../../../main.dart';
-import '../../../core/enum/box_types.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
+import '../../../core/enum/box_types.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';

@@ -19,7 +19,7 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
   Future<void> addOrUpdateExpense(ExpenseModel expense) async {
     final id = await expenseBox.add(expense);
     expense.superId = id;
-    expense.save();
+    return expense.save();
   }
 
   @override

@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
-import '../../../domain/debt/entities/debt.dart';
 
 import '../../../core/enum/debt_type.dart';
+import '../../../domain/debt/entities/debt.dart';
 
 part 'debt_model.g.dart';
 

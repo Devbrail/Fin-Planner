@@ -18,21 +18,21 @@ class BudgetItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout.builder(
+    return ScreenTypeLayout(
       breakpoints: const ScreenBreakpoints(
         tablet: 600,
         desktop: 700,
         watch: 300,
       ),
-      mobile: (_) => BudgetItemMobileWidget(
+      mobile: BudgetItemMobileWidget(
         category: category,
         expenses: expenses,
       ),
-      tablet: (_) => BudgetItemTableWidget(
+      tablet: BudgetItemTableWidget(
         category: category,
         expenses: expenses,
       ),
-      desktop: (_) => BudgetItemTableWidget(
+      desktop: BudgetItemTableWidget(
         category: category,
         expenses: expenses,
       ),

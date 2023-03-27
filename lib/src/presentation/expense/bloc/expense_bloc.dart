@@ -71,7 +71,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       currentDescription = expense.description;
       currentExpense = expense;
       emit(ExpenseSuccessState(expense));
-      add(ChangeExpenseEvent(transactionType));
+      Future.delayed(Duration.zero).then(
+          (value) => add(const ChangeExpenseEvent(TransactionType.expense)));
     } else {
       emit(const ExpenseErrorState('Expense not found!'));
     }
@@ -88,13 +89,13 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     final DateTime dateTime = selectedDate;
     final String? description = currentDescription;
 
+    if (name == null) {
+      return emit(const ExpenseErrorState('Enter expense name'));
+    }
     if (validAmount == null || validAmount == 0.0) {
       return emit(const ExpenseErrorState('Enter valid amount'));
     }
 
-    if (name == null) {
-      return emit(const ExpenseErrorState('Enter expense name'));
-    }
     if (accountId == null) {
       return emit(const ExpenseErrorState('Select account'));
     }
@@ -145,6 +146,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     ChangeExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) {
+    transactionType = event.transactionType;
     emit(ChangeExpenseState(event.transactionType));
   }
 

@@ -34,13 +34,13 @@ class CategoryListWidget extends StatelessWidget {
             title: context.loc.errorNoCatagoriesLabel,
           );
         }
-        return ScreenTypeLayout.builder(
+        return ScreenTypeLayout(
           breakpoints: const ScreenBreakpoints(
             tablet: 600,
             desktop: 700,
             watch: 300,
           ),
-          mobile: (_) => ListView.builder(
+          mobile: ListView.builder(
             padding: const EdgeInsets.only(
               bottom: 124,
               left: 8,
@@ -58,7 +58,7 @@ class CategoryListWidget extends StatelessWidget {
               );
             },
           ),
-          tablet: (_) => GridView.builder(
+          tablet: GridView.builder(
             padding: const EdgeInsets.only(
               bottom: 124,
               left: 8,
@@ -79,7 +79,7 @@ class CategoryListWidget extends StatelessWidget {
               );
             },
           ),
-          desktop: (_) => SafeArea(
+          desktop: SafeArea(
             child: GridView.builder(
               padding: const EdgeInsets.only(
                 bottom: 124,

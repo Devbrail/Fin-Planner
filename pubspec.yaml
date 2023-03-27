@@ -1,29 +1,29 @@
 name: paisa
 description: A expense manager app for Android, iOS, Web & Windows.
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 4.0.1+101
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
 
-dependencies:  
+dependencies:
   animations: ^2.0.7
-  chart_sparkline: ^1.0.12 
+  chart_sparkline: ^1.0.12
   collection: ^1.17.0
-  csv: ^5.0.1  
-  date_picker_timeline: ^1.2.3 
-  device_info_plus:  
+  csv: ^5.0.1
+  date_picker_timeline: ^1.2.3
+  device_info_plus:
   dynamic_color: ^1.5.4
   equatable: ^2.0.5
   file_picker: ^5.2.5
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.1 
+  flutter_bloc: ^8.1.1
   flutter_displaymode: ^0.5.0
   flutter_localizations:
-    sdk: flutter  
+    sdk: flutter
   get_it: ^7.2.0
   glassmorphism: ^3.0.0
   go_router: ^6.0.1
@@ -33,17 +33,17 @@ dependencies:
   image_picker: ^0.8.6
   in_app_review: ^2.0.6
   injectable: ^2.1.0
-  intl: ^0.17.0 
+  intl: ^0.17.0
   local_auth: ^2.1.3
   material_color_utilities: ^0.2.0
   material_design_icons_flutter: ^6.0.7096
   package_info_plus: ^3.0.2
   path_provider: ^2.0.11
-  permission_handler: ^10.2.0 
+  permission_handler: ^10.2.0
   provider: ^6.0.5
-  responsive_builder: ^0.6.3
-  share_plus: ^6.3.0 
-  url_launcher: ^6.1.7 
+  responsive_builder: 0.5.0+1
+  share_plus: ^6.3.0
+  url_launcher: ^6.1.7
   url_strategy: ^0.2.0
   workmanager: ^0.5.1
 
@@ -61,7 +61,7 @@ dev_dependencies:
 
 dependency_overrides:
   intl: ^0.18.0
-  material_color_utilities: ^0.2.0 
+  material_color_utilities: ^0.2.0
 
 flutter_app_name:
   name: "Paisa"
@@ -82,7 +82,6 @@ flutter_icons:
   image_path: "assets/images/icon.png"
   ios: true
   android: false
-  
 
 flutter:
   generate: true

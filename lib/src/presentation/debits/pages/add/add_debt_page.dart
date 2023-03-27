@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -29,9 +30,9 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
     ..add(FetchDebtOrCreditFromIdEvent(widget.debtId))
     ..add(const ChangeDebtTypeEvent(DebtType.debt));
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController amountController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController descController = TextEditingController();
+  final amountController = TextEditingController();
+  final nameController = TextEditingController();
+  final descController = TextEditingController();
 
   @override
   void dispose() {
@@ -65,14 +66,15 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
             descController.selection = TextSelection.collapsed(
               offset: state.debt.description.toString().length,
             );
+          } else if (state is DebtErrorState) {
+            context.showMaterialSnackBar(
+              state.errorString,
+              backgroundColor: Theme.of(context).colorScheme.errorContainer,
+              color: Theme.of(context).colorScheme.onErrorContainer,
+            );
           }
         },
         builder: (context, state) {
-          String? startDate, endDate;
-          if (state is DebtsSuccessState) {
-            startDate = state.debt.dateTime.formattedDate;
-            endDate = state.debt.expiryDateTime.formattedDate;
-          }
           return Scaffold(
             appBar: context.materialYouAppBar(
               context.loc.addDebtLabel,
@@ -113,30 +115,43 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                       ],
                     ),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DatePickerWidget(
-                          onSelected: (date) => debtBloc.currentDateTime = date,
-                          title: context.loc.startDateLabel,
-                          subtitle: startDate ?? context.loc.validDateLabel,
-                          icon: MdiIcons.calendarStart,
-                          lastDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                        ),
-                      ),
-                      Expanded(
-                        child: DatePickerWidget(
-                          onSelected: (date) =>
-                              debtBloc.currentDueDateTime = date,
-                          title: context.loc.dueDateLabel,
-                          subtitle: endDate ?? context.loc.validDateLabel,
-                          icon: MdiIcons.calendarEnd,
-                          lastDate: DateTime(2050),
-                          firstDate: DateTime.now(),
-                        ),
-                      ),
-                    ],
+                  BlocBuilder(
+                    bloc: debtBloc,
+                    buildWhen: (previous, current) =>
+                        current is SelectedDateState,
+                    builder: (context, state) {
+                      String? startDate, endDate;
+                      if (state is SelectedDateState) {
+                        startDate = state.startDateTime.formattedDate;
+                        endDate = state.endDateTime.formattedDate;
+                      }
+                      return Row(
+                        children: [
+                          Expanded(
+                            child: DatePickerWidget(
+                              onSelected: (date) =>
+                                  debtBloc.currentDateTime = date,
+                              title: context.loc.startDateLabel,
+                              subtitle: startDate ?? context.loc.validDateLabel,
+                              icon: MdiIcons.calendarStart,
+                              lastDate: DateTime.now(),
+                              firstDate: DateTime(2000),
+                            ),
+                          ),
+                          Expanded(
+                            child: DatePickerWidget(
+                              onSelected: (date) =>
+                                  debtBloc.currentDueDateTime = date,
+                              title: context.loc.dueDateLabel,
+                              subtitle: endDate ?? context.loc.validDateLabel,
+                              icon: MdiIcons.calendarEnd,
+                              lastDate: DateTime(2050),
+                              firstDate: DateTime.now(),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                   ListTile(
                     title: Text(
@@ -330,6 +345,9 @@ class AmountWidget extends StatelessWidget {
         double? amount = double.tryParse(value);
         BlocProvider.of<DebtsBloc>(context).currentAmount = amount;
       },
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       validator: (value) {
         if (value!.isNotEmpty) {
           return null;

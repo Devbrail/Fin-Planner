@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/presentation/widgets/paisa_card.dart';
+import '../../widgets/paisa_card.dart';
 
 import '../../../../main.dart';
 import '../../../domain/account/entities/account.dart';

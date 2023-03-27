@@ -29,9 +29,9 @@ class AddCategoryPage extends StatefulWidget {
 class _AddCategoryPageState extends State<AddCategoryPage> {
   late final categoryBloc = getIt.get<CategoryBloc>()
     ..add(FetchCategoryFromIdEvent(widget.categoryId));
-  late TextEditingController budgetController = TextEditingController();
-  late TextEditingController categoryController = TextEditingController();
-  late TextEditingController descController = TextEditingController();
+  final budgetController = TextEditingController();
+  final categoryController = TextEditingController();
+  final descController = TextEditingController();
 
   @override
   void dispose() {
@@ -81,8 +81,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           }
         },
         builder: (context, state) {
-          return ScreenTypeLayout.builder(
-            mobile: (_) => Scaffold(
+          return ScreenTypeLayout(
+            mobile: Scaffold(
               appBar: appBar(),
               body: SingleChildScrollView(
                 child: Form(
@@ -144,7 +144,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                 ),
               ),
             ),
-            tablet: (_) => Scaffold(
+            tablet: Scaffold(
               appBar: context.materialYouAppBar(
                 isAddCategory
                     ? context.loc.addCategoryLabel

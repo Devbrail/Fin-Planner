@@ -1,5 +1,6 @@
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt_model.dart';
+import '../../../data/debt/models/transactions_model.dart';
 
 abstract class DebtRepository {
   Future<void> addDebtOrCredit(
@@ -10,6 +11,22 @@ abstract class DebtRepository {
     DateTime dueDateTime,
     DebtType debtType,
   );
+  Future<void> updateDebt({
+    required String description,
+    required String name,
+    required double amount,
+    required DateTime currentDateTime,
+    required DateTime dueDateTime,
+    required DebtType debtType,
+    required int key,
+  });
 
-  Future<DebtModel?> fetchDebtOrCreditFromId(int debtId);
+  DebtModel? fetchDebtOrCreditFromId(int debtId);
+
+  Future<void> addTransaction(
+    double amount,
+    DateTime currentDateTime,
+    int parentId,
+  );
+  List<TransactionsModel> fetchTransactionsFromId(int id);
 }
