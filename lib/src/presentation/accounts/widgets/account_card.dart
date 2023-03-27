@@ -97,10 +97,12 @@ class MobileAccountCard extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: GlassmorphicFlexContainer(
+        child: GlassmorphicContainer(
+          height: 240,
+          width: MediaQuery.of(context).size.width,
           borderRadius: 24,
           blur: 10,
-          border: 2,
+          alignment: Alignment.bottomCenter,
           linearGradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -118,6 +120,7 @@ class MobileAccountCard extends StatelessWidget {
               Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.5),
             ],
           ),
+          border: 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -255,7 +258,9 @@ class TabletAccountCard extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GlassmorphicFlexContainer(
+        child: GlassmorphicContainer(
+          height: 240,
+          width: MediaQuery.of(context).size.width,
           borderRadius: 24,
           blur: 10,
           alignment: Alignment.bottomCenter,
@@ -423,7 +428,9 @@ class DesktopAccountCard extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GlassmorphicFlexContainer(
+        child: GlassmorphicContainer(
+          height: 240,
+          width: MediaQuery.of(context).size.width,
           borderRadius: 24,
           blur: 10,
           alignment: Alignment.bottomCenter,

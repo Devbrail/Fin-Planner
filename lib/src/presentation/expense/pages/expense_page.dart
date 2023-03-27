@@ -78,12 +78,7 @@ class _ExpensePageState extends State<ExpensePage> {
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               color: Theme.of(context).colorScheme.onPrimaryContainer,
             );
-            if (!kDebugMode) {
-              final InAppReview inAppReview = InAppReview.instance;
-              inAppReview
-                  .isAvailable()
-                  .then((value) => inAppReview.requestReview());
-            }
+
             context.pop();
           } else if (state is ExpenseErrorState) {
             context.showMaterialSnackBar(
