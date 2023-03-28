@@ -715,5 +715,9 @@
     "intoCTALabel": "Get started",
     "@intoCTALabel": {
         "description": "Get started label"
+    },
+    "deleteDebtOrCreditLabel": "Deleting the debt/ credit deletes all record related to it. ",
+    "@deleteDebtOrCreditLabel": {
+        "description": "Delete debt or category label"
     }
 }
