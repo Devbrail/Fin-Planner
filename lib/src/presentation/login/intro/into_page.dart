@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:hive_flutter/adapters.dart';
-import '../../../../main.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../widgets/lava/lava_clock.dart';
+import '../../widgets/paisa_annotate_region_widget.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -61,7 +60,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      'Simple way to help control your savings',
+                      context.loc.intoTitleLabel,
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium
@@ -81,7 +80,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                           ),
                           dense: true,
                           title: Text(
-                            'Manage your money with our app',
+                            context.loc.intoSummary1Label,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -100,7 +99,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                           ),
                           dense: true,
                           title: Text(
-                            'Easy expense tracking for a better budget',
+                            context.loc.intoSummary2Label,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -119,7 +118,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                           ),
                           dense: true,
                           title: Text(
-                            'Stay on top of your expenses, anytime, anywhere',
+                            context.loc.intoSummary3Label,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -138,7 +137,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                                   instanceName: BoxType.settings.name)
                               .put(userIntroKey, true),
                           child: Text(
-                            'Get started',
+                            context.loc.intoCTALabel,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge
@@ -203,7 +202,7 @@ class IntoMobileWidget extends StatelessWidget {
                       ),
                 ),
                 Text(
-                  'Simple way to help control your savings',
+                  context.loc.intoTitleLabel,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         color: Theme.of(context).colorScheme.secondary,
                       ),
@@ -220,7 +219,7 @@ class IntoMobileWidget extends StatelessWidget {
                       ),
                       dense: true,
                       title: Text(
-                        'Manage your money with our app',
+                        context.loc.intoSummary1Label,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
@@ -233,7 +232,7 @@ class IntoMobileWidget extends StatelessWidget {
                       ),
                       dense: true,
                       title: Text(
-                        'Easy expense tracking for a better budget',
+                        context.loc.intoSummary2Label,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
@@ -246,7 +245,7 @@ class IntoMobileWidget extends StatelessWidget {
                       ),
                       dense: true,
                       title: Text(
-                        'Stay on top of your expenses, anytime, anywhere',
+                        context.loc.intoSummary3Label,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     )
@@ -280,7 +279,7 @@ class IntoMobileWidget extends StatelessWidget {
                   .put(userIntroKey, true);
             },
             child: Text(
-              'Get started',
+              context.loc.intoCTALabel,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,

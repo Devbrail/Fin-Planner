@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/domain/category/entities/category.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
@@ -16,12 +17,11 @@ class SelectCategoryIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final expenseBloc = BlocProvider.of<ExpenseBloc>(context);
     return ValueListenableBuilder<Box<CategoryModel>>(
       valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
       builder: (context, value, child) {
-        final categories = value.values.toList();
-        categories.sort(((a, b) => a.name.compareTo(b.name)));
+        final List<Category> categories = value.values.toEntities();
+
         if (categories.isEmpty) {
           return ListTile(
             onTap: () => context.pushNamed(addCategoryPath),
@@ -46,7 +46,6 @@ class SelectCategoryIcon extends StatelessWidget {
               ),
               SelectedItem(
                 categories: categories,
-                expenseBloc: expenseBloc,
               )
             ],
           ),
@@ -65,7 +64,6 @@ class SelectCategoryIcon extends StatelessWidget {
               ),
               SelectedItem(
                 categories: categories,
-                expenseBloc: expenseBloc,
               )
             ],
           ),
@@ -79,14 +77,13 @@ class SelectedItem extends StatelessWidget {
   const SelectedItem({
     super.key,
     required this.categories,
-    required this.expenseBloc,
   });
 
-  final List<CategoryModel> categories;
-  final ExpenseBloc expenseBloc;
+  final List<Category> categories;
 
   @override
   Widget build(BuildContext context) {
+    late final expenseBloc = BlocProvider.of<ExpenseBloc>(context);
     return BlocBuilder(
       bloc: expenseBloc,
       builder: (context, state) {
@@ -137,15 +134,17 @@ class SelectedItem extends StatelessWidget {
                     ),
                   );
                 } else {
-                  final category = categories[index - 1];
+                  final Category category = categories[index - 1];
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: FilterChip(
-                      selected: category.key == expenseBloc.selectedCategoryId,
+                      selected:
+                          category.superId == expenseBloc.selectedCategoryId,
                       onSelected: (value) =>
                           expenseBloc.add(ChangeCategoryEvent(category)),
                       avatar: Icon(
-                        color: category.key == expenseBloc.selectedCategoryId
+                        color: category.superId ==
+                                expenseBloc.selectedCategoryId
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.onSurfaceVariant,
                         IconData(
@@ -168,12 +167,12 @@ class SelectedItem extends StatelessWidget {
                           .textTheme
                           .titleMedium
                           ?.copyWith(
-                              color:
-                                  category.key == expenseBloc.selectedCategoryId
-                                      ? Theme.of(context).colorScheme.primary
-                                      : Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant),
+                              color: category.superId ==
+                                      expenseBloc.selectedCategoryId
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant),
                       padding: const EdgeInsets.all(12),
                     ),
                   );

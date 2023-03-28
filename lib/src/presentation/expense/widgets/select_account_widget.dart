@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
+import '../../../core/extensions/account_extension.dart';
 import '../../../data/accounts/model/account_model.dart';
+import '../../../domain/account/entities/account.dart';
 import '../bloc/expense_bloc.dart';
 import 'selectable_item_widget.dart';
 
@@ -21,7 +23,7 @@ class SelectedAccount extends StatelessWidget {
     return ValueListenableBuilder<Box<AccountModel>>(
       valueListenable: getIt.get<Box<AccountModel>>().listenable(),
       builder: (context, value, child) {
-        final accounts = value.values.toList();
+        final accounts = value.values.toEntities();
         if (accounts.isEmpty) {
           return ListTile(
             onTap: () => context.pushNamed(addAccountPath),
@@ -85,7 +87,7 @@ class SelectedItem extends StatelessWidget {
     required this.expenseBloc,
   }) : super(key: key);
 
-  final List<AccountModel> accounts;
+  final List<Account> accounts;
   final ExpenseBloc expenseBloc;
 
   @override
@@ -115,16 +117,16 @@ class SelectedItem extends StatelessWidget {
                     onPressed: () => context.pushNamed(addAccountPath),
                   ),
                 );
+              } else {
+                final account = accounts[index - 1];
+                return ItemWidget(
+                  isSelected: account.superId == expenseBloc.selectedAccountId,
+                  title: account.name,
+                  icon: account.icon,
+                  onPressed: () => expenseBloc.add(ChangeAccountEvent(account)),
+                  subtitle: account.bankName,
+                );
               }
-
-              final account = accounts[index - 1];
-              return ItemWidget(
-                isSelected: account.key == expenseBloc.selectedAccountId,
-                title: account.name,
-                icon: account.icon,
-                onPressed: () => expenseBloc.add(ChangeAccountEvent(account)),
-                subtitle: account.bankName,
-              );
             },
           ),
         );

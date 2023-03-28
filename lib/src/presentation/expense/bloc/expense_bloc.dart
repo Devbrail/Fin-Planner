@@ -10,10 +10,14 @@ import '../../../core/enum/transaction.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../data/category/model/category_model.dart';
 import '../../../data/expense/model/expense_model.dart';
+import '../../../domain/account/entities/account.dart';
 import '../../../domain/account/use_case/get_account_use_case.dart';
+import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
 import '../../../domain/expense/use_case/update_expense_use_case.dart';
+
+import '../pages/expense_page.dart';
 
 part 'expense_event.dart';
 part 'expense_state.dart';
@@ -34,6 +38,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<FetchExpenseFromIdEvent>(_fetchExpenseFromId);
     on<ChangeCategoryEvent>(_changeCategory);
     on<ChangeAccountEvent>(_changeAccount);
+    on<UpdateDateTimeEvent>(_updateDateTime);
   }
 
   final GetExpenseUseCase expenseUseCase;
@@ -148,7 +153,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     ChangeCategoryEvent event,
     Emitter<ExpenseState> emit,
   ) {
-    selectedCategoryId = event.category.key;
+    selectedCategoryId = event.category.superId;
     emit(ChangeCategoryState(event.category));
   }
 
@@ -156,7 +161,15 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     ChangeAccountEvent event,
     Emitter<ExpenseState> emit,
   ) {
-    selectedAccountId = event.account.key;
+    selectedAccountId = event.account.superId;
     emit(ChangeAccountState(event.account));
+  }
+
+  FutureOr<void> _updateDateTime(
+    UpdateDateTimeEvent event,
+    Emitter<ExpenseState> emit,
+  ) {
+    selectedDate = event.dateTime;
+    emit(UpdateDateTimeState(event.dateTime));
   }
 }
