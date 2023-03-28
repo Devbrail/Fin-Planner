@@ -64,3 +64,12 @@ class ChangeAccountState extends ExpenseState {
   @override
   List<Object> get props => [account];
 }
+
+class UpdateDateTimeState extends ExpenseState {
+  final DateTime dateTime;
+
+  const UpdateDateTimeState(this.dateTime);
+
+  @override
+  List<Object> get props => [dateTime];
+}

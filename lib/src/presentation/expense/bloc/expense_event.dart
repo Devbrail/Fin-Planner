@@ -33,13 +33,22 @@ class ChangeExpenseEvent extends ExpenseEvent {
 }
 
 class ChangeCategoryEvent extends ExpenseEvent {
-  final CategoryModel category;
+  final Category category;
 
   const ChangeCategoryEvent(this.category);
 }
 
 class ChangeAccountEvent extends ExpenseEvent {
-  final AccountModel account;
+  final Account account;
 
   const ChangeAccountEvent(this.account);
+}
+
+class UpdateDateTimeEvent extends ExpenseEvent {
+  final DateTime dateTime;
+
+  const UpdateDateTimeEvent(this.dateTime);
+
+  @override
+  List<Object> get props => [dateTime];
 }
