@@ -28,10 +28,8 @@ class DebtLocalDataSourceImpl extends DebtLocalDataSource {
       debtBox.values.firstWhereOrNull((element) => element.superId == debtId);
 
   @override
-  List<TransactionsModel> getTransactionsFromId(int? id) {
-    return transactionsBox.values
-        .where((element) => element.parentId == id)
-        .toList();
+  Iterable<TransactionsModel> getTransactionsFromId(int? id) {
+    return transactionsBox.values.where((element) => element.parentId == id);
   }
 
   @override
@@ -44,5 +42,23 @@ class DebtLocalDataSourceImpl extends DebtLocalDataSource {
   @override
   Future<void> updateDebt(DebtModel debtModel) {
     return debtBox.put(debtModel.superId!, debtModel);
+  }
+
+  @override
+  Future<void> deleteDebtOrCreditFromId(int debtId) {
+    return debtBox.delete(debtId);
+  }
+
+  @override
+  Future<void> deleteTransactionFromId(int transactionId) {
+    return transactionsBox.delete(transactionId);
+  }
+
+  @override
+  Future<void> deleteTransactionsFromId(int parentId) {
+    final Iterable<int> transactionsKeys = transactionsBox.values
+        .where((element) => element.parentId == parentId)
+        .map((e) => e.superId!);
+    return transactionsBox.deleteAll(transactionsKeys);
   }
 }

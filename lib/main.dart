@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 
 import 'src/app.dart';
 import 'src/di/di.dart';
-import 'src/di/module/work.dart';
 
 final getIt = GetIt.instance;
 

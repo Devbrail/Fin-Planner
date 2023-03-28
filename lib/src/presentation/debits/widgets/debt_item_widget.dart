@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/src/core/extensions/debt_extensions.dart';
+import 'package:paisa/src/core/extensions/transaction_extension.dart';
 import 'package:paisa/src/domain/debt/entities/transaction.dart';
 
 import '../../../../main.dart';
@@ -16,7 +17,10 @@ import '../../widgets/paisa_text_field.dart';
 import '../cubit/debts_cubit.dart';
 
 class DebtItemWidget extends StatelessWidget {
-  const DebtItemWidget({super.key, required this.debt});
+  const DebtItemWidget({
+    super.key,
+    required this.debt,
+  });
   final DebtModel debt;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class DebtItemWidget extends StatelessWidget {
       valueListenable: getIt.get<Box<TransactionsModel>>().listenable(),
       builder: (context, value, child) {
         final List<Transaction> transactions =
-            value.getTransactionsFromId(debt.superId).toEntities();
+            value.getTransactionsFromId(debt.superId ?? 0).toEntities();
         final double amount = transactions.fold<double>(
             0, (previousValue, element) => previousValue + element.amount);
         return Padding(

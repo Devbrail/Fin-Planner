@@ -5,6 +5,9 @@ abstract class DebtLocalDataSource {
   Future<void> addDebtOrCredit(DebtModel debt);
   DebtModel? fetchDebtOrCreditFromId(int debtId);
   Future<void> updateDebt(DebtModel debtModel);
-  List<TransactionsModel> getTransactionsFromId(int? id);
+  Iterable<TransactionsModel> getTransactionsFromId(int? id);
+  Future<void> deleteDebtOrCreditFromId(int debtId);
   Future<void> addTransaction(TransactionsModel transactionsModel);
+  Future<void> deleteTransactionsFromId(int parentId);
+  Future<void> deleteTransactionFromId(int transactionId);
 }

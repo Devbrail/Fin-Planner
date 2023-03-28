@@ -54,3 +54,21 @@ class SelectedDateEvent extends DebtsEvent {
   @override
   List<Object> get props => [startDateTime, endDateTime];
 }
+
+class DeleteDebtEvent extends DebtsEvent {
+  final int id;
+
+  const DeleteDebtEvent(this.id);
+
+  @override
+  List<Object?> get props => [id];
+}
+
+class DeleteTransactionEvent extends DebtsEvent {
+  final int id;
+
+  const DeleteTransactionEvent(this.id);
+
+  @override
+  List<Object?> get props => [id];
+}

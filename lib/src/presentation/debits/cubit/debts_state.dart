@@ -64,3 +64,7 @@ class SelectedDateState extends DebtsState {
     );
   }
 }
+
+class DeleteDebtsState extends DebtsState {}
+
+class DeleteTransactionState extends DebtsState {}

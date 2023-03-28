@@ -50,7 +50,7 @@ class DebtRepositoryImpl extends DebtRepository {
   }
 
   @override
-  List<TransactionsModel> fetchTransactionsFromId(int id) {
+  Iterable<TransactionsModel> fetchTransactionsFromId(int id) {
     return dataSource.getTransactionsFromId(id);
   }
 
@@ -73,5 +73,20 @@ class DebtRepositoryImpl extends DebtRepository {
       debtType: debtType,
       superId: key,
     ));
+  }
+
+  @override
+  Future<void> deleteDebtOrCreditFromId(int debtId) {
+    return dataSource.deleteDebtOrCreditFromId(debtId);
+  }
+
+  @override
+  Future<void> deleteTransactionFromId(int transactionId) {
+    return dataSource.deleteTransactionFromId(transactionId);
+  }
+
+  @override
+  Future<void> deleteTransactionsFromId(int parentId) {
+    return dataSource.deleteTransactionsFromId(parentId);
   }
 }

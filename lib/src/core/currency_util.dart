@@ -42,7 +42,7 @@ extension MappingString on String {
     if (model.symbolOnLeft) {
       return '${model.symbol}$this';
     } else {
-      return '${this}${model.symbol}';
+      return '$this${model.symbol}';
     }
   }
 }

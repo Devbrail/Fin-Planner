@@ -33,8 +33,8 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
   }
 
   @override
-  Future<void> clearExpense(int key) async {
-    await expenseBox.delete(key);
+  Future<void> clearExpense(int key) {
+    return expenseBox.delete(key);
   }
 
   @override

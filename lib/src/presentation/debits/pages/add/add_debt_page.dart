@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/core/extensions/transaction_extension.dart';
+import 'package:paisa/src/domain/debt/entities/transaction.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
@@ -26,14 +28,17 @@ class AddOrEditDebtPage extends StatefulWidget {
 }
 
 class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
-  late final bool isUpdate = widget.debtId != null;
-  late final debtBloc = getIt.get<DebtsBloc>()
-    ..add(FetchDebtOrCreditFromIdEvent(widget.debtId))
-    ..add(const ChangeDebtTypeEvent(DebtType.debt));
+  late final bool isUpdate = widget.debtId == null;
+  final DebtsBloc debtBloc = getIt.get();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final amountController = TextEditingController();
   final nameController = TextEditingController();
   final descController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    debtBloc.add(FetchDebtOrCreditFromIdEvent(widget.debtId));
+  }
 
   @override
   void dispose() {
@@ -80,42 +85,49 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
             appBar: context.materialYouAppBar(
               context.loc.addDebtLabel,
               actions: [
-                IconButton(
-                  onPressed: () => paisaAlertDialog(
-                    context,
-                    title: Text(context.loc.dialogDeleteTitleLabel),
-                    child: RichText(
-                      text: TextSpan(
-                        text: context.loc.deleteDebtOrCreditLabel,
-                        children: const [
-                          TextSpan(
-                              text: 'Are you sure?',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )),
-                        ],
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ),
-                    confirmationButton: TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                        foregroundColor:
-                        Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                      onPressed: () {
-                        debtBloc.currentDebt?.delete();
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Delete'),
-                    ),
-                  ).then((value) => context.pop()),
-                  icon: Icon(
-                    Icons.delete_rounded,
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-                )
+                isUpdate
+                    ? const SizedBox.shrink()
+                    : IconButton(
+                        onPressed: () => paisaAlertDialog(
+                          context,
+                          title: Text(context.loc.dialogDeleteTitleLabel),
+                          child: RichText(
+                            text: TextSpan(
+                              text: context.loc.deleteDebtOrCreditLabel,
+                              children: const [
+                                TextSpan(
+                                  text: 'Are you sure?',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ),
+                          confirmationButton: TextButton(
+                            style: TextButton.styleFrom(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              backgroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                              foregroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer,
+                            ),
+                            onPressed: () {
+                              debtBloc.add(DeleteDebtEvent(
+                                  int.tryParse(widget.debtId!) ?? 0));
+                            },
+                            child: const Text('Delete'),
+                          ),
+                        ).then((value) => context.pop()),
+                        icon: Icon(
+                          Icons.delete_rounded,
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      )
               ],
             ),
             body: Form(
@@ -127,10 +139,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       children: [
-                        DebtToggleButtonsWidget(
-                          onSelected: (p0) => debtBloc.currentDebtType = p0,
-                          selectedType: debtBloc.currentDebtType,
-                        ),
+                        DebtToggleButtonsWidget(debtsBloc: debtBloc),
                         const SizedBox(height: 16),
                         AmountWidget(controller: amountController),
                         const SizedBox(height: 16),
@@ -192,20 +201,28 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                     valueListenable:
                         getIt.get<Box<TransactionsModel>>().listenable(),
                     builder: (context, value, child) {
-                      final result = value.values
-                          .where((element) =>
-                              element.parentId ==
-                              (int.tryParse(widget.debtId ?? '') ?? -1))
-                          .toList();
+                      final int? parentId = int.tryParse(widget.debtId ?? '');
+                      if (parentId == null) return const SizedBox.shrink();
+                      final List<Transaction> transactions =
+                          value.getTransactionsFromId(parentId);
+
                       return ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: result.length,
+                        itemCount: transactions.length,
                         itemBuilder: (_, index) {
-                          final transaction = result[index];
+                          final Transaction transaction = transactions[index];
                           return ListTile(
-                            trailing: Text(transaction.amount.toCurrency()),
+                            leading: IconButton(
+                              onPressed: () {
+                                debtBloc.add(
+                                  DeleteTransactionEvent(transaction.superId!),
+                                );
+                              },
+                              icon: const Icon(Icons.delete),
+                            ),
                             title: Text(transaction.now.formattedDate),
+                            trailing: Text(transaction.amount.toCurrency()),
                           );
                         },
                       );

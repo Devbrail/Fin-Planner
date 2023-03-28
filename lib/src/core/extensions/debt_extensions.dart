@@ -15,17 +15,3 @@ extension AccountMapping on DebtModel {
         superId: superId,
       );
 }
-
-extension MappingOnTransaction on TransactionsModel {
-  Transaction toEntity() => Transaction(
-        amount: amount,
-        now: now,
-        parentId: parentId,
-      );
-}
-
-extension MappingOnTransactions on List<TransactionsModel> {
-  List<Transaction> toEntities() => map((e) => e.toEntity())
-      .sorted((a, b) => a.now.compareTo(b.now))
-      .toList();
-}

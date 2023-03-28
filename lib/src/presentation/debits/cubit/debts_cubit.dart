@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/domain/debt/use_case/delete_transactions_use_case.dart';
 
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt_model.dart';
@@ -21,14 +22,17 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     required this.getTransactionsUseCase,
     required this.addTransactionUseCase,
     required this.updateDebtUseCase,
+    required this.deleteDebtUseCase,
+    required this.deleteTransactionsUseCase,
+    required this.deleteTransactionUseCase,
   }) : super(DebtsInitial()) {
-    on<AddTransactionToDebtEvent>(
-        (event, emit) => _addTransactionToDebt(event, emit));
-    on<ChangeDebtTypeEvent>((event, emit) => _changeType(event, emit));
-    on<FetchDebtOrCreditFromIdEvent>(
-        (event, emit) => _fetchDebtOrCreditFromId(event, emit));
-    on<AddOrUpdateEvent>((event, emit) => addDebt(event, emit));
+    on<AddTransactionToDebtEvent>(_addTransactionToDebt);
+    on<ChangeDebtTypeEvent>(_changeType);
+    on<FetchDebtOrCreditFromIdEvent>(_fetchDebtOrCreditFromId);
+    on<AddOrUpdateEvent>(addDebt);
     on<SelectedDateEvent>(selectedDateEvent);
+    on<DeleteDebtEvent>(_deleteDebit);
+    on<DeleteTransactionEvent>(_deleteTransaction);
   }
 
   final AddDebtUseCase addDebtUseCase;
@@ -36,6 +40,9 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
   final GetTransactionsUseCase getTransactionsUseCase;
   final AddTransactionUseCase addTransactionUseCase;
   final UpdateDebtUseCase updateDebtUseCase;
+  final DeleteDebtUseCase deleteDebtUseCase;
+  final DeleteTransactionsUseCase deleteTransactionsUseCase;
+  final DeleteTransactionUseCase deleteTransactionUseCase;
 
   DebtType currentDebtType = DebtType.debt;
   Debt? currentDebt;
@@ -70,7 +77,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     Emitter<DebtsState> emit,
   ) async {
     final int? debtId = int.tryParse(event.id ?? '');
-    if (debtId == null) return emit(const DebtErrorState('Debt not found'));
+    if (debtId == null) return;
 
     final Debt? debt = getDebtUseCase(debtId);
     if (debt != null) {
@@ -82,8 +89,10 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
       currentDebtType = debt.debtType;
       currentDebt = debt;
       emit(DebtsSuccessState(debt));
-      Future.delayed(Duration.zero).then((value) =>
-          add(SelectedDateEvent(currentDateTime!, currentDueDateTime!)));
+
+      Future.delayed(Duration.zero).then((value) {
+        add(ChangeDebtTypeEvent(currentDebtType));
+      });
     } else {
       emit(const DebtErrorState('Debt not found'));
     }
@@ -145,5 +154,22 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     currentDateTime = event.startDateTime;
     currentDueDateTime = event.endDateTime;
     emit(SelectedDateState(event.startDateTime, event.endDateTime));
+  }
+
+  FutureOr<void> _deleteDebit(
+    DeleteDebtEvent event,
+    Emitter<DebtsState> emit,
+  ) async {
+    await deleteDebtUseCase(event.id);
+    await deleteTransactionsUseCase(event.id);
+    emit(DeleteDebtsState());
+  }
+
+  FutureOr<void> _deleteTransaction(
+    DeleteTransactionEvent event,
+    Emitter<DebtsState> emit,
+  ) async {
+    await deleteTransactionUseCase(event.id);
+    emit(DeleteDebtsState());
   }
 }

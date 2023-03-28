@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import '../../../core/extensions/debt_extensions.dart';
+import '../../../core/extensions/transaction_extension.dart';
 import '../entities/transaction.dart';
 import '../repository/debit_repository.dart';
 
