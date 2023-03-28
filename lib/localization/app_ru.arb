@@ -1,0 +1,700 @@
+{
+    "appTitle": "Paisa",
+    "@appTitle": {
+        "description": "The app name"
+    },
+    "homeLabel": "Главная",
+    "@homeLabel": {
+        "description": "Home label"
+    },
+    "dueDateLabel": "Дата окончания",
+    "@dueDateLabel": {
+        "description": "End date label"
+    },
+    "startDateLabel": "Дата начала",
+    "@startDateLabel": {
+        "description": "Start date label"
+    },
+    "categoryLabel": "Категория",
+    "@categoryLabel": {
+        "description": "Category label"
+    },
+    "enterDebtLabel": "Введите сумму долга",
+    "@enterDebtLabel": {
+        "description": "Enter debt amount label"
+    },
+    "enterCreditLabel": "Введите сумму кредита",
+    "@enterCreditLabel": {
+        "description": "Enter credit amount label"
+    },
+    "addCategoryLabel": "Добавить категорию",
+    "@addCategoryLabel": {
+        "description": "Add Category label"
+    },
+    "addExpenseLabel": "Добавить расходы",
+    "@addExpenseLabel": {
+        "description": "Add Expense label"
+    },
+    "updateExpenseLabel": "Обновление расходов",
+    "@updateExpenseLabel": {
+        "description": "Update Expense label"
+    },
+    "updateCardLabel": "Обновление карты",
+    "@updateCardLabel": {
+        "description": "Update card label"
+    },
+    "addAccountLabel": "Добавить счет",
+    "@addAccountLabel": {
+        "description": "Add Account label"
+    },
+    "categoriesLabel": "Категории",
+    "@categoriesLabel": {
+        "description": "Categories label"
+    },
+    "accountsLabel": "Счета",
+    "@accountsLabel": {
+        "description": "Accounts label"
+    },
+    "budgetLabel": "Бюджет",
+    "@budgetLabel": {
+        "description": "Budget label"
+    },
+    "welcomeMessage": "С возвращением!",
+    "@welcomeMessage": {
+        "description": "Budget label"
+    },
+    "settingsLabel": "Настройки",
+    "@settingsLabel": {
+        "description": "Settings label"
+    },
+    "localAppLabel": "Блокировка приложения",
+    "@localAppLabel": {
+        "description": "Lock app label"
+    },
+    "totalLabel": "Итог",
+    "@totalLabel": {
+        "description": "Total label"
+    },
+    "expenseLabel": "Расходы",
+    "@expenseLabel": {
+        "description": "Expense label"
+    },
+    "expensesLabel": "Расходы",
+    "@expensesLabel": {
+        "description": "Expenses label"
+    },
+    "depositLabel": "Депозит",
+    "@depositLabel": {
+        "description": "Deposit label"
+    },
+    "dailyLabel": "Ежедневно",
+    "@dailyLabel": {
+        "description": "Daily label"
+    },
+    "weeklyLabel": "Еженедельно",
+    "@weeklyLabel": {
+        "description": "Weekly label"
+    },
+    "monthlyLabel": "Ежемесячно",
+    "@monthlyLabel": {
+        "description": "Monthly label"
+    },
+    "yearlyLabel": "Ежегодно",
+    "@yearlyLabel": {
+        "description": "Yearly label"
+    },
+    "allLabel": "Все",
+    "@allLabel": {
+        "description": "All label"
+    },
+    "transactionHistoryLabel": "История транзакций",
+    "@transactionHistoryLabel": {
+        "description": "Transaction history label"
+    },
+    "selectCategoryIconLabel": "Выберите значок категории",
+    "@selectCategoryIconLabel": {
+        "description": "Select category icon label"
+    },
+    "descriptionLabel": "Описание",
+    "@descriptionLabel": {
+        "description": "Description label"
+    },
+    "cashLabel": "Деньги",
+    "@cashLabel": {
+        "description": "Cash label"
+    },
+    "debitCardLabel": "Дебетовая карта",
+    "@debitCardLabel": {
+        "description": "Debit Card label"
+    },
+    "creditCardLabel": "Кредитная карта",
+    "@creditCardLabel": {
+        "description": "Credit Card label"
+    },
+    "cardHolderLabel": "Имя владельца карты",
+    "@cardHolderLabel": {
+        "description": "Cardholder name label"
+    },
+    "accountNameLabel": "Название счета",
+    "@accountNameLabel": {
+        "description": "Account label"
+    },
+    "lastFourDigitLabel": "Последние четыре цифры",
+    "@lastFourDigitLabel": {
+        "description": "Last four digit number label"
+    },
+    "addCardLabel": "Добавить карту",
+    "@addCardLabel": {
+        "description": "Add card label"
+    },
+    "addedCardLabel": "Счет добавлен",
+    "@addedCardLabel": {
+        "description": "Account added label"
+    },
+    "updatedCardLabel": "Счет обновлен",
+    "@updatedCardLabel": {
+        "description": "Account updated label"
+    },
+    "deletedCardLabel": "Счет удален",
+    "@deletedCardLabel": {
+        "description": "Account deleted label"
+    },
+    "successAddCategoryLabel": "Категория добавлена успешно",
+    "@successAddCategoryLabel": {
+        "description": "Category added successful label"
+    },
+    "validNameLabel": "Введите действительное имя",
+    "@validNameLabel": {
+        "description": "Enter valid name label"
+    },
+    "profileLabel": "Профиль",
+    "@profileLabel": {
+        "description": "Profile label"
+    },
+    "themeLabel": "Тема",
+    "@themeLabel": {
+        "description": "Theme label"
+    },
+    "reminderLabel": "Напоминание",
+    "@reminderLabel": {
+        "description": "Reminder label"
+    },
+    "reminderDescriptionLabel": "Показывать уведомления о расписании для добавления расходов",
+    "@reminderDescriptionLabel": {
+        "description": "Show schedule notifications to add expense label"
+    },
+    "chooseThemeLabel": "Выберите тему",
+    "@chooseThemeLabel": {
+        "description": "Choose theme label"
+    },
+    "updateLabel": "Обновить",
+    "@updateLabel": {
+        "description": "Update label"
+    },
+    "userNameLabel": "Имя пользователя",
+    "@userNameLabel": {
+        "description": "User name label"
+    },
+    "selectedCountryLabel": "Выберите валюту",
+    "@selectedCountryLabel": {
+        "description": "Select currency label"
+    },
+    "errorAuthLabel": "Ошибка аутентификации",
+    "@errorAuthLabel": {
+        "description": "Error authentication label"
+    },
+    "errorNoCardsLabel": "Карт нет",
+    "@errorNoCardsLabel": {
+        "description": "No cards label"
+    },
+    "errorNoCardsDescriptionLabel": "Добавьте расходы, которые будут отображаться здесь",
+    "@errorNoCardsDescriptionLabel": {
+        "description": "No cards description label"
+    },
+    "errorNoCatagoriesLabel": "Категорий нет",
+    "@errorNoCatagoriesLabel": {
+        "description": "No categories label"
+    },
+    "errorNoCategoriesDescriptionLabel": "Добавьте несколько категорий, и они появятся здесь",
+    "@errorNoCategoriesDescriptionLabel": {
+        "description": "No category description label"
+    },
+    "errorNoBudgetLabel": "Обзора бюджета нет",
+    "@errorNoBudgetLabel": {
+        "description": "Empty in budget overview label"
+    },
+    "errorNoBudgetDescriptionLabel": "Добавьте некоторые расходы, и обзор бюджета появится здесь",
+    "@errorNoBudgetDescriptionLabel": {
+        "description": "No budget overview description label"
+    },
+    "cardholderLabel": "Держатель карты",
+    "@cardholderLabel": {
+        "description": "CardHolder label"
+    },
+    "expenseAddedSuccessfulLabel": "Расходы добавлены",
+    "@expenseAddedSuccessfulLabel": {
+        "description": "Expense added label"
+    },
+    "expenseUpdateSuccessfulLabel": "Расходы обновлены",
+    "@expenseUpdateSuccessfulLabel": {
+        "description": "Expense updated label"
+    },
+    "expenseDeletedSuccessfulLabel": "Расходы удалены",
+    "@expenseDeletedSuccessfulLabel": {
+        "description": "Expense deleted label"
+    },
+    "expenseNameLabel": "Название расхода",
+    "@expenseNameLabel": {
+        "description": "Expense name label"
+    },
+    "amountLabel": "Сумма",
+    "@amountLabel": {
+        "description": "Amount label"
+    },
+    "initialAmountLabel": "Первоначальная сумма",
+    "@initialAmountLabel": {
+        "description": "Initial amount label"
+    },
+    "validAmountLabel": "Введите действительную сумму",
+    "@validAmountLabel": {
+        "description": "Enter valid amount label"
+    },
+    "dateLabel": "Дата",
+    "@dateLabel": {
+        "description": "date label"
+    },
+    "validDateLabel": "Выберите дату",
+    "@validDateLabel": {
+        "description": "Select date label"
+    },
+    "addLabel": "Добавить",
+    "@addLabel": {
+        "description": "add label"
+    },
+    "selectAccountLabel": "Выберите счет",
+    "@selectAccountLabel": {
+        "description": "Select account label"
+    },
+    "selectCategoryLabel": "Выберите категорию",
+    "@selectCategoryLabel": {
+        "description": "Select category label"
+    },
+    "socialLinksLabel": "Социальные сети",
+    "@socialLinksLabel": {
+        "description": "Social links label"
+    },
+    "telegramLabel": "Telegram",
+    "@telegramLabel": {
+        "description": "Telegram label"
+    },
+    "telegramGroupLabel": "Группа для отслеживания и публикации ошибок и запросов о возможностях",
+    "@telegramGroupLabel": {
+        "description": "A group to follow and post bugs and feature requests label"
+    },
+    "budgetOverViewLabel": "Обзор бюджета",
+    "@budgetOverViewLabel": {
+        "description": "Budget overview label"
+    },
+    "noResultFoundLabel": "Результат не найден",
+    "@noResultFoundLabel": {
+        "description": "No result found label"
+    },
+    "noCategoryLabel": "Категория не выбрана",
+    "@noCategoryLabel": {
+        "description": "No category label"
+    },
+    "noAccountAvailableLabel": "Счет не выбран",
+    "@noAccountAvailableLabel": {
+        "description": "No account label"
+    },
+    "privacyPolicyLabel": "Политика и конфиденциальность",
+    "@privacyPolicyLabel": {
+        "description": "Privacy & Policy label"
+    },
+    "githubLabel": "Github",
+    "@githubLabel": {
+        "description": "Github label"
+    },
+    "versionLabel": "Версия",
+    "@versionLabel": {
+        "description": "Github label"
+    },
+    "versionNumber": "v{version}",
+    "@versionNumber": {
+        "description": "Version number label",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "deleteAccountLabel": "Удаление счета удаляет все расходы, которые связаны с этим счетом ",
+    "@deleteAccountLabel": {
+        "description": "Delete account label"
+    },
+    "deleteCategoryLabel": "Удаление категории удаляет все расходы, которые связаны с этой категорией ",
+    "@deleteCategoryLabel": {
+        "description": "Delete category label"
+    },
+    "deleteExpenseLabel": "Расход будет окончательно удален со счета",
+    "@deleteExpenseLabel": {
+        "description": "Version number label"
+    },
+    "dialogDeleteTitleLabel": "Удалить навсегда?",
+    "@dialogDeleteTitleLabel": {
+        "description": "Permanently delete label"
+    },
+    "updatedCategoryLabel": "Категория обновлена",
+    "@updatedCategoryLabel": {
+        "description": "Category updated label"
+    },
+    "doneLabel": "Готово",
+    "@doneLabel": {
+        "description": "Done label"
+    },
+    "cancelLabel": "Отмена",
+    "@cancelLabel": {
+        "description": "Cancel label"
+    },
+    "customLabel": "Пользовательский",
+    "@customLabel": {
+        "description": "Custom label"
+    },
+    "accentColorLabel": "Цвет акцента",
+    "@accentColorLabel": {
+        "description": "Accent color label"
+    },
+    "dynamicColorLabel": "Динамический",
+    "@dynamicColorLabel": {
+        "description": "Dynamic label"
+    },
+    "pickColorLabel": "Выберите цвет",
+    "@pickColorLabel": {
+        "description": "Pick color label"
+    },
+    "pickColorDescLabel": "Установите цвет в соответствии с вашей категорией",
+    "@pickColorDescLabel": {
+        "description": "Pick color label"
+    },
+    "colorsLabel": "Цвета",
+    "@colorsLabel": {
+        "description": "Colors label"
+    },
+    "othersLabel": "Другие",
+    "@othersLabel": {
+        "description": "Others label"
+    },
+    "githubTextLabel": "Форк проекта на GitHub",
+    "@githubTextLabel": {
+        "description": "GitHub text label"
+    },
+    "madeWithLoveInIndiaLabel": "Сделано с ♥ в Индии",
+    "@madeWithLoveInIndiaLabel": {
+        "description": "Made with ♥ in India label"
+    },
+    "updateCategoryLabel": "Обновить категорию",
+    "@updateCategoryLabel": {
+        "description": "Made with ♥ in India label"
+    },
+    "accountInfoLabel": "Информация",
+    "@accountInfoLabel": {
+        "description": "information label"
+    },
+    "accountInfoDescLabel": "Введенные вами данные не передаются никому, включая нас. Он используется только для визуального представления информации о счете, вы можете ввести и ложную информацию",
+    "@accountInfoDescLabel": {
+        "description": "information label"
+    },
+    "nextLabel": "Далее",
+    "@nextLabel": {
+        "description": "Next label"
+    },
+    "imageLabel": "Изображение",
+    "@imageLabel": {
+        "description": "Image label"
+    },
+    "welcomeLabel": "Привет, добро пожаловать в",
+    "@welcomeLabel": {
+        "description": "Welcome label"
+    },
+    "welcomeDescLabel": "Как мы должны вас называть",
+    "@welcomeDescLabel": {
+        "description": "Welcome desc label"
+    },
+    "nameLabel": "Имя",
+    "@nameLabel": {
+        "description": "Name label"
+    },
+    "enterNameLabel": "Введите имя",
+    "@enterNameLabel": {
+        "description": "Enter name label"
+    },
+    "imageDescLabel": "Давайте установим ваше изображение",
+    "@imageDescLabel": {
+        "description": "Image desc label"
+    },
+    "backLabel": "Назад",
+    "@backLabel": {
+        "description": "Back label"
+    },
+    "setBudgetLabel": "Установите бюджет для категории",
+    "@setBudgetLabel": {
+        "description": "Set budget label"
+    },
+    "incomeLabel": "Доход",
+    "@incomeLabel": {
+        "description": "income label"
+    },
+    "outcomeLabel": "Потрачено",
+    "@outcomeLabel": {
+        "description": "outcome label"
+    },
+    "thisMonthLabel": "В этом месяце",
+    "@thisMonthLabel": {
+        "description": "This month label"
+    },
+    "totalBalanceLabel": "Общий баланс",
+    "@totalBalanceLabel": {
+        "description": "Total balance label"
+    },
+    "summaryLabel": "Сводка",
+    "@summaryLabel": {
+        "description": "Summary label"
+    },
+    "acceptLabel": "Принять",
+    "@acceptLabel": {
+        "description": "Accept label"
+    },
+    "okLabel": "Oк",
+    "@okLabel": {
+        "description": "Ok label"
+    },
+    "searchMessageLabel": "Начните что-нибудь искать!",
+    "@searchMessageLabel": {
+        "description": "search message label"
+    },
+    "emptySearchMessageLabel": "Похоже, ничего не найдено!",
+    "@emptySearchMessageLabel": {
+        "description": "empty search message label"
+    },
+    "emptyExpensesMessage": "Добавьте некоторые расходы, которые будут отображаться здесь",
+    "@emptyExpensesMessage": {
+        "description": "empty search message label"
+    },
+    "balanceLabel": "Баланс",
+    "@balanceLabel": {
+        "description": "Balance label"
+    },
+    "selectIconLabel": "Выберите значок",
+    "@selectIconLabel": {
+        "description": "Balance label"
+    },
+    "selectIconDescLabel": "Нажмите для выбора значка",
+    "@selectIconDescLabel": {
+        "description": "Balance label"
+    },
+    "incomeNameLabel": "Наименование дохода",
+    "@incomeNameLabel": {
+        "description": "income name label"
+    },
+    "currencySignLabel": "Знак валюты",
+    "@currencySignLabel": {
+        "description": "Currency sign label"
+    },
+    "incomeAddedSuccessfulLabel": "Доход добавлен",
+    "@incomeAddedSuccessfulLabel": {
+        "description": "Expense added label"
+    },
+    "incomeUpdateSuccessfulLabel": "Доход обновлен",
+    "@incomeUpdateSuccessfulLabel": {
+        "description": "Expense updated label"
+    },
+    "incomeDeletedSuccessfulLabel": "Доход удален",
+    "@incomeDeletedSuccessfulLabel": {
+        "description": "Expense deleted label"
+    },
+    "expenseByCategoryLabel": "Расходы по категориям",
+    "@expenseByCategoryLabel": {
+        "description": "Expense by category label"
+    },
+    "backupAndRestoreLabel": "Резервное копирование и восстановление",
+    "@backupAndRestoreLabel": {
+        "description": "Backup and Restore label"
+    },
+    "backupAndRestoreDescLabel": "Резервное копирование и восстановление расходов, счетов и категорийs",
+    "@backupAndRestoreDescLabel": {
+        "description": "Backup and restore your data label"
+    },
+    "createLabel": "Создать",
+    "@createLabel": {
+        "description": "create label"
+    },
+    "restoreLabel": "Восстановить",
+    "@restoreLabel": {
+        "description": "Restore label"
+    },
+    "creatingBackupLabel": "Создание резервной копии",
+    "@creatingBackupLabel": {
+        "description": "Creating backup label"
+    },
+    "restoringBackupLabel": "Восстановление резервной копии",
+    "@restoringBackupLabel": {
+        "description": "Creating backup label"
+    },
+    "saveAsCSVLabel": "Сохранить как CSV",
+    "@saveAsCSVLabel": {
+        "description": "Save as CSV label"
+    },
+    "saveAsCSVDescLabel": "Экспорт данных в формат файла CSV",
+    "@saveAsCSVDescLabel": {
+        "description": "Save as CSV label"
+    },
+    "transferLabel": "Передача",
+    "@transferLabel": {
+        "description": "Transfer label"
+    },
+    "appRateLabel": "Оценить приложение",
+    "@appRateLabel": {
+        "description": "Rate label"
+    },
+    "appRateDescLabel": "Вам нравится это приложение? Сообщите нам в Google Play, как сделать его еще лучше.",
+    "@appRateDescLabel": {
+        "description": "Rate label"
+    },
+    "raiseABugOrRequestLabel": "Сообщить об ошибке или запрос",
+    "@raiseABugOrRequestLabel": {
+        "description": "Raise a bug or request label"
+    },
+    "raiseABugOrRequestDescLabel": "Нашли ошибку или нужно реализовать какую-то функцию - спрашивайте.",
+    "@raiseABugOrRequestDescLabel": {
+        "description": "Found a bug or need a feature to implement ask away label"
+    },
+    "transferNameLabel": "Название перевода",
+    "@transferNameLabel": {
+        "description": "Transfer name label"
+    },
+    "debtsLabel": "Долги",
+    "@debtsLabel": {
+        "description": "Debts label"
+    },
+    "debtLabel": "Долг",
+    "@debtLabel": {
+        "description": "Debts label"
+    },
+    "creditLabel": "Кредит",
+    "@creditLabel": {
+        "description": "Credit label"
+    },
+    "enterCategoryLabel": "Введите категорию",
+    "@enterCategoryLabel": {
+        "description": "Enter category label"
+    },
+    "addDebtLabel": "Добавить долг",
+    "@addDebtLabel": {
+        "description": "Add debt label"
+    },
+    "addCreditLabel": "Добавить кредит",
+    "@addCreditLabel": {
+        "description": "Add credit label"
+    },
+    "enterBudgetLabel": "Введите бюджет",
+    "@enterBudgetLabel": {
+        "description": "Enter budget label"
+    },
+    "enterDescriptionLabel": "Введите описание",
+    "@enterDescriptionLabel": {
+        "description": "Enter description label"
+    },
+    "validDescriptionLabel": "Введите действительное описание",
+    "@validDescriptionLabel": {
+        "description": "Enter valid description label"
+    },
+    "payDebtLabel": "Выплатить долг",
+    "@payDebtLabel": {
+        "description": "Pay debt label"
+    },
+    "payCreditLabel": "Оплатить кредит",
+    "@payCreditLabel": {
+        "description": "Pay credit label"
+    },
+    "enterAmountLabel": "Введите сумму",
+    "@enterAmountLabel": {
+        "description": "Enter amount label"
+    },
+    "emptyDebtsLabel": "Долгов нет",
+    "@emptyDebtsLabel": {
+        "description": "Empty in debts label"
+    },
+    "emptyDebtsDescLabel": "Похоже, у вас нет долгов, добавьте их, и они появятся здесь ",
+    "@emptyDebtsDescLabel": {
+        "description": "Looks like you have no debts label"
+    },
+    "emptyCreditLabel": "Кредитов нет",
+    "@emptyCreditLabel": {
+        "description": "Empty in credits label"
+    },
+    "emptyCreditDescLabel": "Похоже, что у вас нет кредитов, добавьте их, они появятся здесь ",
+    "@emptyCreditDescLabel": {
+        "description": "Looks like you have no credits label"
+    },
+    "enterInitialAmountLabel": "Введите начальную сумму",
+    "@enterInitialAmountLabel": {
+        "description": "Enter initial amount label"
+    },
+    "enterNumberOptionalLabel": "Введите последние 4 цифры (необязательно)",
+    "@enterNumberOptionalLabel": {
+        "description": "Optional number"
+    },
+    "enterAccountNameLabel": "Введите имя счета",
+    "@enterAccountNameLabel": {
+        "description": "Enter account name label"
+    },
+    "enterCardHolderNameLabel": "Введите имя держателя карты",
+    "@enterCardHolderNameLabel": {
+        "description": "Enter account name label"
+    },
+    "searchLabel": "Поиск",
+    "@searchLabel": {
+        "description": "Search label"
+    },
+    "addNewLabel": "Добавить новый",
+    "@addNewLabel": {
+        "description": "Add new label"
+    },
+    "deleteLabel": "Удалить",
+    "@deleteLabel": {
+        "description": "Delete label"
+    },
+    "appBarSearchLabel": "Поиск расходов, счетов, категорий",
+    "@appBarSearchLabel": {
+        "description": "Delete label"
+    },
+    "noTransactionLabel": "Транзакций нет",
+    "@noTransactionLabel": {
+        "description": "Empty in transaction"
+    },
+    "enterSymbolLabel": "Введите символ",
+    "@enterSymbolLabel": {
+        "description": "Enter symbol"
+    },
+    "leftSymbolLabel": "Символ слева",
+    "@leftSymbolLabel": {
+        "description": "Symbol on left label"
+    },
+    "rightSymbolLabel": "Символ справа",
+    "@rightSymbolLabel": {
+        "description": "Symbol on right label"
+    },
+    "customSymbolLabel": "Пользовательский символ",
+    "@customSymbolLabel": {
+        "description": "Custom symbol label"
+    },
+    "selectCurrencyLabel": "Выберите валюту",
+    "@selectCurrencyLabel": {
+        "description": "Select currency label"
+    }
+    ,
+    "overviewLabel": "Обзор",
+    "@overviewLabel": {
+        "description": "Overview label"
+    }
+}
