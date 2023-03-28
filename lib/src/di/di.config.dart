@@ -13,7 +13,7 @@ import 'package:paisa/src/data/accounts/data_sources/local_account_data_manager.
     as _i22;
 import 'package:paisa/src/data/accounts/data_sources/local_account_data_manager_impl.dart'
     as _i23;
-import 'package:paisa/src/data/accounts/model/account_model.dart' as _i9;
+import 'package:paisa/src/data/accounts/model/account_model.dart' as _i6;
 import 'package:paisa/src/data/accounts/repository/account_repository_impl.dart'
     as _i33;
 import 'package:paisa/src/data/category/data_sources/category_local_data_source.dart'
@@ -29,15 +29,15 @@ import 'package:paisa/src/data/debt/data_sources/debt_local_data_source.dart'
     as _i12;
 import 'package:paisa/src/data/debt/data_sources/debt_local_data_source_impl.dart'
     as _i13;
-import 'package:paisa/src/data/debt/models/debt_model.dart' as _i6;
-import 'package:paisa/src/data/debt/models/transactions_model.dart' as _i5;
+import 'package:paisa/src/data/debt/models/debt_model.dart' as _i8;
+import 'package:paisa/src/data/debt/models/transactions_model.dart' as _i9;
 import 'package:paisa/src/data/debt/repository/debt_repository_impl.dart'
     as _i15;
 import 'package:paisa/src/data/expense/data_sources/local_expense_data_manager.dart'
     as _i26;
 import 'package:paisa/src/data/expense/data_sources/local_expense_data_manager_impl.dart'
     as _i27;
-import 'package:paisa/src/data/expense/model/expense_model.dart' as _i8;
+import 'package:paisa/src/data/expense/model/expense_model.dart' as _i5;
 import 'package:paisa/src/data/expense/repository/expense_repository_impl.dart'
     as _i45;
 import 'package:paisa/src/data/settings/authenticate.dart' as _i3;
@@ -140,20 +140,20 @@ _i1.GetIt init(
   );
   final hiveModule = _$HiveModule();
   gh.singleton<_i3.Authenticate>(_i3.Authenticate());
+  gh.factory<_i4.Box<_i5.ExpenseModel>>(() => hiveModule.expenseBox);
+  gh.singleton<_i4.Box<_i6.AccountModel>>(hiveModule.accountBox);
+  gh.singleton<_i4.Box<_i7.CategoryModel>>(hiveModule.categoryBox);
+  gh.singleton<_i4.Box<_i8.DebtModel>>(hiveModule.debtsBox);
+  gh.singleton<_i4.Box<_i9.TransactionsModel>>(hiveModule.transactionsBox);
   gh.singleton<_i4.Box<dynamic>>(
     hiveModule.boxDynamic,
     instanceName: 'settings',
   );
-  gh.singleton<_i4.Box<_i5.TransactionsModel>>(hiveModule.transactionsBox);
-  gh.singleton<_i4.Box<_i6.DebtModel>>(hiveModule.debtsBox);
-  gh.singleton<_i4.Box<_i7.CategoryModel>>(hiveModule.categoryBox);
-  gh.factory<_i4.Box<_i8.ExpenseModel>>(() => hiveModule.expenseBox);
-  gh.singleton<_i4.Box<_i9.AccountModel>>(hiveModule.accountBox);
   gh.singleton<_i10.CurrenciesRepository>(
       _i11.CurrencySelectorRepositoryImpl());
   gh.singleton<_i12.DebtLocalDataSource>(_i13.DebtLocalDataSourceImpl(
-    debtBox: gh<_i4.Box<_i6.DebtModel>>(),
-    transactionsBox: gh<_i4.Box<_i5.TransactionsModel>>(),
+    debtBox: gh<_i4.Box<_i8.DebtModel>>(),
+    transactionsBox: gh<_i4.Box<_i9.TransactionsModel>>(),
   ));
   gh.singleton<_i14.DebtRepository>(
       _i15.DebtRepositoryImpl(dataSource: gh<_i12.DebtLocalDataSource>()));
@@ -168,12 +168,12 @@ _i1.GetIt init(
       _i20.GetTransactionsUseCase(debtRepository: gh<_i14.DebtRepository>()));
   gh.factory<_i21.HomeBloc>(() => _i21.HomeBloc());
   gh.singleton<_i22.LocalAccountDataManager>(_i23.LocalAccountDataManagerImpl(
-      accountBox: gh<_i4.Box<_i9.AccountModel>>()));
+      accountBox: gh<_i4.Box<_i6.AccountModel>>()));
   gh.singleton<_i24.LocalCategoryManagerDataSource>(
       _i25.LocalCategoryManagerDataSourceImpl(
           gh<_i4.Box<_i7.CategoryModel>>()));
   gh.factory<_i26.LocalExpenseDataManager>(
-      () => _i27.LocalExpenseDataManagerImpl(gh<_i28.Box<_i8.ExpenseModel>>()));
+      () => _i27.LocalExpenseDataManagerImpl(gh<_i28.Box<_i5.ExpenseModel>>()));
   gh.singleton<_i29.Settings>(
       _i29.Settings(gh<_i4.Box<dynamic>>(instanceName: 'settings')));
   gh.singleton<_i30.SettingsController>(
@@ -191,7 +191,7 @@ _i1.GetIt init(
   gh.singleton<_i37.CategoryRepository>(_i38.CategoryRepositoryImpl(
       dataSources: gh<_i24.LocalCategoryManagerDataSource>()));
   gh.factory<_i39.CurrencySelectorBloc>(() => _i39.CurrencySelectorBloc(
-        accounts: gh<_i4.Box<_i9.AccountModel>>(),
+        accounts: gh<_i4.Box<_i6.AccountModel>>(),
         categories: gh<_i4.Box<_i7.CategoryModel>>(),
         currenciesUseCase: gh<_i18.GetCurrenciesUseCase>(),
       ));

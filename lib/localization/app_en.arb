@@ -691,10 +691,29 @@
     "selectCurrencyLabel": "Select currency",
     "@selectCurrencyLabel": {
         "description": "Select currency label"
-    }
-    ,
+    },
     "overviewLabel": "Overview",
     "@overviewLabel": {
         "description": "Overview label"
+    },
+    "intoTitleLabel": "Simple way to help control your savings",
+    "@intoTitleLabel": {
+        "description": "Intro title label"
+    },
+    "intoSummary1Label": "Manage your money with our app",
+    "@intoSummary1Label": {
+        "description": "Intro summary 1 label"
+    },
+    "intoSummary2Label": "Easy expense tracking for a better budget",
+    "@intoSummary2Label": {
+        "description": "Intro summary 2 label"
+    },
+    "intoSummary3Label": "Stay on top of your expenses, anytime, anywhere",
+    "@intoSummary3Label": {
+        "description": "Intro summary 3 label"
+    },
+    "intoCTALabel": "Get started",
+    "@intoCTALabel": {
+        "description": "Get started label"
     }
 }
