@@ -107,10 +107,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       await addExpenseUseCase(
         name: name,
         amount: validAmount,
-        time: dateTime.copyWith(
-          hour: timeOfDay.hour,
-          minute: timeOfDay.minute,
-        ),
+        time: dateTime,
         categoryId: categoryId,
         accountId: accountId,
         transactionType: transactionType,
@@ -123,10 +120,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         ..categoryId = categoryId
         ..currency = validAmount
         ..name = name
-        ..time = dateTime.copyWith(
-          hour: timeOfDay.hour,
-          minute: timeOfDay.minute,
-        )
+        ..time = dateTime
         ..type = transactionType
         ..description = description;
       await updateExpensesUseCase(currentExpense!);

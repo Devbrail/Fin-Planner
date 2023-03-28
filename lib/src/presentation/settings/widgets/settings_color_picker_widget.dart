@@ -17,6 +17,14 @@ class SettingsColorPickerWidget extends StatelessWidget {
 
   final Box<dynamic> settings;
 
+  int _extractColorValue(BuildContext context, dynamic value) {
+    final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
+    if (isDynamic) {
+      return Theme.of(context).colorScheme.primary.value;
+    }
+    return value.get(appColorKey, defaultValue: 0xFF795548);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<dynamic>>(
@@ -26,7 +34,7 @@ class SettingsColorPickerWidget extends StatelessWidget {
       ]),
       builder: (context, value, _) {
         final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
-        final color = value.get(appColorKey, defaultValue: 0xFF795548);
+        final color = _extractColorValue(context, value);
         return SettingsOption(
           title: context.loc.accentColorLabel,
           subtitle: isDynamic

@@ -97,7 +97,7 @@ class _ExpensePageState extends State<ExpensePage> {
             );
             descriptionController.text = state.expense.description ?? '';
             descriptionController.selection = TextSelection.collapsed(
-              offset: state.expense.description.toString().length,
+              offset: state.expense.description?.length ?? 0,
             );
           }
         },
@@ -415,8 +415,9 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
       children: [
         Expanded(
           child: ListTile(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
             horizontalTitleGap: 0,
             onTap: () async {
               final DateTime? dateTime = await showDatePicker(
@@ -426,13 +427,14 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                 lastDate: DateTime.now(),
               );
               if (dateTime != null) {
-                selectedDateTime = selectedDateTime.copyWith(
-                  day: dateTime.day,
-                  month: dateTime.month,
-                  year: dateTime.year,
-                );
-                expenseBloc.selectedDate = selectedDateTime;
-                setState(() {});
+                setState(() {
+                  selectedDateTime = selectedDateTime.copyWith(
+                    day: dateTime.day,
+                    month: dateTime.month,
+                    year: dateTime.year,
+                  );
+                  expenseBloc.selectedDate = selectedDateTime;
+                });
               }
             },
             leading: const Icon(Icons.today_rounded),
@@ -441,8 +443,9 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
         ),
         Expanded(
           child: ListTile(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
             horizontalTitleGap: 0,
             onTap: () async {
               final TimeOfDay? timeOfDay = await showTimePicker(
@@ -451,12 +454,13 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                 initialEntryMode: TimePickerEntryMode.dialOnly,
               );
               if (timeOfDay != null) {
-                selectedDateTime = selectedDateTime.copyWith(
-                  hour: timeOfDay.hour,
-                  minute: timeOfDay.minute,
-                );
-                expenseBloc.selectedDate = selectedDateTime;
-                setState(() {});
+                setState(() {
+                  selectedDateTime = selectedDateTime.copyWith(
+                    hour: timeOfDay.hour,
+                    minute: timeOfDay.minute,
+                  );
+                  expenseBloc.selectedDate = selectedDateTime;
+                });
               }
             },
             leading: const Icon(MdiIcons.clockOutline),
