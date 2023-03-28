@@ -71,8 +71,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       currentDescription = expense.description;
       currentExpense = expense;
       emit(ExpenseSuccessState(expense));
-      Future.delayed(Duration.zero).then(
-          (value) => add(const ChangeExpenseEvent(TransactionType.expense)));
+      Future.delayed(Duration.zero)
+          .then((value) => add(ChangeExpenseEvent(transactionType)));
     } else {
       emit(const ExpenseErrorState('Expense not found!'));
     }
