@@ -696,5 +696,9 @@
     "overviewLabel": "Overview",
     "@overviewLabel": {
         "description": "Overview label"
-    }
+    } ,
+    "deleteDebtOrCreditLabel": "Deleting the debt/ credit deletes all record related to it. ",
+        "@deleteDebtOrCreditLabel": {
+            "description": "Delete debt or category label"
+        }
 }
