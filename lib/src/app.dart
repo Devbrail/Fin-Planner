@@ -34,10 +34,18 @@ class _PaisaAppState extends State<PaisaApp> {
       child: ValueListenableBuilder<Box>(
         valueListenable: settings,
         builder: (context, value, _) {
-          final bool isDynamic = value.get(dynamicThemeKey, defaultValue: true);
-          final ThemeMode themeMode =
-              ThemeMode.values[value.get(themeModeKey, defaultValue: 0)];
-          final int color = value.get(appColorKey, defaultValue: 0xFF795548);
+          final bool isDynamic = value.get(
+            dynamicThemeKey,
+            defaultValue: false,
+          );
+          final ThemeMode themeMode = ThemeMode.values[value.get(
+            themeModeKey,
+            defaultValue: 0,
+          )];
+          final int color = value.get(
+            appColorKey,
+            defaultValue: 0xFF795548,
+          );
           final Color primaryColor = Color(color);
           return DynamicColorBuilder(
             builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
