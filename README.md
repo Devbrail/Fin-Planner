@@ -1,6 +1,5 @@
 <p align="center">
   <a href="https://retromusic.app">
-    <img src="assets\images\icon.png" height="128">
     <h1 align="center">Paisa - Expense Tracker</h1>
   </a>
 </p>
