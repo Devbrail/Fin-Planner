@@ -111,7 +111,7 @@ class AccountSummaryWidget extends StatelessWidget {
                       SizedBox(
                         height: 40,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Sparkline(
                             data: expenses.incomeList
                                 .map((e) => e.currency)
@@ -161,7 +161,7 @@ class AccountSummaryWidget extends StatelessWidget {
                       SizedBox(
                         height: 40,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Sparkline(
                             data: expenses.expenseList
                                 .map((e) => e.currency)

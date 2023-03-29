@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/core/common.dart';
 
 import '../../../domain/category/entities/category.dart';
+import '../../widgets/paisa_bottom_sheet.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/category_item_tablet_widget.dart';
 
@@ -17,22 +19,54 @@ class CategoryListTabletWidget extends StatelessWidget {
   final List<Category> categories;
 
   @override
-  Widget build(BuildContext context) => GridView.builder(
-        padding: const EdgeInsets.only(
-          bottom: 124,
-          left: 8,
-          right: 8,
-          top: 8,
-        ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-        ),
-        itemCount: categories.length,
-        shrinkWrap: true,
-        itemBuilder: (_, index) => CategoryItemTabletWidget(
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: const EdgeInsets.only(
+        bottom: 124,
+        left: 8,
+        right: 8,
+        top: 8,
+      ),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+      ),
+      itemCount: categories.length,
+      shrinkWrap: true,
+      itemBuilder: (_, index) {
+        return CategoryItemTabletWidget(
           category: categories[index],
-          onPressed: () =>
-              addCategoryBloc.add(CategoryDeleteEvent(categories[index])),
-        ),
-      );
+          onPressed: () => paisaAlertDialog(
+            context,
+            title: Text(context.loc.dialogDeleteTitleLabel),
+            child: RichText(
+              text: TextSpan(
+                text: context.loc.deleteCategoryLabel,
+                children: [
+                  TextSpan(
+                      text: categories[index].name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      )),
+                ],
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
+            confirmationButton: TextButton(
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                foregroundColor:
+                    Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
+              onPressed: () {
+                addCategoryBloc.add(CategoryDeleteEvent(categories[index]));
+                Navigator.pop(context);
+              },
+              child: const Text('Delete'),
+            ),
+          ),
+        );
+      },
+    );
+  }
 }

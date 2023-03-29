@@ -32,7 +32,9 @@ class ExpenseItemWidget extends StatelessWidget {
         ),
         child: ListTile(
           horizontalTitleGap: 4,
-          title: Text(expense.name),
+          title: Text(
+            expense.name,
+          ),
           subtitle: Text(
             '${account.bankName} • ${expense.time.shortDayString}',
           ),

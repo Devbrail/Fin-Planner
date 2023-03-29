@@ -17,11 +17,13 @@ class CategoryListMobileWidget extends StatelessWidget {
   final List<Category> categories;
 
   @override
-  Widget build(BuildContext context) => ListView.builder(
-        padding: const EdgeInsets.only(bottom: 124),
-        itemCount: categories.length,
-        shrinkWrap: true,
-        itemBuilder: (_, index) => CategoryItemMobileWidget(
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: const EdgeInsets.only(bottom: 124),
+      itemCount: categories.length,
+      shrinkWrap: true,
+      itemBuilder: (_, index) {
+        return CategoryItemMobileWidget(
           category: categories[index],
           onPressed: () => paisaAlertDialog(
             context,
@@ -53,6 +55,8 @@ class CategoryListMobileWidget extends StatelessWidget {
               child: const Text('Delete'),
             ),
           ),
-        ),
-      );
+        );
+      },
+    );
+  }
 }

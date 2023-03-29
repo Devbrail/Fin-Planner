@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -111,45 +112,80 @@ class DebtItemWidget extends StatelessWidget {
                           style: TextButton.styleFrom(),
                           onPressed: () {
                             final controller = TextEditingController();
-                            showDialog(
+                            showModalBottomSheet(
                               context: context,
-                              builder: (context) => AlertDialog(
-                                title: Text(
-                                  context.loc.payDebtLabel,
-                                ),
-                                content: PaisaTextFormField(
-                                  controller: controller,
-                                  hintText: context.loc.enterAmountLabel,
-                                  keyboardType: TextInputType.number,
-                                ),
-                                actions: [
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(24),
+                              constraints: BoxConstraints(
+                                maxWidth:
+                                    MediaQuery.of(context).size.width >= 700
+                                        ? 700
+                                        : double.infinity,
+                              ),
+                              builder: (context) => Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: SafeArea(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ListTile(
+                                        horizontalTitleGap: 0,
+                                        title: Text(
+                                          context.loc.payDebtLabel,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge,
+                                        ),
                                       ),
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 24,
-                                        vertical: 12,
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16.0),
+                                        child: PaisaTextFormField(
+                                          controller: controller,
+                                          hintText:
+                                              context.loc.enterAmountLabel,
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly,
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    onPressed: () {
-                                      final double amount =
-                                          double.tryParse(controller.text) ?? 0;
-                                      getIt.get<DebtsBloc>().add(
-                                            AddTransactionToDebtEvent(
-                                              debt,
-                                              amount,
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 16),
+                                        child: TextButton(
+                                          style: TextButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
                                             ),
-                                          );
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 24,
+                                              vertical: 12,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            final double amount =
+                                                double.tryParse(
+                                                        controller.text) ??
+                                                    0;
+                                            getIt.get<DebtsBloc>().add(
+                                                  AddTransactionToDebtEvent(
+                                                    debt,
+                                                    amount,
+                                                  ),
+                                                );
 
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      context.loc.updateLabel,
-                                    ),
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            context.loc.updateLabel,
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             );
                           },

@@ -41,6 +41,7 @@ Future<T?> paisaAlertDialog<T>(
     showDialog<T>(
       context: context,
       builder: (context) => AlertDialog(
+        titleTextStyle: Theme.of(context).textTheme.titleLarge,
         title: title,
         content: child,
         actions: [
