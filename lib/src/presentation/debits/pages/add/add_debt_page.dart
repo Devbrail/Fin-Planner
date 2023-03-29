@@ -389,7 +389,15 @@ class AmountWidget extends StatelessWidget {
         BlocProvider.of<DebtsBloc>(context).currentAmount = amount;
       },
       inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
+        FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+        TextInputFormatter.withFunction((oldValue, newValue) {
+          try {
+            final text = newValue.text;
+            if (text.isNotEmpty) double.parse(text);
+            return newValue;
+          } catch (e) {}
+          return oldValue;
+        }),
       ],
       validator: (value) {
         if (value!.isNotEmpty) {

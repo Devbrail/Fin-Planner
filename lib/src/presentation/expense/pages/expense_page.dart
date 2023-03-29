@@ -375,7 +375,15 @@ class ExpenseAmountWidget extends StatelessWidget {
       maxLength: 13,
       maxLines: 1,
       inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.digitsOnly,
+        FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+        TextInputFormatter.withFunction((oldValue, newValue) {
+          try {
+            final text = newValue.text;
+            if (text.isNotEmpty) double.parse(text);
+            return newValue;
+          } catch (e) {}
+          return oldValue;
+        }),
       ],
       onChanged: (value) {
         double? amount = double.tryParse(value);
