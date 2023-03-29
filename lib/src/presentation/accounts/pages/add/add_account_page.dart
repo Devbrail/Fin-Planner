@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:paisa/src/presentation/widgets/paisa_add_button_widget.dart';
 import '../../../widgets/paisa_bottom_sheet.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -164,9 +165,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                         vertical: 8,
                       ),
                       child: CardTypeButtons(
-                        onSelected: (cardType) =>
-                            accountsBloc.add(UpdateCardTypeEvent(cardType)),
-                        selectedCardType: accountsBloc.selectedType,
+                        accountsBloc: accountsBloc,
                       ),
                     ),
                     Form(
@@ -312,6 +311,22 @@ class AddAccountPageState extends State<AddAccountPage> {
                         )
                 ],
               ),
+              bottomNavigationBar: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: PaisaAddButton(
+                    onPressed: () {
+                      final isValid = _form.currentState!.validate();
+                      if (!isValid) {
+                        return;
+                      }
+                      accountsBloc
+                          .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
+                    },
+                    title: context.loc.addCardLabel,
+                  ),
+                ),
+              ),
               body: SingleChildScrollView(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -325,10 +340,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               CardTypeButtons(
-                                onSelected: (cardType) {
-                                  accountsBloc.selectedType = cardType;
-                                },
-                                selectedCardType: accountsBloc.selectedType,
+                                accountsBloc: accountsBloc,
                               ),
                               const SizedBox(height: 16),
                               AccountCardHolderNameWidget(
@@ -351,33 +363,6 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 accountBloc: accountsBloc,
                               ),
                               const SizedBox(height: 16),
-                              ElevatedButton(
-                                onPressed: () {
-                                  final isValid =
-                                      _form.currentState!.validate();
-                                  if (!isValid) {
-                                    return;
-                                  }
-                                  accountsBloc.add(AddOrUpdateAccountEvent(
-                                      isAccountAddOrUpdate));
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.all(24),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(32.0),
-                                  ),
-                                ),
-                                child: Text(
-                                  context.loc.addCardLabel,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge
-                                        ?.fontSize,
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                         ),

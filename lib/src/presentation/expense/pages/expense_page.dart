@@ -8,6 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/transaction.dart';
+import '../../widgets/paisa_add_button_widget.dart';
 import '../../widgets/paisa_bottom_sheet.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../bloc/expense_bloc.dart';
@@ -177,11 +178,31 @@ class _ExpensePageState extends State<ExpensePage> {
               bottomNavigationBar: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: _addButton(context),
+                  child: PaisaAddButton(
+                    onPressed: () {
+                      expenseBloc.add(AddOrUpdateExpenseEvent(isAddExpense));
+                    },
+                    title: isAddExpense
+                        ? context.loc.addLabel
+                        : context.loc.updateLabel,
+                  ),
                 ),
               ),
             ),
             tablet: Scaffold(
+              bottomNavigationBar: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: PaisaAddButton(
+                    onPressed: () {
+                      expenseBloc.add(AddOrUpdateExpenseEvent(isAddExpense));
+                    },
+                    title: isAddExpense
+                        ? context.loc.addLabel
+                        : context.loc.updateLabel,
+                  ),
+                ),
+              ),
               appBar: AppBar(
                 systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarColor: Colors.transparent,
@@ -243,24 +264,26 @@ class _ExpensePageState extends State<ExpensePage> {
                   Expanded(
                     child: Form(
                       key: _form,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            ExpenseNameWidget(controller: nameController),
-                            const SizedBox(height: 16),
-                            ExpenseDescriptionWidget(
-                                controller: descriptionController),
-                            const SizedBox(height: 16),
-                            ExpenseAmountWidget(controller: amountController),
-                            const SizedBox(height: 16),
-                            const ExpenseDatePickerWidget(),
-                            const SizedBox(height: 16),
-                            _addButton(context),
-                            const SizedBox(height: 16),
-                          ],
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                ExpenseNameWidget(controller: nameController),
+                                const SizedBox(height: 16),
+                                ExpenseDescriptionWidget(
+                                    controller: descriptionController),
+                                const SizedBox(height: 16),
+                                ExpenseAmountWidget(
+                                    controller: amountController),
+                              ],
+                            ),
+                          ),
+                          const ExpenseDatePickerWidget(),
+                        ],
                       ),
                     ),
                   ),
@@ -269,28 +292,6 @@ class _ExpensePageState extends State<ExpensePage> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget _addButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        BlocProvider.of<ExpenseBloc>(context)
-            .add(AddOrUpdateExpenseEvent(isAddExpense));
-      },
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32.0),
-        ),
-      ),
-      child: Text(
-        isAddExpense ? context.loc.addLabel : context.loc.updateLabel,
-        style: TextStyle(
-          fontWeight: FontWeight.w700,
-          fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
-        ),
       ),
     );
   }
