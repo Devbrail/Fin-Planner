@@ -94,14 +94,6 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                           child: RichText(
                             text: TextSpan(
                               text: context.loc.deleteDebtOrCreditLabel,
-                              children: const [
-                                TextSpan(
-                                  text: 'Are you sure?',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                           ),
