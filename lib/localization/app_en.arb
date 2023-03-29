@@ -510,7 +510,7 @@
     },
     "incomeDeletedSuccessfulLabel": "Income deleted",
     "@incomeDeletedSuccessfulLabel": {
-        "description": "Expense deleted label"
+        "description": "Income deleted label"
     },
     "expenseByCategoryLabel": "Expense by category",
     "@expenseByCategoryLabel": {
@@ -716,8 +716,8 @@
     "@intoCTALabel": {
         "description": "Get started label"
     },
-    "deleteDebtOrCreditLabel": "Deleting the debt/ credit deletes all record related to it. ",
+    "deleteDebtOrCreditLabel": "Deleting the debt or credit deletes all record related to it ",
     "@deleteDebtOrCreditLabel": {
-        "description": "Delete debt or category label"
+        "description": "Delete debt or credit label"
     }
 }
