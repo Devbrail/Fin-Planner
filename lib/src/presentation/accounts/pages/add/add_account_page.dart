@@ -186,19 +186,9 @@ class AddAccountPageState extends State<AddAccountPage> {
                               accountBloc: accountsBloc,
                             ),
                             const SizedBox(height: 16),
-                            Builder(
-                              builder: (context) {
-                                if (state is UpdateCardTypeState &&
-                                    (state.cardType == CardType.bank ||
-                                        state.cardType == CardType.wallet)) {
-                                  return AccountInitialAmountWidget(
-                                    controller: accountInitialAmountController,
-                                    accountBloc: accountsBloc,
-                                  );
-                                } else {
-                                  return const SizedBox.shrink();
-                                }
-                              },
+                            AccountInitialAmountWidget(
+                              controller: accountInitialAmountController,
+                              accountBloc: accountsBloc,
                             ),
                             const SizedBox(height: 16),
                             Builder(
