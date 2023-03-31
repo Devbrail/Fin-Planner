@@ -192,7 +192,7 @@ final GoRouter goRouter = GoRouter(
   errorBuilder: (context, state) => Center(
     child: Text(state.error.toString()),
   ),
-  redirect: (_, state) async {
+  redirect: (state) {
     final isLogging = state.location == introPagePath;
     bool isIntroDone = settings.get(userIntroKey, defaultValue: false);
     if (!isIntroDone) {
@@ -218,16 +218,17 @@ final GoRouter goRouter = GoRouter(
         isLogging) {
       final localAuth = getIt.get<Authenticate>();
 
-      final bool canCheckBiometrics = await localAuth.canCheckBiometrics();
-
-      if (canCheckBiometrics) {
-        final bool result = await localAuth.authenticateWithBiometrics();
-        if (result) {
-          return landingPath;
-        } else {
-          SystemNavigator.pop();
+      localAuth.canCheckBiometrics().then((canCheckBiometrics) {
+        if (canCheckBiometrics) {
+          localAuth.authenticateWithBiometrics().then((result) {
+            if (result) {
+              return landingPath;
+            } else {
+              SystemNavigator.pop();
+            }
+          });
         }
-      }
+      });
     } else if (name.isNotEmpty && image.isNotEmpty && isLogging) {
       return landingPath;
     }
