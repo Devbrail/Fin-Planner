@@ -69,8 +69,8 @@ class HomeMobilePage extends StatelessWidget {
               ),
               NavigationDestination(
                 label: context.loc.debtsLabel,
-                icon: const Icon(MdiIcons.accountCash),
-                selectedIcon: const Icon(MdiIcons.accountCashOutline),
+                icon: const Icon(MdiIcons.accountCashOutline),
+                selectedIcon: const Icon(MdiIcons.accountCash),
               ),
               NavigationDestination(
                 label: context.loc.overviewLabel,

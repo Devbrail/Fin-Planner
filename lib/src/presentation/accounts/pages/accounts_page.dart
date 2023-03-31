@@ -7,9 +7,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../main.dart';
 import '../../../app/app_level_constants.dart';
 import '../../../core/common.dart';
-import '../../../core/extensions/account_extension.dart';
 import '../../../data/accounts/model/account_model.dart';
-import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/paisa_empty_widget.dart';
@@ -46,29 +44,22 @@ class AccountsPage extends StatelessWidget {
             accountsBloc.add(AccountSelectedEvent(accounts.first));
             return BlocBuilder(
               bloc: accountsBloc,
+              buildWhen: (previous, current) => current is AccountSelectedState,
               builder: (context, state) {
                 if (state is AccountSelectedState) {
-                  return ValueListenableBuilder<Box<ExpenseModel>>(
-                    valueListenable:
-                        getIt.get<Box<ExpenseModel>>().listenable(),
-                    builder: (context, value, child) {
-                      final List<Expense> expenses = value
-                          .expensesFromAccountId(state.account.superId!)
-                          .map((e) => e.toEntity())
-                          .toList();
-                      return ScreenTypeLayout(
-                        mobile: AccountsMobilePage(
-                          accounts: accounts,
-                          accountsBloc: accountsBloc,
-                          expenses: expenses,
-                        ),
-                        tablet: AccountsTabletPage(
-                          accounts: accounts,
-                          accountsBloc: accountsBloc,
-                          expenses: expenses,
-                        ),
-                      );
-                    },
+                  final List<Expense> expenses = accountsBloc
+                      .fetchExpenseFromAccountId(state.account.superId!);
+                  return ScreenTypeLayout(
+                    mobile: AccountsMobilePage(
+                      accounts: accounts,
+                      accountsBloc: accountsBloc,
+                      expenses: expenses,
+                    ),
+                    tablet: AccountsTabletPage(
+                      accounts: accounts,
+                      accountsBloc: accountsBloc,
+                      expenses: expenses,
+                    ),
                   );
                 } else {
                   return const SizedBox.shrink();

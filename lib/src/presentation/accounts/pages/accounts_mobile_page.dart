@@ -20,20 +20,22 @@ class AccountsMobilePage extends StatelessWidget {
   final AccountsBloc accountsBloc;
 
   @override
-  Widget build(BuildContext context) => ListView(
-        shrinkWrap: true,
-        key: const Key('accounts_list_view'),
-        padding: const EdgeInsets.only(bottom: 124),
-        children: [
-          AccountPageViewWidget(
-            accounts: accounts,
-            accountBloc: accountsBloc,
-          ),
-          AccountTransactionWidget(
-            accountLocalDataSource: getIt.get(),
-            categoryLocalDataSource: getIt.get(),
-            expenses: expenses,
-          )
-        ],
-      );
+  Widget build(BuildContext context) {
+    return ListView(
+      shrinkWrap: true,
+      key: const Key('accounts_list_view'),
+      padding: const EdgeInsets.only(bottom: 124),
+      children: [
+        AccountPageViewWidget(
+          accounts: accounts,
+          accountBloc: accountsBloc,
+        ),
+        AccountTransactionWidget(
+          accountLocalDataSource: getIt.get(),
+          categoryLocalDataSource: getIt.get(),
+          expenses: expenses,
+        )
+      ],
+    );
+  }
 }

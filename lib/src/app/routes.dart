@@ -94,13 +94,23 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           path: addExpensePath,
           name: addExpensePath,
-          builder: (context, state) => const ExpensePage(),
+          pageBuilder: (context, state) => MaterialPage(
+            key: ValueKey(
+              state.location + DateTime.now().millisecondsSinceEpoch.toString(),
+            ),
+            child: const ExpensePage(),
+          ),
         ),
         GoRoute(
           name: editExpensePath,
           path: 'edit-expense/:eid',
-          builder: (context, state) => ExpensePage(
-            expenseId: state.params['eid'],
+          pageBuilder: (context, state) => MaterialPage(
+            key: ValueKey(
+              state.location + DateTime.now().millisecondsSinceEpoch.toString(),
+            ),
+            child: ExpensePage(
+              expenseId: state.params['eid'],
+            ),
           ),
         ),
         GoRoute(
@@ -192,7 +202,7 @@ final GoRouter goRouter = GoRouter(
   errorBuilder: (context, state) => Center(
     child: Text(state.error.toString()),
   ),
-  redirect: (state) {
+  redirect: (_, state) async {
     final isLogging = state.location == introPagePath;
     bool isIntroDone = settings.get(userIntroKey, defaultValue: false);
     if (!isIntroDone) {
@@ -218,17 +228,16 @@ final GoRouter goRouter = GoRouter(
         isLogging) {
       final localAuth = getIt.get<Authenticate>();
 
-      localAuth.canCheckBiometrics().then((canCheckBiometrics) {
-        if (canCheckBiometrics) {
-          localAuth.authenticateWithBiometrics().then((result) {
-            if (result) {
-              return landingPath;
-            } else {
-              SystemNavigator.pop();
-            }
-          });
+      final bool canCheckBiometrics = await localAuth.canCheckBiometrics();
+
+      if (canCheckBiometrics) {
+        final bool result = await localAuth.authenticateWithBiometrics();
+        if (result) {
+          return landingPath;
+        } else {
+          SystemNavigator.pop();
         }
-      });
+      }
     } else if (name.isNotEmpty && image.isNotEmpty && isLogging) {
       return landingPath;
     }

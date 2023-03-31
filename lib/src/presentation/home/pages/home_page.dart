@@ -31,16 +31,16 @@ class _LandingPageState extends State<LandingPage> {
   void _handleClick(PageType page) {
     switch (page) {
       case PageType.accounts:
-        context.pushNamed(addAccountPath);
+        context.goNamed(addAccountPath);
         break;
       case PageType.home:
-        context.pushNamed(addExpensePath);
+        context.goNamed(addExpensePath);
         break;
       case PageType.category:
-        context.pushNamed(addCategoryPath);
+        context.goNamed(addCategoryPath);
         break;
       case PageType.debts:
-        context.pushNamed(addDebitName);
+        context.goNamed(addDebitName);
         break;
       case PageType.budgetOverview:
         _dateRangePicker();

@@ -65,6 +65,7 @@ class _PaisaAppState extends State<PaisaApp> {
               }
 
               return MaterialApp.router(
+                routeInformationProvider: goRouter.routeInformationProvider,
                 routeInformationParser: goRouter.routeInformationParser,
                 routerDelegate: goRouter.routerDelegate,
                 debugShowCheckedModeBanner: false,

@@ -16,8 +16,6 @@ import '../widgets/select_account_widget.dart';
 import '../widgets/select_category_widget.dart';
 import '../widgets/toggle_buttons_widget.dart';
 
-final GlobalKey<FormState> _form = GlobalKey<FormState>();
-
 class ExpensePage extends StatefulWidget {
   const ExpensePage({
     Key? key,
@@ -152,23 +150,20 @@ class _ExpensePageState extends State<ExpensePage> {
                   const SizedBox(height: 16),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Form(
-                      key: _form,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          ExpenseNameWidget(controller: nameController),
-                          const SizedBox(height: 16),
-                          ExpenseDescriptionWidget(
-                            controller: descriptionController,
-                          ),
-                          const SizedBox(height: 16),
-                          ExpenseAmountWidget(controller: amountController),
-                          const SizedBox(height: 16),
-                          const ExpenseDatePickerWidget(),
-                          const SizedBox(height: 16),
-                        ],
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ExpenseNameWidget(controller: nameController),
+                        const SizedBox(height: 16),
+                        ExpenseDescriptionWidget(
+                          controller: descriptionController,
+                        ),
+                        const SizedBox(height: 16),
+                        ExpenseAmountWidget(controller: amountController),
+                        const SizedBox(height: 16),
+                        const ExpenseDatePickerWidget(),
+                        const SizedBox(height: 16),
+                      ],
                     ),
                   ),
                   const SelectedAccount(),
@@ -262,29 +257,25 @@ class _ExpensePageState extends State<ExpensePage> {
                     ),
                   ),
                   Expanded(
-                    child: Form(
-                      key: _form,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                ExpenseNameWidget(controller: nameController),
-                                const SizedBox(height: 16),
-                                ExpenseDescriptionWidget(
-                                    controller: descriptionController),
-                                const SizedBox(height: 16),
-                                ExpenseAmountWidget(
-                                    controller: amountController),
-                              ],
-                            ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              ExpenseNameWidget(controller: nameController),
+                              const SizedBox(height: 16),
+                              ExpenseDescriptionWidget(
+                                  controller: descriptionController),
+                              const SizedBox(height: 16),
+                              ExpenseAmountWidget(controller: amountController),
+                            ],
                           ),
-                          const ExpenseDatePickerWidget(),
-                        ],
-                      ),
+                        ),
+                        const ExpenseDatePickerWidget(),
+                      ],
                     ),
                   ),
                 ],

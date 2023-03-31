@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/extensions/account_extension.dart';
-import '../../../domain/expense/entities/expense.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../domain/account/entities/account.dart';
+import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/lava/lava_clock.dart';
 import '../../widgets/paisa_bottom_sheet.dart';
 import '../bloc/accounts_bloc.dart';
@@ -31,88 +30,91 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
   int selectedIndex = 0;
 
   @override
-  Widget build(BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          LavaAnimation(
-            child: AspectRatio(
-              aspectRatio: 16 / 10,
-              child: PageView.builder(
-                padEnds: true,
-                pageSnapping: true,
-                key: const Key('accounts_page_view'),
-                controller: _controller,
-                itemCount: widget.accounts.length,
-                onPageChanged: (index) {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                  widget.accountBloc
-                      .add(AccountSelectedEvent(widget.accounts[index]));
-                },
-                itemBuilder: (_, index) {
-                  final Account account = widget.accounts[index];
-                  final List<Expense> expenses = widget.accountBloc
-                      .fetchExpenseFromAccountId(account.superId!);
-                  return AccountCard(
-                    key: ValueKey(account.hashCode),
-                    expense: expenses.totalExpense.toCurrency(),
-                    income: expenses.totalIncome.toCurrency(),
-                    totalBalance: (expenses.fullTotal + account.initialAmount)
-                        .toCurrency(),
-                    cardHolder: account.name,
-                    bankName: account.bankName,
-                    cardType: account.cardType ?? CardType.bank,
-                    onDelete: () => paisaAlertDialog(
-                      context,
-                      title: Text(context.loc.dialogDeleteTitleLabel),
-                      child: RichText(
-                        text: TextSpan(
-                          text: context.loc.deleteAccountLabel,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          children: [
-                            TextSpan(
-                              text: account.name,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        LavaAnimation(
+          child: AspectRatio(
+            aspectRatio: 16 / 10,
+            child: PageView.builder(
+              padEnds: true,
+              pageSnapping: true,
+              key: const Key('accounts_page_view'),
+              controller: _controller,
+              itemCount: widget.accounts.length,
+              onPageChanged: (index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+                widget.accountBloc
+                    .add(AccountSelectedEvent(widget.accounts[index]));
+              },
+              itemBuilder: (_, index) {
+                final Account account = widget.accounts[index];
+                final List<Expense> expenses = widget.accountBloc
+                    .fetchExpenseFromAccountId(account.superId!);
+                final String expense = expenses.totalExpense.toCurrency();
+                final String income = expenses.totalIncome.toCurrency();
+                final String totalBalance =
+                    (expenses.fullTotal + account.initialAmount).toCurrency();
+                return AccountCard(
+                  key: ValueKey(account.hashCode),
+                  expense: expense,
+                  income: income,
+                  totalBalance: totalBalance,
+                  cardHolder: account.name,
+                  bankName: account.bankName,
+                  cardType: account.cardType ?? CardType.bank,
+                  onDelete: () => paisaAlertDialog(
+                    context,
+                    title: Text(context.loc.dialogDeleteTitleLabel),
+                    child: RichText(
+                      text: TextSpan(
+                        text: context.loc.deleteAccountLabel,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        children: [
+                          TextSpan(
+                            text: account.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
-                        ),
-                      ),
-                      confirmationButton: TextButton(
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primaryContainer,
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onPrimaryContainer,
-                        ),
-                        onPressed: () {
-                          widget.accountBloc
-                              .add(DeleteAccountEvent(account.superId!));
-                          Navigator.pop(context);
-                        },
-                        child: Text(context.loc.deleteLabel),
+                          ),
+                        ],
                       ),
                     ),
-                    onTap: () => context.pushNamed(
-                      editAccountPath,
-                      params: <String, String>{
-                        'aid': account.superId.toString()
+                    confirmationButton: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.primaryContainer,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
+                      onPressed: () {
+                        widget.accountBloc
+                            .add(DeleteAccountEvent(account.superId!));
+                        Navigator.pop(context);
                       },
+                      child: Text(context.loc.deleteLabel),
                     ),
-                  );
-                },
-              ),
+                  ),
+                  onTap: () => context.pushNamed(
+                    editAccountPath,
+                    params: <String, String>{'aid': account.superId.toString()},
+                  ),
+                );
+              },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _buildPageIndicator(),
-          ),
-        ],
-      );
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _buildPageIndicator(),
+        ),
+      ],
+    );
+  }
 
   Widget _buildPageIndicator() => Row(
         mainAxisSize: MainAxisSize.min,

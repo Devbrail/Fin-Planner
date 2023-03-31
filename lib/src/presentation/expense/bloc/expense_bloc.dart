@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../core/enum/transaction.dart';
 import '../../../data/accounts/model/account_model.dart';
@@ -16,8 +15,6 @@ import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
 import '../../../domain/expense/use_case/update_expense_use_case.dart';
-
-import '../pages/expense_page.dart';
 
 part 'expense_event.dart';
 part 'expense_state.dart';

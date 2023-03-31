@@ -94,6 +94,7 @@ class SelectedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: expenseBloc,
+      buildWhen: (previous, current) => current is ChangeAccountState,
       builder: (context, state) {
         return SizedBox(
           height: 180,
@@ -108,17 +109,14 @@ class SelectedItem extends StatelessWidget {
             itemCount: accounts.length + 1,
             itemBuilder: (_, index) {
               if (index == 0) {
-                return Hero(
-                  tag: 'account',
-                  child: ItemWidget(
-                    isSelected: false,
-                    title: 'Add New',
-                    icon: MdiIcons.plus.codePoint,
-                    onPressed: () => context.pushNamed(addAccountPath),
-                  ),
+                return ItemWidget(
+                  isSelected: false,
+                  title: 'Add New',
+                  icon: MdiIcons.plus.codePoint,
+                  onPressed: () => context.pushNamed(addAccountPath),
                 );
               } else {
-                final account = accounts[index - 1];
+                final Account account = accounts[index - 1];
                 return ItemWidget(
                   isSelected: account.superId == expenseBloc.selectedAccountId,
                   title: account.name,

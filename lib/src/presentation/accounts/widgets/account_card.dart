@@ -39,7 +39,7 @@ class _AccountCardState extends State<AccountCard>
       mobile: MobileAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
-        cardNumber: widget.totalBalance,
+        totalBalance: widget.totalBalance,
         cardType: widget.cardType,
         onDelete: widget.onDelete,
         onTap: widget.onTap,
@@ -73,7 +73,7 @@ class _AccountCardState extends State<AccountCard>
 class MobileAccountCard extends StatelessWidget {
   const MobileAccountCard({
     Key? key,
-    required this.cardNumber,
+    required this.totalBalance,
     required this.cardHolder,
     required this.bankName,
     required this.cardType,
@@ -83,7 +83,7 @@ class MobileAccountCard extends StatelessWidget {
     required this.expense,
   }) : super(key: key);
 
-  final String cardNumber;
+  final String totalBalance;
   final String cardHolder;
   final String bankName;
   final CardType cardType;
@@ -150,7 +150,7 @@ class MobileAccountCard extends StatelessWidget {
                       children: [
                         Text(context.loc.totalBalanceLabel),
                         Text(
-                          cardNumber,
+                          totalBalance,
                           style: GoogleFonts.manrope(
                             textStyle: Theme.of(context)
                                 .textTheme
