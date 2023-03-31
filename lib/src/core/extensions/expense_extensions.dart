@@ -9,6 +9,11 @@ import '../enum/filter_budget.dart';
 import '../enum/transaction.dart';
 
 extension ExpenseListMapping on Box<ExpenseModel> {
+  List<Expense> search(query) => values
+      .where(
+          (ExpenseModel element) => element.name.toLowerCase().contains(query))
+      .toEntities();
+
   List<ExpenseModel> get expenses =>
       values.toList()..sort(((a, b) => b.time.compareTo(a.time)));
 

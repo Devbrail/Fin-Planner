@@ -37,12 +37,7 @@ class SearchListWidget extends StatelessWidget {
           );
         }
 
-        final results = value.values
-            .toEntities()
-            .where(
-                (Expense expense) => expense.name.toLowerCase().contains(query))
-            .toList();
-
+        final List<Expense> results = value.search(query);
         if (results.isEmpty) {
           return Center(
             child: Column(

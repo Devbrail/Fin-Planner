@@ -28,11 +28,11 @@ class SearchPage extends SearchDelegate<ExpenseModel?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return SearchListWidget(query: query);
+    return SearchListWidget(query: query.toLowerCase());
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return SearchListWidget(query: query);
+    return SearchListWidget(query: query.toLowerCase());
   }
 }

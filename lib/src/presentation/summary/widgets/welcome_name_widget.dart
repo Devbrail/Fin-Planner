@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../../main.dart';
@@ -23,9 +24,11 @@ class WelcomeNameWidget extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: GoogleFonts.outfit(
+                  fontWeight: FontWeight.w600,
+                  textStyle: Theme.of(context).textTheme.titleLarge,
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
               ),
               Text(
                 context.loc.welcomeMessage,

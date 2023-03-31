@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PaisaMaterialYouChip extends StatelessWidget {
   const PaisaMaterialYouChip({
@@ -39,10 +40,11 @@ class PaisaMaterialYouChip extends StatelessWidget {
               ),
               child: Text(
                 title,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: colorOnPrimary,
-                      fontWeight: FontWeight.w600,
-                    ),
+                style: GoogleFonts.outfit(
+                  textStyle: Theme.of(context).textTheme.titleSmall,
+                  color: colorOnPrimary,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
