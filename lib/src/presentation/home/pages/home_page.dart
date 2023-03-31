@@ -34,7 +34,7 @@ class _LandingPageState extends State<LandingPage> {
         context.goNamed(addAccountPath);
         break;
       case PageType.home:
-        context.goNamed(addExpensePath);
+        context.pushNamed(addExpensePath);
         break;
       case PageType.category:
         context.goNamed(addCategoryPath);
