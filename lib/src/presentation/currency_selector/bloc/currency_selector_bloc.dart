@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../main.dart';
@@ -91,7 +92,14 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
   ) {
     final query = event.query.toLowerCase();
     final result = currenciesUseCase()
-        .where((element) => element.name.toLowerCase().contains(query))
+        .where(
+          (element) =>
+              element.name.toLowerCase().contains(query) ||
+              (NumberFormat.compactSimpleCurrency(
+                    locale: element.locale.toString(),
+                  ).currencyName?.toLowerCase().contains(query) ??
+                  false),
+        )
         .toList();
     result.sort(((a, b) => a.name.compareTo(b.name)));
     emit(CountryLocalesState(result));
