@@ -10,7 +10,7 @@ import '../../../data/accounts/model/account_model.dart';
 import '../../../data/category/model/category_model.dart';
 import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/account/entities/account.dart';
-import '../../../domain/account/use_case/get_account_use_case.dart';
+import '../../../domain/account/use_case/account_use_case.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
@@ -27,6 +27,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     required this.addExpenseUseCase,
     required this.deleteExpenseUseCase,
     required this.updateExpensesUseCase,
+    required this.accountsUseCase,
   }) : super(ExpenseInitial()) {
     on<ExpenseEvent>((event, emit) {});
     on<AddOrUpdateExpenseEvent>(_addExpense);
@@ -36,16 +37,19 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<ChangeCategoryEvent>(_changeCategory);
     on<ChangeAccountEvent>(_changeAccount);
     on<UpdateDateTimeEvent>(_updateDateTime);
+    on<TransferAccountsEvent>(_transferAccount);
   }
 
   final GetExpenseUseCase expenseUseCase;
   final AddExpenseUseCase addExpenseUseCase;
   final GetAccountUseCase accountUseCase;
+  final GetAccountsUseCase accountsUseCase;
   final DeleteExpenseUseCase deleteExpenseUseCase;
   final UpdateExpensesUseCase updateExpensesUseCase;
 
   String? expenseName;
   double? expenseAmount;
+  double? transferAmount;
   int? selectedCategoryId;
   int? selectedAccountId;
   Expense? currentExpense;
@@ -53,6 +57,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay timeOfDay = TimeOfDay.now();
   TransactionType transactionType = TransactionType.expense;
+  Account? fromAccount, toAccount;
 
   Future<void> _fetchExpenseFromId(
     FetchExpenseFromIdEvent event,
@@ -84,50 +89,74 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     AddOrUpdateExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) async {
-    final double? validAmount = expenseAmount;
-    final String? name = expenseName;
-    final int? categoryId = selectedCategoryId;
-    final int? accountId = selectedAccountId;
-    final DateTime dateTime = selectedDate;
-    final String? description = currentDescription;
-
-    if (name == null) {
-      return emit(const ExpenseErrorState('Enter expense name'));
-    }
-    if (validAmount == null || validAmount == 0.0) {
-      return emit(const ExpenseErrorState('Enter valid amount'));
-    }
-
-    if (accountId == null) {
-      return emit(const ExpenseErrorState('Select account'));
-    }
-    if (categoryId == null) {
-      return emit(const ExpenseErrorState('Select category'));
-    }
-
-    if (event.isAdding) {
+    if (transactionType == TransactionType.transfer) {
+      if ((fromAccount == null || toAccount == null) ||
+          (fromAccount == toAccount)) {
+        return emit(
+          const ExpenseErrorState(
+            'Select both from and to accounts',
+          ),
+        );
+      }
+      final String expenseName =
+          'Transfer from ${fromAccount?.bankName} to ${toAccount?.bankName}';
       await addExpenseUseCase(
-        name: name,
-        amount: validAmount,
-        time: dateTime,
-        categoryId: categoryId,
-        accountId: accountId,
-        transactionType: transactionType,
-        description: description,
+        name: expenseName,
+        amount: transferAmount ?? 0,
+        time: DateTime.now(),
+        categoryId: -1,
+        accountId: -1,
+        transactionType: TransactionType.transfer,
+        description: 'Transfer money',
       );
+
+      emit(const ExpenseAdded(isAddOrUpdate: true));
     } else {
-      if (currentExpense == null) return;
-      currentExpense!
-        ..accountId = accountId
-        ..categoryId = categoryId
-        ..currency = validAmount
-        ..name = name
-        ..time = dateTime
-        ..type = transactionType
-        ..description = description;
-      await updateExpensesUseCase(currentExpense!);
+      final double? validAmount = expenseAmount;
+      final String? name = expenseName;
+      final int? categoryId = selectedCategoryId;
+      final int? accountId = selectedAccountId;
+      final DateTime dateTime = selectedDate;
+      final String? description = currentDescription;
+
+      if (name == null) {
+        return emit(const ExpenseErrorState('Enter expense name'));
+      }
+      if (validAmount == null || validAmount == 0.0) {
+        return emit(const ExpenseErrorState('Enter valid amount'));
+      }
+
+      if (accountId == null) {
+        return emit(const ExpenseErrorState('Select account'));
+      }
+      if (categoryId == null) {
+        return emit(const ExpenseErrorState('Select category'));
+      }
+
+      if (event.isAdding) {
+        await addExpenseUseCase(
+          name: name,
+          amount: validAmount,
+          time: dateTime,
+          categoryId: categoryId,
+          accountId: accountId,
+          transactionType: transactionType,
+          description: description,
+        );
+      } else {
+        if (currentExpense == null) return;
+        currentExpense!
+          ..accountId = accountId
+          ..categoryId = categoryId
+          ..currency = validAmount
+          ..name = name
+          ..time = dateTime
+          ..type = transactionType
+          ..description = description;
+        await updateExpensesUseCase(currentExpense!);
+      }
+      emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
     }
-    emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
   }
 
   Future<void> _deleteExpense(
@@ -142,8 +171,21 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     ChangeExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) {
-    transactionType = event.transactionType;
-    emit(ChangeExpenseState(event.transactionType));
+    final List<Account> accounts = accountsUseCase();
+    if (accounts.length == 1 &&
+        event.transactionType == TransactionType.transfer) {
+      emit(const ExpenseErrorState('Need two more accounts '));
+    } else {
+      transactionType = event.transactionType;
+      emit(ChangeTransactionTypeState(event.transactionType));
+      if (event.transactionType == TransactionType.transfer) {
+        emit(TransferAccountsState(
+          accounts,
+          accounts.first,
+          accounts.last,
+        ));
+      }
+    }
   }
 
   FutureOr<void> _changeCategory(
@@ -168,5 +210,16 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   ) {
     selectedDate = event.dateTime;
     emit(UpdateDateTimeState(event.dateTime));
+  }
+
+  FutureOr<void> _transferAccount(
+    TransferAccountsEvent event,
+    Emitter<ExpenseState> emit,
+  ) {
+    fromAccount = event.fromAccount;
+    toAccount = event.toAccount;
+    emit(
+      TransferAccountsState(event.accounts, event.fromAccount, event.toAccount),
+    );
   }
 }

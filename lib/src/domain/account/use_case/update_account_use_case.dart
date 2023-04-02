@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import '../entities/account.dart';
 
 import '../../../core/enum/card_type.dart';
+import '../entities/account.dart';
 import '../repository/account_repository.dart';
 
 @singleton

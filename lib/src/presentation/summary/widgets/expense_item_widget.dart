@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paisa/src/core/enum/transaction.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -20,6 +21,14 @@ class ExpenseItemWidget extends StatelessWidget {
   final Expense expense;
   final Category category;
 
+  String getSubtitle() {
+    if (expense.type == TransactionType.transfer) {
+      return expense.time.shortDayString;
+    } else {
+      return '${account.bankName} • ${expense.time.shortDayString}';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,12 +41,8 @@ class ExpenseItemWidget extends StatelessWidget {
         ),
         child: ListTile(
           horizontalTitleGap: 4,
-          title: Text(
-            expense.name,
-          ),
-          subtitle: Text(
-            '${account.bankName} • ${expense.time.shortDayString}',
-          ),
+          title: Text(expense.name),
+          subtitle: Text(getSubtitle()),
           leading: Icon(
             IconData(
               category.icon,

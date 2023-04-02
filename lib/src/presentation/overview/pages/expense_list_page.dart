@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/common.dart';
-import '../../../core/extensions/account_extension.dart';
 import '../../../data/accounts/data_sources/local_account_data_manager.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/expense/data_sources/local_expense_data_manager.dart';

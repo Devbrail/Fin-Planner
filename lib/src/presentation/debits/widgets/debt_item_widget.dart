@@ -3,9 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/core/extensions/debt_extensions.dart';
-import 'package:paisa/src/core/extensions/transaction_extension.dart';
-import 'package:paisa/src/domain/debt/entities/transaction.dart';
 
 import '../../../../main.dart';
 import '../../../app/routes.dart';
@@ -13,6 +10,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt_model.dart';
 import '../../../data/debt/models/transactions_model.dart';
+import '../../../domain/debt/entities/transaction.dart';
 import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../cubit/debts_cubit.dart';

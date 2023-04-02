@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/core/common.dart';
 
+import '../../../core/common.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../widgets/paisa_bottom_sheet.dart';
 import '../bloc/category_bloc.dart';
@@ -54,9 +54,6 @@ class CategoryListTabletWidget extends StatelessWidget {
             confirmationButton: TextButton(
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                foregroundColor:
-                    Theme.of(context).colorScheme.onPrimaryContainer,
               ),
               onPressed: () {
                 addCategoryBloc.add(CategoryDeleteEvent(categories[index]));

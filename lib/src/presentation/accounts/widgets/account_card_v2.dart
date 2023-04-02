@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app/app_level_constants.dart';
 import '../../../app/routes.dart';
-import '../../../core/extensions/account_extension.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account_model.dart';

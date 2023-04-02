@@ -6,8 +6,8 @@ import '../../../core/common.dart';
 import '../../widgets/paisa_icon_picker.dart';
 import '../bloc/category_bloc.dart';
 
-class SelectIconWidget extends StatelessWidget {
-  const SelectIconWidget({super.key});
+class CategoryIconPickerWidget extends StatelessWidget {
+  const CategoryIconPickerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +33,16 @@ class SelectIconWidget extends StatelessWidget {
             ),
             color: Theme.of(context).colorScheme.primary,
           ),
-          onTap: () async {
-            await showIconPicker(
+          onTap: () {
+            showIconPicker(
               context: context,
               defaultIcon: IconData(
                 codePoint,
                 fontFamily: 'Material Design Icons',
                 fontPackage: 'material_design_icons_flutter',
               ),
-              onSelectedIcon: (iconData) =>
-                  BlocProvider.of<CategoryBloc>(context)
-                      .add(CategoryIconSelectedEvent(iconData.codePoint)),
-            );
+            ).then((resultIcon) => BlocProvider.of<CategoryBloc>(context)
+                .add(CategoryIconSelectedEvent(resultIcon.codePoint)));
           },
         );
       },

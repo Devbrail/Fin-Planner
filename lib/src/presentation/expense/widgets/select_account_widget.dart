@@ -8,7 +8,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../../core/extensions/account_extension.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../domain/account/entities/account.dart';
 import '../bloc/expense_bloc.dart';
@@ -50,7 +49,7 @@ class SelectedAccount extends StatelessWidget {
                       ),
                 ),
               ),
-              SelectedItem(
+              AccountSelectedItem(
                 accounts: accounts,
                 expenseBloc: expenseBloc,
               )
@@ -68,7 +67,7 @@ class SelectedAccount extends StatelessWidget {
                       ),
                 ),
               ),
-              SelectedItem(
+              AccountSelectedItem(
                 accounts: accounts,
                 expenseBloc: expenseBloc,
               )
@@ -80,8 +79,8 @@ class SelectedAccount extends StatelessWidget {
   }
 }
 
-class SelectedItem extends StatelessWidget {
-  const SelectedItem({
+class AccountSelectedItem extends StatelessWidget {
+  const AccountSelectedItem({
     Key? key,
     required this.accounts,
     required this.expenseBloc,

@@ -86,10 +86,6 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                     confirmationButton: TextButton(
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        backgroundColor:
-                            Theme.of(context).colorScheme.primaryContainer,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onPrimaryContainer,
                       ),
                       onPressed: () {
                         widget.accountBloc

@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
-import '../../../core/common.dart';
 
+import '../../../core/common.dart';
 import '../entities/expense.dart';
 import '../repository/expense_repository.dart';
 

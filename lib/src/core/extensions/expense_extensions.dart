@@ -1,14 +1,14 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import '../../domain/expense/entities/expense.dart';
 
 import '../../data/expense/model/expense_model.dart';
+import '../../domain/expense/entities/expense.dart';
 import '../common.dart';
 import '../enum/filter_budget.dart';
 import '../enum/transaction.dart';
 
-extension ExpenseListMapping on Box<ExpenseModel> {
+extension ExpenseModelBoxMapping on Box<ExpenseModel> {
   List<Expense> search(query) => values
       .where(
           (ExpenseModel element) => element.name.toLowerCase().contains(query))
@@ -20,9 +20,10 @@ extension ExpenseListMapping on Box<ExpenseModel> {
   List<ExpenseModel> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
 
-  List<ExpenseModel> get budgetOverView =>
-      values.where((element) => element.type != TransactionType.income).toList()
-        ..sort((a, b) => b.time.compareTo(a.time));
+  List<ExpenseModel> get budgetOverView => values
+      .where((element) => element.categoryId != -1 || element.accountId != -1)
+      .where((element) => element.type == TransactionType.expense)
+      .toList();
 
   List<ExpenseModel> isFilterTimeBetween(DateTimeRange range) =>
       values.where((element) => element.time.isAfterBeforeTime(range)).toList();
@@ -42,7 +43,24 @@ extension ExpenseListMapping on Box<ExpenseModel> {
       .fold<double>(0, (previousValue, element) => previousValue + element);
 }
 
-extension TotalAmountOnExpenses on Iterable<Expense> {
+extension ExpenseModelHelper on ExpenseModel {
+  Expense toEntity() => Expense(
+        name: name,
+        currency: currency,
+        time: time,
+        categoryId: categoryId,
+        accountId: accountId,
+        type: type,
+      );
+}
+
+extension ExpenseModelsHelper on Iterable<ExpenseModel> {
+  List<Expense> toEntities() => map((expenseModel) => expenseModel.toEntity())
+      .sorted((a, b) => b.time.compareTo(a.time))
+      .toList();
+}
+
+extension ExpensesHelper on Iterable<Expense> {
   List<Expense> get expenses =>
       toList()..sort(((a, b) => b.time.compareTo(a.time)));
 
@@ -60,8 +78,10 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
   double get filterTotal => fold<double>(0, (previousValue, element) {
         if (element.type == TransactionType.expense) {
           return previousValue - element.currency;
-        } else {
+        } else if (element.type == TransactionType.income) {
           return previousValue + element.currency;
+        } else {
+          return previousValue;
         }
       });
   double get fullTotal => totalIncome - totalExpense;
@@ -104,19 +124,4 @@ extension TotalAmountOnExpenses on Iterable<Expense> {
       map((expenseModel) => expenseModel.toEntity()).toList();
 }
 
-extension ExpenseMapping on ExpenseModel {
-  Expense toEntity() => Expense(
-        name: name,
-        currency: currency,
-        time: time,
-        categoryId: categoryId,
-        accountId: accountId,
-        type: type,
-      );
-}
-
-extension ExpensesMapping on Iterable<ExpenseModel> {
-  List<Expense> toEntities() => map((expenseModel) => expenseModel.toEntity())
-      .sorted((a, b) => b.time.compareTo(a.time))
-      .toList();
-}
+extension ExpenseHelper on Expense {}

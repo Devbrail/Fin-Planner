@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/src/presentation/widgets/paisa_add_button_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
+import '../../../widgets/paisa_add_button_widget.dart';
 import '../../../widgets/paisa_color_picker.dart';
 import '../../../widgets/paisa_text_field.dart';
 import '../../bloc/category_bloc.dart';
 import '../../widgets/color_picker_widget.dart';
-import '../../widgets/select_icon_widget.dart';
+import '../../widgets/category_icon_picker_widget.dart';
 import '../../widgets/set_budget_widget.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -92,7 +92,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const SelectIconWidget(),
+                      const CategoryIconPickerWidget(),
                       SetBudgetWidget(controller: budgetController),
                       ListTile(
                         shape: RoundedRectangleBorder(
@@ -193,7 +193,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                       Expanded(
                         child: Column(
                           children: [
-                            const SelectIconWidget(),
+                            const CategoryIconPickerWidget(),
                             SetBudgetWidget(controller: budgetController),
                             ColorPickerWidget(categoryBloc: categoryBloc),
                           ],

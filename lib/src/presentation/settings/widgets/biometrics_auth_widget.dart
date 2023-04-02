@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import '../../widgets/future_resolve.dart';
-import '../../../../main.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../data/settings/authenticate.dart';
+import '../../widgets/future_resolve.dart';
 
 class BiometricAuthWidget extends StatefulWidget {
   const BiometricAuthWidget({

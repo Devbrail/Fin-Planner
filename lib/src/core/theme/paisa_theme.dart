@@ -343,8 +343,10 @@ extension ColorExtension on Color {
 CustomColors lightCustomColor = CustomColors(
   red: Colors.red.shade400,
   green: Colors.green.shade400,
+  blue: Colors.blue.shade400,
 );
 CustomColors darkCustomColor = CustomColors(
   red: Colors.red.shade400,
   green: Colors.green.shade400,
+  blue: Colors.blue.shade400,
 );

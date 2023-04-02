@@ -101,12 +101,6 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                             style: TextButton.styleFrom(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16),
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
-                              foregroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimaryContainer,
                             ),
                             onPressed: () {
                               debtBloc.add(DeleteDebtEvent(

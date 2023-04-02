@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/domain/debt/use_case/delete_transactions_use_case.dart';
 
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt_model.dart';

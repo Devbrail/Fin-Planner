@@ -8,12 +8,14 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/transaction.dart';
+import '../../../domain/account/entities/account.dart';
 import '../../widgets/paisa_add_button_widget.dart';
 import '../../widgets/paisa_bottom_sheet.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../bloc/expense_bloc.dart';
 import '../widgets/select_account_widget.dart';
 import '../widgets/select_category_widget.dart';
+import '../widgets/selectable_item_widget.dart';
 import '../widgets/toggle_buttons_widget.dart';
 
 class ExpensePage extends StatefulWidget {
@@ -121,12 +123,6 @@ class _ExpensePageState extends State<ExpensePage> {
                               style: TextButton.styleFrom(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 16),
-                                backgroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .primaryContainer,
-                                foregroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .onPrimaryContainer,
                               ),
                               onPressed: () {
                                 expenseBloc
@@ -148,26 +144,148 @@ class _ExpensePageState extends State<ExpensePage> {
                 children: [
                   TransactionToggleButtons(expenseBloc: expenseBloc),
                   const SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        ExpenseNameWidget(controller: nameController),
-                        const SizedBox(height: 16),
-                        ExpenseDescriptionWidget(
-                          controller: descriptionController,
-                        ),
-                        const SizedBox(height: 16),
-                        ExpenseAmountWidget(controller: amountController),
-                        const SizedBox(height: 16),
-                        const ExpenseDatePickerWidget(),
-                        const SizedBox(height: 16),
-                      ],
-                    ),
+                  BlocBuilder(
+                    bloc: expenseBloc,
+                    buildWhen: (previous, current) =>
+                        current is ChangeTransactionTypeState,
+                    builder: (context, state) {
+                      if (state is ChangeTransactionTypeState &&
+                          (state.transactionType == TransactionType.expense ||
+                              state.transactionType ==
+                                  TransactionType.income)) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ExpenseNameWidget(controller: nameController),
+                            const SizedBox(height: 16),
+                            ExpenseDescriptionWidget(
+                              controller: descriptionController,
+                            ),
+                            const SizedBox(height: 16),
+                            ExpenseAmountWidget(controller: amountController),
+                            const SizedBox(height: 16),
+                            const ExpenseDatePickerWidget(),
+                            const SizedBox(height: 16),
+                            const SelectedAccount(),
+                            const SelectCategoryIcon(),
+                          ],
+                        );
+                      } else {
+                        return BlocBuilder(
+                          bloc: expenseBloc,
+                          buildWhen: (previous, current) =>
+                              current is TransferAccountsState,
+                          builder: (context, state) {
+                            if (state is TransferAccountsState) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      'From Account',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 180,
+                                    child: ListView.builder(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 16,
+                                        left: 16,
+                                        right: 16,
+                                      ),
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemCount: state.accounts.length,
+                                      itemBuilder: (_, index) {
+                                        final Account account =
+                                            state.accounts[index];
+                                        return ItemWidget(
+                                          isSelected: account.superId ==
+                                              state.fromAccount.superId,
+                                          title: account.name,
+                                          icon: account.icon,
+                                          onPressed: () {
+                                            expenseBloc.add(
+                                              TransferAccountsEvent(
+                                                state.accounts,
+                                                account,
+                                                state.toAccount,
+                                              ),
+                                            );
+                                          },
+                                          subtitle: account.bankName,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      'To Account',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 180,
+                                    child: ListView.builder(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 16,
+                                        left: 16,
+                                        right: 16,
+                                      ),
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemCount: state.accounts.length,
+                                      itemBuilder: (_, index) {
+                                        final Account account =
+                                            state.accounts[index];
+                                        return ItemWidget(
+                                          isSelected: account.superId ==
+                                              state.toAccount.superId,
+                                          title: account.name,
+                                          icon: account.icon,
+                                          onPressed: () {
+                                            expenseBloc.add(
+                                              TransferAccountsEvent(
+                                                state.accounts,
+                                                state.fromAccount,
+                                                account,
+                                              ),
+                                            );
+                                          },
+                                          subtitle: account.bankName,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: ExpenseAmountWidget(
+                                      controller: amountController,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
+                        );
+                      }
+                    },
                   ),
-                  const SelectedAccount(),
-                  const SelectCategoryIcon(),
                 ],
               ),
               bottomNavigationBar: SafeArea(
@@ -300,26 +418,29 @@ class ExpenseNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: BlocProvider.of<ExpenseBloc>(context),
-      buildWhen: (oldState, newState) => newState is ChangeExpenseState,
+      buildWhen: (oldState, newState) => newState is ChangeTransactionTypeState,
       builder: (context, state) {
-        if (state is ChangeExpenseState) {
-          return PaisaTextFormField(
-            maxLines: 1,
-            controller: controller,
-            hintText: state.transactionType.hintName(context),
-            keyboardType: TextInputType.name,
-            inputFormatters: [
-              FilteringTextInputFormatter.singleLineFormatter,
-            ],
-            validator: (value) {
-              if (value!.isNotEmpty) {
-                return null;
-              } else {
-                return context.loc.validNameLabel;
-              }
-            },
-            onChanged: (value) =>
-                BlocProvider.of<ExpenseBloc>(context).expenseName = value,
+        if (state is ChangeTransactionTypeState) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: PaisaTextFormField(
+              maxLines: 1,
+              controller: controller,
+              hintText: state.transactionType.hintName(context),
+              keyboardType: TextInputType.name,
+              inputFormatters: [
+                FilteringTextInputFormatter.singleLineFormatter,
+              ],
+              validator: (value) {
+                if (value!.isNotEmpty) {
+                  return null;
+                } else {
+                  return context.loc.validNameLabel;
+                }
+              },
+              onChanged: (value) =>
+                  BlocProvider.of<ExpenseBloc>(context).expenseName = value,
+            ),
           );
         } else {
           return const SizedBox.shrink();
@@ -339,13 +460,16 @@ class ExpenseDescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaTextFormField(
-      maxLines: 1,
-      controller: controller,
-      hintText: context.loc.descriptionLabel,
-      keyboardType: TextInputType.name,
-      onChanged: (value) =>
-          BlocProvider.of<ExpenseBloc>(context).currentDescription = value,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: PaisaTextFormField(
+        maxLines: 1,
+        controller: controller,
+        hintText: context.loc.descriptionLabel,
+        keyboardType: TextInputType.name,
+        onChanged: (value) =>
+            BlocProvider.of<ExpenseBloc>(context).currentDescription = value,
+      ),
     );
   }
 }
@@ -360,34 +484,42 @@ class ExpenseAmountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaTextFormField(
-      controller: controller,
-      hintText: context.loc.amountLabel,
-      keyboardType: TextInputType.number,
-      maxLength: 13,
-      maxLines: 1,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-        TextInputFormatter.withFunction((oldValue, newValue) {
-          try {
-            final text = newValue.text;
-            if (text.isNotEmpty) double.parse(text);
-            return newValue;
-          } catch (e) {}
-          return oldValue;
-        }),
-      ],
-      onChanged: (value) {
-        double? amount = double.tryParse(value);
-        BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
-      },
-      validator: (value) {
-        if (value!.isNotEmpty) {
-          return null;
-        } else {
-          return context.loc.validAmountLabel;
-        }
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: PaisaTextFormField(
+        controller: controller,
+        hintText: context.loc.amountLabel,
+        keyboardType: TextInputType.number,
+        maxLength: 13,
+        maxLines: 1,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+          TextInputFormatter.withFunction((oldValue, newValue) {
+            try {
+              final text = newValue.text;
+              if (text.isNotEmpty) double.parse(text);
+              return newValue;
+            } catch (e) {}
+            return oldValue;
+          }),
+        ],
+        onChanged: (value) {
+          double? amount = double.tryParse(value);
+          if (BlocProvider.of<ExpenseBloc>(context).transactionType !=
+              TransactionType.transfer) {
+            BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
+          } else {
+            BlocProvider.of<ExpenseBloc>(context).transferAmount = amount;
+          }
+        },
+        validator: (value) {
+          if (value!.isNotEmpty) {
+            return null;
+          } else {
+            return context.loc.validAmountLabel;
+          }
+        },
+      ),
     );
   }
 }
@@ -408,63 +540,66 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              horizontalTitleGap: 0,
+              onTap: () async {
+                final DateTime? dateTime = await showDatePicker(
+                  context: context,
+                  initialDate: selectedDateTime,
+                  firstDate: DateTime(1950),
+                  lastDate: DateTime.now(),
+                );
+                if (dateTime != null) {
+                  setState(() {
+                    selectedDateTime = selectedDateTime.copyWith(
+                      day: dateTime.day,
+                      month: dateTime.month,
+                      year: dateTime.year,
+                    );
+                    expenseBloc.selectedDate = selectedDateTime;
+                  });
+                }
+              },
+              leading: const Icon(Icons.today_rounded),
+              title: Text(selectedDateTime.formattedDate),
             ),
-            horizontalTitleGap: 0,
-            onTap: () async {
-              final DateTime? dateTime = await showDatePicker(
-                context: context,
-                initialDate: selectedDateTime,
-                firstDate: DateTime(1950),
-                lastDate: DateTime.now(),
-              );
-              if (dateTime != null) {
-                setState(() {
-                  selectedDateTime = selectedDateTime.copyWith(
-                    day: dateTime.day,
-                    month: dateTime.month,
-                    year: dateTime.year,
-                  );
-                  expenseBloc.selectedDate = selectedDateTime;
-                });
-              }
-            },
-            leading: const Icon(Icons.today_rounded),
-            title: Text(selectedDateTime.formattedDate),
           ),
-        ),
-        Expanded(
-          child: ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+          Expanded(
+            child: ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              horizontalTitleGap: 0,
+              onTap: () async {
+                final TimeOfDay? timeOfDay = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
+                  initialEntryMode: TimePickerEntryMode.dialOnly,
+                );
+                if (timeOfDay != null) {
+                  setState(() {
+                    selectedDateTime = selectedDateTime.copyWith(
+                      hour: timeOfDay.hour,
+                      minute: timeOfDay.minute,
+                    );
+                    expenseBloc.selectedDate = selectedDateTime;
+                  });
+                }
+              },
+              leading: const Icon(MdiIcons.clockOutline),
+              title: Text(selectedDateTime.formattedTime),
             ),
-            horizontalTitleGap: 0,
-            onTap: () async {
-              final TimeOfDay? timeOfDay = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay.now(),
-                initialEntryMode: TimePickerEntryMode.dialOnly,
-              );
-              if (timeOfDay != null) {
-                setState(() {
-                  selectedDateTime = selectedDateTime.copyWith(
-                    hour: timeOfDay.hour,
-                    minute: timeOfDay.minute,
-                  );
-                  expenseBloc.selectedDate = selectedDateTime;
-                });
-              }
-            },
-            leading: const Icon(MdiIcons.clockOutline),
-            title: Text(selectedDateTime.formattedTime),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

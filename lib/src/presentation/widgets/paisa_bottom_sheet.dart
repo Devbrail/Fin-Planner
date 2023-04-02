@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../main.dart';
 
+import '../../../main.dart';
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
 

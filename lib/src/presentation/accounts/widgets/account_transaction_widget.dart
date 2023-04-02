@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../widgets/paisa_card.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
-import '../../../core/extensions/account_extension.dart';
 import '../../../data/accounts/data_sources/local_account_data_manager.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/widgets/expense_item_widget.dart';
+import '../../widgets/paisa_card.dart';
 
 class AccountTransactionWidget extends StatelessWidget {
   const AccountTransactionWidget({
@@ -50,12 +49,14 @@ class AccountTransactionWidget extends StatelessWidget {
               horizontal: 16,
               vertical: 0,
             ),
-            title: Text(context.loc.transactionHistoryLabel,
-                style: GoogleFonts.outfit(
-                  fontWeight: FontWeight.w600,
-                  textStyle: Theme.of(context).textTheme.titleLarge,
-                  color: Theme.of(context).colorScheme.onBackground,
-                )),
+            title: Text(
+              context.loc.transactionHistoryLabel,
+              style: GoogleFonts.outfit(
+                fontWeight: FontWeight.w600,
+                textStyle: Theme.of(context).textTheme.titleLarge,
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -65,12 +66,23 @@ class AccountTransactionWidget extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: expenses.length,
                 itemBuilder: (_, index) {
-                  final Account account = accountLocalDataSource
-                      .fetchAccountFromId(expenses[index].accountId)!
-                      .toEntity();
-                  final Category category = categoryLocalDataSource
-                      .fetchCategoryFromId(expenses[index].categoryId)!
-                      .toEntity();
+                  final Account? account = accountLocalDataSource
+                      .fetchAccountFromId(expenses[index].accountId)
+                      ?.toEntity();
+                  final Category? category = categoryLocalDataSource
+                      .fetchCategoryFromId(expenses[index].categoryId)
+                      ?.toEntity();
+                  if (category == null || account == null) {
+                    return ExpenseItemWidget(
+                      expense: expenses[index],
+                      account: account!,
+                      category: Category(
+                        icon: Icons.wallet.codePoint,
+                        name: 'Code',
+                        color: Colors.amber.value,
+                      ),
+                    );
+                  }
                   return ExpenseItemWidget(
                     expense: expenses[index],
                     account: account,

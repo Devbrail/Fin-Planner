@@ -6,19 +6,23 @@ class CustomColors extends ThemeExtension<CustomColors> {
   const CustomColors({
     required this.red,
     required this.green,
+    required this.blue,
   });
 
   final Color? red;
   final Color? green;
+  final Color? blue;
 
   @override
   CustomColors copyWith({
     Color? red,
     Color? green,
+    Color? blue,
   }) {
     return CustomColors(
       red: red ?? this.red,
       green: green ?? this.green,
+      blue: blue ?? this.blue,
     );
   }
 
@@ -30,6 +34,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
     return CustomColors(
       red: Color.lerp(red, other.red, t),
       green: Color.lerp(green, other.green, t),
+      blue: Color.lerp(blue, other.blue, t),
     );
   }
 

@@ -29,8 +29,8 @@ import 'package:paisa/src/data/debt/data_sources/debt_local_data_source.dart'
     as _i12;
 import 'package:paisa/src/data/debt/data_sources/debt_local_data_source_impl.dart'
     as _i13;
-import 'package:paisa/src/data/debt/models/debt_model.dart' as _i6;
-import 'package:paisa/src/data/debt/models/transactions_model.dart' as _i5;
+import 'package:paisa/src/data/debt/models/debt_model.dart' as _i5;
+import 'package:paisa/src/data/debt/models/transactions_model.dart' as _i6;
 import 'package:paisa/src/data/debt/repository/debt_repository_impl.dart'
     as _i15;
 import 'package:paisa/src/data/expense/data_sources/local_expense_data_manager.dart'
@@ -146,20 +146,20 @@ _i1.GetIt init(
   );
   final hiveModule = _$HiveModule();
   gh.singleton<_i3.Authenticate>(_i3.Authenticate());
+  gh.singleton<_i4.Box<_i5.DebtModel>>(hiveModule.debtsBox);
+  gh.singleton<_i4.Box<_i6.TransactionsModel>>(hiveModule.transactionsBox);
   gh.singleton<_i4.Box<dynamic>>(
     hiveModule.boxDynamic,
     instanceName: 'settings',
   );
-  gh.singleton<_i4.Box<_i5.TransactionsModel>>(hiveModule.transactionsBox);
-  gh.singleton<_i4.Box<_i6.DebtModel>>(hiveModule.debtsBox);
   gh.factory<_i4.Box<_i7.ExpenseModel>>(() => hiveModule.expenseBox);
   gh.singleton<_i4.Box<_i8.AccountModel>>(hiveModule.accountBox);
   gh.singleton<_i4.Box<_i9.CategoryModel>>(hiveModule.categoryBox);
   gh.singleton<_i10.CurrenciesRepository>(
       _i11.CurrencySelectorRepositoryImpl());
   gh.singleton<_i12.DebtLocalDataSource>(_i13.DebtLocalDataSourceImpl(
-    debtBox: gh<_i4.Box<_i6.DebtModel>>(),
-    transactionsBox: gh<_i4.Box<_i5.TransactionsModel>>(),
+    debtBox: gh<_i4.Box<_i5.DebtModel>>(),
+    transactionsBox: gh<_i4.Box<_i6.TransactionsModel>>(),
   ));
   gh.singleton<_i14.DebtRepository>(
       _i15.DebtRepositoryImpl(dataSource: gh<_i12.DebtLocalDataSource>()));
@@ -214,7 +214,7 @@ _i1.GetIt init(
         addTransactionUseCase: gh<_i44.AddTransactionUseCase>(),
         updateDebtUseCase: gh<_i44.UpdateDebtUseCase>(),
         deleteDebtUseCase: gh<_i44.DeleteDebtUseCase>(),
-        deleteTransactionsUseCase: gh<_i18.DeleteTransactionsUseCase>(),
+        deleteTransactionsUseCase: gh<_i44.DeleteTransactionsUseCase>(),
         deleteTransactionUseCase: gh<_i44.DeleteTransactionUseCase>(),
       ));
   gh.singleton<_i45.DeleteAccountUseCase>(_i45.DeleteAccountUseCase(
@@ -267,10 +267,11 @@ _i1.GetIt init(
           expenseRepository: gh<_i47.ExpenseRepository>()));
   gh.factory<_i69.ExpenseBloc>(() => _i69.ExpenseBloc(
         expenseUseCase: gh<_i65.GetExpenseUseCase>(),
-        accountUseCase: gh<_i49.GetAccountUseCase>(),
+        accountUseCase: gh<_i57.GetAccountUseCase>(),
         addExpenseUseCase: gh<_i65.AddExpenseUseCase>(),
         deleteExpenseUseCase: gh<_i65.DeleteExpenseUseCase>(),
         updateExpensesUseCase: gh<_i61.UpdateExpensesUseCase>(),
+        accountsUseCase: gh<_i57.GetAccountsUseCase>(),
       ));
   gh.factory<_i70.AccountsBloc>(() => _i70.AccountsBloc(
         getAccountUseCase: gh<_i57.GetAccountUseCase>(),

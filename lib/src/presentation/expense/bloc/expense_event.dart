@@ -52,3 +52,17 @@ class UpdateDateTimeEvent extends ExpenseEvent {
   @override
   List<Object> get props => [dateTime];
 }
+
+class TransferAccountsEvent extends ExpenseEvent {
+  final List<Account> accounts;
+  final Account fromAccount, toAccount;
+
+  const TransferAccountsEvent(
+    this.accounts,
+    this.fromAccount,
+    this.toAccount,
+  );
+
+  @override
+  List<Object> get props => [accounts, fromAccount, toAccount];
+}

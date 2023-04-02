@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
+import '../../../core/common.dart';
 import '../../../domain/expense/entities/expense.dart';
 
 import '../../../core/enum/transaction.dart';
@@ -60,7 +61,7 @@ class ExpenseModel extends HiveObject with EquatableMixin {
         time: DateTime.parse(json['time']),
         categoryId: json['categoryId'],
         accountId: json['accountId'],
-        type: (json['type'] as String).type,
+        type: (json['type'] as String).transactionType,
         description: (json['description'] as String),
       )..superId = json['superId'];
 

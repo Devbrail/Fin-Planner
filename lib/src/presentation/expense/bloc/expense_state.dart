@@ -20,10 +20,10 @@ class ExpenseAdded extends ExpenseState {
 
 class ExpenseDeletedState extends ExpenseState {}
 
-class ChangeExpenseState extends ExpenseState {
+class ChangeTransactionTypeState extends ExpenseState {
   final TransactionType transactionType;
 
-  const ChangeExpenseState(this.transactionType);
+  const ChangeTransactionTypeState(this.transactionType);
 
   @override
   List<Object> get props => [transactionType];
@@ -72,4 +72,18 @@ class UpdateDateTimeState extends ExpenseState {
 
   @override
   List<Object> get props => [dateTime];
+}
+
+class TransferAccountsState extends ExpenseState {
+  final List<Account> accounts;
+  final Account fromAccount, toAccount;
+
+  const TransferAccountsState(
+    this.accounts,
+    this.fromAccount,
+    this.toAccount,
+  );
+
+  @override
+  List<Object> get props => [accounts, fromAccount, toAccount];
 }
