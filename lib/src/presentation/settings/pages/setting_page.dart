@@ -124,9 +124,12 @@ class SettingsPage extends StatelessWidget {
                     const VersionWidget(),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(context.loc.madeWithLoveInIndiaLabel),
+                SafeArea(
+                  top: false,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(context.loc.madeWithLoveInIndiaLabel),
+                  ),
                 ),
               ],
             ),
