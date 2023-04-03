@@ -99,13 +99,17 @@ extension ExpensesHelper on Iterable<Expense> {
 
   double get thisMonthExpense =>
       where((element) => element.type == TransactionType.expense)
-          .where((element) => element.time.month == DateTime.now().month)
+          .where((element) =>
+              element.time.month == DateTime.now().month &&
+              element.time.year == DateTime.now().year)
           .map((e) => e.currency)
           .fold<double>(0, (previousValue, element) => previousValue + element);
 
   double get thisMonthIncome =>
       where((element) => element.type == TransactionType.income)
-          .where((element) => element.time.month == DateTime.now().month)
+          .where((element) =>
+              element.time.month == DateTime.now().month &&
+              element.time.year == DateTime.now().year)
           .map((e) => e.currency)
           .fold<double>(0, (previousValue, element) => previousValue + element);
 
