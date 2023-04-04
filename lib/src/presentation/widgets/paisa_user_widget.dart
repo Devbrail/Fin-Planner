@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../../di/module/work.dart';
 import 'package:workmanager/workmanager.dart';
 
 import '../../../main.dart';
 import '../../core/enum/box_types.dart';
+import '../../di/module/work.dart';
 import '../home/bloc/home_bloc.dart';
 import '../home/widgets/welcome_widget.dart';
 import '../settings/widgets/user_profile_widget.dart';

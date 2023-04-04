@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/core/enum/card_type.dart';
+import '../../../core/enum/card_type.dart';
 
 import '../../../../main.dart';
 import '../../../domain/account/entities/account.dart';

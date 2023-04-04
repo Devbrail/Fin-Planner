@@ -291,10 +291,6 @@
     "@telegramGroupLabel": {
         "description": "A group to follow and post bugs and feature requests label"
     },
-    "budgetOverViewLabel": "Budget overview",
-    "@budgetOverViewLabel": {
-        "description": "Budget overview label"
-    },
     "noResultFoundLabel": "No result found",
     "@noResultFoundLabel": {
         "description": "No result found label"

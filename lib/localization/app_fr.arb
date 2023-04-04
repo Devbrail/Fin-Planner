@@ -291,10 +291,6 @@
     "@telegramGroupLabel": {
         "description": "A group to follow and post bugs and feature requests label"
     },
-    "budgetOverViewLabel": "Vue d'ensemble du budget",
-    "@budgetOverViewLabel": {
-        "description": "Budget overview label"
-    },
     "noResultFoundLabel": "Aucun résultat trouvé",
     "@noResultFoundLabel": {
         "description": "No result found label"
@@ -663,13 +659,13 @@
     "deleteLabel": "Supprimer",
     "@deleteLabel": {
         "description": "Delete label"
-    }
-   , "appBarSearchLabel": "Rechercher des dépenses, des comptes, des catégories",
+    },
+    "appBarSearchLabel": "Rechercher des dépenses, des comptes, des catégories",
     "@appBarSearchLabel": {
         "description": "Search expenses, accounts, categories label"
     },
     "deleteDebtOrCreditLabel": "La suppression de la dette / du crédit supprime tous les enregistrements qui s'y rapportent.",
-            "@deleteDebtOrCreditLabel": {
-                "description": "Delete debt or category label"
-            }
+    "@deleteDebtOrCreditLabel": {
+        "description": "Delete debt or category label"
+    }
 }

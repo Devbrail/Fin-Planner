@@ -291,10 +291,6 @@
     "@telegramGroupLabel": {
         "description": "A group to follow and post bugs and feature requests label"
     },
-    "budgetOverViewLabel": "Обзор бюджета",
-    "@budgetOverViewLabel": {
-        "description": "Budget overview label"
-    },
     "noResultFoundLabel": "Результат не найден",
     "@noResultFoundLabel": {
         "description": "No result found label"
@@ -691,8 +687,7 @@
     "selectCurrencyLabel": "Выберите валюту",
     "@selectCurrencyLabel": {
         "description": "Select currency label"
-    }
-    ,
+    },
     "overviewLabel": "Обзор",
     "@overviewLabel": {
         "description": "Overview label"

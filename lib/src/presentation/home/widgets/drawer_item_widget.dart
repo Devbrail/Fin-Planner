@@ -7,11 +7,14 @@ class DrawerItemWidget extends StatelessWidget {
     required this.onPressed,
     required this.title,
     required this.icon,
+    this.selectedIcon,
   });
   final bool isSelected;
   final VoidCallback onPressed;
   final String title;
   final IconData icon;
+  final IconData? selectedIcon;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,7 +37,7 @@ class DrawerItemWidget extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  icon,
+                  isSelected ? selectedIcon ?? icon : icon,
                   size: 18,
                   color: isSelected
                       ? Theme.of(context).colorScheme.onSecondaryContainer

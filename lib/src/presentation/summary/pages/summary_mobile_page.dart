@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/enum/filter_budget.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/filter_widget/filter_budget_widget.dart';
 import '../widgets/expense_history_widget.dart';
@@ -10,11 +9,9 @@ import '../widgets/welcome_name_widget.dart';
 class SummaryMobilePage extends StatelessWidget {
   const SummaryMobilePage({
     super.key,
-    required this.valueNotifier,
     required this.expenses,
   });
 
-  final ValueNotifier<FilterExpense> valueNotifier;
   final List<Expense> expenses;
 
   @override
@@ -32,12 +29,9 @@ class SummaryMobilePage extends StatelessWidget {
           } else if (index == 2) {
             return const SizedBox(height: 16);
           } else if (index == 3) {
-            return FilterBudgetToggleWidget(valueNotifier: valueNotifier);
+            return const FilterBudgetToggleWidget();
           } else if (index == 4) {
-            return ExpenseHistory(
-              valueNotifier: valueNotifier,
-              expenses: expenses,
-            );
+            return ExpenseHistory(expenses: expenses);
           }
           return const SizedBox.shrink();
         },

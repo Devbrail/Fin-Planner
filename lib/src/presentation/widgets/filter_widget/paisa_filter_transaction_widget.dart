@@ -3,12 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/common.dart';
-import '../../../core/enum/filter_budget.dart';
 import '../../home/bloc/home_bloc.dart';
 import 'filter_budget_widget.dart';
-
-final ValueNotifier<FilterExpense> valueNotifier =
-    ValueNotifier<FilterExpense>(FilterExpense.daily);
 
 class PaisaFilterTransactionWidget extends StatelessWidget {
   const PaisaFilterTransactionWidget({super.key});
@@ -19,7 +15,7 @@ class PaisaFilterTransactionWidget extends StatelessWidget {
       bloc: BlocProvider.of<HomeBloc>(context),
       builder: (context, state) {
         if (state is CurrentIndexState &&
-            state.currentPage == PageType.budgetOverview) {
+            state.currentPage == PageType.overview) {
           return IconButton(
             onPressed: () {
               showModalBottomSheet(
@@ -35,10 +31,11 @@ class PaisaFilterTransactionWidget extends StatelessWidget {
                     topRight: Radius.circular(16),
                   ),
                 ),
-                builder: (context) => FilterBudgetToggleWidget(
-                  valueNotifier: valueNotifier,
-                  showAsList: true,
-                ),
+                builder: (context) {
+                  return const FilterBudgetToggleWidget(
+                    showAsList: true,
+                  );
+                },
               );
             },
             icon: const Icon(MdiIcons.filter),

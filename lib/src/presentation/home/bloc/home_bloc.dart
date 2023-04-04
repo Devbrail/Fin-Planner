@@ -36,16 +36,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   int getIndexFromPage(PageType currentPage) {
     switch (currentPage) {
-      case PageType.home:
-        return 0;
       case PageType.accounts:
         return 1;
-      case PageType.category:
-        return 2;
       case PageType.debts:
+        return 2;
+      case PageType.overview:
         return 3;
-      case PageType.budgetOverview:
-        return 4;
+      case PageType.home:
       default:
         return 0;
     }
@@ -56,11 +53,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       case 1:
         return PageType.accounts;
       case 2:
-        return PageType.category;
-      case 3:
         return PageType.debts;
+      case 3:
+        return PageType.overview;
       case 4:
-        return PageType.budgetOverview;
+        return PageType.budget;
       case 0:
       default:
         return PageType.home;

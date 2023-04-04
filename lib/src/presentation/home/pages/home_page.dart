@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../summary/controller/summary_controller.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
@@ -23,9 +24,8 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   final HomeBloc homeBloc = getIt.get<HomeBloc>();
-  final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier =
-      ValueNotifier<DateTimeRange?>(null);
   final SettingsController settingsController = getIt.get();
+  final SummaryController summaryController = getIt.get();
 
   DateTimeRange? dateTimeRange;
   void _handleClick(PageType page) {
@@ -42,8 +42,10 @@ class _LandingPageState extends State<LandingPage> {
       case PageType.debts:
         context.goNamed(addDebitName);
         break;
-      case PageType.budgetOverview:
+      case PageType.overview:
         _dateRangePicker();
+        break;
+      case PageType.budget:
         break;
     }
   }
@@ -52,7 +54,8 @@ class _LandingPageState extends State<LandingPage> {
     return BlocBuilder(
       bloc: homeBloc,
       builder: (context, state) {
-        if (state is CurrentIndexState) {
+        if (state is CurrentIndexState &&
+            state.currentPage != PageType.budget) {
           return FloatingActionButton.large(
             onPressed: () => _handleClick(state.currentPage),
             child: const Icon(Icons.add),
@@ -68,10 +71,11 @@ class _LandingPageState extends State<LandingPage> {
     return BlocBuilder(
       bloc: homeBloc,
       builder: (context, state) {
-        if (state is CurrentIndexState) {
+        if (state is CurrentIndexState &&
+            state.currentPage != PageType.budget) {
           return FloatingActionButton.large(
             onPressed: () => _handleClick(state.currentPage),
-            child: state.currentPage != PageType.budgetOverview
+            child: state.currentPage != PageType.overview
                 ? const Icon(Icons.add)
                 : const Icon(Icons.date_range),
           );
@@ -105,7 +109,7 @@ class _LandingPageState extends State<LandingPage> {
     );
     if (newDateRange == null || newDateRange == dateTimeRange) return;
     dateTimeRange = newDateRange;
-    dateTimeRangeNotifier.value = newDateRange;
+    summaryController.dateTimeRangeNotifier.value = newDateRange;
   }
 
   @override
@@ -128,17 +132,14 @@ class _LandingPageState extends State<LandingPage> {
           ),
           mobile: HomeMobilePage(
             homeBloc: homeBloc,
-            dateTimeRangeNotifier: dateTimeRangeNotifier,
             floatingActionButton: _floatingActionButtonBig(),
           ),
           tablet: HomeTabletPage(
             homeBloc: homeBloc,
-            dateTimeRangeNotifier: dateTimeRangeNotifier,
             floatingActionButton: _desktopButton(),
           ),
           desktop: HomeDesktopWidget(
             homeBloc: homeBloc,
-            dateTimeRangeNotifier: dateTimeRangeNotifier,
             floatingActionButton: _desktopButton(),
           ),
         ),

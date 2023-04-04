@@ -1,6 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
 
+import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/filter_budget.dart';
 import '../../../domain/expense/entities/expense.dart';
@@ -9,15 +11,14 @@ import 'expense_month_card.dart';
 class ExpenseHistory extends StatelessWidget {
   const ExpenseHistory({
     super.key,
-    required this.valueNotifier,
     required this.expenses,
   });
 
-  final ValueNotifier<FilterExpense> valueNotifier;
   final List<Expense> expenses;
 
   @override
   Widget build(BuildContext context) {
+    final SummaryController summaryController = getIt.get();
     if (expenses.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(16.0),
@@ -37,7 +38,7 @@ class ExpenseHistory extends StatelessWidget {
       );
     } else {
       return ValueListenableBuilder<FilterExpense>(
-        valueListenable: valueNotifier,
+        valueListenable: summaryController.filterExpenseNotifier,
         builder: (_, value, __) {
           final maps = groupBy(
               expenses, (Expense element) => element.time.formatted(value));

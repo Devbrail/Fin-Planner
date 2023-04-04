@@ -2,11 +2,11 @@ import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/common.dart';
+import '../../../domain/category/entities/category.dart';
+import '../../../domain/expense/entities/expense.dart';
 
 import '../../../app/routes.dart';
-import '../../../core/common.dart';
-import '../../../data/category/model/category_model.dart';
-import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/paisa_card.dart';
 
 class BudgetItemMobileWidget extends StatelessWidget {
@@ -15,7 +15,7 @@ class BudgetItemMobileWidget extends StatelessWidget {
     required this.category,
     required this.expenses,
   }) : super(key: key);
-  final CategoryModel category;
+  final Category category;
   final List<Expense> expenses;
 
   get isBudgetActive {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../summary/controller/summary_controller.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_budget.dart';
@@ -9,17 +10,16 @@ import '../paisa_toggle_button.dart';
 class FilterBudgetToggleWidget extends StatelessWidget {
   const FilterBudgetToggleWidget({
     Key? key,
-    required this.valueNotifier,
     this.showAsList = false,
   }) : super(key: key);
 
-  final ValueNotifier<FilterExpense> valueNotifier;
   final bool showAsList;
 
   @override
   Widget build(BuildContext context) {
+    final SummaryController summaryController = getIt.get();
     return ValueListenableBuilder<FilterExpense>(
-      valueListenable: valueNotifier,
+      valueListenable: summaryController.filterExpenseNotifier,
       builder: (_, value, child) {
         getIt.get<SettingsController>().setFilterExpense(value);
         if (showAsList) {
@@ -53,7 +53,8 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         title: FilterExpense.daily.name(context),
                         isSelected: FilterExpense.daily == value,
                         onPressed: () {
-                          valueNotifier.value = FilterExpense.daily;
+                          summaryController.filterExpenseNotifier.value =
+                              FilterExpense.daily;
                         },
                       ),
                       Divider(
@@ -65,8 +66,8 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                       PaisaToggleButton(
                         title: FilterExpense.weekly.name(context),
                         isSelected: FilterExpense.weekly == value,
-                        onPressed: () =>
-                            valueNotifier.value = FilterExpense.weekly,
+                        onPressed: () => summaryController
+                            .filterExpenseNotifier.value = FilterExpense.weekly,
                       ),
                       Divider(
                         indent: 0,
@@ -77,8 +78,8 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                       PaisaToggleButton(
                         title: FilterExpense.monthly.name(context),
                         isSelected: FilterExpense.monthly == value,
-                        onPressed: () =>
-                            valueNotifier.value = FilterExpense.monthly,
+                        onPressed: () => summaryController.filterExpenseNotifier
+                            .value = FilterExpense.monthly,
                       ),
                       Divider(
                         indent: 0,
@@ -89,8 +90,8 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                       PaisaToggleButton(
                         title: FilterExpense.yearly.name(context),
                         isSelected: FilterExpense.yearly == value,
-                        onPressed: () =>
-                            valueNotifier.value = FilterExpense.yearly,
+                        onPressed: () => summaryController
+                            .filterExpenseNotifier.value = FilterExpense.yearly,
                       ),
                       Divider(
                         indent: 0,
@@ -102,8 +103,8 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         itemIndex: ItemIndex.last,
                         title: FilterExpense.all.name(context),
                         isSelected: FilterExpense.all == value,
-                        onPressed: () =>
-                            valueNotifier.value = FilterExpense.all,
+                        onPressed: () => summaryController
+                            .filterExpenseNotifier.value = FilterExpense.all,
                       ),
                     ],
                   ),
@@ -121,28 +122,32 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                   PaisaMaterialYouChip(
                     title: FilterExpense.daily.name(context),
                     isSelected: FilterExpense.daily == value,
-                    onPressed: () => valueNotifier.value = FilterExpense.daily,
+                    onPressed: () => summaryController
+                        .filterExpenseNotifier.value = FilterExpense.daily,
                   ),
                   PaisaMaterialYouChip(
                     title: FilterExpense.weekly.name(context),
                     isSelected: FilterExpense.weekly == value,
-                    onPressed: () => valueNotifier.value = FilterExpense.weekly,
+                    onPressed: () => summaryController
+                        .filterExpenseNotifier.value = FilterExpense.weekly,
                   ),
                   PaisaMaterialYouChip(
                     title: FilterExpense.monthly.name(context),
                     isSelected: FilterExpense.monthly == value,
-                    onPressed: () =>
-                        valueNotifier.value = FilterExpense.monthly,
+                    onPressed: () => summaryController
+                        .filterExpenseNotifier.value = FilterExpense.monthly,
                   ),
                   PaisaMaterialYouChip(
                     title: FilterExpense.yearly.name(context),
                     isSelected: FilterExpense.yearly == value,
-                    onPressed: () => valueNotifier.value = FilterExpense.yearly,
+                    onPressed: () => summaryController
+                        .filterExpenseNotifier.value = FilterExpense.yearly,
                   ),
                   PaisaMaterialYouChip(
                     title: FilterExpense.all.name(context),
                     isSelected: FilterExpense.all == value,
-                    onPressed: () => valueNotifier.value = FilterExpense.all,
+                    onPressed: () => summaryController
+                        .filterExpenseNotifier.value = FilterExpense.all,
                   ),
                 ],
               ),

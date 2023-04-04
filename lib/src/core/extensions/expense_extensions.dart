@@ -105,6 +105,13 @@ extension ExpensesHelper on Iterable<Expense> {
           .map((e) => e.currency)
           .fold<double>(0, (previousValue, element) => previousValue + element);
 
+  List<Expense> get thisMonthExpensesList =>
+      where((element) => element.type == TransactionType.expense)
+          .where((element) =>
+              element.time.month == DateTime.now().month &&
+              element.time.year == DateTime.now().year)
+          .toList();
+
   double get thisMonthIncome =>
       where((element) => element.type == TransactionType.income)
           .where((element) =>

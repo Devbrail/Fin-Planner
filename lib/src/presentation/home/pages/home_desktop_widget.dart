@@ -23,12 +23,10 @@ class HomeDesktopWidget extends StatelessWidget {
   const HomeDesktopWidget({
     super.key,
     required this.homeBloc,
-    required this.dateTimeRangeNotifier,
     required this.floatingActionButton,
   });
   final HomeBloc homeBloc;
   final Widget floatingActionButton;
-  final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +92,9 @@ class HomeDesktopWidget extends StatelessWidget {
                       NavigationBarItem(
                         title: context.loc.overviewLabel,
                         icon: MdiIcons.sortVariant,
-                        isSelected:
-                            state.currentPage == PageType.budgetOverview,
-                        onPressed: () => homeBloc.add(
-                            const CurrentIndexEvent(PageType.budgetOverview)),
+                        isSelected: state.currentPage == PageType.overview,
+                        onPressed: () => homeBloc
+                            .add(const CurrentIndexEvent(PageType.overview)),
                       ),
                       NavigationBarItem(
                         title: context.loc.debtsLabel,
@@ -105,6 +102,13 @@ class HomeDesktopWidget extends StatelessWidget {
                         isSelected: state.currentPage == PageType.debts,
                         onPressed: () => homeBloc
                             .add(const CurrentIndexEvent(PageType.debts)),
+                      ),
+                      NavigationBarItem(
+                        title: context.loc.budgetLabel,
+                        icon: MdiIcons.timetable,
+                        isSelected: state.currentPage == PageType.budget,
+                        onPressed: () => homeBloc
+                            .add(const CurrentIndexEvent(PageType.budget)),
                       ),
                       const Divider(),
                       NavigationBarItem(
@@ -150,6 +154,8 @@ class HomeDesktopWidget extends StatelessWidget {
                           ),
                         ),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
                               onLongPress: () {
@@ -176,9 +182,7 @@ class HomeDesktopWidget extends StatelessWidget {
                     ],
                   ),
                   Expanded(
-                    child: ContentWidget(
-                      dateTimeRangeNotifier: dateTimeRangeNotifier,
-                    ),
+                    child: ContentWidget(),
                   ),
                 ],
               ),
