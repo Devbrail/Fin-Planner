@@ -136,21 +136,3 @@ class _IconPickerWidgetState extends State<_IconPickerWidget> {
     );
   }
 }
-
-Map<String, dynamic> sectionIcons() {
-  return {
-    'Account': {
-      '1': MdiIcons.account,
-      '2': MdiIcons.accountGroup,
-      '3': MdiIcons.accountHeart,
-      '1': MdiIcons.account,
-      '1': MdiIcons.account,
-      '1': MdiIcons.account,
-      '1': MdiIcons.account,
-      '1': MdiIcons.account,
-      '1': MdiIcons.account,
-      '1': MdiIcons.account,
-      '1': MdiIcons.account,
-    },
-  };
-}

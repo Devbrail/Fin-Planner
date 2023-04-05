@@ -166,7 +166,7 @@ class HomeDesktopWidget extends StatelessWidget {
                                   ),
                                 );
                               },
-                              child: const WelcomeWidget(),
+                              child: const UserImageWidget(),
                             ),
                             const WelcomeNameWidget(),
                           ],

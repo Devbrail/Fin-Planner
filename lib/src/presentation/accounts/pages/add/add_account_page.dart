@@ -546,7 +546,7 @@ class _AccountDefaultSwitchWidgetState
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      title: Text('Default account'),
+      title: const Text('Default account'),
       value: isAccountDefault,
       onChanged: (value) {
         setState(() {

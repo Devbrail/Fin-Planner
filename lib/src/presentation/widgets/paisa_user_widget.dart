@@ -19,43 +19,44 @@ class PaisaUserWidget extends StatelessWidget {
   final HomeBloc homeBloc;
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        onDoubleTap: () {
-          Workmanager().registerPeriodicTask(
-            'task_name_1',
-            periodicTaskName,
-            frequency: Duration(minutes: 15),
-          );
-        },
-        onLongPress: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => const ColorPalette(),
-            ),
-          );
-        },
-        onTap: () => showModalBottomSheet(
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width >= 700
-                ? 700
-                : double.infinity,
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onDoubleTap: () {
+        Workmanager().registerPeriodicTask(
+          'task_name_1',
+          periodicTaskName,
+          frequency: const Duration(minutes: 15),
+        );
+      },
+      onLongPress: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const ColorPalette(),
           ),
-          isScrollControlled: true,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
-            ),
-          ),
-          context: context,
-          builder: (_) => UserProfilePage(
-            settings: getIt.get<Box<dynamic>>(
-              instanceName: BoxType.settings.name,
-            ),
-            controller: TextEditingController(),
+        );
+      },
+      onTap: () => showModalBottomSheet(
+        constraints: BoxConstraints(
+          maxWidth:
+              MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
+        ),
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
           ),
         ),
-        child: const WelcomeWidget(),
-      );
+        context: context,
+        builder: (_) => UserProfilePage(
+          settings: getIt.get<Box<dynamic>>(
+            instanceName: BoxType.settings.name,
+          ),
+          controller: TextEditingController(),
+        ),
+      ),
+      child: const UserImageWidget(),
+    );
+  }
 }

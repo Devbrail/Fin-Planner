@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -59,7 +60,7 @@ class SettingsColorPickerWidget extends StatelessWidget {
                   : double.infinity,
             ),
             builder: (context) => ColorPickerDialogWidget(
-              valueListenable: settings.listenable(),
+              settings: settings,
             ),
           ),
         );
@@ -71,81 +72,126 @@ class SettingsColorPickerWidget extends StatelessWidget {
 class ColorPickerDialogWidget extends StatelessWidget {
   const ColorPickerDialogWidget({
     Key? key,
-    required this.valueListenable,
+    required this.settings,
   }) : super(key: key);
 
-  final ValueListenable<Box<dynamic>> valueListenable;
+  final Box<dynamic> settings;
 
   @override
   Widget build(BuildContext context) {
-    return FutureResolve<AndroidDeviceInfo>(
-      future: DeviceInfoPlugin().androidInfo,
-      builder: (info) {
-        final sdk = info.version.sdkInt;
-        bool isAndroid12 = sdk >= 29;
-        return ValueListenableBuilder<Box<dynamic>>(
-          valueListenable: valueListenable,
-          builder: (context, value, _) {
-            final bool isDynamic = value.get(
-              dynamicThemeKey,
-              defaultValue: false,
-            );
-            int selectedColor = value.get(
-              appColorKey,
-              defaultValue: 0xFF795548,
-            );
+    if (Platform.isAndroid) {
+      return FutureResolve<AndroidDeviceInfo>(
+        future: DeviceInfoPlugin().androidInfo,
+        builder: (info) {
+          final sdk = info.version.sdkInt;
+          bool isAndroid12 = sdk >= 29;
+          return ValueListenableBuilder<Box<dynamic>>(
+            valueListenable: settings.listenable(),
+            builder: (context, value, _) {
+              final bool isDynamic = value.get(
+                dynamicThemeKey,
+                defaultValue: false,
+              );
+              int selectedColor = value.get(
+                appColorKey,
+                defaultValue: 0xFF795548,
+              );
 
-            return SafeArea(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  ListTile(
-                    title: Text(
-                      context.loc.pickColorLabel,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
-                  Visibility(
-                    visible: isAndroid12,
-                    child: DynamicColorSwitchWidget(settings: value),
-                  ),
-                  const Divider(),
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 500),
-                    child: isDynamic
-                        ? const SizedBox.shrink()
-                        : ColorPickerGridWidget(
-                            onSelected: (color) {
-                              selectedColor = color;
-                            },
-                            selectedColor: selectedColor,
-                          ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 16.0, bottom: 16),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 12,
-                        ),
+              return SafeArea(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    ListTile(
+                      title: Text(
+                        context.loc.pickColorLabel,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
-                      onPressed: () => value
-                          .put(appColorKey, selectedColor)
-                          .then((value) => Navigator.pop(context)),
-                      child: Text(context.loc.doneLabel),
                     ),
-                  ),
-                ],
+                    Visibility(
+                      visible: isAndroid12,
+                      child: DynamicColorSwitchWidget(settings: value),
+                    ),
+                    const Divider(),
+                    AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 500),
+                      child: isDynamic
+                          ? const SizedBox.shrink()
+                          : ColorPickerGridWidget(
+                              onSelected: (color) {
+                                selectedColor = color;
+                              },
+                              selectedColor: selectedColor,
+                            ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 12,
+                          ),
+                        ),
+                        onPressed: () => value
+                            .put(appColorKey, selectedColor)
+                            .then((value) => Navigator.pop(context)),
+                        child: Text(context.loc.doneLabel),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      );
+    } else {
+      int selectedColor = settings.get(
+        appColorKey,
+        defaultValue: 0xFF795548,
+      );
+      return SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ListTile(
+              title: Text(
+                context.loc.pickColorLabel,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
-            );
-          },
-        );
-      },
-    );
+            ),
+            ColorPickerGridWidget(
+              onSelected: (color) {
+                selectedColor = color;
+              },
+              selectedColor: selectedColor,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                ),
+                onPressed: () => settings
+                    .put(appColorKey, selectedColor)
+                    .then((value) => Navigator.pop(context)),
+                child: Text(context.loc.doneLabel),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }

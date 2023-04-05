@@ -9,7 +9,6 @@ import '../../../core/common.dart';
 import '../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../widgets/paisa_icon_title.dart';
 import '../../widgets/paisa_search_button_widget.dart';
-import '../../widgets/paisa_user_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/content_widget.dart';
 
@@ -28,12 +27,9 @@ class HomeMobilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const PaisaTitle(),
-        actions: [
-          const PaisaFilterTransactionWidget(),
-          const PaisaSearchButtonWidget(),
-          PaisaUserWidget(
-            homeBloc: homeBloc,
-          ),
+        actions: const [
+          PaisaFilterTransactionWidget(),
+          PaisaSearchButtonWidget(),
         ],
       ),
       drawer: Drawer(

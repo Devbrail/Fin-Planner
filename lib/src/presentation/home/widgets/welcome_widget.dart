@@ -8,8 +8,8 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 
-class WelcomeWidget extends StatelessWidget {
-  const WelcomeWidget({
+class UserImageWidget extends StatelessWidget {
+  const UserImageWidget({
     Key? key,
     this.onPressed,
   }) : super(key: key);
@@ -31,18 +31,14 @@ class WelcomeWidget extends StatelessWidget {
           mobile: Builder(
             builder: (context) {
               if (image.isEmpty) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipOval(
-                    child: Container(
-                      width: 42,
-                      height: 42,
-                      color: Theme.of(context).colorScheme.secondaryContainer,
-                      child: Icon(
-                        Icons.account_circle_outlined,
-                        color:
-                            Theme.of(context).colorScheme.onSecondaryContainer,
-                      ),
+                return ClipOval(
+                  child: Container(
+                    width: 42,
+                    height: 42,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
+                    child: Icon(
+                      Icons.account_circle_outlined,
+                      color: Theme.of(context).colorScheme.onSecondaryContainer,
                     ),
                   ),
                 );
