@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:paisa/src/presentation/settings/bloc/settings_controller.dart';
 import '../../../widgets/paisa_add_button_widget.dart';
 import '../../../widgets/paisa_bottom_sheet.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -199,6 +200,10 @@ class AddAccountPageState extends State<AddAccountPage> {
                               },
                             ),
                             const SizedBox(height: 16),
+                            AccountDefaultSwitchWidget(
+                              accountId:
+                                  int.tryParse(widget.accountId ?? '') ?? -1,
+                            ),
                           ],
                         ),
                       ),
@@ -516,6 +521,42 @@ class AccountInitialAmountWidget extends StatelessWidget {
       onChanged: (value) {
         double? amount = double.tryParse(value);
         accountBloc.initialAmount = amount;
+      },
+    );
+  }
+}
+
+class AccountDefaultSwitchWidget extends StatefulWidget {
+  const AccountDefaultSwitchWidget({
+    super.key,
+    required this.accountId,
+  });
+  final int accountId;
+
+  @override
+  State<AccountDefaultSwitchWidget> createState() =>
+      _AccountDefaultSwitchWidgetState();
+}
+
+class _AccountDefaultSwitchWidgetState
+    extends State<AccountDefaultSwitchWidget> {
+  final SettingsController settingsController = getIt.get();
+  late bool isAccountDefault =
+      settingsController.defaultAccountId == widget.accountId;
+  @override
+  Widget build(BuildContext context) {
+    return SwitchListTile(
+      title: Text('Default account'),
+      value: isAccountDefault,
+      onChanged: (value) {
+        setState(() {
+          isAccountDefault = value;
+        });
+        if (value) {
+          settingsController.setDefaultAccountId(widget.accountId);
+        } else {
+          settingsController.setDefaultAccountId(-1);
+        }
       },
     );
   }

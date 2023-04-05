@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import '../../core/enum/filter_budget.dart';
 
 const selectedFilterExpenseKey = "selected_filter_expense_key";
+const defaultAccountIdKey = "default_account_id_key";
 
 @singleton
 class Settings {
@@ -18,4 +19,11 @@ class Settings {
 
   Future<void> setFilterExpense(FilterExpense expense) async =>
       settings.put(selectedFilterExpenseKey, expense);
+
+  int? get defaultAccountId {
+    return settings.get(defaultAccountIdKey);
+  }
+
+  Future<void> setDefaultAccountId(int accountId) async =>
+      settings.put(defaultAccountIdKey, accountId);
 }

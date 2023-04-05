@@ -60,17 +60,6 @@ class UserProfilePage extends StatelessWidget {
                 context.loc.profileLabel,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              trailing: IconButton(
-                tooltip: context.loc.settingsLabel,
-                onPressed: () {
-                  context.pop();
-                  GoRouter.of(context).pushNamed(settingsPath);
-                },
-                icon: Icon(
-                  MdiIcons.cog,
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
             ),
             Row(
               children: [

@@ -3,7 +3,7 @@ import '../../summary/controller/summary_controller.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_budget.dart';
-import '../../summary/controller/settings_controller.dart';
+import '../../settings/bloc/settings_controller.dart';
 import '../paisa_chip.dart';
 import '../paisa_toggle_button.dart';
 

@@ -72,9 +72,9 @@ import 'package:paisa/src/domain/category/use_case/update_category_use_case.dart
 import 'package:paisa/src/domain/currencies/repository/currencies_repository.dart'
     as _i10;
 import 'package:paisa/src/domain/currencies/use_case/get_country_user_case.dart'
-    as _i21;
-import 'package:paisa/src/domain/currencies/use_case/get_currencies_use_case.dart'
     as _i20;
+import 'package:paisa/src/domain/currencies/use_case/get_currencies_use_case.dart'
+    as _i21;
 import 'package:paisa/src/domain/debt/repository/debit_repository.dart' as _i14;
 import 'package:paisa/src/domain/debt/use_case/add_debt_use.case.dart' as _i38;
 import 'package:paisa/src/domain/debt/use_case/add_transaction_use_case.dart'
@@ -124,7 +124,7 @@ import 'package:paisa/src/presentation/expense/bloc/expense_bloc.dart' as _i69;
 import 'package:paisa/src/presentation/home/bloc/home_bloc.dart' as _i24;
 import 'package:paisa/src/presentation/overview/cubit/budget_cubit.dart'
     as _i65;
-import 'package:paisa/src/presentation/summary/controller/settings_controller.dart'
+import 'package:paisa/src/presentation/settings/bloc/settings_controller.dart'
     as _i33;
 import 'package:paisa/src/presentation/summary/controller/summary_controller.dart'
     as _i56;
@@ -146,15 +146,15 @@ _i1.GetIt init(
   );
   final hiveModule = _$HiveModule();
   gh.singleton<_i3.Authenticate>(_i3.Authenticate());
+  gh.singleton<_i4.Box<dynamic>>(
+    hiveModule.boxDynamic,
+    instanceName: 'settings',
+  );
   gh.factory<_i4.Box<_i5.ExpenseModel>>(() => hiveModule.expenseBox);
   gh.singleton<_i4.Box<_i6.AccountModel>>(hiveModule.accountBox);
   gh.singleton<_i4.Box<_i7.CategoryModel>>(hiveModule.categoryBox);
   gh.singleton<_i4.Box<_i8.DebtModel>>(hiveModule.debtsBox);
   gh.singleton<_i4.Box<_i9.TransactionsModel>>(hiveModule.transactionsBox);
-  gh.singleton<_i4.Box<dynamic>>(
-    hiveModule.boxDynamic,
-    instanceName: 'settings',
-  );
   gh.singleton<_i10.CurrenciesRepository>(
       _i11.CurrencySelectorRepositoryImpl());
   gh.singleton<_i12.DebtLocalDataSource>(_i13.DebtLocalDataSourceImpl(
@@ -205,7 +205,7 @@ _i1.GetIt init(
   gh.factory<_i42.CurrencySelectorBloc>(() => _i42.CurrencySelectorBloc(
         accounts: gh<_i4.Box<_i6.AccountModel>>(),
         categories: gh<_i4.Box<_i7.CategoryModel>>(),
-        currenciesUseCase: gh<_i20.GetCurrenciesUseCase>(),
+        currenciesUseCase: gh<_i21.GetCurrenciesUseCase>(),
       ));
   gh.factory<_i43.DebtsBloc>(() => _i43.DebtsBloc(
         addDebtUseCase: gh<_i44.AddDebtUseCase>(),

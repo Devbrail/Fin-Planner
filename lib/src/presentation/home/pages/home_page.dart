@@ -7,7 +7,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../summary/controller/settings_controller.dart';
+import '../../settings/bloc/settings_controller.dart';
 import '../bloc/home_bloc.dart';
 import 'home_desktop_widget.dart';
 import 'home_mobile_page.dart';

@@ -9,7 +9,7 @@ import '../../../domain/category/entities/category.dart';
 import '../../../domain/category/use_case/category_use_case.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
-import 'settings_controller.dart';
+import '../../settings/bloc/settings_controller.dart';
 
 @singleton
 class SummaryController {
