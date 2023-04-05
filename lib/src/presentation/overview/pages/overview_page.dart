@@ -44,6 +44,7 @@ class OverViewPage extends StatelessWidget {
                 budgetCubit.fetchBudgetSummary(expenses, value);
                 return Scaffold(
                   body: ListView(
+                    padding: const EdgeInsets.only(bottom: 124),
                     shrinkWrap: true,
                     children: [
                       BlocBuilder(
