@@ -38,6 +38,13 @@ class OverViewPage extends StatelessWidget {
           dateTimeRangeNotifier: summaryController.dateTimeRangeNotifier,
           expenses: expenses,
           builder: (expenses) {
+            if (expenses.isEmpty) {
+              return EmptyWidget(
+                icon: Icons.paid,
+                title: context.loc.errorNoBudgetLabel,
+                description: context.loc.errorNoBudgetDescriptionLabel,
+              );
+            }
             return ValueListenableBuilder<FilterExpense>(
               valueListenable: summaryController.filterExpenseNotifier,
               builder: (context, value, child) {

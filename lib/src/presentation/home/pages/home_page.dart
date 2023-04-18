@@ -94,7 +94,7 @@ class _LandingPageState extends State<LandingPage> {
     final newDateRange = await showDateRangePicker(
       context: context,
       firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
+      lastDate: DateTime.now(),
       initialDateRange: dateTimeRange ?? initialDateRange,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       builder: (_, child) {

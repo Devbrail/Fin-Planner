@@ -16,7 +16,7 @@ final getIt = GetIt.instance;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configInjector(getIt);
-  //await addDummyData();
+  await addDummyData();
   runApp(const PaisaApp());
 }
 
@@ -25,7 +25,7 @@ Future<void> addDummyData() async {
   final AccountRepository accRepo = getIt.get();
   final CategoryRepository catRepo = getIt.get();
   final ExpenseRepository expRepo = getIt.get();
-  final ints = [1, 2, 3, 4, 5, 6, 7];
+  final ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   for (var index in ints) {
     await accRepo.addAccount(
       bankName: 'Bank Name $index',
@@ -39,7 +39,7 @@ Future<void> addDummyData() async {
       icon: Icons.abc.codePoint,
       color: Colors.amber.value,
     );
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 20; i++) {
       await expRepo.addExpense(
         'Name $index',
         Random().nextDouble() * 100000,

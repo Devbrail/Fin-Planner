@@ -17,7 +17,7 @@ class LocalAccountDataManagerImpl implements LocalAccountDataManager {
   Future<void> addAccount(AccountModel account) async {
     final int id = await accountBox.add(account);
     account.superId = id;
-    await account.save();
+    return await account.save();
   }
 
   @override
