@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
 
@@ -18,12 +19,13 @@ class BudgetPage extends StatelessWidget {
     return ValueListenableBuilder<Box<CategoryModel>>(
       valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
       builder: (_, value, child) {
-        final categories = value.values.toEntities();
+        final categories = value.values.toBudgetEntities();
         if (categories.isEmpty) {
           return const EmptyWidget(
-            title: 'No expenses',
-            icon: Icons.dangerous,
-            description: 'Noope',
+            title: 'No budgets have been set for any categories.',
+            icon: MdiIcons.timetable,
+            description:
+                'Set a budget for any category, and that category will show up here',
           );
         }
         return ListView.separated(

@@ -616,21 +616,21 @@
     "@enterAmountLabel": {
         "description": "Enter amount label"
     },
-    "emptyDebtsLabel": "Empty in debts",
+    "emptyDebtsLabel": "There are no debts at this time",
     "@emptyDebtsLabel": {
-        "description": "Empty in debts label"
+        "description": "There are no debts at this time label"
     },
-    "emptyDebtsDescLabel": "Looks like you have no debts, add them it will show here ",
+    "emptyDebtsDescLabel": "Add your debts here to see them displayed.",
     "@emptyDebtsDescLabel": {
-        "description": "Looks like you have no debts label"
+        "description": "Add your debts here to see them displayed label"
     },
-    "emptyCreditLabel": "Empty in credits",
+    "emptyCreditLabel": "There are no credits at this time",
     "@emptyCreditLabel": {
-        "description": "Empty in credits label"
+        "description": "There are no credits at this time label"
     },
-    "emptyCreditDescLabel": "Looks like you have no credits, add them it will show here ",
+    "emptyCreditDescLabel": "Add your credits here to see them displayed.",
     "@emptyCreditDescLabel": {
-        "description": "Looks like you have no credits label"
+        "description": "Add your credits here to see them displayed label"
     },
     "enterInitialAmountLabel": "Enter initial amount",
     "@enterInitialAmountLabel": {

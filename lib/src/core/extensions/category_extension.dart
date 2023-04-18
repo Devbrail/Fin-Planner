@@ -21,6 +21,12 @@ extension CategoriesMapping on Iterable<CategoryModel> {
       map((categoryModel) => categoryModel.toEntity())
           .sorted((a, b) => a.name.compareTo(b.name))
           .toList();
+
+  List<Category> toBudgetEntities() =>
+      map((categoryModel) => categoryModel.toEntity())
+          .where((element) => element.isBudgetActive)
+          .sorted((a, b) => a.name.compareTo(b.name))
+          .toList();
 }
 
 extension CategoryHelper on Category {
