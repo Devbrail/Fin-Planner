@@ -10,10 +10,12 @@ import '../widgets/settings_group_card.dart';
 class ExportAndImportPage extends StatelessWidget {
   const ExportAndImportPage({super.key});
 
-  Future<void> _fetchAndShareJSONFile() async {
+  Future<void> _fetchAndShareJSONFile(BuildContext context) async {
     final FileHandler fileHandler = getIt.get<FileHandler>();
-    final XFile xFile = await fileHandler.fetchXFileJSONToShare();
-    Share.shareXFiles([xFile], subject: 'Paisa expensive manager file');
+    fileHandler.fetchXFileJSONToShare().then((xFile) => Share.shareXFiles(
+          [xFile],
+          subject: context.loc.backupAndRestoreShareTitleLabel,
+        ));
   }
 
   @override
@@ -25,12 +27,10 @@ class ExportAndImportPage extends StatelessWidget {
       body: ListView(
         children: [
           SettingsGroup(
-            title: 'Export data as JSON file',
+            title: context.loc.backupAndRestoreJSONTitleLabel,
             options: [
-              const ListTile(
-                title: Text(
-                  'The file will be a plain JSON file created and exported to save. Please note that if in case anything changes happen in the future in Paisa then this file will be invalid to import.',
-                ),
+              ListTile(
+                title: Text(context.loc.backupAndRestoreJSONDescLabel),
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
@@ -39,7 +39,7 @@ class ExportAndImportPage extends StatelessWidget {
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   ),
-                  onPressed: () => _fetchAndShareJSONFile(),
+                  onPressed: () => _fetchAndShareJSONFile(context),
                   label: Text(context.loc.createLabel),
                   icon: const Icon(MdiIcons.fileExport),
                 ),

@@ -715,5 +715,17 @@
     "deleteDebtOrCreditLabel": "Deleting the debt or credit deletes all record related to it ",
     "@deleteDebtOrCreditLabel": {
         "description": "Delete debt or credit label"
+    },
+    "backupAndRestoreJSONTitleLabel": "Export data as JSON file",
+    "@backupAndRestoreJSONTitleLabel": {
+        "description": "Export data as JSON label"
+    },
+    "backupAndRestoreJSONDescLabel": "The file will be a plain JSON file created and exported to save. Please note that if in case anything changes happen in the future in Paisa then this file will be invalid to import.",
+    "@backupAndRestoreJSONDescLabel": {
+        "description": "Export data as JSON desc label"
+    },
+    "backupAndRestoreShareTitleLabel": "Export data into file",
+    "@backupAndRestoreShareTitleLabel": {
+        "description": "Export data into file label"
     }
 }
