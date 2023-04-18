@@ -16,7 +16,7 @@ final getIt = GetIt.instance;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configInjector(getIt);
-  await addDummyData();
+  //await addDummyData();
   runApp(const PaisaApp());
 }
 

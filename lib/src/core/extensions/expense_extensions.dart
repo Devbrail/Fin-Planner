@@ -55,9 +55,15 @@ extension ExpenseModelHelper on ExpenseModel {
 }
 
 extension ExpenseModelsHelper on Iterable<ExpenseModel> {
-  List<Expense> toEntities() => map((expenseModel) => expenseModel.toEntity())
-      .sorted((a, b) => b.time.compareTo(a.time))
-      .toList();
+  List<Expense> toEntities({bool sublist = false}) {
+    final sortedList = map((expenseModel) => expenseModel.toEntity())
+        .sorted((a, b) => b.time.compareTo(a.time));
+    if (sublist && sortedList.length >= 100) {
+      return sortedList.sublist(100);
+    } else {
+      return sortedList;
+    }
+  }
 }
 
 extension ExpensesHelper on Iterable<Expense> {
