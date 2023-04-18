@@ -4,13 +4,12 @@ import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/app/routes.dart';
 import 'package:quick_actions/quick_actions.dart';
 
+import '../app/routes.dart';
 import 'di.config.dart';
 import 'module/data_module.dart';
 
-const QuickActions quickActions = QuickActions();
 @InjectableInit(
   asExtension: false,
   preferRelativeImports: true,
@@ -35,6 +34,7 @@ Future<GetIt> configInjector(
 }
 
 Future<void> initAppShortcuts() async {
+  const QuickActions quickActions = QuickActions();
   await quickActions.initialize((String shortcutType) {
     if (shortcutType == 'add_expense') goRouter.pushNamed(addExpensePath);
   });

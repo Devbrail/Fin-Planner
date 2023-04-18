@@ -85,7 +85,7 @@ class AccountSummaryWidget extends StatelessWidget {
               child: PaisaExpenseStatsWidget(
                 total: expenses.totalIncome.toCurrency(decimalDigits: 0),
                 title: context.loc.incomeLabel,
-                graphData: expenses.expenseList.map((e) => e.currency).toList(),
+                graphData: expenses.incomeList.map((e) => e.currency).toList(),
                 graphLineColor:
                     Theme.of(context).extension<CustomColors>()!.green ??
                         Theme.of(context).colorScheme.secondary,
