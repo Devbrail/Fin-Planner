@@ -19,7 +19,7 @@ extension CategoryMapping on CategoryModel {
 extension CategoriesMapping on Iterable<CategoryModel> {
   List<Category> toEntities() =>
       map((categoryModel) => categoryModel.toEntity())
-          .sorted((a, b) => b.name.compareTo(a.name))
+          .sorted((a, b) => a.name.compareTo(b.name))
           .toList();
 }
 
