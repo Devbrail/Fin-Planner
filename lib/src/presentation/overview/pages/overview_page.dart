@@ -50,9 +50,8 @@ class OverViewPage extends StatelessWidget {
               builder: (context, value, child) {
                 budgetCubit.fetchBudgetSummary(expenses, value);
                 return Scaffold(
-                  body: ListView(
-                    padding: const EdgeInsets.only(bottom: 124),
-                    shrinkWrap: true,
+                  body: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       BlocBuilder(
                         bloc: budgetCubit,
@@ -87,20 +86,22 @@ class OverViewPage extends StatelessWidget {
                           }
                         },
                       ),
-                      BlocBuilder(
-                        bloc: budgetCubit,
-                        buildWhen: (previous, current) =>
-                            current is FilteredCategoryListState,
-                        builder: (context, state) {
-                          if (state is FilteredCategoryListState) {
-                            return CategoryListWidget(
-                              categoryGrouped: state.categoryGrouped,
-                              totalExpense: state.totalExpense,
-                            );
-                          } else {
-                            return const SizedBox.shrink();
-                          }
-                        },
+                      Expanded(
+                        child: BlocBuilder(
+                          bloc: budgetCubit,
+                          buildWhen: (previous, current) =>
+                              current is FilteredCategoryListState,
+                          builder: (context, state) {
+                            if (state is FilteredCategoryListState) {
+                              return CategoryListWidget(
+                                categoryGrouped: state.categoryGrouped,
+                                totalExpense: state.totalExpense,
+                              );
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
+                        ),
                       ),
                     ],
                   ),

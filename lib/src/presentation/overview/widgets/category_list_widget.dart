@@ -17,8 +17,8 @@ class CategoryListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
+      padding: const EdgeInsets.only(bottom: 124),
       itemCount: categoryGrouped.length,
       itemBuilder: (context, index) {
         final MapEntry<Category, List<Expense>> map = categoryGrouped[index];
