@@ -56,7 +56,7 @@ class _ExpensePageState extends State<ExpensePage> {
           if (state is ExpenseDeletedState) {
             context.showMaterialSnackBar(
               expenseBloc.transactionType == TransactionType.expense
-                  ? context.loc.expenseDeletedSuccessfulLabel
+                  ? context.loc.deletedExpenseLabel
                   : context.loc.incomeDeletedSuccessfulLabel,
               backgroundColor: Theme.of(context).colorScheme.error,
               color: Theme.of(context).colorScheme.onError,
@@ -66,8 +66,8 @@ class _ExpensePageState extends State<ExpensePage> {
             final content =
                 expenseBloc.transactionType == TransactionType.expense
                     ? state.isAddOrUpdate
-                        ? context.loc.expenseAddedSuccessfulLabel
-                        : context.loc.expenseUpdateSuccessfulLabel
+                        ? context.loc.addedExpenseLabel
+                        : context.loc.updatedExpenseLabel
                     : state.isAddOrUpdate
                         ? context.loc.incomeAddedSuccessfulLabel
                         : context.loc.incomeUpdateSuccessfulLabel;

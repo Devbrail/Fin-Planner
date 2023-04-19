@@ -83,7 +83,7 @@ class HomeDesktopWidget extends StatelessWidget {
                             .add(const CurrentIndexEvent(PageType.accounts)),
                       ),
                       NavigationBarItem(
-                        title: context.loc.categoryLabel,
+                        title: context.loc.categoriesLabel,
                         icon: Icons.category,
                         isSelected: state.currentPage == PageType.category,
                         onPressed: () => homeBloc

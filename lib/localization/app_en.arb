@@ -9,59 +9,55 @@
     },
     "dueDateLabel": "End date",
     "@dueDateLabel": {
-        "description": "End date label"
+        "description": "Select end date in debt/ credit page"
     },
     "startDateLabel": "Start date",
     "@startDateLabel": {
-        "description": "Start date label"
-    },
-    "categoryLabel": "Category",
-    "@categoryLabel": {
-        "description": "Category label"
+        "description": "Select start date in debt/ credit page"
     },
     "enterDebtLabel": "Enter debt amount",
     "@enterDebtLabel": {
-        "description": "Enter debt amount label"
+        "description": "Text input hint"
     },
     "enterCreditLabel": "Enter credit amount",
     "@enterCreditLabel": {
-        "description": "Enter credit amount label"
+        "description": "Text input hint"
     },
     "addCategoryLabel": "Add Category",
     "@addCategoryLabel": {
-        "description": "Add Category label"
+        "description": "Show add category text when empty in categories"
     },
     "addExpenseLabel": "Add Expense",
     "@addExpenseLabel": {
-        "description": "Add Expense label"
+        "description": "While adding a expense we show toolbar text as add expense"
     },
     "updateExpenseLabel": "Update Expense",
     "@updateExpenseLabel": {
-        "description": "Update Expense label"
+        "description": "While updating a expense we show toolbar text as update expense"
     },
-    "updateCardLabel": "Update card",
-    "@updateCardLabel": {
-        "description": "Update card label"
+    "updateAccountLabel": "Update account",
+    "@updateAccountLabel": {
+        "description": "While updating a account we show toolbar text as update account"
     },
     "addAccountLabel": "Add Account",
     "@addAccountLabel": {
-        "description": "Add Account label"
+        "description": "While adding a account we show toolbar text as add account"
     },
     "categoriesLabel": "Categories",
     "@categoriesLabel": {
-        "description": "Categories label"
+        "description": "Categories text for navigation items and toolbar text"
     },
     "accountsLabel": "Accounts",
     "@accountsLabel": {
-        "description": "Accounts label"
+        "description": "Accounts text for navigation items and toolbar text"
     },
     "budgetLabel": "Budget",
     "@budgetLabel": {
-        "description": "Budget label"
+        "description": "Budget text for navigation items and toolbar text"
     },
     "welcomeMessage": "Welcome back!",
     "@welcomeMessage": {
-        "description": "Budget label"
+        "description": "Text to show under the user name for welcome message"
     },
     "settingsLabel": "Settings",
     "@settingsLabel": {
@@ -69,51 +65,43 @@
     },
     "localAppLabel": "Lock app",
     "@localAppLabel": {
-        "description": "Lock app label"
-    },
-    "totalLabel": "Total",
-    "@totalLabel": {
-        "description": "Total label"
+        "description": "Biometric auth for to open the app"
     },
     "expenseLabel": "Expense",
     "@expenseLabel": {
-        "description": "Expense label"
+        "description": "Show expense text label"
     },
     "expensesLabel": "Expenses",
     "@expensesLabel": {
-        "description": "Expenses label"
-    },
-    "depositLabel": "Deposit",
-    "@depositLabel": {
-        "description": "Deposit label"
+        "description": "Show expenses text label"
     },
     "dailyLabel": "Daily",
     "@dailyLabel": {
-        "description": "Daily label"
+        "description": "Filter expenses based text"
     },
     "weeklyLabel": "Weekly",
     "@weeklyLabel": {
-        "description": "Weekly label"
+        "description": "Filter expenses based text"
     },
     "monthlyLabel": "Monthly",
     "@monthlyLabel": {
-        "description": "Monthly label"
+        "description": "Filter expenses based text"
     },
     "yearlyLabel": "Yearly",
     "@yearlyLabel": {
-        "description": "Yearly label"
+        "description": "Filter expenses based text"
     },
     "allLabel": "All",
     "@allLabel": {
-        "description": "All label"
+        "description": "Filter expenses based text"
     },
     "transactionHistoryLabel": "Transaction History",
     "@transactionHistoryLabel": {
-        "description": "Transaction history label"
+        "description": "Account expenses list shown under transaction history"
     },
     "selectCategoryIconLabel": "Select category icon",
     "@selectCategoryIconLabel": {
-        "description": "Select category icon label"
+        "description": "Category icon select error message"
     },
     "descriptionLabel": "Description",
     "@descriptionLabel": {
@@ -121,51 +109,39 @@
     },
     "cashLabel": "Cash",
     "@cashLabel": {
-        "description": "Cash label"
-    },
-    "debitCardLabel": "Debit Card",
-    "@debitCardLabel": {
-        "description": "Debit Card label"
-    },
-    "creditCardLabel": "Credit Card",
-    "@creditCardLabel": {
-        "description": "Credit Card label"
+        "description": "Account cash label"
     },
     "cardHolderLabel": "Cardholder name",
     "@cardHolderLabel": {
-        "description": "Cardholder name label"
+        "description": "Account cardholder name label"
     },
     "accountNameLabel": "Account name",
     "@accountNameLabel": {
-        "description": "Account label"
+        "description": "Account name label"
     },
     "lastFourDigitLabel": "Last four digit number",
     "@lastFourDigitLabel": {
-        "description": "Last four digit number label"
+        "description": "Account last four digit number label"
     },
-    "addCardLabel": "Add card",
-    "@addCardLabel": {
-        "description": "Add card label"
+    "addedAccountLabel": "Account added",
+    "@addedAccountLabel": {
+        "description": "Successful message when account added"
     },
-    "addedCardLabel": "Account added",
-    "@addedCardLabel": {
-        "description": "Account added label"
+    "updatedAccountLabel": "Account updated",
+    "@updatedAccountLabel": {
+        "description": "Successful message when account updated"
     },
-    "updatedCardLabel": "Account updated",
-    "@updatedCardLabel": {
-        "description": "Account updated label"
+    "deletedAccountLabel": "Account deleted",
+    "@deletedAccountLabel": {
+        "description": "Successful message when account deleted"
     },
-    "deletedCardLabel": "Account deleted",
-    "@deletedCardLabel": {
-        "description": "Account deleted label"
-    },
-    "successAddCategoryLabel": "Category added successful",
+    "successAddCategoryLabel": "Category added",
     "@successAddCategoryLabel": {
-        "description": "Category added successful label"
+        "description": "Successful message when category deleted"
     },
     "validNameLabel": "Enter valid name",
     "@validNameLabel": {
-        "description": "Enter valid name label"
+        "description": "Error message for valid name"
     },
     "profileLabel": "Profile",
     "@profileLabel": {
@@ -179,10 +155,6 @@
     "@reminderLabel": {
         "description": "Reminder label"
     },
-    "reminderDescriptionLabel": "Show schedule notifications to add expense",
-    "@reminderDescriptionLabel": {
-        "description": "Show schedule notifications to add expense label"
-    },
     "chooseThemeLabel": "Choose theme",
     "@chooseThemeLabel": {
         "description": "Choose theme label"
@@ -195,81 +167,73 @@
     "@userNameLabel": {
         "description": "User name label"
     },
-    "selectedCountryLabel": "Select currency",
-    "@selectedCountryLabel": {
-        "description": "Select currency label"
+    "selectCountryLabel": "Select currency",
+    "@selectCountryLabel": {
+        "description": "Toolbar select currency"
     },
     "errorAuthLabel": "Error authentication",
     "@errorAuthLabel": {
-        "description": "Error authentication label"
+        "description": "Show error when biometric fails"
     },
-    "errorNoCardsLabel": "Empty in cards",
-    "@errorNoCardsLabel": {
-        "description": "No cards label"
+    "emptyAccountLabel": "No accounts are available",
+    "@emptyAccountLabel": {
+        "description": "No accounts available message"
     },
-    "errorNoCardsDescriptionLabel": "Add expenses and will show up here",
-    "@errorNoCardsDescriptionLabel": {
-        "description": "No cards description label"
+    "emptyAccountDescriptionLabel": "Add an account to display it here",
+    "@emptyAccountDescriptionLabel": {
+        "description": "No accounts available description"
     },
-    "errorNoCatagoriesLabel": "Empty in categories",
-    "@errorNoCatagoriesLabel": {
-        "description": "No categories label"
+    "emptyCategoriesLabel": "No categories are available",
+    "@emptyCategoriesLabel": {
+        "description": "No accounts available message"
     },
-    "errorNoCategoriesDescriptionLabel": "Add some categories and will show up here",
-    "@errorNoCategoriesDescriptionLabel": {
-        "description": "No category description label"
+    "emptyCategoriesDescriptionLabel": "Add an category to display it here",
+    "@emptyCategoriesDescriptionLabel": {
+        "description": "No category available description"
     },
-    "errorNoBudgetLabel": "Empty in budget overview",
-    "@errorNoBudgetLabel": {
-        "description": "Empty in budget overview label"
+    "emptyOverviewLabel": "No overview data",
+    "@emptyOverviewLabel": {
+        "description": "No overview data message"
     },
-    "errorNoBudgetDescriptionLabel": "Add some expenses and budget overview will show up here",
-    "@errorNoBudgetDescriptionLabel": {
+    "emptyOverviewDescriptionLabel": "To see your spending overview, add your expenses",
+    "@emptyOverviewDescriptionLabel": {
         "description": "No budget overview description label"
     },
-    "cardholderLabel": "CardHolder",
-    "@cardholderLabel": {
-        "description": "CardHolder label"
+    "addedExpenseLabel": "Expense added",
+    "@addedExpenseLabel": {
+        "description": "Successful message when expense added"
     },
-    "expenseAddedSuccessfulLabel": "Expense added",
-    "@expenseAddedSuccessfulLabel": {
-        "description": "Expense added label"
+    "updatedExpenseLabel": "Expense updated",
+    "@updatedExpenseLabel": {
+        "description": "Successful message when expense updated"
     },
-    "expenseUpdateSuccessfulLabel": "Expense updated",
-    "@expenseUpdateSuccessfulLabel": {
-        "description": "Expense updated label"
-    },
-    "expenseDeletedSuccessfulLabel": "Expense deleted",
-    "@expenseDeletedSuccessfulLabel": {
-        "description": "Expense deleted label"
+    "deletedExpenseLabel": "Expense deleted",
+    "@deletedExpenseLabel": {
+        "description": "Successful message when expense deleted"
     },
     "expenseNameLabel": "Expense name",
     "@expenseNameLabel": {
-        "description": "Expense name label"
+        "description": "Text input hint name"
     },
     "amountLabel": "Amount",
     "@amountLabel": {
-        "description": "Amount label"
+        "description": "Text input hint name"
     },
     "initialAmountLabel": "Initial amount",
     "@initialAmountLabel": {
-        "description": "Initial amount label"
+        "description": "Text input hint name"
     },
     "validAmountLabel": "Enter valid amount",
     "@validAmountLabel": {
-        "description": "Enter valid amount label"
+        "description": "Text input hint name"
     },
-    "dateLabel": "Date",
-    "@dateLabel": {
-        "description": "date label"
-    },
-    "validDateLabel": "Select date",
+    "validDateLabel": "Select valid date",
     "@validDateLabel": {
-        "description": "Select date label"
+        "description": "Date validate message"
     },
     "addLabel": "Add",
     "@addLabel": {
-        "description": "add label"
+        "description": "Add label"
     },
     "selectAccountLabel": "Select account",
     "@selectAccountLabel": {
@@ -290,10 +254,6 @@
     "telegramGroupLabel": "A group to follow and post bugs and feature requests",
     "@telegramGroupLabel": {
         "description": "A group to follow and post bugs and feature requests label"
-    },
-    "noResultFoundLabel": "No result found",
-    "@noResultFoundLabel": {
-        "description": "No result found label"
     },
     "noCategoryLabel": "No category selected",
     "@noCategoryLabel": {
@@ -326,15 +286,15 @@
     },
     "deleteAccountLabel": "Deleting the account deletes all expenses which tied to this account ",
     "@deleteAccountLabel": {
-        "description": "Delete account label"
+        "description": "Delete account message"
     },
     "deleteCategoryLabel": "Deleting the category deletes all expenses which tied to this category ",
     "@deleteCategoryLabel": {
-        "description": "Delete category label"
+        "description": "Delete category message"
     },
     "deleteExpenseLabel": "Expense will be permanently removed from account",
     "@deleteExpenseLabel": {
-        "description": "Version number label"
+        "description": "Delete expense message"
     },
     "dialogDeleteTitleLabel": "Permanently delete?",
     "@dialogDeleteTitleLabel": {
@@ -342,7 +302,7 @@
     },
     "updatedCategoryLabel": "Category updated",
     "@updatedCategoryLabel": {
-        "description": "Category updated label"
+        "description": "Successful message when category updated"
     },
     "doneLabel": "Done",
     "@doneLabel": {
@@ -390,7 +350,7 @@
     },
     "updateCategoryLabel": "Update Category",
     "@updateCategoryLabel": {
-        "description": "Made with ♥ in India label"
+        "description": "Category update toolbar message"
     },
     "accountInfoLabel": "Information",
     "@accountInfoLabel": {
@@ -398,7 +358,7 @@
     },
     "accountInfoDescLabel": "The account details you entered are not shared with anyone, including us. It is only used for visual representation of account details, you may enter false info too",
     "@accountInfoDescLabel": {
-        "description": "information label"
+        "description": "Account information message"
     },
     "nextLabel": "Next",
     "@nextLabel": {
@@ -410,7 +370,7 @@
     },
     "welcomeLabel": "Hi, Welcome to",
     "@welcomeLabel": {
-        "description": "Welcome label"
+        "description": "Intro page message for name input"
     },
     "welcomeDescLabel": "What should we call you",
     "@welcomeDescLabel": {

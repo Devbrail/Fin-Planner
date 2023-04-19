@@ -24,9 +24,9 @@ class CategoryListPage extends StatelessWidget {
           final List<Category> categories = value.values.toEntities();
           if (categories.isEmpty) {
             return EmptyWidget(
-              description: context.loc.errorNoCategoriesDescriptionLabel,
+              title: context.loc.emptyCategoriesLabel,
+              description: context.loc.emptyCategoriesDescriptionLabel,
               icon: Icons.category,
-              title: context.loc.errorNoCatagoriesLabel,
             );
           }
           return ScreenTypeLayout(

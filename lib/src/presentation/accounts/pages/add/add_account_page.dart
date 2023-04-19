@@ -57,8 +57,8 @@ class AddAccountPageState extends State<AddAccountPage> {
           if (state is AddAccountState) {
             context.showMaterialSnackBar(
               isAccountAddOrUpdate
-                  ? context.loc.addedCardLabel
-                  : context.loc.updatedCardLabel,
+                  ? context.loc.addedAccountLabel
+                  : context.loc.updateAccountLabel,
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               color: Theme.of(context).colorScheme.onPrimaryContainer,
             );
@@ -66,7 +66,7 @@ class AddAccountPageState extends State<AddAccountPage> {
           }
           if (state is AccountDeletedState) {
             context.showMaterialSnackBar(
-              context.loc.deletedCardLabel,
+              context.loc.deleteAccountLabel,
               backgroundColor: Theme.of(context).colorScheme.error,
               color: Theme.of(context).colorScheme.onError,
             );
@@ -101,8 +101,8 @@ class AddAccountPageState extends State<AddAccountPage> {
             mobile: Scaffold(
               appBar: context.materialYouAppBar(
                 isAccountAddOrUpdate
-                    ? context.loc.addCardLabel
-                    : context.loc.updateCardLabel,
+                    ? context.loc.addAccountLabel
+                    : context.loc.updateAccountLabel,
                 actions: [
                   isAccountAddOrUpdate
                       ? const SizedBox.shrink()
@@ -231,7 +231,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                     ),
                     child: Text(
                       isAccountAddOrUpdate
-                          ? context.loc.addCardLabel
+                          ? context.loc.addLabel
                           : context.loc.updateLabel,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
@@ -245,7 +245,9 @@ class AddAccountPageState extends State<AddAccountPage> {
             ),
             tablet: Scaffold(
               appBar: context.materialYouAppBar(
-                context.loc.addCardLabel,
+                isAccountAddOrUpdate
+                    ? context.loc.addAccountLabel
+                    : context.loc.updateAccountLabel,
                 actions: [
                   IconButton(
                     onPressed: _showInfo,
@@ -306,7 +308,9 @@ class AddAccountPageState extends State<AddAccountPage> {
                       accountsBloc
                           .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
                     },
-                    title: context.loc.addCardLabel,
+                    title: isAccountAddOrUpdate
+                        ? context.loc.addLabel
+                        : context.loc.updateLabel,
                   ),
                 ),
               ),

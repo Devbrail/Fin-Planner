@@ -30,8 +30,8 @@ class OverViewPage extends StatelessWidget {
         if (expenses.isEmpty) {
           return EmptyWidget(
             icon: Icons.paid,
-            title: context.loc.errorNoBudgetLabel,
-            description: context.loc.errorNoBudgetDescriptionLabel,
+            title: context.loc.emptyOverviewLabel,
+            description: context.loc.emptyOverviewDescriptionLabel,
           );
         }
         return FilterDateRangeWidget(
@@ -41,8 +41,8 @@ class OverViewPage extends StatelessWidget {
             if (expenses.isEmpty) {
               return EmptyWidget(
                 icon: Icons.paid,
-                title: context.loc.errorNoBudgetLabel,
-                description: context.loc.errorNoBudgetDescriptionLabel,
+                title: context.loc.emptyOverviewLabel,
+                description: context.loc.emptyOverviewDescriptionLabel,
               );
             }
             return ValueListenableBuilder<FilterExpense>(

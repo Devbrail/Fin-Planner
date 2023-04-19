@@ -5,6 +5,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/category/model/category_model.dart';
+import '../../../domain/category/entities/category.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/category_bloc.dart';
 import 'category_item_desktop_widget.dart';
@@ -26,12 +27,12 @@ class CategoryListWidget extends StatelessWidget {
     return ValueListenableBuilder<Box<CategoryModel>>(
       valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
       builder: (BuildContext context, value, Widget? child) {
-        final categories = value.values.toEntities();
+        final List<Category> categories = value.values.toEntities();
         if (categories.isEmpty) {
           return EmptyWidget(
-            description: context.loc.errorNoCategoriesDescriptionLabel,
             icon: Icons.category,
-            title: context.loc.errorNoCatagoriesLabel,
+            title: context.loc.emptyCategoriesLabel,
+            description: context.loc.emptyCategoriesDescriptionLabel,
           );
         }
         return ScreenTypeLayout(

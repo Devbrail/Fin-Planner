@@ -49,7 +49,7 @@ class CurrencySelectorPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      context.loc.selectedCountryLabel,
+                      context.loc.selectCountryLabel,
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.bold,

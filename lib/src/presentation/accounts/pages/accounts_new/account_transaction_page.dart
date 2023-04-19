@@ -37,7 +37,7 @@ class AccountTransactionPage extends StatelessWidget {
                   return EmptyWidget(
                     icon: Icons.credit_card,
                     title: context.loc.noTransactionLabel,
-                    description: context.loc.errorNoCardsDescriptionLabel,
+                    description: context.loc.emptyAccountDescriptionLabel,
                   );
                 } else {
                   return ListView(

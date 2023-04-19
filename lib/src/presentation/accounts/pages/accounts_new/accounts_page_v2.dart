@@ -26,8 +26,8 @@ class AccountsPageV2 extends StatelessWidget {
     if (accounts.isEmpty) {
       return EmptyWidget(
         icon: Icons.credit_card,
-        title: context.loc.errorNoCardsLabel,
-        description: context.loc.errorNoCardsDescriptionLabel,
+        title: context.loc.emptyAccountLabel,
+        description: context.loc.emptyAccountDescriptionLabel,
       );
     } else {
       return ValueListenableBuilder<Box<ExpenseModel>>(
