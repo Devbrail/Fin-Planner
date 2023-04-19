@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import '../../../core/common.dart';
 import '../../../domain/expense/entities/expense.dart';
 

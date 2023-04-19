@@ -21,11 +21,10 @@ class BudgetPage extends StatelessWidget {
       builder: (_, value, child) {
         final categories = value.values.toBudgetEntities();
         if (categories.isEmpty) {
-          return const EmptyWidget(
-            title: 'No budgets have been set for any categories.',
+          return EmptyWidget(
+            title: context.loc.emptyBudgetMessageLabel,
             icon: MdiIcons.timetable,
-            description:
-                'Set a budget for any category, and that category will show up here',
+            description: context.loc.emptyBudgetDescriptionLabel,
           );
         }
         return ListView.separated(

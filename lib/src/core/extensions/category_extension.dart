@@ -24,7 +24,7 @@ extension CategoriesMapping on Iterable<CategoryModel> {
 
   List<Category> toBudgetEntities() =>
       map((categoryModel) => categoryModel.toEntity())
-          .where((element) => element.isBudgetActive)
+          .where((element) => element.isBudget)
           .sorted((a, b) => a.name.compareTo(b.name))
           .toList();
 }
@@ -35,11 +35,4 @@ extension CategoryHelper on Category {
       Color(color ?? Colors.amber.shade100.value).withOpacity(0.25);
 
   double get finalBudget => budget ?? 0.0;
-  bool get isBudgetActive {
-    final double totalBudget = budget ?? 0.0;
-    if (totalBudget > 0.0) {
-      return true;
-    }
-    return false;
-  }
 }

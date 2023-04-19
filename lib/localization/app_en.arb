@@ -727,5 +727,13 @@
     "backupAndRestoreShareTitleLabel": "Export data into file",
     "@backupAndRestoreShareTitleLabel": {
         "description": "Export data into file label"
+    },
+    "emptyBudgetMessageLabel": "No budgets have been set for any categories",
+    "@emptyBudgetMessageLabel": {
+        "description": "Show message when budgets are empty"
+    },
+    "emptyBudgetDescriptionLabel": "Set a budget for any category, and that category will show up here.",
+    "@emptyBudgetDescriptionLabel": {
+        "description": "Set a budget for any category, and that category will show up here label"
     }
 }
