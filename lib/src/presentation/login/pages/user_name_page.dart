@@ -86,15 +86,15 @@ class UserNamePage extends StatelessWidget {
                         key: const Key('user_name_textfield'),
                         controller: _nameController,
                         decoration: InputDecoration(
-                          hintText: context.loc.enterNameLabel,
-                          label: Text(context.loc.nameLabel),
+                          hintText: context.loc.enterNameHintLabel,
+                          label: Text(context.loc.nameHintLabel),
                         ),
                         keyboardType: TextInputType.name,
                         validator: (val) {
                           if (val!.isNotEmpty) {
                             return null;
                           } else {
-                            return context.loc.enterNameLabel;
+                            return context.loc.enterNameHintLabel;
                           }
                         },
                       ),

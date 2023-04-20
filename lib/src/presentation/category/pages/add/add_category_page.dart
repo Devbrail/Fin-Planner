@@ -142,7 +142,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               bottomNavigationBar: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: PaisaAddButton(
+                  child: PaisaBigButton(
                     onPressed: () {
                       final isValid = _formKey.currentState!.validate();
                       if (!isValid) {
@@ -168,7 +168,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               bottomNavigationBar: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: PaisaAddButton(
+                  child: PaisaBigButton(
                     onPressed: () {
                       final isValid = _formKey.currentState!.validate();
                       if (!isValid) {

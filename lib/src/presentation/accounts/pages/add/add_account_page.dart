@@ -214,7 +214,7 @@ class AddAccountPageState extends State<AddAccountPage> {
               bottomNavigationBar: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
+                  child: PaisaBigButton(
                     onPressed: () {
                       final isValid = _form.currentState!.validate();
                       if (!isValid) {
@@ -223,22 +223,9 @@ class AddAccountPageState extends State<AddAccountPage> {
                       accountsBloc
                           .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
                     },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
-                    ),
-                    child: Text(
-                      isAccountAddOrUpdate
-                          ? context.loc.addLabel
-                          : context.loc.updateLabel,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize:
-                            Theme.of(context).textTheme.titleLarge?.fontSize,
-                      ),
-                    ),
+                    title: isAccountAddOrUpdate
+                        ? context.loc.addLabel
+                        : context.loc.updateLabel,
                   ),
                 ),
               ),
@@ -299,7 +286,7 @@ class AddAccountPageState extends State<AddAccountPage> {
               bottomNavigationBar: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: PaisaAddButton(
+                  child: PaisaBigButton(
                     onPressed: () {
                       final isValid = _form.currentState!.validate();
                       if (!isValid) {

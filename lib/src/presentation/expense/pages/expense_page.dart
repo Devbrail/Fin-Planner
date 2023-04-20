@@ -291,7 +291,7 @@ class _ExpensePageState extends State<ExpensePage> {
               bottomNavigationBar: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: PaisaAddButton(
+                  child: PaisaBigButton(
                     onPressed: () {
                       expenseBloc.add(AddOrUpdateExpenseEvent(isAddExpense));
                     },
@@ -306,7 +306,7 @@ class _ExpensePageState extends State<ExpensePage> {
               bottomNavigationBar: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: PaisaAddButton(
+                  child: PaisaBigButton(
                     onPressed: () {
                       expenseBloc.add(AddOrUpdateExpenseEvent(isAddExpense));
                     },

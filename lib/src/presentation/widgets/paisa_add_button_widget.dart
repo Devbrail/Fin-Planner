@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PaisaAddButton extends StatelessWidget {
-  const PaisaAddButton({
+class PaisaBigButton extends StatelessWidget {
+  const PaisaBigButton({
     super.key,
     required this.onPressed,
     required this.title,
@@ -19,6 +19,8 @@ class PaisaAddButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32.0),
         ),
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       child: Text(
         title,

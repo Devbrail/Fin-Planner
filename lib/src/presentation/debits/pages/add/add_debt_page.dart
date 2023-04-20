@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/presentation/widgets/paisa_add_button_widget.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
@@ -26,7 +27,7 @@ class AddOrEditDebtPage extends StatefulWidget {
 }
 
 class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
-  late final bool isUpdate = widget.debtId == null;
+  late final bool isDebtAddOrUpdate = widget.debtId == null;
   final DebtsBloc debtBloc = getIt.get();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final amountController = TextEditingController();
@@ -85,7 +86,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
             appBar: context.materialYouAppBar(
               context.loc.addDebtLabel,
               actions: [
-                isUpdate
+                isDebtAddOrUpdate
                     ? const SizedBox.shrink()
                     : IconButton(
                         onPressed: () => paisaAlertDialog(
@@ -220,28 +221,17 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
             bottomNavigationBar: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: ElevatedButton(
+                child: PaisaBigButton(
                   onPressed: () {
                     final isValid = _formKey.currentState!.validate();
                     if (!isValid) {
                       return;
                     }
-                    debtBloc.add(AddOrUpdateEvent(isUpdate));
+                    debtBloc.add(AddOrUpdateEvent(isDebtAddOrUpdate));
                   },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32.0),
-                    ),
-                  ),
-                  child: Text(
-                    context.loc.addLabel,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize:
-                          Theme.of(context).textTheme.titleLarge?.fontSize,
-                    ),
-                  ),
+                  title: isDebtAddOrUpdate
+                      ? context.loc.addLabel
+                      : context.loc.updateLabel,
                 ),
               ),
             ),
@@ -315,7 +305,7 @@ class NameWidget extends StatelessWidget {
     return PaisaTextFormField(
       controller: controller,
       keyboardType: TextInputType.name,
-      hintText: context.loc.nameLabel,
+      hintText: context.loc.nameHintLabel,
       validator: (value) {
         if (value!.length >= 2) {
           return null;
