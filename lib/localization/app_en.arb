@@ -376,21 +376,17 @@
     "@welcomeDescLabel": {
         "description": "Welcome desc label"
     },
-    "nameLabel": "Name",
-    "@nameLabel": {
-        "description": "Name label"
+    "nameHintLabel": "Name",
+    "@nameHintLabel": {
+        "description": "Text input hint name"
     },
-    "enterNameLabel": "Enter name",
-    "@enterNameLabel": {
-        "description": "Enter name label"
+    "enterNameHintLabel": "Enter name",
+    "@enterNameHintLabel": {
+        "description": "Text input hint name"
     },
     "imageDescLabel": "Let's set image of you",
     "@imageDescLabel": {
         "description": "Image desc label"
-    },
-    "backLabel": "Back",
-    "@backLabel": {
-        "description": "Back label"
     },
     "setBudgetLabel": "Set budget for category",
     "@setBudgetLabel": {
@@ -398,11 +394,11 @@
     },
     "incomeLabel": "Income",
     "@incomeLabel": {
-        "description": "income label"
+        "description": "Income label"
     },
     "outcomeLabel": "Outcome",
     "@outcomeLabel": {
-        "description": "outcome label"
+        "description": "Outcome label"
     },
     "thisMonthLabel": "This month",
     "@thisMonthLabel": {
@@ -411,10 +407,6 @@
     "totalBalanceLabel": "Total balance",
     "@totalBalanceLabel": {
         "description": "Total balance label"
-    },
-    "summaryLabel": "Summary",
-    "@summaryLabel": {
-        "description": "Summary label"
     },
     "acceptLabel": "Accept",
     "@acceptLabel": {
@@ -442,11 +434,11 @@
     },
     "selectIconLabel": "Select icon",
     "@selectIconLabel": {
-        "description": "Balance label"
+        "description": "Select icon label"
     },
     "selectIconDescLabel": "Tap to select icon",
     "@selectIconDescLabel": {
-        "description": "Balance label"
+        "description": "Icon picker dialog title"
     },
     "incomeNameLabel": "Income name",
     "@incomeNameLabel": {
