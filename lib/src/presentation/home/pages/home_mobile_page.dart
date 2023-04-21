@@ -49,6 +49,16 @@ class HomeMobilePage extends StatelessWidget {
                     child: PaisaIconTitle(),
                   ),
                   DrawerItemWidget(
+                    isSelected: pageType == PageType.home,
+                    onPressed: () {
+                      homeBloc.add(const CurrentIndexEvent(PageType.home));
+                      Navigator.pop(context);
+                    },
+                    icon: Icons.home_outlined,
+                    selectedIcon: Icons.home,
+                    title: context.loc.homeLabel,
+                  ),
+                  DrawerItemWidget(
                     isSelected: pageType == PageType.category,
                     onPressed: () {
                       homeBloc.add(const CurrentIndexEvent(PageType.category));
@@ -89,6 +99,11 @@ class HomeMobilePage extends StatelessWidget {
       bottomNavigationBar: BlocBuilder(
         bloc: homeBloc,
         builder: (context, state) {
+          if (state is CurrentIndexState &&
+              (state.currentPage == PageType.budget ||
+                  state.currentPage == PageType.category)) {
+            return const SizedBox.shrink();
+          }
           return Theme(
             data: Theme.of(context).copyWith(
               splashFactory: NoSplash.splashFactory,
