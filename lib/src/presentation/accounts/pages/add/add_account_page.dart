@@ -548,14 +548,14 @@ class _AccountDefaultSwitchWidgetState
       title: const Text('Default account'),
       value: isAccountDefault,
       onChanged: (value) {
-        setState(() {
-          isAccountDefault = value;
-        });
         if (value) {
           settingsController.setDefaultAccountId(widget.accountId);
         } else {
           settingsController.setDefaultAccountId(-1);
         }
+        setState(() {
+          isAccountDefault = value;
+        });
       },
     );
   }
