@@ -134,19 +134,48 @@ class DebtItemWidget extends StatelessWidget {
                                               .titleLarge,
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16.0),
-                                        child: PaisaTextFormField(
-                                          controller: controller,
-                                          hintText:
-                                              context.loc.enterAmountLabel,
-                                          keyboardType: TextInputType.number,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly,
-                                          ],
-                                        ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16.0),
+                                              child: PaisaTextFormField(
+                                                controller: controller,
+                                                hintText: context
+                                                    .loc.enterAmountLabel,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .allow(RegExp(r"[0-9.]")),
+                                                  TextInputFormatter
+                                                      .withFunction(
+                                                          (oldValue, newValue) {
+                                                    try {
+                                                      final text =
+                                                          newValue.text;
+                                                      if (text.isNotEmpty) {
+                                                        double.parse(text);
+                                                      }
+                                                      return newValue;
+                                                    } catch (e) {}
+                                                    return oldValue;
+                                                  }),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 16.0),
+                                            child: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(Icons.date_range),
+                                            ),
+                                          )
+                                        ],
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(

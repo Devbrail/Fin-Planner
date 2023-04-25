@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/presentation/settings/bloc/settings_controller.dart';
 
 import '../../../core/enum/transaction.dart';
 import '../../../data/accounts/model/account_model.dart';
@@ -21,7 +22,8 @@ part 'expense_state.dart';
 
 @injectable
 class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
-  ExpenseBloc({
+  ExpenseBloc(
+    this.settingsController, {
     required this.expenseUseCase,
     required this.accountUseCase,
     required this.addExpenseUseCase,
@@ -46,6 +48,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   final GetAccountsUseCase accountsUseCase;
   final DeleteExpenseUseCase deleteExpenseUseCase;
   final UpdateExpensesUseCase updateExpensesUseCase;
+  final SettingsController settingsController;
 
   String? expenseName;
   double? expenseAmount;
@@ -71,7 +74,13 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       expenseAmount = expense.currency;
       expenseName = expense.name;
       selectedCategoryId = expense.categoryId;
-      selectedAccountId = expense.accountId;
+      if (settingsController.defaultAccountId == null ||
+          settingsController.defaultAccountId == -1) {
+        selectedAccountId = expense.accountId;
+      } else {
+        selectedAccountId = settingsController.defaultAccountId;
+      }
+
       selectedDate = expense.time;
       timeOfDay = TimeOfDay.fromDateTime(expense.time);
       transactionType = expense.type ?? TransactionType.expense;

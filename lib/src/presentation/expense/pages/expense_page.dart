@@ -568,7 +568,10 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                   });
                 }
               },
-              leading: const Icon(Icons.today_rounded),
+              leading: Icon(
+                Icons.today_rounded,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
               title: Text(selectedDateTime.formattedDate),
             ),
           ),
@@ -594,7 +597,10 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                   });
                 }
               },
-              leading: const Icon(MdiIcons.clockOutline),
+              leading: Icon(
+                MdiIcons.clockOutline,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
               title: Text(selectedDateTime.formattedTime),
             ),
           ),
