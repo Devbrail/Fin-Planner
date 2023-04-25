@@ -69,7 +69,7 @@ String formatNumberv1(double number) {
 }
 
 void main() {
-  double number = 1234567.89;
-  String formattedNumber = formatNumber(number);
-  print(formattedNumber); // Output: 1.234.567,89
+  //double number = 1234567.89;
+  //String formattedNumber = formatNumber(number);
+  //print(formattedNumber); // Output: 1.234.567,89
 }

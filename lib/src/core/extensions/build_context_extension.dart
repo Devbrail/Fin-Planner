@@ -29,12 +29,12 @@ extension LocalizedBuildContext on BuildContext {
           content: Text(
             content,
             style: TextStyle(
-              color: color ?? Theme.of(this).colorScheme.onSurface,
+              color: color ?? Theme.of(this).colorScheme.onSurfaceVariant,
             ),
           ),
           behavior: SnackBarBehavior.floating,
           backgroundColor:
-              backgroundColor ?? Theme.of(this).colorScheme.surface,
+              backgroundColor ?? Theme.of(this).colorScheme.surfaceVariant,
         ),
       );
 }

@@ -4,7 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import '../../data/accounts/model/account_model.dart';
 import '../../domain/account/entities/account.dart';
 
-extension AccountMapping on AccountModel {
+extension AccountModelMapping on AccountModel {
   double get initialAmount => amount ?? 0;
 
   Account toEntity() => Account(
@@ -18,7 +18,11 @@ extension AccountMapping on AccountModel {
       );
 }
 
-extension AccountsMapping on Iterable<AccountModel> {
+extension AccountModelsMapping on Iterable<AccountModel> {
+  List<Map<String, dynamic>> toJson() {
+    return map((e) => e.toJson()).toList();
+  }
+
   List<Account> toEntities() =>
       map((accountModel) => accountModel.toEntity()).toList();
 }

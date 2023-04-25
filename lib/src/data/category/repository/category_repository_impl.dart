@@ -55,4 +55,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
       superId: key,
     ));
   }
+
+  @override
+  Future<void> clearAll() => dataSources.clearAll();
 }

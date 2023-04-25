@@ -52,12 +52,13 @@ class ExpenseListWidget extends StatelessWidget {
                   color: Colors.amber.value,
                 ),
               );
+            } else {
+              return ExpenseItemWidget(
+                expense: expense,
+                account: account,
+                category: category,
+              );
             }
-            return ExpenseItemWidget(
-              expense: expense,
-              account: account,
-              category: category,
-            );
           },
         ),
       ),

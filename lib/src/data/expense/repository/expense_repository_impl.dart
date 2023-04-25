@@ -84,4 +84,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
       ),
     );
   }
+
+  @override
+  Future<void> clearAll() => dataSource.clearAll();
 }

@@ -5,6 +5,8 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
+import 'package:paisa/src/core/common.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -20,8 +22,47 @@ import 'data.dart';
 
 @Singleton()
 class FileHandler {
+  Future<void> importFromFile() async {
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      allowMultiple: false,
+    );
+    if (result == null || result.files.isEmpty) {
+      return;
+    }
+    final file = File(result.files.first.path!);
+    final jsonString = await file.readAsString();
+    final data = Data.fromRawJson(jsonString);
+    final accountBox = Hive.box<AccountModel>(BoxType.accounts.name);
+    final categoryBox = Hive.box<CategoryModel>(BoxType.category.name);
+    final expenseBox = Hive.box<ExpenseModel>(BoxType.expense.name);
+    await expenseBox.clear();
+    await categoryBox.clear();
+    await accountBox.clear();
+
+    await expenseBox.addAll(data.expenses);
+    await categoryBox.addAll(data.categories);
+    await accountBox.addAll(data.accounts);
+  }
+
+  Future<void> backupIntoFile() async {
+    final String jsonString = await _fetchAllDataAndEncode();
+    final dlPath = await FilePicker.platform.getDirectoryPath();
+    if (dlPath == null) {
+      return;
+    } else {
+      final timeStamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+
+      final paisaFileName = 'paisa_$timeStamp.json';
+      final fileTask = File('$dlPath/$paisaFileName');
+      await fileTask.writeAsString(jsonString);
+    }
+  }
+
   Future<XFile> fetchXFileJSONToShare() async {
-    final String jsonString = await _fetchExpensesAndEncode();
+    final String jsonString = await _fetchAllDataAndEncode();
+
     return XFile.fromData(
       Uint8List.fromList(jsonString.codeUnits),
       name: 'paisa_backup_${DateTime.now().toIso8601String()}.json',
@@ -31,7 +72,7 @@ class FileHandler {
   }
 
   Future<XFile> fetchXFileCSVToShare() async {
-    final String jsonString = await _fetchExpensesAndEncode();
+    final String jsonString = await _fetchAllDataAndEncode();
     return XFile.fromData(
       Uint8List.fromList(jsonString.codeUnits),
       name: 'paisa_backup_${DateTime.now().toIso8601String()}.json',
@@ -39,7 +80,7 @@ class FileHandler {
     );
   }
 
-  Future<String> _fetchExpensesAndEncode() async {
+  Future<String> _fetchAllDataAndEncode() async {
     final expenseDataStore = getIt.get<LocalExpenseDataManager>();
     final Iterable<ExpenseModel> expenses = expenseDataStore.exportData();
 
@@ -50,9 +91,9 @@ class FileHandler {
     final Iterable<CategoryModel> categories = categoryDataStore.exportData();
 
     final data = {
-      'expenses': expenses.map((e) => e.toJson()).toList(),
-      'accounts': accounts.map((e) => e.toJson()).toList(),
-      'categories': categories.map((e) => e.toJson()).toList(),
+      'expenses': expenses.toJson(),
+      'accounts': accounts.toJson(),
+      'categories': categories.toJson(),
     };
     return json.encode(data);
   }

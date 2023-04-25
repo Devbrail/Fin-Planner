@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../data/category/model/category_model.dart';
 import '../../domain/category/entities/category.dart';
 
-extension CategoryMapping on CategoryModel {
+extension CategoryModelHelper on CategoryModel {
   Category toEntity() => Category(
         icon: icon,
         name: name,
@@ -16,7 +16,11 @@ extension CategoryMapping on CategoryModel {
       );
 }
 
-extension CategoriesMapping on Iterable<CategoryModel> {
+extension CategoryModelsHelper on Iterable<CategoryModel> {
+  List<Map<String, dynamic>> toJson() {
+    return map((e) => e.toJson()).toList();
+  }
+
   List<Category> toEntities() =>
       map((categoryModel) => categoryModel.toEntity())
           .sorted((a, b) => a.name.compareTo(b.name))

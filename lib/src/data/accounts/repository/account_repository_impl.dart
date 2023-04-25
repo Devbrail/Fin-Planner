@@ -60,4 +60,7 @@ class AccountRepositoryImpl extends AccountRepository {
 
   @override
   List<AccountModel> getAccounts() => dataSource.accounts();
+
+  @override
+  Future<void> clearAll() => dataSource.clearAll();
 }

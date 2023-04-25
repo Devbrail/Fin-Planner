@@ -83,4 +83,7 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
       expenseBox.values
           .where((element) => element.categoryId == category)
           .toList();
+
+  @override
+  Future<void> clearAll() => expenseBox.clear();
 }

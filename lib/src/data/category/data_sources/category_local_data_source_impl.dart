@@ -32,7 +32,7 @@ class LocalCategoryManagerDataSourceImpl
   @override
   CategoryModel? fetchCategoryFromId(int categoryId) =>
       categoryBox.values.firstWhereOrNull(
-        (element) => element.key == categoryId,
+        (element) => element.superId == categoryId,
       );
 
   @override
@@ -42,4 +42,7 @@ class LocalCategoryManagerDataSourceImpl
   Future<void> updateCategory(CategoryModel categoryModel) {
     return categoryBox.put(categoryModel.superId!, categoryModel);
   }
+
+  @override
+  Future<void> clearAll() => categoryBox.clear();
 }

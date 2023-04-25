@@ -472,9 +472,13 @@
     "@backupAndRestoreDescLabel": {
         "description": "Backup and restore your data label"
     },
-    "createLabel": "Create",
-    "@createLabel": {
-        "description": "create label"
+    "exportDataLabel": "Export",
+    "@exportDataLabel": {
+        "description": "Export the data from db to file"
+    },
+    "importDataLabel": "Import",
+    "@importDataLabel": {
+        "description": "Import the data from file to db"
     },
     "restoreLabel": "Restore",
     "@restoreLabel": {

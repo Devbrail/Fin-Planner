@@ -160,14 +160,16 @@ final GoRouter goRouter = GoRouter(
           ),
         ),
         GoRoute(
-          name: exportAndImport,
-          path: exportAndImport,
-          builder: (context, state) => const ExportAndImportPage(),
-        ),
-        GoRoute(
           name: settingsName,
           path: settingsPath,
           builder: (context, state) => const SettingsPage(),
+          routes: [
+            GoRoute(
+              name: exportAndImport,
+              path: exportAndImport,
+              builder: (context, state) => const ExportAndImportPage(),
+            ),
+          ],
         ),
         GoRoute(
           name: addDebitName,

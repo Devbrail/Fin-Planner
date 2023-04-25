@@ -28,4 +28,5 @@ abstract class ExpenseRepository {
     TransactionType transactionType,
     String? description,
   );
+  Future<void> clearAll();
 }

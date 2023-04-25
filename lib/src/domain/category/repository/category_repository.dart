@@ -20,4 +20,5 @@ abstract class CategoryRepository {
     double? budget = -1,
     bool isBudget = false,
   });
+  Future<void> clearAll();
 }

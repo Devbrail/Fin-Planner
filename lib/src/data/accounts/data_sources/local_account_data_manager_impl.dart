@@ -39,4 +39,7 @@ class LocalAccountDataManagerImpl implements LocalAccountDataManager {
   Future<void> updateAccount(AccountModel accountModel) {
     return accountBox.put(accountModel.superId!, accountModel);
   }
+
+  @override
+  Future<void> clearAll() => accountBox.clear();
 }

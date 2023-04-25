@@ -78,7 +78,7 @@ class SettingsPage extends StatelessWidget {
                       title: context.loc.backupAndRestoreLabel,
                       subtitle: context.loc.backupAndRestoreDescLabel,
                       onTap: () {
-                        GoRouter.of(context).pushNamed(exportAndImport);
+                        GoRouter.of(context).goNamed(exportAndImport);
                       },
                     ),
                   ],

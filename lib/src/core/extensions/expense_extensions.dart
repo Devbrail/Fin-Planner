@@ -55,6 +55,10 @@ extension ExpenseModelHelper on ExpenseModel {
 }
 
 extension ExpenseModelsHelper on Iterable<ExpenseModel> {
+  List<Map<String, dynamic>> toJson() {
+    return map((e) => e.toJson()).toList();
+  }
+
   List<Expense> toEntities({bool sublist = false}) {
     final sortedList = map((expenseModel) => expenseModel.toEntity())
         .sorted((a, b) => b.time.compareTo(a.time));
