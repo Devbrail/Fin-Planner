@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:paisa/src/presentation/settings/bloc/settings_controller.dart';
-import '../../../widgets/paisa_add_button_widget.dart';
+import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_bottom_sheet.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 

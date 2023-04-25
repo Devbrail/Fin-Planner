@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/presentation/widgets/paisa_add_button_widget.dart';
+import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
