@@ -34,8 +34,11 @@ class SettingsPage extends StatelessWidget {
           SliverAppBar.large(
             title: Text(context.loc.settingsLabel),
           ),
-          SliverToBoxAdapter(
-            child: Column(
+          SliverFillRemaining(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
               children: [
                 SettingsGroup(
                   title: context.loc.colorsLabel,

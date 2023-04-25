@@ -22,14 +22,14 @@ import 'data.dart';
 
 @Singleton()
 class FileHandler {
-  Future<void> importFromFile() async {
+  Future<List<Iterable<int>>> importFromFile() async {
     final FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['json'],
       allowMultiple: false,
     );
     if (result == null || result.files.isEmpty) {
-      return;
+      return [];
     }
     final file = File(result.files.first.path!);
     final jsonString = await file.readAsString();
@@ -41,22 +41,25 @@ class FileHandler {
     await categoryBox.clear();
     await accountBox.clear();
 
-    await expenseBox.addAll(data.expenses);
-    await categoryBox.addAll(data.categories);
-    await accountBox.addAll(data.accounts);
+    return Future.wait([
+      expenseBox.addAll(data.expenses),
+      categoryBox.addAll(data.categories),
+      accountBox.addAll(data.accounts),
+    ]);
   }
 
-  Future<void> backupIntoFile() async {
+  Future<bool> backupIntoFile() async {
     final String jsonString = await _fetchAllDataAndEncode();
     final dlPath = await FilePicker.platform.getDirectoryPath();
     if (dlPath == null) {
-      return;
+      return false;
     } else {
       final timeStamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
 
       final paisaFileName = 'paisa_$timeStamp.json';
       final fileTask = File('$dlPath/$paisaFileName');
       await fileTask.writeAsString(jsonString);
+      return true;
     }
   }
 

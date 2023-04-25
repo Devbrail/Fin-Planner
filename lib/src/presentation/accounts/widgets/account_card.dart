@@ -138,88 +138,60 @@ class MobileAccountCard extends StatelessWidget {
                       )
                     : const SizedBox.shrink(),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(context.loc.totalBalanceLabel),
-                        Text(
-                          totalBalance,
-                          style: GoogleFonts.manrope(
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+              ListTile(
+                title: Text(context.loc.totalBalanceLabel),
+                subtitle: Text(
+                  totalBalance,
+                  style: GoogleFonts.manrope(
+                    textStyle:
+                        Theme.of(context).textTheme.headlineSmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                  bottom: 16.0,
-                  right: 16.0,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            context.loc.incomeLabel,
-                            style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurface
-                                  .withOpacity(0.75),
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            income,
-                            style: GoogleFonts.manrope(
-                              textStyle: Theme.of(context).textTheme.titleLarge,
-                            ),
-                          ),
-                        ],
+              Row(
+                children: [
+                  Expanded(
+                    child: ListTile(
+                      title: Text(
+                        context.loc.incomeLabel,
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withOpacity(0.75),
+                        ),
+                      ),
+                      subtitle: Text(
+                        income,
+                        style: GoogleFonts.manrope(
+                          textStyle: Theme.of(context).textTheme.titleLarge,
+                        ),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            context.loc.expenseLabel,
-                            style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSecondaryContainer
-                                  .withOpacity(0.75),
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            expense,
-                            style: GoogleFonts.manrope(
-                              textStyle: Theme.of(context).textTheme.titleLarge,
-                            ),
-                          ),
-                        ],
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: ListTile(
+                      title: Text(
+                        context.loc.expenseLabel,
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer
+                              .withOpacity(0.75),
+                        ),
+                      ),
+                      subtitle: Text(
+                        expense,
+                        style: GoogleFonts.manrope(
+                          textStyle: Theme.of(context).textTheme.titleLarge,
+                        ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),

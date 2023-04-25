@@ -39,6 +39,8 @@ class CategoryListWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Icon(
+                        color:
+                            Color(map.key.color ?? Colors.amber.shade100.value),
                         IconData(
                           map.key.icon,
                           fontFamily: 'Material Design Icons',
