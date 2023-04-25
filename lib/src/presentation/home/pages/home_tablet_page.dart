@@ -53,6 +53,16 @@ class HomeTabletPage extends StatelessWidget {
                     child: PaisaIconTitle(),
                   ),
                   DrawerItemWidget(
+                    isSelected: pageType == PageType.home,
+                    onPressed: () {
+                      homeBloc.add(const CurrentIndexEvent(PageType.home));
+                      Navigator.pop(context);
+                    },
+                    icon: Icons.home_outlined,
+                    selectedIcon: Icons.home,
+                    title: context.loc.homeLabel,
+                  ),
+                  DrawerItemWidget(
                     isSelected: pageType == PageType.category,
                     onPressed: () {
                       homeBloc.add(const CurrentIndexEvent(PageType.category));
@@ -92,40 +102,47 @@ class HomeTabletPage extends StatelessWidget {
       floatingActionButton: floatingActionButton,
       bottomNavigationBar: BlocBuilder(
         bloc: homeBloc,
-        builder: (context, state) => Theme(
-          data: Theme.of(context).copyWith(
-            splashFactory: NoSplash.splashFactory,
-          ),
-          child: NavigationBar(
-            elevation: 1,
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            selectedIndex: homeBloc.getIndexFromPage(homeBloc.currentPage),
-            onDestinationSelected: (index) => homeBloc
-                .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
-            destinations: [
-              NavigationDestination(
-                label: context.loc.homeLabel,
-                icon: const Icon(Icons.home_outlined),
-                selectedIcon: const Icon(Icons.home),
-              ),
-              NavigationDestination(
-                label: context.loc.accountsLabel,
-                icon: const Icon(Icons.credit_card_outlined),
-                selectedIcon: const Icon(Icons.credit_card),
-              ),
-              NavigationDestination(
-                label: context.loc.debtsLabel,
-                icon: const Icon(MdiIcons.accountCash),
-                selectedIcon: const Icon(MdiIcons.accountCashOutline),
-              ),
-              NavigationDestination(
-                label: context.loc.overviewLabel,
-                icon: const Icon(MdiIcons.sortVariant),
-                selectedIcon: const Icon(MdiIcons.sortVariant),
-              ),
-            ],
-          ),
-        ),
+        builder: (context, state) {
+          if (state is CurrentIndexState &&
+              (state.currentPage == PageType.budget ||
+                  state.currentPage == PageType.category)) {
+            return const SizedBox.shrink();
+          }
+          return Theme(
+            data: Theme.of(context).copyWith(
+              splashFactory: NoSplash.splashFactory,
+            ),
+            child: NavigationBar(
+              elevation: 1,
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              selectedIndex: homeBloc.getIndexFromPage(homeBloc.currentPage),
+              onDestinationSelected: (index) => homeBloc
+                  .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
+              destinations: [
+                NavigationDestination(
+                  label: context.loc.homeLabel,
+                  icon: const Icon(Icons.home_outlined),
+                  selectedIcon: const Icon(Icons.home),
+                ),
+                NavigationDestination(
+                  label: context.loc.accountsLabel,
+                  icon: const Icon(Icons.credit_card_outlined),
+                  selectedIcon: const Icon(Icons.credit_card),
+                ),
+                NavigationDestination(
+                  label: context.loc.debtsLabel,
+                  icon: const Icon(MdiIcons.accountCash),
+                  selectedIcon: const Icon(MdiIcons.accountCashOutline),
+                ),
+                NavigationDestination(
+                  label: context.loc.overviewLabel,
+                  icon: const Icon(MdiIcons.sortVariant),
+                  selectedIcon: const Icon(MdiIcons.sortVariant),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
