@@ -8,7 +8,6 @@
  <a href="https://github.com/h4h13/paisa" style="text-decoration:none" area-label="flutter">
     <img src="https://img.shields.io/badge/Platform-Flutter-blue">
   </a>
-
    <a href="https://play.google.com/store/apps/details?id=dev.hemanths.paisa" style="text-decoration:none" area-label="flutter">
     <img src="https://img.shields.io/badge/Download-Google%20Play-green">
   </a>
@@ -20,7 +19,7 @@
     <h2> Material design expense manager</h2>
 </p>
 
-### ⚠ Join [@paisa](https://t.me/app_paisa) on Telegram for important updates
+### ⚠ Join [@paisa group](https://t.me/app_paisa) on Telegram for important updates
 
 ### Screen shots
 

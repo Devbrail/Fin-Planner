@@ -117,6 +117,9 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         accountId: -1,
         transactionType: TransactionType.transfer,
         description: 'Transfer money',
+        fromAccountId: fromAccount?.superId,
+        toAccountId: toAccount?.superId,
+        transferAmount: transferAmount ?? 0,
       );
 
       emit(const ExpenseAdded(isAddOrUpdate: true));
@@ -183,7 +186,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     final List<Account> accounts = accountsUseCase();
     if (accounts.length == 1 &&
         event.transactionType == TransactionType.transfer) {
-      emit(const ExpenseErrorState('Need two more accounts '));
+      emit(const ExpenseErrorState('Need two or more accounts '));
     } else {
       transactionType = event.transactionType;
       emit(ChangeTransactionTypeState(event.transactionType));

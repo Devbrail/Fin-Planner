@@ -51,6 +51,11 @@ extension ExpenseModelHelper on ExpenseModel {
         categoryId: categoryId,
         accountId: accountId,
         type: type,
+        description: description,
+        fromAccountId: fromAccountId,
+        superId: superId,
+        toAccountId: toAccountId,
+        transferAmount: transferAmount,
       );
 }
 

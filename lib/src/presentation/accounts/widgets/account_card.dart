@@ -98,7 +98,7 @@ class MobileAccountCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GlassmorphicContainer(
-          height: 240,
+          height: 246,
           width: MediaQuery.of(context).size.width,
           borderRadius: 24,
           blur: 10,
@@ -123,12 +123,11 @@ class MobileAccountCard extends StatelessWidget {
           border: 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ListTile(
                 horizontalTitleGap: 0,
-                title: Text(bankName.toUpperCase()),
-                subtitle: Text(cardHolder.toUpperCase()),
+                title: Text(bankName),
+                subtitle: Text(cardHolder),
                 leading: Icon(cardType.icon),
                 trailing: onDelete != null
                     ? GestureDetector(
@@ -156,6 +155,7 @@ class MobileAccountCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListTile(
+                      dense: true,
                       title: Text(
                         context.loc.incomeLabel,
                         style: TextStyle(
@@ -173,9 +173,9 @@ class MobileAccountCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 8),
                   Expanded(
                     child: ListTile(
+                      dense: true,
                       title: Text(
                         context.loc.expenseLabel,
                         style: TextStyle(

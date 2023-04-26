@@ -10,6 +10,9 @@ abstract class ExpenseRepository {
     int account,
     TransactionType transactionType,
     String? description,
+    int? fromAccountId,
+    int? toAccountId,
+    double transferAmount,
   );
   Future<void> clearExpense(int expenseId);
   ExpenseModel? fetchExpenseFromId(int expenseId);
