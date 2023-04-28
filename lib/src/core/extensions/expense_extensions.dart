@@ -9,10 +9,28 @@ import '../enum/filter_budget.dart';
 import '../enum/transaction.dart';
 
 extension ExpenseModelBoxMapping on Box<ExpenseModel> {
-  List<Expense> search(query) => values
-      .where(
-          (ExpenseModel element) => element.name.toLowerCase().contains(query))
-      .toEntities();
+  List<Expense> search(
+    query, {
+    int? selectedAccountId = -1,
+    int? selecteCategoryId = -1,
+  }) =>
+      values.where((element) {
+        if (selectedAccountId != -1) {
+          return element.accountId == selectedAccountId;
+        } else {
+          return true;
+        }
+      }).where((element) {
+        if (selecteCategoryId != -1) {
+          return element.categoryId == selecteCategoryId;
+        } else {
+          return true;
+        }
+      }).where((ExpenseModel element) {
+        final description = element.description ?? '';
+        return element.name.toLowerCase().contains(query) ||
+            description.toLowerCase().contains(query);
+      }).toEntities();
 
   List<ExpenseModel> get expenses =>
       values.toList()..sort(((a, b) => b.time.compareTo(a.time)));

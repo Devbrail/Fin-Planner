@@ -35,6 +35,8 @@ class SettingsPage extends StatelessWidget {
             title: Text(context.loc.settingsLabel),
           ),
           SliverFillRemaining(
+            hasScrollBody: true,
+            fillOverscroll: true,
             child: ListView(
               padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
