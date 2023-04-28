@@ -98,7 +98,7 @@ class MobileAccountCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GlassmorphicContainer(
-          height: 240,
+          height: 280,
           width: MediaQuery.of(context).size.width,
           borderRadius: 24,
           blur: 10,
