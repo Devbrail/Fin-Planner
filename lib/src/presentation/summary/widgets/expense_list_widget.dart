@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../core/enum/card_type.dart';
 
 import '../../../../main.dart';
+import '../../../core/enum/transaction.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
@@ -31,33 +30,35 @@ class ExpenseListWidget extends StatelessWidget {
           itemCount: expenses.length,
           itemBuilder: (_, index) {
             final Expense expense = expenses[index];
-            final Account? account =
-                summaryController.getAccount(expenses[index].accountId);
-            final Category? category =
-                summaryController.getCategory(expenses[index].categoryId);
-            if (account == null || category == null) {
-              return ExpenseItemWidget(
-                expense: expense,
-                account: Account(
-                  name: 'Transfer',
-                  icon: Icons.wallet.codePoint,
-                  bankName: 'Transfer bank name',
-                  number: 'Transfer bank number',
-                  cardType: CardType.bank,
-                  amount: 0,
-                ),
-                category: Category(
-                  icon: MdiIcons.bankTransfer.codePoint,
-                  name: 'Transfer category',
-                  color: Colors.amber.value,
-                ),
-              );
+            if (expense.type == TransactionType.transfer) {
+              final Account? fromAccount =
+                  summaryController.getAccount(expenses[index].fromAccountId!);
+              final Account? toAccount =
+                  summaryController.getAccount(expenses[index].toAccountId!);
+
+              if (fromAccount == null || toAccount == null) {
+                return const SizedBox.shrink();
+              } else {
+                return ExpenseTransferItemWidget(
+                  expense: expense,
+                  fromAccount: fromAccount,
+                  toAccount: toAccount,
+                );
+              }
             } else {
-              return ExpenseItemWidget(
-                expense: expense,
-                account: account,
-                category: category,
-              );
+              final Account? account =
+                  summaryController.getAccount(expenses[index].accountId);
+              final Category? category =
+                  summaryController.getCategory(expenses[index].categoryId);
+              if (account == null || category == null) {
+                return const SizedBox.shrink();
+              } else {
+                return ExpenseItemWidget(
+                  expense: expense,
+                  account: account,
+                  category: category,
+                );
+              }
             }
           },
         ),

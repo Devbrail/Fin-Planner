@@ -10,5 +10,8 @@ class Expense extends ExpenseModel {
     required super.type,
     super.description,
     super.superId,
+    super.fromAccountId,
+    super.toAccountId,
+    super.transferAmount,
   });
 }

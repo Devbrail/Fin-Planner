@@ -16,22 +16,28 @@ class PaisaMaterialYouChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderRadius =
-        isSelected ? BorderRadius.circular(28) : BorderRadius.circular(12);
-    final colorPrimary = isSelected
-        ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).colorScheme.surfaceVariant;
-    final colorOnPrimary = isSelected
+    final bgColor = Theme.of(context).colorScheme.primaryContainer;
+    final textColor = Theme.of(context).colorScheme.primary;
+    final borderColor =
+        isSelected ? Theme.of(context).colorScheme.primary : null;
+    final onColor = isSelected
         ? Theme.of(context).colorScheme.onPrimary
         : Theme.of(context).colorScheme.onSurfaceVariant;
+
     return Row(
       children: [
         GestureDetector(
           onTap: onPressed,
-          child: Container(
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
             decoration: BoxDecoration(
-              borderRadius: borderRadius,
-              color: colorPrimary,
+              borderRadius: BorderRadius.circular(28),
+              color: bgColor,
+              border: Border.all(
+                strokeAlign: BorderSide.strokeAlignInside,
+                width: 1.5,
+                color: borderColor ?? Colors.white.withOpacity(0),
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -42,7 +48,7 @@ class PaisaMaterialYouChip extends StatelessWidget {
                 title,
                 style: GoogleFonts.outfit(
                   textStyle: Theme.of(context).textTheme.titleSmall,
-                  color: colorOnPrimary,
+                  color: textColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),

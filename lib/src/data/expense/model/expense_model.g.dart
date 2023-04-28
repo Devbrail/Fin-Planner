@@ -27,13 +27,16 @@ class ExpenseModelAdapter extends TypeAdapter<ExpenseModel> {
           : fields[4] as TransactionType?,
       description: fields[8] as String?,
       superId: fields[7] as int?,
+      fromAccountId: fields[9] as int?,
+      toAccountId: fields[10] as int?,
+      transferAmount: fields[11] == null ? 0.0 : fields[11] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, ExpenseModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -49,7 +52,13 @@ class ExpenseModelAdapter extends TypeAdapter<ExpenseModel> {
       ..writeByte(7)
       ..write(obj.superId)
       ..writeByte(8)
-      ..write(obj.description);
+      ..write(obj.description)
+      ..writeByte(9)
+      ..write(obj.fromAccountId)
+      ..writeByte(10)
+      ..write(obj.toAccountId)
+      ..writeByte(11)
+      ..write(obj.transferAmount);
   }
 
   @override

@@ -60,3 +60,63 @@ class ExpenseTotalWidget extends StatelessWidget {
     );
   }
 }
+
+class TouchCard extends StatefulWidget {
+  final Widget child;
+
+  const TouchCard({required this.child});
+
+  @override
+  _TouchCardState createState() => _TouchCardState();
+}
+
+class _TouchCardState extends State<TouchCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Create the animation controller
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
+
+    // Create the animation tween
+    _animation = Tween<double>(begin: 1, end: 1.05).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: (TapDownDetails details) {
+        _controller.forward(from: 1);
+      },
+      onTapCancel: () {
+        _controller.reverse(from: 1.05);
+      },
+      onTapUp: (TapUpDetails details) {
+        _controller.reverse(from: 1);
+      },
+      child: AnimatedBuilder(
+        animation: _animation,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _animation.value,
+            child: child,
+          );
+        },
+        child: widget.child,
+      ),
+    );
+  }
+}

@@ -48,6 +48,9 @@ Future<void> addDummyData() async {
         index,
         Random().nextBool() ? TransactionType.expense : TransactionType.income,
         'description',
+        null,
+        null,
+        0,
       );
     }
   }

@@ -20,6 +20,9 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     int account,
     TransactionType transactionType,
     String? description,
+    int? fromAccountId,
+    int? toAccountId,
+    double transferAmount,
   ) async =>
       dataSource.addOrUpdateExpense(
         ExpenseModel(
@@ -30,6 +33,9 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
           accountId: account,
           type: transactionType,
           description: description,
+          fromAccountId: fromAccountId,
+          toAccountId: toAccountId,
+          transferAmount: transferAmount,
         ),
       );
 

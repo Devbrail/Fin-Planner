@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../../core/enum/transaction.dart';
 
 import '../../../app/routes.dart';
@@ -49,6 +50,57 @@ class ExpenseItemWidget extends StatelessWidget {
               fontFamily: 'Material Design Icons',
               fontPackage: 'material_design_icons_flutter',
             ),
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+          trailing: Text(
+            '${expense.type?.sign}${expense.currency.toCurrency()}',
+            style: GoogleFonts.manrope(
+              textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: expense.type?.color(context),
+                  ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ExpenseTransferItemWidget extends StatelessWidget {
+  const ExpenseTransferItemWidget({
+    Key? key,
+    required this.expense,
+    required this.fromAccount,
+    required this.toAccount,
+  }) : super(key: key);
+
+  final Account fromAccount, toAccount;
+  final Expense expense;
+
+  String getSubtitle() {
+    return expense.time.shortDayString;
+  }
+
+  String get title {
+    return 'Transfer from ${fromAccount.bankName} to ${toAccount.bankName}';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24),
+        onTap: () => context.goNamed(
+          editExpensePath,
+          params: <String, String>{'eid': expense.superId.toString()},
+        ),
+        child: ListTile(
+          horizontalTitleGap: 4,
+          title: Text(title),
+          subtitle: Text(getSubtitle()),
+          leading: Icon(
+            MdiIcons.bankTransfer,
             color: Theme.of(context).colorScheme.onSurface,
           ),
           trailing: Text(

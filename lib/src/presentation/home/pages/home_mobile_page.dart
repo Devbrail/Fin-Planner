@@ -82,7 +82,7 @@ class HomeMobilePage extends StatelessWidget {
                   DrawerItemWidget(
                     isSelected: false,
                     onPressed: () {
-                      GoRouter.of(context).pushNamed(settingsPath);
+                      GoRouter.of(context).goNamed(settingsPath);
                       Navigator.pop(context);
                     },
                     icon: MdiIcons.cog,

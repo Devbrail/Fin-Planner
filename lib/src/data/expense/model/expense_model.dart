@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../../../core/common.dart';
-import '../../../domain/expense/entities/expense.dart';
 
+import '../../../core/common.dart';
 import '../../../core/enum/transaction.dart';
 
 part 'expense_model.g.dart';
@@ -33,6 +32,15 @@ class ExpenseModel extends HiveObject with EquatableMixin {
   @HiveField(8)
   String? description;
 
+  @HiveField(9)
+  int? fromAccountId;
+
+  @HiveField(10)
+  int? toAccountId;
+
+  @HiveField(11, defaultValue: 0.0)
+  double transferAmount;
+
   ExpenseModel({
     required this.name,
     required this.currency,
@@ -42,6 +50,9 @@ class ExpenseModel extends HiveObject with EquatableMixin {
     required this.type,
     this.description,
     this.superId,
+    this.fromAccountId,
+    this.toAccountId,
+    this.transferAmount = 0.0,
   });
 
   Map<String, dynamic> toJson() => {
@@ -53,29 +64,24 @@ class ExpenseModel extends HiveObject with EquatableMixin {
         'categoryId': categoryId,
         'superId': superId,
         'description': description,
+        'fromAccountId': fromAccountId,
+        'toAccountId': toAccountId,
+        'transferAmount': transferAmount,
       };
 
   factory ExpenseModel.fromJson(Map<String, dynamic> json) => ExpenseModel(
-        name: json['name'],
-        currency: json['currency'],
-        time: DateTime.parse(json['time']),
-        categoryId: json['categoryId'],
-        accountId: json['accountId'],
-        type: (json['type'] as String).transactionType,
-        description: (json['description'] as String),
-      )..superId = json['superId'];
+      name: json['name'],
+      currency: json['currency'],
+      time: DateTime.parse(json['time']),
+      categoryId: json['categoryId'],
+      accountId: json['accountId'],
+      type: (json['type'] as String).transactionType,
+      description: (json['description'] as String),
+      fromAccountId: json['fromAccountId'],
+      toAccountId: json['toAccountId'],
+      transferAmount: json['transferAmount'])
+    ..superId = json['superId'];
 
   @override
   List<Object?> get props => [name, type];
-
-  Expense toEntity() => Expense(
-        name: name,
-        currency: currency,
-        time: time,
-        categoryId: categoryId,
-        accountId: accountId,
-        type: type,
-        description: description,
-        superId: superId,
-      );
 }
