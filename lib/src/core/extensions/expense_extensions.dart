@@ -38,7 +38,7 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
   List<ExpenseModel> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
 
-  List<ExpenseModel> get budgetOverView => values
+  List<ExpenseModel> get budgetOverView => noRecurring
       .where((element) => element.categoryId != -1 || element.accountId != -1)
       .where((element) => element.type == TransactionType.expense)
       .toList();
@@ -51,6 +51,9 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
 
   Iterable<ExpenseModel> get incomeList =>
       values.where((element) => element.type == TransactionType.income);
+
+  Iterable<ExpenseModel> get noRecurring =>
+      values.where((element) => element.type != TransactionType.recurring);
 
   double get totalExpense => expenseList
       .map((e) => e.currency)
@@ -74,6 +77,8 @@ extension ExpenseModelHelper on ExpenseModel {
         superId: superId,
         toAccountId: toAccountId,
         transferAmount: transferAmount,
+        recurringType: recurringType,
+        recurringDate: recurringDate,
       );
 }
 
@@ -82,14 +87,9 @@ extension ExpenseModelsHelper on Iterable<ExpenseModel> {
     return map((e) => e.toJson()).toList();
   }
 
-  List<Expense> toEntities({bool sublist = false}) {
-    final sortedList = map((expenseModel) => expenseModel.toEntity())
+  List<Expense> toEntities() {
+    return map((expenseModel) => expenseModel.toEntity())
         .sorted((a, b) => b.time.compareTo(a.time));
-    if (sublist && sortedList.length >= 100) {
-      return sortedList.sublist(100);
-    } else {
-      return sortedList;
-    }
   }
 }
 

@@ -96,10 +96,9 @@ class AccountSelectedItem extends StatelessWidget {
       buildWhen: (previous, current) => current is ChangeAccountState,
       builder: (context, state) {
         return SizedBox(
-          height: 180,
+          height: 160,
           child: ListView.builder(
             padding: const EdgeInsets.only(
-              bottom: 16,
               left: 16,
               right: 16,
             ),

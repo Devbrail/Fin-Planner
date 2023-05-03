@@ -13,14 +13,14 @@ import 'package:paisa/src/data/accounts/data_sources/local_account_data_manager.
     as _i25;
 import 'package:paisa/src/data/accounts/data_sources/local_account_data_manager_impl.dart'
     as _i26;
-import 'package:paisa/src/data/accounts/model/account_model.dart' as _i8;
+import 'package:paisa/src/data/accounts/model/account_model.dart' as _i9;
 import 'package:paisa/src/data/accounts/repository/account_repository_impl.dart'
     as _i36;
 import 'package:paisa/src/data/category/data_sources/category_local_data_source.dart'
     as _i27;
 import 'package:paisa/src/data/category/data_sources/category_local_data_source_impl.dart'
     as _i28;
-import 'package:paisa/src/data/category/model/category_model.dart' as _i7;
+import 'package:paisa/src/data/category/model/category_model.dart' as _i6;
 import 'package:paisa/src/data/category/repository/category_repository_impl.dart'
     as _i41;
 import 'package:paisa/src/data/currencies/repository/currencies_repository_impl.dart'
@@ -29,7 +29,7 @@ import 'package:paisa/src/data/debt/data_sources/debt_local_data_source.dart'
     as _i12;
 import 'package:paisa/src/data/debt/data_sources/debt_local_data_source_impl.dart'
     as _i13;
-import 'package:paisa/src/data/debt/models/debt_model.dart' as _i6;
+import 'package:paisa/src/data/debt/models/debt_model.dart' as _i7;
 import 'package:paisa/src/data/debt/models/transactions_model.dart' as _i5;
 import 'package:paisa/src/data/debt/repository/debt_repository_impl.dart'
     as _i15;
@@ -37,7 +37,7 @@ import 'package:paisa/src/data/expense/data_sources/local_expense_data_manager.d
     as _i29;
 import 'package:paisa/src/data/expense/data_sources/local_expense_data_manager_impl.dart'
     as _i30;
-import 'package:paisa/src/data/expense/model/expense_model.dart' as _i9;
+import 'package:paisa/src/data/expense/model/expense_model.dart' as _i8;
 import 'package:paisa/src/data/expense/repository/expense_repository_impl.dart'
     as _i48;
 import 'package:paisa/src/data/settings/authenticate.dart' as _i3;
@@ -147,18 +147,18 @@ _i1.GetIt init(
   final hiveModule = _$HiveModule();
   gh.singleton<_i3.Authenticate>(_i3.Authenticate());
   gh.singleton<_i4.Box<_i5.TransactionsModel>>(hiveModule.transactionsBox);
+  gh.singleton<_i4.Box<_i6.CategoryModel>>(hiveModule.categoryBox);
+  gh.singleton<_i4.Box<_i7.DebtModel>>(hiveModule.debtsBox);
   gh.singleton<_i4.Box<dynamic>>(
     hiveModule.boxDynamic,
     instanceName: 'settings',
   );
-  gh.singleton<_i4.Box<_i6.DebtModel>>(hiveModule.debtsBox);
-  gh.singleton<_i4.Box<_i7.CategoryModel>>(hiveModule.categoryBox);
-  gh.singleton<_i4.Box<_i8.AccountModel>>(hiveModule.accountBox);
-  gh.factory<_i4.Box<_i9.ExpenseModel>>(() => hiveModule.expenseBox);
+  gh.factory<_i4.Box<_i8.ExpenseModel>>(() => hiveModule.expenseBox);
+  gh.singleton<_i4.Box<_i9.AccountModel>>(hiveModule.accountBox);
   gh.singleton<_i10.CurrenciesRepository>(
       _i11.CurrencySelectorRepositoryImpl());
   gh.singleton<_i12.DebtLocalDataSource>(_i13.DebtLocalDataSourceImpl(
-    debtBox: gh<_i4.Box<_i6.DebtModel>>(),
+    debtBox: gh<_i4.Box<_i7.DebtModel>>(),
     transactionsBox: gh<_i4.Box<_i5.TransactionsModel>>(),
   ));
   gh.singleton<_i14.DebtRepository>(
@@ -180,12 +180,12 @@ _i1.GetIt init(
       _i23.GetTransactionsUseCase(debtRepository: gh<_i14.DebtRepository>()));
   gh.factory<_i24.HomeBloc>(() => _i24.HomeBloc());
   gh.singleton<_i25.LocalAccountDataManager>(_i26.LocalAccountDataManagerImpl(
-      accountBox: gh<_i4.Box<_i8.AccountModel>>()));
+      accountBox: gh<_i4.Box<_i9.AccountModel>>()));
   gh.singleton<_i27.LocalCategoryManagerDataSource>(
       _i28.LocalCategoryManagerDataSourceImpl(
-          gh<_i4.Box<_i7.CategoryModel>>()));
+          gh<_i4.Box<_i6.CategoryModel>>()));
   gh.factory<_i29.LocalExpenseDataManager>(
-      () => _i30.LocalExpenseDataManagerImpl(gh<_i31.Box<_i9.ExpenseModel>>()));
+      () => _i30.LocalExpenseDataManagerImpl(gh<_i31.Box<_i8.ExpenseModel>>()));
   gh.singleton<_i32.Settings>(
       _i32.Settings(gh<_i4.Box<dynamic>>(instanceName: 'settings')));
   gh.singleton<_i33.SettingsController>(
@@ -203,8 +203,8 @@ _i1.GetIt init(
   gh.singleton<_i40.CategoryRepository>(_i41.CategoryRepositoryImpl(
       dataSources: gh<_i27.LocalCategoryManagerDataSource>()));
   gh.factory<_i42.CurrencySelectorBloc>(() => _i42.CurrencySelectorBloc(
-        accounts: gh<_i4.Box<_i8.AccountModel>>(),
-        categories: gh<_i4.Box<_i7.CategoryModel>>(),
+        accounts: gh<_i4.Box<_i9.AccountModel>>(),
+        categories: gh<_i4.Box<_i6.CategoryModel>>(),
         currenciesUseCase: gh<_i20.GetCurrenciesUseCase>(),
       ));
   gh.factory<_i43.DebtsBloc>(() => _i43.DebtsBloc(

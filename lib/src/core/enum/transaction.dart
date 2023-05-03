@@ -9,7 +9,9 @@ enum TransactionType {
   @HiveField(0)
   income('income'),
   @HiveField(2)
-  transfer('transfer');
+  transfer('transfer'),
+  @HiveField(3)
+  recurring('recurring');
 
   final String type;
   const TransactionType(this.type);

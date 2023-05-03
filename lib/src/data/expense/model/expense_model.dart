@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../core/common.dart';
+import '../../../core/enum/recurring_type.dart';
 import '../../../core/enum/transaction.dart';
 
 part 'expense_model.g.dart';
@@ -41,6 +42,12 @@ class ExpenseModel extends HiveObject with EquatableMixin {
   @HiveField(11, defaultValue: 0.0)
   double transferAmount;
 
+  @HiveField(14)
+  RecurringType? recurringType;
+
+  @HiveField(13)
+  DateTime? recurringDate;
+
   ExpenseModel({
     required this.name,
     required this.currency,
@@ -53,6 +60,8 @@ class ExpenseModel extends HiveObject with EquatableMixin {
     this.fromAccountId,
     this.toAccountId,
     this.transferAmount = 0.0,
+    this.recurringType,
+    this.recurringDate,
   });
 
   Map<String, dynamic> toJson() => {
@@ -67,20 +76,24 @@ class ExpenseModel extends HiveObject with EquatableMixin {
         'fromAccountId': fromAccountId,
         'toAccountId': toAccountId,
         'transferAmount': transferAmount,
+        "recurringType": recurringType?.index,
+        "recurringDate": recurringDate,
       };
 
   factory ExpenseModel.fromJson(Map<String, dynamic> json) => ExpenseModel(
-      name: json['name'],
-      currency: json['currency'],
-      time: DateTime.parse(json['time']),
-      categoryId: json['categoryId'],
-      accountId: json['accountId'],
-      type: (json['type'] as String).transactionType,
-      description: (json['description'] as String),
-      fromAccountId: json['fromAccountId'],
-      toAccountId: json['toAccountId'],
-      transferAmount: json['transferAmount'])
-    ..superId = json['superId'];
+        name: json['name'],
+        currency: json['currency'],
+        time: DateTime.parse(json['time']),
+        categoryId: json['categoryId'],
+        accountId: json['accountId'],
+        type: (json['type'] as String).transactionType,
+        description: (json['description'] as String),
+        fromAccountId: json['fromAccountId'],
+        toAccountId: json['toAccountId'],
+        transferAmount: json['transferAmount'],
+        recurringDate: DateTime.parse(json['recurringDate']),
+        recurringType: RecurringType.values[json['recurringType']],
+      )..superId = json['superId'];
 
   @override
   List<Object?> get props => [name, type];

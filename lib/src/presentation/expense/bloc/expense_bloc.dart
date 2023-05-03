@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/core/enum/recurring_type.dart';
 import 'package:paisa/src/presentation/settings/bloc/settings_controller.dart';
 
 import '../../../core/enum/transaction.dart';
@@ -40,6 +41,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<ChangeAccountEvent>(_changeAccount);
     on<UpdateDateTimeEvent>(_updateDateTime);
     on<TransferAccountsEvent>(_transferAccount);
+    on<ChangeRecurringEvent>(_changeRecurring);
   }
 
   final GetExpenseUseCase expenseUseCase;
@@ -60,6 +62,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay timeOfDay = TimeOfDay.now();
   TransactionType transactionType = TransactionType.expense;
+  RecurringType recurringType = RecurringType.daily;
   Account? fromAccount, toAccount;
 
   Future<void> _fetchExpenseFromId(
@@ -80,7 +83,6 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       } else {
         selectedAccountId = settingsController.defaultAccountId;
       }
-
       selectedDate = expense.time;
       timeOfDay = TimeOfDay.fromDateTime(expense.time);
       transactionType = expense.type ?? TransactionType.expense;
@@ -98,7 +100,38 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     AddOrUpdateExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) async {
-    if (transactionType == TransactionType.transfer) {
+    if (transactionType == TransactionType.recurring) {
+      final double? validAmount = expenseAmount;
+      final String? name = expenseName;
+      final int? categoryId = selectedCategoryId;
+      final int? accountId = selectedAccountId;
+      final DateTime dateTime = selectedDate;
+      final String? description = currentDescription;
+
+      if (name == null) {
+        return emit(const ExpenseErrorState('Enter expense name'));
+      }
+      if (validAmount == null || validAmount == 0.0) {
+        return emit(const ExpenseErrorState('Enter valid amount'));
+      }
+
+      if (accountId == null) {
+        return emit(const ExpenseErrorState('Select account'));
+      }
+      if (categoryId == null) {
+        return emit(const ExpenseErrorState('Select category'));
+      }
+
+      await addExpenseUseCase(
+        name: name,
+        amount: validAmount,
+        time: dateTime,
+        categoryId: categoryId,
+        accountId: accountId,
+        transactionType: transactionType,
+        description: description,
+      );
+    } else if (transactionType == TransactionType.transfer) {
       if ((fromAccount == null || toAccount == null) ||
           (fromAccount == toAccount)) {
         return emit(
@@ -233,5 +266,13 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     emit(
       TransferAccountsState(event.accounts, event.fromAccount, event.toAccount),
     );
+  }
+
+  FutureOr<void> _changeRecurring(
+    ChangeRecurringEvent event,
+    Emitter<ExpenseState> emit,
+  ) {
+    recurringType = event.recurringType;
+    emit(ChangeRecurringTypeState(recurringType));
   }
 }

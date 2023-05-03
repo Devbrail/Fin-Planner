@@ -26,27 +26,36 @@ class TransactionToggleButtons extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            children: [
-              PaisaMaterialYouChip(
-                title: TransactionType.expense.stringName(context),
-                isSelected:
-                    expenseBloc.transactionType == TransactionType.expense,
-                onPressed: () => _update(TransactionType.expense),
-              ),
-              PaisaMaterialYouChip(
-                title: TransactionType.income.stringName(context),
-                isSelected:
-                    expenseBloc.transactionType == TransactionType.income,
-                onPressed: () => _update(TransactionType.income),
-              ),
-              PaisaMaterialYouChip(
-                title: TransactionType.transfer.stringName(context),
-                isSelected:
-                    expenseBloc.transactionType == TransactionType.transfer,
-                onPressed: () => _update(TransactionType.transfer),
-              ),
-            ],
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                PaisaMaterialYouChip(
+                  title: TransactionType.expense.stringName(context),
+                  isSelected:
+                      expenseBloc.transactionType == TransactionType.expense,
+                  onPressed: () => _update(TransactionType.expense),
+                ),
+                PaisaMaterialYouChip(
+                  title: TransactionType.income.stringName(context),
+                  isSelected:
+                      expenseBloc.transactionType == TransactionType.income,
+                  onPressed: () => _update(TransactionType.income),
+                ),
+                PaisaMaterialYouChip(
+                  title: TransactionType.transfer.stringName(context),
+                  isSelected:
+                      expenseBloc.transactionType == TransactionType.transfer,
+                  onPressed: () => _update(TransactionType.transfer),
+                ),
+                PaisaMaterialYouChip(
+                  title: TransactionType.recurring.stringName(context),
+                  isSelected:
+                      expenseBloc.transactionType == TransactionType.recurring,
+                  onPressed: () => _update(TransactionType.recurring),
+                ),
+              ],
+            ),
           ),
         );
       },
