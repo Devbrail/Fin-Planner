@@ -28,12 +28,9 @@ class HomeTabletPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const PaisaTitle(),
-        actions: [
-          const PaisaFilterTransactionWidget(),
-          const PaisaSearchButtonWidget(),
-          PaisaUserWidget(
-            homeBloc: homeBloc,
-          ),
+        actions: const [
+          PaisaFilterTransactionWidget(),
+          PaisaSearchButtonWidget(),
         ],
       ),
       drawer: Drawer(

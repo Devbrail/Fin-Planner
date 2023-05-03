@@ -8,11 +8,15 @@ class EmptyWidget extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.description,
+    this.onActionPressed,
+    this.actionTitle,
   }) : super(key: key);
 
   final String title;
   final IconData icon;
   final String description;
+  final VoidCallback? onActionPressed;
+  final String? actionTitle;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -50,6 +54,10 @@ class EmptyWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
+            TextButton(
+              onPressed: onActionPressed,
+              child: Text(actionTitle ?? ''),
+            )
           ],
         ),
       ),

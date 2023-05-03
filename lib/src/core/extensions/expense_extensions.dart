@@ -12,7 +12,7 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
   List<Expense> search(
     query, {
     int? selectedAccountId = -1,
-    int? selecteCategoryId = -1,
+    int? selectedCategoryId = -1,
   }) =>
       values.where((element) {
         if (selectedAccountId != -1) {
@@ -21,8 +21,8 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
           return true;
         }
       }).where((element) {
-        if (selecteCategoryId != -1) {
-          return element.categoryId == selecteCategoryId;
+        if (selectedCategoryId != -1) {
+          return element.categoryId == selectedCategoryId;
         } else {
           return true;
         }
@@ -40,7 +40,7 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
 
   List<ExpenseModel> get budgetOverView => values
       .where((element) => element.categoryId != -1 || element.accountId != -1)
-      .where((element) => element.type == TransactionType.expense)
+      //.where((element) => element.type == TransactionType.expense)
       .toList();
 
   List<ExpenseModel> isFilterTimeBetween(DateTimeRange range) =>
@@ -82,18 +82,30 @@ extension ExpenseModelsHelper on Iterable<ExpenseModel> {
     return map((e) => e.toJson()).toList();
   }
 
-  List<Expense> toEntities({bool sublist = false}) {
-    final sortedList = map((expenseModel) => expenseModel.toEntity())
+  List<Expense> toEntities() {
+    return map((expenseModel) => expenseModel.toEntity())
         .sorted((a, b) => b.time.compareTo(a.time));
-    if (sublist && sortedList.length >= 100) {
-      return sortedList.sublist(100);
-    } else {
-      return sortedList;
-    }
   }
 }
 
 extension ExpensesHelper on Iterable<Expense> {
+  List<Expense> filterByThis(FilterThisExpense thisExpense) {
+    return where((element) {
+      final now = DateTime.now();
+      switch (thisExpense) {
+        case FilterThisExpense.today:
+          return element.time.isToday;
+        case FilterThisExpense.thisWeek:
+          return element.time.isAfter(now.subtract(const Duration(days: 7)));
+        case FilterThisExpense.thisMonth:
+          return (element.time.month == now.month) &&
+              (element.time.year == now.year);
+        case FilterThisExpense.thisYear:
+          return element.time.year == now.year;
+      }
+    }).toList();
+  }
+
   List<Expense> get expenses =>
       toList()..sort(((a, b) => b.time.compareTo(a.time)));
 
@@ -166,6 +178,8 @@ extension ExpensesHelper on Iterable<Expense> {
 
   List<Expense> toEntities() =>
       map((expenseModel) => expenseModel.toEntity()).toList();
+
+  List<double> toDouble() => map((expense) => expense.currency).toList();
 }
 
 extension ExpenseHelper on Expense {}

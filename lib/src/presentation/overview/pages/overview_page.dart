@@ -12,6 +12,7 @@ import '../../widgets/paisa_chip.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../cubit/budget_cubit.dart';
 import '../widgets/category_list_widget.dart';
+import '../widgets/chart_widget.dart';
 import '../widgets/filter_date_range_widget.dart';
 
 class OverViewPage extends StatelessWidget {

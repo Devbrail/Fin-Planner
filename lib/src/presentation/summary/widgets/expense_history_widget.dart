@@ -1,11 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/filter_budget.dart';
 import '../../../domain/expense/entities/expense.dart';
+import '../controller/summary_controller.dart';
 import 'expense_month_card.dart';
 
 class ExpenseHistory extends StatelessWidget {
@@ -37,11 +37,14 @@ class ExpenseHistory extends StatelessWidget {
         ),
       );
     } else {
-      return ValueListenableBuilder<FilterExpense>(
-        valueListenable: summaryController.filterExpenseNotifier,
+      return ValueListenableBuilder<FilterThisExpense>(
+        valueListenable: summaryController.filterThisExpenseNotifier,
         builder: (_, value, __) {
+          final filteredExpenses = expenses.filterByThis(value);
           final maps = groupBy(
-              expenses, (Expense element) => element.time.formatted(value));
+            filteredExpenses,
+            (Expense element) => element.time.formatThis(value),
+          );
           return ListView.builder(
             shrinkWrap: true,
             padding: EdgeInsets.zero,

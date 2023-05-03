@@ -43,9 +43,7 @@ class ExpenseMonthCardWidget extends StatelessWidget {
             ),
           ),
         ),
-        ExpenseListWidget(
-          expenses: expenses,
-        ),
+        ExpenseListWidget(expenses: expenses),
       ],
     );
   }

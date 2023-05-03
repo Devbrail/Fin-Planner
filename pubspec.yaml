@@ -18,6 +18,7 @@ dependencies:
   dynamic_color: ^1.5.4
   equatable: ^2.0.5
   file_picker: ^5.2.5
+  fl_chart: ^0.62.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1

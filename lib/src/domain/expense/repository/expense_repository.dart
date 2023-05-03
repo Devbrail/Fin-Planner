@@ -32,4 +32,7 @@ abstract class ExpenseRepository {
     String? description,
   );
   Future<void> clearAll();
+
+  List<ExpenseModel> filterExpenses(
+      String query, int? accountId, int? categoryId);
 }

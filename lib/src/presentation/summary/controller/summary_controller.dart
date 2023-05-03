@@ -20,8 +20,15 @@ class SummaryController {
       ValueNotifier<DateTimeRange?>(null);
   final FilterExpense filterExpense =
       getIt.get<SettingsController>().fetchFilterExpense;
+
+  final FilterThisExpense filterThisExpense =
+      getIt.get<SettingsController>().fetchFilterThisExpense;
+
   late final ValueNotifier<FilterExpense> filterExpenseNotifier =
       ValueNotifier<FilterExpense>(filterExpense);
+
+  late final ValueNotifier<FilterThisExpense> filterThisExpenseNotifier =
+      ValueNotifier<FilterThisExpense>(filterThisExpense);
 
   SummaryController({
     required this.getAccountUseCase,

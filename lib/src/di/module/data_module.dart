@@ -24,6 +24,7 @@ Future<void> initHive() async {
     ..registerAdapter(DebtTypeAdapter())
     ..registerAdapter(TransactionsModelAdapter())
     ..registerAdapter(CardTypeAdapter())
+    ..registerAdapter(FilterThisExpenseAdapter())
     ..registerAdapter(FilterExpenseAdapter());
   await hiveOpenBoxes();
 }

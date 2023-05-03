@@ -327,8 +327,7 @@ class TabletAccountCard extends StatelessWidget {
                           Text(
                             income,
                             style: GoogleFonts.manrope(
-                              textStyle:
-                                  Theme.of(context).textTheme.titleMedium,
+                              textStyle: Theme.of(context).textTheme.titleSmall,
                             ),
                           ),
                         ],
@@ -353,8 +352,7 @@ class TabletAccountCard extends StatelessWidget {
                           Text(
                             expense,
                             style: GoogleFonts.manrope(
-                              textStyle:
-                                  Theme.of(context).textTheme.titleMedium,
+                              textStyle: Theme.of(context).textTheme.titleSmall,
                             ),
                           ),
                         ],

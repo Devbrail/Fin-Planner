@@ -29,7 +29,7 @@ class SummaryMobilePage extends StatelessWidget {
           } else if (index == 2) {
             return const SizedBox(height: 16);
           } else if (index == 3) {
-            return const FilterBudgetToggleWidget();
+            return const FilterThisToggleWidget();
           } else if (index == 4) {
             return ExpenseHistory(expenses: expenses);
           }

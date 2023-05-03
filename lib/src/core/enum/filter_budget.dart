@@ -33,3 +33,28 @@ enum FilterExpense {
     }
   }
 }
+
+@HiveType(typeId: 23)
+enum FilterThisExpense {
+  @HiveField(0)
+  today,
+  @HiveField(1)
+  thisWeek,
+  @HiveField(2)
+  thisMonth,
+  @HiveField(3)
+  thisYear;
+
+  String name(BuildContext context) {
+    switch (this) {
+      case FilterThisExpense.today:
+        return context.loc.today;
+      case FilterThisExpense.thisWeek:
+        return context.loc.thisWeek;
+      case FilterThisExpense.thisMonth:
+        return context.loc.thisMonth;
+      case FilterThisExpense.thisYear:
+        return context.loc.thisYear;
+    }
+  }
+}

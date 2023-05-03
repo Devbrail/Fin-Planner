@@ -158,3 +158,60 @@ class FilterBudgetToggleWidget extends StatelessWidget {
     );
   }
 }
+
+class FilterThisToggleWidget extends StatelessWidget {
+  const FilterThisToggleWidget({
+    Key? key,
+    this.showAsList = false,
+  }) : super(key: key);
+
+  final bool showAsList;
+
+  @override
+  Widget build(BuildContext context) {
+    final SummaryController summaryController = getIt.get();
+    return ValueListenableBuilder<FilterThisExpense>(
+      valueListenable: summaryController.filterThisExpenseNotifier,
+      builder: (_, value, child) {
+        getIt.get<SettingsController>().setFilterThisExpense(value);
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: SizedBox(
+            height: 50,
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              children: [
+                PaisaMaterialYouChip(
+                  title: FilterThisExpense.today.name(context),
+                  isSelected: FilterThisExpense.today == value,
+                  onPressed: () => summaryController.filterThisExpenseNotifier
+                      .value = FilterThisExpense.today,
+                ),
+                PaisaMaterialYouChip(
+                  title: FilterThisExpense.thisWeek.name(context),
+                  isSelected: FilterThisExpense.thisWeek == value,
+                  onPressed: () => summaryController.filterThisExpenseNotifier
+                      .value = FilterThisExpense.thisWeek,
+                ),
+                PaisaMaterialYouChip(
+                  title: FilterThisExpense.thisMonth.name(context),
+                  isSelected: FilterThisExpense.thisMonth == value,
+                  onPressed: () => summaryController.filterThisExpenseNotifier
+                      .value = FilterThisExpense.thisMonth,
+                ),
+                PaisaMaterialYouChip(
+                  title: FilterThisExpense.thisYear.name(context),
+                  isSelected: FilterThisExpense.thisYear == value,
+                  onPressed: () => summaryController.filterThisExpenseNotifier
+                      .value = FilterThisExpense.thisYear,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

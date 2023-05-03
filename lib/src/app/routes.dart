@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/src/presentation/overview/pages/expense_list_page.dart';
+import 'package:paisa/src/presentation/search/pages/search_page.dart';
 
 import '../../main.dart';
 import '../core/common.dart';
@@ -31,6 +32,8 @@ const splashName = 'splash';
 
 const userNamePath = '/user-name';
 const userImagePath = '/user-image';
+const searchPath = 'search';
+const search = 'search';
 const landingPath = '/landing';
 const landingName = 'landing';
 
@@ -187,6 +190,11 @@ final GoRouter goRouter = GoRouter(
           name: debtPage,
           path: 'debt',
           builder: (context, state) => const DebtsPage(),
+        ),
+        GoRoute(
+          name: search,
+          path: searchPath,
+          builder: (context, state) => const SearchPage(),
         ),
       ],
     ),

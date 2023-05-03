@@ -61,8 +61,7 @@ class ExportAndImportPage extends StatelessWidget {
               context.loc.backupAndRestoreLabel,
             ),
           ),
-          SliverFillRemaining(
-            hasScrollBody: true,
+          SliverToBoxAdapter(
             child: ListView(
               padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),

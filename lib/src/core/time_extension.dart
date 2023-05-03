@@ -71,6 +71,34 @@ extension DateUtils on DateTime {
     }
   }
 
+  String formatThis(FilterThisExpense filterThisExpense) {
+    switch (filterThisExpense) {
+      case FilterThisExpense.today:
+        return year == DateTime.now().year
+            ? DateFormat('EEEE dd MMM').format(this)
+            : DateFormat('EEEE dd MMM, yyyy').format(this);
+      case FilterThisExpense.thisWeek:
+        return "Week $weekOfYear of ${DateFormat('yyyy').format(this)}";
+      case FilterThisExpense.thisMonth:
+        return DateFormat('MMMM yyyy').format(this);
+      case FilterThisExpense.thisYear:
+        return DateFormat('yyyy').format(this);
+    }
+  }
+
+  String formattedThis(FilterThisExpense filterBudget) {
+    switch (filterBudget) {
+      case FilterThisExpense.today:
+        return DateTime.now().dayString;
+      case FilterThisExpense.thisWeek:
+        return "Week $weekOfYear of ${DateFormat('yyyy').format(this)}";
+      case FilterThisExpense.thisMonth:
+        return DateFormat('MMMM yyyy').format(this);
+      case FilterThisExpense.thisYear:
+        return DateFormat('yyyy').format(this);
+    }
+  }
+
   bool isAfterBeforeTime(DateTimeRange range) {
     return (isAfter(range.start) || isAtSameMomentAs(range.start)) &&
         (isAtSameMomentAs(range.end) || isBefore(range.end));

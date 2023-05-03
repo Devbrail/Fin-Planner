@@ -93,4 +93,10 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
 
   @override
   Future<void> clearAll() => dataSource.clearAll();
+
+  @override
+  List<ExpenseModel> filterExpenses(
+      String query, int? accountId, int? categoryId) {
+    return dataSource.filterExpenses(query, accountId, categoryId);
+  }
 }

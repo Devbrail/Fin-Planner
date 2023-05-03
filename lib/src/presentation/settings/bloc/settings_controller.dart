@@ -10,9 +10,14 @@ class SettingsController {
   SettingsController(this.settings);
 
   FilterExpense get fetchFilterExpense => settings.fetchFilterExpense;
+  FilterThisExpense get fetchFilterThisExpense =>
+      settings.fetchFilterThisExpense;
 
   Future<void> setFilterExpense(FilterExpense expense) async =>
       settings.setFilterExpense(expense);
+
+  Future<void> setFilterThisExpense(FilterThisExpense expense) async =>
+      settings.setFilterThisExpense(expense);
 
   int? get defaultAccountId => settings.defaultAccountId;
 
