@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/core/common.dart';
 
 import '../model/expense_model.dart';
 import 'local_expense_data_manager.dart';
@@ -74,13 +75,13 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
 
   @override
   List<ExpenseModel> fetchExpensesFromAccountId(int accountId) =>
-      expenseBox.values
+      expenseBox.noRecurring
           .where((element) => element.accountId == accountId)
           .toList();
 
   @override
   List<ExpenseModel> fetchExpensesFromCategoryId(int category) =>
-      expenseBox.values
+      expenseBox.noRecurring
           .where((element) => element.categoryId == category)
           .toList();
 

@@ -86,6 +86,12 @@ class SettingsPage extends StatelessWidget {
                         GoRouter.of(context).goNamed(exportAndImport);
                       },
                     ),
+                    SettingsOption(
+                      title: 'Recurring transaction',
+                      onTap: () {
+                        GoRouter.of(context).goNamed(recurringTransactionsPath);
+                      },
+                    ),
                   ],
                 ),
                 SettingsGroup(

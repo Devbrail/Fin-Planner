@@ -32,6 +32,12 @@ class ChangeExpenseEvent extends ExpenseEvent {
   const ChangeExpenseEvent(this.transactionType);
 }
 
+class ChangeRecurringEvent extends ExpenseEvent {
+  final RecurringType recurringType;
+
+  const ChangeRecurringEvent(this.recurringType);
+}
+
 class ChangeCategoryEvent extends ExpenseEvent {
   final Category category;
 

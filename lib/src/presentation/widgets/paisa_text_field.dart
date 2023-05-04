@@ -14,6 +14,7 @@ class PaisaTextFormField extends StatelessWidget {
     this.maxLines,
     this.label,
     this.inputFormatters,
+    this.counterText,
   });
 
   final TextEditingController controller;
@@ -26,6 +27,7 @@ class PaisaTextFormField extends StatelessWidget {
   final int? maxLines;
   final String? label;
   final List<TextInputFormatter>? inputFormatters;
+  final String? counterText;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class PaisaTextFormField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       decoration: InputDecoration(
+        counterText: "",
         hintText: hintText,
         label: label != null ? Text(label!) : null,
       ),

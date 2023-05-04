@@ -29,6 +29,15 @@ class ChangeTransactionTypeState extends ExpenseState {
   List<Object> get props => [transactionType];
 }
 
+class ChangeRecurringTypeState extends ExpenseState {
+  final RecurringType recurringType;
+
+  const ChangeRecurringTypeState(this.recurringType);
+
+  @override
+  List<Object> get props => [recurringType];
+}
+
 class ExpenseErrorState extends ExpenseState {
   final String errorString;
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/core/enum/recurring_type.dart';
 
 import '../../core/enum/box_types.dart';
 import '../../core/enum/card_type.dart';
@@ -24,6 +25,7 @@ Future<void> initHive() async {
     ..registerAdapter(DebtTypeAdapter())
     ..registerAdapter(TransactionsModelAdapter())
     ..registerAdapter(CardTypeAdapter())
+    ..registerAdapter(RecurringTypeAdapter())
     ..registerAdapter(FilterExpenseAdapter());
   await hiveOpenBoxes();
 }

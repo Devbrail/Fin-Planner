@@ -1,44 +1,44 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'transaction.dart';
+part of 'recurring_type.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TransactionTypeAdapter extends TypeAdapter<TransactionType> {
+class RecurringTypeAdapter extends TypeAdapter<RecurringType> {
   @override
-  final int typeId = 11;
+  final int typeId = 6;
 
   @override
-  TransactionType read(BinaryReader reader) {
+  RecurringType read(BinaryReader reader) {
     switch (reader.readByte()) {
-      case 1:
-        return TransactionType.expense;
       case 0:
-        return TransactionType.income;
+        return RecurringType.daily;
+      case 1:
+        return RecurringType.weekly;
       case 2:
-        return TransactionType.transfer;
+        return RecurringType.monthly;
       case 3:
-        return TransactionType.recurring;
+        return RecurringType.yearly;
       default:
-        return TransactionType.expense;
+        return RecurringType.daily;
     }
   }
 
   @override
-  void write(BinaryWriter writer, TransactionType obj) {
+  void write(BinaryWriter writer, RecurringType obj) {
     switch (obj) {
-      case TransactionType.expense:
-        writer.writeByte(1);
-        break;
-      case TransactionType.income:
+      case RecurringType.daily:
         writer.writeByte(0);
         break;
-      case TransactionType.transfer:
+      case RecurringType.weekly:
+        writer.writeByte(1);
+        break;
+      case RecurringType.monthly:
         writer.writeByte(2);
         break;
-      case TransactionType.recurring:
+      case RecurringType.yearly:
         writer.writeByte(3);
         break;
     }
@@ -50,7 +50,7 @@ class TransactionTypeAdapter extends TypeAdapter<TransactionType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TransactionTypeAdapter &&
+      other is RecurringTypeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

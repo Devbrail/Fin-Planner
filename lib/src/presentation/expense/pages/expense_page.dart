@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
@@ -11,8 +10,12 @@ import '../../../core/enum/transaction.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../widgets/paisa_big_button_widget.dart';
 import '../../widgets/paisa_bottom_sheet.dart';
-import '../../widgets/paisa_text_field.dart';
 import '../bloc/expense_bloc.dart';
+import '../widgets/expense_amount_widget.dart';
+import '../widgets/expense_date_picker_widget.dart';
+import '../widgets/expense_description_widget.dart';
+import '../widgets/expense_name_widget.dart';
+import '../widgets/expense_recurring_widget.dart';
 import '../widgets/select_account_widget.dart';
 import '../widgets/select_category_widget.dart';
 import '../widgets/selectable_item_widget.dart';
@@ -151,8 +154,9 @@ class _ExpensePageState extends State<ExpensePage> {
                     builder: (context, state) {
                       if (state is ChangeTransactionTypeState &&
                           (state.transactionType == TransactionType.expense ||
+                              state.transactionType == TransactionType.income ||
                               state.transactionType ==
-                                  TransactionType.income)) {
+                                  TransactionType.recurring)) {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -165,7 +169,13 @@ class _ExpensePageState extends State<ExpensePage> {
                             ExpenseAmountWidget(controller: amountController),
                             const SizedBox(height: 16),
                             const ExpenseDatePickerWidget(),
-                            const SizedBox(height: 16),
+                            Visibility(
+                              visible: state.transactionType ==
+                                  TransactionType.recurring,
+                              child: ExpenseRecurringWidget(
+                                expenseBloc: expenseBloc,
+                              ),
+                            ),
                             const SelectedAccount(),
                             const SelectCategoryIcon(),
                           ],
@@ -401,210 +411,6 @@ class _ExpensePageState extends State<ExpensePage> {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class ExpenseNameWidget extends StatelessWidget {
-  const ExpenseNameWidget({
-    super.key,
-    required this.controller,
-  });
-
-  final TextEditingController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<ExpenseBloc>(context),
-      buildWhen: (oldState, newState) => newState is ChangeTransactionTypeState,
-      builder: (context, state) {
-        if (state is ChangeTransactionTypeState) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: PaisaTextFormField(
-              maxLines: 1,
-              controller: controller,
-              hintText: state.transactionType.hintName(context),
-              keyboardType: TextInputType.name,
-              inputFormatters: [
-                FilteringTextInputFormatter.singleLineFormatter,
-              ],
-              validator: (value) {
-                if (value!.isNotEmpty) {
-                  return null;
-                } else {
-                  return context.loc.validNameLabel;
-                }
-              },
-              onChanged: (value) =>
-                  BlocProvider.of<ExpenseBloc>(context).expenseName = value,
-            ),
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      },
-    );
-  }
-}
-
-class ExpenseDescriptionWidget extends StatelessWidget {
-  const ExpenseDescriptionWidget({
-    super.key,
-    required this.controller,
-  });
-
-  final TextEditingController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: PaisaTextFormField(
-        maxLines: 1,
-        controller: controller,
-        hintText: context.loc.descriptionLabel,
-        keyboardType: TextInputType.name,
-        onChanged: (value) =>
-            BlocProvider.of<ExpenseBloc>(context).currentDescription = value,
-      ),
-    );
-  }
-}
-
-class ExpenseAmountWidget extends StatelessWidget {
-  const ExpenseAmountWidget({
-    super.key,
-    required this.controller,
-  });
-
-  final TextEditingController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: PaisaTextFormField(
-        controller: controller,
-        hintText: context.loc.amountLabel,
-        keyboardType: TextInputType.number,
-        maxLength: 13,
-        maxLines: 1,
-        inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-          TextInputFormatter.withFunction((oldValue, newValue) {
-            try {
-              final text = newValue.text;
-              if (text.isNotEmpty) double.parse(text);
-              return newValue;
-            } catch (e) {}
-            return oldValue;
-          }),
-        ],
-        onChanged: (value) {
-          double? amount = double.tryParse(value);
-          if (BlocProvider.of<ExpenseBloc>(context).transactionType !=
-              TransactionType.transfer) {
-            BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
-          } else {
-            BlocProvider.of<ExpenseBloc>(context).transferAmount = amount;
-          }
-        },
-        validator: (value) {
-          if (value!.isNotEmpty) {
-            return null;
-          } else {
-            return context.loc.validAmountLabel;
-          }
-        },
-      ),
-    );
-  }
-}
-
-class ExpenseDatePickerWidget extends StatefulWidget {
-  const ExpenseDatePickerWidget({
-    super.key,
-  });
-
-  @override
-  State<ExpenseDatePickerWidget> createState() =>
-      _ExpenseDatePickerWidgetState();
-}
-
-class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
-  late final ExpenseBloc expenseBloc = BlocProvider.of<ExpenseBloc>(context);
-  late DateTime selectedDateTime = expenseBloc.selectedDate;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: ListTile(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              horizontalTitleGap: 0,
-              onTap: () async {
-                final DateTime? dateTime = await showDatePicker(
-                  context: context,
-                  initialDate: selectedDateTime,
-                  firstDate: DateTime(1950),
-                  lastDate: DateTime.now(),
-                );
-                if (dateTime != null) {
-                  setState(() {
-                    selectedDateTime = selectedDateTime.copyWith(
-                      day: dateTime.day,
-                      month: dateTime.month,
-                      year: dateTime.year,
-                    );
-                    expenseBloc.selectedDate = selectedDateTime;
-                  });
-                }
-              },
-              leading: Icon(
-                Icons.today_rounded,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              title: Text(selectedDateTime.formattedDate),
-            ),
-          ),
-          Expanded(
-            child: ListTile(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              horizontalTitleGap: 0,
-              onTap: () async {
-                final TimeOfDay? timeOfDay = await showTimePicker(
-                  context: context,
-                  initialTime: TimeOfDay.now(),
-                  initialEntryMode: TimePickerEntryMode.dialOnly,
-                );
-                if (timeOfDay != null) {
-                  setState(() {
-                    selectedDateTime = selectedDateTime.copyWith(
-                      hour: timeOfDay.hour,
-                      minute: timeOfDay.minute,
-                    );
-                    expenseBloc.selectedDate = selectedDateTime;
-                  });
-                }
-              },
-              leading: Icon(
-                MdiIcons.clockOutline,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              title: Text(selectedDateTime.formattedTime),
-            ),
-          ),
-        ],
       ),
     );
   }

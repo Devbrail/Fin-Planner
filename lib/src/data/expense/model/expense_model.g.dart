@@ -30,13 +30,15 @@ class ExpenseModelAdapter extends TypeAdapter<ExpenseModel> {
       fromAccountId: fields[9] as int?,
       toAccountId: fields[10] as int?,
       transferAmount: fields[11] == null ? 0.0 : fields[11] as double,
+      recurringType: fields[14] as RecurringType?,
+      recurringDate: fields[13] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ExpenseModel obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -58,7 +60,11 @@ class ExpenseModelAdapter extends TypeAdapter<ExpenseModel> {
       ..writeByte(10)
       ..write(obj.toAccountId)
       ..writeByte(11)
-      ..write(obj.transferAmount);
+      ..write(obj.transferAmount)
+      ..writeByte(14)
+      ..write(obj.recurringType)
+      ..writeByte(13)
+      ..write(obj.recurringDate);
   }
 
   @override

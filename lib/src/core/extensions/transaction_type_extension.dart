@@ -25,6 +25,8 @@ extension TransactionTypeHelper on TransactionType {
         return context.loc.expenseLabel;
       case TransactionType.transfer:
         return context.loc.transferLabel;
+      case TransactionType.recurring:
+        return 'Recurring';
     }
   }
 
@@ -36,6 +38,8 @@ extension TransactionTypeHelper on TransactionType {
         return context.loc.expenseNameLabel;
       case TransactionType.transfer:
         return context.loc.transferNameLabel;
+      case TransactionType.recurring:
+        return 'Recurring';
     }
   }
 }
@@ -49,6 +53,8 @@ extension TransactionMap on String {
         return TransactionType.income;
       case 'transfer':
         return TransactionType.transfer;
+      case 'recurring':
+        return TransactionType.recurring;
     }
     return TransactionType.expense;
   }
