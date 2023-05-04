@@ -42,9 +42,7 @@ abstract class ExpenseRepository {
     int account,
     TransactionType transactionType,
     String? description,
-    int? fromAccountId,
-    int? toAccountId,
-    double transferAmount,
     RecurringType recurringType,
   );
+  Future<void> checkForRecurring();
 }

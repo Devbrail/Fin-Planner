@@ -27,6 +27,7 @@ class TransactionToggleButtons extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [

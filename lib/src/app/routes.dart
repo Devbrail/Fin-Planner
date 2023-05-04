@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/src/presentation/overview/pages/expense_list_page.dart';
+import 'package:paisa/src/presentation/settings/pages/recurring_transactions_page.dart';
 
 import '../../main.dart';
 import '../core/common.dart';
@@ -43,6 +44,7 @@ const editAccountPath = 'edit-account';
 const accountTransactionPath = 'account-transaction';
 const expensesByCategory = 'expenses';
 const exportAndImport = 'export-import';
+const recurringTransactionsPath = 'recurring';
 const settingsPath = 'settings';
 const settingsName = 'settings';
 const debtAddOrEditPath = 'edit-debt';
@@ -168,6 +170,11 @@ final GoRouter goRouter = GoRouter(
               name: exportAndImport,
               path: exportAndImport,
               builder: (context, state) => const ExportAndImportPage(),
+            ),
+            GoRoute(
+              name: recurringTransactionsPath,
+              path: recurringTransactionsPath,
+              builder: (context, state) => const RecurringTransactionPage(),
             ),
           ],
         ),

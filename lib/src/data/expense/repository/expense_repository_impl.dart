@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/core/common.dart';
 import 'package:paisa/src/core/enum/recurring_type.dart';
 
 import '../../../core/enum/transaction.dart';
@@ -113,11 +114,41 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     int account,
     TransactionType transactionType,
     String? description,
-    int? fromAccountId,
-    int? toAccountId,
-    double transferAmount,
     RecurringType recurringType,
   ) async {
-    return;
+    return dataSource.addOrUpdateExpense(
+      ExpenseModel(
+        name: name,
+        currency: amount,
+        time: time,
+        categoryId: category,
+        accountId: account,
+        type: transactionType,
+        description: description,
+        recurringType: recurringType,
+        recurringDate: time,
+      ),
+    );
+  }
+
+  @override
+  Future<void> checkForRecurring() async {
+    final List<ExpenseModel> recurringExpenses =
+        expenses().toEntities().recurringList;
+    final now = DateTime.now();
+    for (ExpenseModel expenseModel in recurringExpenses) {
+      if (expenseModel.recurringDate == null) return;
+      if (expenseModel.type == TransactionType.recurring &&
+          expenseModel.recurringDate!.isBefore(now)) {
+        final nextTime = expenseModel.recurringType!.getTime;
+        final ExpenseModel currentExpense = expenseModel;
+        final ExpenseModel saveExpense = expenseModel;
+        currentExpense.type = TransactionType.expense;
+        await dataSource.addOrUpdateExpense(currentExpense);
+        await expenseModel.delete();
+        saveExpense.recurringDate = expenseModel.recurringDate?.add(nextTime);
+        await saveExpense.save();
+      }
+    }
   }
 }

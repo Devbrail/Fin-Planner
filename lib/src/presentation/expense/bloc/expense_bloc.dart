@@ -31,6 +31,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     required this.deleteExpenseUseCase,
     required this.updateExpensesUseCase,
     required this.accountsUseCase,
+    required this.addRecurringExpenseUseCase,
   }) : super(ExpenseInitial()) {
     on<ExpenseEvent>((event, emit) {});
     on<AddOrUpdateExpenseEvent>(_addExpense);
@@ -45,6 +46,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   }
 
   final GetExpenseUseCase expenseUseCase;
+  final AddRecurringExpenseUseCase addRecurringExpenseUseCase;
   final AddExpenseUseCase addExpenseUseCase;
   final GetAccountUseCase accountUseCase;
   final GetAccountsUseCase accountsUseCase;
@@ -122,7 +124,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         return emit(const ExpenseErrorState('Select category'));
       }
 
-      await addExpenseUseCase(
+      await addRecurringExpenseUseCase(
         name: name,
         amount: validAmount,
         time: dateTime,
@@ -130,7 +132,9 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         accountId: accountId,
         transactionType: transactionType,
         description: description,
+        recurringType: recurringType,
       );
+      emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
     } else if (transactionType == TransactionType.transfer) {
       if ((fromAccount == null || toAccount == null) ||
           (fromAccount == toAccount)) {

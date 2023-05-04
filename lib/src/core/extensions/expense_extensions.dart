@@ -54,6 +54,8 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
 
   Iterable<ExpenseModel> get noRecurring =>
       values.where((element) => element.type != TransactionType.recurring);
+  Iterable<ExpenseModel> get recurring =>
+      values.where((element) => element.type == TransactionType.recurring);
 
   double get totalExpense => expenseList
       .map((e) => e.currency)
@@ -99,6 +101,9 @@ extension ExpensesHelper on Iterable<Expense> {
 
   List<Expense> get expenseList =>
       where((element) => element.type == TransactionType.expense).toList();
+
+  List<Expense> get recurringList =>
+      where((element) => element.type == TransactionType.recurring).toList();
 
   List<Expense> get incomeList =>
       where((element) => element.type == TransactionType.income).toList();
