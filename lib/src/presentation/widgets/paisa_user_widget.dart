@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:workmanager/workmanager.dart';
 
 import '../../../main.dart';
 import '../../core/enum/box_types.dart';
-import '../../di/module/work.dart';
 import '../home/bloc/home_bloc.dart';
 import '../home/widgets/welcome_widget.dart';
 import '../settings/widgets/user_profile_widget.dart';
@@ -21,13 +19,7 @@ class PaisaUserWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: () {
-        Workmanager().registerPeriodicTask(
-          'task_name_1',
-          periodicTaskName,
-          frequency: const Duration(minutes: 15),
-        );
-      },
+      onDoubleTap: () {},
       onLongPress: () {
         Navigator.push(
           context,

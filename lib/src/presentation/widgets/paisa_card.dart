@@ -43,11 +43,12 @@ class PaisaOutlineCard extends StatelessWidget {
     return Card(
       shape: shape ??
           RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
-              side: BorderSide(
-                width: 1,
-                color: Theme.of(context).colorScheme.outline,
-              )),
+            borderRadius: BorderRadius.circular(24),
+            side: BorderSide(
+              width: 1,
+              color: Theme.of(context).colorScheme.outline,
+            ),
+          ),
       clipBehavior: Clip.antiAlias,
       elevation: 0,
       color: Theme.of(context).colorScheme.surface,
@@ -62,10 +63,12 @@ class PaisaFilledCard extends StatelessWidget {
     super.key,
     required this.child,
     this.shape,
+    this.color,
   });
 
   final Widget child;
   final ShapeBorder? shape;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +79,7 @@ class PaisaFilledCard extends StatelessWidget {
           ),
       clipBehavior: Clip.antiAlias,
       elevation: 0,
-      color: Theme.of(context).colorScheme.surfaceVariant,
+      color: color ?? Theme.of(context).colorScheme.surfaceVariant,
       shadowColor: Theme.of(context).colorScheme.shadow,
       child: child,
     );

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../app/routes.dart';
 import '../../core/common.dart';
-import '../search/pages/search_page.dart';
 
 class PaisaSearchBar extends StatelessWidget {
   const PaisaSearchBar({super.key});
@@ -17,10 +18,7 @@ class PaisaSearchBar extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(34),
         onTap: () {
-          showSearch(
-            context: context,
-            delegate: SearchPage(),
-          );
+          GoRouter.of(context).pushNamed(search);
         },
         child: Padding(
           padding: const EdgeInsets.all(12.0),

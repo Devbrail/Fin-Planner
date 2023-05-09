@@ -424,9 +424,13 @@
     "@emptySearchMessageLabel": {
         "description": "empty search message label"
     },
-    "emptyExpensesMessage": "Add some expenses will show up here",
+    "emptyExpensesMessage": "No expenses yet?",
     "@emptyExpensesMessage": {
-        "description": "empty search message label"
+        "description": "No expenses in home screen"
+    },
+    "emptyExpensesDescription": "If there are no expenses, start by adding an expense to see it displayed here.",
+    "@emptyExpensesDescription": {
+        "description": "No expenses in home description"
     },
     "balanceLabel": "Balance",
     "@balanceLabel": {
@@ -691,5 +695,9 @@
     "emptyBudgetDescriptionLabel": "Set a budget for any category, and that category will show up here.",
     "@emptyBudgetDescriptionLabel": {
         "description": "Set a budget for any category, and that category will show up here label"
+    },
+    "transactionsLabel": "Transactions",
+    "@transactionsLabel": {
+        "description": "Transactions label"
     }
 }

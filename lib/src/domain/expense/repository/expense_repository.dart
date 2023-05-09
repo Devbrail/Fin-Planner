@@ -45,4 +45,6 @@ abstract class ExpenseRepository {
     RecurringType recurringType,
   );
   Future<void> checkForRecurring();
+  List<ExpenseModel> filterExpenses(
+      String query, int? accountId, int? categoryId);
 }

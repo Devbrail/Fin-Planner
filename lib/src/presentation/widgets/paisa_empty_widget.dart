@@ -8,11 +8,16 @@ class EmptyWidget extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.description,
+    this.onActionPressed,
+    this.actionTitle,
   }) : super(key: key);
 
-  final String title;
-  final IconData icon;
+  final String? actionTitle;
   final String description;
+  final IconData icon;
+  final VoidCallback? onActionPressed;
+  final String title;
+
   @override
   Widget build(BuildContext context) {
     return Center(

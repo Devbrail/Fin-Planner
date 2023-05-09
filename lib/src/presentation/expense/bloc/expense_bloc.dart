@@ -221,7 +221,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     Emitter<ExpenseState> emit,
   ) {
     final List<Account> accounts = accountsUseCase();
-    if (accounts.length == 1 &&
+    if (accounts.isEmpty &&
+        accounts.length <= 1 &&
         event.transactionType == TransactionType.transfer) {
       emit(const ExpenseErrorState('Need two or more accounts '));
     } else {

@@ -46,35 +46,35 @@ import 'package:paisa/src/data/settings/settings.dart' as _i32;
 import 'package:paisa/src/domain/account/repository/account_repository.dart'
     as _i35;
 import 'package:paisa/src/domain/account/use_case/account_use_case.dart'
-    as _i57;
+    as _i60;
 import 'package:paisa/src/domain/account/use_case/add_account_use_case.dart'
     as _i37;
 import 'package:paisa/src/domain/account/use_case/delete_account_use_case.dart'
     as _i45;
 import 'package:paisa/src/domain/account/use_case/get_account_use_case.dart'
-    as _i49;
-import 'package:paisa/src/domain/account/use_case/get_accounts_use_case.dart'
     as _i50;
+import 'package:paisa/src/domain/account/use_case/get_accounts_use_case.dart'
+    as _i51;
 import 'package:paisa/src/domain/account/use_case/update_account_use_case.dart'
-    as _i60;
+    as _i62;
 import 'package:paisa/src/domain/category/repository/category_repository.dart'
     as _i40;
 import 'package:paisa/src/domain/category/use_case/add_category_use_case.dart'
-    as _i63;
+    as _i65;
 import 'package:paisa/src/domain/category/use_case/category_use_case.dart'
-    as _i58;
+    as _i61;
 import 'package:paisa/src/domain/category/use_case/delete_category_use_case.dart'
     as _i46;
 import 'package:paisa/src/domain/category/use_case/get_category_use_case.dart'
-    as _i51;
+    as _i52;
 import 'package:paisa/src/domain/category/use_case/update_category_use_case.dart'
-    as _i61;
+    as _i63;
 import 'package:paisa/src/domain/currencies/repository/currencies_repository.dart'
     as _i10;
 import 'package:paisa/src/domain/currencies/use_case/get_country_user_case.dart'
-    as _i21;
-import 'package:paisa/src/domain/currencies/use_case/get_currencies_use_case.dart'
     as _i20;
+import 'package:paisa/src/domain/currencies/use_case/get_currencies_use_case.dart'
+    as _i21;
 import 'package:paisa/src/domain/debt/repository/debit_repository.dart' as _i14;
 import 'package:paisa/src/domain/debt/use_case/add_debt_use.case.dart' as _i38;
 import 'package:paisa/src/domain/debt/use_case/add_transaction_use_case.dart'
@@ -94,44 +94,47 @@ import 'package:paisa/src/domain/debt/use_case/update_debt_use.case.dart'
 import 'package:paisa/src/domain/expense/repository/expense_repository.dart'
     as _i47;
 import 'package:paisa/src/domain/expense/use_case/add_expenses_use_case.dart'
-    as _i64;
+    as _i66;
 import 'package:paisa/src/domain/expense/use_case/add_recurring_expenses_use_case.dart'
-    as _i65;
-import 'package:paisa/src/domain/expense/use_case/delete_expense_use_case.dart'
     as _i67;
-import 'package:paisa/src/domain/expense/use_case/delete_expenses_from_account_id.dart'
-    as _i68;
-import 'package:paisa/src/domain/expense/use_case/delete_expenses_from_category_id.dart'
+import 'package:paisa/src/domain/expense/use_case/delete_expense_use_case.dart'
     as _i69;
-import 'package:paisa/src/domain/expense/use_case/expense_use_case.dart'
-    as _i59;
-import 'package:paisa/src/domain/expense/use_case/get_expense_from_account_id.dart'
-    as _i53;
-import 'package:paisa/src/domain/expense/use_case/get_expense_from_category_id.dart'
-    as _i54;
-import 'package:paisa/src/domain/expense/use_case/get_expense_use_case.dart'
-    as _i52;
-import 'package:paisa/src/domain/expense/use_case/get_expenses_use_case.dart'
-    as _i55;
-import 'package:paisa/src/domain/expense/use_case/update_expense_use_case.dart'
-    as _i62;
-import 'package:paisa/src/presentation/accounts/bloc/accounts_bloc.dart'
+import 'package:paisa/src/domain/expense/use_case/delete_expenses_from_account_id.dart'
+    as _i70;
+import 'package:paisa/src/domain/expense/use_case/delete_expenses_from_category_id.dart'
     as _i71;
+import 'package:paisa/src/domain/expense/use_case/expense_use_case.dart'
+    as _i58;
+import 'package:paisa/src/domain/expense/use_case/filter_expense_use_case.dart'
+    as _i49;
+import 'package:paisa/src/domain/expense/use_case/get_expense_from_account_id.dart'
+    as _i54;
+import 'package:paisa/src/domain/expense/use_case/get_expense_from_category_id.dart'
+    as _i55;
+import 'package:paisa/src/domain/expense/use_case/get_expense_use_case.dart'
+    as _i53;
+import 'package:paisa/src/domain/expense/use_case/get_expenses_use_case.dart'
+    as _i56;
+import 'package:paisa/src/domain/expense/use_case/update_expense_use_case.dart'
+    as _i64;
+import 'package:paisa/src/presentation/accounts/bloc/accounts_bloc.dart'
+    as _i73;
 import 'package:paisa/src/presentation/category/bloc/category_bloc.dart'
-    as _i72;
+    as _i74;
 import 'package:paisa/src/presentation/currency_selector/bloc/currency_selector_bloc.dart'
     as _i42;
 import 'package:paisa/src/presentation/debits/cubit/debts_cubit.dart' as _i43;
-import 'package:paisa/src/presentation/expense/bloc/expense_bloc.dart' as _i70;
+import 'package:paisa/src/presentation/expense/bloc/expense_bloc.dart' as _i72;
 import 'package:paisa/src/presentation/home/bloc/home_bloc.dart' as _i24;
 import 'package:paisa/src/presentation/overview/cubit/budget_cubit.dart'
-    as _i66;
+    as _i68;
+import 'package:paisa/src/presentation/search/cubit/search_cubit.dart' as _i57;
 import 'package:paisa/src/presentation/settings/bloc/settings_controller.dart'
     as _i33;
 import 'package:paisa/src/presentation/summary/controller/summary_controller.dart'
-    as _i56;
+    as _i59;
 
-import 'module/hive_module.dart' as _i73;
+import 'module/hive_module.dart' as _i75;
 
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
@@ -207,7 +210,7 @@ _i1.GetIt init(
   gh.factory<_i42.CurrencySelectorBloc>(() => _i42.CurrencySelectorBloc(
         accounts: gh<_i4.Box<_i6.AccountModel>>(),
         categories: gh<_i4.Box<_i7.CategoryModel>>(),
-        currenciesUseCase: gh<_i20.GetCurrenciesUseCase>(),
+        currenciesUseCase: gh<_i21.GetCurrenciesUseCase>(),
       ));
   gh.factory<_i43.DebtsBloc>(() => _i43.DebtsBloc(
         addDebtUseCase: gh<_i44.AddDebtUseCase>(),
@@ -225,83 +228,87 @@ _i1.GetIt init(
       categoryRepository: gh<_i40.CategoryRepository>()));
   gh.singleton<_i47.ExpenseRepository>(_i48.ExpenseRepositoryImpl(
       dataSource: gh<_i29.LocalExpenseDataManager>()));
-  gh.singleton<_i49.GetAccountUseCase>(
-      _i49.GetAccountUseCase(accountRepository: gh<_i35.AccountRepository>()));
-  gh.singleton<_i50.GetAccountsUseCase>(
-      _i50.GetAccountsUseCase(accountRepository: gh<_i35.AccountRepository>()));
-  gh.singleton<_i51.GetCategoryUseCase>(_i51.GetCategoryUseCase(
+  gh.singleton<_i49.FilterExpenseUseCase>(
+      _i49.FilterExpenseUseCase(gh<_i47.ExpenseRepository>()));
+  gh.singleton<_i50.GetAccountUseCase>(
+      _i50.GetAccountUseCase(accountRepository: gh<_i35.AccountRepository>()));
+  gh.singleton<_i51.GetAccountsUseCase>(
+      _i51.GetAccountsUseCase(accountRepository: gh<_i35.AccountRepository>()));
+  gh.singleton<_i52.GetCategoryUseCase>(_i52.GetCategoryUseCase(
       categoryRepository: gh<_i40.CategoryRepository>()));
-  gh.singleton<_i52.GetExpenseUseCase>(
-      _i52.GetExpenseUseCase(expenseRepository: gh<_i47.ExpenseRepository>()));
-  gh.singleton<_i53.GetExpensesFromAccountIdUseCase>(
-      _i53.GetExpensesFromAccountIdUseCase(
+  gh.singleton<_i53.GetExpenseUseCase>(
+      _i53.GetExpenseUseCase(expenseRepository: gh<_i47.ExpenseRepository>()));
+  gh.singleton<_i54.GetExpensesFromAccountIdUseCase>(
+      _i54.GetExpensesFromAccountIdUseCase(
           expenseRepository: gh<_i47.ExpenseRepository>()));
-  gh.singleton<_i54.GetExpensesFromCategoryIdUseCase>(
-      _i54.GetExpensesFromCategoryIdUseCase(
+  gh.singleton<_i55.GetExpensesFromCategoryIdUseCase>(
+      _i55.GetExpensesFromCategoryIdUseCase(
           expenseRepository: gh<_i47.ExpenseRepository>()));
-  gh.singleton<_i55.GetExpensesUseCase>(
-      _i55.GetExpensesUseCase(expenseRepository: gh<_i47.ExpenseRepository>()));
-  gh.singleton<_i56.SummaryController>(_i56.SummaryController(
-    getAccountUseCase: gh<_i57.GetAccountUseCase>(),
-    getCategoryUseCase: gh<_i58.GetCategoryUseCase>(),
+  gh.singleton<_i56.GetExpensesUseCase>(
+      _i56.GetExpensesUseCase(expenseRepository: gh<_i47.ExpenseRepository>()));
+  gh.factory<_i57.SearchCubit>(
+      () => _i57.SearchCubit(gh<_i58.FilterExpenseUseCase>()));
+  gh.singleton<_i59.SummaryController>(_i59.SummaryController(
+    getAccountUseCase: gh<_i60.GetAccountUseCase>(),
+    getCategoryUseCase: gh<_i61.GetCategoryUseCase>(),
     getExpensesFromCategoryIdUseCase:
-        gh<_i59.GetExpensesFromCategoryIdUseCase>(),
+        gh<_i58.GetExpensesFromCategoryIdUseCase>(),
   ));
-  gh.singleton<_i60.UpdateAccountUseCase>(_i60.UpdateAccountUseCase(
+  gh.singleton<_i62.UpdateAccountUseCase>(_i62.UpdateAccountUseCase(
       accountRepository: gh<_i35.AccountRepository>()));
-  gh.singleton<_i61.UpdateCategoryUseCase>(_i61.UpdateCategoryUseCase(
+  gh.singleton<_i63.UpdateCategoryUseCase>(_i63.UpdateCategoryUseCase(
       categoryRepository: gh<_i40.CategoryRepository>()));
-  gh.singleton<_i62.UpdateExpensesUseCase>(_i62.UpdateExpensesUseCase(
+  gh.singleton<_i64.UpdateExpensesUseCase>(_i64.UpdateExpensesUseCase(
       expenseRepository: gh<_i47.ExpenseRepository>()));
-  gh.singleton<_i63.AddCategoryUseCase>(_i63.AddCategoryUseCase(
+  gh.singleton<_i65.AddCategoryUseCase>(_i65.AddCategoryUseCase(
       categoryRepository: gh<_i40.CategoryRepository>()));
-  gh.singleton<_i64.AddExpenseUseCase>(
-      _i64.AddExpenseUseCase(expenseRepository: gh<_i47.ExpenseRepository>()));
-  gh.singleton<_i65.AddRecurringExpenseUseCase>(_i65.AddRecurringExpenseUseCase(
+  gh.singleton<_i66.AddExpenseUseCase>(
+      _i66.AddExpenseUseCase(expenseRepository: gh<_i47.ExpenseRepository>()));
+  gh.singleton<_i67.AddRecurringExpenseUseCase>(_i67.AddRecurringExpenseUseCase(
       expenseRepository: gh<_i47.ExpenseRepository>()));
-  gh.factory<_i66.BudgetCubit>(() => _i66.BudgetCubit(
-        gh<_i59.GetExpensesUseCase>(),
-        gh<_i56.SummaryController>(),
+  gh.factory<_i68.BudgetCubit>(() => _i68.BudgetCubit(
+        gh<_i58.GetExpensesUseCase>(),
+        gh<_i59.SummaryController>(),
       ));
-  gh.singleton<_i67.DeleteExpenseUseCase>(_i67.DeleteExpenseUseCase(
+  gh.singleton<_i69.DeleteExpenseUseCase>(_i69.DeleteExpenseUseCase(
       expenseRepository: gh<_i47.ExpenseRepository>()));
-  gh.singleton<_i68.DeleteExpensesFromAccountIdUseCase>(
-      _i68.DeleteExpensesFromAccountIdUseCase(
+  gh.singleton<_i70.DeleteExpensesFromAccountIdUseCase>(
+      _i70.DeleteExpensesFromAccountIdUseCase(
           expenseRepository: gh<_i47.ExpenseRepository>()));
-  gh.singleton<_i69.DeleteExpensesFromCategoryIdUseCase>(
-      _i69.DeleteExpensesFromCategoryIdUseCase(
+  gh.singleton<_i71.DeleteExpensesFromCategoryIdUseCase>(
+      _i71.DeleteExpensesFromCategoryIdUseCase(
           expenseRepository: gh<_i47.ExpenseRepository>()));
-  gh.factory<_i70.ExpenseBloc>(() => _i70.ExpenseBloc(
+  gh.factory<_i72.ExpenseBloc>(() => _i72.ExpenseBloc(
         gh<_i33.SettingsController>(),
-        expenseUseCase: gh<_i59.GetExpenseUseCase>(),
-        accountUseCase: gh<_i57.GetAccountUseCase>(),
-        addExpenseUseCase: gh<_i59.AddExpenseUseCase>(),
-        deleteExpenseUseCase: gh<_i59.DeleteExpenseUseCase>(),
-        updateExpensesUseCase: gh<_i62.UpdateExpensesUseCase>(),
-        accountsUseCase: gh<_i57.GetAccountsUseCase>(),
-        addRecurringExpenseUseCase: gh<_i59.AddRecurringExpenseUseCase>(),
+        expenseUseCase: gh<_i58.GetExpenseUseCase>(),
+        accountUseCase: gh<_i60.GetAccountUseCase>(),
+        addExpenseUseCase: gh<_i58.AddExpenseUseCase>(),
+        deleteExpenseUseCase: gh<_i58.DeleteExpenseUseCase>(),
+        updateExpensesUseCase: gh<_i64.UpdateExpensesUseCase>(),
+        accountsUseCase: gh<_i60.GetAccountsUseCase>(),
+        addRecurringExpenseUseCase: gh<_i58.AddRecurringExpenseUseCase>(),
       ));
-  gh.factory<_i71.AccountsBloc>(() => _i71.AccountsBloc(
-        getAccountUseCase: gh<_i57.GetAccountUseCase>(),
-        deleteAccountUseCase: gh<_i57.DeleteAccountUseCase>(),
+  gh.factory<_i73.AccountsBloc>(() => _i73.AccountsBloc(
+        getAccountUseCase: gh<_i60.GetAccountUseCase>(),
+        deleteAccountUseCase: gh<_i60.DeleteAccountUseCase>(),
         getExpensesFromAccountIdUseCase:
-            gh<_i59.GetExpensesFromAccountIdUseCase>(),
-        addAccountUseCase: gh<_i57.AddAccountUseCase>(),
-        getAccountsUseCase: gh<_i57.GetAccountsUseCase>(),
-        getCategoryUseCase: gh<_i58.GetCategoryUseCase>(),
+            gh<_i58.GetExpensesFromAccountIdUseCase>(),
+        addAccountUseCase: gh<_i60.AddAccountUseCase>(),
+        getAccountsUseCase: gh<_i60.GetAccountsUseCase>(),
+        getCategoryUseCase: gh<_i61.GetCategoryUseCase>(),
         deleteExpensesFromAccountIdUseCase:
-            gh<_i59.DeleteExpensesFromAccountIdUseCase>(),
-        updateAccountUseCase: gh<_i57.UpdateAccountUseCase>(),
+            gh<_i58.DeleteExpensesFromAccountIdUseCase>(),
+        updateAccountUseCase: gh<_i60.UpdateAccountUseCase>(),
       ));
-  gh.factory<_i72.CategoryBloc>(() => _i72.CategoryBloc(
-        getCategoryUseCase: gh<_i58.GetCategoryUseCase>(),
-        addCategoryUseCase: gh<_i58.AddCategoryUseCase>(),
-        deleteCategoryUseCase: gh<_i58.DeleteCategoryUseCase>(),
+  gh.factory<_i74.CategoryBloc>(() => _i74.CategoryBloc(
+        getCategoryUseCase: gh<_i61.GetCategoryUseCase>(),
+        addCategoryUseCase: gh<_i61.AddCategoryUseCase>(),
+        deleteCategoryUseCase: gh<_i61.DeleteCategoryUseCase>(),
         deleteExpensesFromCategoryIdUseCase:
-            gh<_i59.DeleteExpensesFromCategoryIdUseCase>(),
-        updateCategoryUseCase: gh<_i58.UpdateCategoryUseCase>(),
+            gh<_i58.DeleteExpensesFromCategoryIdUseCase>(),
+        updateCategoryUseCase: gh<_i61.UpdateCategoryUseCase>(),
       ));
   return getIt;
 }
 
-class _$HiveModule extends _i73.HiveModule {}
+class _$HiveModule extends _i75.HiveModule {}

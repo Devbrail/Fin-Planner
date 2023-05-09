@@ -22,8 +22,8 @@ class AccountModelAdapter extends TypeAdapter<AccountModel> {
       bankName: fields[3] as String,
       number: fields[5] as String,
       cardType: fields[6] == null ? CardType.bank : fields[6] as CardType?,
-      amount: fields[8] == null ? 0 : fields[8] as double?,
       superId: fields[7] == null ? 0 : fields[7] as int?,
+      amount: fields[8] == null ? 0 : fields[8] as double?,
     );
   }
 
@@ -31,20 +31,20 @@ class AccountModelAdapter extends TypeAdapter<AccountModel> {
   void write(BinaryWriter writer, AccountModel obj) {
     writer
       ..writeByte(7)
-      ..writeByte(0)
-      ..write(obj.name)
-      ..writeByte(1)
-      ..write(obj.icon)
+      ..writeByte(8)
+      ..write(obj.amount)
       ..writeByte(3)
       ..write(obj.bankName)
-      ..writeByte(5)
-      ..write(obj.number)
       ..writeByte(6)
       ..write(obj.cardType)
+      ..writeByte(1)
+      ..write(obj.icon)
+      ..writeByte(0)
+      ..write(obj.name)
+      ..writeByte(5)
+      ..write(obj.number)
       ..writeByte(7)
-      ..write(obj.superId)
-      ..writeByte(8)
-      ..write(obj.amount);
+      ..write(obj.superId);
   }
 
   @override

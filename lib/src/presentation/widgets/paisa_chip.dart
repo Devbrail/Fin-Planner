@@ -20,9 +20,6 @@ class PaisaMaterialYouChip extends StatelessWidget {
     final textColor = Theme.of(context).colorScheme.primary;
     final borderColor =
         isSelected ? Theme.of(context).colorScheme.primary : null;
-    final onColor = isSelected
-        ? Theme.of(context).colorScheme.onPrimary
-        : Theme.of(context).colorScheme.onSurfaceVariant;
 
     return Row(
       children: [
@@ -42,12 +39,12 @@ class PaisaMaterialYouChip extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: kIsWeb ? 28 : 16,
-                vertical: 12,
+                vertical: 10,
               ),
               child: Text(
                 title,
                 style: GoogleFonts.outfit(
-                  textStyle: Theme.of(context).textTheme.titleSmall,
+                  textStyle: Theme.of(context).textTheme.bodySmall,
                   color: textColor,
                   fontWeight: FontWeight.w600,
                 ),

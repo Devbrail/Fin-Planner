@@ -1,11 +1,12 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/filter_budget.dart';
 import '../../../domain/expense/entities/expense.dart';
+import '../../widgets/paisa_empty_widget.dart';
+import '../controller/summary_controller.dart';
 import 'expense_month_card.dart';
 
 class ExpenseHistory extends StatelessWidget {
@@ -20,21 +21,10 @@ class ExpenseHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     final SummaryController summaryController = getIt.get();
     if (expenses.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            children: [
-              const Icon(
-                Icons.money_off_rounded,
-                size: 72,
-              ),
-              Text(
-                context.loc.emptyExpensesMessage,
-              ),
-            ],
-          ),
-        ),
+      return EmptyWidget(
+        title: context.loc.emptyExpensesMessage,
+        icon: Icons.money_off_rounded,
+        description: context.loc.emptyExpensesDescription,
       );
     } else {
       return ValueListenableBuilder<FilterExpense>(
@@ -42,7 +32,8 @@ class ExpenseHistory extends StatelessWidget {
         builder: (_, value, __) {
           final maps = groupBy(
               expenses, (Expense element) => element.time.formatted(value));
-          return ListView.builder(
+          return ListView.separated(
+            separatorBuilder: (context, index) => const Divider(),
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),

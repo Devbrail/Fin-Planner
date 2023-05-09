@@ -10,6 +10,7 @@ import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/widgets/expense_item_widget.dart';
 import '../../widgets/paisa_card.dart';
+import '../../widgets/paisa_empty_widget.dart';
 
 class AccountTransactionWidget extends StatelessWidget {
   const AccountTransactionWidget({
@@ -27,16 +28,10 @@ class AccountTransactionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (expenses.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            children: [
-              const Icon(Icons.money_off_rounded, size: 72),
-              Text(context.loc.emptyExpensesMessage),
-            ],
-          ),
-        ),
+      return EmptyWidget(
+        title: context.loc.emptyExpensesMessage,
+        icon: Icons.money_off_rounded,
+        description: context.loc.emptyExpensesDescription,
       );
     }
     return ScreenTypeLayout(
@@ -58,39 +53,34 @@ class AccountTransactionWidget extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: PaisaCard(
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: expenses.length,
-                itemBuilder: (_, index) {
-                  final Account? account = accountLocalDataSource
-                      .fetchAccountFromId(expenses[index].accountId)
-                      ?.toEntity();
-                  final Category? category = categoryLocalDataSource
-                      .fetchCategoryFromId(expenses[index].categoryId)
-                      ?.toEntity();
-                  if (category == null || account == null) {
-                    return ExpenseItemWidget(
-                      expense: expenses[index],
-                      account: account!,
-                      category: Category(
-                        icon: Icons.wallet.codePoint,
-                        name: 'Code',
-                        color: Colors.amber.value,
-                      ),
-                    );
-                  }
-                  return ExpenseItemWidget(
-                    expense: expenses[index],
-                    account: account,
-                    category: category,
-                  );
-                },
-              ),
-            ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: expenses.length,
+            itemBuilder: (_, index) {
+              final Account? account = accountLocalDataSource
+                  .fetchAccountFromId(expenses[index].accountId)
+                  ?.toEntity();
+              final Category? category = categoryLocalDataSource
+                  .fetchCategoryFromId(expenses[index].categoryId)
+                  ?.toEntity();
+              if (category == null || account == null) {
+                return ExpenseItemWidget(
+                  expense: expenses[index],
+                  account: account!,
+                  category: Category(
+                    icon: Icons.wallet.codePoint,
+                    name: 'Code',
+                    color: Colors.amber.value,
+                  ),
+                );
+              }
+              return ExpenseItemWidget(
+                expense: expenses[index],
+                account: account,
+                category: category,
+              );
+            },
           ),
         ],
       ),

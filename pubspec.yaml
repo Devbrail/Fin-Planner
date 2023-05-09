@@ -18,6 +18,7 @@ dependencies:
   dynamic_color: ^1.5.4
   equatable: ^2.0.5
   file_picker: ^5.2.5
+  fl_chart: ^0.62.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
@@ -45,8 +46,7 @@ dependencies:
   responsive_builder: 0.5.0+1
   share_plus: ^6.3.0
   url_launcher: ^6.1.7
-  url_strategy: ^0.2.0
-  workmanager: ^0.5.1
+  url_strategy: ^0.2.0 
 
 dev_dependencies:
   build_runner: ^2.3.2

@@ -12,25 +12,24 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
   List<Expense> search(
     query, {
     int? selectedAccountId = -1,
-    int? selecteCategoryId = -1,
-  }) =>
-      values.where((element) {
-        if (selectedAccountId != -1) {
-          return element.accountId == selectedAccountId;
-        } else {
-          return true;
-        }
-      }).where((element) {
-        if (selecteCategoryId != -1) {
-          return element.categoryId == selecteCategoryId;
-        } else {
-          return true;
-        }
-      }).where((ExpenseModel element) {
-        final description = element.description ?? '';
-        return element.name.toLowerCase().contains(query) ||
-            description.toLowerCase().contains(query);
-      }).toEntities();
+    int? selectedCategoryId = -1,
+  }) {
+    Iterable<ExpenseModel> expenseModels = values;
+    if (selectedAccountId != -1) {
+      expenseModels =
+          values.where((element) => element.accountId == selectedAccountId);
+    }
+    if (selectedCategoryId != -1) {
+      expenseModels =
+          values.where((element) => element.categoryId == selectedCategoryId);
+    }
+
+    return expenseModels.where((ExpenseModel element) {
+      final description = element.description ?? '';
+      return element.name.toLowerCase().contains(query) ||
+          description.toLowerCase().contains(query);
+    }).toEntities();
+  }
 
   List<ExpenseModel> get expenses =>
       values.toList()..sort(((a, b) => b.time.compareTo(a.time)));

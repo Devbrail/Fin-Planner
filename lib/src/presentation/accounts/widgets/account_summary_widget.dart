@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/common.dart';
 import '../../../core/theme/custom_color.dart';
@@ -89,9 +90,9 @@ class AccountSummaryWidget extends StatelessWidget {
                 graphLineColor:
                     Theme.of(context).extension<CustomColors>()!.green ??
                         Theme.of(context).colorScheme.secondary,
+                iconData: MdiIcons.arrowBottomLeft,
               ),
             ),
-            const SizedBox(width: 8),
             Expanded(
               child: PaisaExpenseStatsWidget(
                 total: expenses.totalExpense.toCurrency(decimalDigits: 0),
@@ -100,6 +101,7 @@ class AccountSummaryWidget extends StatelessWidget {
                 graphLineColor:
                     Theme.of(context).extension<CustomColors>()!.red ??
                         Theme.of(context).colorScheme.secondary,
+                iconData: MdiIcons.arrowTopRight,
               ),
             ),
           ],

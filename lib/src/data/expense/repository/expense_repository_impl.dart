@@ -151,4 +151,13 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
       }
     }
   }
+
+  @override
+  List<ExpenseModel> filterExpenses(
+    String query,
+    int? accountId,
+    int? categoryId,
+  ) {
+    return dataSource.filterExpenses(query, accountId, categoryId);
+  }
 }

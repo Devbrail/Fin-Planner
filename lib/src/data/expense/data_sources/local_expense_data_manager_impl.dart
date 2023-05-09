@@ -87,4 +87,16 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
 
   @override
   Future<void> clearAll() => expenseBox.clear();
+  @override
+  List<ExpenseModel> filterExpenses(
+    String query,
+    int? accountId,
+    int? categoryId,
+  ) {
+    return expenseBox.search(
+      query,
+      selectedAccountId: accountId,
+      selectedCategoryId: categoryId,
+    );
+  }
 }

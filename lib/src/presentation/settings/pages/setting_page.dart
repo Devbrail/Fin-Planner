@@ -46,6 +46,7 @@ class SettingsPage extends StatelessWidget {
                   title: context.loc.colorsLabel,
                   options: [
                     SettingsColorPickerWidget(settings: settings),
+                    const Divider(),
                     SettingsOption(
                       title: context.loc.chooseThemeLabel,
                       subtitle: currentTheme.themeName,
@@ -86,12 +87,13 @@ class SettingsPage extends StatelessWidget {
                         GoRouter.of(context).goNamed(exportAndImport);
                       },
                     ),
+                    /* const Divider(),
                     SettingsOption(
                       title: 'Recurring transaction',
                       onTap: () {
                         GoRouter.of(context).goNamed(recurringTransactionsPath);
                       },
-                    ),
+                    ), */
                   ],
                 ),
                 SettingsGroup(

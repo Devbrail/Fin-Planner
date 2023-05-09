@@ -25,9 +25,12 @@ class ExpensePage extends StatefulWidget {
   const ExpensePage({
     Key? key,
     this.expenseId,
+    this.transactionType,
   }) : super(key: key);
 
   final String? expenseId;
+  final TransactionType? transactionType;
+
   @override
   State<ExpensePage> createState() => _ExpensePageState();
 }
@@ -35,7 +38,7 @@ class ExpensePage extends StatefulWidget {
 class _ExpensePageState extends State<ExpensePage> {
   late final bool isAddExpense = widget.expenseId == null;
   late final ExpenseBloc expenseBloc = getIt.get<ExpenseBloc>()
-    ..add(const ChangeExpenseEvent(TransactionType.expense))
+    ..add(ChangeExpenseEvent(widget.transactionType ?? TransactionType.expense))
     ..add(FetchExpenseFromIdEvent(widget.expenseId));
   final nameController = TextEditingController();
   final amountController = TextEditingController();
@@ -370,26 +373,11 @@ class _ExpensePageState extends State<ExpensePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 12,
-                        right: 12,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: const [
-                          SelectedAccount(),
-                          SelectCategoryIcon(),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(16),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
@@ -403,6 +391,15 @@ class _ExpensePageState extends State<ExpensePage> {
                           ),
                         ),
                         const ExpenseDatePickerWidget(),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: const [
+                        SelectedAccount(),
+                        SelectCategoryIcon(),
                       ],
                     ),
                   ),

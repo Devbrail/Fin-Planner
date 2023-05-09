@@ -28,36 +28,53 @@ class ExpenseRecurringWidget extends StatelessWidget {
             state.transactionType == TransactionType.transfer) {
           return const SizedBox.shrink();
         }
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                PaisaMaterialYouChip(
-                  title: RecurringType.daily.name(context),
-                  isSelected: expenseBloc.recurringType == RecurringType.daily,
-                  onPressed: () => _update(RecurringType.daily),
-                ),
-                PaisaMaterialYouChip(
-                  title: RecurringType.weekly.name(context),
-                  isSelected: expenseBloc.recurringType == RecurringType.weekly,
-                  onPressed: () => _update(RecurringType.weekly),
-                ),
-                PaisaMaterialYouChip(
-                  title: RecurringType.monthly.name(context),
-                  isSelected:
-                      expenseBloc.recurringType == RecurringType.monthly,
-                  onPressed: () => _update(RecurringType.monthly),
-                ),
-                PaisaMaterialYouChip(
-                  title: RecurringType.yearly.name(context),
-                  isSelected: expenseBloc.recurringType == RecurringType.yearly,
-                  onPressed: () => _update(RecurringType.yearly),
-                ),
-              ],
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Periodic',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    PaisaMaterialYouChip(
+                      title: RecurringType.daily.name(context),
+                      isSelected:
+                          expenseBloc.recurringType == RecurringType.daily,
+                      onPressed: () => _update(RecurringType.daily),
+                    ),
+                    PaisaMaterialYouChip(
+                      title: RecurringType.weekly.name(context),
+                      isSelected:
+                          expenseBloc.recurringType == RecurringType.weekly,
+                      onPressed: () => _update(RecurringType.weekly),
+                    ),
+                    PaisaMaterialYouChip(
+                      title: RecurringType.monthly.name(context),
+                      isSelected:
+                          expenseBloc.recurringType == RecurringType.monthly,
+                      onPressed: () => _update(RecurringType.monthly),
+                    ),
+                    PaisaMaterialYouChip(
+                      title: RecurringType.yearly.name(context),
+                      isSelected:
+                          expenseBloc.recurringType == RecurringType.yearly,
+                      onPressed: () => _update(RecurringType.yearly),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         );
       },
     );

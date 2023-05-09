@@ -16,4 +16,6 @@ abstract class LocalExpenseDataManager {
   List<ExpenseModel> fetchExpensesFromCategoryId(int category);
   Future<void> updateExpense(ExpenseModel expenseModel);
   Future<void> clearAll();
+  List<ExpenseModel> filterExpenses(
+      String query, int? accountId, int? categoryId);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 enum ItemIndex { first, middle, last }
 
@@ -38,13 +39,14 @@ class PaisaToggleButton extends StatelessWidget {
           borderRadius: borderRadius,
         ),
         clipBehavior: Clip.antiAlias,
-        padding: const EdgeInsets.all(14.0),
+        padding: const EdgeInsets.all(16.0),
         child: Text(
           title,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: textColor,
-                fontWeight: FontWeight.bold,
-              ),
+          style: GoogleFonts.outfit(
+            textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: textColor,
+                ),
+          ),
         ),
       ),
     );

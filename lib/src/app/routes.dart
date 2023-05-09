@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/core/enum/transaction.dart';
 import 'package:paisa/src/presentation/overview/pages/expense_list_page.dart';
 import 'package:paisa/src/presentation/settings/pages/recurring_transactions_page.dart';
 
@@ -21,6 +22,7 @@ import '../presentation/home/pages/home_page.dart';
 import '../presentation/login/intro/into_page.dart';
 import '../presentation/login/pages/user_image_page.dart';
 import '../presentation/login/pages/user_name_page.dart';
+import '../presentation/search/pages/search_page.dart';
 import '../presentation/settings/pages/export_and_import_page.dart';
 import '../presentation/settings/pages/setting_page.dart';
 
@@ -34,7 +36,9 @@ const userNamePath = '/user-name';
 const userImagePath = '/user-image';
 const landingPath = '/landing';
 const landingName = 'landing';
-
+const searchPath = 'search';
+const search = 'search';
+const shortcutAddExpensePath = 'short-cut-add-expense';
 const addExpensePath = 'add-expense';
 const editExpensePath = 'edit-expense';
 const addCategoryPath = 'add-category';
@@ -93,6 +97,24 @@ final GoRouter goRouter = GoRouter(
       path: landingPath,
       builder: (context, state) => const LandingPage(),
       routes: [
+        GoRoute(
+          path: 'short-cut-add-expense/:type',
+          name: shortcutAddExpensePath,
+          pageBuilder: (context, state) {
+            String? transactionTypeString = state.params['type'];
+            int transactionType =
+                int.tryParse(transactionTypeString ?? '') ?? 0;
+            return MaterialPage(
+              key: ValueKey(
+                state.location +
+                    DateTime.now().millisecondsSinceEpoch.toString(),
+              ),
+              child: ExpensePage(
+                transactionType: TransactionType.values[transactionType],
+              ),
+            );
+          },
+        ),
         GoRoute(
           path: addExpensePath,
           name: addExpensePath,
@@ -194,6 +216,11 @@ final GoRouter goRouter = GoRouter(
           name: debtPage,
           path: 'debt',
           builder: (context, state) => const DebtsPage(),
+        ),
+        GoRoute(
+          name: search,
+          path: searchPath,
+          builder: (context, state) => const SearchPage(),
         ),
       ],
     ),

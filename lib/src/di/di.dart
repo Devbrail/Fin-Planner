@@ -36,13 +36,34 @@ Future<GetIt> configInjector(
 Future<void> initAppShortcuts() async {
   const QuickActions quickActions = QuickActions();
   await quickActions.initialize((String shortcutType) {
-    if (shortcutType == 'add_expense') goRouter.pushNamed(addExpensePath);
+    goRouter.goNamed(
+      shortcutAddExpensePath,
+      params: {
+        'type': shortcutType == 'ic_expense'
+            ? '0'
+            : shortcutType == 'ic_income'
+                ? '1'
+                : shortcutType == 'ic_transfer'
+                    ? '2'
+                    : '0',
+      },
+    );
   });
   await quickActions.setShortcutItems([
     const ShortcutItem(
-      type: 'add_expense',
-      localizedTitle: 'Add expense',
-      icon: 'ic_action_add',
+      type: 'ic_income',
+      localizedTitle: 'Income',
+      icon: 'ic_income',
+    ),
+    const ShortcutItem(
+      type: 'ic_expense',
+      localizedTitle: 'Expense',
+      icon: 'ic_expense',
+    ),
+    const ShortcutItem(
+      type: 'ic_transfer',
+      localizedTitle: 'Transfer',
+      icon: 'ic_transfer',
     ),
   ]);
 }

@@ -33,6 +33,7 @@ class ExpenseTotalWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
           child: PaisaCard(
+            elevation: 0,
             color: Theme.of(context).colorScheme.primaryContainer,
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -62,9 +63,9 @@ class ExpenseTotalWidget extends StatelessWidget {
 }
 
 class TouchCard extends StatefulWidget {
-  final Widget child;
-
   const TouchCard({required this.child});
+
+  final Widget child;
 
   @override
   _TouchCardState createState() => _TouchCardState();
@@ -72,8 +73,14 @@ class TouchCard extends StatefulWidget {
 
 class _TouchCardState extends State<TouchCard>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
   late Animation<double> _animation;
+  late AnimationController _controller;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -87,12 +94,6 @@ class _TouchCardState extends State<TouchCard>
 
     // Create the animation tween
     _animation = Tween<double>(begin: 1, end: 1.05).animate(_controller);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override

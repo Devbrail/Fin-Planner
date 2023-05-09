@@ -32,33 +32,47 @@ class ExpenseItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(24),
-        onTap: () => context.goNamed(
-          editExpensePath,
-          params: <String, String>{'eid': expense.superId.toString()},
+    return InkWell(
+      borderRadius: BorderRadius.circular(24),
+      onTap: () => context.goNamed(
+        editExpensePath,
+        params: <String, String>{'eid': expense.superId.toString()},
+      ),
+      child: ListTile(
+        title: Text(
+          expense.name,
+          style: GoogleFonts.manrope(
+            textStyle: Theme.of(context).textTheme.bodyLarge,
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        child: ListTile(
-          horizontalTitleGap: 4,
-          title: Text(expense.name),
-          subtitle: Text(getSubtitle()),
-          leading: Icon(
+        subtitle: Text(
+          getSubtitle(),
+          style: GoogleFonts.manrope(
+            textStyle: Theme.of(context).textTheme.bodySmall,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        leading: CircleAvatar(
+          backgroundColor: Color(
+                  category.color ?? Theme.of(context).colorScheme.surface.value)
+              .withOpacity(0.2),
+          child: Icon(
             IconData(
               category.icon,
               fontFamily: 'Material Design Icons',
               fontPackage: 'material_design_icons_flutter',
             ),
-            color: Theme.of(context).colorScheme.onSurface,
+            color: Color(
+                category.color ?? Theme.of(context).colorScheme.surface.value),
           ),
-          trailing: Text(
-            '${expense.type?.sign}${expense.currency.toCurrency()}',
-            style: GoogleFonts.manrope(
-              textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: expense.type?.color(context),
-                  ),
-            ),
+        ),
+        trailing: Text(
+          '${expense.type?.sign}${expense.currency.toCurrency()}',
+          style: GoogleFonts.manrope(
+            textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: expense.type?.color(context),
+                ),
           ),
         ),
       ),

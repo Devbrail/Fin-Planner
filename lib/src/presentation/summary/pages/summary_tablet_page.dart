@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/presentation/summary/pages/summary_mobile_page.dart';
 
 import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/filter_widget/filter_budget_widget.dart';
@@ -35,7 +36,7 @@ class SummaryTabletPage extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.only(bottom: 124),
                 children: [
-                  const FilterBudgetToggleWidget(),
+                  const TransactionsHeaderWidget(),
                   ExpenseHistory(
                     expenses: expenses,
                   ),
