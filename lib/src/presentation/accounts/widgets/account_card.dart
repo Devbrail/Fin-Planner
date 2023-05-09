@@ -122,12 +122,12 @@ class MobileAccountCard extends StatelessWidget {
           ),
           border: 2,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
+                minVerticalPadding: 10,
                 horizontalTitleGap: 0,
-                title: Text(bankName),
-                subtitle: Text(cardHolder),
+                title: Text(bankName, style: GoogleFonts.outfit()),
+                subtitle: Text(cardHolder, style: GoogleFonts.outfit()),
                 leading: Icon(cardType.icon),
                 trailing: onDelete != null
                     ? GestureDetector(
@@ -140,14 +140,19 @@ class MobileAccountCard extends StatelessWidget {
                     : const SizedBox.shrink(),
               ),
               ListTile(
-                title: Text(context.loc.totalBalanceLabel),
+                minVerticalPadding: 10,
+                title: Text(
+                  context.loc.totalBalanceLabel,
+                  style: GoogleFonts.outfit(
+                    textStyle: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
                 subtitle: Text(
                   totalBalance,
                   style: GoogleFonts.manrope(
-                    textStyle:
-                        Theme.of(context).textTheme.headlineSmall?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                    textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
               ),
@@ -178,11 +183,14 @@ class MobileAccountCard extends StatelessWidget {
                       dense: true,
                       title: Text(
                         context.loc.expenseLabel,
-                        style: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSecondaryContainer
-                              .withOpacity(0.75),
+                        style: GoogleFonts.outfit(
+                          textStyle:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondaryContainer
+                                        .withOpacity(0.75),
+                                  ),
                         ),
                       ),
                       subtitle: Text(

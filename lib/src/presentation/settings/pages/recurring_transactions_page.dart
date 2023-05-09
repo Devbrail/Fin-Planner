@@ -16,8 +16,7 @@ class RecurringTransactionPage extends StatelessWidget {
           SliverAppBar.large(
             title: Text('Recurring transactions'),
           ),
-          SliverFillRemaining(
-            hasScrollBody: true,
+          SliverToBoxAdapter(
             child: ValueListenableBuilder<Box<ExpenseModel>>(
               valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
               builder: (_, value, child) {

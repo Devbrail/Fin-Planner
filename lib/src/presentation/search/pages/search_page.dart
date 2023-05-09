@@ -243,7 +243,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                       ),
                       showCheckmark: false,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      label: Text(account.name),
+                      label: Text(account.bankName),
                       labelStyle: Theme.of(context)
                           .textTheme
                           .titleMedium

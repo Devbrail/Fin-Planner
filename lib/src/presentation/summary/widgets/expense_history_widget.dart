@@ -28,7 +28,7 @@ class ExpenseHistory extends StatelessWidget {
       );
     } else {
       return ValueListenableBuilder<FilterExpense>(
-        valueListenable: summaryController.filterExpenseNotifier,
+        valueListenable: summaryController.filterHomeExpenseNotifier,
         builder: (_, value, __) {
           final maps = groupBy(
               expenses, (Expense element) => element.time.formatted(value));

@@ -18,10 +18,16 @@ class SummaryController {
   final GetExpensesFromCategoryIdUseCase getExpensesFromCategoryIdUseCase;
   final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier =
       ValueNotifier<DateTimeRange?>(null);
+
   final FilterExpense filterExpense =
-      getIt.get<SettingsController>().fetchFilterExpense;
+      getIt.get<SettingsController>().fetchFilterExpense();
   late final ValueNotifier<FilterExpense> filterExpenseNotifier =
       ValueNotifier<FilterExpense>(filterExpense);
+
+  final FilterExpense filterHomeExpense =
+      getIt.get<SettingsController>().fetchFilterExpense(isHome: true);
+  late final ValueNotifier<FilterExpense> filterHomeExpenseNotifier =
+      ValueNotifier<FilterExpense>(filterHomeExpense);
 
   SummaryController({
     required this.getAccountUseCase,

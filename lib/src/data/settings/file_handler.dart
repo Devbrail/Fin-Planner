@@ -57,7 +57,8 @@ class FileHandler {
       final timeStamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
 
       final paisaFileName = 'paisa_$timeStamp.json';
-      final fileTask = File('$dlPath/$paisaFileName');
+      final fileTask =
+          await File('$dlPath/$paisaFileName').create(recursive: true);
       await fileTask.writeAsString(jsonString);
       return true;
     }

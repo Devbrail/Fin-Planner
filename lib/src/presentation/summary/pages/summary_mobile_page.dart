@@ -75,9 +75,7 @@ class TransactionsHeaderWidget extends StatelessWidget {
               ),
             ),
             builder: (context) {
-              return const FilterBudgetToggleWidget(
-                showAsList: true,
-              );
+              return FilterHomeWidget();
             },
           );
         },

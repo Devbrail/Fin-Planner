@@ -32,7 +32,7 @@ class PaisaFilterTransactionWidget extends StatelessWidget {
                   ),
                 ),
                 builder: (context) {
-                  return const FilterBudgetToggleWidget(
+                  return FilterBudgetToggleWidget(
                     showAsList: true,
                   );
                 },

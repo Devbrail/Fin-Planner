@@ -33,7 +33,7 @@ class SummaryDesktopPage extends StatelessWidget {
                     child: ListView(
                       padding: const EdgeInsets.only(bottom: 124),
                       children: [
-                        const FilterBudgetToggleWidget(),
+                        FilterBudgetToggleWidget(),
                         ExpenseHistory(expenses: expenses),
                       ],
                     ),
