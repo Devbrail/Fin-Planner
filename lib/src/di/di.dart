@@ -37,7 +37,7 @@ Future<void> initAppShortcuts() async {
   const QuickActions quickActions = QuickActions();
   await quickActions.initialize((String shortcutType) {
     goRouter.goNamed(
-      shortcutAddExpensePath,
+      shortcutAddTransactionName,
       params: {
         'type': shortcutType == 'ic_expense'
             ? '0'

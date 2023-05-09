@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
 
 import '../../core/theme/paisa_theme.dart';
 
@@ -43,9 +44,7 @@ class EmptyWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(
-              height: 4,
-            ),
+            const SizedBox(height: 4),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Text(
@@ -55,6 +54,11 @@ class EmptyWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
+            const SizedBox(height: 8),
+            onActionPressed != null
+                ? PaisaTextButton(
+                    onPressed: onActionPressed!, title: actionTitle ?? '')
+                : const SizedBox.shrink()
           ],
         ),
       ),

@@ -52,11 +52,11 @@ class ExpenseModel extends HiveObject with EquatableMixin {
     required this.name,
     required this.currency,
     required this.time,
-    required this.categoryId,
-    required this.accountId,
     required this.type,
-    this.description,
+    required this.accountId,
+    required this.categoryId,
     this.superId,
+    this.description,
     this.fromAccountId,
     this.toAccountId,
     this.transferAmount = 0.0,
@@ -96,5 +96,47 @@ class ExpenseModel extends HiveObject with EquatableMixin {
       )..superId = json['superId'];
 
   @override
-  List<Object?> get props => [name, type];
+  List<Object?> get props {
+    return [
+      name,
+      currency,
+      time,
+      type,
+      accountId,
+      categoryId,
+      transferAmount,
+    ];
+  }
+
+  ExpenseModel copyWith({
+    String? name,
+    double? currency,
+    DateTime? time,
+    TransactionType? type,
+    int? accountId,
+    int? categoryId,
+    int? superId,
+    String? description,
+    int? fromAccountId,
+    int? toAccountId,
+    double? transferAmount,
+    RecurringType? recurringType,
+    DateTime? recurringDate,
+  }) {
+    return ExpenseModel(
+      name: name ?? this.name,
+      currency: currency ?? this.currency,
+      time: time ?? this.time,
+      type: type ?? this.type,
+      accountId: accountId ?? this.accountId,
+      categoryId: categoryId ?? this.categoryId,
+      superId: superId ?? this.superId,
+      description: description ?? this.description,
+      fromAccountId: fromAccountId ?? this.fromAccountId,
+      toAccountId: toAccountId ?? this.toAccountId,
+      transferAmount: transferAmount ?? this.transferAmount,
+      recurringType: recurringType ?? this.recurringType,
+      recurringDate: recurringDate ?? this.recurringDate,
+    );
+  }
 }

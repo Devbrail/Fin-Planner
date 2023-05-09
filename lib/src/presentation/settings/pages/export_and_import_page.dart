@@ -47,90 +47,82 @@ class ExportAndImportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar.large(
-            title: Text(
-              context.loc.backupAndRestoreLabel,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              children: [
-                SettingsGroup(
-                  title: context.loc.backupAndRestoreJSONTitleLabel,
-                  options: [
-                    ListTile(
-                      title: Text(context.loc.backupAndRestoreJSONDescLabel),
+    return Scaffold(
+      appBar: context.materialYouAppBar(
+        context.loc.backupAndRestoreLabel,
+      ),
+      body: ListView(
+        padding: EdgeInsets.zero,
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        children: [
+          SettingsGroup(
+            title: context.loc.backupAndRestoreJSONTitleLabel,
+            options: [
+              ListTile(
+                title: Text(context.loc.backupAndRestoreJSONDescLabel),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor:
+                              Theme.of(context).colorScheme.primary,
+                          elevation: 0,
+                          padding: const EdgeInsets.all(10),
+                        ),
+                        onPressed: () {
+                          _selectedFileAndImportData().then((value) {
+                            if (value.isEmpty) {
+                              return context.showMaterialSnackBar(
+                                'Error restore backup ',
+                              );
+                            } else {
+                              return context.showMaterialSnackBar(
+                                context.loc.restoringBackupLabel,
+                              );
+                            }
+                          });
+                        },
+                        label: Text(context.loc.importDataLabel),
+                        icon: const Icon(MdiIcons.fileImport),
+                      ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor:
-                                    Theme.of(context).colorScheme.primary,
-                                elevation: 0,
-                                padding: const EdgeInsets.all(10),
-                              ),
-                              onPressed: () {
-                                _selectedFileAndImportData().then((value) {
-                                  if (value.isEmpty) {
-                                    return context.showMaterialSnackBar(
-                                      'Error restore backup ',
-                                    );
-                                  } else {
-                                    return context.showMaterialSnackBar(
-                                      context.loc.restoringBackupLabel,
-                                    );
-                                  }
-                                });
-                              },
-                              label: Text(context.loc.importDataLabel),
-                              icon: const Icon(MdiIcons.fileImport),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor:
-                                    Theme.of(context).colorScheme.onPrimary,
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.primary,
-                                padding: const EdgeInsets.all(10),
-                              ),
-                              onPressed: () {
-                                _selectedFolderAndBackUpData().then((value) {
-                                  if (value) {
-                                    return context.showMaterialSnackBar(
-                                      context.loc.creatingBackupLabel,
-                                    );
-                                  } else {
-                                    return context.showMaterialSnackBar(
-                                      'Error backing ',
-                                    );
-                                  }
-                                });
-                              },
-                              label: Text(context.loc.exportDataLabel),
-                              icon: const Icon(MdiIcons.fileExport),
-                            ),
-                          ),
-                        ],
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onPrimary,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                          padding: const EdgeInsets.all(10),
+                        ),
+                        onPressed: () {
+                          _selectedFolderAndBackUpData().then((value) {
+                            if (value) {
+                              return context.showMaterialSnackBar(
+                                context.loc.creatingBackupLabel,
+                              );
+                            } else {
+                              return context.showMaterialSnackBar(
+                                'Error backing ',
+                              );
+                            }
+                          });
+                        },
+                        label: Text(context.loc.exportDataLabel),
+                        icon: const Icon(MdiIcons.fileExport),
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
-          )
+              ),
+            ],
+          ),
         ],
       ),
     );

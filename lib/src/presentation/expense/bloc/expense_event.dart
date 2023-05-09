@@ -38,6 +38,10 @@ class ChangeRecurringEvent extends ExpenseEvent {
   const ChangeRecurringEvent(this.recurringType);
 }
 
+class AddRecurringEvent extends ExpenseEvent {
+  const AddRecurringEvent();
+}
+
 class ChangeCategoryEvent extends ExpenseEvent {
   final Category category;
 

@@ -1,10 +1,10 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../budget/pages/budget_page.dart';
 
 import '../../../core/common.dart';
 import '../../accounts/pages/accounts_page.dart';
+import '../../budget/pages/budget_page.dart';
 import '../../category/pages/category_list_page.dart';
 import '../../debits/pages/debts_page.dart';
 import '../../overview/pages/overview_page.dart';
@@ -22,7 +22,7 @@ class ContentWidget extends StatelessWidget {
     PageType.category: const CategoryListPage(),
     PageType.overview: const OverViewPage(),
     PageType.debts: const DebtsPage(),
-    PageType.budget: BudgetPage()
+    PageType.budget: BudgetPage(),
   };
 
   @override

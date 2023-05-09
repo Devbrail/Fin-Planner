@@ -110,8 +110,8 @@ class _ExpensePageState extends State<ExpensePage> {
             mobile: Scaffold(
               appBar: context.materialYouAppBar(
                 isAddExpense
-                    ? context.loc.addExpenseLabel
-                    : context.loc.updateExpenseLabel,
+                    ? context.loc.addTransactionLabel
+                    : context.loc.updateTransactionLabel,
                 actions: [
                   isAddExpense
                       ? const SizedBox.shrink()
@@ -172,13 +172,6 @@ class _ExpensePageState extends State<ExpensePage> {
                             ExpenseAmountWidget(controller: amountController),
                             const SizedBox(height: 16),
                             const ExpenseDatePickerWidget(),
-                            Visibility(
-                              visible: state.transactionType ==
-                                  TransactionType.recurring,
-                              child: ExpenseRecurringWidget(
-                                expenseBloc: expenseBloc,
-                              ),
-                            ),
                             const SelectedAccount(),
                             const SelectCategoryIcon(),
                           ],
@@ -346,8 +339,8 @@ class _ExpensePageState extends State<ExpensePage> {
                 backgroundColor: Colors.transparent,
                 title: Text(
                   isAddExpense
-                      ? context.loc.addExpenseLabel
-                      : context.loc.updateExpenseLabel,
+                      ? context.loc.addTransactionLabel
+                      : context.loc.updateTransactionLabel,
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge

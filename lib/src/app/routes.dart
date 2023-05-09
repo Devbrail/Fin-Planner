@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/src/core/enum/transaction.dart';
 import 'package:paisa/src/presentation/overview/pages/expense_list_page.dart';
-import 'package:paisa/src/presentation/settings/pages/recurring_transactions_page.dart';
+import 'package:paisa/src/presentation/recurring/page/add_recurring_page.dart';
+import 'package:paisa/src/presentation/recurring/page/recurring_page.dart';
 
 import '../../main.dart';
 import '../core/common.dart';
@@ -33,28 +34,64 @@ const splashPath = '/splash';
 const splashName = 'splash';
 
 const userNamePath = '/user-name';
+const userName = 'user-name';
+
 const userImagePath = '/user-image';
+const userImageName = 'user-image';
+
 const landingPath = '/landing';
 const landingName = 'landing';
+
 const searchPath = 'search';
-const search = 'search';
-const shortcutAddExpensePath = 'short-cut-add-expense';
-const addExpensePath = 'add-expense';
-const editExpensePath = 'edit-expense';
+const searchName = 'search';
+
+const shortcutAddTransactionPath = 'short-cut-add-expense/:type';
+const shortcutAddTransactionName = 'short-cut-add-expense';
+
+const addTransactionPath = 'add-transaction';
+const addTransactionsName = 'add-transaction';
+
+const editTransactionsName = 'edit-transaction';
+const editTransactionsPath = 'edit-transaction/:eid';
+
 const addCategoryPath = 'add-category';
-const editCategoryPath = 'edit-category';
+const addCategoryName = 'add-category';
+
+const manageCategoriesPath = 'categories';
+const manageCategoriesName = 'categories';
+
+const editCategoryPath = 'edit-category/:cid';
+const editCategoryName = 'edit-category';
+
 const addAccountPath = 'add-account';
-const editAccountPath = 'edit-account';
-const accountTransactionPath = 'account-transaction';
-const expensesByCategory = 'expenses';
-const exportAndImport = 'export-import';
+const addAccountName = 'add-account';
+
+const editAccountPath = 'edit-account/:aid';
+const editAccountName = 'edit-account';
+
+const accountTransactionPath = 'account-transaction/:aid';
+const accountTransactionName = 'account-transaction';
+
+const expensesByCategoryName = 'expenses-by-category';
+const expensesByCategoryPath = 'expenses-by-category/:cid';
+
+const exportAndImportName = 'import-export';
+const exportAndImportPath = 'import-export';
+
+const recurringTransactionsName = 'recurring';
 const recurringTransactionsPath = 'recurring';
+
+const recurringName = 'add-recurring';
+const recurringPath = 'add-recurring';
+
 const settingsPath = 'settings';
 const settingsName = 'settings';
-const debtAddOrEditPath = 'edit-debt';
-const debtPage = 'debt';
-const addDebitName = 'debit-add';
-const manageCategories = 'categories';
+
+const debtAddOrEditName = 'edit-debt';
+const debtAddOrEditPath = 'edit-debt/:did';
+
+const addDebitName = 'add-debit';
+const addDebitPath = 'add-debit';
 
 const introPageName = 'intro';
 const introPagePath = '/intro';
@@ -93,13 +130,23 @@ final GoRouter goRouter = GoRouter(
       },
     ),
     GoRoute(
+      name: userName,
+      path: userNamePath,
+      builder: (context, state) => UserNamePage(),
+    ),
+    GoRoute(
+      name: userImageName,
+      path: userImagePath,
+      builder: (context, state) => const UserImagePage(),
+    ),
+    GoRoute(
       name: landingName,
       path: landingPath,
       builder: (context, state) => const LandingPage(),
       routes: [
         GoRoute(
-          path: 'short-cut-add-expense/:type',
-          name: shortcutAddExpensePath,
+          path: shortcutAddTransactionPath,
+          name: shortcutAddTransactionName,
           pageBuilder: (context, state) {
             String? transactionTypeString = state.params['type'];
             int transactionType =
@@ -116,8 +163,8 @@ final GoRouter goRouter = GoRouter(
           },
         ),
         GoRoute(
-          path: addExpensePath,
-          name: addExpensePath,
+          path: addTransactionPath,
+          name: addTransactionsName,
           pageBuilder: (context, state) => MaterialPage(
             key: ValueKey(
               state.location + DateTime.now().millisecondsSinceEpoch.toString(),
@@ -126,8 +173,8 @@ final GoRouter goRouter = GoRouter(
           ),
         ),
         GoRoute(
-          name: editExpensePath,
-          path: 'edit-expense/:eid',
+          name: editTransactionsName,
+          path: editTransactionsPath,
           pageBuilder: (context, state) => MaterialPage(
             key: ValueKey(
               state.location + DateTime.now().millisecondsSinceEpoch.toString(),
@@ -138,44 +185,44 @@ final GoRouter goRouter = GoRouter(
           ),
         ),
         GoRoute(
-          name: addCategoryPath,
+          name: addCategoryName,
           path: addCategoryPath,
           builder: (context, state) => const AddCategoryPage(),
         ),
         GoRoute(
-          name: manageCategories,
-          path: manageCategories,
-          builder: (context, state) => const CategoryListPage(),
-        ),
-        GoRoute(
-          name: editCategoryPath,
-          path: 'edit-category/:cid',
+          name: editCategoryName,
+          path: editCategoryPath,
           builder: (context, state) => AddCategoryPage(
             categoryId: state.params['cid'],
           ),
         ),
         GoRoute(
-          name: addAccountPath,
+          name: manageCategoriesName,
+          path: manageCategoriesPath,
+          builder: (context, state) => const CategoryListPage(),
+        ),
+        GoRoute(
+          name: addAccountName,
           path: addAccountPath,
           builder: (context, state) => const AddAccountPage(),
         ),
         GoRoute(
-          name: editAccountPath,
-          path: 'edit-account/:aid',
+          name: editAccountName,
+          path: editAccountPath,
           builder: (context, state) => AddAccountPage(
             accountId: state.params['aid'],
           ),
         ),
         GoRoute(
-          name: accountTransactionPath,
-          path: 'account/:aid',
+          name: accountTransactionName,
+          path: accountTransactionPath,
           builder: (context, state) => AccountTransactionPage(
             accountId: state.params['aid'] as String,
           ),
         ),
         GoRoute(
-          name: expensesByCategory,
-          path: 'expenses/:cid',
+          name: expensesByCategoryName,
+          path: expensesByCategoryPath,
           builder: (context, state) => ExpenseListPage(
             categoryId: state.params['cid'] as String,
             accountLocalDataSource: getIt.get(),
@@ -184,55 +231,47 @@ final GoRouter goRouter = GoRouter(
           ),
         ),
         GoRoute(
-          name: settingsName,
-          path: settingsPath,
-          builder: (context, state) => const SettingsPage(),
-          routes: [
-            GoRoute(
-              name: exportAndImport,
-              path: exportAndImport,
-              builder: (context, state) => const ExportAndImportPage(),
-            ),
-            GoRoute(
-              name: recurringTransactionsPath,
-              path: recurringTransactionsPath,
-              builder: (context, state) => const RecurringTransactionPage(),
-            ),
-          ],
-        ),
-        GoRoute(
           name: addDebitName,
-          path: addDebitName,
+          path: addDebitPath,
           builder: (context, state) => const AddOrEditDebtPage(),
         ),
         GoRoute(
           name: debtAddOrEditPath,
-          path: 'debt/:did',
+          path: debtAddOrEditName,
           builder: (context, state) => AddOrEditDebtPage(
             debtId: state.params['did'],
           ),
         ),
         GoRoute(
-          name: debtPage,
-          path: 'debt',
-          builder: (context, state) => const DebtsPage(),
-        ),
-        GoRoute(
-          name: search,
+          name: searchName,
           path: searchPath,
           builder: (context, state) => const SearchPage(),
         ),
+        GoRoute(
+          name: recurringTransactionsName,
+          path: recurringTransactionsPath,
+          builder: (context, state) => const RecurringPage(),
+          routes: [
+            GoRoute(
+              name: recurringName,
+              path: recurringPath,
+              builder: (context, state) => const AddRecurringPage(),
+            ),
+          ],
+        ),
+        GoRoute(
+          name: settingsName,
+          path: settingsPath,
+          builder: (context, state) => const SettingsPage(),
+          routes: [
+            GoRoute(
+              name: exportAndImportName,
+              path: exportAndImportPath,
+              builder: (context, state) => const ExportAndImportPage(),
+            ),
+          ],
+        ),
       ],
-    ),
-    GoRoute(
-      name: 'user-name',
-      path: userNamePath,
-      builder: (context, state) => UserNamePage(),
-    ),
-    GoRoute(
-      name: 'user-image',
-      path: userImagePath,
-      builder: (context, state) => const UserImagePage(),
     ),
   ],
   errorBuilder: (context, state) => Center(

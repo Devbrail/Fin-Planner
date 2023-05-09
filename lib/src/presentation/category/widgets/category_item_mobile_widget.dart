@@ -20,7 +20,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
     return PaisaFilledCard(
       child: ListTile(
         onTap: () => context.pushNamed(
-          editCategoryPath,
+          editCategoryName,
           params: <String, String>{'cid': category.superId.toString()},
         ),
         leading: Icon(

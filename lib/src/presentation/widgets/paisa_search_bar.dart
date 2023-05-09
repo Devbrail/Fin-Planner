@@ -18,7 +18,7 @@ class PaisaSearchBar extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(34),
         onTap: () {
-          GoRouter.of(context).pushNamed(search);
+          GoRouter.of(context).pushNamed(searchName);
         },
         child: Padding(
           padding: const EdgeInsets.all(12.0),

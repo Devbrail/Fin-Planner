@@ -34,10 +34,12 @@ class ExpenseItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(24),
-      onTap: () => context.goNamed(
-        editExpensePath,
-        params: <String, String>{'eid': expense.superId.toString()},
-      ),
+      onTap: () {
+        context.goNamed(
+          editTransactionsName,
+          params: <String, String>{'eid': expense.superId.toString()},
+        );
+      },
       child: ListTile(
         title: Text(
           expense.name,
@@ -106,16 +108,19 @@ class ExpenseTransferItemWidget extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(24),
         onTap: () => context.goNamed(
-          editExpensePath,
+          editTransactionsName,
           params: <String, String>{'eid': expense.superId.toString()},
         ),
         child: ListTile(
-          horizontalTitleGap: 4,
           title: Text(title),
           subtitle: Text(getSubtitle()),
-          leading: Icon(
-            MdiIcons.bankTransfer,
-            color: Theme.of(context).colorScheme.onSurface,
+          leading: CircleAvatar(
+            backgroundColor:
+                Theme.of(context).colorScheme.primary.withOpacity(0.2),
+            child: Icon(
+              MdiIcons.bankTransfer,
+              color: Theme.of(context).colorScheme.primary,
+            ),
           ),
           trailing: Text(
             '${expense.type?.sign}${expense.currency.toCurrency()}',

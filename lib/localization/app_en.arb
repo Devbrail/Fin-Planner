@@ -27,13 +27,13 @@
     "@addCategoryLabel": {
         "description": "Show add category text when empty in categories"
     },
-    "addExpenseLabel": "Add Expense",
-    "@addExpenseLabel": {
-        "description": "While adding a expense we show toolbar text as add expense"
+    "addTransactionLabel": "Add transaction",
+    "@addTransactionLabel": {
+        "description": "While adding a transaction we show toolbar text as add transaction"
     },
-    "updateExpenseLabel": "Update Expense",
-    "@updateExpenseLabel": {
-        "description": "While updating a expense we show toolbar text as update expense"
+    "updateTransactionLabel": "Update transaction",
+    "@updateTransactionLabel": {
+        "description": "While updating a transaction we show toolbar text as update transaction"
     },
     "updateAccountLabel": "Update account",
     "@updateAccountLabel": {
@@ -699,5 +699,21 @@
     "transactionsLabel": "Transactions",
     "@transactionsLabel": {
         "description": "Transactions label"
+    },
+    "recurringLabel": "Recurring",
+    "@recurringLabel": {
+        "description": "Recurring label"
+    },
+    "recurringEmptyMessage": "No recurring events?",
+    "@recurringEmptyMessage": {
+        "description": "Recurring empty message"
+    },
+    "recurringEmptyMessageDescription": "Add recurring events to view them here",
+    "@recurringEmptyMessageDescription": {
+        "description": "Recurring empty message"
+    },
+    "recurringActionLabel": "Add recurring events",
+    "@recurringActionLabel": {
+        "description": "Recurring empty message"
     }
 }

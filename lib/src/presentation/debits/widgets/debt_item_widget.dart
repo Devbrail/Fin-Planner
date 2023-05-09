@@ -35,7 +35,7 @@ class DebtItemWidget extends StatelessWidget {
           child: PaisaFilledCard(
             child: InkWell(
               onTap: () => context.pushNamed(
-                debtAddOrEditPath,
+                debtAddOrEditName,
                 params: {'did': debt.superId.toString()},
               ),
               child: Column(

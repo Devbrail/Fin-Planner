@@ -136,18 +136,21 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     final List<ExpenseModel> recurringExpenses =
         expenses().toEntities().recurringList;
     final now = DateTime.now();
-    for (ExpenseModel expenseModel in recurringExpenses) {
+    for (final ExpenseModel expenseModel in recurringExpenses) {
       if (expenseModel.recurringDate == null) return;
       if (expenseModel.type == TransactionType.recurring &&
           expenseModel.recurringDate!.isBefore(now)) {
         final nextTime = expenseModel.recurringType!.getTime;
-        final ExpenseModel currentExpense = expenseModel;
-        final ExpenseModel saveExpense = expenseModel;
-        currentExpense.type = TransactionType.expense;
+        final ExpenseModel currentExpense = expenseModel.copyWith(
+          type: TransactionType.expense,
+          time: now,
+        );
+        final ExpenseModel saveExpense = expenseModel.copyWith(
+          recurringDate: expenseModel.recurringDate?.add(nextTime),
+        );
         await dataSource.addOrUpdateExpense(currentExpense);
-        await expenseModel.delete();
-        saveExpense.recurringDate = expenseModel.recurringDate?.add(nextTime);
-        await saveExpense.save();
+        await dataSource.addOrUpdateExpense(saveExpense);
+        await dataSource.clearExpense(expenseModel.superId!);
       }
     }
   }

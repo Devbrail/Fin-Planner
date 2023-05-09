@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
@@ -69,17 +70,18 @@ class AccountTransactionWidget extends StatelessWidget {
                   expense: expenses[index],
                   account: account!,
                   category: Category(
-                    icon: Icons.wallet.codePoint,
+                    icon: MdiIcons.bankTransfer.codePoint,
                     name: 'Code',
                     color: Colors.amber.value,
                   ),
                 );
+              } else {
+                return ExpenseItemWidget(
+                  expense: expenses[index],
+                  account: account,
+                  category: category,
+                );
               }
-              return ExpenseItemWidget(
-                expense: expenses[index],
-                account: account,
-                category: category,
-              );
             },
           ),
         ],

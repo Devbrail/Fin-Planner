@@ -43,6 +43,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<UpdateDateTimeEvent>(_updateDateTime);
     on<TransferAccountsEvent>(_transferAccount);
     on<ChangeRecurringEvent>(_changeRecurring);
+    on<AddRecurringEvent>(_addRecurring);
   }
 
   final GetExpenseUseCase expenseUseCase;
@@ -102,40 +103,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     AddOrUpdateExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) async {
-    if (transactionType == TransactionType.recurring) {
-      final double? validAmount = expenseAmount;
-      final String? name = expenseName;
-      final int? categoryId = selectedCategoryId;
-      final int? accountId = selectedAccountId;
-      final DateTime dateTime = selectedDate;
-      final String? description = currentDescription;
-
-      if (name == null) {
-        return emit(const ExpenseErrorState('Enter expense name'));
-      }
-      if (validAmount == null || validAmount == 0.0) {
-        return emit(const ExpenseErrorState('Enter valid amount'));
-      }
-
-      if (accountId == null) {
-        return emit(const ExpenseErrorState('Select account'));
-      }
-      if (categoryId == null) {
-        return emit(const ExpenseErrorState('Select category'));
-      }
-
-      await addRecurringExpenseUseCase(
-        name: name,
-        amount: validAmount,
-        time: dateTime,
-        categoryId: categoryId,
-        accountId: accountId,
-        transactionType: transactionType,
-        description: description,
-        recurringType: recurringType,
-      );
-      emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
-    } else if (transactionType == TransactionType.transfer) {
+    if (transactionType == TransactionType.transfer) {
       if ((fromAccount == null || toAccount == null) ||
           (fromAccount == toAccount)) {
         return emit(
@@ -144,7 +112,30 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
           ),
         );
       }
-      final String expenseName =
+
+      await addExpenseUseCase(
+        name:
+            'Transfer from ${fromAccount!.bankName} to ${toAccount!.bankName}',
+        amount: transferAmount ?? 0,
+        time: DateTime.now(),
+        categoryId: -1,
+        accountId: fromAccount!.superId!,
+        transactionType: TransactionType.expense,
+        description: '',
+      );
+
+      await addExpenseUseCase(
+        name:
+            'Transfer from ${fromAccount?.bankName} to ${toAccount?.bankName}',
+        amount: transferAmount ?? 0,
+        time: DateTime.now(),
+        categoryId: -1,
+        accountId: toAccount!.superId!,
+        transactionType: TransactionType.income,
+        description: '',
+      );
+
+      /* final String expenseName =
           'Transfer from ${fromAccount?.bankName} to ${toAccount?.bankName}';
       await addExpenseUseCase(
         name: expenseName,
@@ -157,7 +148,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         fromAccountId: fromAccount?.superId,
         toAccountId: toAccount?.superId,
         transferAmount: transferAmount ?? 0,
-      );
+      ); */
 
       emit(const ExpenseAdded(isAddOrUpdate: true));
     } else {
@@ -279,5 +270,43 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   ) {
     recurringType = event.recurringType;
     emit(ChangeRecurringTypeState(recurringType));
+  }
+
+  FutureOr<void> _addRecurring(
+    AddRecurringEvent event,
+    Emitter<ExpenseState> emit,
+  ) async {
+    final double? validAmount = expenseAmount;
+    final String? name = expenseName;
+    final int? categoryId = selectedCategoryId;
+    final int? accountId = selectedAccountId;
+    final DateTime dateTime = selectedDate;
+    final String? description = currentDescription;
+
+    if (name == null) {
+      return emit(const ExpenseErrorState('Enter expense name'));
+    }
+    if (validAmount == null || validAmount == 0.0) {
+      return emit(const ExpenseErrorState('Enter valid amount'));
+    }
+
+    if (accountId == null) {
+      return emit(const ExpenseErrorState('Select account'));
+    }
+    if (categoryId == null) {
+      return emit(const ExpenseErrorState('Select category'));
+    }
+
+    await addRecurringExpenseUseCase(
+      name: name,
+      amount: validAmount,
+      time: dateTime,
+      categoryId: categoryId,
+      accountId: accountId,
+      transactionType: transactionType,
+      description: description,
+      recurringType: recurringType,
+    );
+    emit(const ExpenseAdded(isAddOrUpdate: true));
   }
 }

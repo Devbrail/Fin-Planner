@@ -14,7 +14,7 @@ class PaisaSearchButtonWidget extends StatelessWidget {
         color: Theme.of(context).colorScheme.onBackground,
       ),
       onPressed: () {
-        GoRouter.of(context).pushNamed(search);
+        GoRouter.of(context).pushNamed(searchName);
       },
     );
   }

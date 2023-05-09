@@ -27,8 +27,10 @@ class CategoryListWidget extends StatelessWidget {
         final MapEntry<Category, List<Expense>> map = categoryGrouped[index];
         return InkWell(
           onTap: () {
-            GoRouter.of(context).pushNamed(expensesByCategory,
-                params: {'cid': map.key.superId.toString()});
+            GoRouter.of(context).pushNamed(
+              expensesByCategoryName,
+              params: {'cid': map.key.superId.toString()},
+            );
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),

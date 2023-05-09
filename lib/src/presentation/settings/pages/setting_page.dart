@@ -28,123 +28,107 @@ class SettingsPage extends StatelessWidget {
     final currentTheme = ThemeMode.values[getIt
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
         .get(themeModeKey, defaultValue: 0)];
-    return Material(
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar.large(
-            title: Text(context.loc.settingsLabel),
+    return Scaffold(
+      appBar: context.materialYouAppBar(context.loc.settingsLabel),
+      body: ListView(
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        children: [
+          SettingsGroup(
+            title: context.loc.colorsLabel,
+            options: [
+              SettingsColorPickerWidget(settings: settings),
+              const Divider(),
+              SettingsOption(
+                title: context.loc.chooseThemeLabel,
+                subtitle: currentTheme.themeName,
+                onTap: () {
+                  showModalBottomSheet(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width >= 700
+                          ? 700
+                          : double.infinity,
+                    ),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
+                      ),
+                    ),
+                    context: context,
+                    builder: (_) => ChooseThemeModeWidget(
+                      currentTheme: currentTheme,
+                    ),
+                  );
+                },
+              )
+            ],
           ),
-          SliverToBoxAdapter(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              children: [
-                SettingsGroup(
-                  title: context.loc.colorsLabel,
-                  options: [
-                    SettingsColorPickerWidget(settings: settings),
-                    const Divider(),
-                    SettingsOption(
-                      title: context.loc.chooseThemeLabel,
-                      subtitle: currentTheme.themeName,
-                      onTap: () {
-                        showModalBottomSheet(
-                          constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width >= 700
-                                ? 700
-                                : double.infinity,
-                          ),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
-                            ),
-                          ),
-                          context: context,
-                          builder: (_) => ChooseThemeModeWidget(
-                            currentTheme: currentTheme,
-                          ),
-                        );
-                      },
-                    )
-                  ],
+          SettingsGroup(
+            title: context.loc.othersLabel,
+            options: [
+              const CurrencyChangeWidget(),
+              const Divider(),
+              BiometricAuthWidget(
+                authenticate: getIt.get<Authenticate>(),
+              ),
+              SettingsOption(
+                title: context.loc.backupAndRestoreLabel,
+                subtitle: context.loc.backupAndRestoreDescLabel,
+                onTap: () {
+                  GoRouter.of(context).goNamed(exportAndImportName);
+                },
+              ),
+            ],
+          ),
+          SettingsGroup(
+            title: context.loc.socialLinksLabel,
+            options: [
+              SettingsOption(
+                title: context.loc.appRateLabel,
+                subtitle: context.loc.appRateDescLabel,
+                onTap: () => launchUrl(
+                  Uri.parse(playStoreUrl),
+                  mode: LaunchMode.externalApplication,
                 ),
-                SettingsGroup(
-                  title: context.loc.othersLabel,
-                  options: [
-                    const CurrencyChangeWidget(),
-                    const Divider(),
-                    BiometricAuthWidget(
-                      authenticate: getIt.get<Authenticate>(),
-                    ),
-                    SettingsOption(
-                      title: context.loc.backupAndRestoreLabel,
-                      subtitle: context.loc.backupAndRestoreDescLabel,
-                      onTap: () {
-                        GoRouter.of(context).goNamed(exportAndImport);
-                      },
-                    ),
-                    /* const Divider(),
-                    SettingsOption(
-                      title: 'Recurring transaction',
-                      onTap: () {
-                        GoRouter.of(context).goNamed(recurringTransactionsPath);
-                      },
-                    ), */
-                  ],
+              ),
+              const Divider(),
+              SettingsOption(
+                title: context.loc.githubLabel,
+                subtitle: context.loc.githubTextLabel,
+                onTap: () => launchUrl(
+                  Uri.parse(gitHubUrl),
+                  mode: LaunchMode.externalApplication,
                 ),
-                SettingsGroup(
-                  title: context.loc.socialLinksLabel,
-                  options: [
-                    SettingsOption(
-                      title: context.loc.appRateLabel,
-                      subtitle: context.loc.appRateDescLabel,
-                      onTap: () => launchUrl(
-                        Uri.parse(playStoreUrl),
-                        mode: LaunchMode.externalApplication,
-                      ),
-                    ),
-                    const Divider(),
-                    SettingsOption(
-                      title: context.loc.githubLabel,
-                      subtitle: context.loc.githubTextLabel,
-                      onTap: () => launchUrl(
-                        Uri.parse(gitHubUrl),
-                        mode: LaunchMode.externalApplication,
-                      ),
-                    ),
-                    const Divider(),
-                    SettingsOption(
-                      title: context.loc.telegramLabel,
-                      subtitle: context.loc.telegramGroupLabel,
-                      onTap: () => launchUrl(
-                        Uri.parse(telegramGroupUrl),
-                        mode: LaunchMode.externalApplication,
-                      ),
-                    ),
-                    const Divider(),
-                    SettingsOption(
-                      title: context.loc.privacyPolicyLabel,
-                      onTap: () => launchUrl(
-                        Uri.parse(termsAndConditionsUrl),
-                        mode: LaunchMode.externalApplication,
-                      ),
-                    ),
-                    const Divider(),
-                    const VersionWidget(),
-                  ],
+              ),
+              const Divider(),
+              SettingsOption(
+                title: context.loc.telegramLabel,
+                subtitle: context.loc.telegramGroupLabel,
+                onTap: () => launchUrl(
+                  Uri.parse(telegramGroupUrl),
+                  mode: LaunchMode.externalApplication,
                 ),
-                SafeArea(
-                  top: false,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(context.loc.madeWithLoveInIndiaLabel),
-                  ),
+              ),
+              const Divider(),
+              SettingsOption(
+                title: context.loc.privacyPolicyLabel,
+                onTap: () => launchUrl(
+                  Uri.parse(termsAndConditionsUrl),
+                  mode: LaunchMode.externalApplication,
                 ),
-              ],
+              ),
+              const Divider(),
+              const VersionWidget(),
+            ],
+          ),
+          SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(context.loc.madeWithLoveInIndiaLabel),
             ),
-          )
+          ),
         ],
       ),
     );

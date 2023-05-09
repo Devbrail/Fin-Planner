@@ -83,6 +83,16 @@ class HomeMobilePage extends StatelessWidget {
                     selectedIcon: MdiIcons.timetable,
                     title: context.loc.budgetLabel,
                   ),
+                  DrawerItemWidget(
+                    isSelected: false,
+                    onPressed: () {
+                      Navigator.pop(context);
+                      GoRouter.of(context).goNamed(recurringTransactionsName);
+                    },
+                    icon: MdiIcons.cashSync,
+                    selectedIcon: MdiIcons.cashSync,
+                    title: context.loc.recurringLabel,
+                  ),
                   const Divider(),
                   DrawerItemWidget(
                     isSelected: false,
