@@ -4,18 +4,18 @@ import 'package:paisa/main.dart';
 import 'package:paisa/src/core/common.dart';
 import 'package:paisa/src/core/enum/box_types.dart';
 
-class SmallSizeFAb extends StatefulWidget {
-  const SmallSizeFAb({super.key});
+class SmallSizeFabWidget extends StatefulWidget {
+  const SmallSizeFabWidget({super.key});
 
   @override
-  State<SmallSizeFAb> createState() => _SmallSizeFAbState();
+  State<SmallSizeFabWidget> createState() => _SmallSizeFabWidgetState();
 }
 
-class _SmallSizeFAbState extends State<SmallSizeFAb> {
+class _SmallSizeFabWidgetState extends State<SmallSizeFabWidget> {
   final settings = getIt.get<Box<dynamic>>(
     instanceName: BoxType.settings.name,
   );
-  late bool isSelected = settings.get(smallSizeFab, defaultValue: false);
+  late bool isSelected = settings.get(smallSizeFabKey, defaultValue: false);
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
@@ -27,7 +27,7 @@ class _SmallSizeFAbState extends State<SmallSizeFAb> {
         setState(() {
           isSelected = value;
         });
-        settings.put(smallSizeFab, value);
+        settings.put(smallSizeFabKey, value);
       },
       value: isSelected,
     );

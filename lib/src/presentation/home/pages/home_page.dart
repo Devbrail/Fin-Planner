@@ -9,7 +9,7 @@ import '../../../core/common.dart';
 import '../../settings/bloc/settings_controller.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../bloc/home_bloc.dart';
-import '../widgets/floating_action_button_widget.dart';
+import '../widgets/home_floating_action_button_widget.dart';
 import 'home_desktop_widget.dart';
 import 'home_mobile_page.dart';
 import 'home_tablet_page.dart';
@@ -30,7 +30,7 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final actionButton = PaisaActionButton(
+    final actionButton = HomeFloatingActionButtonWidget(
       summaryController: getIt.get(),
       settings: getIt.get<Box<dynamic>>(
         instanceName: BoxType.settings.name,

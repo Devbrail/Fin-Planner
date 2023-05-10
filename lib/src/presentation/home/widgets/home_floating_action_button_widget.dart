@@ -6,10 +6,11 @@ import 'package:hive_flutter/adapters.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../summary/controller/summary_controller.dart';
+import '../../widgets/small_size_fab.dart';
 import '../bloc/home_bloc.dart';
 
-class PaisaActionButton extends StatelessWidget {
-  const PaisaActionButton({
+class HomeFloatingActionButtonWidget extends StatelessWidget {
+  const HomeFloatingActionButtonWidget({
     super.key,
     required this.summaryController,
     required this.settings,
@@ -71,23 +72,12 @@ class PaisaActionButton extends StatelessWidget {
       builder: (context, state) {
         if (state is CurrentIndexState &&
             state.currentPage != PageType.budget) {
-          if (settings.get(smallSizeFab, defaultValue: false)) {
-            return FloatingActionButton(
-              tooltip: state.currentPage.toolTip(context),
-              onPressed: () => _handleClick(context, state.currentPage),
-              child: state.currentPage != PageType.overview
-                  ? const Icon(Icons.add)
-                  : const Icon(Icons.date_range),
-            );
-          } else {
-            return FloatingActionButton.large(
-              tooltip: state.currentPage.toolTip(context),
-              onPressed: () => _handleClick(context, state.currentPage),
-              child: state.currentPage != PageType.overview
-                  ? const Icon(Icons.add)
-                  : const Icon(Icons.date_range),
-            );
-          }
+          return SmallSizeFab(
+            onPressed: () => _handleClick(context, state.currentPage),
+            icon: state.currentPage != PageType.overview
+                ? Icons.add
+                : Icons.date_range,
+          );
         } else {
           return const SizedBox.shrink();
         }

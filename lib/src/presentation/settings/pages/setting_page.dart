@@ -83,7 +83,7 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
               const Divider(),
-              const SmallSizeFAb()
+              const SmallSizeFabWidget()
             ],
           ),
           SettingsGroup(

@@ -2,27 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/app/routes.dart';
-import 'package:paisa/src/presentation/widgets/paisa_empty_widget.dart';
 
 import '../../../../main.dart';
+import '../../../app/routes.dart';
 import '../../../core/common.dart';
+import '../../../core/enum/box_types.dart';
 import '../../../data/expense/model/expense_model.dart';
+import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/small_size_fab.dart';
 
 class RecurringPage extends StatelessWidget {
   const RecurringPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final settings = getIt.get<Box<dynamic>>(
+      instanceName: BoxType.settings.name,
+    );
     return Scaffold(
       appBar: context.materialYouAppBar(
         context.loc.recurring,
       ),
-      floatingActionButton: FloatingActionButton.large(
+      floatingActionButton: SmallSizeFab(
         onPressed: () {
           GoRouter.of(context).pushNamed(recurringName);
         },
-        child: const Icon(Icons.add),
+        icon: Icons.add,
       ),
       body: ValueListenableBuilder<Box<ExpenseModel>>(
         valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
