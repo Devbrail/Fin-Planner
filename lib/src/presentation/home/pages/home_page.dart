@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import '../../summary/controller/summary_controller.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/core/enum/box_types.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
-import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../settings/bloc/settings_controller.dart';
+import '../../summary/controller/summary_controller.dart';
 import '../bloc/home_bloc.dart';
+import '../widgets/floating_action_button_widget.dart';
 import 'home_desktop_widget.dart';
 import 'home_mobile_page.dart';
 import 'home_tablet_page.dart';
@@ -27,94 +28,14 @@ class _LandingPageState extends State<LandingPage> {
   final SettingsController settingsController = getIt.get();
   final SummaryController summaryController = getIt.get();
 
-  DateTimeRange? dateTimeRange;
-  void _handleClick(PageType page) {
-    switch (page) {
-      case PageType.accounts:
-        context.goNamed(addAccountName);
-        break;
-      case PageType.home:
-        context.pushNamed(addTransactionsName);
-        break;
-      case PageType.category:
-        context.goNamed(addCategoryName);
-        break;
-      case PageType.debts:
-        context.goNamed(addDebitName);
-        break;
-      case PageType.overview:
-        _dateRangePicker();
-        break;
-      case PageType.budget:
-        break;
-    }
-  }
-
-  Widget _desktopButton() {
-    return BlocBuilder(
-      bloc: homeBloc,
-      builder: (context, state) {
-        if (state is CurrentIndexState &&
-            state.currentPage != PageType.budget) {
-          return FloatingActionButton.large(
-            onPressed: () => _handleClick(state.currentPage),
-            child: const Icon(Icons.add),
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      },
-    );
-  }
-
-  Widget _floatingActionButtonBig() {
-    return BlocBuilder(
-      bloc: homeBloc,
-      builder: (context, state) {
-        if (state is CurrentIndexState &&
-            state.currentPage != PageType.budget) {
-          return FloatingActionButton.large(
-            tooltip: state.currentPage.toolTip(context),
-            onPressed: () => _handleClick(state.currentPage),
-            child: state.currentPage != PageType.overview
-                ? const Icon(Icons.add)
-                : const Icon(Icons.date_range),
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      },
-    );
-  }
-
-  Future<void> _dateRangePicker() async {
-    final initialDateRange = DateTimeRange(
-      start: DateTime.now().subtract(const Duration(days: 3)),
-      end: DateTime.now(),
-    );
-    final newDateRange = await showDateRangePicker(
-      context: context,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime.now(),
-      initialDateRange: dateTimeRange ?? initialDateRange,
-      initialEntryMode: DatePickerEntryMode.calendarOnly,
-      builder: (_, child) {
-        return Theme(
-          data: ThemeData.from(colorScheme: Theme.of(context).colorScheme)
-              .copyWith(
-            appBarTheme: Theme.of(context).appBarTheme,
-          ),
-          child: child!,
-        );
-      },
-    );
-    if (newDateRange == null || newDateRange == dateTimeRange) return;
-    dateTimeRange = newDateRange;
-    summaryController.dateTimeRangeNotifier.value = newDateRange;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final actionButton = PaisaActionButton(
+      summaryController: getIt.get(),
+      settings: getIt.get<Box<dynamic>>(
+        instanceName: BoxType.settings.name,
+      ),
+    );
     return BlocProvider(
       create: (context) => homeBloc,
       child: WillPopScope(
@@ -133,15 +54,15 @@ class _LandingPageState extends State<LandingPage> {
           ),
           mobile: HomeMobilePage(
             homeBloc: homeBloc,
-            floatingActionButton: _floatingActionButtonBig(),
+            floatingActionButton: actionButton,
           ),
           tablet: HomeTabletPage(
             homeBloc: homeBloc,
-            floatingActionButton: _desktopButton(),
+            floatingActionButton: actionButton,
           ),
           desktop: HomeDesktopWidget(
             homeBloc: homeBloc,
-            floatingActionButton: _desktopButton(),
+            floatingActionButton: actionButton,
           ),
         ),
       ),

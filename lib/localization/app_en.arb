@@ -945,5 +945,17 @@
         "description": "Title text shown on the sort dialog",
         "type": "text",
         "placeholders": {}
+    },
+    "smallSizeFab": "Small size FAB",
+    "@smallSizeFab": {
+        "description": "Title text shown on the settings page for FAB size option",
+        "type": "text",
+        "placeholders": {}
+    },
+    "smallSizeFabMessage": "Show small size action button on all screen",
+    "@smallSizeFabMessage": {
+        "description": "Title text shown on the settings page for FAB size option",
+        "type": "text",
+        "placeholders": {}
     }
 }

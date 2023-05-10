@@ -98,7 +98,7 @@ class MobileAccountCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GlassmorphicContainer(
-          height: 280,
+          height: 240,
           width: MediaQuery.of(context).size.width,
           borderRadius: 24,
           blur: 10,
@@ -139,6 +139,7 @@ class MobileAccountCard extends StatelessWidget {
                       )
                     : const SizedBox.shrink(),
               ),
+              const Spacer(),
               ListTile(
                 minVerticalPadding: 10,
                 title: Text(
@@ -156,6 +157,7 @@ class MobileAccountCard extends StatelessWidget {
                   ),
                 ),
               ),
+              const Spacer(),
               Row(
                 children: [
                   Expanded(
