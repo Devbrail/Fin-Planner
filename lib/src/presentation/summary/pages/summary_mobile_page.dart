@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/main.dart';
 
-import '../../../core/common.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../widgets/expense_history_widget.dart';
 import '../widgets/expense_total_widget.dart';
-import '../widgets/filter_home_expense_widget.dart';
+import '../widgets/transactions_header_widget.dart';
 import '../widgets/welcome_name_widget.dart';
 
 class SummaryMobilePage extends StatelessWidget {
@@ -30,59 +28,14 @@ class SummaryMobilePage extends StatelessWidget {
           } else if (index == 1) {
             return ExpenseTotalWidget(expenses: expenses);
           } else if (index == 2) {
-            return const TransactionsHeaderWidget();
+            return TransactionsHeaderWidget(
+              summaryController: getIt.get(),
+            );
           } else if (index == 3) {
             return ExpenseHistory(expenses: expenses);
           }
           return const SizedBox.shrink();
         },
-      ),
-    );
-  }
-}
-
-class TransactionsHeaderWidget extends StatelessWidget {
-  const TransactionsHeaderWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 0,
-      ),
-      title: Text(
-        context.loc.transactions,
-        style: GoogleFonts.outfit(
-          fontWeight: FontWeight.w600,
-          textStyle: Theme.of(context).textTheme.titleLarge,
-          color: Theme.of(context).colorScheme.onBackground,
-        ),
-      ),
-      trailing: IconButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width >= 700
-                  ? 700
-                  : double.infinity,
-            ),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-            ),
-            builder: (context) {
-              return FilterHomeWidget();
-            },
-          );
-        },
-        icon: Icon(
-          MdiIcons.filter,
-          color: Theme.of(context).colorScheme.primary,
-        ),
       ),
     );
   }

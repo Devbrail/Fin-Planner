@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/presentation/summary/pages/summary_mobile_page.dart';
 
+import '../../../../main.dart';
 import '../../../domain/expense/entities/expense.dart';
-import '../../widgets/filter_widget/filter_budget_widget.dart';
 import '../widgets/expense_history_widget.dart';
 import '../widgets/expense_total_widget.dart';
+import '../widgets/transactions_header_widget.dart';
 import '../widgets/welcome_name_widget.dart';
 
 class SummaryTabletPage extends StatelessWidget {
@@ -36,7 +36,9 @@ class SummaryTabletPage extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.only(bottom: 124),
                 children: [
-                  const TransactionsHeaderWidget(),
+                  TransactionsHeaderWidget(
+                    summaryController: getIt.get(),
+                  ),
                   ExpenseHistory(
                     expenses: expenses,
                   ),

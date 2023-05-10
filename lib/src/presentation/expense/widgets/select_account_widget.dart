@@ -94,12 +94,13 @@ class AccountSelectedItem extends StatelessWidget {
         return SizedBox(
           height: 160,
           child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.only(
               left: 16,
               right: 16,
             ),
             scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
+            shrinkWrap: false,
             itemCount: accounts.length + 1,
             itemBuilder: (_, index) {
               if (index == 0) {

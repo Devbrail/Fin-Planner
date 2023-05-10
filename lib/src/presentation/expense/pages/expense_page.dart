@@ -201,6 +201,7 @@ class _ExpensePageState extends State<ExpensePage> {
                                   SizedBox(
                                     height: 180,
                                     child: ListView.builder(
+                                      physics: const BouncingScrollPhysics(),
                                       padding: const EdgeInsets.only(
                                         bottom: 16,
                                         left: 16,
@@ -246,6 +247,7 @@ class _ExpensePageState extends State<ExpensePage> {
                                   SizedBox(
                                     height: 180,
                                     child: ListView.builder(
+                                      physics: const BouncingScrollPhysics(),
                                       padding: const EdgeInsets.only(
                                         bottom: 16,
                                         left: 16,

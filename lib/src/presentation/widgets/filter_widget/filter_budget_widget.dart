@@ -115,7 +115,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
           );
         } else {
           return SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

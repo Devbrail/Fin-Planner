@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class PaisaBigButton extends StatelessWidget {
   const PaisaBigButton({
@@ -76,6 +77,53 @@ class PaisaTextButton extends StatelessWidget {
         foregroundColor: Theme.of(context).colorScheme.primary,
       ),
       child: Text(title),
+    );
+  }
+}
+
+class PaisaOutlineButton extends StatelessWidget {
+  const PaisaOutlineButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+  });
+
+  final VoidCallback onPressed;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: onPressed,
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        foregroundColor: Theme.of(context).colorScheme.primary,
+      ),
+      child: Text(title),
+    );
+  }
+}
+
+class PaisaOutlineIconButton extends StatelessWidget {
+  const PaisaOutlineIconButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+  });
+
+  final VoidCallback onPressed;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton.icon(
+      onPressed: onPressed,
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        foregroundColor: Theme.of(context).colorScheme.primary,
+      ),
+      label: Text(title),
+      icon: const Icon(MdiIcons.sortVariant),
     );
   }
 }

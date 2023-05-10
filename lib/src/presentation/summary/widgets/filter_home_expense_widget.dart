@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/core/common.dart';
 import 'package:paisa/src/core/extensions/filter_expense_extension.dart';
 
 import '../../../../main.dart';
@@ -8,9 +9,9 @@ import '../../summary/controller/summary_controller.dart';
 import '../../widgets/paisa_toggle_button.dart';
 
 class FilterHomeWidget extends StatelessWidget {
-  FilterHomeWidget({super.key});
+  const FilterHomeWidget({super.key, required this.summaryController});
 
-  final SummaryController summaryController = getIt.get();
+  final SummaryController summaryController;
   void updateFilter(FilterExpense filterExpense) {
     summaryController.filterHomeExpenseNotifier.value = filterExpense;
   }
@@ -28,7 +29,7 @@ class FilterHomeWidget extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(
-                  'Filter list',
+                  context.loc.sortList,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),

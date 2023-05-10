@@ -87,12 +87,12 @@ class ExpenseModel extends HiveObject with EquatableMixin {
         categoryId: json['categoryId'],
         accountId: json['accountId'],
         type: (json['type'] as String).transactionType,
-        description: (json['description'] as String),
+        description: json['description'],
         fromAccountId: json['fromAccountId'],
         toAccountId: json['toAccountId'],
         transferAmount: json['transferAmount'],
-        recurringDate: DateTime.parse(json['recurringDate']),
-        recurringType: RecurringType.values[json['recurringType']],
+        recurringDate: DateTime.tryParse(json['recurringDate'] ?? ''),
+        recurringType: RecurringType.values[json['recurringType'] ?? 1],
       )..superId = json['superId'];
 
   @override

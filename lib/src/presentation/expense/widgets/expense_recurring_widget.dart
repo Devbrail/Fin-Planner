@@ -44,6 +44,7 @@ class ExpenseRecurringWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
                 child: Row(
                   children: [
                     PaisaMaterialYouChip(

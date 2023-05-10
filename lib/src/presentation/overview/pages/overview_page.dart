@@ -70,6 +70,7 @@ class OverViewPage extends StatelessWidget {
                               height: 70,
                               child: ListView.builder(
                                 shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
                                 padding: const EdgeInsets.all(16),
                                 scrollDirection: Axis.horizontal,
                                 itemCount: state.filerTimes.length,
@@ -264,8 +265,9 @@ class BarChartSample2State extends State<BarChartSample2> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 16),
       scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
       child: SizedBox(
         width: showingBarGroups.length * 40.0,
         child: BarChart(

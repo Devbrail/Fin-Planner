@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
@@ -23,9 +24,11 @@ import 'data.dart';
 @Singleton()
 class FileHandler {
   Future<List<Iterable<int>>> importFromFile() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
     final FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['json'],
+      type: androidInfo.version.sdkInt < 29 ? FileType.any : FileType.custom,
+      allowedExtensions: androidInfo.version.sdkInt < 29 ? null : ['json'],
       allowMultiple: false,
     );
     if (result == null || result.files.isEmpty) {

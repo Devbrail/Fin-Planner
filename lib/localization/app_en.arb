@@ -939,5 +939,11 @@
         "description": "Text shown on the recurring action button",
         "type": "text",
         "placeholders": {}
+    },
+    "sortList": "Sort list",
+    "@sortList": {
+        "description": "Title text shown on the sort dialog",
+        "type": "text",
+        "placeholders": {}
     }
 }

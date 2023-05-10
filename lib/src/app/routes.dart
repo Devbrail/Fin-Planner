@@ -235,8 +235,8 @@ final GoRouter goRouter = GoRouter(
           builder: (context, state) => const AddOrEditDebtPage(),
         ),
         GoRoute(
-          name: debtAddOrEditPath,
-          path: debtAddOrEditName,
+          name: debtAddOrEditName,
+          path: debtAddOrEditPath,
           builder: (context, state) => AddOrEditDebtPage(
             debtId: state.params['did'],
           ),

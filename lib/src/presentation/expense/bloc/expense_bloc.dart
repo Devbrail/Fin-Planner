@@ -73,19 +73,17 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     Emitter<ExpenseState> emit,
   ) async {
     final int? expenseId = int.tryParse(event.expenseId ?? '');
-    if (expenseId == null) return;
+    if (expenseId == null) {
+      selectedAccountId = settingsController.defaultAccountId;
+      return;
+    }
 
     final Expense? expense = await expenseUseCase(expenseId);
     if (expense != null) {
       expenseAmount = expense.currency;
       expenseName = expense.name;
       selectedCategoryId = expense.categoryId;
-      if (settingsController.defaultAccountId == null ||
-          settingsController.defaultAccountId == -1) {
-        selectedAccountId = expense.accountId;
-      } else {
-        selectedAccountId = settingsController.defaultAccountId;
-      }
+      selectedAccountId = expense.accountId;
       selectedDate = expense.time;
       timeOfDay = TimeOfDay.fromDateTime(expense.time);
       transactionType = expense.type ?? TransactionType.expense;

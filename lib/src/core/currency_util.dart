@@ -68,8 +68,8 @@ String formatNumberv1(double number) {
       .join(','); // join the parts with a comma as the decimal separator
 }
 
-void main() {
+//void main() {
   //double number = 1234567.89;
   //String formattedNumber = formatNumber(number);
   //print(formattedNumber); // Output: 1.234.567,89
-}
+//}

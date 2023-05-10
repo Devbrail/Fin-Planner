@@ -83,7 +83,7 @@ class HomeMobilePage extends StatelessWidget {
                     selectedIcon: MdiIcons.timetable,
                     title: context.loc.budget,
                   ),
-                  DrawerItemWidget(
+                  /* DrawerItemWidget(
                     isSelected: false,
                     onPressed: () {
                       Navigator.pop(context);
@@ -92,7 +92,7 @@ class HomeMobilePage extends StatelessWidget {
                     icon: MdiIcons.cashSync,
                     selectedIcon: MdiIcons.cashSync,
                     title: context.loc.recurring,
-                  ),
+                  ), */
                   const Divider(),
                   DrawerItemWidget(
                     isSelected: false,
