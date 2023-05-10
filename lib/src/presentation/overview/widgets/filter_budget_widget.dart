@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/common.dart';
-import '../../../core/enum/filter_budget.dart';
+import '../../../core/enum/filter_expense.dart';
 import '../../../domain/expense/entities/expense.dart';
 
 class FilterBudgetWidget extends StatelessWidget {

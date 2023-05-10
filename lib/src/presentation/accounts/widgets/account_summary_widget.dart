@@ -29,7 +29,7 @@ class AccountSummaryWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    context.loc.incomeLabel,
+                    context.loc.income,
                     style: TextStyle(
                       color: Theme.of(context)
                           .colorScheme
@@ -56,7 +56,7 @@ class AccountSummaryWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    context.loc.expenseLabel,
+                    context.loc.expense,
                     style: TextStyle(
                       color: Theme.of(context)
                           .colorScheme
@@ -85,7 +85,7 @@ class AccountSummaryWidget extends StatelessWidget {
             Expanded(
               child: PaisaExpenseStatsWidget(
                 total: expenses.totalIncome.toCurrency(decimalDigits: 0),
-                title: context.loc.incomeLabel,
+                title: context.loc.income,
                 graphData: expenses.incomeList.map((e) => e.currency).toList(),
                 graphLineColor:
                     Theme.of(context).extension<CustomColors>()!.green ??
@@ -96,7 +96,7 @@ class AccountSummaryWidget extends StatelessWidget {
             Expanded(
               child: PaisaExpenseStatsWidget(
                 total: expenses.totalExpense.toCurrency(decimalDigits: 0),
-                title: context.loc.expenseLabel,
+                title: context.loc.expense,
                 graphData: expenses.expenseList.map((e) => e.currency).toList(),
                 graphLineColor:
                     Theme.of(context).extension<CustomColors>()!.red ??

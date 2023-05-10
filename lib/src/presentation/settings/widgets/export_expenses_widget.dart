@@ -31,8 +31,8 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
   Widget build(BuildContext context) {
     return SettingsOption(
       onTap: () => exportData('Export'),
-      title: context.loc.saveAsCSVLabel,
-      subtitle: context.loc.saveAsCSVDescLabel,
+      title: context.loc.saveAsCSV,
+      subtitle: context.loc.saveAsCSVDesc,
     );
   }
 

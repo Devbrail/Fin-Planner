@@ -35,8 +35,12 @@ class ColorPickerWidget extends StatelessWidget {
             Icons.color_lens,
             color: Theme.of(context).colorScheme.primary,
           ),
-          title: Text(context.loc.pickColorLabel),
-          subtitle: Text(context.loc.pickColorDescLabel),
+          title: Text(
+            context.loc.pickColor,
+          ),
+          subtitle: Text(
+            context.loc.pickColorDesc,
+          ),
           trailing: Container(
             width: 32,
             height: 32,

@@ -54,7 +54,7 @@ class UserProfilePage extends StatelessWidget {
           children: [
             ListTile(
               title: Text(
-                context.loc.profileLabel,
+                context.loc.profile,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
@@ -88,7 +88,9 @@ class UserProfilePage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () => _updateDetails(context),
-                child: Text(context.loc.updateLabel),
+                child: Text(
+                  context.loc.update,
+                ),
               ),
             ),
             const SizedBox(height: 10)

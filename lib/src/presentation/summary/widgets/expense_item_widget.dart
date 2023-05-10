@@ -22,11 +22,12 @@ class ExpenseItemWidget extends StatelessWidget {
   final Expense expense;
   final Category category;
 
-  String getSubtitle() {
+  String getSubtitle(BuildContext context) {
     if (expense.type == TransactionType.transfer) {
       return expense.time.shortDayString;
     } else {
-      return '${account.bankName} • ${expense.time.shortDayString}';
+      return context.loc.transactionSubTittleText(
+          account.bankName, expense.time.shortDayString);
     }
   }
 
@@ -49,7 +50,7 @@ class ExpenseItemWidget extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          getSubtitle(),
+          getSubtitle(context),
           style: GoogleFonts.manrope(
             textStyle: Theme.of(context).textTheme.bodySmall,
             fontWeight: FontWeight.w600,

@@ -49,7 +49,7 @@ class CurrencySelectorPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      context.loc.selectCountryLabel,
+                      context.loc.selectCurrency,
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class CurrencySelectorPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: PaisaTextFormField(
-                  hintText: context.loc.searchLabel,
+                  hintText: context.loc.search,
                   controller: TextEditingController(),
                   keyboardType: TextInputType.name,
                   onChanged: (value) =>
@@ -112,7 +112,7 @@ class CurrencySelectorPage extends StatelessWidget {
         extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
         label: const Icon(MdiIcons.arrowRight),
         icon: Text(
-          context.loc.nextLabel,
+          context.loc.next,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,

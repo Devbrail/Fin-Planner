@@ -1,428 +1,649 @@
 {
     "appTitle": "Paisa",
     "@appTitle": {
-        "description": "The app name"
+        "description": "The app name",
+        "type": "text",
+        "placeholders": {}
     },
-    "homeLabel": "Home",
-    "@homeLabel": {
-        "description": "Home label"
+    "home": "Home",
+    "@home": {
+        "description": "Home text shown in the bottom navigation or drawer widget",
+        "type": "text",
+        "placeholders": {}
     },
-    "dueDateLabel": "End date",
-    "@dueDateLabel": {
-        "description": "Select end date in debt/ credit page"
-    },
-    "startDateLabel": "Start date",
-    "@startDateLabel": {
-        "description": "Select start date in debt/ credit page"
-    },
-    "enterDebtLabel": "Enter debt amount",
-    "@enterDebtLabel": {
-        "description": "Text input hint"
-    },
-    "enterCreditLabel": "Enter credit amount",
-    "@enterCreditLabel": {
-        "description": "Text input hint"
-    },
-    "addCategoryLabel": "Add Category",
-    "@addCategoryLabel": {
-        "description": "Show add category text when empty in categories"
-    },
-    "addTransactionLabel": "Add transaction",
-    "@addTransactionLabel": {
-        "description": "While adding a transaction we show toolbar text as add transaction"
-    },
-    "updateTransactionLabel": "Update transaction",
-    "@updateTransactionLabel": {
-        "description": "While updating a transaction we show toolbar text as update transaction"
-    },
-    "updateAccountLabel": "Update account",
-    "@updateAccountLabel": {
-        "description": "While updating a account we show toolbar text as update account"
-    },
-    "addAccountLabel": "Add Account",
-    "@addAccountLabel": {
-        "description": "While adding a account we show toolbar text as add account"
-    },
-    "categoriesLabel": "Categories",
-    "@categoriesLabel": {
-        "description": "Categories text for navigation items and toolbar text"
-    },
-    "accountsLabel": "Accounts",
-    "@accountsLabel": {
-        "description": "Accounts text for navigation items and toolbar text"
-    },
-    "budgetLabel": "Budget",
-    "@budgetLabel": {
-        "description": "Budget text for navigation items and toolbar text"
+    "transactions": "Transactions",
+    "@transactions": {
+        "description": "Section title shown on the home page",
+        "type": "text",
+        "placeholders": {}
     },
     "welcomeMessage": "Welcome back!",
     "@welcomeMessage": {
-        "description": "Text to show under the user name for welcome message"
+        "description": "Text shown on the home screen under the user name",
+        "type": "text",
+        "placeholders": {}
     },
-    "settingsLabel": "Settings",
-    "@settingsLabel": {
-        "description": "Settings label"
+    "categories": "Categories",
+    "@categories": {
+        "description": "Categories text shown in the bottom navigation or drawer widget",
+        "type": "text",
+        "placeholders": {}
     },
-    "localAppLabel": "Lock app",
-    "@localAppLabel": {
-        "description": "Biometric auth for to open the app"
+    "accounts": "Accounts",
+    "@accounts": {
+        "description": "Accounts text shown in the bottom navigation or drawer widget",
+        "type": "text",
+        "placeholders": {}
     },
-    "expenseLabel": "Expense",
-    "@expenseLabel": {
-        "description": "Show expense text label"
+    "budget": "Budget",
+    "@budget": {
+        "description": "Accounts text shown in the bottom navigation or drawer widget",
+        "type": "text",
+        "placeholders": {}
     },
-    "expensesLabel": "Expenses",
-    "@expensesLabel": {
-        "description": "Show expenses text label"
+    "overview": "Overview",
+    "@overview": {
+        "description": "Accounts text shown in the bottom navigation or drawer widget",
+        "type": "text",
+        "placeholders": {}
     },
-    "dailyLabel": "Daily",
-    "@dailyLabel": {
-        "description": "Filter expenses based text"
+    "recurring": "Recurring",
+    "@recurring": {
+        "description": "Recurring text shown in the bottom navigation or drawer widget and recurring page toolbar title",
+        "type": "text",
+        "placeholders": {}
     },
-    "weeklyLabel": "Weekly",
-    "@weeklyLabel": {
-        "description": "Filter expenses based text"
+    "debts": "Debts",
+    "@debts": {
+        "description": "Debts text shown in the bottom navigation or drawer widget",
+        "type": "text",
+        "placeholders": {}
     },
-    "monthlyLabel": "Monthly",
-    "@monthlyLabel": {
-        "description": "Filter expenses based text"
+    "addTransactionTooltip": "Add transaction",
+    "@addTransactionTooltip": {
+        "description": "Tooltip shown on the home fab button",
+        "type": "text",
+        "placeholders": {}
     },
-    "yearlyLabel": "Yearly",
-    "@yearlyLabel": {
-        "description": "Filter expenses based text"
+    "addAccountTooltip": "Add account",
+    "@addAccountTooltip": {
+        "description": "Tooltip shown on the account fab button",
+        "type": "text",
+        "placeholders": {}
     },
-    "allLabel": "All",
-    "@allLabel": {
-        "description": "Filter expenses based text"
+    "addCategoryTooltip": "Add category",
+    "@addCategoryTooltip": {
+        "description": "Tooltip shown on the category fab button",
+        "type": "text",
+        "placeholders": {}
     },
-    "transactionHistoryLabel": "Transaction History",
-    "@transactionHistoryLabel": {
-        "description": "Account expenses list shown under transaction history"
+    "addDebtTooltip": "Add debt",
+    "@addDebtTooltip": {
+        "description": "Tooltip shown on the category debt button",
+        "type": "text",
+        "placeholders": {}
     },
-    "selectCategoryIconLabel": "Select category icon",
-    "@selectCategoryIconLabel": {
-        "description": "Category icon select error message"
+    "addRecurringTooltip": "Add recurring",
+    "@addRecurringTooltip": {
+        "description": "Tooltip shown on the category recurring button",
+        "type": "text",
+        "placeholders": {}
     },
-    "descriptionLabel": "Description",
-    "@descriptionLabel": {
-        "description": "Description label"
+    "selectDateRangeTooltip": "Date range",
+    "@selectDate": {
+        "description": "Tooltip shown on the overview fab button",
+        "type": "text",
+        "placeholders": {}
     },
-    "cashLabel": "Cash",
-    "@cashLabel": {
-        "description": "Account cash label"
+    "transactionSubTittleText": "{bankName} • {dateString}",
+    "@transactionSubTittleText": {
+        "description": "Tooltip shown on the overview fab button",
+        "type": "text",
+        "placeholders": {
+            "bankName": {
+                "type": "String"
+            },
+            "dateString": {
+                "type": "String"
+            }
+        }
     },
-    "cardHolderLabel": "Cardholder name",
-    "@cardHolderLabel": {
-        "description": "Account cardholder name label"
+    "addCategory": "Add Category",
+    "@addCategory": {
+        "description": "Text shown on the toolbar on the category page",
+        "type": "text",
+        "placeholders": {}
     },
-    "accountNameLabel": "Account name",
-    "@accountNameLabel": {
-        "description": "Account name label"
+    "addCategoryEmptyTitle": "No categories",
+    "@addCategoryEmptyTitle": {
+        "description": "Title text shown on the expense page when there is not categories available",
+        "type": "text",
+        "placeholders": {}
     },
-    "lastFourDigitLabel": "Last four digit number",
-    "@lastFourDigitLabel": {
-        "description": "Account last four digit number label"
+    "addCategoryEmptySubTitle": "Add categories to select",
+    "@addCategoryEmptySubTitle": {
+        "description": "Subtitle text shown on the expense page when there is not categories available",
+        "type": "text",
+        "placeholders": {}
     },
-    "addedAccountLabel": "Account added",
-    "@addedAccountLabel": {
-        "description": "Successful message when account added"
+    "addAccountEmptyTitle": "No accounts",
+    "@addAccountEmptyTitle": {
+        "description": "Title text shown on the expense page when there is not accounts available",
+        "type": "text",
+        "placeholders": {}
     },
-    "updatedAccountLabel": "Account updated",
-    "@updatedAccountLabel": {
-        "description": "Successful message when account updated"
+    "addAccountEmptySubTitle": "Add account to select",
+    "@addAccountEmptySubTitle": {
+        "description": "Subtitle text shown on the expense page when there is not accounts available",
+        "type": "text",
+        "placeholders": {}
     },
-    "deletedAccountLabel": "Account deleted",
-    "@deletedAccountLabel": {
-        "description": "Successful message when account deleted"
+    "addTransaction": "Add transaction",
+    "@addTransaction": {
+        "description": "Add transaction text shown on the transactions page as toolbar title",
+        "type": "text",
+        "placeholders": {}
     },
-    "successAddCategoryLabel": "Category added",
-    "@successAddCategoryLabel": {
-        "description": "Successful message when category deleted"
+    "updateTransaction": "Update transaction",
+    "@updateTransaction": {
+        "description": "Update transaction text shown on the transactions page as toolbar title",
+        "type": "text",
+        "placeholders": {}
     },
-    "validNameLabel": "Enter valid name",
-    "@validNameLabel": {
-        "description": "Error message for valid name"
+    "addedExpense": "Expense added",
+    "@addedExpense": {
+        "description": "Successful message when expense added",
+        "type": "text",
+        "placeholders": {}
     },
-    "profileLabel": "Profile",
-    "@profileLabel": {
-        "description": "Profile label"
+    "updatedExpense": "Expense updated",
+    "@updatedExpense": {
+        "description": "Successful message when expense updated",
+        "type": "text",
+        "placeholders": {}
     },
-    "themeLabel": "Theme",
-    "@themeLabel": {
-        "description": "Theme label"
+    "deletedExpense": "Expense deleted",
+    "@deletedExpense": {
+        "description": "Successful message when expense deleted",
+        "type": "text",
+        "placeholders": {}
     },
-    "reminderLabel": "Reminder",
-    "@reminderLabel": {
-        "description": "Reminder label"
+    "expenseName": "Expense name",
+    "@expenseName": {
+        "description": "Text shown on input hint name",
+        "type": "text",
+        "placeholders": {}
     },
-    "chooseThemeLabel": "Choose theme",
-    "@chooseThemeLabel": {
-        "description": "Choose theme label"
+    "description": "Description",
+    "@description": {
+        "description": "Text shown on the transaction page textfield description ",
+        "type": "text",
+        "placeholders": {}
     },
-    "updateLabel": "Update",
-    "@updateLabel": {
-        "description": "Update label"
+    "selectAccount": "Select account",
+    "@selectAccount": {
+        "description": "Section title text shown on the transaction for accounts",
+        "type": "text",
+        "placeholders": {}
     },
-    "userNameLabel": "User name",
-    "@userNameLabel": {
-        "description": "User name label"
+    "selectCategory": "Select category",
+    "@selectCategory": {
+        "description": "Section title text shown on the transaction for categories ",
+        "type": "text",
+        "placeholders": {}
     },
-    "selectCountryLabel": "Select currency",
-    "@selectCountryLabel": {
-        "description": "Toolbar select currency"
+    "settings": "Settings",
+    "@settings": {
+        "description": "Text shown on the drawer button",
+        "type": "text",
+        "placeholders": {}
     },
-    "errorAuthLabel": "Error authentication",
-    "@errorAuthLabel": {
-        "description": "Show error when biometric fails"
+    "localApp": "Lock app",
+    "@localApp": {
+        "description": "Text shown on the settings page biometric button",
+        "type": "text",
+        "placeholders": {}
     },
-    "emptyAccountLabel": "No accounts are available",
-    "@emptyAccountLabel": {
-        "description": "No accounts available message"
+    "expense": "Expense",
+    "@expense": {
+        "description": "Text shown on the multiple places",
+        "type": "text",
+        "placeholders": {}
     },
-    "emptyAccountDescriptionLabel": "Add an account to display it here",
-    "@emptyAccountDescriptionLabel": {
-        "description": "No accounts available description"
+    "daily": "Daily",
+    "@daily": {
+        "description": "Text shown on the expenses filter",
+        "type": "text",
+        "placeholders": {}
     },
-    "emptyCategoriesLabel": "No categories are available",
-    "@emptyCategoriesLabel": {
-        "description": "No accounts available message"
+    "weekly": "Weekly",
+    "@weekly": {
+        "description": "Text shown on the expenses filter",
+        "type": "text",
+        "placeholders": {}
     },
-    "emptyCategoriesDescriptionLabel": "Add an category to display it here",
-    "@emptyCategoriesDescriptionLabel": {
-        "description": "No category available description"
+    "monthly": "Monthly",
+    "@monthly": {
+        "description": "Text shown on the expenses filter",
+        "type": "text",
+        "placeholders": {}
     },
-    "emptyOverviewLabel": "No overview data",
-    "@emptyOverviewLabel": {
-        "description": "No overview data message"
+    "yearly": "Yearly",
+    "@yearly": {
+        "description": "Text shown on the expenses filter",
+        "type": "text",
+        "placeholders": {}
     },
-    "emptyOverviewDescriptionLabel": "To see your spending overview, add your expenses",
-    "@emptyOverviewDescriptionLabel": {
-        "description": "No budget overview description label"
+    "all": "All",
+    "@all": {
+        "description": "Text shown on the expenses filter",
+        "type": "text",
+        "placeholders": {}
     },
-    "addedExpenseLabel": "Expense added",
-    "@addedExpenseLabel": {
-        "description": "Successful message when expense added"
+    "updateAccount": "Update account",
+    "@updateAccount": {
+        "description": "Update account text shown on the transactions page as toolbar title",
+        "type": "text",
+        "placeholders": {}
     },
-    "updatedExpenseLabel": "Expense updated",
-    "@updatedExpenseLabel": {
-        "description": "Successful message when expense updated"
+    "addAccount": "Add Account",
+    "@addAccount": {
+        "description": "Add account text shown on the transactions page as toolbar title",
+        "type": "text",
+        "placeholders": {}
     },
-    "deletedExpenseLabel": "Expense deleted",
-    "@deletedExpenseLabel": {
-        "description": "Successful message when expense deleted"
+    "transactionHistory": "Transaction history",
+    "@transactionHistory": {
+        "description": "Title text shown on accounts page as section header title",
+        "type": "text",
+        "placeholders": {}
     },
-    "expenseNameLabel": "Expense name",
-    "@expenseNameLabel": {
-        "description": "Text input hint name"
+    "cash": "Cash",
+    "@cash": {
+        "description": "Text shown on the account page chip button",
+        "type": "text",
+        "placeholders": {}
     },
-    "amountLabel": "Amount",
-    "@amountLabel": {
-        "description": "Text input hint name"
+    "bank": "Bank",
+    "@bank": {
+        "description": "Text shown on the account page chip button",
+        "type": "text",
+        "placeholders": {}
     },
-    "initialAmountLabel": "Initial amount",
-    "@initialAmountLabel": {
-        "description": "Text input hint name"
+    "wallet": "Wallet",
+    "@wallet": {
+        "description": "Text shown on the account page chip button",
+        "type": "text",
+        "placeholders": {}
     },
-    "validAmountLabel": "Enter valid amount",
-    "@validAmountLabel": {
-        "description": "Text input hint name"
+    "cardHolder": "Cardholder name",
+    "@cardHolder": {
+        "description": "Text shown on the account page as textfield hint",
+        "type": "text",
+        "placeholders": {}
     },
-    "validDateLabel": "Select valid date",
-    "@validDateLabel": {
-        "description": "Date validate message"
+    "accountName": "Account name",
+    "@accountName": {
+        "description": "Text shown on the account page as textfield hint",
+        "type": "text",
+        "placeholders": {}
     },
-    "addLabel": "Add",
-    "@addLabel": {
-        "description": "Add label"
+    "lastFourDigit": "Last four digit number",
+    "@lastFourDigit": {
+        "description": "Text shown on the account page as textfield hint",
+        "type": "text",
+        "placeholders": {}
     },
-    "selectAccountLabel": "Select account",
-    "@selectAccountLabel": {
-        "description": "Select account label"
+    "addedAccount": "Account added",
+    "@addedAccount": {
+        "description": "Successful message when account added",
+        "type": "text",
+        "placeholders": {}
     },
-    "selectCategoryLabel": "Select category",
-    "@selectCategoryLabel": {
-        "description": "Select category label"
+    "updatedAccount": "Account updated",
+    "@updatedAccount": {
+        "description": "Successful message when account updated",
+        "type": "text",
+        "placeholders": {}
     },
-    "socialLinksLabel": "Social links",
-    "@socialLinksLabel": {
-        "description": "Social links label"
+    "deletedAccount": "Account deleted",
+    "@deletedAccount": {
+        "description": "Successful message when account deleted",
+        "type": "text",
+        "placeholders": {}
     },
-    "telegramLabel": "Telegram",
-    "@telegramLabel": {
-        "description": "Telegram label"
+    "successAddCategory": "Category added",
+    "@successAddCategory": {
+        "description": "Successful message when category deleted",
+        "type": "text",
+        "placeholders": {}
     },
-    "telegramGroupLabel": "A group to follow and post bugs and feature requests",
-    "@telegramGroupLabel": {
-        "description": "A group to follow and post bugs and feature requests label"
+    "validName": "Enter valid name",
+    "@validName": {
+        "description": "Error message shown when entered name is not valid",
+        "type": "text",
+        "placeholders": {}
     },
-    "noCategoryLabel": "No category selected",
-    "@noCategoryLabel": {
-        "description": "No category label"
+    "profile": "Profile",
+    "@profile": {
+        "description": "Text shown on the bottom sheet dialog",
+        "type": "text",
+        "placeholders": {}
     },
-    "noAccountAvailableLabel": "No account selected",
-    "@noAccountAvailableLabel": {
-        "description": "No account label"
+    "chooseTheme": "Choose theme",
+    "@chooseTheme": {
+        "description": "Title text shown on the settings page theme for theme chooser",
+        "type": "text",
+        "placeholders": {}
     },
-    "privacyPolicyLabel": "Privacy & Policy",
-    "@privacyPolicyLabel": {
-        "description": "Privacy & Policy label"
+    "selectCurrency": "Select currency",
+    "@selectCurrency": {
+        "description": "Toolbar title text shown on choosing the currency",
+        "type": "text",
+        "placeholders": {}
     },
-    "githubLabel": "Github",
-    "@githubLabel": {
-        "description": "Github label"
+    "errorAuth": "Error authentication",
+    "@errorAuth": {
+        "description": "Error message shown when biometric authentication fails",
+        "type": "text",
+        "placeholders": {}
     },
-    "versionLabel": "Version",
-    "@versionLabel": {
-        "description": "Github label"
+    "emptyAccountMessageTitle": "No accounts are available",
+    "@emptyAccountMessageTitle": {
+        "description": "Message title text shown on the accounts page",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyAccountMessageSubTitle": "Add an account to display it here",
+    "@emptyAccountMessageSubTitle": {
+        "description": "Message sub title text shown on the accounts page",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyCategoriesMessageTitle": "No categories are available",
+    "@emptyCategoriesMessageTitle": {
+        "description": "Message title text shown on the categories page when no categories available",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyCategoriesMessageSubTitle": "Add an category to display it here",
+    "@emptyCategoriesMessageSubTitle": {
+        "description": "Message subtitle text shown on the categories page when no categories available",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyOverviewMessageTitle": "No overview data",
+    "@emptyOverviewMessageTitle": {
+        "description": "No overview data message",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyOverviewMessageSubtitle": "To see your spending overview, add your expenses",
+    "@emptyOverviewMessageSubtitle": {
+        "description": "No budget overview description ",
+        "type": "text",
+        "placeholders": {}
+    },
+    "amount": "Amount",
+    "@amount": {
+        "description": "Text shown on the input hint name",
+        "type": "text",
+        "placeholders": {}
+    },
+    "initialAmount": "Initial amount",
+    "@initialAmount": {
+        "description": "Text shown on the input hint name"
+    },
+    "validAmount": "Enter valid amount",
+    "@validAmount": {
+        "description": "Text shown on the input hint name",
+        "type": "text",
+        "placeholders": {}
+    },
+    "dueDate": "End date",
+    "@dueDate": {
+        "description": "Text shown on the debt/ credit page when selecting end date",
+        "type": "text",
+        "placeholders": {}
+    },
+    "startDate": "Start date",
+    "@startDate": {
+        "description": "Text shown on the debt/ credit page when selecting start date",
+        "type": "text",
+        "placeholders": {}
+    },
+    "validDate": "Select valid date",
+    "@validDate": {
+        "description": "Subtitle text shown on the debt/ credit page when selecting date",
+        "type": "text",
+        "placeholders": {}
+    },
+    "socialLinks": "Social links",
+    "@socialLinks": {
+        "description": "Section title shown on the settings page",
+        "type": "text",
+        "placeholders": {}
+    },
+    "telegram": "Telegram",
+    "@telegram": {
+        "description": "Title text shown on settings page for telegram button",
+        "type": "text",
+        "placeholders": {}
+    },
+    "telegramGroup": "A group to follow and post bugs and feature requests",
+    "@telegramGroup": {
+        "description": "Subtitle text shown on settings page for telegram button",
+        "type": "text",
+        "placeholders": {}
+    },
+    "privacyPolicy": "Privacy & Policy",
+    "@privacyPolicy": {
+        "description": "Title text shown on settings page for privacy and policy button",
+        "type": "text",
+        "placeholders": {}
+    },
+    "github": "Github",
+    "@github": {
+        "description": "Title text shown on settings page for github button ",
+        "type": "text",
+        "placeholders": {}
+    },
+    "githubText": "Fork the project on GitHub",
+    "@githubText": {
+        "description": "Subtitle text shown on the github button",
+        "type": "text",
+        "placeholders": {}
+    },
+    "version": "Version",
+    "@version": {
+        "description": "Title text shown on the settings page for button",
+        "type": "text",
+        "placeholders": {}
     },
     "versionNumber": "v{version}",
     "@versionNumber": {
-        "description": "Version number label",
+        "description": "Subtitle text shown on the settings page for button",
         "placeholders": {
             "version": {
                 "type": "String"
             }
         }
     },
-    "deleteAccountLabel": "Deleting the account deletes all expenses which tied to this account ",
-    "@deleteAccountLabel": {
-        "description": "Delete account message"
+    "deleteAccount": "Deleting the account deletes all expenses which tied to this account ",
+    "@deleteAccount": {
+        "description": "Delete account message",
+        "type": "text",
+        "placeholders": {}
     },
-    "deleteCategoryLabel": "Deleting the category deletes all expenses which tied to this category ",
-    "@deleteCategoryLabel": {
-        "description": "Delete category message"
+    "deleteCategory": "Deleting the category deletes all expenses which tied to this category ",
+    "@deleteCategory": {
+        "description": "Delete category message",
+        "type": "text",
+        "placeholders": {}
     },
-    "deleteExpenseLabel": "Expense will be permanently removed from account",
-    "@deleteExpenseLabel": {
-        "description": "Delete expense message"
+    "deleteExpense": "Expense will be permanently removed from account",
+    "@deleteExpense": {
+        "description": "Delete expense message",
+        "type": "text",
+        "placeholders": {}
     },
-    "dialogDeleteTitleLabel": "Permanently delete?",
-    "@dialogDeleteTitleLabel": {
-        "description": "Permanently delete label"
+    "dialogDeleteTitle": "Permanently delete?",
+    "@dialogDeleteTitle": {
+        "description": "Permanently delete ",
+        "type": "text",
+        "placeholders": {}
     },
-    "updatedCategoryLabel": "Category updated",
-    "@updatedCategoryLabel": {
-        "description": "Successful message when category updated"
+    "updatedCategory": "Category updated",
+    "@updatedCategory": {
+        "description": "Successful message when category updated",
+        "type": "text",
+        "placeholders": {}
     },
-    "doneLabel": "Done",
-    "@doneLabel": {
-        "description": "Done label"
+    "update": "Update",
+    "@update": {
+        "description": "Text shown on multiple places on button",
+        "type": "text",
+        "placeholders": {}
     },
-    "cancelLabel": "Cancel",
-    "@cancelLabel": {
-        "description": "Cancel label"
+    "add": "Add",
+    "@add": {
+        "description": "Text shown on multiple places on button",
+        "type": "text",
+        "placeholders": {}
     },
-    "customLabel": "Custom",
-    "@customLabel": {
-        "description": "Custom label"
+    "done": "Done",
+    "@done": {
+        "description": "Text shown on multiple places on button",
+        "type": "text",
+        "placeholders": {}
     },
-    "accentColorLabel": "Accent color",
-    "@accentColorLabel": {
-        "description": "Accent color label"
+    "cancel": "Cancel",
+    "@cancel": {
+        "description": "Text shown on multiple places on button",
+        "type": "text",
+        "placeholders": {}
     },
-    "dynamicColorLabel": "Dynamic",
-    "@dynamicColorLabel": {
-        "description": "Dynamic label"
+    "custom": "Custom",
+    "@custom": {
+        "description": "Text shown on the one of the theme option",
+        "type": "text",
+        "placeholders": {}
     },
-    "pickColorLabel": "Pick color",
-    "@pickColorLabel": {
-        "description": "Pick color label"
+    "accentColor": "Primary color",
+    "@accentColor": {
+        "description": "Title text shown on the settings page theme button",
+        "type": "text",
+        "placeholders": {}
     },
-    "pickColorDescLabel": "Set color to your category",
-    "@pickColorDescLabel": {
-        "description": "Pick color label"
+    "dynamicColor": "Dynamic",
+    "@dynamicColor": {
+        "description": "Text shown on the theme option switch button ",
+        "type": "text",
+        "placeholders": {}
     },
-    "colorsLabel": "Colors",
-    "@colorsLabel": {
-        "description": "Colors label"
+    "pickColor": "Pick color",
+    "@pickColor": {
+        "description": "Title text shown on the color picker",
+        "type": "text",
+        "placeholders": {}
     },
-    "othersLabel": "Others",
-    "@othersLabel": {
-        "description": "Others label"
+    "pickColorDesc": "Set color to your category",
+    "@pickColorDesc": {
+        "description": "Subtitle text shown on the category color picker button",
+        "type": "text",
+        "placeholders": {}
     },
-    "githubTextLabel": "Fork the project on GitHub",
-    "@githubTextLabel": {
-        "description": "GitHub text label"
+    "colors": "Colors",
+    "@colors": {
+        "description": "Section title on settings page for theme",
+        "type": "text",
+        "placeholders": {}
     },
-    "madeWithLoveInIndiaLabel": "Made with ♥ in India",
-    "@madeWithLoveInIndiaLabel": {
-        "description": "Made with ♥ in India label"
+    "others": "Others",
+    "@others": {
+        "description": "Section title on settings page for theme",
+        "type": "text",
+        "placeholders": {}
     },
-    "updateCategoryLabel": "Update Category",
-    "@updateCategoryLabel": {
+    "madeWithLoveInIndia": "Made with ♥ in India",
+    "@madeWithLoveInIndia": {
+        "description": "Made with ♥ in India "
+    },
+    "updateCategory": "Update Category",
+    "@updateCategory": {
         "description": "Category update toolbar message"
     },
-    "accountInfoLabel": "Information",
-    "@accountInfoLabel": {
-        "description": "information label"
+    "accountInfo": "Information",
+    "@accountInfo": {
+        "description": "information "
     },
-    "accountInfoDescLabel": "The account details you entered are not shared with anyone, including us. It is only used for visual representation of account details, you may enter false info too",
-    "@accountInfoDescLabel": {
+    "accountInfoDesc": "The account details you entered are not shared with anyone, including us. It is only used for visual representation of account details, you may enter false info too",
+    "@accountInfoDesc": {
         "description": "Account information message"
     },
-    "nextLabel": "Next",
-    "@nextLabel": {
-        "description": "Next label"
+    "next": "Next",
+    "@next": {
+        "description": "Next "
     },
-    "imageLabel": "Image",
-    "@imageLabel": {
-        "description": "Image label"
+    "image": "Image",
+    "@image": {
+        "description": "Image "
     },
-    "welcomeLabel": "Hi, Welcome to",
-    "@welcomeLabel": {
+    "welcome": "Hi, Welcome to",
+    "@welcome": {
         "description": "Intro page message for name input"
     },
-    "welcomeDescLabel": "What should we call you",
-    "@welcomeDescLabel": {
-        "description": "Welcome desc label"
+    "welcomeDesc": "What should we call you",
+    "@welcomeDesc": {
+        "description": "Welcome desc "
     },
-    "nameHintLabel": "Name",
-    "@nameHintLabel": {
+    "nameHint": "Name",
+    "@nameHint": {
         "description": "Text input hint name"
     },
-    "enterNameHintLabel": "Enter name",
-    "@enterNameHintLabel": {
+    "enterNameHint": "Enter name",
+    "@enterNameHint": {
         "description": "Text input hint name"
     },
-    "imageDescLabel": "Let's set image of you",
-    "@imageDescLabel": {
-        "description": "Image desc label"
+    "imageDesc": "Let's set image of you",
+    "@imageDesc": {
+        "description": "Image desc "
     },
-    "setBudgetLabel": "Set budget for category",
-    "@setBudgetLabel": {
-        "description": "Set budget label"
+    "setBudget": "Set budget for category",
+    "@setBudget": {
+        "description": "Set budget "
     },
-    "incomeLabel": "Income",
-    "@incomeLabel": {
-        "description": "Income label"
+    "income": "Income",
+    "@income": {
+        "description": "Income "
     },
-    "outcomeLabel": "Outcome",
-    "@outcomeLabel": {
-        "description": "Outcome label"
+    "outcome": "Outcome",
+    "@outcome": {
+        "description": "Outcome "
     },
-    "thisMonthLabel": "This month",
-    "@thisMonthLabel": {
-        "description": "This month label"
+    "thisMonth": "This month",
+    "@thisMonth": {
+        "description": "This month "
     },
-    "totalBalanceLabel": "Total balance",
-    "@totalBalanceLabel": {
-        "description": "Total balance label"
+    "totalBalance": "Total balance",
+    "@totalBalance": {
+        "description": "Total balance "
     },
-    "acceptLabel": "Accept",
-    "@acceptLabel": {
-        "description": "Accept label"
+    "accept": "Accept",
+    "@accept": {
+        "description": "Accept "
     },
-    "okLabel": "Ok",
-    "@okLabel": {
-        "description": "Ok label"
+    "ok": "Ok",
+    "@ok": {
+        "description": "Ok "
     },
-    "searchMessageLabel": "Start searching something!",
-    "@searchMessageLabel": {
-        "description": "search message label"
+    "searchMessage": "Start searching something!",
+    "@searchMessage": {
+        "description": "search message "
     },
-    "emptySearchMessageLabel": "Looks like nothing found!",
-    "@emptySearchMessageLabel": {
-        "description": "empty search message label"
+    "emptySearchMessage": "Looks like nothing found!",
+    "@emptySearchMessage": {
+        "description": "empty search message "
     },
     "emptyExpensesMessage": "No expenses yet?",
     "@emptyExpensesMessage": {
@@ -432,288 +653,291 @@
     "@emptyExpensesDescription": {
         "description": "No expenses in home description"
     },
-    "balanceLabel": "Balance",
-    "@balanceLabel": {
-        "description": "Balance label"
+    "balance": "Balance",
+    "@balance": {
+        "description": "Balance "
     },
-    "selectIconLabel": "Select icon",
-    "@selectIconLabel": {
-        "description": "Select icon label"
+    "selectIcon": "Select icon",
+    "@selectIcon": {
+        "description": "Select icon "
     },
-    "selectIconDescLabel": "Tap to select icon",
-    "@selectIconDescLabel": {
+    "selectIconDesc": "Tap to select icon",
+    "@selectIconDesc": {
         "description": "Icon picker dialog title"
     },
-    "incomeNameLabel": "Income name",
-    "@incomeNameLabel": {
-        "description": "income name label"
+    "incomeName": "Income name",
+    "@incomeName": {
+        "description": "income name "
     },
-    "currencySignLabel": "Currency sign",
-    "@currencySignLabel": {
-        "description": "Currency sign label"
+    "currencySign": "Currency sign",
+    "@currencySign": {
+        "description": "Currency sign "
     },
-    "incomeAddedSuccessfulLabel": "Income added",
-    "@incomeAddedSuccessfulLabel": {
-        "description": "Expense added label"
+    "incomeAddedSuccessful": "Income added",
+    "@incomeAddedSuccessful": {
+        "description": "Expense added "
     },
-    "incomeUpdateSuccessfulLabel": "Income updated",
-    "@incomeUpdateSuccessfulLabel": {
-        "description": "Expense updated label"
+    "incomeUpdateSuccessful": "Income updated",
+    "@incomeUpdateSuccessful": {
+        "description": "Expense updated "
     },
-    "incomeDeletedSuccessfulLabel": "Income deleted",
-    "@incomeDeletedSuccessfulLabel": {
-        "description": "Income deleted label"
+    "incomeDeletedSuccessful": "Income deleted",
+    "@incomeDeletedSuccessful": {
+        "description": "Income deleted "
     },
-    "expenseByCategoryLabel": "Expense by category",
-    "@expenseByCategoryLabel": {
-        "description": "Expense by category label"
+    "expenseByCategory": "Expense by category",
+    "@expenseByCategory": {
+        "description": "Expense by category "
     },
-    "backupAndRestoreLabel": "Backup and Restore",
-    "@backupAndRestoreLabel": {
-        "description": "Backup and Restore label"
+    "backupAndRestore": "Backup and Restore",
+    "@backupAndRestore": {
+        "description": "Backup and Restore "
     },
-    "backupAndRestoreDescLabel": "Backup and restore your expense, accounts & categories",
-    "@backupAndRestoreDescLabel": {
-        "description": "Backup and restore your data label"
+    "backupAndRestoreDesc": "Backup and restore your expense, accounts & categories",
+    "@backupAndRestoreDesc": {
+        "description": "Backup and restore your data "
     },
-    "exportDataLabel": "Export",
-    "@exportDataLabel": {
+    "exportData": "Export",
+    "@exportData": {
         "description": "Export the data from db to file"
     },
-    "importDataLabel": "Import",
-    "@importDataLabel": {
+    "importData": "Import",
+    "@importData": {
         "description": "Import the data from file to db"
     },
-    "restoreLabel": "Restore",
-    "@restoreLabel": {
-        "description": "Restore label"
+    "restore": "Restore",
+    "@restore": {
+        "description": "Restore "
     },
-    "creatingBackupLabel": "Creating backup",
-    "@creatingBackupLabel": {
-        "description": "Creating backup label"
+    "creatingBackup": "Creating backup",
+    "@creatingBackup": {
+        "description": "Creating backup "
     },
-    "restoringBackupLabel": "Restoring backup",
-    "@restoringBackupLabel": {
-        "description": "Creating backup label"
+    "restoringBackup": "Restoring backup",
+    "@restoringBackup": {
+        "description": "Creating backup "
     },
-    "saveAsCSVLabel": "Save as CSV",
-    "@saveAsCSVLabel": {
-        "description": "Save as CSV label"
+    "saveAsCSV": "Save as CSV",
+    "@saveAsCSV": {
+        "description": "Save as CSV "
     },
-    "saveAsCSVDescLabel": "Export data into CSV file format",
-    "@saveAsCSVDescLabel": {
-        "description": "Save as CSV label"
+    "saveAsCSVDesc": "Export data into CSV file format",
+    "@saveAsCSVDesc": {
+        "description": "Save as CSV "
     },
-    "transferLabel": "Transfer",
-    "@transferLabel": {
-        "description": "Transfer label"
+    "transfer": "Transfer",
+    "@transfer": {
+        "description": "Transfer "
     },
-    "appRateLabel": "Rate the app",
-    "@appRateLabel": {
-        "description": "Rate label"
+    "appRate": "Rate the app",
+    "@appRate": {
+        "description": "Rate "
     },
-    "appRateDescLabel": "Love this app? Let us know in the Google Play Store how we can make it even better",
-    "@appRateDescLabel": {
-        "description": "Rate label"
+    "appRateDesc": "Love this app? Let us know in the Google Play Store how we can make it even better",
+    "@appRateDesc": {
+        "description": "Rate "
     },
-    "raiseABugOrRequestLabel": "Raise a bug or request",
-    "@raiseABugOrRequestLabel": {
-        "description": "Raise a bug or request label"
+    "raiseABugOrRequest": "Raise a bug or request",
+    "@raiseABugOrRequest": {
+        "description": "Raise a bug or request "
     },
-    "raiseABugOrRequestDescLabel": "Found a bug or need a feature to implement ask away",
-    "@raiseABugOrRequestDescLabel": {
-        "description": "Found a bug or need a feature to implement ask away label"
+    "raiseABugOrRequestDesc": "Found a bug or need a feature to implement ask away",
+    "@raiseABugOrRequestDesc": {
+        "description": "Found a bug or need a feature to implement ask away "
     },
-    "transferNameLabel": "Transfer name",
-    "@transferNameLabel": {
-        "description": "Transfer name label"
+    "transferName": "Transfer name",
+    "@transferName": {
+        "description": "Transfer name "
     },
-    "debtsLabel": "Debts",
-    "@debtsLabel": {
-        "description": "Debts label"
+    "debt": "Debt",
+    "@debt": {
+        "description": "Debts "
     },
-    "debtLabel": "Debt",
-    "@debtLabel": {
-        "description": "Debts label"
+    "credit": "Credit",
+    "@credit": {
+        "description": "Credit "
     },
-    "creditLabel": "Credit",
-    "@creditLabel": {
-        "description": "Credit label"
+    "enterCategory": "Enter category",
+    "@enterCategory": {
+        "description": "Enter category "
     },
-    "enterCategoryLabel": "Enter category",
-    "@enterCategoryLabel": {
-        "description": "Enter category label"
+    "addDebt": "Add debt",
+    "@addDebt": {
+        "description": "Add debt "
     },
-    "addDebtLabel": "Add debt",
-    "@addDebtLabel": {
-        "description": "Add debt label"
+    "addCredit": "Add credit",
+    "@addCredit": {
+        "description": "Add credit "
     },
-    "addCreditLabel": "Add credit",
-    "@addCreditLabel": {
-        "description": "Add credit label"
+    "enterBudget": "Enter budget",
+    "@enterBudget": {
+        "description": "Enter budget "
     },
-    "enterBudgetLabel": "Enter budget",
-    "@enterBudgetLabel": {
-        "description": "Enter budget label"
+    "enterDescription": "Enter description",
+    "@enterDescription": {
+        "description": "Enter description "
     },
-    "enterDescriptionLabel": "Enter description",
-    "@enterDescriptionLabel": {
-        "description": "Enter description label"
+    "validDescription": "Enter valid description",
+    "@validDescription": {
+        "description": "Enter valid description "
     },
-    "validDescriptionLabel": "Enter valid description",
-    "@validDescriptionLabel": {
-        "description": "Enter valid description label"
+    "payDebt": "Pay debt",
+    "@payDebt": {
+        "description": "Pay debt "
     },
-    "payDebtLabel": "Pay debt",
-    "@payDebtLabel": {
-        "description": "Pay debt label"
+    "payCredit": "Pay credit",
+    "@payCredit": {
+        "description": "Pay credit "
     },
-    "payCreditLabel": "Pay credit",
-    "@payCreditLabel": {
-        "description": "Pay credit label"
+    "enterAmount": "Enter amount",
+    "@enterAmount": {
+        "description": "Enter amount "
     },
-    "enterAmountLabel": "Enter amount",
-    "@enterAmountLabel": {
-        "description": "Enter amount label"
+    "emptyDebts": "There are no debts at this time",
+    "@emptyDebts": {
+        "description": "There are no debts at this time "
     },
-    "emptyDebtsLabel": "There are no debts at this time",
-    "@emptyDebtsLabel": {
-        "description": "There are no debts at this time label"
+    "emptyDebtsDesc": "Add your debts here to see them displayed.",
+    "@emptyDebtsDesc": {
+        "description": "Add your debts here to see them displayed "
     },
-    "emptyDebtsDescLabel": "Add your debts here to see them displayed.",
-    "@emptyDebtsDescLabel": {
-        "description": "Add your debts here to see them displayed label"
+    "emptyCredit": "There are no credits at this time",
+    "@emptyCredit": {
+        "description": "There are no credits at this time "
     },
-    "emptyCreditLabel": "There are no credits at this time",
-    "@emptyCreditLabel": {
-        "description": "There are no credits at this time label"
+    "emptyCreditDesc": "Add your credits here to see them displayed.",
+    "@emptyCreditDesc": {
+        "description": "Add your credits here to see them displayed "
     },
-    "emptyCreditDescLabel": "Add your credits here to see them displayed.",
-    "@emptyCreditDescLabel": {
-        "description": "Add your credits here to see them displayed label"
+    "enterInitialAmount": "Enter initial amount",
+    "@enterInitialAmount": {
+        "description": "Enter initial amount "
     },
-    "enterInitialAmountLabel": "Enter initial amount",
-    "@enterInitialAmountLabel": {
-        "description": "Enter initial amount label"
-    },
-    "enterNumberOptionalLabel": "Enter last 4 digit (optional)",
-    "@enterNumberOptionalLabel": {
+    "enterNumberOptional": "Enter last 4 digit (optional)",
+    "@enterNumberOptional": {
         "description": "Optional number"
     },
-    "enterAccountNameLabel": "Enter account name",
-    "@enterAccountNameLabel": {
-        "description": "Enter account name label"
+    "enterAccountName": "Enter account name",
+    "@enterAccountName": {
+        "description": "Enter account name "
     },
-    "enterCardHolderNameLabel": "Enter cardholder name",
-    "@enterCardHolderNameLabel": {
-        "description": "Enter account name label"
+    "enterCardHolderName": "Enter cardholder name",
+    "@enterCardHolderName": {
+        "description": "Enter account name "
     },
-    "searchLabel": "Search",
-    "@searchLabel": {
-        "description": "Search label"
+    "search": "Search",
+    "@search": {
+        "description": "Search "
     },
-    "addNewLabel": "Add new",
-    "@addNewLabel": {
-        "description": "Add new label"
+    "addNew": "Add new",
+    "@addNew": {
+        "description": "Add new "
     },
-    "deleteLabel": "Delete",
-    "@deleteLabel": {
-        "description": "Delete label"
+    "delete": "Delete",
+    "@delete": {
+        "description": "Delete "
     },
-    "appBarSearchLabel": "Search expenses, accounts, categories",
-    "@appBarSearchLabel": {
-        "description": "Delete label"
+    "appBarSearch": "Search expenses, accounts, categories",
+    "@appBarSearch": {
+        "description": "Delete "
     },
-    "noTransactionLabel": "Empty in transaction",
-    "@noTransactionLabel": {
+    "noTransaction": "Empty in transaction",
+    "@noTransaction": {
         "description": "Empty in transaction"
     },
-    "enterSymbolLabel": "Enter symbol",
-    "@enterSymbolLabel": {
+    "enterSymbol": "Enter symbol",
+    "@enterSymbol": {
         "description": "Enter symbol"
     },
-    "leftSymbolLabel": "Symbol on left",
-    "@leftSymbolLabel": {
-        "description": "Symbol on left label"
+    "leftSymbol": "Symbol on left",
+    "@leftSymbol": {
+        "description": "Symbol on left "
     },
-    "rightSymbolLabel": "Symbol on right",
-    "@rightSymbolLabel": {
-        "description": "Symbol on right label"
+    "rightSymbol": "Symbol on right",
+    "@rightSymbol": {
+        "description": "Symbol on right "
     },
-    "customSymbolLabel": "Custom symbol",
-    "@customSymbolLabel": {
-        "description": "Custom symbol label"
+    "customSymbol": "Custom symbol",
+    "@customSymbol": {
+        "description": "Custom symbol "
     },
-    "selectCurrencyLabel": "Select currency",
-    "@selectCurrencyLabel": {
-        "description": "Select currency label"
+     
+    "intoTitle": "Simple way to help control your savings",
+    "@intoTitle": {
+        "description": "Title text shown on the intro page",
+        "type": "text",
+        "placeholders": {}
     },
-    "overviewLabel": "Overview",
-    "@overviewLabel": {
-        "description": "Overview label"
+    "intoSummary1": "Manage your money with our app",
+    "@intoSummary1": {
+        "description": "Hint message 1 shown on the intro page",
+        "type": "text",
+        "placeholders": {}
     },
-    "intoTitleLabel": "Simple way to help control your savings",
-    "@intoTitleLabel": {
-        "description": "Intro title label"
+    "intoSummary2": "Easy expense tracking for a better budget",
+    "@intoSummary2": {
+        "description": "Hint message 2 shown on the intro page",
+        "type": "text",
+        "placeholders": {}
     },
-    "intoSummary1Label": "Manage your money with our app",
-    "@intoSummary1Label": {
-        "description": "Intro summary 1 label"
+    "intoSummary3": "Stay on top of your expenses, anytime, anywhere",
+    "@intoSummary3": {
+        "description": "Hint message 3 shown on the intro page",
+        "type": "text",
+        "placeholders": {}
     },
-    "intoSummary2Label": "Easy expense tracking for a better budget",
-    "@intoSummary2Label": {
-        "description": "Intro summary 2 label"
+    "introCTA": "Get started",
+    "@introCTA": {
+        "description": "Text shown on the intro screen button",
+        "type": "text",
+        "placeholders": {}
     },
-    "intoSummary3Label": "Stay on top of your expenses, anytime, anywhere",
-    "@intoSummary3Label": {
-        "description": "Intro summary 3 label"
+    "deleteDebtOrCredit": "Deleting the debt or credit deletes all record related to it ",
+    "@deleteDebtOrCredit": {
+        "description": "Delete debt or credit ",
+        "type": "text",
+        "placeholders": {}
     },
-    "intoCTALabel": "Get started",
-    "@intoCTALabel": {
-        "description": "Get started label"
+    "backupAndRestoreJSONTitle": "Export data as JSON file",
+    "@backupAndRestoreJSONTitle": {
+        "description": "Section title text shown on the export and import page",
+        "type": "text",
+        "placeholders": {}
     },
-    "deleteDebtOrCreditLabel": "Deleting the debt or credit deletes all record related to it ",
-    "@deleteDebtOrCreditLabel": {
-        "description": "Delete debt or credit label"
+    "backupAndRestoreJSONDesc": "The file will be a plain JSON file created and exported to save. Please note that if in case anything changes happen in the future in Paisa then this file will be invalid to import.",
+    "@backupAndRestoreJSONDesc": {
+        "description": "Message shown on the import and export screen",
+        "type": "text",
+        "placeholders": {}
     },
-    "backupAndRestoreJSONTitleLabel": "Export data as JSON file",
-    "@backupAndRestoreJSONTitleLabel": {
-        "description": "Export data as JSON label"
+    "emptyBudgetMessageTitle": "No budgets have been set for any categories",
+    "@emptyBudgetMessageTitle": {
+        "description": "Title text shown on the budget screen when no budgets are available",
+        "type": "text",
+        "placeholders": {}
     },
-    "backupAndRestoreJSONDescLabel": "The file will be a plain JSON file created and exported to save. Please note that if in case anything changes happen in the future in Paisa then this file will be invalid to import.",
-    "@backupAndRestoreJSONDescLabel": {
-        "description": "Export data as JSON desc label"
+    "emptyBudgetMessageSubTitle": "Set a budget for any category, and that category will show up here.",
+    "@emptyBudgetMessageSubTitle": {
+        "description": "Subtitle text shown on the budget screen when no budgets are available",
+        "type": "text",
+        "placeholders": {}
     },
-    "backupAndRestoreShareTitleLabel": "Export data into file",
-    "@backupAndRestoreShareTitleLabel": {
-        "description": "Export data into file label"
+    "recurringEmptyMessageTitle": "No recurring events?",
+    "@recurringEmptyMessageTitle": {
+        "description": "Title text shown on the recurring page when no events available",
+        "type": "text",
+        "placeholders": {}
     },
-    "emptyBudgetMessageLabel": "No budgets have been set for any categories",
-    "@emptyBudgetMessageLabel": {
-        "description": "Show message when budgets are empty"
+    "recurringEmptyMessageSubTitle": "Add recurring events to view them here",
+    "@recurringEmptyMessageSubTitle": {
+        "description": "Subtitle text shown on the recurring page when no events available",
+        "type": "text",
+        "placeholders": {}
     },
-    "emptyBudgetDescriptionLabel": "Set a budget for any category, and that category will show up here.",
-    "@emptyBudgetDescriptionLabel": {
-        "description": "Set a budget for any category, and that category will show up here label"
-    },
-    "transactionsLabel": "Transactions",
-    "@transactionsLabel": {
-        "description": "Transactions label"
-    },
-    "recurringLabel": "Recurring",
-    "@recurringLabel": {
-        "description": "Recurring label"
-    },
-    "recurringEmptyMessage": "No recurring events?",
-    "@recurringEmptyMessage": {
-        "description": "Recurring empty message"
-    },
-    "recurringEmptyMessageDescription": "Add recurring events to view them here",
-    "@recurringEmptyMessageDescription": {
-        "description": "Recurring empty message"
-    },
-    "recurringActionLabel": "Add recurring events",
-    "@recurringActionLabel": {
-        "description": "Recurring empty message"
+    "recurringAction": "Add recurring events",
+    "@recurringAction": {
+        "description": "Text shown on the recurring action button",
+        "type": "text",
+        "placeholders": {}
     }
 }

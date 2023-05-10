@@ -69,6 +69,10 @@ class _PaisaAppState extends State<PaisaApp> {
                 routeInformationParser: goRouter.routeInformationParser,
                 routerDelegate: goRouter.routerDelegate,
                 debugShowCheckedModeBanner: false,
+                themeMode: themeMode,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                onGenerateTitle: (BuildContext context) => context.loc.appTitle,
                 theme: ThemeData.from(
                   colorScheme: lightColorScheme,
                 ).copyWith(
@@ -119,10 +123,6 @@ class _PaisaAppState extends State<PaisaApp> {
                     color: ThemeData.dark().dividerColor,
                   ),
                 ),
-                themeMode: themeMode,
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                supportedLocales: AppLocalizations.supportedLocales,
-                onGenerateTitle: (BuildContext context) => context.loc.appTitle,
               );
             },
           );

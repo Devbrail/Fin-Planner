@@ -142,7 +142,7 @@ class MobileAccountCard extends StatelessWidget {
               ListTile(
                 minVerticalPadding: 10,
                 title: Text(
-                  context.loc.totalBalanceLabel,
+                  context.loc.totalBalance,
                   style: GoogleFonts.outfit(
                     textStyle: Theme.of(context).textTheme.bodyMedium,
                   ),
@@ -162,7 +162,7 @@ class MobileAccountCard extends StatelessWidget {
                     child: ListTile(
                       dense: true,
                       title: Text(
-                        context.loc.incomeLabel,
+                        context.loc.income,
                         style: TextStyle(
                           color: Theme.of(context)
                               .colorScheme
@@ -182,7 +182,7 @@ class MobileAccountCard extends StatelessWidget {
                     child: ListTile(
                       dense: true,
                       title: Text(
-                        context.loc.expenseLabel,
+                        context.loc.expense,
                         style: GoogleFonts.outfit(
                           textStyle:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -290,7 +290,7 @@ class TabletAccountCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          context.loc.totalBalanceLabel,
+                          context.loc.totalBalance,
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         Text(
@@ -322,7 +322,7 @@ class TabletAccountCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            context.loc.incomeLabel,
+                            context.loc.income,
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: Theme.of(context)
@@ -348,7 +348,7 @@ class TabletAccountCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            context.loc.expenseLabel,
+                            context.loc.expense,
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: Theme.of(context)
@@ -457,7 +457,7 @@ class DesktopAccountCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(context.loc.totalBalanceLabel),
+                        Text(context.loc.totalBalance),
                         Text(
                           cardNumber,
                           style: GoogleFonts.manrope(
@@ -487,7 +487,7 @@ class DesktopAccountCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            context.loc.incomeLabel,
+                            context.loc.income,
                             style: GoogleFonts.manrope(
                               textStyle: Theme.of(context)
                                   .textTheme
@@ -516,7 +516,7 @@ class DesktopAccountCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            context.loc.expenseLabel,
+                            context.loc.expense,
                             style: GoogleFonts.manrope(
                               textStyle: Theme.of(context)
                                   .textTheme

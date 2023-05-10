@@ -17,7 +17,7 @@ class DynamicColorSwitchWidget extends StatelessWidget {
     return StatefulBuilder(
       builder: (context, setState) {
         return SettingsOption(
-          title: context.loc.dynamicColorLabel,
+          title: context.loc.dynamicColor,
           trailing: Switch(
             activeColor: Theme.of(context).colorScheme.primary,
             value: settings.get(

@@ -74,6 +74,7 @@ class _LandingPageState extends State<LandingPage> {
         if (state is CurrentIndexState &&
             state.currentPage != PageType.budget) {
           return FloatingActionButton.large(
+            tooltip: state.currentPage.toolTip(context),
             onPressed: () => _handleClick(state.currentPage),
             child: state.currentPage != PageType.overview
                 ? const Icon(Icons.add)

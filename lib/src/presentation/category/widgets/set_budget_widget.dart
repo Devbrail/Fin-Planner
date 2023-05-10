@@ -37,8 +37,8 @@ class SetBudgetWidget extends StatelessWidget {
               ),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
-              title: Text(context.loc.budgetLabel),
-              subtitle: Text(context.loc.setBudgetLabel),
+              title: Text(context.loc.budget),
+              subtitle: Text(context.loc.setBudget),
               activeColor: Theme.of(context).colorScheme.primary,
               onChanged: (bool value) => BlocProvider.of<CategoryBloc>(context)
                   .add(UpdateCategoryBudgetEvent(value)),
@@ -73,8 +73,8 @@ class CategoryBudgetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: context.loc.enterBudgetLabel,
-      label: context.loc.budgetLabel,
+      hintText: context.loc.enterBudget,
+      label: context.loc.budget,
       onChanged: (value) {
         double? amount = double.tryParse(value);
         BlocProvider.of<CategoryBloc>(context).categoryBudget = amount;

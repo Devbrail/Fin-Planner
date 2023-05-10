@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../widgets/paisa_chip.dart';
 import '../cubit/debts_cubit.dart';
@@ -25,12 +26,12 @@ class DebtToggleButtonsWidget extends StatelessWidget {
         return Row(
           children: [
             PaisaMaterialYouChip(
-              title: DebtType.debt.name(context),
+              title: DebtType.debt.stringValue(context),
               isSelected: debtsBloc.currentDebtType == DebtType.debt,
               onPressed: () => _update(DebtType.debt),
             ),
             PaisaMaterialYouChip(
-              title: DebtType.credit.name(context),
+              title: DebtType.credit.stringValue(context),
               isSelected: debtsBloc.currentDebtType == DebtType.credit,
               onPressed: () => _update(DebtType.credit),
             ),

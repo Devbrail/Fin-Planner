@@ -19,13 +19,13 @@ enum RecurringType {
   String name(BuildContext context) {
     switch (this) {
       case RecurringType.daily:
-        return context.loc.dailyLabel;
+        return context.loc.daily;
       case RecurringType.weekly:
-        return context.loc.weeklyLabel;
+        return context.loc.weekly;
       case RecurringType.monthly:
-        return context.loc.monthlyLabel;
+        return context.loc.monthly;
       case RecurringType.yearly:
-        return context.loc.yearlyLabel;
+        return context.loc.yearly;
     }
   }
 }

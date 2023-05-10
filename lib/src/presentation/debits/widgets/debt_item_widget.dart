@@ -96,8 +96,8 @@ class DebtItemWidget extends StatelessWidget {
                           ),
                           label: Text(
                             debt.debtType == DebtType.debt
-                                ? context.loc.payDebtLabel
-                                : context.loc.payDebtLabel,
+                                ? context.loc.payDebt
+                                : context.loc.payDebt,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge
@@ -128,7 +128,7 @@ class DebtItemWidget extends StatelessWidget {
                                       ListTile(
                                         horizontalTitleGap: 0,
                                         title: Text(
-                                          context.loc.payDebtLabel,
+                                          context.loc.payDebt,
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleLarge,
@@ -143,8 +143,8 @@ class DebtItemWidget extends StatelessWidget {
                                                       horizontal: 16.0),
                                               child: PaisaTextFormField(
                                                 controller: controller,
-                                                hintText: context
-                                                    .loc.enterAmountLabel,
+                                                hintText:
+                                                    context.loc.enterAmount,
                                                 keyboardType:
                                                     TextInputType.number,
                                                 inputFormatters: [
@@ -206,7 +206,7 @@ class DebtItemWidget extends StatelessWidget {
                                             Navigator.pop(context);
                                           },
                                           child: Text(
-                                            context.loc.updateLabel,
+                                            context.loc.update,
                                           ),
                                         ),
                                       )

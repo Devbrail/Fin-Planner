@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'filter_budget.dart';
+part of 'filter_expense.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

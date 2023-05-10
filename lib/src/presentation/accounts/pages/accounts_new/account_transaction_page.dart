@@ -36,8 +36,8 @@ class AccountTransactionPage extends StatelessWidget {
                 if (expenses.isEmpty) {
                   return EmptyWidget(
                     icon: Icons.credit_card,
-                    title: context.loc.noTransactionLabel,
-                    description: context.loc.emptyAccountDescriptionLabel,
+                    title: context.loc.noTransaction,
+                    description: context.loc.emptyAccountMessageSubTitle,
                   );
                 } else {
                   return ListView(
@@ -48,7 +48,7 @@ class AccountTransactionPage extends StatelessWidget {
                           vertical: 0,
                         ),
                         title: Text(
-                          context.loc.transactionHistoryLabel,
+                          context.loc.transactionHistory,
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall

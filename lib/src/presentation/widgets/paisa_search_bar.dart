@@ -31,7 +31,9 @@ class PaisaSearchBar extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Text(context.loc.searchLabel),
+                child: Text(
+                  context.loc.search,
+                ),
               ),
             ],
           ),

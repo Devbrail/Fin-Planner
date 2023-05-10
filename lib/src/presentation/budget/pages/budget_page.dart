@@ -22,9 +22,9 @@ class BudgetPage extends StatelessWidget {
         final categories = value.values.toBudgetEntities();
         if (categories.isEmpty) {
           return EmptyWidget(
-            title: context.loc.emptyBudgetMessageLabel,
             icon: MdiIcons.timetable,
-            description: context.loc.emptyBudgetDescriptionLabel,
+            title: context.loc.emptyBudgetMessageTitle,
+            description: context.loc.emptyBudgetMessageSubTitle,
           );
         }
         return ListView.separated(

@@ -54,8 +54,8 @@ class _DebtsPageState extends State<DebtsPage>
                       .bodyLarge
                       ?.copyWith(fontWeight: FontWeight.bold),
                   tabs: [
-                    Tab(text: context.loc.debtLabel),
-                    Tab(text: context.loc.creditLabel),
+                    Tab(text: context.loc.debt),
+                    Tab(text: context.loc.credit),
                   ],
                 ),
               ),
@@ -80,9 +80,9 @@ class _DebtsPageState extends State<DebtsPage>
                     return debts.isNotEmpty
                         ? DebtsListWidget(debts: debts)
                         : EmptyWidget(
-                            title: context.loc.emptyDebtsLabel,
+                            title: context.loc.emptyDebts,
                             icon: MdiIcons.cashMinus,
-                            description: context.loc.emptyDebtsDescLabel,
+                            description: context.loc.emptyDebtsDesc,
                           );
                   },
                 ),
@@ -91,9 +91,9 @@ class _DebtsPageState extends State<DebtsPage>
                     return credits.isNotEmpty
                         ? DebtsListWidget(debts: credits)
                         : EmptyWidget(
-                            title: context.loc.emptyCreditLabel,
+                            title: context.loc.emptyCredit,
                             icon: MdiIcons.cashMinus,
-                            description: context.loc.emptyCreditDescLabel,
+                            description: context.loc.emptyCreditDesc,
                           );
                   },
                 )

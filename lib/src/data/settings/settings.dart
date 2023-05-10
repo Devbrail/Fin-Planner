@@ -1,7 +1,7 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../core/enum/filter_budget.dart';
+import '../../core/enum/filter_expense.dart';
 
 const selectedFilterExpenseKey = "selected_filter_expense_key";
 const selectedHomeFilterExpenseKey = "selected_home_filter_expense_key";

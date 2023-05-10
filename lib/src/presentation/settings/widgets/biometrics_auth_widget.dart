@@ -37,7 +37,9 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
             child: Column(
               children: [
                 SwitchListTile(
-                  title: Text(context.loc.localAppLabel),
+                  title: Text(
+                    context.loc.localApp,
+                  ),
                   onChanged: (bool value) async {
                     bool isAuthenticated = false;
                     if (value) {

@@ -35,7 +35,7 @@ class ExpenseNameWidget extends StatelessWidget {
                 if (value!.isNotEmpty) {
                   return null;
                 } else {
-                  return context.loc.validNameLabel;
+                  return context.loc.validName;
                 }
               },
               onChanged: (value) =>

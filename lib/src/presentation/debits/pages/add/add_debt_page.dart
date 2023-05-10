@@ -84,17 +84,17 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
         builder: (context, state) {
           return Scaffold(
             appBar: context.materialYouAppBar(
-              context.loc.addDebtLabel,
+              context.loc.addDebt,
               actions: [
                 isDebtAddOrUpdate
                     ? const SizedBox.shrink()
                     : IconButton(
                         onPressed: () => paisaAlertDialog(
                           context,
-                          title: Text(context.loc.dialogDeleteTitleLabel),
+                          title: Text(context.loc.dialogDeleteTitle),
                           child: RichText(
                             text: TextSpan(
-                              text: context.loc.deleteDebtOrCreditLabel,
+                              text: context.loc.deleteDebtOrCredit,
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                           ),
@@ -153,8 +153,8 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                             child: DatePickerWidget(
                               onSelected: (date) =>
                                   debtBloc.currentDateTime = date,
-                              title: context.loc.startDateLabel,
-                              subtitle: startDate ?? context.loc.validDateLabel,
+                              title: context.loc.startDate,
+                              subtitle: startDate ?? context.loc.validDate,
                               icon: MdiIcons.calendarStart,
                               lastDate: DateTime.now(),
                               firstDate: DateTime(2000),
@@ -164,8 +164,8 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                             child: DatePickerWidget(
                               onSelected: (date) =>
                                   debtBloc.currentDueDateTime = date,
-                              title: context.loc.dueDateLabel,
-                              subtitle: endDate ?? context.loc.validDateLabel,
+                              title: context.loc.dueDate,
+                              subtitle: endDate ?? context.loc.validDate,
                               icon: MdiIcons.calendarEnd,
                               lastDate: DateTime(2050),
                               firstDate: DateTime.now(),
@@ -177,7 +177,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                   ),
                   ListTile(
                     title: Text(
-                      context.loc.transactionHistoryLabel,
+                      context.loc.transactionHistory,
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium
@@ -229,9 +229,8 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                     }
                     debtBloc.add(AddOrUpdateEvent(isDebtAddOrUpdate));
                   },
-                  title: isDebtAddOrUpdate
-                      ? context.loc.addLabel
-                      : context.loc.updateLabel,
+                  title:
+                      isDebtAddOrUpdate ? context.loc.add : context.loc.update,
                 ),
               ),
             ),
@@ -305,12 +304,12 @@ class NameWidget extends StatelessWidget {
     return PaisaTextFormField(
       controller: controller,
       keyboardType: TextInputType.name,
-      hintText: context.loc.nameHintLabel,
+      hintText: context.loc.nameHint,
       validator: (value) {
         if (value!.length >= 2) {
           return null;
         } else {
-          return context.loc.validNameLabel;
+          return context.loc.validName;
         }
       },
       onChanged: (value) =>
@@ -332,12 +331,12 @@ class DescriptionWidget extends StatelessWidget {
     return PaisaTextFormField(
       controller: controller,
       keyboardType: TextInputType.name,
-      hintText: context.loc.descriptionLabel,
+      hintText: context.loc.description,
       validator: (value) {
         if (value!.length >= 3) {
           return null;
         } else {
-          return context.loc.validDescriptionLabel;
+          return context.loc.validDescription;
         }
       },
       onChanged: (value) =>
@@ -359,7 +358,7 @@ class AmountWidget extends StatelessWidget {
     return PaisaTextFormField(
       controller: controller,
       keyboardType: TextInputType.number,
-      hintText: context.loc.amountLabel,
+      hintText: context.loc.amount,
       onChanged: (value) {
         double? amount = double.tryParse(value);
         BlocProvider.of<DebtsBloc>(context).currentAmount = amount;
@@ -379,7 +378,7 @@ class AmountWidget extends StatelessWidget {
         if (value!.isNotEmpty) {
           return null;
         } else {
-          return context.loc.validAmountLabel;
+          return context.loc.validAmount;
         }
       },
     );

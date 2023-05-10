@@ -9,7 +9,7 @@ import 'package:paisa/src/core/enum/transaction.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../core/enum/filter_budget.dart';
+import '../../../core/enum/filter_expense.dart';
 import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
@@ -37,8 +37,8 @@ class OverViewPage extends StatelessWidget {
         if (expenses.isEmpty) {
           return EmptyWidget(
             icon: Icons.paid,
-            title: context.loc.emptyOverviewLabel,
-            description: context.loc.emptyOverviewDescriptionLabel,
+            title: context.loc.emptyOverviewMessageTitle,
+            description: context.loc.emptyOverviewMessageSubtitle,
           );
         }
         return FilterDateRangeWidget(
@@ -48,8 +48,8 @@ class OverViewPage extends StatelessWidget {
             if (expenses.isEmpty) {
               return EmptyWidget(
                 icon: Icons.paid,
-                title: context.loc.emptyOverviewLabel,
-                description: context.loc.emptyOverviewDescriptionLabel,
+                title: context.loc.emptyOverviewMessageTitle,
+                description: context.loc.emptyOverviewMessageSubtitle,
               );
             }
             return ValueListenableBuilder<FilterExpense>(

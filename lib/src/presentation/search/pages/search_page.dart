@@ -42,7 +42,7 @@ class _SearchPageState extends State<SearchPage> {
                           const EdgeInsets.symmetric(horizontal: 16),
                       border: InputBorder.none,
                       filled: false,
-                      hintText: context.loc.searchLabel,
+                      hintText: context.loc.search,
                     ),
                     controller: textEditingController,
                     onChanged: (value) {
@@ -133,7 +133,7 @@ class _SearchPageState extends State<SearchPage> {
                     Icons.search,
                     size: 72,
                   ),
-                  Text(context.loc.searchMessageLabel),
+                  Text(context.loc.searchMessage),
                 ],
               ),
             );
@@ -148,7 +148,7 @@ class _SearchPageState extends State<SearchPage> {
                     Icons.sentiment_satisfied_rounded,
                     size: 72,
                   ),
-                  Text(context.loc.emptySearchMessageLabel),
+                  Text(context.loc.emptySearchMessage),
                 ],
               ),
             );
@@ -194,7 +194,7 @@ class _FilterWidgetState extends State<FilterWidget> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            context.loc.selectAccountLabel,
+            context.loc.selectAccount,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -264,7 +264,7 @@ class _FilterWidgetState extends State<FilterWidget> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            context.loc.selectCategoryLabel,
+            context.loc.selectCategory,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),

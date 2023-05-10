@@ -62,14 +62,14 @@ class _UserImagePageState extends State<UserImagePage> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  context.loc.imageLabel,
+                  context.loc.image,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
                 Text(
-                  context.loc.imageDescLabel,
+                  context.loc.imageDesc,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Theme.of(context)
                             .colorScheme
@@ -100,7 +100,7 @@ class _UserImagePageState extends State<UserImagePage> {
         extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
         label: const Icon(MdiIcons.arrowRight),
         icon: Text(
-          context.loc.nextLabel,
+          context.loc.next,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,

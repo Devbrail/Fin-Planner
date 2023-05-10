@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import '../../../core/common.dart';
@@ -35,7 +33,7 @@ class ExpenseListPage extends StatelessWidget {
     }
     return Scaffold(
       appBar: context.materialYouAppBar(
-        context.loc.expenseByCategoryLabel,
+        context.loc.expenseByCategory,
       ),
       body: ListView.builder(
         shrinkWrap: true,

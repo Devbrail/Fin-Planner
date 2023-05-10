@@ -31,8 +31,8 @@ class CategoryListWidget extends StatelessWidget {
         if (categories.isEmpty) {
           return EmptyWidget(
             icon: Icons.category,
-            title: context.loc.emptyCategoriesLabel,
-            description: context.loc.emptyCategoriesDescriptionLabel,
+            title: context.loc.emptyCategoriesMessageTitle,
+            description: context.loc.emptyCategoriesMessageSubTitle,
           );
         }
         return ScreenTypeLayout(

@@ -62,8 +62,8 @@ class _ExpensePageState extends State<ExpensePage> {
           if (state is ExpenseDeletedState) {
             context.showMaterialSnackBar(
               expenseBloc.transactionType == TransactionType.expense
-                  ? context.loc.deletedExpenseLabel
-                  : context.loc.incomeDeletedSuccessfulLabel,
+                  ? context.loc.deletedExpense
+                  : context.loc.incomeDeletedSuccessful,
               backgroundColor: Theme.of(context).colorScheme.error,
               color: Theme.of(context).colorScheme.onError,
             );
@@ -72,11 +72,11 @@ class _ExpensePageState extends State<ExpensePage> {
             final content =
                 expenseBloc.transactionType == TransactionType.expense
                     ? state.isAddOrUpdate
-                        ? context.loc.addedExpenseLabel
-                        : context.loc.updatedExpenseLabel
+                        ? context.loc.addedExpense
+                        : context.loc.updatedExpense
                     : state.isAddOrUpdate
-                        ? context.loc.incomeAddedSuccessfulLabel
-                        : context.loc.incomeUpdateSuccessfulLabel;
+                        ? context.loc.incomeAddedSuccessful
+                        : context.loc.incomeUpdateSuccessful;
 
             context.showMaterialSnackBar(
               content,
@@ -110,18 +110,18 @@ class _ExpensePageState extends State<ExpensePage> {
             mobile: Scaffold(
               appBar: context.materialYouAppBar(
                 isAddExpense
-                    ? context.loc.addTransactionLabel
-                    : context.loc.updateTransactionLabel,
+                    ? context.loc.addTransaction
+                    : context.loc.updateTransaction,
                 actions: [
                   isAddExpense
                       ? const SizedBox.shrink()
                       : IconButton(
                           onPressed: () => paisaAlertDialog(
                             context,
-                            title: Text(context.loc.dialogDeleteTitleLabel),
+                            title: Text(context.loc.dialogDeleteTitle),
                             child: RichText(
                               text: TextSpan(
-                                text: context.loc.deleteExpenseLabel,
+                                text: context.loc.deleteExpense,
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                             ),
@@ -135,7 +135,7 @@ class _ExpensePageState extends State<ExpensePage> {
                                     .add(ClearExpenseEvent(widget.expenseId!));
                                 Navigator.pop(context);
                               },
-                              child: Text(context.loc.deleteLabel),
+                              child: Text(context.loc.delete),
                             ),
                           ),
                           icon: Icon(
@@ -301,9 +301,7 @@ class _ExpensePageState extends State<ExpensePage> {
                     onPressed: () {
                       expenseBloc.add(AddOrUpdateExpenseEvent(isAddExpense));
                     },
-                    title: isAddExpense
-                        ? context.loc.addLabel
-                        : context.loc.updateLabel,
+                    title: isAddExpense ? context.loc.add : context.loc.update,
                   ),
                 ),
               ),
@@ -316,9 +314,7 @@ class _ExpensePageState extends State<ExpensePage> {
                     onPressed: () {
                       expenseBloc.add(AddOrUpdateExpenseEvent(isAddExpense));
                     },
-                    title: isAddExpense
-                        ? context.loc.addLabel
-                        : context.loc.updateLabel,
+                    title: isAddExpense ? context.loc.add : context.loc.update,
                   ),
                 ),
               ),
@@ -339,8 +335,8 @@ class _ExpensePageState extends State<ExpensePage> {
                 backgroundColor: Colors.transparent,
                 title: Text(
                   isAddExpense
-                      ? context.loc.addTransactionLabel
-                      : context.loc.updateTransactionLabel,
+                      ? context.loc.addTransaction
+                      : context.loc.updateTransaction,
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge

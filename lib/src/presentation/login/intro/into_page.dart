@@ -60,7 +60,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      context.loc.intoTitleLabel,
+                      context.loc.intoTitle,
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium
@@ -80,7 +80,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                           ),
                           dense: true,
                           title: Text(
-                            context.loc.intoSummary1Label,
+                            context.loc.intoSummary1,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -99,7 +99,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                           ),
                           dense: true,
                           title: Text(
-                            context.loc.intoSummary2Label,
+                            context.loc.intoSummary2,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -118,7 +118,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                           ),
                           dense: true,
                           title: Text(
-                            context.loc.intoSummary3Label,
+                            context.loc.intoSummary3,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -137,7 +137,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                                   instanceName: BoxType.settings.name)
                               .put(userIntroKey, true),
                           child: Text(
-                            context.loc.intoCTALabel,
+                            context.loc.introCTA,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge
@@ -202,7 +202,7 @@ class IntoMobileWidget extends StatelessWidget {
                       ),
                 ),
                 Text(
-                  context.loc.intoTitleLabel,
+                  context.loc.intoTitle,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         color: Theme.of(context).colorScheme.secondary,
                       ),
@@ -219,7 +219,7 @@ class IntoMobileWidget extends StatelessWidget {
                       ),
                       dense: true,
                       title: Text(
-                        context.loc.intoSummary1Label,
+                        context.loc.intoSummary1,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
@@ -232,7 +232,7 @@ class IntoMobileWidget extends StatelessWidget {
                       ),
                       dense: true,
                       title: Text(
-                        context.loc.intoSummary2Label,
+                        context.loc.intoSummary2,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
@@ -245,7 +245,7 @@ class IntoMobileWidget extends StatelessWidget {
                       ),
                       dense: true,
                       title: Text(
-                        context.loc.intoSummary3Label,
+                        context.loc.intoSummary3,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     )
@@ -279,7 +279,7 @@ class IntoMobileWidget extends StatelessWidget {
                   .put(userIntroKey, true);
             },
             child: Text(
-              context.loc.intoCTALabel,
+              context.loc.introCTA,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,

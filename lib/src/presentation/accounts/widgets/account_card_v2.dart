@@ -64,7 +64,7 @@ class AccountCardV2 extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    context.loc.thisMonthLabel,
+                    context.loc.thisMonth,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: Theme.of(context)
                               .colorScheme

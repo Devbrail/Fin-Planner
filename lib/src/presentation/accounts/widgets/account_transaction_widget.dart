@@ -46,7 +46,7 @@ class AccountTransactionWidget extends StatelessWidget {
               vertical: 0,
             ),
             title: Text(
-              context.loc.transactionHistoryLabel,
+              context.loc.transactionHistory,
               style: GoogleFonts.outfit(
                 fontWeight: FontWeight.w600,
                 textStyle: Theme.of(context).textTheme.titleLarge,
@@ -96,7 +96,7 @@ class AccountTransactionWidget extends StatelessWidget {
               vertical: 0,
             ),
             title: Text(
-              context.loc.transactionHistoryLabel,
+              context.loc.transactionHistory,
               style: Theme.of(context)
                   .textTheme
                   .titleSmall

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/core/extensions/filter_expense_extension.dart';
 
 import '../../../../main.dart';
-import '../../../core/enum/filter_budget.dart';
+import '../../../core/enum/filter_expense.dart';
 import '../../settings/bloc/settings_controller.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../../widgets/paisa_toggle_button.dart';
@@ -47,7 +48,7 @@ class FilterHomeWidget extends StatelessWidget {
                   children: [
                     PaisaToggleButton(
                       itemIndex: ItemIndex.first,
-                      title: FilterExpense.daily.name(context),
+                      title: FilterExpense.daily.stringValue(context),
                       isSelected: FilterExpense.daily == value,
                       onPressed: () {
                         updateFilter(FilterExpense.daily);
@@ -60,7 +61,7 @@ class FilterHomeWidget extends StatelessWidget {
                       color: Theme.of(context).colorScheme.outline,
                     ),
                     PaisaToggleButton(
-                      title: FilterExpense.weekly.name(context),
+                      title: FilterExpense.weekly.stringValue(context),
                       isSelected: FilterExpense.weekly == value,
                       onPressed: () {
                         updateFilter(FilterExpense.weekly);
@@ -73,7 +74,7 @@ class FilterHomeWidget extends StatelessWidget {
                       color: Theme.of(context).colorScheme.outline,
                     ),
                     PaisaToggleButton(
-                      title: FilterExpense.monthly.name(context),
+                      title: FilterExpense.monthly.stringValue(context),
                       isSelected: FilterExpense.monthly == value,
                       onPressed: () => updateFilter(FilterExpense.monthly),
                     ),
@@ -84,7 +85,7 @@ class FilterHomeWidget extends StatelessWidget {
                       color: Theme.of(context).colorScheme.outline,
                     ),
                     PaisaToggleButton(
-                      title: FilterExpense.yearly.name(context),
+                      title: FilterExpense.yearly.stringValue(context),
                       isSelected: FilterExpense.yearly == value,
                       onPressed: () => updateFilter(FilterExpense.yearly),
                     ),
@@ -96,7 +97,7 @@ class FilterHomeWidget extends StatelessWidget {
                     ),
                     PaisaToggleButton(
                       itemIndex: ItemIndex.last,
-                      title: FilterExpense.all.name(context),
+                      title: FilterExpense.all.stringValue(context),
                       isSelected: FilterExpense.all == value,
                       onPressed: () => updateFilter(FilterExpense.all),
                     ),

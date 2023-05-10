@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../main.dart';
-import '../../../core/enum/filter_budget.dart';
+import '../../../core/enum/filter_expense.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/account/use_case/account_use_case.dart';
 import '../../../domain/category/entities/category.dart';

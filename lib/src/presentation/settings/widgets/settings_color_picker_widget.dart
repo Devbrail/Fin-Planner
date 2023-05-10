@@ -37,10 +37,8 @@ class SettingsColorPickerWidget extends StatelessWidget {
         final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
         final color = _extractColorValue(context, value);
         return SettingsOption(
-          title: context.loc.accentColorLabel,
-          subtitle: isDynamic
-              ? context.loc.dynamicColorLabel
-              : context.loc.customLabel,
+          title: context.loc.accentColor,
+          subtitle: isDynamic ? context.loc.dynamicColor : context.loc.custom,
           trailing: CircleAvatar(
             backgroundColor: Color(color),
             maxRadius: 16,
@@ -104,7 +102,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                   children: [
                     ListTile(
                       title: Text(
-                        context.loc.pickColorLabel,
+                        context.loc.pickColor,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
@@ -139,7 +137,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                         onPressed: () => value
                             .put(appColorKey, selectedColor)
                             .then((value) => Navigator.pop(context)),
-                        child: Text(context.loc.doneLabel),
+                        child: Text(context.loc.done),
                       ),
                     ),
                   ],
@@ -161,7 +159,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
           children: [
             ListTile(
               title: Text(
-                context.loc.pickColorLabel,
+                context.loc.pickColor,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
@@ -186,7 +184,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                 onPressed: () => settings
                     .put(appColorKey, selectedColor)
                     .then((value) => Navigator.pop(context)),
-                child: Text(context.loc.doneLabel),
+                child: Text(context.loc.done),
               ),
             ),
           ],

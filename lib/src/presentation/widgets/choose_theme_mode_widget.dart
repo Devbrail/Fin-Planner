@@ -29,7 +29,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
         children: [
           ListTile(
             title: Text(
-              context.loc.chooseThemeLabel,
+              context.loc.chooseTheme,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
@@ -66,7 +66,9 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
                         horizontal: 24, vertical: 12),
                   ),
                   onPressed: () => Navigator.pop(context),
-                  child: Text(context.loc.cancelLabel),
+                  child: Text(
+                    context.loc.cancel,
+                  ),
                 ),
               ),
               Padding(
@@ -85,7 +87,9 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
                       .get<Box<dynamic>>(instanceName: BoxType.settings.name)
                       .put(themeModeKey, currentIndex.index)
                       .then((value) => Navigator.pop(context)),
-                  child: Text(context.loc.okLabel),
+                  child: Text(
+                    context.loc.ok,
+                  ),
                 ),
               ),
             ],

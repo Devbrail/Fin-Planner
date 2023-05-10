@@ -30,17 +30,34 @@ enum PageType {
   String name(BuildContext context) {
     switch (this) {
       case PageType.home:
-        return context.loc.homeLabel;
+        return context.loc.home;
       case PageType.accounts:
-        return context.loc.accountsLabel;
+        return context.loc.accounts;
       case PageType.overview:
-        return context.loc.overviewLabel;
+        return context.loc.overview;
       case PageType.category:
-        return context.loc.categoriesLabel;
+        return context.loc.categories;
       case PageType.debts:
-        return context.loc.debtsLabel;
+        return context.loc.debts;
       case PageType.budget:
-        return context.loc.budgetLabel;
+        return context.loc.budget;
+    }
+  }
+
+  String toolTip(BuildContext context) {
+    switch (this) {
+      case PageType.home:
+        return context.loc.addTransactionTooltip;
+      case PageType.accounts:
+        return context.loc.addAccountTooltip;
+      case PageType.overview:
+        return context.loc.selectDateRangeTooltip;
+      case PageType.category:
+        return context.loc.addCategoryTooltip;
+      case PageType.debts:
+        return context.loc.addDebtTooltip;
+      case PageType.budget: // Doesn't have FAB button
+        return '';
     }
   }
 }

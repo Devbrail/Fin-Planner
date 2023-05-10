@@ -47,7 +47,9 @@ Future<T?> paisaAlertDialog<T>(
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(context.loc.cancelLabel),
+            child: Text(
+              context.loc.cancel,
+            ),
           ),
           confirmationButton,
         ],
@@ -151,7 +153,7 @@ Future<void> showUserDialog(
                               color: Theme.of(context).colorScheme.onSurface,
                             ),
                             title: Text(
-                              context.loc.debtsLabel,
+                              context.loc.debts,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge
@@ -173,7 +175,7 @@ Future<void> showUserDialog(
                               color: Theme.of(context).colorScheme.onSurface,
                             ),
                             title: Text(
-                              context.loc.chooseThemeLabel,
+                              context.loc.chooseTheme,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge
@@ -193,7 +195,7 @@ Future<void> showUserDialog(
                               color: Theme.of(context).colorScheme.onSurface,
                             ),
                             title: Text(
-                              context.loc.settingsLabel,
+                              context.loc.settings,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge

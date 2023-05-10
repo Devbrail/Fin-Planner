@@ -57,7 +57,7 @@ class UserNamePage extends StatelessWidget {
                               color: Theme.of(context).colorScheme.onSurface,
                               letterSpacing: 0.8,
                             ),
-                        text: context.loc.welcomeLabel,
+                        text: context.loc.welcome,
                         children: [
                           TextSpan(
                             text: ' ${context.loc.appTitle}',
@@ -70,7 +70,7 @@ class UserNamePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      context.loc.welcomeDescLabel,
+                      context.loc.welcomeDesc,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
@@ -86,15 +86,15 @@ class UserNamePage extends StatelessWidget {
                         key: const Key('user_name_textfield'),
                         controller: _nameController,
                         decoration: InputDecoration(
-                          hintText: context.loc.enterNameHintLabel,
-                          label: Text(context.loc.nameHintLabel),
+                          hintText: context.loc.enterNameHint,
+                          label: Text(context.loc.nameHint),
                         ),
                         keyboardType: TextInputType.name,
                         validator: (val) {
                           if (val!.isNotEmpty) {
                             return null;
                           } else {
-                            return context.loc.enterNameHintLabel;
+                            return context.loc.enterNameHint;
                           }
                         },
                       ),
@@ -115,7 +115,7 @@ class UserNamePage extends StatelessWidget {
             extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
             label: const Icon(MdiIcons.arrowRight),
             icon: Text(
-              context.loc.nextLabel,
+              context.loc.next,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,

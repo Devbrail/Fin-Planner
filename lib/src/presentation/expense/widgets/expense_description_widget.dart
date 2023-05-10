@@ -20,7 +20,7 @@ class ExpenseDescriptionWidget extends StatelessWidget {
       child: PaisaTextFormField(
         maxLines: 1,
         controller: controller,
-        hintText: context.loc.descriptionLabel,
+        hintText: context.loc.description,
         keyboardType: TextInputType.name,
         onChanged: (value) =>
             BlocProvider.of<ExpenseBloc>(context).currentDescription = value,

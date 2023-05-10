@@ -37,10 +37,12 @@ class CategoryListTabletWidget extends StatelessWidget {
           category: categories[index],
           onPressed: () => paisaAlertDialog(
             context,
-            title: Text(context.loc.dialogDeleteTitleLabel),
+            title: Text(
+              context.loc.dialogDeleteTitle,
+            ),
             child: RichText(
               text: TextSpan(
-                text: context.loc.deleteCategoryLabel,
+                text: context.loc.deleteCategory,
                 children: [
                   TextSpan(
                       text: categories[index].name,

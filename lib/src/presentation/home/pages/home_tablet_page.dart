@@ -60,7 +60,7 @@ class HomeTabletPage extends StatelessWidget {
                     },
                     icon: Icons.home_outlined,
                     selectedIcon: Icons.home,
-                    title: context.loc.homeLabel,
+                    title: context.loc.home,
                   ),
                   DrawerItemWidget(
                     isSelected: pageType == PageType.category,
@@ -70,7 +70,7 @@ class HomeTabletPage extends StatelessWidget {
                     },
                     icon: Icons.category_outlined,
                     selectedIcon: Icons.category,
-                    title: context.loc.categoriesLabel,
+                    title: context.loc.categories,
                   ),
                   DrawerItemWidget(
                     isSelected: pageType == PageType.budget,
@@ -80,7 +80,7 @@ class HomeTabletPage extends StatelessWidget {
                     },
                     icon: MdiIcons.timetable,
                     selectedIcon: MdiIcons.timetable,
-                    title: context.loc.budgetLabel,
+                    title: context.loc.budget,
                   ),
                   const Divider(),
                   DrawerItemWidget(
@@ -90,7 +90,7 @@ class HomeTabletPage extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     icon: MdiIcons.cog,
-                    title: context.loc.settingsLabel,
+                    title: context.loc.settings,
                   ),
                 ],
               ),
@@ -120,22 +120,22 @@ class HomeTabletPage extends StatelessWidget {
                   .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
               destinations: [
                 NavigationDestination(
-                  label: context.loc.homeLabel,
+                  label: context.loc.home,
                   icon: const Icon(Icons.home_outlined),
                   selectedIcon: const Icon(Icons.home),
                 ),
                 NavigationDestination(
-                  label: context.loc.accountsLabel,
+                  label: context.loc.accounts,
                   icon: const Icon(Icons.credit_card_outlined),
                   selectedIcon: const Icon(Icons.credit_card),
                 ),
                 NavigationDestination(
-                  label: context.loc.debtsLabel,
+                  label: context.loc.debts,
                   icon: const Icon(MdiIcons.accountCash),
                   selectedIcon: const Icon(MdiIcons.accountCashOutline),
                 ),
                 NavigationDestination(
-                  label: context.loc.overviewLabel,
+                  label: context.loc.overview,
                   icon: const Icon(MdiIcons.sortVariant),
                   selectedIcon: const Icon(MdiIcons.sortVariant),
                 ),

@@ -52,7 +52,7 @@ class TransactionsHeaderWidget extends StatelessWidget {
         vertical: 0,
       ),
       title: Text(
-        context.loc.transactionsLabel,
+        context.loc.transactions,
         style: GoogleFonts.outfit(
           fontWeight: FontWeight.w600,
           textStyle: Theme.of(context).textTheme.titleLarge,

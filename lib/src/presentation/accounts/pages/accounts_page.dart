@@ -37,8 +37,8 @@ class AccountsPage extends StatelessWidget {
             if (accounts.isEmpty) {
               return EmptyWidget(
                 icon: Icons.credit_card,
-                title: context.loc.emptyAccountLabel,
-                description: context.loc.emptyAccountDescriptionLabel,
+                title: context.loc.emptyAccountMessageTitle,
+                description: context.loc.emptyAccountMessageSubTitle,
               );
             }
             accountsBloc.add(AccountSelectedEvent(accounts.first));

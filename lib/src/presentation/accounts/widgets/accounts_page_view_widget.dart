@@ -68,10 +68,12 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                   cardType: account.cardType ?? CardType.bank,
                   onDelete: () => paisaAlertDialog(
                     context,
-                    title: Text(context.loc.dialogDeleteTitleLabel),
+                    title: Text(
+                      context.loc.dialogDeleteTitle,
+                    ),
                     child: RichText(
                       text: TextSpan(
-                        text: context.loc.deleteAccountLabel,
+                        text: context.loc.deleteAccount,
                         style: Theme.of(context).textTheme.bodyMedium,
                         children: [
                           TextSpan(
@@ -92,7 +94,9 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                             .add(DeleteAccountEvent(account.superId!));
                         Navigator.pop(context);
                       },
-                      child: Text(context.loc.deleteLabel),
+                      child: Text(
+                        context.loc.delete,
+                      ),
                     ),
                   ),
                   onTap: () => context.pushNamed(

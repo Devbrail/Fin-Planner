@@ -28,7 +28,7 @@ Future<int> paisaColorPicker(
         children: [
           ListTile(
             title: Text(
-              context.loc.pickColorLabel,
+              context.loc.pickColor,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
@@ -51,7 +51,9 @@ Future<int> paisaColorPicker(
               onPressed: () {
                 Navigator.pop(context, selectedColor);
               },
-              child: Text(context.loc.doneLabel),
+              child: Text(
+                context.loc.done,
+              ),
             ),
           ),
         ],

@@ -20,7 +20,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          context.loc.thisMonthLabel,
+          context.loc.thisMonth,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: Theme.of(context)
                     .colorScheme
@@ -45,7 +45,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                           ),
                       children: [
                         TextSpan(
-                          text: context.loc.incomeLabel,
+                          text: context.loc.income,
                           style: TextStyle(
                             color: Theme.of(context)
                                 .colorScheme
@@ -83,7 +83,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                           ),
                       children: [
                         TextSpan(
-                          text: context.loc.expenseLabel,
+                          text: context.loc.expense,
                           style: TextStyle(
                             color: Theme.of(context)
                                 .colorScheme

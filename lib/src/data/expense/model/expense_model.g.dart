@@ -20,13 +20,13 @@ class ExpenseModelAdapter extends TypeAdapter<ExpenseModel> {
       name: fields[0] as String,
       currency: fields[1] as double,
       time: fields[3] as DateTime,
-      categoryId: fields[6] as int,
-      accountId: fields[5] as int,
       type: fields[4] == null
           ? TransactionType.expense
           : fields[4] as TransactionType?,
-      description: fields[8] as String?,
+      accountId: fields[5] as int,
+      categoryId: fields[6] as int,
       superId: fields[7] as int?,
+      description: fields[8] as String?,
       fromAccountId: fields[9] as int?,
       toAccountId: fields[10] as int?,
       transferAmount: fields[11] == null ? 0.0 : fields[11] as double,

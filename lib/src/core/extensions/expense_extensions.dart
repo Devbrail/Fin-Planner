@@ -5,7 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 import '../../data/expense/model/expense_model.dart';
 import '../../domain/expense/entities/expense.dart';
 import '../common.dart';
-import '../enum/filter_budget.dart';
+import '../enum/filter_expense.dart';
 import '../enum/transaction.dart';
 
 extension ExpenseModelBoxMapping on Box<ExpenseModel> {
@@ -38,7 +38,7 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
       expenses.where((element) => element.accountId == accountId).toList();
 
   List<ExpenseModel> get budgetOverView => noRecurring
-      .where((element) => element.categoryId != -1 || element.accountId != -1)
+      .where((element) => element.categoryId != -1 && element.accountId != -1)
       .where((element) => element.type == TransactionType.expense)
       .toList();
 

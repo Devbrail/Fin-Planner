@@ -15,7 +15,9 @@ class RecurringPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: context.materialYouAppBar(context.loc.recurringLabel),
+      appBar: context.materialYouAppBar(
+        context.loc.recurring,
+      ),
       floatingActionButton: FloatingActionButton.large(
         onPressed: () {
           GoRouter.of(context).pushNamed(recurringName);
@@ -28,10 +30,10 @@ class RecurringPage extends StatelessWidget {
           final List<ExpenseModel> expenses = value.recurring.toList();
           if (expenses.isEmpty) {
             return EmptyWidget(
-              title: context.loc.recurringEmptyMessage,
-              description: context.loc.recurringEmptyMessageDescription,
+              title: context.loc.recurringEmptyMessageTitle,
+              description: context.loc.recurringEmptyMessageSubTitle,
               icon: MdiIcons.cashSync,
-              actionTitle: context.loc.recurringActionLabel,
+              actionTitle: context.loc.recurringAction,
               onActionPressed: () {
                 GoRouter.of(context).pushNamed(recurringName);
               },

@@ -57,8 +57,8 @@ class AddAccountPageState extends State<AddAccountPage> {
           if (state is AddAccountState) {
             context.showMaterialSnackBar(
               isAccountAddOrUpdate
-                  ? context.loc.addedAccountLabel
-                  : context.loc.updateAccountLabel,
+                  ? context.loc.addedAccount
+                  : context.loc.updateAccount,
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               color: Theme.of(context).colorScheme.onPrimaryContainer,
             );
@@ -66,7 +66,7 @@ class AddAccountPageState extends State<AddAccountPage> {
           }
           if (state is AccountDeletedState) {
             context.showMaterialSnackBar(
-              context.loc.deleteAccountLabel,
+              context.loc.deleteAccount,
               backgroundColor: Theme.of(context).colorScheme.error,
               color: Theme.of(context).colorScheme.onError,
             );
@@ -101,8 +101,8 @@ class AddAccountPageState extends State<AddAccountPage> {
             mobile: Scaffold(
               appBar: context.materialYouAppBar(
                 isAccountAddOrUpdate
-                    ? context.loc.addAccountLabel
-                    : context.loc.updateAccountLabel,
+                    ? context.loc.addAccount
+                    : context.loc.updateAccount,
                 actions: [
                   isAccountAddOrUpdate
                       ? const SizedBox.shrink()
@@ -110,10 +110,10 @@ class AddAccountPageState extends State<AddAccountPage> {
                           onPressed: () {
                             paisaAlertDialog(
                               context,
-                              title: Text(context.loc.dialogDeleteTitleLabel),
+                              title: Text(context.loc.dialogDeleteTitle),
                               child: RichText(
                                 text: TextSpan(
-                                  text: context.loc.deleteAccountLabel,
+                                  text: context.loc.deleteAccount,
                                   style: Theme.of(context).textTheme.bodyMedium,
                                   children: [
                                     TextSpan(
@@ -136,7 +136,7 @@ class AddAccountPageState extends State<AddAccountPage> {
 
                                   Navigator.pop(context);
                                 },
-                                child: Text(context.loc.deleteLabel),
+                                child: Text(context.loc.delete),
                               ),
                             );
                           },
@@ -224,8 +224,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                           .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
                     },
                     title: isAccountAddOrUpdate
-                        ? context.loc.addLabel
-                        : context.loc.updateLabel,
+                        ? context.loc.add
+                        : context.loc.update,
                   ),
                 ),
               ),
@@ -233,8 +233,8 @@ class AddAccountPageState extends State<AddAccountPage> {
             tablet: Scaffold(
               appBar: context.materialYouAppBar(
                 isAccountAddOrUpdate
-                    ? context.loc.addAccountLabel
-                    : context.loc.updateAccountLabel,
+                    ? context.loc.addAccount
+                    : context.loc.updateAccount,
                 actions: [
                   IconButton(
                     onPressed: _showInfo,
@@ -246,10 +246,10 @@ class AddAccountPageState extends State<AddAccountPage> {
                           onPressed: () {
                             paisaAlertDialog(
                               context,
-                              title: Text(context.loc.dialogDeleteTitleLabel),
+                              title: Text(context.loc.dialogDeleteTitle),
                               child: RichText(
                                 text: TextSpan(
-                                  text: context.loc.deleteAccountLabel,
+                                  text: context.loc.deleteAccount,
                                   style: Theme.of(context).textTheme.bodyMedium,
                                   children: [
                                     TextSpan(
@@ -272,7 +272,7 @@ class AddAccountPageState extends State<AddAccountPage> {
 
                                   Navigator.pop(context);
                                 },
-                                child: Text(context.loc.deleteLabel),
+                                child: Text(context.loc.delete),
                               ),
                             );
                           },
@@ -296,8 +296,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                           .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
                     },
                     title: isAccountAddOrUpdate
-                        ? context.loc.addLabel
-                        : context.loc.updateLabel,
+                        ? context.loc.add
+                        : context.loc.update,
                   ),
                 ),
               ),
@@ -371,7 +371,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                   horizontalTitleGap: 0,
                   leading: const Icon(Icons.info_rounded),
                   title: Text(
-                    context.loc.accountInfoLabel,
+                    context.loc.accountInfo,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
@@ -381,7 +381,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    context.loc.accountInfoDescLabel,
+                    context.loc.accountInfoDesc,
                   ),
                 ),
                 Align(
@@ -402,7 +402,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                         GoRouter.of(context).pop();
                       },
                       child: Text(
-                        context.loc.acceptLabel,
+                        context.loc.accept,
                       ),
                     ),
                   ),
@@ -430,7 +430,7 @@ class AccountCardHolderNameWidget extends StatelessWidget {
       builder: (context) {
         return PaisaTextFormField(
           controller: controller,
-          hintText: context.loc.enterCardHolderNameLabel,
+          hintText: context.loc.enterCardHolderName,
           keyboardType: TextInputType.name,
           inputFormatters: [
             FilteringTextInputFormatter.singleLineFormatter,
@@ -457,7 +457,7 @@ class AccountNameWidget extends StatelessWidget {
       builder: (context) {
         return PaisaTextFormField(
           controller: controller,
-          hintText: context.loc.enterAccountNameLabel,
+          hintText: context.loc.enterAccountName,
           keyboardType: TextInputType.name,
           inputFormatters: [
             FilteringTextInputFormatter.singleLineFormatter,
@@ -485,7 +485,7 @@ class AccountNumberWidget extends StatelessWidget {
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
       ],
-      hintText: context.loc.enterNumberOptionalLabel,
+      hintText: context.loc.enterNumberOptional,
       keyboardType: TextInputType.number,
       onChanged: (value) => accountBloc.accountNumber = value,
     );
@@ -504,7 +504,7 @@ class AccountInitialAmountWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: context.loc.enterAmountLabel,
+      hintText: context.loc.enterAmount,
       keyboardType: TextInputType.number,
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),

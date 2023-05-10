@@ -49,7 +49,7 @@ class ExportAndImportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: context.materialYouAppBar(
-        context.loc.backupAndRestoreLabel,
+        context.loc.backupAndRestore,
       ),
       body: ListView(
         padding: EdgeInsets.zero,
@@ -57,10 +57,10 @@ class ExportAndImportPage extends StatelessWidget {
         shrinkWrap: true,
         children: [
           SettingsGroup(
-            title: context.loc.backupAndRestoreJSONTitleLabel,
+            title: context.loc.backupAndRestoreJSONTitle,
             options: [
               ListTile(
-                title: Text(context.loc.backupAndRestoreJSONDescLabel),
+                title: Text(context.loc.backupAndRestoreJSONDesc),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -82,12 +82,12 @@ class ExportAndImportPage extends StatelessWidget {
                               );
                             } else {
                               return context.showMaterialSnackBar(
-                                context.loc.restoringBackupLabel,
+                                context.loc.restoringBackup,
                               );
                             }
                           });
                         },
-                        label: Text(context.loc.importDataLabel),
+                        label: Text(context.loc.importData),
                         icon: const Icon(MdiIcons.fileImport),
                       ),
                     ),
@@ -105,7 +105,7 @@ class ExportAndImportPage extends StatelessWidget {
                           _selectedFolderAndBackUpData().then((value) {
                             if (value) {
                               return context.showMaterialSnackBar(
-                                context.loc.creatingBackupLabel,
+                                context.loc.creatingBackup,
                               );
                             } else {
                               return context.showMaterialSnackBar(
@@ -114,7 +114,7 @@ class ExportAndImportPage extends StatelessWidget {
                             }
                           });
                         },
-                        label: Text(context.loc.exportDataLabel),
+                        label: Text(context.loc.exportData),
                         icon: const Icon(MdiIcons.fileExport),
                       ),
                     ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -63,11 +62,11 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
             /* final content =
                 expenseBloc.transactionType == TransactionType.expense
                     ? state.isAddOrUpdate
-                        ? context.loc.addedExpenseLabel
-                        : context.loc.updatedExpenseLabel
+                        ? context.loc.addedExpense,
+                        : context.loc.updatedExpense,
                     : state.isAddOrUpdate
-                        ? context.loc.incomeAddedSuccessfulLabel
-                        : context.loc.incomeUpdateSuccessfulLabel;
+                        ? context.loc.incomeAddedSuccessful,
+                        : context.loc.incomeUpdateSuccessful
 
             context.showMaterialSnackBar(
               content,
@@ -81,7 +80,7 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
           return ScreenTypeLayout(
             mobile: Scaffold(
               appBar: context.materialYouAppBar(
-                context.loc.recurringLabel,
+                context.loc.recurring,
               ),
               body: BlocBuilder(
                 bloc: expenseBloc,
@@ -116,7 +115,7 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
                     onPressed: () {
                       expenseBloc.add(const AddRecurringEvent());
                     },
-                    title: context.loc.addLabel,
+                    title: context.loc.add,
                   ),
                 ),
               ),

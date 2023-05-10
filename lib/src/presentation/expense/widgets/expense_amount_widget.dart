@@ -21,7 +21,7 @@ class ExpenseAmountWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: PaisaTextFormField(
         controller: controller,
-        hintText: context.loc.amountLabel,
+        hintText: context.loc.amount,
         keyboardType: TextInputType.number,
         maxLength: 13,
         maxLines: 1,
@@ -50,7 +50,7 @@ class ExpenseAmountWidget extends StatelessWidget {
           if (value!.isNotEmpty) {
             return null;
           } else {
-            return context.loc.validAmountLabel;
+            return context.loc.validAmount;
           }
         },
       ),

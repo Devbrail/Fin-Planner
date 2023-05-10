@@ -53,8 +53,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           if (state is CategoryAddedState) {
             context.showMaterialSnackBar(
               isAddCategory
-                  ? context.loc.successAddCategoryLabel
-                  : context.loc.updatedCategoryLabel,
+                  ? context.loc.successAddCategory
+                  : context.loc.updatedCategory,
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               color: Theme.of(context).colorScheme.onPrimaryContainer,
             );
@@ -85,7 +85,11 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         builder: (context, state) {
           return ScreenTypeLayout(
             mobile: Scaffold(
-              appBar: appBar(),
+              appBar: context.materialYouAppBar(
+                isAddCategory
+                    ? context.loc.addCategory
+                    : context.loc.updateCategory,
+              ),
               body: SingleChildScrollView(
                 child: Form(
                   key: _formKey,
@@ -110,8 +114,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                           Icons.color_lens,
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        title: Text(context.loc.pickColorLabel),
-                        subtitle: Text(context.loc.pickColorDescLabel),
+                        title: Text(context.loc.pickColor),
+                        subtitle: Text(context.loc.pickColorDesc),
                         trailing: Container(
                           width: 32,
                           height: 32,
@@ -152,9 +156,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                       BlocProvider.of<CategoryBloc>(context)
                           .add(AddOrUpdateCategoryEvent(isAddCategory));
                     },
-                    title: isAddCategory
-                        ? context.loc.addCategoryLabel
-                        : context.loc.updateLabel,
+                    title: isAddCategory ? context.loc.add : context.loc.update,
                   ),
                 ),
               ),
@@ -162,8 +164,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             tablet: Scaffold(
               appBar: context.materialYouAppBar(
                 isAddCategory
-                    ? context.loc.addCategoryLabel
-                    : context.loc.updateCategoryLabel,
+                    ? context.loc.addCategory
+                    : context.loc.updateCategory,
               ),
               bottomNavigationBar: SafeArea(
                 child: Padding(
@@ -178,9 +180,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                       BlocProvider.of<CategoryBloc>(context)
                           .add(AddOrUpdateCategoryEvent(isAddCategory));
                     },
-                    title: isAddCategory
-                        ? context.loc.addCategoryLabel
-                        : context.loc.updateLabel,
+                    title: isAddCategory ? context.loc.add : context.loc.update,
                   ),
                 ),
               ),
@@ -222,14 +222,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       ),
     );
   }
-
-  AppBar appBar() {
-    return context.materialYouAppBar(
-      isAddCategory
-          ? context.loc.addCategoryLabel
-          : context.loc.updateCategoryLabel,
-    );
-  }
 }
 
 class CategoryNameWidget extends StatelessWidget {
@@ -243,7 +235,7 @@ class CategoryNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: context.loc.enterCategoryLabel,
+      hintText: context.loc.enterCategory,
       keyboardType: TextInputType.name,
       onChanged: (value) =>
           BlocProvider.of<CategoryBloc>(context).categoryTitle = value,
@@ -251,7 +243,7 @@ class CategoryNameWidget extends StatelessWidget {
         if (value!.isNotEmpty) {
           return null;
         } else {
-          return context.loc.validNameLabel;
+          return context.loc.validName;
         }
       },
     );
@@ -269,7 +261,7 @@ class CategoryDescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaTextFormField(
       controller: controller,
-      hintText: context.loc.enterDescriptionLabel,
+      hintText: context.loc.enterDescription,
       keyboardType: TextInputType.name,
       onChanged: (value) =>
           BlocProvider.of<CategoryBloc>(context).categoryDesc = value,

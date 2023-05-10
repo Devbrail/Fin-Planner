@@ -20,11 +20,11 @@ extension TransactionTypeHelper on TransactionType {
   String stringName(BuildContext context) {
     switch (this) {
       case TransactionType.income:
-        return context.loc.incomeLabel;
+        return context.loc.income;
       case TransactionType.expense:
-        return context.loc.expenseLabel;
+        return context.loc.expense;
       case TransactionType.transfer:
-        return context.loc.transferLabel;
+        return context.loc.transfer;
       case TransactionType.recurring:
         return 'Recurring';
     }
@@ -33,11 +33,11 @@ extension TransactionTypeHelper on TransactionType {
   String hintName(BuildContext context) {
     switch (this) {
       case TransactionType.income:
-        return context.loc.incomeNameLabel;
+        return context.loc.incomeName;
       case TransactionType.expense:
-        return context.loc.expenseNameLabel;
+        return context.loc.expenseName;
       case TransactionType.transfer:
-        return context.loc.transferNameLabel;
+        return context.loc.transferName;
       case TransactionType.recurring:
         return 'Recurring';
     }

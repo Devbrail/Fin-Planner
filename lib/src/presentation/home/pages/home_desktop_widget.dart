@@ -69,42 +69,42 @@ class HomeDesktopWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 24),
                       NavigationBarItem(
-                        title: context.loc.homeLabel,
+                        title: context.loc.home,
                         icon: MdiIcons.home,
                         isSelected: state.currentPage == PageType.home,
                         onPressed: () => homeBloc
                             .add(const CurrentIndexEvent(PageType.home)),
                       ),
                       NavigationBarItem(
-                        title: context.loc.accountsLabel,
+                        title: context.loc.accounts,
                         icon: MdiIcons.creditCard,
                         isSelected: state.currentPage == PageType.accounts,
                         onPressed: () => homeBloc
                             .add(const CurrentIndexEvent(PageType.accounts)),
                       ),
                       NavigationBarItem(
-                        title: context.loc.categoriesLabel,
+                        title: context.loc.categories,
                         icon: Icons.category,
                         isSelected: state.currentPage == PageType.category,
                         onPressed: () => homeBloc
                             .add(const CurrentIndexEvent(PageType.category)),
                       ),
                       NavigationBarItem(
-                        title: context.loc.overviewLabel,
+                        title: context.loc.overview,
                         icon: MdiIcons.sortVariant,
                         isSelected: state.currentPage == PageType.overview,
                         onPressed: () => homeBloc
                             .add(const CurrentIndexEvent(PageType.overview)),
                       ),
                       NavigationBarItem(
-                        title: context.loc.debtsLabel,
+                        title: context.loc.debts,
                         icon: MdiIcons.accountCash,
                         isSelected: state.currentPage == PageType.debts,
                         onPressed: () => homeBloc
                             .add(const CurrentIndexEvent(PageType.debts)),
                       ),
                       NavigationBarItem(
-                        title: context.loc.budgetLabel,
+                        title: context.loc.budget,
                         icon: MdiIcons.timetable,
                         isSelected: state.currentPage == PageType.budget,
                         onPressed: () => homeBloc
@@ -112,7 +112,7 @@ class HomeDesktopWidget extends StatelessWidget {
                       ),
                       const Divider(),
                       NavigationBarItem(
-                        title: context.loc.settingsLabel,
+                        title: context.loc.settings,
                         icon: MdiIcons.cog,
                         isSelected: false,
                         onPressed: () =>

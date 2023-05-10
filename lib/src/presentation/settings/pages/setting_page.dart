@@ -29,18 +29,20 @@ class SettingsPage extends StatelessWidget {
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
         .get(themeModeKey, defaultValue: 0)];
     return Scaffold(
-      appBar: context.materialYouAppBar(context.loc.settingsLabel),
+      appBar: context.materialYouAppBar(
+        context.loc.settings,
+      ),
       body: ListView(
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         children: [
           SettingsGroup(
-            title: context.loc.colorsLabel,
+            title: context.loc.colors,
             options: [
               SettingsColorPickerWidget(settings: settings),
               const Divider(),
               SettingsOption(
-                title: context.loc.chooseThemeLabel,
+                title: context.loc.chooseTheme,
                 subtitle: currentTheme.themeName,
                 onTap: () {
                   showModalBottomSheet(
@@ -65,7 +67,7 @@ class SettingsPage extends StatelessWidget {
             ],
           ),
           SettingsGroup(
-            title: context.loc.othersLabel,
+            title: context.loc.others,
             options: [
               const CurrencyChangeWidget(),
               const Divider(),
@@ -73,8 +75,8 @@ class SettingsPage extends StatelessWidget {
                 authenticate: getIt.get<Authenticate>(),
               ),
               SettingsOption(
-                title: context.loc.backupAndRestoreLabel,
-                subtitle: context.loc.backupAndRestoreDescLabel,
+                title: context.loc.backupAndRestore,
+                subtitle: context.loc.backupAndRestoreDesc,
                 onTap: () {
                   GoRouter.of(context).goNamed(exportAndImportName);
                 },
@@ -82,11 +84,11 @@ class SettingsPage extends StatelessWidget {
             ],
           ),
           SettingsGroup(
-            title: context.loc.socialLinksLabel,
+            title: context.loc.socialLinks,
             options: [
               SettingsOption(
-                title: context.loc.appRateLabel,
-                subtitle: context.loc.appRateDescLabel,
+                title: context.loc.appRate,
+                subtitle: context.loc.appRateDesc,
                 onTap: () => launchUrl(
                   Uri.parse(playStoreUrl),
                   mode: LaunchMode.externalApplication,
@@ -94,8 +96,8 @@ class SettingsPage extends StatelessWidget {
               ),
               const Divider(),
               SettingsOption(
-                title: context.loc.githubLabel,
-                subtitle: context.loc.githubTextLabel,
+                title: context.loc.github,
+                subtitle: context.loc.githubText,
                 onTap: () => launchUrl(
                   Uri.parse(gitHubUrl),
                   mode: LaunchMode.externalApplication,
@@ -103,8 +105,8 @@ class SettingsPage extends StatelessWidget {
               ),
               const Divider(),
               SettingsOption(
-                title: context.loc.telegramLabel,
-                subtitle: context.loc.telegramGroupLabel,
+                title: context.loc.telegram,
+                subtitle: context.loc.telegramGroup,
                 onTap: () => launchUrl(
                   Uri.parse(telegramGroupUrl),
                   mode: LaunchMode.externalApplication,
@@ -112,7 +114,7 @@ class SettingsPage extends StatelessWidget {
               ),
               const Divider(),
               SettingsOption(
-                title: context.loc.privacyPolicyLabel,
+                title: context.loc.privacyPolicy,
                 onTap: () => launchUrl(
                   Uri.parse(termsAndConditionsUrl),
                   mode: LaunchMode.externalApplication,
@@ -126,7 +128,9 @@ class SettingsPage extends StatelessWidget {
             top: false,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(context.loc.madeWithLoveInIndiaLabel),
+              child: Text(
+                context.loc.madeWithLoveInIndia,
+              ),
             ),
           ),
         ],

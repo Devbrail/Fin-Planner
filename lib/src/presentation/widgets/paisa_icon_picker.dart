@@ -17,7 +17,7 @@ Future<IconData> showIconPicker({
     builder: (_) => AlertDialog(
       icon: Icon(defaultIcon),
       title: Text(
-        context.loc.selectIconLabel,
+        context.loc.selectIcon,
         style: Theme.of(context).textTheme.titleMedium,
       ),
       content: SizedBox(
@@ -41,7 +41,9 @@ Future<IconData> showIconPicker({
           onPressed: () {
             Navigator.of(context).pop(defaultIcon);
           },
-          child: Text(context.loc.cancelLabel),
+          child: Text(
+            context.loc.cancel,
+          ),
         ),
         TextButton(
           style: TextButton.styleFrom(
@@ -50,7 +52,9 @@ Future<IconData> showIconPicker({
           onPressed: () {
             Navigator.of(context).pop(selectedIcon);
           },
-          child: Text(context.loc.doneLabel),
+          child: Text(
+            context.loc.done,
+          ),
         )
       ],
     ),

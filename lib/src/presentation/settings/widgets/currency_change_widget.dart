@@ -32,7 +32,7 @@ class CurrencyChangeWidget extends StatelessWidget {
                 children: [
                   ListTile(
                     title: Text(
-                      context.loc.currencySignLabel,
+                      context.loc.currencySign,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
@@ -46,14 +46,18 @@ class CurrencyChangeWidget extends StatelessWidget {
                         },
                       );
                     },
-                    title: Text(context.loc.selectCurrencyLabel),
+                    title: Text(
+                      context.loc.selectCurrency,
+                    ),
                   ),
                   ListTile(
                     onTap: () {
                       Navigator.pop(context);
                       _showCustomCurrencySymbol(context);
                     },
-                    title: Text(context.loc.customSymbolLabel),
+                    title: Text(
+                      context.loc.customSymbol,
+                    ),
                   )
                 ],
               ),
@@ -61,7 +65,9 @@ class CurrencyChangeWidget extends StatelessWidget {
           },
         );
       },
-      title: Text(context.loc.currencySignLabel),
+      title: Text(
+        context.loc.currencySign,
+      ),
       subtitle: Text(
         customSymbol.isNotEmpty ? customSymbol : currentSymbol,
       ),
@@ -124,7 +130,7 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
           children: [
             ListTile(
               title: Text(
-                context.loc.customSymbolLabel,
+                context.loc.customSymbol,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
@@ -146,7 +152,7 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
                     decoration: InputDecoration(
                       filled: false,
                       counterText: "",
-                      hintText: context.loc.enterSymbolLabel,
+                      hintText: context.loc.enterSymbol,
                     ),
                     controller: editingController,
                     keyboardType: TextInputType.text,
@@ -163,8 +169,8 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
                         Expanded(
                           child: Text(
                             symbolLeftOrRight
-                                ? context.loc.leftSymbolLabel
-                                : context.loc.rightSymbolLabel,
+                                ? context.loc.leftSymbol
+                                : context.loc.rightSymbol,
                           ),
                         ),
                         Switch(
@@ -191,7 +197,9 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text(context.loc.cancelLabel),
+                          child: Text(
+                            context.loc.cancel,
+                          ),
                         ),
                       ),
                       TextButton(
@@ -204,7 +212,7 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
                               .then((value) => Navigator.pop(context));
                         },
                         child: Text(
-                          context.loc.deleteLabel,
+                          context.loc.delete,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.error,
                           ),
@@ -221,7 +229,9 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
                             Navigator.pop(context);
                           }
                         },
-                        child: Text(context.loc.doneLabel),
+                        child: Text(
+                          context.loc.done,
+                        ),
                       ),
                     ],
                   ),

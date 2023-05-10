@@ -26,12 +26,8 @@ class SelectedAccount extends StatelessWidget {
         if (accounts.isEmpty) {
           return ListTile(
             onTap: () => context.pushNamed(addAccountPath),
-            title: Text(
-              context.loc.addAccountLabel,
-            ),
-            subtitle: Text(
-              context.loc.noAccountAvailableLabel,
-            ),
+            title: Text(context.loc.addAccountEmptyTitle),
+            subtitle: Text(context.loc.addAccountEmptySubTitle),
             trailing: const Icon(Icons.keyboard_arrow_right),
           );
         }
@@ -43,7 +39,7 @@ class SelectedAccount extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  context.loc.selectAccountLabel,
+                  context.loc.selectAccount,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -61,7 +57,7 @@ class SelectedAccount extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  context.loc.selectAccountLabel,
+                  context.loc.selectAccount,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

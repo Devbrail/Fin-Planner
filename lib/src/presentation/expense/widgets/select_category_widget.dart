@@ -25,8 +25,8 @@ class SelectCategoryIcon extends StatelessWidget {
         if (categories.isEmpty) {
           return ListTile(
             onTap: () => context.pushNamed(addCategoryPath),
-            title: Text(context.loc.addCategoryLabel),
-            subtitle: Text(context.loc.noCategoryLabel),
+            title: Text(context.loc.addCategoryEmptyTitle),
+            subtitle: Text(context.loc.addCategoryEmptySubTitle),
             trailing: const Icon(Icons.keyboard_arrow_right),
           );
         }
@@ -38,7 +38,7 @@ class SelectCategoryIcon extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  context.loc.selectCategoryLabel,
+                  context.loc.selectCategory,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -55,7 +55,7 @@ class SelectCategoryIcon extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  context.loc.selectCategoryLabel,
+                  context.loc.selectCategory,
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium
@@ -118,7 +118,7 @@ class SelectedItem extends StatelessWidget {
                       showCheckmark: false,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       label: Text(
-                        context.loc.addNewLabel,
+                        context.loc.addNew,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                         ),
