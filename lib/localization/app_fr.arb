@@ -1,0 +1,12 @@
+{
+    "appTitle": "Paisa",
+    "versionNumber": "v{version}",
+    "@versionNumber": {
+        "description": "Subtitle text shown on the settings page for button",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    }
+}

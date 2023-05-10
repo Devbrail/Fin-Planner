@@ -41,13 +41,39 @@
 | :--: | :--: | :--: | :--: |
 |Home|Accounts|Categories|Budget overview|
 
-
 ### Expense Tracking
 
 - Tracking expenses, incomes & deposits
 - Account & budget visw overview
 - Manage categories
   
+### Steps to translate
+
+1. Create `.arb` file inside `lib/localization/app_<country_code>.arb` example `app_en.arb`
+2. Copy all transactions from `app_en.arb` to created file and remove all keys which annotates with `@`
+   From
+
+   ```json
+   {
+    "appTitle": "Paisa",
+    "@appTitle": {
+        "description": "The app name",
+        "type": "text",
+        "placeholders": {}
+    }
+   }
+    ```
+
+    To
+
+    ```json
+    {
+      "appTitle": "Paisa"
+    }
+    ```
+
+3. Run the app and check once
+
 ### License
 
     Copyright (c) 2022, Hemanth S
