@@ -26,12 +26,8 @@ class CategoryIconPickerWidget extends StatelessWidget {
         }
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          title: Text(
-            context.loc.selectIcon,
-          ),
-          subtitle: Text(
-            context.loc.selectIconDesc,
-          ),
+          title: Text(context.loc.selectIconTitle),
+          subtitle: Text(context.loc.selectIconSubTitle),
           leading: Icon(
             IconData(
               codePoint,

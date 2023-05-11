@@ -60,23 +60,15 @@ class _ExpensePageState extends State<ExpensePage> {
         listener: (context, state) {
           if (state is ExpenseDeletedState) {
             context.showMaterialSnackBar(
-              expenseBloc.transactionType == TransactionType.expense
-                  ? context.loc.deletedTransaction
-                  : context.loc.incomeDeletedSuccessful,
+              context.loc.deletedTransaction,
               backgroundColor: Theme.of(context).colorScheme.error,
               color: Theme.of(context).colorScheme.onError,
             );
             context.pop();
           } else if (state is ExpenseAdded) {
-            final content =
-                expenseBloc.transactionType == TransactionType.expense
-                    ? state.isAddOrUpdate
-                        ? context.loc.addedTransaction
-                        : context.loc.updatedTransaction
-                    : state.isAddOrUpdate
-                        ? context.loc.incomeAddedSuccessful
-                        : context.loc.incomeUpdateSuccessful;
-
+            final content = state.isAddOrUpdate
+                ? context.loc.addedTransaction
+                : context.loc.updatedTransaction;
             context.showMaterialSnackBar(
               content,
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,

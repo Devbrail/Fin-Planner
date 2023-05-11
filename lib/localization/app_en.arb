@@ -210,6 +210,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "transfer": "Transfer",
+    "@transfer": {
+        "description": "Text shown on the multiple places",
+        "type": "text",
+        "placeholders": {}
+    },
     "daily": "Daily",
     "@daily": {
         "description": "Text shown on the expenses filter",
@@ -567,155 +573,195 @@
     },
     "madeWithLoveInIndia": "Made with ♥ in India",
     "@madeWithLoveInIndia": {
-        "description": "Made with ♥ in India "
+        "description": "Message shown on the bottom of the setting screen",
+        "type": "text",
+        "placeholders": {}
     },
     "updateCategory": "Update Category",
     "@updateCategory": {
-        "description": "Category update toolbar message"
+        "description": "Text shown on the adding category screen toolbar",
+        "type": "text",
+        "placeholders": {}
     },
-    "accountInfo": "Information",
-    "@accountInfo": {
-        "description": "information "
+    "accountInformationTitle": "Information",
+    "@accountInformationTitle": {
+        "description": "Title text shown on the information dialog",
+        "type": "text",
+        "placeholders": {}
     },
-    "accountInfoDesc": "The account details you entered are not shared with anyone, including us. It is only used for visual representation of account details, you may enter false info too",
-    "@accountInfoDesc": {
-        "description": "Account information message"
+    "accountInformationSubTitle": "The account details you entered are not shared with anyone, including us. It is only used for visual representation of account details, you may enter false info too",
+    "@accountInformationSubTitle": {
+        "description": "Subtitle text shown on the information dialog",
+        "type": "text",
+        "placeholders": {}
     },
     "next": "Next",
     "@next": {
-        "description": "Next "
+        "description": "Text shown on the intro page button",
+        "type": "text",
+        "placeholders": {}
     },
     "image": "Image",
     "@image": {
-        "description": "Image "
+        "description": "Text shown on the intro page",
+        "type": "text",
+        "placeholders": {}
     },
     "welcome": "Hi, Welcome to",
     "@welcome": {
-        "description": "Intro page message for name input"
+        "description": "Intro page message for name input",
+        "type": "text",
+        "placeholders": {}
     },
     "welcomeDesc": "What should we call you",
     "@welcomeDesc": {
-        "description": "Welcome desc "
+        "description": "Welcome desc ",
+        "type": "text",
+        "placeholders": {}
     },
     "nameHint": "Name",
     "@nameHint": {
-        "description": "Text input hint name"
+        "description": "Text input hint name",
+        "type": "text",
+        "placeholders": {}
     },
     "enterNameHint": "Enter name",
     "@enterNameHint": {
-        "description": "Text input hint name"
+        "description": "Text input hint name",
+        "type": "text",
+        "placeholders": {}
     },
     "imageDesc": "Let's set image of you",
     "@imageDesc": {
-        "description": "Image desc "
+        "description": "Image desc ",
+        "type": "text",
+        "placeholders": {}
     },
     "setBudget": "Set budget for category",
     "@setBudget": {
-        "description": "Set budget "
+        "description": "Text shown on the category screen for setting budget",
+        "type": "text",
+        "placeholders": {}
     },
     "income": "Income",
     "@income": {
-        "description": "Income "
+        "description": "Text shown on multiple places",
+        "type": "text",
+        "placeholders": {}
     },
     "outcome": "Outcome",
     "@outcome": {
-        "description": "Outcome "
+        "description": "Text shown on multiple places",
+        "type": "text",
+        "placeholders": {}
     },
     "thisMonth": "This month",
     "@thisMonth": {
-        "description": "This month "
+        "description": "Text shown on the home screen top section",
+        "type": "text",
+        "placeholders": {}
     },
     "totalBalance": "Total balance",
     "@totalBalance": {
-        "description": "Total balance "
-    },
-    "accept": "Accept",
-    "@accept": {
-        "description": "Accept "
+        "description": "Text shown on the home screen top section",
+        "type": "text",
+        "placeholders": {}
     },
     "ok": "Ok",
     "@ok": {
-        "description": "Ok "
+        "description": "Text shown on the button",
+        "type": "text",
+        "placeholders": {}
     },
     "searchMessage": "Start searching something!",
     "@searchMessage": {
-        "description": "search message "
+        "description": "Message shown on the search screen",
+        "type": "text",
+        "placeholders": {}
     },
     "emptySearchMessage": "Looks like nothing found!",
     "@emptySearchMessage": {
-        "description": "empty search message "
+        "description": "Message shown on the search screen",
+        "type": "text",
+        "placeholders": {}
     },
-    "emptyExpensesMessage": "No expenses yet?",
-    "@emptyExpensesMessage": {
-        "description": "No expenses in home screen"
+    "emptyExpensesMessageTitle": "No expenses yet?",
+    "@emptyExpensesMessageTitle": {
+        "description": "Title message shown on the page when there are no expenses",
+        "type": "text",
+        "placeholders": {}
     },
-    "emptyExpensesDescription": "If there are no expenses, start by adding an expense to see it displayed here.",
-    "@emptyExpensesDescription": {
-        "description": "No expenses in home description"
+    "emptyExpensesMessageSubTitle": "If there are no expenses, start by adding an expense to see it displayed here.",
+    "@emptyExpensesMessageSunTitle": {
+        "description": "Subtitle message shown on the page when there are no expenses",
+        "type": "text",
+        "placeholders": {}
     },
-    "balance": "Balance",
-    "@balance": {
-        "description": "Balance "
+    "selectIconTitle": "Select icon",
+    "@selectIconTitle": {
+        "description": "Title text shown on the button in category page",
+        "type": "text",
+        "placeholders": {}
     },
-    "selectIcon": "Select icon",
-    "@selectIcon": {
-        "description": "Select icon "
-    },
-    "selectIconDesc": "Tap to select icon",
-    "@selectIconDesc": {
-        "description": "Icon picker dialog title"
+    "selectIconSubTitle": "Tap to select icon",
+    "@selectIconSubTitle": {
+        "description": "Subtitle text shown on the button in category page",
+        "type": "text",
+        "placeholders": {}
     },
     "incomeName": "Income name",
     "@incomeName": {
-        "description": "income name "
+        "description": "Text shown on the input hint",
+        "type": "text",
+        "placeholders": {}
     },
     "currencySign": "Currency sign",
     "@currencySign": {
-        "description": "Currency sign "
-    },
-    "incomeAddedSuccessful": "Income added",
-    "@incomeAddedSuccessful": {
-        "description": "Expense added "
-    },
-    "incomeUpdateSuccessful": "Income updated",
-    "@incomeUpdateSuccessful": {
-        "description": "Expense updated "
-    },
-    "incomeDeletedSuccessful": "Income deleted",
-    "@incomeDeletedSuccessful": {
-        "description": "Income deleted "
+        "description": "Text shown on the button on settings screen",
+        "type": "text",
+        "placeholders": {}
     },
     "expenseByCategory": "Expense by category",
     "@expenseByCategory": {
-        "description": "Expense by category "
+        "description": "Text shown on the toolbar title",
+        "type": "text",
+        "placeholders": {}
     },
-    "backupAndRestore": "Backup and Restore",
-    "@backupAndRestore": {
-        "description": "Backup and Restore "
+    "backupAndRestoreTitle": "Backup and restore",
+    "@backupAndRestoreTitle": {
+        "description": "Text shown on the toolbar title",
+        "type": "text",
+        "placeholders": {}
     },
-    "backupAndRestoreDesc": "Backup and restore your expense, accounts & categories",
-    "@backupAndRestoreDesc": {
-        "description": "Backup and restore your data "
+    "backupAndRestoreSubTitle": "Backup and restore your expenses, accounts & categories",
+    "@backupAndRestoreSubTitle": {
+        "description": "Subtitle text shown on the setting button",
+        "type": "text",
+        "placeholders": {}
     },
     "exportData": "Export",
     "@exportData": {
-        "description": "Export the data from db to file"
+        "description": "Text shown on the import and export button",
+        "type": "text",
+        "placeholders": {}
     },
     "importData": "Import",
     "@importData": {
-        "description": "Import the data from file to db"
-    },
-    "restore": "Restore",
-    "@restore": {
-        "description": "Restore "
+        "description": "IText shown on the import and export button",
+        "type": "text",
+        "placeholders": {}
     },
     "creatingBackup": "Creating backup",
     "@creatingBackup": {
-        "description": "Creating backup "
+        "description": "Message shown when the backup is initiated",
+        "type": "text",
+        "placeholders": {}
     },
     "restoringBackup": "Restoring backup",
     "@restoringBackup": {
-        "description": "Creating backup "
+        "description": "Message shown when the importing backup file",
+        "type": "text",
+        "placeholders": {}
     },
     "saveAsCSV": "Save as CSV",
     "@saveAsCSV": {
@@ -724,10 +770,6 @@
     "saveAsCSVDesc": "Export data into CSV file format",
     "@saveAsCSVDesc": {
         "description": "Save as CSV "
-    },
-    "transfer": "Transfer",
-    "@transfer": {
-        "description": "Transfer "
     },
     "appRate": "Rate the app",
     "@appRate": {
@@ -861,7 +903,6 @@
     "@customSymbol": {
         "description": "Custom symbol "
     },
-     
     "intoTitle": "Simple way to help control your savings",
     "@intoTitle": {
         "description": "Title text shown on the intro page",

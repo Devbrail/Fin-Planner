@@ -371,7 +371,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                   horizontalTitleGap: 0,
                   leading: const Icon(Icons.info_rounded),
                   title: Text(
-                    context.loc.accountInfo,
+                    context.loc.accountInformationTitle,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
@@ -380,9 +380,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    context.loc.accountInfoDesc,
-                  ),
+                  child: Text(context.loc.accountInformationSubTitle),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -401,9 +399,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                       onPressed: () {
                         GoRouter.of(context).pop();
                       },
-                      child: Text(
-                        context.loc.accept,
-                      ),
+                      child: Text(context.loc.ok),
                     ),
                   ),
                 ),
@@ -513,7 +509,7 @@ class AccountInitialAmountWidget extends StatelessWidget {
             final text = newValue.text;
             if (text.isNotEmpty) double.parse(text);
             return newValue;
-          } catch (e) {}
+          } catch (_) {}
           return oldValue;
         }),
       ],

@@ -26,9 +26,9 @@ class AccountTransactionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (expenses.isEmpty) {
       return EmptyWidget(
-        title: context.loc.emptyExpensesMessage,
+        title: context.loc.emptyExpensesMessageTitle,
         icon: Icons.money_off_rounded,
-        description: context.loc.emptyExpensesDescription,
+        description: context.loc.emptyExpensesMessageTitle,
       );
     }
     return ListView(

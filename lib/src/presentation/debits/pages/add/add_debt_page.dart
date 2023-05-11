@@ -370,7 +370,7 @@ class AmountWidget extends StatelessWidget {
             final text = newValue.text;
             if (text.isNotEmpty) double.parse(text);
             return newValue;
-          } catch (e) {}
+          } catch (_) {}
           return oldValue;
         }),
       ],

@@ -48,9 +48,7 @@ class ExportAndImportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: context.materialYouAppBar(
-        context.loc.backupAndRestore,
-      ),
+      appBar: context.materialYouAppBar(context.loc.backupAndRestoreTitle),
       body: ListView(
         padding: EdgeInsets.zero,
         physics: const NeverScrollableScrollPhysics(),

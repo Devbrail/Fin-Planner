@@ -76,8 +76,8 @@ class SettingsPage extends StatelessWidget {
                 authenticate: getIt.get<Authenticate>(),
               ),
               SettingsOption(
-                title: context.loc.backupAndRestore,
-                subtitle: context.loc.backupAndRestoreDesc,
+                title: context.loc.backupAndRestoreTitle,
+                subtitle: context.loc.backupAndRestoreSubTitle,
                 onTap: () {
                   GoRouter.of(context).goNamed(exportAndImportName);
                 },

@@ -17,7 +17,7 @@ Future<IconData> showIconPicker({
     builder: (_) => AlertDialog(
       icon: Icon(defaultIcon),
       title: Text(
-        context.loc.selectIcon,
+        context.loc.selectIconTitle,
         style: Theme.of(context).textTheme.titleMedium,
       ),
       content: SizedBox(

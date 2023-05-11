@@ -22,9 +22,9 @@ class ExpenseHistory extends StatelessWidget {
     final SummaryController summaryController = getIt.get();
     if (expenses.isEmpty) {
       return EmptyWidget(
-        title: context.loc.emptyExpensesMessage,
+        title: context.loc.emptyExpensesMessageTitle,
         icon: Icons.money_off_rounded,
-        description: context.loc.emptyExpensesDescription,
+        description: context.loc.emptyExpensesMessageSubTitle,
       );
     } else {
       return ValueListenableBuilder<FilterExpense>(

@@ -65,9 +65,7 @@ class CurrencyChangeWidget extends StatelessWidget {
           },
         );
       },
-      title: Text(
-        context.loc.currencySign,
-      ),
+      title: Text(context.loc.currencySign),
       subtitle: Text(
         customSymbol.isNotEmpty ? customSymbol : currentSymbol,
       ),
