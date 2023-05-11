@@ -114,9 +114,13 @@ class CustomCurrencySymbol extends StatefulWidget {
 
 class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
   final format = NumberFormat("#,##,##0.00", "en_US");
-  final TextEditingController editingController = TextEditingController();
+  late final TextEditingController editingController = TextEditingController(
+      text: widget.settings.get(userCustomCurrencyKey, defaultValue: ''));
   late String symbol = widget.currentSymbol;
-  bool symbolLeftOrRight = true;
+  late bool symbolLeftOrRight = widget.settings.get(
+    userCustomCurrencyLeftOrRightKey,
+    defaultValue: false,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -177,6 +181,8 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
                             setState(() {
                               symbolLeftOrRight = value;
                             });
+                            widget.settings
+                                .put(userCustomCurrencyLeftOrRightKey, value);
                           },
                         ),
                       ],
@@ -227,9 +233,7 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
                             Navigator.pop(context);
                           }
                         },
-                        child: Text(
-                          context.loc.done,
-                        ),
+                        child: Text(context.loc.done),
                       ),
                     ],
                   ),

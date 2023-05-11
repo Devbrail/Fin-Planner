@@ -33,6 +33,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
   final amountController = TextEditingController();
   final nameController = TextEditingController();
   final descController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -137,44 +138,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                       ],
                     ),
                   ),
-                  BlocBuilder(
-                    bloc: debtBloc,
-                    buildWhen: (previous, current) =>
-                        current is SelectedDateState,
-                    builder: (context, state) {
-                      String? startDate, endDate;
-                      if (state is SelectedDateState) {
-                        startDate = state.startDateTime.formattedDate;
-                        endDate = state.endDateTime.formattedDate;
-                      }
-                      return Row(
-                        children: [
-                          Expanded(
-                            child: DatePickerWidget(
-                              onSelected: (date) =>
-                                  debtBloc.currentDateTime = date,
-                              title: context.loc.startDate,
-                              subtitle: startDate ?? context.loc.validDate,
-                              icon: MdiIcons.calendarStart,
-                              lastDate: DateTime.now(),
-                              firstDate: DateTime(2000),
-                            ),
-                          ),
-                          Expanded(
-                            child: DatePickerWidget(
-                              onSelected: (date) =>
-                                  debtBloc.currentDueDateTime = date,
-                              title: context.loc.dueDate,
-                              subtitle: endDate ?? context.loc.validDate,
-                              icon: MdiIcons.calendarEnd,
-                              lastDate: DateTime(2050),
-                              firstDate: DateTime.now(),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+                  const StartAndEndDateWidget(),
                   ListTile(
                     title: Text(
                       context.loc.transactionHistory,
@@ -237,6 +201,50 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
           );
         },
       ),
+    );
+  }
+}
+
+class StartAndEndDateWidget extends StatelessWidget {
+  const StartAndEndDateWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final debtBloc = BlocProvider.of<DebtsBloc>(context);
+    return BlocBuilder(
+      bloc: debtBloc,
+      buildWhen: (previous, current) => current is SelectedDateState,
+      builder: (context, state) {
+        String? startDate, endDate;
+        if (state is SelectedDateState) {
+          startDate = state.startDateTime.formattedDate;
+          endDate = state.endDateTime.formattedDate;
+        }
+        return Row(
+          children: [
+            Expanded(
+              child: DatePickerWidget(
+                onSelected: (date) => debtBloc.currentStartDateTime = date,
+                title: context.loc.startDate,
+                subtitle: startDate ?? context.loc.validDate,
+                icon: MdiIcons.calendarStart,
+                lastDate: DateTime.now(),
+                firstDate: DateTime(2000),
+              ),
+            ),
+            Expanded(
+              child: DatePickerWidget(
+                onSelected: (date) => debtBloc.currentEndDateTime = date,
+                title: context.loc.dueDate,
+                subtitle: endDate ?? context.loc.validDate,
+                icon: MdiIcons.calendarEnd,
+                lastDate: DateTime(2050),
+                firstDate: DateTime.now(),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

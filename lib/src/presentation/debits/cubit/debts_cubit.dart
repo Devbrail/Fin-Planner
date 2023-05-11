@@ -48,8 +48,8 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
   String? currentName;
   String? currentDescription;
   double? currentAmount;
-  DateTime? currentDateTime;
-  DateTime? currentDueDateTime;
+  DateTime? currentStartDateTime;
+  DateTime? currentEndDateTime;
 
   Future<void> _addTransactionToDebt(
     AddTransactionToDebtEvent event,
@@ -83,13 +83,14 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
       currentAmount = debt.amount;
       currentName = debt.name;
       currentDescription = debt.description;
-      currentDateTime = debt.dateTime;
-      currentDueDateTime = debt.expiryDateTime;
+      currentStartDateTime = debt.dateTime;
+      currentEndDateTime = debt.expiryDateTime;
       currentDebtType = debt.debtType;
       currentDebt = debt;
       emit(DebtsSuccessState(debt));
 
       Future.delayed(Duration.zero).then((value) {
+        emit(SelectedDateState(currentStartDateTime!, currentEndDateTime!));
         add(ChangeDebtTypeEvent(currentDebtType));
       });
     } else {
@@ -104,8 +105,8 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     final String? name = currentName?.trim();
     final double? amount = currentAmount;
     final String? description = currentDescription?.trim();
-    final DateTime? dateTime = currentDateTime;
-    final DateTime? dueDateTime = currentDueDateTime;
+    final DateTime? dateTime = currentStartDateTime;
+    final DateTime? dueDateTime = currentEndDateTime;
     final DebtType debtType = currentDebtType;
 
     if (amount == null) {
@@ -150,8 +151,8 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     SelectedDateEvent event,
     Emitter<DebtsState> emit,
   ) {
-    currentDateTime = event.startDateTime;
-    currentDueDateTime = event.endDateTime;
+    currentStartDateTime = event.startDateTime;
+    currentEndDateTime = event.endDateTime;
     emit(SelectedDateState(event.startDateTime, event.endDateTime));
   }
 

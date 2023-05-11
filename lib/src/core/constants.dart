@@ -15,4 +15,6 @@ const String userAuthKey = 'user_auth_key';
 const String smallSizeFabKey = 'user_small_size_fab_key';
 const String userLanguageKey = 'user_language_key';
 const String userCustomCurrencyKey = 'user_custom_currency_key';
+const String userCustomCurrencyLeftOrRightKey =
+    'user_custom_currency_let_or_right_key';
 const String scheduleTime = 'schedule_time_key';

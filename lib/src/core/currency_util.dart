@@ -26,8 +26,13 @@ extension MappingOnDouble on double {
     //return asThousands(separator: model.thousandsSeparator).leftOrRight;
     final String? customCurrency = settings.get(userCustomCurrencyKey);
     if (customCurrency != null) {
-      return settings.get(userCustomCurrencyKey, defaultValue: '\$') +
-          NumberFormat("#,##0.00", "en_US").format(this);
+      if (settings.get(userCustomCurrencyLeftOrRightKey, defaultValue: false)) {
+        return settings.get(userCustomCurrencyKey, defaultValue: '\$') +
+            NumberFormat("#,##0.00", "en_US").format(this);
+      } else {
+        return NumberFormat("#,##0.00", "en_US").format(this) +
+            settings.get(userCustomCurrencyKey, defaultValue: '\$');
+      }
     } else {
       return NumberFormat.simpleCurrency(
         locale: settings.get(userLanguageKey),
