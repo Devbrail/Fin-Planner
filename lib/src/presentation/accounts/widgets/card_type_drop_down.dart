@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:paisa/src/core/common.dart';
 
 import '../../../core/enum/card_type.dart';
 import '../../widgets/paisa_chip.dart';
@@ -25,17 +26,17 @@ class CardTypeButtons extends StatelessWidget {
         return Row(
           children: [
             PaisaMaterialYouChip(
-              title: CardType.cash.name,
+              title: CardType.cash.stringValue(context),
               isSelected: accountsBloc.selectedType == CardType.cash,
               onPressed: () => _update(CardType.cash),
             ),
             PaisaMaterialYouChip(
-              title: CardType.bank.name,
+              title: CardType.bank.stringValue(context),
               isSelected: accountsBloc.selectedType == CardType.bank,
               onPressed: () => _update(CardType.bank),
             ),
             PaisaMaterialYouChip(
-              title: CardType.wallet.name,
+              title: CardType.wallet.stringValue(context),
               isSelected: accountsBloc.selectedType == CardType.wallet,
               onPressed: () => _update(CardType.wallet),
             ),
