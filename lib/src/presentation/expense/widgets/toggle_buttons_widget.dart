@@ -43,12 +43,12 @@ class TransactionToggleButtons extends StatelessWidget {
                       expenseBloc.transactionType == TransactionType.income,
                   onPressed: () => _update(TransactionType.income),
                 ),
-                PaisaMaterialYouChip(
+                /*  PaisaMaterialYouChip(
                   title: TransactionType.transfer.stringName(context),
                   isSelected:
                       expenseBloc.transactionType == TransactionType.transfer,
                   onPressed: () => _update(TransactionType.transfer),
-                ),
+                ), */
               ],
             ),
           ),
