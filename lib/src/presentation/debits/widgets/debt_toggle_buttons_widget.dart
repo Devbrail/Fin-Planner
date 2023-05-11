@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../widgets/paisa_chip.dart';
-import '../cubit/debts_cubit.dart';
+import '../cubit/debts_bloc.dart';
 
 class DebtToggleButtonsWidget extends StatelessWidget {
   const DebtToggleButtonsWidget({

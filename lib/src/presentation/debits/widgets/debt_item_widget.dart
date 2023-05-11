@@ -13,7 +13,7 @@ import '../../../data/debt/models/transactions_model.dart';
 import '../../../domain/debt/entities/transaction.dart';
 import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_text_field.dart';
-import '../cubit/debts_cubit.dart';
+import '../cubit/debts_bloc.dart';
 
 class DebtItemWidget extends StatelessWidget {
   const DebtItemWidget({
@@ -113,7 +113,9 @@ class DebtItemWidget extends StatelessWidget {
                           AddTransactionToDebtEvent(debt, amount, dateTime!));
                       Navigator.pop(context);
                     } else {
-                      context.showMaterialSnackBar('Select time');
+                      context.showMaterialSnackBar(
+                          context.loc.selectDateErrorMessage);
+                      Navigator.pop(context);
                     }
                   },
                   child: Text(

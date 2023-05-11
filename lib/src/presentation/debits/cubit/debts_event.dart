@@ -1,4 +1,4 @@
-part of 'debts_cubit.dart';
+part of 'debts_bloc.dart';
 
 @immutable
 abstract class DebtsEvent extends Equatable {
@@ -46,14 +46,22 @@ class ChangeDebtTypeEvent extends DebtsEvent {
   List<Object?> get props => [debtType];
 }
 
-class SelectedDateEvent extends DebtsEvent {
-  final DateTime startDateTime;
+class SelectedEndDateEvent extends DebtsEvent {
   final DateTime endDateTime;
 
-  const SelectedDateEvent(this.startDateTime, this.endDateTime);
+  const SelectedEndDateEvent(this.endDateTime);
 
   @override
-  List<Object> get props => [startDateTime, endDateTime];
+  List<Object> get props => [endDateTime];
+}
+
+class SelectedStartDateEvent extends DebtsEvent {
+  final DateTime startDateTime;
+
+  const SelectedStartDateEvent(this.startDateTime);
+
+  @override
+  List<Object> get props => [startDateTime];
 }
 
 class DeleteDebtEvent extends DebtsEvent {

@@ -13,6 +13,8 @@ import '../../../domain/debt/use_case/debt_use_case.dart';
 part 'debts_event.dart';
 part 'debts_state.dart';
 
+enum SelectedTime { start, end }
+
 @injectable
 class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
   DebtsBloc({
@@ -29,74 +31,27 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     on<ChangeDebtTypeEvent>(_changeType);
     on<FetchDebtOrCreditFromIdEvent>(_fetchDebtOrCreditFromId);
     on<AddOrUpdateEvent>(addDebt);
-    on<SelectedDateEvent>(selectedDateEvent);
+    on<SelectedStartDateEvent>(_selectedStartDateEvent);
+    on<SelectedEndDateEvent>(_selectedEndDateEvent);
     on<DeleteDebtEvent>(_deleteDebit);
     on<DeleteTransactionEvent>(_deleteTransaction);
   }
 
   final AddDebtUseCase addDebtUseCase;
+  final AddTransactionUseCase addTransactionUseCase;
+  double? currentAmount;
+  Debt? currentDebt;
+  DebtType currentDebtType = DebtType.debt;
+  String? currentDescription;
+  DateTime? endDateTime;
+  String? currentName;
+  DateTime? startDateTime;
+  final DeleteDebtUseCase deleteDebtUseCase;
+  final DeleteTransactionUseCase deleteTransactionUseCase;
+  final DeleteTransactionsUseCase deleteTransactionsUseCase;
   final GetDebtUseCase getDebtUseCase;
   final GetTransactionsUseCase getTransactionsUseCase;
-  final AddTransactionUseCase addTransactionUseCase;
   final UpdateDebtUseCase updateDebtUseCase;
-  final DeleteDebtUseCase deleteDebtUseCase;
-  final DeleteTransactionsUseCase deleteTransactionsUseCase;
-  final DeleteTransactionUseCase deleteTransactionUseCase;
-
-  DebtType currentDebtType = DebtType.debt;
-  Debt? currentDebt;
-  String? currentName;
-  String? currentDescription;
-  double? currentAmount;
-  DateTime? currentStartDateTime;
-  DateTime? currentEndDateTime;
-
-  Future<void> _addTransactionToDebt(
-    AddTransactionToDebtEvent event,
-    Emitter<DebtsState> emit,
-  ) async {
-    await addTransactionUseCase(
-      amount: event.amount,
-      currentDateTime: event.dateTime,
-      parentId: event.debt.superId!,
-    );
-    emit(TransactionAddedState());
-  }
-
-  void _changeType(
-    ChangeDebtTypeEvent event,
-    Emitter<DebtsState> emit,
-  ) {
-    currentDebtType = event.debtType;
-    emit(DebtsTabState(event.debtType));
-  }
-
-  Future<void> _fetchDebtOrCreditFromId(
-    FetchDebtOrCreditFromIdEvent event,
-    Emitter<DebtsState> emit,
-  ) async {
-    final int? debtId = int.tryParse(event.id ?? '');
-    if (debtId == null) return;
-
-    final Debt? debt = getDebtUseCase(debtId);
-    if (debt != null) {
-      currentAmount = debt.amount;
-      currentName = debt.name;
-      currentDescription = debt.description;
-      currentStartDateTime = debt.dateTime;
-      currentEndDateTime = debt.expiryDateTime;
-      currentDebtType = debt.debtType;
-      currentDebt = debt;
-      emit(DebtsSuccessState(debt));
-
-      Future.delayed(Duration.zero).then((value) {
-        emit(SelectedDateState(currentStartDateTime!, currentEndDateTime!));
-        add(ChangeDebtTypeEvent(currentDebtType));
-      });
-    } else {
-      emit(const DebtErrorState('Debt not found'));
-    }
-  }
 
   Future<void> addDebt(
     AddOrUpdateEvent event,
@@ -105,8 +60,8 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     final String? name = currentName?.trim();
     final double? amount = currentAmount;
     final String? description = currentDescription?.trim();
-    final DateTime? dateTime = currentStartDateTime;
-    final DateTime? dueDateTime = currentEndDateTime;
+    final DateTime? dateTime = startDateTime;
+    final DateTime? dueDateTime = endDateTime;
     final DebtType debtType = currentDebtType;
 
     if (amount == null) {
@@ -147,13 +102,72 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     emit(DebtsAdded(isUpdate: event.isUpdate));
   }
 
-  FutureOr<void> selectedDateEvent(
-    SelectedDateEvent event,
+  FutureOr<void> _selectedStartDateEvent(
+    SelectedStartDateEvent event,
     Emitter<DebtsState> emit,
   ) {
-    currentStartDateTime = event.startDateTime;
-    currentEndDateTime = event.endDateTime;
-    emit(SelectedDateState(event.startDateTime, event.endDateTime));
+    startDateTime = event.startDateTime;
+    emit(SelectedStartDateState(event.startDateTime));
+  }
+
+  FutureOr<void> _selectedEndDateEvent(
+    SelectedEndDateEvent event,
+    Emitter<DebtsState> emit,
+  ) {
+    endDateTime = event.endDateTime;
+    emit(SelectedEndDateState(event.endDateTime));
+  }
+
+  Future<void> _addTransactionToDebt(
+    AddTransactionToDebtEvent event,
+    Emitter<DebtsState> emit,
+  ) async {
+    await addTransactionUseCase(
+      amount: event.amount,
+      currentDateTime: event.dateTime,
+      parentId: event.debt.superId!,
+    );
+    emit(TransactionAddedState());
+  }
+
+  Future<void> _fetchDebtOrCreditFromId(
+    FetchDebtOrCreditFromIdEvent event,
+    Emitter<DebtsState> emit,
+  ) async {
+    final int? debtId = int.tryParse(event.id ?? '');
+    if (debtId == null) {
+      add(SelectedStartDateEvent(DateTime.now()));
+      add(SelectedEndDateEvent(DateTime.now()));
+      return;
+    }
+
+    final Debt? debt = getDebtUseCase(debtId);
+    if (debt != null) {
+      currentAmount = debt.amount;
+      currentName = debt.name;
+      currentDescription = debt.description;
+      startDateTime = debt.dateTime;
+      endDateTime = debt.expiryDateTime;
+      currentDebtType = debt.debtType;
+      currentDebt = debt;
+      emit(DebtsSuccessState(debt));
+
+      Future.delayed(Duration.zero).then((value) {
+        add(ChangeDebtTypeEvent(currentDebtType));
+        add(SelectedStartDateEvent(startDateTime!));
+        add(SelectedEndDateEvent(endDateTime!));
+      });
+    } else {
+      emit(const DebtErrorState('Debt not found'));
+    }
+  }
+
+  void _changeType(
+    ChangeDebtTypeEvent event,
+    Emitter<DebtsState> emit,
+  ) {
+    currentDebtType = event.debtType;
+    emit(DebtsTabState(event.debtType));
   }
 
   FutureOr<void> _deleteDebit(

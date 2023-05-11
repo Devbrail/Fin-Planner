@@ -1,4 +1,4 @@
-part of 'debts_cubit.dart';
+part of 'debts_bloc.dart';
 
 abstract class DebtsState extends Equatable {
   const DebtsState();
@@ -45,24 +45,22 @@ class DebtErrorState extends DebtsState {
 
 class TransactionAddedState extends DebtsState {}
 
-class SelectedDateState extends DebtsState {
-  final DateTime startDateTime;
+class SelectedEndDateState extends DebtsState {
   final DateTime endDateTime;
 
-  const SelectedDateState(this.startDateTime, this.endDateTime);
+  const SelectedEndDateState(this.endDateTime);
 
   @override
-  List<Object> get props => [startDateTime, endDateTime];
+  List<Object> get props => [endDateTime];
+}
 
-  SelectedDateState copyWith({
-    DateTime? startDateTime,
-    DateTime? endDateTime,
-  }) {
-    return SelectedDateState(
-      startDateTime ?? this.startDateTime,
-      endDateTime ?? this.endDateTime,
-    );
-  }
+class SelectedStartDateState extends DebtsState {
+  final DateTime startDateTime;
+
+  const SelectedStartDateState(this.startDateTime);
+
+  @override
+  List<Object> get props => [startDateTime];
 }
 
 class DeleteDebtsState extends DebtsState {}

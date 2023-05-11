@@ -418,12 +418,6 @@
         "type": "text",
         "placeholders": {}
     },
-    "validDate": "Select valid date",
-    "@validDate": {
-        "description": "Subtitle text shown on the debt/ credit page when selecting date",
-        "type": "text",
-        "placeholders": {}
-    },
     "socialLinks": "Social links",
     "@socialLinks": {
         "description": "Section title shown on the settings page",
@@ -996,6 +990,12 @@
     "smallSizeFabMessage": "Show small size action button on all screen",
     "@smallSizeFabMessage": {
         "description": "Title text shown on the settings page for FAB size option",
+        "type": "text",
+        "placeholders": {}
+    },
+    "selectDateErrorMessage": "Select date",
+    "@selectDateErrorMessage": {
+        "description": "Message shown when the date is not select on debt payout ",
         "type": "text",
         "placeholders": {}
     }

@@ -4,15 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../data/debt/models/transactions_model.dart';
 import '../../../../domain/debt/entities/transaction.dart';
+import '../../../widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_bottom_sheet.dart';
 import '../../../widgets/paisa_text_field.dart';
-import '../../cubit/debts_cubit.dart';
+import '../../cubit/debts_bloc.dart';
 import '../../widgets/debt_toggle_buttons_widget.dart';
 
 class AddOrEditDebtPage extends StatefulWidget {
@@ -211,45 +211,58 @@ class StartAndEndDateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final debtBloc = BlocProvider.of<DebtsBloc>(context);
-    return BlocBuilder(
-      bloc: debtBloc,
-      buildWhen: (previous, current) => current is SelectedDateState,
-      builder: (context, state) {
-        String? startDate, endDate;
-        if (state is SelectedDateState) {
-          startDate = state.startDateTime.formattedDate;
-          endDate = state.endDateTime.formattedDate;
-        }
-        return Row(
-          children: [
-            Expanded(
-              child: DatePickerWidget(
-                onSelected: (date) => debtBloc.currentStartDateTime = date,
-                title: context.loc.startDate,
-                subtitle: startDate ?? context.loc.validDate,
-                icon: MdiIcons.calendarStart,
-                lastDate: DateTime.now(),
-                firstDate: DateTime(2000),
-              ),
-            ),
-            Expanded(
-              child: DatePickerWidget(
-                onSelected: (date) => debtBloc.currentEndDateTime = date,
-                title: context.loc.dueDate,
-                subtitle: endDate ?? context.loc.validDate,
-                icon: MdiIcons.calendarEnd,
-                lastDate: DateTime(2050),
-                firstDate: DateTime.now(),
-              ),
-            ),
-          ],
-        );
-      },
+    return Row(
+      children: [
+        BlocBuilder(
+          bloc: debtBloc,
+          buildWhen: (previous, current) => current is SelectedStartDateState,
+          builder: (context, state) {
+            if (state is SelectedStartDateState) {
+              return Expanded(
+                child: DatePickerWidget(
+                  onSelected: (date) {
+                    debtBloc.add(SelectedStartDateEvent(date));
+                  },
+                  title: context.loc.startDate,
+                  subtitle: state.startDateTime.formattedDate,
+                  icon: MdiIcons.calendarStart,
+                  lastDate: DateTime.now(),
+                  firstDate: DateTime(2000),
+                ),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        ),
+        BlocBuilder(
+          bloc: debtBloc,
+          buildWhen: (previous, current) => current is SelectedEndDateState,
+          builder: (context, state) {
+            if (state is SelectedEndDateState) {
+              return Expanded(
+                child: DatePickerWidget(
+                  onSelected: (date) {
+                    debtBloc.add(SelectedEndDateEvent(date));
+                  },
+                  title: context.loc.dueDate,
+                  subtitle: state.endDateTime.formattedDate,
+                  icon: MdiIcons.calendarEnd,
+                  lastDate: DateTime(2050),
+                  firstDate: DateTime.now(),
+                ),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        ),
+      ],
     );
   }
 }
 
-class DatePickerWidget extends StatefulWidget {
+class DatePickerWidget extends StatelessWidget {
   const DatePickerWidget({
     super.key,
     required this.onSelected,
@@ -267,12 +280,6 @@ class DatePickerWidget extends StatefulWidget {
   final DateTime firstDate;
 
   @override
-  State<DatePickerWidget> createState() => _DatePickerWidgetState();
-}
-
-class _DatePickerWidgetState extends State<DatePickerWidget> {
-  late String subtitle = widget.subtitle;
-  @override
   Widget build(BuildContext context) {
     return ListTile(
       horizontalTitleGap: 0,
@@ -283,17 +290,14 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
         final result = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
-          firstDate: widget.firstDate,
-          lastDate: widget.lastDate,
+          firstDate: firstDate,
+          lastDate: lastDate,
         );
         if (result == null) return;
-        widget.onSelected.call(result);
-        setState(() {
-          subtitle = result.formattedDate;
-        });
+        onSelected.call(result);
       },
-      leading: Icon(widget.icon),
-      title: Text(widget.title),
+      leading: Icon(icon),
+      title: Text(title),
       subtitle: Text(subtitle),
     );
   }
