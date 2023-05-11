@@ -11,8 +11,9 @@ abstract class DebtsEvent extends Equatable {
 class AddTransactionToDebtEvent extends DebtsEvent {
   final DebtModel debt;
   final double amount;
+  final DateTime dateTime;
 
-  const AddTransactionToDebtEvent(this.debt, this.amount);
+  const AddTransactionToDebtEvent(this.debt, this.amount, this.dateTime);
 
   @override
   List<Object?> get props => [debt, amount];

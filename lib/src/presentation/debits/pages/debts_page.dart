@@ -7,18 +7,10 @@ import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt_model.dart';
 import '../../widgets/paisa_empty_widget.dart';
-import '../widgets/debt_item_widget.dart';
+import '../widgets/debt_list_widget.dart';
 
-class DebtsPage extends StatefulWidget {
+class DebtsPage extends StatelessWidget {
   const DebtsPage({super.key});
-
-  @override
-  State<DebtsPage> createState() => _DebtsPageState();
-}
-
-class _DebtsPageState extends State<DebtsPage>
-    with SingleTickerProviderStateMixin {
-  DebtType selectedType = DebtType.debt;
 
   @override
   Widget build(BuildContext context) {
@@ -101,27 +93,6 @@ class _DebtsPageState extends State<DebtsPage>
             );
           },
         ),
-      ),
-    );
-  }
-}
-
-class DebtsListWidget extends StatelessWidget {
-  const DebtsListWidget({
-    super.key,
-    required this.debts,
-  });
-
-  final List<DebtModel> debts;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.only(top: 8, bottom: 124),
-      shrinkWrap: true,
-      itemCount: debts.length,
-      itemBuilder: (context, index) => DebtItemWidget(
-        debt: debts[index],
       ),
     );
   }

@@ -57,7 +57,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
   ) async {
     await addTransactionUseCase(
       amount: event.amount,
-      currentDateTime: DateTime.now(),
+      currentDateTime: event.dateTime,
       parentId: event.debt.superId!,
     );
     emit(TransactionAddedState());
