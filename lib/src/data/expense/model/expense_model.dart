@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/recurring_type.dart';
-import '../../../core/enum/transaction.dart';
+import '../../../core/enum/transaction_type.dart';
 
 part 'expense_model.g.dart';
 
@@ -42,12 +42,6 @@ class ExpenseModel extends HiveObject with EquatableMixin {
   @HiveField(11, defaultValue: 0.0)
   double transferAmount;
 
-  @HiveField(14)
-  RecurringType? recurringType;
-
-  @HiveField(13)
-  DateTime? recurringDate;
-
   ExpenseModel({
     required this.name,
     required this.currency,
@@ -60,8 +54,6 @@ class ExpenseModel extends HiveObject with EquatableMixin {
     this.fromAccountId,
     this.toAccountId,
     this.transferAmount = 0.0,
-    this.recurringType,
-    this.recurringDate,
   });
 
   Map<String, dynamic> toJson() => {
@@ -76,8 +68,6 @@ class ExpenseModel extends HiveObject with EquatableMixin {
         'fromAccountId': fromAccountId,
         'toAccountId': toAccountId,
         'transferAmount': transferAmount,
-        "recurringType": recurringType?.index,
-        "recurringDate": recurringDate,
       };
 
   factory ExpenseModel.fromJson(Map<String, dynamic> json) => ExpenseModel(
@@ -91,8 +81,6 @@ class ExpenseModel extends HiveObject with EquatableMixin {
         fromAccountId: json['fromAccountId'],
         toAccountId: json['toAccountId'],
         transferAmount: json['transferAmount'],
-        recurringDate: DateTime.tryParse(json['recurringDate'] ?? ''),
-        recurringType: RecurringType.values[json['recurringType'] ?? 1],
       )..superId = json['superId'];
 
   @override
@@ -135,8 +123,6 @@ class ExpenseModel extends HiveObject with EquatableMixin {
       fromAccountId: fromAccountId ?? this.fromAccountId,
       toAccountId: toAccountId ?? this.toAccountId,
       transferAmount: transferAmount ?? this.transferAmount,
-      recurringType: recurringType ?? this.recurringType,
-      recurringDate: recurringDate ?? this.recurringDate,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/data/recurring/model/recurring.dart';
 
 import '../../core/enum/box_types.dart';
 import '../../data/accounts/model/account_model.dart';
@@ -28,6 +29,10 @@ abstract class HiveModule {
   @singleton
   Box<TransactionsModel> get transactionsBox =>
       Hive.box<TransactionsModel>(BoxType.transactions.name);
+
+  @singleton
+  Box<RecurringModel> get recurringBox =>
+      Hive.box<RecurringModel>(BoxType.recurring.name);
 
   @singleton
   @Named('settings')

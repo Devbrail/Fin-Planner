@@ -1,8 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/core/enum/recurring_type.dart';
 
-import '../../../core/enum/transaction.dart';
+import '../../../core/enum/transaction_type.dart';
 import '../../../domain/expense/repository/expense_repository.dart';
 import '../data_sources/local_expense_data_manager.dart';
 import '../model/expense_model.dart';
@@ -104,56 +102,6 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
 
   @override
   Future<void> clearAll() => dataSource.clearAll();
-
-  @override
-  Future<void> addRecurringExpense(
-    String name,
-    double amount,
-    DateTime time,
-    int category,
-    int account,
-    TransactionType transactionType,
-    String? description,
-    RecurringType recurringType,
-  ) async {
-    return dataSource.addOrUpdateExpense(
-      ExpenseModel(
-        name: name,
-        currency: amount,
-        time: time,
-        categoryId: category,
-        accountId: account,
-        type: transactionType,
-        description: description,
-        recurringType: recurringType,
-        recurringDate: time,
-      ),
-    );
-  }
-
-  @override
-  Future<void> checkForRecurring() async {
-    final List<ExpenseModel> recurringExpenses =
-        expenses().toEntities().recurringList;
-    final now = DateTime.now();
-    for (final ExpenseModel expenseModel in recurringExpenses) {
-      if (expenseModel.recurringDate == null) return;
-      if (expenseModel.type == TransactionType.recurring &&
-          expenseModel.recurringDate!.isBefore(now)) {
-        final nextTime = expenseModel.recurringType!.getTime;
-        final ExpenseModel currentExpense = expenseModel.copyWith(
-          type: TransactionType.expense,
-          time: now,
-        );
-        final ExpenseModel saveExpense = expenseModel.copyWith(
-          recurringDate: expenseModel.recurringDate?.add(nextTime),
-        );
-        await dataSource.addOrUpdateExpense(currentExpense);
-        await dataSource.addOrUpdateExpense(saveExpense);
-        await dataSource.clearExpense(expenseModel.superId!);
-      }
-    }
-  }
 
   @override
   List<ExpenseModel> filterExpenses(

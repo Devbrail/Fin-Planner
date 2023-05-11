@@ -4,10 +4,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/enum/recurring_type.dart';
-import 'package:paisa/src/presentation/settings/bloc/settings_controller.dart';
 
-import '../../../core/enum/transaction.dart';
+import '../../../core/enum/recurring_type.dart';
+import '../../../core/enum/transaction_type.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../data/category/model/category_model.dart';
 import '../../../data/expense/model/expense_model.dart';
@@ -17,6 +16,7 @@ import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
 import '../../../domain/expense/use_case/update_expense_use_case.dart';
+import '../../settings/bloc/settings_controller.dart';
 
 part 'expense_event.dart';
 part 'expense_state.dart';
@@ -31,7 +31,6 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     required this.deleteExpenseUseCase,
     required this.updateExpensesUseCase,
     required this.accountsUseCase,
-    required this.addRecurringExpenseUseCase,
   }) : super(ExpenseInitial()) {
     on<ExpenseEvent>((event, emit) {});
     on<AddOrUpdateExpenseEvent>(_addExpense);
@@ -42,12 +41,9 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<ChangeAccountEvent>(_changeAccount);
     on<UpdateDateTimeEvent>(_updateDateTime);
     on<TransferAccountsEvent>(_transferAccount);
-    on<ChangeRecurringEvent>(_changeRecurring);
-    on<AddRecurringEvent>(_addRecurring);
   }
 
   final GetExpenseUseCase expenseUseCase;
-  final AddRecurringExpenseUseCase addRecurringExpenseUseCase;
   final AddExpenseUseCase addExpenseUseCase;
   final GetAccountUseCase accountUseCase;
   final GetAccountsUseCase accountsUseCase;
@@ -260,51 +256,5 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     emit(
       TransferAccountsState(event.accounts, event.fromAccount, event.toAccount),
     );
-  }
-
-  FutureOr<void> _changeRecurring(
-    ChangeRecurringEvent event,
-    Emitter<ExpenseState> emit,
-  ) {
-    recurringType = event.recurringType;
-    emit(ChangeRecurringTypeState(recurringType));
-  }
-
-  FutureOr<void> _addRecurring(
-    AddRecurringEvent event,
-    Emitter<ExpenseState> emit,
-  ) async {
-    final double? validAmount = expenseAmount;
-    final String? name = expenseName;
-    final int? categoryId = selectedCategoryId;
-    final int? accountId = selectedAccountId;
-    final DateTime dateTime = selectedDate;
-    final String? description = currentDescription;
-
-    if (name == null) {
-      return emit(const ExpenseErrorState('Enter expense name'));
-    }
-    if (validAmount == null || validAmount == 0.0) {
-      return emit(const ExpenseErrorState('Enter valid amount'));
-    }
-
-    if (accountId == null) {
-      return emit(const ExpenseErrorState('Select account'));
-    }
-    if (categoryId == null) {
-      return emit(const ExpenseErrorState('Select category'));
-    }
-
-    await addRecurringExpenseUseCase(
-      name: name,
-      amount: validAmount,
-      time: dateTime,
-      categoryId: categoryId,
-      accountId: accountId,
-      transactionType: transactionType,
-      description: description,
-      recurringType: recurringType,
-    );
-    emit(const ExpenseAdded(isAddOrUpdate: true));
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../main.dart';
-import '../../../core/enum/transaction.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
@@ -21,7 +20,10 @@ class ExpenseListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final SummaryController summaryController = getIt.get();
     return ListView.separated(
-      separatorBuilder: (context, index) => const Divider(indent: 72),
+      separatorBuilder: (context, index) => const Divider(
+        indent: 72,
+        height: 0,
+      ),
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),

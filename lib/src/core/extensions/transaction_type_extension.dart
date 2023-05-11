@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../common.dart';
-import '../enum/transaction.dart';
+import '../enum/transaction_type.dart';
 import '../theme/custom_color.dart';
 
 extension TransactionTypeHelper on TransactionType {
@@ -25,8 +25,6 @@ extension TransactionTypeHelper on TransactionType {
         return context.loc.expense;
       case TransactionType.transfer:
         return context.loc.transfer;
-      case TransactionType.recurring:
-        return 'Recurring';
     }
   }
 
@@ -38,8 +36,6 @@ extension TransactionTypeHelper on TransactionType {
         return context.loc.expenseName;
       case TransactionType.transfer:
         return context.loc.transferName;
-      case TransactionType.recurring:
-        return 'Recurring';
     }
   }
 }
@@ -53,8 +49,6 @@ extension TransactionMap on String {
         return TransactionType.income;
       case 'transfer':
         return TransactionType.transfer;
-      case 'recurring':
-        return TransactionType.recurring;
     }
     return TransactionType.expense;
   }

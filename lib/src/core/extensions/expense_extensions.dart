@@ -6,7 +6,7 @@ import '../../data/expense/model/expense_model.dart';
 import '../../domain/expense/entities/expense.dart';
 import '../common.dart';
 import '../enum/filter_expense.dart';
-import '../enum/transaction.dart';
+import '../enum/transaction_type.dart';
 
 extension ExpenseModelBoxMapping on Box<ExpenseModel> {
   List<Expense> search(
@@ -37,7 +37,7 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
   List<ExpenseModel> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
 
-  List<ExpenseModel> get budgetOverView => noRecurring
+  List<ExpenseModel> get budgetOverView => values
       .where((element) => element.categoryId != -1 && element.accountId != -1)
       .where((element) => element.type == TransactionType.expense)
       .toList();
@@ -50,11 +50,6 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
 
   Iterable<ExpenseModel> get incomeList =>
       values.where((element) => element.type == TransactionType.income);
-
-  Iterable<ExpenseModel> get noRecurring =>
-      values.where((element) => element.type != TransactionType.recurring);
-  Iterable<ExpenseModel> get recurring =>
-      values.where((element) => element.type == TransactionType.recurring);
 
   double get totalExpense => expenseList
       .map((e) => e.currency)
@@ -78,8 +73,6 @@ extension ExpenseModelHelper on ExpenseModel {
         superId: superId,
         toAccountId: toAccountId,
         transferAmount: transferAmount,
-        recurringType: recurringType,
-        recurringDate: recurringDate,
       );
 }
 
@@ -100,9 +93,6 @@ extension ExpensesHelper on Iterable<Expense> {
 
   List<Expense> get expenseList =>
       where((element) => element.type == TransactionType.expense).toList();
-
-  List<Expense> get recurringList =>
-      where((element) => element.type == TransactionType.recurring).toList();
 
   List<Expense> get incomeList =>
       where((element) => element.type == TransactionType.income).toList();

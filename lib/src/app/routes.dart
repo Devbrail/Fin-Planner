@@ -6,7 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 import '../../main.dart';
 import '../core/common.dart';
 import '../core/enum/box_types.dart';
-import '../core/enum/transaction.dart';
+import '../core/enum/transaction_type.dart';
 import '../data/settings/authenticate.dart';
 import '../presentation/accounts/pages/accounts_new/account_transaction_page.dart';
 import '../presentation/accounts/pages/add/add_account_page.dart';

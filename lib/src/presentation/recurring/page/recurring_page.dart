@@ -6,8 +6,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
-import '../../../data/expense/model/expense_model.dart';
+import '../../../data/recurring/model/recurring.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../../widgets/small_size_fab.dart';
 
@@ -16,9 +15,6 @@ class RecurringPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = getIt.get<Box<dynamic>>(
-      instanceName: BoxType.settings.name,
-    );
     return Scaffold(
       appBar: context.materialYouAppBar(
         context.loc.recurring,
@@ -29,11 +25,11 @@ class RecurringPage extends StatelessWidget {
         },
         icon: Icons.add,
       ),
-      body: ValueListenableBuilder<Box<ExpenseModel>>(
-        valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
+      body: ValueListenableBuilder<Box<RecurringModel>>(
+        valueListenable: getIt.get<Box<RecurringModel>>().listenable(),
         builder: (_, value, child) {
-          final List<ExpenseModel> expenses = value.recurring.toList();
-          if (expenses.isEmpty) {
+          final List<RecurringModel> recurringModels = value.values.toList();
+          if (recurringModels.isEmpty) {
             return EmptyWidget(
               title: context.loc.recurringEmptyMessageTitle,
               description: context.loc.recurringEmptyMessageSubTitle,
@@ -44,7 +40,7 @@ class RecurringPage extends StatelessWidget {
               },
             );
           }
-          return RecurringListWidget(expenseModels: expenses);
+          return RecurringListWidget(recurringModels: recurringModels);
         },
       ),
     );
@@ -52,8 +48,8 @@ class RecurringPage extends StatelessWidget {
 }
 
 class RecurringListWidget extends StatelessWidget {
-  const RecurringListWidget({super.key, required this.expenseModels});
-  final List<ExpenseModel> expenseModels;
+  const RecurringListWidget({super.key, required this.recurringModels});
+  final List<RecurringModel> recurringModels;
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +57,13 @@ class RecurringListWidget extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
-      itemCount: expenseModels.length,
+      itemCount: recurringModels.length,
       itemBuilder: (context, index) {
-        final ExpenseModel expense = expenseModels[index];
+        final RecurringModel expense = recurringModels[index];
         return ListTile(
           title: Text(expense.name),
           subtitle: Text(
-              '${expense.recurringType?.name(context) ?? ''} - ${expense.recurringDate?.shortDayString ?? ""}'),
+              '${expense.recurringType.name(context)} - ${expense.recurringDate.shortDayString}'),
           trailing: IconButton(
             onPressed: () async {
               await expense.delete();

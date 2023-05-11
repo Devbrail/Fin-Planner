@@ -22,6 +22,7 @@ class AccountsMobilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
       key: const Key('accounts_list_view'),
       padding: const EdgeInsets.only(bottom: 124),

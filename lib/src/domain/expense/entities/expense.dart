@@ -13,7 +13,5 @@ class Expense extends ExpenseModel {
     super.fromAccountId,
     super.toAccountId,
     super.transferAmount,
-    super.recurringType,
-    super.recurringDate,
   });
 }

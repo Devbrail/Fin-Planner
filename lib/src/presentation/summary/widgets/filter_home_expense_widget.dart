@@ -13,13 +13,13 @@ class FilterHomeWidget extends StatelessWidget {
 
   final SummaryController summaryController;
   void updateFilter(FilterExpense filterExpense) {
-    summaryController.filterHomeExpenseNotifier.value = filterExpense;
+    summaryController.sortHomeExpenseNotifier.value = filterExpense;
   }
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<FilterExpense>(
-      valueListenable: summaryController.filterHomeExpenseNotifier,
+      valueListenable: summaryController.sortHomeExpenseNotifier,
       builder: (_, value, child) {
         getIt.get<SettingsController>().setFilterExpense(value, isHome: true);
         return SafeArea(

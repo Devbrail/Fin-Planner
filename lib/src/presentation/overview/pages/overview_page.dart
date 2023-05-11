@@ -1,15 +1,16 @@
 import 'dart:math';
 
 import 'package:collection/collection.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:paisa/src/core/enum/transaction.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/filter_expense.dart';
+import '../../../core/enum/transaction_type.dart';
 import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
@@ -18,8 +19,6 @@ import '../../widgets/paisa_empty_widget.dart';
 import '../cubit/budget_cubit.dart';
 import '../widgets/category_list_widget.dart';
 import '../widgets/filter_date_range_widget.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
 
 class OverViewPage extends StatelessWidget {
   const OverViewPage({
@@ -304,7 +303,6 @@ class BarChartSample2State extends State<BarChartSample2> {
                   showTitles: true,
                   reservedSize: 32,
                   getTitlesWidget: (value, meta) {
-                    print(value.toString());
                     return Text(
                       DateFormat("MMM\nyy").format(
                           DateTime.fromMillisecondsSinceEpoch(value.round())),
@@ -338,55 +336,6 @@ class BarChartSample2State extends State<BarChartSample2> {
                 .barRods
                 .first
                 .toY,
-          ),
-        ),
-      ),
-    );
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          width: maxLength * 10,
-          child: BarChart(
-            BarChartData(
-              maxY: 20,
-              barTouchData: BarTouchData(
-                touchTooltipData: BarTouchTooltipData(
-                  tooltipBgColor: Colors.grey,
-                  getTooltipItem: (a, b, c, d) => null,
-                ),
-              ),
-              titlesData: FlTitlesData(
-                show: true,
-                rightTitles: AxisTitles(
-                  sideTitles: SideTitles(showTitles: false),
-                ),
-                topTitles: AxisTitles(
-                  sideTitles: SideTitles(showTitles: false),
-                ),
-                bottomTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    getTitlesWidget: bottomTitles,
-                    reservedSize: 42,
-                  ),
-                ),
-                leftTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: false,
-                    reservedSize: 28,
-                    interval: 1,
-                    getTitlesWidget: leftTitles,
-                  ),
-                ),
-              ),
-              borderData: FlBorderData(
-                show: false,
-              ),
-              barGroups: showingBarGroups,
-              gridData: FlGridData(show: false),
-            ),
           ),
         ),
       ),

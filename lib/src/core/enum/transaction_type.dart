@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-part 'transaction.g.dart';
+part 'transaction_type.g.dart';
 
 @HiveType(typeId: 11)
 enum TransactionType {
@@ -9,9 +9,7 @@ enum TransactionType {
   @HiveField(0)
   income('income'),
   @HiveField(2)
-  transfer('transfer'),
-  @HiveField(3)
-  recurring('recurring');
+  transfer('transfer');
 
   final String type;
   const TransactionType(this.type);

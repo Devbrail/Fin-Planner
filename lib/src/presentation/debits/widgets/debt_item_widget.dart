@@ -152,17 +152,18 @@ class DebtItemWidget extends StatelessWidget {
                                                       .allow(RegExp(r"[0-9.]")),
                                                   TextInputFormatter
                                                       .withFunction(
-                                                          (oldValue, newValue) {
-                                                    try {
-                                                      final text =
-                                                          newValue.text;
-                                                      if (text.isNotEmpty) {
-                                                        double.parse(text);
-                                                      }
-                                                      return newValue;
-                                                    } catch (e) {}
-                                                    return oldValue;
-                                                  }),
+                                                    (oldValue, newValue) {
+                                                      try {
+                                                        final text =
+                                                            newValue.text;
+                                                        if (text.isNotEmpty) {
+                                                          double.parse(text);
+                                                        }
+                                                        return newValue;
+                                                      } catch (_) {}
+                                                      return oldValue;
+                                                    },
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -172,7 +173,8 @@ class DebtItemWidget extends StatelessWidget {
                                                 right: 16.0),
                                             child: IconButton(
                                               onPressed: () {},
-                                              icon: Icon(Icons.date_range),
+                                              icon:
+                                                  const Icon(Icons.date_range),
                                             ),
                                           )
                                         ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
-import '../../../core/enum/transaction.dart';
+import '../../../core/enum/transaction_type.dart';
 import '../../widgets/paisa_chip.dart';
 import '../bloc/expense_bloc.dart';
 
@@ -49,12 +49,6 @@ class TransactionToggleButtons extends StatelessWidget {
                       expenseBloc.transactionType == TransactionType.transfer,
                   onPressed: () => _update(TransactionType.transfer),
                 ),
-                /*  PaisaMaterialYouChip(
-                  title: TransactionType.recurring.stringName(context),
-                  isSelected:
-                      expenseBloc.transactionType == TransactionType.recurring,
-                  onPressed: () => _update(TransactionType.recurring),
-                ), */
               ],
             ),
           ),

@@ -28,6 +28,7 @@ class BudgetPage extends StatelessWidget {
           );
         }
         return ListView.separated(
+          physics: const BouncingScrollPhysics(),
           itemCount: categories.length,
           itemBuilder: (context, index) {
             final Category category = categories[index];

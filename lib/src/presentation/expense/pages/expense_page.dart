@@ -6,7 +6,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../core/enum/transaction.dart';
+import '../../../core/enum/transaction_type.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../widgets/paisa_big_button_widget.dart';
 import '../../widgets/paisa_bottom_sheet.dart';
@@ -15,7 +15,6 @@ import '../widgets/expense_amount_widget.dart';
 import '../widgets/expense_date_picker_widget.dart';
 import '../widgets/expense_description_widget.dart';
 import '../widgets/expense_name_widget.dart';
-import '../widgets/expense_recurring_widget.dart';
 import '../widgets/select_account_widget.dart';
 import '../widgets/select_category_widget.dart';
 import '../widgets/selectable_item_widget.dart';
@@ -62,7 +61,7 @@ class _ExpensePageState extends State<ExpensePage> {
           if (state is ExpenseDeletedState) {
             context.showMaterialSnackBar(
               expenseBloc.transactionType == TransactionType.expense
-                  ? context.loc.deletedExpense
+                  ? context.loc.deletedTransaction
                   : context.loc.incomeDeletedSuccessful,
               backgroundColor: Theme.of(context).colorScheme.error,
               color: Theme.of(context).colorScheme.onError,
@@ -72,8 +71,8 @@ class _ExpensePageState extends State<ExpensePage> {
             final content =
                 expenseBloc.transactionType == TransactionType.expense
                     ? state.isAddOrUpdate
-                        ? context.loc.addedExpense
-                        : context.loc.updatedExpense
+                        ? context.loc.addedTransaction
+                        : context.loc.updatedTransaction
                     : state.isAddOrUpdate
                         ? context.loc.incomeAddedSuccessful
                         : context.loc.incomeUpdateSuccessful;
@@ -157,9 +156,8 @@ class _ExpensePageState extends State<ExpensePage> {
                     builder: (context, state) {
                       if (state is ChangeTransactionTypeState &&
                           (state.transactionType == TransactionType.expense ||
-                              state.transactionType == TransactionType.income ||
                               state.transactionType ==
-                                  TransactionType.recurring)) {
+                                  TransactionType.income)) {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [

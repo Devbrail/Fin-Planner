@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/core/enum/filter_expense.dart';
 
 import '../../../core/common.dart';
 import '../../../core/extensions/filter_expense_extension.dart';
@@ -34,7 +35,12 @@ class TransactionsHeaderWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
           foregroundColor: Theme.of(context).colorScheme.primary,
         ),
-        label: Text(summaryController.filterHomeExpense.stringValue(context)),
+        label: ValueListenableBuilder<FilterExpense>(
+          valueListenable: summaryController.sortHomeExpenseNotifier,
+          builder: (context, value, child) {
+            return Text(value.stringValue(context));
+          },
+        ),
         icon: const Icon(MdiIcons.sortVariant),
         onPressed: () {
           showModalBottomSheet(

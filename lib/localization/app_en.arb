@@ -150,21 +150,21 @@
         "type": "text",
         "placeholders": {}
     },
-    "addedExpense": "Expense added",
-    "@addedExpense": {
-        "description": "Successful message when expense added",
+    "addedTransaction": "Transaction added",
+    "@addedTransaction": {
+        "description": "Successful message when Transaction added",
         "type": "text",
         "placeholders": {}
     },
-    "updatedExpense": "Expense updated",
-    "@updatedExpense": {
-        "description": "Successful message when expense updated",
+    "updatedTransaction": "Transaction updated",
+    "@updatedTransaction": {
+        "description": "Successful message when Transaction updated",
         "type": "text",
         "placeholders": {}
     },
-    "deletedExpense": "Expense deleted",
-    "@deletedExpense": {
-        "description": "Successful message when expense deleted",
+    "deletedTransaction": "Transaction deleted",
+    "@deletedTransaction": {
+        "description": "Successful message when Transaction deleted",
         "type": "text",
         "placeholders": {}
     },

@@ -1,6 +1,4 @@
-import 'package:paisa/src/core/enum/recurring_type.dart';
-
-import '../../../core/enum/transaction.dart';
+import '../../../core/enum/transaction_type.dart';
 import '../../../data/expense/model/expense_model.dart';
 
 abstract class ExpenseRepository {
@@ -34,17 +32,7 @@ abstract class ExpenseRepository {
     String? description,
   );
   Future<void> clearAll();
-  Future<void> addRecurringExpense(
-    String name,
-    double amount,
-    DateTime time,
-    int category,
-    int account,
-    TransactionType transactionType,
-    String? description,
-    RecurringType recurringType,
-  );
-  Future<void> checkForRecurring();
+
   List<ExpenseModel> filterExpenses(
       String query, int? accountId, int? categoryId);
 }

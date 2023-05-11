@@ -13,4 +13,21 @@ extension RecurringTypeHelper on RecurringType {
         return const Duration(days: 365);
     }
   }
+
+  int differenceInNumber(DateTime now, DateTime recurring) {
+    switch (this) {
+      case RecurringType.daily:
+        int days = now.difference(recurring).inDays;
+        return days ~/ 1;
+      case RecurringType.weekly:
+        int days = now.difference(recurring).inDays;
+        return days ~/ 7;
+      case RecurringType.monthly:
+        int days = now.difference(recurring).inDays;
+        return days ~/ 30;
+      case RecurringType.yearly:
+        int days = now.difference(recurring).inDays;
+        return days ~/ 365;
+    }
+  }
 }

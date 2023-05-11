@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import '../../../core/enum/transaction.dart';
+import '../../../core/enum/transaction_type.dart';
 import '../entities/expense.dart';
 import '../repository/expense_repository.dart';
 

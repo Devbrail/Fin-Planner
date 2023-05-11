@@ -19,7 +19,7 @@ class SummaryPage extends StatelessWidget {
     return ValueListenableBuilder<Box<ExpenseModel>>(
       valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
       builder: (_, value, child) {
-        final expenses = value.noRecurring.toEntities();
+        final expenses = value.values.toEntities();
         return ScreenTypeLayout(
           breakpoints: const ScreenBreakpoints(
             tablet: 673,

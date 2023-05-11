@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart' show immutable;
-import 'package:paisa/src/core/common.dart';
 
 import '../../../core/enum/card_type.dart';
 import '../../../data/category/model/category_model.dart';

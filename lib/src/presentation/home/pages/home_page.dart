@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/core/enum/box_types.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../settings/bloc/settings_controller.dart';
-import '../../summary/controller/summary_controller.dart';
+import '../../../core/enum/box_types.dart';
+import '../../widgets/paisa_base_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/home_floating_action_button_widget.dart';
 import 'home_desktop_widget.dart';
@@ -25,8 +24,6 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   final HomeBloc homeBloc = getIt.get<HomeBloc>();
-  final SettingsController settingsController = getIt.get();
-  final SummaryController summaryController = getIt.get();
 
   @override
   Widget build(BuildContext context) {

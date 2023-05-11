@@ -75,13 +75,13 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
 
   @override
   List<ExpenseModel> fetchExpensesFromAccountId(int accountId) =>
-      expenseBox.noRecurring
+      expenseBox.values
           .where((element) => element.accountId == accountId)
           .toList();
 
   @override
   List<ExpenseModel> fetchExpensesFromCategoryId(int category) =>
-      expenseBox.noRecurring
+      expenseBox.values
           .where((element) => element.categoryId == category)
           .toList();
 

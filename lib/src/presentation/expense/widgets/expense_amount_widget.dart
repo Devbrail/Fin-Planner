@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
-import '../../../core/enum/transaction.dart';
+import '../../../core/enum/transaction_type.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../bloc/expense_bloc.dart';
 
@@ -33,7 +33,7 @@ class ExpenseAmountWidget extends StatelessWidget {
               final text = newValue.text;
               if (text.isNotEmpty) double.parse(text);
               return newValue;
-            } catch (e) {}
+            } catch (_) {}
             return oldValue;
           }),
         ],
