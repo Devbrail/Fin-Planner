@@ -28,8 +28,8 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
         child: ListTile(
           title: Text(
             title,
-            style: GoogleFonts.manrope(
-              textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+            style: GoogleFonts.outfit(
+              textStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: Theme.of(context)
                         .colorScheme
                         .onSurfaceVariant
@@ -42,7 +42,7 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
             style: GoogleFonts.manrope(
               textStyle: Theme.of(context)
                   .textTheme
-                  .titleMedium
+                  .titleSmall
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
