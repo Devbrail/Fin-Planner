@@ -51,20 +51,17 @@ class FileHandler {
     ]);
   }
 
-  Future<bool> backupIntoFile() async {
+  Future<File?> backupIntoFile() async {
     final String jsonString = await _fetchAllDataAndEncode();
-    final dlPath = await FilePicker.platform.getDirectoryPath();
-    if (dlPath == null) {
-      return false;
-    } else {
-      final timeStamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+    final String? dlPath = await FilePicker.platform.getDirectoryPath();
+    if (dlPath == null) return null;
 
-      final paisaFileName = 'paisa_$timeStamp.json';
-      final fileTask =
-          await File('$dlPath/$paisaFileName').create(recursive: true);
-      await fileTask.writeAsString(jsonString);
-      return true;
-    }
+    final timeStamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+    final paisaFileName = 'paisa_$timeStamp.json';
+    final File fileTask =
+        await File('$dlPath/$paisaFileName').create(recursive: true);
+    final File file = await fileTask.writeAsString(jsonString);
+    return file;
   }
 
   Future<XFile> fetchXFileJSONToShare() async {
@@ -98,6 +95,8 @@ class FileHandler {
     final Iterable<CategoryModel> categories = categoryDataStore.exportData();
 
     final data = {
+      'version': 1.0,
+      'date': DateTime.now().toIso8601String(),
       'expenses': expenses.toJson(),
       'accounts': accounts.toJson(),
       'categories': categories.toJson(),

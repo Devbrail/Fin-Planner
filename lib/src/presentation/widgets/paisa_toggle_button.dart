@@ -39,7 +39,7 @@ class PaisaToggleButton extends StatelessWidget {
           borderRadius: borderRadius,
         ),
         clipBehavior: Clip.antiAlias,
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(14.0),
         child: Text(
           title,
           style: GoogleFonts.outfit(

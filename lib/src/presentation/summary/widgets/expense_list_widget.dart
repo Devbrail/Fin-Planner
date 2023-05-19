@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/core/common.dart';
 
 import '../../../../main.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
+import '../../widgets/paisa_empty_widget.dart';
 import '../controller/summary_controller.dart';
 import 'expense_item_widget.dart';
 
@@ -18,6 +20,13 @@ class ExpenseListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (expenses.isEmpty) {
+      return EmptyWidget(
+        title: context.loc.emptyExpensesMessageTitle,
+        icon: Icons.money_off_rounded,
+        description: context.loc.emptyExpensesMessageSubTitle,
+      );
+    }
     final SummaryController summaryController = getIt.get();
     return ListView.separated(
       separatorBuilder: (context, index) => const Divider(

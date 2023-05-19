@@ -8,7 +8,7 @@ import 'package:quick_actions/quick_actions.dart';
 
 import '../app/routes.dart';
 import 'di.config.dart';
-import 'module/data_module.dart';
+import 'module/hive_module.dart';
 
 @InjectableInit(
   asExtension: false,
@@ -21,7 +21,7 @@ Future<GetIt> configInjector(
   EnvironmentFilter? environmentFilter,
 }) async {
   usePathUrlStrategy();
-  await initHive();
+  HiveAdapterModule().initHive();
   if (Platform.isAndroid) {
     await FlutterDisplayMode.setHighRefreshRate();
   }

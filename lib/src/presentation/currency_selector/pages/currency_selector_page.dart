@@ -59,14 +59,17 @@ class CurrencySelectorPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: PaisaTextFormField(
-                  hintText: context.loc.search,
-                  controller: TextEditingController(),
-                  keyboardType: TextInputType.name,
-                  onChanged: (value) =>
-                      splashCubit.add(FilterLocaleEvent(value)),
+              FractionallySizedBox(
+                widthFactor: 0.8,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: PaisaTextFormField(
+                    hintText: context.loc.search,
+                    controller: TextEditingController(),
+                    keyboardType: TextInputType.name,
+                    onChanged: (value) =>
+                        splashCubit.add(FilterLocaleEvent(value)),
+                  ),
                 ),
               ),
               Expanded(
@@ -82,11 +85,14 @@ class CurrencySelectorPage extends StatelessWidget {
                               splashCubit.selectedLocale = locale,
                           crossAxisCount: 2,
                         ),
-                        tablet: LocaleGridView(
-                          locales: locales,
-                          onPressed: (locale) =>
-                              splashCubit.selectedLocale = locale,
-                          crossAxisCount: 3,
+                        tablet: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: LocaleGridView(
+                            locales: locales,
+                            onPressed: (locale) =>
+                                splashCubit.selectedLocale = locale,
+                            crossAxisCount: 5,
+                          ),
                         ),
                         desktop: LocaleGridView(
                           locales: locales,

@@ -2,6 +2,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
@@ -11,38 +12,27 @@ import '../widgets/settings_group_card.dart';
 class ExportAndImportPage extends StatelessWidget {
   const ExportAndImportPage({super.key});
 
-  Future<bool> _selectedFolderAndBackUpData() async {
+  Future<void> _fetchAndShareJSONFile(String title) async {
     final FileHandler fileHandler = getIt.get<FileHandler>();
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    var statusManageExternalStorage =
-        await Permission.manageExternalStorage.request();
-    if (statusManageExternalStorage.isGranted &&
-        androidInfo.version.sdkInt > 29) {
-      return fileHandler.backupIntoFile();
-    } else if (androidInfo.version.sdkInt < 30) {
+    if (androidInfo.version.sdkInt < 30) {
       if (await Permission.storage.request().isGranted) {
-        return fileHandler.backupIntoFile();
+        fileHandler.backupIntoFile();
       }
+    } else {
+      final XFile xFile = await fileHandler.fetchXFileJSONToShare();
+      Share.shareXFiles(
+        [xFile],
+        subject: title,
+      );
     }
-    return false;
   }
 
   Future<List<Iterable<int>>> _selectedFileAndImportData() async {
     final FileHandler fileHandler = getIt.get<FileHandler>();
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    var statusManageExternalStorage =
-        await Permission.manageExternalStorage.request();
-    if (statusManageExternalStorage.isGranted &&
-        androidInfo.version.sdkInt > 29) {
-      return fileHandler.importFromFile();
-    } else if (androidInfo.version.sdkInt < 30) {
-      if (await Permission.storage.request().isGranted) {
-        return fileHandler.importFromFile();
-      }
-    }
-    return [];
+
+    return fileHandler.importFromFile();
   }
 
   @override
@@ -100,17 +90,8 @@ class ExportAndImportPage extends StatelessWidget {
                           padding: const EdgeInsets.all(10),
                         ),
                         onPressed: () {
-                          _selectedFolderAndBackUpData().then((value) {
-                            if (value) {
-                              return context.showMaterialSnackBar(
-                                context.loc.creatingBackup,
-                              );
-                            } else {
-                              return context.showMaterialSnackBar(
-                                'Error backing ',
-                              );
-                            }
-                          });
+                          _fetchAndShareJSONFile(
+                              context.loc.backupAndRestoreJSONTitle);
                         },
                         label: Text(context.loc.exportData),
                         icon: const Icon(MdiIcons.fileExport),

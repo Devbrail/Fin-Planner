@@ -26,6 +26,8 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
       mobile: PaisaFilledCard(
         color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.4),
         child: ListTile(
+          dense: true,
+          visualDensity: const VisualDensity(horizontal: -4, vertical: -2),
           title: Text(
             title,
             style: GoogleFonts.outfit(
@@ -47,6 +49,7 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
             ),
           ),
           leading: CircleAvatar(
+            maxRadius: 16,
             backgroundColor: graphLineColor.withOpacity(0.3),
             child: Icon(
               iconData,
@@ -58,7 +61,6 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
       tablet: PaisaFilledCard(
         color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.4),
         child: ListTile(
-          horizontalTitleGap: 0,
           title: Text(
             title,
             style: GoogleFonts.manrope(

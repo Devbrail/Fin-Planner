@@ -8,7 +8,6 @@ import '../core/common.dart';
 import '../core/enum/box_types.dart';
 import '../core/enum/transaction_type.dart';
 import '../data/settings/authenticate.dart';
-import '../presentation/accounts/pages/accounts_new/account_transaction_page.dart';
 import '../presentation/accounts/pages/add/add_account_page.dart';
 import '../presentation/category/pages/add/add_category_page.dart';
 import '../presentation/category/pages/category_list_page.dart';
@@ -67,9 +66,6 @@ const addAccountName = 'add-account';
 
 const editAccountPath = 'edit-account/:aid';
 const editAccountName = 'edit-account';
-
-const accountTransactionPath = 'account-transaction/:aid';
-const accountTransactionName = 'account-transaction';
 
 const expensesByCategoryName = 'expenses-by-category';
 const expensesByCategoryPath = 'expenses-by-category/:cid';
@@ -210,13 +206,6 @@ final GoRouter goRouter = GoRouter(
           path: editAccountPath,
           builder: (context, state) => AddAccountPage(
             accountId: state.params['aid'],
-          ),
-        ),
-        GoRoute(
-          name: accountTransactionName,
-          path: accountTransactionPath,
-          builder: (context, state) => AccountTransactionPage(
-            accountId: state.params['aid'] as String,
           ),
         ),
         GoRoute(

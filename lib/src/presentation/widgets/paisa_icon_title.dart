@@ -4,27 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/common.dart';
 import '../home/bloc/home_bloc.dart';
 
-class PaisaIconTitle extends StatelessWidget {
-  const PaisaIconTitle({super.key});
+class PaisaIcon extends StatelessWidget {
+  const PaisaIcon({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      horizontalTitleGap: 0,
-      leading: Icon(
-        Icons.wallet,
-        color: Theme.of(context).colorScheme.primary,
-        size: 32,
-      ),
-      title: Text(
-        context.loc.appTitle,
-        style: GoogleFonts.outfit(
-          fontWeight: FontWeight.w600,
-          textStyle: Theme.of(context).textTheme.titleLarge,
-          color: Theme.of(context).colorScheme.onBackground,
-        ),
-      ),
+    return Icon(
+      Icons.wallet,
+      color: Theme.of(context).colorScheme.primary,
+      size: 32,
     );
   }
 }
@@ -50,6 +38,31 @@ class PaisaTitle extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class PaisaIconTitle extends StatelessWidget {
+  const PaisaIconTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      horizontalTitleGap: 8,
+      leading: Icon(
+        Icons.wallet,
+        color: Theme.of(context).colorScheme.primary,
+        size: 32,
+      ),
+      title: Text(
+        context.loc.appTitle,
+        style: GoogleFonts.outfit(
+          fontWeight: FontWeight.w600,
+          textStyle: Theme.of(context).textTheme.titleLarge,
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
+      ),
     );
   }
 }

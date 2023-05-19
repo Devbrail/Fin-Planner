@@ -13,6 +13,7 @@ class TransactionsHeaderWidget extends StatelessWidget {
     super.key,
     required this.summaryController,
   });
+
   final SummaryController summaryController;
 
   @override
@@ -30,40 +31,57 @@ class TransactionsHeaderWidget extends StatelessWidget {
           color: Theme.of(context).colorScheme.onBackground,
         ),
       ),
-      trailing: OutlinedButton.icon(
-        style: OutlinedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-          foregroundColor: Theme.of(context).colorScheme.primary,
-        ),
-        label: ValueListenableBuilder<FilterExpense>(
-          valueListenable: summaryController.sortHomeExpenseNotifier,
-          builder: (context, value, child) {
-            return Text(value.stringValue(context));
-          },
-        ),
-        icon: const Icon(MdiIcons.sortVariant),
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width >= 700
-                  ? 700
-                  : double.infinity,
-            ),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-            ),
-            builder: (context) {
-              return FilterHomeWidget(
-                summaryController: summaryController,
-              );
-            },
-          );
+      trailing: FilterTextWidget(summaryController: summaryController),
+    );
+  }
+}
+
+class FilterTextWidget extends StatelessWidget {
+  const FilterTextWidget({
+    super.key,
+    required this.summaryController,
+  });
+
+  final SummaryController summaryController;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton.icon(
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        foregroundColor: Theme.of(context).colorScheme.primary,
+      ),
+      label: ValueListenableBuilder<FilterExpense>(
+        valueListenable: summaryController.sortHomeExpenseNotifier,
+        builder: (context, value, child) {
+          return Text(value.stringValue(context));
         },
       ),
+      icon: const Icon(
+        MdiIcons.sortVariant,
+        size: 16,
+      ),
+      onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width >= 700
+                ? 700
+                : double.infinity,
+          ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(16),
+              topRight: Radius.circular(16),
+            ),
+          ),
+          builder: (context) {
+            return FilterHomeWidget(
+              summaryController: summaryController,
+            );
+          },
+        );
+      },
     );
   }
 }

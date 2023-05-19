@@ -28,7 +28,7 @@ class AccountTransactionWidget extends StatelessWidget {
       return EmptyWidget(
         title: context.loc.emptyExpensesMessageTitle,
         icon: Icons.money_off_rounded,
-        description: context.loc.emptyExpensesMessageTitle,
+        description: context.loc.emptyExpensesMessageSubTitle,
       );
     }
     return ListView(

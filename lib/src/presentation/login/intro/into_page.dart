@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -7,6 +8,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../widgets/lava/lava_clock.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
+import '../../widgets/paisa_big_button_widget.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -71,81 +73,16 @@ class IntroBigScreenWidget extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ListTile(
-                          horizontalTitleGap: 0,
-                          contentPadding: EdgeInsets.zero,
-                          leading: Icon(
-                            Icons.check_circle,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          dense: true,
-                          title: Text(
-                            context.loc.intoSummary1,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface),
-                          ),
-                        ),
-                        ListTile(
-                          horizontalTitleGap: 0,
-                          contentPadding: EdgeInsets.zero,
-                          leading: Icon(
-                            Icons.check_circle,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          dense: true,
-                          title: Text(
-                            context.loc.intoSummary2,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface),
-                          ),
-                        ),
-                        ListTile(
-                          horizontalTitleGap: 0,
-                          contentPadding: EdgeInsets.zero,
-                          leading: Icon(
-                            Icons.check_circle,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          dense: true,
-                          title: Text(
-                            context.loc.intoSummary3,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface),
-                          ),
-                        ),
+                        IntroSubText(text: context.loc.intoSummary1),
+                        IntroSubText(text: context.loc.intoSummary2),
+                        IntroSubText(text: context.loc.intoSummary3),
                         const SizedBox(height: 24),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.all(28)),
+                        PaisaBigButton(
                           onPressed: () => getIt
                               .get<Box<dynamic>>(
                                   instanceName: BoxType.settings.name)
                               .put(userIntroKey, true),
-                          child: Text(
-                            context.loc.introCTA,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
+                          title: context.loc.introCTA,
                         ),
                       ],
                     ),
@@ -197,9 +134,12 @@ class IntoMobileWidget extends StatelessWidget {
               children: [
                 Text(
                   context.loc.appTitle,
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                  style: GoogleFonts.outfit(
+                    textStyle:
+                        Theme.of(context).textTheme.displayMedium?.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                  ),
                 ),
                 Text(
                   context.loc.intoTitle,
@@ -210,45 +150,9 @@ class IntoMobileWidget extends StatelessWidget {
                 const SizedBox(height: 24),
                 Column(
                   children: [
-                    ListTile(
-                      horizontalTitleGap: 0,
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(
-                        Icons.check_circle,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      dense: true,
-                      title: Text(
-                        context.loc.intoSummary1,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
-                    ListTile(
-                      horizontalTitleGap: 0,
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(
-                        Icons.check_circle,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      dense: true,
-                      title: Text(
-                        context.loc.intoSummary2,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
-                    ListTile(
-                      horizontalTitleGap: 0,
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(
-                        Icons.check_circle,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      dense: true,
-                      title: Text(
-                        context.loc.intoSummary3,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    )
+                    IntroSubText(text: context.loc.intoSummary1),
+                    IntroSubText(text: context.loc.intoSummary2),
+                    IntroSubText(text: context.loc.intoSummary3),
                   ],
                 ),
                 const Spacer(),
@@ -271,21 +175,56 @@ class IntoMobileWidget extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 24),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(18)),
+          child: PaisaBigButton(
             onPressed: () {
               getIt
                   .get<Box<dynamic>>(instanceName: BoxType.settings.name)
                   .put(userIntroKey, true);
             },
-            child: Text(
-              context.loc.introCTA,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
+            title: context.loc.introCTA,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class IntroSubText extends StatelessWidget {
+  const IntroSubText({
+    super.key,
+    required this.text,
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScreenTypeLayout(
+      mobile: ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: Icon(
+          Icons.check_circle,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        dense: true,
+        title: Text(
+          context.loc.intoSummary1,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(color: Theme.of(context).colorScheme.onSurface),
+        ),
+      ),
+      tablet: ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: Icon(
+          Icons.check_circle,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        dense: true,
+        title: Text(
+          text,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
     );

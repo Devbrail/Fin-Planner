@@ -17,27 +17,19 @@ class SummaryDesktopPage extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: SafeArea(
         bottom: false,
-        child: Column(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ExpenseTotalWidget(expenses: expenses),
+            ),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.only(bottom: 124),
                 children: [
-                  Expanded(
-                    child: ExpenseTotalWidget(expenses: expenses),
-                  ),
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.only(bottom: 124),
-                      children: [
-                        FilterBudgetToggleWidget(),
-                        ExpenseHistory(expenses: expenses),
-                      ],
-                    ),
-                  ),
+                  FilterBudgetToggleWidget(),
+                  ExpenseHistory(expenses: expenses),
                 ],
               ),
             ),

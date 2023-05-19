@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class PaisaBigButton extends StatelessWidget {
@@ -25,9 +26,10 @@ class PaisaBigButton extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: TextStyle(
-          fontWeight: FontWeight.w700,
-          fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
+        style: GoogleFonts.outfit(
+          textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
         ),
       ),
     );

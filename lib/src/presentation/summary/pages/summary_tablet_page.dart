@@ -36,12 +36,8 @@ class SummaryTabletPage extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.only(bottom: 124),
                 children: [
-                  TransactionsHeaderWidget(
-                    summaryController: getIt.get(),
-                  ),
-                  ExpenseHistory(
-                    expenses: expenses,
-                  ),
+                  TransactionsHeaderWidget(summaryController: getIt.get()),
+                  ExpenseHistory(expenses: expenses),
                 ],
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../main.dart';
 import '../../core/common.dart';
@@ -23,17 +24,29 @@ class SmallSizeFab extends StatelessWidget {
       valueListenable: settings.listenable(keys: [smallSizeFabKey]),
       builder: (context, value, child) {
         final isSmallSize = value.get(smallSizeFabKey, defaultValue: false);
-        if (isSmallSize) {
-          return FloatingActionButton(
+        return ScreenTypeLayout(
+          breakpoints: const ScreenBreakpoints(
+            tablet: 673,
+            desktop: 799,
+            watch: 300,
+          ),
+          mobile: Visibility(
+            maintainState: true,
+            visible: isSmallSize,
+            replacement: FloatingActionButton.large(
+              onPressed: onPressed,
+              child: Icon(icon),
+            ),
+            child: FloatingActionButton(
+              onPressed: onPressed,
+              child: Icon(icon),
+            ),
+          ),
+          tablet: FloatingActionButton(
             onPressed: onPressed,
             child: Icon(icon),
-          );
-        } else {
-          return FloatingActionButton.large(
-            onPressed: onPressed,
-            child: Icon(icon),
-          );
-        }
+          ),
+        );
       },
     );
   }

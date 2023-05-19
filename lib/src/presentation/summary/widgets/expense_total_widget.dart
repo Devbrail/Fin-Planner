@@ -27,11 +27,11 @@ class ExpenseTotalWidget extends StatelessWidget {
     final thisMonthIncome = expenses.thisMonthIncome;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
+          padding: const EdgeInsets.only(left: 8, right: 8),
           child: PaisaCard(
             elevation: 0,
             color: Theme.of(context).colorScheme.primaryContainer,

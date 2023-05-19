@@ -18,6 +18,7 @@ class HomeFloatingActionButtonWidget extends StatelessWidget {
 
   final SummaryController summaryController;
   final Box<dynamic> settings;
+
   void _handleClick(BuildContext context, PageType page) {
     switch (page) {
       case PageType.accounts:

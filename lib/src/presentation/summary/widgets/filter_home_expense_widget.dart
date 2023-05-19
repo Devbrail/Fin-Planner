@@ -30,7 +30,7 @@ class FilterHomeWidget extends StatelessWidget {
               ListTile(
                 title: Text(
                   context.loc.sortList,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
               Container(

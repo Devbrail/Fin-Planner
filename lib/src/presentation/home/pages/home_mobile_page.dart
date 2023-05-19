@@ -20,8 +20,8 @@ class HomeMobilePage extends StatelessWidget {
     required this.floatingActionButton,
   });
 
-  final HomeBloc homeBloc;
   final Widget floatingActionButton;
+  final HomeBloc homeBloc;
 
   @override
   Widget build(BuildContext context) {

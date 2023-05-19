@@ -32,8 +32,7 @@ class ExpenseHistory extends StatelessWidget {
         builder: (_, value, __) {
           final maps = groupBy(
               expenses, (Expense element) => element.time.formatted(value));
-          return ListView.separated(
-            separatorBuilder: (context, index) => const Divider(),
+          return ListView.builder(
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),

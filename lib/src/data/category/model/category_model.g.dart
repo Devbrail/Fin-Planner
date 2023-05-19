@@ -31,20 +31,20 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
   void write(BinaryWriter writer, CategoryModel obj) {
     writer
       ..writeByte(7)
-      ..writeByte(0)
-      ..write(obj.name)
+      ..writeByte(6)
+      ..write(obj.budget)
+      ..writeByte(8)
+      ..write(obj.color)
       ..writeByte(1)
       ..write(obj.description)
       ..writeByte(2)
       ..write(obj.icon)
-      ..writeByte(4)
-      ..write(obj.superId)
-      ..writeByte(6)
-      ..write(obj.budget)
       ..writeByte(7)
       ..write(obj.isBudget)
-      ..writeByte(8)
-      ..write(obj.color);
+      ..writeByte(0)
+      ..write(obj.name)
+      ..writeByte(4)
+      ..write(obj.superId);
   }
 
   @override

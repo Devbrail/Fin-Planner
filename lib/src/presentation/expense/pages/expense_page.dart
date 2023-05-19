@@ -368,17 +368,18 @@ class _ExpensePageState extends State<ExpensePage> {
                                   controller: descriptionController),
                               const SizedBox(height: 16),
                               ExpenseAmountWidget(controller: amountController),
+                              const SizedBox(height: 16),
+                              const ExpenseDatePickerWidget(),
                             ],
                           ),
                         ),
-                        const ExpenseDatePickerWidget(),
                       ],
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: const [
+                      children: [
                         SelectedAccount(),
                         SelectCategoryIcon(),
                       ],
