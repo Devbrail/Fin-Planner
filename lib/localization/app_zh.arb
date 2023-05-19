@@ -1,0 +1,1002 @@
+{
+    "appTitle": "Paisa",
+    "@appTitle": {
+        "description": "应用程序名称",
+        "type": "text",
+        "placeholders": {}
+    },
+    "home": "首页",
+    "@home": {
+        "description": "底部导航或抽屉小部件中显示的主页文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transactions": "交易",
+    "@transactions": {
+        "description": "部分标题显示在主页上",
+        "type": "text",
+        "placeholders": {}
+    },
+    "welcomeMessage": "欢迎回来!",
+    "@welcomeMessage": {
+        "description": "主屏幕上用户名下显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "categories": "类别",
+    "@categories": {
+        "description": "底部导航或抽屉小部件中显示的类别文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "accounts": "账户",
+    "@accounts": {
+        "description": "底部导航或抽屉小部件中显示的帐户文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "budget": "预算",
+    "@budget": {
+        "description": "底部导航或抽屉小部件中显示的帐户文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "overview": "概述",
+    "@overview": {
+        "description": "底部导航或抽屉小部件中显示的帐户文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "recurring": "常用",
+    "@recurring": {
+        "description": "底部导航或抽屉小部件中显示的重复文本和重复页面工具栏标题",
+        "type": "text",
+        "placeholders": {}
+    },
+    "debts": "债务",
+    "@debts": {
+        "description": "底部导航或抽屉小部件中显示的债务文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addTransactionTooltip": "添加交易",
+    "@addTransactionTooltip": {
+        "description": "主页 fab 按钮上显示的工具提示",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addAccountTooltip": "新增帐户",
+    "@addAccountTooltip": {
+        "description": "帐户 fab 按钮上显示的工具提示",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addCategoryTooltip": "添加类别",
+    "@addCategoryTooltip": {
+        "description": "类别 fab 按钮上显示的工具提示",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addDebtTooltip": "增加债务",
+    "@addDebtTooltip": {
+        "description": "类别债务按钮上显示的工具提示",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addRecurringTooltip": "添加常用",
+    "@addRecurringTooltip": {
+        "description": "类别重复按钮上显示的工具提示",
+        "type": "text",
+        "placeholders": {}
+    },
+    "selectDateRangeTooltip": "日期范围",
+    "@selectDate": {
+        "description": "概览 fab 按钮上显示的工具提示",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transactionSubTittleText": "{bankName} • {dateString}",
+    "@transactionSubTittleText": {
+        "description": "概览 fab 按钮上显示的工具提示",
+        "type": "text",
+        "placeholders": {
+            "bankName": {
+                "type": "String"
+            },
+            "dateString": {
+                "type": "String"
+            }
+        }
+    },
+    "addCategory": "添加类别",
+    "@addCategory": {
+        "description": "类别页面工具栏上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addCategoryEmptyTitle": "没有类别",
+    "@addCategoryEmptyTitle": {
+        "description": "没有可用类别时费用页面上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addCategoryEmptySubTitle": "添加要选择的类别",
+    "@addCategoryEmptySubTitle": {
+        "description": "没有可用类别时费用页面上显示的字幕文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addAccountEmptyTitle": "没有帐户",
+    "@addAccountEmptyTitle": {
+        "description": "没有可用帐户时费用页面上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addAccountEmptySubTitle": "添加帐户以选择",
+    "@addAccountEmptySubTitle": {
+        "description": "没有可用帐户时费用页面上显示的字幕文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addTransaction": "添加交易",
+    "@addTransaction": {
+        "description": "添加交易页面上显示的交易文本作为工具栏标题",
+        "type": "text",
+        "placeholders": {}
+    },
+    "updateTransaction": "更新交易",
+    "@updateTransaction": {
+        "description": "将交易页面上显示的交易文本更新为工具栏标题",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addedTransaction": "已添加交易",
+    "@addedTransaction": {
+        "description": "添加交易时的成功消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "updatedTransaction": "交易已更新",
+    "@updatedTransaction": {
+        "description": "事务更新时的成功消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "deletedTransaction": "交易已删除",
+    "@deletedTransaction": {
+        "description": "交易删除时的成功消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "expenseName": "费用名称",
+    "@expenseName": {
+        "description": "输入提示名称上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "description": "描述",
+    "@description": {
+        "description": "交易页面文本字段描述中显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "selectAccount": "选择帐户",
+    "@selectAccount": {
+        "description": "帐户交易中显示的部分标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "selectCategory": "选择类别",
+    "@selectCategory": {
+        "description": "类别交易中显示的部分标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "settings": "设置",
+    "@settings": {
+        "description": "抽屉按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "localApp": "锁定应用程序",
+    "@localApp": {
+        "description": "设置页面生物识别按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "expense": "费用",
+    "@expense": {
+        "description": "多处显示文字",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transfer": "转移",
+    "@transfer": {
+        "description": "多处显示文字",
+        "type": "text",
+        "placeholders": {}
+    },
+    "daily": "每天",
+    "@daily": {
+        "description": "费用过滤器上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "weekly": "每周",
+    "@weekly": {
+        "description": "费用过滤器上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "monthly": "每月",
+    "@monthly": {
+        "description": "费用过滤器上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "yearly": "每年",
+    "@yearly": {
+        "description": "费用过滤器上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "all": "所有",
+    "@all": {
+        "description": "费用过滤器上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "updateAccount": "更新账户",
+    "@updateAccount": {
+        "description": "将交易页面上显示的帐户文本更新为工具栏标题",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addAccount": "新增帐户",
+    "@addAccount": {
+        "description": "添加交易页面上显示的帐户文本作为工具栏标题",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transactionHistory": "交易纪录",
+    "@transactionHistory": {
+        "description": "帐户页面上显示的标题文本作为部分标题标题",
+        "type": "text",
+        "placeholders": {}
+    },
+    "cash": "现金",
+    "@cash": {
+        "description": "帐户页面芯片按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "bank": "银行",
+    "@bank": {
+        "description": "帐户页面芯片按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "wallet": "钱包",
+    "@wallet": {
+        "description": "帐户页面芯片按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "cardHolder": "持卡人姓名",
+    "@cardHolder": {
+        "description": "帐户页面上显示的文本作为文本字段提示",
+        "type": "text",
+        "placeholders": {}
+    },
+    "accountName": "帐户名称",
+    "@accountName": {
+        "description": "帐户页面上显示的文本作为文本字段提示",
+        "type": "text",
+        "placeholders": {}
+    },
+    "lastFourDigit": "最后四位数字",
+    "@lastFourDigit": {
+        "description": "帐户页面上显示的文本作为文本字段提示",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addedAccount": "已添加帐户",
+    "@addedAccount": {
+        "description": "添加账号成功提示",
+        "type": "text",
+        "placeholders": {}
+    },
+    "updatedAccount": "帐户已更新",
+    "@updatedAccount": {
+        "description": "帐户更新时的成功消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "deletedAccount": "帐户已删除",
+    "@deletedAccount": {
+        "description": "删除帐户时的成功消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "successAddCategory": "已添加类别",
+    "@successAddCategory": {
+        "description": "删除类别时的成功消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "validName": "输入有效名称",
+    "@validName": {
+        "description": "输入的名称无效时显示的错误消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "profile": "用户配置",
+    "@profile": {
+        "description": "底部工作表对话框中显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "chooseTheme": "选择主题",
+    "@chooseTheme": {
+        "description": "主题选择器的设置页面主题上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "selectCurrency": "选择货币",
+    "@selectCurrency": {
+        "description": "选择货币时显示的工具栏标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "errorAuth": "认证错误",
+    "@errorAuth": {
+        "description": "生物特征认证失败时显示的错误消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyAccountMessageTitle": "没有可用的帐户",
+    "@emptyAccountMessageTitle": {
+        "description": "帐户页面上显示的消息标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyAccountMessageSubTitle": "添加一个帐户以在此处显示",
+    "@emptyAccountMessageSubTitle": {
+        "description": "帐户页面上显示的消息子标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyCategoriesMessageTitle": "没有可用的类别",
+    "@emptyCategoriesMessageTitle": {
+        "description": "没有可用类别时，类别页面上显示的消息标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyCategoriesMessageSubTitle": "添加类别以在此处显示它",
+    "@emptyCategoriesMessageSubTitle": {
+        "description": "没有可用的类别时，类别页面上显示的消息字幕文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyOverviewMessageTitle": "无概览数据",
+    "@emptyOverviewMessageTitle": {
+        "description": "无概述数据消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyOverviewMessageSubtitle": "要查看支出概览，请添加支出",
+    "@emptyOverviewMessageSubtitle": {
+        "description": "无预算概览说明",
+        "type": "text",
+        "placeholders": {}
+    },
+    "amount": "金额",
+    "@amount": {
+        "description": "输入提示名称上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "initialAmount": "初始金额",
+    "@initialAmount": {
+        "description": "输入提示名称上显示的文本"
+    },
+    "validAmount": "输入有效金额",
+    "@validAmount": {
+        "description": "输入提示名称上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "dueDate": "结束日期",
+    "@dueDate": {
+        "description": "选择结束日期时债务信用页面上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "startDate": "开始日期",
+    "@startDate": {
+        "description": "选择开始日期时债务信用页面上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "socialLinks": "社交链接",
+    "@socialLinks": {
+        "description": "设置页面上显示的部分标题",
+        "type": "text",
+        "placeholders": {}
+    },
+    "telegram": "Telegram",
+    "@telegram": {
+        "description": "电报按钮设置页面上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "telegramGroup": "关注和发布错误和功能请求的组",
+    "@telegramGroup": {
+        "description": "电报按钮的设置页面上显示的字幕文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "privacyPolicy": "隐私与政策",
+    "@privacyPolicy": {
+        "description": "隐私和策略按钮的设置页面上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "github": "Github",
+    "@github": {
+        "description": "github 按钮的设置页面上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "githubText": "在GitHub上Fork项目",
+    "@githubText": {
+        "description": "字幕文本显示在 github 按钮上",
+        "type": "text",
+        "placeholders": {}
+    },
+    "version": "版本",
+    "@version": {
+        "description": "按钮的设置页面上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "versionNumber": "v{version}",
+    "@versionNumber": {
+        "description": "按钮设置页面上显示的字幕文本",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "deleteAccount": "删除帐户将删除与此帐户相关的所有费用",
+    "@deleteAccount": {
+        "description": "删除帐户消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "deleteCategory": "删除该类别将删除与此类别相关的所有费用",
+    "@deleteCategory": {
+        "description": "删除类别消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "deleteExpense": "费用将从帐户中永久删除",
+    "@deleteExpense": {
+        "description": "删除费用消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "dialogDeleteTitle": "永久删除？",
+    "@dialogDeleteTitle": {
+        "description": "永久删除",
+        "type": "text",
+        "placeholders": {}
+    },
+    "updatedCategory": "类别已更新",
+    "@updatedCategory": {
+        "description": "类别更新时出现成功消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "update": "更新",
+    "@update": {
+        "description": "按钮上的多个位置显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "add": "添加",
+    "@add": {
+        "description": "按钮上的多个位置显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "done": "完成",
+    "@done": {
+        "description": "按钮上的多个位置显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "cancel": "取消",
+    "@cancel": {
+        "description": "按钮上的多个位置显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "custom": "自定义",
+    "@custom": {
+        "description": "主题选项之一上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "accentColor": "主色调",
+    "@accentColor": {
+        "description": "设置页面主题按钮上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "dynamicColor": "动态",
+    "@dynamicColor": {
+        "description": "主题选项切换按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "pickColor": "选择颜色",
+    "@pickColor": {
+        "description": "颜色选取器上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "pickColorDesc": "为类别设置颜色",
+    "@pickColorDesc": {
+        "description": "类别颜色选择器按钮上显示的字幕文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "colors": "颜色",
+    "@colors": {
+        "description": "主题设置页面上的部分标题",
+        "type": "text",
+        "placeholders": {}
+    },
+    "others": "其他",
+    "@others": {
+        "description": "主题设置页面上的部分标题",
+        "type": "text",
+        "placeholders": {}
+    },
+    "madeWithLoveInIndia": "Made with ♥ in India",
+    "@madeWithLoveInIndia": {
+        "description": "设置屏幕底部显示的消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "updateCategory": "更新类别",
+    "@updateCategory": {
+        "description": "添加类别屏幕工具栏上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "accountInformationTitle": "信息",
+    "@accountInformationTitle": {
+        "description": "信息对话框上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "accountInformationSubTitle": "您输入的帐户详细信息不会与任何人共享，包括我们。它仅用于帐户详细信息的可视化表示，您也可以输入虚假信息",
+    "@accountInformationSubTitle": {
+        "description": "信息对话框上显示的字幕文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "next": "下一步",
+    "@next": {
+        "description": "简介页面上显示的文本按钮",
+        "type": "text",
+        "placeholders": {}
+    },
+    "image": "图片",
+    "@image": {
+        "description": "简介页面上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "welcome": "嗨，欢迎来到",
+    "@welcome": {
+        "description": "用于名称输入的介绍页面消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "welcomeDesc": "我们应该怎么称呼您",
+    "@welcomeDesc": {
+        "description": "欢迎辞",
+        "type": "text",
+        "placeholders": {}
+    },
+    "nameHint": "名字",
+    "@nameHint": {
+        "description": "文本输入提示名称",
+        "type": "text",
+        "placeholders": {}
+    },
+    "enterNameHint": "输入名称",
+    "@enterNameHint": {
+        "description": "文本输入提示名称",
+        "type": "text",
+        "placeholders": {}
+    },
+    "imageDesc": "让我们设定你的形象",
+    "@imageDesc": {
+        "description": "图像描述",
+        "type": "text",
+        "placeholders": {}
+    },
+    "setBudget": "为类别设置预算",
+    "@setBudget": {
+        "description": "类别屏幕上显示的用于设置预算的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "income": "收入",
+    "@income": {
+        "description": "在多个位置显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "outcome": "支出",
+    "@outcome": {
+        "description": "在多个位置显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "thisMonth": "本月",
+    "@thisMonth": {
+        "description": "主屏幕顶部显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "totalBalance": "总余额",
+    "@totalBalance": {
+        "description": "主屏幕顶部显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "ok": "好的",
+    "@ok": {
+        "description": "按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "searchMessage": "开始搜索一些东西！",
+    "@searchMessage": {
+        "description": "搜索屏幕上显示的消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptySearchMessage": "看起来什么也没找到！",
+    "@emptySearchMessage": {
+        "description": "搜索屏幕上显示的消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyExpensesMessageTitle": "还没有费用？",
+    "@emptyExpensesMessageTitle": {
+        "description": "没有费用时页面上显示的标题消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyExpensesMessageSubTitle": "如果没有费用，请首先添加费用以查看其在此处显示。",
+    "@emptyExpensesMessageSunTitle": {
+        "description": "没有费用时在页面上显示字幕消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "selectIconTitle": "选择图标",
+    "@selectIconTitle": {
+        "description": "类别页面按钮上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "selectIconSubTitle": "点击以选择图标",
+    "@selectIconSubTitle": {
+        "description": "类别页面按钮上显示的字幕文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "incomeName": "收入名称",
+    "@incomeName": {
+        "description": "输入提示上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "currencySign": "货币符号",
+    "@currencySign": {
+        "description": "设置屏幕上按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "expenseByCategory": "按类别划分的费用",
+    "@expenseByCategory": {
+        "description": "工具栏标题上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "backupAndRestoreTitle": "备份和还原",
+    "@backupAndRestoreTitle": {
+        "description": "工具栏标题上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "backupAndRestoreSubTitle": "备份和恢复您的费用、帐户和类别",
+    "@backupAndRestoreSubTitle": {
+        "description": "设置按钮上显示的字幕文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "exportData": "导出",
+    "@exportData": {
+        "description": "导入和导出按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "importData": "导入",
+    "@importData": {
+        "description": "导入和导出按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "creatingBackup": "创建备份",
+    "@creatingBackup": {
+        "description": "启动备份时显示的消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "restoringBackup": "恢复备份",
+    "@restoringBackup": {
+        "description": "导入备份文件时显示的消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "saveAsCSV": "另存为CSV",
+    "@saveAsCSV": {
+        "description": "另存为CSV"
+    },
+    "saveAsCSVDesc": "将数据导出为 CSV 文件格式",
+    "@saveAsCSVDesc": {
+        "description": "将数据导出为 CSV 文件格式"
+    },
+    "appRate": "评价应用",
+    "@appRate": {
+        "description": "评价应用 "
+    },
+    "appRateDesc": "喜欢这个程序？让我们在谷歌Play商店中知道我们如何让它变得更好",
+    "@appRateDesc": {
+        "description": "Rate "
+    },
+    "raiseABugOrRequest": "提出错误或请求",
+    "@raiseABugOrRequest": {
+        "description": "提出错误或请求"
+    },
+    "raiseABugOrRequestDesc": "发现错误或需要功能来实现询问",
+    "@raiseABugOrRequestDesc": {
+        "description": "发现错误或需要功能来实现询问"
+    },
+    "transferName": "转移名称",
+    "@transferName": {
+        "description": "转移名称"
+    },
+    "debt": "债务",
+    "@debt": {
+        "description": "债务"
+    },
+    "credit": "信用",
+    "@credit": {
+        "description": "信用"
+    },
+    "enterCategory": "输入类别",
+    "@enterCategory": {
+        "description": "输入类别"
+    },
+    "addDebt": "添加债务",
+    "@addDebt": {
+        "description": "添加债务"
+    },
+    "addCredit": "添加信用",
+    "@addCredit": {
+        "description": "添加信用"
+    },
+    "enterBudget": "输入预算",
+    "@enterBudget": {
+        "description": "输入预算"
+    },
+    "enterDescription": "输入描述",
+    "@enterDescription": {
+        "description": "输入描述"
+    },
+    "validDescription": "输入有效的描述",
+    "@validDescription": {
+        "description": "输入有效的描述"
+    },
+    "payDebt": "偿还债务",
+    "@payDebt": {
+        "description": "偿还债务"
+    },
+    "payCredit": "支付信用额",
+    "@payCredit": {
+        "description": "支付信用额"
+    },
+    "enterAmount": "输入金额",
+    "@enterAmount": {
+        "description": "输入金额"
+    },
+    "emptyDebts": "目前没有债务",
+    "@emptyDebts": {
+        "description": "目前没有债务"
+    },
+    "emptyDebtsDesc": "在此处添加您的债务以查看它们显示。",
+    "@emptyDebtsDesc": {
+        "description": "在此处添加您的债务以查看其显示"
+    },
+    "emptyCredit": "目前没有信用卡",
+    "@emptyCredit": {
+        "description": "目前没有信用卡"
+    },
+    "emptyCreditDesc": "在此处添加您的积分以查看其显示。",
+    "@emptyCreditDesc": {
+        "description": "在此处添加您的积分以查看其显示。"
+    },
+    "enterInitialAmount": "输入初始金额",
+    "@enterInitialAmount": {
+        "description": "输入初始金额"
+    },
+    "enterNumberOptional": "输入最后 4 位数字（可选）",
+    "@enterNumberOptional": {
+        "description": "可选号码"
+    },
+    "enterAccountName": "输入帐户名称",
+    "@enterAccountName": {
+        "description": "输入帐户名称"
+    },
+    "enterCardHolderName": "输入持卡人姓名",
+    "@enterCardHolderName": {
+        "description": "输入持卡人姓名"
+    },
+    "search": "搜索",
+    "@search": {
+        "description": "搜索"
+    },
+    "addNew": "新增",
+    "@addNew": {
+        "description": "新增"
+    },
+    "delete": "删除",
+    "@delete": {
+        "description": "删除 "
+    },
+    "appBarSearch": "搜索费用、帐户、类别",
+    "@appBarSearch": {
+        "description": "搜索费用、帐户、类别"
+    },
+    "noTransaction": "事务中为空",
+    "@noTransaction": {
+        "description": "事务中为空"
+    },
+    "enterSymbol": "输入符号",
+    "@enterSymbol": {
+        "description": "输入符号"
+    },
+    "leftSymbol": "左侧符号",
+    "@leftSymbol": {
+        "description": "左侧符号"
+    },
+    "rightSymbol": "右侧符号",
+    "@rightSymbol": {
+        "description": "右侧符号"
+    },
+    "customSymbol": "自定义符号",
+    "@customSymbol": {
+        "description": "自定义符号"
+    },
+    "intoTitle": "帮助您控制储蓄的简单方法",
+    "@intoTitle": {
+        "description": "简介页面上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "intoSummary1": "使用我们的应用程序管理您的资金",
+    "@intoSummary1": {
+        "description": "简介页面上显示的提示消息 1",
+        "type": "text",
+        "placeholders": {}
+    },
+    "intoSummary2": "轻松跟踪费用，获得更好的预算",
+    "@intoSummary2": {
+        "description": "简介页面上显示的提示消息 2",
+        "type": "text",
+        "placeholders": {}
+    },
+    "intoSummary3": "随时随地掌控您的开支",
+    "@intoSummary3": {
+        "description": "简介页面上显示的提示消息 3",
+        "type": "text",
+        "placeholders": {}
+    },
+    "introCTA": "开始使用",
+    "@introCTA": {
+        "description": "介绍屏幕按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "deleteDebtOrCredit": "删除债务或信用将删除与之相关的所有记录",
+    "@deleteDebtOrCredit": {
+        "description": "删除债务或信用",
+        "type": "text",
+        "placeholders": {}
+    },
+    "backupAndRestoreJSONTitle": "将数据导出为 JSON 文件",
+    "@backupAndRestoreJSONTitle": {
+        "description": "导出和导入页面上显示的节标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "backupAndRestoreJSONDesc": "该文件将是创建并导出以保存的纯 JSON 文件。请注意，如果将来Paisa发生任何更改，则此文件将无法导入。",
+    "@backupAndRestoreJSONDesc": {
+        "description": "导入和导出屏幕上显示的消息",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyBudgetMessageTitle": "尚未为任何类别设置预算",
+    "@emptyBudgetMessageTitle": {
+        "description": "没有可用预算时，预算屏幕上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "emptyBudgetMessageSubTitle": "为任何类别设置预算，该类别将显示在此处。",
+    "@emptyBudgetMessageSubTitle": {
+        "description": "没有可用预算时，预算屏幕上显示字幕文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "recurringEmptyMessageTitle": "没有重复发生的事件？",
+    "@recurringEmptyMessageTitle": {
+        "description": "没有可用事件时在重复页面上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "recurringEmptyMessageSubTitle": "添加定期事件以在此处查看它们",
+    "@recurringEmptyMessageSubTitle": {
+        "description": "没有可用事件时在重复页面上显示的字幕文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "recurringAction": "添加定期事件",
+    "@recurringAction": {
+        "description": "重复操作按钮上显示的文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "sortList": "排序列表",
+    "@sortList": {
+        "description": "排序对话框中显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "smallSizeFab": "小尺寸 FAB",
+    "@smallSizeFab": {
+        "description": "FAB 尺寸选项设置页面上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "smallSizeFabMessage": "在所有屏幕上显示小尺寸 FAB 按钮",
+    "@smallSizeFabMessage": {
+        "description": "FAB 尺寸选项设置页面上显示的标题文本",
+        "type": "text",
+        "placeholders": {}
+    },
+    "selectDateErrorMessage": "选择日期",
+    "@selectDateErrorMessage": {
+        "description": "未选择债务支付日期时显示的消息",
+        "type": "text",
+        "placeholders": {}
+    }
+}
