@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart' show immutable;
+import 'package:meta/meta.dart';
 
 import '../../../core/enum/card_type.dart';
-import '../../../data/category/model/category_model.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/account/use_case/account_use_case.dart';
+import '../../../domain/category/entities/category.dart';
 import '../../../domain/category/use_case/category_use_case.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
@@ -34,6 +35,8 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     on<AccountSelectedEvent>(_accountSelected);
     on<UpdateCardTypeEvent>(_updateCardType);
     on<FetchAccountFromIdEvent>(_fetchAccountFromId);
+    on<FetchExpensesFromAccountIdEvent>(_fetchExpensesFromAccountId);
+    on<AccountColorSelectedEvent>(_updateAccountColor);
   }
 
   final GetExpensesFromAccountIdUseCase getExpensesFromAccountIdUseCase;
@@ -51,6 +54,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   String? accountNumber;
   Account? currentAccount;
   double? initialAmount;
+  int? selectedColor;
 
   Future<void> _fetchAccountFromId(
     FetchAccountFromIdEvent event,
@@ -67,6 +71,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
       selectedType = account.cardType ?? CardType.cash;
       initialAmount = account.amount;
       currentAccount = account;
+      selectedColor = account.color ?? Colors.brown.shade100.value;
       emit(AccountSuccessState(account));
       emit(UpdateCardTypeState(selectedType));
     } else {
@@ -83,12 +88,15 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final String? number = accountNumber;
     final CardType cardType = selectedType;
     final double? amount = initialAmount;
-
+    final int? color = selectedColor;
     if (bankName == null) {
       return emit(const AccountErrorState('Set bank name'));
     }
     if (holderName == null) {
       return emit(const AccountErrorState('Set account holder name'));
+    }
+    if (color == null) {
+      return emit(const AccountErrorState('Set account color name'));
     }
 
     if (event.isAdding) {
@@ -98,6 +106,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
         number: number ?? '',
         cardType: cardType,
         amount: amount ?? 0,
+        color: color,
       );
     } else {
       if (currentAccount != null) {
@@ -107,7 +116,8 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
           ..icon = cardType.icon.codePoint
           ..name = holderName
           ..number = number ?? ''
-          ..amount = amount;
+          ..amount = amount
+          ..color = color;
 
         await updateAccountUseCase(account: currentAccount!);
       }
@@ -138,9 +148,23 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     emit(UpdateCardTypeState(event.cardType));
   }
 
-  CategoryModel? fetchCategoryFromId(int categoryId) =>
+  Category? fetchCategoryFromId(int categoryId) =>
       getCategoryUseCase(categoryId);
 
-  List<Expense> fetchExpenseFromAccountId(int accountId) =>
-      getExpensesFromAccountIdUseCase(accountId);
+  FutureOr<void> _fetchExpensesFromAccountId(
+    FetchExpensesFromAccountIdEvent event,
+    Emitter<AccountsState> emit,
+  ) async {
+    List<Expense> expenses =
+        getExpensesFromAccountIdUseCase(int.parse(event.accountId));
+    emit(ExpensesFromAccountIdState(expenses));
+  }
+
+  FutureOr<void> _updateAccountColor(
+    AccountColorSelectedEvent event,
+    Emitter<AccountsState> emit,
+  ) {
+    selectedColor = event.accountColor;
+    emit(AccountColorSelectedState(event.accountColor));
+  }
 }

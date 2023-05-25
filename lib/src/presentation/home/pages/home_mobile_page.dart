@@ -31,9 +31,7 @@ class HomeMobilePage extends StatelessWidget {
         actions: [
           const PaisaFilterTransactionWidget(),
           const PaisaSearchButtonWidget(),
-          PaisaUserWidget(
-            homeBloc: homeBloc,
-          ),
+          PaisaUserWidget(homeBloc: homeBloc),
           const SizedBox(width: 8),
         ],
       ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:paisa/src/presentation/accounts/bloc/accounts_bloc.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
@@ -25,10 +27,15 @@ class AccountTransactionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (expenses.isEmpty) {
-      return EmptyWidget(
-        title: context.loc.emptyExpensesMessageTitle,
-        icon: Icons.money_off_rounded,
-        description: context.loc.emptyExpensesMessageTitle,
+      return BlocBuilder(
+        bloc: BlocProvider.of<AccountsBloc>(context),
+        builder: (context, state) {
+          return EmptyWidget(
+            title: context.loc.emptyExpensesMessageTitle,
+            icon: Icons.money_off_rounded,
+            description: context.loc.emptyExpensesMessageTitle,
+          );
+        },
       );
     }
     return ListView(

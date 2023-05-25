@@ -18,6 +18,7 @@ class AccountRepositoryImpl extends AccountRepository {
     required String number,
     required CardType cardType,
     required double amount,
+    required int color,
   }) {
     return dataSource.addAccount(AccountModel(
       name: holderName,
@@ -26,6 +27,7 @@ class AccountRepositoryImpl extends AccountRepository {
       number: number,
       cardType: cardType,
       amount: amount,
+      color: color,
     ));
   }
 
@@ -37,6 +39,7 @@ class AccountRepositoryImpl extends AccountRepository {
     required String number,
     required CardType cardType,
     required double amount,
+    required int color,
   }) {
     return dataSource.updateAccount(
       AccountModel(
@@ -47,6 +50,7 @@ class AccountRepositoryImpl extends AccountRepository {
         cardType: cardType,
         amount: amount,
         superId: key,
+        color: color,
       ),
     );
   }

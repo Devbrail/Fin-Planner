@@ -54,6 +54,7 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
         number: '1234',
         cardType: CardType.bank,
         amount: 0,
+        color: Colors.brown.shade100.value,
       );
       final int id = await accounts.add(account);
       account.superId = id;

@@ -16,8 +16,8 @@ class ExpenseDatePickerWidget extends StatefulWidget {
 }
 
 class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
-  late final ExpenseBloc expenseBloc = BlocProvider.of<ExpenseBloc>(context);
-  late DateTime selectedDateTime = expenseBloc.selectedDate;
+  late DateTime selectedDateTime =
+      BlocProvider.of<ExpenseBloc>(context).selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,6 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            horizontalTitleGap: 0,
             onTap: () async {
               final DateTime? dateTime = await showDatePicker(
                 context: context,
@@ -43,7 +42,8 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                     month: dateTime.month,
                     year: dateTime.year,
                   );
-                  expenseBloc.selectedDate = selectedDateTime;
+                  BlocProvider.of<ExpenseBloc>(context).selectedDate =
+                      selectedDateTime;
                 });
               }
             },
@@ -59,7 +59,6 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            horizontalTitleGap: 0,
             onTap: () async {
               final TimeOfDay? timeOfDay = await showTimePicker(
                 context: context,
@@ -72,7 +71,8 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                     hour: timeOfDay.hour,
                     minute: timeOfDay.minute,
                   );
-                  expenseBloc.selectedDate = selectedDateTime;
+                  BlocProvider.of<ExpenseBloc>(context).selectedDate =
+                      selectedDateTime;
                 });
               }
             },

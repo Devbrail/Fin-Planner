@@ -8,6 +8,7 @@ class Account extends AccountModel {
     required super.number,
     required super.cardType,
     required super.amount,
+    required super.color,
     super.superId,
   });
 }

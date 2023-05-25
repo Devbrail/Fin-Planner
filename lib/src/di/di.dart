@@ -8,7 +8,7 @@ import 'package:quick_actions/quick_actions.dart';
 
 import '../app/routes.dart';
 import 'di.config.dart';
-import 'module/data_module.dart';
+import 'module/hive_module.dart';
 
 @InjectableInit(
   asExtension: false,
@@ -21,7 +21,7 @@ Future<GetIt> configInjector(
   EnvironmentFilter? environmentFilter,
 }) async {
   usePathUrlStrategy();
-  await initHive();
+  await HiveAdapters().initHive();
   if (Platform.isAndroid) {
     await FlutterDisplayMode.setHighRefreshRate();
   }
@@ -37,8 +37,8 @@ Future<void> initAppShortcuts() async {
   const QuickActions quickActions = QuickActions();
   await quickActions.initialize((String shortcutType) {
     goRouter.goNamed(
-      shortcutAddTransactionName,
-      params: {
+      addTransactionsName,
+      queryParams: {
         'type': shortcutType == 'ic_expense'
             ? '0'
             : shortcutType == 'ic_income'

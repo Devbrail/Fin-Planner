@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../main.dart';
 import '../../../domain/account/entities/account.dart';
@@ -12,40 +13,43 @@ class AccountsTabletPage extends StatelessWidget {
   const AccountsTabletPage({
     super.key,
     required this.accounts,
-    required this.accountsBloc,
-    required this.expenses,
   });
 
   final List<Account> accounts;
-  final List<Expense> expenses;
-  final AccountsBloc accountsBloc;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+    return BlocBuilder<AccountsBloc, AccountsState>(
+      builder: (context, state) {
+        if (state is ExpensesFromAccountIdState) {
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AccountPageViewWidget(
-                accountBloc: accountsBloc,
-                accounts: accounts,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    AccountPageViewWidget(
+                      accounts: accounts,
+                    ),
+                    AccountSummaryWidget(
+                      expenses: state.expenses,
+                    )
+                  ],
+                ),
               ),
-              AccountSummaryWidget(expenses: expenses)
+              Expanded(
+                child: AccountTransactionWidget(
+                  accountLocalDataSource: getIt.get(),
+                  categoryLocalDataSource: getIt.get(),
+                  expenses: state.expenses,
+                ),
+              ),
             ],
-          ),
-        ),
-        Expanded(
-          child: AccountTransactionWidget(
-            accountLocalDataSource: getIt.get(),
-            categoryLocalDataSource: getIt.get(),
-            expenses: expenses,
-            isScroll: true,
-          ),
-        ),
-      ],
+          );
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 }

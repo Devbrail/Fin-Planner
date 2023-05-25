@@ -15,6 +15,7 @@ extension AccountModelMapping on AccountModel {
         name: name,
         number: number,
         superId: superId,
+        color: color,
       );
 }
 

@@ -18,7 +18,6 @@ class SelectedAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final expenseBloc = BlocProvider.of<ExpenseBloc>(context);
     return ValueListenableBuilder<Box<AccountModel>>(
       valueListenable: getIt.get<Box<AccountModel>>().listenable(),
       builder: (context, value, child) {
@@ -47,7 +46,6 @@ class SelectedAccount extends StatelessWidget {
               ),
               AccountSelectedItem(
                 accounts: accounts,
-                expenseBloc: expenseBloc,
               )
             ],
           ),
@@ -65,7 +63,6 @@ class SelectedAccount extends StatelessWidget {
               ),
               AccountSelectedItem(
                 accounts: accounts,
-                expenseBloc: expenseBloc,
               )
             ],
           ),
@@ -79,16 +76,13 @@ class AccountSelectedItem extends StatelessWidget {
   const AccountSelectedItem({
     Key? key,
     required this.accounts,
-    required this.expenseBloc,
   }) : super(key: key);
 
   final List<Account> accounts;
-  final ExpenseBloc expenseBloc;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: expenseBloc,
+    return BlocBuilder<ExpenseBloc, ExpenseState>(
       buildWhen: (previous, current) => current is ChangeAccountState,
       builder: (context, state) {
         return SizedBox(
@@ -106,17 +100,19 @@ class AccountSelectedItem extends StatelessWidget {
               if (index == 0) {
                 return ItemWidget(
                   isSelected: false,
-                  title: 'Add New',
+                  title: context.loc.addNew,
                   icon: MdiIcons.plus.codePoint,
                   onPressed: () => context.pushNamed(addAccountPath),
                 );
               } else {
                 final Account account = accounts[index - 1];
                 return ItemWidget(
-                  isSelected: account.superId == expenseBloc.selectedAccountId,
+                  isSelected: account.superId ==
+                      BlocProvider.of<ExpenseBloc>(context).selectedAccountId,
                   title: account.name,
                   icon: account.icon,
-                  onPressed: () => expenseBloc.add(ChangeAccountEvent(account)),
+                  onPressed: () => BlocProvider.of<ExpenseBloc>(context)
+                      .add(ChangeAccountEvent(account)),
                   subtitle: account.bankName,
                 );
               }

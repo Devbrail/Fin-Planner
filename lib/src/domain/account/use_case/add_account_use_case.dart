@@ -15,6 +15,7 @@ class AddAccountUseCase {
     required String number,
     required CardType cardType,
     required double amount,
+    required int color,
   }) =>
       accountRepository.addAccount(
         bankName: bankName,
@@ -22,5 +23,6 @@ class AddAccountUseCase {
         number: number,
         cardType: cardType,
         amount: amount,
+        color: color,
       );
 }

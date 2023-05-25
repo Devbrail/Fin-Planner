@@ -58,6 +58,33 @@ class PaisaButton extends StatelessWidget {
   }
 }
 
+class PaisaIconButton extends StatelessWidget {
+  const PaisaIconButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+    required this.iconData,
+  });
+
+  final VoidCallback onPressed;
+  final String title;
+  final IconData iconData;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+      ),
+      label: Text(title),
+      icon: Icon(iconData),
+    );
+  }
+}
+
 class PaisaTextButton extends StatelessWidget {
   const PaisaTextButton({
     super.key,

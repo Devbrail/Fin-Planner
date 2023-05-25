@@ -83,16 +83,16 @@ class UpdateDateTimeState extends ExpenseState {
   List<Object> get props => [dateTime];
 }
 
-class TransferAccountsState extends ExpenseState {
-  final List<Account> accounts;
-  final Account fromAccount, toAccount;
+class TransferAccountState extends ExpenseState {
+  final bool isFromAccount;
+  final Account? fromAccount, toAccount;
 
-  const TransferAccountsState(
-    this.accounts,
+  const TransferAccountState(
+    this.isFromAccount,
     this.fromAccount,
     this.toAccount,
   );
 
   @override
-  List<Object> get props => [accounts, fromAccount, toAccount];
+  List<Object> get props => [isFromAccount];
 }

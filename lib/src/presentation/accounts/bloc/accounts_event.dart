@@ -46,3 +46,21 @@ class UpdateCardTypeEvent extends AccountsEvent {
   @override
   List<Object> get props => [cardType];
 }
+
+class FetchExpensesFromAccountIdEvent extends AccountsEvent {
+  final String accountId;
+
+  const FetchExpensesFromAccountIdEvent(this.accountId);
+
+  @override
+  List<Object> get props => [accountId];
+}
+
+class AccountColorSelectedEvent extends AccountsEvent {
+  final int accountColor;
+
+  const AccountColorSelectedEvent(this.accountColor);
+
+  @override
+  List<Object> get props => [accountColor];
+}

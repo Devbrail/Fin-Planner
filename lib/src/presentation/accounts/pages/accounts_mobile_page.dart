@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../main.dart';
 import '../../../domain/account/entities/account.dart';
-import '../../../domain/expense/entities/expense.dart';
 import '../bloc/accounts_bloc.dart';
 import '../widgets/account_transaction_widget.dart';
 import '../widgets/accounts_page_view_widget.dart';
@@ -11,13 +11,9 @@ class AccountsMobilePage extends StatelessWidget {
   const AccountsMobilePage({
     super.key,
     required this.accounts,
-    required this.accountsBloc,
-    required this.expenses,
   });
 
   final List<Account> accounts;
-  final List<Expense> expenses;
-  final AccountsBloc accountsBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +23,18 @@ class AccountsMobilePage extends StatelessWidget {
       key: const Key('accounts_list_view'),
       padding: const EdgeInsets.only(bottom: 124),
       children: [
-        AccountPageViewWidget(
-          accounts: accounts,
-          accountBloc: accountsBloc,
-        ),
-        AccountTransactionWidget(
-          accountLocalDataSource: getIt.get(),
-          categoryLocalDataSource: getIt.get(),
-          expenses: expenses,
+        AccountPageViewWidget(accounts: accounts),
+        BlocBuilder<AccountsBloc, AccountsState>(
+          builder: (context, state) {
+            if (state is ExpensesFromAccountIdState) {
+              return AccountTransactionWidget(
+                accountLocalDataSource: getIt.get(),
+                categoryLocalDataSource: getIt.get(),
+                expenses: state.expenses,
+              );
+            }
+            return const SizedBox.shrink();
+          },
         )
       ],
     );

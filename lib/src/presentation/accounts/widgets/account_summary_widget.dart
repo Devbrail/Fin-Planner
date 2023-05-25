@@ -33,7 +33,7 @@ class AccountSummaryWidget extends StatelessWidget {
                     style: TextStyle(
                       color: Theme.of(context)
                           .colorScheme
-                          .onSurface
+                          .onSecondaryContainer
                           .withOpacity(0.75),
                     ),
                   ),
@@ -64,7 +64,6 @@ class AccountSummaryWidget extends StatelessWidget {
                           .withOpacity(0.75),
                     ),
                   ),
-                  const SizedBox(height: 6),
                   Text(
                     expenses.thisMonthExpense.toCurrency(decimalDigits: 0),
                     style: GoogleFonts.manrope(

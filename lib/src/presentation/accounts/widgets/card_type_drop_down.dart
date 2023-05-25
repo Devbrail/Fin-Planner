@@ -7,38 +7,36 @@ import '../../widgets/paisa_chip.dart';
 import '../bloc/accounts_bloc.dart';
 
 class CardTypeButtons extends StatelessWidget {
-  const CardTypeButtons({
-    Key? key,
-    required this.accountsBloc,
-  }) : super(key: key);
-  final AccountsBloc accountsBloc;
+  const CardTypeButtons({Key? key}) : super(key: key);
 
-  void _update(CardType type) {
-    accountsBloc.add(UpdateCardTypeEvent(type));
+  void _update(BuildContext context, CardType type) {
+    BlocProvider.of<AccountsBloc>(context).add(UpdateCardTypeEvent(type));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: accountsBloc,
+    return BlocBuilder<AccountsBloc, AccountsState>(
       buildWhen: (previous, current) => current is UpdateCardTypeState,
       builder: (context, state) {
         return Row(
           children: [
             PaisaMaterialYouChip(
               title: CardType.cash.stringValue(context),
-              isSelected: accountsBloc.selectedType == CardType.cash,
-              onPressed: () => _update(CardType.cash),
+              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
+                  CardType.cash,
+              onPressed: () => _update(context, CardType.cash),
             ),
             PaisaMaterialYouChip(
               title: CardType.bank.stringValue(context),
-              isSelected: accountsBloc.selectedType == CardType.bank,
-              onPressed: () => _update(CardType.bank),
+              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
+                  CardType.bank,
+              onPressed: () => _update(context, CardType.bank),
             ),
             PaisaMaterialYouChip(
               title: CardType.wallet.stringValue(context),
-              isSelected: accountsBloc.selectedType == CardType.wallet,
-              onPressed: () => _update(CardType.wallet),
+              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
+                  CardType.wallet,
+              onPressed: () => _update(context, CardType.wallet),
             ),
           ],
         );

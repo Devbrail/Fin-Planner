@@ -16,8 +16,7 @@ class ExpenseNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<ExpenseBloc>(context),
+    return BlocBuilder<ExpenseBloc, ExpenseState>(
       buildWhen: (oldState, newState) => newState is ChangeTransactionTypeState,
       builder: (context, state) {
         if (state is ChangeTransactionTypeState) {

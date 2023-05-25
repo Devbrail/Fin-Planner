@@ -40,7 +40,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<ChangeCategoryEvent>(_changeCategory);
     on<ChangeAccountEvent>(_changeAccount);
     on<UpdateDateTimeEvent>(_updateDateTime);
-    on<TransferAccountsEvent>(_transferAccount);
+    on<TransferAccountEvent>(_transferAccount);
   }
 
   final GetExpenseUseCase expenseUseCase;
@@ -101,9 +101,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       if ((fromAccount == null || toAccount == null) ||
           (fromAccount == toAccount)) {
         return emit(
-          const ExpenseErrorState(
-            'Select both from and to accounts',
-          ),
+          const ExpenseErrorState('Select both from and to accounts'),
         );
       }
 
@@ -111,7 +109,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         name:
             'Transfer from ${fromAccount!.bankName} to ${toAccount!.bankName}',
         amount: transferAmount ?? 0,
-        time: DateTime.now(),
+        time: selectedDate,
         categoryId: -1,
         accountId: fromAccount!.superId!,
         transactionType: TransactionType.expense,
@@ -120,9 +118,9 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
       await addExpenseUseCase(
         name:
-            'Transfer from ${fromAccount?.bankName} to ${toAccount?.bankName}',
+            'Received from ${fromAccount?.bankName} to ${toAccount?.bankName}',
         amount: transferAmount ?? 0,
-        time: DateTime.now(),
+        time: selectedDate,
         categoryId: -1,
         accountId: toAccount!.superId!,
         transactionType: TransactionType.income,
@@ -213,13 +211,6 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     } else {
       transactionType = event.transactionType;
       emit(ChangeTransactionTypeState(event.transactionType));
-      if (event.transactionType == TransactionType.transfer) {
-        emit(TransferAccountsState(
-          accounts,
-          accounts.first,
-          accounts.last,
-        ));
-      }
     }
   }
 
@@ -248,13 +239,18 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   }
 
   FutureOr<void> _transferAccount(
-    TransferAccountsEvent event,
+    TransferAccountEvent event,
     Emitter<ExpenseState> emit,
   ) {
-    fromAccount = event.fromAccount;
-    toAccount = event.toAccount;
-    emit(
-      TransferAccountsState(event.accounts, event.fromAccount, event.toAccount),
-    );
+    if (event.isFromAccount) {
+      fromAccount = event.account;
+    } else {
+      toAccount = event.account;
+    }
+    emit(TransferAccountState(
+      event.isFromAccount,
+      fromAccount,
+      toAccount,
+    ));
   }
 }

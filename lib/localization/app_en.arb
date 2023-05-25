@@ -998,5 +998,23 @@
         "description": "Message shown when the date is not select on debt payout ",
         "type": "text",
         "placeholders": {}
+    },
+    "edit": "Edit",
+    "@edit": {
+        "description": "Text shown on the buttons",
+        "type": "text",
+        "placeholders": {}
+    },
+    "fromAccount": "Transfer account from",
+    "@fromAccount": {
+        "description": "Text shown on the title section of account in transfer section in transaction page",
+        "type": "text",
+        "placeholders": {}
+    },
+    "toAccount": "Transfer account to",
+    "@toAccount": {
+        "description": "Text shown on the title section of account in transfer section in transaction page",
+        "type": "text",
+        "placeholders": {}
     }
 }

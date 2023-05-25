@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes.dart';
@@ -15,11 +16,9 @@ class AccountPageViewWidget extends StatefulWidget {
   const AccountPageViewWidget({
     Key? key,
     required this.accounts,
-    required this.accountBloc,
   }) : super(key: key);
 
   final List<Account> accounts;
-  final AccountsBloc accountBloc;
 
   @override
   State<AccountPageViewWidget> createState() => _AccountPageViewWidgetState();
@@ -47,13 +46,15 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                 setState(() {
                   selectedIndex = index;
                 });
-                widget.accountBloc
+                BlocProvider.of<AccountsBloc>(context)
                     .add(AccountSelectedEvent(widget.accounts[index]));
               },
               itemBuilder: (_, index) {
                 final Account account = widget.accounts[index];
-                final List<Expense> expenses = widget.accountBloc
-                    .fetchExpenseFromAccountId(account.superId!);
+                final List<Expense> expenses = [];
+                /*  BlocProvider.of<AccountsBloc>(context)
+                        .fetchExpenseFromAccountId(account.superId!) */
+                ;
                 final String expense = expenses.totalExpense.toCurrency();
                 final String income = expenses.totalIncome.toCurrency();
                 final String totalBalance =
@@ -90,7 +91,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                       ),
                       onPressed: () {
-                        widget.accountBloc
+                        BlocProvider.of<AccountsBloc>(context)
                             .add(DeleteAccountEvent(account.superId!));
                         Navigator.pop(context);
                       },

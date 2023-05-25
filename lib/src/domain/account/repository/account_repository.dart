@@ -8,6 +8,7 @@ abstract class AccountRepository {
     required String number,
     required CardType cardType,
     required double amount,
+    required int color,
   });
   Future<void> updateAccount({
     required int key,
@@ -16,6 +17,7 @@ abstract class AccountRepository {
     required String number,
     required CardType cardType,
     required double amount,
+    required int color,
   });
   Future<void> deleteAccount(int key);
   AccountModel? fetchAccountFromId(int accountId);

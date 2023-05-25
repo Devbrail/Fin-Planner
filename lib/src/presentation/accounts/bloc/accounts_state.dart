@@ -64,3 +64,21 @@ class UpdateCardTypeState extends AccountsState {
   @override
   List<Object> get props => [cardType];
 }
+
+class ExpensesFromAccountIdState extends AccountsState {
+  final List<Expense> expenses;
+
+  const ExpensesFromAccountIdState(this.expenses);
+
+  @override
+  List<Object> get props => [expenses];
+}
+
+class AccountColorSelectedState extends AccountsState {
+  final int categoryColor;
+
+  const AccountColorSelectedState(this.categoryColor);
+
+  @override
+  List<Object> get props => [categoryColor, identityHashCode(this)];
+}

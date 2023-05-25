@@ -21,6 +21,7 @@ Future<void> addDummyData() async {
       number: '$index',
       cardType: CardType.bank,
       amount: 0,
+      color: Colors.brown.shade200.value,
     );
     await catRepo.addCategory(
       name: 'Category Name $index',

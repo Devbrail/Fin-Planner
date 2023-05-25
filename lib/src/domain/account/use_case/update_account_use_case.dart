@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/enum/card_type.dart';
@@ -18,6 +19,7 @@ class UpdateAccountUseCase {
       cardType: account.cardType ?? CardType.bank,
       amount: account.amount ?? 0.0,
       key: account.superId!,
+      color: account.color ?? Colors.brown.shade400.value,
     );
   }
 }

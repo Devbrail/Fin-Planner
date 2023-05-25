@@ -3,35 +3,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
 import '../../widgets/paisa_color_picker.dart';
-import '../bloc/category_bloc.dart';
+import '../bloc/accounts_bloc.dart';
 
-class ColorPickerWidget extends StatelessWidget {
-  const ColorPickerWidget({
-    super.key,
-    required this.categoryBloc,
-  });
-  final CategoryBloc categoryBloc;
+class AccountColorPickerWidget extends StatelessWidget {
+  const AccountColorPickerWidget({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
+    return BlocBuilder<AccountsBloc, AccountsState>(
       buildWhen: (previous, current) =>
-          current is CategoryColorSelectedState ||
-          current is CategorySuccessState,
-      bloc: categoryBloc,
+          current is AccountColorSelectedState ||
+          current is AccountSuccessState,
       builder: (context, state) {
         int color = Colors.red.value;
-        if (state is CategoryColorSelectedState) {
+        if (state is AccountColorSelectedState) {
           color = state.categoryColor;
         }
-        if (state is CategorySuccessState) {
-          color = state.category.color ?? Colors.red.value;
+        if (state is AccountSuccessState) {
+          color = state.account.color ?? Colors.red.value;
         }
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           onTap: () {
             paisaColorPicker(context).then((color) =>
-                BlocProvider.of<CategoryBloc>(context)
-                    .add(CategoryColorSelectedEvent(color)));
+                BlocProvider.of<AccountsBloc>(context)
+                    .add(AccountColorSelectedEvent(color)));
           },
           leading: Icon(
             Icons.color_lens,

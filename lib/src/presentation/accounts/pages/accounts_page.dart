@@ -9,7 +9,6 @@ import '../../../app/app_level_constants.dart';
 import '../../../core/common.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../domain/account/entities/account.dart';
-import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
 import 'accounts_mobile_page.dart';
@@ -21,7 +20,6 @@ class AccountsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AccountsBloc accountsBloc = getIt.get();
     return Scaffold(
       key: const Key('accounts_mobile'),
       body: ValueListenableBuilder<Box<AccountModel>>(
@@ -29,10 +27,7 @@ class AccountsPage extends StatelessWidget {
         builder: (_, value, __) {
           final List<Account> accounts = value.toEntities();
           if (useAccountsList) {
-            return AccountsPageV2(
-              accounts: accounts,
-              accountsBloc: accountsBloc,
-            );
+            return AccountsPageV2(accounts: accounts);
           } else {
             if (accounts.isEmpty) {
               return EmptyWidget(
@@ -41,25 +36,18 @@ class AccountsPage extends StatelessWidget {
                 description: context.loc.emptyAccountMessageSubTitle,
               );
             }
-            accountsBloc.add(AccountSelectedEvent(accounts.first));
-            return BlocBuilder(
-              bloc: accountsBloc,
+            BlocProvider.of<AccountsBloc>(context)
+                .add(AccountSelectedEvent(accounts.first));
+            return BlocBuilder<AccountsBloc, AccountsState>(
               buildWhen: (previous, current) => current is AccountSelectedState,
               builder: (context, state) {
                 if (state is AccountSelectedState) {
-                  final List<Expense> expenses = accountsBloc
-                      .fetchExpenseFromAccountId(state.account.superId!);
+                  BlocProvider.of<AccountsBloc>(context).add(
+                      FetchExpensesFromAccountIdEvent(
+                          state.account.superId.toString()));
                   return ScreenTypeLayout(
-                    mobile: AccountsMobilePage(
-                      accounts: accounts,
-                      accountsBloc: accountsBloc,
-                      expenses: expenses,
-                    ),
-                    tablet: AccountsTabletPage(
-                      accounts: accounts,
-                      accountsBloc: accountsBloc,
-                      expenses: expenses,
-                    ),
+                    mobile: AccountsMobilePage(accounts: accounts),
+                    tablet: AccountsTabletPage(accounts: accounts),
                   );
                 } else {
                   return const SizedBox.shrink();

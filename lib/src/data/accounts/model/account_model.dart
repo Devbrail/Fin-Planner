@@ -16,19 +16,18 @@ class AccountModel extends HiveObject with EquatableMixin {
     required this.cardType,
     this.superId,
     required this.amount,
+    required this.color,
   });
 
   factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
-      name: json["name"],
-      bankName: json["bankName"],
-      icon: json["icon"],
-      number: json["number"],
-      cardType: (json["cardType"] as String).type,
-      amount: json["amount"])
-    ..superId = json["superId"];
-
-  @HiveField(8, defaultValue: 0)
-  double? amount;
+        name: json["name"],
+        bankName: json["bankName"],
+        icon: json["icon"],
+        number: json["number"],
+        cardType: (json["cardType"] as String).type,
+        amount: json["amount"],
+        color: json["color"],
+      )..superId = json["superId"];
 
   @HiveField(3)
   String bankName;
@@ -48,6 +47,12 @@ class AccountModel extends HiveObject with EquatableMixin {
   @HiveField(7, defaultValue: 0)
   int? superId;
 
+  @HiveField(8, defaultValue: 0)
+  double? amount;
+
+  @HiveField(9, defaultValue: 0xFFFFC107)
+  int? color;
+
   @override
   List<Object> get props {
     return [
@@ -66,6 +71,7 @@ class AccountModel extends HiveObject with EquatableMixin {
         'cardType': cardType?.name,
         'superId': superId,
         'amount': amount,
+        'color': color,
       };
 
   AccountModel copyWith({
@@ -76,6 +82,7 @@ class AccountModel extends HiveObject with EquatableMixin {
     CardType? cardType,
     int? superId,
     double? amount,
+    int? color,
   }) {
     return AccountModel(
       name: name ?? this.name,
@@ -85,6 +92,7 @@ class AccountModel extends HiveObject with EquatableMixin {
       cardType: cardType ?? this.cardType,
       superId: superId ?? this.superId,
       amount: amount ?? this.amount,
+      color: color ?? this.color,
     );
   }
 }

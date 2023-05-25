@@ -44,9 +44,6 @@ const landingName = 'landing';
 const searchPath = 'search';
 const searchName = 'search';
 
-const shortcutAddTransactionPath = 'short-cut-add-expense/:type';
-const shortcutAddTransactionName = 'short-cut-add-expense';
-
 const addTransactionPath = 'add-transaction';
 const addTransactionsName = 'add-transaction';
 
@@ -144,39 +141,31 @@ final GoRouter goRouter = GoRouter(
       builder: (context, state) => const LandingPage(),
       routes: [
         GoRoute(
-          path: shortcutAddTransactionPath,
-          name: shortcutAddTransactionName,
+          path: addTransactionPath,
+          name: addTransactionsName,
           pageBuilder: (context, state) {
-            String? transactionTypeString = state.params['type'];
-            int transactionType =
-                int.tryParse(transactionTypeString ?? '') ?? 0;
+            final String? transactionTypeString = state.queryParams['type'];
+            final String? accountId = state.queryParams['aid'];
+            final String? categoryId = state.queryParams['cid'];
+            final int typeInt = int.tryParse(transactionTypeString ?? '') ?? 0;
+            final TransactionType transactionType =
+                TransactionType.values[typeInt];
             return MaterialPage(
-              key: ValueKey(
-                state.location +
-                    DateTime.now().millisecondsSinceEpoch.toString(),
-              ),
+              key: ValueKey(state.location),
               child: ExpensePage(
-                transactionType: TransactionType.values[transactionType],
+                accountId: accountId,
+                categoryId: categoryId,
+                transactionType: transactionType,
               ),
             );
           },
-        ),
-        GoRoute(
-          path: addTransactionPath,
-          name: addTransactionsName,
-          pageBuilder: (context, state) => MaterialPage(
-            key: ValueKey(
-              state.location + DateTime.now().millisecondsSinceEpoch.toString(),
-            ),
-            child: const ExpensePage(),
-          ),
         ),
         GoRoute(
           name: editTransactionsName,
           path: editTransactionsPath,
           pageBuilder: (context, state) => MaterialPage(
             key: ValueKey(
-              state.location + DateTime.now().millisecondsSinceEpoch.toString(),
+              state.location,
             ),
             child: ExpensePage(
               expenseId: state.params['eid'],

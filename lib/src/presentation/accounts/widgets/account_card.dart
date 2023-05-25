@@ -161,52 +161,55 @@ class MobileAccountCard extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: ListTile(
-                      dense: true,
-                      title: Text(
-                        context.loc.income,
-                        style: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withOpacity(0.75),
-                        ),
-                      ),
-                      subtitle: Text(
-                        income,
-                        style: GoogleFonts.manrope(
-                          textStyle: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ),
+                    child: AccountSummaryTail(
+                      title: context.loc.income,
+                      subtitle: income,
                     ),
                   ),
                   Expanded(
-                    child: ListTile(
-                      dense: true,
-                      title: Text(
-                        context.loc.expense,
-                        style: GoogleFonts.outfit(
-                          textStyle:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondaryContainer
-                                        .withOpacity(0.75),
-                                  ),
-                        ),
-                      ),
-                      subtitle: Text(
-                        expense,
-                        style: GoogleFonts.manrope(
-                          textStyle: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ),
+                    child: AccountSummaryTail(
+                      title: context.loc.expense,
+                      subtitle: expense,
                     ),
                   ),
                 ],
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AccountSummaryTail extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const AccountSummaryTail({
+    super.key,
+    required this.title,
+    required this.subtitle,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      dense: true,
+      title: Text(
+        title,
+        style: GoogleFonts.outfit(
+          textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context)
+                    .colorScheme
+                    .onSecondaryContainer
+                    .withOpacity(0.75),
+              ),
+        ),
+      ),
+      subtitle: Text(
+        subtitle,
+        style: GoogleFonts.manrope(
+          textStyle: Theme.of(context).textTheme.titleMedium,
         ),
       ),
     );

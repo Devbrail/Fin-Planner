@@ -7,21 +7,15 @@ import '../../widgets/paisa_chip.dart';
 import '../bloc/expense_bloc.dart';
 
 class TransactionToggleButtons extends StatelessWidget {
-  const TransactionToggleButtons({
-    Key? key,
-    required this.expenseBloc,
-  }) : super(key: key);
+  const TransactionToggleButtons({Key? key}) : super(key: key);
 
-  final ExpenseBloc expenseBloc;
-
-  void _update(TransactionType type) {
-    expenseBloc.add(ChangeExpenseEvent(type));
+  void _update(BuildContext context, TransactionType type) {
+    BlocProvider.of<ExpenseBloc>(context).add(ChangeExpenseEvent(type));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: expenseBloc,
+    return BlocBuilder<ExpenseBloc, ExpenseState>(
       buildWhen: (previous, current) => current is ChangeTransactionTypeState,
       builder: (context, state) {
         return Padding(
@@ -34,21 +28,24 @@ class TransactionToggleButtons extends StatelessWidget {
                 PaisaMaterialYouChip(
                   title: TransactionType.expense.stringName(context),
                   isSelected:
-                      expenseBloc.transactionType == TransactionType.expense,
-                  onPressed: () => _update(TransactionType.expense),
+                      BlocProvider.of<ExpenseBloc>(context).transactionType ==
+                          TransactionType.expense,
+                  onPressed: () => _update(context, TransactionType.expense),
                 ),
                 PaisaMaterialYouChip(
                   title: TransactionType.income.stringName(context),
                   isSelected:
-                      expenseBloc.transactionType == TransactionType.income,
-                  onPressed: () => _update(TransactionType.income),
+                      BlocProvider.of<ExpenseBloc>(context).transactionType ==
+                          TransactionType.income,
+                  onPressed: () => _update(context, TransactionType.income),
                 ),
-                /*  PaisaMaterialYouChip(
+                PaisaMaterialYouChip(
                   title: TransactionType.transfer.stringName(context),
                   isSelected:
-                      expenseBloc.transactionType == TransactionType.transfer,
-                  onPressed: () => _update(TransactionType.transfer),
-                ), */
+                      BlocProvider.of<ExpenseBloc>(context).transactionType ==
+                          TransactionType.transfer,
+                  onPressed: () => _update(context, TransactionType.transfer),
+                ),
               ],
             ),
           ),

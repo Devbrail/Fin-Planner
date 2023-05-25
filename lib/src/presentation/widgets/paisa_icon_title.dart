@@ -11,7 +11,7 @@ class PaisaIconTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      horizontalTitleGap: 0,
+      horizontalTitleGap: 10,
       leading: Icon(
         Icons.wallet,
         color: Theme.of(context).colorScheme.primary,
