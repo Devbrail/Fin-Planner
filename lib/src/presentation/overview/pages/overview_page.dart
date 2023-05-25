@@ -14,7 +14,7 @@ import '../../../core/enum/transaction_type.dart';
 import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
-import '../../widgets/paisa_chip.dart';
+import '../../widgets/paisa_pill_chip.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../cubit/budget_cubit.dart';
 import '../widgets/category_list_widget.dart';
@@ -75,7 +75,7 @@ class OverViewPage extends StatelessWidget {
                                 itemCount: state.filerTimes.length,
                                 itemBuilder: (context, index) {
                                   final item = state.filerTimes[index];
-                                  return PaisaMaterialYouChip(
+                                  return PaisaPillChip(
                                     title: item,
                                     onPressed: () {
                                       if (budgetCubit.selectedTime != item) {

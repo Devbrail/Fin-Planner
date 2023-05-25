@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PaisaMaterialYouChip extends StatelessWidget {
-  const PaisaMaterialYouChip({
+class PaisaPillChip extends StatelessWidget {
+  const PaisaPillChip({
     super.key,
     required this.title,
     required this.onPressed,

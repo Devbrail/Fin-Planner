@@ -17,7 +17,7 @@ import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../expense/widgets/selectable_item_widget.dart';
 import '../../widgets/paisa_big_button_widget.dart';
-import '../../widgets/paisa_chip.dart';
+import '../../widgets/paisa_pill_chip.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../cubit/recurring_cubit.dart';
 
@@ -126,13 +126,13 @@ class TransactionToggleButtons extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                PaisaMaterialYouChip(
+                PaisaPillChip(
                   title: TransactionType.expense.stringName(context),
                   isSelected:
                       recurringCubit.transactionType == TransactionType.expense,
                   onPressed: () => _update(TransactionType.expense),
                 ),
-                PaisaMaterialYouChip(
+                PaisaPillChip(
                   title: TransactionType.income.stringName(context),
                   isSelected:
                       recurringCubit.transactionType == TransactionType.income,
@@ -602,25 +602,25 @@ class RecurringWidget extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 child: Row(
                   children: [
-                    PaisaMaterialYouChip(
+                    PaisaPillChip(
                       title: RecurringType.daily.name(context),
                       isSelected:
                           recurringCubit.recurringType == RecurringType.daily,
                       onPressed: () => _update(RecurringType.daily),
                     ),
-                    PaisaMaterialYouChip(
+                    PaisaPillChip(
                       title: RecurringType.weekly.name(context),
                       isSelected:
                           recurringCubit.recurringType == RecurringType.weekly,
                       onPressed: () => _update(RecurringType.weekly),
                     ),
-                    PaisaMaterialYouChip(
+                    PaisaPillChip(
                       title: RecurringType.monthly.name(context),
                       isSelected:
                           recurringCubit.recurringType == RecurringType.monthly,
                       onPressed: () => _update(RecurringType.monthly),
                     ),
-                    PaisaMaterialYouChip(
+                    PaisaPillChip(
                       title: RecurringType.yearly.name(context),
                       isSelected:
                           recurringCubit.recurringType == RecurringType.yearly,

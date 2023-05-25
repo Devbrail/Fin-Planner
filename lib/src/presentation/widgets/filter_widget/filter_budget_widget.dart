@@ -5,7 +5,7 @@ import '../../summary/controller/summary_controller.dart';
 import '../../../../main.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../settings/bloc/settings_controller.dart';
-import '../paisa_chip.dart';
+import '../paisa_pill_chip.dart';
 import '../paisa_toggle_button.dart';
 
 class FilterBudgetToggleWidget extends StatelessWidget {
@@ -121,31 +121,31 @@ class FilterBudgetToggleWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
                 children: [
-                  PaisaMaterialYouChip(
+                  PaisaPillChip(
                     title: FilterExpense.daily.stringValue(context),
                     isSelected: FilterExpense.daily == value,
                     onPressed: () => summaryController
                         .filterExpenseNotifier.value = FilterExpense.daily,
                   ),
-                  PaisaMaterialYouChip(
+                  PaisaPillChip(
                     title: FilterExpense.weekly.stringValue(context),
                     isSelected: FilterExpense.weekly == value,
                     onPressed: () => summaryController
                         .filterExpenseNotifier.value = FilterExpense.weekly,
                   ),
-                  PaisaMaterialYouChip(
+                  PaisaPillChip(
                     title: FilterExpense.monthly.stringValue(context),
                     isSelected: FilterExpense.monthly == value,
                     onPressed: () => summaryController
                         .filterExpenseNotifier.value = FilterExpense.monthly,
                   ),
-                  PaisaMaterialYouChip(
+                  PaisaPillChip(
                     title: FilterExpense.yearly.stringValue(context),
                     isSelected: FilterExpense.yearly == value,
                     onPressed: () => summaryController
                         .filterExpenseNotifier.value = FilterExpense.yearly,
                   ),
-                  PaisaMaterialYouChip(
+                  PaisaPillChip(
                     title: FilterExpense.all.stringValue(context),
                     isSelected: FilterExpense.all == value,
                     onPressed: () => summaryController

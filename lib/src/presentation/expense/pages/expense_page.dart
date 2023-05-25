@@ -202,7 +202,6 @@ class _ExpensePageState extends State<ExpensePage> {
                               BlocProvider.of<ExpenseBloc>(context)
                                   .fromAccount = account;
                             },
-                            selectedAccount: -1,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -221,7 +220,6 @@ class _ExpensePageState extends State<ExpensePage> {
                               BlocProvider.of<ExpenseBloc>(context).toAccount =
                                   account;
                             },
-                            selectedAccount: -1,
                           ),
                           const SizedBox(height: 16),
                           const Padding(

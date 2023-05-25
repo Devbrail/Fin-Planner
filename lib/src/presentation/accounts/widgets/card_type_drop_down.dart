@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paisa/src/core/common.dart';
 
 import '../../../core/enum/card_type.dart';
-import '../../widgets/paisa_chip.dart';
+import '../../widgets/paisa_pill_chip.dart';
 import '../bloc/accounts_bloc.dart';
 
 class CardTypeButtons extends StatelessWidget {
@@ -20,19 +20,19 @@ class CardTypeButtons extends StatelessWidget {
       builder: (context, state) {
         return Row(
           children: [
-            PaisaMaterialYouChip(
+            PaisaPillChip(
               title: CardType.cash.stringValue(context),
               isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
                   CardType.cash,
               onPressed: () => _update(context, CardType.cash),
             ),
-            PaisaMaterialYouChip(
+            PaisaPillChip(
               title: CardType.bank.stringValue(context),
               isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
                   CardType.bank,
               onPressed: () => _update(context, CardType.bank),
             ),
-            PaisaMaterialYouChip(
+            PaisaPillChip(
               title: CardType.wallet.stringValue(context),
               isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
                   CardType.wallet,

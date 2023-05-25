@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/transaction_type.dart';
-import '../../widgets/paisa_chip.dart';
+import '../../widgets/paisa_pill_chip.dart';
 import '../bloc/expense_bloc.dart';
 
 class TransactionToggleButtons extends StatelessWidget {
@@ -25,21 +25,21 @@ class TransactionToggleButtons extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                PaisaMaterialYouChip(
+                PaisaPillChip(
                   title: TransactionType.expense.stringName(context),
                   isSelected:
                       BlocProvider.of<ExpenseBloc>(context).transactionType ==
                           TransactionType.expense,
                   onPressed: () => _update(context, TransactionType.expense),
                 ),
-                PaisaMaterialYouChip(
+                PaisaPillChip(
                   title: TransactionType.income.stringName(context),
                   isSelected:
                       BlocProvider.of<ExpenseBloc>(context).transactionType ==
                           TransactionType.income,
                   onPressed: () => _update(context, TransactionType.income),
                 ),
-                PaisaMaterialYouChip(
+                PaisaPillChip(
                   title: TransactionType.transfer.stringName(context),
                   isSelected:
                       BlocProvider.of<ExpenseBloc>(context).transactionType ==

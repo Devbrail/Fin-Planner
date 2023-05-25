@@ -10,18 +10,16 @@ class PillsAccountWidget extends StatefulWidget {
   const PillsAccountWidget({
     super.key,
     required this.accountSelected,
-    required this.selectedAccount,
   });
 
   final Function(Account) accountSelected;
-  final int selectedAccount;
 
   @override
   State<PillsAccountWidget> createState() => _PillsAccountWidgetState();
 }
 
 class _PillsAccountWidgetState extends State<PillsAccountWidget> {
-  late int selectedAccount = widget.selectedAccount;
+  late int selectedAccount = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -38,57 +36,79 @@ class _PillsAccountWidgetState extends State<PillsAccountWidget> {
               accounts.length,
               (index) {
                 final Account account = accounts[index];
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: FilterChip(
-                    selected: account.superId == selectedAccount,
-                    onSelected: (value) {
-                      setState(() {
-                        if (selectedAccount == account.superId) {
-                          selectedAccount = -1;
-                        } else {
-                          selectedAccount = account.superId ?? -1;
-                        }
-                        widget.accountSelected(account);
-                      });
-                    },
-                    avatar: Icon(
-                      color: account.superId == selectedAccount
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.onSurfaceVariant,
-                      IconData(
-                        account.icon,
-                        fontFamily: 'Material Design Icons',
-                        fontPackage: 'material_design_icons_flutter',
-                      ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(28),
-                      side: BorderSide(
-                        width: 1,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    showCheckmark: false,
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    label: Text(account.bankName),
-                    labelStyle: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(
-                            color: account.superId == selectedAccount
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context)
-                                    .colorScheme
-                                    .onSurfaceVariant),
-                    padding: const EdgeInsets.all(12),
-                  ),
+                return PaisaFilterChip(
+                  title: account.bankName,
+                  onPressed: () {
+                    setState(() {
+                      if (selectedAccount == account.superId) {
+                        selectedAccount = -1;
+                      } else {
+                        selectedAccount = account.superId ?? -1;
+                      }
+                      widget.accountSelected(account);
+                    });
+                  },
+                  isSelected: account.superId == selectedAccount,
+                  icon: account.icon,
                 );
               },
             ),
           ),
         );
       },
+    );
+  }
+}
+
+class PaisaFilterChip extends StatelessWidget {
+  const PaisaFilterChip({
+    super.key,
+    required this.title,
+    required this.onPressed,
+    required this.isSelected,
+    required this.icon,
+  });
+
+  final String title;
+  final VoidCallback onPressed;
+  final bool isSelected;
+  final int icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: FilterChip(
+        selected: isSelected,
+        onSelected: (value) {
+          onPressed.call();
+        },
+        avatar: Icon(
+          color: isSelected
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onSurfaceVariant,
+          IconData(
+            icon,
+            fontFamily: 'Material Design Icons',
+            fontPackage: 'material_design_icons_flutter',
+          ),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(28),
+          side: BorderSide(
+            width: 1,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
+        showCheckmark: false,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        label: Text(title),
+        labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: isSelected
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.onSurfaceVariant),
+        padding: const EdgeInsets.all(12),
+      ),
     );
   }
 }

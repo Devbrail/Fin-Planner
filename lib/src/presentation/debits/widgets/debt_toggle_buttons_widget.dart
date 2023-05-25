@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
-import '../../widgets/paisa_chip.dart';
+import '../../widgets/paisa_pill_chip.dart';
 import '../cubit/debts_bloc.dart';
 
 class DebtToggleButtonsWidget extends StatelessWidget {
@@ -25,12 +25,12 @@ class DebtToggleButtonsWidget extends StatelessWidget {
       builder: (context, state) {
         return Row(
           children: [
-            PaisaMaterialYouChip(
+            PaisaPillChip(
               title: DebtType.debt.stringValue(context),
               isSelected: debtsBloc.currentDebtType == DebtType.debt,
               onPressed: () => _update(DebtType.debt),
             ),
-            PaisaMaterialYouChip(
+            PaisaPillChip(
               title: DebtType.credit.stringValue(context),
               isSelected: debtsBloc.currentDebtType == DebtType.credit,
               onPressed: () => _update(DebtType.credit),
