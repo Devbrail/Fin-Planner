@@ -57,6 +57,7 @@ class AccountsPage extends StatelessWidget {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
+                      childAspectRatio: 16 / 11,
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       final List<Expense> expenses = value

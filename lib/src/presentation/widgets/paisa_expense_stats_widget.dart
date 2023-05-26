@@ -24,6 +24,53 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
       mobile: PaisaFilledCard(
+        child: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                maxRadius: 16,
+                backgroundColor: graphLineColor.withOpacity(0.3),
+                child: Icon(
+                  iconData,
+                  color: graphLineColor,
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: GoogleFonts.outfit(
+                          textStyle:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant
+                                        .withOpacity(0.75),
+                                  ),
+                        ),
+                      ),
+                      Text(
+                        total,
+                        style: GoogleFonts.manrope(
+                          textStyle: Theme.of(context)
+                              .textTheme
+                              .titleSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ) /* PaisaFilledCard(
         color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.4),
         child: ListTile(
           title: Text(
@@ -54,7 +101,8 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ) */
+      ,
       tablet: PaisaFilledCard(
         color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.4),
         child: ListTile(
