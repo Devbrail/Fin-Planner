@@ -5,22 +5,21 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 @injectable
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(const CurrentIndexState(PageType.home)) {
+  HomeBloc(
+    @Named('settings') this.settings,
+  ) : super(const CurrentIndexState(PageType.home)) {
     on<HomeEvent>((event, emit) {});
     on<CurrentIndexEvent>(_currentIndex);
   }
 
-  final Box<dynamic> settings =
-      getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+  final Box<dynamic> settings;
 
   PageType currentPage = PageType.home;
 

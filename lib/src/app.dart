@@ -24,7 +24,7 @@ class PaisaApp extends StatefulWidget {
 }
 
 class _PaisaAppState extends State<PaisaApp> {
-  late final settings =
+  final settings =
       getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name).listenable(
     keys: [
       appColorKey,

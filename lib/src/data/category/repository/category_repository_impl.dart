@@ -15,6 +15,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
 
   final LocalCategoryManagerDataSource dataSources;
   final Box<dynamic> settings;
+
   @override
   Future<void> addCategory({
     required String name,

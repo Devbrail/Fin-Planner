@@ -9,9 +9,9 @@ const defaultAccountIdKey = "default_account_id_key";
 
 @singleton
 class Settings {
-  final Box<dynamic> settings;
-
   Settings(@Named('settings') this.settings);
+
+  final Box<dynamic> settings;
 
   FilterExpense fetchFilterExpense({
     bool isHome = false,
