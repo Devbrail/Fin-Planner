@@ -3,11 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/app/routes.dart';
-import 'package:paisa/src/core/enum/box_types.dart';
 
 import '../../../../../main.dart';
+import '../../../../app/routes.dart';
 import '../../../../core/common.dart';
+import '../../../../core/enum/box_types.dart';
 import '../../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../../data/category/data_sources/default_category.dart';
 import '../../../../data/category/model/category_model.dart';
