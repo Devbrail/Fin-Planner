@@ -11,7 +11,6 @@ extension AccountModelMapping on AccountModel {
         amount: amount,
         bankName: bankName,
         cardType: cardType,
-        icon: icon,
         name: name,
         number: number,
         superId: superId,

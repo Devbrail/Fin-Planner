@@ -49,7 +49,7 @@ class _PillsAccountWidgetState extends State<PillsAccountWidget> {
                     });
                   },
                   isSelected: account.superId == selectedAccount,
-                  icon: account.icon,
+                  icon: account.cardType!.icon.codePoint,
                 );
               },
             ),

@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/src/app/routes.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../app/routes.dart';
+import '../../widgets/paisa_big_button_widget.dart';
 
-import '../../../../core/common.dart';
-import '../../../../domain/account/entities/account.dart';
-import '../../../../domain/category/entities/category.dart';
-import '../../../summary/widgets/expense_item_widget.dart';
-import '../../../widgets/paisa_empty_widget.dart';
-import '../../bloc/accounts_bloc.dart';
+import '../../../../main.dart';
+import '../../../core/common.dart';
+import '../../../domain/account/entities/account.dart';
+import '../../../domain/category/entities/category.dart';
+import '../../../domain/expense/entities/expense.dart';
+import '../../summary/controller/summary_controller.dart';
+import '../../summary/widgets/expense_item_widget.dart';
+import '../../widgets/paisa_empty_widget.dart';
+import '../bloc/accounts_bloc.dart';
 
-class AccountTransactionPage extends StatelessWidget {
-  const AccountTransactionPage({
+class AccountTransactionsPage extends StatelessWidget {
+  const AccountTransactionsPage({
     Key? key,
     required this.accountId,
   }) : super(key: key);
@@ -21,6 +25,7 @@ class AccountTransactionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SummaryController summaryController = getIt.get();
     BlocProvider.of<AccountsBloc>(context)
         .add(FetchAccountFromIdEvent(accountId));
     Account? account;
@@ -32,7 +37,7 @@ class AccountTransactionPage extends StatelessWidget {
             tooltip: context.loc.edit,
             onPressed: () {
               GoRouter.of(context).pushNamed(
-                editAccountName,
+                editAccountWithIdName,
                 params: {'aid': accountId},
               );
             },
@@ -73,16 +78,29 @@ class AccountTransactionPage extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: state.expenses.length,
                   itemBuilder: (context, index) {
-                    final Category category = BlocProvider.of<AccountsBloc>(
-                            context)
-                        .fetchCategoryFromId(state.expenses[index].categoryId)!
-                        .toEntity();
+                    final Expense expense = state.expenses[index];
+                    final Account? account =
+                        summaryController.getAccount(expense.accountId);
+                    final Category? category =
+                        summaryController.getCategory(expense.categoryId);
 
-                    return ExpenseItemWidget(
-                      expense: state.expenses[index],
-                      account: account!,
-                      category: category,
-                    );
+                    if (account == null || category == null) {
+                      return ExpenseItemWidget(
+                        expense: expense,
+                        account: account!,
+                        category: Category(
+                          icon: MdiIcons.bankTransfer.codePoint,
+                          name: 'Transfer',
+                          color: Colors.amber.value,
+                        ),
+                      );
+                    } else {
+                      return ExpenseItemWidget(
+                        expense: expense,
+                        account: account,
+                        category: category,
+                      );
+                    }
                   },
                 );
               } else {

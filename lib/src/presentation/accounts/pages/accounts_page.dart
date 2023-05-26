@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
-import '../../../app/app_level_constants.dart';
 import '../../../core/common.dart';
 import '../../../data/accounts/model/account_model.dart';
+import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/account/entities/account.dart';
+import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/paisa_empty_widget.dart';
-import '../bloc/accounts_bloc.dart';
-import 'accounts_mobile_page.dart';
-import 'accounts_new/accounts_page_v2.dart';
-import 'accounts_tablet_page.dart';
+import '../widgets/account_card_v2.dart';
 
 class AccountsPage extends StatelessWidget {
   const AccountsPage({super.key});
@@ -26,32 +23,53 @@ class AccountsPage extends StatelessWidget {
         valueListenable: getIt.get<Box<AccountModel>>().listenable(),
         builder: (_, value, __) {
           final List<Account> accounts = value.toEntities();
-          if (useAccountsList) {
-            return AccountsPageV2(accounts: accounts);
+          if (accounts.isEmpty) {
+            return EmptyWidget(
+              icon: Icons.credit_card,
+              title: context.loc.emptyAccountMessageTitle,
+              description: context.loc.emptyAccountMessageSubTitle,
+            );
           } else {
-            if (accounts.isEmpty) {
-              return EmptyWidget(
-                icon: Icons.credit_card,
-                title: context.loc.emptyAccountMessageTitle,
-                description: context.loc.emptyAccountMessageSubTitle,
-              );
-            }
-            BlocProvider.of<AccountsBloc>(context)
-                .add(AccountSelectedEvent(accounts.first));
-            return BlocBuilder<AccountsBloc, AccountsState>(
-              buildWhen: (previous, current) => current is AccountSelectedState,
-              builder: (context, state) {
-                if (state is AccountSelectedState) {
-                  BlocProvider.of<AccountsBloc>(context).add(
-                      FetchExpensesFromAccountIdEvent(
-                          state.account.superId.toString()));
-                  return ScreenTypeLayout(
-                    mobile: AccountsMobilePage(accounts: accounts),
-                    tablet: AccountsTabletPage(accounts: accounts),
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
+            return ValueListenableBuilder<Box<ExpenseModel>>(
+              valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
+              builder: (context, value, child) {
+                return ScreenTypeLayout(
+                  mobile: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.only(bottom: 124),
+                    itemCount: accounts.length,
+                    itemBuilder: (context, index) {
+                      final List<Expense> expenses = value
+                          .expensesFromAccountId(accounts[index].superId!)
+                          .map((e) => e.toEntity())
+                          .toList();
+                      return AccountCardV2(
+                        account: accounts[index],
+                        expenses: expenses,
+                      );
+                    },
+                  ),
+                  tablet: GridView.builder(
+                    padding: const EdgeInsets.only(bottom: 124),
+                    shrinkWrap: true,
+                    itemCount: accounts.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      final List<Expense> expenses = value
+                          .expensesFromAccountId(accounts[index].superId!)
+                          .map((e) => e.toEntity())
+                          .toList();
+                      return AccountCardV2(
+                        account: accounts[index],
+                        expenses: expenses,
+                      );
+                    },
+                  ),
+                );
               },
             );
           }

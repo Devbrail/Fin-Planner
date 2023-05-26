@@ -23,10 +23,17 @@ class AccountColorPickerWidget extends StatelessWidget {
         }
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          onTap: () {
-            paisaColorPicker(context).then((color) =>
-                BlocProvider.of<AccountsBloc>(context)
-                    .add(AccountColorSelectedEvent(color)));
+          onTap: () async {
+            final color = await paisaColorPicker(
+              context,
+              defaultColor:
+                  BlocProvider.of<AccountsBloc>(context).selectedColor ??
+                      Colors.red.value,
+            );
+            if (context.mounted) {
+              BlocProvider.of<AccountsBloc>(context)
+                  .add(AccountColorSelectedEvent(color));
+            }
           },
           leading: Icon(
             Icons.color_lens,

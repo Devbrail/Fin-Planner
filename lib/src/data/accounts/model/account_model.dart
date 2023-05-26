@@ -10,7 +10,6 @@ part 'account_model.g.dart';
 class AccountModel extends HiveObject with EquatableMixin {
   AccountModel({
     required this.name,
-    required this.icon,
     required this.bankName,
     required this.number,
     required this.cardType,
@@ -22,7 +21,6 @@ class AccountModel extends HiveObject with EquatableMixin {
   factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
         name: json["name"],
         bankName: json["bankName"],
-        icon: json["icon"],
         number: json["number"],
         cardType: (json["cardType"] as String).type,
         amount: json["amount"],
@@ -34,9 +32,6 @@ class AccountModel extends HiveObject with EquatableMixin {
 
   @HiveField(6, defaultValue: CardType.bank)
   CardType? cardType;
-
-  @HiveField(1)
-  int icon;
 
   @HiveField(0)
   String name;
@@ -57,7 +52,6 @@ class AccountModel extends HiveObject with EquatableMixin {
   List<Object> get props {
     return [
       name,
-      icon,
       bankName,
       number,
     ];
@@ -66,7 +60,6 @@ class AccountModel extends HiveObject with EquatableMixin {
   Map<String, dynamic> toJson() => {
         'name': name,
         'bankName': bankName,
-        'icon': icon,
         'number': number,
         'cardType': cardType?.name,
         'superId': superId,
@@ -86,7 +79,6 @@ class AccountModel extends HiveObject with EquatableMixin {
   }) {
     return AccountModel(
       name: name ?? this.name,
-      icon: icon ?? this.icon,
       bankName: bankName ?? this.bankName,
       number: number ?? this.number,
       cardType: cardType ?? this.cardType,

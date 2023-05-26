@@ -110,7 +110,7 @@ class AccountSelectedItem extends StatelessWidget {
                   isSelected: account.superId ==
                       BlocProvider.of<ExpenseBloc>(context).selectedAccountId,
                   title: account.name,
-                  icon: account.icon,
+                  icon: account.cardType!.icon.codePoint,
                   onPressed: () => BlocProvider.of<ExpenseBloc>(context)
                       .add(ChangeAccountEvent(account)),
                   subtitle: account.bankName,

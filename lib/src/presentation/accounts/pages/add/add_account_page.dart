@@ -14,7 +14,6 @@ import '../../../widgets/paisa_color_picker.dart';
 import '../../../widgets/paisa_text_field.dart';
 import '../../bloc/accounts_bloc.dart';
 import '../../widgets/card_type_drop_down.dart';
-import '../../widgets/color_picker_widget.dart';
 
 final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
@@ -32,13 +31,18 @@ class AddAccountPage extends StatefulWidget {
 
 class AddAccountPageState extends State<AddAccountPage> {
   late final bool isAccountAddOrUpdate = widget.accountId == null;
-  late final AccountsBloc accountsBloc = BlocProvider.of<AccountsBloc>(context)
-    ..add(FetchAccountFromIdEvent(widget.accountId));
 
   final accountNumberController = TextEditingController();
   final accountHolderController = TextEditingController();
   final accountNameController = TextEditingController();
   final accountInitialAmountController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<AccountsBloc>(context)
+        .add(FetchAccountFromIdEvent(widget.accountId));
+  }
 
   @override
   void dispose() {
@@ -53,7 +57,7 @@ class AddAccountPageState extends State<AddAccountPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<AccountsBloc, AccountsState>(
       listener: (context, state) {
-        if (state is AddAccountState) {
+        if (state is AccountAddedState) {
           context.showMaterialSnackBar(
             isAccountAddOrUpdate
                 ? context.loc.addedAccount
@@ -115,7 +119,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 style: Theme.of(context).textTheme.bodyMedium,
                                 children: [
                                   TextSpan(
-                                    text: accountsBloc.accountName,
+                                    text: BlocProvider.of<AccountsBloc>(context)
+                                        .accountName,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -160,6 +165,42 @@ class AddAccountPageState extends State<AddAccountPage> {
                     ),
                     child: CardTypeButtons(),
                   ),
+                  ListTile(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    onTap: () async {
+                      final color = await paisaColorPicker(
+                        context,
+                        defaultColor: BlocProvider.of<AccountsBloc>(context)
+                                .selectedColor ??
+                            Colors.red.value,
+                      );
+                      if (context.mounted) {
+                        BlocProvider.of<AccountsBloc>(context)
+                            .add(AccountColorSelectedEvent(color));
+                      }
+                    },
+                    leading: Icon(
+                      Icons.color_lens,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    title: Text(
+                      context.loc.pickColor,
+                    ),
+                    subtitle: Text(
+                      context.loc.pickColorDesc,
+                    ),
+                    trailing: Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(BlocProvider.of<AccountsBloc>(context)
+                                .selectedColor ??
+                            Colors.red.value),
+                      ),
+                    ),
+                  ),
                   Form(
                     key: _form,
                     child: Padding(
@@ -192,7 +233,6 @@ class AddAccountPageState extends State<AddAccountPage> {
                               }
                             },
                           ),
-                          const AccountColorPickerWidget(),
                           const SizedBox(height: 16),
                           AccountDefaultSwitchWidget(
                             accountId:
@@ -201,7 +241,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -214,7 +254,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                     if (!isValid) {
                       return;
                     }
-                    accountsBloc
+                    BlocProvider.of<AccountsBloc>(context)
                         .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
                   },
                   title: isAccountAddOrUpdate
@@ -247,7 +287,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 style: Theme.of(context).textTheme.bodyMedium,
                                 children: [
                                   TextSpan(
-                                    text: accountsBloc.accountName,
+                                    text: BlocProvider.of<AccountsBloc>(context)
+                                        .accountName,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -261,8 +302,9 @@ class AddAccountPageState extends State<AddAccountPage> {
                                     const EdgeInsets.symmetric(horizontal: 16),
                               ),
                               onPressed: () {
-                                accountsBloc.add(DeleteAccountEvent(
-                                    int.parse(widget.accountId!)));
+                                BlocProvider.of<AccountsBloc>(context).add(
+                                    DeleteAccountEvent(
+                                        int.parse(widget.accountId!)));
 
                                 Navigator.pop(context);
                               },
@@ -286,7 +328,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                     if (!isValid) {
                       return;
                     }
-                    accountsBloc
+                    BlocProvider.of<AccountsBloc>(context)
                         .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
                   },
                   title: isAccountAddOrUpdate
@@ -355,7 +397,6 @@ class AddAccountPageState extends State<AddAccountPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  horizontalTitleGap: 0,
                   leading: const Icon(Icons.info_rounded),
                   title: Text(
                     context.loc.accountInformationTitle,
@@ -373,15 +414,9 @@ class AddAccountPageState extends State<AddAccountPage> {
                   alignment: Alignment.bottomRight,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 12,
-                        ),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                       ),
                       onPressed: () {
                         GoRouter.of(context).pop();

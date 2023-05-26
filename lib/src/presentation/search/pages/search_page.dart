@@ -229,7 +229,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.onSurfaceVariant,
                         IconData(
-                          account.icon,
+                          account.cardType!.icon.codePoint,
                           fontFamily: 'Material Design Icons',
                           fontPackage: 'material_design_icons_flutter',
                         ),

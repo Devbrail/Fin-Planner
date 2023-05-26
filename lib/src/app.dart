@@ -4,17 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/accounts/bloc/accounts_bloc.dart';
-import 'package:paisa/src/presentation/category/bloc/category_bloc.dart';
-import 'package:paisa/src/presentation/expense/bloc/expense_bloc.dart';
-import 'package:paisa/src/presentation/home/bloc/home_bloc.dart';
-import 'dart:io';
 
 import '../main.dart';
 import 'app/routes.dart';
 import 'core/common.dart';
 import 'core/enum/box_types.dart';
 import 'core/theme/paisa_theme.dart';
+import 'presentation/accounts/bloc/accounts_bloc.dart';
+import 'presentation/category/bloc/category_bloc.dart';
+import 'presentation/expense/bloc/expense_bloc.dart';
+import 'presentation/home/bloc/home_bloc.dart';
 import 'presentation/widgets/paisa_annotate_region_widget.dart';
 
 class PaisaApp extends StatefulWidget {

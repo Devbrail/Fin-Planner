@@ -30,29 +30,14 @@ class ExpenseListWidget extends StatelessWidget {
       itemCount: expenses.length,
       itemBuilder: (_, index) {
         final Expense expense = expenses[index];
-        /* if (expense.type == TransactionType.transfer) {
-          final Account? fromAccount =
-              summaryController.getAccount(expenses[index].fromAccountId!);
-          final Account? toAccount =
-              summaryController.getAccount(expenses[index].toAccountId!);
 
-          if (fromAccount == null || toAccount == null) {
-            return const SizedBox.shrink();
-          } else {
-            return ExpenseTransferItemWidget(
-              expense: expense,
-              fromAccount: fromAccount,
-              toAccount: toAccount,
-            );
-          }
-        } else { */
         final Account? account =
-            summaryController.getAccount(expenses[index].accountId);
+            summaryController.getAccount(expense.accountId);
         final Category? category =
-            summaryController.getCategory(expenses[index].categoryId);
+            summaryController.getCategory(expense.categoryId);
         if (account == null || category == null) {
           return ExpenseItemWidget(
-            expense: expenses[index],
+            expense: expense,
             account: account!,
             category: Category(
               icon: MdiIcons.bankTransfer.codePoint,
@@ -67,7 +52,6 @@ class ExpenseListWidget extends StatelessWidget {
             category: category,
           );
         }
-        //}
       },
     );
   }

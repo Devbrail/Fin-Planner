@@ -22,7 +22,6 @@ class AccountRepositoryImpl extends AccountRepository {
   }) {
     return dataSource.addAccount(AccountModel(
       name: holderName,
-      icon: cardType.icon.codePoint,
       bankName: bankName,
       number: number,
       cardType: cardType,
@@ -44,7 +43,6 @@ class AccountRepositoryImpl extends AccountRepository {
     return dataSource.updateAccount(
       AccountModel(
         name: holderName,
-        icon: cardType.icon.codePoint,
         bankName: bankName,
         number: number,
         cardType: cardType,

@@ -8,7 +8,7 @@ import '../core/common.dart';
 import '../core/enum/box_types.dart';
 import '../core/enum/transaction_type.dart';
 import '../data/settings/authenticate.dart';
-import '../presentation/accounts/pages/accounts_new/account_transaction_page.dart';
+import '../presentation/accounts/pages/account_transactions_page.dart';
 import '../presentation/accounts/pages/add/add_account_page.dart';
 import '../presentation/category/pages/add/add_category_page.dart';
 import '../presentation/category/pages/category_list_page.dart';
@@ -64,6 +64,12 @@ const addAccountName = 'add-account';
 
 const editAccountPath = 'edit-account/:aid';
 const editAccountName = 'edit-account';
+
+const editAccountWithIdPath = 'edit';
+const editAccountWithIdName = 'edit';
+
+const addAccountWithIdPath = 'add';
+const addAccountWithIdName = 'add';
 
 const accountTransactionPath = 'account-transaction/:aid';
 const accountTransactionName = 'account-transaction';
@@ -204,9 +210,43 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: accountTransactionName,
           path: accountTransactionPath,
-          builder: (context, state) => AccountTransactionPage(
-            accountId: state.params['aid'] as String,
-          ),
+          builder: (context, state) {
+            final String accountId = state.params['aid'] as String;
+            return AccountTransactionsPage(
+              accountId: accountId,
+            );
+          },
+          routes: [
+            GoRoute(
+              name: editAccountWithIdName,
+              path: editAccountWithIdPath,
+              builder: (context, state) {
+                final String? accountId = state.params['aid'];
+                return AddAccountPage(
+                  accountId: accountId,
+                );
+              },
+            ),
+            GoRoute(
+              path: addAccountWithIdPath,
+              name: addAccountWithIdName,
+              pageBuilder: (context, state) {
+                final String? transactionTypeString = state.queryParams['type'];
+                final String? accountId = state.queryParams['aid'];
+                final int typeInt =
+                    int.tryParse(transactionTypeString ?? '') ?? 0;
+                final TransactionType transactionType =
+                    TransactionType.values[typeInt];
+                return MaterialPage(
+                  key: ValueKey(state.location),
+                  child: ExpensePage(
+                    accountId: accountId,
+                    transactionType: transactionType,
+                  ),
+                );
+              },
+            ),
+          ],
         ),
         GoRoute(
           name: expensesByCategoryName,

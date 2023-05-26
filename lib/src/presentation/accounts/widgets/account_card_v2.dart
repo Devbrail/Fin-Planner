@@ -80,7 +80,7 @@ class AccountCardV2 extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Divider(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
@@ -95,7 +95,7 @@ class AccountCardV2 extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ThisMonthTransactionWidget(
-                        title: context.loc.expense,
+                        title: context.loc.income,
                         content: expenses.thisMonthIncome
                             .toCurrency(decimalDigits: 0),
                         color: onPrimary,
@@ -104,7 +104,7 @@ class AccountCardV2 extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: ThisMonthTransactionWidget(
-                        title: context.loc.income,
+                        title: context.loc.expense,
                         color: onPrimary,
                         content: expenses.thisMonthExpense
                             .toCurrency(decimalDigits: 0),

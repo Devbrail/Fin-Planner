@@ -18,7 +18,6 @@ class AccountModelAdapter extends TypeAdapter<AccountModel> {
     };
     return AccountModel(
       name: fields[0] as String,
-      icon: fields[1] as int,
       bankName: fields[3] as String,
       number: fields[5] as String,
       cardType: fields[6] == null ? CardType.bank : fields[6] as CardType?,
@@ -31,13 +30,11 @@ class AccountModelAdapter extends TypeAdapter<AccountModel> {
   @override
   void write(BinaryWriter writer, AccountModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(7)
       ..writeByte(3)
       ..write(obj.bankName)
       ..writeByte(6)
       ..write(obj.cardType)
-      ..writeByte(1)
-      ..write(obj.icon)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(5)

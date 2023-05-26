@@ -19,10 +19,10 @@ class AccountListState extends AccountsState {
   List<Object> get props => [accounts];
 }
 
-class AddAccountState extends AccountsState {
+class AccountAddedState extends AccountsState {
   final bool isAddOrUpdate;
 
-  const AddAccountState({this.isAddOrUpdate = false});
+  const AccountAddedState({this.isAddOrUpdate = false});
   @override
   List<Object> get props => [isAddOrUpdate];
 }

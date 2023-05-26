@@ -4,12 +4,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../core/enum/card_type.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/account/use_case/account_use_case.dart';
-import '../../../domain/category/entities/category.dart';
 import '../../../domain/category/use_case/category_use_case.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
@@ -109,20 +107,18 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
         color: color,
       );
     } else {
-      if (currentAccount != null) {
-        currentAccount!
-          ..bankName = bankName
-          ..cardType = cardType
-          ..icon = cardType.icon.codePoint
-          ..name = holderName
-          ..number = number ?? ''
-          ..amount = amount
-          ..color = color;
+      if (currentAccount == null) return;
+      currentAccount!
+        ..bankName = bankName
+        ..cardType = cardType
+        ..name = holderName
+        ..number = number ?? ''
+        ..amount = amount
+        ..color = color;
 
-        await updateAccountUseCase(account: currentAccount!);
-      }
+      await updateAccountUseCase(account: currentAccount!);
     }
-    emit(AddAccountState(isAddOrUpdate: event.isAdding));
+    emit(AccountAddedState(isAddOrUpdate: event.isAdding));
   }
 
   FutureOr<void> _deleteAccount(
@@ -147,9 +143,6 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     selectedType = event.cardType;
     emit(UpdateCardTypeState(event.cardType));
   }
-
-  Category? fetchCategoryFromId(int categoryId) =>
-      getCategoryUseCase(categoryId);
 
   FutureOr<void> _fetchExpensesFromAccountId(
     FetchExpensesFromAccountIdEvent event,

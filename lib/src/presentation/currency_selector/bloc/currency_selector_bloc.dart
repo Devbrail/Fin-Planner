@@ -49,7 +49,6 @@ class CurrencySelectorBloc extends Bloc<SplashEvent, SplashState> {
     if (isAnyAccount) {
       final account = AccountModel(
         name: 'Holder name',
-        icon: MdiIcons.creditCard.codePoint,
         bankName: 'Bank name',
         number: '1234',
         cardType: CardType.bank,

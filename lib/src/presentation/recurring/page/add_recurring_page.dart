@@ -233,7 +233,7 @@ class _AccountSelectedWidgetState extends State<AccountSelectedWidget> {
             return ItemWidget(
               isSelected: account.superId == selectedId,
               title: account.name,
-              icon: account.icon,
+              icon: account.cardType!.icon.codePoint,
               onPressed: () {
                 setState(() {
                   selectedId = account.superId!;
