@@ -40,7 +40,7 @@ class CurrencyChangeWidget extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                       context.pushNamed(
-                        splashName,
+                        countrySelectorName,
                         extra: {
                           'force_change_currency': true,
                         },

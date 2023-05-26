@@ -1016,5 +1016,23 @@
         "description": "Text shown on the title section of account in transfer section in transaction page",
         "type": "text",
         "placeholders": {}
+    },
+    "paisaLocked": "Paisa Locked",
+    "@paisaLocked": {
+        "description": "Text shown on the title section of biometric screen",
+        "type": "text",
+        "placeholders": {}
+    },
+    "authenticate": "Authenticate",
+    "@authenticate": {
+        "description": "Text shown on the button biometric screen",
+        "type": "text",
+        "placeholders": {}
+    },
+    "biometricMessage": "Touch the fingerprint sensor",
+    "@biometricMessage": {
+        "description": "Text shown on the biometric screen below icon",
+        "type": "text",
+        "placeholders": {}
     }
 }

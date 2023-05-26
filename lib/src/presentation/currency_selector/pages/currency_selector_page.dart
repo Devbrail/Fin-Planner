@@ -27,9 +27,8 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
     return BlocListener(
       bloc: countryCubit,
       listener: (context, state) {
-        print(state.toString());
         if (state is NavigateToLading) {
-          context.go(landingPath);
+          context.goNamed(landingName);
         }
       },
       child: Scaffold(

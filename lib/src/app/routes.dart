@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/data/currencies/models/country_model.dart';
+import 'package:paisa/src/presentation/biometric/pages/biometric_page.dart';
 
 import '../../main.dart';
 import '../core/common.dart';
@@ -29,14 +31,17 @@ import '../presentation/settings/pages/setting_page.dart';
 const loginPath = '/login';
 const loginName = 'login';
 
-const splashPath = '/splash';
-const splashName = 'splash';
+const currencySelectorPath = '/splash';
+const countrySelectorName = 'splash';
 
 const userNamePath = '/user-name';
 const userName = 'user-name';
 
 const userImagePath = '/user-image';
 const userImageName = 'user-image';
+
+const biometricPath = '/biometric';
+const biometricName = 'biometric';
 
 const landingPath = '/landing';
 const landingName = 'landing';
@@ -118,8 +123,8 @@ final GoRouter goRouter = GoRouter(
           const Center(child: CircularProgressIndicator()),
     ),
     GoRoute(
-      name: splashName,
-      path: splashPath,
+      name: countrySelectorName,
+      path: currencySelectorPath,
       builder: (context, state) {
         return const CurrencySelectorPage();
       },
@@ -133,6 +138,11 @@ final GoRouter goRouter = GoRouter(
       name: userImageName,
       path: userImagePath,
       builder: (context, state) => const UserImagePage(),
+    ),
+    GoRoute(
+      name: biometricName,
+      path: biometricPath,
+      builder: (context, state) => const BiometricPage(),
     ),
     GoRoute(
       name: landingName,
@@ -312,11 +322,11 @@ final GoRouter goRouter = GoRouter(
     if (image.isEmpty && isLogging) {
       return userImagePath;
     }
-    final String languageCode =
-        settings.get(userLanguageKey, defaultValue: 'DEF');
-    if (languageCode == 'DEF' && isLogging) {
-      return splashPath;
+    final Map<dynamic, dynamic>? json = settings.get(userCountryKey);
+    if (json == null && isLogging) {
+      return currencySelectorPath;
     }
+
     final isBiometricEnabled = settings.get(userAuthKey, defaultValue: false);
     if (isBiometricEnabled &&
         name.isNotEmpty &&

@@ -95,7 +95,7 @@ class _UserImagePageState extends State<UserImagePage> {
           if (image.isEmpty) {
             value.put(userImageKey, 'no-image');
           }
-          context.go(splashPath);
+          context.go(currencySelectorPath);
         },
         extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
         label: const Icon(MdiIcons.arrowRight),

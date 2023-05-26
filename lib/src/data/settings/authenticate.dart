@@ -7,7 +7,7 @@ class Authenticate {
   final LocalAuthentication localAuth = LocalAuthentication();
 
   Future<bool> canCheckBiometrics() async {
-    late bool canCheckBiometrics;
+    bool canCheckBiometrics = false;
     try {
       canCheckBiometrics = await localAuth.canCheckBiometrics;
     } on PlatformException catch (_) {
@@ -17,7 +17,7 @@ class Authenticate {
   }
 
   Future<List<BiometricType>> getAvailableBiometrics() async {
-    late List<BiometricType> availableBiometrics;
+    List<BiometricType> availableBiometrics = [];
     try {
       availableBiometrics = await localAuth.getAvailableBiometrics();
     } on PlatformException catch (_) {
