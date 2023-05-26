@@ -97,12 +97,12 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                   spacing: 12.0,
                   runSpacing: 12.0,
                   children: defaultModels
-                      .map((e) => FilterChip(
-                            label: Text(e.name),
+                      .map((model) => FilterChip(
+                            label: Text(model.name),
                             onSelected: (value) {
-                              dataSource.addCategory(e);
+                              dataSource.addCategory(model);
                               setState(() {
-                                defaultModels.remove(e);
+                                defaultModels.remove(model);
                               });
                             },
                             shape: RoundedRectangleBorder(
@@ -118,7 +118,11 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                             labelStyle: Theme.of(context).textTheme.titleMedium,
                             padding: const EdgeInsets.all(12),
                             avatar: Icon(
-                              MdiIcons.plus,
+                              IconData(
+                                model.icon,
+                                fontFamily: 'Material Design Icons',
+                                fontPackage: 'material_design_icons_flutter',
+                              ),
                               color: Theme.of(context).colorScheme.primary,
                             ),
                           ))

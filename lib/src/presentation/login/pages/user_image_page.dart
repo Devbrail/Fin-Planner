@@ -32,8 +32,9 @@ class _UserImagePageState extends State<UserImagePage> {
         }
       });
     } else {
-      context
-          .showMaterialSnackBar('Not supported in ${Platform.operatingSystem}');
+      context.showMaterialSnackBar(
+        'Not supported in ${Platform.operatingSystem}',
+      );
     }
   }
 
@@ -90,12 +91,12 @@ class _UserImagePageState extends State<UserImagePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
+        onPressed: () async {
           final String image = value.get(userImageKey, defaultValue: '');
           if (image.isEmpty) {
-            value.put(userImageKey, 'no-image');
+            await value.put(userImageKey, 'no-image');
           }
-          context.go(currencySelectorPath);
+          if (context.mounted) context.go(categorySelectorPath);
         },
         extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
         label: const Icon(MdiIcons.arrowRight),

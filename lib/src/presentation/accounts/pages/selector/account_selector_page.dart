@@ -120,7 +120,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                             labelStyle: Theme.of(context).textTheme.titleMedium,
                             padding: const EdgeInsets.all(12),
                             avatar: Icon(
-                              MdiIcons.plus,
+                              model.cardType!.icon,
                               color: Theme.of(context).colorScheme.primary,
                             ),
                           ))
