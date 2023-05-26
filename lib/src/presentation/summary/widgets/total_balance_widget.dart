@@ -29,7 +29,7 @@ class TotalBalanceWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          amount.toCurrency(),
+          amount.toFormateCurrency(),
           style: GoogleFonts.manrope(
             textStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onPrimaryContainer,

@@ -288,7 +288,7 @@ class BarChartSample2State extends State<BarChartSample2> {
                   BarChartRodData rod,
                   int rodIndex,
                 ) {
-                  return BarTooltipItem(rod.toY.toCurrency(),
+                  return BarTooltipItem(rod.toY.toFormateCurrency(),
                       Theme.of(context).textTheme.subtitle2!);
                 },
               ),

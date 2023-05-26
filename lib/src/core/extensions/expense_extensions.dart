@@ -97,7 +97,7 @@ extension ExpensesHelper on Iterable<Expense> {
   List<Expense> get incomeList =>
       where((element) => element.type == TransactionType.income).toList();
 
-  String get balance => (totalIncome - totalExpense).toCurrency();
+  String get balance => (totalIncome - totalExpense).toFormateCurrency();
 
   List<Expense> isFilterTimeBetween(DateTimeRange range) =>
       where((element) => element.time.isAfterBeforeTime(range)).toList();

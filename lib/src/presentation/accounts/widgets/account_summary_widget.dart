@@ -39,7 +39,7 @@ class AccountSummaryWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    expenses.thisMonthIncome.toCurrency(decimalDigits: 0),
+                    expenses.thisMonthIncome.toFormateCurrency(),
                     style: GoogleFonts.manrope(
                       textStyle: Theme.of(context).textTheme.titleLarge,
                     ),
@@ -65,7 +65,7 @@ class AccountSummaryWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    expenses.thisMonthExpense.toCurrency(decimalDigits: 0),
+                    expenses.thisMonthExpense.toFormateCurrency(),
                     style: GoogleFonts.manrope(
                       textStyle: Theme.of(context).textTheme.titleLarge,
                     ),
@@ -83,7 +83,7 @@ class AccountSummaryWidget extends StatelessWidget {
           children: [
             Expanded(
               child: PaisaExpenseStatsWidget(
-                total: expenses.totalIncome.toCurrency(decimalDigits: 0),
+                total: expenses.totalIncome.toFormateCurrency(),
                 title: context.loc.income,
                 graphData: expenses.incomeList.map((e) => e.currency).toList(),
                 graphLineColor:
@@ -94,7 +94,7 @@ class AccountSummaryWidget extends StatelessWidget {
             ),
             Expanded(
               child: PaisaExpenseStatsWidget(
-                total: expenses.totalExpense.toCurrency(decimalDigits: 0),
+                total: expenses.totalExpense.toFormateCurrency(),
                 title: context.loc.expense,
                 graphData: expenses.expenseList.map((e) => e.currency).toList(),
                 graphLineColor:

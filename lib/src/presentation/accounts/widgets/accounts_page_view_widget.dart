@@ -55,10 +55,12 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                 /*  BlocProvider.of<AccountsBloc>(context)
                         .fetchExpenseFromAccountId(account.superId!) */
                 ;
-                final String expense = expenses.totalExpense.toCurrency();
-                final String income = expenses.totalIncome.toCurrency();
+                final String expense =
+                    expenses.totalExpense.toFormateCurrency();
+                final String income = expenses.totalIncome.toFormateCurrency();
                 final String totalBalance =
-                    (expenses.fullTotal + account.initialAmount).toCurrency();
+                    (expenses.fullTotal + account.initialAmount)
+                        .toFormateCurrency();
                 return AccountCard(
                   key: ValueKey(account.hashCode),
                   expense: expense,

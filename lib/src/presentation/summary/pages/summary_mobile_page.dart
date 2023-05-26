@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paisa/src/presentation/summary/widgets/expense_month_card.dart';
 
 import '../../../core/common.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../widgets/expense_history_widget.dart';
-import '../widgets/expense_list_widget.dart';
 import '../widgets/expense_total_widget.dart';
 import '../widgets/welcome_name_widget.dart';
 

@@ -19,21 +19,10 @@ class CountryModel {
     required this.decimalSeparator,
     required this.spaceBetweenAmountAndSymbol,
     required this.symbolOnLeft,
+    required this.pattern,
   });
 
-  final String code;
-  final String name;
-  final String symbol;
-  final String flag;
-  final int decimalDigits;
-  final int number;
-  final String namePlural;
-  final String thousandsSeparator;
-  final String decimalSeparator;
-  final bool spaceBetweenAmountAndSymbol;
-  final bool symbolOnLeft;
-
-  factory CountryModel.fromJson(Map<String, dynamic> json) => CountryModel(
+  factory CountryModel.fromJson(Map<dynamic, dynamic> json) => CountryModel(
         code: json["code"],
         name: json["name"],
         symbol: json["symbol"],
@@ -45,7 +34,21 @@ class CountryModel {
         decimalSeparator: json["decimal_separator"],
         spaceBetweenAmountAndSymbol: json["space_between_amount_and_symbol"],
         symbolOnLeft: json["symbol_on_left"],
+        pattern: json["pattern"],
       );
+
+  final String code;
+  final int decimalDigits;
+  final String decimalSeparator;
+  final String? flag;
+  final String name;
+  final String namePlural;
+  final int number;
+  final bool spaceBetweenAmountAndSymbol;
+  final String symbol;
+  final bool symbolOnLeft;
+  final String thousandsSeparator;
+  final String pattern;
 
   Map<String, dynamic> toJson() => {
         "code": code,
@@ -59,6 +62,7 @@ class CountryModel {
         "decimal_separator": decimalSeparator,
         "space_between_amount_and_symbol": spaceBetweenAmountAndSymbol,
         "symbol_on_left": symbolOnLeft,
+        "pattern": pattern,
       };
 }
 
@@ -76,6 +80,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "EUR",
@@ -89,6 +94,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "JPY",
@@ -102,6 +108,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "GBP",
@@ -115,6 +122,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "AUD",
@@ -128,6 +136,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "CAD",
@@ -141,6 +150,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "CHF",
@@ -154,6 +164,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "CNY",
@@ -167,6 +178,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "HKD",
@@ -180,6 +192,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "NZD",
@@ -193,6 +206,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "SEK",
@@ -206,6 +220,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "KRW",
@@ -219,6 +234,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "SGD",
@@ -232,6 +248,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "NOK",
@@ -245,6 +262,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "MXN",
@@ -258,6 +276,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "INR",
@@ -271,6 +290,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##,##0.00",
     },
     {
       "code": "RUB",
@@ -284,6 +304,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "ZAR",
@@ -297,6 +318,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "TRY",
@@ -310,6 +332,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BRL",
@@ -323,6 +346,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "TWD",
@@ -336,6 +360,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "DKK",
@@ -349,6 +374,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "PLN",
@@ -362,6 +388,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "THB",
@@ -375,6 +402,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "IDR",
@@ -388,6 +416,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "HUF",
@@ -401,6 +430,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "CZK",
@@ -414,6 +444,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "ILS",
@@ -427,6 +458,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "CLP",
@@ -440,6 +472,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "PHP",
@@ -453,6 +486,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "AED",
@@ -466,6 +500,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "COP",
@@ -479,6 +514,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "SAR",
@@ -492,6 +528,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "MYR",
@@ -505,6 +542,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "RON",
@@ -518,6 +556,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "AFN",
@@ -531,6 +570,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "ALL",
@@ -544,6 +584,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "DZD",
@@ -557,6 +598,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "ARS",
@@ -570,6 +612,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "AMD",
@@ -583,6 +626,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "AZN",
@@ -596,6 +640,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BHD",
@@ -609,6 +654,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BDT",
@@ -622,6 +668,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##,##0.00",
     },
     {
       "code": "BBD",
@@ -635,6 +682,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BYN",
@@ -648,6 +696,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BZD",
@@ -661,6 +710,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BMD",
@@ -674,6 +724,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BTN",
@@ -687,6 +738,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BOB",
@@ -700,6 +752,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BAM",
@@ -713,6 +766,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BWP",
@@ -726,6 +780,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BND",
@@ -739,6 +794,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "BGN",
@@ -752,6 +808,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "0.00",
     },
     {
       "code": "BIF",
@@ -765,6 +822,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "KHR",
@@ -778,6 +836,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "KYD",
@@ -791,6 +850,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "XAF",
@@ -804,6 +864,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "XOF",
@@ -817,6 +878,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "CDF",
@@ -830,6 +892,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "CRC",
@@ -843,6 +906,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "DOP",
@@ -856,6 +920,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "EGP",
@@ -869,6 +934,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "ETB",
@@ -882,6 +948,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "GMD",
@@ -895,6 +962,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "GEL",
@@ -908,6 +976,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "GHS",
@@ -921,6 +990,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "GTQ",
@@ -934,6 +1004,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "GYD",
@@ -947,6 +1018,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "HTG",
@@ -960,6 +1032,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "ISK",
@@ -973,6 +1046,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "JMD",
@@ -986,6 +1060,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "JOD",
@@ -999,6 +1074,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "KZT",
@@ -1012,6 +1088,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": "-",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "KES",
@@ -1025,6 +1102,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "KWD",
@@ -1038,6 +1116,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "KGS",
@@ -1051,6 +1130,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "LAK",
@@ -1064,6 +1144,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "LRD",
@@ -1077,6 +1158,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "MKD",
@@ -1090,6 +1172,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "MWK",
@@ -1103,6 +1186,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "MUR",
@@ -1116,6 +1200,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "MDL",
@@ -1129,6 +1214,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "MNT",
@@ -1142,6 +1228,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "MAD",
@@ -1155,6 +1242,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "MZN",
@@ -1168,6 +1256,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "MMK",
@@ -1181,6 +1270,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "NAD",
@@ -1194,6 +1284,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "NPR",
@@ -1207,6 +1298,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "NIO",
@@ -1220,6 +1312,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "NGN",
@@ -1233,6 +1326,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "OMR",
@@ -1246,6 +1340,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "PKR",
@@ -1259,6 +1354,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "PGK",
@@ -1272,6 +1368,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "PYG",
@@ -1285,6 +1382,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "PEN",
@@ -1298,6 +1396,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "QAR",
@@ -1311,6 +1410,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "RWF",
@@ -1324,6 +1424,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "RSD",
@@ -1337,6 +1438,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "SCR",
@@ -1350,6 +1452,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "SOS",
@@ -1363,6 +1466,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "LKR",
@@ -1376,6 +1480,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "SRD",
@@ -1389,6 +1494,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "SYP",
@@ -1402,6 +1508,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "TZS",
@@ -1415,6 +1522,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "TTD",
@@ -1428,6 +1536,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "TND",
@@ -1441,6 +1550,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "UGX",
@@ -1454,6 +1564,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "UAH",
@@ -1467,6 +1578,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "UYU",
@@ -1480,6 +1592,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "VEF",
@@ -1493,6 +1606,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "VND",
@@ -1506,6 +1620,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": false,
+      "pattern": "#,##0.00",
     },
     {
       "code": "YER",
@@ -1519,6 +1634,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ".",
       "space_between_amount_and_symbol": true,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
     {
       "code": "ZMW",
@@ -1532,6 +1648,7 @@ List<Map<String, dynamic>> data() {
       "decimal_separator": ",",
       "space_between_amount_and_symbol": false,
       "symbol_on_left": true,
+      "pattern": "#,##0.00",
     },
   ];
 }

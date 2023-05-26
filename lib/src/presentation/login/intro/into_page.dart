@@ -211,7 +211,6 @@ class IntoMobileWidget extends StatelessWidget {
                 Column(
                   children: [
                     ListTile(
-                      horizontalTitleGap: 0,
                       contentPadding: EdgeInsets.zero,
                       leading: Icon(
                         Icons.check_circle,
@@ -224,7 +223,6 @@ class IntoMobileWidget extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      horizontalTitleGap: 0,
                       contentPadding: EdgeInsets.zero,
                       leading: Icon(
                         Icons.check_circle,
@@ -237,7 +235,6 @@ class IntoMobileWidget extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      horizontalTitleGap: 0,
                       contentPadding: EdgeInsets.zero,
                       leading: Icon(
                         Icons.check_circle,
@@ -253,7 +250,6 @@ class IntoMobileWidget extends StatelessWidget {
                 ),
                 const Spacer(),
                 ListTile(
-                  horizontalTitleGap: 0,
                   contentPadding: EdgeInsets.zero,
                   dense: true,
                   title: Text(

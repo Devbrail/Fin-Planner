@@ -73,7 +73,7 @@ class CategoryListWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(map.value.totalExpense.toCurrency())
+                    Text(map.value.totalExpense.toFormateCurrency())
                   ],
                 )
               ],

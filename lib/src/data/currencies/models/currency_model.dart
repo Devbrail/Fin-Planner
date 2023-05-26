@@ -9,7 +9,7 @@ class CurrencyModel {
 
 List<CurrencyModel> getLocales() => [
       CurrencyModel("US Dollar", const Locale('en')),
-      CurrencyModel("Indian Rupee", const Locale('hi')),
+      CurrencyModel("Indian Rupee", const Locale('en_IN')),
       CurrencyModel("Nepalese Rupee", const Locale('ne')),
       CurrencyModel("Malaysia Ringgit", const Locale('ms')),
       CurrencyModel("Ukrainian Hryvnia", const Locale('uk')),
@@ -21,7 +21,6 @@ List<CurrencyModel> getLocales() => [
       CurrencyModel("Philippine Peso", const Locale('fil')),
       CurrencyModel("Indonesian Rupiah", const Locale('id')),
       CurrencyModel("Vietnamese Dong", const Locale('vi')),
-      CurrencyModel("Lebanese Pound", const Locale('ar-lb')),
       CurrencyModel("Taiwan Dollar", const Locale('zh-tw')),
       CurrencyModel("Sri Lanka Rupee", const Locale('si')),
       CurrencyModel("Pakistan Rupee", const Locale('ur')),
@@ -57,4 +56,6 @@ List<CurrencyModel> getLocales() => [
       CurrencyModel("Albanian Lek", const Locale('sq')),
       CurrencyModel("Czech Koruna", const Locale('cs')),
       CurrencyModel("Tanzanian Shilling", const Locale('sw')),
+      CurrencyModel("Canadian Dollar", const Locale('fr_CA')),
+      CurrencyModel("SEPA", const Locale('br')),
     ];

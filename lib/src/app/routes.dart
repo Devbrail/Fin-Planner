@@ -121,14 +121,7 @@ final GoRouter goRouter = GoRouter(
       name: splashName,
       path: splashPath,
       builder: (context, state) {
-        if (state.extra is Map) {
-          final map = state.extra as Map;
-          return CurrencySelectorPage(
-            forceChangeCurrency: map['force_change_currency'] as bool,
-          );
-        } else {
-          return CurrencySelectorPage();
-        }
+        return const CurrencySelectorPage();
       },
     ),
     GoRoute(

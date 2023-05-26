@@ -170,7 +170,7 @@ class DebtItemWidget extends StatelessWidget {
                       ),
                     ),
                     trailing: Text(
-                      (debt.amount - amount).toCurrency(),
+                      (debt.amount - amount).toFormateCurrency(),
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(),
                     ),
                   ),
@@ -206,7 +206,7 @@ class DebtItemWidget extends StatelessWidget {
                           label: Text(
                             debt.debtType == DebtType.debt
                                 ? context.loc.payDebt
-                                : context.loc.payDebt,
+                                : context.loc.payCredit,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge
