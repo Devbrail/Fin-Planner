@@ -1046,5 +1046,17 @@
         "description": "Text shown on the add category section title",
         "type": "text",
         "placeholders": {}
+    },
+    "addedAccounts": "Added accounts",
+    "@addedAccounts": {
+        "description": "Text shown on the add account section title",
+        "type": "text",
+        "placeholders": {}
+    },
+    "defaultAccounts": "Default accounts",
+    "@defaultAccounts": {
+        "description": "Text shown on the add account section title",
+        "type": "text",
+        "placeholders": {}
     }
 }

@@ -4,53 +4,54 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import 'package:paisa/src/core/common.dart';
+import 'package:paisa/src/data/accounts/data_sources/default_account.dart';
+import 'package:paisa/src/data/accounts/data_sources/local_account_data_manager.dart';
+import 'package:paisa/src/data/accounts/model/account_model.dart';
+
 import '../../../../../main.dart';
 import '../../../../app/routes.dart';
-import '../../../../core/common.dart';
 import '../../../../core/enum/box_types.dart';
-import '../../../../data/category/data_sources/category_local_data_source.dart';
-import '../../../../data/category/data_sources/default_category.dart';
-import '../../../../data/category/model/category_model.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_card.dart';
 
-class CategorySelectorPage extends StatefulWidget {
-  const CategorySelectorPage({super.key});
+class AccountSelectorPage extends StatefulWidget {
+  const AccountSelectorPage({super.key});
 
   @override
-  State<CategorySelectorPage> createState() => _CategorySelectorPageState();
+  State<AccountSelectorPage> createState() => _AccountSelectorPageState();
 }
 
-class _CategorySelectorPageState extends State<CategorySelectorPage> {
-  final List<CategoryModel> defaultModels = defaultCategoriesData();
-  final LocalCategoryManagerDataSource dataSource = getIt.get();
+class _AccountSelectorPageState extends State<AccountSelectorPage> {
+  final List<AccountModel> defaultModels = defaultAccountsData();
+  final LocalAccountDataManager dataSource = getIt.get();
   final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: context.materialYouAppBar(context.loc.categories),
+      appBar: context.materialYouAppBar(context.loc.accounts),
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: PaisaBigButton(
             onPressed: () async {
-              context.go(accountSelectorPath);
-              await settings.put(userCategorySelectorKey, false);
+              context.go(currencySelectorPath);
+              await settings.put(userAccountSelectorKey, false);
             },
             title: context.loc.done,
           ),
         ),
       ),
       body: ValueListenableBuilder(
-        valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
+        valueListenable: getIt.get<Box<AccountModel>>().listenable(),
         builder: (context, value, child) {
-          final List<CategoryModel> categoryModels = value.values.toList();
+          final List<AccountModel> categoryModels = value.values.toList();
           return ListView(
             children: [
               ListTile(
                 title: Text(
-                  context.loc.addedCategories,
+                  context.loc.addedAccounts,
                   style: GoogleFonts.outfit(
                     textStyle: Theme.of(context).textTheme.titleMedium,
                   ),
@@ -62,22 +63,19 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                   itemCount: categoryModels.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    final CategoryModel model = categoryModels[index];
+                    final AccountModel model = categoryModels[index];
                     return ListTile(
                       onTap: () async {
                         await model.delete();
                         defaultModels.add(model);
                       },
                       leading: Icon(
-                        IconData(
-                          model.icon,
-                          fontFamily: 'Material Design Icons',
-                          fontPackage: 'material_design_icons_flutter',
-                        ),
+                        model.cardType!.icon,
                         color:
                             Color(model.color ?? Colors.brown.shade200.value),
                       ),
                       title: Text(model.name),
+                      subtitle: Text(model.bankName),
                       trailing: const Icon(MdiIcons.delete),
                     );
                   },
@@ -85,7 +83,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
               ),
               ListTile(
                 title: Text(
-                  context.loc.defaultCategories,
+                  context.loc.defaultAccounts,
                   style: GoogleFonts.outfit(
                     textStyle: Theme.of(context).textTheme.titleMedium,
                   ),
@@ -97,12 +95,15 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                   spacing: 12.0,
                   runSpacing: 12.0,
                   children: defaultModels
-                      .map((e) => FilterChip(
-                            label: Text(e.name),
+                      .map((model) => FilterChip(
                             onSelected: (value) {
-                              dataSource.addCategory(e);
+                              dataSource.addAccount(model
+                                ..name = settings.get(
+                                  userNameKey,
+                                  defaultValue: model.name,
+                                ));
                               setState(() {
-                                defaultModels.remove(e);
+                                defaultModels.remove(model);
                               });
                             },
                             shape: RoundedRectangleBorder(
@@ -115,6 +116,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                             showCheckmark: false,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,
+                            label: Text(model.bankName),
                             labelStyle: Theme.of(context).textTheme.titleMedium,
                             padding: const EdgeInsets.all(12),
                             avatar: Icon(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/category/pages/selector/category_selector_page.dart';
 
 import '../../main.dart';
 import '../core/common.dart';
@@ -11,9 +10,11 @@ import '../core/enum/transaction_type.dart';
 import '../data/settings/authenticate.dart';
 import '../presentation/accounts/pages/account_transactions_page.dart';
 import '../presentation/accounts/pages/add/add_account_page.dart';
+import '../presentation/accounts/pages/selector/account_selector_page.dart';
 import '../presentation/biometric/pages/biometric_page.dart';
 import '../presentation/category/pages/add/add_category_page.dart';
 import '../presentation/category/pages/category_list_page.dart';
+import '../presentation/category/pages/selector/category_selector_page.dart';
 import '../presentation/currency_selector/pages/currency_selector_page.dart';
 import '../presentation/debits/pages/add/add_debt_page.dart';
 import '../presentation/expense/pages/expense_page.dart';
@@ -102,8 +103,12 @@ const addDebitPath = 'add-debit';
 
 const introPageName = 'intro';
 const introPagePath = '/intro';
+
 const categorySelectorName = 'category-selector';
 const categorySelectorPath = '/category-selector';
+
+const accountSelectorName = 'account-selector';
+const accountSelectorPath = '/account-selector';
 
 final settings = Hive.box(BoxType.settings.name);
 
@@ -122,6 +127,11 @@ final GoRouter goRouter = GoRouter(
       name: categorySelectorName,
       path: categorySelectorPath,
       builder: (context, state) => const CategorySelectorPage(),
+    ),
+    GoRoute(
+      name: accountSelectorName,
+      path: accountSelectorPath,
+      builder: (context, state) => const AccountSelectorPage(),
     ),
     GoRoute(
       name: loginName,
@@ -334,10 +344,20 @@ final GoRouter goRouter = GoRouter(
       return userImagePath;
     }
 
-    final bool categorySelectorDone =
-        settings.get(userCategorySelectorKey, defaultValue: true);
+    final bool categorySelectorDone = settings.get(
+      userCategorySelectorKey,
+      defaultValue: true,
+    );
     if (categorySelectorDone && isLogging) {
       return categorySelectorPath;
+    }
+
+    final bool accountSelectorDone = settings.get(
+      userAccountSelectorKey,
+      defaultValue: true,
+    );
+    if (accountSelectorDone && isLogging) {
+      return accountSelectorPath;
     }
 
     final Map<dynamic, dynamic>? json = settings.get(userCountryKey);

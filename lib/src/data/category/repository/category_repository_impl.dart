@@ -1,6 +1,5 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/common.dart';
 
 import '../../../domain/category/repository/category_repository.dart';
 import '../data_sources/category_local_data_source.dart';
@@ -36,14 +35,6 @@ class CategoryRepositoryImpl extends CategoryRepository {
 
   @override
   Future<void> clearAll() => dataSources.clearAll();
-
-  @override
-  Future<void> defaultCategories() async {
-    if (settings.get(userSetDefaultCategoryKey, defaultValue: true)) {
-      await dataSources.defaultCategories();
-      return settings.put(userSetDefaultCategoryKey, false);
-    }
-  }
 
   @override
   Future<void> deleteCategory(int key) => dataSources.deleteCategory(key);

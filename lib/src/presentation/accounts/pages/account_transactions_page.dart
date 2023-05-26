@@ -12,6 +12,7 @@ import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../../summary/widgets/expense_item_widget.dart';
+import '../../widgets/paisa_bottom_sheet.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
 
@@ -46,8 +47,39 @@ class AccountTransactionsPage extends StatelessWidget {
           IconButton(
             tooltip: context.loc.delete,
             onPressed: () {
-              BlocProvider.of<AccountsBloc>(context)
-                  .add(DeleteAccountEvent(int.parse(accountId)));
+              paisaAlertDialog(
+                context,
+                title: Text(
+                  context.loc.dialogDeleteTitle,
+                ),
+                child: RichText(
+                  text: TextSpan(
+                    text: context.loc.deleteAccount,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    children: [
+                      TextSpan(
+                        text: account?.name ?? '',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                confirmationButton: TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                  ),
+                  onPressed: () {
+                    BlocProvider.of<AccountsBloc>(context)
+                        .add(DeleteAccountEvent(int.parse(accountId)));
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    context.loc.delete,
+                  ),
+                ),
+              );
             },
             icon: const Icon(Icons.delete_rounded),
           )

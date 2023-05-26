@@ -90,91 +90,83 @@ class SelectedItem extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Wrap(
-            spacing: 4.0,
-            runSpacing: 8.0,
+            spacing: 12.0,
+            runSpacing: 12.0,
             children: List.generate(
               categories.length + 1,
               (index) {
                 if (index == 0) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: FilterChip(
-                      onSelected: (value) => context.pushNamed(addCategoryPath),
-                      avatar: Icon(
-                        color: Theme.of(context).colorScheme.primary,
-                        IconData(
-                          MdiIcons.plus.codePoint,
-                          fontFamily: 'Material Design Icons',
-                          fontPackage: 'material_design_icons_flutter',
-                        ),
+                  return FilterChip(
+                    onSelected: (value) => context.pushNamed(addCategoryPath),
+                    avatar: Icon(
+                      color: Theme.of(context).colorScheme.primary,
+                      IconData(
+                        MdiIcons.plus.codePoint,
+                        fontFamily: 'Material Design Icons',
+                        fontPackage: 'material_design_icons_flutter',
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(28),
-                        side: BorderSide(
-                          width: 1,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                      showCheckmark: false,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      label: Text(
-                        context.loc.addNew,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                      labelStyle: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant),
-                      padding: const EdgeInsets.all(12),
                     ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(28),
+                      side: BorderSide(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    showCheckmark: false,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    label: Text(
+                      context.loc.addNew,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    labelStyle: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant),
+                    padding: const EdgeInsets.all(12),
                   );
                 } else {
                   final Category category = categories[index - 1];
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: FilterChip(
-                      selected:
-                          category.superId == expenseBloc.selectedCategoryId,
-                      onSelected: (value) =>
-                          expenseBloc.add(ChangeCategoryEvent(category)),
-                      avatar: Icon(
-                        color: category.superId ==
-                                expenseBloc.selectedCategoryId
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
-                        IconData(
-                          category.icon,
-                          fontFamily: 'Material Design Icons',
-                          fontPackage: 'material_design_icons_flutter',
-                        ),
+                  return FilterChip(
+                    selected:
+                        category.superId == expenseBloc.selectedCategoryId,
+                    onSelected: (value) =>
+                        expenseBloc.add(ChangeCategoryEvent(category)),
+                    avatar: Icon(
+                      color: category.superId == expenseBloc.selectedCategoryId
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                      IconData(
+                        category.icon,
+                        fontFamily: 'Material Design Icons',
+                        fontPackage: 'material_design_icons_flutter',
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(28),
-                        side: BorderSide(
-                          width: 1,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                      showCheckmark: false,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      label: Text(category.name),
-                      labelStyle: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(
-                              color: category.superId ==
-                                      expenseBloc.selectedCategoryId
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context)
-                                      .colorScheme
-                                      .onSurfaceVariant),
-                      padding: const EdgeInsets.all(12),
                     ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(28),
+                      side: BorderSide(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    showCheckmark: false,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    label: Text(category.name),
+                    labelStyle: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(
+                            color: category.superId ==
+                                    expenseBloc.selectedCategoryId
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant),
+                    padding: const EdgeInsets.all(12),
                   );
                 }
               },

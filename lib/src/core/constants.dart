@@ -12,6 +12,7 @@ const String userNameKey = 'user_name_key';
 const String userIntroKey = 'user_intro_key';
 const String userImageKey = 'user_image_key';
 const String userCategorySelectorKey = 'user_category_selector_key';
+const String userAccountSelectorKey = 'user_account_selector_key';
 const String userAuthKey = 'user_auth_key';
 const String smallSizeFabKey = 'user_small_size_fab_key';
 const String userLanguageKey = 'user_language_key';
@@ -20,4 +21,3 @@ const String userCustomCurrencyKey = 'user_custom_currency_key';
 const String userCustomCurrencyLeftOrRightKey =
     'user_custom_currency_let_or_right_key';
 const String scheduleTime = 'schedule_time_key';
-const String userSetDefaultCategoryKey = 'user_set_default_category_key';
