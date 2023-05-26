@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/data/category/data_sources/default_category.dart';
 
 import '../model/category_model.dart';
 import 'category_local_data_source.dart';
@@ -45,4 +46,11 @@ class LocalCategoryManagerDataSourceImpl
 
   @override
   Future<void> clearAll() => categoryBox.clear();
+
+  @override
+  Future<void> defaultCategories() async {
+    defaultCategoriesData().forEach((element) async {
+      await addCategory(element);
+    });
+  }
 }

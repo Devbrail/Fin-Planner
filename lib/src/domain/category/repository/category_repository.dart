@@ -21,4 +21,5 @@ abstract class CategoryRepository {
     bool isBudget = false,
   });
   Future<void> clearAll();
+  Future<void> defaultCategories();
 }

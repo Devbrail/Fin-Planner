@@ -23,14 +23,18 @@ class CategoryItemMobileWidget extends StatelessWidget {
           editCategoryName,
           params: <String, String>{'cid': category.superId.toString()},
         ),
-        leading: Icon(
-          IconData(
-            category.icon,
-            fontFamily: 'Material Design Icons',
-            fontPackage: 'material_design_icons_flutter',
+        leading: CircleAvatar(
+          backgroundColor: Color(category.color ?? Colors.amber.shade100.value)
+              .withOpacity(0.3),
+          child: Icon(
+            IconData(
+              category.icon,
+              fontFamily: 'Material Design Icons',
+              fontPackage: 'material_design_icons_flutter',
+            ),
+            size: 28,
+            color: Color(category.color ?? Colors.amber.shade100.value),
           ),
-          size: 28,
-          color: Color(category.color ?? Colors.amber.shade100.value),
         ),
         title: Text(
           category.name,

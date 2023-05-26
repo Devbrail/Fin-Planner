@@ -19,3 +19,4 @@ const String userCustomCurrencyKey = 'user_custom_currency_key';
 const String userCustomCurrencyLeftOrRightKey =
     'user_custom_currency_let_or_right_key';
 const String scheduleTime = 'schedule_time_key';
+const String userSetDefaultCategoryKey = 'user_set_default_category_key';

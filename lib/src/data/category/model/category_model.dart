@@ -37,7 +37,7 @@ class CategoryModel extends HiveObject with EquatableMixin {
   });
 
   @override
-  List<Object?> get props => [name, icon, description];
+  List<Object?> get props => [name, icon, icon];
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
         name: json["name"],

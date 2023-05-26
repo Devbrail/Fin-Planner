@@ -1,4 +1,6 @@
+import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/core/common.dart';
 
 import '../../../domain/category/repository/category_repository.dart';
 import '../data_sources/category_local_data_source.dart';
@@ -6,13 +8,13 @@ import '../model/category_model.dart';
 
 @Singleton(as: CategoryRepository)
 class CategoryRepositoryImpl extends CategoryRepository {
+  CategoryRepositoryImpl({
+    required this.dataSources,
+    @Named('settings') required this.settings,
+  });
+
   final LocalCategoryManagerDataSource dataSources;
-
-  CategoryRepositoryImpl({required this.dataSources});
-
-  @override
-  Future<void> deleteCategory(int key) => dataSources.deleteCategory(key);
-
+  final Box<dynamic> settings;
   @override
   Future<void> addCategory({
     required String name,
@@ -30,6 +32,20 @@ class CategoryRepositoryImpl extends CategoryRepository {
         isBudget: isBudget,
         color: color,
       ));
+
+  @override
+  Future<void> clearAll() => dataSources.clearAll();
+
+  @override
+  Future<void> defaultCategories() async {
+    if (settings.get(userSetDefaultCategoryKey, defaultValue: true)) {
+      await dataSources.defaultCategories();
+      return settings.put(userSetDefaultCategoryKey, false);
+    }
+  }
+
+  @override
+  Future<void> deleteCategory(int key) => dataSources.deleteCategory(key);
 
   @override
   CategoryModel? fetchCategoryFromId(int categoryId) =>
@@ -55,7 +71,4 @@ class CategoryRepositoryImpl extends CategoryRepository {
       superId: key,
     ));
   }
-
-  @override
-  Future<void> clearAll() => dataSources.clearAll();
 }
