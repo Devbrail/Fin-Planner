@@ -21,69 +21,73 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            onTap: () async {
-              final DateTime? dateTime = await showDatePicker(
-                context: context,
-                initialDate: selectedDateTime,
-                firstDate: DateTime(1950),
-                lastDate: DateTime.now(),
-              );
-              if (dateTime != null) {
-                setState(() {
-                  selectedDateTime = selectedDateTime.copyWith(
-                    day: dateTime.day,
-                    month: dateTime.month,
-                    year: dateTime.year,
+    return BlocBuilder<ExpenseBloc, ExpenseState>(
+      builder: (context, state) {
+        return Row(
+          children: [
+            Expanded(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                onTap: () async {
+                  final DateTime? dateTime = await showDatePicker(
+                    context: context,
+                    initialDate: selectedDateTime,
+                    firstDate: DateTime(1950),
+                    lastDate: DateTime.now(),
                   );
-                  BlocProvider.of<ExpenseBloc>(context).selectedDate =
-                      selectedDateTime;
-                });
-              }
-            },
-            leading: Icon(
-              Icons.today_rounded,
-              color: Theme.of(context).colorScheme.secondary,
+                  if (dateTime != null) {
+                    setState(() {
+                      selectedDateTime = selectedDateTime.copyWith(
+                        day: dateTime.day,
+                        month: dateTime.month,
+                        year: dateTime.year,
+                      );
+                      BlocProvider.of<ExpenseBloc>(context).selectedDate =
+                          selectedDateTime;
+                    });
+                  }
+                },
+                leading: Icon(
+                  Icons.today_rounded,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                title: Text(selectedDateTime.formattedDate),
+              ),
             ),
-            title: Text(selectedDateTime.formattedDate),
-          ),
-        ),
-        Expanded(
-          child: ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            onTap: () async {
-              final TimeOfDay? timeOfDay = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay.now(),
-                initialEntryMode: TimePickerEntryMode.dialOnly,
-              );
-              if (timeOfDay != null) {
-                setState(() {
-                  selectedDateTime = selectedDateTime.copyWith(
-                    hour: timeOfDay.hour,
-                    minute: timeOfDay.minute,
+            Expanded(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                onTap: () async {
+                  final TimeOfDay? timeOfDay = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                    initialEntryMode: TimePickerEntryMode.dialOnly,
                   );
-                  BlocProvider.of<ExpenseBloc>(context).selectedDate =
-                      selectedDateTime;
-                });
-              }
-            },
-            leading: Icon(
-              MdiIcons.clockOutline,
-              color: Theme.of(context).colorScheme.secondary,
+                  if (timeOfDay != null) {
+                    setState(() {
+                      selectedDateTime = selectedDateTime.copyWith(
+                        hour: timeOfDay.hour,
+                        minute: timeOfDay.minute,
+                      );
+                      BlocProvider.of<ExpenseBloc>(context).selectedDate =
+                          selectedDateTime;
+                    });
+                  }
+                },
+                leading: Icon(
+                  MdiIcons.clockOutline,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                title: Text(selectedDateTime.formattedTime),
+              ),
             ),
-            title: Text(selectedDateTime.formattedTime),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }
