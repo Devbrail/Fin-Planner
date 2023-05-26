@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/category/pages/selector/category_selector_page.dart';
 
 import '../../main.dart';
 import '../core/common.dart';
@@ -101,6 +102,8 @@ const addDebitPath = 'add-debit';
 
 const introPageName = 'intro';
 const introPagePath = '/intro';
+const categorySelectorName = 'category-selector';
+const categorySelectorPath = '/category-selector';
 
 final settings = Hive.box(BoxType.settings.name);
 
@@ -114,6 +117,11 @@ final GoRouter goRouter = GoRouter(
       name: introPageName,
       path: introPagePath,
       builder: (context, state) => const IntroPage(),
+    ),
+    GoRoute(
+      name: categorySelectorName,
+      path: categorySelectorPath,
+      builder: (context, state) => const CategorySelectorPage(),
     ),
     GoRoute(
       name: loginName,
@@ -325,6 +333,13 @@ final GoRouter goRouter = GoRouter(
     if (image.isEmpty && isLogging) {
       return userImagePath;
     }
+
+    final bool categorySelectorDone =
+        settings.get(userCategorySelectorKey, defaultValue: true);
+    if (categorySelectorDone && isLogging) {
+      return categorySelectorPath;
+    }
+
     final Map<dynamic, dynamic>? json = settings.get(userCountryKey);
     if (json == null && isLogging) {
       return currencySelectorPath;

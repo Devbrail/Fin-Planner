@@ -1034,5 +1034,17 @@
         "description": "Text shown on the biometric screen below icon",
         "type": "text",
         "placeholders": {}
+    },
+    "addedCategories": "Added categories",
+    "@addedCategories": {
+        "description": "Text shown on the add category section title",
+        "type": "text",
+        "placeholders": {}
+    },
+    "defaultCategories": "Default categories",
+    "@defaultCategories": {
+        "description": "Text shown on the add category section title",
+        "type": "text",
+        "placeholders": {}
     }
 }
