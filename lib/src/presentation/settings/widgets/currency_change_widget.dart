@@ -41,8 +41,8 @@ class CurrencyChangeWidget extends StatelessWidget {
                       Navigator.pop(context);
                       context.pushNamed(
                         countrySelectorName,
-                        extra: {
-                          'force_change_currency': true,
+                        queryParams: {
+                          'force_currency_selector': true,
                         },
                       );
                     },

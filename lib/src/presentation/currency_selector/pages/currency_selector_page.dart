@@ -14,14 +14,29 @@ import '../../widgets/paisa_text_field.dart';
 import '../cubit/country_cubit.dart';
 
 class CurrencySelectorPage extends StatefulWidget {
-  const CurrencySelectorPage({Key? key}) : super(key: key);
+  const CurrencySelectorPage({
+    Key? key,
+    required this.forceCurrencySelector,
+  }) : super(key: key);
+
+  final bool forceCurrencySelector;
 
   @override
   State<CurrencySelectorPage> createState() => _CurrencySelectorPageState();
 }
 
 class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
-  final CountryCubit countryCubit = getIt.get<CountryCubit>()..checkForData();
+  final CountryCubit countryCubit = getIt.get<CountryCubit>();
+  @override
+  void initState() {
+    super.initState();
+    if (widget.forceCurrencySelector) {
+      countryCubit.fetchCountry();
+    } else {
+      countryCubit.checkForData();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener(

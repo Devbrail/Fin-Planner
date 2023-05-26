@@ -8,7 +8,7 @@ import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../widgets/paisa_big_button_widget.dart';
-import '../bloc/biometric_bloc.dart';
+import '../cubit/biometric_cubit.dart';
 
 class BiometricPage extends StatefulWidget {
   const BiometricPage({super.key});
@@ -18,7 +18,13 @@ class BiometricPage extends StatefulWidget {
 }
 
 class _BiometricPageState extends State<BiometricPage> {
-  final BiometricBloc biometricCubit = getIt.get()..add(CheckBiometricEvent());
+  final BiometricCubit biometricCubit = getIt.get();
+  @override
+  void initState() {
+    super.initState();
+    biometricCubit.checkBiometric();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener(
@@ -34,7 +40,7 @@ class _BiometricPageState extends State<BiometricPage> {
             padding: const EdgeInsets.all(16.0),
             child: PaisaBigButton(
               onPressed: () {
-                biometricCubit.add(CheckBiometricEvent());
+                biometricCubit.checkBiometric();
               },
               title: context.loc.authenticate,
             ),

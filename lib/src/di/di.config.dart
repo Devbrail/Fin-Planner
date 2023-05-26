@@ -168,8 +168,8 @@ Future<_i1.GetIt> init(
   );
   final hiveBoxModule = _$HiveBoxModule();
   gh.singleton<_i3.Authenticate>(_i3.Authenticate());
-  gh.factory<_i4.BiometricBloc>(
-      () => _i4.BiometricBloc(gh<_i3.Authenticate>()));
+  gh.factory<_i4.BiometricCubit>(
+      () => _i4.BiometricCubit(gh<_i3.Authenticate>()));
   await gh.singletonAsync<_i5.Box<_i6.ExpenseModel>>(
     () => hiveBoxModule.expenseBox,
     preResolve: true,

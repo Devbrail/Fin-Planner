@@ -1,4 +1,4 @@
-part of 'biometric_bloc.dart';
+part of 'biometric_cubit.dart';
 
 abstract class BiometricState extends Equatable {
   const BiometricState();

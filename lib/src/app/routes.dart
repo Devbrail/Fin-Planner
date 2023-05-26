@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/data/currencies/models/country_model.dart';
-import 'package:paisa/src/presentation/biometric/pages/biometric_page.dart';
 
 import '../../main.dart';
 import '../core/common.dart';
@@ -12,6 +10,7 @@ import '../core/enum/transaction_type.dart';
 import '../data/settings/authenticate.dart';
 import '../presentation/accounts/pages/account_transactions_page.dart';
 import '../presentation/accounts/pages/add/add_account_page.dart';
+import '../presentation/biometric/pages/biometric_page.dart';
 import '../presentation/category/pages/add/add_category_page.dart';
 import '../presentation/category/pages/category_list_page.dart';
 import '../presentation/currency_selector/pages/currency_selector_page.dart';
@@ -126,7 +125,11 @@ final GoRouter goRouter = GoRouter(
       name: countrySelectorName,
       path: currencySelectorPath,
       builder: (context, state) {
-        return const CurrencySelectorPage();
+        final forceCurrencySelector =
+            state.queryParams['force_currency_selector'];
+        return CurrencySelectorPage(
+          forceCurrencySelector: forceCurrencySelector == 'true',
+        );
       },
     ),
     GoRoute(
