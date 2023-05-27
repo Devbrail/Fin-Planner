@@ -11,6 +11,7 @@ import '../../../core/enum/box_types.dart';
 import '../../../core/enum/theme_mode.dart';
 import '../../../data/settings/authenticate.dart';
 import '../../widgets/choose_theme_mode_widget.dart';
+import '../widgets/accounts_style_widget.dart';
 import '../widgets/biometrics_auth_widget.dart';
 import '../widgets/currency_change_widget.dart';
 import '../widgets/setting_option.dart';
@@ -71,6 +72,8 @@ class SettingsPage extends StatelessWidget {
             title: context.loc.others,
             options: [
               const CurrencyChangeWidget(),
+              const Divider(),
+              const AccountsStyleWidget(),
               const Divider(),
               BiometricAuthWidget(
                 authenticate: getIt.get<Authenticate>(),

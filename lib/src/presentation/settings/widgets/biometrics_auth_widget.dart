@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
 import '../../../data/settings/authenticate.dart';
 import '../../widgets/future_resolve.dart';
+import '../bloc/settings_controller.dart';
 
 class BiometricAuthWidget extends StatefulWidget {
   const BiometricAuthWidget({
@@ -20,9 +19,7 @@ class BiometricAuthWidget extends StatefulWidget {
 }
 
 class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
-  final settings = getIt.get<Box<dynamic>>(
-    instanceName: BoxType.settings.name,
-  );
+  final SettingsController settings = getIt.get<SettingsController>();
   late bool isSelected = settings.get(userAuthKey, defaultValue: false);
 
   @override

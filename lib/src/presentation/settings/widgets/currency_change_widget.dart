@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
+import '../bloc/settings_controller.dart';
 
 class CurrencyChangeWidget extends StatelessWidget {
   const CurrencyChangeWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Box<dynamic> settings =
-        getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+    final SettingsController settings = getIt.get<SettingsController>();
     final String customSymbol =
         settings.get(userCustomCurrencyKey, defaultValue: '');
     final String currentSymbol = NumberFormat.compactSimpleCurrency(
@@ -53,7 +51,7 @@ class CurrencyChangeWidget extends StatelessWidget {
                   ListTile(
                     onTap: () {
                       Navigator.pop(context);
-                      _showCustomCurrencySymbol(context);
+                      _showCustomCurrencySymbol(context, settings);
                     },
                     title: Text(
                       context.loc.customSymbol,
@@ -73,9 +71,10 @@ class CurrencyChangeWidget extends StatelessWidget {
   }
 }
 
-void _showCustomCurrencySymbol(BuildContext context) {
-  final Box<dynamic> settings =
-      getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+void _showCustomCurrencySymbol(
+  BuildContext context,
+  SettingsController settings,
+) {
   showModalBottomSheet(
     constraints: BoxConstraints(
       maxWidth:
@@ -105,7 +104,7 @@ class CustomCurrencySymbol extends StatefulWidget {
     required this.currentSymbol,
   });
 
-  final Box<dynamic> settings;
+  final SettingsController settings;
   final String currentSymbol;
 
   @override

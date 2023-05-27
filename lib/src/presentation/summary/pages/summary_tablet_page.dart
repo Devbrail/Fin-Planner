@@ -33,7 +33,7 @@ class SummaryTabletPage extends StatelessWidget {
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.only(bottom: 124),
-                children: [ExpenseHistory(expenses: expenses)],
+                children: [ExpenseHistoryWidget(expenses: expenses)],
               ),
             ),
           ],

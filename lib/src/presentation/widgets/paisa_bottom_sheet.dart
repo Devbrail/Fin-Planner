@@ -7,6 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../main.dart';
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
+import '../settings/bloc/settings_controller.dart';
 
 enum UserMenuPopup { debts, chooseTheme, settings, userDetails }
 
@@ -60,7 +61,7 @@ Future<void> showUserDialog(
   BuildContext context, {
   required Function(UserMenuPopup userMenuPopup) userMenuPopup,
 }) {
-  final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+  final SettingsController settings = getIt.get<SettingsController>();
   final int themeModeValue = settings.get(themeModeKey, defaultValue: 0);
   var themeMode = ThemeMode.values[themeModeValue];
   bool isDarkMode = themeMode == ThemeMode.dark;

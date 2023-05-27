@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/common.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../../widgets/paisa_user_image_widget.dart';
+import '../bloc/settings_controller.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({
@@ -15,7 +15,7 @@ class UserProfilePage extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final Box<dynamic> settings;
+  final SettingsController settings;
 
   final TextEditingController controller;
 

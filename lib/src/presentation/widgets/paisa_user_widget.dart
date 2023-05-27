@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../main.dart';
-import '../../core/enum/box_types.dart';
 import '../home/bloc/home_bloc.dart';
 import '../home/widgets/welcome_widget.dart';
+import '../settings/bloc/settings_controller.dart';
 import '../settings/widgets/user_profile_widget.dart';
 import 'color_palette.dart';
 
@@ -42,9 +41,7 @@ class PaisaUserWidget extends StatelessWidget {
         ),
         context: context,
         builder: (_) => UserProfilePage(
-          settings: getIt.get<Box<dynamic>>(
-            instanceName: BoxType.settings.name,
-          ),
+          settings: getIt.get<SettingsController>(),
           controller: TextEditingController(),
         ),
       ),

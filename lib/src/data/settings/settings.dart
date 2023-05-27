@@ -33,4 +33,10 @@ class Settings {
 
   Future<void> setDefaultAccountId(int accountId) async =>
       settings.put(defaultAccountIdKey, accountId);
+
+  dynamic get(String key, {dynamic defaultValue}) =>
+      settings.get(key, defaultValue: defaultValue);
+
+  Future<void> put(String key, dynamic value) => settings.put(key, value);
+  Future<void> delete(String key) => settings.delete(key);
 }

@@ -44,7 +44,7 @@ class SummaryMobilePage extends StatelessWidget {
               ),
             );
           } else if (index == 3) {
-            return ExpenseHistory(expenses: expenses);
+            return ExpenseHistoryWidget(expenses: expenses);
           }
           return const SizedBox.shrink();
         },

@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/core/enum/box_types.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/currencies/models/country_model.dart';
+import '../../settings/bloc/settings_controller.dart';
 import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../cubit/country_cubit.dart';
@@ -29,8 +28,7 @@ class CurrencySelectorPage extends StatefulWidget {
 
 class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
   final CountryCubit countryCubit = getIt.get<CountryCubit>();
-  final Box<dynamic> settings =
-      getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+  final SettingsController settings = getIt.get<SettingsController>();
   CountryModel? countryModel;
 
   @override

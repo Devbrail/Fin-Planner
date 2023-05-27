@@ -133,8 +133,11 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   FutureOr<void> _accountSelected(
     AccountSelectedEvent event,
     Emitter<AccountsState> emit,
-  ) async =>
-      emit(AccountSelectedState(event.account));
+  ) async {
+    final List<Expense> expenses =
+        getExpensesFromAccountIdUseCase(event.account.superId!);
+    emit(AccountSelectedState(event.account, expenses));
+  }
 
   FutureOr<void> _updateCardType(
     UpdateCardTypeEvent event,

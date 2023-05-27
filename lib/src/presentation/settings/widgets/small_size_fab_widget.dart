@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/main.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/core/enum/box_types.dart';
+
+import '../../../../main.dart';
+import '../../../core/common.dart';
+import '../bloc/settings_controller.dart';
 
 class SmallSizeFabWidget extends StatefulWidget {
   const SmallSizeFabWidget({super.key});
@@ -12,9 +12,7 @@ class SmallSizeFabWidget extends StatefulWidget {
 }
 
 class _SmallSizeFabWidgetState extends State<SmallSizeFabWidget> {
-  final settings = getIt.get<Box<dynamic>>(
-    instanceName: BoxType.settings.name,
-  );
+  final SettingsController settings = getIt.get<SettingsController>();
   late bool isSelected = settings.get(smallSizeFabKey, defaultValue: false);
   @override
   Widget build(BuildContext context) {

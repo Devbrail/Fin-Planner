@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/common.dart';
 import '../../../data/currencies/models/country_model.dart';
 import '../../../domain/currencies/use_case/get_country_user_case.dart';
+import '../../settings/bloc/settings_controller.dart';
 
 part 'country_state.dart';
 
@@ -13,12 +13,12 @@ part 'country_state.dart';
 class CountryCubit extends Cubit<CountryState> {
   CountryCubit(
     this.getCountryUseCase,
-    @Named('settings') this.settings,
+    this.settings,
   ) : super(CountryInitial());
 
   final GetCountryUseCase getCountryUseCase;
 
-  final Box<dynamic> settings;
+  final SettingsController settings;
   CountryModel? selectedCountry;
 
   void checkForData() {

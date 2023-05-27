@@ -7,8 +7,8 @@ import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import 'expense_month_card.dart';
 
-class ExpenseHistory extends StatelessWidget {
-  const ExpenseHistory({
+class ExpenseHistoryWidget extends StatelessWidget {
+  const ExpenseHistoryWidget({
     super.key,
     required this.expenses,
   });

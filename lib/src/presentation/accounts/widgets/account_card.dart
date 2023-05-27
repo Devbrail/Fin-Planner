@@ -101,7 +101,7 @@ class MobileAccountCard extends StatelessWidget {
           height: 240,
           width: MediaQuery.of(context).size.width,
           borderRadius: 24,
-          blur: 10,
+          blur: 25,
           alignment: Alignment.bottomCenter,
           linearGradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -125,7 +125,6 @@ class MobileAccountCard extends StatelessWidget {
             children: [
               ListTile(
                 minVerticalPadding: 10,
-                horizontalTitleGap: 0,
                 title: Text(bankName, style: GoogleFonts.outfit()),
                 subtitle: Text(cardHolder, style: GoogleFonts.outfit()),
                 leading: Icon(cardType.icon),
@@ -210,6 +209,7 @@ class AccountSummaryTail extends StatelessWidget {
         subtitle,
         style: GoogleFonts.manrope(
           textStyle: Theme.of(context).textTheme.titleMedium,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );

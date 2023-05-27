@@ -31,11 +31,12 @@ class AccountDeletedState extends AccountsState {}
 
 class AccountSelectedState extends AccountsState {
   final Account account;
+  final List<Expense> expenses;
 
-  const AccountSelectedState(this.account);
+  const AccountSelectedState(this.account, this.expenses);
 
   @override
-  List<Object> get props => [account];
+  List<Object> get props => [account, expenses];
 }
 
 class AccountErrorState extends AccountsState {

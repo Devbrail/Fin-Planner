@@ -4,14 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/data/accounts/data_sources/default_account.dart';
-import 'package:paisa/src/data/accounts/data_sources/local_account_data_manager.dart';
-import 'package:paisa/src/data/accounts/model/account_model.dart';
-
 import '../../../../../main.dart';
 import '../../../../app/routes.dart';
-import '../../../../core/enum/box_types.dart';
+import '../../../../core/common.dart';
+import '../../../../data/accounts/data_sources/default_account.dart';
+import '../../../../data/accounts/data_sources/local_account_data_manager.dart';
+import '../../../../data/accounts/model/account_model.dart';
+import '../../../settings/bloc/settings_controller.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_card.dart';
 
@@ -25,7 +24,7 @@ class AccountSelectorPage extends StatefulWidget {
 class _AccountSelectorPageState extends State<AccountSelectorPage> {
   final List<AccountModel> defaultModels = defaultAccountsData();
   final LocalAccountDataManager dataSource = getIt.get();
-  final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+  final SettingsController settings = getIt.get<SettingsController>();
 
   @override
   Widget build(BuildContext context) {

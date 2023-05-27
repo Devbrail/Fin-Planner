@@ -34,7 +34,7 @@ class SummaryDesktopPage extends StatelessWidget {
                     child: ListView(
                       padding: const EdgeInsets.only(bottom: 124),
                       children: [
-                        ExpenseHistory(expenses: expenses),
+                        ExpenseHistoryWidget(expenses: expenses),
                       ],
                     ),
                   ),

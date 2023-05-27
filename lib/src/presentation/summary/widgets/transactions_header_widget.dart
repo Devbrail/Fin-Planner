@@ -26,7 +26,7 @@ class TransactionsHeaderWidget extends StatelessWidget {
         context.loc.transactions,
         style: GoogleFonts.outfit(
           fontWeight: FontWeight.w600,
-          textStyle: Theme.of(context).textTheme.titleLarge,
+          textStyle: Theme.of(context).textTheme.titleMedium,
           color: Theme.of(context).colorScheme.onBackground,
         ),
       ),

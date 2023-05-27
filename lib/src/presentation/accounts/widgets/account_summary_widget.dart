@@ -24,21 +24,21 @@ class AccountSummaryWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
+          ListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 0,
+            ),
+            visualDensity: const VisualDensity(horizontal: 0, vertical: -3),
+            title: Text(
               context.loc.thisMonth,
               style: GoogleFonts.outfit(
-                textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimaryContainer
-                          .withOpacity(0.85),
-                    ),
+                fontWeight: FontWeight.w600,
+                textStyle: Theme.of(context).textTheme.titleMedium,
+                color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
           ),
-          const SizedBox(height: 8),
           Row(
             children: [
               Expanded(

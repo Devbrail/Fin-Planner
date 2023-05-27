@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -7,7 +6,6 @@ import '../../main.dart';
 import '../core/common.dart';
 import '../core/enum/box_types.dart';
 import '../core/enum/transaction_type.dart';
-import '../data/settings/authenticate.dart';
 import '../presentation/accounts/pages/account_transactions_page.dart';
 import '../presentation/accounts/pages/add/add_account_page.dart';
 import '../presentation/accounts/pages/selector/account_selector_page.dart';

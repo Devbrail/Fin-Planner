@@ -14,6 +14,7 @@ const String userImageKey = 'user_image_key';
 const String userCategorySelectorKey = 'user_category_selector_key';
 const String userAccountSelectorKey = 'user_account_selector_key';
 const String userAuthKey = 'user_auth_key';
+const String userAccountsStyleKey = 'user_accounts_style_key';
 const String smallSizeFabKey = 'user_small_size_fab_key';
 const String userLanguageKey = 'user_language_key';
 const String userCountryKey = 'user_country_key';
