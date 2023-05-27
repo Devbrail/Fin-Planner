@@ -16,11 +16,10 @@ class SmallSizeFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = getIt.get<Box<dynamic>>(
-      instanceName: BoxType.settings.name,
-    );
     return ValueListenableBuilder<Box<dynamic>>(
-      valueListenable: settings.listenable(keys: [smallSizeFabKey]),
+      valueListenable: getIt
+          .get<Box<dynamic>>(instanceName: BoxType.settings.name)
+          .listenable(keys: [smallSizeFabKey]),
       builder: (context, value, child) {
         final isSmallSize = value.get(smallSizeFabKey, defaultValue: false);
         if (isSmallSize) {

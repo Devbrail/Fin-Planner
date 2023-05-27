@@ -39,7 +39,7 @@ class SettingsPage extends StatelessWidget {
         shrinkWrap: true,
         children: [
           SettingsGroup(
-            title: context.loc.colors,
+            title: context.loc.colorsUI,
             options: [
               SettingsColorPickerWidget(settings: settings),
               const Divider(),
@@ -65,19 +65,21 @@ class SettingsPage extends StatelessWidget {
                     ),
                   );
                 },
-              )
+              ),
+              const Divider(),
+              const AccountsStyleWidget(),
+              const Divider(),
+              const SmallSizeFabWidget(),
             ],
           ),
           SettingsGroup(
             title: context.loc.others,
             options: [
-              const CurrencyChangeWidget(),
-              const Divider(),
-              const AccountsStyleWidget(),
-              const Divider(),
               BiometricAuthWidget(
                 authenticate: getIt.get<Authenticate>(),
               ),
+              const CurrencyChangeWidget(),
+              const Divider(),
               SettingsOption(
                 title: context.loc.backupAndRestoreTitle,
                 subtitle: context.loc.backupAndRestoreSubTitle,
@@ -85,8 +87,6 @@ class SettingsPage extends StatelessWidget {
                   GoRouter.of(context).goNamed(exportAndImportName);
                 },
               ),
-              const Divider(),
-              const SmallSizeFabWidget()
             ],
           ),
           SettingsGroup(

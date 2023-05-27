@@ -1064,5 +1064,11 @@
         "description": "Text shown on the home screen sub title on total card",
         "type": "text",
         "placeholders": {}
+    },
+    "colorsUI": "Colors & UI",
+    "@colorsUI": {
+        "description": "Text shown on the section title on settings screen",
+        "type": "text",
+        "placeholders": {}
     }
 }
