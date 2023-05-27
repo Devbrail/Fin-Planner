@@ -19,14 +19,19 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          context.loc.thisMonth,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onPrimaryContainer
-                    .withOpacity(0.85),
-              ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+            context.loc.total,
+            style: GoogleFonts.outfit(
+              textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onPrimaryContainer
+                        .withOpacity(0.85),
+                  ),
+            ),
+          ),
         ),
         const SizedBox(height: 8),
         Row(

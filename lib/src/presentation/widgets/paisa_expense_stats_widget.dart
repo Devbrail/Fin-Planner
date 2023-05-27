@@ -7,7 +7,6 @@ import 'paisa_card.dart';
 class PaisaExpenseStatsWidget extends StatelessWidget {
   final String total;
   final String title;
-  final List<double> graphData;
   final Color graphLineColor;
   final IconData iconData;
 
@@ -15,7 +14,6 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
     super.key,
     required this.total,
     required this.title,
-    required this.graphData,
     required this.graphLineColor,
     required this.iconData,
   });

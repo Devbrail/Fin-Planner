@@ -19,93 +19,52 @@ class AccountSummaryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (useAccountsList) {
-      return Row(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    context.loc.income,
-                    style: TextStyle(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              context.loc.thisMonth,
+              style: GoogleFonts.outfit(
+                textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Theme.of(context)
                           .colorScheme
-                          .onSecondaryContainer
-                          .withOpacity(0.75),
+                          .onPrimaryContainer
+                          .withOpacity(0.85),
                     ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    expenses.thisMonthIncome.toFormateCurrency(),
-                    style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
-                ],
               ),
             ),
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    context.loc.expense,
-                    style: TextStyle(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSecondaryContainer
-                          .withOpacity(0.75),
-                    ),
-                  ),
-                  Text(
-                    expenses.thisMonthExpense.toFormateCurrency(),
-                    style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
-                ],
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: PaisaExpenseStatsWidget(
+                  total: expenses.thisMonthIncome.toFormateCurrency(),
+                  title: context.loc.income,
+                  graphLineColor:
+                      Theme.of(context).extension<CustomColors>()!.green ??
+                          Theme.of(context).colorScheme.secondary,
+                  iconData: MdiIcons.arrowBottomLeft,
+                ),
               ),
-            ),
+              Expanded(
+                child: PaisaExpenseStatsWidget(
+                  total: expenses.thisMonthExpense.toFormateCurrency(),
+                  title: context.loc.expense,
+                  graphLineColor:
+                      Theme.of(context).extension<CustomColors>()!.red ??
+                          Theme.of(context).colorScheme.secondary,
+                  iconData: MdiIcons.arrowTopRight,
+                ),
+              ),
+            ],
           ),
         ],
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Row(
-          children: [
-            Expanded(
-              child: PaisaExpenseStatsWidget(
-                total: expenses.totalIncome.toFormateCurrency(),
-                title: context.loc.income,
-                graphData: expenses.incomeList.map((e) => e.currency).toList(),
-                graphLineColor:
-                    Theme.of(context).extension<CustomColors>()!.green ??
-                        Theme.of(context).colorScheme.secondary,
-                iconData: MdiIcons.arrowBottomLeft,
-              ),
-            ),
-            Expanded(
-              child: PaisaExpenseStatsWidget(
-                total: expenses.totalExpense.toFormateCurrency(),
-                title: context.loc.expense,
-                graphData: expenses.expenseList.map((e) => e.currency).toList(),
-                graphLineColor:
-                    Theme.of(context).extension<CustomColors>()!.red ??
-                        Theme.of(context).colorScheme.secondary,
-                iconData: MdiIcons.arrowTopRight,
-              ),
-            ),
-          ],
-        ),
-      );
-    }
+      ),
+    );
   }
 }

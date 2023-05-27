@@ -1058,5 +1058,11 @@
         "description": "Text shown on the add account section title",
         "type": "text",
         "placeholders": {}
+    },
+    "total": "Total",
+    "@total": {
+        "description": "Text shown on the home screen sub title on total card",
+        "type": "text",
+        "placeholders": {}
     }
 }

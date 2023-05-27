@@ -21,10 +21,11 @@ class ExpenseTotalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final totalExpenseBalance = expenses.fullTotal;
+    final totalExpenses = expenses.totalExpense;
+    final totalIncome = expenses.totalIncome;
     final totalAccountBalance =
         getIt.get<Box<AccountModel>>().totalAccountInitialAmount;
-    final thisMonthExpenses = expenses.thisMonthExpense;
-    final thisMonthIncome = expenses.thisMonthIncome;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,8 +49,8 @@ class ExpenseTotalWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
                   ExpenseTotalForMonthWidget(
-                    outcome: thisMonthExpenses,
-                    income: thisMonthIncome,
+                    outcome: totalExpenses,
+                    income: totalIncome,
                   ),
                 ],
               ),

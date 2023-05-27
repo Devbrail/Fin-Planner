@@ -32,8 +32,8 @@ import '../presentation/settings/pages/setting_page.dart';
 const loginPath = '/login';
 const loginName = 'login';
 
-const currencySelectorPath = '/splash';
-const countrySelectorName = 'splash';
+const currencySelectorPath = '/currency-selector';
+const currencySelectorName = 'currency-selector';
 
 const userNamePath = '/user-name';
 const userName = 'user-name';
@@ -140,7 +140,7 @@ final GoRouter goRouter = GoRouter(
           const Center(child: CircularProgressIndicator()),
     ),
     GoRoute(
-      name: countrySelectorName,
+      name: currencySelectorName,
       path: currencySelectorPath,
       builder: (context, state) {
         final forceCurrencySelector =

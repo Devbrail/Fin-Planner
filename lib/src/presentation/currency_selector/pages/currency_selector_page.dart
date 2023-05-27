@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/core/enum/box_types.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
@@ -27,6 +29,10 @@ class CurrencySelectorPage extends StatefulWidget {
 
 class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
   final CountryCubit countryCubit = getIt.get<CountryCubit>();
+  final Box<dynamic> settings =
+      getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+  CountryModel? countryModel;
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +45,11 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
 
   @override
   Widget build(BuildContext context) {
+    CountryModel? countryModel;
+    final Map<dynamic, dynamic>? json = settings.get(userCountryKey);
+    if (json != null) {
+      countryModel = CountryModel.fromJson(json);
+    }
     return BlocListener(
       bloc: countryCubit,
       listener: (context, state) {
@@ -94,6 +105,7 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
                         onSelected: (countryModel) {
                           countryCubit.selectedCountry = countryModel;
                         },
+                        selectedModel: countryModel,
                       ),
                       tablet: CountriesWidget(
                         countries: state.countries,
@@ -101,6 +113,7 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
                         onSelected: (countryModel) {
                           countryCubit.selectedCountry = countryModel;
                         },
+                        selectedModel: countryModel,
                       ),
                       desktop: CountriesWidget(
                         countries: state.countries,
@@ -108,6 +121,7 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
                         onSelected: (countryModel) {
                           countryCubit.selectedCountry = countryModel;
                         },
+                        selectedModel: countryModel,
                       ),
                     );
                   }
@@ -142,17 +156,19 @@ class CountriesWidget extends StatefulWidget {
     required this.countries,
     required this.crossAxisCount,
     required this.onSelected,
+    this.selectedModel,
   });
 
   final List<CountryModel> countries;
   final int crossAxisCount;
   final Function(CountryModel countryModel) onSelected;
+  final CountryModel? selectedModel;
   @override
   State<CountriesWidget> createState() => _CountriesWidgetState();
 }
 
 class _CountriesWidgetState extends State<CountriesWidget> {
-  CountryModel? selectedModel;
+  late CountryModel? selectedModel = widget.selectedModel;
 
   @override
   Widget build(BuildContext context) {
