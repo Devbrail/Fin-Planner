@@ -28,7 +28,7 @@ class ExpenseMonthCardWidget extends StatelessWidget {
             title,
             style: GoogleFonts.outfit(
               fontWeight: FontWeight.w600,
-              textStyle: Theme.of(context).textTheme.titleMedium,
+              textStyle: Theme.of(context).textTheme.titleSmall,
               color: Theme.of(context).colorScheme.onBackground,
             ),
           ),

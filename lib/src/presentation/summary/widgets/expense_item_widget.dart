@@ -45,7 +45,7 @@ class ExpenseItemWidget extends StatelessWidget {
         title: Text(
           expense.name,
           style: GoogleFonts.manrope(
-            textStyle: Theme.of(context).textTheme.bodyLarge,
+            textStyle: Theme.of(context).textTheme.bodyMedium,
             fontWeight: FontWeight.w600,
           ),
         ),

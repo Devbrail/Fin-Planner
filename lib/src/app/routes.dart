@@ -370,18 +370,7 @@ final GoRouter goRouter = GoRouter(
         name.isNotEmpty &&
         image.isNotEmpty &&
         isLogging) {
-      final localAuth = getIt.get<Authenticate>();
-
-      final bool canCheckBiometrics = await localAuth.canCheckBiometrics();
-
-      if (canCheckBiometrics) {
-        final bool result = await localAuth.authenticateWithBiometrics();
-        if (result) {
-          return landingPath;
-        } else {
-          SystemNavigator.pop();
-        }
-      }
+      return biometricPath;
     } else if (name.isNotEmpty && image.isNotEmpty && isLogging) {
       return landingPath;
     }
