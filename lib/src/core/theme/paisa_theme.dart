@@ -73,11 +73,9 @@ ElevatedButtonThemeData elevatedButtonTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(32.0),
       ),
-      textStyle: GoogleFonts.outfit(
-        textStyle: TextStyle(
-          fontWeight: FontWeight.w600,
-          color: colorScheme.onPrimary,
-        ),
+      textStyle: TextStyle(
+        fontWeight: FontWeight.w600,
+        color: colorScheme.onPrimary,
       ),
     ),
   );
@@ -96,13 +94,7 @@ NavigationBarThemeData navigationBarThemeData(ColorScheme colorScheme) {
   return NavigationBarThemeData(
     backgroundColor: colorScheme.surface,
     labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-    labelTextStyle: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
-        return GoogleFonts.outfit().copyWith(fontWeight: FontWeight.bold);
-      } else {
-        return GoogleFonts.outfit();
-      }
-    }),
+    labelTextStyle: MaterialStateProperty.resolveWith((states) {}),
   );
 }
 
@@ -133,10 +125,8 @@ AppBarTheme appBarThemeDark(ColorScheme colorScheme) {
 
 DialogTheme get dialogTheme {
   return DialogTheme(
-    titleTextStyle: GoogleFonts.manrope(
-      textStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
+    titleTextStyle: const TextStyle(
+      fontWeight: FontWeight.bold,
     ),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(24),
@@ -146,10 +136,8 @@ DialogTheme get dialogTheme {
 
 TimePickerThemeData get timePickerTheme {
   return TimePickerThemeData(
-    helpTextStyle: GoogleFonts.manrope(
-      textStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
+    helpTextStyle: const TextStyle(
+      fontWeight: FontWeight.bold,
     ),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
     hourMinuteShape: const CircleBorder(),

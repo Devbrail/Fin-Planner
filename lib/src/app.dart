@@ -30,6 +30,7 @@ class _PaisaAppState extends State<PaisaApp> {
       appColorKey,
       dynamicThemeKey,
       themeModeKey,
+      userFontPreferenceKey,
     ],
   );
 
@@ -54,6 +55,8 @@ class _PaisaAppState extends State<PaisaApp> {
         child: ValueListenableBuilder<Box>(
           valueListenable: settings,
           builder: (context, value, _) {
+            final String fontPreference =
+                value.get(userFontPreferenceKey, defaultValue: 'Outfit');
             final bool isDynamic = value.get(
               dynamicThemeKey,
               defaultValue: false,
@@ -103,7 +106,8 @@ class _PaisaAppState extends State<PaisaApp> {
                     timePickerTheme: timePickerTheme,
                     appBarTheme: appBarThemeLight(lightColorScheme),
                     useMaterial3: true,
-                    textTheme: GoogleFonts.outfitTextTheme(
+                    textTheme: GoogleFonts.getTextTheme(
+                      fontPreference,
                       ThemeData.light().textTheme,
                     ),
                     scaffoldBackgroundColor: lightColorScheme.background,
@@ -129,7 +133,8 @@ class _PaisaAppState extends State<PaisaApp> {
                     timePickerTheme: timePickerTheme,
                     appBarTheme: appBarThemeDark(darkColorScheme),
                     useMaterial3: true,
-                    textTheme: GoogleFonts.outfitTextTheme(
+                    textTheme: GoogleFonts.getTextTheme(
+                      fontPreference,
                       ThemeData.dark().textTheme,
                     ),
                     scaffoldBackgroundColor: darkColorScheme.background,

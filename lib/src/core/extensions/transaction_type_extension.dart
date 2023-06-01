@@ -5,12 +5,6 @@ import '../enum/transaction_type.dart';
 import '../theme/custom_color.dart';
 
 extension TransactionTypeHelper on TransactionType {
-  String get sign => this == TransactionType.transfer
-      ? ''
-      : this == TransactionType.expense
-          ? '-'
-          : '+';
-
   Color? color(BuildContext context) => this == TransactionType.transfer
       ? Theme.of(context).extension<CustomColors>()!.blue
       : this == TransactionType.expense

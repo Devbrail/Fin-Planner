@@ -36,11 +36,9 @@ class SummaryMobilePage extends StatelessWidget {
               ),
               title: Text(
                 context.loc.transactions,
-                style: GoogleFonts.outfit(
-                  fontWeight: FontWeight.w600,
-                  textStyle: Theme.of(context).textTheme.titleMedium,
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.onBackground),
               ),
             );
           } else if (index == 3) {

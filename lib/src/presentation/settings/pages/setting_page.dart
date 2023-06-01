@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/settings/widgets/font_preference_widget.dart';
 import 'package:paisa/src/presentation/settings/widgets/small_size_fab_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -70,6 +71,12 @@ class SettingsPage extends StatelessWidget {
               const AccountsStyleWidget(),
               const Divider(),
               const SmallSizeFabWidget(),
+              const Divider(),
+              FontPreferenceWidget(
+                settings: getIt.get<Box<dynamic>>(
+                  instanceName: BoxType.settings.name,
+                ),
+              ),
             ],
           ),
           SettingsGroup(

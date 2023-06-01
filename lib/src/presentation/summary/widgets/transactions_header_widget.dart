@@ -24,11 +24,10 @@ class TransactionsHeaderWidget extends StatelessWidget {
       ),
       title: Text(
         context.loc.transactions,
-        style: GoogleFonts.outfit(
-          fontWeight: FontWeight.w600,
-          textStyle: Theme.of(context).textTheme.titleMedium,
-          color: Theme.of(context).colorScheme.onBackground,
-        ),
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+              fontWeight: FontWeight.w600,
+            ),
       ),
       trailing: OutlinedButton.icon(
         style: OutlinedButton.styleFrom(

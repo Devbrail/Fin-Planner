@@ -51,9 +51,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
               ListTile(
                 title: Text(
                   context.loc.addedAccounts,
-                  style: GoogleFonts.outfit(
-                    textStyle: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
               PaisaFilledCard(
@@ -83,9 +81,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
               ListTile(
                 title: Text(
                   context.loc.defaultAccounts,
-                  style: GoogleFonts.outfit(
-                    textStyle: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
               Padding(

@@ -42,24 +42,20 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: GoogleFonts.outfit(
-                          textStyle:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurfaceVariant
-                                        .withOpacity(0.75),
-                                  ),
-                        ),
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant
+                                      .withOpacity(0.75),
+                                ),
                       ),
                       Text(
                         total,
-                        style: GoogleFonts.manrope(
-                          textStyle: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
@@ -68,61 +64,25 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
             ],
           ),
         ),
-      ) /* PaisaFilledCard(
-        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.4),
-        child: ListTile(
-          title: Text(
-            title,
-            style: GoogleFonts.outfit(
-              textStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurfaceVariant
-                        .withOpacity(0.75),
-                  ),
-            ),
-          ),
-          subtitle: Text(
-            total,
-            style: GoogleFonts.manrope(
-              textStyle: Theme.of(context)
-                  .textTheme
-                  .titleSmall
-                  ?.copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-          leading: CircleAvatar(
-            backgroundColor: graphLineColor.withOpacity(0.3),
-            child: Icon(
-              iconData,
-              color: graphLineColor,
-            ),
-          ),
-        ),
-      ) */
-      ,
+      ),
       tablet: PaisaFilledCard(
         color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.4),
         child: ListTile(
           title: Text(
             title,
-            style: GoogleFonts.manrope(
-              textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurfaceVariant
-                        .withOpacity(0.75),
-                  ),
-            ),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurfaceVariant
+                      .withOpacity(0.75),
+                ),
           ),
           subtitle: Text(
             total,
-            style: GoogleFonts.manrope(
-              textStyle: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
-            ),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
           leading: Align(
             widthFactor: 0.5,

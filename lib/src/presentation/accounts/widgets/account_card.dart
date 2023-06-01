@@ -125,8 +125,12 @@ class MobileAccountCard extends StatelessWidget {
             children: [
               ListTile(
                 minVerticalPadding: 10,
-                title: Text(bankName, style: GoogleFonts.outfit()),
-                subtitle: Text(cardHolder, style: GoogleFonts.outfit()),
+                title: Text(
+                  bankName,
+                ),
+                subtitle: Text(
+                  cardHolder,
+                ),
                 leading: Icon(cardType.icon),
                 trailing: onDelete != null
                     ? GestureDetector(
@@ -143,17 +147,13 @@ class MobileAccountCard extends StatelessWidget {
                 minVerticalPadding: 10,
                 title: Text(
                   context.loc.totalBalance,
-                  style: GoogleFonts.outfit(
-                    textStyle: Theme.of(context).textTheme.bodyMedium,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 subtitle: Text(
                   totalBalance,
-                  style: GoogleFonts.manrope(
-                    textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
               const Spacer(),
@@ -196,21 +196,16 @@ class AccountSummaryTail extends StatelessWidget {
       dense: true,
       title: Text(
         title,
-        style: GoogleFonts.outfit(
-          textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSecondaryContainer
-                    .withOpacity(0.75),
-              ),
-        ),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Theme.of(context)
+                  .colorScheme
+                  .onSecondaryContainer
+                  .withOpacity(0.75),
+            ),
       ),
       subtitle: Text(
         subtitle,
-        style: GoogleFonts.manrope(
-          textStyle: Theme.of(context).textTheme.titleMedium,
-          fontWeight: FontWeight.w600,
-        ),
+        style: Theme.of(context).textTheme.titleMedium,
       ),
     );
   }
@@ -300,14 +295,10 @@ class TabletAccountCard extends StatelessWidget {
                         ),
                         Text(
                           cardNumber,
-                          style: GoogleFonts.manrope(
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ],
                     ),
@@ -339,10 +330,7 @@ class TabletAccountCard extends StatelessWidget {
                           const SizedBox(height: 6),
                           Text(
                             income,
-                            style: GoogleFonts.manrope(
-                              textStyle:
-                                  Theme.of(context).textTheme.titleMedium,
-                            ),
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ],
                       ),
@@ -365,10 +353,7 @@ class TabletAccountCard extends StatelessWidget {
                           const SizedBox(height: 6),
                           Text(
                             expense,
-                            style: GoogleFonts.manrope(
-                              textStyle:
-                                  Theme.of(context).textTheme.titleMedium,
-                            ),
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ],
                       ),
@@ -465,14 +450,10 @@ class DesktopAccountCard extends StatelessWidget {
                         Text(context.loc.totalBalance),
                         Text(
                           cardNumber,
-                          style: GoogleFonts.manrope(
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ],
                     ),
@@ -493,24 +474,20 @@ class DesktopAccountCard extends StatelessWidget {
                         children: [
                           Text(
                             context.loc.income,
-                            style: GoogleFonts.manrope(
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall
-                                  ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondaryContainer
-                                        .withOpacity(0.75),
-                                  ),
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondaryContainer
+                                      .withOpacity(0.75),
+                                ),
                           ),
                           const SizedBox(height: 6),
                           Text(
                             income,
-                            style: GoogleFonts.manrope(
-                              textStyle: Theme.of(context).textTheme.titleSmall,
-                            ),
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ],
                       ),
@@ -522,24 +499,20 @@ class DesktopAccountCard extends StatelessWidget {
                         children: [
                           Text(
                             context.loc.expense,
-                            style: GoogleFonts.manrope(
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall
-                                  ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondaryContainer
-                                        .withOpacity(0.75),
-                                  ),
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondaryContainer
+                                      .withOpacity(0.75),
+                                ),
                           ),
                           const SizedBox(height: 6),
                           Text(
                             expense,
-                            style: GoogleFonts.manrope(
-                              textStyle: Theme.of(context).textTheme.titleSmall,
-                            ),
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ],
                       ),

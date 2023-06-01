@@ -51,9 +51,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
               ListTile(
                 title: Text(
                   context.loc.addedCategories,
-                  style: GoogleFonts.outfit(
-                    textStyle: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
               PaisaFilledCard(
@@ -86,9 +84,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
               ListTile(
                 title: Text(
                   context.loc.defaultCategories,
-                  style: GoogleFonts.outfit(
-                    textStyle: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
               Padding(

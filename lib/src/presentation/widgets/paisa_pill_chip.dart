@@ -43,11 +43,10 @@ class PaisaPillChip extends StatelessWidget {
               ),
               child: Text(
                 title,
-                style: GoogleFonts.outfit(
-                  textStyle: Theme.of(context).textTheme.bodySmall,
-                  color: textColor,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: textColor,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
           ),

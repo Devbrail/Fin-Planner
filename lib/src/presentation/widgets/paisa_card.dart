@@ -64,11 +64,13 @@ class PaisaFilledCard extends StatelessWidget {
     required this.child,
     this.shape,
     this.color,
+    this.margin,
   });
 
   final Widget child;
   final ShapeBorder? shape;
   final Color? color;
+  final EdgeInsets? margin;
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +83,7 @@ class PaisaFilledCard extends StatelessWidget {
       elevation: 0,
       color: color ?? Theme.of(context).colorScheme.surfaceVariant,
       shadowColor: Theme.of(context).colorScheme.shadow,
+      margin: margin,
       child: child,
     );
   }

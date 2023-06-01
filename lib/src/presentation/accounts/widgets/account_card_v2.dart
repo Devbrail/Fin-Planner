@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paisa/src/core/enum/transaction_type.dart';
+import 'package:paisa/src/presentation/widgets/month_total_widget.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -28,134 +30,90 @@ class AccountCardV2 extends StatelessWidget {
         (account.initialAmount + expenses.fullTotal).toFormateCurrency();
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: PaisaFilledCard(
-          color: color,
-          child: InkWell(
-            onTap: () => GoRouter.of(context).pushNamed(
-              accountTransactionName,
-              params: <String, String>{'aid': account.superId.toString()},
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  horizontalTitleGap: 0,
-                  trailing: Icon(
-                    account.cardType == null
-                        ? CardType.bank.icon
-                        : account.cardType!.icon,
-                    color: onPrimary,
-                  ),
-                  title: Text(
-                    account.name,
-                    style: GoogleFonts.outfit(
-                      textStyle:
-                          Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: onPrimary,
-                              ),
-                    ),
-                  ),
-                  subtitle: Text(
-                    account.bankName,
-                    style: GoogleFonts.outfit(
-                      textStyle:
-                          Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: onPrimary.withOpacity(0.5),
-                              ),
-                    ),
-                  ),
+      child: PaisaFilledCard(
+        color: color,
+        child: InkWell(
+          onTap: () => GoRouter.of(context).pushNamed(
+            accountTransactionName,
+            params: <String, String>{'aid': account.superId.toString()},
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ListTile(
+                horizontalTitleGap: 0,
+                trailing: Icon(
+                  account.cardType == null
+                      ? CardType.bank.icon
+                      : account.cardType!.icon,
+                  color: onPrimary,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(
-                    total,
-                    style: GoogleFonts.manrope(
-                      textStyle:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: onPrimary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                    ),
-                  ),
+                title: Text(
+                  account.name,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: onPrimary,
+                      ),
                 ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(
-                    context.loc.thisMonth,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: onPrimary,
-                        ),
-                  ),
+                subtitle: Text(
+                  account.bankName,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: onPrimary.withOpacity(0.5),
+                      ),
                 ),
-                const SizedBox(height: 8),
-                Row(
+              ),
+              ListTile(
+                minVerticalPadding: 10,
+                title: Text(
+                  context.loc.totalBalance,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: onPrimary,
+                      ),
+                ),
+                subtitle: Text(
+                  total,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  context.loc.thisMonth,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: onPrimary,
+                      ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
                   children: [
                     Expanded(
-                      child: ThisMonthTransactionWidget(
-                        title: context.loc.income,
+                      child: PaisaTransactionTailWidget(
+                        transactionType: TransactionType.income,
                         content: expenses.thisMonthIncome.toFormateCurrency(),
                         color: onPrimary,
                       ),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
-                      child: ThisMonthTransactionWidget(
-                        title: context.loc.expense,
+                      child: PaisaTransactionTailWidget(
+                        transactionType: TransactionType.expense,
                         color: onPrimary,
                         content: expenses.thisMonthExpense.toFormateCurrency(),
                       ),
                     ),
                   ],
                 ),
-                const Spacer(),
-              ],
-            ),
+              ),
+              const SizedBox(height: 16),
+            ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ThisMonthTransactionWidget extends StatelessWidget {
-  const ThisMonthTransactionWidget({
-    super.key,
-    required this.title,
-    required this.content,
-    required this.color,
-  });
-  final String title;
-  final String content;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: GoogleFonts.outfit(
-              textStyle: TextStyle(
-                color: color.withOpacity(0.75),
-              ),
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            content,
-            style: GoogleFonts.manrope(
-              textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: color,
-                  ),
-            ),
-          ),
-        ],
       ),
     );
   }

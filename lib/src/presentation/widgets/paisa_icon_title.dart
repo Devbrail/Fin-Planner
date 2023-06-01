@@ -19,11 +19,10 @@ class PaisaIconTitle extends StatelessWidget {
       ),
       title: Text(
         context.loc.appTitle,
-        style: GoogleFonts.outfit(
-          fontWeight: FontWeight.w600,
-          textStyle: Theme.of(context).textTheme.titleLarge,
-          color: Theme.of(context).colorScheme.onBackground,
-        ),
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
       ),
     );
   }
@@ -43,11 +42,10 @@ class PaisaTitle extends StatelessWidget {
         }
         return Text(
           title,
-          style: GoogleFonts.outfit(
-            fontWeight: FontWeight.w600,
-            textStyle: Theme.of(context).textTheme.titleLarge,
-            color: Theme.of(context).colorScheme.onBackground,
-          ),
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
         );
       },
     );

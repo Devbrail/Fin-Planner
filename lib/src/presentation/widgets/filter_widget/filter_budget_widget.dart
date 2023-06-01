@@ -16,6 +16,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
 
   final bool showAsList;
   final SummaryController summaryController = getIt.get();
+
   void updateFilter(FilterExpense filterExpense) {
     summaryController.filterExpenseNotifier.value = filterExpense;
   }

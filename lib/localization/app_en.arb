@@ -1070,5 +1070,9 @@
         "description": "Text shown on the section title on settings screen",
         "type": "text",
         "placeholders": {}
+    },
+    "chooseFontLabel": "Choose font",
+    "@chooseFontLabel": {
+        "description": "Subtitle shown on the setting screen for font option"
     }
 }

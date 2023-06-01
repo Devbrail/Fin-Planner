@@ -44,17 +44,15 @@ class ExpenseItemWidget extends StatelessWidget {
       child: ListTile(
         title: Text(
           expense.name,
-          style: GoogleFonts.manrope(
-            textStyle: Theme.of(context).textTheme.bodyMedium,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
         ),
         subtitle: Text(
           getSubtitle(context),
-          style: GoogleFonts.manrope(
-            textStyle: Theme.of(context).textTheme.bodySmall,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
         ),
         leading: CircleAvatar(
           backgroundColor: Color(
@@ -71,12 +69,10 @@ class ExpenseItemWidget extends StatelessWidget {
           ),
         ),
         trailing: Text(
-          '${expense.type?.sign}${expense.currency.toFormateCurrency()}',
-          style: GoogleFonts.manrope(
-            textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: expense.type?.color(context),
-                ),
-          ),
+          expense.currency.toFormateCurrency(),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: expense.type?.color(context),
+              ),
         ),
       ),
     );
@@ -124,12 +120,10 @@ class ExpenseTransferItemWidget extends StatelessWidget {
             ),
           ),
           trailing: Text(
-            '${expense.type?.sign}${expense.currency.toFormateCurrency()}',
-            style: GoogleFonts.manrope(
-              textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: expense.type?.color(context),
-                  ),
-            ),
+            expense.currency.toFormateCurrency(),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: expense.type?.color(context),
+                ),
           ),
         ),
       ),

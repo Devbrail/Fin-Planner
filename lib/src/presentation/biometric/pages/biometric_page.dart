@@ -50,9 +50,7 @@ class _BiometricPageState extends State<BiometricPage> {
           ),
           Text(
             context.loc.paisaLocked,
-            style: GoogleFonts.outfit(
-              textStyle: Theme.of(context).textTheme.headlineSmall,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           Expanded(
             child: Center(
@@ -66,9 +64,7 @@ class _BiometricPageState extends State<BiometricPage> {
                   ),
                   Text(
                     context.loc.biometricMessage,
-                    style: GoogleFonts.outfit(
-                      textStyle: Theme.of(context).textTheme.bodyMedium,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )
                 ],
               ),

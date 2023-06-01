@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paisa/src/core/enum/transaction_type.dart';
+import 'package:paisa/src/presentation/widgets/month_total_widget.dart';
 
 import '../../../core/common.dart';
 import '../../../core/theme/custom_color.dart';
@@ -30,81 +32,20 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      text: '▼',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Theme.of(context)
-                                .extension<CustomColors>()!
-                                .green,
-                          ),
-                      children: [
-                        TextSpan(
-                          text: context.loc.income,
-                          style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimaryContainer,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Text(
-                    '+${income.toFormateCurrency()}',
-                    style: GoogleFonts.manrope(
-                      textStyle:
-                          Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onPrimaryContainer,
-                              ),
-                    ),
-                  ),
-                ],
+              child: PaisaTransactionTailWidget(
+                content: '+${income.toFormateCurrency()}',
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                transactionType: TransactionType.income,
               ),
             ),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      text: '▲',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Theme.of(context)
-                                .extension<CustomColors>()!
-                                .red,
-                          ),
-                      children: [
-                        TextSpan(
-                          text: context.loc.expense,
-                          style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimaryContainer,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Text(
-                    '-${outcome.toFormateCurrency()}',
-                    style: GoogleFonts.manrope(
-                      textStyle:
-                          Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onPrimaryContainer,
-                              ),
-                    ),
-                  ),
-                ],
+              child: PaisaTransactionTailWidget(
+                content: '-${outcome.toFormateCurrency()}',
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
               ),
             ),
           ],

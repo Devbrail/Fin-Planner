@@ -32,11 +32,9 @@ class AccountSummaryWidget extends StatelessWidget {
             visualDensity: const VisualDensity(horizontal: 0, vertical: -3),
             title: Text(
               context.loc.thisMonth,
-              style: GoogleFonts.outfit(
-                fontWeight: FontWeight.w600,
-                textStyle: Theme.of(context).textTheme.titleMedium,
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
             ),
           ),
           Row(

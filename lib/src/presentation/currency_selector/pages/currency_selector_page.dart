@@ -209,7 +209,7 @@ class _CountriesWidgetState extends State<CountriesWidget> {
                   ),
                   child: Text(
                     model.symbol,
-                    style: GoogleFonts.manrope(
+                    style: GoogleFonts.roboto(
                       textStyle: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),

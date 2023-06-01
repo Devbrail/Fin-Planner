@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:paisa/src/data/currencies/models/country_model.dart';
 
 import '../../../../main.dart';
 import '../../../app/routes.dart';
@@ -13,88 +14,22 @@ class CurrencyChangeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SettingsController settings = getIt.get<SettingsController>();
-    final String customSymbol =
-        settings.get(userCustomCurrencyKey, defaultValue: '');
-    final String currentSymbol = NumberFormat.compactSimpleCurrency(
-                locale: settings.get(userLanguageKey))
-            .currencyName ??
-        '';
+    late final CountryModel model =
+        CountryModel.fromJson(settings.get(userCountryKey));
+
     return ListTile(
       onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (context) {
-            return SafeArea(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    title: Text(
-                      context.loc.currencySign,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
-                  ListTile(
-                    onTap: () {
-                      Navigator.pop(context);
-                      context.pushNamed(
-                        currencySelectorName,
-                        queryParams: {
-                          'force_currency_selector': 'true',
-                        },
-                      );
-                    },
-                    title: Text(
-                      context.loc.selectCurrency,
-                    ),
-                  ),
-                  ListTile(
-                    onTap: () {
-                      Navigator.pop(context);
-                      _showCustomCurrencySymbol(context, settings);
-                    },
-                    title: Text(
-                      context.loc.customSymbol,
-                    ),
-                  )
-                ],
-              ),
-            );
+        context.pushNamed(
+          currencySelectorName,
+          queryParams: {
+            'force_currency_selector': 'true',
           },
         );
       },
       title: Text(context.loc.currencySign),
-      subtitle: Text(
-        customSymbol.isNotEmpty ? customSymbol : currentSymbol,
-      ),
+      subtitle: Text(model.symbol),
     );
   }
-}
-
-void _showCustomCurrencySymbol(
-  BuildContext context,
-  SettingsController settings,
-) {
-  showModalBottomSheet(
-    constraints: BoxConstraints(
-      maxWidth:
-          MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
-    ),
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(16),
-        topRight: Radius.circular(16),
-      ),
-    ),
-    context: context,
-    builder: (context) {
-      return CustomCurrencySymbol(
-        settings: settings,
-        currentSymbol: settings.get(userCustomCurrencyKey, defaultValue: '\$'),
-      );
-    },
-  );
 }
 
 class CustomCurrencySymbol extends StatefulWidget {
