@@ -8,6 +8,7 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/category/model/category_model.dart';
 import '../../../domain/category/entities/category.dart';
+import '../../widgets/paisa_annotate_region_widget.dart';
 import '../../widgets/paisa_empty_widget.dart';
 
 class BudgetPage extends StatelessWidget {
@@ -16,31 +17,34 @@ class BudgetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box<CategoryModel>>(
-      valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
-      builder: (_, value, child) {
-        final categories = value.values.toBudgetEntities();
-        if (categories.isEmpty) {
-          return EmptyWidget(
-            icon: MdiIcons.timetable,
-            title: context.loc.emptyBudgetMessageTitle,
-            description: context.loc.emptyBudgetMessageSubTitle,
+    return PaisaAnnotatedRegionWidget(
+      color: Theme.of(context).colorScheme.background,
+      child: ValueListenableBuilder<Box<CategoryModel>>(
+        valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
+        builder: (_, value, child) {
+          final categories = value.values.toBudgetEntities();
+          if (categories.isEmpty) {
+            return EmptyWidget(
+              icon: MdiIcons.timetable,
+              title: context.loc.emptyBudgetMessageTitle,
+              description: context.loc.emptyBudgetMessageSubTitle,
+            );
+          }
+          return ListView.separated(
+            physics: const BouncingScrollPhysics(),
+            itemCount: categories.length,
+            itemBuilder: (context, index) {
+              final Category category = categories[index];
+              final List<Expense> expenses = summaryController
+                  .getExpensesFromCategoryId(category.superId!)
+                  .thisMonthExpensesList;
+              return BudgetItem(category: category, expenses: expenses);
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
           );
-        }
-        return ListView.separated(
-          physics: const BouncingScrollPhysics(),
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            final Category category = categories[index];
-            final List<Expense> expenses = summaryController
-                .getExpensesFromCategoryId(category.superId!)
-                .thisMonthExpensesList;
-            return BudgetItem(category: category, expenses: expenses);
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-        );
-      },
+        },
+      ),
     );
   }
 }

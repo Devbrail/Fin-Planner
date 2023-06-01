@@ -7,6 +7,7 @@ import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/recurring/model/recurring.dart';
+import '../../widgets/paisa_annotate_region_widget.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../../widgets/small_size_fab.dart';
 
@@ -15,33 +16,36 @@ class RecurringPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: context.materialYouAppBar(
-        context.loc.recurring,
-      ),
-      floatingActionButton: SmallSizeFab(
-        onPressed: () {
-          GoRouter.of(context).pushNamed(recurringName);
-        },
-        icon: Icons.add,
-      ),
-      body: ValueListenableBuilder<Box<RecurringModel>>(
-        valueListenable: getIt.get<Box<RecurringModel>>().listenable(),
-        builder: (_, value, child) {
-          final List<RecurringModel> recurringModels = value.values.toList();
-          if (recurringModels.isEmpty) {
-            return EmptyWidget(
-              title: context.loc.recurringEmptyMessageTitle,
-              description: context.loc.recurringEmptyMessageSubTitle,
-              icon: MdiIcons.cashSync,
-              actionTitle: context.loc.recurringAction,
-              onActionPressed: () {
-                GoRouter.of(context).pushNamed(recurringName);
-              },
-            );
-          }
-          return RecurringListWidget(recurringModels: recurringModels);
-        },
+    return PaisaAnnotatedRegionWidget(
+      color: Theme.of(context).colorScheme.background,
+      child: Scaffold(
+        appBar: context.materialYouAppBar(
+          context.loc.recurring,
+        ),
+        floatingActionButton: SmallSizeFab(
+          onPressed: () {
+            GoRouter.of(context).pushNamed(recurringName);
+          },
+          icon: Icons.add,
+        ),
+        body: ValueListenableBuilder<Box<RecurringModel>>(
+          valueListenable: getIt.get<Box<RecurringModel>>().listenable(),
+          builder: (_, value, child) {
+            final List<RecurringModel> recurringModels = value.values.toList();
+            if (recurringModels.isEmpty) {
+              return EmptyWidget(
+                title: context.loc.recurringEmptyMessageTitle,
+                description: context.loc.recurringEmptyMessageSubTitle,
+                icon: MdiIcons.cashSync,
+                actionTitle: context.loc.recurringAction,
+                onActionPressed: () {
+                  GoRouter.of(context).pushNamed(recurringName);
+                },
+              );
+            }
+            return RecurringListWidget(recurringModels: recurringModels);
+          },
+        ),
       ),
     );
   }

@@ -9,6 +9,7 @@ import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../data/debt/models/transactions_model.dart';
 import '../../../../domain/debt/entities/transaction.dart';
+import '../../../widgets/paisa_annotate_region_widget.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_bottom_sheet.dart';
 import '../../../widgets/paisa_text_field.dart';
@@ -50,157 +51,162 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => debtBloc,
-      child: BlocConsumer(
-        bloc: debtBloc,
-        listener: (context, state) {
-          if (state is DebtsAdded) {
-            GoRouter.of(context).pop();
-          } else if (state is DebtsSuccessState) {
-            amountController.text = state.debt.amount.toString();
-            amountController.selection = TextSelection.collapsed(
-              offset: state.debt.amount.toString().length,
-            );
+    return PaisaAnnotatedRegionWidget(
+      color: Theme.of(context).colorScheme.background,
+      child: BlocProvider(
+        create: (_) => debtBloc,
+        child: BlocConsumer(
+          bloc: debtBloc,
+          listener: (context, state) {
+            if (state is DebtsAdded) {
+              GoRouter.of(context).pop();
+            } else if (state is DebtsSuccessState) {
+              amountController.text = state.debt.amount.toString();
+              amountController.selection = TextSelection.collapsed(
+                offset: state.debt.amount.toString().length,
+              );
 
-            nameController.text = state.debt.name.toString();
-            nameController.selection = TextSelection.collapsed(
-              offset: state.debt.name.toString().length,
-            );
+              nameController.text = state.debt.name.toString();
+              nameController.selection = TextSelection.collapsed(
+                offset: state.debt.name.toString().length,
+              );
 
-            descController.text = state.debt.description.toString();
-            descController.selection = TextSelection.collapsed(
-              offset: state.debt.description.toString().length,
-            );
-          } else if (state is DebtErrorState) {
-            context.showMaterialSnackBar(
-              state.errorString,
-              backgroundColor: Theme.of(context).colorScheme.errorContainer,
-              color: Theme.of(context).colorScheme.onErrorContainer,
-            );
-          } else if (state is DeleteDebtsState) {
-            context.pop();
-          }
-        },
-        builder: (context, state) {
-          return Scaffold(
-            appBar: context.materialYouAppBar(
-              context.loc.addDebt,
-              actions: [
-                isDebtAddOrUpdate
-                    ? const SizedBox.shrink()
-                    : IconButton(
-                        onPressed: () => paisaAlertDialog(
-                          context,
-                          title: Text(context.loc.dialogDeleteTitle),
-                          child: RichText(
-                            text: TextSpan(
-                              text: context.loc.deleteDebtOrCredit,
-                              style: Theme.of(context).textTheme.bodyLarge,
+              descController.text = state.debt.description.toString();
+              descController.selection = TextSelection.collapsed(
+                offset: state.debt.description.toString().length,
+              );
+            } else if (state is DebtErrorState) {
+              context.showMaterialSnackBar(
+                state.errorString,
+                backgroundColor: Theme.of(context).colorScheme.errorContainer,
+                color: Theme.of(context).colorScheme.onErrorContainer,
+              );
+            } else if (state is DeleteDebtsState) {
+              context.pop();
+            }
+          },
+          builder: (context, state) {
+            return Scaffold(
+              appBar: context.materialYouAppBar(
+                context.loc.addDebt,
+                actions: [
+                  isDebtAddOrUpdate
+                      ? const SizedBox.shrink()
+                      : IconButton(
+                          onPressed: () => paisaAlertDialog(
+                            context,
+                            title: Text(context.loc.dialogDeleteTitle),
+                            child: RichText(
+                              text: TextSpan(
+                                text: context.loc.deleteDebtOrCredit,
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
                             ),
-                          ),
-                          confirmationButton: TextButton(
-                            style: TextButton.styleFrom(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                            ),
-                            onPressed: () {
-                              debtBloc.add(DeleteDebtEvent(
-                                  int.tryParse(widget.debtId!) ?? 0));
-                            },
-                            child: const Text('Delete'),
-                          ),
-                        ).then((value) => context.pop()),
-                        icon: Icon(
-                          Icons.delete_rounded,
-                          color: Theme.of(context).colorScheme.error,
-                        ),
-                      )
-              ],
-            ),
-            body: Form(
-              key: _formKey,
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      children: [
-                        DebtToggleButtonsWidget(debtsBloc: debtBloc),
-                        const SizedBox(height: 16),
-                        AmountWidget(controller: amountController),
-                        const SizedBox(height: 16),
-                        NameWidget(controller: nameController),
-                        const SizedBox(height: 16),
-                        DescriptionWidget(controller: descController),
-                        const SizedBox(height: 16),
-                      ],
-                    ),
-                  ),
-                  const StartAndEndDateWidget(),
-                  ListTile(
-                    title: Text(
-                      context.loc.transactionHistory,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  ValueListenableBuilder<Box<TransactionsModel>>(
-                    valueListenable:
-                        getIt.get<Box<TransactionsModel>>().listenable(),
-                    builder: (context, value, child) {
-                      final int? parentId = int.tryParse(widget.debtId ?? '');
-                      if (parentId == null) return const SizedBox.shrink();
-                      final List<Transaction> transactions =
-                          value.getTransactionsFromId(parentId);
-
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: transactions.length,
-                        itemBuilder: (_, index) {
-                          final Transaction transaction = transactions[index];
-                          return ListTile(
-                            leading: IconButton(
+                            confirmationButton: TextButton(
+                              style: TextButton.styleFrom(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                              ),
                               onPressed: () {
-                                debtBloc.add(
-                                  DeleteTransactionEvent(transaction.superId!),
-                                );
+                                debtBloc.add(DeleteDebtEvent(
+                                    int.tryParse(widget.debtId!) ?? 0));
                               },
-                              icon: const Icon(Icons.delete),
+                              child: const Text('Delete'),
                             ),
-                            title: Text(transaction.now.formattedDate),
-                            trailing:
-                                Text(transaction.amount.toFormateCurrency()),
-                          );
-                        },
-                      );
-                    },
-                  )
+                          ).then((value) => context.pop()),
+                          icon: Icon(
+                            Icons.delete_rounded,
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                        )
                 ],
               ),
-            ),
-            bottomNavigationBar: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: PaisaBigButton(
-                  onPressed: () {
-                    final isValid = _formKey.currentState!.validate();
-                    if (!isValid) {
-                      return;
-                    }
-                    debtBloc.add(AddOrUpdateEvent(isDebtAddOrUpdate));
-                  },
-                  title:
-                      isDebtAddOrUpdate ? context.loc.add : context.loc.update,
+              body: Form(
+                key: _formKey,
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          DebtToggleButtonsWidget(debtsBloc: debtBloc),
+                          const SizedBox(height: 16),
+                          AmountWidget(controller: amountController),
+                          const SizedBox(height: 16),
+                          NameWidget(controller: nameController),
+                          const SizedBox(height: 16),
+                          DescriptionWidget(controller: descController),
+                          const SizedBox(height: 16),
+                        ],
+                      ),
+                    ),
+                    const StartAndEndDateWidget(),
+                    ListTile(
+                      title: Text(
+                        context.loc.transactionHistory,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    ValueListenableBuilder<Box<TransactionsModel>>(
+                      valueListenable:
+                          getIt.get<Box<TransactionsModel>>().listenable(),
+                      builder: (context, value, child) {
+                        final int? parentId = int.tryParse(widget.debtId ?? '');
+                        if (parentId == null) return const SizedBox.shrink();
+                        final List<Transaction> transactions =
+                            value.getTransactionsFromId(parentId);
+
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: transactions.length,
+                          itemBuilder: (_, index) {
+                            final Transaction transaction = transactions[index];
+                            return ListTile(
+                              leading: IconButton(
+                                onPressed: () {
+                                  debtBloc.add(
+                                    DeleteTransactionEvent(
+                                        transaction.superId!),
+                                  );
+                                },
+                                icon: const Icon(Icons.delete),
+                              ),
+                              title: Text(transaction.now.formattedDate),
+                              trailing:
+                                  Text(transaction.amount.toFormateCurrency()),
+                            );
+                          },
+                        );
+                      },
+                    )
+                  ],
                 ),
               ),
-            ),
-          );
-        },
+              bottomNavigationBar: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: PaisaBigButton(
+                    onPressed: () {
+                      final isValid = _formKey.currentState!.validate();
+                      if (!isValid) {
+                        return;
+                      }
+                      debtBloc.add(AddOrUpdateEvent(isDebtAddOrUpdate));
+                    },
+                    title: isDebtAddOrUpdate
+                        ? context.loc.add
+                        : context.loc.update,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

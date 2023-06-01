@@ -6,6 +6,7 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/category/model/category_model.dart';
 import '../../../domain/category/entities/category.dart';
+import '../../widgets/paisa_annotate_region_widget.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/category_bloc.dart';
 import 'category_list_mobile_page.dart';
@@ -17,40 +18,43 @@ class CategoryListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = getIt.get<CategoryBloc>();
-    return Scaffold(
-      body: ValueListenableBuilder<Box<CategoryModel>>(
-        valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
-        builder: (BuildContext context, value, Widget? child) {
-          final List<Category> categories = value.values.toEntities();
-          if (categories.isEmpty) {
-            return EmptyWidget(
-              title: context.loc.emptyCategoriesMessageTitle,
-              description: context.loc.emptyCategoriesMessageSubTitle,
-              icon: Icons.category,
+    return PaisaAnnotatedRegionWidget(
+      color: Theme.of(context).colorScheme.background,
+      child: Scaffold(
+        body: ValueListenableBuilder<Box<CategoryModel>>(
+          valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
+          builder: (BuildContext context, value, Widget? child) {
+            final List<Category> categories = value.values.toEntities();
+            if (categories.isEmpty) {
+              return EmptyWidget(
+                title: context.loc.emptyCategoriesMessageTitle,
+                description: context.loc.emptyCategoriesMessageSubTitle,
+                icon: Icons.category,
+              );
+            }
+            return ScreenTypeLayout(
+              breakpoints: const ScreenBreakpoints(
+                tablet: 600,
+                desktop: 700,
+                watch: 300,
+              ),
+              mobile: CategoryListMobileWidget(
+                addCategoryBloc: bloc,
+                categories: categories,
+              ),
+              tablet: CategoryListTabletWidget(
+                addCategoryBloc: bloc,
+                crossAxisCount: 3,
+                categories: categories,
+              ),
+              desktop: CategoryListTabletWidget(
+                addCategoryBloc: bloc,
+                crossAxisCount: 5,
+                categories: categories,
+              ),
             );
-          }
-          return ScreenTypeLayout(
-            breakpoints: const ScreenBreakpoints(
-              tablet: 600,
-              desktop: 700,
-              watch: 300,
-            ),
-            mobile: CategoryListMobileWidget(
-              addCategoryBloc: bloc,
-              categories: categories,
-            ),
-            tablet: CategoryListTabletWidget(
-              addCategoryBloc: bloc,
-              crossAxisCount: 3,
-              categories: categories,
-            ),
-            desktop: CategoryListTabletWidget(
-              addCategoryBloc: bloc,
-              crossAxisCount: 5,
-              categories: categories,
-            ),
-          );
-        },
+          },
+        ),
       ),
     );
   }

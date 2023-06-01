@@ -16,6 +16,7 @@ import '../../../data/category/model/category_model.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../expense/widgets/selectable_item_widget.dart';
+import '../../widgets/paisa_annotate_region_widget.dart';
 import '../../widgets/paisa_big_button_widget.dart';
 import '../../widgets/paisa_pill_chip.dart';
 import '../../widgets/paisa_text_field.dart';
@@ -44,58 +45,61 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => recurringCubit,
-      child: BlocConsumer(
-        bloc: recurringCubit,
-        listener: (context, state) {
-          if (state is RecurringErrorState) {
-            context.showMaterialSnackBar(
-              state.error,
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
-            );
-          } else if (state is RecurringEventAddedState) {
-            context.pop();
-          }
-        },
-        builder: (context, state) {
-          return ScreenTypeLayout(
-            mobile: Scaffold(
-              appBar: context.materialYouAppBar(
-                context.loc.recurring,
-              ),
-              body: ListView(
-                shrinkWrap: true,
-                children: [
-                  TransactionToggleButtons(recurringCubit: recurringCubit),
-                  const SizedBox(height: 16),
-                  RecurringNameWidget(controller: nameController),
-                  const SizedBox(height: 16),
-                  RecurringAmountWidget(controller: amountController),
-                  const SizedBox(height: 16),
-                  const RecurringDatePickerWidget(),
-                  RecurringWidget(
-                    recurringCubit: recurringCubit,
-                  ),
-                  const SelectedAccount(),
-                  const SelectCategory(),
-                ],
-              ),
-              bottomNavigationBar: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: PaisaBigButton(
-                    onPressed: () {
-                      recurringCubit.addRecurringEvent();
-                    },
-                    title: context.loc.add,
+    return PaisaAnnotatedRegionWidget(
+      color: Theme.of(context).colorScheme.background,
+      child: BlocProvider(
+        create: (context) => recurringCubit,
+        child: BlocConsumer(
+          bloc: recurringCubit,
+          listener: (context, state) {
+            if (state is RecurringErrorState) {
+              context.showMaterialSnackBar(
+                state.error,
+                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              );
+            } else if (state is RecurringEventAddedState) {
+              context.pop();
+            }
+          },
+          builder: (context, state) {
+            return ScreenTypeLayout(
+              mobile: Scaffold(
+                appBar: context.materialYouAppBar(
+                  context.loc.recurring,
+                ),
+                body: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    TransactionToggleButtons(recurringCubit: recurringCubit),
+                    const SizedBox(height: 16),
+                    RecurringNameWidget(controller: nameController),
+                    const SizedBox(height: 16),
+                    RecurringAmountWidget(controller: amountController),
+                    const SizedBox(height: 16),
+                    const RecurringDatePickerWidget(),
+                    RecurringWidget(
+                      recurringCubit: recurringCubit,
+                    ),
+                    const SelectedAccount(),
+                    const SelectCategory(),
+                  ],
+                ),
+                bottomNavigationBar: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: PaisaBigButton(
+                      onPressed: () {
+                        recurringCubit.addRecurringEvent();
+                      },
+                      title: context.loc.add,
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

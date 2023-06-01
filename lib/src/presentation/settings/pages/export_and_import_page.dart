@@ -6,6 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/settings/file_handler.dart';
+import '../../widgets/paisa_annotate_region_widget.dart';
 import '../widgets/settings_group_card.dart';
 
 class ExportAndImportPage extends StatelessWidget {
@@ -47,81 +48,84 @@ class ExportAndImportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: context.materialYouAppBar(context.loc.backupAndRestoreTitle),
-      body: ListView(
-        padding: EdgeInsets.zero,
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        children: [
-          SettingsGroup(
-            title: context.loc.backupAndRestoreJSONTitle,
-            options: [
-              ListTile(
-                title: Text(context.loc.backupAndRestoreJSONDesc),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton.icon(
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          elevation: 0,
-                          padding: const EdgeInsets.all(10),
-                        ),
-                        onPressed: () {
-                          _selectedFileAndImportData().then((value) {
-                            if (value.isEmpty) {
-                              return context.showMaterialSnackBar(
-                                'Error restore backup ',
-                              );
-                            } else {
-                              return context.showMaterialSnackBar(
-                                context.loc.restoringBackup,
-                              );
-                            }
-                          });
-                        },
-                        label: Text(context.loc.importData),
-                        icon: const Icon(MdiIcons.fileImport),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onPrimary,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          padding: const EdgeInsets.all(10),
-                        ),
-                        onPressed: () {
-                          _selectedFolderAndBackUpData().then((value) {
-                            if (value) {
-                              return context.showMaterialSnackBar(
-                                context.loc.creatingBackup,
-                              );
-                            } else {
-                              return context.showMaterialSnackBar(
-                                'Error backing ',
-                              );
-                            }
-                          });
-                        },
-                        label: Text(context.loc.exportData),
-                        icon: const Icon(MdiIcons.fileExport),
-                      ),
-                    ),
-                  ],
+    return PaisaAnnotatedRegionWidget(
+      color: Theme.of(context).colorScheme.background,
+      child: Scaffold(
+        appBar: context.materialYouAppBar(context.loc.backupAndRestoreTitle),
+        body: ListView(
+          padding: EdgeInsets.zero,
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          children: [
+            SettingsGroup(
+              title: context.loc.backupAndRestoreJSONTitle,
+              options: [
+                ListTile(
+                  title: Text(context.loc.backupAndRestoreJSONDesc),
                 ),
-              ),
-            ],
-          ),
-        ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor:
+                                Theme.of(context).colorScheme.primary,
+                            elevation: 0,
+                            padding: const EdgeInsets.all(10),
+                          ),
+                          onPressed: () {
+                            _selectedFileAndImportData().then((value) {
+                              if (value.isEmpty) {
+                                return context.showMaterialSnackBar(
+                                  'Error restore backup ',
+                                );
+                              } else {
+                                return context.showMaterialSnackBar(
+                                  context.loc.restoringBackup,
+                                );
+                              }
+                            });
+                          },
+                          label: Text(context.loc.importData),
+                          icon: const Icon(MdiIcons.fileImport),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor:
+                                Theme.of(context).colorScheme.onPrimary,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primary,
+                            padding: const EdgeInsets.all(10),
+                          ),
+                          onPressed: () {
+                            _selectedFolderAndBackUpData().then((value) {
+                              if (value) {
+                                return context.showMaterialSnackBar(
+                                  context.loc.creatingBackup,
+                                );
+                              } else {
+                                return context.showMaterialSnackBar(
+                                  'Error backing ',
+                                );
+                              }
+                            });
+                          },
+                          label: Text(context.loc.exportData),
+                          icon: const Icon(MdiIcons.fileExport),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

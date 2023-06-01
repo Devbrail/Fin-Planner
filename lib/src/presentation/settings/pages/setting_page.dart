@@ -11,6 +11,7 @@ import '../../../core/enum/box_types.dart';
 import '../../../core/enum/theme_mode.dart';
 import '../../../data/settings/authenticate.dart';
 import '../../widgets/choose_theme_mode_widget.dart';
+import '../../widgets/paisa_annotate_region_widget.dart';
 import '../widgets/accounts_style_widget.dart';
 import '../widgets/biometrics_auth_widget.dart';
 import '../widgets/currency_change_widget.dart';
@@ -30,116 +31,119 @@ class SettingsPage extends StatelessWidget {
     final currentTheme = ThemeMode.values[getIt
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
         .get(themeModeKey, defaultValue: 0)];
-    return Scaffold(
-      appBar: context.materialYouAppBar(
-        context.loc.settings,
-      ),
-      body: ListView(
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        children: [
-          SettingsGroup(
-            title: context.loc.colorsUI,
-            options: [
-              SettingsColorPickerWidget(settings: settings),
-              const Divider(),
-              SettingsOption(
-                title: context.loc.chooseTheme,
-                subtitle: currentTheme.themeName,
-                onTap: () {
-                  showModalBottomSheet(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width >= 700
-                          ? 700
-                          : double.infinity,
-                    ),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(16),
-                        topRight: Radius.circular(16),
+    return PaisaAnnotatedRegionWidget(
+      color: Theme.of(context).colorScheme.background,
+      child: Scaffold(
+        appBar: context.materialYouAppBar(
+          context.loc.settings,
+        ),
+        body: ListView(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          children: [
+            SettingsGroup(
+              title: context.loc.colorsUI,
+              options: [
+                SettingsColorPickerWidget(settings: settings),
+                const Divider(),
+                SettingsOption(
+                  title: context.loc.chooseTheme,
+                  subtitle: currentTheme.themeName,
+                  onTap: () {
+                    showModalBottomSheet(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width >= 700
+                            ? 700
+                            : double.infinity,
                       ),
-                    ),
-                    context: context,
-                    builder: (_) => ChooseThemeModeWidget(
-                      currentTheme: currentTheme,
-                    ),
-                  );
-                },
-              ),
-              const Divider(),
-              const AccountsStyleWidget(),
-              const Divider(),
-              const SmallSizeFabWidget(),
-            ],
-          ),
-          SettingsGroup(
-            title: context.loc.others,
-            options: [
-              BiometricAuthWidget(
-                authenticate: getIt.get<Authenticate>(),
-              ),
-              const CurrencyChangeWidget(),
-              const Divider(),
-              SettingsOption(
-                title: context.loc.backupAndRestoreTitle,
-                subtitle: context.loc.backupAndRestoreSubTitle,
-                onTap: () {
-                  GoRouter.of(context).goNamed(exportAndImportName);
-                },
-              ),
-            ],
-          ),
-          SettingsGroup(
-            title: context.loc.socialLinks,
-            options: [
-              SettingsOption(
-                title: context.loc.appRate,
-                subtitle: context.loc.appRateDesc,
-                onTap: () => launchUrl(
-                  Uri.parse(playStoreUrl),
-                  mode: LaunchMode.externalApplication,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                          topRight: Radius.circular(16),
+                        ),
+                      ),
+                      context: context,
+                      builder: (_) => ChooseThemeModeWidget(
+                        currentTheme: currentTheme,
+                      ),
+                    );
+                  },
                 ),
-              ),
-              const Divider(),
-              SettingsOption(
-                title: context.loc.github,
-                subtitle: context.loc.githubText,
-                onTap: () => launchUrl(
-                  Uri.parse(gitHubUrl),
-                  mode: LaunchMode.externalApplication,
+                const Divider(),
+                const AccountsStyleWidget(),
+                const Divider(),
+                const SmallSizeFabWidget(),
+              ],
+            ),
+            SettingsGroup(
+              title: context.loc.others,
+              options: [
+                BiometricAuthWidget(
+                  authenticate: getIt.get<Authenticate>(),
                 ),
-              ),
-              const Divider(),
-              SettingsOption(
-                title: context.loc.telegram,
-                subtitle: context.loc.telegramGroup,
-                onTap: () => launchUrl(
-                  Uri.parse(telegramGroupUrl),
-                  mode: LaunchMode.externalApplication,
+                const CurrencyChangeWidget(),
+                const Divider(),
+                SettingsOption(
+                  title: context.loc.backupAndRestoreTitle,
+                  subtitle: context.loc.backupAndRestoreSubTitle,
+                  onTap: () {
+                    GoRouter.of(context).goNamed(exportAndImportName);
+                  },
                 ),
-              ),
-              const Divider(),
-              SettingsOption(
-                title: context.loc.privacyPolicy,
-                onTap: () => launchUrl(
-                  Uri.parse(termsAndConditionsUrl),
-                  mode: LaunchMode.externalApplication,
+              ],
+            ),
+            SettingsGroup(
+              title: context.loc.socialLinks,
+              options: [
+                SettingsOption(
+                  title: context.loc.appRate,
+                  subtitle: context.loc.appRateDesc,
+                  onTap: () => launchUrl(
+                    Uri.parse(playStoreUrl),
+                    mode: LaunchMode.externalApplication,
+                  ),
                 ),
-              ),
-              const Divider(),
-              const VersionWidget(),
-            ],
-          ),
-          SafeArea(
-            top: false,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                context.loc.madeWithLoveInIndia,
+                const Divider(),
+                SettingsOption(
+                  title: context.loc.github,
+                  subtitle: context.loc.githubText,
+                  onTap: () => launchUrl(
+                    Uri.parse(gitHubUrl),
+                    mode: LaunchMode.externalApplication,
+                  ),
+                ),
+                const Divider(),
+                SettingsOption(
+                  title: context.loc.telegram,
+                  subtitle: context.loc.telegramGroup,
+                  onTap: () => launchUrl(
+                    Uri.parse(telegramGroupUrl),
+                    mode: LaunchMode.externalApplication,
+                  ),
+                ),
+                const Divider(),
+                SettingsOption(
+                  title: context.loc.privacyPolicy,
+                  onTap: () => launchUrl(
+                    Uri.parse(termsAndConditionsUrl),
+                    mode: LaunchMode.externalApplication,
+                  ),
+                ),
+                const Divider(),
+                const VersionWidget(),
+              ],
+            ),
+            SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  context.loc.madeWithLoveInIndia,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
