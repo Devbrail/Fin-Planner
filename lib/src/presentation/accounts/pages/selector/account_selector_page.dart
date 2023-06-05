@@ -42,7 +42,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
           ),
         ),
       ),
-      body: ValueListenableBuilder(
+      body: ValueListenableBuilder<Box<AccountModel>>(
         valueListenable: getIt.get<Box<AccountModel>>().listenable(),
         builder: (context, value, child) {
           final List<AccountModel> categoryModels = value.values.toList();

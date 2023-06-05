@@ -42,7 +42,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
           ),
         ),
       ),
-      body: ValueListenableBuilder(
+      body: ValueListenableBuilder<Box<CategoryModel>>(
         valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
         builder: (context, value, child) {
           final List<CategoryModel> categoryModels = value.values.toList();

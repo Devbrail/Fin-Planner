@@ -24,18 +24,12 @@ class _UserImagePageState extends State<UserImagePage> {
       getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   void _pickImage() {
-    if (Platform.isAndroid) {
-      final ImagePicker picker = ImagePicker();
-      picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
-        if (pickedFile != null) {
-          settings.put(userImageKey, pickedFile.path);
-        }
-      });
-    } else {
-      context.showMaterialSnackBar(
-        'Not supported in ${Platform.operatingSystem}',
-      );
-    }
+    final ImagePicker picker = ImagePicker();
+    picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
+      if (pickedFile != null) {
+        settings.put(userImageKey, pickedFile.path);
+      }
+    });
   }
 
   @override
@@ -83,6 +77,7 @@ class _UserImagePageState extends State<UserImagePage> {
                   child: UserImageWidget(
                     pickImage: _pickImage,
                     maxRadius: 72,
+                    useDefault: true,
                   ),
                 ),
               ],

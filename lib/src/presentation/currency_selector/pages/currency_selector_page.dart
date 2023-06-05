@@ -56,78 +56,84 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(),
-        body: Column(
-          children: [
-            FractionallySizedBox(
-              widthFactor: 0.8,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Icon(
-                      Icons.language_rounded,
-                      size: 72,
-                      color: Theme.of(context).colorScheme.primary,
+        appBar: widget.forceCurrencySelector ? AppBar() : null,
+        body: SafeArea(
+          child: Column(
+            children: [
+              widget.forceCurrencySelector
+                  ? const SizedBox.shrink()
+                  : const SizedBox(height: 16),
+              FractionallySizedBox(
+                widthFactor: 0.8,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Icon(
+                        Icons.language_rounded,
+                        size: 72,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
-                  ),
-                  Text(
-                    context.loc.selectCurrency,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onSurface,
+                    Text(
+                      context.loc.selectCurrency,
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: PaisaTextFormField(
+                  hintText: context.loc.search,
+                  controller: TextEditingController(),
+                  keyboardType: TextInputType.name,
+                  onChanged: (value) => countryCubit.filterCountry(value),
+                ),
+              ),
+              Expanded(
+                child: BlocBuilder(
+                  bloc: countryCubit,
+                  builder: (context, state) {
+                    if (state is CountriesState) {
+                      return ScreenTypeLayout(
+                        mobile: CountriesWidget(
+                          countries: state.countries,
+                          crossAxisCount: 2,
+                          onSelected: (countryModel) {
+                            countryCubit.selectedCountry = countryModel;
+                          },
+                          selectedModel: countryModel,
                         ),
-                  )
-                ],
+                        tablet: CountriesWidget(
+                          countries: state.countries,
+                          crossAxisCount: 3,
+                          onSelected: (countryModel) {
+                            countryCubit.selectedCountry = countryModel;
+                          },
+                          selectedModel: countryModel,
+                        ),
+                        desktop: CountriesWidget(
+                          countries: state.countries,
+                          crossAxisCount: 6,
+                          onSelected: (countryModel) {
+                            countryCubit.selectedCountry = countryModel;
+                          },
+                          selectedModel: countryModel,
+                        ),
+                      );
+                    }
+                    return Container();
+                  },
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: PaisaTextFormField(
-                hintText: context.loc.search,
-                controller: TextEditingController(),
-                keyboardType: TextInputType.name,
-                onChanged: (value) => countryCubit.filterCountry(value),
-              ),
-            ),
-            Expanded(
-              child: BlocBuilder(
-                bloc: countryCubit,
-                builder: (context, state) {
-                  if (state is CountriesState) {
-                    return ScreenTypeLayout(
-                      mobile: CountriesWidget(
-                        countries: state.countries,
-                        crossAxisCount: 2,
-                        onSelected: (countryModel) {
-                          countryCubit.selectedCountry = countryModel;
-                        },
-                        selectedModel: countryModel,
-                      ),
-                      tablet: CountriesWidget(
-                        countries: state.countries,
-                        crossAxisCount: 3,
-                        onSelected: (countryModel) {
-                          countryCubit.selectedCountry = countryModel;
-                        },
-                        selectedModel: countryModel,
-                      ),
-                      desktop: CountriesWidget(
-                        countries: state.countries,
-                        crossAxisCount: 6,
-                        onSelected: (countryModel) {
-                          countryCubit.selectedCountry = countryModel;
-                        },
-                        selectedModel: countryModel,
-                      ),
-                    );
-                  }
-                  return Container();
-                },
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {

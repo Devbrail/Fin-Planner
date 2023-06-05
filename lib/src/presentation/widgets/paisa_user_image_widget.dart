@@ -13,10 +13,12 @@ class UserImageWidget extends StatelessWidget {
     Key? key,
     required this.pickImage,
     this.maxRadius,
+    this.useDefault = false,
   }) : super(key: key);
 
   final VoidCallback pickImage;
   final double? maxRadius;
+  final bool useDefault;
 
   @override
   Widget build(BuildContext context) {
@@ -45,26 +47,33 @@ class UserImageWidget extends StatelessWidget {
                   ),
                 );
               } else {
-                return Badge(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  label: GestureDetector(
-                    onTap: () {
-                      value.put(userImageKey, '');
-                    },
-                    child: Center(
-                      child: Icon(
-                        MdiIcons.delete,
-                        size: 8,
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    ),
-                  ),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  child: CircleAvatar(
+                if (useDefault) {
+                  return CircleAvatar(
                     foregroundImage: FileImage(File(image)),
                     maxRadius: maxRadius,
-                  ),
-                );
+                  );
+                } else {
+                  return Badge(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    label: GestureDetector(
+                      onTap: () {
+                        value.put(userImageKey, '');
+                      },
+                      child: Center(
+                        child: Icon(
+                          MdiIcons.delete,
+                          size: 8,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                    ),
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    child: CircleAvatar(
+                      foregroundImage: FileImage(File(image)),
+                      maxRadius: maxRadius,
+                    ),
+                  );
+                }
               }
             },
           ),

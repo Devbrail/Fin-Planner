@@ -14,7 +14,6 @@ import 'presentation/accounts/bloc/accounts_bloc.dart';
 import 'presentation/category/bloc/category_bloc.dart';
 import 'presentation/expense/bloc/expense_bloc.dart';
 import 'presentation/home/bloc/home_bloc.dart';
-import 'presentation/widgets/paisa_annotate_region_widget.dart';
 
 class PaisaApp extends StatefulWidget {
   const PaisaApp({Key? key}) : super(key: key);

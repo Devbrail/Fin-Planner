@@ -7,6 +7,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../widgets/lava/lava_clock.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
+import '../../widgets/paisa_big_button_widget.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -267,20 +268,13 @@ class IntoMobileWidget extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 24),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(18)),
+          child: PaisaBigButton(
             onPressed: () {
               getIt
                   .get<Box<dynamic>>(instanceName: BoxType.settings.name)
                   .put(userIntroKey, true);
             },
-            child: Text(
-              context.loc.introCTA,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
+            title: context.loc.introCTA,
           ),
         ),
       ),
