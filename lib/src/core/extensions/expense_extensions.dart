@@ -139,6 +139,19 @@ extension ExpensesHelper on Iterable<Expense> {
               element.time.year == DateTime.now().year)
           .toList();
 
+  List<Expense> get thisMonthIncomeList =>
+      where((element) => element.type == TransactionType.income)
+          .where((element) =>
+              element.time.month == DateTime.now().month &&
+              element.time.year == DateTime.now().year)
+          .toList();
+
+  List<double> get expenseDoubleList =>
+      thisMonthExpensesList.map((element) => element.currency).toList();
+
+  List<double> get incomeDoubleList =>
+      thisMonthIncomeList.map((element) => element.currency).toList();
+
   double get thisMonthIncome =>
       where((element) => element.type == TransactionType.income)
           .where((element) =>
