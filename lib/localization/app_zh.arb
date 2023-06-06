@@ -175,5 +175,17 @@
     "sortList": "排序列表",
     "smallSizeFab": "小尺寸 FAB",
     "smallSizeFabMessage": "在所有屏幕上显示小尺寸 FAB 按钮",
-    "selectDateErrorMessage": "选择日期"
+    "selectDateErrorMessage": "选择日期",
+    "edit": "编辑",
+    "fromAccount": "转账自",
+    "toAccount": "转账至",
+    "paisaLocked": "Paisa已锁定",
+    "authenticate": "认证",
+    "biometricMessage": "触摸指纹传感器",
+    "addedCategories": "已添加的类别",
+    "defaultCategories": "默认的类别",
+    "addedAccounts": "已添加的账户",
+    "defaultAccounts": "默认的账户",
+    "total": "总共",
+    "colorsUI": "颜色 & 界面"
 }
