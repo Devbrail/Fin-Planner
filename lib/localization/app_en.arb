@@ -1070,5 +1070,17 @@
         "description": "Text shown on the section title on settings screen",
         "type": "text",
         "placeholders": {}
+    },
+    "more": "More",
+    "@more": {
+        "description": "Text shown on the button on icon chooser screen",
+        "type": "text",
+        "placeholders": {}
+    },
+    "chooseIcon": "Choose icon",
+    "@chooseIcon": {
+        "description": "Title text shown on the icon chooser screen",
+        "type": "text",
+        "placeholders": {}
     }
 }

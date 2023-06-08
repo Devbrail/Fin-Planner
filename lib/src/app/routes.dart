@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/category/pages/category_icon_picker_page.dart';
 
 import '../../main.dart';
 import '../core/common.dart';
@@ -108,6 +109,9 @@ const categorySelectorPath = '/category-selector';
 const accountSelectorName = 'account-selector';
 const accountSelectorPath = '/account-selector';
 
+const iconPickerName = 'icon-picker';
+const iconPickerPath = 'icon-picker';
+
 final settings = Hive.box(BoxType.settings.name);
 
 final GoRouter goRouter = GoRouter(
@@ -142,7 +146,7 @@ final GoRouter goRouter = GoRouter(
       path: currencySelectorPath,
       builder: (context, state) {
         final forceCurrencySelector =
-            state.queryParams['force_currency_selector'];
+            state.queryParameters['force_currency_selector'];
         return CurrencySelectorPage(
           forceCurrencySelector: forceCurrencySelector == 'true',
         );
@@ -172,9 +176,9 @@ final GoRouter goRouter = GoRouter(
           path: addTransactionPath,
           name: addTransactionsName,
           pageBuilder: (context, state) {
-            final String? transactionTypeString = state.queryParams['type'];
-            final String? accountId = state.queryParams['aid'];
-            final String? categoryId = state.queryParams['cid'];
+            final String? transactionTypeString = state.queryParameters['type'];
+            final String? accountId = state.queryParameters['aid'];
+            final String? categoryId = state.queryParameters['cid'];
             final int typeInt = int.tryParse(transactionTypeString ?? '') ?? 0;
             final TransactionType transactionType =
                 TransactionType.values[typeInt];
@@ -196,20 +200,26 @@ final GoRouter goRouter = GoRouter(
               state.location,
             ),
             child: ExpensePage(
-              expenseId: state.params['eid'],
+              expenseId: state.pathParameters['eid'],
             ),
           ),
         ),
         GoRoute(
-          name: addCategoryName,
-          path: addCategoryPath,
-          builder: (context, state) => const AddCategoryPage(),
-        ),
+            name: addCategoryName,
+            path: addCategoryPath,
+            builder: (context, state) => const AddCategoryPage(),
+            routes: [
+              GoRoute(
+                path: iconPickerPath,
+                name: iconPickerName,
+                builder: (context, state) => const CategoryIconPickerPage(),
+              )
+            ]),
         GoRoute(
           name: editCategoryName,
           path: editCategoryPath,
           builder: (context, state) => AddCategoryPage(
-            categoryId: state.params['cid'],
+            categoryId: state.pathParameters['cid'],
           ),
         ),
         GoRoute(
@@ -226,14 +236,14 @@ final GoRouter goRouter = GoRouter(
           name: editAccountName,
           path: editAccountPath,
           builder: (context, state) => AddAccountPage(
-            accountId: state.params['aid'],
+            accountId: state.pathParameters['aid'],
           ),
         ),
         GoRoute(
           name: accountTransactionName,
           path: accountTransactionPath,
           builder: (context, state) {
-            final String accountId = state.params['aid'] as String;
+            final String accountId = state.pathParameters['aid'] as String;
             return AccountTransactionsPage(
               accountId: accountId,
             );
@@ -243,7 +253,7 @@ final GoRouter goRouter = GoRouter(
               name: editAccountWithIdName,
               path: editAccountWithIdPath,
               builder: (context, state) {
-                final String? accountId = state.params['aid'];
+                final String? accountId = state.pathParameters['aid'];
                 return AddAccountPage(
                   accountId: accountId,
                 );
@@ -253,8 +263,9 @@ final GoRouter goRouter = GoRouter(
               path: addAccountWithIdPath,
               name: addAccountWithIdName,
               pageBuilder: (context, state) {
-                final String? transactionTypeString = state.queryParams['type'];
-                final String? accountId = state.queryParams['aid'];
+                final String? transactionTypeString =
+                    state.queryParameters['type'];
+                final String? accountId = state.queryParameters['aid'];
                 final int typeInt =
                     int.tryParse(transactionTypeString ?? '') ?? 0;
                 final TransactionType transactionType =
@@ -274,7 +285,7 @@ final GoRouter goRouter = GoRouter(
           name: expensesByCategoryName,
           path: expensesByCategoryPath,
           builder: (context, state) => ExpenseListPage(
-            categoryId: state.params['cid'] as String,
+            categoryId: state.pathParameters['cid'] as String,
             accountLocalDataSource: getIt.get(),
             categoryLocalDataSource: getIt.get(),
             expenseDataManager: getIt.get(),
@@ -289,7 +300,7 @@ final GoRouter goRouter = GoRouter(
           name: debtAddOrEditName,
           path: debtAddOrEditPath,
           builder: (context, state) => AddOrEditDebtPage(
-            debtId: state.params['did'],
+            debtId: state.pathParameters['did'],
           ),
         ),
         GoRoute(

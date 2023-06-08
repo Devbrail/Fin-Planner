@@ -38,7 +38,7 @@ class ExpenseItemWidget extends StatelessWidget {
       onTap: () {
         context.goNamed(
           editTransactionsName,
-          params: <String, String>{'eid': expense.superId.toString()},
+          pathParameters: <String, String>{'eid': expense.superId.toString()},
         );
       },
       child: ListTile(
@@ -71,7 +71,7 @@ class ExpenseItemWidget extends StatelessWidget {
           ),
         ),
         trailing: Text(
-          '${expense.type?.sign}${expense.currency.toFormateCurrency()}',
+          expense.currency.toFormateCurrency(),
           style: GoogleFonts.manrope(
             textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: expense.type?.color(context),
@@ -110,7 +110,7 @@ class ExpenseTransferItemWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         onTap: () => context.goNamed(
           editTransactionsName,
-          params: <String, String>{'eid': expense.superId.toString()},
+          pathParameters: <String, String>{'eid': expense.superId.toString()},
         ),
         child: ListTile(
           title: Text(title),

@@ -133,7 +133,7 @@ AppBarTheme appBarThemeDark(ColorScheme colorScheme) {
 
 DialogTheme get dialogTheme {
   return DialogTheme(
-    titleTextStyle: GoogleFonts.manrope(
+    titleTextStyle: GoogleFonts.outfit(
       textStyle: const TextStyle(
         fontWeight: FontWeight.bold,
       ),
@@ -146,7 +146,7 @@ DialogTheme get dialogTheme {
 
 TimePickerThemeData get timePickerTheme {
   return TimePickerThemeData(
-    helpTextStyle: GoogleFonts.manrope(
+    helpTextStyle: GoogleFonts.outfit(
       textStyle: const TextStyle(
         fontWeight: FontWeight.bold,
       ),

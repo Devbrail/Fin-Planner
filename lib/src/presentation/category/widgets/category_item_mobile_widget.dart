@@ -21,7 +21,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
       child: ListTile(
         onTap: () => context.pushNamed(
           editCategoryName,
-          params: <String, String>{'cid': category.superId.toString()},
+          pathParameters: <String, String>{'cid': category.superId.toString()},
         ),
         leading: CircleAvatar(
           backgroundColor: Color(category.color ?? Colors.amber.shade100.value)

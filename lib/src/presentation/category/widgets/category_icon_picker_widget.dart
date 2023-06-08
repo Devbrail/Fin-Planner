@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/app/routes.dart';
 
 import '../../../core/common.dart';
-import '../../widgets/paisa_icon_picker.dart';
 import '../bloc/category_bloc.dart';
 
 class CategoryIconPickerWidget extends StatelessWidget {
@@ -36,16 +37,14 @@ class CategoryIconPickerWidget extends StatelessWidget {
             ),
             color: Theme.of(context).colorScheme.primary,
           ),
-          onTap: () {
-            showIconPicker(
-              context: context,
-              defaultIcon: IconData(
-                codePoint,
-                fontFamily: 'Material Design Icons',
-                fontPackage: 'material_design_icons_flutter',
-              ),
-            ).then((resultIcon) => BlocProvider.of<CategoryBloc>(context)
-                .add(CategoryIconSelectedEvent(resultIcon.codePoint)));
+          onTap: () async {
+            final IconData? result =
+                await context.pushNamed<IconData>(iconPickerName);
+            if (result == null) return;
+            if (context.mounted) {
+              BlocProvider.of<CategoryBloc>(context)
+                  .add(CategoryIconSelectedEvent(result.codePoint));
+            }
           },
         );
       },

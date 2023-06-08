@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../core/common.dart';
 
-Future<IconData> showIconPicker({
+Future<IconData> paisaIconPicker({
   required BuildContext context,
   //required Function(IconData icon) onSelectedIcon,
   IconData defaultIcon = Icons.home_rounded,

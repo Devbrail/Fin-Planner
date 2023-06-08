@@ -29,7 +29,7 @@ class CategoryListWidget extends StatelessWidget {
           onTap: () {
             GoRouter.of(context).pushNamed(
               expensesByCategoryName,
-              params: {'cid': map.key.superId.toString()},
+              pathParameters: {'cid': map.key.superId.toString()},
             );
           },
           child: Padding(

@@ -10,6 +10,6 @@ class GetAccountUseCase {
 
   GetAccountUseCase({required this.accountRepository});
 
-  Account? call(int params) =>
-      accountRepository.fetchAccountFromId(params)?.toEntity();
+  Account? call(int pathParameters) =>
+      accountRepository.fetchAccountFromId(pathParameters)?.toEntity();
 }

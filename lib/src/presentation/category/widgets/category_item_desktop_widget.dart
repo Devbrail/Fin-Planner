@@ -21,7 +21,7 @@ class CategoryItemDesktopWidget extends StatelessWidget {
       child: InkWell(
         onTap: () => context.pushNamed(
           editCategoryPath,
-          params: <String, String>{'cid': category.superId.toString()},
+          pathParameters: <String, String>{'cid': category.superId.toString()},
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

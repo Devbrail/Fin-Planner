@@ -38,7 +38,7 @@ Future<void> initAppShortcuts() async {
   await quickActions.initialize((String shortcutType) {
     goRouter.goNamed(
       addTransactionsName,
-      queryParams: {
+      queryParameters: {
         'type': shortcutType == 'ic_expense'
             ? '0'
             : shortcutType == 'ic_income'

@@ -145,7 +145,7 @@ class DebtItemWidget extends StatelessWidget {
             child: InkWell(
               onTap: () => context.pushNamed(
                 debtAddOrEditName,
-                params: {'did': debt.superId.toString()},
+                pathParameters: {'did': debt.superId.toString()},
               ),
               child: Column(
                 children: [

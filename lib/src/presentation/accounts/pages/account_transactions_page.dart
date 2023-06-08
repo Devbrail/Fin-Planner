@@ -39,7 +39,7 @@ class AccountTransactionsPage extends StatelessWidget {
             onPressed: () {
               GoRouter.of(context).pushNamed(
                 editAccountWithIdName,
-                params: {'aid': accountId},
+                pathParameters: {'aid': accountId},
               );
             },
             icon: const Icon(Icons.edit_rounded),
@@ -154,7 +154,7 @@ class AccountTransactionsPage extends StatelessWidget {
                 onPressed: () {
                   GoRouter.of(context).pushNamed(
                     addTransactionsName,
-                    queryParams: {'aid': accountId, 'type': '1'},
+                    queryParameters: {'aid': accountId, 'type': '1'},
                   );
                 },
                 title: context.loc.income,
@@ -167,7 +167,7 @@ class AccountTransactionsPage extends StatelessWidget {
                 onPressed: () {
                   GoRouter.of(context).pushNamed(
                     addTransactionsName,
-                    queryParams: {'aid': accountId, 'type': '0'},
+                    queryParameters: {'aid': accountId, 'type': '0'},
                   );
                 },
                 title: context.loc.expense,

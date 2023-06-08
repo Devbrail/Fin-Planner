@@ -35,7 +35,9 @@ class AccountCardV2 extends StatelessWidget {
           child: InkWell(
             onTap: () => GoRouter.of(context).pushNamed(
               accountTransactionName,
-              params: <String, String>{'aid': account.superId.toString()},
+              pathParameters: <String, String>{
+                'aid': account.superId.toString()
+              },
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

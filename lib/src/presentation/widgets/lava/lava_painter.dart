@@ -93,10 +93,10 @@ class Lava {
   final List<int> mscases = [0, 3, 0, 3, 1, 3, 0, 3, 2, 2, 0, 2, 1, 1, 0];
   final ix = [1, 0, -1, 0, 0, 1, 0, -1, -1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1];
 
-  List? marchingSquares(List? params, Path path) {
-    int sx = params?[0] ?? 0;
-    int sy = params?[1] ?? 0;
-    int pdir = params?[2] ?? 0;
+  List? marchingSquares(List? pathParameters, Path path) {
+    int sx = pathParameters?[0] ?? 0;
+    int sy = pathParameters?[1] ?? 0;
+    int pdir = pathParameters?[2] ?? 0;
 
     if (matrix[sx]![sy]!.computed == iter) return null;
 
@@ -163,14 +163,14 @@ class Lava {
 
       for (Ball ball in balls) {
         Path path = Path();
-        List? params = [
+        List? pathParameters = [
           (ball.pos.x / step - sx / 2).round(),
           (ball.pos.y / step - sy / 2).round(),
           null
         ];
         do {
-          params = marchingSquares(params, path);
-        } while (params != null);
+          pathParameters = marchingSquares(pathParameters, path);
+        } while (pathParameters != null);
         if (paint) {
           path.close();
 
