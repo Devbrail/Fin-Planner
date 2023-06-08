@@ -8,6 +8,9 @@ import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:paisa/src/core/common.dart';
+import 'package:paisa/src/domain/account/repository/account_repository.dart';
+import 'package:paisa/src/domain/category/repository/category_repository.dart';
+import 'package:paisa/src/domain/expense/repository/expense_repository.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -23,7 +26,7 @@ import 'data.dart';
 
 @Singleton()
 class FileHandler {
-  Future<List<Iterable<int>>> importFromFile() async {
+  Future<void> importFromFile() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
     final FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -32,23 +35,32 @@ class FileHandler {
       allowMultiple: false,
     );
     if (result == null || result.files.isEmpty) {
-      return [];
+      return;
     }
     final file = File(result.files.first.path!);
     final jsonString = await file.readAsString();
     final data = Data.fromRawJson(jsonString);
-    final accountBox = Hive.box<AccountModel>(BoxType.accounts.name);
-    final categoryBox = Hive.box<CategoryModel>(BoxType.category.name);
-    final expenseBox = Hive.box<ExpenseModel>(BoxType.expense.name);
-    await expenseBox.clear();
-    await categoryBox.clear();
-    await accountBox.clear();
+    final LocalAccountDataManager localAccountDataManager = getIt.get();
+    final LocalCategoryDataManager localCategoryDataManager = getIt.get();
+    final LocalExpenseDataManager localExpenseDataManager = getIt.get();
 
-    return Future.wait([
-      expenseBox.addAll(data.expenses),
-      categoryBox.addAll(data.categories),
-      accountBox.addAll(data.accounts),
-    ]);
+    await localExpenseDataManager.clearAll();
+    await localCategoryDataManager.clearAll();
+    await localAccountDataManager.clearAll();
+
+    for (var element in data.accounts) {
+      await localAccountDataManager.updateAccount(element);
+    }
+
+    for (var element in data.categories) {
+      await localCategoryDataManager.updateCategory(element);
+    }
+
+    for (var element in data.expenses) {
+      await localExpenseDataManager.updateExpense(element);
+    }
+
+    return;
   }
 
   Future<bool> backupIntoFile() async {
@@ -94,7 +106,7 @@ class FileHandler {
     final accountDataStore = getIt.get<LocalAccountDataManager>();
     final Iterable<AccountModel> accounts = accountDataStore.exportData();
 
-    final categoryDataStore = getIt.get<LocalCategoryManagerDataSource>();
+    final categoryDataStore = getIt.get<LocalCategoryDataManager>();
     final Iterable<CategoryModel> categories = categoryDataStore.exportData();
 
     final data = {
@@ -109,14 +121,14 @@ class FileHandler {
     final expenseDataStore = getIt.get<LocalExpenseDataManager>();
     final Iterable<ExpenseModel> expenses = expenseDataStore.exportData();
     final accountDataStore = getIt.get<LocalAccountDataManager>();
-    final categoryDataStore = getIt.get<LocalCategoryManagerDataSource>();
+    final categoryDataStore = getIt.get<LocalCategoryDataManager>();
     return csvDataList(expenses.toList(), accountDataStore, categoryDataStore);
   }
 
   List<List<String>> csvDataList(
     List<ExpenseModel> expenses,
     LocalAccountDataManager accountDataSource,
-    LocalCategoryManagerDataSource categoryDataSource,
+    LocalCategoryDataManager categoryDataSource,
   ) =>
       [
         [

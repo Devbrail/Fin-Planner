@@ -19,7 +19,7 @@ class AccountTransactionWidget extends StatelessWidget {
   }) : super(key: key);
 
   final LocalAccountDataManager accountLocalDataSource;
-  final LocalCategoryManagerDataSource categoryLocalDataSource;
+  final LocalCategoryDataManager categoryLocalDataSource;
 
   final bool isScroll;
   @override

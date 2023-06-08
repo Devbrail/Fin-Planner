@@ -20,7 +20,7 @@ class ExpenseListPage extends StatelessWidget {
 
   final String categoryId;
   final LocalAccountDataManager accountLocalDataSource;
-  final LocalCategoryManagerDataSource categoryLocalDataSource;
+  final LocalCategoryDataManager categoryLocalDataSource;
   final LocalExpenseDataManager expenseDataManager;
 
   @override

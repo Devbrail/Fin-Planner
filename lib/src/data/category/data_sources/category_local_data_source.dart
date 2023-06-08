@@ -1,6 +1,6 @@
 import '../model/category_model.dart';
 
-abstract class LocalCategoryManagerDataSource {
+abstract class LocalCategoryDataManager {
   Future<void> addCategory(CategoryModel category);
   Future<void> deleteCategory(int key);
   Future<List<CategoryModel>> categories();

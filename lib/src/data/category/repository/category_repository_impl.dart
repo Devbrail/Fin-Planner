@@ -12,7 +12,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
     @Named('settings') required this.settings,
   });
 
-  final LocalCategoryManagerDataSource dataSources;
+  final LocalCategoryDataManager dataSources;
   final Box<dynamic> settings;
 
   @override

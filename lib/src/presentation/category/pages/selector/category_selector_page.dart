@@ -23,7 +23,7 @@ class CategorySelectorPage extends StatefulWidget {
 
 class _CategorySelectorPageState extends State<CategorySelectorPage> {
   final List<CategoryModel> defaultModels = defaultCategoriesData();
-  final LocalCategoryManagerDataSource dataSource = getIt.get();
+  final LocalCategoryDataManager dataSource = getIt.get();
   final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   @override

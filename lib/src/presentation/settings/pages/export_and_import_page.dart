@@ -1,6 +1,8 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/presentation/settings/cubit/data_cubit.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../main.dart';
@@ -29,7 +31,7 @@ class ExportAndImportPage extends StatelessWidget {
     return false;
   }
 
-  Future<List<Iterable<int>>> _selectedFileAndImportData() async {
+  Future<void> _selectedFileAndImportData() async {
     final FileHandler fileHandler = getIt.get<FileHandler>();
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
@@ -43,88 +45,108 @@ class ExportAndImportPage extends StatelessWidget {
         return fileHandler.importFromFile();
       }
     }
-    return [];
+    return;
   }
 
   @override
   Widget build(BuildContext context) {
+    final DataCubit dataCubit = getIt.get();
     return PaisaAnnotatedRegionWidget(
       color: Theme.of(context).colorScheme.background,
-      child: Scaffold(
-        appBar: context.materialYouAppBar(context.loc.backupAndRestoreTitle),
-        body: ListView(
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          children: [
-            SettingsGroup(
-              title: context.loc.backupAndRestoreJSONTitle,
-              options: [
-                ListTile(
-                  title: Text(context.loc.backupAndRestoreJSONDesc),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor:
-                                Theme.of(context).colorScheme.primary,
-                            elevation: 0,
-                            padding: const EdgeInsets.all(10),
-                          ),
-                          onPressed: () {
-                            _selectedFileAndImportData().then((value) {
-                              if (value.isEmpty) {
-                                return context.showMaterialSnackBar(
-                                  'Error restore backup ',
-                                );
-                              } else {
-                                return context.showMaterialSnackBar(
-                                  context.loc.restoringBackup,
-                                );
-                              }
-                            });
-                          },
-                          label: Text(context.loc.importData),
-                          icon: const Icon(MdiIcons.fileImport),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor:
-                                Theme.of(context).colorScheme.onPrimary,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.primary,
-                            padding: const EdgeInsets.all(10),
-                          ),
-                          onPressed: () {
-                            _selectedFolderAndBackUpData().then((value) {
-                              if (value) {
-                                return context.showMaterialSnackBar(
-                                  context.loc.creatingBackup,
-                                );
-                              } else {
-                                return context.showMaterialSnackBar(
-                                  'Error backing ',
-                                );
-                              }
-                            });
-                          },
-                          label: Text(context.loc.exportData),
-                          icon: const Icon(MdiIcons.fileExport),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+      child: BlocListener(
+        bloc: dataCubit,
+        listener: (context, state) {
+          if (state is DataSuccess) {
+            context.showMaterialSnackBar(context.loc.restoringBackupSuccess);
+          } else if (state is DataError) {
+            context.showMaterialSnackBar(state.error);
+          } else if (state is DataLoading) {
+            context.showMaterialSnackBar(context.loc.restoringBackup);
+          }
+        },
+        child: Scaffold(
+          appBar: context
+              .materialYouAppBar(context.loc.backupAndRestoreTitle, actions: [
+            BlocBuilder(
+              bloc: dataCubit,
+              builder: (context, state) {
+                if (state is DataLoading) {
+                  return const SizedBox(
+                    height: 16,
+                    width: 16,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
             ),
-          ],
+            const SizedBox(width: 16),
+          ]),
+          body: ListView(
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: [
+              SettingsGroup(
+                title: context.loc.backupAndRestoreJSONTitle,
+                options: [
+                  ListTile(
+                    title: Text(context.loc.backupAndRestoreJSONDesc),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor:
+                                  Theme.of(context).colorScheme.primary,
+                              elevation: 0,
+                              padding: const EdgeInsets.all(10),
+                            ),
+                            onPressed: () {
+                              dataCubit.importDataFromJSON();
+                            },
+                            label: Text(context.loc.importData),
+                            icon: const Icon(MdiIcons.fileImport),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor:
+                                  Theme.of(context).colorScheme.onPrimary,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary,
+                              padding: const EdgeInsets.all(10),
+                            ),
+                            onPressed: () {
+                              _selectedFolderAndBackUpData().then((value) {
+                                if (value) {
+                                  return context.showMaterialSnackBar(
+                                    context.loc.creatingBackup,
+                                  );
+                                } else {
+                                  return context.showMaterialSnackBar(
+                                    'Error backing ',
+                                  );
+                                }
+                              });
+                            },
+                            label: Text(context.loc.exportData),
+                            icon: const Icon(MdiIcons.fileExport),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

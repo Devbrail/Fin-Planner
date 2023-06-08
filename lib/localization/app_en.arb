@@ -757,6 +757,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "restoringBackupSuccess": "Restoring successful",
+    "@restoringBackupSuccess": {
+        "description": "Message shown when the importing backup file",
+        "type": "text",
+        "placeholders": {}
+    },
     "saveAsCSV": "Save as CSV",
     "@saveAsCSV": {
         "description": "Save as CSV "

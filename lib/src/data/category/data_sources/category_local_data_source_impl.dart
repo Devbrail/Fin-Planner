@@ -6,9 +6,8 @@ import 'package:paisa/src/data/category/data_sources/default_category.dart';
 import '../model/category_model.dart';
 import 'category_local_data_source.dart';
 
-@Singleton(as: LocalCategoryManagerDataSource)
-class LocalCategoryManagerDataSourceImpl
-    implements LocalCategoryManagerDataSource {
+@Singleton(as: LocalCategoryDataManager)
+class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
   final Box<CategoryModel> categoryBox;
 
   LocalCategoryManagerDataSourceImpl(this.categoryBox);
