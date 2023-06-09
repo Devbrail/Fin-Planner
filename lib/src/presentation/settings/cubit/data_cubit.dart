@@ -13,8 +13,8 @@ part 'data_state.dart';
 class DataCubit extends Cubit<DataState> {
   DataCubit() : super(DataInitial());
 
-  void importDataFromJSON() {
-    emit(DataLoading());
+  void importDataFromJson() {
+    emit(const DataLoadingState(true));
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     deviceInfo.androidInfo.then((androidInfo) {
       Permission.manageExternalStorage
@@ -36,8 +36,36 @@ class DataCubit extends Cubit<DataState> {
     });
   }
 
+  void exportDataToJson() {
+    emit(const DataLoadingState(false));
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    deviceInfo.androidInfo.then((androidInfo) {
+      Permission.manageExternalStorage
+          .request()
+          .then((statusManageExternalStorage) {
+        if (statusManageExternalStorage.isGranted &&
+            androidInfo.version.sdkInt > 29) {
+          _exportFile();
+        } else if (androidInfo.version.sdkInt < 30) {
+          Permission.storage.request().isGranted.then((value) {
+            if (value) {
+              _exportFile();
+            } else {
+              emit(const DataError('Permission error'));
+            }
+          });
+        }
+      });
+    });
+  }
+
+  void _exportFile() {
+    final FileHandler fileHandler = getIt.get<FileHandler>();
+    fileHandler.backupDataIntoFile().then((value) => emit(DataExportState()));
+  }
+
   void _importFile() {
     final FileHandler fileHandler = getIt.get<FileHandler>();
-    fileHandler.importFromFile().then((value) => emit(DataSuccess()));
+    fileHandler.importDataFromFile().then((value) => emit(DataSuccessState()));
   }
 }

@@ -751,6 +751,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "creatingBackupSuccess": "Backup successful",
+    "@creatingBackupSuccess": {
+        "description": "Message shown when the importing backup file",
+        "type": "text",
+        "placeholders": {}
+    },
     "restoringBackup": "Restoring backup",
     "@restoringBackup": {
         "description": "Message shown when the importing backup file",

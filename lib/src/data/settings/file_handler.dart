@@ -26,9 +26,9 @@ import 'data.dart';
 
 @Singleton()
 class FileHandler {
-  Future<void> importFromFile() async {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+  Future<void> importDataFromFile() async {
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
     final FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: androidInfo.version.sdkInt < 29 ? FileType.any : FileType.custom,
       allowedExtensions: androidInfo.version.sdkInt < 29 ? null : ['json'],
@@ -63,7 +63,7 @@ class FileHandler {
     return;
   }
 
-  Future<bool> backupIntoFile() async {
+  Future<bool> backupDataIntoFile() async {
     final String jsonString = await _fetchAllDataAndEncode();
     final dlPath = await FilePicker.platform.getDirectoryPath();
     if (dlPath == null) {

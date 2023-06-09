@@ -9,9 +9,15 @@ abstract class DataState extends Equatable {
 
 class DataInitial extends DataState {}
 
-class DataSuccess extends DataState {}
+class DataSuccessState extends DataState {}
 
-class DataLoading extends DataState {}
+class DataLoadingState extends DataState {
+  final bool isLoadingImport;
+
+  const DataLoadingState(this.isLoadingImport);
+}
+
+class DataExportState extends DataState {}
 
 class DataError extends DataState {
   final String error;

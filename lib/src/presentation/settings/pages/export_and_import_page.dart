@@ -1,52 +1,15 @@
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/presentation/settings/cubit/data_cubit.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../data/settings/file_handler.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
+import '../cubit/data_cubit.dart';
 import '../widgets/settings_group_card.dart';
 
 class ExportAndImportPage extends StatelessWidget {
   const ExportAndImportPage({super.key});
-
-  Future<bool> _selectedFolderAndBackUpData() async {
-    final FileHandler fileHandler = getIt.get<FileHandler>();
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    var statusManageExternalStorage =
-        await Permission.manageExternalStorage.request();
-    if (statusManageExternalStorage.isGranted &&
-        androidInfo.version.sdkInt > 29) {
-      return fileHandler.backupIntoFile();
-    } else if (androidInfo.version.sdkInt < 30) {
-      if (await Permission.storage.request().isGranted) {
-        return fileHandler.backupIntoFile();
-      }
-    }
-    return false;
-  }
-
-  Future<void> _selectedFileAndImportData() async {
-    final FileHandler fileHandler = getIt.get<FileHandler>();
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    var statusManageExternalStorage =
-        await Permission.manageExternalStorage.request();
-    if (statusManageExternalStorage.isGranted &&
-        androidInfo.version.sdkInt > 29) {
-      return fileHandler.importFromFile();
-    } else if (androidInfo.version.sdkInt < 30) {
-      if (await Permission.storage.request().isGranted) {
-        return fileHandler.importFromFile();
-      }
-    }
-    return;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,12 +19,18 @@ class ExportAndImportPage extends StatelessWidget {
       child: BlocListener(
         bloc: dataCubit,
         listener: (context, state) {
-          if (state is DataSuccess) {
+          if (state is DataSuccessState) {
             context.showMaterialSnackBar(context.loc.restoringBackupSuccess);
           } else if (state is DataError) {
             context.showMaterialSnackBar(state.error);
-          } else if (state is DataLoading) {
-            context.showMaterialSnackBar(context.loc.restoringBackup);
+          } else if (state is DataLoadingState) {
+            context.showMaterialSnackBar(
+              state.isLoadingImport
+                  ? context.loc.restoringBackup
+                  : context.loc.creatingBackup,
+            );
+          } else if (state is DataExportState) {
+            context.showMaterialSnackBar(context.loc.creatingBackupSuccess);
           }
         },
         child: Scaffold(
@@ -70,7 +39,7 @@ class ExportAndImportPage extends StatelessWidget {
             BlocBuilder(
               bloc: dataCubit,
               builder: (context, state) {
-                if (state is DataLoading) {
+                if (state is DataLoadingState) {
                   return const SizedBox(
                     height: 16,
                     width: 16,
@@ -106,9 +75,7 @@ class ExportAndImportPage extends StatelessWidget {
                               elevation: 0,
                               padding: const EdgeInsets.all(10),
                             ),
-                            onPressed: () {
-                              dataCubit.importDataFromJSON();
-                            },
+                            onPressed: () => dataCubit.importDataFromJson(),
                             label: Text(context.loc.importData),
                             icon: const Icon(MdiIcons.fileImport),
                           ),
@@ -123,19 +90,7 @@ class ExportAndImportPage extends StatelessWidget {
                                   Theme.of(context).colorScheme.primary,
                               padding: const EdgeInsets.all(10),
                             ),
-                            onPressed: () {
-                              _selectedFolderAndBackUpData().then((value) {
-                                if (value) {
-                                  return context.showMaterialSnackBar(
-                                    context.loc.creatingBackup,
-                                  );
-                                } else {
-                                  return context.showMaterialSnackBar(
-                                    'Error backing ',
-                                  );
-                                }
-                              });
-                            },
+                            onPressed: () => dataCubit.exportDataToJson(),
                             label: Text(context.loc.exportData),
                             icon: const Icon(MdiIcons.fileExport),
                           ),
