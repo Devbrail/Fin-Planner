@@ -50,3 +50,5 @@ app.*.map.json
 *.VSCodeCounter
 /expense.jks
 android/app/google-services.json
+.fvm/flutter_sdk
+.fvm/
