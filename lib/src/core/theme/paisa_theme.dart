@@ -151,6 +151,11 @@ TimePickerThemeData get timePickerTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
+    hourMinuteTextStyle: GoogleFonts.outfit(
+      textStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+    ),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
     hourMinuteShape: const CircleBorder(),
   );

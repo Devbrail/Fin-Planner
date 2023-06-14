@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  bezier_chart_plus:
+    dependency: "direct main"
+    description:
+      name: bezier_chart_plus
+      sha256: "895db80bad8ec142776e362b570ca9539dbb2d28d18af45b675e789f21d4b740"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   bloc:
     dependency: transitive
     description:
@@ -387,6 +395,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.9"
+  flutter_slidable:
+    dependency: "direct main"
+    description:
+      name: flutter_slidable
+      sha256: cc4231579e3eae41ae166660df717f4bad1359c87f4a4322ad8ba1befeb3d2be
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -1235,5 +1251,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=3.0.0-0 <4.0.0"
-  flutter: ">=3.4.0-17.0.pre"
+  dart: ">=3.0.2 <4.0.0"
+  flutter: ">=3.7.0"

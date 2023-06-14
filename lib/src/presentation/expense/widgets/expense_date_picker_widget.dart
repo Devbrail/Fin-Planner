@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/presentation/widgets/paisa_date_picker.dart';
 
 import '../../../core/common.dart';
+import '../../widgets/paisa_time_picker.dart';
 import '../bloc/expense_bloc.dart';
 
 class ExpenseDatePickerWidget extends StatefulWidget {
@@ -31,11 +34,9 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 onTap: () async {
-                  final DateTime? dateTime = await showDatePicker(
-                    context: context,
-                    initialDate: selectedDateTime,
-                    firstDate: DateTime(1950),
-                    lastDate: DateTime.now(),
+                  final DateTime? dateTime = await paisaDatePicker(
+                    context,
+                    selectedDateTime: selectedDateTime,
                   );
                   if (dateTime != null) {
                     setState(() {
@@ -62,11 +63,7 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 onTap: () async {
-                  final TimeOfDay? timeOfDay = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay.now(),
-                    initialEntryMode: TimePickerEntryMode.dialOnly,
-                  );
+                  final TimeOfDay? timeOfDay = await paisaTimerPicker(context);
                   if (timeOfDay != null) {
                     setState(() {
                       selectedDateTime = selectedDateTime.copyWith(

@@ -9,6 +9,12 @@ import '../enum/filter_expense.dart';
 import '../enum/transaction_type.dart';
 
 extension ExpenseModelBoxMapping on Box<ExpenseModel> {
+  List<Expense> get toEntities {
+    return values
+        .map((expenseModel) => expenseModel.toEntity())
+        .sorted((a, b) => b.time.compareTo(a.time));
+  }
+
   List<Expense> search(
     query, {
     int? selectedAccountId = -1,
@@ -32,12 +38,13 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
   }
 
   List<ExpenseModel> get expenses =>
-      values.toList()..sort(((a, b) => b.time.compareTo(a.time)));
+      values.sorted(((a, b) => b.time.compareTo(a.time)));
 
   List<ExpenseModel> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
 
   List<ExpenseModel> get budgetOverView => values
+      .sorted((a, b) => b.time.compareTo(a.time))
       .where((element) => element.categoryId != -1 && element.accountId != -1)
       .where((element) => element.type == TransactionType.expense)
       .toList();
@@ -88,8 +95,7 @@ extension ExpenseModelsHelper on Iterable<ExpenseModel> {
 }
 
 extension ExpensesHelper on Iterable<Expense> {
-  List<Expense> get expenses =>
-      toList()..sort(((a, b) => b.time.compareTo(a.time)));
+  List<Expense> get expenses => sorted(((a, b) => b.time.compareTo(a.time)));
 
   List<Expense> get expenseList =>
       where((element) => element.type == TransactionType.expense).toList();
@@ -138,6 +144,8 @@ extension ExpensesHelper on Iterable<Expense> {
               element.time.month == DateTime.now().month &&
               element.time.year == DateTime.now().year)
           .toList();
+  List<double> get expenseDoubleList =>
+      thisMonthExpensesList.map((element) => element.currency).toList();
 
   List<Expense> get thisMonthIncomeList =>
       where((element) => element.type == TransactionType.income)
@@ -145,9 +153,6 @@ extension ExpensesHelper on Iterable<Expense> {
               element.time.month == DateTime.now().month &&
               element.time.year == DateTime.now().year)
           .toList();
-
-  List<double> get expenseDoubleList =>
-      thisMonthExpensesList.map((element) => element.currency).toList();
 
   List<double> get incomeDoubleList =>
       thisMonthIncomeList.map((element) => element.currency).toList();

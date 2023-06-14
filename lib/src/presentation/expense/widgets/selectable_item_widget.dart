@@ -62,7 +62,13 @@ class ItemWidget extends StatelessWidget {
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
-                subtitle: subtitle != null ? Text(subtitle!) : null,
+                subtitle: subtitle != null
+                    ? Text(
+                        subtitle!,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      )
+                    : null,
               )
             ],
           ),
