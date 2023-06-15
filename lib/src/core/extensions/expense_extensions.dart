@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/overview/pages/overview_page.dart';
 
 import '../../data/expense/model/expense_model.dart';
 import '../../domain/expense/entities/expense.dart';
@@ -43,10 +44,14 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
   List<ExpenseModel> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
 
-  List<ExpenseModel> get budgetOverView => values
+  List<ExpenseModel> budgetOverView(OverviewType overviewType) => values
       .sorted((a, b) => b.time.compareTo(a.time))
       .where((element) => element.categoryId != -1 && element.accountId != -1)
-      .where((element) => element.type == TransactionType.expense)
+      .where((element) =>
+          element.type ==
+          (overviewType == OverviewType.income
+              ? TransactionType.expense
+              : TransactionType.income))
       .toList();
 
   List<ExpenseModel> isFilterTimeBetween(DateTimeRange range) =>
@@ -92,6 +97,17 @@ extension ExpenseModelsHelper on Iterable<ExpenseModel> {
     return map((expenseModel) => expenseModel.toEntity())
         .sorted((a, b) => b.time.compareTo(a.time));
   }
+
+  List<ExpenseModel> budgetOverView(OverviewType overviewType) =>
+      sorted((a, b) => b.time.compareTo(a.time))
+          .where(
+              (element) => element.categoryId != -1 && element.accountId != -1)
+          .where((element) =>
+              element.type ==
+              (overviewType == OverviewType.income
+                  ? TransactionType.income
+                  : TransactionType.expense))
+          .toList();
 }
 
 extension ExpensesHelper on Iterable<Expense> {

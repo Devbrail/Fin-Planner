@@ -7,14 +7,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/domain/account/repository/account_repository.dart';
-import 'package:paisa/src/domain/category/repository/category_repository.dart';
-import 'package:paisa/src/domain/expense/repository/expense_repository.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../main.dart';
+import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
 import '../accounts/data_sources/local_account_data_manager.dart';
 import '../accounts/model/account_model.dart';

@@ -51,7 +51,7 @@ class BudgetCubit extends Cubit<BudgetState> {
     emit(FilteredCategoryListState(
       categoryGroupedExpenses.sorted(
           (a, b) => b.value.totalExpense.compareTo(a.value.totalExpense)),
-      selectedTimeExpenses.totalExpense,
+      selectedTimeExpenses.total,
     ));
   }
 }

@@ -66,14 +66,14 @@ class CategoryListWidget extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: LinearProgressIndicator(
-                            value: map.value.totalExpense / totalExpense,
+                            value: map.value.total / totalExpense,
                             color: Color(
                                 map.key.color ?? Colors.amber.shade100.value),
                           ),
                         ),
                       ),
                     ),
-                    Text(map.value.totalExpense.toFormateCurrency())
+                    Text(map.value.total.toFormateCurrency())
                   ],
                 )
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/presentation/overview/pages/overview_page.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_expense.dart';
@@ -21,18 +22,18 @@ class SummaryController {
 
   final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier =
       ValueNotifier<DateTimeRange?>(null);
-
   final FilterExpense filterExpense =
       getIt.get<SettingsController>().fetchFilterExpense();
-
-  late final ValueNotifier<FilterExpense> filterExpenseNotifier =
-      ValueNotifier<FilterExpense>(filterExpense);
-
   final GetAccountUseCase getAccountUseCase;
   final GetCategoryUseCase getCategoryUseCase;
   final GetExpensesFromCategoryIdUseCase getExpensesFromCategoryIdUseCase;
   final FilterExpense sortHomeExpense =
       getIt.get<SettingsController>().fetchFilterExpense(isHome: true);
+  final ValueNotifier<OverviewType> typeNotifier =
+      ValueNotifier<OverviewType>(OverviewType.income);
+
+  late final ValueNotifier<FilterExpense> filterExpenseNotifier =
+      ValueNotifier<FilterExpense>(filterExpense);
 
   late final ValueNotifier<FilterExpense> sortHomeExpenseNotifier =
       ValueNotifier<FilterExpense>(sortHomeExpense);

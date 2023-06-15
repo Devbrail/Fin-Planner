@@ -23,4 +23,4 @@ const String userCustomCurrencyLeftOrRightKey =
     'user_custom_currency_let_or_right_key';
 const String scheduleTime = 'schedule_time_key';
 const String fontFamilyName = 'Material Design Icons';
-const String fontFamilyPackageName = 'Material Design Icons';
+const String fontFamilyPackageName = 'material_design_icons_flutter';
