@@ -102,8 +102,8 @@ class SelectedItem extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                       IconData(
                         MdiIcons.plus.codePoint,
-                        fontFamily: 'Material Design Icons',
-                        fontPackage: 'material_design_icons_flutter',
+                        fontFamily: fontFamilyName,
+                        fontPackage: fontFamilyPackageName,
                       ),
                     ),
                     shape: RoundedRectangleBorder(
@@ -142,8 +142,8 @@ class SelectedItem extends StatelessWidget {
                           : Theme.of(context).colorScheme.onSurfaceVariant,
                       IconData(
                         category.icon,
-                        fontFamily: 'Material Design Icons',
-                        fontPackage: 'material_design_icons_flutter',
+                        fontFamily: fontFamilyName,
+                        fontPackage: fontFamilyPackageName,
                       ),
                     ),
                     shape: RoundedRectangleBorder(

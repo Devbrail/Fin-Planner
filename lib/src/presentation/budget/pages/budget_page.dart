@@ -71,8 +71,8 @@ class BudgetItem extends StatelessWidget {
         child: Icon(
           IconData(
             category.icon,
-            fontFamily: 'Material Design Icons',
-            fontPackage: 'material_design_icons_flutter',
+            fontFamily: fontFamilyName,
+            fontPackage: fontFamilyPackageName,
           ),
           color: category.foregroundColor,
         ),

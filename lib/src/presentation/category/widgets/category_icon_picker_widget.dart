@@ -32,8 +32,8 @@ class CategoryIconPickerWidget extends StatelessWidget {
           leading: Icon(
             IconData(
               codePoint,
-              fontFamily: 'Material Design Icons',
-              fontPackage: 'material_design_icons_flutter',
+              fontFamily: fontFamilyName,
+              fontPackage: fontFamilyPackageName,
             ),
             color: Theme.of(context).colorScheme.primary,
           ),

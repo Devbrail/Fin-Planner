@@ -45,8 +45,8 @@ class CategoryListWidget extends StatelessWidget {
                             Color(map.key.color ?? Colors.amber.shade100.value),
                         IconData(
                           map.key.icon,
-                          fontFamily: 'Material Design Icons',
-                          fontPackage: 'material_design_icons_flutter',
+                          fontFamily: fontFamilyName,
+                          fontPackage: fontFamilyPackageName,
                         ),
                       ),
                     ),

@@ -333,8 +333,8 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                     color: Theme.of(context).colorScheme.primary,
                     IconData(
                       MdiIcons.plus.codePoint,
-                      fontFamily: 'Material Design Icons',
-                      fontPackage: 'material_design_icons_flutter',
+                      fontFamily: fontFamilyName,
+                      fontPackage: fontFamilyPackageName,
                     ),
                   ),
                   shape: RoundedRectangleBorder(
@@ -375,8 +375,8 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                         : Theme.of(context).colorScheme.onSurfaceVariant,
                     IconData(
                       category.icon,
-                      fontFamily: 'Material Design Icons',
-                      fontPackage: 'material_design_icons_flutter',
+                      fontFamily: fontFamilyName,
+                      fontPackage: fontFamilyPackageName,
                     ),
                   ),
                   shape: RoundedRectangleBorder(

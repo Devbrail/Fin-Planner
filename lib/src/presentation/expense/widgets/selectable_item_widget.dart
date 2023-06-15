@@ -47,8 +47,8 @@ class ItemWidget extends StatelessWidget {
                   child: Icon(
                     IconData(
                       icon,
-                      fontFamily: 'Material Design Icons',
-                      fontPackage: 'material_design_icons_flutter',
+                      fontFamily: fontFamilyName,
+                      fontPackage: fontFamilyPackageName,
                     ),
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),

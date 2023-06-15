@@ -230,8 +230,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                             : Theme.of(context).colorScheme.onSurfaceVariant,
                         IconData(
                           account.cardType!.icon.codePoint,
-                          fontFamily: 'Material Design Icons',
-                          fontPackage: 'material_design_icons_flutter',
+                          fontFamily: fontFamilyName,
+                          fontPackage: fontFamilyPackageName,
                         ),
                       ),
                       shape: RoundedRectangleBorder(
@@ -300,8 +300,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                             : Theme.of(context).colorScheme.onSurfaceVariant,
                         IconData(
                           account.icon,
-                          fontFamily: 'Material Design Icons',
-                          fontPackage: 'material_design_icons_flutter',
+                          fontFamily: fontFamilyName,
+                          fontPackage: fontFamilyPackageName,
                         ),
                       ),
                       shape: RoundedRectangleBorder(

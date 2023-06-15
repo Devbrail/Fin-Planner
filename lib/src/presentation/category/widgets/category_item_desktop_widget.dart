@@ -34,8 +34,8 @@ class CategoryItemDesktopWidget extends StatelessWidget {
                   Icon(
                     IconData(
                       category.icon,
-                      fontFamily: 'Material Design Icons',
-                      fontPackage: 'material_design_icons_flutter',
+                      fontFamily: fontFamilyName,
+                      fontPackage: fontFamilyPackageName,
                     ),
                     size: 42,
                     color: Theme.of(context).colorScheme.onSurface,

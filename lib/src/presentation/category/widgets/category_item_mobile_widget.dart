@@ -29,8 +29,8 @@ class CategoryItemMobileWidget extends StatelessWidget {
           child: Icon(
             IconData(
               category.icon,
-              fontFamily: 'Material Design Icons',
-              fontPackage: 'material_design_icons_flutter',
+              fontFamily: fontFamilyName,
+              fontPackage: fontFamilyPackageName,
             ),
             size: 28,
             color: Color(category.color ?? Colors.amber.shade100.value),

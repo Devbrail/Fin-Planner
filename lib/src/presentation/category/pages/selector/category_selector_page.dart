@@ -71,8 +71,8 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                       leading: Icon(
                         IconData(
                           model.icon,
-                          fontFamily: 'Material Design Icons',
-                          fontPackage: 'material_design_icons_flutter',
+                          fontFamily: fontFamilyName,
+                          fontPackage: fontFamilyPackageName,
                         ),
                         color:
                             Color(model.color ?? Colors.brown.shade200.value),
@@ -120,8 +120,8 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                             avatar: Icon(
                               IconData(
                                 model.icon,
-                                fontFamily: 'Material Design Icons',
-                                fontPackage: 'material_design_icons_flutter',
+                                fontFamily: fontFamilyName,
+                                fontPackage: fontFamilyPackageName,
                               ),
                               color: Theme.of(context).colorScheme.primary,
                             ),

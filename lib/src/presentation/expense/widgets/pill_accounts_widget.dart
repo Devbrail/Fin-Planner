@@ -89,8 +89,8 @@ class PaisaFilterChip extends StatelessWidget {
               : Theme.of(context).colorScheme.onSurfaceVariant,
           IconData(
             icon,
-            fontFamily: 'Material Design Icons',
-            fontPackage: 'material_design_icons_flutter',
+            fontFamily: fontFamilyName,
+            fontPackage: fontFamilyPackageName,
           ),
         ),
         shape: RoundedRectangleBorder(
