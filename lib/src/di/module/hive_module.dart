@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 
@@ -57,7 +59,7 @@ abstract class HiveBoxModule {
 
 class HiveAdapters {
   Future<void> initHive() async {
-    await Hive.initFlutter(Platform.isWindows ? 'paisa' : null);
+    await Hive.initFlutter(hivePath);
     Hive
       ..registerAdapter(ExpenseModelAdapter())
       ..registerAdapter(CategoryModelAdapter())
@@ -70,5 +72,15 @@ class HiveAdapters {
       ..registerAdapter(RecurringTypeAdapter())
       ..registerAdapter(RecurringModelAdapter())
       ..registerAdapter(FilterExpenseAdapter());
+  }
+
+  String? get hivePath {
+    if (kIsWeb) {
+      return 'paisa';
+    } else if (TargetPlatform.windows == defaultTargetPlatform) {
+      return 'paisa';
+    } else {
+      return null;
+    }
   }
 }

@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:get_it/get_it.dart';
@@ -22,10 +21,14 @@ Future<GetIt> configInjector(
 }) async {
   usePathUrlStrategy();
   await HiveAdapters().initHive();
-  if (Platform.isAndroid) {
+  if (TargetPlatform.android == defaultTargetPlatform) {
     await FlutterDisplayMode.setHighRefreshRate();
   }
-  initAppShortcuts();
+  if (TargetPlatform.android == defaultTargetPlatform ||
+      TargetPlatform.iOS == defaultTargetPlatform) {
+    initAppShortcuts();
+  }
+
   return init(
     getIt,
     environmentFilter: environmentFilter,

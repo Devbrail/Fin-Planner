@@ -73,7 +73,6 @@ class IntroBigScreenWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ListTile(
-                          horizontalTitleGap: 0,
                           contentPadding: EdgeInsets.zero,
                           leading: Icon(
                             Icons.check_circle,
@@ -92,7 +91,6 @@ class IntroBigScreenWidget extends StatelessWidget {
                           ),
                         ),
                         ListTile(
-                          horizontalTitleGap: 0,
                           contentPadding: EdgeInsets.zero,
                           leading: Icon(
                             Icons.check_circle,
@@ -111,7 +109,6 @@ class IntroBigScreenWidget extends StatelessWidget {
                           ),
                         ),
                         ListTile(
-                          horizontalTitleGap: 0,
                           contentPadding: EdgeInsets.zero,
                           leading: Icon(
                             Icons.check_circle,
