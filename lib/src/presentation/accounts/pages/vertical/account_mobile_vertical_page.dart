@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/domain/account/entities/account.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
+import '../../../../core/common.dart';
 import '../../../../data/expense/model/expense_model.dart';
+import '../../../../domain/account/entities/account.dart';
 import '../../../../domain/expense/entities/expense.dart';
 import '../../widgets/account_card_v2.dart';
 

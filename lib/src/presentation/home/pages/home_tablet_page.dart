@@ -64,11 +64,25 @@ class HomeTabletPage extends StatelessWidget {
 
                       break;
                     case 6:
-                      GoRouter.of(context).pushNamed(settingsPath);
+                      GoRouter.of(context).goNamed(recurringTransactionsName);
                       break;
                     default:
                   }
                 },
+                minWidth: 55,
+                useIndicator: true,
+                groupAlignment: 1,
+                trailing: Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: IconButton(
+                      onPressed: () {
+                        GoRouter.of(context).pushNamed(settingsPath);
+                      },
+                      icon: const Icon(MdiIcons.cog),
+                    ),
+                  ),
+                ),
                 destinations: [
                   NavigationRailDestination(
                     label: Text(context.loc.home),
@@ -101,9 +115,9 @@ class HomeTabletPage extends StatelessWidget {
                     selectedIcon: const Icon(MdiIcons.timetable),
                   ),
                   NavigationRailDestination(
-                    label: Text(context.loc.settings),
-                    icon: const Icon(MdiIcons.cog),
-                    selectedIcon: const Icon(MdiIcons.cog),
+                    label: Text(context.loc.recurring),
+                    icon: const Icon(MdiIcons.cashSync),
+                    selectedIcon: const Icon(MdiIcons.cashSync),
                   ),
                 ],
               );

@@ -2,6 +2,7 @@ import 'package:bezier_chart_plus/bezier_chart_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
@@ -74,13 +75,6 @@ class OverViewPage extends StatelessWidget {
               dateTimeRangeNotifier: summaryController.dateTimeRangeNotifier,
               expenses: expenses,
               builder: (expenses) {
-                if (expenses.isEmpty) {
-                  return EmptyWidget(
-                    icon: Icons.paid,
-                    title: context.loc.emptyOverviewMessageTitle,
-                    description: context.loc.emptyOverviewMessageSubtitle,
-                  );
-                }
                 return ValueListenableBuilder<FilterExpense>(
                   valueListenable: summaryController.filterExpenseNotifier,
                   builder: (context, value, child) {
@@ -90,52 +84,125 @@ class OverViewPage extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         children: [
-                          const TransactionTypeSegmentedWidget(),
-                          BlocBuilder(
-                            bloc: budgetCubit,
-                            buildWhen: (previous, current) =>
-                                current is InitialSelectedState,
-                            builder: (context, state) {
-                              if (state is InitialSelectedState) {
-                                return SizedBox(
-                                  height: 70,
-                                  child: Row(
-                                    children: [
-                                      const SizedBox(width: 8),
-                                      const PaisaFilterTransactionWidget(),
-                                      Expanded(
-                                        child: ListView.builder(
-                                          shrinkWrap: true,
-                                          physics:
-                                              const BouncingScrollPhysics(),
-                                          padding: const EdgeInsets.all(16),
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: state.filerTimes.length,
-                                          itemBuilder: (context, index) {
-                                            final item =
-                                                state.filerTimes[index];
-                                            return PaisaPillChip(
-                                              title: item,
-                                              onPressed: () {
-                                                if (budgetCubit.selectedTime !=
-                                                    item) {
-                                                  budgetCubit
-                                                      .updateFilterTime(item);
-                                                }
-                                              },
-                                              isSelected: item ==
-                                                  budgetCubit.selectedTime,
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ],
+                          ScreenTypeLayout(
+                            tablet: Row(
+                              children: [
+                                Expanded(
+                                  child: BlocBuilder(
+                                    bloc: budgetCubit,
+                                    buildWhen: (previous, current) =>
+                                        current is InitialSelectedState,
+                                    builder: (context, state) {
+                                      if (state is InitialSelectedState) {
+                                        return SizedBox(
+                                          height: 70,
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(width: 8),
+                                              const PaisaFilterTransactionWidget(),
+                                              Expanded(
+                                                child: ListView.builder(
+                                                  shrinkWrap: true,
+                                                  physics:
+                                                      const BouncingScrollPhysics(),
+                                                  padding:
+                                                      const EdgeInsets.all(16),
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemCount:
+                                                      state.filerTimes.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    final item =
+                                                        state.filerTimes[index];
+                                                    return PaisaPillChip(
+                                                      title: item,
+                                                      onPressed: () {
+                                                        if (budgetCubit
+                                                                .selectedTime !=
+                                                            item) {
+                                                          budgetCubit
+                                                              .updateFilterTime(
+                                                                  item);
+                                                        }
+                                                      },
+                                                      isSelected: item ==
+                                                          budgetCubit
+                                                              .selectedTime,
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      } else {
+                                        return const SizedBox.shrink();
+                                      }
+                                    },
                                   ),
-                                );
-                              } else {
-                                return const SizedBox.shrink();
-                              }
-                            },
+                                ),
+                                const TransactionTypeSegmentedWidget(),
+                              ],
+                            ),
+                            mobile: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                const TransactionTypeSegmentedWidget(),
+                                BlocBuilder(
+                                  bloc: budgetCubit,
+                                  buildWhen: (previous, current) =>
+                                      current is InitialSelectedState,
+                                  builder: (context, state) {
+                                    if (state is InitialSelectedState) {
+                                      return SizedBox(
+                                        height: 70,
+                                        child: Row(
+                                          children: [
+                                            const SizedBox(width: 8),
+                                            const PaisaFilterTransactionWidget(),
+                                            Expanded(
+                                              child: ListView.builder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    const BouncingScrollPhysics(),
+                                                padding:
+                                                    const EdgeInsets.all(16),
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount:
+                                                    state.filerTimes.length,
+                                                itemBuilder: (context, index) {
+                                                  final item =
+                                                      state.filerTimes[index];
+                                                  return PaisaPillChip(
+                                                    title: item,
+                                                    onPressed: () {
+                                                      if (budgetCubit
+                                                              .selectedTime !=
+                                                          item) {
+                                                        budgetCubit
+                                                            .updateFilterTime(
+                                                                item);
+                                                      }
+                                                    },
+                                                    isSelected: item ==
+                                                        budgetCubit
+                                                            .selectedTime,
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    } else {
+                                      return const SizedBox.shrink();
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                           BlocBuilder(
                             bloc: budgetCubit,
@@ -143,12 +210,27 @@ class OverViewPage extends StatelessWidget {
                                 current is FilteredCategoryListState,
                             builder: (context, state) {
                               if (state is FilteredCategoryListState) {
-                                return CategoryListWidget(
-                                  categoryGrouped: state.categoryGrouped,
-                                  totalExpense: state.totalExpense,
-                                );
+                                if (state.categoryGrouped.isEmpty) {
+                                  return EmptyWidget(
+                                    icon: Icons.paid,
+                                    title:
+                                        context.loc.emptyOverviewMessageTitle,
+                                    description: context
+                                        .loc.emptyOverviewMessageSubtitle,
+                                  );
+                                } else {
+                                  return CategoryListWidget(
+                                    categoryGrouped: state.categoryGrouped,
+                                    totalExpense: state.totalExpense,
+                                  );
+                                }
                               } else {
-                                return const SizedBox.shrink();
+                                return EmptyWidget(
+                                  icon: Icons.paid,
+                                  title: context.loc.emptyOverviewMessageTitle,
+                                  description:
+                                      context.loc.emptyOverviewMessageSubtitle,
+                                );
                               }
                             },
                           ),

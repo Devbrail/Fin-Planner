@@ -30,7 +30,7 @@ class SummaryController {
   final FilterExpense sortHomeExpense =
       getIt.get<SettingsController>().fetchFilterExpense(isHome: true);
   final ValueNotifier<OverviewType> typeNotifier =
-      ValueNotifier<OverviewType>(OverviewType.income);
+      ValueNotifier<OverviewType>(OverviewType.expense);
 
   late final ValueNotifier<FilterExpense> filterExpenseNotifier =
       ValueNotifier<FilterExpense>(filterExpense);

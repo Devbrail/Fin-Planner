@@ -24,13 +24,17 @@ class BudgetCubit extends Cubit<BudgetState> {
   String? selectedTime;
 
   void fetchBudgetSummary(List<Expense> expenses, FilterExpense filterExpense) {
-    _groupedExpenses = groupBy(
-        expenses, (Expense expense) => expense.time.formatted(filterExpense));
-    final String time = selectedTime = _groupedExpenses.keys.first;
-    _filterTimes = _groupedExpenses.keys.toList();
-    emit(InitialSelectedState(time, _filterTimes));
-    Future.delayed(Duration.zero)
-        .then((value) => fetchSelectedTimeExpenses(time));
+    if (expenses.isEmpty) {
+      emit(EmptyFilterListState());
+    } else {
+      _groupedExpenses = groupBy(
+          expenses, (Expense expense) => expense.time.formatted(filterExpense));
+      final String time = selectedTime = _groupedExpenses.keys.first;
+      _filterTimes = _groupedExpenses.keys.toList();
+      emit(InitialSelectedState(time, _filterTimes));
+      Future.delayed(Duration.zero)
+          .then((value) => fetchSelectedTimeExpenses(time));
+    }
   }
 
   void updateFilterTime(String time) {
@@ -81,3 +85,5 @@ class FilteredCategoryListState extends BudgetState {
 
   const FilteredCategoryListState(this.categoryGrouped, this.totalExpense);
 }
+
+class EmptyFilterListState extends BudgetState {}
