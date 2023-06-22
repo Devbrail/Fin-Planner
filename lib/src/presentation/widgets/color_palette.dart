@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/core/common.dart';
 
 class ColorPalette extends StatelessWidget {
   const ColorPalette({super.key});
@@ -15,7 +16,7 @@ class ColorPalette extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
               border: Border.all(
-                color: Theme.of(context).colorScheme.outline,
+                color: context.outline,
               ),
             ),
             child: Column(
@@ -29,23 +30,21 @@ class ColorPalette extends StatelessWidget {
                   indent: 0,
                   thickness: 1,
                   height: 1,
-                  color: Theme.of(context).colorScheme.outline,
+                  color: context.outline,
                 ),
                 Container(
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  color: context.primaryContainer,
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
                     'data',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                    style: TextStyle(color: context.primary),
                   ),
                 ),
                 Divider(
                   indent: 0,
                   thickness: 1,
                   height: 1,
-                  color: Theme.of(context).colorScheme.outline,
+                  color: context.outline,
                 ),
                 const Padding(
                   padding: EdgeInsets.all(16.0),
@@ -56,156 +55,156 @@ class ColorPalette extends StatelessWidget {
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.primary,
+            color: context.primary,
             child: Center(
               child: Text(
                 'Text onPrimary ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: context.onPrimary,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: context.primaryContainer,
             child: Center(
               child: Text(
                 'Text onPrimaryContainer ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  color: context.onPrimaryContainer,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.secondary,
+            color: context.secondary,
             child: Center(
               child: Text(
                 'Text onSecondary ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSecondary,
+                  color: context.onSecondary,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.secondaryContainer,
+            color: context.secondaryContainer,
             child: Center(
               child: Text(
                 'Text onSecondaryContainer ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSecondaryContainer,
+                  color: context.onSecondaryContainer,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.tertiary,
+            color: context.tertiary,
             child: Center(
               child: Text(
                 'Text onTertiary ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onTertiary,
+                  color: context.onTertiary,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.tertiaryContainer,
+            color: context.tertiaryContainer,
             child: Center(
               child: Text(
                 'Text onTertiaryContainer ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onTertiaryContainer,
+                  color: context.onTertiaryContainer,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.surface,
+            color: context.surface,
             child: Center(
               child: Text(
                 'Text onSurface ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: context.onSurface,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.surfaceVariant,
+            color: context.surfaceVariant,
             child: Center(
               child: Text(
                 'Text onSurfaceVariant ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  color: context.onSurfaceVariant,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.surfaceTint,
+            color: context.surfaceTint,
             child: Center(
               child: Text(
                 'Text onSurfaceVariant ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  color: context.onSurfaceVariant,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.inverseSurface,
+            color: context.inverseSurface,
             child: Center(
               child: Text(
                 'Text onInverseSurface ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onInverseSurface,
+                  color: context.onInverseSurface,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.background,
+            color: context.background,
             child: Center(
               child: Text(
                 'Text onBackground ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
+                  color: context.onBackground,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.error,
+            color: context.error,
             child: Center(
               child: Text(
                 'Text onError ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onError,
+                  color: context.onError,
                 ),
               ),
             ),
           ),
           Container(
             height: 50,
-            color: Theme.of(context).colorScheme.errorContainer,
+            color: context.errorContainer,
             child: Center(
               child: Text(
                 'Text onErrorContainer ',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onErrorContainer,
+                  color: context.onErrorContainer,
                 ),
               ),
             ),

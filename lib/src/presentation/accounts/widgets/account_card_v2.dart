@@ -53,19 +53,17 @@ class AccountCardV2 extends StatelessWidget {
                   title: Text(
                     account.name,
                     style: GoogleFonts.outfit(
-                      textStyle:
-                          Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: onPrimary,
-                              ),
+                      textStyle: context.bodyMedium?.copyWith(
+                        color: onPrimary,
+                      ),
                     ),
                   ),
                   subtitle: Text(
                     account.bankName,
                     style: GoogleFonts.outfit(
-                      textStyle:
-                          Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: onPrimary.withOpacity(0.5),
-                              ),
+                      textStyle: context.bodyMedium?.copyWith(
+                        color: onPrimary.withOpacity(0.5),
+                      ),
                     ),
                   ),
                 ),
@@ -74,11 +72,10 @@ class AccountCardV2 extends StatelessWidget {
                   child: Text(
                     total,
                     style: GoogleFonts.manrope(
-                      textStyle:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: onPrimary,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      textStyle: context.headlineSmall?.copyWith(
+                        color: onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -87,9 +84,9 @@ class AccountCardV2 extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
                     context.loc.thisMonth,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: onPrimary,
-                        ),
+                    style: context.titleMedium?.copyWith(
+                      color: onPrimary,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -152,9 +149,9 @@ class ThisMonthTransactionWidget extends StatelessWidget {
           Text(
             content,
             style: GoogleFonts.manrope(
-              textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: color,
-                  ),
+              textStyle: context.titleLarge?.copyWith(
+                color: color,
+              ),
             ),
           ),
         ],

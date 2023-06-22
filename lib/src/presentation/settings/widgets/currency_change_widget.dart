@@ -31,7 +31,7 @@ class CurrencyChangeWidget extends StatelessWidget {
                   ListTile(
                     title: Text(
                       context.loc.currencySign,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: context.titleLarge,
                     ),
                   ),
                   ListTile(
@@ -132,7 +132,7 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
             ListTile(
               title: Text(
                 context.loc.customSymbol,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: context.titleLarge,
               ),
             ),
             Padding(
@@ -145,7 +145,7 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
                     contentPadding: EdgeInsets.zero,
                     title: Text(
                       'Sample: ${symbolLeftOrRight ? symbol : ''}${format.format(1000000)}${symbolLeftOrRight ? '' : symbol}',
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: context.titleSmall,
                     ),
                   ),
                   TextFormField(
@@ -217,7 +217,7 @@ class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
                         child: Text(
                           context.loc.delete,
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.error,
+                            color: context.error,
                           ),
                         ),
                       ),

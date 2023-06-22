@@ -45,13 +45,13 @@ class _BiometricPageState extends State<BiometricPage> {
             padding: const EdgeInsets.all(16.0),
             child: Icon(
               MdiIcons.lock,
-              color: Theme.of(context).colorScheme.primary,
+              color: context.primary,
             ),
           ),
           Text(
             context.loc.paisaLocked,
             style: GoogleFonts.outfit(
-              textStyle: Theme.of(context).textTheme.headlineSmall,
+              textStyle: context.headlineSmall,
             ),
           ),
           Expanded(
@@ -67,7 +67,7 @@ class _BiometricPageState extends State<BiometricPage> {
                   Text(
                     context.loc.biometricMessage,
                     style: GoogleFonts.outfit(
-                      textStyle: Theme.of(context).textTheme.bodyMedium,
+                      textStyle: context.bodyMedium,
                     ),
                   )
                 ],

@@ -21,7 +21,7 @@ class SettingsColorPickerWidget extends StatelessWidget {
   int _extractColorValue(BuildContext context, dynamic value) {
     final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
     if (isDynamic) {
-      return Theme.of(context).colorScheme.primary.value;
+      return context.primary.value;
     }
     return value.get(appColorKey, defaultValue: 0xFF795548);
   }
@@ -103,7 +103,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                     ListTile(
                       title: Text(
                         context.loc.pickColor,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: context.titleLarge,
                       ),
                     ),
                     Visibility(
@@ -160,7 +160,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
             ListTile(
               title: Text(
                 context.loc.pickColor,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: context.titleLarge,
               ),
             ),
             ColorPickerGridWidget(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/core/common.dart';
 
 class SettingsOption extends StatelessWidget {
   const SettingsOption({
@@ -23,19 +24,19 @@ class SettingsOption extends StatelessWidget {
           ? null
           : Icon(
               icon,
-              color: Theme.of(context).colorScheme.onBackground,
+              color: context.onBackground,
             ),
       title: Text(
         title,
         style: TextStyle(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: context.onBackground,
         ),
       ),
       subtitle: subtitle != null
           ? Text(
               subtitle!,
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: context.onBackground,
               ),
             )
           : null,

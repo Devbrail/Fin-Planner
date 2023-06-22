@@ -84,9 +84,7 @@ class PaisaFilterChip extends StatelessWidget {
           onPressed.call();
         },
         avatar: Icon(
-          color: isSelected
-              ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).colorScheme.onSurfaceVariant,
+          color: isSelected ? context.primary : context.onSurfaceVariant,
           IconData(
             icon,
             fontFamily: fontFamilyName,
@@ -97,16 +95,14 @@ class PaisaFilterChip extends StatelessWidget {
           borderRadius: BorderRadius.circular(28),
           side: BorderSide(
             width: 1,
-            color: Theme.of(context).colorScheme.primary,
+            color: context.primary,
           ),
         ),
         showCheckmark: false,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         label: Text(title),
-        labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: isSelected
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.onSurfaceVariant),
+        labelStyle: context.titleMedium?.copyWith(
+            color: isSelected ? context.primary : context.onSurfaceVariant),
         padding: const EdgeInsets.all(12),
       ),
     );

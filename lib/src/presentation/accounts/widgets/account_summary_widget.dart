@@ -34,8 +34,8 @@ class AccountSummaryWidget extends StatelessWidget {
               context.loc.thisMonth,
               style: GoogleFonts.outfit(
                 fontWeight: FontWeight.w600,
-                textStyle: Theme.of(context).textTheme.titleMedium,
-                color: Theme.of(context).colorScheme.onBackground,
+                textStyle: context.titleMedium,
+                color: context.onBackground,
               ),
             ),
           ),
@@ -48,7 +48,7 @@ class AccountSummaryWidget extends StatelessWidget {
                   data: expenses.incomeDoubleList,
                   graphLineColor:
                       Theme.of(context).extension<CustomColors>()!.green ??
-                          Theme.of(context).colorScheme.secondary,
+                          context.secondary,
                   iconData: MdiIcons.arrowBottomLeft,
                 ),
               ),
@@ -59,7 +59,7 @@ class AccountSummaryWidget extends StatelessWidget {
                   data: expenses.expenseDoubleList,
                   graphLineColor:
                       Theme.of(context).extension<CustomColors>()!.red ??
-                          Theme.of(context).colorScheme.secondary,
+                          context.secondary,
                   iconData: MdiIcons.arrowTopRight,
                 ),
               ),

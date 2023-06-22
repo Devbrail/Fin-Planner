@@ -32,7 +32,7 @@ class SettingsPage extends StatelessWidget {
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
         .get(themeModeKey, defaultValue: 0)];
     return PaisaAnnotatedRegionWidget(
-      color: Theme.of(context).colorScheme.background,
+      color: context.background,
       child: Scaffold(
         appBar: context.materialYouAppBar(
           context.loc.settings,

@@ -41,6 +41,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         return 2;
       case PageType.overview:
         return 3;
+      case PageType.category:
+        return 4;
+      case PageType.budget:
+        return 5;
       case PageType.home:
       default:
         return 0;
@@ -56,6 +60,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       case 3:
         return PageType.overview;
       case 4:
+        return PageType.category;
+      case 5:
         return PageType.budget;
       case 0:
       default:

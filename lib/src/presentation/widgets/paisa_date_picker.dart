@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paisa/src/core/common.dart';
 
 Future<DateTime?> paisaDatePicker(
   BuildContext context, {
@@ -18,10 +19,10 @@ Future<DateTime?> paisaDatePicker(
               borderRadius: BorderRadius.circular(24),
             ),
             headerHelpStyle: GoogleFonts.outfit(
-              textStyle: Theme.of(context).textTheme.titleMedium,
+              textStyle: context.titleMedium,
             ),
             headerHeadlineStyle: GoogleFonts.outfit(
-              textStyle: Theme.of(context).textTheme.headlineMedium,
+              textStyle: context.headlineMedium,
             ),
           ),
         ),

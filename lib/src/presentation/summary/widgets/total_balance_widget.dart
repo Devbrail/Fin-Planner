@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/currency_util.dart';
+import '../../../core/common.dart';
 
 class TotalBalanceWidget extends StatelessWidget {
   const TotalBalanceWidget({
@@ -20,21 +20,21 @@ class TotalBalanceWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onPrimaryContainer
-                    .withOpacity(0.85),
-              ),
+          style: context.titleMedium?.copyWith(
+            color: Theme.of(context)
+                .colorScheme
+                .onPrimaryContainer
+                .withOpacity(0.85),
+          ),
         ),
         const SizedBox(height: 8),
         Text(
           amount.toFormateCurrency(),
           style: GoogleFonts.manrope(
-            textStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  fontWeight: FontWeight.w700,
-                ),
+            textStyle: context.headlineMedium?.copyWith(
+              color: context.onPrimaryContainer,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
       ],

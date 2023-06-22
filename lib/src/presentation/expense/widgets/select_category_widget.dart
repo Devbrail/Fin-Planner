@@ -39,9 +39,9 @@ class SelectCategoryIcon extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   context.loc.selectCategory,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: context.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               SelectedItem(
@@ -99,7 +99,7 @@ class SelectedItem extends StatelessWidget {
                   return FilterChip(
                     onSelected: (value) => context.pushNamed(addCategoryPath),
                     avatar: Icon(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: context.primary,
                       IconData(
                         MdiIcons.plus.codePoint,
                         fontFamily: fontFamilyName,
@@ -110,7 +110,7 @@ class SelectedItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(28),
                       side: BorderSide(
                         width: 1,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: context.primary,
                       ),
                     ),
                     showCheckmark: false,
@@ -118,15 +118,13 @@ class SelectedItem extends StatelessWidget {
                     label: Text(
                       context.loc.addNew,
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
+                        color: context.primary,
                       ),
                     ),
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleMedium
-                        ?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant),
+                        ?.copyWith(color: context.onSurfaceVariant),
                     padding: const EdgeInsets.all(12),
                   );
                 } else {
@@ -138,8 +136,8 @@ class SelectedItem extends StatelessWidget {
                         expenseBloc.add(ChangeCategoryEvent(category)),
                     avatar: Icon(
                       color: category.superId == expenseBloc.selectedCategoryId
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                          ? context.primary
+                          : context.onSurfaceVariant,
                       IconData(
                         category.icon,
                         fontFamily: fontFamilyName,
@@ -150,7 +148,7 @@ class SelectedItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(28),
                       side: BorderSide(
                         width: 1,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: context.primary,
                       ),
                     ),
                     showCheckmark: false,
@@ -162,7 +160,7 @@ class SelectedItem extends StatelessWidget {
                         ?.copyWith(
                             color: category.superId ==
                                     expenseBloc.selectedCategoryId
-                                ? Theme.of(context).colorScheme.primary
+                                ? context.primary
                                 : Theme.of(context)
                                     .colorScheme
                                     .onSurfaceVariant),

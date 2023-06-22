@@ -56,15 +56,15 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             isAddCategory
                 ? context.loc.successAddCategory
                 : context.loc.updatedCategory,
-            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-            color: Theme.of(context).colorScheme.onPrimaryContainer,
+            backgroundColor: context.primaryContainer,
+            color: context.onPrimaryContainer,
           );
           context.pop();
         } else if (state is CategoryErrorState) {
           context.showMaterialSnackBar(
             state.errorString,
-            backgroundColor: Theme.of(context).colorScheme.errorContainer,
-            color: Theme.of(context).colorScheme.onErrorContainer,
+            backgroundColor: context.errorContainer,
+            color: context.onErrorContainer,
           );
         } else if (state is CategorySuccessState) {
           budgetController.text = state.category.budget.toString();
@@ -115,7 +115,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                       },
                       leading: Icon(
                         Icons.color_lens,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: context.primary,
                       ),
                       title: Text(context.loc.pickColor),
                       subtitle: Text(context.loc.pickColorDesc),

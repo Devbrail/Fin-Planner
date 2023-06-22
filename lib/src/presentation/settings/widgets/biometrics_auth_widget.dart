@@ -64,11 +64,11 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
               content: Text(
                 result ? 'Authenticated' : 'Not authenticated',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  color: context.onPrimaryContainer,
                 ),
               ),
               behavior: SnackBarBehavior.floating,
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              backgroundColor: context.primaryContainer,
             ),
           ));
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/core/common.dart';
 import 'package:paisa/src/core/extensions/filter_expense_extension.dart';
 import '../../summary/controller/summary_controller.dart';
 
@@ -35,7 +36,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                 ListTile(
                   title: Text(
                     'Filter list',
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: context.titleLarge,
                   ),
                 ),
                 Container(
@@ -45,7 +46,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: Theme.of(context).colorScheme.outline,
+                      color: context.outline,
                     ),
                   ),
                   child: Column(
@@ -64,7 +65,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         indent: 0,
                         thickness: 1,
                         height: 1,
-                        color: Theme.of(context).colorScheme.outline,
+                        color: context.outline,
                       ),
                       PaisaToggleButton(
                         title: FilterExpense.weekly.stringValue(context),
@@ -77,7 +78,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         indent: 0,
                         thickness: 1,
                         height: 1,
-                        color: Theme.of(context).colorScheme.outline,
+                        color: context.outline,
                       ),
                       PaisaToggleButton(
                         title: FilterExpense.monthly.stringValue(context),
@@ -88,7 +89,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         indent: 0,
                         thickness: 1,
                         height: 1,
-                        color: Theme.of(context).colorScheme.outline,
+                        color: context.outline,
                       ),
                       PaisaToggleButton(
                         title: FilterExpense.yearly.stringValue(context),
@@ -99,7 +100,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         indent: 0,
                         thickness: 1,
                         height: 1,
-                        color: Theme.of(context).colorScheme.outline,
+                        color: context.outline,
                       ),
                       PaisaToggleButton(
                         itemIndex: ItemIndex.last,

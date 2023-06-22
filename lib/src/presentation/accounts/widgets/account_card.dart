@@ -107,8 +107,8 @@ class MobileAccountCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.1),
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.05),
+              context.titleMedium!.color!.withOpacity(0.1),
+              context.titleMedium!.color!.withOpacity(0.05),
             ],
             stops: const [0.1, 1],
           ),
@@ -116,8 +116,8 @@ class MobileAccountCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.5),
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.5),
+              context.titleMedium!.color!.withOpacity(0.5),
+              context.titleMedium!.color!.withOpacity(0.5),
             ],
           ),
           border: 2,
@@ -133,7 +133,7 @@ class MobileAccountCard extends StatelessWidget {
                         onTap: onDelete,
                         child: Icon(
                           Icons.delete,
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: context.onSurface,
                         ),
                       )
                     : const SizedBox.shrink(),
@@ -144,15 +144,15 @@ class MobileAccountCard extends StatelessWidget {
                 title: Text(
                   context.loc.totalBalance,
                   style: GoogleFonts.outfit(
-                    textStyle: Theme.of(context).textTheme.bodyMedium,
+                    textStyle: context.bodyMedium,
                   ),
                 ),
                 subtitle: Text(
                   totalBalance,
                   style: GoogleFonts.manrope(
-                    textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                    textStyle: context.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -197,18 +197,18 @@ class AccountSummaryTail extends StatelessWidget {
       title: Text(
         title,
         style: GoogleFonts.outfit(
-          textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSecondaryContainer
-                    .withOpacity(0.75),
-              ),
+          textStyle: context.bodyMedium?.copyWith(
+            color: Theme.of(context)
+                .colorScheme
+                .onSecondaryContainer
+                .withOpacity(0.75),
+          ),
         ),
       ),
       subtitle: Text(
         subtitle,
         style: GoogleFonts.manrope(
-          textStyle: Theme.of(context).textTheme.titleMedium,
+          textStyle: context.titleMedium,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -254,8 +254,8 @@ class TabletAccountCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.1),
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.05),
+              context.titleMedium!.color!.withOpacity(0.1),
+              context.titleMedium!.color!.withOpacity(0.05),
             ],
             stops: const [0.1, 1],
           ),
@@ -263,8 +263,8 @@ class TabletAccountCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.5),
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.5),
+              context.titleMedium!.color!.withOpacity(0.5),
+              context.titleMedium!.color!.withOpacity(0.5),
             ],
           ),
           child: Column(
@@ -281,7 +281,7 @@ class TabletAccountCard extends StatelessWidget {
                         onTap: onDelete,
                         child: Icon(
                           Icons.delete,
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: context.onSurface,
                         ),
                       )
                     : const SizedBox.shrink(),
@@ -296,7 +296,7 @@ class TabletAccountCard extends StatelessWidget {
                       children: [
                         Text(
                           context.loc.totalBalance,
-                          style: Theme.of(context).textTheme.titleSmall,
+                          style: context.titleSmall,
                         ),
                         Text(
                           cardNumber,
@@ -328,20 +328,18 @@ class TabletAccountCard extends StatelessWidget {
                         children: [
                           Text(
                             context.loc.income,
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSecondaryContainer
-                                          .withOpacity(0.75),
-                                    ),
+                            style: context.bodySmall?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondaryContainer
+                                  .withOpacity(0.75),
+                            ),
                           ),
                           const SizedBox(height: 6),
                           Text(
                             income,
                             style: GoogleFonts.manrope(
-                              textStyle:
-                                  Theme.of(context).textTheme.titleMedium,
+                              textStyle: context.titleMedium,
                             ),
                           ),
                         ],
@@ -354,20 +352,18 @@ class TabletAccountCard extends StatelessWidget {
                         children: [
                           Text(
                             context.loc.expense,
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSecondaryContainer
-                                          .withOpacity(0.75),
-                                    ),
+                            style: context.bodySmall?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondaryContainer
+                                  .withOpacity(0.75),
+                            ),
                           ),
                           const SizedBox(height: 6),
                           Text(
                             expense,
                             style: GoogleFonts.manrope(
-                              textStyle:
-                                  Theme.of(context).textTheme.titleMedium,
+                              textStyle: context.titleMedium,
                             ),
                           ),
                         ],
@@ -422,8 +418,8 @@ class DesktopAccountCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.1),
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.05),
+              context.titleMedium!.color!.withOpacity(0.1),
+              context.titleMedium!.color!.withOpacity(0.05),
             ],
             stops: const [0.1, 1],
           ),
@@ -431,8 +427,8 @@ class DesktopAccountCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.5),
-              Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.5),
+              context.titleMedium!.color!.withOpacity(0.5),
+              context.titleMedium!.color!.withOpacity(0.5),
             ],
           ),
           child: Column(
@@ -449,7 +445,7 @@ class DesktopAccountCard extends StatelessWidget {
                         onTap: onDelete,
                         child: Icon(
                           Icons.delete,
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: context.onSurface,
                         ),
                       )
                     : const SizedBox.shrink(),
@@ -509,7 +505,7 @@ class DesktopAccountCard extends StatelessWidget {
                           Text(
                             income,
                             style: GoogleFonts.manrope(
-                              textStyle: Theme.of(context).textTheme.titleSmall,
+                              textStyle: context.titleSmall,
                             ),
                           ),
                         ],
@@ -538,7 +534,7 @@ class DesktopAccountCard extends StatelessWidget {
                           Text(
                             expense,
                             style: GoogleFonts.manrope(
-                              textStyle: Theme.of(context).textTheme.titleSmall,
+                              textStyle: context.titleSmall,
                             ),
                           ),
                         ],

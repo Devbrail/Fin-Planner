@@ -35,10 +35,10 @@ class UserImageWidget extends StatelessWidget {
                   child: Container(
                     width: 42,
                     height: 42,
-                    color: Theme.of(context).colorScheme.secondaryContainer,
+                    color: context.secondaryContainer,
                     child: Icon(
                       Icons.account_circle_outlined,
-                      color: Theme.of(context).colorScheme.onSecondaryContainer,
+                      color: context.onSecondaryContainer,
                     ),
                   ),
                 );
@@ -61,11 +61,10 @@ class UserImageWidget extends StatelessWidget {
                     child: Container(
                       width: 42,
                       height: 42,
-                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      color: context.secondaryContainer,
                       child: Icon(
                         Icons.account_circle_outlined,
-                        color:
-                            Theme.of(context).colorScheme.onSecondaryContainer,
+                        color: context.onSecondaryContainer,
                       ),
                     ),
                   ),

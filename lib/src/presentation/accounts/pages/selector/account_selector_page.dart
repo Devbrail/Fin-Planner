@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
 import '../../../../app/routes.dart';
@@ -29,18 +30,20 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: context.materialYouAppBar(context.loc.accounts),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: PaisaBigButton(
+      appBar: context.materialYouAppBar(
+        context.loc.accounts,
+        actions: [
+          PaisaButton(
             onPressed: () async {
               context.go(currencySelectorPath);
               await settings.put(userAccountSelectorKey, false);
             },
             title: context.loc.done,
           ),
-        ),
+          const SizedBox(
+            width: 16,
+          )
+        ],
       ),
       body: ValueListenableBuilder<Box<AccountModel>>(
         valueListenable: getIt.get<Box<AccountModel>>().listenable(),
@@ -52,30 +55,45 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                 title: Text(
                   context.loc.addedAccounts,
                   style: GoogleFonts.outfit(
-                    textStyle: Theme.of(context).textTheme.titleMedium,
+                    textStyle: context.titleMedium,
                   ),
                 ),
               ),
-              PaisaFilledCard(
-                child: ListView.builder(
+              ScreenTypeLayout(
+                mobile: PaisaFilledCard(
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: categoryModels.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final AccountModel model = categoryModels[index];
+                      return AccountItemWidget(
+                        model: model,
+                        onPress: () async {
+                          await model.delete();
+                          defaultModels.add(model);
+                        },
+                      );
+                    },
+                  ),
+                ),
+                tablet: GridView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    childAspectRatio: 2,
+                  ),
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: categoryModels.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     final AccountModel model = categoryModels[index];
-                    return ListTile(
-                      onTap: () async {
+                    return AccountItemWidget(
+                      model: model,
+                      onPress: () async {
                         await model.delete();
                         defaultModels.add(model);
                       },
-                      leading: Icon(
-                        model.cardType!.icon,
-                        color:
-                            Color(model.color ?? Colors.brown.shade200.value),
-                      ),
-                      title: Text(model.name),
-                      subtitle: Text(model.bankName),
-                      trailing: const Icon(MdiIcons.delete),
                     );
                   },
                 ),
@@ -84,7 +102,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                 title: Text(
                   context.loc.defaultAccounts,
                   style: GoogleFonts.outfit(
-                    textStyle: Theme.of(context).textTheme.titleMedium,
+                    textStyle: context.titleMedium,
                   ),
                 ),
               ),
@@ -109,18 +127,18 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                               borderRadius: BorderRadius.circular(28),
                               side: BorderSide(
                                 width: 1,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: context.primary,
                               ),
                             ),
                             showCheckmark: false,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,
                             label: Text(model.bankName),
-                            labelStyle: Theme.of(context).textTheme.titleMedium,
+                            labelStyle: context.titleMedium,
                             padding: const EdgeInsets.all(12),
                             avatar: Icon(
                               model.cardType!.icon,
-                              color: Theme.of(context).colorScheme.primary,
+                              color: context.primary,
                             ),
                           ))
                       .toList(),
@@ -129,6 +147,54 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class AccountItemWidget extends StatelessWidget {
+  const AccountItemWidget({
+    super.key,
+    required this.model,
+    required this.onPress,
+  });
+  final AccountModel model;
+  final VoidCallback onPress;
+  @override
+  Widget build(BuildContext context) {
+    return ScreenTypeLayout(
+      mobile: ListTile(
+        onTap: onPress,
+        leading: Icon(
+          model.cardType!.icon,
+          color: Color(model.color ?? Colors.brown.shade200.value),
+        ),
+        title: Text(model.name),
+        trailing: const Icon(MdiIcons.delete),
+      ),
+      tablet: PaisaCard(
+        child: InkWell(
+          onTap: onPress,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Icon(
+                    model.cardType!.icon,
+                    color: Color(model.color ?? Colors.brown.shade200.value),
+                  ),
+                ),
+                Expanded(
+                    child: Text(
+                  model.name,
+                  style: context.titleMedium,
+                )),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

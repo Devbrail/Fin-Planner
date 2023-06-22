@@ -121,7 +121,7 @@ class HomeMobilePage extends StatelessWidget {
             ),
             child: NavigationBar(
               elevation: 1,
-              backgroundColor: Theme.of(context).colorScheme.surface,
+              backgroundColor: context.surface,
               selectedIndex: homeBloc.getIndexFromPage(homeBloc.currentPage),
               onDestinationSelected: (index) => homeBloc
                   .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/core/common.dart';
 
 import 'lava_painter.dart';
 
@@ -38,7 +39,7 @@ class LavaAnimationState extends State<LavaAnimation>
           size: const Size(100, 100),
           painter: LavaPainter(
             lava,
-            color: widget.color ?? Theme.of(context).colorScheme.primary,
+            color: widget.color ?? context.primary,
           ),
           child: widget.child,
         ),

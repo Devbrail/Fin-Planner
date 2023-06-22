@@ -45,7 +45,7 @@ class _UserImagePageState extends State<UserImagePage> {
                 const SizedBox(height: 16),
                 ColorFiltered(
                   colorFilter: ColorFilter.mode(
-                    Theme.of(context).colorScheme.primary,
+                    context.primary,
                     BlendMode.srcIn,
                   ),
                   child: const Icon(
@@ -56,19 +56,19 @@ class _UserImagePageState extends State<UserImagePage> {
                 const SizedBox(height: 16),
                 Text(
                   context.loc.image,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                  style: context.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: context.onSurface,
+                  ),
                 ),
                 Text(
                   context.loc.imageDesc,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withOpacity(0.75),
-                      ),
+                  style: context.titleMedium?.copyWith(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.75),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Center(
@@ -95,10 +95,10 @@ class _UserImagePageState extends State<UserImagePage> {
         label: const Icon(MdiIcons.arrowRight),
         icon: Text(
           context.loc.next,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1,
-              ),
+          style: context.bodyLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+          ),
         ),
       ),
     );

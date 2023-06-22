@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paisa/src/core/common.dart';
 
 enum ItemIndex { first, middle, last }
 
@@ -17,9 +18,8 @@ class PaisaToggleButton extends StatelessWidget {
   final ItemIndex itemIndex;
   @override
   Widget build(BuildContext context) {
-    final textColor = isSelected ? Theme.of(context).colorScheme.primary : null;
-    final color =
-        isSelected ? Theme.of(context).colorScheme.primaryContainer : null;
+    final textColor = isSelected ? context.primary : null;
+    final color = isSelected ? context.primaryContainer : null;
     final BorderRadius borderRadius = itemIndex == ItemIndex.first
         ? const BorderRadius.only(
             topLeft: Radius.circular(8),
@@ -43,9 +43,9 @@ class PaisaToggleButton extends StatelessWidget {
         child: Text(
           title,
           style: GoogleFonts.outfit(
-            textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: textColor,
-                ),
+            textStyle: context.bodyMedium?.copyWith(
+              color: textColor,
+            ),
           ),
         ),
       ),

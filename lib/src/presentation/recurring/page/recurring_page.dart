@@ -17,7 +17,7 @@ class RecurringPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PaisaAnnotatedRegionWidget(
-      color: Theme.of(context).colorScheme.background,
+      color: context.background,
       child: Scaffold(
         appBar: context.materialYouAppBar(
           context.loc.recurring,

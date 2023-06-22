@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/core/common.dart';
 
 class SettingsGroup extends StatelessWidget {
   final String title;
@@ -15,7 +16,7 @@ class SettingsGroup extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 0,
-      color: Theme.of(context).colorScheme.background,
+      color: context.background,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12), // if you need this
         side: BorderSide(
@@ -32,9 +33,9 @@ class SettingsGroup extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Text(
               title,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+              style: context.titleMedium?.copyWith(
+                color: context.primary,
+              ),
             ),
           ),
           ...options

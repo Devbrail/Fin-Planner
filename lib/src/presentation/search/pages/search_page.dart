@@ -90,7 +90,7 @@ class _SearchPageState extends State<SearchPage> {
                   },
                   icon: Icon(
                     MdiIcons.filter,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: context.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(width: 8)
@@ -111,9 +111,9 @@ class _SearchPageState extends State<SearchPage> {
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
                       'Result',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                      style: context.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   ExpenseListWidget(
@@ -188,16 +188,16 @@ class _FilterWidgetState extends State<FilterWidget> {
         ListTile(
           title: Text(
             'Filter',
-            style: Theme.of(context).textTheme.titleLarge,
+            style: context.titleLarge,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
             context.loc.selectAccount,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            style: context.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         ValueListenableBuilder<Box<AccountModel>>(
@@ -226,8 +226,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                       },
                       avatar: Icon(
                         color: account.superId == selectedAccount
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
+                            ? context.primary
+                            : context.onSurfaceVariant,
                         IconData(
                           account.cardType!.icon.codePoint,
                           fontFamily: fontFamilyName,
@@ -238,7 +238,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         borderRadius: BorderRadius.circular(28),
                         side: BorderSide(
                           width: 1,
-                          color: Theme.of(context).colorScheme.primary,
+                          color: context.primary,
                         ),
                       ),
                       showCheckmark: false,
@@ -249,7 +249,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           .titleMedium
                           ?.copyWith(
                               color: account.superId == selectedAccount
-                                  ? Theme.of(context).colorScheme.primary
+                                  ? context.primary
                                   : Theme.of(context)
                                       .colorScheme
                                       .onSurfaceVariant),
@@ -265,9 +265,9 @@ class _FilterWidgetState extends State<FilterWidget> {
           padding: const EdgeInsets.all(16.0),
           child: Text(
             context.loc.selectCategory,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            style: context.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         ValueListenableBuilder<Box<CategoryModel>>(
@@ -296,8 +296,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                       },
                       avatar: Icon(
                         color: account.superId == selectedCategory
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
+                            ? context.primary
+                            : context.onSurfaceVariant,
                         IconData(
                           account.icon,
                           fontFamily: fontFamilyName,
@@ -308,7 +308,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         borderRadius: BorderRadius.circular(28),
                         side: BorderSide(
                           width: 1,
-                          color: Theme.of(context).colorScheme.primary,
+                          color: context.primary,
                         ),
                       ),
                       showCheckmark: false,
@@ -319,7 +319,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           .titleMedium
                           ?.copyWith(
                               color: account.superId == selectedCategory
-                                  ? Theme.of(context).colorScheme.primary
+                                  ? context.primary
                                   : Theme.of(context)
                                       .colorScheme
                                       .onSurfaceVariant),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:paisa/src/core/common.dart';
 
 class PaisaBaseWidget extends StatelessWidget {
   const PaisaBaseWidget({super.key, required this.child});
@@ -9,7 +10,7 @@ class PaisaBaseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        systemNavigationBarColor: Theme.of(context).colorScheme.surface,
+        systemNavigationBarColor: context.surface,
         systemNavigationBarContrastEnforced: true,
       ),
       child: child,

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
 import '../../../../app/routes.dart';
@@ -29,18 +30,35 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: context.materialYouAppBar(context.loc.categories),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: PaisaBigButton(
+      appBar: context.materialYouAppBar(
+        context.loc.categories,
+        actions: [
+          PaisaButton(
             onPressed: () async {
               context.go(accountSelectorPath);
               await settings.put(userCategorySelectorKey, false);
             },
             title: context.loc.done,
           ),
+          const SizedBox(
+            width: 16,
+          )
+        ],
+      ),
+      bottomNavigationBar: ScreenTypeLayout(
+        mobile: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: PaisaBigButton(
+              onPressed: () async {
+                context.go(accountSelectorPath);
+                await settings.put(userCategorySelectorKey, false);
+              },
+              title: context.loc.done,
+            ),
+          ),
         ),
+        tablet: const SizedBox.shrink(),
       ),
       body: ValueListenableBuilder<Box<CategoryModel>>(
         valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
@@ -52,33 +70,45 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                 title: Text(
                   context.loc.addedCategories,
                   style: GoogleFonts.outfit(
-                    textStyle: Theme.of(context).textTheme.titleMedium,
+                    textStyle: context.titleMedium,
                   ),
                 ),
               ),
-              PaisaFilledCard(
-                child: ListView.builder(
+              ScreenTypeLayout(
+                mobile: PaisaFilledCard(
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: categoryModels.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final CategoryModel model = categoryModels[index];
+                      return CategoryItemWidget(
+                        model: model,
+                        onPress: () async {
+                          await model.delete();
+                          defaultModels.add(model);
+                        },
+                      );
+                    },
+                  ),
+                ),
+                tablet: GridView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    childAspectRatio: 2,
+                  ),
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: categoryModels.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     final CategoryModel model = categoryModels[index];
-                    return ListTile(
-                      onTap: () async {
+                    return CategoryItemWidget(
+                      model: model,
+                      onPress: () async {
                         await model.delete();
                         defaultModels.add(model);
                       },
-                      leading: Icon(
-                        IconData(
-                          model.icon,
-                          fontFamily: fontFamilyName,
-                          fontPackage: fontFamilyPackageName,
-                        ),
-                        color:
-                            Color(model.color ?? Colors.brown.shade200.value),
-                      ),
-                      title: Text(model.name),
-                      trailing: const Icon(MdiIcons.delete),
                     );
                   },
                 ),
@@ -87,7 +117,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                 title: Text(
                   context.loc.defaultCategories,
                   style: GoogleFonts.outfit(
-                    textStyle: Theme.of(context).textTheme.titleMedium,
+                    textStyle: context.titleMedium,
                   ),
                 ),
               ),
@@ -109,13 +139,13 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                               borderRadius: BorderRadius.circular(28),
                               side: BorderSide(
                                 width: 1,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: context.primary,
                               ),
                             ),
                             showCheckmark: false,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,
-                            labelStyle: Theme.of(context).textTheme.titleMedium,
+                            labelStyle: context.titleMedium,
                             padding: const EdgeInsets.all(12),
                             avatar: Icon(
                               IconData(
@@ -123,7 +153,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                                 fontFamily: fontFamilyName,
                                 fontPackage: fontFamilyPackageName,
                               ),
-                              color: Theme.of(context).colorScheme.primary,
+                              color: context.primary,
                             ),
                           ))
                       .toList(),
@@ -132,6 +162,62 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class CategoryItemWidget extends StatelessWidget {
+  const CategoryItemWidget({
+    super.key,
+    required this.model,
+    required this.onPress,
+  });
+  final CategoryModel model;
+  final VoidCallback onPress;
+  @override
+  Widget build(BuildContext context) {
+    return ScreenTypeLayout(
+      mobile: ListTile(
+        onTap: onPress,
+        leading: Icon(
+          IconData(
+            model.icon,
+            fontFamily: fontFamilyName,
+            fontPackage: fontFamilyPackageName,
+          ),
+          color: Color(model.color ?? Colors.brown.shade200.value),
+        ),
+        title: Text(model.name),
+        trailing: const Icon(MdiIcons.delete),
+      ),
+      tablet: PaisaCard(
+        child: InkWell(
+          onTap: onPress,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Icon(
+                    IconData(
+                      model.icon,
+                      fontFamily: fontFamilyName,
+                      fontPackage: fontFamilyPackageName,
+                    ),
+                    color: Color(model.color ?? Colors.brown.shade200.value),
+                  ),
+                ),
+                Expanded(
+                    child: Text(
+                  model.name,
+                  style: context.titleMedium,
+                )),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

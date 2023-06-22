@@ -14,15 +14,15 @@ class PaisaIconTitle extends StatelessWidget {
       horizontalTitleGap: 10,
       leading: Icon(
         Icons.wallet,
-        color: Theme.of(context).colorScheme.primary,
+        color: context.primary,
         size: 32,
       ),
       title: Text(
         context.loc.appTitle,
         style: GoogleFonts.outfit(
           fontWeight: FontWeight.w600,
-          textStyle: Theme.of(context).textTheme.titleLarge,
-          color: Theme.of(context).colorScheme.onBackground,
+          textStyle: context.titleLarge,
+          color: context.onBackground,
         ),
       ),
     );
@@ -45,11 +45,24 @@ class PaisaTitle extends StatelessWidget {
           title,
           style: GoogleFonts.outfit(
             fontWeight: FontWeight.w600,
-            textStyle: Theme.of(context).textTheme.titleLarge,
-            color: Theme.of(context).colorScheme.onBackground,
+            textStyle: context.titleLarge,
+            color: context.onBackground,
           ),
         );
       },
+    );
+  }
+}
+
+class PaisaIcon extends StatelessWidget {
+  const PaisaIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      Icons.wallet,
+      color: context.primary,
+      size: 32,
     );
   }
 }

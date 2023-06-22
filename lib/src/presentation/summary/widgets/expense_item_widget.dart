@@ -45,37 +45,35 @@ class ExpenseItemWidget extends StatelessWidget {
         title: Text(
           expense.name,
           style: GoogleFonts.manrope(
-            textStyle: Theme.of(context).textTheme.bodyMedium,
+            textStyle: context.bodyMedium,
             fontWeight: FontWeight.w600,
           ),
         ),
         subtitle: Text(
           getSubtitle(context),
           style: GoogleFonts.manrope(
-            textStyle: Theme.of(context).textTheme.bodySmall,
+            textStyle: context.bodySmall,
             fontWeight: FontWeight.w600,
           ),
         ),
         leading: CircleAvatar(
-          backgroundColor: Color(
-                  category.color ?? Theme.of(context).colorScheme.surface.value)
-              .withOpacity(0.2),
+          backgroundColor:
+              Color(category.color ?? context.surface.value).withOpacity(0.2),
           child: Icon(
             IconData(
               category.icon,
               fontFamily: fontFamilyName,
               fontPackage: fontFamilyPackageName,
             ),
-            color: Color(
-                category.color ?? Theme.of(context).colorScheme.surface.value),
+            color: Color(category.color ?? context.surface.value),
           ),
         ),
         trailing: Text(
           expense.currency.toFormateCurrency(),
           style: GoogleFonts.manrope(
-            textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: expense.type?.color(context),
-                ),
+            textStyle: context.bodyMedium?.copyWith(
+              color: expense.type?.color(context),
+            ),
           ),
         ),
       ),
@@ -116,19 +114,18 @@ class ExpenseTransferItemWidget extends StatelessWidget {
           title: Text(title),
           subtitle: Text(getSubtitle()),
           leading: CircleAvatar(
-            backgroundColor:
-                Theme.of(context).colorScheme.primary.withOpacity(0.2),
+            backgroundColor: context.primary.withOpacity(0.2),
             child: Icon(
               MdiIcons.bankTransfer,
-              color: Theme.of(context).colorScheme.primary,
+              color: context.primary,
             ),
           ),
           trailing: Text(
             '${expense.type?.sign}${expense.currency.toFormateCurrency()}',
             style: GoogleFonts.manrope(
-              textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: expense.type?.color(context),
-                  ),
+              textStyle: context.bodyLarge?.copyWith(
+                color: expense.type?.color(context),
+              ),
             ),
           ),
         ),

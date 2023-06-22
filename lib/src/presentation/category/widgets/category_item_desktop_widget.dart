@@ -39,14 +39,14 @@ class CategoryItemDesktopWidget extends StatelessWidget {
                       fontPackage: fontFamilyPackageName,
                     ),
                     size: 42,
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: context.onSurface,
                   ),
                   const Spacer(),
                   IconButton(
                     onPressed: onPressed,
                     icon: Icon(
                       Icons.delete_rounded,
-                      color: Theme.of(context).colorScheme.error,
+                      color: context.error,
                     ),
                   )
                 ],
@@ -61,16 +61,16 @@ class CategoryItemDesktopWidget extends StatelessWidget {
                 children: [
                   Text(
                     category.name,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
+                    style: context.titleLarge?.copyWith(
+                      color: context.onSurface,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   Text(
                     category.description == null ? '' : category.description!,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
+                    style: context.bodyLarge?.copyWith(
+                      color: context.onSurface,
+                    ),
                     textAlign: TextAlign.center,
                   )
                 ],

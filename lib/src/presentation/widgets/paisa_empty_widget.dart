@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
 
-import '../../core/theme/paisa_theme.dart';
+import '../../core/common.dart';
+import 'paisa_big_button_widget.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
@@ -30,7 +30,7 @@ class EmptyWidget extends StatelessWidget {
             Icon(
               icon,
               size: 96,
-              color: Theme.of(context).colorScheme.primary,
+              color: context.primary,
             ),
             const SizedBox(
               height: 6,
@@ -39,8 +39,7 @@ class EmptyWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Text(
                 title,
-                style:
-                    Theme.of(context).textTheme.titleLarge?.onSurface(context),
+                style: context.titleLarge?.onSurface(context),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -49,8 +48,7 @@ class EmptyWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Text(
                 description,
-                style:
-                    Theme.of(context).textTheme.bodyLarge?.onSurface(context),
+                style: context.titleLarge?.onSurface(context),
                 textAlign: TextAlign.center,
               ),
             ),

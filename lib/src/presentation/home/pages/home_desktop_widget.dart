@@ -54,7 +54,7 @@ class HomeDesktopWidget extends StatelessWidget {
                               .textTheme
                               .headlineMedium
                               ?.fontSize,
-                          color: Theme.of(context).colorScheme.primary,
+                          color: context.primary,
                         ),
                         title: Text(
                           context.loc.appTitle,
@@ -62,7 +62,7 @@ class HomeDesktopWidget extends StatelessWidget {
                               .textTheme
                               .headlineMedium
                               ?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
+                                color: context.primary,
                               ),
                         ),
                       ),

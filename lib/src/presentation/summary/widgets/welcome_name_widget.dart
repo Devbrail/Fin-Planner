@@ -14,16 +14,19 @@ class WelcomeNameWidget extends StatelessWidget {
     return ValueListenableBuilder<Box>(
       valueListenable: getIt
           .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-          .listenable(keys: [userNameKey]),
+          .listenable(
+        keys: [userNameKey],
+      ),
       builder: (context, value, _) {
         final name = value.get(userNameKey, defaultValue: 'Name');
+
         return ListTile(
           title: Text(
             name,
             style: GoogleFonts.outfit(
               fontWeight: FontWeight.w600,
-              textStyle: Theme.of(context).textTheme.titleLarge,
-              color: Theme.of(context).colorScheme.onBackground,
+              textStyle: context.titleLarge,
+              color: context.onBackground,
             ),
           ),
           subtitle: Text(
@@ -31,7 +34,7 @@ class WelcomeNameWidget extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .labelMedium
-                ?.copyWith(color: Theme.of(context).textTheme.bodySmall?.color),
+                ?.copyWith(color: context.bodySmall?.color),
           ),
         );
       },

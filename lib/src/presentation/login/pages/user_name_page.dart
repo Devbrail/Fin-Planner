@@ -38,7 +38,7 @@ class UserNamePage extends StatelessWidget {
                     const SizedBox(height: 16),
                     ColorFiltered(
                       colorFilter: ColorFilter.mode(
-                        Theme.of(context).colorScheme.primary,
+                        context.primary,
                         BlendMode.srcIn,
                       ),
                       child: const Icon(
@@ -49,20 +49,17 @@ class UserNamePage extends StatelessWidget {
                     const SizedBox(height: 16),
                     RichText(
                       text: TextSpan(
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall
-                            ?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onSurface,
-                              letterSpacing: 0.8,
-                            ),
+                        style: context.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.onSurface,
+                          letterSpacing: 0.8,
+                        ),
                         text: context.loc.welcome,
                         children: [
                           TextSpan(
                             text: ' ${context.loc.appTitle}',
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
+                              color: context.primary,
                             ),
                           )
                         ],
@@ -71,13 +68,13 @@ class UserNamePage extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       context.loc.welcomeDesc,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurface
-                                .withOpacity(0.75),
-                            letterSpacing: 0.6,
-                          ),
+                      style: context.titleMedium?.copyWith(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(0.75),
+                        letterSpacing: 0.6,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Form(
@@ -85,6 +82,7 @@ class UserNamePage extends StatelessWidget {
                       child: TextFormField(
                         key: const Key('user_name_textfield'),
                         controller: _nameController,
+                        textCapitalization: TextCapitalization.words,
                         decoration: InputDecoration(
                           hintText: context.loc.enterNameHint,
                           label: Text(context.loc.nameHint),
@@ -116,10 +114,10 @@ class UserNamePage extends StatelessWidget {
             label: const Icon(MdiIcons.arrowRight),
             icon: Text(
               context.loc.next,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                  ),
+              style: context.bodyLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1,
+              ),
             ),
           ),
         );

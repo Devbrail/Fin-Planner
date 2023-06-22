@@ -26,14 +26,14 @@ class TransactionsHeaderWidget extends StatelessWidget {
         context.loc.transactions,
         style: GoogleFonts.outfit(
           fontWeight: FontWeight.w600,
-          textStyle: Theme.of(context).textTheme.titleMedium,
-          color: Theme.of(context).colorScheme.onBackground,
+          textStyle: context.titleMedium,
+          color: context.onBackground,
         ),
       ),
       trailing: OutlinedButton.icon(
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-          foregroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: context.primary,
         ),
         label: ValueListenableBuilder<FilterExpense>(
           valueListenable: summaryController.sortHomeExpenseNotifier,

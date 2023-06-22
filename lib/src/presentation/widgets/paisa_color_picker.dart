@@ -29,7 +29,7 @@ Future<int> paisaColorPicker(
           ListTile(
             title: Text(
               context.loc.pickColor,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: context.titleLarge,
             ),
           ),
           ColorPickerGridWidget(

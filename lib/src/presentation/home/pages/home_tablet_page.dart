@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../app/routes.dart';
-import '../widgets/drawer_item_widget.dart';
 
+import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../widgets/paisa_icon_title.dart';
-import '../../widgets/paisa_search_button_widget.dart';
+import '../../widgets/paisa_search_bar.dart';
 import '../../widgets/paisa_user_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/content_widget.dart';
@@ -27,123 +25,96 @@ class HomeTabletPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const PaisaTitle(),
+        leading: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: PaisaIcon(),
+        ),
+        leadingWidth: 86,
+        title: const PaisaSearchBar(),
         actions: [
-          const PaisaFilterTransactionWidget(),
-          const PaisaSearchButtonWidget(),
           PaisaUserWidget(
             homeBloc: homeBloc,
           ),
         ],
       ),
-      drawer: Drawer(
-        child: BlocBuilder(
-          bloc: homeBloc,
-          builder: (context, state) {
-            PageType pageType = PageType.home;
-            if (state is CurrentIndexState) {
-              pageType = state.currentPage;
-            }
-            return SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: PaisaIconTitle(),
-                  ),
-                  DrawerItemWidget(
-                    isSelected: pageType == PageType.home,
-                    onPressed: () {
-                      homeBloc.add(const CurrentIndexEvent(PageType.home));
-                      Navigator.pop(context);
-                    },
-                    icon: Icons.home_outlined,
-                    selectedIcon: Icons.home,
-                    title: context.loc.home,
-                  ),
-                  DrawerItemWidget(
-                    isSelected: pageType == PageType.category,
-                    onPressed: () {
-                      homeBloc.add(const CurrentIndexEvent(PageType.category));
-                      Navigator.pop(context);
-                    },
-                    icon: Icons.category_outlined,
-                    selectedIcon: Icons.category,
-                    title: context.loc.categories,
-                  ),
-                  DrawerItemWidget(
-                    isSelected: pageType == PageType.budget,
-                    onPressed: () {
-                      homeBloc.add(const CurrentIndexEvent(PageType.budget));
-                      Navigator.pop(context);
-                    },
-                    icon: MdiIcons.timetable,
-                    selectedIcon: MdiIcons.timetable,
-                    title: context.loc.budget,
-                  ),
-                  const Divider(),
-                  DrawerItemWidget(
-                    isSelected: false,
-                    onPressed: () {
+      body: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              return NavigationRail(
+                elevation: 1,
+                selectedLabelTextStyle: context.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+                unselectedLabelTextStyle: context.bodyLarge,
+                labelType: NavigationRailLabelType.all,
+                backgroundColor: context.surface,
+                selectedIndex: homeBloc.getIndexFromPage(homeBloc.currentPage),
+                onDestinationSelected: (index) {
+                  switch (index) {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                      homeBloc.add(
+                          CurrentIndexEvent(homeBloc.getPageFromIndex(index)));
+
+                      break;
+                    case 6:
                       GoRouter.of(context).pushNamed(settingsPath);
-                      Navigator.pop(context);
-                    },
-                    icon: MdiIcons.cog,
-                    title: context.loc.settings,
+                      break;
+                    default:
+                  }
+                },
+                destinations: [
+                  NavigationRailDestination(
+                    label: Text(context.loc.home),
+                    icon: const Icon(Icons.home_outlined),
+                    selectedIcon: const Icon(Icons.home),
+                  ),
+                  NavigationRailDestination(
+                    label: Text(context.loc.accounts),
+                    icon: const Icon(Icons.credit_card_outlined),
+                    selectedIcon: const Icon(Icons.credit_card),
+                  ),
+                  NavigationRailDestination(
+                    label: Text(context.loc.debts),
+                    icon: const Icon(MdiIcons.accountCash),
+                    selectedIcon: const Icon(MdiIcons.accountCashOutline),
+                  ),
+                  NavigationRailDestination(
+                    label: Text(context.loc.overview),
+                    icon: const Icon(MdiIcons.sortVariant),
+                    selectedIcon: const Icon(MdiIcons.sortVariant),
+                  ),
+                  NavigationRailDestination(
+                    label: Text(context.loc.categories),
+                    icon: const Icon(Icons.category_outlined),
+                    selectedIcon: const Icon(Icons.category),
+                  ),
+                  NavigationRailDestination(
+                    label: Text(context.loc.budget),
+                    icon: const Icon(MdiIcons.timetable),
+                    selectedIcon: const Icon(MdiIcons.timetable),
+                  ),
+                  NavigationRailDestination(
+                    label: Text(context.loc.settings),
+                    icon: const Icon(MdiIcons.cog),
+                    selectedIcon: const Icon(MdiIcons.cog),
                   ),
                 ],
-              ),
-            );
-          },
-        ),
+              );
+            },
+          ),
+          Expanded(
+            child: ContentWidget(),
+          ),
+        ],
       ),
-      body: ContentWidget(),
       floatingActionButton: floatingActionButton,
-      bottomNavigationBar: BlocBuilder(
-        bloc: homeBloc,
-        builder: (context, state) {
-          if (state is CurrentIndexState &&
-              (state.currentPage == PageType.budget ||
-                  state.currentPage == PageType.category)) {
-            return const SizedBox.shrink();
-          }
-          return Theme(
-            data: Theme.of(context).copyWith(
-              splashFactory: NoSplash.splashFactory,
-            ),
-            child: NavigationBar(
-              elevation: 1,
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              selectedIndex: homeBloc.getIndexFromPage(homeBloc.currentPage),
-              onDestinationSelected: (index) => homeBloc
-                  .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
-              destinations: [
-                NavigationDestination(
-                  label: context.loc.home,
-                  icon: const Icon(Icons.home_outlined),
-                  selectedIcon: const Icon(Icons.home),
-                ),
-                NavigationDestination(
-                  label: context.loc.accounts,
-                  icon: const Icon(Icons.credit_card_outlined),
-                  selectedIcon: const Icon(Icons.credit_card),
-                ),
-                NavigationDestination(
-                  label: context.loc.debts,
-                  icon: const Icon(MdiIcons.accountCash),
-                  selectedIcon: const Icon(MdiIcons.accountCashOutline),
-                ),
-                NavigationDestination(
-                  label: context.loc.overview,
-                  icon: const Icon(MdiIcons.sortVariant),
-                  selectedIcon: const Icon(MdiIcons.sortVariant),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
     );
   }
 }

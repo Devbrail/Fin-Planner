@@ -24,7 +24,7 @@ class ItemWidget extends StatelessWidget {
         ? RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
             side: BorderSide(
-              color: Theme.of(context).colorScheme.primary,
+              color: context.primary,
               width: 2,
             ),
           )
@@ -34,7 +34,7 @@ class ItemWidget extends StatelessWidget {
     return SizedBox(
       width: 150,
       child: Card(
-        color: Theme.of(context).colorScheme.surface,
+        color: context.surface,
         clipBehavior: Clip.antiAlias,
         shape: shape,
         child: InkWell(
@@ -45,14 +45,14 @@ class ItemWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: CircleAvatar(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  backgroundColor: context.primary,
                   child: Icon(
                     IconData(
                       icon,
                       fontFamily: fontFamilyName,
                       fontPackage: fontFamilyPackageName,
                     ),
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: context.onPrimary,
                   ),
                 ),
               ),
@@ -60,9 +60,9 @@ class ItemWidget extends StatelessWidget {
               ListTile(
                 title: Text(
                   title,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                  style: context.titleMedium?.copyWith(
+                    color: context.onSurface,
+                  ),
                 ),
                 subtitle: subtitle != null
                     ? Text(

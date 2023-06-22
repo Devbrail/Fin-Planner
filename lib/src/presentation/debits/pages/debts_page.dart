@@ -25,18 +25,17 @@ class DebtsPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Material(
                 borderRadius: BorderRadius.circular(32),
-                color: Theme.of(context).colorScheme.surfaceVariant,
+                color: context.surfaceVariant,
                 child: TabBar(
                   dividerColor: Colors.transparent,
                   splashBorderRadius: BorderRadius.circular(32),
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(32),
-                    color: Theme.of(context).colorScheme.primary,
+                    color: context.primary,
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,
-                  labelColor: Theme.of(context).colorScheme.onPrimary,
-                  unselectedLabelColor:
-                      Theme.of(context).colorScheme.onSurfaceVariant,
+                  labelColor: context.onPrimary,
+                  unselectedLabelColor: context.onSurfaceVariant,
                   labelStyle: Theme.of(context)
                       .textTheme
                       .bodyLarge

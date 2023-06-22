@@ -19,7 +19,7 @@ class CategoryListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = getIt.get<CategoryBloc>();
     return PaisaAnnotatedRegionWidget(
-      color: Theme.of(context).colorScheme.background,
+      color: context.background,
       child: Scaffold(
         body: ValueListenableBuilder<Box<CategoryModel>>(
           valueListenable: getIt.get<Box<CategoryModel>>().listenable(),

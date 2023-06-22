@@ -42,7 +42,7 @@ Future<T?> paisaAlertDialog<T>(
     showDialog<T>(
       context: context,
       builder: (context) => AlertDialog(
-        titleTextStyle: Theme.of(context).textTheme.titleLarge,
+        titleTextStyle: context.titleLarge,
         title: title,
         content: child,
         actions: [
@@ -80,7 +80,7 @@ Future<void> showUserDialog(
             child: FractionallySizedBox(
               widthFactor: 0.9,
               child: ColoredBox(
-                color: Theme.of(context).colorScheme.surface,
+                color: context.surface,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -151,7 +151,7 @@ Future<void> showUserDialog(
                             onTap: () => userMenuPopup(UserMenuPopup.debts),
                             leading: Icon(
                               MdiIcons.accountCashOutline,
-                              color: Theme.of(context).colorScheme.onSurface,
+                              color: context.onSurface,
                             ),
                             title: Text(
                               context.loc.debts,
@@ -159,8 +159,7 @@ Future<void> showUserDialog(
                                   .textTheme
                                   .bodyLarge
                                   ?.copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
+                                    color: context.onSurface,
                                   ),
                             ),
                           ),
@@ -173,7 +172,7 @@ Future<void> showUserDialog(
                               isDarkMode
                                   ? MdiIcons.brightness5
                                   : MdiIcons.brightness4,
-                              color: Theme.of(context).colorScheme.onSurface,
+                              color: context.onSurface,
                             ),
                             title: Text(
                               context.loc.chooseTheme,
@@ -181,8 +180,7 @@ Future<void> showUserDialog(
                                   .textTheme
                                   .bodyLarge
                                   ?.copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
+                                    color: context.onSurface,
                                   ),
                             ),
                           ),
@@ -193,7 +191,7 @@ Future<void> showUserDialog(
                             onTap: () => userMenuPopup(UserMenuPopup.settings),
                             leading: Icon(
                               MdiIcons.cog,
-                              color: Theme.of(context).colorScheme.onSurface,
+                              color: context.onSurface,
                             ),
                             title: Text(
                               context.loc.settings,
@@ -201,8 +199,7 @@ Future<void> showUserDialog(
                                   .textTheme
                                   .bodyLarge
                                   ?.copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
+                                    color: context.onSurface,
                                   ),
                             ),
                           )

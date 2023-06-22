@@ -40,11 +40,6 @@ class LandingPage extends StatelessWidget {
             return false;
           },
           child: ScreenTypeLayout(
-            breakpoints: const ScreenBreakpoints(
-              tablet: 600,
-              desktop: 700,
-              watch: 300,
-            ),
             mobile: HomeMobilePage(
               homeBloc: homeBloc,
               floatingActionButton: actionButton,

@@ -46,7 +46,7 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
   @override
   Widget build(BuildContext context) {
     return PaisaAnnotatedRegionWidget(
-      color: Theme.of(context).colorScheme.background,
+      color: context.background,
       child: BlocProvider(
         create: (context) => recurringCubit,
         child: BlocConsumer(
@@ -55,8 +55,8 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
             if (state is RecurringErrorState) {
               context.showMaterialSnackBar(
                 state.error,
-                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                backgroundColor: context.primaryContainer,
+                color: context.onPrimaryContainer,
               );
             } else if (state is RecurringEventAddedState) {
               context.pop();
@@ -176,9 +176,9 @@ class SelectedAccount extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 context.loc.selectAccount,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: context.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             AccountSelectedWidget(
@@ -330,7 +330,7 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                 child: FilterChip(
                   onSelected: (value) => context.pushNamed(addCategoryPath),
                   avatar: Icon(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: context.primary,
                     IconData(
                       MdiIcons.plus.codePoint,
                       fontFamily: fontFamilyName,
@@ -341,7 +341,7 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                     borderRadius: BorderRadius.circular(28),
                     side: BorderSide(
                       width: 1,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: context.primary,
                     ),
                   ),
                   showCheckmark: false,
@@ -349,11 +349,13 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                   label: Text(
                     context.loc.addNew,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: context.primary,
                     ),
                   ),
-                  labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  labelStyle: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(color: context.onSurfaceVariant),
                   padding: const EdgeInsets.all(12),
                 ),
               );
@@ -371,8 +373,8 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                   },
                   avatar: Icon(
                     color: category.superId == selectedId
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.onSurfaceVariant,
+                        ? context.primary
+                        : context.onSurfaceVariant,
                     IconData(
                       category.icon,
                       fontFamily: fontFamilyName,
@@ -383,16 +385,16 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                     borderRadius: BorderRadius.circular(28),
                     side: BorderSide(
                       width: 1,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: context.primary,
                     ),
                   ),
                   showCheckmark: false,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   label: Text(category.name),
-                  labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  labelStyle: context.titleMedium?.copyWith(
                       color: category.superId == selectedId
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.onSurfaceVariant),
+                          ? context.primary
+                          : context.onSurfaceVariant),
                   padding: const EdgeInsets.all(12),
                 ),
               );
@@ -530,7 +532,7 @@ class _RecurringDatePickerWidgetState extends State<RecurringDatePickerWidget> {
             },
             leading: Icon(
               Icons.today_rounded,
-              color: Theme.of(context).colorScheme.secondary,
+              color: context.secondary,
             ),
             title: Text(selectedDateTime.formattedDate),
           ),
@@ -559,7 +561,7 @@ class _RecurringDatePickerWidgetState extends State<RecurringDatePickerWidget> {
             },
             leading: Icon(
               MdiIcons.clockOutline,
-              color: Theme.of(context).colorScheme.secondary,
+              color: context.secondary,
             ),
             title: Text(selectedDateTime.formattedTime),
           ),
@@ -594,9 +596,9 @@ class RecurringWidget extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 'Periodic',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: context.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Padding(

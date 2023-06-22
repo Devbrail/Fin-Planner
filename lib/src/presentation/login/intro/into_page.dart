@@ -46,7 +46,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                           child: Icon(
                             Icons.wallet,
                             size: 52,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: context.primary,
                           ),
                         ),
                         Text(
@@ -55,7 +55,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                               .textTheme
                               .displayMedium
                               ?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
+                                color: context.primary,
                               ),
                         ),
                       ],
@@ -65,8 +65,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium
-                          ?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurface),
+                          ?.copyWith(color: context.onSurface),
                     ),
                     const SizedBox(height: 24),
                     Column(
@@ -76,7 +75,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                           contentPadding: EdgeInsets.zero,
                           leading: Icon(
                             Icons.check_circle,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: context.primary,
                           ),
                           dense: true,
                           title: Text(
@@ -94,7 +93,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                           contentPadding: EdgeInsets.zero,
                           leading: Icon(
                             Icons.check_circle,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: context.primary,
                           ),
                           dense: true,
                           title: Text(
@@ -112,7 +111,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                           contentPadding: EdgeInsets.zero,
                           leading: Icon(
                             Icons.check_circle,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: context.primary,
                           ),
                           dense: true,
                           title: Text(
@@ -127,24 +126,13 @@ class IntroBigScreenWidget extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 24),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.all(28)),
+                        PaisaBigButton(
                           onPressed: () => getIt
                               .get<Box<dynamic>>(
                                   instanceName: BoxType.settings.name)
                               .put(userIntroKey, true),
-                          child: Text(
-                            context.loc.introCTA,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ),
+                          title: context.loc.introCTA,
+                        )
                       ],
                     ),
                   ],
@@ -158,7 +146,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: LavaAnimation(
-                    color: Theme.of(context).colorScheme.primaryContainer,
+                    color: context.primaryContainer,
                     child: const SizedBox.shrink(),
                   ),
                 ),
@@ -187,7 +175,7 @@ class IntoMobileWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: LavaAnimation(
-          color: Theme.of(context).colorScheme.primaryContainer,
+          color: context.primaryContainer,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -195,15 +183,15 @@ class IntoMobileWidget extends StatelessWidget {
               children: [
                 Text(
                   context.loc.appTitle,
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                  style: context.displayMedium?.copyWith(
+                    color: context.primary,
+                  ),
                 ),
                 Text(
                   context.loc.intoTitle,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
+                  style: context.headlineMedium?.copyWith(
+                    color: context.secondary,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 Column(
@@ -212,36 +200,36 @@ class IntoMobileWidget extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       leading: Icon(
                         Icons.check_circle,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: context.primary,
                       ),
                       dense: true,
                       title: Text(
                         context.loc.intoSummary1,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: context.titleMedium,
                       ),
                     ),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       leading: Icon(
                         Icons.check_circle,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: context.primary,
                       ),
                       dense: true,
                       title: Text(
                         context.loc.intoSummary2,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: context.titleMedium,
                       ),
                     ),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       leading: Icon(
                         Icons.check_circle,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: context.primary,
                       ),
                       dense: true,
                       title: Text(
                         context.loc.intoSummary3,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: context.titleMedium,
                       ),
                     )
                   ],
@@ -252,9 +240,9 @@ class IntoMobileWidget extends StatelessWidget {
                   dense: true,
                   title: Text(
                     '*This app still in beta, expect the unexpected behavior and UI changes',
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Theme.of(context).textTheme.bodySmall?.color,
-                        ),
+                    style: context.titleSmall?.copyWith(
+                      color: context.bodySmall?.color,
+                    ),
                   ),
                 )
               ],

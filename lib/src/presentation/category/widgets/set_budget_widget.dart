@@ -33,13 +33,13 @@ class SetBudgetWidget extends StatelessWidget {
             SwitchListTile(
               secondary: Icon(
                 Icons.wallet,
-                color: Theme.of(context).colorScheme.primary,
+                color: context.primary,
               ),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
               title: Text(context.loc.budget),
               subtitle: Text(context.loc.setBudget),
-              activeColor: Theme.of(context).colorScheme.primary,
+              activeColor: context.primary,
               onChanged: (bool value) => BlocProvider.of<CategoryBloc>(context)
                   .add(UpdateCategoryBudgetEvent(value)),
               value: budget,

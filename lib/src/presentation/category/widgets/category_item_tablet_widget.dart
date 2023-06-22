@@ -39,15 +39,14 @@ class CategoryItemTabletWidget extends StatelessWidget {
                       fontPackage: fontFamilyPackageName,
                     ),
                     size: 32,
-                    color: Color(category.color ??
-                        Theme.of(context).colorScheme.primary.value),
+                    color: Color(category.color ?? context.primary.value),
                   ),
                   const Spacer(),
                   IconButton(
                     onPressed: onPressed,
                     icon: Icon(
                       Icons.delete_rounded,
-                      color: Theme.of(context).colorScheme.error,
+                      color: context.error,
                     ),
                   )
                 ],
@@ -62,16 +61,16 @@ class CategoryItemTabletWidget extends StatelessWidget {
                 children: [
                   Text(
                     category.name,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
+                    style: context.titleMedium?.copyWith(
+                      color: context.onSurface,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   Text(
                     category.description == null ? '' : category.description!,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
+                    style: context.bodySmall?.copyWith(
+                      color: context.onSurface,
+                    ),
                     textAlign: TextAlign.center,
                   )
                 ],

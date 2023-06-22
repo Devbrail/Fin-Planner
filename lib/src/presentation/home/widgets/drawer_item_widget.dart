@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/common.dart';
+
 class DrawerItemWidget extends StatelessWidget {
   const DrawerItemWidget({
     super.key,
@@ -23,7 +25,7 @@ class DrawerItemWidget extends StatelessWidget {
         decoration: isSelected
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(32),
-                color: Theme.of(context).colorScheme.secondaryContainer,
+                color: context.secondaryContainer,
               )
             : null,
         child: InkWell(
@@ -39,21 +41,17 @@ class DrawerItemWidget extends StatelessWidget {
                 Icon(
                   isSelected ? selectedIcon ?? icon : icon,
                   size: 18,
-                  color: isSelected
-                      ? Theme.of(context).colorScheme.onSecondaryContainer
-                      : null,
+                  color: isSelected ? context.onSecondaryContainer : null,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Text(
                     title,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: isSelected
-                              ? Theme.of(context)
-                                  .colorScheme
-                                  .onSecondaryContainer
-                              : null,
-                        ),
+                    style: context.titleMedium?.copyWith(
+                      color: isSelected
+                          ? Theme.of(context).colorScheme.onSecondaryContainer
+                          : null,
+                    ),
                   ),
                 ),
               ],

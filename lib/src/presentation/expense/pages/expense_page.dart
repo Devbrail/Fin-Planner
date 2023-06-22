@@ -63,14 +63,14 @@ class _ExpensePageState extends State<ExpensePage> {
   @override
   Widget build(BuildContext context) {
     return PaisaAnnotatedRegionWidget(
-      color: Theme.of(context).colorScheme.background,
+      color: context.background,
       child: BlocConsumer<ExpenseBloc, ExpenseState>(
         listener: (context, state) {
           if (state is ExpenseDeletedState) {
             context.showMaterialSnackBar(
               context.loc.deletedTransaction,
-              backgroundColor: Theme.of(context).colorScheme.error,
-              color: Theme.of(context).colorScheme.onError,
+              backgroundColor: context.error,
+              color: context.onError,
             );
             context.pop();
           } else if (state is ExpenseAdded) {
@@ -79,15 +79,15 @@ class _ExpensePageState extends State<ExpensePage> {
                 : context.loc.updatedTransaction;
             context.showMaterialSnackBar(
               content,
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
+              backgroundColor: context.primaryContainer,
+              color: context.onPrimaryContainer,
             );
             context.pop();
           } else if (state is ExpenseErrorState) {
             context.showMaterialSnackBar(
               state.errorString,
-              backgroundColor: Theme.of(context).colorScheme.errorContainer,
-              color: Theme.of(context).colorScheme.onErrorContainer,
+              backgroundColor: context.errorContainer,
+              color: context.onErrorContainer,
             );
           } else if (state is ExpenseSuccessState) {
             nameController.text = state.expense.name;
@@ -129,7 +129,7 @@ class _ExpensePageState extends State<ExpensePage> {
                             child: RichText(
                               text: TextSpan(
                                 text: context.loc.deleteExpense,
-                                style: Theme.of(context).textTheme.bodyLarge,
+                                style: context.bodyLarge,
                               ),
                             ),
                             confirmationButton: TextButton(
@@ -147,7 +147,7 @@ class _ExpensePageState extends State<ExpensePage> {
                           ),
                           icon: Icon(
                             Icons.delete_rounded,
-                            color: Theme.of(context).colorScheme.error,
+                            color: context.error,
                           ),
                         )
                 ],
@@ -274,7 +274,7 @@ class _ExpensePageState extends State<ExpensePage> {
                           : Brightness.dark,
                 ),
                 iconTheme: IconThemeData(
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: context.onSurface,
                 ),
                 elevation: 0,
                 backgroundColor: Colors.transparent,
@@ -298,7 +298,7 @@ class _ExpensePageState extends State<ExpensePage> {
                           },
                           icon: Icon(
                             Icons.delete_rounded,
-                            color: Theme.of(context).colorScheme.error,
+                            color: context.error,
                           ),
                         )
                 ],

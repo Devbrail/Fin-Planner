@@ -55,7 +55,7 @@ class AccountTransactionsPage extends StatelessWidget {
                 child: RichText(
                   text: TextSpan(
                     text: context.loc.deleteAccount,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: context.bodyMedium,
                     children: [
                       TextSpan(
                         text: account?.name ?? '',

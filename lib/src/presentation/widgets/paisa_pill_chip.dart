@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paisa/src/core/common.dart';
 
 class PaisaPillChip extends StatelessWidget {
   const PaisaPillChip({
@@ -16,10 +17,9 @@ class PaisaPillChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = Theme.of(context).colorScheme.primaryContainer;
-    final textColor = Theme.of(context).colorScheme.primary;
-    final borderColor =
-        isSelected ? Theme.of(context).colorScheme.primary : null;
+    final bgColor = context.primaryContainer;
+    final textColor = context.primary;
+    final borderColor = isSelected ? context.primary : null;
 
     return Row(
       children: [
@@ -44,7 +44,7 @@ class PaisaPillChip extends StatelessWidget {
               child: Text(
                 title,
                 style: GoogleFonts.outfit(
-                  textStyle: Theme.of(context).textTheme.bodySmall,
+                  textStyle: context.bodySmall,
                   color: textColor,
                   fontWeight: FontWeight.w600,
                 ),

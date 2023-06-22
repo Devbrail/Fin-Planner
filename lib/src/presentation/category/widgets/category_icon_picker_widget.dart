@@ -35,7 +35,7 @@ class CategoryIconPickerWidget extends StatelessWidget {
               fontFamily: fontFamilyName,
               fontPackage: fontFamilyPackageName,
             ),
-            color: Theme.of(context).colorScheme.primary,
+            color: context.primary,
           ),
           onTap: () async {
             final IconData? result =

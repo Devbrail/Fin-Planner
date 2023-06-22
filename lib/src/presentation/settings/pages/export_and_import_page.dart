@@ -15,7 +15,7 @@ class ExportAndImportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final DataCubit dataCubit = getIt.get();
     return PaisaAnnotatedRegionWidget(
-      color: Theme.of(context).colorScheme.background,
+      color: context.background,
       child: BlocListener(
         bloc: dataCubit,
         listener: (context, state) {
@@ -70,8 +70,7 @@ class ExportAndImportPage extends StatelessWidget {
                         Expanded(
                           child: OutlinedButton.icon(
                             style: OutlinedButton.styleFrom(
-                              foregroundColor:
-                                  Theme.of(context).colorScheme.primary,
+                              foregroundColor: context.primary,
                               elevation: 0,
                               padding: const EdgeInsets.all(10),
                             ),
@@ -84,10 +83,8 @@ class ExportAndImportPage extends StatelessWidget {
                         Expanded(
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
-                              foregroundColor:
-                                  Theme.of(context).colorScheme.onPrimary,
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.primary,
+                              foregroundColor: context.onPrimary,
+                              backgroundColor: context.primary,
                               padding: const EdgeInsets.all(10),
                             ),
                             onPressed: () => dataCubit.exportDataToJson(),

@@ -10,10 +10,11 @@ class PaisaSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(maxWidth: 256),
+      constraints:
+          BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 3),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(34),
-        color: Theme.of(context).colorScheme.surfaceVariant,
+        color: context.surfaceVariant,
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(34),
@@ -31,9 +32,7 @@ class PaisaSearchBar extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Text(
-                  context.loc.search,
-                ),
+                child: Text(context.loc.search),
               ),
             ],
           ),

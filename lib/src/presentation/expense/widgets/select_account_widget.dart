@@ -39,9 +39,9 @@ class SelectedAccount extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   context.loc.selectAccount,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: context.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               AccountSelectedItem(
@@ -56,9 +56,9 @@ class SelectedAccount extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   context.loc.selectAccount,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: context.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               AccountSelectedItem(

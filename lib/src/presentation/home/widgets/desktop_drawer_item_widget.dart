@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/common.dart';
+
 class NavigationBarItem extends StatelessWidget {
   const NavigationBarItem({
     super.key,
@@ -16,9 +18,7 @@ class NavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isSelected
-        ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).textTheme.labelLarge?.color;
+    final color = isSelected ? context.primary : context.labelLarge?.color;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -26,7 +26,7 @@ class NavigationBarItem extends StatelessWidget {
           ? BoxDecoration(
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(32),
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: context.primaryContainer,
             )
           : null,
       child: InkWell(

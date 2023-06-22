@@ -76,7 +76,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                           child: RichText(
                             text: TextSpan(
                               text: context.loc.deleteAccount,
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: context.bodyMedium,
                               children: [
                                 TextSpan(
                                   text: account.name,
@@ -147,9 +147,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
       width: 8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: isActive
-            ? Theme.of(context).colorScheme.primary
-            : Theme.of(context).disabledColor,
+        color: isActive ? context.primary : Theme.of(context).disabledColor,
       ),
     );
   }

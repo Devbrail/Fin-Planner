@@ -52,7 +52,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
   @override
   Widget build(BuildContext context) {
     return PaisaAnnotatedRegionWidget(
-      color: Theme.of(context).colorScheme.background,
+      color: context.background,
       child: BlocProvider(
         create: (_) => debtBloc,
         child: BlocConsumer(
@@ -78,8 +78,8 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
             } else if (state is DebtErrorState) {
               context.showMaterialSnackBar(
                 state.errorString,
-                backgroundColor: Theme.of(context).colorScheme.errorContainer,
-                color: Theme.of(context).colorScheme.onErrorContainer,
+                backgroundColor: context.errorContainer,
+                color: context.onErrorContainer,
               );
             } else if (state is DeleteDebtsState) {
               context.pop();
@@ -99,7 +99,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                             child: RichText(
                               text: TextSpan(
                                 text: context.loc.deleteDebtOrCredit,
-                                style: Theme.of(context).textTheme.bodyLarge,
+                                style: context.bodyLarge,
                               ),
                             ),
                             confirmationButton: TextButton(
@@ -116,7 +116,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                           ).then((value) => context.pop()),
                           icon: Icon(
                             Icons.delete_rounded,
-                            color: Theme.of(context).colorScheme.error,
+                            color: context.error,
                           ),
                         )
                 ],

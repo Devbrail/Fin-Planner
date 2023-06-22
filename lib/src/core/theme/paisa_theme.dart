@@ -4,62 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'custom_color.dart';
 
-extension TextStyleMapping on TextStyle {
-  TextStyle onPrimary(BuildContext context) {
-    return copyWith(color: Theme.of(context).colorScheme.onPrimary);
-  }
-
-  TextStyle onSecondary(BuildContext context) {
-    return copyWith(color: Theme.of(context).colorScheme.onSecondary);
-  }
-
-  TextStyle onTertiary(BuildContext context) {
-    return copyWith(color: Theme.of(context).colorScheme.onTertiary);
-  }
-
-  TextStyle onPrimaryContainer(BuildContext context) {
-    return copyWith(color: Theme.of(context).colorScheme.onPrimaryContainer);
-  }
-
-  TextStyle onSecondaryContainer(BuildContext context) {
-    return copyWith(color: Theme.of(context).colorScheme.onSecondaryContainer);
-  }
-
-  TextStyle onTertiaryContainer(BuildContext context) {
-    return copyWith(color: Theme.of(context).colorScheme.onTertiaryContainer);
-  }
-
-  TextStyle onSurface(BuildContext context) {
-    return copyWith(color: Theme.of(context).colorScheme.onSurface);
-  }
-}
-
-extension ColorText on BuildContext {
-  Color get onPrimary {
-    return Theme.of(this).colorScheme.onPrimary;
-  }
-
-  Color get onPrimaryContainer {
-    return Theme.of(this).colorScheme.onPrimaryContainer;
-  }
-
-  Color get onSecondary {
-    return Theme.of(this).colorScheme.onSecondary;
-  }
-
-  Color get onSecondaryContainer {
-    return Theme.of(this).colorScheme.onSecondaryContainer;
-  }
-
-  Color get onTertiary {
-    return Theme.of(this).colorScheme.onTertiary;
-  }
-
-  Color get onTertiaryContainer {
-    return Theme.of(this).colorScheme.onTertiaryContainer;
-  }
-}
-
 ElevatedButtonThemeData elevatedButtonTheme(
   BuildContext context,
   ColorScheme colorScheme,

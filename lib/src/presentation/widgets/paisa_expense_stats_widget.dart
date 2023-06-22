@@ -1,6 +1,7 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paisa/src/core/common.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'paisa_card.dart';
@@ -92,17 +93,17 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
         ),
       ),
       tablet: PaisaFilledCard(
-        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.4),
+        color: context.surfaceVariant.withOpacity(0.4),
         child: ListTile(
           title: Text(
             title,
             style: GoogleFonts.manrope(
-              textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurfaceVariant
-                        .withOpacity(0.75),
-                  ),
+              textStyle: context.bodySmall?.copyWith(
+                color: Theme.of(context)
+                    .colorScheme
+                    .onSurfaceVariant
+                    .withOpacity(0.75),
+              ),
             ),
           ),
           subtitle: Text(

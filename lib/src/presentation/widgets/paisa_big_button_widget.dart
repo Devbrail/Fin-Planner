@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/core/common.dart';
 
 class PaisaBigButton extends StatelessWidget {
   const PaisaBigButton({
@@ -20,14 +21,14 @@ class PaisaBigButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32.0),
         ),
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: context.onPrimary,
+        backgroundColor: context.primary,
       ),
       child: Text(
         title,
         style: TextStyle(
           fontWeight: FontWeight.w700,
-          fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
+          fontSize: context.titleLarge?.fontSize,
         ),
       ),
     );
@@ -50,8 +51,8 @@ class PaisaButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: context.onPrimary,
+        backgroundColor: context.primary,
       ),
       child: Text(title),
     );
@@ -76,8 +77,8 @@ class PaisaIconButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: context.onPrimary,
+        backgroundColor: context.primary,
       ),
       label: Text(title),
       icon: Icon(iconData),
@@ -101,7 +102,7 @@ class PaisaTextButton extends StatelessWidget {
       onPressed: onPressed,
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        foregroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: context.primary,
       ),
       child: Text(title),
     );
@@ -124,7 +125,7 @@ class PaisaOutlineButton extends StatelessWidget {
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        foregroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: context.primary,
       ),
       child: Text(title),
     );
@@ -147,7 +148,7 @@ class PaisaOutlineIconButton extends StatelessWidget {
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        foregroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: context.primary,
       ),
       label: Text(title),
       icon: const Icon(MdiIcons.sortVariant),

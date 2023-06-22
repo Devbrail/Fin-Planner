@@ -30,14 +30,14 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
           ListTile(
             title: Text(
               context.loc.chooseTheme,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: context.titleLarge,
             ),
           ),
           ...ThemeMode.values
               .map(
                 (e) => RadioListTile(
                   value: e,
-                  activeColor: Theme.of(context).colorScheme.primary,
+                  activeColor: context.primary,
                   groupValue: currentIndex,
                   onChanged: (ThemeMode? value) {
                     currentIndex = value!;
@@ -46,7 +46,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
                   title: Text(
                     e.themeName,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface,
+                      color: context.onSurface,
                     ),
                   ),
                 ),
@@ -87,9 +87,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
                       .get<Box<dynamic>>(instanceName: BoxType.settings.name)
                       .put(themeModeKey, currentIndex.index)
                       .then((value) => Navigator.pop(context)),
-                  child: Text(
-                    context.loc.ok,
-                  ),
+                  child: Text(context.loc.ok),
                 ),
               ),
             ],

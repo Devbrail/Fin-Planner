@@ -73,8 +73,8 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
                     iconData.key,
                     style: GoogleFonts.outfit(
                       fontWeight: FontWeight.w600,
-                      textStyle: Theme.of(context).textTheme.titleMedium,
-                      color: Theme.of(context).colorScheme.primary,
+                      textStyle: context.titleMedium,
+                      color: context.primary,
                     ),
                   ),
                 ),
@@ -96,7 +96,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
                           ? BoxDecoration(
                               border: Border.all(
                                 width: 2,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: context.primary,
                               ),
                               borderRadius: BorderRadius.circular(32),
                             )
@@ -105,7 +105,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
                         iconSize: 30,
                         key: ValueKey(iconData.value[index].hashCode),
                         color: isSelected
-                            ? Theme.of(context).colorScheme.primary
+                            ? context.primary
                             : Theme.of(context).iconTheme.color,
                         onPressed: () {
                           setState(() {

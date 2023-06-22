@@ -217,25 +217,25 @@ class BarChartSample2State extends State<BarChartSample2> {
             ),
           ],
           config: BezierChartConfig(
-            bubbleIndicatorColor: Theme.of(context).colorScheme.surface,
+            bubbleIndicatorColor: context.surface,
             bubbleIndicatorValueStyle: Theme.of(context)
                 .textTheme
                 .bodySmall!
-                .copyWith(color: Theme.of(context).colorScheme.primary),
+                .copyWith(color: context.primary),
             bubbleIndicatorTitleStyle: Theme.of(context)
                 .textTheme
                 .bodyMedium!
-                .copyWith(color: Theme.of(context).colorScheme.onSurface),
+                .copyWith(color: context.onSurface),
             bubbleIndicatorLabelStyle: Theme.of(context)
                 .textTheme
                 .bodySmall!
-                .copyWith(color: Theme.of(context).colorScheme.onSurface),
+                .copyWith(color: context.onSurface),
             verticalIndicatorStrokeWidth: 2.0,
             showVerticalIndicator: true,
             contentWidth: MediaQuery.of(context).size.width * 2,
             footerHeight: 50.0,
-            xLinesColor: Theme.of(context).colorScheme.primary,
-            verticalIndicatorColor: Theme.of(context).colorScheme.primary,
+            xLinesColor: context.primary,
+            verticalIndicatorColor: context.primary,
           ),
         ),
       ),

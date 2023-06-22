@@ -18,7 +18,7 @@ Future<IconData> paisaIconPicker({
       icon: Icon(defaultIcon),
       title: Text(
         context.loc.selectIconTitle,
-        style: Theme.of(context).textTheme.titleMedium,
+        style: context.titleMedium,
       ),
       content: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
@@ -114,7 +114,7 @@ class _IconPickerWidgetState extends State<_IconPickerWidget> {
                     ? BoxDecoration(
                         border: Border.all(
                           width: 2,
-                          color: Theme.of(context).colorScheme.primary,
+                          color: context.primary,
                         ),
                         borderRadius: BorderRadius.circular(32),
                       )
@@ -122,7 +122,7 @@ class _IconPickerWidgetState extends State<_IconPickerWidget> {
                 child: IconButton(
                   key: ValueKey(iconKeys[index].hashCode),
                   color: isSelected
-                      ? Theme.of(context).colorScheme.primary
+                      ? context.primary
                       : Theme.of(context).disabledColor,
                   onPressed: () {
                     setState(() {

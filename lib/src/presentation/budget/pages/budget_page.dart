@@ -18,7 +18,7 @@ class BudgetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PaisaAnnotatedRegionWidget(
-      color: Theme.of(context).colorScheme.background,
+      color: context.background,
       child: ValueListenableBuilder<Box<CategoryModel>>(
         valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
         builder: (_, value, child) {
@@ -89,9 +89,9 @@ class BudgetItem extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     text: 'Limit: ',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).textTheme.bodySmall?.color,
-                        ),
+                    style: context.bodyMedium?.copyWith(
+                      color: context.bodySmall?.color,
+                    ),
                     children: [
                       TextSpan(
                         text: ' ${category.finalBudget.toFormateCurrency()}',
@@ -104,9 +104,9 @@ class BudgetItem extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     text: 'Spent: ',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).textTheme.bodySmall?.color,
-                        ),
+                    style: context.bodyMedium?.copyWith(
+                      color: context.bodySmall?.color,
+                    ),
                     children: [
                       TextSpan(
                         text: ' ${totalExpenses.toFormateCurrency()}',
@@ -119,9 +119,9 @@ class BudgetItem extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     text: 'Remaining: ',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).textTheme.bodySmall?.color,
-                        ),
+                    style: context.bodyMedium?.copyWith(
+                      color: context.bodySmall?.color,
+                    ),
                     children: [
                       TextSpan(
                         text:

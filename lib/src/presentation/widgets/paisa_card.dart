@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/src/core/common.dart';
 
 class PaisaCard extends StatelessWidget {
   const PaisaCard({
@@ -19,10 +20,10 @@ class PaisaCard extends StatelessWidget {
     return Card(
       shape: shape ??
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      color: color ?? Theme.of(context).colorScheme.surfaceVariant,
+      color: color ?? context.surfaceVariant,
       clipBehavior: Clip.antiAlias,
       elevation: elevation ?? 2.0,
-      shadowColor: color ?? Theme.of(context).colorScheme.shadow,
+      shadowColor: color ?? context.shadow,
       child: child,
     );
   }
@@ -46,13 +47,13 @@ class PaisaOutlineCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             side: BorderSide(
               width: 1,
-              color: Theme.of(context).colorScheme.outline,
+              color: context.outline,
             ),
           ),
       clipBehavior: Clip.antiAlias,
       elevation: 0,
-      color: Theme.of(context).colorScheme.surface,
-      shadowColor: Theme.of(context).colorScheme.shadow,
+      color: context.surface,
+      shadowColor: context.shadow,
       child: child,
     );
   }
@@ -79,8 +80,8 @@ class PaisaFilledCard extends StatelessWidget {
           ),
       clipBehavior: Clip.antiAlias,
       elevation: 0,
-      color: color ?? Theme.of(context).colorScheme.surfaceVariant,
-      shadowColor: Theme.of(context).colorScheme.shadow,
+      color: color ?? context.surfaceVariant,
+      shadowColor: context.shadow,
       child: child,
     );
   }

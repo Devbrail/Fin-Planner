@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:paisa/src/core/common.dart';
 
 class PaisaAnnotatedRegionWidget extends StatelessWidget {
   const PaisaAnnotatedRegionWidget({
@@ -14,8 +15,8 @@ class PaisaAnnotatedRegionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     Color navColor = ElevationOverlay.applySurfaceTint(
-      Theme.of(context).colorScheme.surface,
-      Theme.of(context).colorScheme.surfaceTint,
+      context.surface,
+      context.surfaceTint,
       1,
     );
 

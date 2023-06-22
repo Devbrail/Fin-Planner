@@ -55,7 +55,7 @@ class UserProfilePage extends StatelessWidget {
             ListTile(
               title: Text(
                 context.loc.profile,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: context.titleLarge,
               ),
             ),
             Row(

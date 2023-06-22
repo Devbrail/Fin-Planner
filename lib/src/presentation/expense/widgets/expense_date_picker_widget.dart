@@ -51,7 +51,7 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                 },
                 leading: Icon(
                   Icons.today_rounded,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: context.secondary,
                 ),
                 title: Text(selectedDateTime.formattedDate),
               ),
@@ -76,7 +76,7 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                 },
                 leading: Icon(
                   MdiIcons.clockOutline,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: context.secondary,
                 ),
                 title: Text(selectedDateTime.formattedTime),
               ),

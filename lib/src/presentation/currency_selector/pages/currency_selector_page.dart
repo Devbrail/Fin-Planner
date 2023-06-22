@@ -73,16 +73,15 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
                       child: Icon(
                         Icons.language_rounded,
                         size: 72,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: context.primary,
                       ),
                     ),
                     Text(
                       context.loc.selectCurrency,
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
+                      style: context.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: context.onSurface,
+                      ),
                     )
                   ],
                 ),
@@ -143,10 +142,10 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
           label: const Icon(MdiIcons.arrowRight),
           icon: Text(
             context.loc.next,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                ),
+            style: context.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1,
+            ),
           ),
         ),
       ),
@@ -178,8 +177,8 @@ class _CountriesWidgetState extends State<CountriesWidget> {
   Widget build(BuildContext context) {
     return GridView.builder(
       padding: const EdgeInsets.only(bottom: 82, left: 8, right: 8),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: widget.crossAxisCount,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 256,
         childAspectRatio: 16 / 12,
       ),
       shrinkWrap: true,
@@ -187,13 +186,13 @@ class _CountriesWidgetState extends State<CountriesWidget> {
       itemBuilder: (context, index) {
         final CountryModel model = widget.countries[index];
         return PaisaCard(
-          color: Theme.of(context).colorScheme.surface,
+          color: context.surface,
           shape: selectedModel == model
               ? RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
                   side: BorderSide(
                     width: 2,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: context.primary,
                   ),
                 )
               : null,
@@ -216,7 +215,7 @@ class _CountriesWidgetState extends State<CountriesWidget> {
                   child: Text(
                     model.symbol,
                     style: GoogleFonts.manrope(
-                      textStyle: Theme.of(context).textTheme.titleLarge,
+                      textStyle: context.titleLarge,
                     ),
                   ),
                 ),

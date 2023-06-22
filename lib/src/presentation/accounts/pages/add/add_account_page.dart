@@ -57,7 +57,7 @@ class AddAccountPageState extends State<AddAccountPage> {
   @override
   Widget build(BuildContext context) {
     return PaisaAnnotatedRegionWidget(
-      color: Theme.of(context).colorScheme.background,
+      color: context.background,
       child: BlocConsumer<AccountsBloc, AccountsState>(
         listener: (context, state) {
           if (state is AccountAddedState) {
@@ -65,23 +65,23 @@ class AddAccountPageState extends State<AddAccountPage> {
               isAccountAddOrUpdate
                   ? context.loc.addedAccount
                   : context.loc.updateAccount,
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
+              backgroundColor: context.primaryContainer,
+              color: context.onPrimaryContainer,
             );
             context.pop();
           }
           if (state is AccountDeletedState) {
             context.showMaterialSnackBar(
               context.loc.deleteAccount,
-              backgroundColor: Theme.of(context).colorScheme.error,
-              color: Theme.of(context).colorScheme.onError,
+              backgroundColor: context.error,
+              color: context.onError,
             );
             context.pop();
           } else if (state is AccountErrorState) {
             context.showMaterialSnackBar(
               state.errorString,
-              backgroundColor: Theme.of(context).colorScheme.errorContainer,
-              color: Theme.of(context).colorScheme.onErrorContainer,
+              backgroundColor: context.errorContainer,
+              color: context.onErrorContainer,
             );
           } else if (state is AccountSuccessState) {
             accountNameController.text = state.account.bankName;
@@ -120,7 +120,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                               child: RichText(
                                 text: TextSpan(
                                   text: context.loc.deleteAccount,
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: context.bodyMedium,
                                   children: [
                                     TextSpan(
                                       text:
@@ -151,7 +151,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                           },
                           icon: Icon(
                             Icons.delete_rounded,
-                            color: Theme.of(context).colorScheme.error,
+                            color: context.error,
                           ),
                         ),
                   IconButton(
@@ -187,7 +187,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                       },
                       leading: Icon(
                         Icons.color_lens,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: context.primary,
                       ),
                       title: Text(
                         context.loc.pickColor,
@@ -289,7 +289,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                               child: RichText(
                                 text: TextSpan(
                                   text: context.loc.deleteAccount,
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: context.bodyMedium,
                                   children: [
                                     TextSpan(
                                       text:
@@ -320,7 +320,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                           },
                           icon: Icon(
                             Icons.delete_rounded,
-                            color: Theme.of(context).colorScheme.error,
+                            color: context.error,
                           ),
                         )
                 ],

@@ -12,3 +12,4 @@ export 'extensions/recurring_type_ext.dart';
 export 'extensions/time_extension.dart';
 export 'extensions/transaction_extension.dart';
 export 'extensions/transaction_type_extension.dart';
+export 'theme/color_extension.dart';

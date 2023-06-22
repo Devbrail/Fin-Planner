@@ -51,7 +51,7 @@ class DebtItemWidget extends StatelessWidget {
                 horizontalTitleGap: 0,
                 title: Text(
                   context.loc.payDebt,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: context.titleLarge,
                 ),
               ),
               Row(
@@ -152,13 +152,9 @@ class DebtItemWidget extends StatelessWidget {
                   ListTile(
                     title: Text(
                       debt.name,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall
-                          ?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
+                      style: context.headlineSmall?.copyWith(
+                        color: context.onSurfaceVariant,
+                      ),
                     ),
                     subtitle: Text(
                       debt.description,
@@ -171,7 +167,7 @@ class DebtItemWidget extends StatelessWidget {
                     ),
                     trailing: Text(
                       (debt.amount - amount).toFormateCurrency(),
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(),
+                      style: context.titleLarge?.copyWith(),
                     ),
                   ),
                   Padding(
@@ -180,8 +176,7 @@ class DebtItemWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                       child: LinearProgressIndicator(
                         value: amount / debt.amount,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.secondaryContainer,
+                        backgroundColor: context.secondaryContainer,
                       ),
                     ),
                   ),
@@ -200,8 +195,7 @@ class DebtItemWidget extends StatelessWidget {
                         child: TextButton.icon(
                           icon: Icon(
                             MdiIcons.cashClock,
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
+                            color: context.onSurfaceVariant,
                           ),
                           label: Text(
                             debt.debtType == DebtType.debt

@@ -41,9 +41,9 @@ class CategoryItemMobileWidget extends StatelessWidget {
           category.name,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+          style: context.titleMedium?.copyWith(
+            color: context.onSurfaceVariant,
+          ),
         ),
         subtitle: category.description == null
             ? null
@@ -51,18 +51,18 @@ class CategoryItemMobileWidget extends StatelessWidget {
                 category.description!,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurfaceVariant
-                          .withOpacity(0.75),
-                    ),
+                style: context.bodyLarge?.copyWith(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurfaceVariant
+                      .withOpacity(0.75),
+                ),
               ),
         trailing: IconButton(
           onPressed: onPressed,
           icon: Icon(
             Icons.delete_rounded,
-            color: Theme.of(context).colorScheme.error,
+            color: context.error,
           ),
         ),
       ),

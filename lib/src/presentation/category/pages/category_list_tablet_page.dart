@@ -27,8 +27,9 @@ class CategoryListTabletWidget extends StatelessWidget {
         right: 8,
         top: 8,
       ),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 256,
+        childAspectRatio: 1,
       ),
       itemCount: categories.length,
       shrinkWrap: true,
@@ -50,7 +51,7 @@ class CategoryListTabletWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       )),
                 ],
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: context.bodyLarge,
               ),
             ),
             confirmationButton: TextButton(

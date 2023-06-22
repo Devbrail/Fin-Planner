@@ -39,8 +39,8 @@ class AccountMobileVerticalPage extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 124),
             shrinkWrap: true,
             itemCount: accounts.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 450,
               childAspectRatio: 16 / 11,
             ),
             itemBuilder: (BuildContext context, int index) {

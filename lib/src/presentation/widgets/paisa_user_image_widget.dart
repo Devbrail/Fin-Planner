@@ -39,11 +39,11 @@ class UserImageWidget extends StatelessWidget {
             builder: (context) {
               if (image.isEmpty) {
                 return CircleAvatar(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  backgroundColor: context.primary,
                   maxRadius: maxRadius,
                   child: Icon(
                     Icons.account_circle_outlined,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: context.onPrimary,
                   ),
                 );
               } else {
@@ -63,11 +63,11 @@ class UserImageWidget extends StatelessWidget {
                         child: Icon(
                           MdiIcons.delete,
                           size: 8,
-                          color: Theme.of(context).colorScheme.onPrimary,
+                          color: context.onPrimary,
                         ),
                       ),
                     ),
-                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    backgroundColor: context.primary,
                     child: CircleAvatar(
                       foregroundImage: FileImage(File(image)),
                       maxRadius: maxRadius,
