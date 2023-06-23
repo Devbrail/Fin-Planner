@@ -25,7 +25,7 @@
 
 #### Mobile
 
-| <img src="paisa-images/Screenshot_1667486038.png" width="200"/> | <img src="paisa-images/Screenshot_1667486042.png" width="200"/> | <img src="paisa-images/Screenshot_1667486044.png" width="200"/> |<img src="paisa-images/Screenshot_1667486046.png" width="200"/> |
+| <img src="paisa-images/flutter_01.png" width="200"/> | <img src="paisa-images/flutter_02.png" width="200"/> | <img src="paisa-images/flutter_04.png" width="200"/> |<img src="paisa-images/flutter_03.png" width="200"/> |
 | :--: | :--: | :--: | :--: |
 |Home|Accounts|Categories|Budget overview|
 
