@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../core/common.dart';
-import '../../home/bloc/home_bloc.dart';
 import 'filter_budget_widget.dart';
 
 class PaisaFilterTransactionWidget extends StatelessWidget {
@@ -11,38 +8,29 @@ class PaisaFilterTransactionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<HomeBloc>(context),
-      builder: (context, state) {
-        if (state is CurrentIndexState &&
-            state.currentPage == PageType.overview) {
-          return IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width >= 700
-                      ? 700
-                      : double.infinity,
-                ),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                  ),
-                ),
-                builder: (context) {
-                  return FilterBudgetToggleWidget(
-                    showAsList: true,
-                  );
-                },
-              );
-            },
-            icon: const Icon(MdiIcons.filter),
-          );
-        }
-        return const SizedBox.shrink();
+    return IconButton(
+      onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width >= 700
+                ? 700
+                : double.infinity,
+          ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(16),
+              topRight: Radius.circular(16),
+            ),
+          ),
+          builder: (context) {
+            return FilterBudgetToggleWidget(
+              showAsList: true,
+            );
+          },
+        );
       },
+      icon: const Icon(MdiIcons.filter),
     );
   }
 }
