@@ -12,7 +12,6 @@ import 'core/enum/box_types.dart';
 import 'core/theme/paisa_theme.dart';
 import 'presentation/accounts/bloc/accounts_bloc.dart';
 import 'presentation/category/bloc/category_bloc.dart';
-import 'presentation/expense/bloc/expense_bloc.dart';
 import 'presentation/home/bloc/home_bloc.dart';
 
 class PaisaApp extends StatefulWidget {
@@ -38,9 +37,6 @@ class _PaisaAppState extends State<PaisaApp> {
       providers: [
         BlocProvider(
           create: (context) => getIt.get<AccountsBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => getIt.get<ExpenseBloc>(),
         ),
         BlocProvider(
           create: (context) => getIt.get<HomeBloc>(),
@@ -99,12 +95,15 @@ class _PaisaAppState extends State<PaisaApp> {
                   timePickerTheme: timePickerTheme,
                   appBarTheme: appBarThemeLight(lightColorScheme),
                   useMaterial3: true,
-                  textTheme: GoogleFonts.outfitTextTheme(
-                    ThemeData.light().textTheme,
-                  ),
+                  textTheme:
+                      GoogleFonts.outfitTextTheme(ThemeData.light().textTheme),
                   scaffoldBackgroundColor: lightColorScheme.background,
                   dialogBackgroundColor: lightColorScheme.background,
                   navigationBarTheme: navigationBarThemeData(lightColorScheme),
+                  navigationDrawerTheme: navigationDrawerThemeData(
+                    lightColorScheme,
+                    ThemeData.light().textTheme,
+                  ),
                   applyElevationOverlayColor: true,
                   inputDecorationTheme: inputDecorationTheme,
                   elevatedButtonTheme: elevatedButtonTheme(
@@ -130,6 +129,10 @@ class _PaisaAppState extends State<PaisaApp> {
                   scaffoldBackgroundColor: darkColorScheme.background,
                   dialogBackgroundColor: darkColorScheme.background,
                   navigationBarTheme: navigationBarThemeData(darkColorScheme),
+                  navigationDrawerTheme: navigationDrawerThemeData(
+                    darkColorScheme,
+                    ThemeData.dark().textTheme,
+                  ),
                   applyElevationOverlayColor: true,
                   inputDecorationTheme: inputDecorationTheme,
                   elevatedButtonTheme: elevatedButtonTheme(

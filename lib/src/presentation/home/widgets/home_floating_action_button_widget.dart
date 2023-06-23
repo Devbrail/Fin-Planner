@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../app/routes.dart';
-import '../../../core/common.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../../widgets/small_size_fab.dart';
 import '../bloc/home_bloc.dart';
@@ -18,24 +17,27 @@ class HomeFloatingActionButtonWidget extends StatelessWidget {
 
   final SummaryController summaryController;
   final Box<dynamic> settings;
-  void _handleClick(BuildContext context, PageType page) {
+  void _handleClick(BuildContext context, int page) {
     switch (page) {
-      case PageType.accounts:
+      case 1:
         context.goNamed(addAccountName);
         break;
-      case PageType.home:
+      case 6:
+        context.pushNamed(recurringName);
+        break;
+      case 0:
         context.pushNamed(addTransactionsName);
         break;
-      case PageType.category:
+      case 4:
         context.goNamed(addCategoryName);
         break;
-      case PageType.debts:
+      case 2:
         context.goNamed(addDebitName);
         break;
-      case PageType.overview:
+      case 3:
         _dateRangePicker(context);
         break;
-      case PageType.budget:
+      case 5:
         break;
     }
   }
@@ -70,13 +72,10 @@ class HomeFloatingActionButtonWidget extends StatelessWidget {
     return BlocBuilder(
       bloc: BlocProvider.of<HomeBloc>(context),
       builder: (context, state) {
-        if (state is CurrentIndexState &&
-            state.currentPage != PageType.budget) {
+        if (state is CurrentIndexState && state.currentPage != 5) {
           return SmallSizeFab(
             onPressed: () => _handleClick(context, state.currentPage),
-            icon: state.currentPage != PageType.overview
-                ? Icons.add
-                : Icons.date_range,
+            icon: state.currentPage != 3 ? Icons.add : Icons.date_range,
           );
         } else {
           return const SizedBox.shrink();

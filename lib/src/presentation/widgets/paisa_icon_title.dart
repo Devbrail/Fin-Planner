@@ -9,22 +9,25 @@ class PaisaIconTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      horizontalTitleGap: 10,
-      leading: Icon(
-        Icons.wallet,
-        color: context.primary,
-        size: 32,
-      ),
-      title: Text(
-        context.loc.appTitle,
-        style: GoogleFonts.outfit(
-          fontWeight: FontWeight.w600,
-          textStyle: context.titleLarge,
-          color: context.onBackground,
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Icon(
+            Icons.wallet,
+            color: context.primary,
+            size: 32,
+          ),
         ),
-      ),
+        Text(
+          context.loc.appTitle,
+          style: GoogleFonts.outfit(
+            fontWeight: FontWeight.w600,
+            textStyle: context.titleLarge,
+            color: context.onBackground,
+          ),
+        )
+      ],
     );
   }
 }
@@ -34,12 +37,13 @@ class PaisaTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<HomeBloc>(context),
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         String title = PageType.home.name(context);
         if (state is CurrentIndexState) {
-          title = state.currentPage.name(context);
+          title = BlocProvider.of<HomeBloc>(context)
+              .getPageFromIndex(state.currentPage)
+              .name(context);
         }
         return Text(
           title,

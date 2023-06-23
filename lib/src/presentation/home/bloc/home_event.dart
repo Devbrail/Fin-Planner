@@ -8,7 +8,7 @@ abstract class HomeEvent extends Equatable {
 }
 
 class CurrentIndexEvent extends HomeEvent {
-  final PageType currentPage;
+  final int currentPage;
 
   const CurrentIndexEvent(this.currentPage);
 

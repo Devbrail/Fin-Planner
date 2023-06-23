@@ -48,7 +48,7 @@ class EmptyWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Text(
                 description,
-                style: context.titleLarge?.onSurface(context),
+                style: context.titleMedium?.onSurface(context),
                 textAlign: TextAlign.center,
               ),
             ),

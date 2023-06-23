@@ -8,7 +8,8 @@ enum PageType {
   category,
   overview,
   debts,
-  budget;
+  budget,
+  recurring;
 
   int get toIndex {
     switch (this) {
@@ -24,6 +25,8 @@ enum PageType {
         return 4;
       case PageType.budget:
         return 5;
+      case PageType.recurring:
+        return 6;
     }
   }
 
@@ -41,6 +44,8 @@ enum PageType {
         return context.loc.debts;
       case PageType.budget:
         return context.loc.budget;
+      case PageType.recurring:
+        return context.loc.recurring;
     }
   }
 
@@ -56,6 +61,8 @@ enum PageType {
         return context.loc.addCategoryTooltip;
       case PageType.debts:
         return context.loc.addDebtTooltip;
+      case PageType.recurring:
+        return context.loc.recurring;
       case PageType.budget: // Doesn't have FAB button
         return '';
     }

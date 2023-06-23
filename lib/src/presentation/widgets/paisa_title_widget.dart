@@ -8,12 +8,13 @@ class PaisaTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: context.read<HomeBloc>(),
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         if (state is CurrentIndexState) {
           return Text(
-            state.currentPage.name(context),
+            BlocProvider.of<HomeBloc>(context)
+                .getPageFromIndex(state.currentPage)
+                .name(context),
             style: Theme.of(context)
                 .textTheme
                 .titleLarge

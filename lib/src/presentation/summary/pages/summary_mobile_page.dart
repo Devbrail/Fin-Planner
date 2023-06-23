@@ -18,6 +18,7 @@ class SummaryMobilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.surface,
       body: ListView.builder(
         physics: const BouncingScrollPhysics(),
         shrinkWrap: true,

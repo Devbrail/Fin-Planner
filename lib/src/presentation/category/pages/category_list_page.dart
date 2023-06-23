@@ -33,11 +33,6 @@ class CategoryListPage extends StatelessWidget {
               );
             }
             return ScreenTypeLayout(
-              breakpoints: const ScreenBreakpoints(
-                tablet: 600,
-                desktop: 700,
-                watch: 300,
-              ),
               mobile: CategoryListMobileWidget(
                 addCategoryBloc: bloc,
                 categories: categories,

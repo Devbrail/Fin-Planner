@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -10,109 +10,78 @@ import '../../widgets/paisa_search_button_widget.dart';
 import '../../widgets/paisa_user_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/content_widget.dart';
-import '../widgets/drawer_item_widget.dart';
+import 'home_page.dart';
 
 class HomeMobilePage extends StatelessWidget {
   const HomeMobilePage({
     super.key,
-    required this.homeBloc,
     required this.floatingActionButton,
+    required this.destinations,
   });
 
-  final HomeBloc homeBloc;
   final Widget floatingActionButton;
+  final List<Destination> destinations;
 
   @override
   Widget build(BuildContext context) {
+    final HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: const PaisaTitle(),
-        actions: [
-          const PaisaSearchButtonWidget(),
-          PaisaUserWidget(homeBloc: homeBloc),
-          const SizedBox(width: 8),
+        actions: const [
+          PaisaSearchButtonWidget(),
+          PaisaUserWidget(),
+          SizedBox(width: 8),
         ],
       ),
       drawer: Drawer(
-        child: BlocBuilder(
-          bloc: homeBloc,
+        child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
-            PageType pageType = PageType.home;
-            if (state is CurrentIndexState) {
-              pageType = state.currentPage;
-            }
-            return SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: PaisaIconTitle(),
-                  ),
-                  DrawerItemWidget(
-                    isSelected: pageType == PageType.home,
-                    onPressed: () {
-                      homeBloc.add(const CurrentIndexEvent(PageType.home));
+            return NavigationDrawer(
+              selectedIndex: homeBloc.selectedIndex,
+              onDestinationSelected: (index) {
+                homeBloc.add(CurrentIndexEvent(index));
+                Navigator.pop(context);
+              },
+              children: [
+                const PaisaIconTitle(),
+                ...destinations
+                    .map((e) => NavigationDrawerDestination(
+                          icon: e.icon,
+                          selectedIcon: e.selectedIcon,
+                          label: Text(e.label),
+                        ))
+                    .toList(),
+                const Divider(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: ListTile(
+                    onTap: () {
+                      context.pushNamed(settingsName);
                       Navigator.pop(context);
                     },
-                    icon: Icons.home_outlined,
-                    selectedIcon: Icons.home,
-                    title: context.loc.home,
+                    leading: const Icon(Icons.settings),
+                    title: Text(
+                      context.loc.settings,
+                      style: GoogleFonts.outfit(
+                        textStyle: context.bodyLarge,
+                      ),
+                    ),
                   ),
-                  DrawerItemWidget(
-                    isSelected: pageType == PageType.category,
-                    onPressed: () {
-                      homeBloc.add(const CurrentIndexEvent(PageType.category));
-                      Navigator.pop(context);
-                    },
-                    icon: Icons.category_outlined,
-                    selectedIcon: Icons.category,
-                    title: context.loc.categories,
-                  ),
-                  DrawerItemWidget(
-                    isSelected: pageType == PageType.budget,
-                    onPressed: () {
-                      homeBloc.add(const CurrentIndexEvent(PageType.budget));
-                      Navigator.pop(context);
-                    },
-                    icon: MdiIcons.timetable,
-                    selectedIcon: MdiIcons.timetable,
-                    title: context.loc.budget,
-                  ),
-                  DrawerItemWidget(
-                    isSelected: false,
-                    onPressed: () {
-                      Navigator.pop(context);
-                      GoRouter.of(context).goNamed(recurringTransactionsName);
-                    },
-                    icon: MdiIcons.cashSync,
-                    selectedIcon: MdiIcons.cashSync,
-                    title: context.loc.recurring,
-                  ),
-                  const Divider(),
-                  DrawerItemWidget(
-                    isSelected: false,
-                    onPressed: () {
-                      GoRouter.of(context).goNamed(settingsPath);
-                      Navigator.pop(context);
-                    },
-                    icon: MdiIcons.cog,
-                    title: context.loc.settings,
-                  ),
-                ],
-              ),
+                ),
+              ],
             );
           },
         ),
       ),
       body: ContentWidget(),
       floatingActionButton: floatingActionButton,
-      bottomNavigationBar: BlocBuilder(
-        bloc: homeBloc,
+      bottomNavigationBar: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state is CurrentIndexState &&
-              (state.currentPage == PageType.budget ||
-                  state.currentPage == PageType.category)) {
+              (state.currentPage == 4 ||
+                  state.currentPage == 6 ||
+                  state.currentPage == 5)) {
             return const SizedBox.shrink();
           }
           return Theme(
@@ -122,31 +91,17 @@ class HomeMobilePage extends StatelessWidget {
             child: NavigationBar(
               elevation: 1,
               backgroundColor: context.surface,
-              selectedIndex: homeBloc.getIndexFromPage(homeBloc.currentPage),
-              onDestinationSelected: (index) => homeBloc
-                  .add(CurrentIndexEvent(homeBloc.getPageFromIndex(index))),
-              destinations: [
-                NavigationDestination(
-                  label: context.loc.home,
-                  icon: const Icon(Icons.home_outlined),
-                  selectedIcon: const Icon(Icons.home),
-                ),
-                NavigationDestination(
-                  label: context.loc.accounts,
-                  icon: const Icon(Icons.credit_card_outlined),
-                  selectedIcon: const Icon(Icons.credit_card),
-                ),
-                NavigationDestination(
-                  label: context.loc.debts,
-                  icon: const Icon(MdiIcons.accountCashOutline),
-                  selectedIcon: const Icon(MdiIcons.accountCash),
-                ),
-                NavigationDestination(
-                  label: context.loc.overview,
-                  icon: const Icon(MdiIcons.sortVariant),
-                  selectedIcon: const Icon(MdiIcons.sortVariant),
-                ),
-              ],
+              selectedIndex: homeBloc.selectedIndex,
+              onDestinationSelected: (index) =>
+                  homeBloc.add(CurrentIndexEvent(index)),
+              destinations: destinations
+                  .sublist(0, 4)
+                  .map((e) => NavigationDestination(
+                        icon: e.icon,
+                        selectedIcon: e.selectedIcon,
+                        label: e.label,
+                      ))
+                  .toList(),
             ),
           );
         },

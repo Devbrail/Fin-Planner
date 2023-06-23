@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../main.dart';
-import '../home/bloc/home_bloc.dart';
 import '../home/widgets/welcome_widget.dart';
 import '../settings/bloc/settings_controller.dart';
 import '../settings/widgets/user_profile_widget.dart';
 import 'color_palette.dart';
 
 class PaisaUserWidget extends StatelessWidget {
-  const PaisaUserWidget({
-    super.key,
-    required this.homeBloc,
-  });
-
-  final HomeBloc homeBloc;
+  const PaisaUserWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

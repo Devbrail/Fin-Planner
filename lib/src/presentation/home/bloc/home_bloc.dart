@@ -14,42 +14,24 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(
     @Named('settings') this.settings,
-  ) : super(const CurrentIndexState(PageType.home)) {
+  ) : super(const CurrentIndexState(0)) {
     on<HomeEvent>((event, emit) {});
     on<CurrentIndexEvent>(_currentIndex);
   }
 
   final Box<dynamic> settings;
 
-  PageType currentPage = PageType.home;
-
   void _currentIndex(
     CurrentIndexEvent event,
     Emitter<HomeState> emit,
   ) {
-    if (currentPage != event.currentPage) {
-      currentPage = event.currentPage;
-      emit(CurrentIndexState(event.currentPage));
+    if (selectedIndex != event.currentPage) {
+      selectedIndex = event.currentPage;
+      emit(CurrentIndexState(selectedIndex));
     }
   }
 
-  int getIndexFromPage(PageType currentPage) {
-    switch (currentPage) {
-      case PageType.accounts:
-        return 1;
-      case PageType.debts:
-        return 2;
-      case PageType.overview:
-        return 3;
-      case PageType.category:
-        return 4;
-      case PageType.budget:
-        return 5;
-      case PageType.home:
-      default:
-        return 0;
-    }
-  }
+  int selectedIndex = 0;
 
   PageType getPageFromIndex(int index) {
     switch (index) {
@@ -63,6 +45,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         return PageType.category;
       case 5:
         return PageType.budget;
+      case 6:
+        return PageType.recurring;
       case 0:
       default:
         return PageType.home;

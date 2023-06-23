@@ -10,19 +10,21 @@ import '../../widgets/paisa_search_bar.dart';
 import '../../widgets/paisa_user_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/content_widget.dart';
+import 'home_page.dart';
 
 class HomeTabletPage extends StatelessWidget {
   const HomeTabletPage({
     super.key,
-    required this.homeBloc,
     required this.floatingActionButton,
+    required this.destinations,
   });
 
-  final HomeBloc homeBloc;
   final Widget floatingActionButton;
+  final List<Destination> destinations;
 
   @override
   Widget build(BuildContext context) {
+    final HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
     return Scaffold(
       appBar: AppBar(
         leading: const Padding(
@@ -31,11 +33,7 @@ class HomeTabletPage extends StatelessWidget {
         ),
         leadingWidth: 86,
         title: const PaisaSearchBar(),
-        actions: [
-          PaisaUserWidget(
-            homeBloc: homeBloc,
-          ),
-        ],
+        actions: const [PaisaUserWidget()],
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,
@@ -50,25 +48,9 @@ class HomeTabletPage extends StatelessWidget {
                 unselectedLabelTextStyle: context.bodyLarge,
                 labelType: NavigationRailLabelType.all,
                 backgroundColor: context.surface,
-                selectedIndex: homeBloc.getIndexFromPage(homeBloc.currentPage),
-                onDestinationSelected: (index) {
-                  switch (index) {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                      homeBloc.add(
-                          CurrentIndexEvent(homeBloc.getPageFromIndex(index)));
-
-                      break;
-                    case 6:
-                      GoRouter.of(context).goNamed(recurringTransactionsName);
-                      break;
-                    default:
-                  }
-                },
+                selectedIndex: homeBloc.selectedIndex,
+                onDestinationSelected: (index) =>
+                    homeBloc.add(CurrentIndexEvent(index)),
                 minWidth: 55,
                 useIndicator: true,
                 groupAlignment: 1,
@@ -76,53 +58,22 @@ class HomeTabletPage extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: IconButton(
-                      onPressed: () {
-                        GoRouter.of(context).pushNamed(settingsPath);
-                      },
+                      onPressed: () => context.pushNamed(settingsName),
                       icon: const Icon(MdiIcons.cog),
                     ),
                   ),
                 ),
-                destinations: [
-                  NavigationRailDestination(
-                    label: Text(context.loc.home),
-                    icon: const Icon(Icons.home_outlined),
-                    selectedIcon: const Icon(Icons.home),
-                  ),
-                  NavigationRailDestination(
-                    label: Text(context.loc.accounts),
-                    icon: const Icon(Icons.credit_card_outlined),
-                    selectedIcon: const Icon(Icons.credit_card),
-                  ),
-                  NavigationRailDestination(
-                    label: Text(context.loc.debts),
-                    icon: const Icon(MdiIcons.accountCash),
-                    selectedIcon: const Icon(MdiIcons.accountCashOutline),
-                  ),
-                  NavigationRailDestination(
-                    label: Text(context.loc.overview),
-                    icon: const Icon(MdiIcons.sortVariant),
-                    selectedIcon: const Icon(MdiIcons.sortVariant),
-                  ),
-                  NavigationRailDestination(
-                    label: Text(context.loc.categories),
-                    icon: const Icon(Icons.category_outlined),
-                    selectedIcon: const Icon(Icons.category),
-                  ),
-                  NavigationRailDestination(
-                    label: Text(context.loc.budget),
-                    icon: const Icon(MdiIcons.timetable),
-                    selectedIcon: const Icon(MdiIcons.timetable),
-                  ),
-                  NavigationRailDestination(
-                    label: Text(context.loc.recurring),
-                    icon: const Icon(MdiIcons.cashSync),
-                    selectedIcon: const Icon(MdiIcons.cashSync),
-                  ),
-                ],
+                destinations: destinations
+                    .map((e) => NavigationRailDestination(
+                          icon: e.icon,
+                          selectedIcon: e.selectedIcon,
+                          label: Text(e.label),
+                        ))
+                    .toList(),
               );
             },
           ),
+          const VerticalDivider(thickness: 1, width: 1),
           Expanded(
             child: ContentWidget(),
           ),

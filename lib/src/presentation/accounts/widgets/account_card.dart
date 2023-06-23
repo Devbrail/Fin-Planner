@@ -244,10 +244,10 @@ class TabletAccountCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GlassmorphicContainer(
-          height: 240,
+          height: 260,
           width: MediaQuery.of(context).size.width / 2,
           borderRadius: 24,
-          blur: 10,
+          blur: 20,
           alignment: Alignment.bottomCenter,
           border: 2,
           linearGradient: LinearGradient(
@@ -272,7 +272,6 @@ class TabletAccountCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ListTile(
-                horizontalTitleGap: 0,
                 title: Text(bankName.toUpperCase()),
                 subtitle: Text(cardHolder.toUpperCase()),
                 leading: Icon(cardType.icon),

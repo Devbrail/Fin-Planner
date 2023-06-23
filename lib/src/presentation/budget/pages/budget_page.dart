@@ -12,11 +12,11 @@ import '../../widgets/paisa_annotate_region_widget.dart';
 import '../../widgets/paisa_empty_widget.dart';
 
 class BudgetPage extends StatelessWidget {
-  BudgetPage({super.key});
-  final SummaryController summaryController = getIt.get();
+  const BudgetPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final SummaryController summaryController = getIt.get();
     return PaisaAnnotatedRegionWidget(
       color: context.background,
       child: ValueListenableBuilder<Box<CategoryModel>>(

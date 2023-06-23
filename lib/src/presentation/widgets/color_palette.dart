@@ -8,51 +8,8 @@ class ColorPalette extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: ListView(
         children: [
-          Container(
-            margin: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                color: context.outline,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text('data'),
-                ),
-                Divider(
-                  indent: 0,
-                  thickness: 1,
-                  height: 1,
-                  color: context.outline,
-                ),
-                Container(
-                  color: context.primaryContainer,
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'data',
-                    style: TextStyle(color: context.primary),
-                  ),
-                ),
-                Divider(
-                  indent: 0,
-                  thickness: 1,
-                  height: 1,
-                  color: context.outline,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text('data'),
-                ),
-              ],
-            ),
-          ),
           Container(
             height: 50,
             color: context.primary,

@@ -50,6 +50,21 @@ NavigationBarThemeData navigationBarThemeData(ColorScheme colorScheme) {
   );
 }
 
+NavigationDrawerThemeData navigationDrawerThemeData(
+    ColorScheme colorScheme, TextTheme textTheme) {
+  return NavigationDrawerThemeData(
+    backgroundColor: colorScheme.surface,
+    labelTextStyle: MaterialStateProperty.resolveWith((states) {
+      if (states.contains(MaterialState.selected)) {
+        return GoogleFonts.outfit(textStyle: textTheme.bodyLarge)
+            .copyWith(fontWeight: FontWeight.bold);
+      } else {
+        return GoogleFonts.outfit(textStyle: textTheme.bodyLarge);
+      }
+    }),
+  );
+}
+
 FloatingActionButtonThemeData floatingActionButton(ColorScheme colorScheme) {
   return FloatingActionButtonThemeData(
     backgroundColor: colorScheme.primary,

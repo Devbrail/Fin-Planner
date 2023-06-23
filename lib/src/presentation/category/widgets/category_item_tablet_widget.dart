@@ -21,59 +21,49 @@ class CategoryItemTabletWidget extends StatelessWidget {
     return PaisaFilledCard(
       child: InkWell(
         onTap: () => context.pushNamed(
-          editCategoryPath,
+          editCategoryName,
           pathParameters: <String, String>{'cid': category.superId.toString()},
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                children: [
-                  Icon(
-                    IconData(
-                      category.icon,
-                      fontFamily: fontFamilyName,
-                      fontPackage: fontFamilyPackageName,
-                    ),
-                    size: 32,
-                    color: Color(category.color ?? context.primary.value),
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: onPressed,
-                    icon: Icon(
-                      Icons.delete_rounded,
-                      color: context.error,
-                    ),
-                  )
-                ],
+              padding: const EdgeInsets.all(16.0),
+              child: Icon(
+                IconData(
+                  category.icon,
+                  fontFamily: fontFamilyName,
+                  fontPackage: fontFamilyPackageName,
+                ),
+                color: Color(category.color ?? context.primary.value),
               ),
             ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    category.name,
-                    style: context.titleMedium?.copyWith(
-                      color: context.onSurface,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      category.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: context.titleMedium?.copyWith(
+                        color: context.onSurface,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    category.description == null ? '' : category.description!,
-                    style: context.bodySmall?.copyWith(
-                      color: context.onSurface,
-                    ),
-                    textAlign: TextAlign.center,
-                  )
-                ],
+                    if (category.description != null)
+                      Text(
+                        category.description!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.bodySmall?.copyWith(
+                          color: context.onSurface,
+                        ),
+                      )
+                  ],
+                ),
               ),
             ),
           ],

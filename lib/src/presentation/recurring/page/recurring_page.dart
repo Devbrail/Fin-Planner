@@ -9,7 +9,6 @@ import '../../../core/common.dart';
 import '../../../data/recurring/model/recurring.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
 import '../../widgets/paisa_empty_widget.dart';
-import '../../widgets/small_size_fab.dart';
 
 class RecurringPage extends StatelessWidget {
   const RecurringPage({super.key});
@@ -19,15 +18,6 @@ class RecurringPage extends StatelessWidget {
     return PaisaAnnotatedRegionWidget(
       color: context.background,
       child: Scaffold(
-        appBar: context.materialYouAppBar(
-          context.loc.recurring,
-        ),
-        floatingActionButton: SmallSizeFab(
-          onPressed: () {
-            GoRouter.of(context).pushNamed(recurringName);
-          },
-          icon: Icons.add,
-        ),
         body: ValueListenableBuilder<Box<RecurringModel>>(
           valueListenable: getIt.get<Box<RecurringModel>>().listenable(),
           builder: (_, value, child) {

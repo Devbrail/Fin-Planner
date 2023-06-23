@@ -27,9 +27,10 @@ class CategoryListTabletWidget extends StatelessWidget {
         right: 8,
         top: 8,
       ),
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 256,
-        childAspectRatio: 1,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount:
+            MediaQuery.of(context).orientation == Orientation.landscape ? 3 : 2,
+        childAspectRatio: 16 / 3.5,
       ),
       itemCount: categories.length,
       shrinkWrap: true,
@@ -38,9 +39,7 @@ class CategoryListTabletWidget extends StatelessWidget {
           category: categories[index],
           onPressed: () => paisaAlertDialog(
             context,
-            title: Text(
-              context.loc.dialogDeleteTitle,
-            ),
+            title: Text(context.loc.dialogDeleteTitle),
             child: RichText(
               text: TextSpan(
                 text: context.loc.deleteCategory,

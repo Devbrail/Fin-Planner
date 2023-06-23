@@ -1,8 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:paisa/src/presentation/recurring/page/recurring_page.dart';
 
-import '../../../core/common.dart';
 import '../../accounts/pages/accounts_page.dart';
 import '../../budget/pages/budget_page.dart';
 import '../../category/pages/category_list_page.dart';
@@ -16,13 +16,14 @@ class ContentWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  late final Map<PageType, Widget> pages = {
-    PageType.home: const SummaryPage(),
-    PageType.accounts: const AccountsPage(),
-    PageType.category: const CategoryListPage(),
-    PageType.overview: const OverViewPage(),
-    PageType.debts: const DebtsPage(),
-    PageType.budget: BudgetPage(),
+  late final Map<int, Widget> pages = {
+    0: const SummaryPage(),
+    1: const AccountsPage(),
+    2: const DebtsPage(),
+    3: const OverViewPage(),
+    4: const CategoryListPage(),
+    5: const BudgetPage(),
+    6: const RecurringPage(),
   };
 
   @override

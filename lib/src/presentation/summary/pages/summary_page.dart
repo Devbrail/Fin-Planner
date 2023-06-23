@@ -21,11 +21,6 @@ class SummaryPage extends StatelessWidget {
       builder: (_, value, child) {
         final expenses = value.values.toEntities();
         return ScreenTypeLayout(
-          breakpoints: const ScreenBreakpoints(
-            tablet: 673,
-            desktop: 799,
-            watch: 300,
-          ),
           mobile: SummaryMobilePage(expenses: expenses),
           tablet: SummaryTabletPage(expenses: expenses),
           desktop: SummaryDesktopPage(expenses: expenses),
