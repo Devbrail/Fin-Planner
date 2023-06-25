@@ -83,3 +83,13 @@ class AccountColorSelectedState extends AccountsState {
   @override
   List<Object> get props => [categoryColor, identityHashCode(this)];
 }
+
+class AccountAndExpensesState extends AccountsState {
+  final Account account;
+  final List<Expense> expenses;
+
+  const AccountAndExpensesState(this.account, this.expenses);
+
+  @override
+  List<Object> get props => [account, expenses];
+}

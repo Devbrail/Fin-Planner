@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/overview/cubit/budget_cubit.dart';
+import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
 import 'app/routes.dart';
@@ -43,6 +46,12 @@ class _PaisaAppState extends State<PaisaApp> {
         ),
         BlocProvider(
           create: (context) => getIt.get<CategoryBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt.get<BudgetCubit>(),
+        ),
+        Provider(
+          create: (context) => getIt.get<SummaryController>(),
         ),
       ],
       child: ValueListenableBuilder<Box>(

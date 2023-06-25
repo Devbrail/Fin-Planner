@@ -721,6 +721,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "transactionsByCategory": "Transactions by category",
+    "@transactionsByCategory": {
+        "description": "Text shown on the toolbar title",
+        "type": "text",
+        "placeholders": {}
+    },
     "backupAndRestoreTitle": "Backup and restore",
     "@backupAndRestoreTitle": {
         "description": "Text shown on the toolbar title",

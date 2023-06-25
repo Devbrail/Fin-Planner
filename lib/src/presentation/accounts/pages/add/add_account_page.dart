@@ -32,7 +32,7 @@ class AddAccountPage extends StatefulWidget {
 
 class AddAccountPageState extends State<AddAccountPage> {
   late final bool isAccountAddOrUpdate = widget.accountId == null;
-
+  final AccountsBloc accountsBloc = getIt.get();
   final accountNumberController = TextEditingController();
   final accountHolderController = TextEditingController();
   final accountNameController = TextEditingController();
@@ -41,8 +41,7 @@ class AddAccountPageState extends State<AddAccountPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<AccountsBloc>(context)
-        .add(FetchAccountFromIdEvent(widget.accountId));
+    accountsBloc.add(FetchAccountFromIdEvent(widget.accountId));
   }
 
   @override
@@ -58,304 +57,164 @@ class AddAccountPageState extends State<AddAccountPage> {
   Widget build(BuildContext context) {
     return PaisaAnnotatedRegionWidget(
       color: context.background,
-      child: BlocConsumer<AccountsBloc, AccountsState>(
-        listener: (context, state) {
-          if (state is AccountAddedState) {
-            context.showMaterialSnackBar(
-              isAccountAddOrUpdate
-                  ? context.loc.addedAccount
-                  : context.loc.updateAccount,
-              backgroundColor: context.primaryContainer,
-              color: context.onPrimaryContainer,
-            );
-            context.pop();
-          }
-          if (state is AccountDeletedState) {
-            context.showMaterialSnackBar(
-              context.loc.deleteAccount,
-              backgroundColor: context.error,
-              color: context.onError,
-            );
-            context.pop();
-          } else if (state is AccountErrorState) {
-            context.showMaterialSnackBar(
-              state.errorString,
-              backgroundColor: context.errorContainer,
-              color: context.onErrorContainer,
-            );
-          } else if (state is AccountSuccessState) {
-            accountNameController.text = state.account.bankName;
-            accountNameController.selection =
-                TextSelection.collapsed(offset: state.account.bankName.length);
-
-            accountNumberController.text = state.account.number;
-            accountNumberController.selection =
-                TextSelection.collapsed(offset: state.account.number.length);
-
-            accountHolderController.text = state.account.name;
-            accountHolderController.selection =
-                TextSelection.collapsed(offset: state.account.name.length);
-
-            accountInitialAmountController.text =
-                state.account.amount.toString();
-            accountInitialAmountController.selection = TextSelection.collapsed(
-                offset: state.account.amount.toString().length);
-          }
-        },
-        builder: (context, state) {
-          return ScreenTypeLayout(
-            mobile: Scaffold(
-              appBar: context.materialYouAppBar(
+      child: BlocProvider(
+        create: (context) => accountsBloc,
+        child: BlocConsumer<AccountsBloc, AccountsState>(
+          listener: (context, state) {
+            if (state is AccountAddedState) {
+              context.showMaterialSnackBar(
                 isAccountAddOrUpdate
-                    ? context.loc.addAccount
+                    ? context.loc.addedAccount
                     : context.loc.updateAccount,
-                actions: [
-                  isAccountAddOrUpdate
-                      ? const SizedBox.shrink()
-                      : IconButton(
-                          onPressed: () {
-                            paisaAlertDialog(
-                              context,
-                              title: Text(context.loc.dialogDeleteTitle),
-                              child: RichText(
-                                text: TextSpan(
-                                  text: context.loc.deleteAccount,
-                                  style: context.bodyMedium,
-                                  children: [
-                                    TextSpan(
-                                      text:
-                                          BlocProvider.of<AccountsBloc>(context)
-                                              .accountName,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              confirmationButton: TextButton(
-                                style: TextButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                ),
-                                onPressed: () {
-                                  BlocProvider.of<AccountsBloc>(context).add(
-                                      DeleteAccountEvent(
-                                          int.parse(widget.accountId!)));
+                backgroundColor: context.primaryContainer,
+                color: context.onPrimaryContainer,
+              );
+              context.pop();
+            }
+            if (state is AccountDeletedState) {
+              context.showMaterialSnackBar(
+                context.loc.deleteAccount,
+                backgroundColor: context.error,
+                color: context.onError,
+              );
+              context.pop();
+            } else if (state is AccountErrorState) {
+              context.showMaterialSnackBar(
+                state.errorString,
+                backgroundColor: context.errorContainer,
+                color: context.onErrorContainer,
+              );
+            } else if (state is AccountSuccessState) {
+              accountNameController.text = state.account.bankName;
+              accountNameController.selection = TextSelection.collapsed(
+                  offset: state.account.bankName.length);
 
-                                  Navigator.pop(context);
-                                },
-                                child: Text(context.loc.delete),
-                              ),
-                            );
-                          },
-                          icon: Icon(
-                            Icons.delete_rounded,
-                            color: context.error,
+              accountNumberController.text = state.account.number;
+              accountNumberController.selection =
+                  TextSelection.collapsed(offset: state.account.number.length);
+
+              accountHolderController.text = state.account.name;
+              accountHolderController.selection =
+                  TextSelection.collapsed(offset: state.account.name.length);
+
+              accountInitialAmountController.text =
+                  state.account.amount.toString();
+              accountInitialAmountController.selection =
+                  TextSelection.collapsed(
+                      offset: state.account.amount.toString().length);
+            }
+          },
+          builder: (context, state) {
+            return ScreenTypeLayout(
+              mobile: Scaffold(
+                appBar: context.materialYouAppBar(
+                  isAccountAddOrUpdate
+                      ? context.loc.addAccount
+                      : context.loc.updateAccount,
+                  actions: [
+                    isAccountAddOrUpdate
+                        ? const SizedBox.shrink()
+                        : IconButton(
+                            onPressed: () {
+                              paisaAlertDialog(
+                                context,
+                                title: Text(context.loc.dialogDeleteTitle),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: context.loc.deleteAccount,
+                                    style: context.bodyMedium,
+                                    children: [
+                                      TextSpan(
+                                        text: BlocProvider.of<AccountsBloc>(
+                                                context)
+                                            .accountName,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                confirmationButton: TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                  ),
+                                  onPressed: () {
+                                    BlocProvider.of<AccountsBloc>(context).add(
+                                        DeleteAccountEvent(
+                                            int.parse(widget.accountId!)));
+
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(context.loc.delete),
+                                ),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.delete_rounded,
+                              color: context.error,
+                            ),
                           ),
-                        ),
-                  IconButton(
-                    onPressed: _showInfo,
-                    icon: const Icon(Icons.info_rounded),
-                  ),
-                ],
-              ),
-              body: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      child: CardTypeButtons(),
-                    ),
-                    ListTile(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      onTap: () async {
-                        final color = await paisaColorPicker(
-                          context,
-                          defaultColor: BlocProvider.of<AccountsBloc>(context)
-                                  .selectedColor ??
-                              Colors.red.value,
-                        );
-                        if (context.mounted) {
-                          BlocProvider.of<AccountsBloc>(context)
-                              .add(AccountColorSelectedEvent(color));
-                        }
-                      },
-                      leading: Icon(
-                        Icons.color_lens,
-                        color: context.primary,
-                      ),
-                      title: Text(
-                        context.loc.pickColor,
-                      ),
-                      subtitle: Text(
-                        context.loc.pickColorDesc,
-                      ),
-                      trailing: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(BlocProvider.of<AccountsBloc>(context)
-                                  .selectedColor ??
-                              Colors.red.value),
-                        ),
-                      ),
-                    ),
-                    Form(
-                      key: _form,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            const SizedBox(height: 16),
-                            AccountCardHolderNameWidget(
-                              controller: accountHolderController,
-                            ),
-                            const SizedBox(height: 16),
-                            AccountNameWidget(
-                              controller: accountNameController,
-                            ),
-                            const SizedBox(height: 16),
-                            AccountInitialAmountWidget(
-                              controller: accountInitialAmountController,
-                            ),
-                            const SizedBox(height: 16),
-                            Builder(
-                              builder: (context) {
-                                if (state is UpdateCardTypeState &&
-                                    state.cardType == CardType.bank) {
-                                  return AccountNumberWidget(
-                                    controller: accountNumberController,
-                                  );
-                                } else {
-                                  return const SizedBox.shrink();
-                                }
-                              },
-                            ),
-                            const SizedBox(height: 16),
-                            AccountDefaultSwitchWidget(
-                              accountId:
-                                  int.tryParse(widget.accountId ?? '') ?? -1,
-                            ),
-                          ],
-                        ),
-                      ),
+                    IconButton(
+                      onPressed: _showInfo,
+                      icon: const Icon(Icons.info_rounded),
                     ),
                   ],
                 ),
-              ),
-              bottomNavigationBar: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: PaisaBigButton(
-                    onPressed: () {
-                      final isValid = _form.currentState!.validate();
-                      if (!isValid) {
-                        return;
-                      }
-                      BlocProvider.of<AccountsBloc>(context)
-                          .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
-                    },
-                    title: isAccountAddOrUpdate
-                        ? context.loc.add
-                        : context.loc.update,
-                  ),
-                ),
-              ),
-            ),
-            tablet: Scaffold(
-              appBar: context.materialYouAppBar(
-                isAccountAddOrUpdate
-                    ? context.loc.addAccount
-                    : context.loc.updateAccount,
-                actions: [
-                  IconButton(
-                    onPressed: _showInfo,
-                    icon: const Icon(Icons.info_rounded),
-                  ),
-                  isAccountAddOrUpdate
-                      ? const SizedBox.shrink()
-                      : IconButton(
-                          onPressed: () {
-                            paisaAlertDialog(
-                              context,
-                              title: Text(context.loc.dialogDeleteTitle),
-                              child: RichText(
-                                text: TextSpan(
-                                  text: context.loc.deleteAccount,
-                                  style: context.bodyMedium,
-                                  children: [
-                                    TextSpan(
-                                      text:
-                                          BlocProvider.of<AccountsBloc>(context)
-                                              .accountName,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              confirmationButton: TextButton(
-                                style: TextButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                ),
-                                onPressed: () {
-                                  BlocProvider.of<AccountsBloc>(context).add(
-                                      DeleteAccountEvent(
-                                          int.parse(widget.accountId!)));
-
-                                  Navigator.pop(context);
-                                },
-                                child: Text(context.loc.delete),
-                              ),
-                            );
-                          },
-                          icon: Icon(
-                            Icons.delete_rounded,
-                            color: context.error,
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        child: CardTypeButtons(),
+                      ),
+                      ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        onTap: () async {
+                          final color = await paisaColorPicker(
+                            context,
+                            defaultColor: BlocProvider.of<AccountsBloc>(context)
+                                    .selectedColor ??
+                                Colors.red.value,
+                          );
+                          if (context.mounted) {
+                            BlocProvider.of<AccountsBloc>(context)
+                                .add(AccountColorSelectedEvent(color));
+                          }
+                        },
+                        leading: Icon(
+                          Icons.color_lens,
+                          color: context.primary,
+                        ),
+                        title: Text(
+                          context.loc.pickColor,
+                        ),
+                        subtitle: Text(
+                          context.loc.pickColorDesc,
+                        ),
+                        trailing: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(BlocProvider.of<AccountsBloc>(context)
+                                    .selectedColor ??
+                                Colors.red.value),
                           ),
-                        )
-                ],
-              ),
-              bottomNavigationBar: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: PaisaBigButton(
-                    onPressed: () {
-                      final isValid = _form.currentState!.validate();
-                      if (!isValid) {
-                        return;
-                      }
-                      BlocProvider.of<AccountsBloc>(context)
-                          .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
-                    },
-                    title: isAccountAddOrUpdate
-                        ? context.loc.add
-                        : context.loc.update,
-                  ),
-                ),
-              ),
-              body: SingleChildScrollView(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Form(
+                        ),
+                      ),
+                      Form(
                         key: _form,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              const CardTypeButtons(),
                               const SizedBox(height: 16),
                               AccountCardHolderNameWidget(
                                 controller: accountHolderController,
@@ -369,21 +228,166 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 controller: accountInitialAmountController,
                               ),
                               const SizedBox(height: 16),
-                              AccountNumberWidget(
-                                controller: accountNumberController,
+                              Builder(
+                                builder: (context) {
+                                  if (state is UpdateCardTypeState &&
+                                      state.cardType == CardType.bank) {
+                                    return AccountNumberWidget(
+                                      controller: accountNumberController,
+                                    );
+                                  } else {
+                                    return const SizedBox.shrink();
+                                  }
+                                },
                               ),
                               const SizedBox(height: 16),
+                              AccountDefaultSwitchWidget(
+                                accountId:
+                                    int.tryParse(widget.accountId ?? '') ?? -1,
+                              ),
                             ],
                           ),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                bottomNavigationBar: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: PaisaBigButton(
+                      onPressed: () {
+                        final isValid = _form.currentState!.validate();
+                        if (!isValid) {
+                          return;
+                        }
+                        BlocProvider.of<AccountsBloc>(context)
+                            .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
+                      },
+                      title: isAccountAddOrUpdate
+                          ? context.loc.add
+                          : context.loc.update,
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+              tablet: Scaffold(
+                appBar: context.materialYouAppBar(
+                  isAccountAddOrUpdate
+                      ? context.loc.addAccount
+                      : context.loc.updateAccount,
+                  actions: [
+                    IconButton(
+                      onPressed: _showInfo,
+                      icon: const Icon(Icons.info_rounded),
+                    ),
+                    isAccountAddOrUpdate
+                        ? const SizedBox.shrink()
+                        : IconButton(
+                            onPressed: () {
+                              paisaAlertDialog(
+                                context,
+                                title: Text(context.loc.dialogDeleteTitle),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: context.loc.deleteAccount,
+                                    style: context.bodyMedium,
+                                    children: [
+                                      TextSpan(
+                                        text: BlocProvider.of<AccountsBloc>(
+                                                context)
+                                            .accountName,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                confirmationButton: TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                  ),
+                                  onPressed: () {
+                                    BlocProvider.of<AccountsBloc>(context).add(
+                                        DeleteAccountEvent(
+                                            int.parse(widget.accountId!)));
+
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(context.loc.delete),
+                                ),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.delete_rounded,
+                              color: context.error,
+                            ),
+                          )
+                  ],
+                ),
+                bottomNavigationBar: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: PaisaBigButton(
+                      onPressed: () {
+                        final isValid = _form.currentState!.validate();
+                        if (!isValid) {
+                          return;
+                        }
+                        BlocProvider.of<AccountsBloc>(context)
+                            .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
+                      },
+                      title: isAccountAddOrUpdate
+                          ? context.loc.add
+                          : context.loc.update,
+                    ),
+                  ),
+                ),
+                body: SingleChildScrollView(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Form(
+                          key: _form,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                const CardTypeButtons(),
+                                const SizedBox(height: 16),
+                                AccountCardHolderNameWidget(
+                                  controller: accountHolderController,
+                                ),
+                                const SizedBox(height: 16),
+                                AccountNameWidget(
+                                  controller: accountNameController,
+                                ),
+                                const SizedBox(height: 16),
+                                AccountInitialAmountWidget(
+                                  controller: accountInitialAmountController,
+                                ),
+                                const SizedBox(height: 16),
+                                AccountNumberWidget(
+                                  controller: accountNumberController,
+                                ),
+                                const SizedBox(height: 16),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

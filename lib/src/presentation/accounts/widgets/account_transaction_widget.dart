@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
@@ -38,8 +40,13 @@ class AccountTransactionWidget extends StatelessWidget {
             physics: isScroll ? null : const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
-              TransactionsHeaderWidget(summaryController: getIt.get()),
-              AccountHistoryWidget(expenses: state.expenses)
+              TransactionsHeaderWidget(
+                summaryController: Provider.of<SummaryController>(context),
+              ),
+              AccountHistoryWidget(
+                expenses: state.expenses,
+                summaryController: Provider.of<SummaryController>(context),
+              )
             ],
           );
         } else {

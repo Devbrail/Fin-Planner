@@ -1,8 +1,6 @@
 import 'package:bezier_chart_plus/bezier_chart_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
@@ -10,23 +8,25 @@ import '../../../core/enum/filter_expense.dart';
 import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
-import '../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../widgets/paisa_card.dart';
-import '../../widgets/paisa_empty_widget.dart';
-import '../../widgets/paisa_pill_chip.dart';
 import '../cubit/budget_cubit.dart';
-import '../widgets/category_list_widget.dart';
 import '../widgets/filter_budget_widget.dart';
 import '../widgets/filter_date_range_widget.dart';
+import '../widgets/overview_filter_widget.dart';
+import '../widgets/overview_list_widget.dart';
 
 enum OverviewType { income, expense }
 
 class TransactionTypeSegmentedWidget extends StatelessWidget {
-  const TransactionTypeSegmentedWidget({super.key});
+  const TransactionTypeSegmentedWidget({
+    super.key,
+    required this.summaryController,
+  });
+
+  final SummaryController summaryController;
 
   @override
   Widget build(BuildContext context) {
-    final SummaryController summaryController = getIt.get();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ValueListenableBuilder<OverviewType>(
@@ -58,12 +58,14 @@ class TransactionTypeSegmentedWidget extends StatelessWidget {
 class OverViewPage extends StatelessWidget {
   const OverViewPage({
     Key? key,
+    required this.summaryController,
+    required this.budgetCubit,
   }) : super(key: key);
 
+  final SummaryController summaryController;
+  final BudgetCubit budgetCubit;
   @override
   Widget build(BuildContext context) {
-    final BudgetCubit budgetCubit = getIt.get();
-    final SummaryController summaryController = getIt.get();
     return ValueListenableBuilder<Box<ExpenseModel>>(
       valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
       builder: (context, expenseBox, _) {
@@ -84,156 +86,11 @@ class OverViewPage extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         children: [
-                          ScreenTypeLayout(
-                            tablet: Row(
-                              children: [
-                                Expanded(
-                                  child: BlocBuilder(
-                                    bloc: budgetCubit,
-                                    buildWhen: (previous, current) =>
-                                        current is InitialSelectedState,
-                                    builder: (context, state) {
-                                      if (state is InitialSelectedState) {
-                                        return SizedBox(
-                                          height: 70,
-                                          child: Row(
-                                            children: [
-                                              const SizedBox(width: 8),
-                                              const PaisaFilterTransactionWidget(),
-                                              Expanded(
-                                                child: ListView.builder(
-                                                  shrinkWrap: true,
-                                                  physics:
-                                                      const BouncingScrollPhysics(),
-                                                  padding:
-                                                      const EdgeInsets.all(16),
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount:
-                                                      state.filerTimes.length,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    final item =
-                                                        state.filerTimes[index];
-                                                    return PaisaPillChip(
-                                                      title: item,
-                                                      onPressed: () {
-                                                        if (budgetCubit
-                                                                .selectedTime !=
-                                                            item) {
-                                                          budgetCubit
-                                                              .updateFilterTime(
-                                                                  item);
-                                                        }
-                                                      },
-                                                      isSelected: item ==
-                                                          budgetCubit
-                                                              .selectedTime,
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      } else {
-                                        return const SizedBox.shrink();
-                                      }
-                                    },
-                                  ),
-                                ),
-                                const TransactionTypeSegmentedWidget(),
-                              ],
-                            ),
-                            mobile: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                const TransactionTypeSegmentedWidget(),
-                                BlocBuilder(
-                                  bloc: budgetCubit,
-                                  buildWhen: (previous, current) =>
-                                      current is InitialSelectedState,
-                                  builder: (context, state) {
-                                    if (state is InitialSelectedState) {
-                                      return SizedBox(
-                                        height: 70,
-                                        child: Row(
-                                          children: [
-                                            const SizedBox(width: 8),
-                                            const PaisaFilterTransactionWidget(),
-                                            Expanded(
-                                              child: ListView.builder(
-                                                shrinkWrap: true,
-                                                physics:
-                                                    const BouncingScrollPhysics(),
-                                                padding:
-                                                    const EdgeInsets.all(16),
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemCount:
-                                                    state.filerTimes.length,
-                                                itemBuilder: (context, index) {
-                                                  final item =
-                                                      state.filerTimes[index];
-                                                  return PaisaPillChip(
-                                                    title: item,
-                                                    onPressed: () {
-                                                      if (budgetCubit
-                                                              .selectedTime !=
-                                                          item) {
-                                                        budgetCubit
-                                                            .updateFilterTime(
-                                                                item);
-                                                      }
-                                                    },
-                                                    isSelected: item ==
-                                                        budgetCubit
-                                                            .selectedTime,
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    } else {
-                                      return const SizedBox.shrink();
-                                    }
-                                  },
-                                ),
-                              ],
-                            ),
+                          OverviewFilter(
+                            budgetCubit: budgetCubit,
+                            summaryController: summaryController,
                           ),
-                          BlocBuilder(
-                            bloc: budgetCubit,
-                            buildWhen: (previous, current) =>
-                                current is FilteredCategoryListState,
-                            builder: (context, state) {
-                              if (state is FilteredCategoryListState) {
-                                if (state.categoryGrouped.isEmpty) {
-                                  return EmptyWidget(
-                                    icon: Icons.paid,
-                                    title:
-                                        context.loc.emptyOverviewMessageTitle,
-                                    description: context
-                                        .loc.emptyOverviewMessageSubtitle,
-                                  );
-                                } else {
-                                  return CategoryListWidget(
-                                    categoryGrouped: state.categoryGrouped,
-                                    totalExpense: state.totalExpense,
-                                  );
-                                }
-                              } else {
-                                return EmptyWidget(
-                                  icon: Icons.paid,
-                                  title: context.loc.emptyOverviewMessageTitle,
-                                  description:
-                                      context.loc.emptyOverviewMessageSubtitle,
-                                );
-                              }
-                            },
-                          ),
+                          OverviewListView(budgetCubit: budgetCubit),
                         ],
                       ),
                     );
@@ -258,10 +115,11 @@ class BarChartSample2 extends StatefulWidget {
 }
 
 class BarChartSample2State extends State<BarChartSample2> {
-  final DateTime toDate = DateTime.now();
-  late DateTime selectedDate = toDate;
-  final List<DataPoint> incomePoints = [];
   final List<DataPoint> expensePoints = [];
+  final List<DataPoint> incomePoints = [];
+  late DateTime selectedDate = toDate;
+  final DateTime toDate = DateTime.now();
+
   @override
   void initState() {
     super.initState();

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../../main.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
@@ -12,13 +10,13 @@ class ExpenseListWidget extends StatelessWidget {
   const ExpenseListWidget({
     Key? key,
     required this.expenses,
+    required this.summaryController,
   }) : super(key: key);
 
   final List<Expense> expenses;
-
+  final SummaryController summaryController;
   @override
   Widget build(BuildContext context) {
-    final SummaryController summaryController = getIt.get();
     return ListView.separated(
       separatorBuilder: (context, index) => const Divider(
         indent: 72,
@@ -30,21 +28,12 @@ class ExpenseListWidget extends StatelessWidget {
       itemCount: expenses.length,
       itemBuilder: (_, index) {
         final Expense expense = expenses[index];
-
         final Account? account =
-            summaryController.getAccount(expense.accountId);
+            summaryController.fetchAccountFromId(expense.accountId);
         final Category? category =
-            summaryController.getCategory(expense.categoryId);
+            summaryController.fetchCategoryFromId(expense.categoryId);
         if (account == null || category == null) {
-          return ExpenseItemWidget(
-            expense: expense,
-            account: account!,
-            category: Category(
-              icon: MdiIcons.bankTransfer.codePoint,
-              name: 'Transfer',
-              color: Colors.amber.value,
-            ),
-          );
+          return const SizedBox.shrink();
         } else {
           return ExpenseItemWidget(
             expense: expense,

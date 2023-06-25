@@ -9,7 +9,10 @@ import '../../summary/controller/summary_controller.dart';
 import '../../widgets/paisa_toggle_button.dart';
 
 class FilterHomeWidget extends StatelessWidget {
-  const FilterHomeWidget({super.key, required this.summaryController});
+  const FilterHomeWidget({
+    super.key,
+    required this.summaryController,
+  });
 
   final SummaryController summaryController;
   void updateFilter(FilterExpense filterExpense) {

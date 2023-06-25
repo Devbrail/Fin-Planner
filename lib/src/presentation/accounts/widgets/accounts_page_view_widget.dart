@@ -23,17 +23,19 @@ class AccountPageViewWidget extends StatefulWidget {
   State<AccountPageViewWidget> createState() => _AccountPageViewWidgetState();
 }
 
-class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
+class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
+    with AutomaticKeepAliveClientMixin {
   final PageController _controller = PageController();
   int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocBuilder<AccountsBloc, AccountsState>(
       builder: (context, state) {
         if (state is AccountSelectedState) {
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               LavaAnimation(
                 child: SizedBox(
@@ -114,7 +116,8 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
                 child: _buildPageIndicator(),
               ),
             ],
@@ -151,4 +154,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

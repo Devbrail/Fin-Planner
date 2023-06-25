@@ -12,11 +12,13 @@ import '../../widgets/paisa_annotate_region_widget.dart';
 import '../../widgets/paisa_empty_widget.dart';
 
 class BudgetPage extends StatelessWidget {
-  const BudgetPage({super.key});
-
+  const BudgetPage({
+    super.key,
+    required this.summaryController,
+  });
+  final SummaryController summaryController;
   @override
   Widget build(BuildContext context) {
-    final SummaryController summaryController = getIt.get();
     return PaisaAnnotatedRegionWidget(
       color: context.background,
       child: ValueListenableBuilder<Box<CategoryModel>>(
@@ -36,7 +38,7 @@ class BudgetPage extends StatelessWidget {
             itemBuilder: (context, index) {
               final Category category = categories[index];
               final List<Expense> expenses = summaryController
-                  .getExpensesFromCategoryId(category.superId!)
+                  .fetchExpensesFromCategoryId(category.superId!)
                   .thisMonthExpensesList;
               return BudgetItem(category: category, expenses: expenses);
             },

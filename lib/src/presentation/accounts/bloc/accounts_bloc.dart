@@ -35,6 +35,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     on<FetchAccountFromIdEvent>(_fetchAccountFromId);
     on<FetchExpensesFromAccountIdEvent>(_fetchExpensesFromAccountId);
     on<AccountColorSelectedEvent>(_updateAccountColor);
+    on<FetchAccountAndExpenseFromIdEvent>(_fetchAccountAndExpensesFromId);
   }
 
   final GetExpensesFromAccountIdUseCase getExpensesFromAccountIdUseCase;
@@ -162,5 +163,21 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   ) {
     selectedColor = event.accountColor;
     emit(AccountColorSelectedState(event.accountColor));
+  }
+
+  FutureOr<void> _fetchAccountAndExpensesFromId(
+    FetchAccountAndExpenseFromIdEvent event,
+    Emitter<AccountsState> emit,
+  ) async {
+    final int? accountId = int.tryParse(event.accountId);
+    if (accountId == null) {
+      return;
+    }
+
+    final Account? account = getAccountUseCase(accountId);
+    final List<Expense> expenses = getExpensesFromAccountIdUseCase(accountId);
+    if (account != null) {
+      emit(AccountAndExpensesState(account, expenses));
+    }
   }
 }

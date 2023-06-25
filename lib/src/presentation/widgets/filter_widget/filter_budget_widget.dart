@@ -10,13 +10,15 @@ import '../paisa_pill_chip.dart';
 import '../paisa_toggle_button.dart';
 
 class FilterBudgetToggleWidget extends StatelessWidget {
-  FilterBudgetToggleWidget({
+  const FilterBudgetToggleWidget({
     Key? key,
     this.showAsList = false,
+    required this.summaryController,
   }) : super(key: key);
 
   final bool showAsList;
-  final SummaryController summaryController = getIt.get();
+  final SummaryController summaryController;
+
   void updateFilter(FilterExpense filterExpense) {
     summaryController.filterExpenseNotifier.value = filterExpense;
   }

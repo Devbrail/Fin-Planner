@@ -38,10 +38,11 @@ class SummaryController {
   late final ValueNotifier<FilterExpense> sortHomeExpenseNotifier =
       ValueNotifier<FilterExpense>(sortHomeExpense);
 
-  Category? getCategory(int categoryId) => getCategoryUseCase(categoryId);
+  Category? fetchCategoryFromId(int categoryId) =>
+      getCategoryUseCase(categoryId);
 
-  Account? getAccount(int accountId) => getAccountUseCase(accountId);
+  Account? fetchAccountFromId(int accountId) => getAccountUseCase(accountId);
 
-  List<Expense> getExpensesFromCategoryId(int categoryId) =>
+  List<Expense> fetchExpensesFromCategoryId(int categoryId) =>
       getExpensesFromCategoryIdUseCase(categoryId);
 }

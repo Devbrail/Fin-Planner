@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/category/pages/category_icon_picker_page.dart';
+import 'package:provider/provider.dart';
 
-import '../../main.dart';
 import '../core/common.dart';
 import '../core/enum/box_types.dart';
 import '../core/enum/transaction_type.dart';
@@ -12,6 +11,7 @@ import '../presentation/accounts/pages/add/add_account_page.dart';
 import '../presentation/accounts/pages/selector/account_selector_page.dart';
 import '../presentation/biometric/pages/biometric_page.dart';
 import '../presentation/category/pages/add/add_category_page.dart';
+import '../presentation/category/pages/category_icon_picker_page.dart';
 import '../presentation/category/pages/category_list_page.dart';
 import '../presentation/category/pages/selector/category_selector_page.dart';
 import '../presentation/currency_selector/pages/currency_selector_page.dart';
@@ -21,12 +21,13 @@ import '../presentation/home/pages/home_page.dart';
 import '../presentation/login/intro/into_page.dart';
 import '../presentation/login/pages/user_image_page.dart';
 import '../presentation/login/pages/user_name_page.dart';
-import '../presentation/overview/pages/expense_list_page.dart';
+import '../presentation/overview/pages/transactions_by_category_list_page.dart';
 import '../presentation/recurring/page/add_recurring_page.dart';
 import '../presentation/recurring/page/recurring_page.dart';
 import '../presentation/search/pages/search_page.dart';
 import '../presentation/settings/pages/export_and_import_page.dart';
 import '../presentation/settings/pages/setting_page.dart';
+import '../presentation/summary/controller/summary_controller.dart';
 
 const loginPath = '/login';
 const loginName = 'login';
@@ -246,6 +247,7 @@ final GoRouter goRouter = GoRouter(
             final String accountId = state.pathParameters['aid'] as String;
             return AccountTransactionsPage(
               accountId: accountId,
+              summaryController: Provider.of<SummaryController>(context),
             );
           },
           routes: [
@@ -284,11 +286,9 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: expensesByCategoryName,
           path: expensesByCategoryPath,
-          builder: (context, state) => ExpenseListPage(
+          builder: (context, state) => TransactionByCategoryListPage(
             categoryId: state.pathParameters['cid'] as String,
-            accountLocalDataSource: getIt.get(),
-            categoryLocalDataSource: getIt.get(),
-            expenseDataManager: getIt.get(),
+            summaryController: Provider.of<SummaryController>(context),
           ),
         ),
         GoRoute(

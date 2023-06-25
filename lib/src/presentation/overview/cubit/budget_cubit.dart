@@ -6,22 +6,23 @@ import 'package:injectable/injectable.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../../domain/category/entities/category.dart';
+import '../../../domain/category/use_case/category_use_case.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
-import '../../summary/controller/summary_controller.dart';
 
 @injectable
 class BudgetCubit extends Cubit<BudgetState> {
   BudgetCubit(
     this.getExpensesUseCase,
-    this.summaryController,
+    this.getCategoryUseCase,
   ) : super(BudgetInitial());
 
+  final GetCategoryUseCase getCategoryUseCase;
   final GetExpensesUseCase getExpensesUseCase;
-  final SummaryController summaryController;
+  String? selectedTime;
+
   List<String> _filterTimes = [];
   Map<String, List<Expense>> _groupedExpenses = {};
-  String? selectedTime;
 
   void fetchBudgetSummary(List<Expense> expenses, FilterExpense filterExpense) {
     if (expenses.isEmpty) {
@@ -45,15 +46,13 @@ class BudgetCubit extends Cubit<BudgetState> {
 
   void fetchSelectedTimeExpenses(String time) {
     final List<Expense> selectedTimeExpenses = _groupedExpenses[time] ?? [];
-    final List<MapEntry<Category, List<Expense>>> categoryGroupedExpenses =
-        groupBy(
-                selectedTimeExpenses,
-                (Expense expense) =>
-                    summaryController.getCategory(expense.categoryId)!)
-            .entries
-            .toList();
+    final Map<Category, List<Expense>> categoryGroupedExpenses = groupBy(
+        selectedTimeExpenses,
+        (Expense expense) => getCategoryUseCase(expense.categoryId)!);
+    final List<MapEntry<Category, List<Expense>>> mapExpenses =
+        categoryGroupedExpenses.entries.toList();
     emit(FilteredCategoryListState(
-      categoryGroupedExpenses.sorted(
+      mapExpenses.sorted(
           (a, b) => b.value.totalExpense.compareTo(a.value.totalExpense)),
       selectedTimeExpenses.total,
     ));
@@ -70,20 +69,20 @@ abstract class BudgetState extends Equatable {
 class BudgetInitial extends BudgetState {}
 
 class InitialSelectedState extends BudgetState {
-  final String selectedTime;
-  final List<String> filerTimes;
-
   const InitialSelectedState(this.selectedTime, this.filerTimes);
+
+  final List<String> filerTimes;
+  final String selectedTime;
 
   @override
   List<Object> get props => [selectedTime, filerTimes];
 }
 
 class FilteredCategoryListState extends BudgetState {
+  const FilteredCategoryListState(this.categoryGrouped, this.totalExpense);
+
   final List<MapEntry<Category, List<Expense>>> categoryGrouped;
   final double totalExpense;
-
-  const FilteredCategoryListState(this.categoryGrouped, this.totalExpense);
 }
 
 class EmptyFilterListState extends BudgetState {}

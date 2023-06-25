@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../../domain/expense/entities/expense.dart';
@@ -13,13 +12,13 @@ class AccountHistoryWidget extends StatelessWidget {
   const AccountHistoryWidget({
     super.key,
     required this.expenses,
+    required this.summaryController,
   });
 
   final List<Expense> expenses;
-
+  final SummaryController summaryController;
   @override
   Widget build(BuildContext context) {
-    final SummaryController summaryController = getIt.get();
     if (expenses.isEmpty) {
       return EmptyWidget(
         title: context.loc.emptyExpensesMessageTitle,

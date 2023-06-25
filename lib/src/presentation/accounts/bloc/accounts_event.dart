@@ -21,6 +21,14 @@ class DeleteAccountEvent extends AccountsEvent {
   List<Object> get props => [accountId];
 }
 
+class FetchAccountAndExpenseFromIdEvent extends AccountsEvent {
+  final String accountId;
+
+  const FetchAccountAndExpenseFromIdEvent(this.accountId);
+  @override
+  List<Object> get props => [accountId];
+}
+
 class AccountSelectedEvent extends AccountsEvent {
   final Account account;
 
