@@ -7,7 +7,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../data/accounts/data_sources/local_account_data_manager.dart';
+import '../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../data/category/model/category_model.dart';
@@ -23,7 +23,7 @@ class ExportExpensesWidget extends StatefulWidget {
 }
 
 class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
-  final accountDataSource = getIt.get<LocalAccountDataManager>();
+  final accountDataSource = getIt.get<AccountLocalDataSource>();
   final categoryDataSource = getIt.get<LocalCategoryDataManager>();
   final dataSource = getIt.get<LocalExpenseDataManager>();
   DateTimeRange? dateTimeRange;
@@ -93,7 +93,7 @@ List<String> expenseRow(
 
 List<List<String>> csvDataList(
   List<ExpenseModel> expenses,
-  LocalAccountDataManager accountDataSource,
+  AccountLocalDataSource accountDataSource,
   LocalCategoryDataManager categoryDataSource,
 ) {
   return [

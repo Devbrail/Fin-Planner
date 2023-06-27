@@ -32,10 +32,10 @@ class TransactionsModelAdapter extends TypeAdapter<TransactionsModel> {
       ..write(obj.amount)
       ..writeByte(2)
       ..write(obj.now)
-      ..writeByte(3)
-      ..write(obj.superId)
       ..writeByte(4)
-      ..write(obj.parentId);
+      ..write(obj.parentId)
+      ..writeByte(3)
+      ..write(obj.superId);
   }
 
   @override

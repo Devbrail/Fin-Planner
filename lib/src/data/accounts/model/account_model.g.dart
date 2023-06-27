@@ -31,20 +31,20 @@ class AccountModelAdapter extends TypeAdapter<AccountModel> {
   void write(BinaryWriter writer, AccountModel obj) {
     writer
       ..writeByte(7)
+      ..writeByte(8)
+      ..write(obj.amount)
       ..writeByte(3)
       ..write(obj.bankName)
       ..writeByte(6)
       ..write(obj.cardType)
+      ..writeByte(9)
+      ..write(obj.color)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(5)
       ..write(obj.number)
       ..writeByte(7)
-      ..write(obj.superId)
-      ..writeByte(8)
-      ..write(obj.amount)
-      ..writeByte(9)
-      ..write(obj.color);
+      ..write(obj.superId);
   }
 
   @override

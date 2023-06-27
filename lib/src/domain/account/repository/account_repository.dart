@@ -1,3 +1,6 @@
+import 'package:dartz/dartz.dart';
+import 'package:paisa/src/core/error/failures.dart';
+
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account_model.dart';
 
@@ -25,7 +28,7 @@ abstract class AccountRepository {
 
   AccountModel? fetchAccountFromId(int accountId);
 
-  List<AccountModel> getAccounts();
+  Either<Failure, Iterable<AccountModel>> accounts();
 
   Future<void> clearAll();
 }

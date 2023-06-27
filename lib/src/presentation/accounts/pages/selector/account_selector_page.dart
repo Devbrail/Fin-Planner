@@ -9,7 +9,7 @@ import '../../../../../main.dart';
 import '../../../../app/routes.dart';
 import '../../../../core/common.dart';
 import '../../../../data/accounts/data_sources/default_account.dart';
-import '../../../../data/accounts/data_sources/local_account_data_manager.dart';
+import '../../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../../data/accounts/model/account_model.dart';
 import '../../../settings/bloc/settings_controller.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
@@ -23,7 +23,7 @@ class AccountSelectorPage extends StatefulWidget {
 }
 
 class _AccountSelectorPageState extends State<AccountSelectorPage> {
-  final LocalAccountDataManager dataSource = getIt.get();
+  final AccountLocalDataSource dataSource = getIt.get();
   final List<AccountModel> defaultModels = defaultAccountsData();
   final SettingsController settings = getIt.get<SettingsController>();
 

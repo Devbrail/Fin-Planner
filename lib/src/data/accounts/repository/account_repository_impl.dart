@@ -1,15 +1,18 @@
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/core/error/exceptions.dart';
+import 'package:paisa/src/core/error/failures.dart';
 
 import '../../../core/enum/card_type.dart';
 import '../../../domain/account/repository/account_repository.dart';
-import '../data_sources/local_account_data_manager.dart';
+import '../data_sources/account_local_data_source.dart';
 import '../model/account_model.dart';
 
 @Singleton(as: AccountRepository)
 class AccountRepositoryImpl extends AccountRepository {
   AccountRepositoryImpl({required this.dataSource});
 
-  final LocalAccountDataManager dataSource;
+  final AccountLocalDataSource dataSource;
 
   @override
   Future<void> addAccount({
@@ -41,7 +44,18 @@ class AccountRepositoryImpl extends AccountRepository {
       dataSource.fetchAccountFromId(accountId);
 
   @override
-  List<AccountModel> getAccounts() => dataSource.accounts();
+  Either<Failure, Iterable<AccountModel>> accounts() {
+    try {
+      final accounts = dataSource.accounts();
+      if (accounts.isNotEmpty) {
+        return Right(accounts);
+      } else {
+        return Left(NoItemsFailure());
+      }
+    } on NoItemsException {
+      return Left(NoItemsFailure());
+    }
+  }
 
   @override
   Future<void> updateAccount({

@@ -13,7 +13,7 @@ import 'package:share_plus/share_plus.dart';
 import '../../../main.dart';
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
-import '../accounts/data_sources/local_account_data_manager.dart';
+import '../accounts/data_sources/account_local_data_source.dart';
 import '../accounts/model/account_model.dart';
 import '../category/data_sources/category_local_data_source.dart';
 import '../category/model/category_model.dart';
@@ -37,7 +37,7 @@ class FileHandler {
     final file = File(result.files.first.path!);
     final jsonString = await file.readAsString();
     final data = Data.fromRawJson(jsonString);
-    final LocalAccountDataManager localAccountDataManager = getIt.get();
+    final AccountLocalDataSource localAccountDataManager = getIt.get();
     final LocalCategoryDataManager localCategoryDataManager = getIt.get();
     final LocalExpenseDataManager localExpenseDataManager = getIt.get();
 
@@ -100,8 +100,8 @@ class FileHandler {
     final expenseDataStore = getIt.get<LocalExpenseDataManager>();
     final Iterable<ExpenseModel> expenses = expenseDataStore.exportData();
 
-    final accountDataStore = getIt.get<LocalAccountDataManager>();
-    final Iterable<AccountModel> accounts = accountDataStore.exportData();
+    final accountDataStore = getIt.get<AccountLocalDataSource>();
+    final Iterable<AccountModel> accounts = accountDataStore.accounts();
 
     final categoryDataStore = getIt.get<LocalCategoryDataManager>();
     final Iterable<CategoryModel> categories = categoryDataStore.exportData();
@@ -117,14 +117,14 @@ class FileHandler {
   List<List<String>> fetch() {
     final expenseDataStore = getIt.get<LocalExpenseDataManager>();
     final Iterable<ExpenseModel> expenses = expenseDataStore.exportData();
-    final accountDataStore = getIt.get<LocalAccountDataManager>();
+    final accountDataStore = getIt.get<AccountLocalDataSource>();
     final categoryDataStore = getIt.get<LocalCategoryDataManager>();
     return csvDataList(expenses.toList(), accountDataStore, categoryDataStore);
   }
 
   List<List<String>> csvDataList(
     List<ExpenseModel> expenses,
-    LocalAccountDataManager accountDataSource,
+    AccountLocalDataSource accountDataSource,
     LocalCategoryDataManager categoryDataSource,
   ) =>
       [

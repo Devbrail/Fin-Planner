@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/core/use_case/use_case.dart';
 
 import '../../../core/enum/recurring_type.dart';
 import '../../../core/enum/transaction_type.dart';
@@ -126,21 +127,6 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         description: '',
       );
 
-      /* final String expenseName =
-          'Transfer from ${fromAccount?.bankName} to ${toAccount?.bankName}';
-      await addExpenseUseCase(
-        name: expenseName,
-        amount: transferAmount ?? 0,
-        time: DateTime.now(),
-        categoryId: -1,
-        accountId: -1,
-        transactionType: TransactionType.transfer,
-        description: 'Transfer money',
-        fromAccountId: fromAccount?.superId,
-        toAccountId: toAccount?.superId,
-        transferAmount: transferAmount ?? 0,
-      ); */
-
       emit(const ExpenseAdded(isAddOrUpdate: true));
     } else {
       final double? validAmount = expenseAmount;
@@ -202,15 +188,21 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     ChangeExpenseEvent event,
     Emitter<ExpenseState> emit,
   ) {
-    final List<Account> accounts = accountsUseCase();
-    if (accounts.isEmpty &&
-        accounts.length <= 1 &&
-        event.transactionType == TransactionType.transfer) {
-      emit(const ExpenseErrorState('Need two or more accounts '));
-    } else {
-      transactionType = event.transactionType;
-      emit(ChangeTransactionTypeState(event.transactionType));
-    }
+    accountsUseCase(NoParams()).fold(
+      (failure) {
+        //No accounts state emit
+      },
+      (accounts) {
+        if (accounts.isEmpty &&
+            accounts.length <= 1 &&
+            event.transactionType == TransactionType.transfer) {
+          emit(const ExpenseErrorState('Need two or more accounts '));
+        } else {
+          transactionType = event.transactionType;
+          emit(ChangeTransactionTypeState(event.transactionType));
+        }
+      },
+    );
   }
 
   FutureOr<void> _changeCategory(
