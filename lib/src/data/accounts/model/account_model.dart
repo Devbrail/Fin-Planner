@@ -27,11 +27,17 @@ class AccountModel extends HiveObject with EquatableMixin {
         color: json["color"],
       )..superId = json["superId"];
 
+  @HiveField(8, defaultValue: 0)
+  double? amount;
+
   @HiveField(3)
   String bankName;
 
   @HiveField(6, defaultValue: CardType.bank)
   CardType? cardType;
+
+  @HiveField(9, defaultValue: 0xFFFFC107)
+  int? color;
 
   @HiveField(0)
   String name;
@@ -41,12 +47,6 @@ class AccountModel extends HiveObject with EquatableMixin {
 
   @HiveField(7, defaultValue: 0)
   int? superId;
-
-  @HiveField(8, defaultValue: 0)
-  double? amount;
-
-  @HiveField(9, defaultValue: 0xFFFFC107)
-  int? color;
 
   @override
   List<Object> get props {

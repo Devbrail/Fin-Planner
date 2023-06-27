@@ -7,24 +7,24 @@ part 'transactions_model.g.dart';
 
 @HiveType(typeId: 3)
 class TransactionsModel extends HiveObject with EquatableMixin {
-  @HiveField(1)
-  final double amount;
-
-  @HiveField(2)
-  final DateTime now;
-
-  @HiveField(3)
-  int? superId;
-
-  @HiveField(4, defaultValue: -1)
-  int? parentId;
-
   TransactionsModel({
     required this.amount,
     required this.now,
     required this.parentId,
     this.superId,
   });
+
+  @HiveField(1)
+  final double amount;
+
+  @HiveField(2)
+  final DateTime now;
+
+  @HiveField(4, defaultValue: -1)
+  int? parentId;
+
+  @HiveField(3)
+  int? superId;
 
   @override
   List<Object?> get props => [

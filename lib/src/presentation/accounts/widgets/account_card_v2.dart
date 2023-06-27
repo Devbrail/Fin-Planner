@@ -15,6 +15,7 @@ class AccountCardV2 extends StatelessWidget {
     required this.account,
     required this.expenses,
   });
+
   final AccountModel account;
   final List<Expense> expenses;
 
@@ -128,9 +129,10 @@ class ThisMonthTransactionWidget extends StatelessWidget {
     required this.content,
     required this.color,
   });
-  final String title;
-  final String content;
+
   final Color color;
+  final String content;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

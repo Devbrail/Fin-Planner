@@ -7,6 +7,7 @@ import '../bloc/accounts_bloc.dart';
 
 class AccountColorPickerWidget extends StatelessWidget {
   const AccountColorPickerWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountsBloc, AccountsState>(

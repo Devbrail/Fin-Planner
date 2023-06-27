@@ -23,6 +23,7 @@ class AccountTransactionsPage extends StatelessWidget {
 
   final String accountId;
   final SummaryController summaryController;
+
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();

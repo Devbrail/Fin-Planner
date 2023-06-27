@@ -17,6 +17,7 @@ class AccountHistoryWidget extends StatelessWidget {
 
   final List<Expense> expenses;
   final SummaryController summaryController;
+
   @override
   Widget build(BuildContext context) {
     if (expenses.isEmpty) {

@@ -5,9 +5,9 @@ import '../repository/category_repository.dart';
 
 @singleton
 class UpdateCategoryUseCase {
-  final CategoryRepository categoryRepository;
-
   UpdateCategoryUseCase({required this.categoryRepository});
+
+  final CategoryRepository categoryRepository;
 
   Future<void> call(Category category) async =>
       categoryRepository.updateCategory(

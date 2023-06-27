@@ -8,9 +8,9 @@ import 'category_local_data_source.dart';
 
 @Singleton(as: LocalCategoryDataManager)
 class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
-  final Box<CategoryModel> categoryBox;
-
   LocalCategoryManagerDataSourceImpl(this.categoryBox);
+
+  final Box<CategoryModel> categoryBox;
 
   @override
   Future<void> addCategory(CategoryModel category) async {
@@ -20,27 +20,8 @@ class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
   }
 
   @override
-  Future<void> deleteCategory(int key) async {
-    await categoryBox.delete(key);
-  }
-
-  @override
   Future<List<CategoryModel>> categories() async {
     return categoryBox.values.toList();
-  }
-
-  @override
-  CategoryModel? fetchCategoryFromId(int categoryId) =>
-      categoryBox.values.firstWhereOrNull(
-        (element) => element.superId == categoryId,
-      );
-
-  @override
-  Iterable<CategoryModel> exportData() => categoryBox.values;
-
-  @override
-  Future<void> updateCategory(CategoryModel categoryModel) {
-    return categoryBox.put(categoryModel.superId!, categoryModel);
   }
 
   @override
@@ -51,5 +32,24 @@ class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
     defaultCategoriesData().forEach((element) async {
       await addCategory(element);
     });
+  }
+
+  @override
+  Future<void> deleteCategory(int key) async {
+    await categoryBox.delete(key);
+  }
+
+  @override
+  Iterable<CategoryModel> exportData() => categoryBox.values;
+
+  @override
+  CategoryModel? fetchCategoryFromId(int categoryId) =>
+      categoryBox.values.firstWhereOrNull(
+        (element) => element.superId == categoryId,
+      );
+
+  @override
+  Future<void> updateCategory(CategoryModel categoryModel) {
+    return categoryBox.put(categoryModel.superId!, categoryModel);
   }
 }

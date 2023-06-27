@@ -8,6 +8,7 @@ class PaisaAnnotatedRegionWidget extends StatelessWidget {
     required this.child,
     this.color,
   });
+
   final Widget child;
   final Color? color;
 

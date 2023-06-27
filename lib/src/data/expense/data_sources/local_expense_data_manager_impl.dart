@@ -9,12 +9,9 @@ import 'local_expense_data_manager.dart';
 
 @Injectable(as: LocalExpenseDataManager)
 class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
-  final Box<ExpenseModel> expenseBox;
-
   LocalExpenseDataManagerImpl(this.expenseBox);
 
-  @override
-  List<ExpenseModel> expenses() => expenseBox.values.toList();
+  final Box<ExpenseModel> expenseBox;
 
   @override
   Future<void> addOrUpdateExpense(ExpenseModel expense) async {
@@ -24,14 +21,7 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
   }
 
   @override
-  Future<void> updateExpense(ExpenseModel expenseModel) {
-    return expenseBox.put(expenseModel.superId!, expenseModel);
-  }
-
-  @override
-  Future<void> clearExpenses() async {
-    await expenseBox.clear();
-  }
+  Future<void> clearAll() => expenseBox.clear();
 
   @override
   Future<void> clearExpense(int key) {
@@ -39,23 +29,9 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
   }
 
   @override
-  Future<List<ExpenseModel>> filteredExpenses(
-      DateTimeRange dateTimeRange) async {
-    final List<ExpenseModel> expenses = expenseBox.values.toList();
-    expenses.sort((a, b) => b.time.compareTo(a.time));
-    final filteredExpenses = expenses.takeWhile((value) {
-      return value.time.isAfter(dateTimeRange.start) &&
-          value.time.isBefore(dateTimeRange.end);
-    }).toList();
-    return filteredExpenses;
+  Future<void> clearExpenses() async {
+    await expenseBox.clear();
   }
-
-  @override
-  ExpenseModel? fetchExpenseFromId(int expenseId) =>
-      expenseBox.values.firstWhereOrNull((element) => element.key == expenseId);
-
-  @override
-  Iterable<ExpenseModel> exportData() => expenseBox.values;
 
   @override
   Future<void> deleteExpensesByAccountId(int accountId) {
@@ -74,6 +50,16 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
   }
 
   @override
+  List<ExpenseModel> expenses() => expenseBox.values.toList();
+
+  @override
+  Iterable<ExpenseModel> exportData() => expenseBox.values;
+
+  @override
+  ExpenseModel? fetchExpenseFromId(int expenseId) =>
+      expenseBox.values.firstWhereOrNull((element) => element.key == expenseId);
+
+  @override
   List<ExpenseModel> fetchExpensesFromAccountId(int accountId) =>
       expenseBox.values
           .where((element) => element.accountId == accountId)
@@ -86,8 +72,6 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
           .toList();
 
   @override
-  Future<void> clearAll() => expenseBox.clear();
-  @override
   List<ExpenseModel> filterExpenses(
     String query,
     int? accountId,
@@ -98,5 +82,22 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
       selectedAccountId: accountId,
       selectedCategoryId: categoryId,
     );
+  }
+
+  @override
+  Future<List<ExpenseModel>> filteredExpenses(
+      DateTimeRange dateTimeRange) async {
+    final List<ExpenseModel> expenses = expenseBox.values.toList();
+    expenses.sort((a, b) => b.time.compareTo(a.time));
+    final filteredExpenses = expenses.takeWhile((value) {
+      return value.time.isAfter(dateTimeRange.start) &&
+          value.time.isBefore(dateTimeRange.end);
+    }).toList();
+    return filteredExpenses;
+  }
+
+  @override
+  Future<void> updateExpense(ExpenseModel expenseModel) {
+    return expenseBox.put(expenseModel.superId!, expenseModel);
   }
 }

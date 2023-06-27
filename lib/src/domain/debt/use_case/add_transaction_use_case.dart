@@ -4,9 +4,9 @@ import '../repository/debit_repository.dart';
 
 @singleton
 class AddTransactionUseCase {
-  final DebtRepository debtRepository;
-
   AddTransactionUseCase({required this.debtRepository});
+
+  final DebtRepository debtRepository;
 
   Future<void> call({
     required double amount,

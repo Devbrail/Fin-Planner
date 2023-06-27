@@ -11,6 +11,7 @@ abstract class DebtRepository {
     DateTime dueDateTime,
     DebtType debtType,
   );
+
   Future<void> updateDebt({
     required String description,
     required String name,
@@ -20,14 +21,20 @@ abstract class DebtRepository {
     required DebtType debtType,
     required int key,
   });
+
   DebtModel? fetchDebtOrCreditFromId(int debtId);
+
   Future<void> deleteDebtOrCreditFromId(int debtId);
+
   Future<void> deleteTransactionsFromId(int parentId);
+
   Future<void> deleteTransactionFromId(int transactionId);
+
   Future<void> addTransaction(
     double amount,
     DateTime currentDateTime,
     int parentId,
   );
+
   Iterable<TransactionsModel> fetchTransactionsFromId(int id);
 }

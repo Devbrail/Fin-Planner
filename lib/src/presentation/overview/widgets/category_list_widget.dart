@@ -27,7 +27,7 @@ class CategoryListWidget extends StatelessWidget {
         final MapEntry<Category, List<Expense>> map = categoryGrouped[index];
         return InkWell(
           onTap: () {
-            GoRouter.of(context).pushNamed(
+            context.pushNamed(
               expensesByCategoryName,
               pathParameters: {'cid': map.key.superId.toString()},
             );

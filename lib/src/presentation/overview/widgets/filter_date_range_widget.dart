@@ -10,9 +10,11 @@ class FilterDateRangeWidget extends StatelessWidget {
     required this.expenses,
     required this.dateTimeRangeNotifier,
   });
-  final Iterable<Expense> expenses;
+
   final Widget Function(List<Expense> expenses) builder;
   final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier;
+  final Iterable<Expense> expenses;
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<DateTimeRange?>(

@@ -28,6 +28,9 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
   final PageController _controller = PageController();
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
 
@@ -67,40 +70,44 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
                         cardHolder: account.name,
                         bankName: account.bankName,
                         cardType: account.cardType ?? CardType.bank,
-                        onDelete: () => paisaAlertDialog(
-                          context,
-                          title: Text(
-                            context.loc.dialogDeleteTitle,
-                          ),
-                          child: RichText(
-                            text: TextSpan(
-                              text: context.loc.deleteAccount,
-                              style: context.bodyMedium,
-                              children: [
-                                TextSpan(
-                                  text: account.name,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
+                        onDelete: () {
+                          paisaAlertDialog(
+                            context,
+                            title: Text(
+                              context.loc.dialogDeleteTitle,
                             ),
-                          ),
-                          confirmationButton: TextButton(
-                            onPressed: () {
-                              BlocProvider.of<AccountsBloc>(context)
-                                  .add(DeleteAccountEvent(account.superId!));
-                              Navigator.pop(context);
+                            child: RichText(
+                              text: TextSpan(
+                                text: context.loc.deleteAccount,
+                                style: context.bodyMedium,
+                                children: [
+                                  TextSpan(
+                                    text: account.name,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            confirmationButton: TextButton(
+                              onPressed: () {
+                                BlocProvider.of<AccountsBloc>(context)
+                                    .add(DeleteAccountEvent(account.superId!));
+                                Navigator.pop(context);
+                              },
+                              child: Text(context.loc.delete),
+                            ),
+                          );
+                        },
+                        onTap: () {
+                          context.pushNamed(
+                            editAccountName,
+                            pathParameters: <String, String>{
+                              'aid': account.superId.toString()
                             },
-                            child: Text(context.loc.delete),
-                          ),
-                        ),
-                        onTap: () => context.pushNamed(
-                          editAccountName,
-                          pathParameters: <String, String>{
-                            'aid': account.superId.toString()
-                          },
-                        ),
+                          );
+                        },
                       );
                     } else {
                       return const SizedBox.shrink();
@@ -118,9 +125,6 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
       ],
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
 
 class AccountPageViewDotsIndicator extends StatelessWidget {
@@ -129,8 +133,9 @@ class AccountPageViewDotsIndicator extends StatelessWidget {
     required this.pageController,
     required this.accounts,
   });
-  final PageController pageController;
+
   final List<Account> accounts;
+  final PageController pageController;
 
   Widget _indicator(BuildContext context, bool isActive) {
     return AnimatedContainer(

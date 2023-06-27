@@ -15,9 +15,8 @@ class UserProfilePage extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final SettingsController settings;
-
   final TextEditingController controller;
+  final SettingsController settings;
 
   void _updateDetails(BuildContext context) {
     String name = controller.text;

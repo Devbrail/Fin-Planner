@@ -13,6 +13,7 @@ class TransactionsHeaderWidget extends StatelessWidget {
     super.key,
     required this.summaryController,
   });
+
   final SummaryController summaryController;
 
   @override

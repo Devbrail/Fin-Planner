@@ -8,27 +8,6 @@ part 'debt_model.g.dart';
 
 @HiveType(typeId: 4)
 class DebtModel extends HiveObject with EquatableMixin {
-  @HiveField(1)
-  String description;
-
-  @HiveField(7, defaultValue: '')
-  String name;
-
-  @HiveField(2)
-  double amount;
-
-  @HiveField(3)
-  DateTime dateTime;
-
-  @HiveField(4)
-  DateTime expiryDateTime;
-
-  @HiveField(5, defaultValue: DebtType.debt)
-  DebtType debtType;
-
-  @HiveField(6, defaultValue: 0)
-  int? superId;
-
   DebtModel({
     required this.description,
     required this.name,
@@ -38,6 +17,27 @@ class DebtModel extends HiveObject with EquatableMixin {
     required this.debtType,
     this.superId,
   });
+
+  @HiveField(2)
+  double amount;
+
+  @HiveField(3)
+  DateTime dateTime;
+
+  @HiveField(5, defaultValue: DebtType.debt)
+  DebtType debtType;
+
+  @HiveField(1)
+  String description;
+
+  @HiveField(4)
+  DateTime expiryDateTime;
+
+  @HiveField(7, defaultValue: '')
+  String name;
+
+  @HiveField(6, defaultValue: 0)
+  int? superId;
 
   @override
   List<Object?> get props => [

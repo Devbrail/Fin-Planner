@@ -28,8 +28,8 @@ class CurrencySelectorPage extends StatefulWidget {
 
 class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
   final CountryCubit countryCubit = getIt.get<CountryCubit>();
-  final SettingsController settings = getIt.get<SettingsController>();
   CountryModel? countryModel;
+  final SettingsController settings = getIt.get<SettingsController>();
 
   @override
   void initState() {
@@ -166,6 +166,7 @@ class CountriesWidget extends StatefulWidget {
   final int crossAxisCount;
   final Function(CountryModel countryModel) onSelected;
   final CountryModel? selectedModel;
+
   @override
   State<CountriesWidget> createState() => _CountriesWidgetState();
 }

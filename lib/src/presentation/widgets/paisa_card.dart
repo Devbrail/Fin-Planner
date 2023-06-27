@@ -11,8 +11,8 @@ class PaisaCard extends StatelessWidget {
   });
 
   final Widget child;
-  final double? elevation;
   final Color? color;
+  final double? elevation;
   final ShapeBorder? shape;
 
   @override
@@ -68,8 +68,8 @@ class PaisaFilledCard extends StatelessWidget {
   });
 
   final Widget child;
-  final ShapeBorder? shape;
   final Color? color;
+  final ShapeBorder? shape;
 
   @override
   Widget build(BuildContext context) {

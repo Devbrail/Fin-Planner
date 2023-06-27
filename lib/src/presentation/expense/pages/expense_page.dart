@@ -29,9 +29,9 @@ class ExpensePage extends StatefulWidget {
     this.categoryId,
   }) : super(key: key);
 
-  final String? expenseId;
   final String? accountId;
   final String? categoryId;
+  final String? expenseId;
   final TransactionType? transactionType;
 
   @override
@@ -39,11 +39,19 @@ class ExpensePage extends StatefulWidget {
 }
 
 class _ExpensePageState extends State<ExpensePage> {
-  late final bool isAddExpense = widget.expenseId == null;
-  final ExpenseBloc expenseBloc = getIt.get();
-  final TextEditingController nameController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final ExpenseBloc expenseBloc = getIt.get();
+  late final bool isAddExpense = widget.expenseId == null;
+  final TextEditingController nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    amountController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -52,14 +60,6 @@ class _ExpensePageState extends State<ExpensePage> {
       ..add(
           ChangeExpenseEvent(widget.transactionType ?? TransactionType.expense))
       ..add(FetchExpenseFromIdEvent(widget.expenseId));
-  }
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    amountController.dispose();
-    descriptionController.dispose();
-    super.dispose();
   }
 
   @override

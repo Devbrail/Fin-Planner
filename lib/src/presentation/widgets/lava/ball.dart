@@ -2,14 +2,13 @@ import 'dart:math';
 import 'dart:ui';
 
 class ForcePoint {
-  num x, y;
-
-  num get magnitude => x * x + y * y;
-
   ForcePoint(this.x, this.y);
 
   double computed = 0;
   double force = 0;
+  num x, y;
+
+  num get magnitude => x * x + y * y;
 
   ForcePoint add(ForcePoint point) => ForcePoint(point.x + x, point.y + y);
 
@@ -17,10 +16,6 @@ class ForcePoint {
 }
 
 class Ball {
-  late ForcePoint velocity;
-  late ForcePoint pos;
-  late double size;
-
   Ball(Size size) {
     double vel({double ratio = 1}) =>
         (Random().nextDouble() > .5 ? 1 : -1) *
@@ -38,6 +33,10 @@ class Ball {
     this.size = size.shortestSide / 15 +
         (Random().nextDouble() * (h - i) + i) * (size.shortestSide / 15);
   }
+
+  late ForcePoint pos;
+  late double size;
+  late ForcePoint velocity;
 
   moveIn(Size size) {
     if (pos.x >= size.width - this.size) {

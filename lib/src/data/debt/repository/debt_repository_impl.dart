@@ -8,9 +8,10 @@ import '../models/transactions_model.dart';
 
 @Singleton(as: DebtRepository)
 class DebtRepositoryImpl extends DebtRepository {
+  DebtRepositoryImpl({required this.dataSource});
+
   final DebtLocalDataSource dataSource;
 
-  DebtRepositoryImpl({required this.dataSource});
   @override
   Future<void> addDebtOrCredit(
     String description,
@@ -33,10 +34,6 @@ class DebtRepositoryImpl extends DebtRepository {
   }
 
   @override
-  DebtModel? fetchDebtOrCreditFromId(int debtId) =>
-      dataSource.fetchDebtOrCreditFromId(debtId);
-
-  @override
   Future<void> addTransaction(
     double amount,
     DateTime currentDateTime,
@@ -48,6 +45,25 @@ class DebtRepositoryImpl extends DebtRepository {
       parentId: parentId,
     ));
   }
+
+  @override
+  Future<void> deleteDebtOrCreditFromId(int debtId) {
+    return dataSource.deleteDebtOrCreditFromId(debtId);
+  }
+
+  @override
+  Future<void> deleteTransactionFromId(int transactionId) {
+    return dataSource.deleteTransactionFromId(transactionId);
+  }
+
+  @override
+  Future<void> deleteTransactionsFromId(int parentId) {
+    return dataSource.deleteTransactionsFromId(parentId);
+  }
+
+  @override
+  DebtModel? fetchDebtOrCreditFromId(int debtId) =>
+      dataSource.fetchDebtOrCreditFromId(debtId);
 
   @override
   Iterable<TransactionsModel> fetchTransactionsFromId(int id) {
@@ -73,20 +89,5 @@ class DebtRepositoryImpl extends DebtRepository {
       debtType: debtType,
       superId: key,
     ));
-  }
-
-  @override
-  Future<void> deleteDebtOrCreditFromId(int debtId) {
-    return dataSource.deleteDebtOrCreditFromId(debtId);
-  }
-
-  @override
-  Future<void> deleteTransactionFromId(int transactionId) {
-    return dataSource.deleteTransactionFromId(transactionId);
-  }
-
-  @override
-  Future<void> deleteTransactionsFromId(int parentId) {
-    return dataSource.deleteTransactionsFromId(parentId);
   }
 }

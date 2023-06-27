@@ -11,6 +11,7 @@ import '../../widgets/account_card_v2.dart';
 
 class AccountMobileVerticalPage extends StatelessWidget {
   const AccountMobileVerticalPage({super.key, required this.accounts});
+
   final List<Account> accounts;
 
   @override

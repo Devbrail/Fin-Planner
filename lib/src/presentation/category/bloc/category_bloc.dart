@@ -31,19 +31,18 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<CategoryColorSelectedEvent>(_updateCategoryColor);
   }
 
-  final GetCategoryUseCase getCategoryUseCase;
   final AddCategoryUseCase addCategoryUseCase;
+  double? categoryBudget;
+  String? categoryDesc;
+  String? categoryTitle;
+  Category? currentCategory;
   final DeleteCategoryUseCase deleteCategoryUseCase;
   final DeleteExpensesFromCategoryIdUseCase deleteExpensesFromCategoryIdUseCase;
-  final UpdateCategoryUseCase updateCategoryUseCase;
-
-  int? selectedIcon;
-  String? categoryTitle;
-  String? categoryDesc;
-  double? categoryBudget;
-  Category? currentCategory;
+  final GetCategoryUseCase getCategoryUseCase;
   bool isBudgetSet = false;
   int? selectedColor;
+  int? selectedIcon;
+  final UpdateCategoryUseCase updateCategoryUseCase;
 
   Future<void> _fetchCategoryFromId(
     FetchCategoryFromIdEvent event,

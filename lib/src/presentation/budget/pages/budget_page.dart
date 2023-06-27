@@ -16,7 +16,9 @@ class BudgetPage extends StatelessWidget {
     super.key,
     required this.summaryController,
   });
+
   final SummaryController summaryController;
+
   @override
   Widget build(BuildContext context) {
     return PaisaAnnotatedRegionWidget(
@@ -57,8 +59,10 @@ class BudgetItem extends StatelessWidget {
     required this.category,
     required this.expenses,
   });
+
   final Category category;
   final List<Expense> expenses;
+
   @override
   Widget build(BuildContext context) {
     final double totalExpenses = expenses.totalExpense;

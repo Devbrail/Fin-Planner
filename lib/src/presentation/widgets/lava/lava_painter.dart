@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'ball.dart';
 
 class LavaPainter extends CustomPainter {
-  final Lava lava;
-  final Color color;
-
   LavaPainter(this.lava, {required this.color});
+
+  final Color color;
+  final Lava lava;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -23,29 +23,29 @@ class LavaPainter extends CustomPainter {
 }
 
 class Lava {
-  num step = 5;
+  Lava(this.ballsLength);
+
+  late List<Ball> balls;
+  int ballsLength;
+  double iter = 0;
+  final ix = [1, 0, -1, 0, 0, 1, 0, -1, -1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1];
+  late Map<int, Map<int, ForcePoint>> matrix;
+  final List<int> mscases = [0, 3, 0, 3, 1, 3, 0, 3, 2, 2, 0, 2, 1, 1, 0];
+  bool paint = false;
+  final List<int> plx = [0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0];
+  final List<int> ply = [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1];
+  late Rect sRect;
+  int sign = 1;
   Size? size;
+  num step = 5;
 
   double get width => size?.width ?? 10;
 
   double get height => size?.height ?? 10;
 
-  late Rect sRect;
-
   double get sx => (width ~/ step).floor().toDouble();
 
   double get sy => (height ~/ step).floor().toDouble();
-
-  bool paint = false;
-  double iter = 0;
-  int sign = 1;
-
-  late Map<int, Map<int, ForcePoint>> matrix;
-
-  late List<Ball> balls;
-  int ballsLength;
-
-  Lava(this.ballsLength);
 
   updateSize(Size size) {
     this.size = size;
@@ -87,11 +87,6 @@ class Lava {
     matrix[sx]![sy]!.force = force;
     return force;
   }
-
-  final List<int> plx = [0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0];
-  final List<int> ply = [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1];
-  final List<int> mscases = [0, 3, 0, 3, 1, 3, 0, 3, 2, 2, 0, 2, 1, 1, 0];
-  final ix = [1, 0, -1, 0, 0, 1, 0, -1, -1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1];
 
   List? marchingSquares(List? pathParameters, Path path) {
     int sx = pathParameters?[0] ?? 0;

@@ -11,9 +11,10 @@ abstract class ExpenseState extends Equatable {
 class ExpenseInitial extends ExpenseState {}
 
 class ExpenseAdded extends ExpenseState {
+  const ExpenseAdded({this.isAddOrUpdate = false});
+
   final bool isAddOrUpdate;
 
-  const ExpenseAdded({this.isAddOrUpdate = false});
   @override
   List<Object> get props => [isAddOrUpdate];
 }
@@ -21,77 +22,77 @@ class ExpenseAdded extends ExpenseState {
 class ExpenseDeletedState extends ExpenseState {}
 
 class ChangeTransactionTypeState extends ExpenseState {
-  final TransactionType transactionType;
-
   const ChangeTransactionTypeState(this.transactionType);
+
+  final TransactionType transactionType;
 
   @override
   List<Object> get props => [transactionType];
 }
 
 class ChangeRecurringTypeState extends ExpenseState {
-  final RecurringType recurringType;
-
   const ChangeRecurringTypeState(this.recurringType);
+
+  final RecurringType recurringType;
 
   @override
   List<Object> get props => [recurringType];
 }
 
 class ExpenseErrorState extends ExpenseState {
-  final String errorString;
-
   const ExpenseErrorState(this.errorString);
+
+  final String errorString;
 
   @override
   List<Object> get props => [errorString];
 }
 
 class ExpenseSuccessState extends ExpenseState {
-  final ExpenseModel expense;
-
   const ExpenseSuccessState(this.expense);
+
+  final ExpenseModel expense;
 
   @override
   List<Object> get props => [expense];
 }
 
 class ChangeCategoryState extends ExpenseState {
-  final CategoryModel category;
-
   const ChangeCategoryState(this.category);
+
+  final CategoryModel category;
 
   @override
   List<Object> get props => [category];
 }
 
 class ChangeAccountState extends ExpenseState {
-  final AccountModel account;
-
   const ChangeAccountState(this.account);
+
+  final AccountModel account;
 
   @override
   List<Object> get props => [account];
 }
 
 class UpdateDateTimeState extends ExpenseState {
-  final DateTime dateTime;
-
   const UpdateDateTimeState(this.dateTime);
+
+  final DateTime dateTime;
 
   @override
   List<Object> get props => [dateTime];
 }
 
 class TransferAccountState extends ExpenseState {
-  final bool isFromAccount;
-  final Account? fromAccount, toAccount;
-
   const TransferAccountState(
     this.isFromAccount,
     this.fromAccount,
     this.toAccount,
   );
+
+  final bool isFromAccount;
+  final Account? fromAccount, toAccount;
 
   @override
   List<Object> get props => [isFromAccount];

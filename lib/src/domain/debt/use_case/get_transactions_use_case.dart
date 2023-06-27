@@ -6,9 +6,9 @@ import '../repository/debit_repository.dart';
 
 @singleton
 class GetTransactionsUseCase {
-  final DebtRepository debtRepository;
-
   GetTransactionsUseCase({required this.debtRepository});
+
+  final DebtRepository debtRepository;
 
   List<Transaction> call(int id) =>
       debtRepository.fetchTransactionsFromId(id).toEntities();

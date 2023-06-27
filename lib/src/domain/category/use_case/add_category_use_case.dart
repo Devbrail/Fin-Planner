@@ -4,9 +4,9 @@ import '../repository/category_repository.dart';
 
 @singleton
 class AddCategoryUseCase {
-  final CategoryRepository categoryRepository;
-
   AddCategoryUseCase({required this.categoryRepository});
+
+  final CategoryRepository categoryRepository;
 
   Future<void> call({
     required String name,

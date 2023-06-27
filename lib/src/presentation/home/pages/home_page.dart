@@ -97,13 +97,13 @@ class LandingPage extends StatelessWidget {
 }
 
 class Destination {
-  final Icon icon;
-  final Icon selectedIcon;
-  final String label;
-
   Destination({
     required this.label,
     required this.icon,
     required this.selectedIcon,
   });
+
+  final Icon icon;
+  final String label;
+  final Icon selectedIcon;
 }

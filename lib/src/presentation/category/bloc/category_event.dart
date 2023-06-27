@@ -9,26 +9,27 @@ abstract class CategoryEvent extends Equatable {
 }
 
 class AddOrUpdateCategoryEvent extends CategoryEvent {
+  const AddOrUpdateCategoryEvent(this.isAddOrUpdate);
+
   final bool isAddOrUpdate;
 
-  const AddOrUpdateCategoryEvent(this.isAddOrUpdate);
   @override
   List<Object?> get props => [isAddOrUpdate];
 }
 
 class CategoryDeleteEvent extends CategoryEvent {
-  final Category category;
-
   const CategoryDeleteEvent(this.category);
+
+  final Category category;
 
   @override
   List<Object?> get props => [category];
 }
 
 class FetchCategoryFromIdEvent extends CategoryEvent {
-  final String? categoryId;
-
   const FetchCategoryFromIdEvent(this.categoryId);
+
+  final String? categoryId;
 
   @override
   List<Object?> get props => [categoryId];
@@ -40,27 +41,28 @@ class FetchCategoryFromIdEvent extends CategoryEvent {
 }
 
 class CategoryIconSelectedEvent extends CategoryEvent {
-  final int categoryIcon;
-
   const CategoryIconSelectedEvent(this.categoryIcon);
+
+  final int categoryIcon;
 
   @override
   List<Object?> get props => [categoryIcon];
 }
 
 class CategoryColorSelectedEvent extends CategoryEvent {
-  final int categoryColor;
-
   const CategoryColorSelectedEvent(this.categoryColor);
+
+  final int categoryColor;
 
   @override
   List<Object?> get props => [categoryColor];
 }
 
 class UpdateCategoryBudgetEvent extends CategoryEvent {
+  const UpdateCategoryBudgetEvent(this.isBudget);
+
   final bool isBudget;
 
-  const UpdateCategoryBudgetEvent(this.isBudget);
   @override
   List<Object?> get props => [isBudget];
 }

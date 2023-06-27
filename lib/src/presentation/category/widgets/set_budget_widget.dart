@@ -11,6 +11,7 @@ class SetBudgetWidget extends StatelessWidget {
     super.key,
     required this.controller,
   });
+
   final TextEditingController controller;
 
   @override

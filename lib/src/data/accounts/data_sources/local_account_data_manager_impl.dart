@@ -7,11 +7,14 @@ import 'local_account_data_manager.dart';
 
 @Singleton(as: LocalAccountDataManager)
 class LocalAccountDataManagerImpl implements LocalAccountDataManager {
-  final Box<AccountModel> accountBox;
-
   LocalAccountDataManagerImpl({
     required this.accountBox,
   });
+
+  final Box<AccountModel> accountBox;
+
+  @override
+  List<AccountModel> accounts() => accountBox.values.toList();
 
   @override
   Future<void> addAccount(AccountModel account) async {
@@ -21,7 +24,7 @@ class LocalAccountDataManagerImpl implements LocalAccountDataManager {
   }
 
   @override
-  List<AccountModel> accounts() => accountBox.values.toList();
+  Future<void> clearAll() => accountBox.clear();
 
   @override
   Future<void> deleteAccount(int key) async => accountBox.delete(key);
@@ -39,7 +42,4 @@ class LocalAccountDataManagerImpl implements LocalAccountDataManager {
   Future<void> updateAccount(AccountModel accountModel) {
     return accountBox.put(accountModel.superId!, accountModel);
   }
-
-  @override
-  Future<void> clearAll() => accountBox.clear();
 }

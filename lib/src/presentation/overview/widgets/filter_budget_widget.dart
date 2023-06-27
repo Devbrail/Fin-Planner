@@ -12,9 +12,10 @@ class FilterOverviewWidget extends StatelessWidget {
     required this.builder,
     required this.expenses,
   });
+
+  final Widget Function(List<Expense> expenses) builder;
   final Iterable<ExpenseModel> expenses;
   final ValueNotifier<OverviewType> valueNotifier;
-  final Widget Function(List<Expense> expenses) builder;
 
   @override
   Widget build(BuildContext context) {

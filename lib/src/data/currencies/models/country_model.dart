@@ -44,11 +44,11 @@ class CountryModel {
   final String name;
   final String namePlural;
   final int number;
+  final String pattern;
   final bool spaceBetweenAmountAndSymbol;
   final String symbol;
   final bool symbolOnLeft;
   final String thousandsSeparator;
-  final String pattern;
 
   Map<String, dynamic> toJson() => {
         "code": code,

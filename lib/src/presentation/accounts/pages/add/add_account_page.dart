@@ -31,18 +31,12 @@ class AddAccountPage extends StatefulWidget {
 }
 
 class AddAccountPageState extends State<AddAccountPage> {
-  late final bool isAccountAddOrUpdate = widget.accountId == null;
-  final AccountsBloc accountsBloc = getIt.get();
-  final accountNumberController = TextEditingController();
   final accountHolderController = TextEditingController();
-  final accountNameController = TextEditingController();
   final accountInitialAmountController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    accountsBloc.add(FetchAccountFromIdEvent(widget.accountId));
-  }
+  final accountNameController = TextEditingController();
+  final accountNumberController = TextEditingController();
+  final AccountsBloc accountsBloc = getIt.get();
+  late final bool isAccountAddOrUpdate = widget.accountId == null;
 
   @override
   void dispose() {
@@ -52,6 +46,63 @@ class AddAccountPageState extends State<AddAccountPage> {
     accountNameController.dispose();
     super.dispose();
   }
+
+  @override
+  void initState() {
+    super.initState();
+    accountsBloc.add(FetchAccountFromIdEvent(widget.accountId));
+  }
+
+  void _showInfo() => showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        context: context,
+        builder: (context) {
+          return SafeArea(
+            maintainBottomViewPadding: true,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.info_rounded),
+                  title: Text(
+                    context.loc.accountInformationTitle,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(context.loc.accountInformationSubTitle),
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                      ),
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                      child: Text(context.loc.ok),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10)
+              ],
+            ),
+          );
+        },
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -391,57 +442,6 @@ class AddAccountPageState extends State<AddAccountPage> {
       ),
     );
   }
-
-  void _showInfo() => showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(24),
-            topRight: Radius.circular(24),
-          ),
-        ),
-        context: context,
-        builder: (context) {
-          return SafeArea(
-            maintainBottomViewPadding: true,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.info_rounded),
-                  title: Text(
-                    context.loc.accountInformationTitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(context.loc.accountInformationSubTitle),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                      ),
-                      onPressed: () {
-                        GoRouter.of(context).pop();
-                      },
-                      child: Text(context.loc.ok),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10)
-              ],
-            ),
-          );
-        },
-      );
 }
 
 class AccountCardHolderNameWidget extends StatelessWidget {
@@ -449,6 +449,7 @@ class AccountCardHolderNameWidget extends StatelessWidget {
     super.key,
     required this.controller,
   });
+
   final TextEditingController controller;
 
   @override
@@ -475,6 +476,7 @@ class AccountNameWidget extends StatelessWidget {
     super.key,
     required this.controller,
   });
+
   final TextEditingController controller;
 
   @override
@@ -501,7 +503,9 @@ class AccountNumberWidget extends StatelessWidget {
     super.key,
     required this.controller,
   });
+
   final TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
     return PaisaTextFormField(
@@ -523,7 +527,9 @@ class AccountInitialAmountWidget extends StatelessWidget {
     super.key,
     required this.controller,
   });
+
   final TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
     return PaisaTextFormField(
@@ -554,6 +560,7 @@ class AccountDefaultSwitchWidget extends StatefulWidget {
     super.key,
     required this.accountId,
   });
+
   final int accountId;
 
   @override
@@ -563,9 +570,11 @@ class AccountDefaultSwitchWidget extends StatefulWidget {
 
 class _AccountDefaultSwitchWidgetState
     extends State<AccountDefaultSwitchWidget> {
-  final SettingsController settingsController = getIt.get();
   late bool isAccountDefault =
       settingsController.defaultAccountId == widget.accountId;
+
+  final SettingsController settingsController = getIt.get();
+
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(

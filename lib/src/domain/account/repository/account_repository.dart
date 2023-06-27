@@ -10,6 +10,7 @@ abstract class AccountRepository {
     required double amount,
     required int color,
   });
+
   Future<void> updateAccount({
     required int key,
     required String bankName,
@@ -19,8 +20,11 @@ abstract class AccountRepository {
     required double amount,
     required int color,
   });
+
   Future<void> deleteAccount(int key);
+
   AccountModel? fetchAccountFromId(int accountId);
+
   List<AccountModel> getAccounts();
 
   Future<void> clearAll();

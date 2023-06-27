@@ -6,9 +6,9 @@ import '../repository/category_repository.dart';
 
 @singleton
 class GetCategoryUseCase {
-  final CategoryRepository categoryRepository;
-
   GetCategoryUseCase({required this.categoryRepository});
+
+  final CategoryRepository categoryRepository;
 
   Category? call(int categoryId) =>
       categoryRepository.fetchCategoryFromId(categoryId)?.toEntity();

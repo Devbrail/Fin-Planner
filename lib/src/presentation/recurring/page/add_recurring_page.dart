@@ -211,6 +211,7 @@ class AccountSelectedWidget extends StatefulWidget {
 
 class _AccountSelectedWidgetState extends State<AccountSelectedWidget> {
   int selectedId = -1;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -314,6 +315,7 @@ class CategorySelectWidget extends StatefulWidget {
 
 class _CategorySelectWidgetState extends State<CategorySelectWidget> {
   int selectedId = -1;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -10,18 +10,19 @@ abstract class CountryState extends Equatable {
 class CountryInitial extends CountryState {}
 
 class NavigateToLading extends CountryState {
-  final bool noNeedToSelect;
-
   const NavigateToLading(this.noNeedToSelect);
+
+  final bool noNeedToSelect;
 
   @override
   List<Object> get props => [noNeedToSelect, identityHashCode(this)];
 }
 
 class CountriesState extends CountryState {
+  const CountriesState(this.countries);
+
   final List<CountryModel> countries;
 
-  const CountriesState(this.countries);
   @override
   List<Object> get props => [countries];
 }

@@ -10,8 +10,8 @@ class TotalBalanceWidget extends StatelessWidget {
     required this.amount,
   }) : super(key: key);
 
-  final String title;
   final double amount;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

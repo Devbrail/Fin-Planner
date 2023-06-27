@@ -23,18 +23,10 @@ class ExportExpensesWidget extends StatefulWidget {
 }
 
 class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
-  final dataSource = getIt.get<LocalExpenseDataManager>();
   final accountDataSource = getIt.get<LocalAccountDataManager>();
   final categoryDataSource = getIt.get<LocalCategoryDataManager>();
+  final dataSource = getIt.get<LocalExpenseDataManager>();
   DateTimeRange? dateTimeRange;
-  @override
-  Widget build(BuildContext context) {
-    return SettingsOption(
-      onTap: () => exportData('Export'),
-      title: context.loc.saveAsCSV,
-      subtitle: context.loc.saveAsCSVDesc,
-    );
-  }
 
   Future<void> exportData(String subject) async {
     final initialDateRange = DateTimeRange(
@@ -67,6 +59,15 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
     final file = File(path);
     await file.writeAsString(csvData);
     Share.shareFiles([path], subject: subject);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SettingsOption(
+      onTap: () => exportData('Export'),
+      title: context.loc.saveAsCSV,
+      subtitle: context.loc.saveAsCSVDesc,
+    );
   }
 }
 

@@ -12,10 +12,12 @@ class PaisaToggleButton extends StatelessWidget {
     required this.onPressed,
     this.itemIndex = ItemIndex.middle,
   });
-  final String title;
+
   final bool isSelected;
-  final VoidCallback onPressed;
   final ItemIndex itemIndex;
+  final VoidCallback onPressed;
+  final String title;
+
   @override
   Widget build(BuildContext context) {
     final textColor = isSelected ? context.primary : null;

@@ -69,10 +69,10 @@ class PaisaFilterChip extends StatelessWidget {
     required this.icon,
   });
 
-  final String title;
-  final VoidCallback onPressed;
-  final bool isSelected;
   final int icon;
+  final bool isSelected;
+  final VoidCallback onPressed;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

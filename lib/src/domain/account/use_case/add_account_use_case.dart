@@ -5,9 +5,9 @@ import '../repository/account_repository.dart';
 
 @singleton
 class AddAccountUseCase {
-  final AccountRepository accountRepository;
-
   AddAccountUseCase({required this.accountRepository});
+
+  final AccountRepository accountRepository;
 
   Future<void> call({
     required String bankName,

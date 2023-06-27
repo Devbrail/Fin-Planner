@@ -104,17 +104,18 @@ class CustomCurrencySymbol extends StatefulWidget {
     required this.currentSymbol,
   });
 
-  final SettingsController settings;
   final String currentSymbol;
+  final SettingsController settings;
 
   @override
   State<CustomCurrencySymbol> createState() => _CustomCurrencySymbolState();
 }
 
 class _CustomCurrencySymbolState extends State<CustomCurrencySymbol> {
-  final format = NumberFormat("#,##,##0.00", "en_US");
   late final TextEditingController editingController = TextEditingController(
       text: widget.settings.get(userCustomCurrencyKey, defaultValue: ''));
+
+  final format = NumberFormat("#,##,##0.00", "en_US");
   late String symbol = widget.currentSymbol;
   late bool symbolLeftOrRight = widget.settings.get(
     userCustomCurrencyLeftOrRightKey,

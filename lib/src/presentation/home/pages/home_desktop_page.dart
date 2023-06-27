@@ -18,8 +18,9 @@ class HomeDesktopPage extends StatelessWidget {
     required this.floatingActionButton,
     required this.destinations,
   });
-  final Widget floatingActionButton;
+
   final List<Destination> destinations;
+  final Widget floatingActionButton;
 
   @override
   Widget build(BuildContext context) {

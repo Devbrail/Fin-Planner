@@ -11,6 +11,7 @@ class DebtToggleButtonsWidget extends StatelessWidget {
     Key? key,
     required this.debtsBloc,
   }) : super(key: key);
+
   final DebtsBloc debtsBloc;
 
   void _update(DebtType type) {

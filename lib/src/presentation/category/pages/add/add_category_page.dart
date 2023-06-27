@@ -27,17 +27,10 @@ class AddCategoryPage extends StatefulWidget {
 }
 
 class _AddCategoryPageState extends State<AddCategoryPage> {
-  late final bool isAddCategory = widget.categoryId == null;
-
   final budgetController = TextEditingController();
   final categoryController = TextEditingController();
   final descController = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<CategoryBloc>(context)
-        .add(FetchCategoryFromIdEvent(widget.categoryId));
-  }
+  late final bool isAddCategory = widget.categoryId == null;
 
   @override
   void dispose() {
@@ -45,6 +38,13 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     categoryController.dispose();
     descController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<CategoryBloc>(context)
+        .add(FetchCategoryFromIdEvent(widget.categoryId));
   }
 
   @override
@@ -232,6 +232,7 @@ class CategoryNameWidget extends StatelessWidget {
     super.key,
     required this.controller,
   });
+
   final TextEditingController controller;
 
   @override
@@ -258,6 +259,7 @@ class CategoryDescriptionWidget extends StatelessWidget {
     super.key,
     required this.controller,
   });
+
   final TextEditingController controller;
 
   @override

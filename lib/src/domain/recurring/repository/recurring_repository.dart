@@ -4,6 +4,7 @@ import '../../../core/enum/transaction_type.dart';
 
 abstract class RecurringRepository {
   Future<void> checkForRecurring();
+
   Future<void> addRecurringEvent(
     String name,
     double amount,

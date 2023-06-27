@@ -11,9 +11,9 @@ abstract class HomeState extends Equatable {
 class ExpenseInitial extends HomeState {}
 
 class CurrentIndexState extends HomeState {
-  final int currentPage;
-
   const CurrentIndexState(this.currentPage);
+
+  final int currentPage;
 
   @override
   List<Object?> get props => [currentPage];

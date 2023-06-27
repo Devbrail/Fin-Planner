@@ -19,19 +19,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<CurrentIndexEvent>(_currentIndex);
   }
 
-  final Box<dynamic> settings;
-
-  void _currentIndex(
-    CurrentIndexEvent event,
-    Emitter<HomeState> emit,
-  ) {
-    if (selectedIndex != event.currentPage) {
-      selectedIndex = event.currentPage;
-      emit(CurrentIndexState(selectedIndex));
-    }
-  }
-
   int selectedIndex = 0;
+  final Box<dynamic> settings;
 
   PageType getPageFromIndex(int index) {
     switch (index) {
@@ -50,6 +39,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       case 0:
       default:
         return PageType.home;
+    }
+  }
+
+  void _currentIndex(
+    CurrentIndexEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    if (selectedIndex != event.currentPage) {
+      selectedIndex = event.currentPage;
+      emit(CurrentIndexState(selectedIndex));
     }
   }
 }

@@ -9,8 +9,11 @@ abstract class CategoryRepository {
     double? budget = -1,
     bool isBudget = false,
   });
+
   Future<void> deleteCategory(int key);
+
   CategoryModel? fetchCategoryFromId(int categoryId);
+
   Future<void> updateCategory({
     required int key,
     required String name,
@@ -20,5 +23,6 @@ abstract class CategoryRepository {
     double? budget = -1,
     bool isBudget = false,
   });
+
   Future<void> clearAll();
 }

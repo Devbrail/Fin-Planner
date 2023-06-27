@@ -10,7 +10,9 @@ class ColorPickerWidget extends StatelessWidget {
     super.key,
     required this.categoryBloc,
   });
+
   final CategoryBloc categoryBloc;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(

@@ -43,26 +43,25 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<TransferAccountEvent>(_transferAccount);
   }
 
-  final GetExpenseUseCase expenseUseCase;
-  final AddExpenseUseCase addExpenseUseCase;
   final GetAccountUseCase accountUseCase;
   final GetAccountsUseCase accountsUseCase;
-  final DeleteExpenseUseCase deleteExpenseUseCase;
-  final UpdateExpensesUseCase updateExpensesUseCase;
-  final SettingsController settingsController;
-
-  String? expenseName;
-  double? expenseAmount;
-  double? transferAmount;
-  int? selectedCategoryId;
-  int? selectedAccountId;
-  Expense? currentExpense;
+  final AddExpenseUseCase addExpenseUseCase;
   String? currentDescription;
-  DateTime selectedDate = DateTime.now();
-  TimeOfDay timeOfDay = TimeOfDay.now();
-  TransactionType transactionType = TransactionType.expense;
+  Expense? currentExpense;
+  final DeleteExpenseUseCase deleteExpenseUseCase;
+  double? expenseAmount;
+  String? expenseName;
+  final GetExpenseUseCase expenseUseCase;
   RecurringType recurringType = RecurringType.daily;
+  int? selectedAccountId;
+  int? selectedCategoryId;
+  DateTime selectedDate = DateTime.now();
+  final SettingsController settingsController;
+  TimeOfDay timeOfDay = TimeOfDay.now();
   Account? fromAccount, toAccount;
+  TransactionType transactionType = TransactionType.expense;
+  double? transferAmount;
+  final UpdateExpensesUseCase updateExpensesUseCase;
 
   Future<void> _fetchExpenseFromId(
     FetchExpenseFromIdEvent event,

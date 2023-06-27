@@ -10,35 +10,37 @@ abstract class DebtsState extends Equatable {
 class DebtsInitial extends DebtsState {}
 
 class DebtsAdded extends DebtsState {
+  const DebtsAdded({this.isUpdate = false});
+
   final bool isUpdate;
 
-  const DebtsAdded({this.isUpdate = false});
   @override
   List<Object> get props => [isUpdate];
 }
 
 class DebtsTabState extends DebtsState {
-  final DebtType debtType;
-
   const DebtsTabState(this.debtType);
+
+  final DebtType debtType;
 
   @override
   List<Object> get props => [debtType];
 }
 
 class DebtsSuccessState extends DebtsState {
-  final DebtModel debt;
-
   const DebtsSuccessState(this.debt);
+
+  final DebtModel debt;
 
   @override
   List<Object> get props => [debt];
 }
 
 class DebtErrorState extends DebtsState {
+  const DebtErrorState(this.errorString);
+
   final String errorString;
 
-  const DebtErrorState(this.errorString);
   @override
   List<Object> get props => [errorString];
 }
@@ -46,18 +48,18 @@ class DebtErrorState extends DebtsState {
 class TransactionAddedState extends DebtsState {}
 
 class SelectedEndDateState extends DebtsState {
-  final DateTime endDateTime;
-
   const SelectedEndDateState(this.endDateTime);
+
+  final DateTime endDateTime;
 
   @override
   List<Object> get props => [endDateTime];
 }
 
 class SelectedStartDateState extends DebtsState {
-  final DateTime startDateTime;
-
   const SelectedStartDateState(this.startDateTime);
+
+  final DateTime startDateTime;
 
   @override
   List<Object> get props => [startDateTime];

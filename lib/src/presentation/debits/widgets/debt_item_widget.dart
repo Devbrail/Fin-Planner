@@ -20,16 +20,8 @@ class DebtItemWidget extends StatelessWidget {
     super.key,
     required this.debt,
   });
+
   final DebtModel debt;
-  Future<DateTime?> _showDatePicker(BuildContext context) async {
-    final DateTime? time = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2050),
-    );
-    return time;
-  }
 
   void addPayment(BuildContext context) {
     final controller = TextEditingController();
@@ -128,6 +120,16 @@ class DebtItemWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<DateTime?> _showDatePicker(BuildContext context) async {
+    final DateTime? time = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2050),
+    );
+    return time;
   }
 
   @override

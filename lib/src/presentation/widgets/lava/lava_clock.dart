@@ -10,6 +10,7 @@ class LavaAnimation extends StatefulWidget {
     required this.child,
     this.color,
   });
+
   final Widget child;
   final Color? color;
 
@@ -20,6 +21,7 @@ class LavaAnimation extends StatefulWidget {
 class LavaAnimationState extends State<LavaAnimation>
     with TickerProviderStateMixin {
   final Lava lava = Lava(10);
+
   late final AnimationController _animation =
       AnimationController(duration: const Duration(minutes: 10), vsync: this)
         ..repeat();

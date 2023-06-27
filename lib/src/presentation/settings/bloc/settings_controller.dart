@@ -5,9 +5,9 @@ import '../../../data/settings/settings.dart';
 
 @singleton
 class SettingsController {
-  final Settings settings;
-
   SettingsController(this.settings);
+
+  final Settings settings;
 
   FilterExpense fetchFilterExpense({bool isHome = false}) =>
       settings.fetchFilterExpense(isHome: isHome);

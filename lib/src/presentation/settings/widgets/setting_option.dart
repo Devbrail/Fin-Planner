@@ -11,10 +11,10 @@ class SettingsOption extends StatelessWidget {
     this.onTap,
   }) : super(key: key);
 
-  final String title;
-  final String? subtitle;
-  final VoidCallback? onTap;
   final IconData? icon;
+  final VoidCallback? onTap;
+  final String? subtitle;
+  final String title;
   final Widget? trailing;
 
   @override

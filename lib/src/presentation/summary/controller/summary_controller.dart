@@ -22,21 +22,24 @@ class SummaryController {
 
   final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier =
       ValueNotifier<DateTimeRange?>(null);
+
   final FilterExpense filterExpense =
       getIt.get<SettingsController>().fetchFilterExpense();
+
+  late final ValueNotifier<FilterExpense> filterExpenseNotifier =
+      ValueNotifier<FilterExpense>(filterExpense);
+
   final GetAccountUseCase getAccountUseCase;
   final GetCategoryUseCase getCategoryUseCase;
   final GetExpensesFromCategoryIdUseCase getExpensesFromCategoryIdUseCase;
   final FilterExpense sortHomeExpense =
       getIt.get<SettingsController>().fetchFilterExpense(isHome: true);
-  final ValueNotifier<OverviewType> typeNotifier =
-      ValueNotifier<OverviewType>(OverviewType.expense);
-
-  late final ValueNotifier<FilterExpense> filterExpenseNotifier =
-      ValueNotifier<FilterExpense>(filterExpense);
 
   late final ValueNotifier<FilterExpense> sortHomeExpenseNotifier =
       ValueNotifier<FilterExpense>(sortHomeExpense);
+
+  final ValueNotifier<OverviewType> typeNotifier =
+      ValueNotifier<OverviewType>(OverviewType.expense);
 
   Category? fetchCategoryFromId(int categoryId) =>
       getCategoryUseCase(categoryId);

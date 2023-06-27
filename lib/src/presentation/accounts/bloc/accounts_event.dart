@@ -3,71 +3,75 @@ part of 'accounts_bloc.dart';
 @immutable
 abstract class AccountsEvent extends Equatable {
   const AccountsEvent();
+
   @override
   List<Object> get props => [];
 }
 
 class AddOrUpdateAccountEvent extends AccountsEvent {
-  final bool isAdding;
-
   const AddOrUpdateAccountEvent(this.isAdding);
+
+  final bool isAdding;
 }
 
 class DeleteAccountEvent extends AccountsEvent {
+  const DeleteAccountEvent(this.accountId);
+
   final int accountId;
 
-  const DeleteAccountEvent(this.accountId);
   @override
   List<Object> get props => [accountId];
 }
 
 class FetchAccountAndExpenseFromIdEvent extends AccountsEvent {
+  const FetchAccountAndExpenseFromIdEvent(this.accountId);
+
   final String accountId;
 
-  const FetchAccountAndExpenseFromIdEvent(this.accountId);
   @override
   List<Object> get props => [accountId];
 }
 
 class AccountSelectedEvent extends AccountsEvent {
+  const AccountSelectedEvent(this.account);
+
   final Account account;
 
-  const AccountSelectedEvent(this.account);
   @override
   List<Object> get props => [account];
 }
 
 class FetchAccountFromIdEvent extends AccountsEvent {
-  final String? accountId;
-
   const FetchAccountFromIdEvent(this.accountId);
+
+  final String? accountId;
 
   @override
   List<Object> get props => [accountId ?? ''];
 }
 
 class UpdateCardTypeEvent extends AccountsEvent {
-  final CardType cardType;
-
   const UpdateCardTypeEvent(this.cardType);
+
+  final CardType cardType;
 
   @override
   List<Object> get props => [cardType];
 }
 
 class FetchExpensesFromAccountIdEvent extends AccountsEvent {
-  final String accountId;
-
   const FetchExpensesFromAccountIdEvent(this.accountId);
+
+  final String accountId;
 
   @override
   List<Object> get props => [accountId];
 }
 
 class AccountColorSelectedEvent extends AccountsEvent {
-  final int accountColor;
-
   const AccountColorSelectedEvent(this.accountColor);
+
+  final int accountColor;
 
   @override
   List<Object> get props => [accountColor];

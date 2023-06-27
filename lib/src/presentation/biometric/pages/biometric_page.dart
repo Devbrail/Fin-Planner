@@ -23,6 +23,21 @@ class _BiometricPageState extends State<BiometricPage> {
     checkBiometrics();
   }
 
+  Future<void> checkBiometrics() async {
+    final localAuth = getIt.get<Authenticate>();
+
+    final bool canCheckBiometrics = await localAuth.canCheckBiometrics();
+
+    if (canCheckBiometrics) {
+      final bool result = await localAuth.authenticateWithBiometrics();
+      if (result) {
+        if (context.mounted) context.go(landingPath);
+      } else {
+        //SystemNavigator.pop();
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,20 +92,5 @@ class _BiometricPageState extends State<BiometricPage> {
         ],
       ),
     );
-  }
-
-  Future<void> checkBiometrics() async {
-    final localAuth = getIt.get<Authenticate>();
-
-    final bool canCheckBiometrics = await localAuth.canCheckBiometrics();
-
-    if (canCheckBiometrics) {
-      final bool result = await localAuth.authenticateWithBiometrics();
-      if (result) {
-        if (context.mounted) context.go(landingPath);
-      } else {
-        //SystemNavigator.pop();
-      }
-    }
   }
 }

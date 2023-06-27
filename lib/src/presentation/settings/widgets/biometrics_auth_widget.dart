@@ -19,8 +19,23 @@ class BiometricAuthWidget extends StatefulWidget {
 }
 
 class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
-  final SettingsController settings = getIt.get<SettingsController>();
   late bool isSelected = settings.get(userAuthKey, defaultValue: false);
+  final SettingsController settings = getIt.get<SettingsController>();
+
+  void _showSnackBar(bool result) => settings
+      .put(userAuthKey, result)
+      .then((value) => ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+            SnackBar(
+              content: Text(
+                result ? 'Authenticated' : 'Not authenticated',
+                style: TextStyle(
+                  color: context.onPrimaryContainer,
+                ),
+              ),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: context.primaryContainer,
+            ),
+          ));
 
   @override
   Widget build(BuildContext context) => FutureResolve<List<bool>>(
@@ -56,19 +71,4 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
           );
         },
       );
-
-  void _showSnackBar(bool result) => settings
-      .put(userAuthKey, result)
-      .then((value) => ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-            SnackBar(
-              content: Text(
-                result ? 'Authenticated' : 'Not authenticated',
-                style: TextStyle(
-                  color: context.onPrimaryContainer,
-                ),
-              ),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: context.primaryContainer,
-            ),
-          ));
 }

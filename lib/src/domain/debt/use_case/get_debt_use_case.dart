@@ -5,9 +5,9 @@ import '../repository/debit_repository.dart';
 
 @singleton
 class GetDebtUseCase {
-  final DebtRepository debtRepository;
-
   GetDebtUseCase({required this.debtRepository});
+
+  final DebtRepository debtRepository;
 
   Debt? call(int debtId) =>
       debtRepository.fetchDebtOrCreditFromId(debtId)?.toEntity();

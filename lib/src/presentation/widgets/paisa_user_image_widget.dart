@@ -16,8 +16,8 @@ class UserImageWidget extends StatelessWidget {
     this.useDefault = false,
   }) : super(key: key);
 
-  final VoidCallback pickImage;
   final double? maxRadius;
+  final VoidCallback pickImage;
   final bool useDefault;
 
   @override

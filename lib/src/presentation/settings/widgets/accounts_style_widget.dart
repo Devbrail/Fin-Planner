@@ -12,9 +12,10 @@ class AccountsStyleWidget extends StatefulWidget {
 }
 
 class _AccountsStyleWidgetState extends State<AccountsStyleWidget> {
-  final SettingsController settings = getIt.get<SettingsController>();
   late bool isSelected =
       settings.get(userAccountsStyleKey, defaultValue: false);
+
+  final SettingsController settings = getIt.get<SettingsController>();
 
   @override
   Widget build(BuildContext context) {

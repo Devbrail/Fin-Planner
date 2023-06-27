@@ -4,6 +4,7 @@ import 'package:paisa/src/core/common.dart';
 
 class PaisaBaseWidget extends StatelessWidget {
   const PaisaBaseWidget({super.key, required this.child});
+
   final Widget child;
 
   @override

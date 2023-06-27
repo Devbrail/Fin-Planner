@@ -31,6 +31,19 @@ class AccountRepositoryImpl extends AccountRepository {
   }
 
   @override
+  Future<void> clearAll() => dataSource.clearAll();
+
+  @override
+  Future<void> deleteAccount(int key) => dataSource.deleteAccount(key);
+
+  @override
+  AccountModel? fetchAccountFromId(int accountId) =>
+      dataSource.fetchAccountFromId(accountId);
+
+  @override
+  List<AccountModel> getAccounts() => dataSource.accounts();
+
+  @override
   Future<void> updateAccount({
     required int key,
     required String bankName,
@@ -52,17 +65,4 @@ class AccountRepositoryImpl extends AccountRepository {
       ),
     );
   }
-
-  @override
-  Future<void> deleteAccount(int key) => dataSource.deleteAccount(key);
-
-  @override
-  AccountModel? fetchAccountFromId(int accountId) =>
-      dataSource.fetchAccountFromId(accountId);
-
-  @override
-  List<AccountModel> getAccounts() => dataSource.accounts();
-
-  @override
-  Future<void> clearAll() => dataSource.clearAll();
 }

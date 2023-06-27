@@ -7,9 +7,9 @@ import '../repository/account_repository.dart';
 
 @singleton
 class UpdateAccountUseCase {
-  final AccountRepository accountRepository;
-
   UpdateAccountUseCase({required this.accountRepository});
+
+  final AccountRepository accountRepository;
 
   Future<void> call({required Account account}) {
     return accountRepository.updateAccount(

@@ -11,10 +11,10 @@ class NavigationBarItem extends StatelessWidget {
     required this.onPressed,
   });
 
-  final String title;
   final IconData icon;
   final bool isSelected;
   final VoidCallback onPressed;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

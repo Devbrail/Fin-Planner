@@ -23,8 +23,8 @@ class CategorySelectorPage extends StatefulWidget {
 }
 
 class _CategorySelectorPageState extends State<CategorySelectorPage> {
-  final List<CategoryModel> defaultModels = defaultCategoriesData();
   final LocalCategoryDataManager dataSource = getIt.get();
+  final List<CategoryModel> defaultModels = defaultCategoriesData();
   final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   @override
@@ -173,8 +173,10 @@ class CategoryItemWidget extends StatelessWidget {
     required this.model,
     required this.onPress,
   });
+
   final CategoryModel model;
   final VoidCallback onPress;
+
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(

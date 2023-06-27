@@ -62,8 +62,9 @@ class OverViewPage extends StatelessWidget {
     required this.budgetCubit,
   }) : super(key: key);
 
-  final SummaryController summaryController;
   final BudgetCubit budgetCubit;
+  final SummaryController summaryController;
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<ExpenseModel>>(

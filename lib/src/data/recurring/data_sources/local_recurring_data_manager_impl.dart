@@ -18,12 +18,12 @@ class LocalRecurringDataManagerImpl implements LocalRecurringDataManager {
   }
 
   @override
-  List<RecurringModel> recurringModels() {
-    return recurringBox.values.toList();
+  Future<void> clearRecurring(int key) {
+    return recurringBox.delete(key);
   }
 
   @override
-  Future<void> clearRecurring(int key) {
-    return recurringBox.delete(key);
+  List<RecurringModel> recurringModels() {
+    return recurringBox.values.toList();
   }
 }

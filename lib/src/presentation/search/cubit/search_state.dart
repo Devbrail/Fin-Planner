@@ -10,9 +10,9 @@ abstract class SearchState extends Equatable {
 class SearchInitial extends SearchState {}
 
 class SearchResultState extends SearchState {
-  final List<Expense> expenses;
-
   const SearchResultState(this.expenses);
+
+  final List<Expense> expenses;
 
   @override
   List<Object> get props => [expenses];

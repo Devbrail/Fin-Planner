@@ -11,8 +11,9 @@ import '../../../core/enum/box_types.dart';
 class UserNamePage extends StatelessWidget {
   UserNamePage({Key? key}) : super(key: key);
 
-  final _nameController = TextEditingController();
   final _formState = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(

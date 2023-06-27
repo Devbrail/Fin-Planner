@@ -71,8 +71,9 @@ class _IconPickerWidget extends StatefulWidget {
   }) : super(key: key);
 
   final List<String> iconKeys;
-  final IconData selectedIcon;
   final Function(IconData icon) onSelectedIcon;
+  final IconData selectedIcon;
+
   @override
   State<_IconPickerWidget> createState() => _IconPickerWidgetState();
 }

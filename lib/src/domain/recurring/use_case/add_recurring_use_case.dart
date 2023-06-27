@@ -8,6 +8,7 @@ class AddRecurringUseCase {
   AddRecurringUseCase(this.repository);
 
   final RecurringRepository repository;
+
   Future<void> call(
     String name,
     double amount,

@@ -23,8 +23,8 @@ class AccountSelectorPage extends StatefulWidget {
 }
 
 class _AccountSelectorPageState extends State<AccountSelectorPage> {
-  final List<AccountModel> defaultModels = defaultAccountsData();
   final LocalAccountDataManager dataSource = getIt.get();
+  final List<AccountModel> defaultModels = defaultAccountsData();
   final SettingsController settings = getIt.get<SettingsController>();
 
   @override
@@ -158,8 +158,10 @@ class AccountItemWidget extends StatelessWidget {
     required this.model,
     required this.onPress,
   });
+
   final AccountModel model;
   final VoidCallback onPress;
+
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(

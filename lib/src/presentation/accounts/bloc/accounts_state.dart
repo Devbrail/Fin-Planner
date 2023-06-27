@@ -11,18 +11,19 @@ abstract class AccountsState extends Equatable {
 class AccountsInitial extends AccountsState {}
 
 class AccountListState extends AccountsState {
-  final List<Account> accounts;
-
   const AccountListState(this.accounts);
+
+  final List<Account> accounts;
 
   @override
   List<Object> get props => [accounts];
 }
 
 class AccountAddedState extends AccountsState {
+  const AccountAddedState({this.isAddOrUpdate = false});
+
   final bool isAddOrUpdate;
 
-  const AccountAddedState({this.isAddOrUpdate = false});
   @override
   List<Object> get props => [isAddOrUpdate];
 }
@@ -30,65 +31,65 @@ class AccountAddedState extends AccountsState {
 class AccountDeletedState extends AccountsState {}
 
 class AccountSelectedState extends AccountsState {
+  const AccountSelectedState(this.account, this.expenses);
+
   final Account account;
   final List<Expense> expenses;
-
-  const AccountSelectedState(this.account, this.expenses);
 
   @override
   List<Object> get props => [account, expenses];
 }
 
 class AccountErrorState extends AccountsState {
-  final String errorString;
-
   const AccountErrorState(this.errorString);
+
+  final String errorString;
 
   @override
   List<Object> get props => [errorString];
 }
 
 class AccountSuccessState extends AccountsState {
-  final Account account;
-
   const AccountSuccessState(this.account);
+
+  final Account account;
 
   @override
   List<Object> get props => [account];
 }
 
 class UpdateCardTypeState extends AccountsState {
-  final CardType cardType;
-
   const UpdateCardTypeState(this.cardType);
+
+  final CardType cardType;
 
   @override
   List<Object> get props => [cardType];
 }
 
 class ExpensesFromAccountIdState extends AccountsState {
-  final List<Expense> expenses;
-
   const ExpensesFromAccountIdState(this.expenses);
+
+  final List<Expense> expenses;
 
   @override
   List<Object> get props => [expenses];
 }
 
 class AccountColorSelectedState extends AccountsState {
-  final int categoryColor;
-
   const AccountColorSelectedState(this.categoryColor);
+
+  final int categoryColor;
 
   @override
   List<Object> get props => [categoryColor, identityHashCode(this)];
 }
 
 class AccountAndExpensesState extends AccountsState {
+  const AccountAndExpensesState(this.account, this.expenses);
+
   final Account account;
   final List<Expense> expenses;
-
-  const AccountAndExpensesState(this.account, this.expenses);
 
   @override
   List<Object> get props => [account, expenses];

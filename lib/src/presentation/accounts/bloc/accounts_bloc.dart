@@ -38,22 +38,21 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     on<FetchAccountAndExpenseFromIdEvent>(_fetchAccountAndExpensesFromId);
   }
 
-  final GetExpensesFromAccountIdUseCase getExpensesFromAccountIdUseCase;
-  final DeleteExpensesFromAccountIdUseCase deleteExpensesFromAccountIdUseCase;
-  final UpdateAccountUseCase updateAccountUseCase;
-  final GetAccountUseCase getAccountUseCase;
-  final DeleteAccountUseCase deleteAccountUseCase;
+  String? accountHolderName;
+  String? accountName;
+  String? accountNumber;
   final AddAccountUseCase addAccountUseCase;
+  Account? currentAccount;
+  final DeleteAccountUseCase deleteAccountUseCase;
+  final DeleteExpensesFromAccountIdUseCase deleteExpensesFromAccountIdUseCase;
+  final GetAccountUseCase getAccountUseCase;
   final GetAccountsUseCase getAccountsUseCase;
   final GetCategoryUseCase getCategoryUseCase;
-
-  CardType selectedType = CardType.cash;
-  String? accountName;
-  String? accountHolderName;
-  String? accountNumber;
-  Account? currentAccount;
+  final GetExpensesFromAccountIdUseCase getExpensesFromAccountIdUseCase;
   double? initialAmount;
   int? selectedColor;
+  CardType selectedType = CardType.cash;
+  final UpdateAccountUseCase updateAccountUseCase;
 
   Future<void> _fetchAccountFromId(
     FetchAccountFromIdEvent event,

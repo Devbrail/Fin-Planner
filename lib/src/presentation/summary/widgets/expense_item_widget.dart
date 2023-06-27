@@ -19,8 +19,8 @@ class ExpenseItemWidget extends StatelessWidget {
   }) : super(key: key);
 
   final Account account;
-  final Expense expense;
   final Category category;
+  final Expense expense;
 
   String getSubtitle(BuildContext context) {
     if (expense.type == TransactionType.transfer) {
@@ -89,8 +89,8 @@ class ExpenseTransferItemWidget extends StatelessWidget {
     required this.toAccount,
   }) : super(key: key);
 
-  final Account fromAccount, toAccount;
   final Expense expense;
+  final Account fromAccount, toAccount;
 
   String getSubtitle() {
     return expense.time.shortDayString;

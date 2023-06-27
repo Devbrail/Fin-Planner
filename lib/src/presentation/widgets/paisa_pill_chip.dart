@@ -11,9 +11,9 @@ class PaisaPillChip extends StatelessWidget {
     required this.isSelected,
   });
 
-  final String title;
-  final VoidCallback onPressed;
   final bool isSelected;
+  final VoidCallback onPressed;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

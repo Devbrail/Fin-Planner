@@ -6,9 +6,9 @@ import '../repository/account_repository.dart';
 
 @singleton
 class GetAccountUseCase {
-  final AccountRepository accountRepository;
-
   GetAccountUseCase({required this.accountRepository});
+
+  final AccountRepository accountRepository;
 
   Account? call(int pathParameters) =>
       accountRepository.fetchAccountFromId(pathParameters)?.toEntity();

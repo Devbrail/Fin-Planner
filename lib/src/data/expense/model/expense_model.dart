@@ -9,39 +9,6 @@ part 'expense_model.g.dart';
 
 @HiveType(typeId: 0)
 class ExpenseModel extends HiveObject with EquatableMixin {
-  @HiveField(0)
-  String name;
-
-  @HiveField(1)
-  double currency;
-
-  @HiveField(3)
-  DateTime time;
-
-  @HiveField(4, defaultValue: TransactionType.expense)
-  TransactionType? type;
-
-  @HiveField(5)
-  int accountId;
-
-  @HiveField(6)
-  int categoryId;
-
-  @HiveField(7)
-  int? superId;
-
-  @HiveField(8)
-  String? description;
-
-  @HiveField(9)
-  int? fromAccountId;
-
-  @HiveField(10)
-  int? toAccountId;
-
-  @HiveField(11, defaultValue: 0.0)
-  double transferAmount;
-
   ExpenseModel({
     required this.name,
     required this.currency,
@@ -56,20 +23,6 @@ class ExpenseModel extends HiveObject with EquatableMixin {
     this.transferAmount = 0.0,
   });
 
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'currency': currency,
-        'time': time.toIso8601String(),
-        'type': type?.type,
-        'accountId': accountId,
-        'categoryId': categoryId,
-        'superId': superId,
-        'description': description,
-        'fromAccountId': fromAccountId,
-        'toAccountId': toAccountId,
-        'transferAmount': transferAmount,
-      };
-
   factory ExpenseModel.fromJson(Map<String, dynamic> json) => ExpenseModel(
         name: json['name'],
         currency: json['currency'],
@@ -83,6 +36,39 @@ class ExpenseModel extends HiveObject with EquatableMixin {
         transferAmount: json['transferAmount'],
       )..superId = json['superId'];
 
+  @HiveField(5)
+  int accountId;
+
+  @HiveField(6)
+  int categoryId;
+
+  @HiveField(1)
+  double currency;
+
+  @HiveField(8)
+  String? description;
+
+  @HiveField(9)
+  int? fromAccountId;
+
+  @HiveField(0)
+  String name;
+
+  @HiveField(7)
+  int? superId;
+
+  @HiveField(3)
+  DateTime time;
+
+  @HiveField(10)
+  int? toAccountId;
+
+  @HiveField(11, defaultValue: 0.0)
+  double transferAmount;
+
+  @HiveField(4, defaultValue: TransactionType.expense)
+  TransactionType? type;
+
   @override
   List<Object?> get props {
     return [
@@ -95,6 +81,20 @@ class ExpenseModel extends HiveObject with EquatableMixin {
       transferAmount,
     ];
   }
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'currency': currency,
+        'time': time.toIso8601String(),
+        'type': type?.type,
+        'accountId': accountId,
+        'categoryId': categoryId,
+        'superId': superId,
+        'description': description,
+        'fromAccountId': fromAccountId,
+        'toAccountId': toAccountId,
+        'transferAmount': transferAmount,
+      };
 
   ExpenseModel copyWith({
     String? name,

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:paisa/src/core/common.dart';
 
 class SettingsGroup extends StatelessWidget {
-  final String title;
-  final List<Widget> options;
-
   const SettingsGroup({
     Key? key,
     required this.title,
     required this.options,
   }) : super(key: key);
+
+  final List<Widget> options;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

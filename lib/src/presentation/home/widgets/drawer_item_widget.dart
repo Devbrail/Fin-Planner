@@ -11,11 +11,12 @@ class DrawerItemWidget extends StatelessWidget {
     required this.icon,
     this.selectedIcon,
   });
+
+  final IconData icon;
   final bool isSelected;
   final VoidCallback onPressed;
-  final String title;
-  final IconData icon;
   final IconData? selectedIcon;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

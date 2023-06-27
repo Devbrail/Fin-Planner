@@ -43,6 +43,7 @@ class RecurringPage extends StatelessWidget {
 
 class RecurringListWidget extends StatelessWidget {
   const RecurringListWidget({super.key, required this.recurringModels});
+
   final List<RecurringModel> recurringModels;
 
   @override

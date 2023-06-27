@@ -15,6 +15,7 @@ class OverviewFilter extends StatelessWidget {
 
   final BudgetCubit budgetCubit;
   final SummaryController summaryController;
+
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(

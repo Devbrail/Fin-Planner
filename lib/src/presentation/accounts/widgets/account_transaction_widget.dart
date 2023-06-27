@@ -16,6 +16,7 @@ class AccountTransactionWidget extends StatelessWidget {
   }) : super(key: key);
 
   final bool isScroll;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountsBloc, AccountsState>(

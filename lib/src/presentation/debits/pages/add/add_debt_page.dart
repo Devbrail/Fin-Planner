@@ -21,6 +21,7 @@ class AddOrEditDebtPage extends StatefulWidget {
     super.key,
     this.debtId,
   });
+
   final String? debtId;
 
   @override
@@ -28,18 +29,13 @@ class AddOrEditDebtPage extends StatefulWidget {
 }
 
 class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
-  late final bool isDebtAddOrUpdate = widget.debtId == null;
+  final TextEditingController amountController = TextEditingController();
   final DebtsBloc debtBloc = getIt.get();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final amountController = TextEditingController();
-  final nameController = TextEditingController();
-  final descController = TextEditingController();
+  final TextEditingController descController = TextEditingController();
+  late final bool isDebtAddOrUpdate = widget.debtId == null;
+  final TextEditingController nameController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    debtBloc.add(FetchDebtOrCreditFromIdEvent(widget.debtId));
-  }
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -47,6 +43,12 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
     nameController.dispose();
     descController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    debtBloc.add(FetchDebtOrCreditFromIdEvent(widget.debtId));
   }
 
   @override
@@ -279,12 +281,13 @@ class DatePickerWidget extends StatelessWidget {
     required this.lastDate,
     required this.firstDate,
   });
-  final Function(DateTime) onSelected;
-  final String title;
-  final String subtitle;
+
+  final DateTime firstDate;
   final IconData icon;
   final DateTime lastDate;
-  final DateTime firstDate;
+  final Function(DateTime) onSelected;
+  final String subtitle;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

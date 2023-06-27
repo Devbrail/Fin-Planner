@@ -67,9 +67,9 @@ class PaisaIconButton extends StatelessWidget {
     required this.iconData,
   });
 
+  final IconData iconData;
   final VoidCallback onPressed;
   final String title;
-  final IconData iconData;
 
   @override
   Widget build(BuildContext context) {

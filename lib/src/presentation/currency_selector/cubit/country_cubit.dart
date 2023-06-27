@@ -17,9 +17,8 @@ class CountryCubit extends Cubit<CountryState> {
   ) : super(CountryInitial());
 
   final GetCountryUseCase getCountryUseCase;
-
-  final SettingsController settings;
   CountryModel? selectedCountry;
+  final SettingsController settings;
 
   void checkForData() {
     final Map<dynamic, dynamic>? json = settings.get(userCountryKey);

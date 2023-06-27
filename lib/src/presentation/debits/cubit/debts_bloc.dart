@@ -43,14 +43,14 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
   Debt? currentDebt;
   DebtType currentDebtType = DebtType.debt;
   String? currentDescription;
-  DateTime? endDateTime;
   String? currentName;
-  DateTime? startDateTime;
   final DeleteDebtUseCase deleteDebtUseCase;
   final DeleteTransactionUseCase deleteTransactionUseCase;
   final DeleteTransactionsUseCase deleteTransactionsUseCase;
+  DateTime? endDateTime;
   final GetDebtUseCase getDebtUseCase;
   final GetTransactionsUseCase getTransactionsUseCase;
+  DateTime? startDateTime;
   final UpdateDebtUseCase updateDebtUseCase;
 
   Future<void> addDebt(

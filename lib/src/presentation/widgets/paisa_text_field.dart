@@ -17,17 +17,17 @@ class PaisaTextFormField extends StatelessWidget {
     this.counterText,
   });
 
-  final TextEditingController controller;
   final String? Function(String?)? validator;
   final Function(String)? onChanged;
-  final String hintText;
-  final TextInputType keyboardType;
+  final TextEditingController controller;
+  final String? counterText;
   final bool? enabled;
+  final String hintText;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputType keyboardType;
+  final String? label;
   final int? maxLength;
   final int? maxLines;
-  final String? label;
-  final List<TextInputFormatter>? inputFormatters;
-  final String? counterText;
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +63,15 @@ class PaisaTextField extends StatelessWidget {
     this.inputFormatters,
   });
 
-  final TextEditingController controller;
   final Function(String)? onChanged;
-  final String hintText;
-  final TextInputType keyboardType;
+  final TextEditingController controller;
   final bool? enabled;
+  final String hintText;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputType keyboardType;
+  final String? label;
   final int? maxLength;
   final int? maxLines;
-  final String? label;
-  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {

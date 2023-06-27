@@ -11,6 +11,7 @@ class ChooseThemeModeWidget extends StatefulWidget {
     Key? key,
     required this.currentTheme,
   }) : super(key: key);
+
   final ThemeMode currentTheme;
 
   @override

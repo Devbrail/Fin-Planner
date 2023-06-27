@@ -38,5 +38,6 @@ class Settings {
       settings.get(key, defaultValue: defaultValue);
 
   Future<void> put(String key, dynamic value) => settings.put(key, value);
+
   Future<void> delete(String key) => settings.delete(key);
 }

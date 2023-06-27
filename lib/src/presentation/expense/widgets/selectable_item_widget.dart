@@ -12,11 +12,11 @@ class ItemWidget extends StatelessWidget {
     this.subtitle,
   });
 
-  final bool isSelected;
-  final String title;
-  final String? subtitle;
   final int icon;
+  final bool isSelected;
   final VoidCallback onPressed;
+  final String? subtitle;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

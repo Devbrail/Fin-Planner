@@ -8,30 +8,6 @@ part 'recurring.g.dart';
 
 @HiveType(typeId: 5)
 class RecurringModel extends HiveObject with EquatableMixin {
-  @HiveField(0)
-  final String name;
-
-  @HiveField(1)
-  final double amount;
-
-  @HiveField(2, defaultValue: RecurringType.daily)
-  final RecurringType recurringType;
-
-  @HiveField(3)
-  final DateTime recurringDate;
-
-  @HiveField(4)
-  int? superId;
-
-  @HiveField(5)
-  int accountId;
-
-  @HiveField(6)
-  int categoryId;
-
-  @HiveField(7, defaultValue: TransactionType.expense)
-  TransactionType transactionType;
-
   RecurringModel({
     required this.name,
     required this.amount,
@@ -42,6 +18,30 @@ class RecurringModel extends HiveObject with EquatableMixin {
     required this.transactionType,
     this.superId,
   });
+
+  @HiveField(5)
+  int accountId;
+
+  @HiveField(1)
+  final double amount;
+
+  @HiveField(6)
+  int categoryId;
+
+  @HiveField(0)
+  final String name;
+
+  @HiveField(3)
+  final DateTime recurringDate;
+
+  @HiveField(2, defaultValue: RecurringType.daily)
+  final RecurringType recurringType;
+
+  @HiveField(4)
+  int? superId;
+
+  @HiveField(7, defaultValue: TransactionType.expense)
+  TransactionType transactionType;
 
   @override
   List<Object?> get props {

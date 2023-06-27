@@ -11,18 +11,18 @@ abstract class CategoryState extends Equatable {
 class AddCategoryInitial extends CategoryState {}
 
 class CategoriesListState extends CategoryState {
-  final List<CategoryModel> categories;
-
   const CategoriesListState(this.categories);
+
+  final List<CategoryModel> categories;
 
   @override
   List<Object?> get props => [categories];
 }
 
 class CategoryAddedState extends CategoryState {
-  final bool isCategoryAddedOrUpdate;
-
   const CategoryAddedState({this.isCategoryAddedOrUpdate = false});
+
+  final bool isCategoryAddedOrUpdate;
 
   @override
   List<Object?> get props => [isCategoryAddedOrUpdate];
@@ -31,42 +31,42 @@ class CategoryAddedState extends CategoryState {
 class CategoryDeletedState extends CategoryState {}
 
 class CategoryErrorState extends CategoryState {
-  final String errorString;
-
   const CategoryErrorState(this.errorString);
+
+  final String errorString;
 }
 
 class CategorySuccessState extends CategoryState {
-  final CategoryModel category;
-
   const CategorySuccessState(this.category);
+
+  final CategoryModel category;
 
   @override
   List<Object?> get props => [category];
 }
 
 class CategoryIconSelectedState extends CategoryState {
-  final int categoryIcon;
-
   const CategoryIconSelectedState(this.categoryIcon);
+
+  final int categoryIcon;
 
   @override
   List<Object?> get props => [categoryIcon];
 }
 
 class CategoryColorSelectedState extends CategoryState {
-  final int categoryColor;
-
   const CategoryColorSelectedState(this.categoryColor);
+
+  final int categoryColor;
 
   @override
   List<Object?> get props => [categoryColor, identityHashCode(this)];
 }
 
 class UpdateCategoryBudgetState extends CategoryState {
-  final bool isBudget;
-
   const UpdateCategoryBudgetState(this.isBudget);
+
+  final bool isBudget;
 
   @override
   List<Object?> get props => [isBudget];

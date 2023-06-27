@@ -13,8 +13,9 @@ class SmallSizeFabWidget extends StatefulWidget {
 }
 
 class _SmallSizeFabWidgetState extends State<SmallSizeFabWidget> {
-  final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
   late bool isSelected = settings.get(smallSizeFabKey, defaultValue: false);
+  final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(

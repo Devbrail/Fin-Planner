@@ -69,6 +69,7 @@ class ColorPickerGridWidget extends StatefulWidget {
     required this.onSelected,
     required this.selectedColor,
   });
+
   final Function(int) onSelected;
   final int selectedColor;
 

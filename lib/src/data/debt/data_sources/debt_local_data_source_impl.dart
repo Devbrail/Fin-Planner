@@ -8,13 +8,13 @@ import 'debt_local_data_source.dart';
 
 @Singleton(as: DebtLocalDataSource)
 class DebtLocalDataSourceImpl extends DebtLocalDataSource {
-  final Box<DebtModel> debtBox;
-  final Box<TransactionsModel> transactionsBox;
-
   DebtLocalDataSourceImpl({
     required this.debtBox,
     required this.transactionsBox,
   });
+
+  final Box<DebtModel> debtBox;
+  final Box<TransactionsModel> transactionsBox;
 
   @override
   Future<void> addDebtOrCredit(DebtModel debt) async {
@@ -24,24 +24,10 @@ class DebtLocalDataSourceImpl extends DebtLocalDataSource {
   }
 
   @override
-  DebtModel? fetchDebtOrCreditFromId(int debtId) =>
-      debtBox.values.firstWhereOrNull((element) => element.superId == debtId);
-
-  @override
-  Iterable<TransactionsModel> getTransactionsFromId(int? id) {
-    return transactionsBox.values.where((element) => element.parentId == id);
-  }
-
-  @override
   Future<void> addTransaction(TransactionsModel transactionsModel) async {
     final int id = await transactionsBox.add(transactionsModel);
     transactionsModel.superId = id;
     return transactionsModel.save();
-  }
-
-  @override
-  Future<void> updateDebt(DebtModel debtModel) {
-    return debtBox.put(debtModel.superId!, debtModel);
   }
 
   @override
@@ -60,5 +46,19 @@ class DebtLocalDataSourceImpl extends DebtLocalDataSource {
         .where((element) => element.parentId == parentId)
         .map((e) => e.superId!);
     return transactionsBox.deleteAll(transactionsKeys);
+  }
+
+  @override
+  DebtModel? fetchDebtOrCreditFromId(int debtId) =>
+      debtBox.values.firstWhereOrNull((element) => element.superId == debtId);
+
+  @override
+  Iterable<TransactionsModel> getTransactionsFromId(int? id) {
+    return transactionsBox.values.where((element) => element.parentId == id);
+  }
+
+  @override
+  Future<void> updateDebt(DebtModel debtModel) {
+    return debtBox.put(debtModel.superId!, debtModel);
   }
 }

@@ -11,8 +11,9 @@ class SmallSizeFab extends StatelessWidget {
     required this.onPressed,
     required this.icon,
   });
-  final VoidCallback onPressed;
+
   final IconData icon;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {

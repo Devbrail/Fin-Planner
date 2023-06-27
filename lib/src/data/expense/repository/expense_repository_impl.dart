@@ -43,17 +43,12 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   }
 
   @override
+  Future<void> clearAll() => dataSource.clearAll();
+
+  @override
   Future<void> clearExpense(int expenseId) async {
     return dataSource.clearExpense(expenseId);
   }
-
-  @override
-  ExpenseModel? fetchExpenseFromId(int expenseId) {
-    return dataSource.fetchExpenseFromId(expenseId);
-  }
-
-  @override
-  List<ExpenseModel> expenses() => dataSource.expenses();
 
   @override
   Future<void> deleteExpensesByAccountId(int accountId) {
@@ -66,6 +61,14 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   }
 
   @override
+  List<ExpenseModel> expenses() => dataSource.expenses();
+
+  @override
+  ExpenseModel? fetchExpenseFromId(int expenseId) {
+    return dataSource.fetchExpenseFromId(expenseId);
+  }
+
+  @override
   List<ExpenseModel> fetchExpensesFromAccountId(int accountId) {
     return dataSource.fetchExpensesFromAccountId(accountId);
   }
@@ -73,6 +76,15 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   @override
   List<ExpenseModel> fetchExpensesFromCategoryId(int accountId) {
     return dataSource.fetchExpensesFromCategoryId(accountId);
+  }
+
+  @override
+  List<ExpenseModel> filterExpenses(
+    String query,
+    int? accountId,
+    int? categoryId,
+  ) {
+    return dataSource.filterExpenses(query, accountId, categoryId);
   }
 
   @override
@@ -98,17 +110,5 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
         superId: key,
       ),
     );
-  }
-
-  @override
-  Future<void> clearAll() => dataSource.clearAll();
-
-  @override
-  List<ExpenseModel> filterExpenses(
-    String query,
-    int? accountId,
-    int? categoryId,
-  ) {
-    return dataSource.filterExpenses(query, accountId, categoryId);
   }
 }

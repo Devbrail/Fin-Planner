@@ -19,13 +19,13 @@ class AccountCard extends StatefulWidget {
     this.onTap,
   }) : super(key: key);
 
-  final String totalBalance;
-  final String cardHolder;
   final String bankName;
+  final String cardHolder;
   final CardType cardType;
   final String income, expense;
   final VoidCallback? onDelete;
   final VoidCallback? onTap;
+  final String totalBalance;
 
   @override
   State<AccountCard> createState() => _AccountCardState();
@@ -83,13 +83,13 @@ class MobileAccountCard extends StatelessWidget {
     required this.expense,
   }) : super(key: key);
 
-  final String totalBalance;
-  final String cardHolder;
   final String bankName;
+  final String cardHolder;
   final CardType cardType;
   final String income, expense;
   final VoidCallback? onDelete;
   final VoidCallback? onTap;
+  final String totalBalance;
 
   @override
   Widget build(BuildContext context) {
@@ -182,14 +182,15 @@ class MobileAccountCard extends StatelessWidget {
 }
 
 class AccountSummaryTail extends StatelessWidget {
-  final String title;
-  final String subtitle;
-
   const AccountSummaryTail({
     super.key,
     required this.title,
     required this.subtitle,
   });
+
+  final String subtitle;
+  final String title;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -229,9 +230,9 @@ class TabletAccountCard extends StatelessWidget {
     required this.expense,
   }) : super(key: key);
 
-  final String cardNumber;
-  final String cardHolder;
   final String bankName;
+  final String cardHolder;
+  final String cardNumber;
   final CardType cardType;
   final String income, expense;
   final VoidCallback? onDelete;
@@ -392,9 +393,9 @@ class DesktopAccountCard extends StatelessWidget {
     required this.expense,
   }) : super(key: key);
 
-  final String cardNumber;
-  final String cardHolder;
   final String bankName;
+  final String cardHolder;
+  final String cardNumber;
   final CardType cardType;
   final String income, expense;
   final VoidCallback? onDelete;

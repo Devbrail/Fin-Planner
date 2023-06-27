@@ -9,8 +9,8 @@ class FutureResolve<T> extends StatelessWidget {
     required this.builder,
   });
 
-  final Future<T> future;
   final Function(T value) builder;
+  final Future<T> future;
 
   @override
   Widget build(BuildContext context) {

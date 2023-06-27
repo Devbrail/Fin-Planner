@@ -15,6 +15,7 @@ class FilterHomeWidget extends StatelessWidget {
   });
 
   final SummaryController summaryController;
+
   void updateFilter(FilterExpense filterExpense) {
     summaryController.sortHomeExpenseNotifier.value = filterExpense;
   }
