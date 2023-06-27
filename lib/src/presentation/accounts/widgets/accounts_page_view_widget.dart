@@ -26,41 +26,38 @@ class AccountPageViewWidget extends StatefulWidget {
 class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
     with AutomaticKeepAliveClientMixin {
   final PageController _controller = PageController();
-  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return BlocBuilder<AccountsBloc, AccountsState>(
-      builder: (context, state) {
-        if (state is AccountSelectedState) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              LavaAnimation(
-                child: SizedBox(
-                  height: 246,
-                  child: PageView.builder(
-                    padEnds: true,
-                    pageSnapping: true,
-                    key: const Key('accounts_page_view'),
-                    controller: _controller,
-                    itemCount: widget.accounts.length,
-                    onPageChanged: (index) {
-                      setState(() {
-                        selectedIndex = index;
-                      });
-                      BlocProvider.of<AccountsBloc>(context)
-                          .add(AccountSelectedEvent(widget.accounts[index]));
-                    },
-                    itemBuilder: (_, index) {
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LavaAnimation(
+          child: SizedBox(
+            height: 246,
+            child: PageView.builder(
+              padEnds: true,
+              pageSnapping: true,
+              key: const Key('accounts_page_view'),
+              controller: _controller,
+              itemCount: widget.accounts.length,
+              onPageChanged: (index) {
+                BlocProvider.of<AccountsBloc>(context)
+                    .add(AccountSelectedEvent(widget.accounts[index]));
+              },
+              itemBuilder: (_, index) {
+                return BlocBuilder<AccountsBloc, AccountsState>(
+                  builder: (context, state) {
+                    if (state is AccountSelectedState) {
                       final Account account = widget.accounts[index];
                       final String expense =
                           state.expenses.totalExpense.toFormateCurrency();
                       final String income =
                           state.expenses.totalIncome.toFormateCurrency();
                       final String totalBalance =
-                          (state.expenses.fullTotal + account.initialAmount)
+                          (account.initialAmount + state.expenses.fullTotal)
                               .toFormateCurrency();
                       return AccountCard(
                         key: ValueKey(account.hashCode),
@@ -90,18 +87,12 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
                             ),
                           ),
                           confirmationButton: TextButton(
-                            style: TextButton.styleFrom(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                            ),
                             onPressed: () {
                               BlocProvider.of<AccountsBloc>(context)
                                   .add(DeleteAccountEvent(account.superId!));
                               Navigator.pop(context);
                             },
-                            child: Text(
-                              context.loc.delete,
-                            ),
+                            child: Text(context.loc.delete),
                           ),
                         ),
                         onTap: () => context.pushNamed(
@@ -111,38 +102,37 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
                           },
                         ),
                       );
-                    },
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                child: _buildPageIndicator(),
-              ),
-            ],
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      },
-    );
-  }
-
-  Widget _buildPageIndicator() => Row(
-        mainAxisSize: MainAxisSize.min,
-        children: List.generate(
-          widget.accounts.length,
-          (index) => GestureDetector(
-            onTap: () => _controller.jumpToPage(index),
-            child: _indicator(
-              index == selectedIndex,
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
+                );
+              },
             ),
           ),
         ),
-      );
+        AccountPageViewDotsIndicator(
+          pageController: _controller,
+          accounts: widget.accounts,
+        ),
+      ],
+    );
+  }
 
-  Widget _indicator(bool isActive) {
+  @override
+  bool get wantKeepAlive => true;
+}
+
+class AccountPageViewDotsIndicator extends StatelessWidget {
+  const AccountPageViewDotsIndicator({
+    super.key,
+    required this.pageController,
+    required this.accounts,
+  });
+  final PageController pageController;
+  final List<Account> accounts;
+
+  Widget _indicator(BuildContext context, bool isActive) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       margin: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -156,5 +146,34 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
   }
 
   @override
-  bool get wantKeepAlive => true;
+  Widget build(BuildContext context) {
+    if (accounts.length == 1) {
+      return const SizedBox.shrink();
+    }
+    return BlocBuilder<AccountsBloc, AccountsState>(
+      builder: (context, state) {
+        if (state is AccountSelectedState) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: List.generate(accounts.length, (index) {
+                return GestureDetector(
+                  onTap: () {
+                    pageController.jumpToPage(index);
+                  },
+                  child: _indicator(
+                    context,
+                    accounts[index] == state.account,
+                  ),
+                );
+              }),
+            ),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
+    );
+  }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../main.dart';
 import '../../../../domain/account/entities/account.dart';
 import '../../bloc/accounts_bloc.dart';
 import '../../widgets/account_summary_widget.dart';
@@ -38,10 +37,8 @@ class AccountsTabletPage extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(
+        const Expanded(
           child: AccountTransactionWidget(
-            accountLocalDataSource: getIt.get(),
-            categoryLocalDataSource: getIt.get(),
             isScroll: true,
           ),
         ),

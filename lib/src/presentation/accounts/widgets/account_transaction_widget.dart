@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../../data/accounts/data_sources/local_account_data_manager.dart';
-import '../../../data/category/data_sources/category_local_data_source.dart';
+import '../../summary/controller/summary_controller.dart';
 import '../../summary/widgets/transactions_header_widget.dart';
 import '../../widgets/paisa_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
@@ -15,13 +12,8 @@ import 'account_history_widget.dart';
 class AccountTransactionWidget extends StatelessWidget {
   const AccountTransactionWidget({
     Key? key,
-    required this.accountLocalDataSource,
-    required this.categoryLocalDataSource,
     this.isScroll = false,
   }) : super(key: key);
-
-  final LocalAccountDataManager accountLocalDataSource;
-  final LocalCategoryDataManager categoryLocalDataSource;
 
   final bool isScroll;
   @override
