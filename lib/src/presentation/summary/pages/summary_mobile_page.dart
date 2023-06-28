@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paisa/src/domain/expense/entities/enhanced_expense.dart';
 
 import '../../../core/common.dart';
 import '../../../domain/expense/entities/expense.dart';
@@ -13,7 +14,7 @@ class SummaryMobilePage extends StatelessWidget {
     required this.expenses,
   });
 
-  final List<Expense> expenses;
+  final List<EnhancedExpense> expenses;
 
   @override
   Widget build(BuildContext context) {

@@ -23,11 +23,13 @@ class SummaryPage extends StatelessWidget {
     return BlocBuilder(
       bloc: cubit,
       builder: (context, state) {
-        return ScreenTypeLayout(
-          mobile: SummaryMobilePage(expenses: expenses),
-          tablet: SummaryTabletPage(expenses: expenses),
-          desktop: SummaryDesktopPage(expenses: expenses),
-        );
+        if (state is SuccessState) {
+          return ScreenTypeLayout(
+            mobile: SummaryMobilePage(expenses: state.expenses),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
       },
     );
   }
