@@ -8,7 +8,7 @@ import '../../../core/enum/box_types.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../widgets/paisa_empty_widget.dart';
-import 'horizontal/account_mobile_horizontal_page.dart';
+import 'horizontal/account_horizontal_page.dart';
 import 'vertical/account_vertical_page.dart';
 
 class AccountsPage extends StatelessWidget {

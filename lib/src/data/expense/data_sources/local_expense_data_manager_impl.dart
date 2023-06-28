@@ -60,16 +60,18 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
       expenseBox.values.firstWhereOrNull((element) => element.key == expenseId);
 
   @override
-  List<ExpenseModel> fetchExpensesFromAccountId(int accountId) =>
-      expenseBox.values
-          .where((element) => element.accountId == accountId)
-          .toList();
+  List<ExpenseModel> fetchExpensesFromAccountId(int accountId) => expenseBox
+      .values
+      .where((element) => element.accountId != -1 && element.categoryId != -1)
+      .where((element) => element.accountId == accountId)
+      .toList();
 
   @override
-  List<ExpenseModel> fetchExpensesFromCategoryId(int category) =>
-      expenseBox.values
-          .where((element) => element.categoryId == category)
-          .toList();
+  List<ExpenseModel> fetchExpensesFromCategoryId(int category) => expenseBox
+      .values
+      .where((element) => element.accountId != -1 && element.categoryId != -1)
+      .where((element) => element.categoryId == category)
+      .toList();
 
   @override
   List<ExpenseModel> filterExpenses(

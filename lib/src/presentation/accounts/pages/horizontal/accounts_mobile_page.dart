@@ -4,8 +4,8 @@ import '../../../../domain/account/entities/account.dart';
 import '../../widgets/account_transaction_widget.dart';
 import '../../widgets/accounts_page_view_widget.dart';
 
-class AccountsMobilePage extends StatelessWidget {
-  const AccountsMobilePage({super.key, required this.accounts});
+class AccountsHorizontalMobilePage extends StatelessWidget {
+  const AccountsHorizontalMobilePage({super.key, required this.accounts});
 
   final List<Account> accounts;
 

@@ -7,8 +7,8 @@ import '../../widgets/account_summary_widget.dart';
 import '../../widgets/account_transaction_widget.dart';
 import '../../widgets/accounts_page_view_widget.dart';
 
-class AccountsTabletPage extends StatelessWidget {
-  const AccountsTabletPage({
+class AccountsHorizontalTabletPage extends StatelessWidget {
+  const AccountsHorizontalTabletPage({
     super.key,
     required this.accounts,
   });

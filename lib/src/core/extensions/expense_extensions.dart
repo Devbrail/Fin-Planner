@@ -10,11 +10,45 @@ import '../enum/filter_expense.dart';
 import '../enum/transaction_type.dart';
 
 extension ExpenseModelBoxMapping on Box<ExpenseModel> {
-  List<Expense> get toEntities {
-    return values
-        .map((expenseModel) => expenseModel.toEntity())
-        .sorted((a, b) => b.time.compareTo(a.time));
-  }
+  Iterable<ExpenseModel> get filterNull => values
+      .where((element) => element.accountId != -1 && element.categoryId != -1);
+
+  List<ExpenseModel> get expenses =>
+      filterNull.sorted(((a, b) => b.time.compareTo(a.time)));
+
+  List<ExpenseModel> expensesFromAccountId(int accountId) =>
+      expenses.where((element) => element.accountId == accountId).toList();
+
+  List<Expense> get toEntities => filterNull
+      .map((expenseModel) => expenseModel.toEntity())
+      .sorted((a, b) => b.time.compareTo(a.time));
+
+  List<ExpenseModel> budgetOverView(OverviewType overviewType) => filterNull
+      .sorted((a, b) => b.time.compareTo(a.time))
+      .where((element) =>
+          element.type ==
+          (overviewType == OverviewType.income
+              ? TransactionType.expense
+              : TransactionType.income))
+      .toList();
+
+  List<ExpenseModel> isFilterTimeBetween(DateTimeRange range) => filterNull
+      .where((element) => element.time.isAfterBeforeTime(range))
+      .toList();
+
+  Iterable<ExpenseModel> get expenseList =>
+      filterNull.where((element) => element.type == TransactionType.expense);
+
+  Iterable<ExpenseModel> get incomeList =>
+      filterNull.where((element) => element.type == TransactionType.income);
+
+  double get totalExpense => expenseList
+      .map((e) => e.currency)
+      .fold<double>(0, (previousValue, element) => previousValue + element);
+
+  double get totalIncome => incomeList
+      .map((e) => e.currency)
+      .fold<double>(0, (previousValue, element) => previousValue + element);
 
   List<Expense> search(
     query, {
@@ -37,39 +71,6 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
           description.toLowerCase().contains(query);
     }).toEntities();
   }
-
-  List<ExpenseModel> get expenses =>
-      values.sorted(((a, b) => b.time.compareTo(a.time)));
-
-  List<ExpenseModel> expensesFromAccountId(int accountId) =>
-      expenses.where((element) => element.accountId == accountId).toList();
-
-  List<ExpenseModel> budgetOverView(OverviewType overviewType) => values
-      .sorted((a, b) => b.time.compareTo(a.time))
-      .where((element) => element.categoryId != -1 && element.accountId != -1)
-      .where((element) =>
-          element.type ==
-          (overviewType == OverviewType.income
-              ? TransactionType.expense
-              : TransactionType.income))
-      .toList();
-
-  List<ExpenseModel> isFilterTimeBetween(DateTimeRange range) =>
-      values.where((element) => element.time.isAfterBeforeTime(range)).toList();
-
-  Iterable<ExpenseModel> get expenseList =>
-      values.where((element) => element.type == TransactionType.expense);
-
-  Iterable<ExpenseModel> get incomeList =>
-      values.where((element) => element.type == TransactionType.income);
-
-  double get totalExpense => expenseList
-      .map((e) => e.currency)
-      .fold<double>(0, (previousValue, element) => previousValue + element);
-
-  double get totalIncome => incomeList
-      .map((e) => e.currency)
-      .fold<double>(0, (previousValue, element) => previousValue + element);
 }
 
 extension ExpenseModelHelper on ExpenseModel {

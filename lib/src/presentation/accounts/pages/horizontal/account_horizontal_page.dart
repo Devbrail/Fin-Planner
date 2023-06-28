@@ -20,8 +20,8 @@ class AccountMobileHorizontalPage extends StatelessWidget {
     BlocProvider.of<AccountsBloc>(context)
         .add(AccountSelectedEvent(accounts.first));
     return ScreenTypeLayout(
-      mobile: AccountsMobilePage(accounts: accounts),
-      tablet: AccountsTabletPage(accounts: accounts),
+      mobile: AccountsHorizontalMobilePage(accounts: accounts),
+      tablet: AccountsHorizontalTabletPage(accounts: accounts),
     );
   }
 }
