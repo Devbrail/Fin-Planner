@@ -15,6 +15,10 @@ class LocalAccountDataManagerImpl implements LocalAccountDataManager {
 
   @override
   List<AccountModel> accounts() => accountBox.values.toList();
+  @override
+  Map<dynamic, AccountModel> accountsMap() {
+    return accountBox.toMap();
+  }
 
   @override
   Future<void> addAccount(AccountModel account) async {

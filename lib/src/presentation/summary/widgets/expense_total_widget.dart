@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/domain/expense/entities/enhanced_expense.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
@@ -16,7 +17,7 @@ class ExpenseTotalWidget extends StatelessWidget {
     required this.expenses,
   }) : super(key: key);
 
-  final List<Expense> expenses;
+  final List<EnhancedExpense> expenses;
 
   @override
   Widget build(BuildContext context) {

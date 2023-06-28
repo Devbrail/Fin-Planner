@@ -31,18 +31,18 @@ class DebtModelAdapter extends TypeAdapter<DebtModel> {
   void write(BinaryWriter writer, DebtModel obj) {
     writer
       ..writeByte(7)
-      ..writeByte(1)
-      ..write(obj.description)
-      ..writeByte(7)
-      ..write(obj.name)
       ..writeByte(2)
       ..write(obj.amount)
       ..writeByte(3)
       ..write(obj.dateTime)
-      ..writeByte(4)
-      ..write(obj.expiryDateTime)
       ..writeByte(5)
       ..write(obj.debtType)
+      ..writeByte(1)
+      ..write(obj.description)
+      ..writeByte(4)
+      ..write(obj.expiryDateTime)
+      ..writeByte(7)
+      ..write(obj.name)
       ..writeByte(6)
       ..write(obj.superId);
   }

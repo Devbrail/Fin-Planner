@@ -20,8 +20,13 @@ class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
   }
 
   @override
-  Future<List<CategoryModel>> categories() async {
+  List<CategoryModel> categories() {
     return categoryBox.values.toList();
+  }
+
+  @override
+  Map<dynamic, CategoryModel> categoriesMap() {
+    return categoryBox.toMap();
   }
 
   @override

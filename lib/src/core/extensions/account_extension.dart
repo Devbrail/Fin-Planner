@@ -18,6 +18,11 @@ extension AccountModelMapping on AccountModel {
       );
 }
 
+extension AccountMapHelper on Map<dynamic, AccountModel> {
+  Map<int, Account> toMap() =>
+      map((key, value) => MapEntry(key, value.toEntity()));
+}
+
 extension AccountModelsMapping on Iterable<AccountModel> {
   List<Map<String, dynamic>> toJson() {
     return map((e) => e.toJson()).toList();

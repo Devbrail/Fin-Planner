@@ -14,6 +14,8 @@ abstract class CategoryRepository {
 
   CategoryModel? fetchCategoryFromId(int categoryId);
 
+  List<CategoryModel> categories();
+
   Future<void> updateCategory({
     required int key,
     required String name,
@@ -25,4 +27,6 @@ abstract class CategoryRepository {
   });
 
   Future<void> clearAll();
+
+  Map<dynamic, CategoryModel> categoriesMap();
 }

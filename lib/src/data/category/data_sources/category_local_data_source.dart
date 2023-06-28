@@ -5,7 +5,7 @@ abstract class LocalCategoryDataManager {
 
   Future<void> deleteCategory(int key);
 
-  Future<List<CategoryModel>> categories();
+  List<CategoryModel> categories();
 
   CategoryModel? fetchCategoryFromId(int categoryId);
 
@@ -16,4 +16,5 @@ abstract class LocalCategoryDataManager {
   Future<void> clearAll();
 
   Future<void> defaultCategories();
+  Map<dynamic, CategoryModel> categoriesMap();
 }

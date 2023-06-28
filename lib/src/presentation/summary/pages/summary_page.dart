@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/summary/cubit/summary_cubit.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
@@ -16,10 +18,11 @@ class SummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box<ExpenseModel>>(
-      valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
-      builder: (_, value, child) {
-        final expenses = value.values.toEntities();
+    final SummaryCubit cubit = getIt.get();
+    cubit.fetchExpenses();
+    return BlocBuilder(
+      bloc: cubit,
+      builder: (context, state) {
         return ScreenTypeLayout(
           mobile: SummaryMobilePage(expenses: expenses),
           tablet: SummaryTabletPage(expenses: expenses),

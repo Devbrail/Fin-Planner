@@ -11,4 +11,6 @@ class GetAccountsUseCase {
   final AccountRepository accountRepository;
 
   List<Account> call() => accountRepository.getAccounts().toEntities();
+
+  Map<int, Account> map() => accountRepository.accountsMap().toMap();
 }

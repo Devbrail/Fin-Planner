@@ -14,7 +14,7 @@ class AccountSummaryWidget extends StatelessWidget {
     this.useAccountsList = false,
   });
 
-  final List<Expense> expenses;
+  final List<EnhancedExpense> expenses;
   final bool useAccountsList;
 
   @override

@@ -13,7 +13,7 @@ class ExpenseHistoryWidget extends StatelessWidget {
     required this.expenses,
   });
 
-  final List<Expense> expenses;
+  final List<EnhancedExpense> expenses;
 
   @override
   Widget build(BuildContext context) {

@@ -37,28 +37,28 @@ class ExpenseModelAdapter extends TypeAdapter<ExpenseModel> {
   void write(BinaryWriter writer, ExpenseModel obj) {
     writer
       ..writeByte(11)
-      ..writeByte(0)
-      ..write(obj.name)
-      ..writeByte(1)
-      ..write(obj.currency)
-      ..writeByte(3)
-      ..write(obj.time)
-      ..writeByte(4)
-      ..write(obj.type)
       ..writeByte(5)
       ..write(obj.accountId)
       ..writeByte(6)
       ..write(obj.categoryId)
-      ..writeByte(7)
-      ..write(obj.superId)
+      ..writeByte(1)
+      ..write(obj.currency)
       ..writeByte(8)
       ..write(obj.description)
       ..writeByte(9)
       ..write(obj.fromAccountId)
+      ..writeByte(0)
+      ..write(obj.name)
+      ..writeByte(7)
+      ..write(obj.superId)
+      ..writeByte(3)
+      ..write(obj.time)
       ..writeByte(10)
       ..write(obj.toAccountId)
       ..writeByte(11)
-      ..write(obj.transferAmount);
+      ..write(obj.transferAmount)
+      ..writeByte(4)
+      ..write(obj.type);
   }
 
   @override

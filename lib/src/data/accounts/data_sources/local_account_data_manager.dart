@@ -14,4 +14,6 @@ abstract class LocalAccountDataManager {
   Future<void> updateAccount(AccountModel accountModel);
 
   Future<void> clearAll();
+
+  Map<dynamic, AccountModel> accountsMap();
 }

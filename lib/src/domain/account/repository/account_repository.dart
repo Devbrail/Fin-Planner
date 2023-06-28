@@ -27,5 +27,7 @@ abstract class AccountRepository {
 
   List<AccountModel> getAccounts();
 
+  Map<dynamic, AccountModel> accountsMap();
+
   Future<void> clearAll();
 }

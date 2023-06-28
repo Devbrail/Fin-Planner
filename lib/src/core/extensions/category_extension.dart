@@ -16,6 +16,11 @@ extension CategoryModelHelper on CategoryModel {
       );
 }
 
+extension CategoryMapHelper on Map<dynamic, CategoryModel> {
+  Map<int, Category> toMap() =>
+      map((key, value) => MapEntry(key, value.toEntity()));
+}
+
 extension CategoryModelsHelper on Iterable<CategoryModel> {
   List<Map<String, dynamic>> toJson() {
     return map((e) => e.toJson()).toList();

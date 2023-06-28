@@ -65,4 +65,9 @@ class AccountRepositoryImpl extends AccountRepository {
       ),
     );
   }
+
+  @override
+  Map<dynamic, AccountModel> accountsMap() {
+    return dataSource.accountsMap();
+  }
 }
