@@ -184,11 +184,12 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     emit(ExpenseDeletedState());
   }
 
-  void _changeExpense(
+  Future<void> _changeExpense(
     ChangeExpenseEvent event,
     Emitter<ExpenseState> emit,
-  ) {
-    accountsUseCase(NoParams()).fold(
+  ) async {
+    final failureOrAccounts = await accountsUseCase(NoParams());
+    failureOrAccounts.fold(
       (failure) {
         //No accounts state emit
       },

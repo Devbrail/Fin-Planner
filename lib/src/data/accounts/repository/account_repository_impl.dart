@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/error/exceptions.dart';
-import 'package:paisa/src/core/error/failures.dart';
 
 import '../../../core/enum/card_type.dart';
+import '../../../core/error/exceptions.dart';
+import '../../../core/error/failures.dart';
 import '../../../domain/account/repository/account_repository.dart';
 import '../data_sources/account_local_data_source.dart';
 import '../model/account_model.dart';
@@ -15,38 +15,60 @@ class AccountRepositoryImpl extends AccountRepository {
   final AccountLocalDataSource dataSource;
 
   @override
-  Future<void> addAccount({
+  Future<Either<Failure, void>> add({
     required String bankName,
     required String holderName,
     required String number,
     required CardType cardType,
     required double amount,
     required int color,
-  }) {
-    return dataSource.addAccount(AccountModel(
-      name: holderName,
-      bankName: bankName,
-      number: number,
-      cardType: cardType,
-      amount: amount,
-      color: color,
-    ));
+  }) async {
+    try {
+      return Right(
+        dataSource.add(
+          AccountModel(
+            name: holderName,
+            bankName: bankName,
+            number: number,
+            cardType: cardType,
+            amount: amount,
+            color: color,
+          ),
+        ),
+      );
+    } on NotableToAddException {
+      return Left(NotableToAddFailure());
+    }
   }
 
   @override
-  Future<void> clearAll() => dataSource.clearAll();
+  Future<Either<Failure, int>> clear() async {
+    try {
+      final int result = await dataSource.clear();
+      return Right(result);
+    } on NotableToClearException {
+      return Left(NotableToClearFailure());
+    }
+  }
 
   @override
-  Future<void> deleteAccount(int key) => dataSource.deleteAccount(key);
-
-  @override
-  AccountModel? fetchAccountFromId(int accountId) =>
-      dataSource.fetchAccountFromId(accountId);
+  Either<Failure, AccountModel> find(int accountId) {
+    try {
+      final AccountModel? accountModel = dataSource.find(accountId);
+      if (accountModel == null) {
+        return Left(NotableToClearFailure());
+      } else {
+        return Right(accountModel);
+      }
+    } on NotableToClearException {
+      return Left(NotableToClearFailure());
+    }
+  }
 
   @override
   Either<Failure, Iterable<AccountModel>> accounts() {
     try {
-      final accounts = dataSource.accounts();
+      final accounts = dataSource.all();
       if (accounts.isNotEmpty) {
         return Right(accounts);
       } else {
@@ -58,25 +80,37 @@ class AccountRepositoryImpl extends AccountRepository {
   }
 
   @override
-  Future<void> updateAccount({
-    required int key,
-    required String bankName,
-    required String holderName,
-    required String number,
-    required CardType cardType,
-    required double amount,
-    required int color,
-  }) {
-    return dataSource.updateAccount(
-      AccountModel(
-        name: holderName,
-        bankName: bankName,
-        number: number,
-        cardType: cardType,
-        amount: amount,
-        superId: key,
-        color: color,
-      ),
-    );
+  Future<Either<Failure, void>> delete(int key) async {
+    try {
+      return Right(dataSource.delete(key));
+    } on NotableToDeleteException {
+      return Left(NotableToClearFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> update(
+      {required int key,
+      required String bankName,
+      required String holderName,
+      required String number,
+      required CardType cardType,
+      required double amount,
+      required int color}) async {
+    try {
+      return Right(dataSource.update(
+        AccountModel(
+          name: holderName,
+          bankName: bankName,
+          number: number,
+          cardType: cardType,
+          amount: amount,
+          superId: key,
+          color: color,
+        ),
+      ));
+    } on NotableToDeleteException {
+      return Left(NotableToAddFailure());
+    }
   }
 }

@@ -76,3 +76,12 @@ class AccountColorSelectedEvent extends AccountsEvent {
   @override
   List<Object> get props => [accountColor];
 }
+
+class AddAccountEvent extends AccountsEvent {
+  const AddAccountEvent(this.account);
+
+  final Account account;
+
+  @override
+  List<Object> get props => [account];
+}

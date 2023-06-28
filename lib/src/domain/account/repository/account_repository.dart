@@ -5,7 +5,7 @@ import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account_model.dart';
 
 abstract class AccountRepository {
-  Future<void> addAccount({
+  Future<Either<Failure, void>> add({
     required String bankName,
     required String holderName,
     required String number,
@@ -14,7 +14,7 @@ abstract class AccountRepository {
     required int color,
   });
 
-  Future<void> updateAccount({
+  Future<Either<Failure, void>> update({
     required int key,
     required String bankName,
     required String holderName,
@@ -24,11 +24,11 @@ abstract class AccountRepository {
     required int color,
   });
 
-  Future<void> deleteAccount(int key);
+  Future<Either<Failure, void>> delete(int key);
 
-  AccountModel? fetchAccountFromId(int accountId);
+  Either<Failure, AccountModel> find(int accountId);
 
   Either<Failure, Iterable<AccountModel>> accounts();
 
-  Future<void> clearAll();
+  Future<Either<Failure, int>> clear();
 }

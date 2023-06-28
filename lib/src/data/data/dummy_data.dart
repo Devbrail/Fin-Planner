@@ -9,7 +9,7 @@ import 'package:paisa/src/domain/category/repository/category_repository.dart';
 import 'package:paisa/src/domain/expense/repository/expense_repository.dart';
 
 // Generate dummy data
-Future<void> addDummyData() async {
+/* Future<void> addDummyData() async {
   final AccountRepository accRepo = getIt.get();
   final CategoryRepository catRepo = getIt.get();
   final ExpenseRepository expRepo = getIt.get();
@@ -44,3 +44,4 @@ Future<void> addDummyData() async {
     }
   }
 }
+ */

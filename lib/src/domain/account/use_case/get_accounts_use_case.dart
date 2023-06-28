@@ -14,7 +14,7 @@ class GetAccountsUseCase implements UseCase<List<Account>, NoParams> {
   final AccountRepository accountRepository;
 
   @override
-  Either<Failure, List<Account>> call(NoParams params) {
+  Future<Either<Failure, List<Account>>> call(NoParams params) async {
     return accountRepository.accounts().map((r) => r.toEntities());
   }
 }

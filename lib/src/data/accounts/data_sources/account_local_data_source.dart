@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 
@@ -6,23 +5,10 @@ import '../../../core/error/exceptions.dart';
 import '../../interface/result.dart';
 import '../model/account_model.dart';
 
-abstract class AccountLocalDataSource {
-  Future<void> addAccount(AccountModel account);
-
-  Future<void> deleteAccount(int key);
-
-  Iterable<AccountModel> accounts();
-
-  AccountModel? fetchAccountFromId(int accountId);
-
-  Future<void> updateAccount(AccountModel accountModel);
-
-  Future<void> clearAll();
-}
+abstract class AccountLocalDataSource implements Result<AccountModel> {}
 
 @Singleton(as: AccountLocalDataSource)
-class AccountLocalDataSourceImpl
-    implements AccountLocalDataSource, Result<AccountModel> {
+class AccountLocalDataSourceImpl implements AccountLocalDataSource {
   AccountLocalDataSourceImpl({
     required this.accountBox,
   });
@@ -30,7 +16,18 @@ class AccountLocalDataSourceImpl
   final Box<AccountModel> accountBox;
 
   @override
-  Iterable<AccountModel> accounts() {
+  Future<void> add(AccountModel data) async {
+    try {
+      final int id = await accountBox.add(data);
+      data.superId = id;
+      return data.save();
+    } catch (er) {
+      throw NotableToAddException();
+    }
+  }
+
+  @override
+  Iterable<AccountModel> all() {
     final accounts = accountBox.values;
     if (accounts.isNotEmpty) {
       return accounts;
@@ -40,43 +37,16 @@ class AccountLocalDataSourceImpl
   }
 
   @override
-  Future<void> add(AccountModel data) async {
-    final int id = await accountBox.add(data);
-    data.superId = id;
-    return data.save();
-  }
-
-  @override
-  Future<void> addAccount(AccountModel account) async {
-    final int id = await accountBox.add(account);
-    account.superId = id;
-    return account.save();
-  }
-
-  @override
-  Iterable<AccountModel> all() {
-    return accountBox.values;
-  }
-
-  @override
-  Future<void> clearAll() => accountBox.clear();
-
-  @override
   Future<void> delete(int id) {
-    return accountBox.delete(id);
+    try {
+      return accountBox.delete(id);
+    } catch (er) {
+      throw NotableToDeleteException(er);
+    }
   }
 
   @override
-  Future<void> deleteAccount(int key) async => accountBox.delete(key);
-
-  @override
-  AccountModel? fetchAccountFromId(int accountId) {
-    return accountBox.values
-        .firstWhereOrNull((element) => element.superId == accountId);
-  }
-
-  @override
-  AccountModel? single(int id) {
+  AccountModel? find(int id) {
     return accountBox.get(id);
   }
 
@@ -86,7 +56,11 @@ class AccountLocalDataSourceImpl
   }
 
   @override
-  Future<void> updateAccount(AccountModel accountModel) {
-    return accountBox.put(accountModel.superId!, accountModel);
+  Future<int> clear() {
+    try {
+      return accountBox.clear();
+    } catch (er) {
+      throw NotableToDeleteException(er);
+    }
   }
 }

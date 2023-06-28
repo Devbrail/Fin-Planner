@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -9,11 +10,12 @@ import '../../../../../main.dart';
 import '../../../../app/routes.dart';
 import '../../../../core/common.dart';
 import '../../../../data/accounts/data_sources/default_account.dart';
-import '../../../../data/accounts/data_sources/account_local_data_source.dart';
 import '../../../../data/accounts/model/account_model.dart';
+import '../../../../domain/account/entities/account.dart';
 import '../../../settings/bloc/settings_controller.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_card.dart';
+import '../../bloc/accounts_bloc.dart';
 
 class AccountSelectorPage extends StatefulWidget {
   const AccountSelectorPage({super.key});
@@ -23,7 +25,6 @@ class AccountSelectorPage extends StatefulWidget {
 }
 
 class _AccountSelectorPageState extends State<AccountSelectorPage> {
-  final AccountLocalDataSource dataSource = getIt.get();
   final List<AccountModel> defaultModels = defaultAccountsData();
   final SettingsController settings = getIt.get<SettingsController>();
 
@@ -106,47 +107,67 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Wrap(
-                  spacing: 12.0,
-                  runSpacing: 12.0,
-                  children: defaultModels
-                      .map((model) => FilterChip(
-                            onSelected: (value) {
-                              dataSource.addAccount(model
-                                ..name = settings.get(
-                                  userNameKey,
-                                  defaultValue: model.name,
-                                ));
-                              setState(() {
-                                defaultModels.remove(model);
-                              });
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(28),
-                              side: BorderSide(
-                                width: 1,
-                                color: context.primary,
-                              ),
-                            ),
-                            showCheckmark: false,
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                            label: Text(model.bankName),
-                            labelStyle: context.titleMedium,
-                            padding: const EdgeInsets.all(12),
-                            avatar: Icon(
-                              model.cardType!.icon,
-                              color: context.primary,
-                            ),
-                          ))
-                      .toList(),
-                ),
-              ),
+              AccountChips(models: defaultModels)
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class AccountChips extends StatefulWidget {
+  const AccountChips({
+    super.key,
+    required this.models,
+  });
+  final List<AccountModel> models;
+
+  @override
+  State<AccountChips> createState() => _AccountChipsState();
+}
+
+class _AccountChipsState extends State<AccountChips> {
+  late AccountsBloc accountsBloc = BlocProvider.of<AccountsBloc>(context);
+  final SettingsController settings = getIt.get<SettingsController>();
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Wrap(
+        spacing: 12.0,
+        runSpacing: 12.0,
+        children: widget.models
+            .map((model) => FilterChip(
+                  onSelected: (value) {
+                    final String name = settings.get(
+                      userNameKey,
+                      defaultValue: model.name,
+                    );
+                    final Account account = (model..name = name).toEntity();
+                    accountsBloc.add(AddAccountEvent(account));
+                    setState(() {
+                      widget.models.remove(model);
+                    });
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(28),
+                    side: BorderSide(
+                      width: 1,
+                      color: context.primary,
+                    ),
+                  ),
+                  showCheckmark: false,
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  label: Text(model.bankName),
+                  labelStyle: context.titleMedium,
+                  padding: const EdgeInsets.all(12),
+                  avatar: Icon(
+                    model.cardType!.icon,
+                    color: context.primary,
+                  ),
+                ))
+            .toList(),
       ),
     );
   }

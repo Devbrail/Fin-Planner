@@ -61,20 +61,21 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final int? accountId = int.tryParse(event.accountId ?? '');
     if (accountId == null) return;
 
-    final Account? account = getAccountUseCase(accountId);
-    if (account != null) {
-      accountName = account.bankName;
-      accountHolderName = account.name;
-      accountNumber = account.number;
-      selectedType = account.cardType ?? CardType.cash;
-      initialAmount = account.amount;
-      currentAccount = account;
-      selectedColor = account.color ?? Colors.brown.shade100.value;
-      emit(AccountSuccessState(account));
-      emit(UpdateCardTypeState(selectedType));
-    } else {
-      emit(const AccountErrorState('Account not found!'));
-    }
+    final failureOrAccount = await getAccountUseCase(AccountParam(accountId));
+    failureOrAccount.fold(
+      (failure) => emit(const AccountErrorState('Account not found!')),
+      (account) {
+        accountName = account.bankName;
+        accountHolderName = account.name;
+        accountNumber = account.number;
+        selectedType = account.cardType ?? CardType.cash;
+        initialAmount = account.amount;
+        currentAccount = account;
+        selectedColor = account.color ?? Colors.brown.shade100.value;
+        emit(AccountSuccessState(account));
+        emit(UpdateCardTypeState(selectedType));
+      },
+    );
   }
 
   Future<void> _addAccount(
@@ -99,12 +100,14 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
     if (event.isAdding) {
       await addAccountUseCase(
-        bankName: bankName,
-        holderName: holderName,
-        number: number ?? '',
-        cardType: cardType,
-        amount: amount ?? 0,
-        color: color,
+        AddAccountParams(
+          bankName: bankName,
+          holderName: holderName,
+          number: number ?? '',
+          cardType: cardType,
+          amount: amount ?? 0,
+          color: color,
+        ),
       );
     } else {
       if (currentAccount == null) return;
@@ -116,7 +119,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
         ..amount = amount
         ..color = color;
 
-      await updateAccountUseCase(account: currentAccount!);
+      await updateAccountUseCase(currentAccount!);
     }
     emit(AccountAddedState(isAddOrUpdate: event.isAdding));
   }
@@ -126,7 +129,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     Emitter<AccountsState> emit,
   ) async {
     await deleteExpensesFromAccountIdUseCase(event.accountId);
-    await deleteAccountUseCase(event.accountId);
+    await deleteAccountUseCase(DeleteAccountParam(event.accountId));
     emit(AccountDeletedState());
   }
 
@@ -172,11 +175,12 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     if (accountId == null) {
       return;
     }
-
-    final Account? account = getAccountUseCase(accountId);
+    final failureOrAccount = await getAccountUseCase(AccountParam(accountId));
     final List<Expense> expenses = getExpensesFromAccountIdUseCase(accountId);
-    if (account != null) {
-      emit(AccountAndExpensesState(account, expenses));
-    }
+
+    failureOrAccount.fold(
+      (l) => null,
+      (account) => emit(AccountAndExpensesState(account, expenses)),
+    );
   }
 }

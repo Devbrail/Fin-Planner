@@ -1,28 +1,44 @@
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/enum/card_type.dart';
+import '../../../core/error/failures.dart';
+import '../../../core/use_case/use_case.dart';
 import '../repository/account_repository.dart';
 
 @singleton
-class AddAccountUseCase {
+class AddAccountUseCase extends UseCase<void, AddAccountParams> {
   AddAccountUseCase({required this.accountRepository});
 
   final AccountRepository accountRepository;
 
-  Future<void> call({
-    required String bankName,
-    required String holderName,
-    required String number,
-    required CardType cardType,
-    required double amount,
-    required int color,
-  }) =>
-      accountRepository.addAccount(
-        bankName: bankName,
-        holderName: holderName,
-        number: number,
-        cardType: cardType,
-        amount: amount,
-        color: color,
-      );
+  @override
+  Future<Either<Failure, void>> call(AddAccountParams params) {
+    return accountRepository.add(
+      bankName: params.bankName,
+      holderName: params.holderName,
+      number: params.number,
+      cardType: params.cardType,
+      amount: params.amount,
+      color: params.color,
+    );
+  }
+}
+
+class AddAccountParams {
+  final String bankName;
+  final String holderName;
+  final String number;
+  final CardType cardType;
+  final double amount;
+  final int color;
+
+  AddAccountParams({
+    required this.bankName,
+    required this.holderName,
+    required this.number,
+    required this.cardType,
+    required this.amount,
+    required this.color,
+  });
 }

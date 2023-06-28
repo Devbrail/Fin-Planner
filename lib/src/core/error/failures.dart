@@ -13,3 +13,13 @@ class NoFoundFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+class NotableToAddFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+class NotableToClearFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}

@@ -43,10 +43,10 @@ class FileHandler {
 
     await localExpenseDataManager.clearAll();
     await localCategoryDataManager.clearAll();
-    await localAccountDataManager.clearAll();
+    await localAccountDataManager.clear();
 
     for (var element in data.accounts) {
-      await localAccountDataManager.updateAccount(element);
+      await localAccountDataManager.update(element);
     }
 
     for (var element in data.categories) {
@@ -101,7 +101,7 @@ class FileHandler {
     final Iterable<ExpenseModel> expenses = expenseDataStore.exportData();
 
     final accountDataStore = getIt.get<AccountLocalDataSource>();
-    final Iterable<AccountModel> accounts = accountDataStore.accounts();
+    final Iterable<AccountModel> accounts = accountDataStore.all();
 
     final categoryDataStore = getIt.get<LocalCategoryDataManager>();
     final Iterable<CategoryModel> categories = categoryDataStore.exportData();
@@ -143,8 +143,7 @@ class FileHandler {
           expenses.length,
           (index) {
             final expense = expenses[index];
-            final account =
-                accountDataSource.fetchAccountFromId(expense.accountId);
+            final account = accountDataSource.find(expense.accountId);
             final category =
                 categoryDataSource.fetchCategoryFromId(expense.categoryId);
             if (account != null && category != null) {
