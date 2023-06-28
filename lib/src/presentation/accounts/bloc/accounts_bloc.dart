@@ -177,7 +177,6 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     }
     final failureOrAccount = await getAccountUseCase(AccountParam(accountId));
     final List<Expense> expenses = getExpensesFromAccountIdUseCase(accountId);
-
     failureOrAccount.fold(
       (l) => null,
       (account) => emit(AccountAndExpensesState(account, expenses)),

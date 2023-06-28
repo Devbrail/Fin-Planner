@@ -113,7 +113,7 @@ List<List<String>> csvDataList(
       expenses.length,
       (index) {
         final expense = expenses[index];
-        final account = accountDataSource.fetchAccountFromId(expense.accountId);
+        final account = accountDataSource.find(expense.accountId);
         final category =
             categoryDataSource.fetchCategoryFromId(expense.categoryId);
         return expenseRow(
