@@ -32,17 +32,19 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   }
 
   final AddCategoryUseCase addCategoryUseCase;
+  final DeleteCategoryUseCase deleteCategoryUseCase;
+  final DeleteExpensesFromCategoryIdUseCase deleteExpensesFromCategoryIdUseCase;
+  final GetCategoryUseCase getCategoryUseCase;
+  final UpdateCategoryUseCase updateCategoryUseCase;
+
   double? categoryBudget;
   String? categoryDesc;
   String? categoryTitle;
   Category? currentCategory;
-  final DeleteCategoryUseCase deleteCategoryUseCase;
-  final DeleteExpensesFromCategoryIdUseCase deleteExpensesFromCategoryIdUseCase;
-  final GetCategoryUseCase getCategoryUseCase;
   bool isBudgetSet = false;
+  bool isDefault = false;
   int? selectedColor;
   int? selectedIcon;
-  final UpdateCategoryUseCase updateCategoryUseCase;
 
   Future<void> _fetchCategoryFromId(
     FetchCategoryFromIdEvent event,
@@ -92,6 +94,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         budget: budget ?? 0,
         isBudget: setBudget,
         color: color,
+        isDefault: isDefault,
       );
     } else {
       if (currentCategory == null) return;
@@ -102,6 +105,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         ..icon = icon
         ..isBudget = setBudget
         ..color = color
+        ..isDefault = isDefault
         ..name = title;
 
       await updateCategoryUseCase(currentCategory!);

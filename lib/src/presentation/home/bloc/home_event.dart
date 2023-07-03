@@ -16,3 +16,5 @@ class CurrentIndexEvent extends HomeEvent {
   @override
   List<Object?> get props => [currentPage];
 }
+
+class FixExpensesEvent extends HomeEvent {}

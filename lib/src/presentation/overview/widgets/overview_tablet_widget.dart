@@ -5,7 +5,7 @@ import '../../summary/controller/summary_controller.dart';
 import '../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../widgets/paisa_pill_chip.dart';
 import '../cubit/budget_cubit.dart';
-import '../pages/overview_page.dart';
+import 'category_transaction_filter_widget.dart';
 
 class OverviewTablet extends StatelessWidget {
   const OverviewTablet({
@@ -22,8 +22,7 @@ class OverviewTablet extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: BlocBuilder(
-            bloc: budgetCubit,
+          child: BlocBuilder<BudgetCubit, BudgetState>(
             buildWhen: (previous, current) => current is InitialSelectedState,
             builder: (context, state) {
               if (state is InitialSelectedState) {
@@ -63,7 +62,7 @@ class OverviewTablet extends StatelessWidget {
             },
           ),
         ),
-        TransactionTypeSegmentedWidget(summaryController: summaryController),
+        CategoryTransactionFilterWidget(summaryController: summaryController),
       ],
     );
   }

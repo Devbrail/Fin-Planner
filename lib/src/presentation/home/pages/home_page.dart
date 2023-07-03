@@ -14,6 +14,44 @@ import 'home_desktop_page.dart';
 import 'home_mobile_page.dart';
 import 'home_tablet_page.dart';
 
+final destinations = [
+  Destination(
+    pageType: PageType.home,
+    icon: const Icon(Icons.home_outlined),
+    selectedIcon: const Icon(Icons.home),
+  ),
+  Destination(
+    pageType: PageType.accounts,
+    icon: const Icon(Icons.credit_card_outlined),
+    selectedIcon: const Icon(Icons.credit_card),
+  ),
+  Destination(
+    pageType: PageType.debts,
+    icon: const Icon(MdiIcons.accountCashOutline),
+    selectedIcon: const Icon(MdiIcons.accountCash),
+  ),
+  Destination(
+    pageType: PageType.overview,
+    icon: const Icon(MdiIcons.sortVariant),
+    selectedIcon: const Icon(MdiIcons.sortVariant),
+  ),
+  Destination(
+    pageType: PageType.category,
+    icon: const Icon(Icons.category_outlined),
+    selectedIcon: const Icon(Icons.category),
+  ),
+  Destination(
+    pageType: PageType.budget,
+    icon: const Icon(MdiIcons.timetable),
+    selectedIcon: const Icon(MdiIcons.timetable),
+  ),
+  Destination(
+    pageType: PageType.recurring,
+    icon: const Icon(MdiIcons.cashSync),
+    selectedIcon: const Icon(MdiIcons.cashSync),
+  ),
+];
+
 class LandingPage extends StatelessWidget {
   const LandingPage({
     Key? key,
@@ -22,43 +60,7 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
-    final destinations = [
-      Destination(
-        label: context.loc.home,
-        icon: const Icon(Icons.home_outlined),
-        selectedIcon: const Icon(Icons.home),
-      ),
-      Destination(
-        label: context.loc.accounts,
-        icon: const Icon(Icons.credit_card_outlined),
-        selectedIcon: const Icon(Icons.credit_card),
-      ),
-      Destination(
-        label: context.loc.debts,
-        icon: const Icon(MdiIcons.accountCashOutline),
-        selectedIcon: const Icon(MdiIcons.accountCash),
-      ),
-      Destination(
-        label: context.loc.overview,
-        icon: const Icon(MdiIcons.sortVariant),
-        selectedIcon: const Icon(MdiIcons.sortVariant),
-      ),
-      Destination(
-        label: context.loc.categories,
-        icon: const Icon(Icons.category_outlined),
-        selectedIcon: const Icon(Icons.category),
-      ),
-      Destination(
-        label: context.loc.budget,
-        icon: const Icon(MdiIcons.timetable),
-        selectedIcon: const Icon(MdiIcons.timetable),
-      ),
-      Destination(
-        label: context.loc.recurring,
-        icon: const Icon(MdiIcons.cashSync),
-        selectedIcon: const Icon(MdiIcons.cashSync),
-      ),
-    ];
+
     final actionButton = HomeFloatingActionButtonWidget(
       summaryController: getIt.get(),
       settings: getIt.get<Box<dynamic>>(
@@ -68,26 +70,42 @@ class LandingPage extends StatelessWidget {
     return PaisaAnnotatedRegionWidget(
       child: BlocProvider(
         create: (context) => homeBloc,
-        child: WillPopScope(
-          onWillPop: () async {
-            if (homeBloc.selectedIndex == 0) {
-              return true;
+        child: BlocListener(
+          bloc: homeBloc,
+          listener: (context, state) {
+            if (state is ShowFixDialogState) {
+              context.showMaterialSnackBar(
+                'Fix transfer transactions not showing',
+                action: SnackBarAction(
+                  label: context.loc.ok,
+                  onPressed: () {
+                    homeBloc.add(FixExpensesEvent());
+                  },
+                ),
+              );
             }
-            homeBloc.add(const CurrentIndexEvent(0));
-            return false;
           },
-          child: ScreenTypeLayout(
-            mobile: HomeMobilePage(
-              floatingActionButton: actionButton,
-              destinations: destinations,
-            ),
-            tablet: HomeTabletPage(
-              floatingActionButton: actionButton,
-              destinations: destinations,
-            ),
-            desktop: HomeDesktopPage(
-              floatingActionButton: actionButton,
-              destinations: destinations,
+          child: WillPopScope(
+            onWillPop: () async {
+              if (homeBloc.selectedIndex == 0) {
+                return true;
+              }
+              homeBloc.add(const CurrentIndexEvent(0));
+              return false;
+            },
+            child: ScreenTypeLayout(
+              mobile: HomeMobilePage(
+                floatingActionButton: actionButton,
+                destinations: destinations,
+              ),
+              tablet: HomeTabletPage(
+                floatingActionButton: actionButton,
+                destinations: destinations,
+              ),
+              desktop: HomeDesktopPage(
+                floatingActionButton: actionButton,
+                destinations: destinations,
+              ),
             ),
           ),
         ),
@@ -98,12 +116,12 @@ class LandingPage extends StatelessWidget {
 
 class Destination {
   Destination({
-    required this.label,
+    required this.pageType,
     required this.icon,
     required this.selectedIcon,
   });
 
   final Icon icon;
-  final String label;
+  final PageType pageType;
   final Icon selectedIcon;
 }

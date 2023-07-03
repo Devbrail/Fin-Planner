@@ -5,6 +5,7 @@ import 'package:paisa/src/core/common.dart';
 import '../../../../main.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../domain/account/entities/account.dart';
+import '../../widgets/paisa_card.dart';
 
 class PillsAccountWidget extends StatefulWidget {
   const PillsAccountWidget({
@@ -27,33 +28,35 @@ class _PillsAccountWidgetState extends State<PillsAccountWidget> {
       valueListenable: getIt.get<Box<AccountModel>>().listenable(),
       builder: (context, value, child) {
         final accounts = value.values.toEntities();
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Wrap(
-            spacing: 4.0,
-            runSpacing: 8.0,
-            children: List.generate(
-              accounts.length,
-              (index) {
-                final Account account = accounts[index];
-                return PaisaFilterChip(
-                  title: account.bankName,
-                  onPressed: () {
-                    setState(() {
-                      if (selectedAccount == account.superId) {
-                        selectedAccount = -1;
-                      } else {
-                        selectedAccount = account.superId ?? -1;
-                      }
-                      widget.accountSelected(account);
-                    });
-                  },
-                  isSelected: account.superId == selectedAccount,
-                  icon: account.cardType!.icon.codePoint,
-                );
-              },
-            ),
+
+        return GridView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 16 / 5,
           ),
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: accounts.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            final Account account = accounts[index];
+            return PaisaFilterChip(
+              color: Color(account.color ?? Colors.brown.shade200.value),
+              onPressed: () {
+                setState(() {
+                  if (selectedAccount == account.superId) {
+                    selectedAccount = -1;
+                  } else {
+                    selectedAccount = account.superId ?? -1;
+                  }
+                  widget.accountSelected(account);
+                });
+              },
+              isSelected: account.superId == selectedAccount,
+              icon: account.cardType!.icon,
+              title: account.bankName,
+            );
+          },
         );
       },
     );
@@ -67,43 +70,41 @@ class PaisaFilterChip extends StatelessWidget {
     required this.onPressed,
     required this.isSelected,
     required this.icon,
+    required this.color,
   });
 
-  final int icon;
+  final IconData icon;
   final bool isSelected;
   final VoidCallback onPressed;
   final String title;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8),
-      child: FilterChip(
-        selected: isSelected,
-        onSelected: (value) {
-          onPressed.call();
-        },
-        avatar: Icon(
-          color: isSelected ? context.primary : context.onSurfaceVariant,
-          IconData(
+    return PaisaFilledCard(
+      color: color.withOpacity(0.2),
+      child: Container(
+        decoration: isSelected
+            ? BoxDecoration(
+                border: Border.all(
+                  color: color,
+                ),
+                borderRadius: BorderRadius.circular(50),
+              )
+            : null,
+        child: ListTile(
+          onTap: onPressed,
+          title: Text(
+            title,
+            style: context.titleSmall?.copyWith(
+              color: color,
+            ),
+          ),
+          leading: Icon(
             icon,
-            fontFamily: fontFamilyName,
-            fontPackage: fontFamilyPackageName,
+            color: color,
           ),
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(28),
-          side: BorderSide(
-            width: 1,
-            color: context.primary,
-          ),
-        ),
-        showCheckmark: false,
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        label: Text(title),
-        labelStyle: context.titleMedium?.copyWith(
-            color: isSelected ? context.primary : context.onSurfaceVariant),
-        padding: const EdgeInsets.all(12),
       ),
     );
   }

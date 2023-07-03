@@ -11,8 +11,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../main.dart';
+import '../../app/routes.dart';
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
+import '../../presentation/home/bloc/home_bloc.dart';
 import '../accounts/data_sources/local_account_data_manager.dart';
 import '../accounts/model/account_model.dart';
 import '../category/data_sources/category_local_data_source.dart';
@@ -42,7 +44,7 @@ class FileHandler {
     final LocalExpenseDataManager localExpenseDataManager = getIt.get();
 
     await localExpenseDataManager.clearAll();
-    await localCategoryDataManager.clearAll();
+    await localCategoryDataManager.clear();
     await localAccountDataManager.clearAll();
 
     for (var element in data.accounts) {
@@ -50,13 +52,13 @@ class FileHandler {
     }
 
     for (var element in data.categories) {
-      await localCategoryDataManager.updateCategory(element);
+      await localCategoryDataManager.update(element);
     }
 
     for (var element in data.expenses) {
       await localExpenseDataManager.updateExpense(element);
     }
-
+    settings.put(expenseFixKey, true);
     return;
   }
 
@@ -104,7 +106,7 @@ class FileHandler {
     final Iterable<AccountModel> accounts = accountDataStore.exportData();
 
     final categoryDataStore = getIt.get<LocalCategoryDataManager>();
-    final Iterable<CategoryModel> categories = categoryDataStore.exportData();
+    final Iterable<CategoryModel> categories = categoryDataStore.export();
 
     final data = {
       'expenses': expenses.toJson(),
@@ -145,8 +147,7 @@ class FileHandler {
             final expense = expenses[index];
             final account =
                 accountDataSource.fetchAccountFromId(expense.accountId);
-            final category =
-                categoryDataSource.fetchCategoryFromId(expense.categoryId);
+            final category = categoryDataSource.findById(expense.categoryId);
             if (account != null && category != null) {
               return expenseRow(
                 index,

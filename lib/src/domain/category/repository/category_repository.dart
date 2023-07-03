@@ -8,6 +8,7 @@ abstract class CategoryRepository {
     String? desc,
     double? budget = -1,
     bool isBudget = false,
+    bool isDefault = false,
   });
 
   Future<void> deleteCategory(int key);
@@ -25,4 +26,6 @@ abstract class CategoryRepository {
   });
 
   Future<void> clearAll();
+
+  List<CategoryModel> defaultCategories();
 }

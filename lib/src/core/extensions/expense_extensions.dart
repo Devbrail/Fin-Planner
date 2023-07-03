@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/overview/pages/overview_page.dart';
 
 import '../../data/expense/model/expense_model.dart';
 import '../../domain/expense/entities/expense.dart';
@@ -10,37 +9,24 @@ import '../enum/filter_expense.dart';
 import '../enum/transaction_type.dart';
 
 extension ExpenseModelBoxMapping on Box<ExpenseModel> {
-  Iterable<ExpenseModel> get filterNull => values
-      .where((element) => element.accountId != -1 && element.categoryId != -1);
-
   List<ExpenseModel> get expenses =>
-      filterNull.sorted(((a, b) => b.time.compareTo(a.time)));
+      values.sorted(((a, b) => b.time.compareTo(a.time)));
 
   List<ExpenseModel> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
 
-  List<Expense> get toEntities => filterNull
+  List<Expense> get toEntities => values
       .map((expenseModel) => expenseModel.toEntity())
       .sorted((a, b) => b.time.compareTo(a.time));
 
-  List<ExpenseModel> budgetOverView(OverviewType overviewType) => filterNull
-      .sorted((a, b) => b.time.compareTo(a.time))
-      .where((element) =>
-          element.type ==
-          (overviewType == OverviewType.income
-              ? TransactionType.expense
-              : TransactionType.income))
-      .toList();
-
-  List<ExpenseModel> isFilterTimeBetween(DateTimeRange range) => filterNull
-      .where((element) => element.time.isAfterBeforeTime(range))
-      .toList();
+  List<ExpenseModel> isFilterTimeBetween(DateTimeRange range) =>
+      values.where((element) => element.time.isAfterBeforeTime(range)).toList();
 
   Iterable<ExpenseModel> get expenseList =>
-      filterNull.where((element) => element.type == TransactionType.expense);
+      values.where((element) => element.type == TransactionType.expense);
 
   Iterable<ExpenseModel> get incomeList =>
-      filterNull.where((element) => element.type == TransactionType.income);
+      values.where((element) => element.type == TransactionType.income);
 
   double get totalExpense => expenseList
       .map((e) => e.currency)
@@ -99,16 +85,10 @@ extension ExpenseModelsHelper on Iterable<ExpenseModel> {
         .sorted((a, b) => b.time.compareTo(a.time));
   }
 
-  List<ExpenseModel> budgetOverView(OverviewType overviewType) =>
+  List<Expense> budgetOverView(TransactionType transactionType) =>
       sorted((a, b) => b.time.compareTo(a.time))
-          .where(
-              (element) => element.categoryId != -1 && element.accountId != -1)
-          .where((element) =>
-              element.type ==
-              (overviewType == OverviewType.income
-                  ? TransactionType.income
-                  : TransactionType.expense))
-          .toList();
+          .where((element) => element.type == transactionType)
+          .toEntities();
 }
 
 extension ExpensesHelper on Iterable<Expense> {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/data/expense/model/expense_model.dart';
+import '../../../core/enum/transaction_type.dart';
+import '../../../data/expense/model/expense_model.dart';
 
 import '../../../core/common.dart';
 import '../../../domain/expense/entities/expense.dart';
-import '../pages/overview_page.dart';
 
 class FilterOverviewWidget extends StatelessWidget {
   const FilterOverviewWidget({
@@ -15,14 +15,14 @@ class FilterOverviewWidget extends StatelessWidget {
 
   final Widget Function(List<Expense> expenses) builder;
   final Iterable<ExpenseModel> expenses;
-  final ValueNotifier<OverviewType> valueNotifier;
+  final ValueNotifier<TransactionType> valueNotifier;
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<OverviewType>(
+    return ValueListenableBuilder<TransactionType>(
       valueListenable: valueNotifier,
       builder: (context, value, child) {
-        return builder.call(expenses.budgetOverView(value).toEntities());
+        return builder.call(expenses.budgetOverView(value));
       },
     );
   }

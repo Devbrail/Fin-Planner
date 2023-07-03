@@ -39,7 +39,7 @@ class SelectedAccount extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   context.loc.selectAccount,
-                  style: context.titleMedium?.copyWith(
+                  style: context.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -56,7 +56,7 @@ class SelectedAccount extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   context.loc.selectAccount,
-                  style: context.titleMedium?.copyWith(
+                  style: context.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),

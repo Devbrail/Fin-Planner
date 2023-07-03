@@ -1,8 +1,8 @@
 import 'package:intl/intl.dart';
 import 'package:paisa/src/data/currencies/models/country_model.dart';
 
-import '../app/routes.dart';
-import 'common.dart';
+import '../../app/routes.dart';
+import '../common.dart';
 
 extension MappingOnDouble on double {
   String toFormateCurrencyOld({int decimalDigits = 2}) {

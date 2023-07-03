@@ -45,9 +45,6 @@ class _PaisaAppState extends State<PaisaApp> {
           create: (context) => getIt.get<HomeBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt.get<CategoryBloc>(),
-        ),
-        BlocProvider(
           create: (context) => getIt.get<BudgetCubit>(),
         ),
         Provider(

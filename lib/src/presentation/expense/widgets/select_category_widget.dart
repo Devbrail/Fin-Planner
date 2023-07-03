@@ -39,7 +39,7 @@ class SelectCategoryIcon extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   context.loc.selectCategory,
-                  style: context.titleMedium?.copyWith(
+                  style: context.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -58,7 +58,7 @@ class SelectCategoryIcon extends StatelessWidget {
                   context.loc.selectCategory,
                   style: Theme.of(context)
                       .textTheme
-                      .titleMedium
+                      .titleSmall
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),

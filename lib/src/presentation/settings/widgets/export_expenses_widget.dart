@@ -114,8 +114,7 @@ List<List<String>> csvDataList(
       (index) {
         final expense = expenses[index];
         final account = accountDataSource.fetchAccountFromId(expense.accountId);
-        final category =
-            categoryDataSource.fetchCategoryFromId(expense.categoryId);
+        final category = categoryDataSource.findById(expense.categoryId);
         return expenseRow(
           index,
           expense: expense,

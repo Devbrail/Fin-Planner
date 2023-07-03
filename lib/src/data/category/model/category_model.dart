@@ -9,6 +9,7 @@ class CategoryModel extends HiveObject with EquatableMixin {
     required this.icon,
     required this.name,
     required this.color,
+    this.isDefault = false,
     this.description,
     this.isBudget = false,
     this.budget = -1,
@@ -21,7 +22,10 @@ class CategoryModel extends HiveObject with EquatableMixin {
         icon: json["icon"],
         budget: json["budget"],
         color: json["color"],
-      )..superId = json["superId"];
+        isDefault: json['isDefault'] ?? false,
+        isBudget: json['isBudget'] ?? false,
+        superId: json["superId"],
+      );
 
   @HiveField(6, defaultValue: 0)
   double? budget;
@@ -44,6 +48,9 @@ class CategoryModel extends HiveObject with EquatableMixin {
   @HiveField(4, defaultValue: 0)
   int? superId;
 
+  @HiveField(3, defaultValue: false)
+  bool isDefault;
+
   @override
   List<Object?> get props => [name, icon, icon];
 
@@ -54,5 +61,7 @@ class CategoryModel extends HiveObject with EquatableMixin {
         'superId': superId,
         'budget': budget,
         'color': color,
+        'isBudget': isBudget,
+        'isDefault': isDefault,
       };
 }

@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/data/category/data_sources/default_category.dart';
 
 import '../model/category_model.dart';
 import 'category_local_data_source.dart';
@@ -13,43 +12,41 @@ class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
   final Box<CategoryModel> categoryBox;
 
   @override
-  Future<void> addCategory(CategoryModel category) async {
+  Future<void> add(CategoryModel category) async {
     final int id = await categoryBox.add(category);
     category.superId = id;
-    await category.save();
+    return category.save();
   }
 
   @override
   Future<List<CategoryModel>> categories() async {
-    return categoryBox.values.toList();
+    return categoryBox.values.where((element) => !element.isDefault).toList();
   }
 
   @override
-  Future<void> clearAll() => categoryBox.clear();
+  Future<void> clear() => categoryBox.clear();
 
   @override
-  Future<void> defaultCategories() async {
-    defaultCategoriesData().forEach((element) async {
-      await addCategory(element);
-    });
+  List<CategoryModel> defaultCategories() {
+    return categoryBox.values.where((element) => element.isDefault).toList();
   }
 
   @override
-  Future<void> deleteCategory(int key) async {
+  Future<void> delete(int key) async {
     await categoryBox.delete(key);
   }
 
   @override
-  Iterable<CategoryModel> exportData() => categoryBox.values;
+  Iterable<CategoryModel> export() => categoryBox.values;
 
   @override
-  CategoryModel? fetchCategoryFromId(int categoryId) =>
+  CategoryModel? findById(int categoryId) =>
       categoryBox.values.firstWhereOrNull(
         (element) => element.superId == categoryId,
       );
 
   @override
-  Future<void> updateCategory(CategoryModel categoryModel) {
+  Future<void> update(CategoryModel categoryModel) {
     return categoryBox.put(categoryModel.superId!, categoryModel);
   }
 }

@@ -9,6 +9,7 @@ class PaisaTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) => current is CurrentIndexState,
       builder: (context, state) {
         if (state is CurrentIndexState) {
           return Text(

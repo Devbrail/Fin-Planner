@@ -12,30 +12,35 @@ extension AppBarHelper on BuildContext {
     String title, {
     List<Widget>? actions,
     Widget? leadingWidget,
-  }) =>
-      AppBar(
-        leading: leadingWidget,
-        title: Text(title),
-        titleTextStyle: titleLarge?.copyWith(fontWeight: FontWeight.bold),
-        actions: actions ?? [],
-      );
+  }) {
+    return AppBar(
+      leading: leadingWidget,
+      title: Text(title),
+      titleTextStyle: titleLarge?.copyWith(fontWeight: FontWeight.bold),
+      actions: actions ?? [],
+    );
+  }
 
-  showMaterialSnackBar(
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+      showMaterialSnackBar(
     String content, {
     Color? backgroundColor,
     Color? color,
-  }) =>
-      ScaffoldMessenger.of(this).showSnackBar(
-        SnackBar(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          content: Text(
-            content,
-            style: TextStyle(
-              color: color ?? onSurfaceVariant,
-            ),
+    SnackBarAction? action,
+  }) {
+    return ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        content: Text(
+          content,
+          style: TextStyle(
+            color: color ?? onSurfaceVariant,
           ),
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: backgroundColor ?? surfaceVariant,
         ),
-      );
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: backgroundColor ?? surfaceVariant,
+        action: action,
+      ),
+    );
+  }
 }

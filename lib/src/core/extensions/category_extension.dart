@@ -5,21 +5,30 @@ import '../../data/category/model/category_model.dart';
 import '../../domain/category/entities/category.dart';
 
 extension CategoryModelHelper on CategoryModel {
-  Category toEntity() => Category(
-        icon: icon,
-        name: name,
-        color: color,
-        budget: budget,
-        description: description,
-        isBudget: isBudget,
-        superId: superId,
-      );
+  Category toEntity() {
+    return Category(
+      icon: icon,
+      name: name,
+      color: color,
+      budget: budget,
+      description: description,
+      isBudget: isBudget,
+      superId: superId,
+      isDefault: isDefault,
+    );
+  }
 }
 
 extension CategoryModelsHelper on Iterable<CategoryModel> {
   List<Map<String, dynamic>> toJson() {
     return map((e) => e.toJson()).toList();
   }
+
+  List<CategoryModel> get onlyDefault =>
+      where((element) => element.isDefault).toList();
+
+  Iterable<CategoryModel> get filterDefault =>
+      where((element) => !element.isDefault);
 
   List<Category> toEntities() =>
       map((categoryModel) => categoryModel.toEntity())

@@ -197,25 +197,26 @@ final GoRouter goRouter = GoRouter(
           name: editTransactionsName,
           path: editTransactionsPath,
           pageBuilder: (context, state) => MaterialPage(
-            key: ValueKey(
-              state.location,
-            ),
+            key: ValueKey(state.location),
             child: ExpensePage(
               expenseId: state.pathParameters['eid'],
             ),
           ),
         ),
         GoRoute(
-            name: addCategoryName,
-            path: addCategoryPath,
-            builder: (context, state) => const AddCategoryPage(),
-            routes: [
-              GoRoute(
-                path: iconPickerPath,
-                name: iconPickerName,
-                builder: (context, state) => const CategoryIconPickerPage(),
-              )
-            ]),
+          name: addCategoryName,
+          path: addCategoryPath,
+          builder: (context, state) => AddCategoryPage(
+            isDefault: state.queryParameters['isDefault'] == 'true',
+          ),
+          routes: [
+            GoRoute(
+              path: iconPickerPath,
+              name: iconPickerName,
+              builder: (context, state) => const CategoryIconPickerPage(),
+            )
+          ],
+        ),
         GoRoute(
           name: editCategoryName,
           path: editCategoryPath,

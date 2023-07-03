@@ -24,7 +24,8 @@ class CategoryListPage extends StatelessWidget {
         body: ValueListenableBuilder<Box<CategoryModel>>(
           valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
           builder: (BuildContext context, value, Widget? child) {
-            final List<Category> categories = value.values.toEntities();
+            final List<Category> categories =
+                value.values.filterDefault.toEntities();
             if (categories.isEmpty) {
               return EmptyWidget(
                 title: context.loc.emptyCategoriesMessageTitle,

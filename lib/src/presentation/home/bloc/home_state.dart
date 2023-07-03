@@ -18,3 +18,5 @@ class CurrentIndexState extends HomeState {
   @override
   List<Object?> get props => [currentPage];
 }
+
+class ShowFixDialogState extends HomeState {}

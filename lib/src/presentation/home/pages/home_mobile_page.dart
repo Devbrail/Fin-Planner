@@ -49,7 +49,7 @@ class HomeMobilePage extends StatelessWidget {
                     .map((e) => NavigationDrawerDestination(
                           icon: e.icon,
                           selectedIcon: e.selectedIcon,
-                          label: Text(e.label),
+                          label: Text(e.pageType.name(context)),
                         ))
                     .toList(),
                 const Divider(),
@@ -74,9 +74,10 @@ class HomeMobilePage extends StatelessWidget {
           },
         ),
       ),
-      body: ContentWidget(),
+      body: const ContentWidget(),
       floatingActionButton: floatingActionButton,
       bottomNavigationBar: BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current) => current is CurrentIndexState,
         builder: (context, state) {
           if (state is CurrentIndexState &&
               (state.currentPage == 4 ||
@@ -99,7 +100,7 @@ class HomeMobilePage extends StatelessWidget {
                   .map((e) => NavigationDestination(
                         icon: e.icon,
                         selectedIcon: e.selectedIcon,
-                        label: e.label,
+                        label: e.pageType.name(context),
                       ))
                   .toList(),
             ),

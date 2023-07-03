@@ -15,13 +15,16 @@ class BudgetCubit extends Cubit<BudgetState> {
   BudgetCubit(
     this.getExpensesUseCase,
     this.getCategoryUseCase,
+    this.getCategoriesUseCase,
   ) : super(BudgetInitial());
 
+  final GetDefaultCategoriesUseCase getCategoriesUseCase;
   final GetCategoryUseCase getCategoryUseCase;
   final GetExpensesUseCase getExpensesUseCase;
   String? selectedTime;
 
   List<String> _filterTimes = [];
+  final List<Category> _defaultCategories = [];
   Map<String, List<Expense>> _groupedExpenses = {};
 
   void fetchBudgetSummary(List<Expense> expenses, FilterExpense filterExpense) {
@@ -46,9 +49,10 @@ class BudgetCubit extends Cubit<BudgetState> {
 
   void fetchSelectedTimeExpenses(String time) {
     final List<Expense> selectedTimeExpenses = _groupedExpenses[time] ?? [];
-    final Map<Category, List<Expense>> categoryGroupedExpenses = groupBy(
-        selectedTimeExpenses,
-        (Expense expense) => getCategoryUseCase(expense.categoryId)!);
+    final Map<Category, List<Expense>> categoryGroupedExpenses =
+        groupBy(selectedTimeExpenses, (Expense expense) {
+      return getCategoryUseCase(expense.categoryId) ?? _defaultCategories.first;
+    });
     final List<MapEntry<Category, List<Expense>>> mapExpenses =
         categoryGroupedExpenses.entries.toList();
     emit(FilteredCategoryListState(
@@ -56,6 +60,10 @@ class BudgetCubit extends Cubit<BudgetState> {
           (a, b) => b.value.totalExpense.compareTo(a.value.totalExpense)),
       selectedTimeExpenses.total,
     ));
+  }
+
+  void fetchDefaultCategory() {
+    _defaultCategories.addAll(getCategoriesUseCase.call());
   }
 }
 

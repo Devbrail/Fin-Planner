@@ -67,14 +67,14 @@ class HomeTabletPage extends StatelessWidget {
                     .map((e) => NavigationRailDestination(
                           icon: e.icon,
                           selectedIcon: e.selectedIcon,
-                          label: Text(e.label),
+                          label: Text(e.pageType.name(context)),
                         ))
                     .toList(),
               );
             },
           ),
           const VerticalDivider(thickness: 1, width: 1),
-          Expanded(
+          const Expanded(
             child: ContentWidget(),
           ),
         ],

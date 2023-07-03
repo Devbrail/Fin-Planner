@@ -9,5 +9,6 @@ class Category extends CategoryModel {
     super.isBudget = false,
     super.budget = -1,
     super.superId,
+    super.isDefault,
   });
 }

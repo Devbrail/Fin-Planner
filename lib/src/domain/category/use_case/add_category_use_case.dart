@@ -15,6 +15,7 @@ class AddCategoryUseCase {
     required bool isBudget,
     required int color,
     double? budget = -1,
+    bool isDefault = false,
   }) async =>
       categoryRepository.addCategory(
         name: name,
@@ -23,5 +24,6 @@ class AddCategoryUseCase {
         budget: budget,
         isBudget: isBudget,
         color: color,
+        isDefault: isDefault,
       );
 }

@@ -38,6 +38,7 @@ class PaisaTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) => current is CurrentIndexState,
       builder: (context, state) {
         String title = PageType.home.name(context);
         if (state is CurrentIndexState) {

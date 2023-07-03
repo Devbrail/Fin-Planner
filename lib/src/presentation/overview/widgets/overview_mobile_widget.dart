@@ -5,7 +5,7 @@ import '../../summary/controller/summary_controller.dart';
 import '../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
 import '../../widgets/paisa_pill_chip.dart';
 import '../cubit/budget_cubit.dart';
-import '../pages/overview_page.dart';
+import 'category_transaction_filter_widget.dart';
 
 class OverviewMobile extends StatelessWidget {
   const OverviewMobile({
@@ -22,7 +22,7 @@ class OverviewMobile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        TransactionTypeSegmentedWidget(summaryController: summaryController),
+        CategoryTransactionFilterWidget(summaryController: summaryController),
         BlocBuilder(
           bloc: budgetCubit,
           buildWhen: (previous, current) => current is InitialSelectedState,

@@ -1,19 +1,19 @@
 import '../model/category_model.dart';
 
 abstract class LocalCategoryDataManager {
-  Future<void> addCategory(CategoryModel category);
+  Future<void> add(CategoryModel category);
 
-  Future<void> deleteCategory(int key);
+  Future<void> delete(int key);
 
   Future<List<CategoryModel>> categories();
 
-  CategoryModel? fetchCategoryFromId(int categoryId);
+  CategoryModel? findById(int categoryId);
 
-  Iterable<CategoryModel> exportData();
+  Iterable<CategoryModel> export();
 
-  Future<void> updateCategory(CategoryModel categoryModel);
+  Future<void> update(CategoryModel categoryModel);
 
-  Future<void> clearAll();
+  Future<void> clear();
 
-  Future<void> defaultCategories();
+  List<CategoryModel> defaultCategories();
 }

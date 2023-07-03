@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/domain/category/use_case/category_use_case.dart';
 
 import '../../../core/enum/recurring_type.dart';
 import '../../../core/enum/transaction_type.dart';
@@ -31,6 +32,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     required this.deleteExpenseUseCase,
     required this.updateExpensesUseCase,
     required this.accountsUseCase,
+    required this.defaultCategoriesUseCase,
   }) : super(ExpenseInitial()) {
     on<ExpenseEvent>((event, emit) {});
     on<AddOrUpdateExpenseEvent>(_addExpense);
@@ -41,6 +43,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<ChangeAccountEvent>(_changeAccount);
     on<UpdateDateTimeEvent>(_updateDateTime);
     on<TransferAccountEvent>(_transferAccount);
+    on<FetchDefaultCategoryEvent>(_fetchDefaultCategories);
   }
 
   final GetAccountUseCase accountUseCase;
@@ -48,6 +51,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   final AddExpenseUseCase addExpenseUseCase;
   String? currentDescription;
   Expense? currentExpense;
+  final GetDefaultCategoriesUseCase defaultCategoriesUseCase;
   final DeleteExpenseUseCase deleteExpenseUseCase;
   double? expenseAmount;
   String? expenseName;
@@ -103,13 +107,20 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
           const ExpenseErrorState('Select both from and to accounts'),
         );
       }
-
+      final double? validAmount = transferAmount;
+      final int? categoryId = selectedCategoryId;
+      if (validAmount == null || validAmount == 0.0) {
+        return emit(const ExpenseErrorState('Enter valid amount'));
+      }
+      if (categoryId == null) {
+        return emit(const ExpenseErrorState('Select category'));
+      }
       await addExpenseUseCase(
         name:
             'Transfer from ${fromAccount!.bankName} to ${toAccount!.bankName}',
-        amount: transferAmount ?? 0,
+        amount: validAmount,
         time: selectedDate,
-        categoryId: -1,
+        categoryId: categoryId,
         accountId: fromAccount!.superId!,
         transactionType: TransactionType.expense,
         description: '',
@@ -118,28 +129,13 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       await addExpenseUseCase(
         name:
             'Received from ${fromAccount?.bankName} to ${toAccount?.bankName}',
-        amount: transferAmount ?? 0,
+        amount: validAmount,
         time: selectedDate,
-        categoryId: -1,
+        categoryId: categoryId,
         accountId: toAccount!.superId!,
         transactionType: TransactionType.income,
         description: '',
       );
-
-      /* final String expenseName =
-          'Transfer from ${fromAccount?.bankName} to ${toAccount?.bankName}';
-      await addExpenseUseCase(
-        name: expenseName,
-        amount: transferAmount ?? 0,
-        time: DateTime.now(),
-        categoryId: -1,
-        accountId: -1,
-        transactionType: TransactionType.transfer,
-        description: 'Transfer money',
-        fromAccountId: fromAccount?.superId,
-        toAccountId: toAccount?.superId,
-        transferAmount: transferAmount ?? 0,
-      ); */
 
       emit(const ExpenseAdded(isAddOrUpdate: true));
     } else {
@@ -251,5 +247,13 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       fromAccount,
       toAccount,
     ));
+  }
+
+  FutureOr<void> _fetchDefaultCategories(
+    FetchDefaultCategoryEvent event,
+    Emitter<ExpenseState> emit,
+  ) {
+    final List<Category> categories = defaultCategoriesUseCase();
+    emit(DefaultCategoriesState(categories));
   }
 }

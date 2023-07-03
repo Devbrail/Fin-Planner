@@ -29,6 +29,7 @@ class IntroBigScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PaisaAnnotatedRegionWidget(
+      color: context.background,
       child: Material(
         child: Row(
           children: [
@@ -166,100 +167,103 @@ class IntoMobileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        toolbarHeight: 0,
-      ),
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: LavaAnimation(
-          color: context.primaryContainer,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  context.loc.appTitle,
-                  style: context.displayMedium?.copyWith(
-                    color: context.primary,
-                  ),
-                ),
-                Text(
-                  context.loc.intoTitle,
-                  style: context.headlineMedium?.copyWith(
-                    color: context.secondary,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Column(
-                  children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(
-                        Icons.check_circle,
-                        color: context.primary,
-                      ),
-                      dense: true,
-                      title: Text(
-                        context.loc.intoSummary1,
-                        style: context.titleMedium,
-                      ),
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(
-                        Icons.check_circle,
-                        color: context.primary,
-                      ),
-                      dense: true,
-                      title: Text(
-                        context.loc.intoSummary2,
-                        style: context.titleMedium,
-                      ),
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(
-                        Icons.check_circle,
-                        color: context.primary,
-                      ),
-                      dense: true,
-                      title: Text(
-                        context.loc.intoSummary3,
-                        style: context.titleMedium,
-                      ),
-                    )
-                  ],
-                ),
-                const Spacer(),
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  dense: true,
-                  title: Text(
-                    '*This app still in beta, expect the unexpected behavior and UI changes',
-                    style: context.titleSmall?.copyWith(
-                      color: context.bodySmall?.color,
+    return PaisaAnnotatedRegionWidget(
+      color: context.background,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          toolbarHeight: 0,
+        ),
+        body: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: LavaAnimation(
+            color: context.primaryContainer,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    context.loc.appTitle,
+                    style: context.displayMedium?.copyWith(
+                      color: context.primary,
                     ),
                   ),
-                )
-              ],
+                  Text(
+                    context.loc.intoTitle,
+                    style: context.headlineMedium?.copyWith(
+                      color: context.secondary,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Column(
+                    children: [
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Icon(
+                          Icons.check_circle,
+                          color: context.primary,
+                        ),
+                        dense: true,
+                        title: Text(
+                          context.loc.intoSummary1,
+                          style: context.titleMedium,
+                        ),
+                      ),
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Icon(
+                          Icons.check_circle,
+                          color: context.primary,
+                        ),
+                        dense: true,
+                        title: Text(
+                          context.loc.intoSummary2,
+                          style: context.titleMedium,
+                        ),
+                      ),
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Icon(
+                          Icons.check_circle,
+                          color: context.primary,
+                        ),
+                        dense: true,
+                        title: Text(
+                          context.loc.intoSummary3,
+                          style: context.titleMedium,
+                        ),
+                      )
+                    ],
+                  ),
+                  const Spacer(),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    dense: true,
+                    title: Text(
+                      '*This app still in beta, expect the unexpected behavior and UI changes',
+                      style: context.titleSmall?.copyWith(
+                        color: context.bodySmall?.color,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 24),
-          child: PaisaBigButton(
-            onPressed: () {
-              getIt
-                  .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-                  .put(userIntroKey, true);
-            },
-            title: context.loc.introCTA,
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 24),
+            child: PaisaBigButton(
+              onPressed: () {
+                getIt
+                    .get<Box<dynamic>>(instanceName: BoxType.settings.name)
+                    .put(userIntroKey, true);
+              },
+              title: context.loc.introCTA,
+            ),
           ),
         ),
       ),

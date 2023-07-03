@@ -27,23 +27,40 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
   final List<AccountModel> defaultModels = defaultAccountsData();
   final SettingsController settings = getIt.get<SettingsController>();
 
+  Future<void> saveAndNavigate() async {
+    await settings.put(userAccountSelectorKey, false);
+    if (mounted) {
+      context.go(currencySelectorPath);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: context.materialYouAppBar(
         context.loc.accounts,
         actions: [
-          PaisaButton(
-            onPressed: () async {
-              context.go(currencySelectorPath);
-              await settings.put(userAccountSelectorKey, false);
-            },
-            title: context.loc.done,
+          ScreenTypeLayout(
+            mobile: const SizedBox.shrink(),
+            tablet: PaisaButton(
+              onPressed: saveAndNavigate,
+              title: context.loc.done,
+            ),
           ),
-          const SizedBox(
-            width: 16,
-          )
+          const SizedBox(width: 16)
         ],
+      ),
+      bottomNavigationBar: ScreenTypeLayout(
+        mobile: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: PaisaBigButton(
+              onPressed: saveAndNavigate,
+              title: context.loc.done,
+            ),
+          ),
+        ),
+        tablet: const SizedBox.shrink(),
       ),
       body: ValueListenableBuilder<Box<AccountModel>>(
         valueListenable: getIt.get<Box<AccountModel>>().listenable(),

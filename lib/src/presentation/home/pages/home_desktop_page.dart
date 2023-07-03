@@ -52,7 +52,7 @@ class HomeDesktopPage extends StatelessWidget {
                       .map((e) => NavigationDrawerDestination(
                             icon: e.icon,
                             selectedIcon: e.selectedIcon,
-                            label: Text(e.label),
+                            label: Text(e.pageType.name(context)),
                           ))
                       .toList(),
                   const Divider(),
@@ -76,7 +76,7 @@ class HomeDesktopPage extends StatelessWidget {
             },
           ),
           const VerticalDivider(thickness: 1, width: 1),
-          Expanded(
+          const Expanded(
             child: SafeArea(
               child: ContentWidget(),
             ),

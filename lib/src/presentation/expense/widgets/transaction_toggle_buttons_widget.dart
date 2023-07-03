@@ -19,7 +19,7 @@ class TransactionToggleButtons extends StatelessWidget {
       buildWhen: (previous, current) => current is ChangeTransactionTypeState,
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -30,21 +30,30 @@ class TransactionToggleButtons extends StatelessWidget {
                   isSelected:
                       BlocProvider.of<ExpenseBloc>(context).transactionType ==
                           TransactionType.expense,
-                  onPressed: () => _update(context, TransactionType.expense),
+                  onPressed: () => _update(
+                    context,
+                    TransactionType.expense,
+                  ),
                 ),
                 PaisaPillChip(
                   title: TransactionType.income.stringName(context),
                   isSelected:
                       BlocProvider.of<ExpenseBloc>(context).transactionType ==
                           TransactionType.income,
-                  onPressed: () => _update(context, TransactionType.income),
+                  onPressed: () => _update(
+                    context,
+                    TransactionType.income,
+                  ),
                 ),
                 PaisaPillChip(
                   title: TransactionType.transfer.stringName(context),
                   isSelected:
                       BlocProvider.of<ExpenseBloc>(context).transactionType ==
                           TransactionType.transfer,
-                  onPressed: () => _update(context, TransactionType.transfer),
+                  onPressed: () => _update(
+                    context,
+                    TransactionType.transfer,
+                  ),
                 ),
               ],
             ),

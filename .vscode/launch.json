@@ -10,7 +10,7 @@
             "type": "dart",
             "args": [
                 "--flavor",
-                "dev",
+                "dev"
             ]
         },
         {
@@ -19,7 +19,7 @@
             "type": "dart",
             "args": [
                 "--flavor",
-                "prod",
+                "prod"
             ]
         },
         {
@@ -29,8 +29,8 @@
             "flutterMode": "profile",
             "args": [
                 "--flavor",
-                "dev",
+                "dev"
             ]
-        },
+        }
     ]
 }

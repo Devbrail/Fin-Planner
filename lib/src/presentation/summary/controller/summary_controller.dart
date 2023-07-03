@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/presentation/overview/pages/overview_page.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_expense.dart';
+import '../../../core/enum/transaction_type.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/account/use_case/account_use_case.dart';
 import '../../../domain/category/entities/category.dart';
@@ -38,8 +38,8 @@ class SummaryController {
   late final ValueNotifier<FilterExpense> sortHomeExpenseNotifier =
       ValueNotifier<FilterExpense>(sortHomeExpense);
 
-  final ValueNotifier<OverviewType> typeNotifier =
-      ValueNotifier<OverviewType>(OverviewType.expense);
+  final ValueNotifier<TransactionType> typeNotifier =
+      ValueNotifier<TransactionType>(TransactionType.income);
 
   Category? fetchCategoryFromId(int categoryId) =>
       getCategoryUseCase(categoryId);

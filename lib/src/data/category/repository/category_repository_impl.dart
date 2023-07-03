@@ -2,6 +2,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/category/repository/category_repository.dart';
+import '../../expense/data_sources/local_expense_data_manager.dart';
 import '../data_sources/category_local_data_source.dart';
 import '../model/category_model.dart';
 
@@ -9,10 +10,12 @@ import '../model/category_model.dart';
 class CategoryRepositoryImpl extends CategoryRepository {
   CategoryRepositoryImpl({
     required this.dataSources,
+    required this.expenseDataManager,
     @Named('settings') required this.settings,
   });
 
   final LocalCategoryDataManager dataSources;
+  final LocalExpenseDataManager expenseDataManager;
   final Box<dynamic> settings;
 
   @override
@@ -23,25 +26,28 @@ class CategoryRepositoryImpl extends CategoryRepository {
     String? desc,
     bool isBudget = false,
     double? budget = -1,
-  }) =>
-      dataSources.addCategory(CategoryModel(
-        description: desc ?? '',
-        name: name,
-        icon: icon,
-        budget: budget,
-        isBudget: isBudget,
-        color: color,
-      ));
+    bool isDefault = false,
+  }) {
+    return dataSources.add(CategoryModel(
+      description: desc ?? '',
+      name: name,
+      icon: icon,
+      budget: budget,
+      isBudget: isBudget,
+      color: color,
+      isDefault: isDefault,
+    ));
+  }
 
   @override
-  Future<void> clearAll() => dataSources.clearAll();
+  Future<void> clearAll() => dataSources.clear();
 
   @override
-  Future<void> deleteCategory(int key) => dataSources.deleteCategory(key);
+  Future<void> deleteCategory(int key) => dataSources.delete(key);
 
   @override
   CategoryModel? fetchCategoryFromId(int categoryId) =>
-      dataSources.fetchCategoryFromId(categoryId);
+      dataSources.findById(categoryId);
 
   @override
   Future<void> updateCategory({
@@ -53,7 +59,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
     double? budget = -1,
     bool isBudget = false,
   }) {
-    return dataSources.updateCategory(CategoryModel(
+    return dataSources.update(CategoryModel(
       description: desc ?? '',
       name: name,
       icon: icon,
@@ -62,5 +68,10 @@ class CategoryRepositoryImpl extends CategoryRepository {
       color: color,
       superId: key,
     ));
+  }
+
+  @override
+  List<CategoryModel> defaultCategories() {
+    return dataSources.defaultCategories();
   }
 }

@@ -69,3 +69,5 @@ class TransferAccountEvent extends ExpenseEvent {
   @override
   List<Object> get props => [account, isFromAccount];
 }
+
+class FetchDefaultCategoryEvent extends ExpenseEvent {}

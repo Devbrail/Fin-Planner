@@ -97,3 +97,12 @@ class TransferAccountState extends ExpenseState {
   @override
   List<Object> get props => [isFromAccount];
 }
+
+class DefaultCategoriesState extends ExpenseState {
+  const DefaultCategoriesState(this.categories);
+
+  final List<Category> categories;
+
+  @override
+  List<Object> get props => [categories];
+}
