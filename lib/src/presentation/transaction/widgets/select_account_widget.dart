@@ -10,7 +10,7 @@ import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../domain/account/entities/account.dart';
-import '../bloc/expense_bloc.dart';
+import '../bloc/transaction_bloc.dart';
 import 'selectable_item_widget.dart';
 
 class SelectedAccount extends StatelessWidget {
@@ -82,7 +82,7 @@ class AccountSelectedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ExpenseBloc, ExpenseState>(
+    return BlocBuilder<TransactionBloc, TransactionState>(
       buildWhen: (previous, current) => current is ChangeAccountState,
       builder: (context, state) {
         return SizedBox(
@@ -99,7 +99,8 @@ class AccountSelectedItem extends StatelessWidget {
             itemBuilder: (_, index) {
               if (index == 0) {
                 return ItemWidget(
-                  isSelected: false,
+                  color: context.primary,
+                  selected: false,
                   title: context.loc.addNew,
                   icon: MdiIcons.plus.codePoint,
                   onPressed: () => context.pushNamed(addAccountPath),
@@ -107,11 +108,13 @@ class AccountSelectedItem extends StatelessWidget {
               } else {
                 final Account account = accounts[index - 1];
                 return ItemWidget(
-                  isSelected: account.superId ==
-                      BlocProvider.of<ExpenseBloc>(context).selectedAccountId,
+                  color: Color(account.color ?? context.primary.value),
+                  selected: account.superId ==
+                      BlocProvider.of<TransactionBloc>(context)
+                          .selectedAccountId,
                   title: account.name,
                   icon: account.cardType!.icon.codePoint,
-                  onPressed: () => BlocProvider.of<ExpenseBloc>(context)
+                  onPressed: () => BlocProvider.of<TransactionBloc>(context)
                       .add(ChangeAccountEvent(account)),
                   subtitle: account.bankName,
                 );

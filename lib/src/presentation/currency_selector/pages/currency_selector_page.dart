@@ -9,7 +9,7 @@ import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/currencies/models/country_model.dart';
-import '../../settings/bloc/settings_controller.dart';
+import '../../settings/controller/settings_controller.dart';
 import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../cubit/country_cubit.dart';

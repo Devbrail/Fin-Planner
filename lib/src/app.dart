@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/overview/cubit/budget_cubit.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
+import 'presentation/overview/cubit/budget_cubit.dart';
+import 'presentation/settings/cubit/settings_cubit.dart';
+import 'presentation/summary/controller/summary_controller.dart';
 import 'package:provider/provider.dart';
 
 import '../main.dart';
@@ -14,7 +15,6 @@ import 'core/common.dart';
 import 'core/enum/box_types.dart';
 import 'core/theme/paisa_theme.dart';
 import 'presentation/accounts/bloc/accounts_bloc.dart';
-import 'presentation/category/bloc/category_bloc.dart';
 import 'presentation/home/bloc/home_bloc.dart';
 
 class PaisaApp extends StatefulWidget {
@@ -38,6 +38,9 @@ class _PaisaAppState extends State<PaisaApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => getIt.get<SettingCubit>(),
+        ),
         BlocProvider(
           create: (context) => getIt.get<AccountsBloc>(),
         ),

@@ -70,42 +70,26 @@ class LandingPage extends StatelessWidget {
     return PaisaAnnotatedRegionWidget(
       child: BlocProvider(
         create: (context) => homeBloc,
-        child: BlocListener(
-          bloc: homeBloc,
-          listener: (context, state) {
-            if (state is ShowFixDialogState) {
-              context.showMaterialSnackBar(
-                'Fix transfer transactions not showing',
-                action: SnackBarAction(
-                  label: context.loc.ok,
-                  onPressed: () {
-                    homeBloc.add(FixExpensesEvent());
-                  },
-                ),
-              );
+        child: WillPopScope(
+          onWillPop: () async {
+            if (homeBloc.selectedIndex == 0) {
+              return true;
             }
+            homeBloc.add(const CurrentIndexEvent(0));
+            return false;
           },
-          child: WillPopScope(
-            onWillPop: () async {
-              if (homeBloc.selectedIndex == 0) {
-                return true;
-              }
-              homeBloc.add(const CurrentIndexEvent(0));
-              return false;
-            },
-            child: ScreenTypeLayout(
-              mobile: HomeMobilePage(
-                floatingActionButton: actionButton,
-                destinations: destinations,
-              ),
-              tablet: HomeTabletPage(
-                floatingActionButton: actionButton,
-                destinations: destinations,
-              ),
-              desktop: HomeDesktopPage(
-                floatingActionButton: actionButton,
-                destinations: destinations,
-              ),
+          child: ScreenTypeLayout(
+            mobile: HomeMobilePage(
+              floatingActionButton: actionButton,
+              destinations: destinations,
+            ),
+            tablet: HomeTabletPage(
+              floatingActionButton: actionButton,
+              destinations: destinations,
+            ),
+            desktop: HomeDesktopPage(
+              floatingActionButton: actionButton,
+              destinations: destinations,
             ),
           ),
         ),

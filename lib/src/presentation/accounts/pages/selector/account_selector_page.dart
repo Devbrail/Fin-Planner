@@ -11,7 +11,7 @@ import '../../../../core/common.dart';
 import '../../../../data/accounts/data_sources/default_account.dart';
 import '../../../../data/accounts/data_sources/local_account_data_manager.dart';
 import '../../../../data/accounts/model/account_model.dart';
-import '../../../settings/bloc/settings_controller.dart';
+import '../../../settings/controller/settings_controller.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_card.dart';
 

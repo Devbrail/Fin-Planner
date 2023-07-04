@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../main.dart';
 import '../home/widgets/welcome_widget.dart';
-import '../settings/bloc/settings_controller.dart';
+import '../settings/controller/settings_controller.dart';
 import '../settings/widgets/user_profile_widget.dart';
 import 'color_palette.dart';
 

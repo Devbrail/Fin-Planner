@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/transaction/pages/transaction_page.dart';
 import 'package:provider/provider.dart';
 
 import '../core/common.dart';
@@ -16,7 +17,6 @@ import '../presentation/category/pages/category_list_page.dart';
 import '../presentation/category/pages/selector/category_selector_page.dart';
 import '../presentation/currency_selector/pages/currency_selector_page.dart';
 import '../presentation/debits/pages/add/add_debt_page.dart';
-import '../presentation/expense/pages/expense_page.dart';
 import '../presentation/home/pages/home_page.dart';
 import '../presentation/login/intro/into_page.dart';
 import '../presentation/login/pages/user_image_page.dart';
@@ -185,7 +185,7 @@ final GoRouter goRouter = GoRouter(
                 TransactionType.values[typeInt];
             return MaterialPage(
               key: ValueKey(state.location),
-              child: ExpensePage(
+              child: TransactionPage(
                 accountId: accountId,
                 categoryId: categoryId,
                 transactionType: transactionType,
@@ -198,7 +198,7 @@ final GoRouter goRouter = GoRouter(
           path: editTransactionsPath,
           pageBuilder: (context, state) => MaterialPage(
             key: ValueKey(state.location),
-            child: ExpensePage(
+            child: TransactionPage(
               expenseId: state.pathParameters['eid'],
             ),
           ),
@@ -275,7 +275,7 @@ final GoRouter goRouter = GoRouter(
                     TransactionType.values[typeInt];
                 return MaterialPage(
                   key: ValueKey(state.location),
-                  child: ExpensePage(
+                  child: TransactionPage(
                     accountId: accountId,
                     transactionType: transactionType,
                   ),

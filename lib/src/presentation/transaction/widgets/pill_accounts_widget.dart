@@ -82,7 +82,7 @@ class PaisaFilterChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PaisaFilledCard(
-      color: color.withOpacity(0.2),
+      color: color.withOpacity(0.09),
       child: Container(
         decoration: isSelected
             ? BoxDecoration(
@@ -96,14 +96,9 @@ class PaisaFilterChip extends StatelessWidget {
           onTap: onPressed,
           title: Text(
             title,
-            style: context.titleSmall?.copyWith(
-              color: color,
-            ),
+            style: context.titleSmall?.copyWith(color: color),
           ),
-          leading: Icon(
-            icon,
-            color: color,
-          ),
+          leading: Icon(icon, color: color),
         ),
       ),
     );

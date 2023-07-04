@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../bloc/settings_controller.dart';
+import '../controller/settings_controller.dart';
 
 class CurrencyChangeWidget extends StatelessWidget {
   const CurrencyChangeWidget({Key? key}) : super(key: key);

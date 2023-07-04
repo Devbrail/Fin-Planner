@@ -17,14 +17,14 @@ import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
 import '../../../domain/expense/use_case/update_expense_use_case.dart';
-import '../../settings/bloc/settings_controller.dart';
+import '../../settings/controller/settings_controller.dart';
 
-part 'expense_event.dart';
-part 'expense_state.dart';
+part 'transaction_event.dart';
+part 'transaction_state.dart';
 
 @injectable
-class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
-  ExpenseBloc(
+class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
+  TransactionBloc(
     this.settingsController, {
     required this.expenseUseCase,
     required this.accountUseCase,
@@ -37,8 +37,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<ExpenseEvent>((event, emit) {});
     on<AddOrUpdateExpenseEvent>(_addExpense);
     on<ClearExpenseEvent>(_deleteExpense);
-    on<ChangeExpenseEvent>(_changeExpense);
-    on<FetchExpenseFromIdEvent>(_fetchExpenseFromId);
+    on<ChangeTransactionTypeEvent>(_changeExpense);
+    on<FindTransactionFromIdEvent>(_fetchExpenseFromId);
     on<ChangeCategoryEvent>(_changeCategory);
     on<ChangeAccountEvent>(_changeAccount);
     on<UpdateDateTimeEvent>(_updateDateTime);
@@ -68,8 +68,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   final UpdateExpensesUseCase updateExpensesUseCase;
 
   Future<void> _fetchExpenseFromId(
-    FetchExpenseFromIdEvent event,
-    Emitter<ExpenseState> emit,
+    FindTransactionFromIdEvent event,
+    Emitter<TransactionState> emit,
   ) async {
     final int? expenseId = int.tryParse(event.expenseId ?? '');
     if (expenseId == null) {
@@ -88,32 +88,32 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       transactionType = expense.type ?? TransactionType.expense;
       currentDescription = expense.description;
       currentExpense = expense;
-      emit(ExpenseSuccessState(expense));
+      emit(TransactionFoundState(expense));
       Future.delayed(Duration.zero)
-          .then((value) => add(ChangeExpenseEvent(transactionType)));
+          .then((value) => add(ChangeTransactionTypeEvent(transactionType)));
     } else {
-      emit(const ExpenseErrorState('Expense not found!'));
+      emit(const TransactionErrorState('Expense not found!'));
     }
   }
 
   Future<void> _addExpense(
     AddOrUpdateExpenseEvent event,
-    Emitter<ExpenseState> emit,
+    Emitter<TransactionState> emit,
   ) async {
     if (transactionType == TransactionType.transfer) {
       if ((fromAccount == null || toAccount == null) ||
           (fromAccount == toAccount)) {
         return emit(
-          const ExpenseErrorState('Select both from and to accounts'),
+          const TransactionErrorState('Select both from and to accounts'),
         );
       }
       final double? validAmount = transferAmount;
       final int? categoryId = selectedCategoryId;
       if (validAmount == null || validAmount == 0.0) {
-        return emit(const ExpenseErrorState('Enter valid amount'));
+        return emit(const TransactionErrorState('Enter valid amount'));
       }
       if (categoryId == null) {
-        return emit(const ExpenseErrorState('Select category'));
+        return emit(const TransactionErrorState('Select category'));
       }
       await addExpenseUseCase(
         name:
@@ -137,7 +137,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         description: '',
       );
 
-      emit(const ExpenseAdded(isAddOrUpdate: true));
+      emit(const TransactionAdded(isAddOrUpdate: true));
     } else {
       final double? validAmount = expenseAmount;
       final String? name = expenseName;
@@ -147,17 +147,17 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       final String? description = currentDescription;
 
       if (name == null) {
-        return emit(const ExpenseErrorState('Enter expense name'));
+        return emit(const TransactionErrorState('Enter expense name'));
       }
       if (validAmount == null || validAmount == 0.0) {
-        return emit(const ExpenseErrorState('Enter valid amount'));
+        return emit(const TransactionErrorState('Enter valid amount'));
       }
 
       if (accountId == null) {
-        return emit(const ExpenseErrorState('Select account'));
+        return emit(const TransactionErrorState('Select account'));
       }
       if (categoryId == null) {
-        return emit(const ExpenseErrorState('Select category'));
+        return emit(const TransactionErrorState('Select category'));
       }
 
       if (event.isAdding) {
@@ -182,27 +182,27 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
           ..description = description;
         await updateExpensesUseCase(currentExpense!);
       }
-      emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
+      emit(TransactionAdded(isAddOrUpdate: event.isAdding));
     }
   }
 
   Future<void> _deleteExpense(
     ClearExpenseEvent event,
-    Emitter<ExpenseState> emit,
+    Emitter<TransactionState> emit,
   ) async {
     await deleteExpenseUseCase(int.parse(event.expenseId));
-    emit(ExpenseDeletedState());
+    emit(TransactionDeletedState());
   }
 
   void _changeExpense(
-    ChangeExpenseEvent event,
-    Emitter<ExpenseState> emit,
+    ChangeTransactionTypeEvent event,
+    Emitter<TransactionState> emit,
   ) {
     final List<Account> accounts = accountsUseCase();
     if (accounts.isEmpty &&
         accounts.length <= 1 &&
         event.transactionType == TransactionType.transfer) {
-      emit(const ExpenseErrorState('Need two or more accounts '));
+      emit(const TransactionErrorState('Need two or more accounts '));
     } else {
       transactionType = event.transactionType;
       emit(ChangeTransactionTypeState(event.transactionType));
@@ -211,7 +211,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
   FutureOr<void> _changeCategory(
     ChangeCategoryEvent event,
-    Emitter<ExpenseState> emit,
+    Emitter<TransactionState> emit,
   ) {
     selectedCategoryId = event.category.superId;
     emit(ChangeCategoryState(event.category));
@@ -219,7 +219,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
   FutureOr<void> _changeAccount(
     ChangeAccountEvent event,
-    Emitter<ExpenseState> emit,
+    Emitter<TransactionState> emit,
   ) {
     selectedAccountId = event.account.superId;
     emit(ChangeAccountState(event.account));
@@ -227,7 +227,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
   FutureOr<void> _updateDateTime(
     UpdateDateTimeEvent event,
-    Emitter<ExpenseState> emit,
+    Emitter<TransactionState> emit,
   ) {
     selectedDate = event.dateTime;
     emit(UpdateDateTimeState(event.dateTime));
@@ -235,7 +235,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
   FutureOr<void> _transferAccount(
     TransferAccountEvent event,
-    Emitter<ExpenseState> emit,
+    Emitter<TransactionState> emit,
   ) {
     if (event.isFromAccount) {
       fromAccount = event.account;
@@ -251,7 +251,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
   FutureOr<void> _fetchDefaultCategories(
     FetchDefaultCategoryEvent event,
-    Emitter<ExpenseState> emit,
+    Emitter<TransactionState> emit,
   ) {
     final List<Category> categories = defaultCategoriesUseCase();
     emit(DefaultCategoriesState(categories));

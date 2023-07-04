@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
 import '../../widgets/paisa_text_field.dart';
-import '../bloc/expense_bloc.dart';
+import '../bloc/transaction_bloc.dart';
 
 class ExpenseDescriptionWidget extends StatelessWidget {
   const ExpenseDescriptionWidget({
@@ -22,8 +22,8 @@ class ExpenseDescriptionWidget extends StatelessWidget {
         controller: controller,
         hintText: context.loc.description,
         keyboardType: TextInputType.name,
-        onChanged: (value) =>
-            BlocProvider.of<ExpenseBloc>(context).currentDescription = value,
+        onChanged: (value) => BlocProvider.of<TransactionBloc>(context)
+            .currentDescription = value,
       ),
     );
   }

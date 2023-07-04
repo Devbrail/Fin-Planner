@@ -14,7 +14,7 @@ import '../../../main.dart';
 import '../../app/routes.dart';
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
-import '../../presentation/home/bloc/home_bloc.dart';
+import '../../presentation/settings/cubit/settings_cubit.dart';
 import '../accounts/data_sources/local_account_data_manager.dart';
 import '../accounts/model/account_model.dart';
 import '../category/data_sources/category_local_data_source.dart';

@@ -4,7 +4,7 @@ import 'package:paisa/src/core/extensions/filter_expense_extension.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_expense.dart';
-import '../../settings/bloc/settings_controller.dart';
+import '../../settings/controller/settings_controller.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../../widgets/paisa_toggle_button.dart';
 

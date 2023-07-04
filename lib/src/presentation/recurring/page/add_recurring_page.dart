@@ -15,7 +15,7 @@ import '../../../data/accounts/model/account_model.dart';
 import '../../../data/category/model/category_model.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
-import '../../expense/widgets/selectable_item_widget.dart';
+import '../../transaction/widgets/selectable_item_widget.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
 import '../../widgets/paisa_big_button_widget.dart';
 import '../../widgets/paisa_pill_chip.dart';
@@ -228,7 +228,8 @@ class _AccountSelectedWidgetState extends State<AccountSelectedWidget> {
         itemBuilder: (_, index) {
           if (index == 0) {
             return ItemWidget(
-              isSelected: false,
+              color: context.primary,
+              selected: false,
               title: 'Add New',
               icon: MdiIcons.plus.codePoint,
               onPressed: () => context.pushNamed(addAccountPath),
@@ -236,7 +237,8 @@ class _AccountSelectedWidgetState extends State<AccountSelectedWidget> {
           } else {
             final Account account = widget.accounts[index - 1];
             return ItemWidget(
-              isSelected: account.superId == selectedId,
+              color: Color(account.color ?? context.primary.value),
+              selected: account.superId == selectedId,
               title: account.name,
               icon: account.cardType!.icon.codePoint,
               onPressed: () {

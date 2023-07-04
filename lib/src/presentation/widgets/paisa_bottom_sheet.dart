@@ -7,7 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../main.dart';
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
-import '../settings/bloc/settings_controller.dart';
+import '../settings/controller/settings_controller.dart';
 
 enum UserMenuPopup { debts, chooseTheme, settings, userDetails }
 

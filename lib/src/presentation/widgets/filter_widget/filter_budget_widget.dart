@@ -5,7 +5,7 @@ import '../../summary/controller/summary_controller.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_expense.dart';
-import '../../settings/bloc/settings_controller.dart';
+import '../../settings/controller/settings_controller.dart';
 import '../paisa_pill_chip.dart';
 import '../paisa_toggle_button.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../bloc/settings_controller.dart';
+import '../controller/settings_controller.dart';
 
 class AccountsStyleWidget extends StatefulWidget {
   const AccountsStyleWidget({super.key});

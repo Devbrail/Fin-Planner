@@ -1,17 +1,35 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/main.dart';
+import 'package:paisa/src/domain/category/entities/category.dart';
+import 'package:paisa/src/domain/category/use_case/category_use_case.dart';
+import 'package:paisa/src/domain/expense/entities/expense.dart';
+import 'package:paisa/src/domain/expense/use_case/expense_use_case.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../data/settings/file_handler.dart';
+import '../../../domain/expense/use_case/update_expense_use_case.dart';
 
-part 'data_state.dart';
+part 'settings_state.dart';
+
+const expenseFixKey = "expense_fix_key";
 
 @injectable
-class DataCubit extends Cubit<DataState> {
-  DataCubit() : super(DataInitial());
+class SettingCubit extends Cubit<SettingsState> {
+  SettingCubit(
+    @Named('settings') this.settings,
+    this.expensesUseCase,
+    this.defaultCategoriesUseCase,
+    this.updateExpensesUseCase,
+  ) : super(DataInitial());
+
+  final GetDefaultCategoriesUseCase defaultCategoriesUseCase;
+  final GetExpensesUseCase expensesUseCase;
+  final Box<dynamic> settings;
+  final UpdateExpensesUseCase updateExpensesUseCase;
 
   void importDataFromJson() {
     emit(const DataLoadingState(true));
@@ -59,6 +77,37 @@ class DataCubit extends Cubit<DataState> {
     });
   }
 
+  void fixExpenses() async {
+    if (settings.get(expenseFixKey, defaultValue: true)) {
+      emit(ExpenseFixStarted());
+      final List<Category> categories = defaultCategoriesUseCase();
+      if (categories.isEmpty) {
+        return emit(ExpenseFixError());
+      }
+      final List<Expense> expenses = expensesUseCase()
+          .where((element) => element.categoryId == -1)
+          .toList();
+
+      for (var element in expenses) {
+        element.categoryId = categories.first.superId!;
+        await updateExpensesUseCase(element);
+      }
+      settings.put(expenseFixKey, false);
+      emit(ExpenseFixDone());
+    }
+  }
+
+  /* FutureOr<void> _checkDefaultCategory(
+    CheckDefaultCategoryEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    final List<Expense> expenses = expensesUseCase();
+    final bool showFixDialog =
+        expenses.where((element) => element.categoryId == -1).isNotEmpty;
+    if (showFixDialog) {
+      emit(ShowFixDialogState());
+    }
+  } */
   void _exportFile() {
     final FileHandler fileHandler = getIt.get<FileHandler>();
     fileHandler.backupDataIntoFile().then((value) => emit(DataExportState()));

@@ -5,7 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../core/common.dart';
 import '../../widgets/paisa_date_picker.dart';
 import '../../widgets/paisa_time_picker.dart';
-import '../bloc/expense_bloc.dart';
+import '../bloc/transaction_bloc.dart';
 
 class ExpenseDatePickerWidget extends StatefulWidget {
   const ExpenseDatePickerWidget({
@@ -19,11 +19,11 @@ class ExpenseDatePickerWidget extends StatefulWidget {
 
 class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
   late DateTime selectedDateTime =
-      BlocProvider.of<ExpenseBloc>(context).selectedDate;
+      BlocProvider.of<TransactionBloc>(context).selectedDate;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ExpenseBloc, ExpenseState>(
+    return BlocBuilder<TransactionBloc, TransactionState>(
       builder: (context, state) {
         return Row(
           children: [
@@ -44,7 +44,7 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                         month: dateTime.month,
                         year: dateTime.year,
                       );
-                      BlocProvider.of<ExpenseBloc>(context).selectedDate =
+                      BlocProvider.of<TransactionBloc>(context).selectedDate =
                           selectedDateTime;
                     });
                   }
@@ -69,7 +69,7 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                         hour: timeOfDay.hour,
                         minute: timeOfDay.minute,
                       );
-                      BlocProvider.of<ExpenseBloc>(context).selectedDate =
+                      BlocProvider.of<TransactionBloc>(context).selectedDate =
                           selectedDateTime;
                     });
                   }

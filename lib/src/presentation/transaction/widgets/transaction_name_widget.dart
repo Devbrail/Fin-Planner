@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paisa/src/core/common.dart';
 
 import '../../widgets/paisa_text_field.dart';
-import '../bloc/expense_bloc.dart';
+import '../bloc/transaction_bloc.dart';
 
-class ExpenseNameWidget extends StatelessWidget {
-  const ExpenseNameWidget({
+class TransactionNameWidget extends StatelessWidget {
+  const TransactionNameWidget({
     super.key,
     required this.controller,
   });
@@ -16,7 +16,7 @@ class ExpenseNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ExpenseBloc, ExpenseState>(
+    return BlocBuilder<TransactionBloc, TransactionState>(
       buildWhen: (oldState, newState) => newState is ChangeTransactionTypeState,
       builder: (context, state) {
         if (state is ChangeTransactionTypeState) {
@@ -38,7 +38,7 @@ class ExpenseNameWidget extends StatelessWidget {
                 }
               },
               onChanged: (value) =>
-                  BlocProvider.of<ExpenseBloc>(context).expenseName = value,
+                  BlocProvider.of<TransactionBloc>(context).expenseName = value,
             ),
           );
         } else {

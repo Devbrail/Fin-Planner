@@ -4,7 +4,7 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/settings/authenticate.dart';
 import '../../widgets/future_resolve.dart';
-import '../bloc/settings_controller.dart';
+import '../controller/settings_controller.dart';
 
 class BiometricAuthWidget extends StatefulWidget {
   const BiometricAuthWidget({

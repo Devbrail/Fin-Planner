@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/transaction_type.dart';
 import '../../widgets/paisa_text_field.dart';
-import '../bloc/expense_bloc.dart';
+import '../bloc/transaction_bloc.dart';
 
-class ExpenseAmountWidget extends StatelessWidget {
-  const ExpenseAmountWidget({
+class TransactionAmountWidget extends StatelessWidget {
+  const TransactionAmountWidget({
     super.key,
     required this.controller,
   });
@@ -39,11 +39,11 @@ class ExpenseAmountWidget extends StatelessWidget {
         ],
         onChanged: (value) {
           double? amount = double.tryParse(value);
-          if (BlocProvider.of<ExpenseBloc>(context).transactionType !=
+          if (BlocProvider.of<TransactionBloc>(context).transactionType !=
               TransactionType.transfer) {
-            BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
+            BlocProvider.of<TransactionBloc>(context).expenseAmount = amount;
           } else {
-            BlocProvider.of<ExpenseBloc>(context).transferAmount = amount;
+            BlocProvider.of<TransactionBloc>(context).transferAmount = amount;
           }
         },
         validator: (value) {

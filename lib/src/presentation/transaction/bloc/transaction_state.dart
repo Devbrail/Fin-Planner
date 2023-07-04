@@ -1,17 +1,17 @@
-part of 'expense_bloc.dart';
+part of 'transaction_bloc.dart';
 
 @immutable
-abstract class ExpenseState extends Equatable {
-  const ExpenseState();
+abstract class TransactionState extends Equatable {
+  const TransactionState();
 
   @override
   List<Object> get props => [];
 }
 
-class ExpenseInitial extends ExpenseState {}
+class ExpenseInitial extends TransactionState {}
 
-class ExpenseAdded extends ExpenseState {
-  const ExpenseAdded({this.isAddOrUpdate = false});
+class TransactionAdded extends TransactionState {
+  const TransactionAdded({this.isAddOrUpdate = false});
 
   final bool isAddOrUpdate;
 
@@ -19,9 +19,9 @@ class ExpenseAdded extends ExpenseState {
   List<Object> get props => [isAddOrUpdate];
 }
 
-class ExpenseDeletedState extends ExpenseState {}
+class TransactionDeletedState extends TransactionState {}
 
-class ChangeTransactionTypeState extends ExpenseState {
+class ChangeTransactionTypeState extends TransactionState {
   const ChangeTransactionTypeState(this.transactionType);
 
   final TransactionType transactionType;
@@ -30,7 +30,7 @@ class ChangeTransactionTypeState extends ExpenseState {
   List<Object> get props => [transactionType];
 }
 
-class ChangeRecurringTypeState extends ExpenseState {
+class ChangeRecurringTypeState extends TransactionState {
   const ChangeRecurringTypeState(this.recurringType);
 
   final RecurringType recurringType;
@@ -39,8 +39,8 @@ class ChangeRecurringTypeState extends ExpenseState {
   List<Object> get props => [recurringType];
 }
 
-class ExpenseErrorState extends ExpenseState {
-  const ExpenseErrorState(this.errorString);
+class TransactionErrorState extends TransactionState {
+  const TransactionErrorState(this.errorString);
 
   final String errorString;
 
@@ -48,8 +48,8 @@ class ExpenseErrorState extends ExpenseState {
   List<Object> get props => [errorString];
 }
 
-class ExpenseSuccessState extends ExpenseState {
-  const ExpenseSuccessState(this.expense);
+class TransactionFoundState extends TransactionState {
+  const TransactionFoundState(this.expense);
 
   final ExpenseModel expense;
 
@@ -57,7 +57,7 @@ class ExpenseSuccessState extends ExpenseState {
   List<Object> get props => [expense];
 }
 
-class ChangeCategoryState extends ExpenseState {
+class ChangeCategoryState extends TransactionState {
   const ChangeCategoryState(this.category);
 
   final CategoryModel category;
@@ -66,7 +66,7 @@ class ChangeCategoryState extends ExpenseState {
   List<Object> get props => [category];
 }
 
-class ChangeAccountState extends ExpenseState {
+class ChangeAccountState extends TransactionState {
   const ChangeAccountState(this.account);
 
   final AccountModel account;
@@ -75,7 +75,7 @@ class ChangeAccountState extends ExpenseState {
   List<Object> get props => [account];
 }
 
-class UpdateDateTimeState extends ExpenseState {
+class UpdateDateTimeState extends TransactionState {
   const UpdateDateTimeState(this.dateTime);
 
   final DateTime dateTime;
@@ -84,7 +84,7 @@ class UpdateDateTimeState extends ExpenseState {
   List<Object> get props => [dateTime];
 }
 
-class TransferAccountState extends ExpenseState {
+class TransferAccountState extends TransactionState {
   const TransferAccountState(
     this.isFromAccount,
     this.fromAccount,
@@ -98,7 +98,7 @@ class TransferAccountState extends ExpenseState {
   List<Object> get props => [isFromAccount];
 }
 
-class DefaultCategoriesState extends ExpenseState {
+class DefaultCategoriesState extends TransactionState {
   const DefaultCategoriesState(this.categories);
 
   final List<Category> categories;

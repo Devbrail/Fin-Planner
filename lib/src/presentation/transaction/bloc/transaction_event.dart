@@ -1,4 +1,4 @@
-part of 'expense_bloc.dart';
+part of 'transaction_bloc.dart';
 
 @immutable
 abstract class ExpenseEvent extends Equatable {
@@ -8,8 +8,8 @@ abstract class ExpenseEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchExpenseFromIdEvent extends ExpenseEvent {
-  const FetchExpenseFromIdEvent(this.expenseId);
+class FindTransactionFromIdEvent extends ExpenseEvent {
+  const FindTransactionFromIdEvent(this.expenseId);
 
   final String? expenseId;
 }
@@ -26,8 +26,8 @@ class ClearExpenseEvent extends ExpenseEvent {
   final String expenseId;
 }
 
-class ChangeExpenseEvent extends ExpenseEvent {
-  const ChangeExpenseEvent(this.transactionType);
+class ChangeTransactionTypeEvent extends ExpenseEvent {
+  const ChangeTransactionTypeEvent(this.transactionType);
 
   final TransactionType transactionType;
 }

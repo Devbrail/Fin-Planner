@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/common.dart';
 import '../../../data/currencies/models/country_model.dart';
 import '../../../domain/currencies/use_case/get_country_user_case.dart';
-import '../../settings/bloc/settings_controller.dart';
+import '../../settings/controller/settings_controller.dart';
 
 part 'country_state.dart';
 

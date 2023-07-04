@@ -8,7 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../core/enum/card_type.dart';
-import '../../../settings/bloc/settings_controller.dart';
+import '../../../settings/controller/settings_controller.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_bottom_sheet.dart';
 import '../../../widgets/paisa_color_picker.dart';

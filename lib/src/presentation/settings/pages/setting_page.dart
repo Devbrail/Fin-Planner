@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/presentation/settings/cubit/settings_cubit.dart';
 import 'package:paisa/src/presentation/settings/widgets/small_size_fab_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,6 +17,7 @@ import '../../widgets/paisa_annotate_region_widget.dart';
 import '../widgets/accounts_style_widget.dart';
 import '../widgets/biometrics_auth_widget.dart';
 import '../widgets/currency_change_widget.dart';
+import '../widgets/expense_fix_widget.dart';
 import '../widgets/setting_option.dart';
 import '../widgets/settings_color_picker_widget.dart';
 import '../widgets/settings_group_card.dart';
@@ -83,11 +86,13 @@ class SettingsPage extends StatelessWidget {
                 ),
                 const CurrencyChangeWidget(),
                 const Divider(),
+                const FixExpenseWidget(),
+                const Divider(),
                 SettingsOption(
                   title: context.loc.backupAndRestoreTitle,
                   subtitle: context.loc.backupAndRestoreSubTitle,
                   onTap: () {
-                    GoRouter.of(context).goNamed(exportAndImportName);
+                    context.goNamed(exportAndImportName);
                   },
                 ),
               ],
