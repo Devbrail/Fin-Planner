@@ -44,7 +44,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
             color: context.onSurfaceVariant,
           ),
         ),
-        subtitle: category.description == null
+        subtitle: category.description == null || category.description == ''
             ? null
             : Text(
                 category.description!,
