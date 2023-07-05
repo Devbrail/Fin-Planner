@@ -6,7 +6,7 @@ import '../bloc/transaction_bloc.dart';
 import 'pill_accounts_widget.dart';
 import 'transaction_amount_widget.dart';
 import 'transaction_date_picker_widget.dart';
-import 'transfer_category_widget.dart';
+import 'transfer_categories_widget.dart';
 
 class TransferWidget extends StatelessWidget {
   const TransferWidget({
@@ -22,7 +22,7 @@ class TransferWidget extends StatelessWidget {
       children: [
         const SizedBox(height: 16),
         TransactionAmountWidget(controller: controller),
-        const TransferCategoryWidget(),
+        const TransferCategoriesWidget(),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(

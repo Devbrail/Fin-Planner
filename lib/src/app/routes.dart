@@ -205,9 +205,7 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: addCategoryName,
           path: addCategoryPath,
-          builder: (context, state) => AddCategoryPage(
-            isDefault: state.queryParameters['isDefault'] == 'true',
-          ),
+          builder: (context, state) => const AddCategoryPage(),
           routes: [
             GoRoute(
               path: iconPickerPath,

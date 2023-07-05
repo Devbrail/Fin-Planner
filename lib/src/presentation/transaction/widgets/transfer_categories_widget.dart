@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../../../domain/category/entities/category.dart';
-import 'select_category_widget.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../../data/category/model/category_model.dart';
+import '../../../domain/category/entities/category.dart';
 import '../bloc/transaction_bloc.dart';
-import '../pages/transaction_page.dart';
+import 'select_category_widget.dart';
 
-class TransferCategoryWidget extends StatelessWidget {
-  const TransferCategoryWidget({super.key});
+class TransferCategoriesWidget extends StatelessWidget {
+  const TransferCategoriesWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +22,7 @@ class TransferCategoryWidget extends StatelessWidget {
           if (state.categories.isEmpty) {
             return ListTile(
               onTap: () async {
-                await context.pushNamed(
-                  addCategoryName,
-                  queryParameters: {'isDefault': 'true'},
-                );
+                await context.pushNamed(addCategoryName);
                 if (context.mounted) {
                   BlocProvider.of<TransactionBloc>(context)
                       .add(FetchDefaultCategoryEvent());

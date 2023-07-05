@@ -19,11 +19,9 @@ class AddCategoryPage extends StatefulWidget {
   const AddCategoryPage({
     Key? key,
     this.categoryId,
-    this.isDefault,
   }) : super(key: key);
 
   final String? categoryId;
-  final bool? isDefault;
 
   @override
   State<AddCategoryPage> createState() => _AddCategoryPageState();
@@ -47,7 +45,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   @override
   void initState() {
     super.initState();
-    categoryBloc.isDefault = widget.isDefault ?? false;
     categoryBloc.add(FetchCategoryFromIdEvent(widget.categoryId));
   }
 
@@ -103,8 +100,22 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const SizedBox(height: 16),
+                            CategoryNameWidget(controller: categoryController),
+                            const SizedBox(height: 16),
+                            CategoryDescriptionWidget(
+                              controller: descController,
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+                        ),
+                      ),
                       const CategoryIconPickerWidget(),
-                      SetBudgetWidget(controller: budgetController),
                       ListTile(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -136,19 +147,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            const SizedBox(height: 16),
-                            CategoryNameWidget(controller: categoryController),
-                            const SizedBox(height: 16),
-                            CategoryDescriptionWidget(
-                                controller: descController),
-                          ],
-                        ),
-                      ),
+                      SetBudgetWidget(controller: budgetController),
+                      const TransferCategoryWidget(),
                     ],
                   ),
                 ),
@@ -232,6 +232,30 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           );
         },
       ),
+    );
+  }
+}
+
+class TransferCategoryWidget extends StatefulWidget {
+  const TransferCategoryWidget({super.key});
+
+  @override
+  State<TransferCategoryWidget> createState() => _TransferCategoryWidgetState();
+}
+
+class _TransferCategoryWidgetState extends State<TransferCategoryWidget> {
+  bool isAccountDefault = false;
+  @override
+  Widget build(BuildContext context) {
+    return SwitchListTile(
+      title: const Text('Transer category'),
+      value: isAccountDefault,
+      onChanged: (value) {
+        setState(() {
+          isAccountDefault = value;
+          BlocProvider.of<CategoryBloc>(context).isDefault = value;
+        });
+      },
     );
   }
 }
