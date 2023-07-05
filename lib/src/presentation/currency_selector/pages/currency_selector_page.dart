@@ -5,36 +5,32 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/currencies/models/country_model.dart';
-import '../../settings/controller/settings_controller.dart';
+import '../../widgets/paisa_annotate_region_widget.dart';
 import '../../widgets/paisa_card.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../cubit/country_cubit.dart';
 
-class CurrencySelectorPage extends StatefulWidget {
-  const CurrencySelectorPage({
+class CountrySelectorPage extends StatefulWidget {
+  const CountrySelectorPage({
     Key? key,
-    required this.forceCurrencySelector,
+    required this.forceCountrySelector,
   }) : super(key: key);
 
-  final bool forceCurrencySelector;
+  final bool forceCountrySelector;
 
   @override
-  State<CurrencySelectorPage> createState() => _CurrencySelectorPageState();
+  State<CountrySelectorPage> createState() => _CountrySelectorPageState();
 }
 
-class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
-  final CountryCubit countryCubit = getIt.get<CountryCubit>();
-  CountryModel? countryModel;
-  final SettingsController settings = getIt.get<SettingsController>();
-
+class _CountrySelectorPageState extends State<CountrySelectorPage> {
+  late final CountryCubit countryCubit = BlocProvider.of<CountryCubit>(context);
   @override
   void initState() {
     super.initState();
-    if (widget.forceCurrencySelector) {
+    if (widget.forceCountrySelector) {
       countryCubit.fetchCountry();
     } else {
       countryCubit.checkForData();
@@ -48,103 +44,96 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
     if (json != null) {
       countryModel = CountryModel.fromJson(json);
     }
-    return BlocListener(
-      bloc: countryCubit,
-      listener: (context, state) {
-        if (state is NavigateToLading) {
-          context.goNamed(landingName);
-        }
-      },
-      child: Scaffold(
-        appBar: widget.forceCurrencySelector ? AppBar() : null,
-        body: SafeArea(
-          child: Column(
-            children: [
-              widget.forceCurrencySelector
-                  ? const SizedBox.shrink()
-                  : const SizedBox(height: 16),
-              FractionallySizedBox(
-                widthFactor: 0.8,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Icon(
-                        Icons.language_rounded,
-                        size: 72,
-                        color: context.primary,
+    return PaisaAnnotatedRegionWidget(
+      color: context.background,
+      child: BlocListener<CountryCubit, CountryState>(
+        listener: (context, state) {
+          if (state is NavigateToLading) {
+            context.goNamed(landingName);
+          }
+        },
+        child: Scaffold(
+          appBar: widget.forceCountrySelector ? AppBar() : null,
+          body: SafeArea(
+            child: Column(
+              children: [
+                widget.forceCountrySelector
+                    ? const SizedBox.shrink()
+                    : const SizedBox(height: 16),
+                FractionallySizedBox(
+                  widthFactor: 0.8,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Icon(
+                          Icons.language_rounded,
+                          size: 72,
+                          color: context.primary,
+                        ),
                       ),
-                    ),
-                    Text(
-                      context.loc.selectCurrency,
-                      style: context.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: context.onSurface,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: PaisaTextFormField(
-                  hintText: context.loc.search,
-                  controller: TextEditingController(),
-                  keyboardType: TextInputType.name,
-                  onChanged: (value) => countryCubit.filterCountry(value),
-                ),
-              ),
-              Expanded(
-                child: BlocBuilder(
-                  bloc: countryCubit,
-                  builder: (context, state) {
-                    if (state is CountriesState) {
-                      return ScreenTypeLayout(
-                        mobile: CountriesWidget(
-                          countries: state.countries,
-                          crossAxisCount: 2,
-                          onSelected: (countryModel) {
-                            countryCubit.selectedCountry = countryModel;
-                          },
-                          selectedModel: countryModel,
+                      Text(
+                        context.loc.selectCurrency,
+                        style: context.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.onSurface,
                         ),
-                        tablet: CountriesWidget(
-                          countries: state.countries,
-                          crossAxisCount: 3,
-                          onSelected: (countryModel) {
-                            countryCubit.selectedCountry = countryModel;
-                          },
-                          selectedModel: countryModel,
-                        ),
-                        desktop: CountriesWidget(
-                          countries: state.countries,
-                          crossAxisCount: 6,
-                          onSelected: (countryModel) {
-                            countryCubit.selectedCountry = countryModel;
-                          },
-                          selectedModel: countryModel,
-                        ),
-                      );
-                    }
-                    return Container();
-                  },
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: PaisaTextFormField(
+                    hintText: context.loc.search,
+                    controller: TextEditingController(),
+                    keyboardType: TextInputType.name,
+                    onChanged: (value) => countryCubit.filterCountry(value),
+                  ),
+                ),
+                Expanded(
+                  child: BlocBuilder<CountryCubit, CountryState>(
+                    bloc: countryCubit,
+                    builder: (context, state) {
+                      if (state is CountriesState) {
+                        return ScreenTypeLayout(
+                          mobile: CountriesWidget(
+                            countries: state.countries,
+                            crossAxisCount: 2,
+                            selectedModel: countryModel,
+                          ),
+                          tablet: CountriesWidget(
+                            countries: state.countries,
+                            crossAxisCount: 3,
+                            selectedModel: countryModel,
+                          ),
+                          desktop: CountriesWidget(
+                            countries: state.countries,
+                            crossAxisCount: 6,
+                            selectedModel: countryModel,
+                          ),
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            countryCubit.saveCountry();
-          },
-          extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
-          label: const Icon(MdiIcons.arrowRight),
-          icon: Text(
-            context.loc.next,
-            style: context.bodyLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1,
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              countryCubit.saveCountry();
+            },
+            extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
+            label: const Icon(MdiIcons.arrowRight),
+            icon: Text(
+              context.loc.next,
+              style: context.bodyLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1,
+              ),
             ),
           ),
         ),
@@ -158,13 +147,11 @@ class CountriesWidget extends StatefulWidget {
     super.key,
     required this.countries,
     required this.crossAxisCount,
-    required this.onSelected,
     this.selectedModel,
   });
 
   final List<CountryModel> countries;
   final int crossAxisCount;
-  final Function(CountryModel countryModel) onSelected;
   final CountryModel? selectedModel;
 
   @override
@@ -186,56 +173,79 @@ class _CountriesWidgetState extends State<CountriesWidget> {
       itemCount: widget.countries.length,
       itemBuilder: (context, index) {
         final CountryModel model = widget.countries[index];
-        return PaisaCard(
-          color: context.surface,
-          shape: selectedModel == model
-              ? RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                  side: BorderSide(
-                    width: 2,
-                    color: context.primary,
-                  ),
-                )
-              : null,
-          child: InkWell(
-            onTap: () {
-              setState(() {
-                selectedModel = model;
-              });
-              widget.onSelected(model);
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 16.0,
-                    left: 16,
-                  ),
-                  child: Text(
-                    model.symbol,
-                    style: GoogleFonts.manrope(
-                      textStyle: context.titleLarge,
-                    ),
-                  ),
-                ),
-                const Spacer(),
-                ListTile(
-                  title: Text(
-                    model.name,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    model.code,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )
-              ],
-            ),
-          ),
+        return CountryWidget(
+          countryModel: model,
+          selected: selectedModel == model,
+          onSelected: (countryModel) {
+            setState(() {
+              selectedModel = countryModel;
+            });
+            BlocProvider.of<CountryCubit>(context).selectedCountry =
+                countryModel;
+          },
         );
       },
+    );
+  }
+}
+
+class CountryWidget extends StatelessWidget {
+  const CountryWidget({
+    super.key,
+    required this.countryModel,
+    required this.selected,
+    required this.onSelected,
+  });
+
+  final CountryModel countryModel;
+  final Function(CountryModel countryModel) onSelected;
+  final bool selected;
+
+  @override
+  Widget build(BuildContext context) {
+    return PaisaCard(
+      color: context.surface,
+      shape: selected
+          ? RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+              side: BorderSide(
+                width: 2,
+                color: context.primary,
+              ),
+            )
+          : null,
+      child: InkWell(
+        onTap: () => onSelected(countryModel),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 16.0,
+                left: 16,
+              ),
+              child: Text(
+                countryModel.symbol,
+                style: GoogleFonts.manrope(
+                  textStyle: context.titleLarge,
+                ),
+              ),
+            ),
+            const Spacer(),
+            ListTile(
+              title: Text(
+                countryModel.name,
+                overflow: TextOverflow.ellipsis,
+              ),
+              subtitle: Text(
+                countryModel.code,
+                overflow: TextOverflow.ellipsis,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -69,7 +69,7 @@ class ExpenseItemWidget extends StatelessWidget {
           ),
         ),
         trailing: Text(
-          expense.currency.toFormateCurrency(),
+          expense.currency.toFormateCurrency(context),
           style: GoogleFonts.manrope(
             textStyle: context.bodyMedium?.copyWith(
               color: expense.type?.color(context),
@@ -121,7 +121,7 @@ class ExpenseTransferItemWidget extends StatelessWidget {
             ),
           ),
           trailing: Text(
-            '${expense.type?.sign}${expense.currency.toFormateCurrency()}',
+            '${expense.type?.sign}${expense.currency.toFormateCurrency(context)}',
             style: GoogleFonts.manrope(
               textStyle: context.bodyLarge?.copyWith(
                 color: expense.type?.color(context),

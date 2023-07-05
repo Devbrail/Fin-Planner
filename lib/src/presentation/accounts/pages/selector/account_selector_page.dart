@@ -30,7 +30,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
   Future<void> saveAndNavigate() async {
     await settings.put(userAccountSelectorKey, false);
     if (mounted) {
-      context.go(currencySelectorPath);
+      context.go(countrySelectorPath);
     }
   }
 

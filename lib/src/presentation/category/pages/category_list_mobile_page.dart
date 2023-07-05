@@ -18,7 +18,10 @@ class CategoryListMobileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => const Divider(
+        indent: 72,
+      ),
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 124),
       itemCount: categories.length,

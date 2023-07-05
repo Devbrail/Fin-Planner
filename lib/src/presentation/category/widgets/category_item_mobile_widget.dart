@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/category/model/category_model.dart';
-import '../../widgets/paisa_card.dart';
 
 class CategoryItemMobileWidget extends StatelessWidget {
   const CategoryItemMobileWidget({
@@ -18,12 +17,13 @@ class CategoryItemMobileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaFilledCard(
+    return InkWell(
+      borderRadius: BorderRadius.circular(24),
+      onTap: () => context.pushNamed(
+        editCategoryName,
+        pathParameters: <String, String>{'cid': category.superId.toString()},
+      ),
       child: ListTile(
-        onTap: () => context.pushNamed(
-          editCategoryName,
-          pathParameters: <String, String>{'cid': category.superId.toString()},
-        ),
         leading: CircleAvatar(
           backgroundColor: Color(category.color ?? Colors.amber.shade100.value)
               .withOpacity(0.3),
@@ -33,7 +33,6 @@ class CategoryItemMobileWidget extends StatelessWidget {
               fontFamily: fontFamilyName,
               fontPackage: fontFamilyPackageName,
             ),
-            size: 28,
             color: Color(category.color ?? Colors.amber.shade100.value),
           ),
         ),

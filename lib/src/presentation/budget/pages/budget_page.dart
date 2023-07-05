@@ -100,7 +100,8 @@ class BudgetItem extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: ' ${category.finalBudget.toFormateCurrency()}',
+                        text:
+                            ' ${category.finalBudget.toFormateCurrency(context)}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -115,7 +116,7 @@ class BudgetItem extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: ' ${totalExpenses.toFormateCurrency()}',
+                        text: ' ${totalExpenses.toFormateCurrency(context)}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -131,7 +132,7 @@ class BudgetItem extends StatelessWidget {
                     children: [
                       TextSpan(
                         text:
-                            ' ${(difference < 0 ? 0.0 : difference).toFormateCurrency()}',
+                            ' ${(difference < 0 ? 0.0 : difference).toFormateCurrency(context)}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],

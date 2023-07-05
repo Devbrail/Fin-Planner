@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:paisa/src/core/common.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../../data/expense/model/expense_model.dart';
 import '../../summary/controller/summary_controller.dart';
+import '../../widgets/paisa_empty_widget.dart';
 import '../cubit/budget_cubit.dart';
 import '../widgets/filter_budget_widget.dart';
 import '../widgets/filter_date_range_widget.dart';
@@ -27,6 +29,13 @@ class OverViewPage extends StatelessWidget {
     return ValueListenableBuilder<Box<ExpenseModel>>(
       valueListenable: getIt.get<Box<ExpenseModel>>().listenable(),
       builder: (context, expenseBox, _) {
+        if (expenseBox.values.isEmpty) {
+          return EmptyWidget(
+            icon: Icons.paid,
+            title: context.loc.emptyOverviewMessageTitle,
+            description: context.loc.emptyOverviewMessageSubtitle,
+          );
+        }
         return FilterOverviewWidget(
           expenses: expenseBox.values,
           valueNotifier: summaryController.typeNotifier,

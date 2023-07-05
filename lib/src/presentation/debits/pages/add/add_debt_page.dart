@@ -179,8 +179,8 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                                 icon: const Icon(Icons.delete),
                               ),
                               title: Text(transaction.now.formattedDate),
-                              trailing:
-                                  Text(transaction.amount.toFormateCurrency()),
+                              trailing: Text(transaction.amount
+                                  .toFormateCurrency(context)),
                             );
                           },
                         );

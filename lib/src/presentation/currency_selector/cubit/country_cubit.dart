@@ -4,8 +4,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../../core/common.dart';
 import '../../../data/currencies/models/country_model.dart';
-import '../../../domain/currencies/use_case/get_country_user_case.dart';
 import '../../settings/controller/settings_controller.dart';
+import '../../../domain/currencies/use_case/get_countries_user_case.dart';
 
 part 'country_state.dart';
 
@@ -16,7 +16,7 @@ class CountryCubit extends Cubit<CountryState> {
     this.settings,
   ) : super(CountryInitial());
 
-  final GetCountryUseCase getCountryUseCase;
+  final GetCountriesUseCase getCountryUseCase;
   CountryModel? selectedCountry;
   final SettingsController settings;
 
@@ -41,7 +41,7 @@ class CountryCubit extends Cubit<CountryState> {
     List<CountryModel> countries = getCountryUseCase()
         .where(
           (element) =>
-              element.name.toLowerCase().contains(value) ||
+              element.name.toLowerCase().contains(value.toLowerCase()) ||
               element.code.toLowerCase().contains(value.toLowerCase()),
         )
         .toList();
@@ -52,6 +52,7 @@ class CountryCubit extends Cubit<CountryState> {
     if (selectedCountry == null) return;
 
     settings.put(userCountryKey, selectedCountry!.toJson());
+    settings.put(userLanguageKey, selectedCountry!.code);
     emit(const NavigateToLading(true));
   }
 }

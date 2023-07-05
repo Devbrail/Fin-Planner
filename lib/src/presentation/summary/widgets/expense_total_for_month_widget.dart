@@ -55,7 +55,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '+${income.toFormateCurrency()}',
+                    '+${income.toFormateCurrency(context)}',
                     style: GoogleFonts.manrope(
                       textStyle: context.titleLarge?.copyWith(
                         color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -88,7 +88,7 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '-${outcome.toFormateCurrency()}',
+                    '-${outcome.toFormateCurrency(context)}',
                     style: GoogleFonts.manrope(
                       textStyle: context.titleLarge?.copyWith(
                         color: Theme.of(context).colorScheme.onPrimaryContainer,

@@ -35,7 +35,7 @@ class ExpenseMonthCardWidget extends StatelessWidget {
             ),
           ),
           trailing: Text(
-            total.toFormateCurrency(),
+            total.toFormateCurrency(context),
             style: GoogleFonts.manrope(
               textStyle: context.titleSmall?.copyWith(
                 color: total.isNegative

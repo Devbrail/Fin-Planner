@@ -13,14 +13,14 @@ import 'package:paisa/src/data/accounts/data_sources/local_account_data_manager.
     as _i24;
 import 'package:paisa/src/data/accounts/data_sources/local_account_data_manager_impl.dart'
     as _i25;
-import 'package:paisa/src/data/accounts/model/account_model.dart' as _i6;
+import 'package:paisa/src/data/accounts/model/account_model.dart' as _i5;
 import 'package:paisa/src/data/accounts/repository/account_repository_impl.dart'
     as _i39;
 import 'package:paisa/src/data/category/data_sources/category_local_data_source.dart'
     as _i26;
 import 'package:paisa/src/data/category/data_sources/category_local_data_source_impl.dart'
     as _i27;
-import 'package:paisa/src/data/category/model/category_model.dart' as _i7;
+import 'package:paisa/src/data/category/model/category_model.dart' as _i9;
 import 'package:paisa/src/data/category/repository/category_repository_impl.dart'
     as _i45;
 import 'package:paisa/src/data/currencies/repository/currencies_repository_impl.dart'
@@ -29,22 +29,22 @@ import 'package:paisa/src/data/debt/data_sources/debt_local_data_source.dart'
     as _i13;
 import 'package:paisa/src/data/debt/data_sources/debt_local_data_source_impl.dart'
     as _i14;
-import 'package:paisa/src/data/debt/models/debt_model.dart' as _i8;
-import 'package:paisa/src/data/debt/models/transactions_model.dart' as _i9;
+import 'package:paisa/src/data/debt/models/debt_model.dart' as _i10;
+import 'package:paisa/src/data/debt/models/transactions_model.dart' as _i8;
 import 'package:paisa/src/data/debt/repository/debt_repository_impl.dart'
     as _i16;
 import 'package:paisa/src/data/expense/data_sources/local_expense_data_manager.dart'
     as _i28;
 import 'package:paisa/src/data/expense/data_sources/local_expense_data_manager_impl.dart'
     as _i29;
-import 'package:paisa/src/data/expense/model/expense_model.dart' as _i5;
+import 'package:paisa/src/data/expense/model/expense_model.dart' as _i6;
 import 'package:paisa/src/data/expense/repository/expense_repository_impl.dart'
     as _i52;
 import 'package:paisa/src/data/recurring/data_sources/local_recurring_data_manager.dart'
     as _i31;
 import 'package:paisa/src/data/recurring/data_sources/local_recurring_data_manager_impl.dart'
     as _i32;
-import 'package:paisa/src/data/recurring/model/recurring.dart' as _i10;
+import 'package:paisa/src/data/recurring/model/recurring.dart' as _i7;
 import 'package:paisa/src/data/recurring/repository/recurring_repository_impl.dart'
     as _i34;
 import 'package:paisa/src/data/settings/authenticate.dart' as _i3;
@@ -80,7 +80,7 @@ import 'package:paisa/src/domain/category/use_case/update_category_use_case.dart
     as _i71;
 import 'package:paisa/src/domain/currencies/repository/currencies_repository.dart'
     as _i11;
-import 'package:paisa/src/domain/currencies/use_case/get_country_user_case.dart'
+import 'package:paisa/src/domain/currencies/use_case/get_countries_user_case.dart'
     as _i21;
 import 'package:paisa/src/domain/debt/repository/debit_repository.dart' as _i15;
 import 'package:paisa/src/domain/debt/use_case/add_debt_use.case.dart' as _i41;
@@ -167,27 +167,15 @@ Future<_i1.GetIt> init(
   );
   final hiveBoxModule = _$HiveBoxModule();
   gh.singleton<_i3.Authenticate>(_i3.Authenticate());
-  await gh.singletonAsync<_i4.Box<_i5.ExpenseModel>>(
-    () => hiveBoxModule.expenseBox,
-    preResolve: true,
-  );
-  await gh.singletonAsync<_i4.Box<_i6.AccountModel>>(
+  await gh.singletonAsync<_i4.Box<_i5.AccountModel>>(
     () => hiveBoxModule.accountBox,
     preResolve: true,
   );
-  await gh.singletonAsync<_i4.Box<_i7.CategoryModel>>(
-    () => hiveBoxModule.categoryBox,
+  await gh.singletonAsync<_i4.Box<_i6.ExpenseModel>>(
+    () => hiveBoxModule.expenseBox,
     preResolve: true,
   );
-  await gh.singletonAsync<_i4.Box<_i8.DebtModel>>(
-    () => hiveBoxModule.debtsBox,
-    preResolve: true,
-  );
-  await gh.singletonAsync<_i4.Box<_i9.TransactionsModel>>(
-    () => hiveBoxModule.transactionsBox,
-    preResolve: true,
-  );
-  await gh.singletonAsync<_i4.Box<_i10.RecurringModel>>(
+  await gh.singletonAsync<_i4.Box<_i7.RecurringModel>>(
     () => hiveBoxModule.recurringBox,
     preResolve: true,
   );
@@ -196,11 +184,23 @@ Future<_i1.GetIt> init(
     instanceName: 'settings',
     preResolve: true,
   );
+  await gh.singletonAsync<_i4.Box<_i8.TransactionsModel>>(
+    () => hiveBoxModule.transactionsBox,
+    preResolve: true,
+  );
+  await gh.singletonAsync<_i4.Box<_i9.CategoryModel>>(
+    () => hiveBoxModule.categoryBox,
+    preResolve: true,
+  );
+  await gh.singletonAsync<_i4.Box<_i10.DebtModel>>(
+    () => hiveBoxModule.debtsBox,
+    preResolve: true,
+  );
   gh.singleton<_i11.CurrenciesRepository>(
       _i12.CurrencySelectorRepositoryImpl());
   gh.singleton<_i13.DebtLocalDataSource>(_i14.DebtLocalDataSourceImpl(
-    debtBox: gh<_i4.Box<_i8.DebtModel>>(),
-    transactionsBox: gh<_i4.Box<_i9.TransactionsModel>>(),
+    debtBox: gh<_i4.Box<_i10.DebtModel>>(),
+    transactionsBox: gh<_i4.Box<_i8.TransactionsModel>>(),
   ));
   gh.singleton<_i15.DebtRepository>(
       _i16.DebtRepositoryImpl(dataSource: gh<_i13.DebtLocalDataSource>()));
@@ -211,21 +211,21 @@ Future<_i1.GetIt> init(
   gh.singleton<_i19.DeleteTransactionsUseCase>(_i19.DeleteTransactionsUseCase(
       debtRepository: gh<_i15.DebtRepository>()));
   gh.singleton<_i20.FileHandler>(_i20.FileHandler());
-  gh.factory<_i21.GetCountryUseCase>(() =>
-      _i21.GetCountryUseCase(repository: gh<_i11.CurrenciesRepository>()));
+  gh.factory<_i21.GetCountriesUseCase>(() =>
+      _i21.GetCountriesUseCase(repository: gh<_i11.CurrenciesRepository>()));
   gh.singleton<_i22.GetDebtUseCase>(
       _i22.GetDebtUseCase(debtRepository: gh<_i15.DebtRepository>()));
   gh.singleton<_i23.GetTransactionsUseCase>(
       _i23.GetTransactionsUseCase(debtRepository: gh<_i15.DebtRepository>()));
   gh.singleton<_i24.LocalAccountDataManager>(_i25.LocalAccountDataManagerImpl(
-      accountBox: gh<_i4.Box<_i6.AccountModel>>()));
+      accountBox: gh<_i4.Box<_i5.AccountModel>>()));
   gh.singleton<_i26.LocalCategoryDataManager>(
       _i27.LocalCategoryManagerDataSourceImpl(
-          gh<_i4.Box<_i7.CategoryModel>>()));
+          gh<_i4.Box<_i9.CategoryModel>>()));
   gh.factory<_i28.LocalExpenseDataManager>(
-      () => _i29.LocalExpenseDataManagerImpl(gh<_i30.Box<_i5.ExpenseModel>>()));
+      () => _i29.LocalExpenseDataManagerImpl(gh<_i30.Box<_i6.ExpenseModel>>()));
   gh.factory<_i31.LocalRecurringDataManager>(() =>
-      _i32.LocalRecurringDataManagerImpl(gh<_i4.Box<_i10.RecurringModel>>()));
+      _i32.LocalRecurringDataManagerImpl(gh<_i4.Box<_i7.RecurringModel>>()));
   gh.singleton<_i33.RecurringRepository>(_i34.RecurringRepositoryImpl(
     gh<_i31.LocalRecurringDataManager>(),
     gh<_i28.LocalExpenseDataManager>(),
@@ -252,7 +252,7 @@ Future<_i1.GetIt> init(
     settings: gh<_i4.Box<dynamic>>(instanceName: 'settings'),
   ));
   gh.factory<_i46.CountryCubit>(() => _i46.CountryCubit(
-        gh<_i21.GetCountryUseCase>(),
+        gh<_i21.GetCountriesUseCase>(),
         gh<_i36.SettingsController>(),
       ));
   gh.factory<_i47.DebtsBloc>(() => _i47.DebtsBloc(

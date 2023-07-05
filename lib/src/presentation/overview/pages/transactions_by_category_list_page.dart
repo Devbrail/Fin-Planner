@@ -31,7 +31,7 @@ class TransactionByCategoryListPage extends StatelessWidget {
         bottomNavigationBar: SafeArea(
           child: ListTile(
             title: Text(
-              expenses.total.toFormateCurrency(),
+              expenses.total.toFormateCurrency(context),
               style: context.titleMedium,
             ),
             subtitle: Text(

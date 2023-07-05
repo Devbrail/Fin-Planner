@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/data/currencies/data_source/country_data.dart';
 
 import '../../../domain/currencies/repository/currencies_repository.dart';
 import '../models/country_model.dart';
@@ -7,6 +8,7 @@ import '../models/country_model.dart';
 class CurrencySelectorRepositoryImpl implements CurrenciesRepository {
   @override
   List<CountryModel> fetchCountries() {
-    return countryFromJson();
+    return List<CountryModel>.from(
+        countriesdata.map((x) => CountryModel.fromJson(x)));
   }
 }

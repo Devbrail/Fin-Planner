@@ -44,7 +44,7 @@ class AccountSummaryWidget extends StatelessWidget {
               Expanded(
                 child: PaisaExpenseStatsWidget(
                   title: context.loc.income,
-                  total: expenses.thisMonthIncome.toFormateCurrency(),
+                  total: expenses.thisMonthIncome.toFormateCurrency(context),
                   data: expenses.incomeDoubleList,
                   graphLineColor:
                       Theme.of(context).extension<CustomColors>()!.green ??
@@ -55,7 +55,7 @@ class AccountSummaryWidget extends StatelessWidget {
               Expanded(
                 child: PaisaExpenseStatsWidget(
                   title: context.loc.expense,
-                  total: expenses.thisMonthExpense.toFormateCurrency(),
+                  total: expenses.thisMonthExpense.toFormateCurrency(context),
                   data: expenses.expenseDoubleList,
                   graphLineColor:
                       Theme.of(context).extension<CustomColors>()!.red ??

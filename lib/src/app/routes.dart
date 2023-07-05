@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/src/presentation/transaction/pages/transaction_page.dart';
 import 'package:provider/provider.dart';
 
+import '../../main.dart';
 import '../core/common.dart';
 import '../core/enum/box_types.dart';
 import '../core/enum/transaction_type.dart';
@@ -15,6 +17,7 @@ import '../presentation/category/pages/add/add_category_page.dart';
 import '../presentation/category/pages/category_icon_picker_page.dart';
 import '../presentation/category/pages/category_list_page.dart';
 import '../presentation/category/pages/selector/category_selector_page.dart';
+import '../presentation/currency_selector/cubit/country_cubit.dart';
 import '../presentation/currency_selector/pages/currency_selector_page.dart';
 import '../presentation/debits/pages/add/add_debt_page.dart';
 import '../presentation/home/pages/home_page.dart';
@@ -32,8 +35,8 @@ import '../presentation/summary/controller/summary_controller.dart';
 const loginPath = '/login';
 const loginName = 'login';
 
-const currencySelectorPath = '/currency-selector';
-const currencySelectorName = 'currency-selector';
+const countrySelectorPath = '/country-selector';
+const countrySelectorName = 'country-selector';
 
 const userNamePath = '/user-name';
 const userName = 'user-name';
@@ -143,13 +146,16 @@ final GoRouter goRouter = GoRouter(
           const Center(child: CircularProgressIndicator()),
     ),
     GoRoute(
-      name: currencySelectorName,
-      path: currencySelectorPath,
+      name: countrySelectorName,
+      path: countrySelectorPath,
       builder: (context, state) {
-        final forceCurrencySelector =
-            state.queryParameters['force_currency_selector'];
-        return CurrencySelectorPage(
-          forceCurrencySelector: forceCurrencySelector == 'true',
+        final forceCountrySelector =
+            state.queryParameters['force_country_selector'];
+        return BlocProvider(
+          create: (context) => getIt.get<CountryCubit>(),
+          child: CountrySelectorPage(
+            forceCountrySelector: forceCountrySelector == 'true',
+          ),
         );
       },
     ),
@@ -372,7 +378,7 @@ final GoRouter goRouter = GoRouter(
 
     final Map<dynamic, dynamic>? json = settings.get(userCountryKey);
     if (json == null && isLogging) {
-      return currencySelectorPath;
+      return countrySelectorPath;
     }
 
     final isBiometricEnabled = settings.get(userAuthKey, defaultValue: false);

@@ -5,8 +5,8 @@ import '../../../data/currencies/models/country_model.dart';
 import '../repository/currencies_repository.dart';
 
 @injectable
-class GetCountryUseCase {
-  GetCountryUseCase({required this.repository});
+class GetCountriesUseCase {
+  GetCountriesUseCase({required this.repository});
 
   final CurrenciesRepository repository;
 
