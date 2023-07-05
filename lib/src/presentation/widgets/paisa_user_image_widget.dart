@@ -8,8 +8,8 @@ import '../../../main.dart';
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
 
-class UserImageWidget extends StatelessWidget {
-  const UserImageWidget({
+class PaisaUserImageWidget extends StatelessWidget {
+  const PaisaUserImageWidget({
     Key? key,
     required this.pickImage,
     this.maxRadius,

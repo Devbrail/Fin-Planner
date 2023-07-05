@@ -60,7 +60,7 @@ class UserProfilePage extends StatelessWidget {
             Row(
               children: [
                 const SizedBox(width: 16),
-                UserImageWidget(pickImage: () => _pickImage(context)),
+                PaisaUserImageWidget(pickImage: () => _pickImage(context)),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),

@@ -48,27 +48,12 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
             appBar: context.materialYouAppBar(
               context.loc.categories,
               actions: [
-                ScreenTypeLayout(
-                  mobile: const SizedBox.shrink(),
-                  tablet: PaisaButton(
-                    onPressed: saveAndNavigate,
-                    title: context.loc.done,
-                  ),
+                PaisaButton(
+                  onPressed: saveAndNavigate,
+                  title: context.loc.done,
                 ),
                 const SizedBox(width: 16)
               ],
-            ),
-            bottomNavigationBar: ScreenTypeLayout(
-              mobile: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: PaisaBigButton(
-                    onPressed: saveAndNavigate,
-                    title: context.loc.done,
-                  ),
-                ),
-              ),
-              tablet: const SizedBox.shrink(),
             ),
             body: ListView(
               children: [
@@ -82,7 +67,8 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                 ),
                 ScreenTypeLayout(
                   mobile: PaisaFilledCard(
-                    child: ListView.builder(
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => const Divider(),
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: categoryModels.length,
                       shrinkWrap: true,

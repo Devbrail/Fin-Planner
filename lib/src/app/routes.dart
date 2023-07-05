@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/transaction/pages/transaction_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../main.dart';
@@ -21,9 +20,8 @@ import '../presentation/currency_selector/cubit/country_cubit.dart';
 import '../presentation/currency_selector/pages/currency_selector_page.dart';
 import '../presentation/debits/pages/add/add_debt_page.dart';
 import '../presentation/home/pages/home_page.dart';
-import '../presentation/login/intro/into_page.dart';
-import '../presentation/login/pages/user_image_page.dart';
-import '../presentation/login/pages/user_name_page.dart';
+import '../presentation/login/intro/intro_page.dart';
+import '../presentation/login/pages/user_onboarding_page.dart';
 import '../presentation/overview/pages/transactions_by_category_list_page.dart';
 import '../presentation/recurring/page/add_recurring_page.dart';
 import '../presentation/recurring/page/recurring_page.dart';
@@ -31,18 +29,13 @@ import '../presentation/search/pages/search_page.dart';
 import '../presentation/settings/pages/export_and_import_page.dart';
 import '../presentation/settings/pages/setting_page.dart';
 import '../presentation/summary/controller/summary_controller.dart';
+import '../presentation/transaction/pages/transaction_page.dart';
 
 const loginPath = '/login';
 const loginName = 'login';
 
 const countrySelectorPath = '/country-selector';
 const countrySelectorName = 'country-selector';
-
-const userNamePath = '/user-name';
-const userName = 'user-name';
-
-const userImagePath = '/user-image';
-const userImageName = 'user-image';
 
 const biometricPath = '/biometric';
 const biometricName = 'biometric';
@@ -116,6 +109,9 @@ const accountSelectorPath = '/account-selector';
 const iconPickerName = 'icon-picker';
 const iconPickerPath = 'icon-picker';
 
+const userOnboardingName = 'onboarding';
+const userOnboardingPath = '/onboarding';
+
 final settings = Hive.box(BoxType.settings.name);
 
 final GoRouter goRouter = GoRouter(
@@ -140,6 +136,13 @@ final GoRouter goRouter = GoRouter(
       builder: (context, state) => const AccountSelectorPage(),
     ),
     GoRoute(
+      name: userOnboardingName,
+      path: userOnboardingPath,
+      builder: (context, state) => UserOnboardingPage(
+        settings: settings,
+      ),
+    ),
+    GoRoute(
       name: loginName,
       path: loginPath,
       builder: (context, state) =>
@@ -158,16 +161,6 @@ final GoRouter goRouter = GoRouter(
           ),
         );
       },
-    ),
-    GoRoute(
-      name: userName,
-      path: userNamePath,
-      builder: (context, state) => UserNamePage(),
-    ),
-    GoRoute(
-      name: userImageName,
-      path: userImagePath,
-      builder: (context, state) => const UserImagePage(),
     ),
     GoRoute(
       name: biometricName,
@@ -353,11 +346,11 @@ final GoRouter goRouter = GoRouter(
     }
     final String name = settings.get(userNameKey, defaultValue: '');
     if (name.isEmpty && isLogging) {
-      return userNamePath;
+      return userOnboardingPath;
     }
     final String image = settings.get(userImageKey, defaultValue: '');
     if (image.isEmpty && isLogging) {
-      return userImagePath;
+      return userOnboardingPath;
     }
 
     final bool categorySelectorDone = settings.get(
