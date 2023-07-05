@@ -9,6 +9,7 @@ import 'package:paisa/src/domain/category/use_case/category_use_case.dart';
 import 'package:paisa/src/domain/expense/entities/expense.dart';
 import 'package:paisa/src/domain/expense/use_case/expense_use_case.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../data/settings/file_handler.dart';
 import '../../../domain/expense/use_case/update_expense_use_case.dart';
@@ -32,35 +33,14 @@ class SettingCubit extends Cubit<SettingsState> {
   final UpdateExpensesUseCase updateExpensesUseCase;
 
   void importDataFromJson() {
-    emit(const DataLoadingState(true));
-    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    deviceInfo.androidInfo.then((androidInfo) {
-      Permission.manageExternalStorage
-          .request()
-          .then((statusManageExternalStorage) {
-        if (statusManageExternalStorage.isGranted &&
-            androidInfo.version.sdkInt > 29) {
-          _importFile();
-        } else if (androidInfo.version.sdkInt < 30) {
-          Permission.storage.request().isGranted.then((value) {
-            if (value) {
-              _importFile();
-            } else {
-              emit(const DataError('Permission error'));
-            }
-          });
-        }
-      });
-    });
+    _importFile();
   }
 
   void exportDataToJson() {
     emit(const DataLoadingState(false));
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     deviceInfo.androidInfo.then((androidInfo) {
-      Permission.manageExternalStorage
-          .request()
-          .then((statusManageExternalStorage) {
+      Permission.storage.request().then((statusManageExternalStorage) {
         if (statusManageExternalStorage.isGranted &&
             androidInfo.version.sdkInt > 29) {
           _exportFile();
@@ -111,6 +91,14 @@ class SettingCubit extends Cubit<SettingsState> {
   void _exportFile() {
     final FileHandler fileHandler = getIt.get<FileHandler>();
     fileHandler.backupDataIntoFile().then((value) => emit(DataExportState()));
+  }
+
+  void shareFile() {
+    final FileHandler fileHandler = getIt.get<FileHandler>();
+    fileHandler.fetchXFileJSONToShare().then((value) => Share.shareXFiles(
+          [value],
+          subject: 'Share',
+        ));
   }
 
   void _importFile() {
