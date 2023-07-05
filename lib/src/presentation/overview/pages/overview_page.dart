@@ -43,11 +43,11 @@ class OverViewPage extends StatelessWidget {
             return FilterDateRangeWidget(
               dateTimeRangeNotifier: summaryController.dateTimeRangeNotifier,
               expenses: expenses,
-              builder: (expenses) {
+              builder: (filterExpenses) {
                 return ValueListenableBuilder<FilterExpense>(
                   valueListenable: summaryController.filterExpenseNotifier,
                   builder: (context, value, child) {
-                    budgetCubit.fetchBudgetSummary(expenses, value);
+                    budgetCubit.fetchBudgetSummary(filterExpenses, value);
                     return Scaffold(
                       body: ListView(
                         shrinkWrap: true,
@@ -57,7 +57,9 @@ class OverViewPage extends StatelessWidget {
                             budgetCubit: budgetCubit,
                             summaryController: summaryController,
                           ),
-                          OverviewListView(budgetCubit: budgetCubit),
+                          OverviewListView(
+                            budgetCubit: budgetCubit,
+                          ),
                         ],
                       ),
                     );

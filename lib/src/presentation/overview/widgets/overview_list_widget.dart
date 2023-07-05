@@ -18,7 +18,9 @@ class OverviewListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: budgetCubit,
-      buildWhen: (previous, current) => current is FilteredCategoryListState,
+      buildWhen: (previous, current) =>
+          current is FilteredCategoryListState ||
+          current is EmptyFilterListState,
       builder: (context, state) {
         if (state is FilteredCategoryListState) {
           if (state.categoryGrouped.isEmpty) {

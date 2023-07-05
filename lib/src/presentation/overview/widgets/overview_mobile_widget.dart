@@ -25,7 +25,9 @@ class OverviewMobile extends StatelessWidget {
         CategoryTransactionFilterWidget(summaryController: summaryController),
         BlocBuilder(
           bloc: budgetCubit,
-          buildWhen: (previous, current) => current is InitialSelectedState,
+          buildWhen: (previous, current) =>
+              current is InitialSelectedState ||
+              current is EmptyFilterListState,
           builder: (context, state) {
             if (state is InitialSelectedState) {
               return SizedBox(
