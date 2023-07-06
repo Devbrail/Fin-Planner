@@ -3,11 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../widgets/user_image_picker_widget.dart';
-import '../widgets/user_name_widget.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
+import '../widgets/user_image_picker_widget.dart';
+import '../widgets/user_name_widget.dart';
 
 class UserOnboardingPage extends StatefulWidget {
   const UserOnboardingPage({

@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
 
+import '../../../core/extensions/expense_extensions.dart';
 import '../entities/expense.dart';
 import '../repository/expense_repository.dart';
-import '../../../core/extensions/expense_extensions.dart';
 
 @singleton
 class GetExpenseUseCase {

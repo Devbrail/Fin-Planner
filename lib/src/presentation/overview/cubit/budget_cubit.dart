@@ -54,10 +54,10 @@ class BudgetCubit extends Cubit<BudgetState> {
       return getCategoryUseCase(expense.categoryId) ?? _defaultCategories.first;
     });
     final List<MapEntry<Category, List<Expense>>> mapExpenses =
-        categoryGroupedExpenses.entries.toList();
+        categoryGroupedExpenses.entries.toList().sorted(
+            (a, b) => b.value.totalExpense.compareTo(a.value.totalExpense));
     emit(FilteredCategoryListState(
-      mapExpenses.sorted(
-          (a, b) => b.value.totalExpense.compareTo(a.value.totalExpense)),
+      mapExpenses,
       selectedTimeExpenses.total,
     ));
   }

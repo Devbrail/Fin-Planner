@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../domain/account/entities/account.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../../domain/account/entities/account.dart';
 import '../../bloc/accounts_bloc.dart';
 import 'accounts_mobile_page.dart';
 import 'accounts_tablet_page.dart';

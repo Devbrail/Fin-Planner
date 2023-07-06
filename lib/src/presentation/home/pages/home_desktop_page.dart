@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../core/common.dart';
 
 import '../../../app/routes.dart';
+import '../../../core/common.dart';
 import '../../widgets/paisa_icon_title.dart';
 import '../../widgets/paisa_search_bar.dart';
 import '../../widgets/paisa_user_widget.dart';

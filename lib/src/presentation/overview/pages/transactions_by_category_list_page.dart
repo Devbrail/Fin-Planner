@@ -7,6 +7,7 @@ import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../../summary/widgets/expense_item_widget.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
+import '../../widgets/paisa_card.dart';
 
 class TransactionByCategoryListPage extends StatelessWidget {
   const TransactionByCategoryListPage({
@@ -25,18 +26,25 @@ class TransactionByCategoryListPage extends StatelessWidget {
         summaryController.fetchExpensesFromCategoryId(cid);
 
     return PaisaAnnotatedRegionWidget(
-      color: context.background,
+      color: Colors.transparent,
       child: Scaffold(
+        extendBody: true,
         appBar: context.materialYouAppBar(context.loc.transactionsByCategory),
         bottomNavigationBar: SafeArea(
-          child: ListTile(
-            title: Text(
-              expenses.total.toFormateCurrency(context),
-              style: context.titleMedium,
-            ),
-            subtitle: Text(
-              context.loc.total,
-              style: context.titleMedium,
+          child: PaisaFilledCard(
+            child: ListTile(
+              title: Text(
+                context.loc.total,
+                style: context.titleSmall
+                    ?.copyWith(color: context.onSurfaceVariant),
+              ),
+              subtitle: Text(
+                expenses.total.toFormateCurrency(context),
+                style: context.titleMedium?.copyWith(
+                  color: context.onSurfaceVariant,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ),

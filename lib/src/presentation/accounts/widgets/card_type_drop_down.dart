@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/common.dart';
 
+import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../widgets/paisa_pill_chip.dart';
 import '../bloc/accounts_bloc.dart';

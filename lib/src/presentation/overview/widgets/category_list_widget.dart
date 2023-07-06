@@ -63,12 +63,15 @@ class CategoryListWidget extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: LinearProgressIndicator(
-                            value: map.value.total / totalExpense,
-                            color: Color(
-                                map.key.color ?? Colors.amber.shade100.value),
+                        child: SizedBox(
+                          height: 6,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: LinearProgressIndicator(
+                              value: map.value.total / totalExpense,
+                              color: Color(
+                                  map.key.color ?? Colors.amber.shade100.value),
+                            ),
                           ),
                         ),
                       ),
