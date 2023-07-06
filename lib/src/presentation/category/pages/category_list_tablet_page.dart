@@ -30,7 +30,7 @@ class CategoryListTabletWidget extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount:
             MediaQuery.of(context).orientation == Orientation.landscape ? 3 : 2,
-        childAspectRatio: 16 / 3.5,
+        childAspectRatio: 4,
       ),
       itemCount: categories.length,
       shrinkWrap: true,

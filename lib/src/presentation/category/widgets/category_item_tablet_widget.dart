@@ -49,7 +49,7 @@ class CategoryItemTabletWidget extends StatelessWidget {
                       category.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: context.titleMedium?.copyWith(
+                      style: context.bodyMedium?.copyWith(
                         color: context.onSurface,
                       ),
                     ),
@@ -58,8 +58,8 @@ class CategoryItemTabletWidget extends StatelessWidget {
                         category.description!,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: context.bodySmall?.copyWith(
-                          color: context.onSurface,
+                        style: context.labelMedium?.copyWith(
+                          color: context.onSurface.withOpacity(0.55),
                         ),
                       )
                   ],
