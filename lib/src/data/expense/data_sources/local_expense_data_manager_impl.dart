@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/common.dart';
+import '../../../core/common.dart';
 
 import '../model/expense_model.dart';
 import 'local_expense_data_manager.dart';

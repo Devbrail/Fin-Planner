@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../../core/enum/card_type.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
@@ -175,7 +176,7 @@ class AccountItemWidget extends StatelessWidget {
           color: Color(model.color ?? Colors.brown.shade200.value),
         ),
         title: Text(model.name),
-        trailing: const Icon(MdiIcons.delete),
+        trailing: Icon(MdiIcons.delete),
       ),
       tablet: PaisaCard(
         child: InkWell(

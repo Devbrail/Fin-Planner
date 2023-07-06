@@ -59,7 +59,7 @@ class HomeTabletPage extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: IconButton(
                       onPressed: () => context.pushNamed(settingsName),
-                      icon: const Icon(MdiIcons.cog),
+                      icon: Icon(MdiIcons.cog),
                     ),
                   ),
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:paisa/src/core/common.dart';
+import '../../../core/common.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_expense.dart';

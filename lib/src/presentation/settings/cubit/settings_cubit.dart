@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/main.dart';
-import 'package:paisa/src/domain/category/entities/category.dart';
-import 'package:paisa/src/domain/category/use_case/category_use_case.dart';
-import 'package:paisa/src/domain/expense/entities/expense.dart';
-import 'package:paisa/src/domain/expense/use_case/expense_use_case.dart';
+import '../../../../main.dart';
+import '../../../domain/category/entities/category.dart';
+import '../../../domain/category/use_case/category_use_case.dart';
+import '../../../domain/expense/entities/expense.dart';
+import '../../../domain/expense/use_case/expense_use_case.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 

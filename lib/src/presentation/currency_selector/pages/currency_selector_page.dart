@@ -127,7 +127,7 @@ class _CountrySelectorPageState extends State<CountrySelectorPage> {
               countryCubit.saveCountry();
             },
             extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
-            label: const Icon(MdiIcons.arrowRight),
+            label: Icon(MdiIcons.arrowRight),
             icon: Text(
               context.loc.next,
               style: context.bodyLarge?.copyWith(

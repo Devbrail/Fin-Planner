@@ -33,24 +33,26 @@ class ExportAndImportPage extends StatelessWidget {
           }
         },
         child: Scaffold(
-          appBar: context
-              .materialYouAppBar(context.loc.backupAndRestoreTitle, actions: [
-            BlocBuilder(
-              bloc: settingCubit,
-              builder: (context, state) {
-                if (state is DataLoadingState) {
-                  return const SizedBox(
-                    height: 16,
-                    width: 16,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-            ),
-            const SizedBox(width: 16),
-          ]),
+          appBar: context.materialYouAppBar(
+            context.loc.backupAndRestoreTitle,
+            actions: [
+              BlocBuilder(
+                bloc: settingCubit,
+                builder: (context, state) {
+                  if (state is DataLoadingState) {
+                    return const SizedBox(
+                      height: 16,
+                      width: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
+              const SizedBox(width: 16),
+            ],
+          ),
           body: ListView(
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
@@ -75,7 +77,7 @@ class ExportAndImportPage extends StatelessWidget {
                             ),
                             onPressed: () => settingCubit.importDataFromJson(),
                             label: Text(context.loc.importData),
-                            icon: const Icon(MdiIcons.fileImport),
+                            icon: Icon(MdiIcons.fileImport),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -88,7 +90,7 @@ class ExportAndImportPage extends StatelessWidget {
                             ),
                             onPressed: () => settingCubit.shareFile(),
                             label: Text(context.loc.exportData),
-                            icon: const Icon(MdiIcons.fileExport),
+                            icon: Icon(MdiIcons.fileExport),
                           ),
                         ),
                       ],

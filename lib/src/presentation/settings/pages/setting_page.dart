@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/settings/controller/settings_controller.dart';
-import 'package:paisa/src/presentation/settings/widgets/small_size_fab_widget.dart';
+import '../controller/settings_controller.dart';
+import '../widgets/small_size_fab_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../main.dart';

@@ -1,6 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/data/expense/model/expense_model.dart';
-import 'package:paisa/src/data/recurring/model/recurring.dart';
+import '../../data/expense/model/expense_model.dart';
+import '../../data/recurring/model/recurring.dart';
 
 extension RecurringModelBoxHelper on Box<RecurringModel> {}
 

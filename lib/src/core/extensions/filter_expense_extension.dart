@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/core/enum/filter_expense.dart';
+import '../common.dart';
+import '../enum/filter_expense.dart';
 
 extension FilterExpenseHelper on FilterExpense {
   String stringValue(BuildContext context) {

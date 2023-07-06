@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/src/app/routes.dart';
+import '../../../app/routes.dart';
 
 import '../../../core/common.dart';
 import '../../../domain/category/entities/category.dart';

@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/presentation/login/widgets/user_image_picker_widget.dart';
-import 'package:paisa/src/presentation/login/widgets/user_name_widget.dart';
+import '../widgets/user_image_picker_widget.dart';
+import '../widgets/user_name_widget.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -52,7 +52,7 @@ class _UserOnboardingPageState extends State<UserOnboardingPage> {
                       letterSpacing: 1,
                     ),
                   ),
-                  icon: const Icon(MdiIcons.arrowLeft),
+                  icon: Icon(MdiIcons.arrowLeft),
                 ),
               ),
               const Spacer(),
@@ -79,7 +79,7 @@ class _UserOnboardingPageState extends State<UserOnboardingPage> {
                   }
                 },
                 extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
-                label: const Icon(MdiIcons.arrowRight),
+                label: Icon(MdiIcons.arrowRight),
                 icon: Text(
                   context.loc.next,
                   style: context.bodyLarge?.copyWith(

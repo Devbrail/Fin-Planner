@@ -27,13 +27,13 @@ final destinations = [
   ),
   Destination(
     pageType: PageType.debts,
-    icon: const Icon(MdiIcons.accountCashOutline),
-    selectedIcon: const Icon(MdiIcons.accountCash),
+    icon: Icon(MdiIcons.accountCashOutline),
+    selectedIcon: Icon(MdiIcons.accountCash),
   ),
   Destination(
     pageType: PageType.overview,
-    icon: const Icon(MdiIcons.sortVariant),
-    selectedIcon: const Icon(MdiIcons.sortVariant),
+    icon: Icon(MdiIcons.sortVariant),
+    selectedIcon: Icon(MdiIcons.sortVariant),
   ),
   Destination(
     pageType: PageType.category,
@@ -42,13 +42,13 @@ final destinations = [
   ),
   Destination(
     pageType: PageType.budget,
-    icon: const Icon(MdiIcons.timetable),
-    selectedIcon: const Icon(MdiIcons.timetable),
+    icon: Icon(MdiIcons.timetable),
+    selectedIcon: Icon(MdiIcons.timetable),
   ),
   Destination(
     pageType: PageType.recurring,
-    icon: const Icon(MdiIcons.cashSync),
-    selectedIcon: const Icon(MdiIcons.cashSync),
+    icon: Icon(MdiIcons.cashSync),
+    selectedIcon: Icon(MdiIcons.cashSync),
   ),
 ];
 

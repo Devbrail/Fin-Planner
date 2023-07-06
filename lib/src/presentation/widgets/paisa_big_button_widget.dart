@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/core/common.dart';
+import '../../core/common.dart';
 
 class PaisaBigButton extends StatelessWidget {
   const PaisaBigButton({
@@ -151,7 +151,7 @@ class PaisaOutlineIconButton extends StatelessWidget {
         foregroundColor: context.primary,
       ),
       label: Text(title),
-      icon: const Icon(MdiIcons.sortVariant),
+      icon: Icon(MdiIcons.sortVariant),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../../../core/enum/card_type.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';

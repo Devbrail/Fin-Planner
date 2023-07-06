@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paisa/src/core/common.dart';
+import '../../core/common.dart';
 
 class PaisaPillChip extends StatelessWidget {
   const PaisaPillChip({

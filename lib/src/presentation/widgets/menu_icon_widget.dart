@@ -10,7 +10,7 @@ class PaisaMenuWidget extends StatelessWidget {
       onPressed: () {
         Scaffold.of(context).openDrawer();
       },
-      icon: const Icon(MdiIcons.menu),
+      icon: Icon(MdiIcons.menu),
     );
   }
 }

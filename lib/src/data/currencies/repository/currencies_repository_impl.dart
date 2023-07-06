@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/data/currencies/data_source/country_data.dart';
+import '../data_source/country_data.dart';
 
 import '../../../domain/currencies/repository/currencies_repository.dart';
 import '../models/country_model.dart';

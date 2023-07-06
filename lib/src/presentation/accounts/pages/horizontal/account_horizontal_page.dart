@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paisa/src/domain/account/entities/account.dart';
+import '../../../../domain/account/entities/account.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../bloc/accounts_bloc.dart';

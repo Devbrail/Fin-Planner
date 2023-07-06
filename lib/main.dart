@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/core/enum/box_types.dart';
+import 'src/core/common.dart';
+import 'src/core/enum/box_types.dart';
 
 import 'src/app.dart';
 import 'src/di/di.dart';

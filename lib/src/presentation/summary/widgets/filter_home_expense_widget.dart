@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/core/extensions/filter_expense_extension.dart';
+import '../../../core/common.dart';
+import '../../../core/extensions/filter_expense_extension.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_expense.dart';

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-import 'package:paisa/src/core/common.dart';
+import '../../../core/common.dart';
 
 import '../../../core/enum/card_type.dart';
 

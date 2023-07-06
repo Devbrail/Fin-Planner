@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/core/common.dart';
+import '../../../core/common.dart';
 
 import 'lava_painter.dart';
 

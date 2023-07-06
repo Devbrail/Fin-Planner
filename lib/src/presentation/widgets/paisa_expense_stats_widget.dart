@@ -1,7 +1,7 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paisa/src/core/common.dart';
+import '../../core/common.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'paisa_card.dart';
