@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../core/common.dart';
 import '../../../core/theme/custom_color.dart';
