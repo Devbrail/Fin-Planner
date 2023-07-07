@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../widgets/paisa_annotate_region_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../core/enum/card_type.dart';
 import '../../../settings/controller/settings_controller.dart';
+import '../../../widgets/paisa_annotate_region_widget.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_bottom_sheet.dart';
 import '../../../widgets/paisa_color_picker.dart';
@@ -223,42 +223,6 @@ class AddAccountPageState extends State<AddAccountPage> {
                         ),
                         child: CardTypeButtons(),
                       ),
-                      ListTile(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        onTap: () async {
-                          final color = await paisaColorPicker(
-                            context,
-                            defaultColor: BlocProvider.of<AccountsBloc>(context)
-                                    .selectedColor ??
-                                Colors.red.value,
-                          );
-                          if (context.mounted) {
-                            BlocProvider.of<AccountsBloc>(context)
-                                .add(AccountColorSelectedEvent(color));
-                          }
-                        },
-                        leading: Icon(
-                          Icons.color_lens,
-                          color: context.primary,
-                        ),
-                        title: Text(
-                          context.loc.pickColor,
-                        ),
-                        subtitle: Text(
-                          context.loc.pickColorDesc,
-                        ),
-                        trailing: Container(
-                          width: 32,
-                          height: 32,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color(BlocProvider.of<AccountsBloc>(context)
-                                    .selectedColor ??
-                                Colors.red.value),
-                          ),
-                        ),
-                      ),
                       Form(
                         key: _form,
                         child: Padding(
@@ -292,6 +256,41 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 },
                               ),
                               const SizedBox(height: 16),
+                              ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
+                                onTap: () async {
+                                  final color = await paisaColorPicker(
+                                    context,
+                                    defaultColor:
+                                        BlocProvider.of<AccountsBloc>(context)
+                                                .selectedColor ??
+                                            Colors.red.value,
+                                  );
+                                  if (context.mounted) {
+                                    BlocProvider.of<AccountsBloc>(context)
+                                        .add(AccountColorSelectedEvent(color));
+                                  }
+                                },
+                                leading: Icon(
+                                  Icons.color_lens,
+                                  color: context.primary,
+                                ),
+                                title: Text(context.loc.pickColor),
+                                subtitle: Text(context.loc.pickColorDesc),
+                                trailing: Container(
+                                  width: 32,
+                                  height: 32,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(
+                                        BlocProvider.of<AccountsBloc>(context)
+                                                .selectedColor ??
+                                            Colors.red.value),
+                                  ),
+                                ),
+                              ),
                               AccountDefaultSwitchWidget(
                                 accountId:
                                     int.tryParse(widget.accountId ?? '') ?? -1,
@@ -578,6 +577,7 @@ class _AccountDefaultSwitchWidgetState
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
       title: const Text('Default account'),
       value: isAccountDefault,
       onChanged: (value) {

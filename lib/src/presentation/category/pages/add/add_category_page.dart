@@ -248,7 +248,7 @@ class _TransferCategoryWidgetState extends State<TransferCategoryWidget> {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      title: const Text('Transer category'),
+      title: Text(context.loc.transferCategory),
       value: isAccountDefault,
       onChanged: (value) {
         setState(() {

@@ -84,22 +84,42 @@ class PaisaFilterChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaisaFilledCard(
       color: color.withOpacity(0.09),
-      child: Container(
-        decoration: isSelected
-            ? BoxDecoration(
-                border: Border.all(
-                  color: color,
+      child: InkWell(
+        onTap: onPressed,
+        child: Container(
+          decoration: isSelected
+              ? BoxDecoration(
+                  border: Border.all(
+                    color: color,
+                  ),
+                  borderRadius: BorderRadius.circular(50),
+                )
+              : BoxDecoration(
+                  border: Border.all(
+                    color: color.withOpacity(0.09),
+                  ),
+                  borderRadius: BorderRadius.circular(50),
                 ),
-                borderRadius: BorderRadius.circular(50),
-              )
-            : null,
-        child: ListTile(
-          onTap: onPressed,
-          title: Text(
-            title,
-            style: context.titleSmall?.copyWith(color: color),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Icon(icon, color: color),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.titleSmall?.copyWith(color: color),
+                  ),
+                ),
+              ),
+            ],
           ),
-          leading: Icon(icon, color: color),
         ),
       ),
     );

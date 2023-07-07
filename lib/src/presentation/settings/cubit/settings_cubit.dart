@@ -63,6 +63,7 @@ class SettingCubit extends Cubit<SettingsState> {
   }
 
   void _importFile() {
+    emit(const DataLoadingState(true));
     fileHandler.importDataFromFile().then((value) {
       value.fold(
         (l) => emit(DataError(l)),

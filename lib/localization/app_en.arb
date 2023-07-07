@@ -643,12 +643,6 @@
         "type": "text",
         "placeholders": {}
     },
-    "outcome": "Outcome",
-    "@outcome": {
-        "description": "Text shown on multiple places",
-        "type": "text",
-        "placeholders": {}
-    },
     "thisMonth": "This month",
     "@thisMonth": {
         "description": "Text shown on the home screen top section",
@@ -1098,6 +1092,12 @@
     "chooseIcon": "Choose icon",
     "@chooseIcon": {
         "description": "Title text shown on the icon chooser screen",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferCategory": "Transfer category",
+    "@transferCategory": {
+        "description": "Text shown add category page for add default category ",
         "type": "text",
         "placeholders": {}
     }
