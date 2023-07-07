@@ -28,10 +28,10 @@ class HomeTabletPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: PaisaIcon(),
+          padding: EdgeInsets.symmetric(horizontal: 14.0),
+          child: PaisaIconTitle(),
         ),
-        leadingWidth: 86,
+        leadingWidth: 150,
         title: const PaisaSearchBar(),
         actions: const [PaisaUserWidget()],
       ),
@@ -59,7 +59,7 @@ class HomeTabletPage extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: IconButton(
                       onPressed: () => context.pushNamed(settingsName),
-                      icon: const Icon(MdiIcons.cog),
+                      icon: Icon(MdiIcons.cog),
                     ),
                   ),
                 ),

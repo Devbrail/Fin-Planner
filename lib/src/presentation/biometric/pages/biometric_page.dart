@@ -75,7 +75,7 @@ class _BiometricPageState extends State<BiometricPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Icon(
+                  Icon(
                     MdiIcons.fingerprint,
                     size: 72,
                   ),

@@ -1,4 +1,4 @@
-import 'package:paisa/src/core/enum/recurring_type.dart';
+import '../../../core/enum/recurring_type.dart';
 
 import '../../../core/enum/transaction_type.dart';
 

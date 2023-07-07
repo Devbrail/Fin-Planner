@@ -1,4 +1,4 @@
-import 'package:paisa/src/data/currencies/models/country_model.dart';
+import '../../../data/currencies/models/country_model.dart';
 
 class Country extends CountryModel {
   Country({

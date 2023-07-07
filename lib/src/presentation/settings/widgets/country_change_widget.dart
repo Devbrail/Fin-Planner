@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/src/presentation/settings/controller/settings_controller.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
+import '../controller/settings_controller.dart';
 
 class CountryChangeWidget extends StatelessWidget {
   const CountryChangeWidget({

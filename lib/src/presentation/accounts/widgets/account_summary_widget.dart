@@ -40,6 +40,8 @@ class AccountSummaryWidget extends StatelessWidget {
             ),
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
                 child: PaisaExpenseStatsWidget(

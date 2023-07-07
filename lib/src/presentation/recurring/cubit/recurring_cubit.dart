@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/enum/recurring_type.dart';
-import 'package:paisa/src/core/enum/transaction_type.dart';
-import 'package:paisa/src/domain/recurring/use_case/recurring_use_case.dart';
+
+import '../../../core/enum/recurring_type.dart';
+import '../../../core/enum/transaction_type.dart';
+import '../../../domain/recurring/use_case/recurring_use_case.dart';
 
 part 'recurring_state.dart';
 

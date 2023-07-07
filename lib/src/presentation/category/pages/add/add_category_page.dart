@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/main.dart';
+import '../../../../../main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../core/common.dart';
@@ -248,7 +248,7 @@ class _TransferCategoryWidgetState extends State<TransferCategoryWidget> {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      title: const Text('Transer category'),
+      title: Text(context.loc.transferCategory),
       value: isAccountDefault,
       onChanged: (value) {
         setState(() {

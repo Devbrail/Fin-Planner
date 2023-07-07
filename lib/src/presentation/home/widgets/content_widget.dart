@@ -1,8 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paisa/src/presentation/overview/cubit/budget_cubit.dart';
-import 'package:paisa/src/presentation/recurring/page/recurring_page.dart';
+import '../../overview/cubit/budget_cubit.dart';
+import '../../recurring/page/recurring_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../accounts/pages/accounts_page.dart';

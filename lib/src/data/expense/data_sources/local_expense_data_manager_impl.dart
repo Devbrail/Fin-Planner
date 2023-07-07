@@ -2,39 +2,34 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/common.dart';
+import '../../../core/common.dart';
 
 import '../model/expense_model.dart';
 import 'local_expense_data_manager.dart';
 
-@Injectable(as: LocalExpenseDataManager)
-class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
+@Injectable(as: ExpenseLocalDataManager)
+class LocalExpenseDataManagerImpl implements ExpenseLocalDataManager {
   LocalExpenseDataManagerImpl(this.expenseBox);
 
   final Box<ExpenseModel> expenseBox;
 
   @override
-  Future<void> addOrUpdateExpense(ExpenseModel expense) async {
+  Future<void> add(ExpenseModel expense) async {
     final id = await expenseBox.add(expense);
     expense.superId = id;
     return expense.save();
   }
 
   @override
-  Future<void> clearAll() => expenseBox.clear();
+  Future<void> clear() => expenseBox.clear();
 
   @override
-  Future<void> clearExpense(int key) {
+  Future<void> deleteById(int key) {
     return expenseBox.delete(key);
   }
 
   @override
-  Future<void> clearExpenses() async {
-    await expenseBox.clear();
-  }
-
-  @override
-  Future<void> deleteExpensesByAccountId(int accountId) {
+  Future<void> deleteByAccountId(int accountId) {
     final keys = expenseBox.values
         .where((element) => element.accountId == accountId)
         .map((e) => e.key);
@@ -42,7 +37,7 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
   }
 
   @override
-  Future<void> deleteExpensesByCategoryId(int categoryId) {
+  Future<void> deleteByCategoryId(int categoryId) {
     final keys = expenseBox.values
         .where((element) => element.categoryId == categoryId)
         .map((e) => e.key);
@@ -53,22 +48,20 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
   List<ExpenseModel> expenses() => expenseBox.values.toList();
 
   @override
-  Iterable<ExpenseModel> exportData() => expenseBox.values;
+  Iterable<ExpenseModel> export() => expenseBox.values;
 
   @override
-  ExpenseModel? fetchExpenseFromId(int expenseId) =>
+  ExpenseModel? findById(int expenseId) =>
       expenseBox.values.firstWhereOrNull((element) => element.key == expenseId);
 
   @override
-  List<ExpenseModel> fetchExpensesFromAccountId(int accountId) => expenseBox
-      .values
+  List<ExpenseModel> findByAccountId(int accountId) => expenseBox.values
       .where((element) => element.accountId != -1 && element.categoryId != -1)
       .where((element) => element.accountId == accountId)
       .toList();
 
   @override
-  List<ExpenseModel> fetchExpensesFromCategoryId(int category) => expenseBox
-      .values
+  List<ExpenseModel> findByCategoryId(int category) => expenseBox.values
       .where((element) => element.accountId != -1 && element.categoryId != -1)
       .where((element) => element.categoryId == category)
       .toList();
@@ -99,7 +92,7 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
   }
 
   @override
-  Future<void> updateExpense(ExpenseModel expenseModel) {
+  Future<void> update(ExpenseModel expenseModel) {
     return expenseBox.put(expenseModel.superId!, expenseModel);
   }
 }

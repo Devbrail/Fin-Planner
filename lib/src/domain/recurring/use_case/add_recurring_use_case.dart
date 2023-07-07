@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/enum/recurring_type.dart';
-import 'package:paisa/src/core/enum/transaction_type.dart';
-import 'package:paisa/src/domain/recurring/repository/recurring_repository.dart';
+import '../../../core/enum/recurring_type.dart';
+import '../../../core/enum/transaction_type.dart';
+import '../repository/recurring_repository.dart';
 
 @singleton
 class AddRecurringUseCase {

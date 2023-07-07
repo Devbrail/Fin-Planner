@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/core/enum/card_type.dart';
 
+import '../../../core/enum/card_type.dart';
 import '../model/account_model.dart';
 
 List<AccountModel> defaultAccountsData() {

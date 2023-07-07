@@ -7,15 +7,22 @@ part 'card_type.g.dart';
 @HiveType(typeId: 12)
 enum CardType {
   @HiveField(0)
-  cash(icon: MdiIcons.cashMultiple),
+  cash,
   @HiveField(1)
-  bank(icon: MdiIcons.creditCardChip),
+  bank,
   @HiveField(2)
-  wallet(icon: MdiIcons.creditCard);
+  wallet;
+}
 
-  final IconData icon;
-
-  const CardType({
-    required this.icon,
-  });
+extension CardTypeHelper on CardType {
+  IconData get icon {
+    switch (this) {
+      case CardType.bank:
+        return MdiIcons.cashMultiple;
+      case CardType.wallet:
+        return MdiIcons.creditCard;
+      case CardType.cash:
+        return MdiIcons.cashMultiple;
+    }
+  }
 }

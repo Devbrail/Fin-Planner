@@ -2,32 +2,30 @@ import 'package:flutter/material.dart';
 
 import '../model/expense_model.dart';
 
-abstract class LocalExpenseDataManager {
-  Future<void> addOrUpdateExpense(ExpenseModel expense);
+abstract class ExpenseLocalDataManager {
+  Future<void> add(ExpenseModel expense);
 
   Future<List<ExpenseModel>> filteredExpenses(DateTimeRange dateTimeRange);
 
-  Future<void> clearExpenses();
+  Future<void> deleteById(int key);
 
-  Future<void> clearExpense(int key);
+  ExpenseModel? findById(int expenseId);
 
-  ExpenseModel? fetchExpenseFromId(int expenseId);
-
-  Iterable<ExpenseModel> exportData();
+  Iterable<ExpenseModel> export();
 
   List<ExpenseModel> expenses();
 
-  Future<void> deleteExpensesByAccountId(int accountId);
+  Future<void> deleteByAccountId(int accountId);
 
-  Future<void> deleteExpensesByCategoryId(int categoryId);
+  Future<void> deleteByCategoryId(int categoryId);
 
-  List<ExpenseModel> fetchExpensesFromAccountId(int accountId);
+  List<ExpenseModel> findByAccountId(int accountId);
 
-  List<ExpenseModel> fetchExpensesFromCategoryId(int category);
+  List<ExpenseModel> findByCategoryId(int category);
 
-  Future<void> updateExpense(ExpenseModel expenseModel);
+  Future<void> update(ExpenseModel expenseModel);
 
-  Future<void> clearAll();
+  Future<void> clear();
 
   List<ExpenseModel> filterExpenses(
       String query, int? accountId, int? categoryId);

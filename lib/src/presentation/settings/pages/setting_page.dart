@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/settings/controller/settings_controller.dart';
-import 'package:paisa/src/presentation/settings/widgets/small_size_fab_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../main.dart';
@@ -13,6 +11,7 @@ import '../../../core/enum/theme_mode.dart';
 import '../../../data/settings/authenticate.dart';
 import '../../widgets/choose_theme_mode_widget.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
+import '../controller/settings_controller.dart';
 import '../widgets/accounts_style_widget.dart';
 import '../widgets/biometrics_auth_widget.dart';
 import '../widgets/country_change_widget.dart';
@@ -20,6 +19,7 @@ import '../widgets/expense_fix_widget.dart';
 import '../widgets/setting_option.dart';
 import '../widgets/settings_color_picker_widget.dart';
 import '../widgets/settings_group_card.dart';
+import '../widgets/small_size_fab_widget.dart';
 import '../widgets/version_widget.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -34,7 +34,7 @@ class SettingsPage extends StatelessWidget {
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
         .get(themeModeKey, defaultValue: 0)];
     return PaisaAnnotatedRegionWidget(
-      color: context.background,
+      color: Colors.transparent,
       child: Scaffold(
         appBar: context.materialYouAppBar(
           context.loc.settings,

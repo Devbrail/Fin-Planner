@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
+import '../../../../core/enum/card_type.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
@@ -23,7 +25,7 @@ class AccountSelectorPage extends StatefulWidget {
 }
 
 class _AccountSelectorPageState extends State<AccountSelectorPage> {
-  final LocalAccountDataManager dataSource = getIt.get();
+  final AccountLocalDataManager dataSource = getIt.get();
   final List<AccountModel> defaultModels = defaultAccountsData();
   final SettingsController settings = getIt.get<SettingsController>();
 
@@ -36,35 +38,59 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: context.materialYouAppBar(
-        context.loc.accounts,
-        actions: [
-          PaisaButton(
-            onPressed: saveAndNavigate,
-            title: context.loc.done,
-          ),
-          const SizedBox(width: 16)
-        ],
-      ),
-      body: ValueListenableBuilder<Box<AccountModel>>(
-        valueListenable: getIt.get<Box<AccountModel>>().listenable(),
-        builder: (context, value, child) {
-          final List<AccountModel> categoryModels = value.values.toList();
-          return ListView(
-            children: [
-              ListTile(
-                title: Text(
-                  context.loc.addedAccounts,
-                  style: GoogleFonts.outfit(
-                    textStyle: context.titleMedium,
+    return PaisaAnnotatedRegionWidget(
+      color: context.background,
+      child: Scaffold(
+        appBar: context.materialYouAppBar(
+          context.loc.accounts,
+          actions: [
+            PaisaButton(
+              onPressed: saveAndNavigate,
+              title: context.loc.done,
+            ),
+            const SizedBox(width: 16)
+          ],
+        ),
+        body: ValueListenableBuilder<Box<AccountModel>>(
+          valueListenable: getIt.get<Box<AccountModel>>().listenable(),
+          builder: (context, value, child) {
+            final List<AccountModel> categoryModels = value.values.toList();
+            return ListView(
+              children: [
+                ListTile(
+                  title: Text(
+                    context.loc.addedAccounts,
+                    style: GoogleFonts.outfit(
+                      textStyle: context.titleMedium,
+                    ),
                   ),
                 ),
-              ),
-              ScreenTypeLayout(
-                mobile: PaisaFilledCard(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) => const Divider(),
+                ScreenTypeLayout(
+                  mobile: PaisaFilledCard(
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => const Divider(),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: categoryModels.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final AccountModel model = categoryModels[index];
+                        return AccountItemWidget(
+                          model: model,
+                          onPress: () async {
+                            await model.delete();
+                            defaultModels.add(model);
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  tablet: GridView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 2,
+                    ),
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: categoryModels.length,
                     shrinkWrap: true,
@@ -80,76 +106,56 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                     },
                   ),
                 ),
-                tablet: GridView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    childAspectRatio: 2,
-                  ),
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: categoryModels.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    final AccountModel model = categoryModels[index];
-                    return AccountItemWidget(
-                      model: model,
-                      onPress: () async {
-                        await model.delete();
-                        defaultModels.add(model);
-                      },
-                    );
-                  },
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  context.loc.defaultAccounts,
-                  style: GoogleFonts.outfit(
-                    textStyle: context.titleMedium,
+                ListTile(
+                  title: Text(
+                    context.loc.defaultAccounts,
+                    style: GoogleFonts.outfit(
+                      textStyle: context.titleMedium,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Wrap(
-                  spacing: 12.0,
-                  runSpacing: 12.0,
-                  children: defaultModels
-                      .map((model) => FilterChip(
-                            onSelected: (value) {
-                              dataSource.addAccount(model
-                                ..name = settings.get(
-                                  userNameKey,
-                                  defaultValue: model.name,
-                                ));
-                              setState(() {
-                                defaultModels.remove(model);
-                              });
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(28),
-                              side: BorderSide(
-                                width: 1,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Wrap(
+                    spacing: 12.0,
+                    runSpacing: 12.0,
+                    children: defaultModels
+                        .map((model) => FilterChip(
+                              onSelected: (value) {
+                                dataSource.add(model
+                                  ..name = settings.get(
+                                    userNameKey,
+                                    defaultValue: model.name,
+                                  ));
+                                setState(() {
+                                  defaultModels.remove(model);
+                                });
+                              },
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(28),
+                                side: BorderSide(
+                                  width: 1,
+                                  color: context.primary,
+                                ),
+                              ),
+                              showCheckmark: false,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              label: Text(model.bankName),
+                              labelStyle: context.titleMedium,
+                              padding: const EdgeInsets.all(12),
+                              avatar: Icon(
+                                model.cardType!.icon,
                                 color: context.primary,
                               ),
-                            ),
-                            showCheckmark: false,
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                            label: Text(model.bankName),
-                            labelStyle: context.titleMedium,
-                            padding: const EdgeInsets.all(12),
-                            avatar: Icon(
-                              model.cardType!.icon,
-                              color: context.primary,
-                            ),
-                          ))
-                      .toList(),
+                            ))
+                        .toList(),
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -175,7 +181,7 @@ class AccountItemWidget extends StatelessWidget {
           color: Color(model.color ?? Colors.brown.shade200.value),
         ),
         title: Text(model.name),
-        trailing: const Icon(MdiIcons.delete),
+        trailing: Icon(MdiIcons.delete),
       ),
       tablet: PaisaCard(
         child: InkWell(

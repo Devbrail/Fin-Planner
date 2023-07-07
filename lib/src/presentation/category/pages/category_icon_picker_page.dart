@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/presentation/widgets/paisa_card.dart';
+import '../../widgets/paisa_card.dart';
 
 import '../../../core/common.dart';
 import '../../widgets/paisa_big_button_widget.dart';

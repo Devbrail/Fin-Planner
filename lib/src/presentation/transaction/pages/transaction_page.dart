@@ -66,7 +66,7 @@ class _TransactionPageState extends State<TransactionPage> {
   @override
   Widget build(BuildContext context) {
     return PaisaAnnotatedRegionWidget(
-      color: context.background,
+      color: Colors.transparent,
       child: BlocProvider(
         create: (context) => transactionBloc,
         child: BlocConsumer<TransactionBloc, TransactionState>(
@@ -120,6 +120,7 @@ class _TransactionPageState extends State<TransactionPage> {
             }
             return ScreenTypeLayout(
               mobile: Scaffold(
+                extendBody: true,
                 appBar: AppBar(
                   title: Text(
                     isAddExpense

@@ -1,17 +1,17 @@
 import '../model/account_model.dart';
 
-abstract class LocalAccountDataManager {
-  Future<void> addAccount(AccountModel account);
+abstract class AccountLocalDataManager {
+  Future<void> add(AccountModel account);
 
-  Future<void> deleteAccount(int key);
+  Future<void> delete(int key);
 
   List<AccountModel> accounts();
 
-  AccountModel? fetchAccountFromId(int accountId);
+  AccountModel? findById(int accountId);
 
-  Iterable<AccountModel> exportData();
+  Iterable<AccountModel> export();
 
-  Future<void> updateAccount(AccountModel accountModel);
+  Future<void> update(AccountModel accountModel);
 
-  Future<void> clearAll();
+  Future<void> clear();
 }

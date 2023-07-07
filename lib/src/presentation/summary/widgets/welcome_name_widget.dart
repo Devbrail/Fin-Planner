@@ -25,7 +25,7 @@ class WelcomeNameWidget extends StatelessWidget {
             name,
             style: GoogleFonts.outfit(
               fontWeight: FontWeight.w600,
-              textStyle: context.titleLarge,
+              textStyle: context.titleMedium,
               color: context.onBackground,
             ),
           ),

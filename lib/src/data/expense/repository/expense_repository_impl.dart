@@ -11,7 +11,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     required this.dataSource,
   });
 
-  final LocalExpenseDataManager dataSource;
+  final ExpenseLocalDataManager dataSource;
 
   @override
   Future<void> addExpense(
@@ -26,7 +26,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     int? toAccountId,
     double transferAmount,
   ) async {
-    return dataSource.addOrUpdateExpense(
+    return dataSource.add(
       ExpenseModel(
         name: name,
         currency: amount,
@@ -43,21 +43,21 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   }
 
   @override
-  Future<void> clearAll() => dataSource.clearAll();
+  Future<void> clearAll() => dataSource.clear();
 
   @override
   Future<void> clearExpense(int expenseId) async {
-    return dataSource.clearExpense(expenseId);
+    return dataSource.deleteById(expenseId);
   }
 
   @override
   Future<void> deleteExpensesByAccountId(int accountId) {
-    return dataSource.deleteExpensesByAccountId(accountId);
+    return dataSource.deleteByAccountId(accountId);
   }
 
   @override
   Future<void> deleteExpensesByCategoryId(int categoryId) {
-    return dataSource.deleteExpensesByCategoryId(categoryId);
+    return dataSource.deleteByCategoryId(categoryId);
   }
 
   @override
@@ -65,17 +65,17 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
 
   @override
   ExpenseModel? fetchExpenseFromId(int expenseId) {
-    return dataSource.fetchExpenseFromId(expenseId);
+    return dataSource.findById(expenseId);
   }
 
   @override
   List<ExpenseModel> fetchExpensesFromAccountId(int accountId) {
-    return dataSource.fetchExpensesFromAccountId(accountId);
+    return dataSource.findByAccountId(accountId);
   }
 
   @override
   List<ExpenseModel> fetchExpensesFromCategoryId(int accountId) {
-    return dataSource.fetchExpensesFromCategoryId(accountId);
+    return dataSource.findByCategoryId(accountId);
   }
 
   @override
@@ -98,7 +98,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
     TransactionType transactionType,
     String? description,
   ) {
-    return dataSource.updateExpense(
+    return dataSource.update(
       ExpenseModel(
         name: name,
         currency: currency,

@@ -24,7 +24,7 @@ class CategorySelectorPage extends StatefulWidget {
 }
 
 class _CategorySelectorPageState extends State<CategorySelectorPage> {
-  final LocalCategoryDataManager dataSource = getIt.get();
+  final CategoryLocalDataManager dataSource = getIt.get();
   final List<CategoryModel> defaultModels = defaultCategoriesData;
   final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
@@ -185,7 +185,7 @@ class CategoryItemWidget extends StatelessWidget {
           color: Color(model.color ?? Colors.brown.shade200.value),
         ),
         title: Text(model.name),
-        trailing: const Icon(MdiIcons.delete),
+        trailing: Icon(MdiIcons.delete),
       ),
       tablet: PaisaCard(
         child: InkWell(
