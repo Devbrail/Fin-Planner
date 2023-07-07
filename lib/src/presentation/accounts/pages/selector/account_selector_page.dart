@@ -25,7 +25,7 @@ class AccountSelectorPage extends StatefulWidget {
 }
 
 class _AccountSelectorPageState extends State<AccountSelectorPage> {
-  final LocalAccountDataManager dataSource = getIt.get();
+  final AccountLocalDataManager dataSource = getIt.get();
   final List<AccountModel> defaultModels = defaultAccountsData();
   final SettingsController settings = getIt.get<SettingsController>();
 
@@ -122,7 +122,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                     children: defaultModels
                         .map((model) => FilterChip(
                               onSelected: (value) {
-                                dataSource.addAccount(model
+                                dataSource.add(model
                                   ..name = settings.get(
                                     userNameKey,
                                     defaultValue: model.name,

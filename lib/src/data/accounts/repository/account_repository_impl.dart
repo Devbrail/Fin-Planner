@@ -9,7 +9,7 @@ import '../model/account_model.dart';
 class AccountRepositoryImpl extends AccountRepository {
   AccountRepositoryImpl({required this.dataSource});
 
-  final LocalAccountDataManager dataSource;
+  final AccountLocalDataManager dataSource;
 
   @override
   Future<void> addAccount({
@@ -20,7 +20,7 @@ class AccountRepositoryImpl extends AccountRepository {
     required double amount,
     required int color,
   }) {
-    return dataSource.addAccount(AccountModel(
+    return dataSource.add(AccountModel(
       name: holderName,
       bankName: bankName,
       number: number,
@@ -31,14 +31,14 @@ class AccountRepositoryImpl extends AccountRepository {
   }
 
   @override
-  Future<void> clearAll() => dataSource.clearAll();
+  Future<void> clearAll() => dataSource.clear();
 
   @override
-  Future<void> deleteAccount(int key) => dataSource.deleteAccount(key);
+  Future<void> deleteAccount(int key) => dataSource.delete(key);
 
   @override
   AccountModel? fetchAccountFromId(int accountId) =>
-      dataSource.fetchAccountFromId(accountId);
+      dataSource.findById(accountId);
 
   @override
   List<AccountModel> getAccounts() => dataSource.accounts();
@@ -53,7 +53,7 @@ class AccountRepositoryImpl extends AccountRepository {
     required double amount,
     required int color,
   }) {
-    return dataSource.updateAccount(
+    return dataSource.update(
       AccountModel(
         name: holderName,
         bankName: bankName,

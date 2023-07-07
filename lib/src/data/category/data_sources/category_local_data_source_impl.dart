@@ -5,8 +5,8 @@ import 'package:injectable/injectable.dart';
 import '../model/category_model.dart';
 import 'category_local_data_source.dart';
 
-@Singleton(as: LocalCategoryDataManager)
-class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
+@Singleton(as: CategoryLocalDataManager)
+class LocalCategoryManagerDataSourceImpl implements CategoryLocalDataManager {
   LocalCategoryManagerDataSourceImpl(this.categoryBox);
 
   final Box<CategoryModel> categoryBox;

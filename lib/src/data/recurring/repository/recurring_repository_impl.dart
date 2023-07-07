@@ -15,7 +15,7 @@ class RecurringRepositoryImpl implements RecurringRepository {
   RecurringRepositoryImpl(this.dataManager, this.expenseDataManager);
 
   final LocalRecurringDataManager dataManager;
-  final LocalExpenseDataManager expenseDataManager;
+  final ExpenseLocalDataManager expenseDataManager;
 
   @override
   Future<void> addRecurringEvent(
@@ -53,7 +53,7 @@ class RecurringRepositoryImpl implements RecurringRepository {
         for (var i = 0; i < numberOfTimes; i++) {
           final ExpenseModel addExpenseModel = recurringModel
               .toExpenseModel(recurringModel.recurringDate.add(nextTime * i));
-          await expenseDataManager.addOrUpdateExpense(addExpenseModel);
+          await expenseDataManager.add(addExpenseModel);
         }
         final RecurringModel saveExpense = recurringModel.copyWith(
           recurringDate:

@@ -23,9 +23,9 @@ class ExportExpensesWidget extends StatefulWidget {
 }
 
 class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
-  final accountDataSource = getIt.get<LocalAccountDataManager>();
-  final categoryDataSource = getIt.get<LocalCategoryDataManager>();
-  final dataSource = getIt.get<LocalExpenseDataManager>();
+  final accountDataSource = getIt.get<AccountLocalDataManager>();
+  final categoryDataSource = getIt.get<CategoryLocalDataManager>();
+  final dataSource = getIt.get<ExpenseLocalDataManager>();
   DateTimeRange? dateTimeRange;
 
   Future<void> exportData(String subject) async {
@@ -93,8 +93,8 @@ List<String> expenseRow(
 
 List<List<String>> csvDataList(
   List<ExpenseModel> expenses,
-  LocalAccountDataManager accountDataSource,
-  LocalCategoryDataManager categoryDataSource,
+  AccountLocalDataManager accountDataSource,
+  CategoryLocalDataManager categoryDataSource,
 ) {
   return [
     [
@@ -113,7 +113,7 @@ List<List<String>> csvDataList(
       expenses.length,
       (index) {
         final expense = expenses[index];
-        final account = accountDataSource.fetchAccountFromId(expense.accountId);
+        final account = accountDataSource.findById(expense.accountId);
         final category = categoryDataSource.findById(expense.categoryId);
         return expenseRow(
           index,
