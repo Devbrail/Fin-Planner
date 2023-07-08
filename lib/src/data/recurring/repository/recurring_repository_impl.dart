@@ -1,11 +1,11 @@
 import 'package:injectable/injectable.dart';
+
 import '../../../core/common.dart';
+import '../../../core/enum/recurring_type.dart';
 import '../../../core/enum/transaction_type.dart';
 import '../../../core/extensions/recurring_extension.dart';
-import '../../expense/data_sources/local_expense_data_manager.dart';
-
-import '../../../core/enum/recurring_type.dart';
 import '../../../domain/recurring/repository/recurring_repository.dart';
+import '../../expense/data_sources/local_expense_data_manager.dart';
 import '../../expense/model/expense_model.dart';
 import '../data_sources/local_recurring_data_manager.dart';
 import '../model/recurring.dart';

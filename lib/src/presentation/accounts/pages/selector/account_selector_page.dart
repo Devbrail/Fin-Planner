@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
+import '../../../widgets/paisa_annotate_region_widget.dart';
 import '../../../../core/enum/card_type.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 

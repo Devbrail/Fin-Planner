@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 import '../../../main.dart';
 import '../../core/enum/card_type.dart';
 import '../../core/enum/transaction_type.dart';

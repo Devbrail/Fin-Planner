@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import '../../../domain/category/use_case/category_use_case.dart';
 
 import '../../../core/enum/recurring_type.dart';
 import '../../../core/enum/transaction_type.dart';
@@ -14,6 +13,7 @@ import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/account/use_case/account_use_case.dart';
 import '../../../domain/category/entities/category.dart';
+import '../../../domain/category/use_case/category_use_case.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
 import '../../../domain/expense/use_case/update_expense_use_case.dart';
