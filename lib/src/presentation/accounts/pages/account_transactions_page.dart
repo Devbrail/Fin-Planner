@@ -81,7 +81,7 @@ class AccountTransactionsPage extends StatelessWidget {
                     ),
                     onPressed: () {
                       BlocProvider.of<AccountsBloc>(context)
-                          .add(DeleteAccountEvent(int.parse(accountId)));
+                          .add(DeleteAccountEvent(accountId));
                       Navigator.pop(context);
                     },
                     child: Text(

@@ -125,8 +125,8 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     DeleteAccountEvent event,
     Emitter<AccountsState> emit,
   ) async {
-    await deleteExpensesFromAccountIdUseCase(event.accountId);
-    await deleteAccountUseCase(event.accountId);
+    await deleteExpensesFromAccountIdUseCase(int.parse(event.accountId));
+    await deleteAccountUseCase(int.parse(event.accountId));
     emit(AccountDeletedState());
   }
 

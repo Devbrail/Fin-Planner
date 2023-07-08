@@ -174,19 +174,6 @@ class _TransactionPageState extends State<TransactionPage> {
                 ),
               ),
               tablet: Scaffold(
-                bottomNavigationBar: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: PaisaBigButton(
-                      onPressed: () {
-                        BlocProvider.of<TransactionBloc>(context)
-                            .add(AddOrUpdateExpenseEvent(isAddExpense));
-                      },
-                      title:
-                          isAddExpense ? context.loc.add : context.loc.update,
-                    ),
-                  ),
-                ),
                 appBar: AppBar(
                   systemOverlayStyle: SystemUiOverlayStyle(
                     statusBarColor: Colors.transparent,
@@ -212,19 +199,16 @@ class _TransactionPageState extends State<TransactionPage> {
                         ?.copyWith(fontWeight: FontWeight.w700),
                   ),
                   actions: [
-                    const TransactionToggleButtons(),
-                    isAddExpense
-                        ? const SizedBox.shrink()
-                        : IconButton(
-                            onPressed: () {
-                              BlocProvider.of<TransactionBloc>(context)
-                                  .add(ClearExpenseEvent(widget.expenseId!));
-                            },
-                            icon: Icon(
-                              Icons.delete_rounded,
-                              color: context.error,
-                            ),
-                          )
+                    TransactionDeleteWidget(expenseId: widget.expenseId),
+                    PaisaButton(
+                      onPressed: () {
+                        BlocProvider.of<TransactionBloc>(context)
+                            .add(AddOrUpdateExpenseEvent(isAddExpense));
+                      },
+                      title:
+                          isAddExpense ? context.loc.add : context.loc.update,
+                    ),
+                    const SizedBox(width: 16),
                   ],
                 ),
                 body: Row(
@@ -234,34 +218,30 @@ class _TransactionPageState extends State<TransactionPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                TransactionNameWidget(
-                                    controller: nameController),
-                                const SizedBox(height: 16),
-                                ExpenseDescriptionWidget(
-                                    controller: descriptionController),
-                                const SizedBox(height: 16),
-                                TransactionAmountWidget(
-                                    controller: amountController),
-                                const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: ExpenseDatePickerWidget(),
-                                ),
-                              ],
-                            ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              const TransactionToggleButtons(),
+                              const SizedBox(height: 16),
+                              TransactionNameWidget(controller: nameController),
+                              const SizedBox(height: 16),
+                              ExpenseDescriptionWidget(
+                                  controller: descriptionController),
+                              const SizedBox(height: 16),
+                              TransactionAmountWidget(
+                                  controller: amountController),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: ExpenseDatePickerWidget(),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                    const Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
+                    Expanded(
+                      child: ListView(
+                        children: const [
                           SelectedAccount(),
                           SelectCategoryIcon(),
                         ],

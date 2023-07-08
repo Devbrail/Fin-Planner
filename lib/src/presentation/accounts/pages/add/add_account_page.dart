@@ -163,50 +163,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                       ? context.loc.addAccount
                       : context.loc.updateAccount,
                   actions: [
-                    isAccountAddOrUpdate
-                        ? const SizedBox.shrink()
-                        : IconButton(
-                            onPressed: () {
-                              paisaAlertDialog(
-                                context,
-                                title: Text(context.loc.dialogDeleteTitle),
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: context.loc.deleteAccount,
-                                    style: context.bodyMedium,
-                                    children: [
-                                      TextSpan(
-                                        text: BlocProvider.of<AccountsBloc>(
-                                                context)
-                                            .accountName,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                confirmationButton: TextButton(
-                                  style: TextButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                  ),
-                                  onPressed: () {
-                                    BlocProvider.of<AccountsBloc>(context).add(
-                                        DeleteAccountEvent(
-                                            int.parse(widget.accountId!)));
-
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(context.loc.delete),
-                                ),
-                              );
-                            },
-                            icon: Icon(
-                              Icons.delete_rounded,
-                              color: context.error,
-                            ),
-                          ),
+                    DeleteAccountWidget(accountId: widget.accountId),
                     IconButton(
                       onPressed: _showInfo,
                       icon: const Icon(Icons.info_rounded),
@@ -256,45 +213,11 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 },
                               ),
                               const SizedBox(height: 16),
-                              ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)),
-                                onTap: () async {
-                                  final color = await paisaColorPicker(
-                                    context,
-                                    defaultColor:
-                                        BlocProvider.of<AccountsBloc>(context)
-                                                .selectedColor ??
-                                            Colors.red.value,
-                                  );
-                                  if (context.mounted) {
-                                    BlocProvider.of<AccountsBloc>(context)
-                                        .add(AccountColorSelectedEvent(color));
-                                  }
-                                },
-                                leading: Icon(
-                                  Icons.color_lens,
-                                  color: context.primary,
-                                ),
-                                title: Text(context.loc.pickColor),
-                                subtitle: Text(context.loc.pickColorDesc),
-                                trailing: Container(
-                                  width: 32,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(
-                                        BlocProvider.of<AccountsBloc>(context)
-                                                .selectedColor ??
-                                            Colors.red.value),
-                                  ),
-                                ),
-                              ),
                               AccountDefaultSwitchWidget(
                                 accountId:
                                     int.tryParse(widget.accountId ?? '') ?? -1,
                               ),
+                              const AccountColorPickerWidget()
                             ],
                           ),
                         ),
@@ -331,56 +254,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                       onPressed: _showInfo,
                       icon: const Icon(Icons.info_rounded),
                     ),
-                    isAccountAddOrUpdate
-                        ? const SizedBox.shrink()
-                        : IconButton(
-                            onPressed: () {
-                              paisaAlertDialog(
-                                context,
-                                title: Text(context.loc.dialogDeleteTitle),
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: context.loc.deleteAccount,
-                                    style: context.bodyMedium,
-                                    children: [
-                                      TextSpan(
-                                        text: BlocProvider.of<AccountsBloc>(
-                                                context)
-                                            .accountName,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                confirmationButton: TextButton(
-                                  style: TextButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                  ),
-                                  onPressed: () {
-                                    BlocProvider.of<AccountsBloc>(context).add(
-                                        DeleteAccountEvent(
-                                            int.parse(widget.accountId!)));
-
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(context.loc.delete),
-                                ),
-                              );
-                            },
-                            icon: Icon(
-                              Icons.delete_rounded,
-                              color: context.error,
-                            ),
-                          )
-                  ],
-                ),
-                bottomNavigationBar: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: PaisaBigButton(
+                    DeleteAccountWidget(accountId: widget.accountId),
+                    PaisaButton(
                       onPressed: () {
                         final isValid = _form.currentState!.validate();
                         if (!isValid) {
@@ -393,7 +268,8 @@ class AddAccountPageState extends State<AddAccountPage> {
                           ? context.loc.add
                           : context.loc.update,
                     ),
-                  ),
+                    const SizedBox(width: 16),
+                  ],
                 ),
                 body: SingleChildScrollView(
                   child: Row(
@@ -422,10 +298,25 @@ class AddAccountPageState extends State<AddAccountPage> {
                                   controller: accountInitialAmountController,
                                 ),
                                 const SizedBox(height: 16),
-                                AccountNumberWidget(
-                                  controller: accountNumberController,
+                                Builder(
+                                  builder: (context) {
+                                    if (state is UpdateCardTypeState &&
+                                        state.cardType == CardType.bank) {
+                                      return AccountNumberWidget(
+                                        controller: accountNumberController,
+                                      );
+                                    } else {
+                                      return const SizedBox.shrink();
+                                    }
+                                  },
                                 ),
                                 const SizedBox(height: 16),
+                                AccountDefaultSwitchWidget(
+                                  accountId:
+                                      int.tryParse(widget.accountId ?? '') ??
+                                          -1,
+                                ),
+                                const AccountColorPickerWidget()
                               ],
                             ),
                           ),
@@ -438,6 +329,103 @@ class AddAccountPageState extends State<AddAccountPage> {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class AccountColorPickerWidget extends StatelessWidget {
+  const AccountColorPickerWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      onTap: () async {
+        final color = await paisaColorPicker(
+          context,
+          defaultColor: BlocProvider.of<AccountsBloc>(context).selectedColor ??
+              Colors.red.value,
+        );
+        if (context.mounted) {
+          BlocProvider.of<AccountsBloc>(context)
+              .add(AccountColorSelectedEvent(color));
+        }
+      },
+      leading: Icon(
+        Icons.color_lens,
+        color: context.primary,
+      ),
+      title: Text(context.loc.pickColor),
+      subtitle: Text(context.loc.pickColorDesc),
+      trailing: Container(
+        margin: const EdgeInsets.only(right: 12),
+        width: 28,
+        height: 28,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(BlocProvider.of<AccountsBloc>(context).selectedColor ??
+              Colors.red.value),
+        ),
+      ),
+    );
+  }
+}
+
+class DeleteAccountWidget extends StatelessWidget {
+  final String? accountId;
+
+  const DeleteAccountWidget({super.key, this.accountId});
+  void onPressed(BuildContext context) {
+    paisaAlertDialog(
+      context,
+      title: Text(context.loc.dialogDeleteTitle),
+      child: RichText(
+        text: TextSpan(
+          text: context.loc.deleteAccount,
+          style: context.bodyMedium,
+          children: [
+            TextSpan(
+              text: BlocProvider.of<AccountsBloc>(context).accountName,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+      confirmationButton: TextButton(
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+        ),
+        onPressed: () {
+          BlocProvider.of<AccountsBloc>(context)
+              .add(DeleteAccountEvent(accountId!));
+
+          Navigator.pop(context);
+        },
+        child: Text(context.loc.delete),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (accountId == null) {
+      return const SizedBox.shrink();
+    }
+    return ScreenTypeLayout(
+      mobile: IconButton(
+        onPressed: () => onPressed(context),
+        icon: Icon(
+          Icons.delete_rounded,
+          color: context.error,
+        ),
+      ),
+      tablet: PaisaTextButton(
+        onPressed: () => onPressed(context),
+        title: context.loc.delete,
       ),
     );
   }
@@ -577,6 +565,7 @@ class _AccountDefaultSwitchWidgetState
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
       title: const Text('Default account'),
       value: isAccountDefault,

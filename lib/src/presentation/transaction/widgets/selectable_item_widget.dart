@@ -63,6 +63,8 @@ class ItemWidget extends StatelessWidget {
               ListTile(
                 title: Text(
                   title,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                   style: context.titleMedium?.copyWith(
                     color: context.onSurface,
                   ),
@@ -71,7 +73,7 @@ class ItemWidget extends StatelessWidget {
                     ? Text(
                         subtitle!,
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
+                        maxLines: 1,
                       )
                     : null,
               )

@@ -17,7 +17,7 @@ class AddOrUpdateAccountEvent extends AccountsEvent {
 class DeleteAccountEvent extends AccountsEvent {
   const DeleteAccountEvent(this.accountId);
 
-  final int accountId;
+  final String accountId;
 
   @override
   List<Object> get props => [accountId];
