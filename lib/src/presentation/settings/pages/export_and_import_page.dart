@@ -18,18 +18,12 @@ class ExportAndImportPage extends StatelessWidget {
       child: BlocListener(
         bloc: settingCubit,
         listener: (context, state) {
-          if (state is DataSuccessState) {
+          if (state is ImportFileSuccessState) {
             context.showMaterialSnackBar(context.loc.restoringBackupSuccess);
-          } else if (state is DataError) {
+          } else if (state is ImportFileError) {
             context.showMaterialSnackBar(state.error);
-          } else if (state is DataLoadingState) {
-            context.showMaterialSnackBar(
-              state.isLoadingImport
-                  ? context.loc.restoringBackup
-                  : context.loc.creatingBackup,
-            );
-          } else if (state is DataExportState) {
-            context.showMaterialSnackBar(context.loc.creatingBackupSuccess);
+          } else if (state is ImportFileLoading) {
+            context.showMaterialSnackBar(context.loc.restoringBackup);
           }
         },
         child: Scaffold(
@@ -39,7 +33,7 @@ class ExportAndImportPage extends StatelessWidget {
               BlocBuilder(
                 bloc: settingCubit,
                 builder: (context, state) {
-                  if (state is DataLoadingState) {
+                  if (state is ImportFileLoading) {
                     return const SizedBox(
                       height: 16,
                       width: 16,

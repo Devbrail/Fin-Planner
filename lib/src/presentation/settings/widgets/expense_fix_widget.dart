@@ -12,15 +12,18 @@ class FixExpenseWidget extends StatelessWidget {
     return ListTile(
       onTap: () => BlocProvider.of<SettingCubit>(context).fixExpenses(),
       title: const Text('Fix transfer expenses'),
-      subtitle: const Text('Add one or more transfer category & click this'),
+      subtitle: const Text(
+          'Add one or more transfer category & click this. Restart once completed'),
       trailing: BlocConsumer<SettingCubit, SettingsState>(
         listener: (context, state) {
-          if (state is ExpenseFixError) {
+          if (state is FixExpenseError) {
+            context.showMaterialSnackBar('Add transfer category');
+          } else if (state is FixExpenseDone) {
             context.showMaterialSnackBar('Add transfer category');
           }
         },
         builder: (context, state) {
-          if (state is ExpenseFixStarted) {
+          if (state is FixExpenseLoading) {
             return const SizedBox(
               width: 16,
               height: 16,

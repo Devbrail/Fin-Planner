@@ -7,20 +7,16 @@ abstract class SettingsState extends Equatable {
   List<Object> get props => [];
 }
 
-class DataInitial extends SettingsState {}
+class SettingsInitial extends SettingsState {}
 
-class DataSuccessState extends SettingsState {}
+class ImportFileSuccessState extends SettingsState {}
 
-class DataLoadingState extends SettingsState {
-  const DataLoadingState(this.isLoadingImport);
-
-  final bool isLoadingImport;
-}
+class ImportFileLoading extends SettingsState {}
 
 class DataExportState extends SettingsState {}
 
-class DataError extends SettingsState {
-  const DataError(this.error);
+class ImportFileError extends SettingsState {
+  const ImportFileError(this.error);
 
   final String error;
 
@@ -28,8 +24,8 @@ class DataError extends SettingsState {
   List<Object> get props => [error];
 }
 
-class ExpenseFixStarted extends SettingsState {}
+class FixExpenseLoading extends SettingsState {}
 
-class ExpenseFixDone extends SettingsState {}
+class FixExpenseDone extends SettingsState {}
 
-class ExpenseFixError extends SettingsState {}
+class FixExpenseError extends SettingsState {}

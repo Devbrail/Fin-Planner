@@ -23,7 +23,7 @@ class SettingCubit extends Cubit<SettingsState> {
     this.defaultCategoriesUseCase,
     this.updateExpensesUseCase,
     this.fileHandler,
-  ) : super(DataInitial());
+  ) : super(SettingsInitial());
 
   final GetDefaultCategoriesUseCase defaultCategoriesUseCase;
   final GetExpensesUseCase expensesUseCase;
@@ -37,10 +37,10 @@ class SettingCubit extends Cubit<SettingsState> {
 
   void fixExpenses() async {
     if (settings.get(expenseFixKey, defaultValue: true)) {
-      emit(ExpenseFixStarted());
+      emit(FixExpenseLoading());
       final List<Category> categories = defaultCategoriesUseCase();
       if (categories.isEmpty) {
-        return emit(ExpenseFixError());
+        return emit(FixExpenseError());
       }
       final List<Expense> expenses = expensesUseCase()
           .where((element) => element.categoryId == -1)
@@ -51,7 +51,7 @@ class SettingCubit extends Cubit<SettingsState> {
         await updateExpensesUseCase(element);
       }
       settings.put(expenseFixKey, false);
-      emit(ExpenseFixDone());
+      emit(FixExpenseDone());
     }
   }
 
@@ -63,11 +63,11 @@ class SettingCubit extends Cubit<SettingsState> {
   }
 
   void _importFile() {
-    emit(const DataLoadingState(true));
+    emit(ImportFileLoading());
     fileHandler.importDataFromFile().then((value) {
       value.fold(
-        (l) => emit(DataError(l)),
-        (r) => emit(DataSuccessState()),
+        (l) => emit(ImportFileError(l)),
+        (r) => emit(ImportFileSuccessState()),
       );
     });
   }
