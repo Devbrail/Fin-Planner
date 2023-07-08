@@ -18,9 +18,9 @@ extension CardTypeHelper on CardType {
   IconData get icon {
     switch (this) {
       case CardType.bank:
-        return MdiIcons.cashMultiple;
-      case CardType.wallet:
         return MdiIcons.creditCard;
+      case CardType.wallet:
+        return MdiIcons.walletBifold;
       case CardType.cash:
         return MdiIcons.cashMultiple;
     }
