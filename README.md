@@ -11,8 +11,8 @@
    <a href="https://play.google.com/store/apps/details?id=dev.hemanths.paisa" style="text-decoration:none" area-label="flutter">
     <img src="https://img.shields.io/badge/Download-Google%20Play-green">
   </a>
-  <a href="https://github.com/RetroMusicPlayer/Paisa/releases/tag/v4.7.9" style="text-decoration:none" area-label="flutter">
-    <img src="https://img.shields.io/badge/Version-4.7.9-orange">
+  <a href="https://github.com/RetroMusicPlayer/Paisa/releases/tag/v4.8.0" style="text-decoration:none" area-label="flutter">
+    <img src="https://img.shields.io/badge/Version-4.8.0-orange">
   </a>
 </p>
 <p  align="center">
