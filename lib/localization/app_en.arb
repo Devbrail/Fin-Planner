@@ -2,98 +2,82 @@
     "appTitle": "Paisa",
     "@appTitle": {
         "description": "The app name",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "home": "Home",
     "@home": {
         "description": "Home text shown in the bottom navigation or drawer widget",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "transactions": "Transactions",
     "@transactions": {
         "description": "Section title shown on the home page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "welcomeMessage": "Welcome back!",
     "@welcomeMessage": {
         "description": "Text shown on the home screen under the user name",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "categories": "Categories",
     "@categories": {
         "description": "Categories text shown in the bottom navigation or drawer widget",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "accounts": "Accounts",
     "@accounts": {
         "description": "Accounts text shown in the bottom navigation or drawer widget",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "budget": "Budget",
     "@budget": {
         "description": "Accounts text shown in the bottom navigation or drawer widget",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "overview": "Overview",
     "@overview": {
         "description": "Accounts text shown in the bottom navigation or drawer widget",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "recurring": "Recurring",
     "@recurring": {
         "description": "Recurring text shown in the bottom navigation or drawer widget and recurring page toolbar title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "debts": "Debts",
     "@debts": {
         "description": "Debts text shown in the bottom navigation or drawer widget",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addTransactionTooltip": "Add transaction",
     "@addTransactionTooltip": {
         "description": "Tooltip shown on the home fab button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addAccountTooltip": "Add account",
     "@addAccountTooltip": {
         "description": "Tooltip shown on the account fab button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addCategoryTooltip": "Add category",
     "@addCategoryTooltip": {
         "description": "Tooltip shown on the category fab button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addDebtTooltip": "Add debt",
     "@addDebtTooltip": {
         "description": "Tooltip shown on the category debt button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addRecurringTooltip": "Add recurring",
     "@addRecurringTooltip": {
         "description": "Tooltip shown on the category recurring button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "selectDateRangeTooltip": "Date range",
     "@selectDate": {
         "description": "Tooltip shown on the overview fab button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "transactionSubTittleText": "{bankName} • {dateString}",
     "@transactionSubTittleText": {
@@ -111,290 +95,242 @@
     "addCategory": "Add Category",
     "@addCategory": {
         "description": "Text shown on the toolbar on the category page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addCategoryEmptyTitle": "No categories",
     "@addCategoryEmptyTitle": {
         "description": "Title text shown on the expense page when there is not categories available",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addCategoryEmptySubTitle": "Add categories to select",
     "@addCategoryEmptySubTitle": {
         "description": "Subtitle text shown on the expense page when there is not categories available",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addAccountEmptyTitle": "No accounts",
     "@addAccountEmptyTitle": {
         "description": "Title text shown on the expense page when there is not accounts available",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addAccountEmptySubTitle": "Add account to select",
     "@addAccountEmptySubTitle": {
         "description": "Subtitle text shown on the expense page when there is not accounts available",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addTransaction": "Add transaction",
     "@addTransaction": {
         "description": "Add transaction text shown on the transactions page as toolbar title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "updateTransaction": "Update transaction",
     "@updateTransaction": {
         "description": "Update transaction text shown on the transactions page as toolbar title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addedTransaction": "Transaction added",
     "@addedTransaction": {
         "description": "Successful message when Transaction added",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "updatedTransaction": "Transaction updated",
     "@updatedTransaction": {
         "description": "Successful message when Transaction updated",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "deletedTransaction": "Transaction deleted",
     "@deletedTransaction": {
         "description": "Successful message when Transaction deleted",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "expenseName": "Expense name",
     "@expenseName": {
         "description": "Text shown on input hint name",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "description": "Description",
     "@description": {
         "description": "Text shown on the transaction page textfield description ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "selectAccount": "Select account",
     "@selectAccount": {
         "description": "Section title text shown on the transaction for accounts",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "selectCategory": "Select category",
     "@selectCategory": {
         "description": "Section title text shown on the transaction for categories ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "settings": "Settings",
     "@settings": {
         "description": "Text shown on the drawer button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "localApp": "Lock app",
     "@localApp": {
         "description": "Text shown on the settings page biometric button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "expense": "Expense",
     "@expense": {
         "description": "Text shown on the multiple places",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "transfer": "Transfer",
     "@transfer": {
         "description": "Text shown on the multiple places",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "daily": "Daily",
     "@daily": {
         "description": "Text shown on the expenses filter",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "weekly": "Weekly",
     "@weekly": {
         "description": "Text shown on the expenses filter",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "monthly": "Monthly",
     "@monthly": {
         "description": "Text shown on the expenses filter",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "yearly": "Yearly",
     "@yearly": {
         "description": "Text shown on the expenses filter",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "all": "All",
     "@all": {
         "description": "Text shown on the expenses filter",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "updateAccount": "Update account",
     "@updateAccount": {
         "description": "Update account text shown on the transactions page as toolbar title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addAccount": "Add Account",
     "@addAccount": {
         "description": "Add account text shown on the transactions page as toolbar title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "transactionHistory": "Transaction history",
     "@transactionHistory": {
         "description": "Title text shown on accounts page as section header title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "cash": "Cash",
     "@cash": {
         "description": "Text shown on the account page chip button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "bank": "Bank",
     "@bank": {
         "description": "Text shown on the account page chip button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "wallet": "Wallet",
     "@wallet": {
         "description": "Text shown on the account page chip button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "cardHolder": "Cardholder name",
     "@cardHolder": {
         "description": "Text shown on the account page as textfield hint",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "accountName": "Account name",
     "@accountName": {
         "description": "Text shown on the account page as textfield hint",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "lastFourDigit": "Last four digit number",
     "@lastFourDigit": {
         "description": "Text shown on the account page as textfield hint",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addedAccount": "Account added",
     "@addedAccount": {
         "description": "Successful message when account added",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "updatedAccount": "Account updated",
     "@updatedAccount": {
         "description": "Successful message when account updated",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "deletedAccount": "Account deleted",
     "@deletedAccount": {
         "description": "Successful message when account deleted",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "successAddCategory": "Category added",
     "@successAddCategory": {
         "description": "Successful message when category deleted",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "validName": "Enter valid name",
     "@validName": {
         "description": "Error message shown when entered name is not valid",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "profile": "Profile",
     "@profile": {
         "description": "Text shown on the bottom sheet dialog",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "chooseTheme": "Choose theme",
     "@chooseTheme": {
         "description": "Title text shown on the settings page theme for theme chooser",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "selectCurrency": "Select currency",
     "@selectCurrency": {
         "description": "Toolbar title text shown on choosing the currency",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "errorAuth": "Error authentication",
     "@errorAuth": {
         "description": "Error message shown when biometric authentication fails",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptyAccountMessageTitle": "No accounts are available",
     "@emptyAccountMessageTitle": {
         "description": "Message title text shown on the accounts page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptyAccountMessageSubTitle": "Add an account to display it here",
     "@emptyAccountMessageSubTitle": {
         "description": "Message sub title text shown on the accounts page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptyCategoriesMessageTitle": "No categories are available",
     "@emptyCategoriesMessageTitle": {
         "description": "Message title text shown on the categories page when no categories available",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptyCategoriesMessageSubTitle": "Add an category to display it here",
     "@emptyCategoriesMessageSubTitle": {
         "description": "Message subtitle text shown on the categories page when no categories available",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptyOverviewMessageTitle": "No overview data",
     "@emptyOverviewMessageTitle": {
         "description": "No overview data message",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptyOverviewMessageSubtitle": "To see your spending overview, add your expenses",
     "@emptyOverviewMessageSubtitle": {
         "description": "No budget overview description ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "amount": "Amount",
     "@amount": {
         "description": "Text shown on the input hint name",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "initialAmount": "Initial amount",
     "@initialAmount": {
@@ -403,62 +339,52 @@
     "validAmount": "Enter valid amount",
     "@validAmount": {
         "description": "Text shown on the input hint name",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "dueDate": "End date",
     "@dueDate": {
         "description": "Text shown on the debt/ credit page when selecting end date",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "startDate": "Start date",
     "@startDate": {
         "description": "Text shown on the debt/ credit page when selecting start date",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "socialLinks": "Social links",
     "@socialLinks": {
         "description": "Section title shown on the settings page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "telegram": "Telegram",
     "@telegram": {
         "description": "Title text shown on settings page for telegram button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "telegramGroup": "A group to follow and post bugs and feature requests",
     "@telegramGroup": {
         "description": "Subtitle text shown on settings page for telegram button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "privacyPolicy": "Privacy & Policy",
     "@privacyPolicy": {
         "description": "Title text shown on settings page for privacy and policy button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "github": "Github",
     "@github": {
         "description": "Title text shown on settings page for github button ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "githubText": "Fork the project on GitHub",
     "@githubText": {
         "description": "Subtitle text shown on the github button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "version": "Version",
     "@version": {
         "description": "Title text shown on the settings page for button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "versionNumber": "v{version}",
     "@versionNumber": {
@@ -472,302 +398,252 @@
     "deleteAccount": "Deleting the account deletes all expenses which tied to this account ",
     "@deleteAccount": {
         "description": "Delete account message",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "deleteCategory": "Deleting the category deletes all expenses which tied to this category ",
     "@deleteCategory": {
         "description": "Delete category message",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "deleteExpense": "Expense will be permanently removed from account",
     "@deleteExpense": {
         "description": "Delete expense message",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "dialogDeleteTitle": "Permanently delete?",
     "@dialogDeleteTitle": {
         "description": "Permanently delete ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "updatedCategory": "Category updated",
     "@updatedCategory": {
         "description": "Successful message when category updated",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "update": "Update",
     "@update": {
         "description": "Text shown on multiple places on button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "add": "Add",
     "@add": {
         "description": "Text shown on multiple places on button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "done": "Done",
     "@done": {
         "description": "Text shown on multiple places on button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "cancel": "Cancel",
     "@cancel": {
         "description": "Text shown on multiple places on button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "custom": "Custom",
     "@custom": {
         "description": "Text shown on the one of the theme option",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "accentColor": "Primary color",
     "@accentColor": {
         "description": "Title text shown on the settings page theme button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "dynamicColor": "Dynamic",
     "@dynamicColor": {
         "description": "Text shown on the theme option switch button ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "pickColor": "Pick color",
     "@pickColor": {
         "description": "Title text shown on the color picker",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "pickColorDesc": "Set color to your category",
     "@pickColorDesc": {
         "description": "Subtitle text shown on the category color picker button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "colors": "Colors",
     "@colors": {
         "description": "Section title on settings page for theme",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "others": "Others",
     "@others": {
         "description": "Section title on settings page for theme",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "madeWithLoveInIndia": "Made with ♥ in India",
     "@madeWithLoveInIndia": {
         "description": "Message shown on the bottom of the setting screen",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "updateCategory": "Update Category",
     "@updateCategory": {
         "description": "Text shown on the adding category screen toolbar",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "accountInformationTitle": "Information",
     "@accountInformationTitle": {
         "description": "Title text shown on the information dialog",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "accountInformationSubTitle": "The account details you entered are not shared with anyone, including us. It is only used for visual representation of account details, you may enter false info too",
     "@accountInformationSubTitle": {
         "description": "Subtitle text shown on the information dialog",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "next": "Next",
     "@next": {
         "description": "Text shown on the intro page button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "image": "Image",
     "@image": {
         "description": "Text shown on the intro page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "welcome": "Hi, Welcome to",
     "@welcome": {
         "description": "Intro page message for name input",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "welcomeDesc": "What should we call you",
     "@welcomeDesc": {
         "description": "Welcome desc ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "nameHint": "Name",
     "@nameHint": {
         "description": "Text input hint name",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "enterNameHint": "Enter name",
     "@enterNameHint": {
         "description": "Text input hint name",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "imageDesc": "Let's set image of you",
     "@imageDesc": {
         "description": "Image desc ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "setBudget": "Set budget for category",
     "@setBudget": {
         "description": "Text shown on the category screen for setting budget",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "income": "Income",
     "@income": {
         "description": "Text shown on multiple places",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "thisMonth": "This month",
     "@thisMonth": {
         "description": "Text shown on the home screen top section",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "totalBalance": "Total balance",
     "@totalBalance": {
         "description": "Text shown on the home screen top section",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "ok": "Ok",
     "@ok": {
         "description": "Text shown on the button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "searchMessage": "Start searching something!",
     "@searchMessage": {
         "description": "Message shown on the search screen",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptySearchMessage": "Looks like nothing found!",
     "@emptySearchMessage": {
         "description": "Message shown on the search screen",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptyExpensesMessageTitle": "No expenses yet?",
     "@emptyExpensesMessageTitle": {
         "description": "Title message shown on the page when there are no expenses",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptyExpensesMessageSubTitle": "If there are no expenses, start by adding an expense to see it displayed here.",
     "@emptyExpensesMessageSunTitle": {
         "description": "Subtitle message shown on the page when there are no expenses",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "selectIconTitle": "Select icon",
     "@selectIconTitle": {
         "description": "Title text shown on the button in category page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "selectIconSubTitle": "Tap to select icon",
     "@selectIconSubTitle": {
         "description": "Subtitle text shown on the button in category page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "incomeName": "Income name",
     "@incomeName": {
         "description": "Text shown on the input hint",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "currencySign": "Currency sign",
     "@currencySign": {
         "description": "Text shown on the button on settings screen",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "expenseByCategory": "Expense by category",
     "@expenseByCategory": {
         "description": "Text shown on the toolbar title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "transactionsByCategory": "Transactions by category",
     "@transactionsByCategory": {
         "description": "Text shown on the toolbar title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "backupAndRestoreTitle": "Backup and restore",
     "@backupAndRestoreTitle": {
         "description": "Text shown on the toolbar title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "backupAndRestoreSubTitle": "Backup and restore your expenses, accounts & categories",
     "@backupAndRestoreSubTitle": {
         "description": "Subtitle text shown on the setting button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "exportData": "Export",
     "@exportData": {
         "description": "Text shown on the import and export button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "importData": "Import",
     "@importData": {
         "description": "IText shown on the import and export button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "creatingBackup": "Creating backup",
     "@creatingBackup": {
         "description": "Message shown when the backup is initiated",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "creatingBackupSuccess": "Backup successful",
     "@creatingBackupSuccess": {
         "description": "Message shown when the importing backup file",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "restoringBackup": "Restoring backup",
     "@restoringBackup": {
         "description": "Message shown when the importing backup file",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "restoringBackupSuccess": "Restoring successful",
     "@restoringBackupSuccess": {
         "description": "Message shown when the importing backup file",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "saveAsCSV": "Save as CSV",
     "@saveAsCSV": {
@@ -912,193 +788,161 @@
     "intoTitle": "Simple way to help control your savings",
     "@intoTitle": {
         "description": "Title text shown on the intro page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "intoSummary1": "Manage your money with our app",
     "@intoSummary1": {
         "description": "Hint message 1 shown on the intro page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "intoSummary2": "Easy expense tracking for a better budget",
     "@intoSummary2": {
         "description": "Hint message 2 shown on the intro page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "intoSummary3": "Stay on top of your expenses, anytime, anywhere",
     "@intoSummary3": {
         "description": "Hint message 3 shown on the intro page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "introCTA": "Get started",
     "@introCTA": {
         "description": "Text shown on the intro screen button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "deleteDebtOrCredit": "Deleting the debt or credit deletes all record related to it ",
     "@deleteDebtOrCredit": {
         "description": "Delete debt or credit ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "backupAndRestoreJSONTitle": "Export data as JSON file",
     "@backupAndRestoreJSONTitle": {
         "description": "Section title text shown on the export and import page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "backupAndRestoreJSONDesc": "The file will be a plain JSON file created and exported to save. Please note that if in case anything changes happen in the future in Paisa then this file will be invalid to import.",
     "@backupAndRestoreJSONDesc": {
         "description": "Message shown on the import and export screen",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptyBudgetMessageTitle": "No budgets have been set for any categories",
     "@emptyBudgetMessageTitle": {
         "description": "Title text shown on the budget screen when no budgets are available",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "emptyBudgetMessageSubTitle": "Set a budget for any category, and that category will show up here.",
     "@emptyBudgetMessageSubTitle": {
         "description": "Subtitle text shown on the budget screen when no budgets are available",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "recurringEmptyMessageTitle": "No recurring events?",
     "@recurringEmptyMessageTitle": {
         "description": "Title text shown on the recurring page when no events available",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "recurringEmptyMessageSubTitle": "Add recurring events to view them here",
     "@recurringEmptyMessageSubTitle": {
         "description": "Subtitle text shown on the recurring page when no events available",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "recurringAction": "Add recurring events",
     "@recurringAction": {
         "description": "Text shown on the recurring action button",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "sortList": "Sort list",
     "@sortList": {
         "description": "Title text shown on the sort dialog",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "smallSizeFab": "Small size FAB",
     "@smallSizeFab": {
         "description": "Title text shown on the settings page for FAB size option",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "smallSizeFabMessage": "Show small size action button on all screen",
     "@smallSizeFabMessage": {
         "description": "Title text shown on the settings page for FAB size option",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "selectDateErrorMessage": "Select date",
     "@selectDateErrorMessage": {
         "description": "Message shown when the date is not select on debt payout ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "edit": "Edit",
     "@edit": {
         "description": "Text shown on the buttons",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "fromAccount": "Transfer account from",
     "@fromAccount": {
         "description": "Text shown on the title section of account in transfer section in transaction page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "toAccount": "Transfer account to",
     "@toAccount": {
         "description": "Text shown on the title section of account in transfer section in transaction page",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "paisaLocked": "Paisa Locked",
     "@paisaLocked": {
         "description": "Text shown on the title section of biometric screen",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "authenticate": "Authenticate",
     "@authenticate": {
         "description": "Text shown on the button biometric screen",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "biometricMessage": "Touch the fingerprint sensor",
     "@biometricMessage": {
         "description": "Text shown on the biometric screen below icon",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addedCategories": "Added categories",
     "@addedCategories": {
         "description": "Text shown on the add category section title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "defaultCategories": "Default categories",
     "@defaultCategories": {
         "description": "Text shown on the add category section title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "addedAccounts": "Added accounts",
     "@addedAccounts": {
         "description": "Text shown on the add account section title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "defaultAccounts": "Default accounts",
     "@defaultAccounts": {
         "description": "Text shown on the add account section title",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "total": "Total",
     "@total": {
         "description": "Text shown on the home screen sub title on total card",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "colorsUI": "Colors & UI",
     "@colorsUI": {
         "description": "Text shown on the section title on settings screen",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "more": "More",
     "@more": {
         "description": "Text shown on the button on icon chooser screen",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "chooseIcon": "Choose icon",
     "@chooseIcon": {
         "description": "Title text shown on the icon chooser screen",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     },
     "transferCategory": "Transfer category",
     "@transferCategory": {
         "description": "Text shown add category page for add default category ",
-        "type": "text",
-        "placeholders": {}
+        "type": "text"
     }
 }
