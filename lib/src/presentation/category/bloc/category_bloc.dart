@@ -117,8 +117,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     CategoryDeleteEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    await deleteCategoryUseCase(event.category.superId!);
-    await deleteExpensesFromCategoryIdUseCase(event.category.superId!);
+    await deleteCategoryUseCase(int.parse(event.categoryId));
+    await deleteExpensesFromCategoryIdUseCase(int.parse(event.categoryId));
     emit(CategoryDeletedState());
   }
 

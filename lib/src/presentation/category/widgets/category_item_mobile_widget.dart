@@ -9,11 +9,9 @@ class CategoryItemMobileWidget extends StatelessWidget {
   const CategoryItemMobileWidget({
     Key? key,
     required this.category,
-    required this.onPressed,
   }) : super(key: key);
 
   final CategoryModel category;
-  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +55,6 @@ class CategoryItemMobileWidget extends StatelessWidget {
                       .withOpacity(0.75),
                 ),
               ),
-        trailing: IconButton(
-          onPressed: onPressed,
-          icon: Icon(
-            Icons.delete_rounded,
-            color: context.error,
-          ),
-        ),
       ),
     );
   }

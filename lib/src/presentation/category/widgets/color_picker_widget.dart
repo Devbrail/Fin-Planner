@@ -8,18 +8,14 @@ import '../bloc/category_bloc.dart';
 class ColorPickerWidget extends StatelessWidget {
   const ColorPickerWidget({
     super.key,
-    required this.categoryBloc,
   });
-
-  final CategoryBloc categoryBloc;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
+    return BlocBuilder<CategoryBloc, CategoryState>(
       buildWhen: (previous, current) =>
           current is CategoryColorSelectedState ||
           current is CategorySuccessState,
-      bloc: categoryBloc,
       builder: (context, state) {
         int color = Colors.red.value;
         if (state is CategoryColorSelectedState) {
@@ -46,8 +42,9 @@ class ColorPickerWidget extends StatelessWidget {
             context.loc.pickColorDesc,
           ),
           trailing: Container(
-            width: 32,
-            height: 32,
+            margin: const EdgeInsets.only(right: 8),
+            width: 28,
+            height: 28,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Color(color),

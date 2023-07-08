@@ -18,12 +18,12 @@ class AddOrUpdateCategoryEvent extends CategoryEvent {
 }
 
 class CategoryDeleteEvent extends CategoryEvent {
-  const CategoryDeleteEvent(this.category);
+  const CategoryDeleteEvent(this.categoryId);
 
-  final Category category;
+  final String categoryId;
 
   @override
-  List<Object?> get props => [category];
+  List<Object?> get props => [categoryId];
 }
 
 class FetchCategoryFromIdEvent extends CategoryEvent {

@@ -58,7 +58,8 @@ class CategoryListTabletWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
               ),
               onPressed: () {
-                addCategoryBloc.add(CategoryDeleteEvent(categories[index]));
+                addCategoryBloc.add(
+                    CategoryDeleteEvent(categories[index].superId!.toString()));
                 Navigator.pop(context);
               },
               child: const Text('Delete'),

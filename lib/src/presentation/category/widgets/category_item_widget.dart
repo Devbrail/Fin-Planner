@@ -26,10 +26,7 @@ class CategoryItemWidget extends StatelessWidget {
         category: category,
         onPressed: onPressed,
       ),
-      mobile: CategoryItemMobileWidget(
-        category: category,
-        onPressed: onPressed,
-      ),
+      mobile: CategoryItemMobileWidget(category: category),
     );
   }
 }

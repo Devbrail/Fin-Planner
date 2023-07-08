@@ -6,6 +6,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
+import '../../../widgets/paisa_bottom_sheet.dart';
 import '../../../widgets/paisa_color_picker.dart';
 import '../../../widgets/paisa_text_field.dart';
 import '../../bloc/category_bloc.dart';
@@ -93,6 +94,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                 isAddCategory
                     ? context.loc.addCategory
                     : context.loc.updateCategory,
+                actions: [
+                  DeleteCategoryWidget(categoryId: widget.categoryId),
+                ],
               ),
               body: SingleChildScrollView(
                 child: Form(
@@ -116,37 +120,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                         ),
                       ),
                       const CategoryIconPickerWidget(),
-                      ListTile(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        onTap: () {
-                          paisaColorPicker(context,
-                                  defaultColor:
-                                      BlocProvider.of<CategoryBloc>(context)
-                                              .selectedColor ??
-                                          Colors.red.value)
-                              .then((color) {
-                            BlocProvider.of<CategoryBloc>(context)
-                                .add(CategoryColorSelectedEvent(color));
-                          });
-                        },
-                        leading: Icon(
-                          Icons.color_lens,
-                          color: context.primary,
-                        ),
-                        title: Text(context.loc.pickColor),
-                        subtitle: Text(context.loc.pickColorDesc),
-                        trailing: Container(
-                          width: 32,
-                          height: 32,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color(BlocProvider.of<CategoryBloc>(context)
-                                    .selectedColor ??
-                                Colors.red.value),
-                          ),
-                        ),
-                      ),
+                      const CategoryColorWidget(),
                       SetBudgetWidget(controller: budgetController),
                       const TransferCategoryWidget(),
                     ],
@@ -173,64 +147,152 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             ),
             tablet: Scaffold(
               appBar: context.materialYouAppBar(
-                isAddCategory
-                    ? context.loc.addCategory
-                    : context.loc.updateCategory,
-              ),
-              bottomNavigationBar: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: PaisaBigButton(
-                    onPressed: () {
-                      final isValid = _formKey.currentState!.validate();
-                      if (!isValid) {
-                        return;
-                      }
+                  isAddCategory
+                      ? context.loc.addCategory
+                      : context.loc.updateCategory,
+                  actions: [
+                    DeleteCategoryWidget(categoryId: widget.categoryId),
+                    PaisaButton(
+                      onPressed: () {
+                        final isValid = _formKey.currentState!.validate();
+                        if (!isValid) {
+                          return;
+                        }
 
-                      BlocProvider.of<CategoryBloc>(context)
-                          .add(AddOrUpdateCategoryEvent(isAddCategory));
-                    },
-                    title: isAddCategory ? context.loc.add : context.loc.update,
-                  ),
-                ),
-              ),
-              body: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Form(
-                  key: _formKey,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const CategoryIconPickerWidget(),
-                            SetBudgetWidget(controller: budgetController),
-                            ColorPickerWidget(
-                                categoryBloc:
-                                    BlocProvider.of<CategoryBloc>(context)),
-                          ],
-                        ),
+                        BlocProvider.of<CategoryBloc>(context)
+                            .add(AddOrUpdateCategoryEvent(isAddCategory));
+                      },
+                      title:
+                          isAddCategory ? context.loc.add : context.loc.update,
+                    ),
+                    const SizedBox(width: 16),
+                  ]),
+              body: Form(
+                key: _formKey,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          const CategoryIconPickerWidget(),
+                          const ColorPickerWidget(),
+                          SetBudgetWidget(controller: budgetController),
+                        ],
                       ),
-                      const SizedBox(width: 24),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            CategoryNameWidget(controller: categoryController),
-                            const SizedBox(height: 24),
-                            CategoryDescriptionWidget(
-                                controller: descController),
-                            const SizedBox(height: 24),
-                          ],
-                        ),
+                    ),
+                    const SizedBox(width: 24),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          CategoryNameWidget(controller: categoryController),
+                          const SizedBox(height: 16),
+                          CategoryDescriptionWidget(controller: descController),
+                          const SizedBox(height: 16),
+                          const TransferCategoryWidget(),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class DeleteCategoryWidget extends StatelessWidget {
+  final String? categoryId;
+
+  const DeleteCategoryWidget({super.key, this.categoryId});
+  void onPressed(BuildContext context) {
+    paisaAlertDialog(
+      context,
+      title: Text(context.loc.dialogDeleteTitle),
+      child: RichText(
+        text: TextSpan(
+          text: context.loc.deleteAccount,
+          style: context.bodyMedium,
+          children: [
+            TextSpan(
+              text: BlocProvider.of<CategoryBloc>(context).categoryTitle,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+      confirmationButton: TextButton(
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+        ),
+        onPressed: () {
+          BlocProvider.of<CategoryBloc>(context)
+              .add(CategoryDeleteEvent(categoryId!));
+
+          Navigator.pop(context);
+        },
+        child: Text(context.loc.delete),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (categoryId == null) {
+      return const SizedBox.shrink();
+    }
+    return ScreenTypeLayout(
+      mobile: IconButton(
+        onPressed: () => onPressed(context),
+        icon: Icon(
+          Icons.delete_rounded,
+          color: context.error,
+        ),
+      ),
+      tablet: PaisaTextButton(
+        onPressed: () => onPressed(context),
+        title: context.loc.delete,
+      ),
+    );
+  }
+}
+
+class CategoryColorWidget extends StatelessWidget {
+  const CategoryColorWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      onTap: () {
+        paisaColorPicker(context,
+                defaultColor:
+                    BlocProvider.of<CategoryBloc>(context).selectedColor ??
+                        Colors.red.value)
+            .then((color) {
+          BlocProvider.of<CategoryBloc>(context)
+              .add(CategoryColorSelectedEvent(color));
+        });
+      },
+      leading: Icon(
+        Icons.color_lens,
+        color: context.primary,
+      ),
+      title: Text(context.loc.pickColor),
+      subtitle: Text(context.loc.pickColorDesc),
+      trailing: Container(
+        width: 32,
+        height: 32,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(BlocProvider.of<CategoryBloc>(context).selectedColor ??
+              Colors.red.value),
+        ),
       ),
     );
   }
