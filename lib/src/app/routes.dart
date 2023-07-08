@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/src/app/in_app.dart';
 import 'package:provider/provider.dart';
 
 import '../../main.dart';
@@ -170,7 +171,9 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: landingName,
       path: landingPath,
-      builder: (context, state) => const LandingPage(),
+      builder: (context, state) => LandingPage(
+        inApp: getIt.get<InApp>(),
+      ),
       routes: [
         GoRoute(
           path: addTransactionPath,
