@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/common.dart';
+import '../../../core/enum/filter_expense.dart';
 import '../../../core/extensions/filter_expense_extension.dart';
 import '../../summary/controller/summary_controller.dart';
-
-import '../../../../main.dart';
-import '../../../core/enum/filter_expense.dart';
-import '../../settings/controller/settings_controller.dart';
 import '../paisa_pill_chip.dart';
 import '../paisa_toggle_button.dart';
 
@@ -28,7 +26,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
     return ValueListenableBuilder<FilterExpense>(
       valueListenable: summaryController.filterExpenseNotifier,
       builder: (_, value, child) {
-        getIt.get<SettingsController>().setFilterExpense(value);
+        summaryController.settingsUseCase.put(selectedFilterExpenseKey, value);
         if (showAsList) {
           return SafeArea(
             child: Column(

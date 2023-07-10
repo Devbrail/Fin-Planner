@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../../core/extensions/filter_expense_extension.dart';
-import '../../settings/controller/settings_controller.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../../widgets/paisa_toggle_button.dart';
 
-class FilterHomeWidget extends StatelessWidget {
-  const FilterHomeWidget({
+class FilterHomeExpensesWidget extends StatelessWidget {
+  const FilterHomeExpensesWidget({
     super.key,
     required this.summaryController,
   });
@@ -25,7 +23,8 @@ class FilterHomeWidget extends StatelessWidget {
     return ValueListenableBuilder<FilterExpense>(
       valueListenable: summaryController.sortHomeExpenseNotifier,
       builder: (_, value, child) {
-        getIt.get<SettingsController>().setFilterExpense(value, isHome: true);
+        summaryController.settingsUseCase
+            .put(selectedHomeFilterExpenseKey, value);
         return SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,

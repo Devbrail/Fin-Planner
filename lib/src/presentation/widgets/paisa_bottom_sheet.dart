@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/src/domain/settings/use_case/setting_use_case.dart';
 
 import '../../../main.dart';
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
-import '../settings/controller/settings_controller.dart';
 
 enum UserMenuPopup { debts, chooseTheme, settings, userDetails }
 
@@ -61,7 +61,7 @@ Future<void> showUserDialog(
   BuildContext context, {
   required Function(UserMenuPopup userMenuPopup) userMenuPopup,
 }) {
-  final SettingsController settings = getIt.get<SettingsController>();
+  final SettingsUseCase settings = getIt.get();
   final int themeModeValue = settings.get(themeModeKey, defaultValue: 0);
   var themeMode = ThemeMode.values[themeModeValue];
   bool isDarkMode = themeMode == ThemeMode.dark;

@@ -267,33 +267,38 @@ class CategoryColorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      onTap: () {
-        paisaColorPicker(context,
-                defaultColor:
-                    BlocProvider.of<CategoryBloc>(context).selectedColor ??
-                        Colors.red.value)
-            .then((color) {
-          BlocProvider.of<CategoryBloc>(context)
-              .add(CategoryColorSelectedEvent(color));
-        });
+    return BlocBuilder<CategoryBloc, CategoryState>(
+      builder: (context, state) {
+        return ListTile(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          onTap: () {
+            paisaColorPicker(context,
+                    defaultColor:
+                        BlocProvider.of<CategoryBloc>(context).selectedColor ??
+                            Colors.red.value)
+                .then((color) {
+              BlocProvider.of<CategoryBloc>(context)
+                  .add(CategoryColorSelectedEvent(color));
+            });
+          },
+          leading: Icon(
+            Icons.color_lens,
+            color: context.primary,
+          ),
+          title: Text(context.loc.pickColor),
+          subtitle: Text(context.loc.pickColorDesc),
+          trailing: Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color(
+                  BlocProvider.of<CategoryBloc>(context).selectedColor ??
+                      Colors.red.value),
+            ),
+          ),
+        );
       },
-      leading: Icon(
-        Icons.color_lens,
-        color: context.primary,
-      ),
-      title: Text(context.loc.pickColor),
-      subtitle: Text(context.loc.pickColorDesc),
-      trailing: Container(
-        width: 32,
-        height: 32,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Color(BlocProvider.of<CategoryBloc>(context).selectedColor ??
-              Colors.red.value),
-        ),
-      ),
     );
   }
 }
@@ -306,17 +311,19 @@ class TransferCategoryWidget extends StatefulWidget {
 }
 
 class _TransferCategoryWidgetState extends State<TransferCategoryWidget> {
-  bool isAccountDefault = false;
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile(
-      title: Text(context.loc.transferCategory),
-      value: isAccountDefault,
-      onChanged: (value) {
-        setState(() {
-          isAccountDefault = value;
-          BlocProvider.of<CategoryBloc>(context).isDefault = value;
-        });
+    return BlocBuilder<CategoryBloc, CategoryState>(
+      builder: (context, state) {
+        return SwitchListTile(
+          title: Text(context.loc.transferCategory),
+          value: BlocProvider.of<CategoryBloc>(context).isDefault,
+          onChanged: (value) {
+            setState(() {
+              BlocProvider.of<CategoryBloc>(context).isDefault = value;
+            });
+          },
+        );
       },
     );
   }

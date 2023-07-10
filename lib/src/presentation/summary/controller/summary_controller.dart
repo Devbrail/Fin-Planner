@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../main.dart';
+import '../../../core/common.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../../core/enum/transaction_type.dart';
 import '../../../domain/account/entities/account.dart';
@@ -10,11 +10,12 @@ import '../../../domain/category/entities/category.dart';
 import '../../../domain/category/use_case/category_use_case.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
-import '../../settings/controller/settings_controller.dart';
+import '../../../domain/settings/use_case/setting_use_case.dart';
 
 @singleton
 class SummaryController {
-  SummaryController({
+  SummaryController(
+    this.settingsUseCase, {
     required this.getAccountUseCase,
     required this.getCategoryUseCase,
     required this.getExpensesFromCategoryIdUseCase,
@@ -23,8 +24,10 @@ class SummaryController {
   final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier =
       ValueNotifier<DateTimeRange?>(null);
 
-  final FilterExpense filterExpense =
-      getIt.get<SettingsController>().fetchFilterExpense();
+  late final FilterExpense filterExpense = settingsUseCase.get<FilterExpense>(
+    selectedFilterExpenseKey,
+    defaultValue: FilterExpense.daily,
+  );
 
   late final ValueNotifier<FilterExpense> filterExpenseNotifier =
       ValueNotifier<FilterExpense>(filterExpense);
@@ -32,8 +35,11 @@ class SummaryController {
   final GetAccountUseCase getAccountUseCase;
   final GetCategoryUseCase getCategoryUseCase;
   final GetExpensesFromCategoryIdUseCase getExpensesFromCategoryIdUseCase;
-  final FilterExpense sortHomeExpense =
-      getIt.get<SettingsController>().fetchFilterExpense(isHome: true);
+  final SettingsUseCase settingsUseCase;
+  late final FilterExpense sortHomeExpense = settingsUseCase.get<FilterExpense>(
+    selectedHomeFilterExpenseKey,
+    defaultValue: FilterExpense.daily,
+  );
 
   late final ValueNotifier<FilterExpense> sortHomeExpenseNotifier =
       ValueNotifier<FilterExpense>(sortHomeExpense);

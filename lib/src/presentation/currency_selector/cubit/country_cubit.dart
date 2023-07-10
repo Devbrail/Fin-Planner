@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/common.dart';
 import '../../../data/currencies/models/country_model.dart';
 import '../../../domain/currencies/use_case/get_countries_user_case.dart';
-import '../../settings/controller/settings_controller.dart';
+import '../../../domain/settings/use_case/setting_use_case.dart';
 
 part 'country_state.dart';
 
@@ -13,20 +13,20 @@ part 'country_state.dart';
 class CountryCubit extends Cubit<CountryState> {
   CountryCubit(
     this.getCountryUseCase,
-    this.settings,
+    this.settingsUseCase,
   ) : super(CountryInitial());
 
   final GetCountriesUseCase getCountryUseCase;
   CountryModel? selectedCountry;
-  final SettingsController settings;
+  final SettingsUseCase settingsUseCase;
 
   void checkForData() {
-    final Map<dynamic, dynamic>? json = settings.get(userCountryKey);
+    final Map<dynamic, dynamic>? json = settingsUseCase.get(userCountryKey);
     if (json == null) {
       fetchCountry();
     } else {
       selectedCountry = CountryModel.fromJson(json);
-      settings
+      settingsUseCase
           .put(userCountryKey, selectedCountry!.toJson())
           .then((value) => emit(const NavigateToLading(false)));
     }
@@ -50,9 +50,9 @@ class CountryCubit extends Cubit<CountryState> {
 
   void saveCountry() {
     if (selectedCountry == null) return;
-
-    settings.put(userCountryKey, selectedCountry!.toJson());
-    settings.put(userLanguageKey, selectedCountry!.code);
-    emit(const NavigateToLading(true));
+    settingsUseCase.put(userCountryKey, selectedCountry!.toJson()).then(
+        (value) => settingsUseCase
+            .put(userLanguageKey, selectedCountry!.code)
+            .then((value) => emit(const NavigateToLading(true))));
   }
 }

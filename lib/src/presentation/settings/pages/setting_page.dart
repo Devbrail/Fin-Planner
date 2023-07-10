@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:injectable/injectable.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../main.dart';
@@ -11,7 +12,6 @@ import '../../../core/enum/theme_mode.dart';
 import '../../../data/settings/authenticate.dart';
 import '../../widgets/choose_theme_mode_widget.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
-import '../controller/settings_controller.dart';
 import '../widgets/accounts_style_widget.dart';
 import '../widgets/biometrics_auth_widget.dart';
 import '../widgets/country_change_widget.dart';
@@ -23,13 +23,15 @@ import '../widgets/small_size_fab_widget.dart';
 import '../widgets/version_widget.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({
+    Key? key,
+    @Named('settings') required this.settings,
+  }) : super(key: key);
+
+  final Box<dynamic> settings;
 
   @override
   Widget build(BuildContext context) {
-    final settings = getIt.get<Box<dynamic>>(
-      instanceName: BoxType.settings.name,
-    );
     final currentTheme = ThemeMode.values[getIt
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
         .get(themeModeKey, defaultValue: 0)];
@@ -83,7 +85,7 @@ class SettingsPage extends StatelessWidget {
                 BiometricAuthWidget(
                   authenticate: getIt.get<Authenticate>(),
                 ),
-                CountryChangeWidget(settings: getIt.get<SettingsController>()),
+                CountryChangeWidget(settings: settings),
                 const Divider(),
                 const FixExpenseWidget(),
                 const Divider(),

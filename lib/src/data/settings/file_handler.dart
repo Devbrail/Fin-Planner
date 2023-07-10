@@ -6,10 +6,11 @@ import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../app/routes.dart';
 import '../../core/common.dart';
+import '../../core/error/exceptions.dart';
 import '../../presentation/settings/cubit/settings_cubit.dart';
 import '../accounts/data_sources/local_account_data_manager.dart';
 import '../accounts/model/account_model.dart';
@@ -17,7 +18,7 @@ import '../category/data_sources/category_local_data_source.dart';
 import '../category/model/category_model.dart';
 import '../expense/data_sources/local_expense_data_manager.dart';
 import '../expense/model/expense_model.dart';
-import 'data.dart';
+import 'model/data.dart';
 
 @Singleton()
 class FileHandler {
@@ -28,26 +29,20 @@ class FileHandler {
     this.expenseDataManager,
   );
 
-  final DeviceInfoPlugin deviceInfo;
   final AccountLocalDataManager accountDataManager;
   final CategoryLocalDataManager categoryDataManager;
+  final DeviceInfoPlugin deviceInfo;
   final ExpenseLocalDataManager expenseDataManager;
 
-  Future<Either<String, bool>> importDataFromFile() async {
+  Future<bool> importDataFromFile() async {
     try {
-      final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      final FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: androidInfo.version.sdkInt < 29 ? FileType.any : FileType.custom,
-        allowedExtensions: androidInfo.version.sdkInt < 29 ? null : ['json'],
-        allowMultiple: false,
-      );
+      final FilePickerResult? result = await _pickFile();
       if (result == null || result.files.isEmpty) {
-        return left('No file is selected');
+        throw FileNotFoundException();
       }
-      final file = File(result.files.first.path!);
-      await readJSONDataFromFile(result.files.first.path!);
-      final jsonString = await file.readAsString(encoding: utf8);
-      final data = Data.fromRawJson(jsonString);
+
+      final jsonString = await _readJSONFromFile(result.files.first.path!);
+      final Data data = Data.fromRawJson(jsonString);
 
       await expenseDataManager.clear();
       await categoryDataManager.clear();
@@ -64,37 +59,49 @@ class FileHandler {
       for (var element in data.expenses) {
         await expenseDataManager.update(element);
       }
-      await settings.put(expenseFixKey, true);
-      return right(true);
+
+      return settings.put(expenseFixKey, true).then((value) => true);
     } catch (err) {
-      return left('Error reading file');
+      throw ErrorFileException();
     }
   }
 
-  Future<String> readJSONDataFromFile(String path) {
-    return File(path).readAsString(encoding: utf8);
-  }
-
-  Future<XFile> exportDataIntoXFile() async {
-    final String jsonString = await _fetchAllDataAndEncode();
-    return XFile.fromData(
-      Uint8List.fromList(jsonString.codeUnits),
-      name: 'paisa_backup_${DateTime.now().toIso8601String()}.json',
-      mimeType: 'application/json',
-      lastModified: DateTime.now(),
+  Future<FilePickerResult?> _pickFile() async {
+    final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    return FilePicker.platform.pickFiles(
+      type: androidInfo.version.sdkInt < 29 ? FileType.any : FileType.custom,
+      allowedExtensions: androidInfo.version.sdkInt < 29 ? null : ['json'],
+      allowMultiple: false,
     );
   }
 
-  Future<String> _fetchAllDataAndEncode() async {
+  Future<String> _readJSONFromFile(String path) async {
+    final Uint8List bytes = await File(path).readAsBytes();
+    return String.fromCharCodes(bytes);
+  }
+
+  Future<String> writeDataIntoFile() async {
+    final File file = await getTempFile();
+    final List<int> jsonBytes = await _fetchAllDataAndEncode();
+    await file.writeAsBytes(jsonBytes);
+    return file.path;
+  }
+
+  Future<File> getTempFile() async {
+    final Directory tempDir = await getTemporaryDirectory();
+    return await File('${tempDir.path}/paisa_backup.json').create();
+  }
+
+  Future<List<int>> _fetchAllDataAndEncode() async {
     final Iterable<ExpenseModel> expenses = expenseDataManager.export();
     final Iterable<AccountModel> accounts = accountDataManager.export();
     final Iterable<CategoryModel> categories = categoryDataManager.export();
 
-    final data = {
+    final Map<String, dynamic> data = {
       'expenses': expenses.toJson(),
       'accounts': accounts.toJson(),
       'categories': categories.toJson(),
     };
-    return json.encode(data);
+    return utf8.encode(jsonEncode(data));
   }
 }

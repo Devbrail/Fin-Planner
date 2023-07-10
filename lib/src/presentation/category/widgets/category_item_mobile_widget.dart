@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -16,7 +17,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(24),
+      borderRadius: BorderRadius.circular(8),
       onTap: () => context.pushNamed(
         editCategoryName,
         pathParameters: <String, String>{'cid': category.superId.toString()},
@@ -42,6 +43,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
             color: context.onSurfaceVariant,
           ),
         ),
+        trailing: category.isDefault ? Icon(MdiIcons.swapHorizontal) : null,
         subtitle: category.description == null || category.description == ''
             ? null
             : Text(

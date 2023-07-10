@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../main.dart';
+import '../../domain/settings/use_case/setting_use_case.dart';
 import '../home/widgets/welcome_widget.dart';
-import '../settings/controller/settings_controller.dart';
 import '../settings/widgets/user_profile_widget.dart';
 import 'color_palette.dart';
 
@@ -35,7 +35,7 @@ class PaisaUserWidget extends StatelessWidget {
         ),
         context: context,
         builder: (_) => UserProfilePage(
-          settings: getIt.get<SettingsController>(),
+          settingsUseCase: getIt.get<SettingsUseCase>(),
           controller: TextEditingController(),
         ),
       ),

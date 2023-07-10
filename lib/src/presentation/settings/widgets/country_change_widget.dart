@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../controller/settings_controller.dart';
 
 class CountryChangeWidget extends StatelessWidget {
   const CountryChangeWidget({
     Key? key,
-    required this.settings,
+    @Named('settings') required this.settings,
   }) : super(key: key);
 
-  final SettingsController settings;
+  final Box<dynamic> settings;
+
   @override
   Widget build(BuildContext context) {
     final String currentSymbol =

@@ -39,6 +39,11 @@
         "description": "Accounts text shown in the bottom navigation or drawer widget",
         "type": "text"
     },
+    "defaultAccount": "Default account",
+    "@defaultAccount": {
+        "description": "Text shown on the switch in add account screen",
+        "type": "text"
+    },
     "recurring": "Recurring",
     "@recurring": {
         "description": "Recurring text shown in the bottom navigation or drawer widget and recurring page toolbar title",
@@ -943,6 +948,16 @@
     "transferCategory": "Transfer category",
     "@transferCategory": {
         "description": "Text shown add category page for add default category ",
+        "type": "text"
+    },
+    "accountStyle": "Account style",
+    "@accountStyle": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "accountStyleDescription": "Select your preferred account display style: vertical or horizontal",
+    "@accountStyleDescription": {
+        "description": "Text shown on settings page",
         "type": "text"
     }
 }

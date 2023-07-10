@@ -2,14 +2,16 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/src/core/common.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../data/settings/file_handler.dart';
+import '../../../core/error/failures.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../../domain/category/use_case/category_use_case.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
 import '../../../domain/expense/use_case/update_expense_use_case.dart';
+import '../../../domain/settings/use_case/setting_use_case.dart';
 
 part 'settings_state.dart';
 
@@ -18,25 +20,24 @@ const expenseFixKey = "expense_fix_key";
 @injectable
 class SettingCubit extends Cubit<SettingsState> {
   SettingCubit(
-    @Named('settings') this.settings,
     this.expensesUseCase,
     this.defaultCategoriesUseCase,
     this.updateExpensesUseCase,
-    this.fileHandler,
+    this.fileImportUseCase,
+    this.fileExportUseCase,
+    this.settingsUseCase,
   ) : super(SettingsInitial());
 
   final GetDefaultCategoriesUseCase defaultCategoriesUseCase;
   final GetExpensesUseCase expensesUseCase;
-  final Box<dynamic> settings;
-  final UpdateExpensesUseCase updateExpensesUseCase;
-  final FileHandler fileHandler;
 
-  void importDataFromJson() {
-    _importFile();
-  }
+  final UpdateExpensesUseCase updateExpensesUseCase;
+  final FileImportUseCase fileImportUseCase;
+  final FileExportUseCase fileExportUseCase;
+  final SettingsUseCase settingsUseCase;
 
   void fixExpenses() async {
-    if (settings.get(expenseFixKey, defaultValue: true)) {
+    if (settingsUseCase.get(expenseFixKey, defaultValue: true)) {
       emit(FixExpenseLoading());
       final List<Category> categories = defaultCategoriesUseCase();
       if (categories.isEmpty) {
@@ -50,25 +51,42 @@ class SettingCubit extends Cubit<SettingsState> {
         element.categoryId = categories.first.superId!;
         await updateExpensesUseCase(element);
       }
-      settings.put(expenseFixKey, false);
+      await settingsUseCase.put(expenseFixKey, false);
       emit(FixExpenseDone());
     }
   }
 
   void shareFile() {
-    fileHandler.exportDataIntoXFile().then((value) => Share.shareXFiles(
-          [value],
-          subject: 'Share',
+    fileExportUseCase().then((fileExport) => fileExport.fold(
+          (failure) => emit(ImportFileError(_mapFailureToMessage(failure))),
+          (path) => Share.shareXFiles(
+            [XFile(path)],
+            subject: 'Share',
+          ),
         ));
   }
 
-  void _importFile() {
-    emit(ImportFileLoading());
-    fileHandler.importDataFromFile().then((value) {
-      value.fold(
-        (l) => emit(ImportFileError(l)),
-        (r) => emit(ImportFileSuccessState()),
-      );
-    });
+  String _mapFailureToMessage(Failure failure) {
+    switch (failure.runtimeType) {
+      case FileNotFoundFailure:
+        return 'File not found';
+      case ErrorFileExportFailure:
+        return 'Error file export';
+      default:
+        return 'Unexpected error';
+    }
   }
+
+  void importDataFromJson() {
+    emit(ImportFileLoading());
+    fileImportUseCase().then((fileImport) => fileImport.fold(
+          (failure) => emit(ImportFileError(_mapFailureToMessage(failure))),
+          (r) => emit(ImportFileSuccessState()),
+        ));
+  }
+
+  int? get defaultAccountId => settingsUseCase.get(defaultAccountIdKey);
+
+  dynamic setDefaultAccountId(int accountId) =>
+      settingsUseCase.put(defaultAccountIdKey, accountId);
 }

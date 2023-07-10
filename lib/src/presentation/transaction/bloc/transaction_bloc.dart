@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../core/common.dart';
 import '../../../core/enum/recurring_type.dart';
 import '../../../core/enum/transaction_type.dart';
 import '../../../data/accounts/model/account_model.dart';
@@ -17,7 +18,7 @@ import '../../../domain/category/use_case/category_use_case.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../../domain/expense/use_case/expense_use_case.dart';
 import '../../../domain/expense/use_case/update_expense_use_case.dart';
-import '../../settings/controller/settings_controller.dart';
+import '../../../domain/settings/use_case/setting_use_case.dart';
 
 part 'transaction_event.dart';
 part 'transaction_state.dart';
@@ -25,7 +26,7 @@ part 'transaction_state.dart';
 @injectable
 class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
   TransactionBloc(
-    this.settingsController, {
+    this.settingsUseCase, {
     required this.expenseUseCase,
     required this.accountUseCase,
     required this.addExpenseUseCase,
@@ -60,7 +61,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
   int? selectedAccountId;
   int? selectedCategoryId;
   DateTime selectedDate = DateTime.now();
-  final SettingsController settingsController;
+  final SettingsUseCase settingsUseCase;
   TimeOfDay timeOfDay = TimeOfDay.now();
   Account? fromAccount, toAccount;
   TransactionType transactionType = TransactionType.expense;
@@ -73,7 +74,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
   ) async {
     final int? expenseId = int.tryParse(event.expenseId ?? '');
     if (expenseId == null) {
-      selectedAccountId = settingsController.defaultAccountId;
+      selectedAccountId = settingsUseCase.get(defaultAccountIdKey);
       return;
     }
 

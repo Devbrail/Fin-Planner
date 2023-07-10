@@ -324,7 +324,7 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: settingsName,
           path: settingsPath,
-          builder: (context, state) => const SettingsPage(),
+          builder: (context, state) => SettingsPage(settings: settings),
           routes: [
             GoRoute(
               name: exportAndImportName,

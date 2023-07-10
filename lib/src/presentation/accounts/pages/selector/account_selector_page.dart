@@ -13,7 +13,6 @@ import '../../../../core/common.dart';
 import '../../../../data/accounts/data_sources/default_account.dart';
 import '../../../../data/accounts/data_sources/local_account_data_manager.dart';
 import '../../../../data/accounts/model/account_model.dart';
-import '../../../settings/controller/settings_controller.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_card.dart';
 
@@ -27,7 +26,6 @@ class AccountSelectorPage extends StatefulWidget {
 class _AccountSelectorPageState extends State<AccountSelectorPage> {
   final AccountLocalDataManager dataSource = getIt.get();
   final List<AccountModel> defaultModels = defaultAccountsData();
-  final SettingsController settings = getIt.get<SettingsController>();
 
   Future<void> saveAndNavigate() async {
     await settings.put(userAccountSelectorKey, false);

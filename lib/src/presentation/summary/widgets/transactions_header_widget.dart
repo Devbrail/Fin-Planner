@@ -6,7 +6,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../../core/extensions/filter_expense_extension.dart';
 import '../controller/summary_controller.dart';
-import '../widgets/filter_home_expense_widget.dart';
+import 'filter_home_expenses_widget.dart';
 
 class TransactionsHeaderWidget extends StatelessWidget {
   const TransactionsHeaderWidget({
@@ -58,9 +58,8 @@ class TransactionsHeaderWidget extends StatelessWidget {
               ),
             ),
             builder: (context) {
-              return FilterHomeWidget(
-                summaryController: summaryController,
-              );
+              return FilterHomeExpensesWidget(
+                  summaryController: summaryController);
             },
           );
         },

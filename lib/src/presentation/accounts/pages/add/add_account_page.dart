@@ -7,7 +7,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../core/enum/card_type.dart';
-import '../../../settings/controller/settings_controller.dart';
+import '../../../settings/cubit/settings_cubit.dart';
 import '../../../widgets/paisa_annotate_region_widget.dart';
 import '../../../widgets/paisa_big_button_widget.dart';
 import '../../../widgets/paisa_bottom_sheet.dart';
@@ -557,23 +557,22 @@ class AccountDefaultSwitchWidget extends StatefulWidget {
 
 class _AccountDefaultSwitchWidgetState
     extends State<AccountDefaultSwitchWidget> {
+  late final SettingCubit settingCubit = BlocProvider.of<SettingCubit>(context);
+
   late bool isAccountDefault =
-      settingsController.defaultAccountId == widget.accountId;
-
-  final SettingsController settingsController = getIt.get();
-
+      settingCubit.defaultAccountId == widget.accountId;
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-      title: const Text('Default account'),
+      title: Text(context.loc.defaultAccount),
       value: isAccountDefault,
       onChanged: (value) {
         if (value) {
-          settingsController.setDefaultAccountId(widget.accountId);
+          settingCubit.setDefaultAccountId(widget.accountId);
         } else {
-          settingsController.setDefaultAccountId(-1);
+          settingCubit.setDefaultAccountId(-1);
         }
         setState(() {
           isAccountDefault = value;

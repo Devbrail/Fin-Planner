@@ -23,3 +23,6 @@ const String userCustomCurrencyLeftOrRightKey =
 const String scheduleTime = 'schedule_time_key';
 const String fontFamilyName = 'Material Design Icons';
 const String fontFamilyPackageName = 'material_design_icons_flutter';
+const String selectedFilterExpenseKey = "selected_filter_expense_key";
+const String selectedHomeFilterExpenseKey = "selected_home_filter_expense_key";
+const String defaultAccountIdKey = "default_account_id_key";

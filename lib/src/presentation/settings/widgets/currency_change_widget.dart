@@ -4,16 +4,16 @@ import 'package:go_router/go_router.dart';
 import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../controller/settings_controller.dart';
+import '../../../domain/settings/use_case/setting_use_case.dart';
 
 class CurrencyChangeWidget extends StatelessWidget {
   const CurrencyChangeWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final SettingsController settings = getIt.get<SettingsController>();
+    final SettingsUseCase settingsUseCase = getIt.get();
     final String currentSymbol =
-        settings.get(userLanguageKey, defaultValue: '');
+        settingsUseCase.get(userLanguageKey, defaultValue: '');
     return ListTile(
       onTap: () {
         context.pushNamed(

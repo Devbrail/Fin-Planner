@@ -4,23 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/common.dart';
+import '../../../domain/settings/use_case/setting_use_case.dart';
 import '../../widgets/paisa_text_field.dart';
 import '../../widgets/paisa_user_image_widget.dart';
-import '../controller/settings_controller.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({
     Key? key,
-    required this.settings,
+    required this.settingsUseCase,
     required this.controller,
   }) : super(key: key);
 
   final TextEditingController controller;
-  final SettingsController settings;
+  final SettingsUseCase settingsUseCase;
 
   void _updateDetails(BuildContext context) {
     String name = controller.text;
-    settings.put(userNameKey, name).then((value) => Navigator.pop(context));
+    settingsUseCase
+        .put(userNameKey, name)
+        .then((value) => Navigator.pop(context));
   }
 
   void _pickImage(BuildContext context) {
@@ -28,7 +30,7 @@ class UserProfilePage extends StatelessWidget {
       final ImagePicker picker = ImagePicker();
       picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
         if (pickedFile != null) {
-          settings
+          settingsUseCase
               .put(userImageKey, pickedFile.path)
               .then((value) => Navigator.pop(context));
         }
@@ -41,7 +43,7 @@ class UserProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String name = settings.get(userNameKey, defaultValue: '');
+    String name = settingsUseCase.get(userNameKey, defaultValue: '');
     controller.text = name;
     controller.selection = TextSelection.collapsed(offset: name.length);
     return Padding(

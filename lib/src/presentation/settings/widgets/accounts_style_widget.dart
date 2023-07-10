@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../controller/settings_controller.dart';
+import '../../../domain/settings/use_case/setting_use_case.dart';
 
 class AccountsStyleWidget extends StatefulWidget {
   const AccountsStyleWidget({super.key});
@@ -12,22 +12,20 @@ class AccountsStyleWidget extends StatefulWidget {
 }
 
 class _AccountsStyleWidgetState extends State<AccountsStyleWidget> {
+  final SettingsUseCase settingsUseCase = getIt.get();
   late bool isSelected =
-      settings.get(userAccountsStyleKey, defaultValue: false);
-
-  final SettingsController settings = getIt.get<SettingsController>();
+      settingsUseCase.get(userAccountsStyleKey, defaultValue: false);
 
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      title: Text('Accounts style'),
-      subtitle: Text(
-          'Select your preferred account display style: vertical or horizontal'),
+      title: Text(context.loc.accountStyle),
+      subtitle: Text(context.loc.accountStyleDescription),
       onChanged: (bool value) async {
         setState(() {
           isSelected = value;
         });
-        settings.put(userAccountsStyleKey, value);
+        settingsUseCase.put(userAccountsStyleKey, value);
       },
       value: isSelected,
     );
