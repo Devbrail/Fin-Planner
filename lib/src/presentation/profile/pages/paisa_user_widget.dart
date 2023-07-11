@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '../../../main.dart';
-import '../../domain/settings/use_case/setting_use_case.dart';
-import '../home/widgets/welcome_widget.dart';
-import '../settings/widgets/user_profile_widget.dart';
-import 'color_palette.dart';
+import 'package:paisa/main.dart';
+import 'package:paisa/src/domain/settings/use_case/setting_use_case.dart';
+import 'package:paisa/src/presentation/home/widgets/welcome_widget.dart';
+import 'package:paisa/src/presentation/profile/cubit/profile_cubit.dart';
+import 'package:paisa/src/presentation/profile/widgets/user_profile_bottomshee_widget.dart';
+import 'package:paisa/src/presentation/widgets/color_palette.dart';
 
 class PaisaUserWidget extends StatelessWidget {
   const PaisaUserWidget({super.key});
@@ -12,7 +12,6 @@ class PaisaUserWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: () {},
       onLongPress: () {
         Navigator.push(
           context,
@@ -34,9 +33,9 @@ class PaisaUserWidget extends StatelessWidget {
           ),
         ),
         context: context,
-        builder: (_) => UserProfilePage(
+        builder: (_) => UserProfileBottomSheetWidget(
           settingsUseCase: getIt.get<SettingsUseCase>(),
-          controller: TextEditingController(),
+          profileCubit: getIt.get<ProfileCubit>(),
         ),
       ),
       child: const UserImageWidget(),

@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../main.dart';
 import '../../core/common.dart';
-import '../../core/enum/box_types.dart';
+import '../profile/cubit/profile_cubit.dart';
 
 class PaisaUserImageWidget extends StatelessWidget {
   const PaisaUserImageWidget({
@@ -23,11 +23,9 @@ class PaisaUserImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: getIt
-          .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-          .listenable(
-        keys: [userImageKey],
-      ),
+      valueListenable: BlocProvider.of<ProfileCubit>(context)
+          .settings
+          .listenable(keys: [userImageKey]),
       builder: (context, value, _) {
         String image = value.get(userImageKey, defaultValue: '');
         if (image == 'no-image') {

@@ -5,9 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
+import '../../profile/pages/paisa_user_widget.dart';
 import '../../widgets/paisa_icon_title.dart';
 import '../../widgets/paisa_search_bar.dart';
-import '../../widgets/paisa_user_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/content_widget.dart';
 import 'home_page.dart';

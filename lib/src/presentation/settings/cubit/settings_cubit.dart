@@ -58,7 +58,7 @@ class SettingCubit extends Cubit<SettingsState> {
 
   void shareFile() {
     fileExportUseCase().then((fileExport) => fileExport.fold(
-          (failure) => emit(ImportFileError(_mapFailureToMessage(failure))),
+          (failure) => emit(ImportFileError(mapFailureToMessage(failure))),
           (path) => Share.shareXFiles(
             [XFile(path)],
             subject: 'Share',
@@ -66,21 +66,10 @@ class SettingCubit extends Cubit<SettingsState> {
         ));
   }
 
-  String _mapFailureToMessage(Failure failure) {
-    switch (failure.runtimeType) {
-      case FileNotFoundFailure:
-        return 'File not found';
-      case ErrorFileExportFailure:
-        return 'Error file export';
-      default:
-        return 'Unexpected error';
-    }
-  }
-
   void importDataFromJson() {
     emit(ImportFileLoading());
     fileImportUseCase().then((fileImport) => fileImport.fold(
-          (failure) => emit(ImportFileError(_mapFailureToMessage(failure))),
+          (failure) => emit(ImportFileError(mapFailureToMessage(failure))),
           (r) => emit(ImportFileSuccessState()),
         ));
   }
