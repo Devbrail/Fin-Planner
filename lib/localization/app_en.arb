@@ -959,5 +959,15 @@
     "@accountStyleDescription": {
         "description": "Text shown on settings page",
         "type": "text"
+    },
+    "supportMe": "Support me",
+    "@supportMe": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "supportMeDescription": "If you think I deserve a little treat for my hard work, you can buy me a virtual beer",
+    "@supportMeDescription": {
+        "description": "Text shown on settings page",
+        "type": "text"
     }
 }

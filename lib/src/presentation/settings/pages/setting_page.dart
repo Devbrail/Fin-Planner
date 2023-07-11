@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../main.dart';
@@ -51,6 +52,7 @@ class SettingsPage extends StatelessWidget {
                 SettingsColorPickerWidget(settings: settings),
                 const Divider(),
                 SettingsOption(
+                  icon: MdiIcons.brightness4,
                   title: context.loc.chooseTheme,
                   subtitle: currentTheme.themeName,
                   onTap: () {
@@ -90,6 +92,7 @@ class SettingsPage extends StatelessWidget {
                 const FixExpenseWidget(),
                 const Divider(),
                 SettingsOption(
+                  icon: MdiIcons.backupRestore,
                   title: context.loc.backupAndRestoreTitle,
                   subtitle: context.loc.backupAndRestoreSubTitle,
                   onTap: () {
@@ -102,6 +105,17 @@ class SettingsPage extends StatelessWidget {
               title: context.loc.socialLinks,
               options: [
                 SettingsOption(
+                  icon: MdiIcons.glassMugVariant,
+                  title: context.loc.supportMe,
+                  subtitle: context.loc.supportMeDescription,
+                  onTap: () => launchUrl(
+                    Uri.parse(buyMeCoffeeUrl),
+                    mode: LaunchMode.externalApplication,
+                  ),
+                ),
+                const Divider(),
+                SettingsOption(
+                  icon: MdiIcons.star,
                   title: context.loc.appRate,
                   subtitle: context.loc.appRateDesc,
                   onTap: () => launchUrl(
@@ -111,6 +125,7 @@ class SettingsPage extends StatelessWidget {
                 ),
                 const Divider(),
                 SettingsOption(
+                  icon: MdiIcons.github,
                   title: context.loc.github,
                   subtitle: context.loc.githubText,
                   onTap: () => launchUrl(
@@ -120,6 +135,7 @@ class SettingsPage extends StatelessWidget {
                 ),
                 const Divider(),
                 SettingsOption(
+                  icon: MdiIcons.send,
                   title: context.loc.telegram,
                   subtitle: context.loc.telegramGroup,
                   onTap: () => launchUrl(

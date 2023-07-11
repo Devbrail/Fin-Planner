@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
@@ -19,6 +20,7 @@ class CountryChangeWidget extends StatelessWidget {
     final String currentSymbol =
         settings.get(userLanguageKey, defaultValue: 'INR') ?? '';
     return ListTile(
+      leading: Icon(MdiIcons.currencySign),
       onTap: () {
         context.pushNamed(
           countrySelectorName,

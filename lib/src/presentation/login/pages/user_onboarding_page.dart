@@ -6,8 +6,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../widgets/user_image_picker_widget.dart';
-import '../widgets/user_name_widget.dart';
+import '../widgets/intro_image_picker_widget.dart';
+import '../widgets/intro_set_name_widget.dart';
 
 class UserOnboardingPage extends StatefulWidget {
   const UserOnboardingPage({
@@ -98,11 +98,11 @@ class _UserOnboardingPageState extends State<UserOnboardingPage> {
         }),
         controller: controller,
         children: [
-          UserNameWidget(
+          IntroSetNameWidget(
             formState: _formState,
             nameController: _nameController,
           ),
-          UserImagePickerWidget(settings: settings),
+          IntroImagePickerWidget(settings: settings),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
@@ -19,6 +20,7 @@ class _AccountsStyleWidgetState extends State<AccountsStyleWidget> {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
+      secondary: Icon(MdiIcons.creditCard),
       title: Text(context.loc.accountStyle),
       subtitle: Text(context.loc.accountStyleDescription),
       onChanged: (bool value) async {

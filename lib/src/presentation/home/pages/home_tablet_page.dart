@@ -57,9 +57,13 @@ class HomeTabletPage extends StatelessWidget {
                 trailing: Expanded(
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: IconButton(
-                      onPressed: () => context.pushNamed(settingsName),
-                      icon: Icon(MdiIcons.cog),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: IconButton(
+                        tooltip: context.loc.settings,
+                        onPressed: () => context.pushNamed(settingsName),
+                        icon: Icon(MdiIcons.cog),
+                      ),
                     ),
                   ),
                 ),

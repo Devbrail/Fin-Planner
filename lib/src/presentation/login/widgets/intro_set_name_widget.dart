@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/common.dart';
 
-class UserNameWidget extends StatelessWidget {
-  const UserNameWidget({
+class IntroSetNameWidget extends StatelessWidget {
+  const IntroSetNameWidget({
     Key? key,
     required this.formState,
     required this.nameController,

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/common.dart';
 import '../../widgets/future_resolve.dart';
@@ -37,6 +38,7 @@ class SettingsColorPickerWidget extends StatelessWidget {
         final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
         final color = _extractColorValue(context, value);
         return SettingsOption(
+          icon: MdiIcons.palette,
           title: context.loc.accentColor,
           subtitle: isDynamic ? context.loc.dynamicColor : context.loc.custom,
           trailing: CircleAvatar(

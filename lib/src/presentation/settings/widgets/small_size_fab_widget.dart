@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
@@ -19,6 +20,7 @@ class _SmallSizeFabWidgetState extends State<SmallSizeFabWidget> {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
+      secondary: Icon(MdiIcons.resize),
       title: Text(
         context.loc.smallSizeFab,
       ),

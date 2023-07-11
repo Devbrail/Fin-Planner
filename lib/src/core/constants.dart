@@ -26,3 +26,4 @@ const String fontFamilyPackageName = 'material_design_icons_flutter';
 const String selectedFilterExpenseKey = "selected_filter_expense_key";
 const String selectedHomeFilterExpenseKey = "selected_home_filter_expense_key";
 const String defaultAccountIdKey = "default_account_id_key";
+const buyMeCoffeeUrl = 'https://www.buymeacoffee.com/h4h13';
