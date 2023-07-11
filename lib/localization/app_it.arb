@@ -120,7 +120,7 @@
     "backupAndRestoreTitle": "Backup e ripristino",
     "backupAndRestoreSubTitle": "Salva le tue spese, account e categorie",
     "exportData": "Esporta",
-    "importData": "Importa,
+    "importData": "Importa",
     "creatingBackup": "Creazione in corso..",
     "creatingBackupSuccess": "Backup creato",
     "restoringBackup": "Ripristino in corso..",
@@ -173,7 +173,7 @@
     "recurringEmptyMessageTitle": "Niente eventi ricorrenti?",
     "recurringEmptyMessageSubTitle": "Aggiungi un evento ricorrente per vederlo qui",
     "recurringAction": "Aggiungi eventi ricorrenti",
-    "sortList": "ordina la lista"
+    "sortList": "ordina la lista",
     "smallSizeFab": "Riduci dimensione FAB",
     "smallSizeFabMessage": "Mostra un bottone di piccole dimensioni su ogni schermata",
     "selectDateErrorMessage": "Scegli data",
@@ -190,5 +190,5 @@
     "total": "Totale",
     "colorsUI": "Colori ed interfaccia",
     "more": "Altro",
-    "chooseIcon": "Scegli icona",
+    "chooseIcon": "Scegli icona"
 }
