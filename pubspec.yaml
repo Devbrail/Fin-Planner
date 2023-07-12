@@ -63,6 +63,7 @@ dev_dependencies:
     sdk: flutter
   hive_generator: ^2.0.0
   injectable_generator: ^2.1.4
+  msix: ^3.7.0
 
 dependency_overrides:
   intl: ^0.18.0
@@ -94,4 +95,16 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - assets/images/
+    - assets/images/icon.png
+
+msix_config:
+  display_name: Paisa - Expense Tracker
+  publisher_display_name: RetroMusic
+  publisher: CN=22326927-E77C-435F-B91A-B9831883516E
+  identity_name: 42423RetroMusic.Paisa-ExpenseTracker
+  msix_version: "4.8.0.0"
+  logo_path: C:\Users\Hemanth S\Documents\GitHub\flutter_expense\assets\images\icon.png
+  capabilities: internetClient
+  certificate_path: C:\Users\Hemanth S\Documents\paisa_certificate.pfx
+  certificate_password: +h4Hem@nth$13+
+  store: true

@@ -970,7 +970,7 @@
         "description": "Text shown on settings page",
         "type": "text"
     },
-    "lockAppDescription": "When enabled, you'll need to use figerprint to open Paisa.",
+    "lockAppDescription": "When enabled, you'll need to use fingerprint to open Paisa.",
     "@lockAppDescription": {
         "description": "Text shown on settings page",
         "type": "text"

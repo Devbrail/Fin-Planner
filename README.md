@@ -74,6 +74,12 @@
 
 3. Run the app and check once
 
+### Download
+
+<a href="https://apps.microsoft.com/store/detail/9NQ2KR46N764?launch=true&mode=mini">
+   <img  width=180 height=100 src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download Discord" />
+</a>   <a href='https://play.google.com/store/apps/details?id=dev.hemanths.paisa&hl=en_US&pli=1&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' width=256 height=100  src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+
 ### License
 
     Copyright (c) 2022, Hemanth S
