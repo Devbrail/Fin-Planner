@@ -5,8 +5,8 @@ import '../../../main.dart';
 import '../../core/common.dart';
 import '../../core/enum/box_types.dart';
 
-class SmallSizeFab extends StatelessWidget {
-  const SmallSizeFab({
+class VariableSizeFAB extends StatelessWidget {
+  const VariableSizeFAB({
     super.key,
     required this.onPressed,
     required this.icon,

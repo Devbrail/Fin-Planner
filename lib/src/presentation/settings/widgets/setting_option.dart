@@ -24,7 +24,7 @@ class SettingsOption extends StatelessWidget {
           ? null
           : Icon(
               icon,
-              color: context.onBackground,
+              color: context.onSurfaceVariant,
             ),
       title: Text(
         title,

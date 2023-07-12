@@ -11,7 +11,10 @@ class FixExpenseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(MdiIcons.autoFix),
+      leading: Icon(
+        MdiIcons.autoFix,
+        color: context.onSurfaceVariant,
+      ),
       onTap: () => BlocProvider.of<SettingCubit>(context).fixExpenses(),
       title: const Text('Fix transfer expenses'),
       subtitle: const Text(

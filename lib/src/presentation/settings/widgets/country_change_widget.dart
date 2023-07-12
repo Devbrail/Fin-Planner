@@ -20,7 +20,10 @@ class CountryChangeWidget extends StatelessWidget {
     final String currentSymbol =
         settings.get(userLanguageKey, defaultValue: 'INR') ?? '';
     return ListTile(
-      leading: Icon(MdiIcons.currencySign),
+      leading: Icon(
+        MdiIcons.currencySign,
+        color: context.onSurfaceVariant,
+      ),
       onTap: () {
         context.pushNamed(
           countrySelectorName,

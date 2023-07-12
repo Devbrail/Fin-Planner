@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -62,6 +63,7 @@ class FileHandler {
 
       return settings.put(expenseFixKey, true).then((value) => true);
     } catch (err) {
+      debugPrint(err.toString());
       throw ErrorFileException();
     }
   }

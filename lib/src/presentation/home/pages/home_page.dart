@@ -11,7 +11,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
 import '../bloc/home_bloc.dart';
-import '../widgets/home_floating_action_button_widget.dart';
+import '../widgets/variable_size_fab.dart';
 import 'home_desktop_page.dart';
 import 'home_mobile_page.dart';
 import 'home_tablet_page.dart';
@@ -81,12 +81,8 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
 
-    final actionButton = HomeFloatingActionButtonWidget(
-      summaryController: getIt.get(),
-      settings: getIt.get<Box<dynamic>>(
-        instanceName: BoxType.settings.name,
-      ),
-    );
+    final actionButton =
+        HomeFloatingActionButtonWidget(summaryController: getIt.get());
     return PaisaAnnotatedRegionWidget(
       child: BlocProvider(
         create: (context) => homeBloc,
