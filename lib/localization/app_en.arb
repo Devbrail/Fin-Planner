@@ -297,7 +297,7 @@
         "description": "Toolbar title text shown on choosing the currency",
         "type": "text"
     },
-    "errorAuth": "Error authentication",
+    "errorAuth": "Authentication error",
     "@errorAuth": {
         "description": "Error message shown when biometric authentication fails",
         "type": "text"
@@ -317,7 +317,7 @@
         "description": "Message title text shown on the categories page when no categories available",
         "type": "text"
     },
-    "emptyCategoriesMessageSubTitle": "Add an category to display it here",
+    "emptyCategoriesMessageSubTitle": "Add a category to display it here",
     "@emptyCategoriesMessageSubTitle": {
         "description": "Message subtitle text shown on the categories page when no categories available",
         "type": "text"
@@ -376,7 +376,7 @@
         "description": "Title text shown on settings page for privacy and policy button",
         "type": "text"
     },
-    "github": "Github",
+    "github": "GitHub",
     "@github": {
         "description": "Title text shown on settings page for github button ",
         "type": "text"
@@ -400,12 +400,12 @@
             }
         }
     },
-    "deleteAccount": "Deleting the account deletes all expenses which tied to this account ",
+    "deleteAccount": "Deleting the account deletes all expenses which are tied to this account ",
     "@deleteAccount": {
         "description": "Delete account message",
         "type": "text"
     },
-    "deleteCategory": "Deleting the category deletes all expenses which tied to this category ",
+    "deleteCategory": "Deleting the category deletes all expenses which are tied to this category ",
     "@deleteCategory": {
         "description": "Delete category message",
         "type": "text"
@@ -515,7 +515,7 @@
         "description": "Intro page message for name input",
         "type": "text"
     },
-    "welcomeDesc": "What should we call you",
+    "welcomeDesc": "What should we call you?",
     "@welcomeDesc": {
         "description": "Welcome desc ",
         "type": "text"
@@ -530,7 +530,7 @@
         "description": "Text input hint name",
         "type": "text"
     },
-    "imageDesc": "Let's set image of you",
+    "imageDesc": "Let's set an image of you",
     "@imageDesc": {
         "description": "Image desc ",
         "type": "text"
@@ -565,7 +565,7 @@
         "description": "Message shown on the search screen",
         "type": "text"
     },
-    "emptySearchMessage": "Looks like nothing found!",
+    "emptySearchMessage": "Looks like nothing was found!",
     "@emptySearchMessage": {
         "description": "Message shown on the search screen",
         "type": "text"
@@ -575,7 +575,7 @@
         "description": "Title message shown on the page when there are no expenses",
         "type": "text"
     },
-    "emptyExpensesMessageSubTitle": "If there are no expenses, start by adding an expense to see it displayed here.",
+    "emptyExpensesMessageSubTitle": "If there are no expenses, start by adding an expense to see it displayed here",
     "@emptyExpensesMessageSunTitle": {
         "description": "Subtitle message shown on the page when there are no expenses",
         "type": "text"
@@ -662,7 +662,7 @@
     "@appRate": {
         "description": "Rate "
     },
-    "appRateDesc": "Love this app? Let us know in the Google Play Store how we can make it even better",
+    "appRateDesc": "Love this app? Let us know how we can make it better on the Google Play Store",
     "@appRateDesc": {
         "description": "Rate "
     },
@@ -670,7 +670,7 @@
     "@raiseABugOrRequest": {
         "description": "Raise a bug or request "
     },
-    "raiseABugOrRequestDesc": "Found a bug or need a feature to implement ask away",
+    "raiseABugOrRequestDesc": "Found a bug or need a feature to be implemented? Ask away!",
     "@raiseABugOrRequestDesc": {
         "description": "Found a bug or need a feature to implement ask away "
     },
@@ -726,7 +726,7 @@
     "@emptyDebts": {
         "description": "There are no debts at this time "
     },
-    "emptyDebtsDesc": "Add your debts here to see them displayed.",
+    "emptyDebtsDesc": "Add your debts to see them displayed here",
     "@emptyDebtsDesc": {
         "description": "Add your debts here to see them displayed "
     },
@@ -734,7 +734,7 @@
     "@emptyCredit": {
         "description": "There are no credits at this time "
     },
-    "emptyCreditDesc": "Add your credits here to see them displayed.",
+    "emptyCreditDesc": "Add your credits to see them displayed here",
     "@emptyCreditDesc": {
         "description": "Add your credits here to see them displayed "
     },
@@ -815,7 +815,7 @@
         "description": "Text shown on the intro screen button",
         "type": "text"
     },
-    "deleteDebtOrCredit": "Deleting the debt or credit deletes all record related to it ",
+    "deleteDebtOrCredit": "Deleting the debt or credit deletes all records related to it",
     "@deleteDebtOrCredit": {
         "description": "Delete debt or credit ",
         "type": "text"
@@ -825,7 +825,7 @@
         "description": "Section title text shown on the export and import page",
         "type": "text"
     },
-    "backupAndRestoreJSONDesc": "The file will be a plain JSON file created and exported to save. Please note that if in case anything changes happen in the future in Paisa then this file will be invalid to import.",
+    "backupAndRestoreJSONDesc": "The file will be a plain JSON file created and exported to save. Please note that if in case anything changes happen in the future in Paisa then this file will be invalid to import",
     "@backupAndRestoreJSONDesc": {
         "description": "Message shown on the import and export screen",
         "type": "text"
@@ -835,7 +835,7 @@
         "description": "Title text shown on the budget screen when no budgets are available",
         "type": "text"
     },
-    "emptyBudgetMessageSubTitle": "Set a budget for any category, and that category will show up here.",
+    "emptyBudgetMessageSubTitle": "Set a budget for any category, and that category will show up here",
     "@emptyBudgetMessageSubTitle": {
         "description": "Subtitle text shown on the budget screen when no budgets are available",
         "type": "text"
@@ -865,7 +865,7 @@
         "description": "Title text shown on the settings page for FAB size option",
         "type": "text"
     },
-    "smallSizeFabMessage": "Show small size action button on all screen",
+    "smallSizeFabMessage": "Show small size action button on all screens",
     "@smallSizeFabMessage": {
         "description": "Title text shown on the settings page for FAB size option",
         "type": "text"
@@ -955,7 +955,7 @@
         "description": "Text shown on settings page",
         "type": "text"
     },
-    "accountStyleDescription": "Select your preferred account display style: vertical or horizontal",
+    "accountStyleDescription": "Select your preferred account display style : vertical or horizontal",
     "@accountStyleDescription": {
         "description": "Text shown on settings page",
         "type": "text"
@@ -970,7 +970,7 @@
         "description": "Text shown on settings page",
         "type": "text"
     },
-    "lockAppDescription": "When enabled, you'll need to use figerprint to open Paisa.",
+    "lockAppDescription": "When enabled, you'll need to use figerprint to open Paisa",
     "@lockAppDescription": {
         "description": "Text shown on settings page",
         "type": "text"
