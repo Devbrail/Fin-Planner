@@ -145,6 +145,7 @@ class SettingsPage extends StatelessWidget {
                 ),
                 const Divider(),
                 SettingsOption(
+                  icon: MdiIcons.note,
                   title: context.loc.privacyPolicy,
                   onTap: () => launchUrl(
                     Uri.parse(termsAndConditionsUrl),

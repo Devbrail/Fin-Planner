@@ -30,12 +30,13 @@ class _VersionWidgetState extends State<VersionWidget> {
   Widget build(BuildContext context) {
     if (packageInfo == null) {
       return SettingsOption(
-        icon: MdiIcons.numeric0Box,
+        icon: MdiIcons.numeric,
         title: context.loc.version,
       );
     }
     final version = packageInfo?.version ?? '';
     return SettingsOption(
+      icon: MdiIcons.numeric,
       title: context.loc.version,
       subtitle: context.loc.versionNumber(version),
     );

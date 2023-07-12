@@ -172,7 +172,7 @@
         "description": "Text shown on the drawer button",
         "type": "text"
     },
-    "localApp": "Lock app",
+    "localApp": "Unlock with fingerprint",
     "@localApp": {
         "description": "Text shown on the settings page biometric button",
         "type": "text"
@@ -967,6 +967,11 @@
     },
     "supportMeDescription": "If you think I deserve a little treat for my hard work, you can buy me a virtual beer",
     "@supportMeDescription": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "lockAppDescription": "When enabled, you'll need to use figerprint to open Paisa.",
+    "@lockAppDescription": {
         "description": "Text shown on settings page",
         "type": "text"
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
@@ -50,9 +51,9 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
           child: Column(
             children: [
               SwitchListTile(
-                title: Text(
-                  context.loc.localApp,
-                ),
+                secondary: Icon(MdiIcons.fingerprint),
+                title: Text(context.loc.localApp),
+                subtitle: Text(context.loc.lockAppDescription),
                 onChanged: (bool value) async {
                   bool isAuthenticated = false;
                   if (value) {
