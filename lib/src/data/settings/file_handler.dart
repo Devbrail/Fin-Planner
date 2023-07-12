@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
@@ -69,12 +70,16 @@ class FileHandler {
   }
 
   Future<FilePickerResult?> _pickFile() async {
-    final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    return FilePicker.platform.pickFiles(
-      type: androidInfo.version.sdkInt < 29 ? FileType.any : FileType.custom,
-      allowedExtensions: androidInfo.version.sdkInt < 29 ? null : ['json'],
-      allowMultiple: false,
-    );
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      return FilePicker.platform.pickFiles(
+        type: androidInfo.version.sdkInt < 29 ? FileType.any : FileType.custom,
+        allowedExtensions: androidInfo.version.sdkInt < 29 ? null : ['json'],
+        allowMultiple: false,
+      );
+    } else {
+      return FilePicker.platform.pickFiles();
+    }
   }
 
   Future<String> _readJSONFromFile(String path) async {
