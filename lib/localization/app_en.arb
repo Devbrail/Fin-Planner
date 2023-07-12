@@ -400,12 +400,12 @@
             }
         }
     },
-    "deleteAccount": "Deleting the account deletes all expenses which are tied to this account ",
+    "deleteAccount": "Deleting the account deletes all expenses which are tied to this account",
     "@deleteAccount": {
         "description": "Delete account message",
         "type": "text"
     },
-    "deleteCategory": "Deleting the category deletes all expenses which are tied to this category ",
+    "deleteCategory": "Deleting the category deletes all expenses which are tied to this category",
     "@deleteCategory": {
         "description": "Delete category message",
         "type": "text"
