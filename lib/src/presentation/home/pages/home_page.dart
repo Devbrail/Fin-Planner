@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/app/in_app.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
+import '../../../app/in_app.dart';
 import '../../../core/common.dart';
-import '../../../core/enum/box_types.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/variable_size_fab.dart';

@@ -9,6 +9,6 @@ class CurrencySelectorRepositoryImpl implements CurrenciesRepository {
   @override
   List<CountryModel> fetchCountries() {
     return List<CountryModel>.from(
-        countriesdata.map((x) => CountryModel.fromJson(x)));
+        countriesData.map((x) => CountryModel.fromJson(x)));
   }
 }

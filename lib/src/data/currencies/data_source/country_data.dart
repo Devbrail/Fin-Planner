@@ -1,4 +1,4 @@
-const List<Map<String, dynamic>> countriesdata = [
+const List<Map<String, dynamic>> countriesData = [
   {
     "code": "USD",
     "name": "United States Dollar",
