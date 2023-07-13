@@ -4,43 +4,29 @@ import 'package:injectable/injectable.dart';
 
 import '../../../core/error/exceptions.dart';
 import '../../../core/error/failures.dart';
+import '../../../domain/settings/repository/import_export.dart';
 import '../../../domain/settings/repository/settings_repository.dart';
-import '../file_handler.dart';
 
 @Injectable(as: SettingsRepository)
 class SettingsRepositoryImpl implements SettingsRepository {
   SettingsRepositoryImpl(
-    this.fileHandler,
     @Named('settings') this.settings,
   );
 
-  final FileHandler fileHandler;
   final Box<dynamic> settings;
 
   @override
   Future<void> delete(String key) => settings.delete(key);
 
   @override
-  Future<Either<Failure, String>> exportJSONToFile() async {
-    try {
-      final String path = await fileHandler.writeDataIntoFile();
-      if (path.isEmpty) {
-        return left(FileNotFoundFailure());
-      }
-      return right(path);
-    } catch (err) {
-      return left(ErrorFileExportFailure());
-    }
-  }
-
-  @override
   T get<T>(String key, {dynamic defaultValue}) =>
       settings.get(key, defaultValue: defaultValue);
 
   @override
-  Future<Either<Failure, bool>> importFileToJSON() async {
+  Future<Either<Failure, bool>> importFileToData(
+      {required Import import}) async {
     try {
-      final bool result = await fileHandler.importDataFromFile();
+      final bool result = await import.import();
       return right(result);
     } on FileNotFoundException {
       return left(FileNotFoundFailure());
@@ -51,4 +37,20 @@ class SettingsRepositoryImpl implements SettingsRepository {
 
   @override
   Future<void> put(String key, value) => settings.put(key, value);
+
+  @override
+  Future<Either<Failure, String>> exportDataToFile(
+      {required Export export}) async {
+    try {
+      final String path = await export.export();
+      if (path.isEmpty) {
+        return left(FileNotFoundFailure());
+      } else {
+        return right(path);
+      }
+    } catch (err) {
+      print(err);
+      return left(ErrorFileExportFailure());
+    }
+  }
 }

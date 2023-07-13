@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:paisa/src/core/error/failures.dart';
+
+import '../../../core/error/failures.dart';
+import 'import_export.dart';
 
 abstract class SettingsRepository {
-  Future<Either<Failure, String>> exportJSONToFile();
+  Future<Either<Failure, String>> exportDataToFile({required Export export});
 
-  Future<Either<Failure, bool>> importFileToJSON();
+  Future<Either<Failure, bool>> importFileToData({required Import import});
 
   T get<T>(String key, {dynamic defaultValue});
 

@@ -63,19 +63,6 @@ class ExportAndImportPage extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child: OutlinedButton.icon(
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: context.primary,
-                              elevation: 0,
-                              padding: const EdgeInsets.all(10),
-                            ),
-                            onPressed: () => settingCubit.importDataFromJson(),
-                            label: Text(context.loc.importData),
-                            icon: Icon(MdiIcons.fileImport),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
                               foregroundColor: context.onPrimary,
@@ -87,6 +74,47 @@ class ExportAndImportPage extends StatelessWidget {
                             icon: Icon(MdiIcons.fileExport),
                           ),
                         ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: context.primary,
+                              elevation: 0,
+                              padding: const EdgeInsets.all(10),
+                            ),
+                            onPressed: () => settingCubit.importDataFromJson(),
+                            label: Text(context.loc.importData),
+                            icon: Icon(MdiIcons.fileImport),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SettingsGroup(
+                title: 'Export data as CSV file',
+                options: [
+                  ListTile(
+                    title: Text(context.loc.backupAndRestoreJSONDesc),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: context.onPrimary,
+                              backgroundColor: context.primary,
+                              padding: const EdgeInsets.all(10),
+                            ),
+                            onPressed: () => settingCubit.shareCSVFile(),
+                            label: Text(context.loc.exportData),
+                            icon: Icon(MdiIcons.fileExport),
+                          ),
+                        ),
+                        const Spacer(),
                       ],
                     ),
                   ),

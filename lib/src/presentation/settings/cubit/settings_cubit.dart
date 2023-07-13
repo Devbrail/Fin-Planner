@@ -22,17 +22,19 @@ class SettingCubit extends Cubit<SettingsState> {
     this.expensesUseCase,
     this.defaultCategoriesUseCase,
     this.updateExpensesUseCase,
-    this.fileImportUseCase,
-    this.fileExportUseCase,
+    this.jsonFileImportUseCase,
+    this.jsonFileExportUseCase,
     this.settingsUseCase,
+    this.csvFileExportUseCase,
   ) : super(SettingsInitial());
 
   final GetDefaultCategoriesUseCase defaultCategoriesUseCase;
   final GetExpensesUseCase expensesUseCase;
 
   final UpdateExpensesUseCase updateExpensesUseCase;
-  final FileImportUseCase fileImportUseCase;
-  final FileExportUseCase fileExportUseCase;
+  final JSONFileImportUseCase jsonFileImportUseCase;
+  final JSONFileExportUseCase jsonFileExportUseCase;
+  final CSVFileExportUseCase csvFileExportUseCase;
   final SettingsUseCase settingsUseCase;
 
   void fixExpenses() async {
@@ -56,7 +58,17 @@ class SettingCubit extends Cubit<SettingsState> {
   }
 
   void shareFile() {
-    fileExportUseCase().then((fileExport) => fileExport.fold(
+    jsonFileExportUseCase().then((fileExport) => fileExport.fold(
+          (failure) => emit(ImportFileError(mapFailureToMessage(failure))),
+          (path) => Share.shareXFiles(
+            [XFile(path)],
+            subject: 'Share',
+          ),
+        ));
+  }
+
+  void shareCSVFile() {
+    csvFileExportUseCase().then((fileExport) => fileExport.fold(
           (failure) => emit(ImportFileError(mapFailureToMessage(failure))),
           (path) => Share.shareXFiles(
             [XFile(path)],
@@ -67,7 +79,7 @@ class SettingCubit extends Cubit<SettingsState> {
 
   void importDataFromJson() {
     emit(ImportFileLoading());
-    fileImportUseCase().then((fileImport) => fileImport.fold(
+    jsonFileImportUseCase().then((fileImport) => fileImport.fold(
           (failure) => emit(ImportFileError(mapFailureToMessage(failure))),
           (r) => emit(ImportFileSuccessState()),
         ));
