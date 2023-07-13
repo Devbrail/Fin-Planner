@@ -8,8 +8,11 @@
  <a href="https://flutter.dev/" style="text-decoration:none" area-label="flutter">
     <img src="https://img.shields.io/badge/Platform-Flutter%203.10.4-blue">
   </a>
-   <a href="https://play.google.com/store/apps/details?id=dev.hemanths.paisa" style="text-decoration:none" area-label="flutter">
+   <a href="https://play.google.com/store/apps/details?id=dev.hemanths.paisa" style="text-decoration:none" area-label="play store">
     <img src="https://img.shields.io/badge/Download-Google%20Play-green">
+  </a>
+  <a href="https://apps.microsoft.com/store/detail/9NQ2KR46N764?launch=true&mode=mini" style="text-decoration:none" area-label="windows">
+    <img src="https://img.shields.io/badge/Download-Micrsoft%20Store-red">
   </a>
   <a href="https://github.com/RetroMusicPlayer/Paisa/releases/tag/v4.8.0" style="text-decoration:none" area-label="flutter">
     <img src="https://img.shields.io/badge/Version-4.8.0-orange">
@@ -74,6 +77,13 @@
 
 3. Run the app and check once
 
+### Download
+
+<p>
+  <a href='https://play.google.com/store/apps/details?id=dev.hemanths.paisa&hl=en_US&pli=1&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' width=256 height=100  src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a><a href="https://apps.microsoft.com/store/detail/9NQ2KR46N764?launch=true&mode=mini">
+   <img  width=180 height=100 src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download Microsft Store" />
+</a>
+</p>
 ### License
 
     Copyright (c) 2022, Hemanth S

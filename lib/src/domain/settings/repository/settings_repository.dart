@@ -3,6 +3,7 @@ import 'package:paisa/src/core/error/failures.dart';
 
 abstract class SettingsRepository {
   Future<Either<Failure, String>> exportJSONToFile();
+
   Future<Either<Failure, bool>> importFileToJSON();
 
   T get<T>(String key, {dynamic defaultValue});
