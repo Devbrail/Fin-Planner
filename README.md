@@ -52,7 +52,7 @@
   
 ### Steps to translate
 
-1. Create `.arb` file inside `lib/localization/app_<country_code>.arb` example `app_en.arb`
+1. Create `.arb` file inside `lib/localization/app_<language_code>.arb` example `app_en.arb`
 2. Copy all transactions from `app_en.arb` to created file and remove all keys which annotates with `@`
    From
 
