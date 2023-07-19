@@ -5,9 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:paisa/core/extensions/build_context_extension.dart';
 import 'package:paisa/core/extensions/text_style_extension.dart';
 import 'package:paisa/core/extensions/color_extension.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_card.dart';
-import 'package:paisa/src/presentation/widgets/paisa_icon_picker.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class CategoryIconPickerPage extends StatefulWidget {
   const CategoryIconPickerPage({super.key});

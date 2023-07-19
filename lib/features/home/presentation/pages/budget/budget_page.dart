@@ -7,9 +7,8 @@ import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/transaction/domain/entities/expense.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_empty_widget.dart';
+import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class BudgetPage extends StatelessWidget {
   const BudgetPage({

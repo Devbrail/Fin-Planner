@@ -4,8 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/transaction/presentation/bloc/transaction_bloc.dart';
-import 'package:paisa/src/presentation/widgets/paisa_date_picker.dart';
-import 'package:paisa/src/presentation/widgets/paisa_time_picker.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class ExpenseDatePickerWidget extends StatefulWidget {
   const ExpenseDatePickerWidget({

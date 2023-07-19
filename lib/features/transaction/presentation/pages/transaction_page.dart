@@ -16,8 +16,7 @@ import 'package:paisa/features/transaction/presentation/widgets/transaction_name
 import 'package:paisa/features/transaction/presentation/widgets/transaction_toggle_buttons_widget.dart';
 import 'package:paisa/features/transaction/presentation/widgets/transfer_widget.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class TransactionPage extends StatefulWidget {

@@ -6,7 +6,7 @@ part of 'expense_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ExpenseModelAdapter extends TypeAdapter<TransactionModel> {
+class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
   @override
   final int typeId = 0;
 
@@ -67,7 +67,7 @@ class ExpenseModelAdapter extends TypeAdapter<TransactionModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ExpenseModelAdapter &&
+      other is TransactionModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/home/presentation/cubit/overview/overview_cubit.dart';
 import 'package:paisa/features/home/presentation/pages/overview/widgets/category_list_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_empty_widget.dart';
+
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class OverviewListView extends StatelessWidget {
   const OverviewListView({

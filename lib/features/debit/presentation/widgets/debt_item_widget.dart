@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/enum/debt_type.dart';
 import 'package:paisa/features/debit/data/models/debit_model.dart';
@@ -11,8 +10,7 @@ import 'package:paisa/features/debit/data/models/debit_transactions_model.dart';
 import 'package:paisa/features/debit/domain/entities/debit_transaction.dart';
 import 'package:paisa/features/debit/presentation/cubit/debts_bloc.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/src/presentation/widgets/paisa_card.dart';
-import 'package:paisa/src/presentation/widgets/paisa_text_field.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class DebtItemWidget extends StatelessWidget {
   const DebtItemWidget({

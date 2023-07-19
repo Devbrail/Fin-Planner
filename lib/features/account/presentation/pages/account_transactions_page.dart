@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:paisa/core/common.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
+import 'package:paisa/features/account/presentation/bloc/accounts_bloc.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
+import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_item_widget.dart';
 import 'package:paisa/features/transaction/domain/entities/expense.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
-import 'package:paisa/src/presentation/summary/widgets/expense_item_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
-import 'package:paisa/src/presentation/widgets/paisa_empty_widget.dart';
-
-import '../../../../config/routes.dart';
-import '../bloc/accounts_bloc.dart';
+import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 
 class AccountTransactionsPage extends StatelessWidget {
   const AccountTransactionsPage({

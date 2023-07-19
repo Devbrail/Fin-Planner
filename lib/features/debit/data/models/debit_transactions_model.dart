@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
 
-part 'transactions_model.g.dart';
+part 'debit_transactions_model.g.dart';
 
 @HiveType(typeId: 3)
 class DebitTransactionsModel extends HiveObject with EquatableMixin {

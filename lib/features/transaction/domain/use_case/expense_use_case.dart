@@ -7,3 +7,4 @@ export 'get_expense_from_account_id.dart';
 export 'get_expense_from_category_id.dart';
 export 'get_expense_use_case.dart';
 export 'get_expenses_use_case.dart';
+export 'update_expense_use_case.dart';

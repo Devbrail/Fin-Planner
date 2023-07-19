@@ -6,7 +6,7 @@ import 'package:paisa/features/account/domain/entities/account.dart';
 
 import 'package:paisa/core/common.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/src/presentation/widgets/paisa_card.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class PillsAccountWidget extends StatefulWidget {
   const PillsAccountWidget({

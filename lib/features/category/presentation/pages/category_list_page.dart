@@ -7,8 +7,7 @@ import 'package:paisa/features/category/presentation/bloc/category_bloc.dart';
 import 'package:paisa/features/category/presentation/pages/category_list_mobile_page.dart';
 import 'package:paisa/features/category/presentation/pages/category_list_tablet_page.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_empty_widget.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class CategoryListPage extends StatelessWidget {

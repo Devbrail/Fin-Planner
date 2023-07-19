@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paisa/features/home/presentation/cubit/overview/overview_cubit.dart';
 import 'package:paisa/features/home/presentation/pages/overview/widgets/category_transaction_filter_widget.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
-import 'package:paisa/src/presentation/widgets/filter_widget/paisa_filter_transaction_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_pill_chip.dart';
+import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
+import 'package:paisa/core/widgets/filter_widget/paisa_filter_transaction_widget.dart';
+
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class OverviewTablet extends StatelessWidget {
   const OverviewTablet({

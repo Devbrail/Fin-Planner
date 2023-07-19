@@ -9,8 +9,8 @@ import 'package:paisa/features/home/presentation/pages/overview/widgets/overview
 import 'package:paisa/features/home/presentation/pages/overview/widgets/overview_list_widget.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
-import 'package:paisa/src/presentation/widgets/paisa_empty_widget.dart';
+import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class OverViewPage extends StatelessWidget {
   const OverViewPage({

@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/constants/constants.dart';
 import 'package:paisa/core/enum/box_types.dart';
 import 'package:paisa/core/extensions/build_context_extension.dart';
@@ -14,9 +13,7 @@ import 'package:paisa/features/category/data/data_sources/category_local_data_so
 import 'package:paisa/features/category/data/data_sources/default_category.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_card.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class CategorySelectorPage extends StatefulWidget {

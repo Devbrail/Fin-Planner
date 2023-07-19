@@ -4,8 +4,8 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/enum/box_types.dart';
 import 'package:paisa/features/recurring/domain/repository/recurring_repository.dart';
-import 'package:paisa/src/app.dart';
-import 'package:paisa/src/di/di.dart';
+import 'package:paisa/app.dart';
+import 'package:paisa/di/di.dart';
 
 final getIt = GetIt.instance;
 

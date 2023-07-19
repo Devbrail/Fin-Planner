@@ -4,17 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:paisa/core/extensions/build_context_extension.dart';
 import 'package:paisa/core/extensions/text_style_extension.dart';
 import 'package:paisa/core/extensions/color_extension.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
-import 'package:paisa/src/presentation/widgets/paisa_color_picker.dart';
-import 'package:paisa/src/presentation/widgets/paisa_text_field.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
-import '../../../../../main.dart';
-import '../../bloc/category_bloc.dart';
-import '../../widgets/category_icon_picker_widget.dart';
-import '../../widgets/color_picker_widget.dart';
-import '../../widgets/set_budget_widget.dart';
+import 'package:paisa/features/category/presentation/bloc/category_bloc.dart';
+import 'package:paisa/features/category/presentation/widgets/category_icon_picker_widget.dart';
+import 'package:paisa/features/category/presentation/widgets/color_picker_widget.dart';
+import 'package:paisa/features/category/presentation/widgets/set_budget_widget.dart';
+import 'package:paisa/main.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 

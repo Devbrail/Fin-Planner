@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../core/common.dart';
-import '../../../../src/presentation/widgets/paisa_color_picker.dart';
-import '../bloc/accounts_bloc.dart';
+import 'package:paisa/core/common.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
+import 'package:paisa/features/account/presentation/bloc/accounts_bloc.dart';
 
 class AccountColorPickerWidget extends StatelessWidget {
   const AccountColorPickerWidget({super.key});

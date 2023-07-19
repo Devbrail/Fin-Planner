@@ -10,8 +10,8 @@ import 'package:paisa/features/home/presentation/widgets/home_mobile_widget.dart
 import 'package:paisa/features/home/presentation/widgets/home_tablet_widget.dart';
 import 'package:paisa/features/home/presentation/widgets/variable_size_fab.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/src/app/in_app.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
+import 'package:paisa/core/in_app.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 final destinations = [

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/core/enum/debt_type.dart';
 
-part 'debt_model.g.dart';
+part 'debit_model.g.dart';
 
 @HiveType(typeId: 4)
 class DebitModel extends HiveObject with EquatableMixin {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paisa/core/common.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
-import '../bloc/transaction_bloc.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
+import 'package:paisa/features/transaction/presentation/bloc/transaction_bloc.dart';
+
+import 'package:responsive_builder/responsive_builder.dart';
 
 class TransactionDeleteWidget extends StatelessWidget {
   const TransactionDeleteWidget({super.key, required this.expenseId});

@@ -3,15 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/currency_picker/data/models/country_model.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_card.dart';
-import 'package:paisa/src/presentation/widgets/paisa_text_field.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../../../config/routes.dart';
-import '../cubit/country_picker_cubit.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
+import 'package:paisa/features/currency_picker/presentation/cubit/country_picker_cubit.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class CountryPickerPage extends StatefulWidget {
   const CountryPickerPage({

@@ -1,5 +1,4 @@
 export 'constants/constants.dart';
-export 'enum/page_type.dart';
 export 'extensions/account_extension.dart';
 export 'extensions/build_context_extension.dart';
 export 'extensions/card_type_extension.dart';
@@ -9,6 +8,7 @@ export 'extensions/country_extension.dart';
 export 'extensions/debt_extensions.dart';
 export 'extensions/double_extensions.dart';
 export 'extensions/expense_extensions.dart';
+export 'extensions/filter_expense_extension.dart';
 export 'extensions/recurring_extension.dart';
 export 'extensions/recurring_type_ext.dart';
 export 'extensions/text_style_extension.dart';

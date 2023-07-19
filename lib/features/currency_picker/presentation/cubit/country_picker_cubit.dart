@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:paisa/core/constants/constants.dart';
 import 'package:paisa/features/currency_picker/data/models/country_model.dart';
 import 'package:paisa/features/currency_picker/domain/use_case/get_countries_user_case.dart';
-import 'package:paisa/src/domain/settings/use_case/setting_use_case.dart';
+import 'package:paisa/features/settings/domain/use_case/setting_use_case.dart';
 
 part 'country_picker_state.dart';
 

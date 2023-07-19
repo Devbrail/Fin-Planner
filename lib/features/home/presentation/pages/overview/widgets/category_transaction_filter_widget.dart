@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
+import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 
 class CategoryTransactionFilterWidget extends StatelessWidget {
   const CategoryTransactionFilterWidget({

@@ -7,14 +7,11 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/debit/data/models/debit_transactions_model.dart';
 import 'package:paisa/features/debit/domain/entities/debit_transaction.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
-import 'package:paisa/src/presentation/widgets/paisa_text_field.dart';
 
-import '../../../../../main.dart';
-import '../../cubit/debts_bloc.dart';
-import '../../widgets/debt_toggle_buttons_widget.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
+import 'package:paisa/features/debit/presentation/cubit/debts_bloc.dart';
+import 'package:paisa/features/debit/presentation/widgets/debt_toggle_buttons_widget.dart';
+import 'package:paisa/main.dart';
 
 class AddOrEditDebtPage extends StatefulWidget {
   const AddOrEditDebtPage({

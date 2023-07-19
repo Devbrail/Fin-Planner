@@ -7,8 +7,7 @@ import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
 import 'package:paisa/features/home/presentation/pages/home/home_page.dart';
 import 'package:paisa/features/home/presentation/widgets/content_widget.dart';
 import 'package:paisa/features/profile/presentation/pages/paisa_user_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_icon_title.dart';
-import 'package:paisa/src/presentation/widgets/paisa_search_bar.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class HomeDesktopWidget extends StatelessWidget {
   const HomeDesktopWidget({

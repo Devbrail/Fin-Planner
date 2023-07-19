@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/config/routes.dart';
 
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';

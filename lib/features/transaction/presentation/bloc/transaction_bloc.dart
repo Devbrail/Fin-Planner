@@ -13,11 +13,11 @@ import 'package:paisa/features/account/domain/use_case/account_use_case.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
+import 'package:paisa/features/settings/domain/use_case/settings_use_case.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
 import 'package:paisa/features/transaction/domain/entities/expense.dart';
 import 'package:paisa/features/transaction/domain/use_case/expense_use_case.dart';
 import 'package:paisa/features/transaction/domain/use_case/update_expense_use_case.dart';
-import 'package:paisa/src/domain/settings/use_case/setting_use_case.dart';
 
 part 'transaction_event.dart';
 part 'transaction_state.dart';

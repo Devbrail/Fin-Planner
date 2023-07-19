@@ -4,17 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/enum/card_type.dart';
-import 'package:paisa/src/presentation/settings/cubit/settings_cubit.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
-import 'package:paisa/src/presentation/widgets/paisa_color_picker.dart';
-import 'package:paisa/src/presentation/widgets/paisa_text_field.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
+import 'package:paisa/features/account/presentation/bloc/accounts_bloc.dart';
+import 'package:paisa/features/account/presentation/widgets/card_type_drop_down.dart';
+import 'package:paisa/features/settings/presentation/cubit/settings_cubit.dart';
+import 'package:paisa/main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-
-import '../../../../../main.dart';
-import '../../bloc/accounts_bloc.dart';
-import '../../widgets/card_type_drop_down.dart';
 
 final GlobalKey<FormState> _form = GlobalKey<FormState>();
 

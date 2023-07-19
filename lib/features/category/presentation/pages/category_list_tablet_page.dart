@@ -3,7 +3,8 @@ import 'package:paisa/core/common.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/category/presentation/bloc/category_bloc.dart';
 import 'package:paisa/features/category/presentation/widgets/category_item_tablet_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_bottom_sheet.dart';
+
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class CategoryListTabletWidget extends StatelessWidget {
   const CategoryListTabletWidget({

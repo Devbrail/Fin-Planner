@@ -94,3 +94,17 @@ class FilteredCategoryListState extends BudgetState {
 }
 
 class EmptyFilterListState extends BudgetState {}
+
+class OverviewFilterArguments {
+  final Map<String, List<Expense>> groupedExpense;
+
+  OverviewFilterArguments({required this.groupedExpense});
+
+  OverviewFilterArguments copyWith({
+    Map<String, List<Expense>>? groupedExpense,
+  }) {
+    return OverviewFilterArguments(
+      groupedExpense: groupedExpense ?? this.groupedExpense,
+    );
+  }
+}

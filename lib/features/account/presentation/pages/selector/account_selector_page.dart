@@ -6,12 +6,10 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/constants/constants.dart';
 import 'package:paisa/core/enum/card_type.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:paisa/features/account/data/data_sources/default_account.dart';
 import 'package:paisa/features/account/data/data_sources/local_account_data_manager.dart';
 import 'package:paisa/features/account/data/model/account_model.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_card.dart';
 
 import 'package:responsive_builder/responsive_builder.dart';
 

@@ -5,7 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
-import 'package:paisa/core/common.dart';
+import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
 import 'package:paisa/features/transaction/domain/use_case/expense_use_case.dart';
 

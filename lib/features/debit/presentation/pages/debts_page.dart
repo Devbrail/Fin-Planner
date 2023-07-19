@@ -6,7 +6,7 @@ import 'package:paisa/core/enum/debt_type.dart';
 import 'package:paisa/features/debit/data/models/debit_model.dart';
 import 'package:paisa/features/debit/presentation/widgets/debt_list_widget.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/src/presentation/widgets/paisa_empty_widget.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class DebtsPage extends StatelessWidget {
   const DebtsPage({super.key});

@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/config/routes.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:paisa/features/account/data/model/account_model.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
@@ -14,12 +16,6 @@ import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/recurring/presentation/cubit/recurring_cubit.dart';
 import 'package:paisa/features/transaction/presentation/widgets/selectable_item_widget.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_big_button_widget.dart';
-import 'package:paisa/src/presentation/widgets/paisa_pill_chip.dart';
-import 'package:paisa/src/presentation/widgets/paisa_text_field.dart';
-
-import 'package:responsive_builder/responsive_builder.dart';
 
 class AddRecurringPage extends StatefulWidget {
   const AddRecurringPage({super.key});
