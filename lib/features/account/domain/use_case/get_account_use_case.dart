@@ -1,17 +1,15 @@
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/common.dart';
-import 'package:paisa/core/use_case/use_case.dart';
-import 'package:paisa/features/account/domain/entities/account.dart';
-import 'package:paisa/features/account/domain/repository/account_repository.dart';
+
+import '../entities/account.dart';
+import '../repository/account_repository.dart';
 
 @singleton
-class GetAccountUseCase extends UseCase<AccountEntity?, int> {
+class GetAccountUseCase {
   GetAccountUseCase({required this.accountRepository});
 
   final AccountRepository accountRepository;
 
-  @override
-  AccountEntity? call({int? params}) {
-    return accountRepository.fetchAccountFromId(params!)?.toEntity();
-  }
+  Account? call(int pathParameters) =>
+      accountRepository.fetchAccountFromId(pathParameters)?.toEntity();
 }

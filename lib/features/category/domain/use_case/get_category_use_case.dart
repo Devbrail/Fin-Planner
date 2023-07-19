@@ -9,6 +9,6 @@ class GetCategoryUseCase {
 
   final CategoryRepository categoryRepository;
 
-  CategoryEntity? call(int categoryId) =>
+  Category? call(int categoryId) =>
       categoryRepository.fetchCategoryFromId(categoryId)?.toEntity();
 }

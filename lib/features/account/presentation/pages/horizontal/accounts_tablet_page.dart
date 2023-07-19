@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
-import 'package:paisa/features/account/presentation/bloc/accounts_bloc.dart';
-import 'package:paisa/features/account/presentation/widgets/account_summary_widget.dart';
-import 'package:paisa/features/account/presentation/widgets/account_transaction_widget.dart';
-import 'package:paisa/features/account/presentation/widgets/accounts_page_view_widget.dart';
+
+import '../../bloc/accounts_bloc.dart';
+import '../../widgets/account_summary_widget.dart';
+import '../../widgets/account_transaction_widget.dart';
+import '../../widgets/accounts_page_view_widget.dart';
 
 class AccountsHorizontalTabletPage extends StatelessWidget {
   const AccountsHorizontalTabletPage({
@@ -12,7 +13,7 @@ class AccountsHorizontalTabletPage extends StatelessWidget {
     required this.accounts,
   });
 
-  final List<AccountEntity> accounts;
+  final List<Account> accounts;
 
   @override
   Widget build(BuildContext context) {

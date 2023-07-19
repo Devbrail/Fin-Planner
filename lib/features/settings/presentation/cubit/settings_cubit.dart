@@ -39,7 +39,7 @@ class SettingCubit extends Cubit<SettingsState> {
   void fixExpenses() async {
     if (settingsUseCase.get(expenseFixKey, defaultValue: true)) {
       emit(FixExpenseLoading());
-      final List<CategoryEntity> categories = defaultCategoriesUseCase();
+      final List<Category> categories = defaultCategoriesUseCase();
       if (categories.isEmpty) {
         return emit(FixExpenseError());
       }

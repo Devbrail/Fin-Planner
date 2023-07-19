@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:paisa/core/common.dart';
+import 'package:paisa/features/category/data/model/category_model.dart';
 
 import 'package:paisa/core/widgets/paisa_widget.dart';
-import 'package:paisa/features/category/domain/entities/category.dart';
 
 class CategoryItemTabletWidget extends StatelessWidget {
   const CategoryItemTabletWidget({
@@ -12,7 +12,7 @@ class CategoryItemTabletWidget extends StatelessWidget {
     required this.onPressed,
   }) : super(key: key);
 
-  final CategoryEntity category;
+  final CategoryModel category;
   final VoidCallback onPressed;
 
   @override
@@ -30,7 +30,7 @@ class CategoryItemTabletWidget extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Icon(
                 IconData(
-                  category.icon ?? 0,
+                  category.icon,
                   fontFamily: fontFamilyName,
                   fontPackage: fontFamilyPackageName,
                 ),
@@ -45,7 +45,7 @@ class CategoryItemTabletWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      category.name ?? '',
+                      category.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: context.bodyMedium?.copyWith(

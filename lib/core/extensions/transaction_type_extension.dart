@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:paisa/core/common.dart';
-import 'package:paisa/core/common_enum.dart';
-import 'package:paisa/core/theme/custom_color.dart';
+import '../common.dart';
+import '../enum/transaction_type.dart';
+import '../theme/custom_color.dart';
 
 extension TransactionTypeHelper on TransactionType {
   String get sign => this == TransactionType.transfer

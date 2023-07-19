@@ -39,13 +39,13 @@ class AddRecurringEvent extends ExpenseEvent {
 class ChangeCategoryEvent extends ExpenseEvent {
   const ChangeCategoryEvent(this.category);
 
-  final CategoryEntity category;
+  final Category category;
 }
 
 class ChangeAccountEvent extends ExpenseEvent {
   const ChangeAccountEvent(this.account);
 
-  final AccountEntity account;
+  final Account account;
 }
 
 class UpdateDateTimeEvent extends ExpenseEvent {
@@ -63,7 +63,7 @@ class TransferAccountEvent extends ExpenseEvent {
     this.isFromAccount = false,
   });
 
-  final AccountEntity account;
+  final Account account;
   final bool isFromAccount;
 
   @override

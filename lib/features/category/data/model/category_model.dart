@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
 
 part 'category_model.g.dart';
 
 @HiveType(typeId: 1)
-class CategoryModel extends HiveObject {
+class CategoryModel extends HiveObject with EquatableMixin {
   CategoryModel({
     required this.icon,
     required this.name,
@@ -36,19 +37,22 @@ class CategoryModel extends HiveObject {
   String? description;
 
   @HiveField(2)
-  int? icon;
+  int icon;
 
   @HiveField(7, defaultValue: false)
-  bool? isBudget;
-
-  @HiveField(3, defaultValue: false)
-  bool? isDefault;
+  bool isBudget;
 
   @HiveField(0)
-  String? name;
+  String name;
 
   @HiveField(4, defaultValue: 0)
   int? superId;
+
+  @HiveField(3, defaultValue: false)
+  bool isDefault;
+
+  @override
+  List<Object?> get props => [name, icon, icon];
 
   Map<String, dynamic> toJson() => {
         'name': name,

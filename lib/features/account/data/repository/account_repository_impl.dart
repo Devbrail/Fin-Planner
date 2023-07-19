@@ -1,14 +1,15 @@
 import 'package:injectable/injectable.dart';
-import 'package:paisa/core/common_enum.dart';
-import 'package:paisa/features/account/data/data_sources/local/account_data_manager.dart';
-import 'package:paisa/features/account/data/model/account_model.dart';
-import 'package:paisa/features/account/domain/repository/account_repository.dart';
+
+import '../../../../core/enum/card_type.dart';
+import '../../domain/repository/account_repository.dart';
+import '../data_sources/local_account_data_manager.dart';
+import '../model/account_model.dart';
 
 @Singleton(as: AccountRepository)
 class AccountRepositoryImpl extends AccountRepository {
   AccountRepositoryImpl({required this.dataSource});
 
-  final LocalAccountDataManager dataSource;
+  final AccountLocalDataManager dataSource;
 
   @override
   Future<void> addAccount({
@@ -45,21 +46,23 @@ class AccountRepositoryImpl extends AccountRepository {
   @override
   Future<void> updateAccount({
     required int key,
-    required String? bankName,
-    required String? holderName,
-    required String? number,
-    required CardType? cardType,
-    required double? amount,
-    required int? color,
+    required String bankName,
+    required String holderName,
+    required String number,
+    required CardType cardType,
+    required double amount,
+    required int color,
   }) {
-    return dataSource.update(AccountModel(
-      name: holderName,
-      bankName: bankName,
-      number: number,
-      cardType: cardType,
-      amount: amount,
-      superId: key,
-      color: color,
-    ));
+    return dataSource.update(
+      AccountModel(
+        name: holderName,
+        bankName: bankName,
+        number: number,
+        cardType: cardType,
+        amount: amount,
+        superId: key,
+        color: color,
+      ),
+    );
   }
 }

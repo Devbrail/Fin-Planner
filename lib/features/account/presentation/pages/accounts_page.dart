@@ -25,7 +25,7 @@ class AccountsPage extends StatelessWidget {
           return ValueListenableBuilder<Box<AccountModel>>(
             valueListenable: getIt.get<Box<AccountModel>>().listenable(),
             builder: (_, value, __) {
-              final List<AccountEntity> accounts = value.toEntities();
+              final List<Account> accounts = value.toEntities();
               if (accounts.isEmpty) {
                 return EmptyWidget(
                   icon: Icons.credit_card,

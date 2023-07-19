@@ -212,7 +212,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 spacing: 4.0,
                 runSpacing: 8.0,
                 children: List.generate(accounts.length, (index) {
-                  final AccountEntity account = accounts[index];
+                  final Account account = accounts[index];
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: FilterChip(
@@ -245,7 +245,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                       ),
                       showCheckmark: false,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      label: Text(account.bankName ?? ''),
+                      label: Text(account.bankName),
                       labelStyle: Theme.of(context)
                           .textTheme
                           .titleMedium
@@ -282,7 +282,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 spacing: 4.0,
                 runSpacing: 8.0,
                 children: List.generate(categories.length, (index) {
-                  final CategoryEntity account = categories[index];
+                  final Category account = categories[index];
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: FilterChip(
@@ -301,7 +301,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             ? context.primary
                             : context.onSurfaceVariant,
                         IconData(
-                          account.icon ?? 0,
+                          account.icon,
                           fontFamily: fontFamilyName,
                           fontPackage: fontFamilyPackageName,
                         ),
@@ -315,7 +315,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                       ),
                       showCheckmark: false,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      label: Text(account.name ?? ''),
+                      label: Text(account.name),
                       labelStyle: Theme.of(context)
                           .textTheme
                           .titleMedium

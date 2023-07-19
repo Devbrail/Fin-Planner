@@ -17,8 +17,8 @@ class ExpenseItemWidget extends StatelessWidget {
     required this.category,
   }) : super(key: key);
 
-  final AccountEntity account;
-  final CategoryEntity category;
+  final Account account;
+  final Category category;
   final Expense expense;
 
   String getSubtitle(BuildContext context) {
@@ -26,9 +26,7 @@ class ExpenseItemWidget extends StatelessWidget {
       return expense.time.shortDayString;
     } else {
       return context.loc.transactionSubTittleText(
-        account.bankName ?? '',
-        expense.time.shortDayString,
-      );
+          account.bankName, expense.time.shortDayString);
     }
   }
 
@@ -62,7 +60,7 @@ class ExpenseItemWidget extends StatelessWidget {
               Color(category.color ?? context.surface.value).withOpacity(0.2),
           child: Icon(
             IconData(
-              category.icon ?? 0,
+              category.icon,
               fontFamily: fontFamilyName,
               fontPackage: fontFamilyPackageName,
             ),
@@ -91,7 +89,7 @@ class ExpenseTransferItemWidget extends StatelessWidget {
   }) : super(key: key);
 
   final Expense expense;
-  final AccountEntity fromAccount, toAccount;
+  final Account fromAccount, toAccount;
 
   String getSubtitle() {
     return expense.time.shortDayString;

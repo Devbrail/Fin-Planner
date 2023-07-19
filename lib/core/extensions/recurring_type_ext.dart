@@ -1,4 +1,4 @@
-import 'package:paisa/core/common_enum.dart';
+import '../enum/recurring_type.dart';
 
 extension RecurringTypeHelper on RecurringType {
   Duration get getTime {

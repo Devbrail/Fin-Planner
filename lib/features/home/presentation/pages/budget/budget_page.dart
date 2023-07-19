@@ -37,7 +37,7 @@ class BudgetPage extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemCount: categories.length,
             itemBuilder: (context, index) {
-              final CategoryEntity category = categories[index];
+              final Category category = categories[index];
               final List<Expense> expenses = summaryController
                   .fetchExpensesFromCategoryId(category.superId!)
                   .thisMonthExpensesList;
@@ -59,7 +59,7 @@ class BudgetItem extends StatelessWidget {
     required this.expenses,
   });
 
-  final CategoryEntity category;
+  final Category category;
   final List<Expense> expenses;
 
   @override
@@ -75,14 +75,14 @@ class BudgetItem extends StatelessWidget {
         backgroundColor: category.backgroundColor,
         child: Icon(
           IconData(
-            category.icon ?? 0,
+            category.icon,
             fontFamily: fontFamilyName,
             fontPackage: fontFamilyPackageName,
           ),
           color: category.foregroundColor,
         ),
       ),
-      title: Text(category.name ?? ''),
+      title: Text(category.name),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

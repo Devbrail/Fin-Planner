@@ -131,17 +131,17 @@ class AddAccountPageState extends State<AddAccountPage> {
                 color: context.onErrorContainer,
               );
             } else if (state is AccountSuccessState) {
-              accountNameController.text = state.account.bankName ?? '';
+              accountNameController.text = state.account.bankName;
               accountNameController.selection = TextSelection.collapsed(
-                  offset: state.account.bankName?.length ?? 0);
+                  offset: state.account.bankName.length);
 
-              accountNumberController.text = state.account.number ?? '';
-              accountNumberController.selection = TextSelection.collapsed(
-                  offset: state.account.number?.length ?? 0);
+              accountNumberController.text = state.account.number;
+              accountNumberController.selection =
+                  TextSelection.collapsed(offset: state.account.number.length);
 
-              accountHolderController.text = state.account.name ?? '';
-              accountHolderController.selection = TextSelection.collapsed(
-                  offset: state.account.name?.length ?? 0);
+              accountHolderController.text = state.account.name;
+              accountHolderController.selection =
+                  TextSelection.collapsed(offset: state.account.name.length);
 
               accountInitialAmountController.text =
                   state.account.amount.toString();

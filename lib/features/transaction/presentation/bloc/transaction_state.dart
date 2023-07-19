@@ -60,7 +60,7 @@ class TransactionFoundState extends TransactionState {
 class ChangeCategoryState extends TransactionState {
   const ChangeCategoryState(this.category);
 
-  final CategoryEntity category;
+  final CategoryModel category;
 
   @override
   List<Object> get props => [category];
@@ -69,7 +69,7 @@ class ChangeCategoryState extends TransactionState {
 class ChangeAccountState extends TransactionState {
   const ChangeAccountState(this.account);
 
-  final AccountEntity account;
+  final AccountModel account;
 
   @override
   List<Object> get props => [account];
@@ -92,7 +92,7 @@ class TransferAccountState extends TransactionState {
   );
 
   final bool isFromAccount;
-  final AccountEntity? fromAccount, toAccount;
+  final Account? fromAccount, toAccount;
 
   @override
   List<Object> get props => [isFromAccount];
@@ -101,7 +101,7 @@ class TransferAccountState extends TransactionState {
 class DefaultCategoriesState extends TransactionState {
   const DefaultCategoriesState(this.categories);
 
-  final List<CategoryEntity> categories;
+  final List<Category> categories;
 
   @override
   List<Object> get props => [categories];

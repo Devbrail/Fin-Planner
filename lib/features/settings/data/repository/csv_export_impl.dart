@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:csv/csv.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/features/account/data/data_sources/local/account_data_manager.dart';
+import 'package:paisa/features/account/data/data_sources/local_account_data_manager.dart';
 import 'package:paisa/features/account/data/model/account_model.dart';
-import 'package:paisa/features/category/data/data_sources/local/category_data_source.dart';
+import 'package:paisa/features/category/data/data_sources/category_local_data_source.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/features/settings/domain/repository/import_export.dart';
 import 'package:paisa/features/transaction/data/data_sources/local_transaction_data_manager.dart';
@@ -22,8 +22,8 @@ class CSVExport extends Export {
     this.expenseDataManager,
   );
 
-  final LocalAccountDataManager accountDataManager;
-  final LocalCategoryDataManager categoryDataManager;
+  final AccountLocalDataManager accountDataManager;
+  final CategoryLocalDataManager categoryDataManager;
   final DeviceInfoPlugin deviceInfo;
   final ExpenseLocalDataManager expenseDataManager;
 

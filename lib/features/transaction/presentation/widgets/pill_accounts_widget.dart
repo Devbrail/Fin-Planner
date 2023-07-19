@@ -14,7 +14,7 @@ class PillsAccountWidget extends StatefulWidget {
     required this.accountSelected,
   });
 
-  final Function(AccountEntity) accountSelected;
+  final Function(Account) accountSelected;
 
   @override
   State<PillsAccountWidget> createState() => _PillsAccountWidgetState();
@@ -40,7 +40,7 @@ class _PillsAccountWidgetState extends State<PillsAccountWidget> {
           itemCount: accounts.length,
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            final AccountEntity account = accounts[index];
+            final Account account = accounts[index];
             return PaisaFilterChip(
               color: Color(account.color ?? Colors.brown.shade200.value),
               onPressed: () {
@@ -55,7 +55,7 @@ class _PillsAccountWidgetState extends State<PillsAccountWidget> {
               },
               isSelected: account.superId == selectedAccount,
               icon: account.cardType!.icon,
-              title: account.bankName ?? '',
+              title: account.bankName,
             );
           },
         );

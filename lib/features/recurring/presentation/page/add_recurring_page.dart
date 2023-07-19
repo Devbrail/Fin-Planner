@@ -197,7 +197,7 @@ class AccountSelectedWidget extends StatefulWidget {
     required this.onSelected,
   }) : super(key: key);
 
-  final List<AccountEntity> accounts;
+  final List<Account> accounts;
   final Function(int selectedId) onSelected;
 
   @override
@@ -230,11 +230,11 @@ class _AccountSelectedWidgetState extends State<AccountSelectedWidget> {
               onPressed: () => context.pushNamed(addAccountPath),
             );
           } else {
-            final AccountEntity account = widget.accounts[index - 1];
+            final Account account = widget.accounts[index - 1];
             return ItemWidget(
               color: Color(account.color ?? context.primary.value),
               selected: account.superId == selectedId,
-              title: account.name ?? '',
+              title: account.name,
               icon: account.cardType!.icon.codePoint,
               onPressed: () {
                 setState(() {
@@ -259,7 +259,7 @@ class SelectCategory extends StatelessWidget {
     return ValueListenableBuilder<Box<CategoryModel>>(
       valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
       builder: (context, value, child) {
-        final List<CategoryEntity> categories = value.values.toEntities();
+        final List<Category> categories = value.values.toEntities();
         if (categories.isEmpty) {
           return ListTile(
             onTap: () => context.pushNamed(addCategoryPath),
@@ -303,7 +303,7 @@ class CategorySelectWidget extends StatefulWidget {
     required this.onSelected,
   });
 
-  final List<CategoryEntity> categories;
+  final List<Category> categories;
   final Function(int selectedId) onSelected;
 
   @override
@@ -359,7 +359,7 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                 ),
               );
             } else {
-              final CategoryEntity category = widget.categories[index - 1];
+              final Category category = widget.categories[index - 1];
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: FilterChip(
@@ -375,7 +375,7 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                         ? context.primary
                         : context.onSurfaceVariant,
                     IconData(
-                      category.icon ?? 0,
+                      category.icon,
                       fontFamily: fontFamilyName,
                       fontPackage: fontFamilyPackageName,
                     ),
@@ -389,7 +389,7 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                   ),
                   showCheckmark: false,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  label: Text(category.name ?? ''),
+                  label: Text(category.name),
                   labelStyle: context.titleMedium?.copyWith(
                       color: category.superId == selectedId
                           ? context.primary

@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/enum/card_type.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
-import 'package:paisa/features/account/domain/entities/add_account.dart';
-import 'package:paisa/features/account/domain/entities/update_account.dart';
 import 'package:paisa/features/account/domain/use_case/account_use_case.dart';
 import 'package:paisa/features/category/domain/use_case/get_category_use_case.dart';
 import 'package:paisa/features/transaction/domain/entities/expense.dart';
@@ -23,6 +21,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     required this.deleteAccountUseCase,
     required this.getExpensesFromAccountIdUseCase,
     required this.addAccountUseCase,
+    required this.getAccountsUseCase,
     required this.getCategoryUseCase,
     required this.deleteExpensesFromAccountIdUseCase,
     required this.updateAccountUseCase,
@@ -42,10 +41,11 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   String? accountName;
   String? accountNumber;
   final AddAccountUseCase addAccountUseCase;
-  AccountEntity? currentAccount;
+  Account? currentAccount;
   final DeleteAccountUseCase deleteAccountUseCase;
   final DeleteExpensesFromAccountIdUseCase deleteExpensesFromAccountIdUseCase;
   final GetAccountUseCase getAccountUseCase;
+  final GetAccountsUseCase getAccountsUseCase;
   final GetCategoryUseCase getCategoryUseCase;
   final GetExpensesFromAccountIdUseCase getExpensesFromAccountIdUseCase;
   double? initialAmount;
@@ -60,7 +60,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final int? accountId = int.tryParse(event.accountId ?? '');
     if (accountId == null) return;
 
-    final AccountEntity? account = getAccountUseCase(params: accountId);
+    final Account? account = getAccountUseCase(accountId);
     if (account != null) {
       accountName = account.bankName;
       accountHolderName = account.name;
@@ -98,26 +98,24 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
     if (event.isAdding) {
       await addAccountUseCase(
-          params: AddAccount(
         bankName: bankName,
         holderName: holderName,
         number: number ?? '',
         cardType: cardType,
         amount: amount ?? 0,
         color: color,
-      ));
+      );
     } else {
       if (currentAccount == null) return;
-      await updateAccountUseCase(
-          params: UpdateAccount(
-        currentAccount!.superId!,
-        bankName: bankName,
-        holderName: holderName,
-        number: number ?? '',
-        cardType: cardType,
-        amount: amount ?? 0,
-        color: color,
-      ));
+      currentAccount!
+        ..bankName = bankName
+        ..cardType = cardType
+        ..name = holderName
+        ..number = number ?? ''
+        ..amount = amount
+        ..color = color;
+
+      await updateAccountUseCase(account: currentAccount!);
     }
     emit(AccountAddedState(isAddOrUpdate: event.isAdding));
   }
@@ -127,7 +125,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     Emitter<AccountsState> emit,
   ) async {
     await deleteExpensesFromAccountIdUseCase(int.parse(event.accountId));
-    await deleteAccountUseCase(params: int.parse(event.accountId));
+    await deleteAccountUseCase(int.parse(event.accountId));
     emit(AccountDeletedState());
   }
 
@@ -174,7 +172,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
       return;
     }
 
-    final AccountEntity? account = getAccountUseCase(params: accountId);
+    final Account? account = getAccountUseCase(accountId);
     final List<Expense> expenses = getExpensesFromAccountIdUseCase(accountId);
     if (account != null) {
       emit(AccountAndExpensesState(account, expenses));

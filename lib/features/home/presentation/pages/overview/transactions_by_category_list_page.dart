@@ -52,9 +52,9 @@ class TransactionByCategoryListPage extends StatelessWidget {
           shrinkWrap: true,
           itemCount: expenses.length,
           itemBuilder: (BuildContext context, int index) {
-            final AccountEntity? account =
+            final Account? account =
                 summaryController.fetchAccountFromId(expenses[index].accountId);
-            final CategoryEntity? category = summaryController
+            final Category? category = summaryController
                 .fetchCategoryFromId(expenses[index].categoryId);
             if (account == null || category == null) {
               return const SizedBox.shrink();

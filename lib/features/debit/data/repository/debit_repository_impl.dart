@@ -1,15 +1,16 @@
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/enum/debt_type.dart';
-import 'package:paisa/features/debit/data/data_sources/local/debit_local_data_source_impl.dart';
-import 'package:paisa/features/debit/data/models/debit_model.dart';
-import 'package:paisa/features/debit/data/models/debit_transactions_model.dart';
 import 'package:paisa/features/debit/domain/repository/debit_repository.dart';
+
+import '../data_sources/debit_local_data_source.dart';
+import '../models/debit_model.dart';
+import '../models/debit_transactions_model.dart';
 
 @Singleton(as: DebtRepository)
 class DebtRepositoryImpl extends DebtRepository {
   DebtRepositoryImpl({required this.dataSource});
 
-  final LocalDebitDataSource dataSource;
+  final DebtLocalDataSource dataSource;
 
   @override
   Future<void> addDebtOrCredit(

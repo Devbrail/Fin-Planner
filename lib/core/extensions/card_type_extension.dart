@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/core/common.dart';
-import 'package:paisa/core/common_enum.dart';
+import '../common.dart';
+import '../enum/card_type.dart';
 
 extension CardTypeMap on String {
   CardType get type {

@@ -9,8 +9,8 @@ import 'package:paisa/core/extensions/build_context_extension.dart';
 import 'package:paisa/core/extensions/category_extension.dart';
 import 'package:paisa/core/extensions/text_style_extension.dart';
 import 'package:paisa/core/extensions/color_extension.dart';
+import 'package:paisa/features/category/data/data_sources/category_local_data_source.dart';
 import 'package:paisa/features/category/data/data_sources/default_category.dart';
-import 'package:paisa/features/category/data/data_sources/local/category_data_source.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/main.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
@@ -24,7 +24,7 @@ class CategorySelectorPage extends StatefulWidget {
 }
 
 class _CategorySelectorPageState extends State<CategorySelectorPage> {
-  final LocalCategoryDataManager dataSource = getIt.get();
+  final CategoryLocalDataManager dataSource = getIt.get();
   final List<CategoryModel> defaultModels = defaultCategoriesData;
   final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
@@ -121,7 +121,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                     runSpacing: 12.0,
                     children: defaultModels
                         .map((model) => FilterChip(
-                              label: Text(model.name ?? ''),
+                              label: Text(model.name),
                               onSelected: (value) {
                                 dataSource.add(model);
                                 setState(() {
@@ -142,7 +142,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                               padding: const EdgeInsets.all(12),
                               avatar: Icon(
                                 IconData(
-                                  model.icon ?? 0,
+                                  model.icon,
                                   fontFamily: fontFamilyName,
                                   fontPackage: fontFamilyPackageName,
                                 ),
@@ -178,13 +178,13 @@ class CategoryItemWidget extends StatelessWidget {
         onTap: onPress,
         leading: Icon(
           IconData(
-            model.icon ?? 0,
+            model.icon,
             fontFamily: fontFamilyName,
             fontPackage: fontFamilyPackageName,
           ),
           color: Color(model.color ?? Colors.brown.shade200.value),
         ),
-        title: Text(model.name ?? ''),
+        title: Text(model.name),
         trailing: Icon(MdiIcons.delete),
       ),
       tablet: PaisaCard(
@@ -198,7 +198,7 @@ class CategoryItemWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 16.0),
                   child: Icon(
                     IconData(
-                      model.icon ?? 0,
+                      model.icon,
                       fontFamily: fontFamilyName,
                       fontPackage: fontFamilyPackageName,
                     ),
@@ -207,7 +207,7 @@ class CategoryItemWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    model.name ?? '',
+                    model.name,
                     style: context.titleMedium,
                   ),
                 ),

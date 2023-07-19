@@ -7,14 +7,17 @@ import 'package:injectable/injectable.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/enum/recurring_type.dart';
 import 'package:paisa/core/enum/transaction_type.dart';
+import 'package:paisa/features/account/data/model/account_model.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/account/domain/use_case/account_use_case.dart';
+import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
 import 'package:paisa/features/settings/domain/use_case/settings_use_case.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
 import 'package:paisa/features/transaction/domain/entities/expense.dart';
 import 'package:paisa/features/transaction/domain/use_case/expense_use_case.dart';
+import 'package:paisa/features/transaction/domain/use_case/update_expense_use_case.dart';
 
 part 'transaction_event.dart';
 part 'transaction_state.dart';
@@ -59,7 +62,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
   DateTime selectedDate = DateTime.now();
   final SettingsUseCase settingsUseCase;
   TimeOfDay timeOfDay = TimeOfDay.now();
-  AccountEntity? fromAccount, toAccount;
+  Account? fromAccount, toAccount;
   TransactionType transactionType = TransactionType.expense;
   double? transferAmount;
   final UpdateExpensesUseCase updateExpensesUseCase;
@@ -195,7 +198,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
     ChangeTransactionTypeEvent event,
     Emitter<TransactionState> emit,
   ) {
-    final List<AccountEntity> accounts = accountsUseCase();
+    final List<Account> accounts = accountsUseCase();
     if (accounts.isEmpty &&
         accounts.length <= 1 &&
         event.transactionType == TransactionType.transfer) {
@@ -250,7 +253,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
     FetchDefaultCategoryEvent event,
     Emitter<TransactionState> emit,
   ) {
-    final List<CategoryEntity> categories = defaultCategoriesUseCase();
+    final List<Category> categories = defaultCategoriesUseCase();
     emit(DefaultCategoriesState(categories));
   }
 }

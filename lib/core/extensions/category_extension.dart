@@ -4,8 +4,8 @@ import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 
 extension CategoryModelHelper on CategoryModel {
-  CategoryEntity toEntity() {
-    return CategoryEntity(
+  Category toEntity() {
+    return Category(
       icon: icon,
       name: name,
       color: color,
@@ -23,25 +23,25 @@ extension CategoryModelsHelper on Iterable<CategoryModel> {
     return map((e) => e.toJson()).toList();
   }
 
-  Iterable<CategoryModel> sort() =>
-      sorted((a, b) => a.name!.compareTo(b.name!));
-  Iterable<CategoryModel> get filterDefault {
-    return sort()
-        .where((element) => element.isDefault != null)
-        .where((element) => !element.isDefault!);
-  }
+  List<CategoryModel> get onlyDefault =>
+      where((element) => element.isDefault).toList();
 
-  List<CategoryEntity> toEntities() =>
-      sort().map((categoryModel) => categoryModel.toEntity()).toList();
+  Iterable<CategoryModel> get filterDefault =>
+      where((element) => !element.isDefault);
 
-  List<CategoryEntity> toBudgetEntities() => sort()
-      .map((categoryModel) => categoryModel.toEntity())
-      .where((element) => element.isBudget != null)
-      .where((element) => element.isBudget!)
-      .toList();
+  List<Category> toEntities() =>
+      map((categoryModel) => categoryModel.toEntity())
+          .sorted((a, b) => a.name.compareTo(b.name))
+          .toList();
+
+  List<Category> toBudgetEntities() =>
+      map((categoryModel) => categoryModel.toEntity())
+          .where((element) => element.isBudget)
+          .sorted((a, b) => a.name.compareTo(b.name))
+          .toList();
 }
 
-extension CategoryHelper on CategoryEntity {
+extension CategoryHelper on Category {
   Color get foregroundColor => Color(color ?? Colors.amber.shade100.value);
   Color get backgroundColor =>
       Color(color ?? Colors.amber.shade100.value).withOpacity(0.25);

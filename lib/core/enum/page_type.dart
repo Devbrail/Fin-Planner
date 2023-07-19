@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/core/common.dart';
+
+import '../common.dart';
 
 enum PageType {
   home,

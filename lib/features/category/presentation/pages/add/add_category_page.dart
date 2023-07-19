@@ -75,9 +75,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               offset: state.category.budget.toString().length,
             );
 
-            categoryController.text = state.category.name ?? '';
+            categoryController.text = state.category.name;
             categoryController.selection = TextSelection.collapsed(
-              offset: state.category.name?.length ?? 0,
+              offset: state.category.name.length,
             );
 
             descController.text = state.category.description ?? '';
@@ -316,7 +316,7 @@ class _TransferCategoryWidgetState extends State<TransferCategoryWidget> {
       builder: (context, state) {
         return SwitchListTile(
           title: Text(context.loc.transferCategory),
-          value: BlocProvider.of<CategoryBloc>(context).isDefault ?? false,
+          value: BlocProvider.of<CategoryBloc>(context).isDefault,
           onChanged: (value) {
             setState(() {
               BlocProvider.of<CategoryBloc>(context).isDefault = value;

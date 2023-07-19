@@ -1,26 +1,12 @@
 import 'package:collection/collection.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/features/account/data/model/account_model.dart';
 
-abstract class LocalAccountDataManager {
-  Future<void> add(AccountModel account);
+import '../model/account_model.dart';
+import 'local_account_data_manager.dart';
 
-  Future<void> delete(int key);
-
-  List<AccountModel> accounts();
-
-  AccountModel? findById(int accountId);
-
-  Iterable<AccountModel> export();
-
-  Future<void> update(AccountModel accountModel);
-
-  Future<void> clear();
-}
-
-@Singleton(as: LocalAccountDataManager)
-class LocalAccountDataManagerImpl implements LocalAccountDataManager {
+@Singleton(as: AccountLocalDataManager)
+class LocalAccountDataManagerImpl implements AccountLocalDataManager {
   LocalAccountDataManagerImpl({
     required this.accountBox,
   });
@@ -34,7 +20,7 @@ class LocalAccountDataManagerImpl implements LocalAccountDataManager {
   Future<void> add(AccountModel account) async {
     final int id = await accountBox.add(account);
     account.superId = id;
-    return account.save();
+    return await account.save();
   }
 
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/core/common.dart';
-import 'package:paisa/features/category/domain/entities/category.dart';
+import 'package:paisa/features/category/data/model/category_model.dart';
 
 class CategoryItemMobileWidget extends StatelessWidget {
   const CategoryItemMobileWidget({
@@ -10,7 +10,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
     required this.category,
   }) : super(key: key);
 
-  final CategoryEntity category;
+  final CategoryModel category;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
               .withOpacity(0.3),
           child: Icon(
             IconData(
-              category.icon ?? 0,
+              category.icon,
               fontFamily: fontFamilyName,
               fontPackage: fontFamilyPackageName,
             ),
@@ -34,15 +34,14 @@ class CategoryItemMobileWidget extends StatelessWidget {
           ),
         ),
         title: Text(
-          category.name ?? '',
+          category.name,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: context.titleMedium?.copyWith(
             color: context.onSurfaceVariant,
           ),
         ),
-        trailing:
-            category.isDefault ?? false ? Icon(MdiIcons.swapHorizontal) : null,
+        trailing: category.isDefault ? Icon(MdiIcons.swapHorizontal) : null,
         subtitle: category.description == null || category.description == ''
             ? null
             : Text(

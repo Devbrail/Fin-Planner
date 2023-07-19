@@ -63,7 +63,7 @@ class SelectDefaultCategoryWidget extends StatelessWidget {
     super.key,
     required this.categories,
   });
-  final List<CategoryEntity> categories;
+  final List<Category> categories;
 
   @override
   Widget build(BuildContext context) {
@@ -88,15 +88,15 @@ class SelectDefaultCategoryWidget extends StatelessWidget {
                     titleColor: context.primary,
                   );
                 } else {
-                  final CategoryEntity category = categories[index - 1];
+                  final Category category = categories[index - 1];
                   final bool selected =
                       category.superId == expenseBloc.selectedCategoryId;
                   return CategoryChip(
                     selected: selected,
                     onSelected: (value) =>
                         expenseBloc.add(ChangeCategoryEvent(category)),
-                    icon: category.icon ?? 0,
-                    title: category.name ?? '',
+                    icon: category.icon,
+                    title: category.name,
                     titleColor: Color(category.color ?? context.primary.value),
                     iconColor: Color(category.color ?? context.primary.value),
                   );

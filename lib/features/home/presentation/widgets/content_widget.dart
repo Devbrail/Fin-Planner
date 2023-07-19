@@ -8,11 +8,10 @@ import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
 import 'package:paisa/features/home/presentation/cubit/overview/overview_cubit.dart';
 import 'package:paisa/features/home/presentation/pages/budget/budget_page.dart';
 import 'package:paisa/features/home/presentation/pages/overview/overview_page.dart';
+import 'package:paisa/features/home/presentation/pages/summary/summary_page.dart';
 import 'package:paisa/features/recurring/presentation/page/recurring_page.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 import 'package:provider/provider.dart';
-
-import '../pages/summary/summary_page.dart';
 
 class ContentWidget extends StatelessWidget {
   const ContentWidget({

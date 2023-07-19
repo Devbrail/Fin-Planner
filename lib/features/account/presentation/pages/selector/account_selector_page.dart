@@ -3,16 +3,18 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
+import 'package:paisa/core/constants/constants.dart';
 import 'package:paisa/core/enum/card_type.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:paisa/features/account/data/data_sources/default_account.dart';
-import 'package:paisa/features/account/data/data_sources/local/account_data_manager.dart';
+import 'package:paisa/features/account/data/data_sources/local_account_data_manager.dart';
 import 'package:paisa/features/account/data/model/account_model.dart';
-import 'package:paisa/main.dart';
 
 import 'package:responsive_builder/responsive_builder.dart';
+
+import '../../../../../main.dart';
+import '../../../../../config/routes.dart';
 
 class AccountSelectorPage extends StatefulWidget {
   const AccountSelectorPage({super.key});
@@ -22,7 +24,7 @@ class AccountSelectorPage extends StatefulWidget {
 }
 
 class _AccountSelectorPageState extends State<AccountSelectorPage> {
-  final LocalAccountDataManager dataSource = getIt.get();
+  final AccountLocalDataManager dataSource = getIt.get();
   final List<AccountModel> defaultModels = defaultAccountsData();
 
   Future<void> saveAndNavigate() async {
@@ -137,7 +139,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                               showCheckmark: false,
                               materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap,
-                              label: Text(model.bankName ?? ''),
+                              label: Text(model.bankName),
                               labelStyle: context.titleMedium,
                               padding: const EdgeInsets.all(12),
                               avatar: Icon(
@@ -176,7 +178,7 @@ class AccountItemWidget extends StatelessWidget {
           model.cardType!.icon,
           color: Color(model.color ?? Colors.brown.shade200.value),
         ),
-        title: Text(model.name ?? ''),
+        title: Text(model.name),
         trailing: Icon(MdiIcons.delete),
       ),
       tablet: PaisaCard(
@@ -195,7 +197,7 @@ class AccountItemWidget extends StatelessWidget {
                 ),
                 Expanded(
                     child: Text(
-                  model.name ?? '',
+                  model.name,
                   style: context.titleMedium,
                 )),
               ],

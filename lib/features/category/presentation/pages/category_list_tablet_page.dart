@@ -15,7 +15,7 @@ class CategoryListTabletWidget extends StatelessWidget {
   }) : super(key: key);
 
   final CategoryBloc addCategoryBloc;
-  final List<CategoryEntity> categories;
+  final List<Category> categories;
   final int crossAxisCount;
 
   @override

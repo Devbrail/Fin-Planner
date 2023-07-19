@@ -35,7 +35,7 @@ class FetchAccountAndExpenseFromIdEvent extends AccountsEvent {
 class AccountSelectedEvent extends AccountsEvent {
   const AccountSelectedEvent(this.account);
 
-  final AccountEntity account;
+  final Account account;
 
   @override
   List<Object> get props => [account];

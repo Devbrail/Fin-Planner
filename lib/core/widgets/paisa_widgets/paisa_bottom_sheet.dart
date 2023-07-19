@@ -6,8 +6,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/features/settings/domain/use_case/setting_use_case.dart';
 
+import '../../../main.dart';
 import 'package:paisa/core/common.dart';
-import 'package:paisa/main.dart';
 
 enum UserMenuPopup { debts, chooseTheme, settings, userDetails }
 

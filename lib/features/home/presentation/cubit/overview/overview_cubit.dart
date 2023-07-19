@@ -24,7 +24,7 @@ class OverviewCubit extends Cubit<BudgetState> {
   String? selectedTime;
 
   List<String> _filterTimes = [];
-  final List<CategoryEntity> _defaultCategories = [];
+  final List<Category> _defaultCategories = [];
   Map<String, List<Expense>> _groupedExpenses = {};
 
   void fetchBudgetSummary(List<Expense> expenses, FilterExpense filterExpense) {
@@ -49,11 +49,11 @@ class OverviewCubit extends Cubit<BudgetState> {
 
   void fetchSelectedTimeExpenses(String time) {
     final List<Expense> selectedTimeExpenses = _groupedExpenses[time] ?? [];
-    final Map<CategoryEntity, List<Expense>> categoryGroupedExpenses =
+    final Map<Category, List<Expense>> categoryGroupedExpenses =
         groupBy(selectedTimeExpenses, (Expense expense) {
       return getCategoryUseCase(expense.categoryId) ?? _defaultCategories.first;
     });
-    final List<MapEntry<CategoryEntity, List<Expense>>> mapExpenses =
+    final List<MapEntry<Category, List<Expense>>> mapExpenses =
         categoryGroupedExpenses.entries.toList().sorted(
             (a, b) => b.value.totalExpense.compareTo(a.value.totalExpense));
     emit(FilteredCategoryListState(
@@ -89,7 +89,7 @@ class InitialSelectedState extends BudgetState {
 class FilteredCategoryListState extends BudgetState {
   const FilteredCategoryListState(this.categoryGrouped, this.totalExpense);
 
-  final List<MapEntry<CategoryEntity, List<Expense>>> categoryGrouped;
+  final List<MapEntry<Category, List<Expense>>> categoryGrouped;
   final double totalExpense;
 }
 

@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
-
-import '../repository/expense_repository.dart';
+import 'package:paisa/features/transaction/domain/repository/expense_repository.dart';
 
 @singleton
 class DeleteExpensesFromAccountIdUseCase {

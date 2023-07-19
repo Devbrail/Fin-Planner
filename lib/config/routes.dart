@@ -30,53 +30,48 @@ import 'package:paisa/features/intro/user_onboarding_page.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 import 'package:provider/provider.dart';
 
-final Box<dynamic> settings = Hive.box(BoxType.settings.name);
+final settings = Hive.box(BoxType.settings.name);
 
 final GoRouter goRouter = GoRouter(
   initialLocation: introPagePath,
-  observers: <NavigatorObserver>[HeroController()],
+  observers: [HeroController()],
   refreshListenable: settings.listenable(),
   debugLogDiagnostics: true,
-  routes: <RouteBase>[
+  routes: [
     GoRoute(
       name: introPageName,
       path: introPagePath,
-      builder: (BuildContext context, GoRouterState state) {
-        return const IntroPage();
-      },
+      builder: (context, state) => const IntroPage(),
     ),
     GoRoute(
       name: categorySelectorName,
       path: categorySelectorPath,
-      builder: (BuildContext context, GoRouterState state) =>
-          const CategorySelectorPage(),
+      builder: (context, state) => const CategorySelectorPage(),
     ),
     GoRoute(
       name: accountSelectorName,
       path: accountSelectorPath,
-      builder: (BuildContext context, GoRouterState state) =>
-          const AccountSelectorPage(),
+      builder: (context, state) => const AccountSelectorPage(),
     ),
     GoRoute(
       name: userOnboardingName,
       path: userOnboardingPath,
-      builder: (BuildContext context, GoRouterState state) =>
-          UserOnboardingPage(settings: settings),
+      builder: (context, state) => UserOnboardingPage(settings: settings),
     ),
     GoRoute(
       name: loginName,
       path: loginPath,
-      builder: (BuildContext context, GoRouterState state) =>
+      builder: (context, state) =>
           const Center(child: CircularProgressIndicator()),
     ),
     GoRoute(
       name: countrySelectorName,
       path: countrySelectorPath,
-      builder: (BuildContext context, GoRouterState state) {
-        final String? forceCountrySelector =
+      builder: (context, state) {
+        final forceCountrySelector =
             state.queryParameters['force_country_selector'];
-        return BlocProvider<CountryPickerCubit>(
-          create: (BuildContext context) => getIt.get<CountryPickerCubit>(),
+        return BlocProvider(
+          create: (context) => getIt.get<CountryPickerCubit>(),
           child: CountryPickerPage(
             forceCountrySelector: forceCountrySelector == 'true',
           ),
@@ -86,27 +81,25 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: biometricName,
       path: biometricPath,
-      builder: (BuildContext context, GoRouterState state) =>
-          const BiometricPage(),
+      builder: (context, state) => const BiometricPage(),
     ),
     GoRoute(
       name: landingName,
       path: landingPath,
-      builder: (BuildContext context, GoRouterState state) =>
-          LandingPage(inApp: getIt.get<InApp>()),
+      builder: (context, state) => LandingPage(inApp: getIt.get<InApp>()),
       routes: [
         GoRoute(
           path: addTransactionPath,
           name: addTransactionsName,
-          pageBuilder: (BuildContext context, GoRouterState state) {
+          pageBuilder: (context, state) {
             final String? transactionTypeString = state.queryParameters['type'];
             final String? accountId = state.queryParameters['aid'];
             final String? categoryId = state.queryParameters['cid'];
             final int typeInt = int.tryParse(transactionTypeString ?? '') ?? 0;
             final TransactionType transactionType =
                 TransactionType.values[typeInt];
-            return MaterialPage<dynamic>(
-              key: ValueKey<String>(state.location),
+            return MaterialPage(
+              key: ValueKey(state.location),
               child: TransactionPage(
                 accountId: accountId,
                 categoryId: categoryId,
@@ -118,67 +111,53 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: editTransactionsName,
           path: editTransactionsPath,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return MaterialPage<dynamic>(
-              key: ValueKey<String>(state.location),
-              child: TransactionPage(
-                expenseId: state.pathParameters['eid'],
-              ),
-            );
-          },
+          pageBuilder: (context, state) => MaterialPage(
+            key: ValueKey(state.location),
+            child: TransactionPage(
+              expenseId: state.pathParameters['eid'],
+            ),
+          ),
         ),
         GoRoute(
           name: addCategoryName,
           path: addCategoryPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return const AddCategoryPage();
-          },
+          builder: (context, state) => const AddCategoryPage(),
           routes: [
             GoRoute(
               path: iconPickerPath,
               name: iconPickerName,
-              builder: (BuildContext context, GoRouterState state) {
-                return const CategoryIconPickerPage();
-              },
+              builder: (context, state) => const CategoryIconPickerPage(),
             )
           ],
         ),
         GoRoute(
           name: editCategoryName,
           path: editCategoryPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return AddCategoryPage(
-              categoryId: state.pathParameters['cid'],
-            );
-          },
+          builder: (context, state) => AddCategoryPage(
+            categoryId: state.pathParameters['cid'],
+          ),
         ),
         GoRoute(
           name: manageCategoriesName,
           path: manageCategoriesPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return const CategoryListPage();
-          },
+          builder: (context, state) => const CategoryListPage(),
         ),
         GoRoute(
           name: addAccountName,
           path: addAccountPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return const AddAccountPage();
-          },
+          builder: (context, state) => const AddAccountPage(),
         ),
         GoRoute(
           name: editAccountName,
           path: editAccountPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return AddAccountPage(
-              accountId: state.pathParameters['aid'],
-            );
-          },
+          builder: (context, state) => AddAccountPage(
+            accountId: state.pathParameters['aid'],
+          ),
         ),
         GoRoute(
           name: accountTransactionName,
           path: accountTransactionPath,
-          builder: (BuildContext context, GoRouterState state) {
+          builder: (context, state) {
             final String accountId = state.pathParameters['aid'] as String;
             return AccountTransactionsPage(
               accountId: accountId,
@@ -189,7 +168,7 @@ final GoRouter goRouter = GoRouter(
             GoRoute(
               name: editAccountWithIdName,
               path: editAccountWithIdPath,
-              builder: (BuildContext context, GoRouterState state) {
+              builder: (context, state) {
                 final String? accountId = state.pathParameters['aid'];
                 return AddAccountPage(
                   accountId: accountId,
@@ -199,7 +178,7 @@ final GoRouter goRouter = GoRouter(
             GoRoute(
               path: addAccountWithIdPath,
               name: addAccountWithIdName,
-              pageBuilder: (BuildContext context, GoRouterState state) {
+              pageBuilder: (context, state) {
                 final String? transactionTypeString =
                     state.queryParameters['type'];
                 final String? accountId = state.queryParameters['aid'];
@@ -207,8 +186,8 @@ final GoRouter goRouter = GoRouter(
                     int.tryParse(transactionTypeString ?? '') ?? 0;
                 final TransactionType transactionType =
                     TransactionType.values[typeInt];
-                return MaterialPage<dynamic>(
-                  key: ValueKey<String>(state.location),
+                return MaterialPage(
+                  key: ValueKey(state.location),
                   child: TransactionPage(
                     accountId: accountId,
                     transactionType: transactionType,
@@ -221,78 +200,60 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: expensesByCategoryName,
           path: expensesByCategoryPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return TransactionByCategoryListPage(
-              categoryId: state.pathParameters['cid'] as String,
-              summaryController: Provider.of<SummaryController>(context),
-            );
-          },
+          builder: (context, state) => TransactionByCategoryListPage(
+            categoryId: state.pathParameters['cid'] as String,
+            summaryController: Provider.of<SummaryController>(context),
+          ),
         ),
         GoRoute(
           name: addDebitName,
           path: addDebitPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return const AddOrEditDebtPage();
-          },
+          builder: (context, state) => const AddOrEditDebtPage(),
         ),
         GoRoute(
           name: debtAddOrEditName,
           path: debtAddOrEditPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return AddOrEditDebtPage(
-              debtId: state.pathParameters['did'],
-            );
-          },
+          builder: (context, state) => AddOrEditDebtPage(
+            debtId: state.pathParameters['did'],
+          ),
         ),
         GoRoute(
           name: searchName,
           path: searchPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return const SearchPage();
-          },
+          builder: (context, state) => const SearchPage(),
         ),
         GoRoute(
           name: recurringTransactionsName,
           path: recurringTransactionsPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return const RecurringPage();
-          },
+          builder: (context, state) => const RecurringPage(),
           routes: [
             GoRoute(
               name: recurringName,
               path: recurringPath,
-              builder: (BuildContext context, GoRouterState state) {
-                return const AddRecurringPage();
-              },
+              builder: (context, state) => const AddRecurringPage(),
             ),
           ],
         ),
         GoRoute(
           name: settingsName,
           path: settingsPath,
-          builder: (BuildContext context, GoRouterState state) {
-            return SettingsPage(settings: settings);
-          },
+          builder: (context, state) => SettingsPage(settings: settings),
           routes: [
             GoRoute(
               name: exportAndImportName,
               path: exportAndImportPath,
-              builder: (BuildContext context, GoRouterState state) {
-                return const ExportAndImportPage();
-              },
+              builder: (context, state) => const ExportAndImportPage(),
             ),
           ],
         ),
       ],
     ),
   ],
-  errorBuilder: (BuildContext context, GoRouterState state) {
-    return Center(
-      child: Text(state.error.toString()),
-    );
-  },
-  redirect: (_, GoRouterState state) async {
-    final bool isLogging = state.location == introPagePath;
+  errorBuilder: (context, state) => Center(
+    child: Text(state.error.toString()),
+  ),
+  redirect: (_, state) async {
+    final isLogging = state.location == introPagePath;
     bool isIntroDone = settings.get(userIntroKey, defaultValue: false);
     if (!isIntroDone) {
       return introPagePath;

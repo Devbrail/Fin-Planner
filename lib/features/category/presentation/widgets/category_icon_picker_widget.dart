@@ -23,7 +23,7 @@ class CategoryIconPickerWidget extends StatelessWidget {
           codePoint = state.categoryIcon;
         }
         if (state is CategorySuccessState) {
-          codePoint = state.category.icon ?? 0;
+          codePoint = state.category.icon;
         }
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
