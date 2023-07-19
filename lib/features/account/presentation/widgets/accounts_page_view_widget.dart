@@ -17,7 +17,7 @@ class AccountPageViewWidget extends StatefulWidget {
     required this.accounts,
   }) : super(key: key);
 
-  final List<Account> accounts;
+  final List<AccountEntity> accounts;
 
   @override
   State<AccountPageViewWidget> createState() => _AccountPageViewWidgetState();
@@ -54,7 +54,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
                 return BlocBuilder<AccountsBloc, AccountsState>(
                   builder: (context, state) {
                     if (state is AccountSelectedState) {
-                      final Account account = widget.accounts[index];
+                      final AccountEntity account = widget.accounts[index];
                       final String expense = state.expenses.totalExpense
                           .toFormateCurrency(context);
                       final String income =
@@ -67,8 +67,8 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
                         expense: expense,
                         income: income,
                         totalBalance: totalBalance,
-                        cardHolder: account.name,
-                        bankName: account.bankName,
+                        cardHolder: account.name ?? '',
+                        bankName: account.bankName ?? '',
                         cardType: account.cardType ?? CardType.bank,
                         onDelete: () {
                           paisaAlertDialog(
@@ -135,7 +135,7 @@ class AccountPageViewDotsIndicator extends StatelessWidget {
     required this.accounts,
   });
 
-  final List<Account> accounts;
+  final List<AccountEntity> accounts;
   final PageController pageController;
 
   Widget _indicator(BuildContext context, bool isActive) {

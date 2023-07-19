@@ -77,7 +77,7 @@ class AccountSelectedItem extends StatelessWidget {
     required this.accounts,
   }) : super(key: key);
 
-  final List<Account> accounts;
+  final List<AccountEntity> accounts;
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +105,13 @@ class AccountSelectedItem extends StatelessWidget {
                   onPressed: () => context.pushNamed(addAccountPath),
                 );
               } else {
-                final Account account = accounts[index - 1];
+                final AccountEntity account = accounts[index - 1];
                 return ItemWidget(
                   color: Color(account.color ?? context.primary.value),
                   selected: account.superId ==
                       BlocProvider.of<TransactionBloc>(context)
                           .selectedAccountId,
-                  title: account.name,
+                  title: account.name ?? '',
                   icon: account.cardType!.icon.codePoint,
                   onPressed: () => BlocProvider.of<TransactionBloc>(context)
                       .add(ChangeAccountEvent(account)),

@@ -39,7 +39,7 @@ class CategoryErrorState extends CategoryState {
 class CategorySuccessState extends CategoryState {
   const CategorySuccessState(this.category);
 
-  final CategoryModel category;
+  final CategoryEntity category;
 
   @override
   List<Object?> get props => [category];

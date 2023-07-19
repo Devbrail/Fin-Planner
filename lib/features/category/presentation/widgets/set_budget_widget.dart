@@ -25,7 +25,7 @@ class SetBudgetWidget extends StatelessWidget {
       builder: (context, state) {
         bool budget = false;
         if (state is CategorySuccessState) {
-          budget = BlocProvider.of<CategoryBloc>(context).isBudgetSet;
+          budget = BlocProvider.of<CategoryBloc>(context).isBudgetSet ?? false;
         }
         if (state is UpdateCategoryBudgetState) {
           budget = state.isBudget;

@@ -29,9 +29,9 @@ class ExpenseListWidget extends StatelessWidget {
       itemCount: expenses.length,
       itemBuilder: (_, index) {
         final Expense expense = expenses[index];
-        final Account? account =
+        final AccountEntity? account =
             summaryController.fetchAccountFromId(expense.accountId);
-        final Category? category =
+        final CategoryEntity? category =
             summaryController.fetchCategoryFromId(expense.categoryId);
         if (account == null || category == null) {
           return const SizedBox.shrink();

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paisa/core/common.dart';
+import 'package:paisa/core/common_enum.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-
-import '../../../../core/common.dart';
-import '../../../../core/enum/card_type.dart';
 
 class AccountCard extends StatefulWidget {
   const AccountCard({

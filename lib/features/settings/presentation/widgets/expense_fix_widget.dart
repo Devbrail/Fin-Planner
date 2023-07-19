@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:paisa/core/common.dart';
-import 'package:paisa/features/settings/presentation/cubit/settings_cubit.dart';
+import '../cubit/settings_cubit.dart';
 
 class FixExpenseWidget extends StatelessWidget {
   const FixExpenseWidget({super.key});

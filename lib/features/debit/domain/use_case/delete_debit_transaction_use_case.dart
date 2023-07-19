@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:paisa/features/debit/domain/repository/debit_repository.dart';
+
+import '../repository/debit_repository.dart';
 
 @singleton
 class DeleteTransactionUseCase {

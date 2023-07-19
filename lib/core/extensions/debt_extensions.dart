@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:paisa/features/debit/data/models/debit_model.dart';
 import 'package:paisa/features/debit/domain/entities/debit.dart';
 
-import '../common.dart';
-import '../enum/debt_type.dart';
+import 'package:paisa/core/common.dart';
+import 'package:paisa/core/common_enum.dart';
 
 extension DebtTypeHelper on DebtType {
   String stringValue(BuildContext context) {

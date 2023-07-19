@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/features/category/data/model/category_model.dart';
+import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'category_item_mobile_widget.dart';
@@ -12,7 +12,7 @@ class CategoryItemWidget extends StatelessWidget {
     required this.onPressed,
   }) : super(key: key);
 
-  final CategoryModel category;
+  final CategoryEntity category;
   final VoidCallback onPressed;
 
   @override

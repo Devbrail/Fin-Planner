@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
-
-import '../repository/debit_repository.dart';
+import 'package:paisa/features/debit/domain/repository/debit_repository.dart';
 
 @singleton
 class AddTransactionUseCase {

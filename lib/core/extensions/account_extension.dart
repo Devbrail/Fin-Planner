@@ -5,8 +5,7 @@ import 'package:paisa/features/account/domain/entities/account.dart';
 
 extension AccountModelMapping on AccountModel {
   double get initialAmount => amount ?? 0;
-
-  Account toEntity() => Account(
+  AccountEntity toEntity() => AccountEntity(
         amount: amount,
         bankName: bankName,
         cardType: cardType,
@@ -22,14 +21,14 @@ extension AccountModelsMapping on Iterable<AccountModel> {
     return map((e) => e.toJson()).toList();
   }
 
-  List<Account> toEntities() =>
+  List<AccountEntity> toEntities() =>
       map((accountModel) => accountModel.toEntity()).toList();
 }
 
 extension AccountBoxMapping on Box<AccountModel> {
-  List<Account> toEntities() => values
+  List<AccountEntity> toEntities() => values
       .map((accountModel) => accountModel.toEntity())
-      .sorted((a, b) => b.name.compareTo(a.name))
+      .sorted((a, b) => b.name!.compareTo(a.name!))
       .toList();
 
   double get totalAccountInitialAmount =>
@@ -38,4 +37,8 @@ extension AccountBoxMapping on Box<AccountModel> {
           .map((accountId) => get(accountId)!)
           .map((account) => account.initialAmount)
           .fold<double>(0, (previousValue, element) => previousValue + element);
+}
+
+extension AccountEntityHelper on AccountEntity {
+  double get initialAmount => amount ?? 0;
 }

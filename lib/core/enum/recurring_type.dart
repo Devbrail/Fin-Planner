@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-
-import '../common.dart';
+import 'package:paisa/core/common.dart';
 
 part 'recurring_type.g.dart';
 
