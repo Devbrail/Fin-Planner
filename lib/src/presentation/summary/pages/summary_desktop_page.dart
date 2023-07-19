@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/features/transaction/domain/entities/expense.dart';
 
-import '../../../domain/expense/entities/expense.dart';
 import '../widgets/expense_history_widget.dart';
 import '../widgets/expense_total_widget.dart';
 import '../widgets/welcome_name_widget.dart';

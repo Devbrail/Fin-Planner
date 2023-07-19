@@ -1,0 +1,14 @@
+import 'package:paisa/features/category/data/model/category_model.dart';
+
+class Category extends CategoryModel {
+  Category({
+    required super.icon,
+    required super.name,
+    required super.color,
+    super.description,
+    super.isBudget = false,
+    super.budget = -1,
+    super.superId,
+    super.isDefault,
+  });
+}

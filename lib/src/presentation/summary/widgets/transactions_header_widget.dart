@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../../core/extensions/filter_expense_extension.dart';
 import '../controller/summary_controller.dart';

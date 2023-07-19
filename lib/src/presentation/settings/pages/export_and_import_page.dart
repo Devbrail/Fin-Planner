@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';
 import '../cubit/settings_cubit.dart';
 import '../widgets/settings_group_card.dart';

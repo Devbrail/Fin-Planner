@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../widgets/paisa_empty_widget.dart';

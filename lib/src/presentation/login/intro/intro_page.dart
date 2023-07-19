@@ -3,7 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../main.dart';
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../widgets/lava/lava_clock.dart';
 import '../../widgets/paisa_annotate_region_widget.dart';

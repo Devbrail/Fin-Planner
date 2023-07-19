@@ -6,8 +6,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../main.dart';
-import '../../../app/routes.dart';
-import '../../../core/common.dart';
+import '../../../../config/routes.dart';
+import 'package:paisa/core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../core/enum/theme_mode.dart';
 import '../../../data/settings/authenticate.dart';

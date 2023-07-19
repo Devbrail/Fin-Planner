@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 
 class IntroSetNameWidget extends StatelessWidget {
   const IntroSetNameWidget({

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../../core/error/failures.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../../domain/category/use_case/category_use_case.dart';

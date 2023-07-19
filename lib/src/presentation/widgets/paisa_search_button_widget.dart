@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/routes.dart';
+import '../../../config/routes.dart';
 import '../../core/common.dart';
 
 class PaisaSearchButtonWidget extends StatelessWidget {

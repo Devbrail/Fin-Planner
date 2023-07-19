@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../../core/theme/custom_color.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../controller/summary_controller.dart';

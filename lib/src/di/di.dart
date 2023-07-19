@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:quick_actions/quick_actions.dart';
 
-import '../app/routes.dart';
+import '../../config/routes.dart';
 import 'di.config.dart';
 import 'module/hive_module.dart';
 

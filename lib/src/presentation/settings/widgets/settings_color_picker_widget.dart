@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../widgets/future_resolve.dart';
 import '../../widgets/paisa_color_picker.dart';
 import 'dynamic_color_switch_widget.dart';

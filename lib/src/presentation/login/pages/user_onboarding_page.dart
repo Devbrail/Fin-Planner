@@ -4,8 +4,8 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../app/routes.dart';
-import '../../../core/common.dart';
+import '../../../../config/routes.dart';
+import 'package:paisa/core/common.dart';
 import '../widgets/intro_image_picker_widget.dart';
 import '../widgets/intro_set_name_widget.dart';
 

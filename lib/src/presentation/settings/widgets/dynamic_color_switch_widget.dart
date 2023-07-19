@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import 'setting_option.dart';
 
 class DynamicColorSwitchWidget extends StatelessWidget {

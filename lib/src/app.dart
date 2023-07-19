@@ -5,20 +5,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:paisa/config/routes.dart';
+import 'package:paisa/core/common.dart';
+import 'package:paisa/core/theme/paisa_theme.dart';
+import 'package:paisa/features/account/presentation/bloc/accounts_bloc.dart';
+import 'package:paisa/features/currency_picker/data/models/country_model.dart';
+import 'package:paisa/features/currency_picker/domain/entities/country.dart';
+import 'package:paisa/main.dart';
+import 'package:paisa/src/presentation/home/bloc/home_bloc.dart';
+import 'package:paisa/features/landing/presentation/cubit/overview/overview_cubit.dart';
+import 'package:paisa/src/presentation/settings/cubit/settings_cubit.dart';
+import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
 import 'package:provider/provider.dart';
-
-import '../main.dart';
-import 'app/routes.dart';
-import 'core/common.dart';
-import 'core/extensions/country_extension.dart';
-import 'core/theme/paisa_theme.dart';
-import 'data/currencies/models/country_model.dart';
-import 'domain/currencies/entities/country.dart';
-import 'presentation/accounts/bloc/accounts_bloc.dart';
-import 'presentation/home/bloc/home_bloc.dart';
-import 'presentation/overview/cubit/budget_cubit.dart';
-import 'presentation/settings/cubit/settings_cubit.dart';
-import 'presentation/summary/controller/summary_controller.dart';
 
 class PaisaApp extends StatefulWidget {
   const PaisaApp({Key? key, required this.settingsListenable})
@@ -43,7 +41,7 @@ class _PaisaAppState extends State<PaisaApp> {
           create: (context) => getIt.get<HomeBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt.get<BudgetCubit>(),
+          create: (context) => getIt.get<OverviewCubit>(),
         ),
         Provider(
           create: (context) => getIt.get<SummaryController>(),

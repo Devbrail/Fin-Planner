@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../../main.dart';
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../../core/enum/box_types.dart';
 
 class WelcomeNameWidget extends StatelessWidget {

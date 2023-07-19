@@ -7,8 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../app/routes.dart';
-import '../../../core/common.dart';
+import '../../../../config/routes.dart';
+import 'package:paisa/core/common.dart';
 import '../../../core/error/exceptions.dart';
 import '../../../domain/settings/repository/import_export.dart';
 import '../../../presentation/settings/cubit/settings_cubit.dart';

@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:paisa/main.dart';
 import 'package:paisa/src/presentation/profile/cubit/profile_cubit.dart';
 
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../widgets/paisa_user_image_widget.dart';
 
 class IntroImagePickerWidget extends StatelessWidget {

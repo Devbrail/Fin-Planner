@@ -5,7 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 
 import '../../../../main.dart';
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../data/category/model/category_model.dart';

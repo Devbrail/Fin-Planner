@@ -3,7 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../main.dart';
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../../core/enum/box_types.dart';
 
 class SmallSizeFabWidget extends StatefulWidget {

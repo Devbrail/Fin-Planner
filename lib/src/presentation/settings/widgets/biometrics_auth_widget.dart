@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../main.dart';
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../../data/settings/authenticate.dart';
 import '../../../domain/settings/use_case/setting_use_case.dart';
 import '../../widgets/future_resolve.dart';

@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:paisa/core/enum/card_type.dart';
+import 'package:paisa/core/enum/transaction_type.dart';
+import 'package:paisa/features/account/domain/repository/account_repository.dart';
+import 'package:paisa/features/category/domain/repository/category_repository.dart';
 
 import '../../../main.dart';
-import '../../core/enum/card_type.dart';
-import '../../core/enum/transaction_type.dart';
-import '../../domain/account/repository/account_repository.dart';
-import '../../domain/category/repository/category_repository.dart';
 import '../../domain/expense/repository/expense_repository.dart';
 
 // Generate dummy data

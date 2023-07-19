@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../main.dart';
-import '../../../app/routes.dart';
-import '../../../core/common.dart';
+import '../../../../config/routes.dart';
+import 'package:paisa/core/common.dart';
 import '../../../domain/settings/use_case/setting_use_case.dart';
 
 class CurrencyChangeWidget extends StatelessWidget {

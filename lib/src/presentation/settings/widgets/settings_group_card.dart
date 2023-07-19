@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 
 class SettingsGroup extends StatelessWidget {
   const SettingsGroup({

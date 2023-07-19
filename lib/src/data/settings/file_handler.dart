@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../app/routes.dart';
+import '../../../config/routes.dart';
 import '../../core/common.dart';
 import '../../core/error/exceptions.dart';
 import '../../presentation/settings/cubit/settings_cubit.dart';

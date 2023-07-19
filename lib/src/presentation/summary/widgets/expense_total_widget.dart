@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../../main.dart';
-import '../../../core/common.dart';
+import 'package:paisa/core/common.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../accounts/widgets/account_summary_widget.dart';
