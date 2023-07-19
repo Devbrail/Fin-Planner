@@ -1,12 +1,28 @@
 import 'package:collection/collection.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/features/category/data/model/category_model.dart';
 
-import '../model/category_model.dart';
-import 'category_local_data_source.dart';
+abstract class LocalCategoryDataManager {
+  Future<void> add(CategoryModel category);
 
-@Singleton(as: CategoryLocalDataManager)
-class LocalCategoryManagerDataSourceImpl implements CategoryLocalDataManager {
+  Future<void> delete(int key);
+
+  Future<List<CategoryModel>> categories();
+
+  CategoryModel? findById(int categoryId);
+
+  Iterable<CategoryModel> export();
+
+  Future<void> update(CategoryModel categoryModel);
+
+  Future<void> clear();
+
+  List<CategoryModel> defaultCategories();
+}
+
+@Singleton(as: LocalCategoryDataManager)
+class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
   LocalCategoryManagerDataSourceImpl(this.categoryBox);
 
   final Box<CategoryModel> categoryBox;
@@ -20,7 +36,10 @@ class LocalCategoryManagerDataSourceImpl implements CategoryLocalDataManager {
 
   @override
   Future<List<CategoryModel>> categories() async {
-    return categoryBox.values.where((element) => !element.isDefault).toList();
+    return categoryBox.values
+        .where((element) => element.isDefault != null)
+        .where((element) => !element.isDefault!)
+        .toList();
   }
 
   @override
@@ -28,7 +47,10 @@ class LocalCategoryManagerDataSourceImpl implements CategoryLocalDataManager {
 
   @override
   List<CategoryModel> defaultCategories() {
-    return categoryBox.values.where((element) => element.isDefault).toList();
+    return categoryBox.values
+        .where((element) => element.isDefault != null)
+        .where((element) => element.isDefault!)
+        .toList();
   }
 
   @override

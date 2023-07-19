@@ -1,12 +1,15 @@
 import 'package:injectable/injectable.dart';
-
-import '../repository/account_repository.dart';
+import 'package:paisa/core/use_case/use_case.dart';
+import 'package:paisa/features/account/domain/repository/account_repository.dart';
 
 @singleton
-class DeleteAccountUseCase {
+class DeleteAccountUseCase extends UseCase<Future<void>, int> {
   DeleteAccountUseCase({required this.accountRepository});
 
   final AccountRepository accountRepository;
 
-  Future<void> call(int key) async => accountRepository.deleteAccount(key);
+  @override
+  Future<void> call({int? params}) {
+    return accountRepository.deleteAccount(params!);
+  }
 }

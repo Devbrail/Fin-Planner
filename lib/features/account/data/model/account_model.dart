@@ -1,13 +1,11 @@
-import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:paisa/core/common.dart';
-
-import '../../../../core/enum/card_type.dart';
+import 'package:paisa/core/common_enum.dart';
 
 part 'account_model.g.dart';
 
 @HiveType(typeId: 2)
-class AccountModel extends HiveObject with EquatableMixin {
+class AccountModel extends HiveObject {
   AccountModel({
     required this.name,
     required this.bankName,
@@ -31,7 +29,7 @@ class AccountModel extends HiveObject with EquatableMixin {
   double? amount;
 
   @HiveField(3)
-  String bankName;
+  String? bankName;
 
   @HiveField(6, defaultValue: CardType.bank)
   CardType? cardType;
@@ -40,22 +38,13 @@ class AccountModel extends HiveObject with EquatableMixin {
   int? color;
 
   @HiveField(0)
-  String name;
+  String? name;
 
   @HiveField(5)
-  String number;
+  String? number;
 
   @HiveField(7, defaultValue: 0)
   int? superId;
-
-  @override
-  List<Object> get props {
-    return [
-      name,
-      bankName,
-      number,
-    ];
-  }
 
   Map<String, dynamic> toJson() => {
         'name': name,

@@ -22,7 +22,7 @@ class CategoryListPage extends StatelessWidget {
         body: ValueListenableBuilder<Box<CategoryModel>>(
           valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
           builder: (BuildContext context, value, Widget? child) {
-            final List<Category> categories = value.values.toEntities();
+            final List<CategoryEntity> categories = value.values.toEntities();
             if (categories.isEmpty) {
               return EmptyWidget(
                 title: context.loc.emptyCategoriesMessageTitle,
@@ -32,7 +32,6 @@ class CategoryListPage extends StatelessWidget {
             }
             return ScreenTypeLayout(
               mobile: CategoryListMobileWidget(
-                addCategoryBloc: bloc,
                 categories: categories,
               ),
               tablet: CategoryListTabletWidget(

@@ -9,5 +9,6 @@ class GetDefaultCategoriesUseCase {
 
   final CategoryRepository categoryRepository;
 
-  List<Category> call() => categoryRepository.defaultCategories().toEntities();
+  List<CategoryEntity> call() =>
+      categoryRepository.defaultCategories().toEntities();
 }

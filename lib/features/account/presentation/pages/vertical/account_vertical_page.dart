@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
+import 'package:paisa/features/account/presentation/widgets/account_card_v2.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
 import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-
-import '../../../../../main.dart';
-import '../../widgets/account_card_v2.dart';
 
 class AccountMobileVerticalPage extends StatelessWidget {
   const AccountMobileVerticalPage({super.key, required this.accounts});
 
-  final List<Account> accounts;
+  final List<AccountEntity> accounts;
 
   @override
   Widget build(BuildContext context) {

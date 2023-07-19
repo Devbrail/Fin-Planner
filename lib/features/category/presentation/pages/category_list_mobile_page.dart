@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
-
-import '../bloc/category_bloc.dart';
-import '../widgets/category_item_mobile_widget.dart';
+import 'package:paisa/features/category/presentation/widgets/category_item_mobile_widget.dart';
 
 class CategoryListMobileWidget extends StatelessWidget {
   const CategoryListMobileWidget({
     Key? key,
-    required this.addCategoryBloc,
     required this.categories,
   }) : super(key: key);
 
-  final CategoryBloc addCategoryBloc;
-  final List<Category> categories;
+  final List<CategoryEntity> categories;
 
   @override
   Widget build(BuildContext context) {

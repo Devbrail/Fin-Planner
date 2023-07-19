@@ -13,7 +13,7 @@ class AccountsInitial extends AccountsState {}
 class AccountListState extends AccountsState {
   const AccountListState(this.accounts);
 
-  final List<Account> accounts;
+  final List<AccountEntity> accounts;
 
   @override
   List<Object> get props => [accounts];
@@ -33,7 +33,7 @@ class AccountDeletedState extends AccountsState {}
 class AccountSelectedState extends AccountsState {
   const AccountSelectedState(this.account, this.expenses);
 
-  final Account account;
+  final AccountEntity account;
   final List<Expense> expenses;
 
   @override
@@ -52,7 +52,7 @@ class AccountErrorState extends AccountsState {
 class AccountSuccessState extends AccountsState {
   const AccountSuccessState(this.account);
 
-  final Account account;
+  final AccountEntity account;
 
   @override
   List<Object> get props => [account];
@@ -88,7 +88,7 @@ class AccountColorSelectedState extends AccountsState {
 class AccountAndExpensesState extends AccountsState {
   const AccountAndExpensesState(this.account, this.expenses);
 
-  final Account account;
+  final AccountEntity account;
   final List<Expense> expenses;
 
   @override

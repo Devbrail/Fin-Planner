@@ -19,7 +19,7 @@ class SelectCategoryIcon extends StatelessWidget {
     return ValueListenableBuilder<Box<CategoryModel>>(
       valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
       builder: (context, value, child) {
-        final List<Category> categories = value.values.toEntities();
+        final List<CategoryEntity> categories = value.values.toEntities();
 
         if (categories.isEmpty) {
           return ListTile(
@@ -73,7 +73,7 @@ class SelectedItem extends StatelessWidget {
     required this.categories,
   });
 
-  final List<Category> categories;
+  final List<CategoryEntity> categories;
 
   @override
   Widget build(BuildContext context) {
@@ -98,15 +98,15 @@ class SelectedItem extends StatelessWidget {
                     titleColor: context.primary,
                   );
                 } else {
-                  final Category category = categories[index - 1];
+                  final CategoryEntity category = categories[index - 1];
                   final bool selected =
                       category.superId == expenseBloc.selectedCategoryId;
                   return CategoryChip(
                     selected: selected,
                     onSelected: (value) =>
                         expenseBloc.add(ChangeCategoryEvent(category)),
-                    icon: category.icon,
-                    title: category.name,
+                    icon: category.icon ?? 0,
+                    title: category.name ?? '',
                     titleColor: Color(category.color ?? context.primary.value),
                     iconColor: Color(category.color ?? context.primary.value),
                   );

@@ -112,7 +112,7 @@ class AccountTransactionsPage extends StatelessWidget {
                     itemCount: state.expenses.length,
                     itemBuilder: (context, index) {
                       final Expense expense = state.expenses[index];
-                      final Category? category = summaryController
+                      final CategoryEntity? category = summaryController
                           .fetchCategoryFromId(expense.categoryId);
                       if (category == null) {
                         return const SizedBox.shrink();

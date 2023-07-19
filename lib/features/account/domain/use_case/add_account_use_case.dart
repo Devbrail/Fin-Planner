@@ -1,28 +1,23 @@
 import 'package:injectable/injectable.dart';
-
-import '../../../../core/enum/card_type.dart';
-import '../repository/account_repository.dart';
+import 'package:paisa/core/use_case/use_case.dart';
+import 'package:paisa/features/account/domain/entities/add_account.dart';
+import 'package:paisa/features/account/domain/repository/account_repository.dart';
 
 @singleton
-class AddAccountUseCase {
+class AddAccountUseCase extends UseCase<Future<void>, AddAccount> {
   AddAccountUseCase({required this.accountRepository});
 
   final AccountRepository accountRepository;
 
-  Future<void> call({
-    required String bankName,
-    required String holderName,
-    required String number,
-    required CardType cardType,
-    required double amount,
-    required int color,
-  }) =>
-      accountRepository.addAccount(
-        bankName: bankName,
-        holderName: holderName,
-        number: number,
-        cardType: cardType,
-        amount: amount,
-        color: color,
-      );
+  @override
+  Future<void> call({AddAccount? params}) {
+    return accountRepository.addAccount(
+      bankName: params!.bankName,
+      holderName: params.holderName,
+      number: params.number,
+      cardType: params.cardType,
+      amount: params.amount,
+      color: params.color,
+    );
+  }
 }

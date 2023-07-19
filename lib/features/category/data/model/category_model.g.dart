@@ -17,12 +17,12 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CategoryModel(
-      icon: fields[2] as int,
-      name: fields[0] as String,
+      icon: fields[2] as int?,
+      name: fields[0] as String?,
       color: fields[8] == null ? 4294951175 : fields[8] as int?,
-      isDefault: fields[3] == null ? false : fields[3] as bool,
+      isDefault: fields[3] == null ? false : fields[3] as bool?,
       description: fields[1] as String?,
-      isBudget: fields[7] == null ? false : fields[7] as bool,
+      isBudget: fields[7] == null ? false : fields[7] as bool?,
       budget: fields[6] == null ? 0 : fields[6] as double?,
       superId: fields[4] == null ? 0 : fields[4] as int?,
     );
@@ -42,12 +42,12 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
       ..write(obj.icon)
       ..writeByte(7)
       ..write(obj.isBudget)
+      ..writeByte(3)
+      ..write(obj.isDefault)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(4)
-      ..write(obj.superId)
-      ..writeByte(3)
-      ..write(obj.isDefault);
+      ..write(obj.superId);
   }
 
   @override

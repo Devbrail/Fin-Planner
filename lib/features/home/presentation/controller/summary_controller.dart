@@ -46,10 +46,11 @@ class SummaryController {
   final ValueNotifier<TransactionType> typeNotifier =
       ValueNotifier<TransactionType>(TransactionType.income);
 
-  Category? fetchCategoryFromId(int categoryId) =>
+  CategoryEntity? fetchCategoryFromId(int categoryId) =>
       getCategoryUseCase(categoryId);
 
-  Account? fetchAccountFromId(int accountId) => getAccountUseCase(accountId);
+  AccountEntity? fetchAccountFromId(int accountId) =>
+      getAccountUseCase(params: accountId);
 
   List<Expense> fetchExpensesFromCategoryId(int categoryId) =>
       getExpensesFromCategoryIdUseCase(categoryId);

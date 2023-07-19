@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/enum/card_type.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
-import 'package:paisa/features/account/data/model/account_model.dart';
+import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/transaction/domain/entities/expense.dart';
 
 class AccountCardV2 extends StatelessWidget {
@@ -14,7 +14,7 @@ class AccountCardV2 extends StatelessWidget {
     required this.expenses,
   });
 
-  final AccountModel account;
+  final AccountEntity account;
   final List<Expense> expenses;
 
   @override
@@ -52,7 +52,7 @@ class AccountCardV2 extends StatelessWidget {
                     color: onPrimary,
                   ),
                   title: Text(
-                    account.name,
+                    account.name ?? '',
                     style: GoogleFonts.outfit(
                       textStyle: context.bodyMedium?.copyWith(
                         color: onPrimary,
@@ -60,7 +60,7 @@ class AccountCardV2 extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    account.bankName,
+                    account.bankName ?? '',
                     style: GoogleFonts.outfit(
                       textStyle: context.bodyMedium?.copyWith(
                         color: onPrimary.withOpacity(0.5),

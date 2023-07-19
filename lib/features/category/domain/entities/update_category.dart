@@ -1,35 +1,35 @@
 import 'package:equatable/equatable.dart';
 
-class CategoryEntity extends Equatable {
-  const CategoryEntity({
-    this.budget,
-    this.color,
-    this.description,
-    this.icon,
-    this.name,
-    this.superId,
-    this.isBudget = false,
-    this.isDefault = false,
-  });
-
+class UpdateCategory extends Equatable {
   final double? budget;
   final int? color;
   final String? description;
   final int? icon;
-  final bool? isBudget;
-  final bool? isDefault;
+  final bool isBudget;
+  final bool isDefault;
   final String? name;
-  final int? superId;
+  final int key;
+
+  const UpdateCategory(
+    this.key, {
+    this.budget,
+    this.color,
+    this.description,
+    this.icon,
+    this.isBudget = false,
+    this.isDefault = false,
+    this.name,
+  });
 
   @override
   List<Object?> get props => [
+        key,
         budget,
         color,
         description,
         icon,
-        name,
-        superId,
         isBudget,
         isDefault,
+        name,
       ];
 }

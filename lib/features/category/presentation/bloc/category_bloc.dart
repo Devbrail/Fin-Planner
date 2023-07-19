@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
+import 'package:paisa/features/category/domain/entities/add_category.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
+import 'package:paisa/features/category/domain/entities/update_category.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
 import 'package:paisa/features/transaction/domain/use_case/expense_use_case.dart';
 
@@ -39,9 +41,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   double? categoryBudget;
   String? categoryDesc;
   String? categoryTitle;
-  Category? currentCategory;
-  bool isBudgetSet = false;
-  bool isDefault = false;
+  CategoryEntity? currentCategory;
+  bool? isBudgetSet = false;
+  bool? isDefault = false;
   int? selectedColor;
   int? selectedIcon;
 
@@ -52,7 +54,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final int? categoryId = int.tryParse(event.categoryId ?? '');
     if (categoryId == null) return;
 
-    final Category? category = getCategoryUseCase(categoryId);
+    final CategoryEntity? category = getCategoryUseCase(categoryId);
     if (category != null) {
       categoryTitle = category.name;
       categoryDesc = category.description;
@@ -74,7 +76,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final String? description = categoryDesc;
     final int? icon = selectedIcon;
     final double? budget = categoryBudget;
-    final bool setBudget = isBudgetSet;
+
     final int? color = selectedColor;
     if (icon == null) {
       return emit(const CategoryErrorState('Select category icon'));
@@ -88,27 +90,29 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     }
     if (event.isAddOrUpdate) {
       await addCategoryUseCase(
+          params: AddCategory(
         icon: icon,
-        desc: description,
+        description: description,
         name: title,
         budget: budget ?? 0,
-        isBudget: setBudget,
+        isBudget: isBudgetSet ?? false,
         color: color,
-        isDefault: isDefault,
-      );
+        isDefault: isDefault ?? false,
+      ));
     } else {
       if (currentCategory == null) return;
 
-      currentCategory!
-        ..budget = budget ?? 0
-        ..description = description ?? ''
-        ..icon = icon
-        ..isBudget = setBudget
-        ..color = color
-        ..isDefault = isDefault
-        ..name = title;
-
-      await updateCategoryUseCase(currentCategory!);
+      await updateCategoryUseCase(
+          params: UpdateCategory(
+        currentCategory!.superId!,
+        budget: budget,
+        color: color,
+        description: description,
+        icon: icon,
+        isBudget: isBudgetSet ?? false,
+        isDefault: isDefault ?? false,
+        name: title,
+      ));
     }
     emit(CategoryAddedState(isCategoryAddedOrUpdate: event.isAddOrUpdate));
   }

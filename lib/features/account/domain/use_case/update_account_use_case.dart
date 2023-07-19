@@ -1,25 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../core/enum/card_type.dart';
-import '../entities/account.dart';
-import '../repository/account_repository.dart';
+import 'package:paisa/core/use_case/use_case.dart';
+import 'package:paisa/features/account/domain/entities/update_account.dart';
+import 'package:paisa/features/account/domain/repository/account_repository.dart';
 
 @singleton
-class UpdateAccountUseCase {
+class UpdateAccountUseCase implements UseCase<Future<void>, UpdateAccount> {
   UpdateAccountUseCase({required this.accountRepository});
 
   final AccountRepository accountRepository;
 
-  Future<void> call({required Account account}) {
+  @override
+  Future<void> call({UpdateAccount? params}) {
     return accountRepository.updateAccount(
-      bankName: account.bankName,
-      holderName: account.name,
-      number: account.number,
-      cardType: account.cardType ?? CardType.bank,
-      amount: account.amount ?? 0.0,
-      key: account.superId!,
-      color: account.color ?? Colors.brown.shade400.value,
+      bankName: params!.bankName,
+      holderName: params.holderName,
+      number: params.number,
+      cardType: params.cardType,
+      amount: params.amount,
+      key: params.key,
+      color: params.color,
     );
   }
 }

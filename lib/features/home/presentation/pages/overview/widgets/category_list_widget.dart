@@ -12,7 +12,7 @@ class CategoryListWidget extends StatelessWidget {
     required this.totalExpense,
   });
 
-  final List<MapEntry<Category, List<Expense>>> categoryGrouped;
+  final List<MapEntry<CategoryEntity, List<Expense>>> categoryGrouped;
   final double totalExpense;
 
   @override
@@ -23,7 +23,8 @@ class CategoryListWidget extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 124),
       itemCount: categoryGrouped.length,
       itemBuilder: (context, index) {
-        final MapEntry<Category, List<Expense>> map = categoryGrouped[index];
+        final MapEntry<CategoryEntity, List<Expense>> map =
+            categoryGrouped[index];
         return InkWell(
           onTap: () {
             context.pushNamed(
@@ -43,7 +44,7 @@ class CategoryListWidget extends StatelessWidget {
                         color:
                             Color(map.key.color ?? Colors.amber.shade100.value),
                         IconData(
-                          map.key.icon,
+                          map.key.icon ?? 0,
                           fontFamily: fontFamilyName,
                           fontPackage: fontFamilyPackageName,
                         ),
@@ -52,7 +53,7 @@ class CategoryListWidget extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(map.key.name),
+                        child: Text(map.key.name ?? ''),
                       ),
                     )
                   ],

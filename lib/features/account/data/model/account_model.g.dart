@@ -17,9 +17,9 @@ class AccountModelAdapter extends TypeAdapter<AccountModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AccountModel(
-      name: fields[0] as String,
-      bankName: fields[3] as String,
-      number: fields[5] as String,
+      name: fields[0] as String?,
+      bankName: fields[3] as String?,
+      number: fields[5] as String?,
       cardType: fields[6] == null ? CardType.bank : fields[6] as CardType?,
       superId: fields[7] == null ? 0 : fields[7] as int?,
       amount: fields[8] == null ? 0 : fields[8] as double?,
