@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:paisa/features/landing/presentation/cubit/overview/overview_cubit.dart';
-import 'package:paisa/features/landing/presentation/pages/overview/widgets/overview_mobile_widget.dart';
-import 'package:paisa/features/landing/presentation/pages/overview/widgets/overview_tablet_widget.dart';
+import 'package:paisa/features/home/presentation/cubit/overview/overview_cubit.dart';
+import 'package:paisa/features/home/presentation/pages/overview/widgets/overview_mobile_widget.dart';
+import 'package:paisa/features/home/presentation/pages/overview/widgets/overview_tablet_widget.dart';
 import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 

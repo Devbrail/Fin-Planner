@@ -44,7 +44,7 @@ import 'package:paisa/src/data/expense/data_sources/local_expense_data_manager_i
 import 'package:paisa/src/data/expense/model/expense_model.dart' as _i5;
 import 'package:paisa/src/data/expense/repository/expense_repository_impl.dart'
     as _i27;
-import 'package:paisa/src/data/profile/repository/profile_repository_impl.dart'
+import 'package:paisa/features/profile/data/repository/profile_repository_impl.dart'
     as _i41;
 import 'package:paisa/src/data/recurring/data_sources/local_recurring_data_manager.dart'
     as _i38;

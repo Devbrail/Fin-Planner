@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
-import 'package:paisa/features/landing/presentation/bloc/home/home_bloc.dart';
-import 'package:paisa/features/landing/presentation/pages/home/home_page.dart';
-import 'package:paisa/features/landing/presentation/widgets/content_widget.dart';
-import 'package:paisa/src/presentation/profile/pages/paisa_user_widget.dart';
+import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
+import 'package:paisa/features/home/presentation/pages/home/home_page.dart';
+import 'package:paisa/features/home/presentation/widgets/content_widget.dart';
+import 'package:paisa/features/profile/presentation/pages/paisa_user_widget.dart';
 import 'package:paisa/src/presentation/widgets/paisa_icon_title.dart';
 import 'package:paisa/src/presentation/widgets/paisa_search_button_widget.dart';
 
