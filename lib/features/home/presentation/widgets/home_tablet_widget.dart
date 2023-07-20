@@ -29,7 +29,7 @@ class HomeTabletWidget extends StatelessWidget {
           child: PaisaIconTitle(),
         ),
         leadingWidth: 150,
-        title: const PaisaSearchBar(),
+        title: const HomeSearchBar(),
         actions: const [PaisaUserWidget()],
       ),
       body: Row(

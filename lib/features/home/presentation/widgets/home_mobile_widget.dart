@@ -26,7 +26,7 @@ class HomeMobileWidget extends StatelessWidget {
       appBar: AppBar(
         title: const PaisaTitle(),
         actions: const [
-          PaisaSearchButtonWidget(),
+          PaisaSearchButton(),
           PaisaUserWidget(),
           SizedBox(width: 8),
         ],

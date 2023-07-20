@@ -43,7 +43,7 @@ class AccountSummaryWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                child: PaisaExpenseStatsWidget(
+                child: SummaryMonthCardWidget(
                   title: context.loc.income,
                   total: expenses.thisMonthIncome.toFormateCurrency(context),
                   data: expenses.incomeDoubleList,
@@ -54,7 +54,7 @@ class AccountSummaryWidget extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: PaisaExpenseStatsWidget(
+                child: SummaryMonthCardWidget(
                   title: context.loc.expense,
                   total: expenses.thisMonthExpense.toFormateCurrency(context),
                   data: expenses.expenseDoubleList,

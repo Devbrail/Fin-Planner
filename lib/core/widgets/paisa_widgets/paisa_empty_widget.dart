@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:paisa/core/common.dart';
-import 'paisa_big_button_widget.dart';
+import 'paisa_button.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
@@ -53,10 +53,11 @@ class EmptyWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            onActionPressed != null
-                ? PaisaTextButton(
-                    onPressed: onActionPressed!, title: actionTitle ?? '')
-                : const SizedBox.shrink()
+            if (onActionPressed != null)
+              PaisaTextButton(
+                  onPressed: onActionPressed!, title: actionTitle ?? '')
+            else
+              const SizedBox.shrink()
           ],
         ),
       ),

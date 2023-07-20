@@ -1,11 +1,10 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:paisa/core/widgets/paisa_widgets/paisa_card.dart';
 
-import 'paisa_card.dart';
-
-class PaisaExpenseStatsWidget extends StatelessWidget {
-  const PaisaExpenseStatsWidget({
+class SummaryMonthCardWidget extends StatelessWidget {
+  const SummaryMonthCardWidget({
     super.key,
     required this.total,
     required this.title,

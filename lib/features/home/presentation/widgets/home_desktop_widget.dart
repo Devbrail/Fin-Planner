@@ -30,7 +30,7 @@ class HomeDesktopWidget extends StatelessWidget {
           child: PaisaIconTitle(),
         ),
         leadingWidth: 300,
-        title: const PaisaSearchBar(),
+        title: const SearchBar(),
         actions: const [PaisaUserWidget()],
       ),
       floatingActionButton: floatingActionButton,
