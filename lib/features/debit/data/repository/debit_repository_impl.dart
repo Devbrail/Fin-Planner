@@ -51,13 +51,13 @@ class DebtRepositoryImpl extends DebtRepository {
   }
 
   @override
-  Future<void> deleteTransactionFromId(int transactionId) {
-    return dataSource.deleteTransactionFromId(transactionId);
+  Future<void> deleteDebitTransactionFromDebitId(int transactionId) {
+    return dataSource.deleteDebitTransactionFromDebitId(transactionId);
   }
 
   @override
-  Future<void> deleteTransactionsFromId(int parentId) {
-    return dataSource.deleteTransactionsFromId(parentId);
+  Future<void> deleteDebitTransactionsFromDebitId(int parentId) {
+    return dataSource.deleteDebitTransactionsFromDebitId(parentId);
   }
 
   @override

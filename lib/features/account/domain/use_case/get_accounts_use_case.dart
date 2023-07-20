@@ -5,13 +5,13 @@ import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/account/domain/repository/account_repository.dart';
 
 @singleton
-class GetAccountsUseCase implements UseCase<List<AccountEntity>, void> {
+class GetAccountsUseCase implements UseCase<List<AccountEntity>, NoParams> {
   GetAccountsUseCase({required this.accountRepository});
 
   final AccountRepository accountRepository;
 
   @override
-  List<AccountEntity> call({void params}) {
+  List<AccountEntity> call({NoParams? params}) {
     return accountRepository.getAccounts().toEntities();
   }
 }

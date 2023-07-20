@@ -1,11 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/core/use_case/use_case.dart';
 import 'package:paisa/features/account/domain/repository/account_repository.dart';
 
 @singleton
-class UpdateAccountUseCase
-    implements UseCase<Future<void>, UpdateAccountParams> {
+class UpdateAccountUseCase implements UseCase<void, UpdateAccountParams> {
   UpdateAccountUseCase({required this.accountRepository});
 
   final AccountRepository accountRepository;
@@ -24,16 +24,8 @@ class UpdateAccountUseCase
   }
 }
 
-class UpdateAccountParams {
-  final String bankName;
-  final String holderName;
-  final String number;
-  final CardType cardType;
-  final double amount;
-  final int color;
-  final int key;
-
-  UpdateAccountParams(
+class UpdateAccountParams extends Equatable {
+  const UpdateAccountParams(
     this.key, {
     required this.bankName,
     required this.holderName,
@@ -42,4 +34,23 @@ class UpdateAccountParams {
     required this.amount,
     required this.color,
   });
+
+  final double amount;
+  final String bankName;
+  final CardType cardType;
+  final int color;
+  final String holderName;
+  final int key;
+  final String number;
+
+  @override
+  List<Object?> get props => [
+        key,
+        bankName,
+        holderName,
+        number,
+        cardType,
+        amount,
+        color,
+      ];
 }

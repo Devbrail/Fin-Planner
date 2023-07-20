@@ -5,6 +5,7 @@ import 'package:paisa/core/common.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:paisa/features/account/presentation/bloc/accounts_bloc.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
+import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_item_widget.dart';
 import 'package:paisa/features/transaction/domain/entities/expense.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
@@ -112,8 +113,9 @@ class AccountTransactionsPage extends StatelessWidget {
                     itemCount: state.expenses.length,
                     itemBuilder: (context, index) {
                       final Expense expense = state.expenses[index];
-                      final CategoryEntity? category = summaryController
-                          .fetchCategoryFromId(expense.categoryId);
+                      final CategoryEntity? category =
+                          BlocProvider.of<HomeBloc>(context)
+                              .fetchCategoryFromId(expense.categoryId);
                       if (category == null) {
                         return const SizedBox.shrink();
                       } else {

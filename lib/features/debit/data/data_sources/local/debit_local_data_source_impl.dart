@@ -17,9 +17,9 @@ abstract class LocalDebitDataSource {
 
   Future<void> addTransaction(DebitTransactionsModel transactionsModel);
 
-  Future<void> deleteTransactionsFromId(int parentId);
+  Future<void> deleteDebitTransactionsFromDebitId(int parentId);
 
-  Future<void> deleteTransactionFromId(int transactionId);
+  Future<void> deleteDebitTransactionFromDebitId(int transactionId);
 }
 
 @Singleton(as: LocalDebitDataSource)
@@ -52,12 +52,12 @@ class LocalDebitDataSourceImpl extends LocalDebitDataSource {
   }
 
   @override
-  Future<void> deleteTransactionFromId(int transactionId) {
+  Future<void> deleteDebitTransactionFromDebitId(int transactionId) {
     return transactionsBox.delete(transactionId);
   }
 
   @override
-  Future<void> deleteTransactionsFromId(int parentId) {
+  Future<void> deleteDebitTransactionsFromDebitId(int parentId) {
     final Iterable<int> transactionsKeys = transactionsBox.values
         .where((element) => element.parentId == parentId)
         .map((e) => e.superId!);

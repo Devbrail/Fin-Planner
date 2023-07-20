@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/use_case/use_case.dart';
@@ -16,8 +17,11 @@ class GetAccountUseCase implements UseCase<AccountEntity?, GetAccountParams> {
   }
 }
 
-class GetAccountParams {
-  GetAccountParams(this.accountId);
+class GetAccountParams extends Equatable {
+  const GetAccountParams(this.accountId);
 
   final int accountId;
+
+  @override
+  List<Object?> get props => [accountId];
 }

@@ -51,7 +51,8 @@ class OverviewCubit extends Cubit<BudgetState> {
     final List<Expense> selectedTimeExpenses = _groupedExpenses[time] ?? [];
     final Map<CategoryEntity, List<Expense>> categoryGroupedExpenses =
         groupBy(selectedTimeExpenses, (Expense expense) {
-      return getCategoryUseCase(params: expense.categoryId) ??
+      return getCategoryUseCase(
+              params: GetCategoryParams(expense.categoryId)) ??
           _defaultCategories.first;
     });
     final List<MapEntry<CategoryEntity, List<Expense>>> mapExpenses =

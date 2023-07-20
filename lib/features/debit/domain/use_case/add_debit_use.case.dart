@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/enum/debt_type.dart';
 import 'package:paisa/core/use_case/use_case.dart';
@@ -22,8 +23,8 @@ class AddDebtUseCase implements UseCase<Future<void>, AddDebit> {
   }
 }
 
-class AddDebit {
-  AddDebit({
+class AddDebit extends Equatable {
+  const AddDebit({
     required this.description,
     required this.name,
     required this.amount,
@@ -38,4 +39,14 @@ class AddDebit {
   final String description;
   final DateTime dueDateTime;
   final String name;
+
+  @override
+  List<Object?> get props => [
+        description,
+        name,
+        amount,
+        currentDateTime,
+        dueDateTime,
+        debtType,
+      ];
 }

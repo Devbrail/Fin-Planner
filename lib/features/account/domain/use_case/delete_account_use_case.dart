@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/use_case/use_case.dart';
 import 'package:paisa/features/account/domain/repository/account_repository.dart';
@@ -15,8 +16,11 @@ class DeleteAccountUseCase
   }
 }
 
-class DeleteAccountParams {
-  DeleteAccountParams(this.accountId);
+class DeleteAccountParams extends Equatable {
+  const DeleteAccountParams(this.accountId);
 
   final int accountId;
+
+  @override
+  List<Object?> get props => [accountId];
 }

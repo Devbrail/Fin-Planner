@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
-import 'package:paisa/features/category/domain/entities/add_category.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
-import 'package:paisa/features/category/domain/entities/update_category.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
 import 'package:paisa/features/transaction/domain/use_case/expense_use_case.dart';
 
@@ -54,7 +52,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final int? categoryId = int.tryParse(event.categoryId ?? '');
     if (categoryId == null) return;
 
-    final CategoryEntity? category = getCategoryUseCase(params: categoryId);
+    final CategoryEntity? category = getCategoryUseCase(
+      params: GetCategoryParams(categoryId),
+    );
     if (category != null) {
       categoryTitle = category.name;
       categoryDesc = category.description;
@@ -90,7 +90,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     }
     if (event.isAddOrUpdate) {
       await addCategoryUseCase(
-          params: AddCategory(
+          params: AddCategoryParams(
         icon: icon,
         description: description,
         name: title,
@@ -103,7 +103,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       if (currentCategory == null) return;
 
       await updateCategoryUseCase(
-          params: UpdateCategory(
+          params: UpdateCategoryParams(
         currentCategory!.superId!,
         budget: budget,
         color: color,
@@ -121,8 +121,11 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     CategoryDeleteEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    await deleteCategoryUseCase(params: int.tryParse(event.categoryId));
-    await deleteExpensesFromCategoryIdUseCase(int.parse(event.categoryId));
+    final int categoryId = int.parse(event.categoryId);
+    await deleteCategoryUseCase(params: DeleteCategoryParams(categoryId));
+    await deleteExpensesFromCategoryIdUseCase(
+      params: DeleteTransactionsByCategoryIdParams(categoryId),
+    );
     emit(CategoryDeletedState());
   }
 

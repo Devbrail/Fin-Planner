@@ -6,13 +6,13 @@ import 'package:paisa/features/category/domain/repository/category_repository.da
 
 @singleton
 class GetDefaultCategoriesUseCase
-    implements UseCase<List<CategoryEntity>, void> {
+    implements UseCase<List<CategoryEntity>, NoParams> {
   GetDefaultCategoriesUseCase({required this.categoryRepository});
 
   final CategoryRepository categoryRepository;
 
   @override
-  List<CategoryEntity> call({void params}) {
+  List<CategoryEntity> call({NoParams? params}) {
     return categoryRepository.defaultCategories().toEntities();
   }
 }

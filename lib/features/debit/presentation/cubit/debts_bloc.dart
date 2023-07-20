@@ -8,6 +8,7 @@ import 'package:paisa/core/enum/debt_type.dart';
 import 'package:paisa/features/debit/data/models/debit_model.dart';
 import 'package:paisa/features/debit/domain/entities/debit.dart';
 import 'package:paisa/features/debit/domain/use_case/debit_use_case.dart';
+import 'package:paisa/features/debit/domain/use_case/delete_debit_transactions_by_debit_id_use_case.dart';
 
 part 'debts_event.dart';
 part 'debts_state.dart';
@@ -23,7 +24,8 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     required this.addTransactionUseCase,
     required this.updateDebtUseCase,
     required this.deleteDebtUseCase,
-    required this.deleteTransactionUseCase,
+    required this.deleteDebitTransactionUseCase,
+    required this.deleteDebitTransactionsByDebitIdUseCase,
   }) : super(DebtsInitial()) {
     on<AddTransactionToDebtEvent>(_addTransactionToDebt);
     on<ChangeDebtTypeEvent>(_changeType);
@@ -43,10 +45,12 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
   String? currentDescription;
   String? currentName;
   final DeleteDebtUseCase deleteDebtUseCase;
-  final DeleteTransactionUseCase deleteTransactionUseCase;
+  final DeleteDebitTransactionUseCase deleteDebitTransactionUseCase;
+  final DeleteDebitTransactionsByDebitIdUseCase
+      deleteDebitTransactionsByDebitIdUseCase;
   DateTime? endDateTime;
   final GetDebtUseCase getDebtUseCase;
-  final GetTransactionsUseCase getTransactionsUseCase;
+  final GetDebitTransactionsUseCase getTransactionsUseCase;
   DateTime? startDateTime;
   final UpdateDebtUseCase updateDebtUseCase;
 
@@ -88,14 +92,16 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
       );
     } else {
       if (currentDebt != null) {
-        currentDebt!
-          ..amount = amount
-          ..dateTime = dateTime
-          ..debtType = debtType
-          ..description = description ?? ''
-          ..expiryDateTime = dueDateTime
-          ..name = name;
-        await updateDebtUseCase(currentDebt!);
+        await updateDebtUseCase(
+            params: UpdateDebitParams(
+          currentDebt!.key,
+          description: description ?? '',
+          name: name,
+          amount: amount,
+          currentDateTime: dateTime,
+          dueDateTime: dueDateTime,
+          debtType: debtType,
+        ));
       }
     }
     emit(DebtsAdded(isUpdate: event.isUpdate));
@@ -122,7 +128,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     Emitter<DebtsState> emit,
   ) async {
     await addTransactionUseCase(
-      params: AddDebitTransaction(
+      params: AddDebitTransactionParams(
         event.amount,
         event.dateTime,
         event.debt.superId!,
@@ -135,14 +141,14 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     FetchDebtOrCreditFromIdEvent event,
     Emitter<DebtsState> emit,
   ) async {
-    final int? debtId = int.tryParse(event.id ?? '');
-    if (debtId == null) {
+    final int? debitId = int.tryParse(event.id ?? '');
+    if (debitId == null) {
       add(SelectedStartDateEvent(DateTime.now()));
       add(SelectedEndDateEvent(DateTime.now()));
       return;
     }
 
-    final Debit? debt = getDebtUseCase(debtId);
+    final Debit? debt = getDebtUseCase(params: GetDebitParams(debitId));
     if (debt != null) {
       currentAmount = debt.amount;
       currentName = debt.name;
@@ -175,8 +181,10 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     DeleteDebtEvent event,
     Emitter<DebtsState> emit,
   ) async {
-    await deleteDebtUseCase(event.id);
-    await deleteTransactionUseCase(params: event.id);
+    final int debitId = event.id;
+    await deleteDebtUseCase(params: DeleteDebitParams(debitId));
+    await deleteDebitTransactionsByDebitIdUseCase(
+        params: DeleteDebitTransactionsbyDebitIdParams(debitId));
     emit(DeleteDebtsState());
   }
 
@@ -184,7 +192,9 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     DeleteTransactionEvent event,
     Emitter<DebtsState> emit,
   ) async {
-    await deleteTransactionUseCase(params: event.id);
+    await deleteDebitTransactionUseCase(
+      params: DeleteDebitTransactionParams(event.id),
+    );
     emit(DeleteDebtsState());
   }
 }

@@ -26,9 +26,9 @@ abstract class DebtRepository {
 
   Future<void> deleteDebtOrCreditFromId(int debtId);
 
-  Future<void> deleteTransactionsFromId(int parentId);
+  Future<void> deleteDebitTransactionsFromDebitId(int parentId);
 
-  Future<void> deleteTransactionFromId(int transactionId);
+  Future<void> deleteDebitTransactionFromDebitId(int transactionId);
 
   Future<void> addTransaction(
     double amount,
