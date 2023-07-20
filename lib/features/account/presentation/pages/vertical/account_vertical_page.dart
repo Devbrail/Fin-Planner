@@ -25,7 +25,7 @@ class AccountMobileVerticalPage extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 124),
             itemCount: accounts.length,
             itemBuilder: (context, index) {
-              final List<Expense> expenses = value
+              final List<Transaction> expenses = value
                   .expensesFromAccountId(accounts[index].superId!)
                   .map((e) => e.toEntity())
                   .toList();
@@ -44,7 +44,7 @@ class AccountMobileVerticalPage extends StatelessWidget {
               childAspectRatio: 16 / 11,
             ),
             itemBuilder: (BuildContext context, int index) {
-              final List<Expense> expenses = value
+              final List<Transaction> expenses = value
                   .expensesFromAccountId(accounts[index].superId!)
                   .map((e) => e.toEntity())
                   .toList();

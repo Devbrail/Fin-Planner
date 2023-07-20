@@ -9,7 +9,7 @@ class UpdateExpensesUseCase {
 
   final ExpenseRepository expenseRepository;
 
-  Future<void> call(Expense expense) {
+  Future<void> call(Transaction expense) {
     return expenseRepository.updateExpense(
       expense.superId!,
       expense.name,

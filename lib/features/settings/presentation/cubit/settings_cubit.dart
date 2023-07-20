@@ -43,7 +43,7 @@ class SettingCubit extends Cubit<SettingsState> {
       if (categories.isEmpty) {
         return emit(FixExpenseError());
       }
-      final List<Expense> expenses = expensesUseCase()
+      final List<Transaction> expenses = expensesUseCase()
           .where((element) => element.categoryId == -1)
           .toList();
 

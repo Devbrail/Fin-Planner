@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/features/transaction/data/model/search_query.dart';
 
 import '../model/expense_model.dart';
 
@@ -27,6 +28,5 @@ abstract class ExpenseLocalDataManager {
 
   Future<void> clear();
 
-  List<TransactionModel> filterExpenses(
-      String query, int? accountId, int? categoryId);
+  List<TransactionModel> filterExpenses(SearchQuery query);
 }

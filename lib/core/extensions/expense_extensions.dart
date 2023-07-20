@@ -5,6 +5,7 @@ import 'package:paisa/core/enum/filter_expense.dart';
 import 'package:paisa/core/enum/transaction_type.dart';
 import 'package:paisa/core/extensions/time_extension.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/search_query.dart';
 import 'package:paisa/features/transaction/domain/entities/expense.dart';
 
 extension ExpenseModelBoxMapping on Box<TransactionModel> {
@@ -14,7 +15,7 @@ extension ExpenseModelBoxMapping on Box<TransactionModel> {
   List<TransactionModel> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
 
-  List<Expense> get toEntities => values
+  List<Transaction> get toEntities => values
       .map((expenseModel) => expenseModel.toEntity())
       .sorted((a, b) => b.time.compareTo(a.time));
 
@@ -35,31 +36,22 @@ extension ExpenseModelBoxMapping on Box<TransactionModel> {
       .map((e) => e.currency)
       .fold<double>(0, (previousValue, element) => previousValue + element);
 
-  List<Expense> search(
-    query, {
-    int? selectedAccountId = -1,
-    int? selectedCategoryId = -1,
-  }) {
-    Iterable<TransactionModel> expenseModels = values;
-    if (selectedAccountId != -1) {
-      expenseModels =
-          values.where((element) => element.accountId == selectedAccountId);
-    }
-    if (selectedCategoryId != -1) {
-      expenseModels =
-          values.where((element) => element.categoryId == selectedCategoryId);
-    }
-
-    return expenseModels.where((TransactionModel element) {
-      final description = element.description ?? '';
-      return element.name.toLowerCase().contains(query) ||
-          description.toLowerCase().contains(query);
+  List<Transaction> search(SearchQuery query) {
+    return values.where((element) {
+      final String text = query.query?.toLowerCase() ?? '';
+      final String desc = (element.description ?? '').toLowerCase();
+      final String name = element.name.toLowerCase();
+      final List<int> accounts = query.accounts ?? [];
+      final List<int> categories = query.categories ?? [];
+      return (name.contains(text) || desc.contains(text)) &&
+          (accounts.contains(element.accountId) &&
+              categories.contains(element.categoryId));
     }).toEntities();
   }
 }
 
 extension ExpenseModelHelper on TransactionModel {
-  Expense toEntity() => Expense(
+  Transaction toEntity() => Transaction(
         name: name,
         currency: currency,
         time: time,
@@ -79,27 +71,28 @@ extension ExpenseModelsHelper on Iterable<TransactionModel> {
     return map((e) => e.toJson()).toList();
   }
 
-  List<Expense> toEntities() {
+  List<Transaction> toEntities() {
     return map((expenseModel) => expenseModel.toEntity())
         .sorted((a, b) => b.time.compareTo(a.time));
   }
 
-  List<Expense> budgetOverView(TransactionType transactionType) =>
+  List<Transaction> budgetOverView(TransactionType transactionType) =>
       sorted((a, b) => b.time.compareTo(a.time))
           .where((element) => element.type == transactionType)
           .toEntities();
 }
 
-extension ExpensesHelper on Iterable<Expense> {
-  List<Expense> get expenses => sorted(((a, b) => b.time.compareTo(a.time)));
+extension ExpensesHelper on Iterable<Transaction> {
+  List<Transaction> get expenses =>
+      sorted(((a, b) => b.time.compareTo(a.time)));
 
-  List<Expense> get expenseList =>
+  List<Transaction> get expenseList =>
       where((element) => element.type == TransactionType.expense).toList();
 
-  List<Expense> get incomeList =>
+  List<Transaction> get incomeList =>
       where((element) => element.type == TransactionType.income).toList();
 
-  List<Expense> isFilterTimeBetween(DateTimeRange range) =>
+  List<Transaction> isFilterTimeBetween(DateTimeRange range) =>
       where((element) => element.time.isAfterBeforeTime(range)).toList();
 
   double get filterTotal => fold<double>(0, (previousValue, element) {
@@ -132,7 +125,7 @@ extension ExpensesHelper on Iterable<Expense> {
           .map((e) => e.currency)
           .fold<double>(0, (previousValue, element) => previousValue + element);
 
-  List<Expense> get thisMonthExpensesList =>
+  List<Transaction> get thisMonthExpensesList =>
       where((element) => element.type == TransactionType.expense)
           .where((element) =>
               element.time.month == DateTime.now().month &&
@@ -141,7 +134,7 @@ extension ExpensesHelper on Iterable<Expense> {
   List<double> get expenseDoubleList =>
       thisMonthExpensesList.map((element) => element.currency).toList();
 
-  List<Expense> get thisMonthIncomeList =>
+  List<Transaction> get thisMonthIncomeList =>
       where((element) => element.type == TransactionType.income)
           .where((element) =>
               element.time.month == DateTime.now().month &&
@@ -159,19 +152,19 @@ extension ExpensesHelper on Iterable<Expense> {
           .map((e) => e.currency)
           .fold<double>(0, (previousValue, element) => previousValue + element);
 
-  List<MapEntry<String, List<Expense>>> groupByTime(
+  List<MapEntry<String, List<Transaction>>> groupByTime(
           FilterExpense filterBudget) =>
       groupBy(
           this,
           (TransactionModel element) =>
               element.time.formatted(filterBudget)).entries.toList();
 
-  Map<String, List<Expense>> groupByTimeList(FilterExpense filterBudget) =>
+  Map<String, List<Transaction>> groupByTimeList(FilterExpense filterBudget) =>
       groupBy(this,
           (TransactionModel element) => element.time.formatted(filterBudget));
 
-  List<Expense> toEntities() =>
+  List<Transaction> toEntities() =>
       map((expenseModel) => expenseModel.toEntity()).toList();
 }
 
-extension ExpenseHelper on Expense {}
+extension ExpenseHelper on Transaction {}

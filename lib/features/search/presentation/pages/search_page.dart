@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -73,14 +74,17 @@ class _SearchPageState extends State<SearchPage> {
                         return DraggableScrollableSheet(
                           initialChildSize: 0.4,
                           minChildSize: 0.2,
-                          maxChildSize: 0.75,
+                          maxChildSize: 0.95,
                           expand: false,
-                          builder: (context, scrollController) => FilterWidget(
-                            scrollController,
-                            selectedAccount: searchCubitCubit.selectedAccountId,
-                            selectedCategory:
-                                searchCubitCubit.selectedCategoryId,
-                          ),
+                          builder: (context, scrollController) {
+                            return FilterWidget(
+                              scrollController,
+                              selectedAccount:
+                                  searchCubitCubit.selectedAccountId,
+                              selectedCategory:
+                                  searchCubitCubit.selectedCategoryId,
+                            );
+                          },
                         );
                       },
                     );
@@ -172,15 +176,15 @@ class FilterWidget extends StatefulWidget {
   });
 
   final ScrollController scrollController;
-  final int selectedAccount, selectedCategory;
+  final List<int> selectedAccount, selectedCategory;
 
   @override
   State<FilterWidget> createState() => _FilterWidgetState();
 }
 
 class _FilterWidgetState extends State<FilterWidget> {
-  late int selectedAccount = widget.selectedAccount;
-  late int selectedCategory = widget.selectedCategory;
+  late List<int> selectedAccount = widget.selectedAccount;
+  late List<int> selectedCategory = widget.selectedCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -213,21 +217,22 @@ class _FilterWidgetState extends State<FilterWidget> {
                 runSpacing: 8.0,
                 children: List.generate(accounts.length, (index) {
                   final AccountEntity account = accounts[index];
+                  final isSelected = selectedAccount.contains(account.superId);
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: FilterChip(
-                      selected: account.superId == selectedAccount,
+                      selected: isSelected,
                       onSelected: (value) {
                         setState(() {
-                          if (selectedAccount == account.superId) {
-                            selectedAccount = -1;
+                          if (isSelected) {
+                            selectedAccount.remove(account.superId);
                           } else {
-                            selectedAccount = account.superId ?? -1;
+                            selectedAccount.add(account.superId!);
                           }
                         });
                       },
                       avatar: Icon(
-                        color: account.superId == selectedAccount
+                        color: isSelected
                             ? context.primary
                             : context.onSurfaceVariant,
                         IconData(
@@ -250,7 +255,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           .textTheme
                           .titleMedium
                           ?.copyWith(
-                              color: account.superId == selectedAccount
+                              color: isSelected
                                   ? context.primary
                                   : Theme.of(context)
                                       .colorScheme
@@ -275,33 +280,36 @@ class _FilterWidgetState extends State<FilterWidget> {
         ValueListenableBuilder<Box<CategoryModel>>(
           valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
           builder: (context, value, child) {
-            final categories = value.values.toEntities();
+            final List<CategoryEntity> categories = value.values.toEntities();
+
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Wrap(
                 spacing: 4.0,
                 runSpacing: 8.0,
                 children: List.generate(categories.length, (index) {
-                  final CategoryEntity account = categories[index];
+                  final CategoryEntity categoryEntity = categories[index];
+                  final bool isSelected =
+                      selectedCategory.contains(categoryEntity.superId);
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: FilterChip(
-                      selected: account.superId == selectedCategory,
+                      selected: isSelected,
                       onSelected: (value) {
                         setState(() {
-                          if (selectedCategory == account.superId) {
-                            selectedCategory = -1;
+                          if (isSelected) {
+                            selectedCategory.remove(categoryEntity.superId);
                           } else {
-                            selectedCategory = account.superId ?? -1;
+                            selectedCategory.add(categoryEntity.superId!);
                           }
                         });
                       },
                       avatar: Icon(
-                        color: account.superId == selectedCategory
+                        color: isSelected
                             ? context.primary
                             : context.onSurfaceVariant,
                         IconData(
-                          account.icon ?? 0,
+                          categoryEntity.icon ?? 0,
                           fontFamily: fontFamilyName,
                           fontPackage: fontFamilyPackageName,
                         ),
@@ -315,12 +323,12 @@ class _FilterWidgetState extends State<FilterWidget> {
                       ),
                       showCheckmark: false,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      label: Text(account.name ?? ''),
+                      label: Text(categoryEntity.name ?? ''),
                       labelStyle: Theme.of(context)
                           .textTheme
                           .titleMedium
                           ?.copyWith(
-                              color: account.superId == selectedCategory
+                              color: isSelected
                                   ? context.primary
                                   : Theme.of(context)
                                       .colorScheme
@@ -343,8 +351,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                   Navigator.pop(
                     context,
                     {
-                      'account': -1,
-                      'category': -1,
+                      'account': [],
+                      'category': [],
                     },
                   );
                 },

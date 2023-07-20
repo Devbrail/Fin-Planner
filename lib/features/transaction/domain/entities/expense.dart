@@ -1,7 +1,7 @@
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
 
-class Expense extends TransactionModel {
-  Expense({
+class Transaction extends TransactionModel {
+  Transaction({
     required super.name,
     required super.currency,
     required super.time,

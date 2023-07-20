@@ -9,5 +9,5 @@ class GetExpensesUseCase {
 
   final ExpenseRepository expenseRepository;
 
-  List<Expense> call() => expenseRepository.expenses().toEntities();
+  List<Transaction> call() => expenseRepository.expenses().toEntities();
 }

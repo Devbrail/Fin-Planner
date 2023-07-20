@@ -15,7 +15,7 @@ class ExpenseListWidget extends StatelessWidget {
     required this.summaryController,
   }) : super(key: key);
 
-  final List<Expense> expenses;
+  final List<Transaction> expenses;
   final SummaryController summaryController;
 
   @override
@@ -30,7 +30,7 @@ class ExpenseListWidget extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: expenses.length,
       itemBuilder: (_, index) {
-        final Expense expense = expenses[index];
+        final Transaction expense = expenses[index];
         final AccountEntity? account = BlocProvider.of<HomeBloc>(context)
             .fetchAccountFromId(expense.accountId);
         final CategoryEntity? category = BlocProvider.of<HomeBloc>(context)

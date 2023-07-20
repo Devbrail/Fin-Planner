@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/features/transaction/data/data_sources/local_transaction_data_manager.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/search_query.dart';
 import 'package:paisa/features/transaction/domain/repository/expense_repository.dart';
 
 @Singleton(as: ExpenseRepository)
@@ -80,10 +81,14 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   @override
   List<TransactionModel> filterExpenses(
     String query,
-    int? accountId,
-    int? categoryId,
+    List<int> accounts,
+    List<int> categories,
   ) {
-    return dataSource.filterExpenses(query, accountId, categoryId);
+    return dataSource.filterExpenses(SearchQuery(
+      query: query,
+      accounts: accounts,
+      categories: categories,
+    ));
   }
 
   @override

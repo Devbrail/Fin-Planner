@@ -112,7 +112,7 @@ class AccountTransactionsPage extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: state.expenses.length,
                     itemBuilder: (context, index) {
-                      final Expense expense = state.expenses[index];
+                      final Transaction expense = state.expenses[index];
                       final CategoryEntity? category =
                           BlocProvider.of<HomeBloc>(context)
                               .fetchCategoryFromId(expense.categoryId);

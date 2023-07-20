@@ -47,7 +47,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
   final GetAccountsUseCase accountsUseCase;
   final AddExpenseUseCase addExpenseUseCase;
   String? currentDescription;
-  Expense? currentExpense;
+  Transaction? currentExpense;
   final GetDefaultCategoriesUseCase defaultCategoriesUseCase;
   final DeleteExpenseUseCase deleteExpenseUseCase;
   double? expenseAmount;
@@ -74,7 +74,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
       return;
     }
 
-    final Expense? expense = await expenseUseCase(expenseId);
+    final Transaction? expense = await expenseUseCase(expenseId);
     if (expense != null) {
       expenseAmount = expense.currency;
       expenseName = expense.name;

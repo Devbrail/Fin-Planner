@@ -8,19 +8,21 @@ part 'search_state.dart';
 
 @injectable
 class SearchCubit extends Cubit<SearchState> {
-  SearchCubit(this.filterExpenseUseCase) : super(SearchInitial());
+  SearchCubit(this.searchUseCase) : super(SearchInitial());
 
-  final FilterExpenseUseCase filterExpenseUseCase;
-  int selectedAccountId = -1, selectedCategoryId = -1;
+  final SearchUseCase searchUseCase;
+  List<int> selectedAccountId = [], selectedCategoryId = [];
 
   void searchWithQuery(String query) {
     if (query.isEmpty) {
       return emit(SearchQueryEmptyState());
     }
-    final List<Expense> expenses = filterExpenseUseCase(
-      query,
-      selectedAccountId,
-      selectedCategoryId,
+    final List<Transaction> expenses = searchUseCase(
+      params: SearchParams(
+        query: query,
+        accounts: selectedAccountId,
+        categories: selectedCategoryId,
+      ),
     );
     if (expenses.isEmpty) {
       return emit(SearchEmptyState());

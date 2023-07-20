@@ -14,7 +14,7 @@ class ExpenseHistoryWidget extends StatelessWidget {
     required this.expenses,
   });
 
-  final List<Expense> expenses;
+  final List<Transaction> expenses;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,10 @@ class ExpenseHistoryWidget extends StatelessWidget {
         description: context.loc.emptyExpensesMessageSubTitle,
       );
     } else {
-      final maps = groupBy(expenses,
-          (Expense element) => element.time.formatted(FilterExpense.monthly));
+      final maps = groupBy(
+          expenses,
+          (Transaction element) =>
+              element.time.formatted(FilterExpense.monthly));
       return ListView.separated(
         separatorBuilder: (context, index) => const Divider(),
         shrinkWrap: true,

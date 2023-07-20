@@ -16,7 +16,7 @@ class ExpenseMonthCardWidget extends StatelessWidget {
     required this.expenses,
   }) : super(key: key);
 
-  final List<Expense> expenses;
+  final List<Transaction> expenses;
   final String title;
   final double total;
 

@@ -137,7 +137,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     AccountSelectedEvent event,
     Emitter<AccountsState> emit,
   ) async {
-    final List<Expense> expenses =
+    final List<Transaction> expenses =
         getExpensesFromAccountIdUseCase(event.account.superId!);
     emit(AccountSelectedState(event.account, expenses));
   }
@@ -154,7 +154,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     FetchExpensesFromAccountIdEvent event,
     Emitter<AccountsState> emit,
   ) async {
-    List<Expense> expenses =
+    List<Transaction> expenses =
         getExpensesFromAccountIdUseCase(int.parse(event.accountId));
     emit(ExpensesFromAccountIdState(expenses));
   }
@@ -178,7 +178,8 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final AccountEntity? account = getAccountUseCase(
       params: GetAccountParams(accountId),
     );
-    final List<Expense> expenses = getExpensesFromAccountIdUseCase(accountId);
+    final List<Transaction> expenses =
+        getExpensesFromAccountIdUseCase(accountId);
     if (account != null) {
       emit(AccountAndExpensesState(account, expenses));
     }

@@ -9,6 +9,6 @@ class GetExpenseUseCase {
 
   final ExpenseRepository expenseRepository;
 
-  Future<Expense?> call(int expenseId) async =>
+  Future<Transaction?> call(int expenseId) async =>
       expenseRepository.fetchExpenseFromId(expenseId)?.toEntity();
 }

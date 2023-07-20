@@ -12,7 +12,7 @@ class SummaryMobileWidget extends StatelessWidget {
     required this.expenses,
   });
 
-  final List<Expense> expenses;
+  final List<Transaction> expenses;
 
   @override
   Widget build(BuildContext context) {

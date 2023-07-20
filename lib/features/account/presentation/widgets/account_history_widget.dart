@@ -14,7 +14,7 @@ class AccountHistoryWidget extends StatelessWidget {
     required this.summaryController,
   });
 
-  final List<Expense> expenses;
+  final List<Transaction> expenses;
   final SummaryController summaryController;
 
   @override
@@ -30,7 +30,7 @@ class AccountHistoryWidget extends StatelessWidget {
         valueListenable: summaryController.sortHomeExpenseNotifier,
         builder: (_, value, __) {
           final maps = groupBy(
-              expenses, (Expense element) => element.time.formatted(value));
+              expenses, (Transaction element) => element.time.formatted(value));
           return ListView.separated(
             separatorBuilder: (context, index) => const Divider(),
             shrinkWrap: true,

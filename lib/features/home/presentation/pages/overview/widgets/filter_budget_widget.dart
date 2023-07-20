@@ -13,7 +13,7 @@ class FilterOverviewWidget extends StatelessWidget {
     required this.expenses,
   });
 
-  final Widget Function(List<Expense> expenses) builder;
+  final Widget Function(List<Transaction> expenses) builder;
   final Iterable<TransactionModel> expenses;
   final ValueNotifier<TransactionType> valueNotifier;
 

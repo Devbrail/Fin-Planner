@@ -9,6 +9,6 @@ class GetExpensesFromAccountIdUseCase {
 
   final ExpenseRepository expenseRepository;
 
-  List<Expense> call(int accountId) =>
+  List<Transaction> call(int accountId) =>
       expenseRepository.fetchExpensesFromAccountId(accountId).toEntities();
 }

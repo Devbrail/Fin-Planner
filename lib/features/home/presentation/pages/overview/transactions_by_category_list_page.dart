@@ -24,7 +24,7 @@ class TransactionByCategoryListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int cid = int.parse(categoryId);
-    final List<Expense> expenses =
+    final List<Transaction> expenses =
         BlocProvider.of<HomeBloc>(context).fetchExpensesFromCategoryId(cid);
 
     return PaisaAnnotatedRegionWidget(

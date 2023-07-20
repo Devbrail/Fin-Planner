@@ -25,14 +25,15 @@ class OverviewCubit extends Cubit<BudgetState> {
 
   List<String> _filterTimes = [];
   final List<CategoryEntity> _defaultCategories = [];
-  Map<String, List<Expense>> _groupedExpenses = {};
+  Map<String, List<Transaction>> _groupedExpenses = {};
 
-  void fetchBudgetSummary(List<Expense> expenses, FilterExpense filterExpense) {
+  void fetchBudgetSummary(
+      List<Transaction> expenses, FilterExpense filterExpense) {
     if (expenses.isEmpty) {
       emit(EmptyFilterListState());
     } else {
-      _groupedExpenses = groupBy(
-          expenses, (Expense expense) => expense.time.formatted(filterExpense));
+      _groupedExpenses = groupBy(expenses,
+          (Transaction expense) => expense.time.formatted(filterExpense));
       final String time = selectedTime = _groupedExpenses.keys.first;
       _filterTimes = _groupedExpenses.keys.toList();
       emit(InitialSelectedState(time, _filterTimes));
@@ -48,14 +49,14 @@ class OverviewCubit extends Cubit<BudgetState> {
   }
 
   void fetchSelectedTimeExpenses(String time) {
-    final List<Expense> selectedTimeExpenses = _groupedExpenses[time] ?? [];
-    final Map<CategoryEntity, List<Expense>> categoryGroupedExpenses =
-        groupBy(selectedTimeExpenses, (Expense expense) {
+    final List<Transaction> selectedTimeExpenses = _groupedExpenses[time] ?? [];
+    final Map<CategoryEntity, List<Transaction>> categoryGroupedExpenses =
+        groupBy(selectedTimeExpenses, (Transaction expense) {
       return getCategoryUseCase(
               params: GetCategoryParams(expense.categoryId)) ??
           _defaultCategories.first;
     });
-    final List<MapEntry<CategoryEntity, List<Expense>>> mapExpenses =
+    final List<MapEntry<CategoryEntity, List<Transaction>>> mapExpenses =
         categoryGroupedExpenses.entries.toList().sorted(
             (a, b) => b.value.totalExpense.compareTo(a.value.totalExpense));
     emit(FilteredCategoryListState(
@@ -91,19 +92,19 @@ class InitialSelectedState extends BudgetState {
 class FilteredCategoryListState extends BudgetState {
   const FilteredCategoryListState(this.categoryGrouped, this.totalExpense);
 
-  final List<MapEntry<CategoryEntity, List<Expense>>> categoryGrouped;
+  final List<MapEntry<CategoryEntity, List<Transaction>>> categoryGrouped;
   final double totalExpense;
 }
 
 class EmptyFilterListState extends BudgetState {}
 
 class OverviewFilterArguments {
-  final Map<String, List<Expense>> groupedExpense;
+  final Map<String, List<Transaction>> groupedExpense;
 
   OverviewFilterArguments({required this.groupedExpense});
 
   OverviewFilterArguments copyWith({
-    Map<String, List<Expense>>? groupedExpense,
+    Map<String, List<Transaction>>? groupedExpense,
   }) {
     return OverviewFilterArguments(
       groupedExpense: groupedExpense ?? this.groupedExpense,

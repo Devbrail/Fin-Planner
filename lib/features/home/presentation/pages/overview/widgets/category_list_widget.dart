@@ -12,7 +12,7 @@ class CategoryListWidget extends StatelessWidget {
     required this.totalExpense,
   });
 
-  final List<MapEntry<CategoryEntity, List<Expense>>> categoryGrouped;
+  final List<MapEntry<CategoryEntity, List<Transaction>>> categoryGrouped;
   final double totalExpense;
 
   @override
@@ -23,7 +23,7 @@ class CategoryListWidget extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 124),
       itemCount: categoryGrouped.length,
       itemBuilder: (context, index) {
-        final MapEntry<CategoryEntity, List<Expense>> map =
+        final MapEntry<CategoryEntity, List<Transaction>> map =
             categoryGrouped[index];
         return InkWell(
           onTap: () {

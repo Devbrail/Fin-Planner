@@ -15,7 +15,7 @@ class ExpenseTotalWidget extends StatelessWidget {
     required this.expenses,
   }) : super(key: key);
 
-  final List<Expense> expenses;
+  final List<Transaction> expenses;
 
   @override
   Widget build(BuildContext context) {

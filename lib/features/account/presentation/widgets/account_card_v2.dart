@@ -15,7 +15,7 @@ class AccountCardV2 extends StatelessWidget {
   });
 
   final AccountEntity account;
-  final List<Expense> expenses;
+  final List<Transaction> expenses;
 
   @override
   Widget build(BuildContext context) {

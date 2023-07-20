@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/transaction/data/data_sources/local_transaction_data_manager.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/search_query.dart';
 
 @Injectable(as: ExpenseLocalDataManager)
 class LocalExpenseDataManagerImpl implements ExpenseLocalDataManager {
@@ -66,16 +67,8 @@ class LocalExpenseDataManagerImpl implements ExpenseLocalDataManager {
       .toList();
 
   @override
-  List<TransactionModel> filterExpenses(
-    String query,
-    int? accountId,
-    int? categoryId,
-  ) {
-    return expenseBox.search(
-      query,
-      selectedAccountId: accountId,
-      selectedCategoryId: categoryId,
-    );
+  List<TransactionModel> filterExpenses(SearchQuery query) {
+    return expenseBox.search(query);
   }
 
   @override
