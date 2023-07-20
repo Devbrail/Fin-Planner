@@ -50,7 +50,7 @@ class SummaryController {
       getCategoryUseCase(params: categoryId);
 
   AccountEntity? fetchAccountFromId(int accountId) =>
-      getAccountUseCase(params: accountId);
+      getAccountUseCase(params: GetAccountParams(accountId));
 
   List<Expense> fetchExpensesFromCategoryId(int categoryId) =>
       getExpensesFromCategoryIdUseCase(categoryId);
