@@ -1,5 +1,5 @@
-import 'package:paisa/features/currency_picker/data/models/country_model.dart';
-import 'package:paisa/features/currency_picker/domain/entities/country.dart';
+import 'package:paisa/features/country_picker/data/models/country_model.dart';
+import 'package:paisa/features/country_picker/domain/entities/country.dart';
 
 extension CountryHelper on CountryModel {
   Country toEntity() {

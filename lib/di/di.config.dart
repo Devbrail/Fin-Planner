@@ -55,13 +55,13 @@ import 'package:paisa/features/category/domain/use_case/update_category_use_case
     as _i85;
 import 'package:paisa/features/category/presentation/bloc/category_bloc.dart'
     as _i92;
-import 'package:paisa/features/currency_picker/data/repository/country_repository_impl.dart'
+import 'package:paisa/features/country_picker/data/repository/country_repository_impl.dart'
     as _i12;
-import 'package:paisa/features/currency_picker/domain/repository/country_repository.dart'
+import 'package:paisa/features/country_picker/domain/repository/country_repository.dart'
     as _i11;
-import 'package:paisa/features/currency_picker/domain/use_case/get_countries_user_case.dart'
+import 'package:paisa/features/country_picker/domain/use_case/get_contries_user_case.dart'
     as _i20;
-import 'package:paisa/features/currency_picker/presentation/cubit/country_picker_cubit.dart'
+import 'package:paisa/features/country_picker/presentation/cubit/country_picker_cubit.dart'
     as _i49;
 import 'package:paisa/features/debit/data/data_sources/local/debit_local_data_source_impl.dart'
     as _i29;
@@ -126,9 +126,9 @@ import 'package:paisa/features/search/presentation/cubit/search_cubit.dart'
 import 'package:paisa/features/settings/data/authenticate.dart' as _i3;
 import 'package:paisa/features/settings/data/file_handler.dart' as _i63;
 import 'package:paisa/features/settings/data/repository/csv_export_impl.dart'
-    as _i62;
-import 'package:paisa/features/settings/data/repository/json_export_import_impl.dart'
     as _i61;
+import 'package:paisa/features/settings/data/repository/json_export_import_impl.dart'
+    as _i62;
 import 'package:paisa/features/settings/data/repository/settings_repository_impl.dart'
     as _i39;
 import 'package:paisa/features/settings/domain/repository/import_export.dart'
@@ -182,8 +182,8 @@ import 'package:paisa/features/transaction/domain/use_case/update_expense_use_ca
 import 'package:paisa/features/transaction/presentation/bloc/transaction_bloc.dart'
     as _i82;
 
-import 'module/hive_module.dart' as _i96;
-import 'module/service_module.dart' as _i97;
+import 'module/hive_module.dart' as _i97;
+import 'module/service_module.dart' as _i96;
 
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
@@ -316,21 +316,21 @@ Future<_i1.GetIt> init(
   gh.singleton<_i59.DeleteTransactionUseCase>(
       _i59.DeleteTransactionUseCase(debtRepository: gh<_i51.DebtRepository>()));
   gh.lazySingleton<_i60.Export>(
-    () => _i61.JSONExportImpl(
-      gh<_i27.LocalAccountDataManager>(),
-      gh<_i28.LocalCategoryDataManager>(),
-      gh<_i14.ExpenseLocalDataManager>(),
-    ),
-    instanceName: 'json_export',
-  );
-  gh.lazySingleton<_i60.Export>(
-    () => _i62.CSVExport(
+    () => _i61.CSVExport(
       gh<_i13.DeviceInfoPlugin>(),
       gh<_i27.LocalAccountDataManager>(),
       gh<_i28.LocalCategoryDataManager>(),
       gh<_i14.ExpenseLocalDataManager>(),
     ),
     instanceName: 'csv',
+  );
+  gh.lazySingleton<_i60.Export>(
+    () => _i62.JSONExportImpl(
+      gh<_i27.LocalAccountDataManager>(),
+      gh<_i28.LocalCategoryDataManager>(),
+      gh<_i14.ExpenseLocalDataManager>(),
+    ),
+    instanceName: 'json_export',
   );
   gh.singleton<_i63.FileHandler>(_i63.FileHandler(
     gh<_i13.DeviceInfoPlugin>(),
@@ -359,7 +359,7 @@ Future<_i1.GetIt> init(
   gh.singleton<_i72.ImagePickerUseCase>(
       _i72.ImagePickerUseCase(gh<_i32.ProfileRepository>()));
   gh.lazySingleton<_i60.Import>(
-    () => _i61.JSONImportImpl(
+    () => _i62.JSONImportImpl(
       gh<_i13.DeviceInfoPlugin>(),
       gh<_i27.LocalAccountDataManager>(),
       gh<_i28.LocalCategoryDataManager>(),
@@ -460,6 +460,6 @@ Future<_i1.GetIt> init(
   return getIt;
 }
 
-class _$HiveBoxModule extends _i96.HiveBoxModule {}
+class _$ServiceBoxModule extends _i96.ServiceBoxModule {}
 
-class _$ServiceBoxModule extends _i97.ServiceBoxModule {}
+class _$HiveBoxModule extends _i97.HiveBoxModule {}

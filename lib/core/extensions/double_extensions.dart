@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
-import 'package:paisa/features/currency_picker/domain/entities/country.dart';
+import 'package:paisa/features/country_picker/domain/entities/country.dart';
 import 'package:provider/provider.dart';
 
 extension MappingOnDouble on double {

@@ -5,10 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
-import 'package:paisa/features/currency_picker/data/models/country_model.dart';
+import 'package:paisa/features/country_picker/data/models/country_model.dart';
 
 import 'package:paisa/core/widgets/paisa_widget.dart';
-import 'package:paisa/features/currency_picker/presentation/cubit/country_picker_cubit.dart';
+import 'package:paisa/features/country_picker/presentation/cubit/country_picker_cubit.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class CountryPickerPage extends StatefulWidget {

@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/constants/constants.dart';
-import 'package:paisa/features/currency_picker/data/models/country_model.dart';
-import 'package:paisa/features/currency_picker/domain/use_case/get_countries_user_case.dart';
+import 'package:paisa/features/country_picker/data/models/country_model.dart';
+import 'package:paisa/features/country_picker/domain/use_case/get_contries_user_case.dart';
 import 'package:paisa/features/settings/domain/use_case/setting_use_case.dart';
 
 part 'country_picker_state.dart';

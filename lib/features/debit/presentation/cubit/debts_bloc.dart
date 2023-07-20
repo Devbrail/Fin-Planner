@@ -77,12 +77,14 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     }
     if (event.isUpdate) {
       await addDebtUseCase(
-        amount: amount,
-        currentDateTime: dateTime,
-        debtType: debtType,
-        description: description ?? '',
-        dueDateTime: dueDateTime,
-        name: name,
+        params: AddDebit(
+          description: description ?? '',
+          name: name,
+          amount: amount,
+          currentDateTime: dateTime,
+          dueDateTime: dueDateTime,
+          debtType: debtType,
+        ),
       );
     } else {
       if (currentDebt != null) {
@@ -120,9 +122,11 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     Emitter<DebtsState> emit,
   ) async {
     await addTransactionUseCase(
-      amount: event.amount,
-      currentDateTime: event.dateTime,
-      parentId: event.debt.superId!,
+      params: AddDebitTransaction(
+        event.amount,
+        event.dateTime,
+        event.debt.superId!,
+      ),
     );
     emit(TransactionAddedState());
   }
@@ -172,7 +176,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     Emitter<DebtsState> emit,
   ) async {
     await deleteDebtUseCase(event.id);
-    await deleteTransactionUseCase(event.id);
+    await deleteTransactionUseCase(params: event.id);
     emit(DeleteDebtsState());
   }
 
@@ -180,7 +184,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     DeleteTransactionEvent event,
     Emitter<DebtsState> emit,
   ) async {
-    await deleteTransactionUseCase(event.id);
+    await deleteTransactionUseCase(params: event.id);
     emit(DeleteDebtsState());
   }
 }

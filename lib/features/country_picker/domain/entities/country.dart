@@ -1,4 +1,4 @@
-import 'package:paisa/features/currency_picker/data/models/country_model.dart';
+import 'package:paisa/features/country_picker/data/models/country_model.dart';
 
 class Country extends CountryModel {
   Country({

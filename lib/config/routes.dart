@@ -11,8 +11,8 @@ import 'package:paisa/features/category/presentation/pages/add/add_category_page
 import 'package:paisa/features/category/presentation/pages/category_icon_picker_page.dart';
 import 'package:paisa/features/category/presentation/pages/category_list_page.dart';
 import 'package:paisa/features/category/presentation/pages/selector/category_selector_page.dart';
-import 'package:paisa/features/currency_picker/presentation/cubit/country_picker_cubit.dart';
-import 'package:paisa/features/currency_picker/presentation/pages/country_picker_page.dart';
+import 'package:paisa/features/country_picker/presentation/cubit/country_picker_cubit.dart';
+import 'package:paisa/features/country_picker/presentation/pages/country_picker_page.dart';
 import 'package:paisa/features/debit/presentation/pages/add/add_debt_page.dart';
 import 'package:paisa/features/home/presentation/pages/home/home_page.dart';
 import 'package:paisa/features/home/presentation/pages/overview/transactions_by_category_list_page.dart';

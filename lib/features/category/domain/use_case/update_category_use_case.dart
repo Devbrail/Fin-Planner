@@ -4,7 +4,7 @@ import 'package:paisa/features/category/domain/entities/update_category.dart';
 import 'package:paisa/features/category/domain/repository/category_repository.dart';
 
 @singleton
-class UpdateCategoryUseCase extends UseCase<Future<void>, UpdateCategory> {
+class UpdateCategoryUseCase implements UseCase<Future<void>, UpdateCategory> {
   UpdateCategoryUseCase({required this.categoryRepository});
 
   final CategoryRepository categoryRepository;

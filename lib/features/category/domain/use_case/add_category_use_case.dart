@@ -4,10 +4,11 @@ import 'package:paisa/features/category/domain/entities/add_category.dart';
 import 'package:paisa/features/category/domain/repository/category_repository.dart';
 
 @singleton
-class AddCategoryUseCase extends UseCase<Future<void>, AddCategory> {
+class AddCategoryUseCase implements UseCase<Future<void>, AddCategory> {
   AddCategoryUseCase({required this.categoryRepository});
 
   final CategoryRepository categoryRepository;
+
   @override
   Future<void> call({AddCategory? params}) {
     return categoryRepository.addCategory(

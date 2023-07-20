@@ -5,7 +5,7 @@ import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/account/domain/repository/account_repository.dart';
 
 @singleton
-class GetAccountUseCase extends UseCase<AccountEntity?, int> {
+class GetAccountUseCase implements UseCase<AccountEntity?, int> {
   GetAccountUseCase({required this.accountRepository});
 
   final AccountRepository accountRepository;

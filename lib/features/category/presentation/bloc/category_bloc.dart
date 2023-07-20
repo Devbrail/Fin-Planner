@@ -54,7 +54,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final int? categoryId = int.tryParse(event.categoryId ?? '');
     if (categoryId == null) return;
 
-    final CategoryEntity? category = getCategoryUseCase(categoryId);
+    final CategoryEntity? category = getCategoryUseCase(params: categoryId);
     if (category != null) {
       categoryTitle = category.name;
       categoryDesc = category.description;
@@ -121,7 +121,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     CategoryDeleteEvent event,
     Emitter<CategoryState> emit,
   ) async {
-    await deleteCategoryUseCase(int.parse(event.categoryId));
+    await deleteCategoryUseCase(params: int.tryParse(event.categoryId));
     await deleteExpensesFromCategoryIdUseCase(int.parse(event.categoryId));
     emit(CategoryDeletedState());
   }
