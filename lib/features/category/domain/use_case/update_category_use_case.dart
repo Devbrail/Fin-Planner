@@ -12,7 +12,7 @@ class UpdateCategoryUseCase
 
   @override
   Future<void> call({UpdateCategoryParams? params}) {
-    return categoryRepository.updateCategory(
+    return categoryRepository.update(
       key: params!.key,
       color: params.color!,
       icon: params.icon,

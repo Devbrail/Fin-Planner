@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:paisa/core/common.dart';
+import 'package:provider/provider.dart';
 
-class VariableSizeFAB extends StatelessWidget {
-  const VariableSizeFAB({
+class VariableFABSize extends StatelessWidget {
+  const VariableFABSize({
     super.key,
     required this.onPressed,
     required this.icon,
-    @Named('settings') required this.settings,
   });
 
   final IconData icon;
   final VoidCallback onPressed;
-  final Box<dynamic> settings;
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<dynamic>>(
-      valueListenable: settings.listenable(keys: [smallSizeFabKey]),
+      valueListenable: Provider.of<Box<dynamic>>(context).listenable(
+        keys: [
+          smallSizeFabKey,
+        ],
+      ),
       builder: (context, value, child) {
         final isSmallSize = value.get(smallSizeFabKey, defaultValue: false);
         if (isSmallSize) {

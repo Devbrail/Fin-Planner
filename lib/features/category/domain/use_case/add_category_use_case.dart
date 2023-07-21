@@ -11,7 +11,7 @@ class AddCategoryUseCase implements UseCase<void, AddCategoryParams> {
 
   @override
   Future<void> call({AddCategoryParams? params}) {
-    return categoryRepository.addCategory(
+    return categoryRepository.add(
       name: params!.name,
       desc: params.description,
       icon: params.icon,

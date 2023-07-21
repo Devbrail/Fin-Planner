@@ -5,8 +5,8 @@ import 'package:paisa/features/debit/data/models/debit_model.dart';
 import 'package:paisa/features/debit/data/models/debit_transactions_model.dart';
 import 'package:paisa/features/debit/domain/repository/debit_repository.dart';
 
-@Singleton(as: DebtRepository)
-class DebtRepositoryImpl extends DebtRepository {
+@Singleton(as: DebitRepository)
+class DebtRepositoryImpl extends DebitRepository {
   DebtRepositoryImpl({required this.dataSource});
 
   final LocalDebitDataSource dataSource;

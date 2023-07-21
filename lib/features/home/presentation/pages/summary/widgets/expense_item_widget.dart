@@ -7,7 +7,7 @@ import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 class ExpenseItemWidget extends StatelessWidget {
   const ExpenseItemWidget({
@@ -19,15 +19,15 @@ class ExpenseItemWidget extends StatelessWidget {
 
   final AccountEntity account;
   final CategoryEntity category;
-  final Transaction expense;
+  final TransactionEntity expense;
 
   String getSubtitle(BuildContext context) {
     if (expense.type == TransactionType.transfer) {
-      return expense.time.shortDayString;
+      return expense.time!.shortDayString;
     } else {
       return context.loc.transactionSubTittleText(
         account.bankName ?? '',
-        expense.time.shortDayString,
+        expense.time!.shortDayString,
       );
     }
   }
@@ -44,7 +44,7 @@ class ExpenseItemWidget extends StatelessWidget {
       },
       child: ListTile(
         title: Text(
-          expense.name,
+          expense.name ?? '',
           style: GoogleFonts.manrope(
             textStyle: context.bodyMedium,
             fontWeight: FontWeight.w600,
@@ -70,7 +70,7 @@ class ExpenseItemWidget extends StatelessWidget {
           ),
         ),
         trailing: Text(
-          expense.currency.toFormateCurrency(context),
+          expense.currency!.toFormateCurrency(context),
           style: GoogleFonts.manrope(
             textStyle: context.bodyMedium?.copyWith(
               color: expense.type?.color(context),
@@ -90,12 +90,8 @@ class ExpenseTransferItemWidget extends StatelessWidget {
     required this.toAccount,
   }) : super(key: key);
 
-  final Transaction expense;
+  final TransactionEntity expense;
   final AccountEntity fromAccount, toAccount;
-
-  String getSubtitle() {
-    return expense.time.shortDayString;
-  }
 
   String get title {
     return 'Transfer from ${fromAccount.bankName} to ${toAccount.bankName}';
@@ -113,7 +109,7 @@ class ExpenseTransferItemWidget extends StatelessWidget {
         ),
         child: ListTile(
           title: Text(title),
-          subtitle: Text(getSubtitle()),
+          subtitle: Text(expense.time!.shortDayString),
           leading: CircleAvatar(
             backgroundColor: context.primary.withOpacity(0.2),
             child: Icon(
@@ -122,7 +118,7 @@ class ExpenseTransferItemWidget extends StatelessWidget {
             ),
           ),
           trailing: Text(
-            '${expense.type?.sign}${expense.currency.toFormateCurrency(context)}',
+            '${expense.type?.sign}${expense.currency!.toFormateCurrency(context)}',
             style: GoogleFonts.manrope(
               textStyle: context.bodyLarge?.copyWith(
                 color: expense.type?.color(context),

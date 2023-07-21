@@ -10,7 +10,7 @@ class GetDebitTransactionsUseCase
     implements UseCase<List<DebitTransaction>, GetDebitTransactionsParams> {
   GetDebitTransactionsUseCase({required this.debtRepository});
 
-  final DebtRepository debtRepository;
+  final DebitRepository debtRepository;
 
   @override
   List<DebitTransaction> call({GetDebitTransactionsParams? params}) {

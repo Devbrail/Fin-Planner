@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
-import 'package:paisa/features/transaction/domain/use_case/expense_use_case.dart';
+import 'package:paisa/features/transaction/domain/use_case/transaction_use_case.dart';
 
 part 'category_event.dart';
 part 'category_state.dart';
@@ -32,7 +32,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
   final AddCategoryUseCase addCategoryUseCase;
   final DeleteCategoryUseCase deleteCategoryUseCase;
-  final DeleteExpensesFromCategoryIdUseCase deleteExpensesFromCategoryIdUseCase;
+  final DeleteTransactionsByCategoryIdUseCase
+      deleteExpensesFromCategoryIdUseCase;
   final GetCategoryUseCase getCategoryUseCase;
   final UpdateCategoryUseCase updateCategoryUseCase;
 

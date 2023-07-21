@@ -23,7 +23,7 @@ abstract class AccountRepository {
 
   Future<void> deleteAccount(int key);
 
-  AccountModel? fetchAccountFromId(int accountId);
+  AccountModel? fetchAccountFromId(int? accountId);
 
   List<AccountModel> getAccounts();
 

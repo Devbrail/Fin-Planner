@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:injectable/injectable.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/intro/presentation/pages/intro_set_name_widget.dart';
 import 'package:paisa/features/intro/presentation/widgets/intro_image_picker_widget.dart';
+import 'package:provider/provider.dart';
 
 class UserOnboardingPage extends StatefulWidget {
   const UserOnboardingPage({
     super.key,
-    @Named('settings') required this.settings,
   });
-  final Box<dynamic> settings;
 
   @override
   State<UserOnboardingPage> createState() => _UserOnboardingPageState();
@@ -59,7 +56,7 @@ class _UserOnboardingPageState extends State<UserOnboardingPage> {
                 onPressed: () async {
                   if (currentIndex == 0) {
                     if (_formState.currentState!.validate()) {
-                      widget.settings
+                      Provider.of<Box<dynamic>>(context)
                           .put(userNameKey, _nameController.text)
                           .then((value) {
                         return controller.nextPage(
@@ -69,10 +66,11 @@ class _UserOnboardingPageState extends State<UserOnboardingPage> {
                       });
                     }
                   } else if (currentIndex == 1) {
-                    final String image =
-                        widget.settings.get(userImageKey, defaultValue: '');
+                    final String image = Provider.of<Box<dynamic>>(context)
+                        .get(userImageKey, defaultValue: '');
                     if (image.isEmpty) {
-                      await widget.settings.put(userImageKey, 'no-image');
+                      await Provider.of<Box<dynamic>>(context)
+                          .put(userImageKey, 'no-image');
                     }
                     if (context.mounted) context.go(categorySelectorPath);
                   }
@@ -101,7 +99,7 @@ class _UserOnboardingPageState extends State<UserOnboardingPage> {
             formState: _formState,
             nameController: _nameController,
           ),
-          IntroImagePickerWidget(settings: settings),
+          const IntroImagePickerWidget(),
         ],
       ),
     );

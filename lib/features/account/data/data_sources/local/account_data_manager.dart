@@ -10,7 +10,7 @@ abstract class LocalAccountDataManager {
 
   List<AccountModel> accounts();
 
-  AccountModel? findById(int accountId);
+  AccountModel? findById(int? accountId);
 
   Iterable<AccountModel> export();
 
@@ -47,7 +47,7 @@ class LocalAccountDataManagerImpl implements LocalAccountDataManager {
   Iterable<AccountModel> export() => accountBox.values;
 
   @override
-  AccountModel? findById(int accountId) {
+  AccountModel? findById(int? accountId) {
     return accountBox.values
         .firstWhereOrNull((element) => element.superId == accountId);
   }

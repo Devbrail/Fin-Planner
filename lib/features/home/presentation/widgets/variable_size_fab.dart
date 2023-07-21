@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:paisa/core/common.dart';
-import 'package:paisa/core/widgets/small_size_fab.dart';
+import 'package:paisa/core/widgets/variable_fab_size.dart';
 import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/main.dart';
 
 class HomeFloatingActionButtonWidget extends StatelessWidget {
   const HomeFloatingActionButtonWidget({
@@ -71,10 +69,9 @@ class HomeFloatingActionButtonWidget extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         if (state is CurrentIndexState && state.currentPage != 5) {
-          return VariableSizeFAB(
+          return VariableFABSize(
             onPressed: () => _handleClick(context, state.currentPage),
             icon: state.currentPage != 3 ? Icons.add : Icons.date_range,
-            settings: getIt.get<Box<dynamic>>(instanceName: 'settings'),
           );
         } else {
           return const SizedBox.shrink();

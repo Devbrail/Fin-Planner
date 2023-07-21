@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 class FilterOverviewWidget extends StatelessWidget {
   const FilterOverviewWidget({
@@ -13,7 +13,7 @@ class FilterOverviewWidget extends StatelessWidget {
     required this.expenses,
   });
 
-  final Widget Function(List<Transaction> expenses) builder;
+  final Widget Function(List<TransactionEntity> expenses) builder;
   final Iterable<TransactionModel> expenses;
   final ValueNotifier<TransactionType> valueNotifier;
 

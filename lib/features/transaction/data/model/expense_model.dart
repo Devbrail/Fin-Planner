@@ -16,9 +16,6 @@ class TransactionModel extends HiveObject with EquatableMixin {
     required this.categoryId,
     this.superId,
     this.description,
-    this.fromAccountId,
-    this.toAccountId,
-    this.transferAmount = 0.0,
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
@@ -30,40 +27,28 @@ class TransactionModel extends HiveObject with EquatableMixin {
         accountId: json['accountId'],
         type: (json['type'] as String).transactionType,
         description: json['description'],
-        fromAccountId: json['fromAccountId'],
-        toAccountId: json['toAccountId'],
-        transferAmount: json['transferAmount'],
       )..superId = json['superId'];
 
   @HiveField(5)
-  int accountId;
+  int? accountId;
 
   @HiveField(6)
-  int categoryId;
+  int? categoryId;
 
   @HiveField(1)
-  double currency;
+  double? currency;
 
   @HiveField(8)
   String? description;
 
-  @HiveField(9)
-  int? fromAccountId;
-
   @HiveField(0)
-  String name;
+  String? name;
 
   @HiveField(7)
   int? superId;
 
   @HiveField(3)
-  DateTime time;
-
-  @HiveField(10)
-  int? toAccountId;
-
-  @HiveField(11, defaultValue: 0.0)
-  double transferAmount;
+  DateTime? time;
 
   @HiveField(4, defaultValue: TransactionType.expense)
   TransactionType? type;
@@ -77,22 +62,18 @@ class TransactionModel extends HiveObject with EquatableMixin {
       type,
       accountId,
       categoryId,
-      transferAmount,
     ];
   }
 
   Map<String, dynamic> toJson() => {
         'name': name,
         'currency': currency,
-        'time': time.toIso8601String(),
+        'time': time?.toIso8601String(),
         'type': type?.type,
         'accountId': accountId,
         'categoryId': categoryId,
         'superId': superId,
         'description': description,
-        'fromAccountId': fromAccountId,
-        'toAccountId': toAccountId,
-        'transferAmount': transferAmount,
       };
 
   TransactionModel copyWith({
@@ -119,9 +100,6 @@ class TransactionModel extends HiveObject with EquatableMixin {
       categoryId: categoryId ?? this.categoryId,
       superId: superId ?? this.superId,
       description: description ?? this.description,
-      fromAccountId: fromAccountId ?? this.fromAccountId,
-      toAccountId: toAccountId ?? this.toAccountId,
-      transferAmount: transferAmount ?? this.transferAmount,
     );
   }
 }

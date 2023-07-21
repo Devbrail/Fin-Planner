@@ -1,18 +1,15 @@
 import 'package:paisa/core/enum/transaction_type.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
 
-abstract class ExpenseRepository {
+abstract class TransactionRepository {
   Future<void> addExpense(
-    String name,
-    double amount,
-    DateTime time,
-    int category,
-    int account,
-    TransactionType transactionType,
+    String? name,
+    double? amount,
+    DateTime? time,
+    int? category,
+    int? account,
+    TransactionType? transactionType,
     String? description,
-    int? fromAccountId,
-    int? toAccountId,
-    double transferAmount,
   );
 
   Future<void> clearExpense(int expenseId);
@@ -31,12 +28,12 @@ abstract class ExpenseRepository {
 
   Future<void> updateExpense(
     int key,
-    String name,
-    double currency,
-    DateTime time,
-    int categoryId,
-    int accountId,
-    TransactionType transactionType,
+    String? name,
+    double? currency,
+    DateTime? time,
+    int? categoryId,
+    int? accountId,
+    TransactionType? transactionType,
     String? description,
   );
 

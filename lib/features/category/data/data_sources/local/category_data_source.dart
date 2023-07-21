@@ -10,7 +10,7 @@ abstract class LocalCategoryDataManager {
 
   Future<List<CategoryModel>> categories();
 
-  CategoryModel? findById(int categoryId);
+  CategoryModel? findById(int? categoryId);
 
   Iterable<CategoryModel> export();
 
@@ -62,7 +62,7 @@ class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
   Iterable<CategoryModel> export() => categoryBox.values;
 
   @override
-  CategoryModel? findById(int categoryId) =>
+  CategoryModel? findById(int? categoryId) =>
       categoryBox.values.firstWhereOrNull(
         (element) => element.superId == categoryId,
       );

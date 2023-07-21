@@ -1,14 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/use_case/use_case.dart';
-
-import '../repository/debit_repository.dart';
+import 'package:paisa/features/debit/domain/repository/debit_repository.dart';
 
 @singleton
-class DeleteDebtUseCase implements UseCase<void, DeleteDebitParams> {
-  DeleteDebtUseCase({required this.debtRepository});
+class DeleteDebitUseCase implements UseCase<void, DeleteDebitParams> {
+  DeleteDebitUseCase({required this.debtRepository});
 
-  final DebtRepository debtRepository;
+  final DebitRepository debtRepository;
 
   @override
   Future<void> call({DeleteDebitParams? params}) {

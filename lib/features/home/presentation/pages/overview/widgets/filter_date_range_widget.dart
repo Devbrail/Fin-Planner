@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:paisa/core/common.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 class FilterDateRangeWidget extends StatelessWidget {
   const FilterDateRangeWidget({
@@ -11,9 +11,9 @@ class FilterDateRangeWidget extends StatelessWidget {
     required this.dateTimeRangeNotifier,
   });
 
-  final Widget Function(List<Transaction> expenses) builder;
+  final Widget Function(List<TransactionEntity> expenses) builder;
   final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier;
-  final Iterable<Transaction> expenses;
+  final Iterable<TransactionEntity> expenses;
 
   @override
   Widget build(BuildContext context) {

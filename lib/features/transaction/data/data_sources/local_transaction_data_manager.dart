@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/features/transaction/data/model/expense_model.dart';
 import 'package:paisa/features/transaction/data/model/search_query.dart';
-
-import '../model/expense_model.dart';
 
 abstract class ExpenseLocalDataManager {
   Future<void> add(TransactionModel expense);

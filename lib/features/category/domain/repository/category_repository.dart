@@ -1,7 +1,7 @@
 import 'package:paisa/features/category/data/model/category_model.dart';
 
 abstract class CategoryRepository {
-  Future<void> addCategory({
+  Future<void> add({
     required String? name,
     required int? icon,
     required int? color,
@@ -11,11 +11,11 @@ abstract class CategoryRepository {
     required bool? isDefault,
   });
 
-  Future<void> deleteCategory(int key);
+  Future<void> delete(int key);
 
-  CategoryModel? fetchCategoryFromId(int categoryId);
+  CategoryModel? fetchById(int? categoryId);
 
-  Future<void> updateCategory({
+  Future<void> update({
     required int? key,
     required String? name,
     required int? icon,
@@ -25,7 +25,7 @@ abstract class CategoryRepository {
     required bool isBudget,
   });
 
-  Future<void> clearAll();
+  Future<void> clear();
 
   List<CategoryModel> defaultCategories();
 }

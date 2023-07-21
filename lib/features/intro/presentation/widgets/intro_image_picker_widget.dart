@@ -2,26 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:injectable/injectable.dart';
 import 'package:paisa/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:paisa/main.dart';
 
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
+import 'package:provider/provider.dart';
 
 class IntroImagePickerWidget extends StatelessWidget {
   const IntroImagePickerWidget({
     Key? key,
-    @Named('settings') required this.settings,
   }) : super(key: key);
 
-  final Box<dynamic> settings;
-
-  void _pickImage() {
+  void _pickImage(BuildContext context) {
     final ImagePicker picker = ImagePicker();
     picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
       if (pickedFile != null) {
-        settings.put(userImageKey, pickedFile.path);
+        Provider.of<Box<dynamic>>(context).put(userImageKey, pickedFile.path);
       }
     });
   }
@@ -66,7 +63,7 @@ class IntroImagePickerWidget extends StatelessWidget {
               const SizedBox(height: 16),
               Center(
                 child: PaisaUserImageWidget(
-                  pickImage: _pickImage,
+                  pickImage: () => _pickImage(context),
                   maxRadius: 72,
                   useDefault: true,
                 ),

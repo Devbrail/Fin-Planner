@@ -37,22 +37,22 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     on<DeleteTransactionEvent>(_deleteTransaction);
   }
 
-  final AddDebtUseCase addDebtUseCase;
-  final AddTransactionUseCase addTransactionUseCase;
+  final AddDebitUseCase addDebtUseCase;
+  final AddDebitTransactionUseCase addTransactionUseCase;
   double? currentAmount;
   Debit? currentDebt;
   DebtType currentDebtType = DebtType.debt;
   String? currentDescription;
   String? currentName;
-  final DeleteDebtUseCase deleteDebtUseCase;
+  final DeleteDebitUseCase deleteDebtUseCase;
   final DeleteDebitTransactionUseCase deleteDebitTransactionUseCase;
   final DeleteDebitTransactionsByDebitIdUseCase
       deleteDebitTransactionsByDebitIdUseCase;
   DateTime? endDateTime;
-  final GetDebtUseCase getDebtUseCase;
+  final GetDebitUseCase getDebtUseCase;
   final GetDebitTransactionsUseCase getTransactionsUseCase;
   DateTime? startDateTime;
-  final UpdateDebtUseCase updateDebtUseCase;
+  final UpdateDebitUseCase updateDebtUseCase;
 
   Future<void> addDebt(
     AddOrUpdateEvent event,
@@ -184,7 +184,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     final int debitId = event.id;
     await deleteDebtUseCase(params: DeleteDebitParams(debitId));
     await deleteDebitTransactionsByDebitIdUseCase(
-        params: DeleteDebitTransactionsbyDebitIdParams(debitId));
+        params: DeleteDebitTransactionsDebitIdParams(debitId));
     emit(DeleteDebtsState());
   }
 

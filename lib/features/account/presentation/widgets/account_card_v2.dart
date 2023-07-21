@@ -5,7 +5,7 @@ import 'package:paisa/core/common.dart';
 import 'package:paisa/core/enum/card_type.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 class AccountCardV2 extends StatelessWidget {
   const AccountCardV2({
@@ -15,7 +15,7 @@ class AccountCardV2 extends StatelessWidget {
   });
 
   final AccountEntity account;
-  final List<Transaction> expenses;
+  final List<TransactionEntity> expenses;
 
   @override
   Widget build(BuildContext context) {

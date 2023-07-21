@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/theme/custom_color.dart';
-import 'package:paisa/core/widgets/paisa_widget.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/account/presentation/widgets/summary_month_card_widget.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 class AccountSummaryWidget extends StatelessWidget {
   const AccountSummaryWidget({
@@ -13,7 +13,7 @@ class AccountSummaryWidget extends StatelessWidget {
     this.useAccountsList = false,
   });
 
-  final List<Transaction> expenses;
+  final List<TransactionEntity> expenses;
   final bool useAccountsList;
 
   @override

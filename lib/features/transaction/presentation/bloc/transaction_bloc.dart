@@ -12,9 +12,8 @@ import 'package:paisa/features/account/domain/use_case/account_use_case.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
 import 'package:paisa/features/settings/domain/use_case/settings_use_case.dart';
-import 'package:paisa/features/transaction/data/model/expense_model.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
-import 'package:paisa/features/transaction/domain/use_case/expense_use_case.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
+import 'package:paisa/features/transaction/domain/use_case/transaction_use_case.dart';
 
 part 'transaction_event.dart';
 part 'transaction_state.dart';
@@ -23,13 +22,13 @@ part 'transaction_state.dart';
 class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
   TransactionBloc(
     this.settingsUseCase, {
-    required this.expenseUseCase,
+    required this.getTransactionUseCase,
     required this.accountUseCase,
-    required this.addExpenseUseCase,
-    required this.deleteExpenseUseCase,
-    required this.updateExpensesUseCase,
+    required this.addTransactionUseCase,
+    required this.deleteTransactionUseCase,
+    required this.updateTransactionUseCase,
     required this.accountsUseCase,
-    required this.defaultCategoriesUseCase,
+    required this.getDefaultCategoriesUseCase,
   }) : super(ExpenseInitial()) {
     on<ExpenseEvent>((event, emit) {});
     on<AddOrUpdateExpenseEvent>(_addExpense);
@@ -45,14 +44,14 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
 
   final GetAccountUseCase accountUseCase;
   final GetAccountsUseCase accountsUseCase;
-  final AddExpenseUseCase addExpenseUseCase;
+  final AddTransactionUseCase addTransactionUseCase;
   String? currentDescription;
-  Transaction? currentExpense;
-  final GetDefaultCategoriesUseCase defaultCategoriesUseCase;
-  final DeleteExpenseUseCase deleteExpenseUseCase;
-  double? expenseAmount;
+  TransactionEntity? currentExpense;
+  final GetDefaultCategoriesUseCase getDefaultCategoriesUseCase;
+  final DeleteTransactionUseCase deleteTransactionUseCase;
+  double? transactionAmount;
   String? expenseName;
-  final GetExpenseUseCase expenseUseCase;
+  final GetTransactionUseCase getTransactionUseCase;
   RecurringType recurringType = RecurringType.daily;
   int? selectedAccountId;
   int? selectedCategoryId;
@@ -61,8 +60,8 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
   TimeOfDay timeOfDay = TimeOfDay.now();
   AccountEntity? fromAccount, toAccount;
   TransactionType transactionType = TransactionType.expense;
-  double? transferAmount;
-  final UpdateExpensesUseCase updateExpensesUseCase;
+
+  final UpdateTransactionUseCase updateTransactionUseCase;
 
   Future<void> _fetchExpenseFromId(
     FindTransactionFromIdEvent event,
@@ -74,18 +73,23 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
       return;
     }
 
-    final Transaction? expense = await expenseUseCase(expenseId);
-    if (expense != null) {
-      expenseAmount = expense.currency;
-      expenseName = expense.name;
-      selectedCategoryId = expense.categoryId;
-      selectedAccountId = expense.accountId;
-      selectedDate = expense.time;
-      timeOfDay = TimeOfDay.fromDateTime(expense.time);
-      transactionType = expense.type ?? TransactionType.expense;
-      currentDescription = expense.description;
-      currentExpense = expense;
-      emit(TransactionFoundState(expense));
+    final TransactionEntity? transaction =
+        await getTransactionUseCase(params: GetTransactionParams(expenseId));
+    if (transaction != null) {
+      transactionAmount = transaction.currency;
+      expenseName = transaction.name;
+      selectedCategoryId = transaction.categoryId;
+      selectedAccountId = transaction.accountId;
+      selectedDate = transaction.time ?? DateTime.now();
+      if (transaction.time == null) {
+        timeOfDay = TimeOfDay.now();
+      } else {
+        timeOfDay = TimeOfDay.fromDateTime(transaction.time!);
+      }
+      transactionType = transaction.type ?? TransactionType.expense;
+      currentDescription = transaction.description;
+      currentExpense = transaction;
+      emit(TransactionFoundState(transaction));
       Future.delayed(Duration.zero)
           .then((value) => add(ChangeTransactionTypeEvent(transactionType)));
     } else {
@@ -104,7 +108,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
           const TransactionErrorState('Select both from and to accounts'),
         );
       }
-      final double? validAmount = transferAmount;
+      final double? validAmount = transactionAmount;
       final int? categoryId = selectedCategoryId;
       if (validAmount == null || validAmount == 0.0) {
         return emit(const TransactionErrorState('Enter valid amount'));
@@ -112,7 +116,8 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
       if (categoryId == null) {
         return emit(const TransactionErrorState('Select category'));
       }
-      await addExpenseUseCase(
+      await addTransactionUseCase(
+          params: AddTransactionParams(
         name:
             'Transfer from ${fromAccount!.bankName} to ${toAccount!.bankName}',
         amount: validAmount,
@@ -121,9 +126,10 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
         accountId: fromAccount!.superId!,
         transactionType: TransactionType.expense,
         description: '',
-      );
+      ));
 
-      await addExpenseUseCase(
+      await addTransactionUseCase(
+          params: AddTransactionParams(
         name:
             'Received from ${fromAccount?.bankName} to ${toAccount?.bankName}',
         amount: validAmount,
@@ -132,11 +138,11 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
         accountId: toAccount!.superId!,
         transactionType: TransactionType.income,
         description: '',
-      );
+      ));
 
       emit(const TransactionAdded(isAddOrUpdate: true));
     } else {
-      final double? validAmount = expenseAmount;
+      final double? validAmount = transactionAmount;
       final String? name = expenseName;
       final int? categoryId = selectedCategoryId;
       final int? accountId = selectedAccountId;
@@ -158,7 +164,8 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
       }
 
       if (event.isAdding) {
-        await addExpenseUseCase(
+        await addTransactionUseCase(
+            params: AddTransactionParams(
           name: name,
           amount: validAmount,
           time: dateTime,
@@ -166,18 +173,20 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
           accountId: accountId,
           transactionType: transactionType,
           description: description,
-        );
+        ));
       } else {
         if (currentExpense == null) return;
-        currentExpense!
-          ..accountId = accountId
-          ..categoryId = categoryId
-          ..currency = validAmount
-          ..name = name
-          ..time = dateTime
-          ..type = transactionType
-          ..description = description;
-        await updateExpensesUseCase(currentExpense!);
+        await updateTransactionUseCase(
+            params: UpdateTransactionParams(
+          currentExpense!.superId!,
+          accountId: accountId,
+          categoryId: categoryId,
+          currency: validAmount,
+          description: description,
+          name: name,
+          time: dateTime,
+          type: transactionType,
+        ));
       }
       emit(TransactionAdded(isAddOrUpdate: event.isAdding));
     }
@@ -187,7 +196,10 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
     ClearExpenseEvent event,
     Emitter<TransactionState> emit,
   ) async {
-    await deleteExpenseUseCase(int.parse(event.expenseId));
+    final int transactionId = int.parse(event.expenseId);
+    await deleteTransactionUseCase(
+      params: DeleteTransactionParams(transactionId),
+    );
     emit(TransactionDeletedState());
   }
 
@@ -250,7 +262,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
     FetchDefaultCategoryEvent event,
     Emitter<TransactionState> emit,
   ) {
-    final List<CategoryEntity> categories = defaultCategoriesUseCase();
+    final List<CategoryEntity> categories = getDefaultCategoriesUseCase();
     emit(DefaultCategoriesState(categories));
   }
 }

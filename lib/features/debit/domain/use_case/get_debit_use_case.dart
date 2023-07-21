@@ -2,15 +2,14 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/use_case/use_case.dart';
-
-import '../entities/debit.dart';
-import '../repository/debit_repository.dart';
+import 'package:paisa/features/debit/domain/entities/debit.dart';
+import 'package:paisa/features/debit/domain/repository/debit_repository.dart';
 
 @singleton
-class GetDebtUseCase implements UseCase<Debit?, GetDebitParams> {
-  GetDebtUseCase({required this.debtRepository});
+class GetDebitUseCase implements UseCase<Debit?, GetDebitParams> {
+  GetDebitUseCase({required this.debtRepository});
 
-  final DebtRepository debtRepository;
+  final DebitRepository debtRepository;
 
   @override
   Debit? call({GetDebitParams? params}) {

@@ -36,7 +36,7 @@ class AccountRepositoryImpl extends AccountRepository {
   Future<void> deleteAccount(int key) => dataSource.delete(key);
 
   @override
-  AccountModel? fetchAccountFromId(int accountId) =>
+  AccountModel? fetchAccountFromId(int? accountId) =>
       dataSource.findById(accountId);
 
   @override

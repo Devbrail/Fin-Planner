@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 class CategoryListWidget extends StatelessWidget {
   const CategoryListWidget({
@@ -12,7 +12,7 @@ class CategoryListWidget extends StatelessWidget {
     required this.totalExpense,
   });
 
-  final List<MapEntry<CategoryEntity, List<Transaction>>> categoryGrouped;
+  final List<MapEntry<CategoryEntity, List<TransactionEntity>>> categoryGrouped;
   final double totalExpense;
 
   @override
@@ -23,7 +23,7 @@ class CategoryListWidget extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 124),
       itemCount: categoryGrouped.length,
       itemBuilder: (context, index) {
-        final MapEntry<CategoryEntity, List<Transaction>> map =
+        final MapEntry<CategoryEntity, List<TransactionEntity>> map =
             categoryGrouped[index];
         return InkWell(
           onTap: () {

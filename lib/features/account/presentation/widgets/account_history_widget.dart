@@ -4,7 +4,7 @@ import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_month_card.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 
 class AccountHistoryWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class AccountHistoryWidget extends StatelessWidget {
     required this.summaryController,
   });
 
-  final List<Transaction> expenses;
+  final List<TransactionEntity> expenses;
   final SummaryController summaryController;
 
   @override
@@ -29,8 +29,8 @@ class AccountHistoryWidget extends StatelessWidget {
       return ValueListenableBuilder<FilterExpense>(
         valueListenable: summaryController.sortHomeExpenseNotifier,
         builder: (_, value, __) {
-          final maps = groupBy(
-              expenses, (Transaction element) => element.time.formatted(value));
+          final maps = groupBy(expenses,
+              (TransactionEntity element) => element.time!.formatted(value));
           return ListView.separated(
             separatorBuilder: (context, index) => const Divider(),
             shrinkWrap: true,

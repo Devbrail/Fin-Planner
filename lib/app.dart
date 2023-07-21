@@ -1,6 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/change_notifier.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,9 +18,13 @@ import 'package:paisa/features/home/presentation/controller/summary_controller.d
 import 'package:provider/provider.dart';
 
 class PaisaApp extends StatefulWidget {
-  const PaisaApp({Key? key, required this.settingsListenable})
-      : super(key: key);
-  final ValueListenable<Box<dynamic>> settingsListenable;
+  const PaisaApp({
+    Key? key,
+    required this.settings,
+  }) : super(key: key);
+
+  final Box<dynamic> settings;
+
   @override
   State<PaisaApp> createState() => _PaisaAppState();
 }
@@ -46,9 +49,19 @@ class _PaisaAppState extends State<PaisaApp> {
         Provider(
           create: (context) => getIt.get<SummaryController>(),
         ),
+        Provider<Box<dynamic>>(
+          create: (context) => widget.settings,
+        ),
       ],
       child: ValueListenableBuilder<Box>(
-        valueListenable: widget.settingsListenable,
+        valueListenable: widget.settings.listenable(
+          keys: [
+            appColorKey,
+            dynamicThemeKey,
+            themeModeKey,
+            userCountryKey,
+          ],
+        ),
         builder: (context, value, _) {
           final bool isDynamic = value.get(
             dynamicThemeKey,

@@ -6,6 +6,7 @@ import 'package:paisa/core/common.dart';
 import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
 import 'package:paisa/features/home/presentation/pages/home/home_page.dart';
 import 'package:paisa/features/home/presentation/widgets/content_widget.dart';
+import 'package:paisa/features/home/presentation/widgets/home_search_bar.dart';
 import 'package:paisa/features/profile/presentation/pages/paisa_user_widget.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 
@@ -30,7 +31,7 @@ class HomeDesktopWidget extends StatelessWidget {
           child: PaisaIconTitle(),
         ),
         leadingWidth: 300,
-        title: const SearchBar(),
+        title: const HomeSearchBar(),
         actions: const [PaisaUserWidget()],
       ),
       floatingActionButton: floatingActionButton,

@@ -5,8 +5,8 @@ import 'package:paisa/core/error/failures.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
 import 'package:paisa/features/settings/domain/use_case/setting_use_case.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
-import 'package:paisa/features/transaction/domain/use_case/expense_use_case.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
+import 'package:paisa/features/transaction/domain/use_case/transaction_use_case.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'package:paisa/core/common.dart';
@@ -18,8 +18,8 @@ const expenseFixKey = "expense_fix_key";
 @injectable
 class SettingCubit extends Cubit<SettingsState> {
   SettingCubit(
-    this.expensesUseCase,
-    this.defaultCategoriesUseCase,
+    this.transactionsUseCase,
+    this.getDefaultCategoriesUseCase,
     this.updateExpensesUseCase,
     this.jsonFileImportUseCase,
     this.jsonFileExportUseCase,
@@ -27,29 +27,37 @@ class SettingCubit extends Cubit<SettingsState> {
     this.csvFileExportUseCase,
   ) : super(SettingsInitial());
 
-  final GetDefaultCategoriesUseCase defaultCategoriesUseCase;
-  final GetExpensesUseCase expensesUseCase;
-
-  final UpdateExpensesUseCase updateExpensesUseCase;
-  final JSONFileImportUseCase jsonFileImportUseCase;
-  final JSONFileExportUseCase jsonFileExportUseCase;
   final CSVFileExportUseCase csvFileExportUseCase;
+  final GetDefaultCategoriesUseCase getDefaultCategoriesUseCase;
+  final JSONFileExportUseCase jsonFileExportUseCase;
+  final JSONFileImportUseCase jsonFileImportUseCase;
   final SettingsUseCase settingsUseCase;
+  final GetTransactionsUseCase transactionsUseCase;
+  final UpdateTransactionUseCase updateExpensesUseCase;
 
   void fixExpenses() async {
     if (settingsUseCase.get(expenseFixKey, defaultValue: true)) {
       emit(FixExpenseLoading());
-      final List<CategoryEntity> categories = defaultCategoriesUseCase();
+      final List<CategoryEntity> categories = getDefaultCategoriesUseCase();
       if (categories.isEmpty) {
         return emit(FixExpenseError());
       }
-      final List<Transaction> expenses = expensesUseCase()
+      final List<TransactionEntity> transactions = transactionsUseCase()
           .where((element) => element.categoryId == -1)
           .toList();
 
-      for (var element in expenses) {
-        element.categoryId = categories.first.superId!;
-        await updateExpensesUseCase(element);
+      for (final TransactionEntity element in transactions) {
+        await updateExpensesUseCase(
+            params: UpdateTransactionParams(
+          element.superId!,
+          accountId: element.accountId,
+          categoryId: categories.first.superId!,
+          currency: element.currency,
+          description: element.description,
+          name: element.name,
+          time: element.time,
+          type: element.type,
+        ));
       }
       await settingsUseCase.put(expenseFixKey, false);
       emit(FixExpenseDone());

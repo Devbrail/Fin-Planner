@@ -9,8 +9,8 @@ import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/account/domain/use_case/account_use_case.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
-import 'package:paisa/features/transaction/domain/use_case/expense_use_case.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
+import 'package:paisa/features/transaction/domain/use_case/transaction_use_case.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -29,11 +29,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   int selectedIndex = 0;
-  final GetExpensesUseCase expensesUseCase;
+  final GetTransactionsUseCase expensesUseCase;
   final GetDefaultCategoriesUseCase defaultCategoriesUseCase;
   final GetAccountUseCase getAccountUseCase;
   final GetCategoryUseCase getCategoryUseCase;
-  final GetExpensesFromCategoryIdUseCase getExpensesFromCategoryIdUseCase;
+  final GetTransactionsByCategoryIdUseCase getExpensesFromCategoryIdUseCase;
 
   PageType getPageFromIndex(int index) {
     switch (index) {
@@ -65,12 +65,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  CategoryEntity? fetchCategoryFromId(int categoryId) =>
+  CategoryEntity? fetchCategoryFromId(int? categoryId) =>
       getCategoryUseCase(params: GetCategoryParams(categoryId));
 
-  AccountEntity? fetchAccountFromId(int accountId) =>
+  AccountEntity? fetchAccountFromId(int? accountId) =>
       getAccountUseCase(params: GetAccountParams(accountId));
 
-  List<Transaction> fetchExpensesFromCategoryId(int categoryId) =>
+  List<TransactionEntity> fetchExpensesFromCategoryId(int categoryId) =>
       getExpensesFromCategoryIdUseCase(categoryId);
 }

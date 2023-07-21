@@ -68,17 +68,17 @@ class LocalExpenseDataManagerImpl implements ExpenseLocalDataManager {
 
   @override
   List<TransactionModel> filterExpenses(SearchQuery query) {
-    return expenseBox.search(query);
+    return expenseBox.search(query).toList();
   }
 
   @override
   Future<List<TransactionModel>> filteredExpenses(
       DateTimeRange dateTimeRange) async {
-    final List<TransactionModel> expenses = expenseBox.values.toList();
-    expenses.sort((a, b) => b.time.compareTo(a.time));
+    final List<TransactionModel> expenses =
+        expenseBox.values.sortedBy<DateTime>((element) => element.time!);
     final filteredExpenses = expenses.takeWhile((value) {
-      return value.time.isAfter(dateTimeRange.start) &&
-          value.time.isBefore(dateTimeRange.end);
+      return value.time!.isAfter(dateTimeRange.start) &&
+          value.time!.isBefore(dateTimeRange.end);
     }).toList();
     return filteredExpenses;
   }

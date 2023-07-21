@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:paisa/core/theme/custom_color.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_list_widget.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +16,7 @@ class ExpenseMonthCardWidget extends StatelessWidget {
     required this.expenses,
   }) : super(key: key);
 
-  final List<Transaction> expenses;
+  final List<TransactionEntity> expenses;
   final String title;
   final double total;
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'expense_month_card.dart';
@@ -14,7 +14,7 @@ class ExpenseHistoryWidget extends StatelessWidget {
     required this.expenses,
   });
 
-  final List<Transaction> expenses;
+  final List<TransactionEntity> expenses;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,8 @@ class ExpenseHistoryWidget extends StatelessWidget {
     } else {
       final maps = groupBy(
           expenses,
-          (Transaction element) =>
-              element.time.formatted(FilterExpense.monthly));
+          (TransactionEntity element) =>
+              element.time!.formatted(FilterExpense.monthly));
       return ListView.separated(
         separatorBuilder: (context, index) => const Divider(),
         shrinkWrap: true,

@@ -1,14 +1,13 @@
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/use_case/use_case.dart';
-
-import '../repository/expense_repository.dart';
+import 'package:paisa/features/transaction/domain/repository/expense_repository.dart';
 
 @singleton
-class DeleteExpensesFromAccountIdUseCase
+class DeleteTransactionsByAccountIdUseCase
     implements UseCase<void, DeleteTransactionsFromAccountIdParams> {
-  DeleteExpensesFromAccountIdUseCase({required this.expenseRepository});
+  DeleteTransactionsByAccountIdUseCase({required this.expenseRepository});
 
-  final ExpenseRepository expenseRepository;
+  final TransactionRepository expenseRepository;
 
   @override
   Future<void> call({DeleteTransactionsFromAccountIdParams? params}) async =>

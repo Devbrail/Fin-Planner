@@ -8,8 +8,8 @@ import 'package:paisa/core/enum/card_type.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/account/domain/use_case/account_use_case.dart';
 import 'package:paisa/features/category/domain/use_case/get_category_use_case.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
-import 'package:paisa/features/transaction/domain/use_case/expense_use_case.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
+import 'package:paisa/features/transaction/domain/use_case/transaction_use_case.dart';
 
 part 'accounts_event.dart';
 part 'accounts_state.dart';
@@ -19,7 +19,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   AccountsBloc({
     required this.getAccountUseCase,
     required this.deleteAccountUseCase,
-    required this.getExpensesFromAccountIdUseCase,
+    required this.getTransactionsByAccountIdUseCase,
     required this.addAccountUseCase,
     required this.getCategoryUseCase,
     required this.deleteExpensesFromAccountIdUseCase,
@@ -42,10 +42,10 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
   final AddAccountUseCase addAccountUseCase;
   AccountEntity? currentAccount;
   final DeleteAccountUseCase deleteAccountUseCase;
-  final DeleteExpensesFromAccountIdUseCase deleteExpensesFromAccountIdUseCase;
+  final DeleteTransactionsByAccountIdUseCase deleteExpensesFromAccountIdUseCase;
   final GetAccountUseCase getAccountUseCase;
   final GetCategoryUseCase getCategoryUseCase;
-  final GetExpensesFromAccountIdUseCase getExpensesFromAccountIdUseCase;
+  final GetTransactionsByAccountIdUseCase getTransactionsByAccountIdUseCase;
   double? initialAmount;
   int? selectedColor;
   CardType selectedType = CardType.cash;
@@ -137,8 +137,9 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     AccountSelectedEvent event,
     Emitter<AccountsState> emit,
   ) async {
-    final List<Transaction> expenses =
-        getExpensesFromAccountIdUseCase(event.account.superId!);
+    final List<TransactionEntity> expenses = getTransactionsByAccountIdUseCase(
+      params: GetTransactionsByAccountIdParams(event.account.superId!),
+    );
     emit(AccountSelectedState(event.account, expenses));
   }
 
@@ -154,8 +155,9 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     FetchExpensesFromAccountIdEvent event,
     Emitter<AccountsState> emit,
   ) async {
-    List<Transaction> expenses =
-        getExpensesFromAccountIdUseCase(int.parse(event.accountId));
+    List<TransactionEntity> expenses = getTransactionsByAccountIdUseCase(
+      params: GetTransactionsByAccountIdParams(int.parse(event.accountId)),
+    );
     emit(ExpensesFromAccountIdState(expenses));
   }
 
@@ -178,8 +180,9 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
     final AccountEntity? account = getAccountUseCase(
       params: GetAccountParams(accountId),
     );
-    final List<Transaction> expenses =
-        getExpensesFromAccountIdUseCase(accountId);
+    final List<TransactionEntity> expenses = getTransactionsByAccountIdUseCase(
+      params: GetTransactionsByAccountIdParams(accountId),
+    );
     if (account != null) {
       emit(AccountAndExpensesState(account, expenses));
     }

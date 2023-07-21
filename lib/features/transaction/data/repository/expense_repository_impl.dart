@@ -5,8 +5,8 @@ import 'package:paisa/features/transaction/data/model/expense_model.dart';
 import 'package:paisa/features/transaction/data/model/search_query.dart';
 import 'package:paisa/features/transaction/domain/repository/expense_repository.dart';
 
-@Singleton(as: ExpenseRepository)
-class ExpenseRepositoryImpl extends ExpenseRepository {
+@Singleton(as: TransactionRepository)
+class ExpenseRepositoryImpl extends TransactionRepository {
   ExpenseRepositoryImpl({
     required this.dataSource,
   });
@@ -15,16 +15,13 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
 
   @override
   Future<void> addExpense(
-    String name,
-    double amount,
-    DateTime time,
-    int category,
-    int account,
-    TransactionType transactionType,
+    String? name,
+    double? amount,
+    DateTime? time,
+    int? category,
+    int? account,
+    TransactionType? transactionType,
     String? description,
-    int? fromAccountId,
-    int? toAccountId,
-    double transferAmount,
   ) async {
     return dataSource.add(
       TransactionModel(
@@ -35,9 +32,6 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
         accountId: account,
         type: transactionType,
         description: description,
-        fromAccountId: fromAccountId,
-        toAccountId: toAccountId,
-        transferAmount: transferAmount,
       ),
     );
   }
@@ -94,12 +88,12 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   @override
   Future<void> updateExpense(
     int key,
-    String name,
-    double currency,
-    DateTime time,
-    int categoryId,
-    int accountId,
-    TransactionType transactionType,
+    String? name,
+    double? currency,
+    DateTime? time,
+    int? categoryId,
+    int? accountId,
+    TransactionType? transactionType,
     String? description,
   ) {
     return dataSource.update(

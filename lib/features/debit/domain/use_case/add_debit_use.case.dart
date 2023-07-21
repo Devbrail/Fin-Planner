@@ -5,10 +5,10 @@ import 'package:paisa/core/use_case/use_case.dart';
 import 'package:paisa/features/debit/domain/repository/debit_repository.dart';
 
 @singleton
-class AddDebtUseCase implements UseCase<Future<void>, AddDebit> {
-  AddDebtUseCase({required this.debtRepository});
+class AddDebitUseCase implements UseCase<Future<void>, AddDebit> {
+  AddDebitUseCase({required this.debtRepository});
 
-  final DebtRepository debtRepository;
+  final DebitRepository debtRepository;
 
   @override
   Future<void> call({AddDebit? params}) {

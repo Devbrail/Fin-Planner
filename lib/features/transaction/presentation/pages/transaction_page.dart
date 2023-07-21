@@ -93,17 +93,17 @@ class _TransactionPageState extends State<TransactionPage> {
                 color: context.onErrorContainer,
               );
             } else if (state is TransactionFoundState) {
-              nameController.text = state.expense.name;
+              nameController.text = state.transaction.name ?? '';
               nameController.selection = TextSelection.collapsed(
-                offset: state.expense.name.length,
+                offset: state.transaction.name?.length ?? 0,
               );
-              amountController.text = state.expense.currency.toString();
+              amountController.text = state.transaction.currency.toString();
               amountController.selection = TextSelection.collapsed(
-                offset: state.expense.currency.toString().length,
+                offset: state.transaction.currency.toString().length,
               );
-              descriptionController.text = state.expense.description ?? '';
+              descriptionController.text = state.transaction.description ?? '';
               descriptionController.selection = TextSelection.collapsed(
-                offset: state.expense.description?.length ?? 0,
+                offset: state.transaction.description?.length ?? 0,
               );
             }
           },

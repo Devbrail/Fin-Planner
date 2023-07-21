@@ -14,16 +14,14 @@ class GetCategoryUseCase
 
   @override
   CategoryEntity? call({GetCategoryParams? params}) {
-    return categoryRepository
-        .fetchCategoryFromId(params!.categoryId)
-        ?.toEntity();
+    return categoryRepository.fetchById(params!.categoryId)?.toEntity();
   }
 }
 
 class GetCategoryParams extends Equatable {
   const GetCategoryParams(this.categoryId);
 
-  final int categoryId;
+  final int? categoryId;
 
   @override
   List<Object?> get props => [categoryId];

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:injectable/injectable.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
@@ -23,10 +22,7 @@ import 'package:url_launcher/url_launcher.dart';
 class SettingsPage extends StatelessWidget {
   const SettingsPage({
     Key? key,
-    @Named('settings') required this.settings,
   }) : super(key: key);
-
-  final Box<dynamic> settings;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +42,7 @@ class SettingsPage extends StatelessWidget {
             SettingsGroup(
               title: context.loc.colorsUI,
               options: [
-                SettingsColorPickerWidget(settings: settings),
+                const SettingsColorPickerWidget(),
                 const Divider(),
                 SettingsOption(
                   icon: MdiIcons.brightness4,
@@ -84,7 +80,7 @@ class SettingsPage extends StatelessWidget {
                 BiometricAuthWidget(
                   authenticate: getIt.get<Authenticate>(),
                 ),
-                CountryChangeWidget(settings: settings),
+                const CountryChangeWidget(),
                 const Divider(),
                 const FixExpenseWidget(),
                 const Divider(),

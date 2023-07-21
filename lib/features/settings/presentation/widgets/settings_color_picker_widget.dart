@@ -10,14 +10,12 @@ import 'package:paisa/core/widgets/future_resolve.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:paisa/features/settings/presentation/widgets/dynamic_color_switch_widget.dart';
 import 'package:paisa/features/settings/presentation/widgets/setting_option.dart';
+import 'package:provider/provider.dart';
 
 class SettingsColorPickerWidget extends StatelessWidget {
   const SettingsColorPickerWidget({
     Key? key,
-    required this.settings,
   }) : super(key: key);
-
-  final Box<dynamic> settings;
 
   int _extractColorValue(BuildContext context, dynamic value) {
     final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
@@ -30,10 +28,12 @@ class SettingsColorPickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<dynamic>>(
-      valueListenable: settings.listenable(keys: [
-        appColorKey,
-        dynamicThemeKey,
-      ]),
+      valueListenable: Provider.of<Box<dynamic>>(context).listenable(
+        keys: [
+          appColorKey,
+          dynamicThemeKey,
+        ],
+      ),
       builder: (context, value, _) {
         final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
         final color = _extractColorValue(context, value);
@@ -59,9 +59,7 @@ class SettingsColorPickerWidget extends StatelessWidget {
                   ? 700
                   : double.infinity,
             ),
-            builder: (context) => ColorPickerDialogWidget(
-              settings: settings,
-            ),
+            builder: (context) => const ColorPickerDialogWidget(),
           ),
         );
       },
@@ -72,10 +70,7 @@ class SettingsColorPickerWidget extends StatelessWidget {
 class ColorPickerDialogWidget extends StatelessWidget {
   const ColorPickerDialogWidget({
     Key? key,
-    required this.settings,
   }) : super(key: key);
-
-  final Box<dynamic> settings;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +81,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
           final sdk = info.version.sdkInt;
           bool isAndroid12 = sdk >= 29;
           return ValueListenableBuilder<Box<dynamic>>(
-            valueListenable: settings.listenable(),
+            valueListenable: Provider.of<Box<dynamic>>(context).listenable(),
             builder: (context, value, _) {
               final bool isDynamic = value.get(
                 dynamicThemeKey,
@@ -110,7 +105,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                     ),
                     Visibility(
                       visible: isAndroid12,
-                      child: DynamicColorSwitchWidget(settings: value),
+                      child: const DynamicColorSwitchWidget(),
                     ),
                     const Divider(),
                     AnimatedSwitcher(
@@ -150,7 +145,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
         },
       );
     } else {
-      int selectedColor = settings.get(
+      int selectedColor = Provider.of<Box<dynamic>>(context).get(
         appColorKey,
         defaultValue: 0xFF795548,
       );
@@ -183,7 +178,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                     vertical: 12,
                   ),
                 ),
-                onPressed: () => settings
+                onPressed: () => Provider.of<Box<dynamic>>(context)
                     .put(appColorKey, selectedColor)
                     .then((value) => Navigator.pop(context)),
                 child: Text(context.loc.done),

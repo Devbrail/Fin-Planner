@@ -27,7 +27,6 @@ class PaisaFilterTransactionWidget extends StatelessWidget {
           ),
           builder: (context) {
             return FilterBudgetToggleWidget(
-              showAsList: true,
               summaryController: Provider.of<SummaryController>(context),
             );
           },

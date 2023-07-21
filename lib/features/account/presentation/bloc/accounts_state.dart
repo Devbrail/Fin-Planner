@@ -34,7 +34,7 @@ class AccountSelectedState extends AccountsState {
   const AccountSelectedState(this.account, this.expenses);
 
   final AccountEntity account;
-  final List<Transaction> expenses;
+  final List<TransactionEntity> expenses;
 
   @override
   List<Object> get props => [account, expenses];
@@ -70,7 +70,7 @@ class UpdateCardTypeState extends AccountsState {
 class ExpensesFromAccountIdState extends AccountsState {
   const ExpensesFromAccountIdState(this.expenses);
 
-  final List<Transaction> expenses;
+  final List<TransactionEntity> expenses;
 
   @override
   List<Object> get props => [expenses];
@@ -89,7 +89,7 @@ class AccountAndExpensesState extends AccountsState {
   const AccountAndExpensesState(this.account, this.expenses);
 
   final AccountEntity account;
-  final List<Transaction> expenses;
+  final List<TransactionEntity> expenses;
 
   @override
   List<Object> get props => [account, expenses];

@@ -1,4 +1,3 @@
-import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/features/category/data/data_sources/local/category_data_source.dart';
 import 'package:paisa/features/category/domain/repository/category_repository.dart';
@@ -11,15 +10,13 @@ class CategoryRepositoryImpl extends CategoryRepository {
   CategoryRepositoryImpl({
     required this.dataSources,
     required this.expenseDataManager,
-    @Named('settings') required this.settings,
   });
 
   final LocalCategoryDataManager dataSources;
   final ExpenseLocalDataManager expenseDataManager;
-  final Box<dynamic> settings;
 
   @override
-  Future<void> addCategory({
+  Future<void> add({
     required String? name,
     required int? icon,
     required int? color,
@@ -40,14 +37,13 @@ class CategoryRepositoryImpl extends CategoryRepository {
   }
 
   @override
-  Future<void> clearAll() => dataSources.clear();
+  Future<void> clear() => dataSources.clear();
 
   @override
-  Future<void> deleteCategory(int key) => dataSources.delete(key);
+  Future<void> delete(int key) => dataSources.delete(key);
 
   @override
-  CategoryModel? fetchCategoryFromId(int categoryId) =>
-      dataSources.findById(categoryId);
+  CategoryModel? fetchById(int? categoryId) => dataSources.findById(categoryId);
 
   @override
   List<CategoryModel> defaultCategories() {
@@ -55,7 +51,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
   }
 
   @override
-  Future<void> updateCategory({
+  Future<void> update({
     required int? key,
     required String? name,
     required int? icon,

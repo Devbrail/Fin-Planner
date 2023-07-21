@@ -5,7 +5,7 @@ import 'package:paisa/features/account/data/model/account_model.dart';
 import 'package:paisa/features/account/presentation/widgets/account_summary_widget.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_total_for_month_widget.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/total_balance_widget.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 import 'package:paisa/main.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 
@@ -15,7 +15,7 @@ class ExpenseTotalWidget extends StatelessWidget {
     required this.expenses,
   }) : super(key: key);
 
-  final List<Transaction> expenses;
+  final List<TransactionEntity> expenses;
 
   @override
   Widget build(BuildContext context) {

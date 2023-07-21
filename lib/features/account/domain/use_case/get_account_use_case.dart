@@ -20,7 +20,7 @@ class GetAccountUseCase implements UseCase<AccountEntity?, GetAccountParams> {
 class GetAccountParams extends Equatable {
   const GetAccountParams(this.accountId);
 
-  final int accountId;
+  final int? accountId;
 
   @override
   List<Object?> get props => [accountId];

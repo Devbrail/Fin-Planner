@@ -61,7 +61,7 @@ final GoRouter goRouter = GoRouter(
       name: userOnboardingName,
       path: userOnboardingPath,
       builder: (BuildContext context, GoRouterState state) =>
-          UserOnboardingPage(settings: settings),
+          const UserOnboardingPage(),
     ),
     GoRoute(
       name: loginName,
@@ -271,7 +271,7 @@ final GoRouter goRouter = GoRouter(
           name: settingsName,
           path: settingsPath,
           builder: (BuildContext context, GoRouterState state) {
-            return SettingsPage(settings: settings);
+            return const SettingsPage();
           },
           routes: [
             GoRoute(

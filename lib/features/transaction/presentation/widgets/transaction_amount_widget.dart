@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:paisa/core/common.dart';
-import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 
@@ -39,12 +38,7 @@ class TransactionAmountWidget extends StatelessWidget {
         ],
         onChanged: (value) {
           double? amount = double.tryParse(value);
-          if (BlocProvider.of<TransactionBloc>(context).transactionType !=
-              TransactionType.transfer) {
-            BlocProvider.of<TransactionBloc>(context).expenseAmount = amount;
-          } else {
-            BlocProvider.of<TransactionBloc>(context).transferAmount = amount;
-          }
+          BlocProvider.of<TransactionBloc>(context).transactionAmount = amount;
         },
         validator: (value) {
           if (value!.isNotEmpty) {

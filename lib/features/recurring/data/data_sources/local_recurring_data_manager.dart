@@ -1,4 +1,4 @@
-import '../model/recurring.dart';
+import 'package:paisa/features/recurring/data/model/recurring.dart';
 
 abstract class LocalRecurringDataManager {
   Future<void> addRecurringEvent(RecurringModel recurringModel);

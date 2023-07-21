@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:paisa/core/common.dart';
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key});
+class HomeSearchBar extends StatelessWidget {
+  const HomeSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {

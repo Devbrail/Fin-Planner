@@ -4,7 +4,7 @@ import 'package:paisa/core/common.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_history_widget.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_total_widget.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/welcome_name_widget.dart';
-import 'package:paisa/features/transaction/domain/entities/expense.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 class SummaryMobileWidget extends StatelessWidget {
   const SummaryMobileWidget({
@@ -12,7 +12,7 @@ class SummaryMobileWidget extends StatelessWidget {
     required this.expenses,
   });
 
-  final List<Transaction> expenses;
+  final List<TransactionEntity> expenses;
 
   @override
   Widget build(BuildContext context) {

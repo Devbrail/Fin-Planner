@@ -49,12 +49,12 @@ class TransactionErrorState extends TransactionState {
 }
 
 class TransactionFoundState extends TransactionState {
-  const TransactionFoundState(this.expense);
+  const TransactionFoundState(this.transaction);
 
-  final TransactionModel expense;
+  final TransactionEntity transaction;
 
   @override
-  List<Object> get props => [expense];
+  List<Object> get props => [transaction];
 }
 
 class ChangeCategoryState extends TransactionState {
