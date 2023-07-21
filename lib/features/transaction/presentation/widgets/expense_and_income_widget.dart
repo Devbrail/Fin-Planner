@@ -25,11 +25,11 @@ class ExpenseIncomeWidget extends StatelessWidget {
         const SizedBox(height: 16),
         TransactionNameWidget(controller: nameController),
         const SizedBox(height: 16),
+        TransactionAmountWidget(controller: amountController),
+        const SizedBox(height: 16),
         ExpenseDescriptionWidget(
           controller: descriptionController,
         ),
-        const SizedBox(height: 16),
-        TransactionAmountWidget(controller: amountController),
         const SizedBox(height: 16),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),

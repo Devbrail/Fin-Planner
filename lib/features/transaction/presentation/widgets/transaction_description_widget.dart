@@ -18,7 +18,6 @@ class ExpenseDescriptionWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: PaisaTextFormField(
-        maxLines: 1,
         controller: controller,
         hintText: context.loc.description,
         keyboardType: TextInputType.name,
