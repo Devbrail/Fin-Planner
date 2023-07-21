@@ -23,7 +23,7 @@ class AccountTransactionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
-    BlocProvider.of<AccountsBloc>(context)
+    BlocProvider.of<AccountBloc>(context)
         .add(FetchAccountAndExpenseFromIdEvent(accountId));
     return PaisaAnnotatedRegionWidget(
       color: context.background,
@@ -49,7 +49,7 @@ class AccountTransactionsPage extends StatelessWidget {
                   title: Text(
                     context.loc.dialogDeleteTitle,
                   ),
-                  child: BlocBuilder<AccountsBloc, AccountsState>(
+                  child: BlocBuilder<AccountBloc, AccountState>(
                     builder: (context, state) {
                       if (state is AccountAndExpensesState) {
                         return RichText(
@@ -76,7 +76,7 @@ class AccountTransactionsPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                     ),
                     onPressed: () {
-                      BlocProvider.of<AccountsBloc>(context)
+                      BlocProvider.of<AccountBloc>(context)
                           .add(DeleteAccountEvent(accountId));
                       Navigator.pop(context);
                     },
@@ -90,7 +90,7 @@ class AccountTransactionsPage extends StatelessWidget {
             )
           ],
         ),
-        body: BlocConsumer<AccountsBloc, AccountsState>(
+        body: BlocConsumer<AccountBloc, AccountState>(
           listener: (context, state) {
             if (state is AccountDeletedState) {
               context.pop();

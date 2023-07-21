@@ -11,31 +11,31 @@ class CardTypeButtons extends StatelessWidget {
   const CardTypeButtons({Key? key}) : super(key: key);
 
   void _update(BuildContext context, CardType type) {
-    BlocProvider.of<AccountsBloc>(context).add(UpdateCardTypeEvent(type));
+    BlocProvider.of<AccountBloc>(context).add(UpdateCardTypeEvent(type));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AccountsBloc, AccountsState>(
+    return BlocBuilder<AccountBloc, AccountState>(
       buildWhen: (previous, current) => current is UpdateCardTypeState,
       builder: (context, state) {
         return Row(
           children: [
             PaisaPillChip(
               title: CardType.cash.stringValue(context),
-              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
+              isSelected: BlocProvider.of<AccountBloc>(context).selectedType ==
                   CardType.cash,
               onPressed: () => _update(context, CardType.cash),
             ),
             PaisaPillChip(
               title: CardType.bank.stringValue(context),
-              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
+              isSelected: BlocProvider.of<AccountBloc>(context).selectedType ==
                   CardType.bank,
               onPressed: () => _update(context, CardType.bank),
             ),
             PaisaPillChip(
               title: CardType.wallet.stringValue(context),
-              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
+              isSelected: BlocProvider.of<AccountBloc>(context).selectedType ==
                   CardType.wallet,
               onPressed: () => _update(context, CardType.wallet),
             ),

@@ -24,7 +24,7 @@ class AccountsHorizontalTabletPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AccountPageViewWidget(accounts: accounts),
-              BlocBuilder<AccountsBloc, AccountsState>(
+              BlocBuilder<AccountBloc, AccountState>(
                 builder: (context, state) {
                   if (state is AccountSelectedState) {
                     return AccountSummaryWidget(expenses: state.expenses);

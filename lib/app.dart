@@ -38,7 +38,7 @@ class _PaisaAppState extends State<PaisaApp> {
           create: (context) => getIt.get<SettingCubit>(),
         ),
         BlocProvider(
-          create: (context) => getIt.get<AccountsBloc>(),
+          create: (context) => getIt.get<AccountBloc>(),
         ),
         BlocProvider(
           create: (context) => getIt.get<HomeBloc>(),

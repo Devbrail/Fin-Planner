@@ -30,7 +30,7 @@ class AddAccountPageState extends State<AddAccountPage> {
   final accountInitialAmountController = TextEditingController();
   final accountNameController = TextEditingController();
   final accountNumberController = TextEditingController();
-  final AccountsBloc accountsBloc = getIt.get();
+  final AccountBloc accountsBloc = getIt.get();
   late final bool isAccountAddOrUpdate = widget.accountId == null;
 
   @override
@@ -105,7 +105,7 @@ class AddAccountPageState extends State<AddAccountPage> {
       color: context.background,
       child: BlocProvider(
         create: (context) => accountsBloc,
-        child: BlocConsumer<AccountsBloc, AccountsState>(
+        child: BlocConsumer<AccountBloc, AccountState>(
           listener: (context, state) {
             if (state is AccountAddedState) {
               context.showMaterialSnackBar(
@@ -229,7 +229,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                         if (!isValid) {
                           return;
                         }
-                        BlocProvider.of<AccountsBloc>(context)
+                        BlocProvider.of<AccountBloc>(context)
                             .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
                       },
                       title: isAccountAddOrUpdate
@@ -256,7 +256,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                         if (!isValid) {
                           return;
                         }
-                        BlocProvider.of<AccountsBloc>(context)
+                        BlocProvider.of<AccountBloc>(context)
                             .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
                       },
                       title: isAccountAddOrUpdate
@@ -334,36 +334,42 @@ class AccountColorPickerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      onTap: () async {
-        final color = await paisaColorPicker(
-          context,
-          defaultColor: BlocProvider.of<AccountsBloc>(context).selectedColor ??
-              Colors.red.value,
+    return BlocBuilder<AccountBloc, AccountState>(
+      builder: (context, state) {
+        return ListTile(
+          contentPadding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          onTap: () async {
+            final color = await paisaColorPicker(
+              context,
+              defaultColor:
+                  BlocProvider.of<AccountBloc>(context).selectedColor ??
+                      Colors.red.value,
+            );
+            if (context.mounted) {
+              BlocProvider.of<AccountBloc>(context)
+                  .add(AccountColorSelectedEvent(color));
+            }
+          },
+          leading: Icon(
+            Icons.color_lens,
+            color: context.primary,
+          ),
+          title: Text(context.loc.pickColor),
+          subtitle: Text(context.loc.pickColorDesc),
+          trailing: Container(
+            margin: const EdgeInsets.only(right: 12),
+            width: 28,
+            height: 28,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color(
+                  BlocProvider.of<AccountBloc>(context).selectedColor ??
+                      Colors.red.value),
+            ),
+          ),
         );
-        if (context.mounted) {
-          BlocProvider.of<AccountsBloc>(context)
-              .add(AccountColorSelectedEvent(color));
-        }
       },
-      leading: Icon(
-        Icons.color_lens,
-        color: context.primary,
-      ),
-      title: Text(context.loc.pickColor),
-      subtitle: Text(context.loc.pickColorDesc),
-      trailing: Container(
-        margin: const EdgeInsets.only(right: 12),
-        width: 28,
-        height: 28,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Color(BlocProvider.of<AccountsBloc>(context).selectedColor ??
-              Colors.red.value),
-        ),
-      ),
     );
   }
 }
@@ -382,7 +388,7 @@ class DeleteAccountWidget extends StatelessWidget {
           style: context.bodyMedium,
           children: [
             TextSpan(
-              text: BlocProvider.of<AccountsBloc>(context).accountName,
+              text: BlocProvider.of<AccountBloc>(context).accountName,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -395,7 +401,7 @@ class DeleteAccountWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
         ),
         onPressed: () {
-          BlocProvider.of<AccountsBloc>(context)
+          BlocProvider.of<AccountBloc>(context)
               .add(DeleteAccountEvent(accountId!));
 
           Navigator.pop(context);
@@ -446,7 +452,7 @@ class AccountCardHolderNameWidget extends StatelessWidget {
             FilteringTextInputFormatter.singleLineFormatter,
           ],
           onChanged: (value) =>
-              BlocProvider.of<AccountsBloc>(context).accountHolderName = value,
+              BlocProvider.of<AccountBloc>(context).accountHolderName = value,
         );
       },
     );
@@ -473,7 +479,7 @@ class AccountNameWidget extends StatelessWidget {
             FilteringTextInputFormatter.singleLineFormatter,
           ],
           onChanged: (value) =>
-              BlocProvider.of<AccountsBloc>(context).accountName = value,
+              BlocProvider.of<AccountBloc>(context).accountName = value,
         );
       },
     );
@@ -499,7 +505,7 @@ class AccountNumberWidget extends StatelessWidget {
       hintText: context.loc.enterNumberOptional,
       keyboardType: TextInputType.number,
       onChanged: (value) =>
-          BlocProvider.of<AccountsBloc>(context).accountNumber = value,
+          BlocProvider.of<AccountBloc>(context).accountNumber = value,
     );
   }
 }
@@ -531,7 +537,7 @@ class AccountInitialAmountWidget extends StatelessWidget {
       ],
       onChanged: (value) {
         double? amount = double.tryParse(value);
-        BlocProvider.of<AccountsBloc>(context).initialAmount = amount;
+        BlocProvider.of<AccountBloc>(context).initialAmount = amount;
       },
     );
   }

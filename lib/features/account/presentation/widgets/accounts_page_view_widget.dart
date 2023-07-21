@@ -47,11 +47,11 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
               controller: _controller,
               itemCount: widget.accounts.length,
               onPageChanged: (index) {
-                BlocProvider.of<AccountsBloc>(context)
+                BlocProvider.of<AccountBloc>(context)
                     .add(AccountSelectedEvent(widget.accounts[index]));
               },
               itemBuilder: (_, index) {
-                return BlocBuilder<AccountsBloc, AccountsState>(
+                return BlocBuilder<AccountBloc, AccountState>(
                   builder: (context, state) {
                     if (state is AccountSelectedState) {
                       final AccountEntity account = widget.accounts[index];
@@ -92,7 +92,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
                             ),
                             confirmationButton: TextButton(
                               onPressed: () {
-                                BlocProvider.of<AccountsBloc>(context).add(
+                                BlocProvider.of<AccountBloc>(context).add(
                                     DeleteAccountEvent(
                                         account.superId!.toString()));
                                 Navigator.pop(context);
@@ -156,7 +156,7 @@ class AccountPageViewDotsIndicator extends StatelessWidget {
     if (accounts.length == 1) {
       return const SizedBox.shrink();
     }
-    return BlocBuilder<AccountsBloc, AccountsState>(
+    return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         if (state is AccountSelectedState) {
           return Padding(

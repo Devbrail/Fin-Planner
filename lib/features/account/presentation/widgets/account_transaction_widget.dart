@@ -19,7 +19,7 @@ class AccountTransactionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AccountsBloc, AccountsState>(
+    return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         if (state is AccountSelectedState) {
           if (state.expenses.isEmpty) {

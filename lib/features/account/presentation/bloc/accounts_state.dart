@@ -1,16 +1,16 @@
 part of 'accounts_bloc.dart';
 
 @immutable
-abstract class AccountsState extends Equatable {
-  const AccountsState();
+abstract class AccountState extends Equatable {
+  const AccountState();
 
   @override
   List<Object> get props => [];
 }
 
-class AccountsInitial extends AccountsState {}
+class AccountsInitial extends AccountState {}
 
-class AccountListState extends AccountsState {
+class AccountListState extends AccountState {
   const AccountListState(this.accounts);
 
   final List<AccountEntity> accounts;
@@ -19,7 +19,7 @@ class AccountListState extends AccountsState {
   List<Object> get props => [accounts];
 }
 
-class AccountAddedState extends AccountsState {
+class AccountAddedState extends AccountState {
   const AccountAddedState({this.isAddOrUpdate = false});
 
   final bool isAddOrUpdate;
@@ -28,9 +28,9 @@ class AccountAddedState extends AccountsState {
   List<Object> get props => [isAddOrUpdate];
 }
 
-class AccountDeletedState extends AccountsState {}
+class AccountDeletedState extends AccountState {}
 
-class AccountSelectedState extends AccountsState {
+class AccountSelectedState extends AccountState {
   const AccountSelectedState(this.account, this.expenses);
 
   final AccountEntity account;
@@ -40,7 +40,7 @@ class AccountSelectedState extends AccountsState {
   List<Object> get props => [account, expenses];
 }
 
-class AccountErrorState extends AccountsState {
+class AccountErrorState extends AccountState {
   const AccountErrorState(this.errorString);
 
   final String errorString;
@@ -49,7 +49,7 @@ class AccountErrorState extends AccountsState {
   List<Object> get props => [errorString];
 }
 
-class AccountSuccessState extends AccountsState {
+class AccountSuccessState extends AccountState {
   const AccountSuccessState(this.account);
 
   final AccountEntity account;
@@ -58,7 +58,7 @@ class AccountSuccessState extends AccountsState {
   List<Object> get props => [account];
 }
 
-class UpdateCardTypeState extends AccountsState {
+class UpdateCardTypeState extends AccountState {
   const UpdateCardTypeState(this.cardType);
 
   final CardType cardType;
@@ -67,7 +67,7 @@ class UpdateCardTypeState extends AccountsState {
   List<Object> get props => [cardType];
 }
 
-class ExpensesFromAccountIdState extends AccountsState {
+class ExpensesFromAccountIdState extends AccountState {
   const ExpensesFromAccountIdState(this.expenses);
 
   final List<TransactionEntity> expenses;
@@ -76,7 +76,7 @@ class ExpensesFromAccountIdState extends AccountsState {
   List<Object> get props => [expenses];
 }
 
-class AccountColorSelectedState extends AccountsState {
+class AccountColorSelectedState extends AccountState {
   const AccountColorSelectedState(this.categoryColor);
 
   final int categoryColor;
@@ -85,7 +85,7 @@ class AccountColorSelectedState extends AccountsState {
   List<Object> get props => [categoryColor, identityHashCode(this)];
 }
 
-class AccountAndExpensesState extends AccountsState {
+class AccountAndExpensesState extends AccountState {
   const AccountAndExpensesState(this.account, this.expenses);
 
   final AccountEntity account;

@@ -15,8 +15,8 @@ part 'accounts_event.dart';
 part 'accounts_state.dart';
 
 @injectable
-class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
-  AccountsBloc({
+class AccountBloc extends Bloc<AccountsEvent, AccountState> {
+  AccountBloc({
     required this.getAccountUseCase,
     required this.deleteAccountUseCase,
     required this.getTransactionsByAccountIdUseCase,
@@ -53,7 +53,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   Future<void> _fetchAccountFromId(
     FetchAccountFromIdEvent event,
-    Emitter<AccountsState> emit,
+    Emitter<AccountState> emit,
   ) async {
     final int? accountId = int.tryParse(event.accountId ?? '');
     if (accountId == null) return;
@@ -77,7 +77,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   Future<void> _addAccount(
     AddOrUpdateAccountEvent event,
-    Emitter<AccountsState> emit,
+    Emitter<AccountState> emit,
   ) async {
     final String? bankName = accountName;
     final String? holderName = accountHolderName;
@@ -123,7 +123,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   FutureOr<void> _deleteAccount(
     DeleteAccountEvent event,
-    Emitter<AccountsState> emit,
+    Emitter<AccountState> emit,
   ) async {
     final int accountId = int.parse(event.accountId);
     await deleteExpensesFromAccountIdUseCase(
@@ -135,7 +135,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   FutureOr<void> _accountSelected(
     AccountSelectedEvent event,
-    Emitter<AccountsState> emit,
+    Emitter<AccountState> emit,
   ) async {
     final List<TransactionEntity> expenses = getTransactionsByAccountIdUseCase(
       params: GetTransactionsByAccountIdParams(event.account.superId!),
@@ -145,7 +145,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   FutureOr<void> _updateCardType(
     UpdateCardTypeEvent event,
-    Emitter<AccountsState> emit,
+    Emitter<AccountState> emit,
   ) async {
     selectedType = event.cardType;
     emit(UpdateCardTypeState(event.cardType));
@@ -153,7 +153,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   FutureOr<void> _fetchExpensesFromAccountId(
     FetchExpensesFromAccountIdEvent event,
-    Emitter<AccountsState> emit,
+    Emitter<AccountState> emit,
   ) async {
     List<TransactionEntity> expenses = getTransactionsByAccountIdUseCase(
       params: GetTransactionsByAccountIdParams(int.parse(event.accountId)),
@@ -163,7 +163,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   FutureOr<void> _updateAccountColor(
     AccountColorSelectedEvent event,
-    Emitter<AccountsState> emit,
+    Emitter<AccountState> emit,
   ) {
     selectedColor = event.accountColor;
     emit(AccountColorSelectedState(event.accountColor));
@@ -171,7 +171,7 @@ class AccountsBloc extends Bloc<AccountsEvent, AccountsState> {
 
   FutureOr<void> _fetchAccountAndExpensesFromId(
     FetchAccountAndExpenseFromIdEvent event,
-    Emitter<AccountsState> emit,
+    Emitter<AccountState> emit,
   ) async {
     final int? accountId = int.tryParse(event.accountId);
     if (accountId == null) {

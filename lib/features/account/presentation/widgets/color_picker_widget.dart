@@ -9,7 +9,7 @@ class AccountColorPickerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AccountsBloc, AccountsState>(
+    return BlocBuilder<AccountBloc, AccountState>(
       buildWhen: (previous, current) =>
           current is AccountColorSelectedState ||
           current is AccountSuccessState,
@@ -27,11 +27,11 @@ class AccountColorPickerWidget extends StatelessWidget {
             final color = await paisaColorPicker(
               context,
               defaultColor:
-                  BlocProvider.of<AccountsBloc>(context).selectedColor ??
+                  BlocProvider.of<AccountBloc>(context).selectedColor ??
                       Colors.red.value,
             );
             if (context.mounted) {
-              BlocProvider.of<AccountsBloc>(context)
+              BlocProvider.of<AccountBloc>(context)
                   .add(AccountColorSelectedEvent(color));
             }
           },

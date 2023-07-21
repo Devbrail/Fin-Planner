@@ -17,7 +17,7 @@ class AccountMobileHorizontalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<AccountsBloc>(context)
+    BlocProvider.of<AccountBloc>(context)
         .add(AccountSelectedEvent(accounts.first));
     return ScreenTypeLayout(
       mobile: AccountsHorizontalMobilePage(accounts: accounts),
