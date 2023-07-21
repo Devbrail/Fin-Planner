@@ -191,11 +191,11 @@
     "total": "Tổng cộng",
     "colorsUI": "Màu sắc & UI",
     "more": "Nhiều hơn",
-    "chooseIcon": "Chọn biểu tượng"
+    "chooseIcon": "Chọn biểu tượng",
     "transferCategory": "Danh mục chuyển khoản",
     "accountStyle": "Kiểu tài khoản",
     "accountStyleDescription": "Chọn kiểu hiển thị tài khoản ưa thích của bạn: dọc hoặc ngang",
     "supportMe": "Hỗ trợ tôi",
     "supportMeDescription": "Nếu bạn nghĩ rằng tôi xứng đáng được thưởng một chút cho công việc khó khăn của mình, bạn có thể mua cho tôi một cốc bia ảo",
-    "lockAppDescription": "Khi được bật, bạn sẽ cần sử dụng dấu vân tay để mở Paisa.",
+    "lockAppDescription": "Khi được bật, bạn sẽ cần sử dụng dấu vân tay để mở Paisa."
 }
