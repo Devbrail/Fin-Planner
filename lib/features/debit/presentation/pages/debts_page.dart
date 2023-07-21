@@ -21,7 +21,11 @@ class DebtsPage extends StatelessWidget {
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.only(
+                left: 8.0,
+                right: 8.0,
+                bottom: 8.0,
+              ),
               child: Material(
                 borderRadius: BorderRadius.circular(32),
                 color: context.surfaceVariant,

@@ -29,8 +29,8 @@ class AccountCardV2 extends StatelessWidget {
         (account.initialAmount + expenses.fullTotal).toFormateCurrency(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
+      child: SizedBox(
+        height: 226,
         child: PaisaFilledCard(
           color: color,
           child: InkWell(
