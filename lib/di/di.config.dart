@@ -130,9 +130,9 @@ import 'package:paisa/features/search/presentation/cubit/search_cubit.dart'
 import 'package:paisa/features/settings/data/authenticate.dart' as _i3;
 import 'package:paisa/features/settings/data/file_handler.dart' as _i58;
 import 'package:paisa/features/settings/data/repository/csv_export_impl.dart'
-    as _i57;
-import 'package:paisa/features/settings/data/repository/json_export_import_impl.dart'
     as _i56;
+import 'package:paisa/features/settings/data/repository/json_export_import_impl.dart'
+    as _i57;
 import 'package:paisa/features/settings/data/repository/settings_repository_impl.dart'
     as _i30;
 import 'package:paisa/features/settings/domain/repository/import_export.dart'
@@ -309,21 +309,21 @@ Future<_i1.GetIt> init(
       _i54.DeleteTransactionsByCategoryIdUseCase(
           transactionRepository: gh<_i34.TransactionRepository>()));
   gh.lazySingleton<_i55.Export>(
-    () => _i56.JSONExportImpl(
-      gh<_i20.LocalAccountDataManager>(),
-      gh<_i21.LocalCategoryDataManager>(),
-      gh<_i14.ExpenseLocalDataManager>(),
-    ),
-    instanceName: 'json_export',
-  );
-  gh.lazySingleton<_i55.Export>(
-    () => _i57.CSVExport(
+    () => _i56.CSVExport(
       gh<_i13.DeviceInfoPlugin>(),
       gh<_i20.LocalAccountDataManager>(),
       gh<_i21.LocalCategoryDataManager>(),
       gh<_i14.ExpenseLocalDataManager>(),
     ),
     instanceName: 'csv',
+  );
+  gh.lazySingleton<_i55.Export>(
+    () => _i57.JSONExportImpl(
+      gh<_i20.LocalAccountDataManager>(),
+      gh<_i21.LocalCategoryDataManager>(),
+      gh<_i14.ExpenseLocalDataManager>(),
+    ),
+    instanceName: 'json_export',
   );
   gh.singleton<_i58.FileHandler>(_i58.FileHandler(
     gh<_i13.DeviceInfoPlugin>(),
@@ -365,7 +365,7 @@ Future<_i1.GetIt> init(
   gh.singleton<_i73.ImagePickerUseCase>(
       _i73.ImagePickerUseCase(gh<_i25.ProfileRepository>()));
   gh.lazySingleton<_i55.Import>(
-    () => _i56.JSONImportImpl(
+    () => _i57.JSONImportImpl(
       gh<_i13.DeviceInfoPlugin>(),
       gh<_i20.LocalAccountDataManager>(),
       gh<_i21.LocalCategoryDataManager>(),

@@ -98,7 +98,7 @@ class AccountSelectedItem extends StatelessWidget {
             itemBuilder: (_, index) {
               if (index == 0) {
                 return ItemWidget(
-                  color: context.primary,
+                  color: context.secondary,
                   selected: false,
                   title: context.loc.addNew,
                   icon: MdiIcons.plus.codePoint,
@@ -107,7 +107,7 @@ class AccountSelectedItem extends StatelessWidget {
               } else {
                 final AccountEntity account = accounts[index - 1];
                 return ItemWidget(
-                  color: Color(account.color ?? context.primary.value),
+                  color: context.secondary,
                   selected: account.superId ==
                       BlocProvider.of<TransactionBloc>(context)
                           .selectedAccountId,
