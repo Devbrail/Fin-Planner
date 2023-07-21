@@ -25,6 +25,7 @@ extension CategoryModelsHelper on Iterable<CategoryModel> {
 
   Iterable<CategoryModel> sort() =>
       sorted((a, b) => a.name!.compareTo(b.name!));
+
   Iterable<CategoryModel> get filterDefault {
     return sort()
         .where((element) => element.isDefault != null)

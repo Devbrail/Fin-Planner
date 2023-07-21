@@ -19,7 +19,8 @@ class SelectCategoryIcon extends StatelessWidget {
     return ValueListenableBuilder<Box<CategoryModel>>(
       valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
       builder: (context, value, child) {
-        final List<CategoryEntity> categories = value.values.toEntities();
+        final List<CategoryEntity> categories =
+            value.values.filterDefault.toEntities();
 
         if (categories.isEmpty) {
           return ListTile(
