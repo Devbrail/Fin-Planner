@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/core/extensions/build_context_extension.dart';
 import 'package:paisa/core/extensions/text_style_extension.dart';
@@ -70,10 +70,9 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
                       const VisualDensity(horizontal: 0, vertical: -3),
                   title: Text(
                     iconData.key,
-                    style: GoogleFonts.outfit(
-                      fontWeight: FontWeight.w600,
-                      textStyle: context.titleMedium,
+                    style: context.titleMedium?.copyWith(
                       color: context.primary,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),

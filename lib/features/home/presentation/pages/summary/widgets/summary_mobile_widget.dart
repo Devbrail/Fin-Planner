@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_history_widget.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_total_widget.dart';
@@ -36,10 +36,9 @@ class SummaryMobileWidget extends StatelessWidget {
               ),
               title: Text(
                 context.loc.transactions,
-                style: GoogleFonts.outfit(
-                  fontWeight: FontWeight.w600,
-                  textStyle: context.titleMedium,
+                style: context.titleMedium?.copyWith(
                   color: context.onBackground,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             );

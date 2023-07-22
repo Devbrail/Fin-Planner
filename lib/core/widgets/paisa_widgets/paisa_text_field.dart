@@ -6,7 +6,7 @@ class PaisaTextFormField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
-    required this.keyboardType,
+    this.keyboardType = TextInputType.none,
     this.validator,
     this.onChanged,
     this.enabled = true,

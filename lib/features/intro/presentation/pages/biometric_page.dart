@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/settings/data/authenticate.dart';
@@ -63,9 +63,7 @@ class _BiometricPageState extends State<BiometricPage> {
           ),
           Text(
             context.loc.paisaLocked,
-            style: GoogleFonts.outfit(
-              textStyle: context.headlineSmall,
-            ),
+            style: context.headlineSmall,
           ),
           Expanded(
             child: Center(
@@ -79,9 +77,7 @@ class _BiometricPageState extends State<BiometricPage> {
                   ),
                   Text(
                     context.loc.biometricMessage,
-                    style: GoogleFonts.outfit(
-                      textStyle: context.bodyMedium,
-                    ),
+                    style: context.bodyMedium,
                   )
                 ],
               ),

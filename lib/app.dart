@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
@@ -60,7 +61,8 @@ class _PaisaAppState extends State<PaisaApp> {
             dynamicThemeKey,
             themeModeKey,
             userCountryKey,
-            appLanguageKey
+            appLanguageKey,
+            appFontChangerKey,
           ],
         ),
         builder: (context, value, _) {
@@ -79,6 +81,9 @@ class _PaisaAppState extends State<PaisaApp> {
           final Color primaryColor = Color(color);
           final Locale locale =
               Locale(value.get(appLanguageKey, defaultValue: 'en'));
+
+          final String fontPreference =
+              value.get(appFontChangerKey, defaultValue: 'Outfit');
           return ProxyProvider0<Country>(
             update: (BuildContext context, _) {
               final Map? jsonString = value.get(userCountryKey);
@@ -118,6 +123,10 @@ class _PaisaAppState extends State<PaisaApp> {
                   theme: ThemeData.from(
                     colorScheme: lightColorScheme,
                   ).copyWith(
+                    textTheme: GoogleFonts.getTextTheme(
+                      fontPreference,
+                      ThemeData.light().textTheme,
+                    ),
                     colorScheme: lightColorScheme,
                     dialogTheme: dialogTheme,
                     timePickerTheme: timePickerTheme,
@@ -125,8 +134,10 @@ class _PaisaAppState extends State<PaisaApp> {
                     useMaterial3: true,
                     scaffoldBackgroundColor: lightColorScheme.background,
                     dialogBackgroundColor: lightColorScheme.background,
-                    navigationBarTheme:
-                        navigationBarThemeData(lightColorScheme),
+                    navigationBarTheme: navigationBarThemeData(
+                      lightColorScheme,
+                      ThemeData.light().textTheme,
+                    ),
                     navigationDrawerTheme: navigationDrawerThemeData(
                       lightColorScheme,
                       ThemeData.light().textTheme,
@@ -145,17 +156,21 @@ class _PaisaAppState extends State<PaisaApp> {
                   darkTheme: ThemeData.from(
                     colorScheme: darkColorScheme,
                   ).copyWith(
+                    textTheme: GoogleFonts.getTextTheme(
+                      fontPreference,
+                      ThemeData.dark().textTheme,
+                    ),
                     colorScheme: darkColorScheme,
                     dialogTheme: dialogTheme,
                     timePickerTheme: timePickerTheme,
                     appBarTheme: appBarThemeDark(darkColorScheme),
                     useMaterial3: true,
-                    textTheme: GoogleFonts.outfitTextTheme(
-                      ThemeData.dark().textTheme,
-                    ),
                     scaffoldBackgroundColor: darkColorScheme.background,
                     dialogBackgroundColor: darkColorScheme.background,
-                    navigationBarTheme: navigationBarThemeData(darkColorScheme),
+                    navigationBarTheme: navigationBarThemeData(
+                      darkColorScheme,
+                      ThemeData.dark().textTheme,
+                    ),
                     navigationDrawerTheme: navigationDrawerThemeData(
                       darkColorScheme,
                       ThemeData.dark().textTheme,

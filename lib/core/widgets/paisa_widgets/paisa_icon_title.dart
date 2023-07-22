@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
@@ -22,10 +21,9 @@ class PaisaIconTitle extends StatelessWidget {
         ),
         Text(
           context.loc.appTitle,
-          style: GoogleFonts.outfit(
-            fontWeight: FontWeight.w600,
-            textStyle: context.titleLarge,
+          style: context.titleLarge?.copyWith(
             color: context.onBackground,
+            fontWeight: FontWeight.w600,
           ),
         )
       ],
@@ -49,9 +47,8 @@ class PaisaTitle extends StatelessWidget {
         }
         return Text(
           title,
-          style: GoogleFonts.outfit(
+          style: context.titleLarge?.copyWith(
             fontWeight: FontWeight.w600,
-            textStyle: context.titleLarge,
             color: context.onBackground,
           ),
         );

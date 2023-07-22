@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:paisa/core/common.dart';
@@ -24,10 +24,9 @@ class TransactionsHeaderWidget extends StatelessWidget {
       ),
       title: Text(
         context.loc.transactions,
-        style: GoogleFonts.outfit(
-          fontWeight: FontWeight.w600,
-          textStyle: context.titleMedium,
+        style: context.titleMedium?.copyWith(
           color: context.onBackground,
+          fontWeight: FontWeight.w600,
         ),
       ),
       trailing: OutlinedButton.icon(

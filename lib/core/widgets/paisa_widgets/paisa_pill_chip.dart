@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:paisa/core/common.dart';
 
 class PaisaPillChip extends StatelessWidget {
@@ -43,8 +43,7 @@ class PaisaPillChip extends StatelessWidget {
               ),
               child: Text(
                 title,
-                style: GoogleFonts.outfit(
-                  textStyle: context.bodySmall,
+                style: context.bodySmall?.copyWith(
                   color: textColor,
                   fontWeight: FontWeight.w600,
                 ),

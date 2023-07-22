@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:paisa/core/common.dart';
 import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
 import 'package:paisa/features/home/presentation/pages/home/home_page.dart';
@@ -62,9 +62,8 @@ class HomeDesktopWidget extends StatelessWidget {
                     ),
                     title: Text(
                       context.loc.settings,
-                      style: GoogleFonts.outfit(
+                      style: context.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w600,
-                        textStyle: context.bodyLarge,
                         color: context.onBackground,
                       ),
                     ),

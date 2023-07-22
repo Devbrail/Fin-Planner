@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:paisa/core/common.dart';
 
 Future<TimeOfDay?> paisaTimerPicker(
@@ -12,15 +12,9 @@ Future<TimeOfDay?> paisaTimerPicker(
       return Theme(
         data: Theme.of(context).copyWith(
           timePickerTheme: TimePickerThemeData(
-            helpTextStyle: GoogleFonts.outfit(
-              textStyle: context.titleLarge,
-            ),
-            dayPeriodTextStyle: GoogleFonts.outfit(
-              textStyle: context.titleMedium,
-            ),
-            hourMinuteTextStyle: GoogleFonts.outfit(
-              textStyle: context.headlineMedium,
-            ),
+            helpTextStyle: context.titleLarge,
+            dayPeriodTextStyle: context.titleMedium,
+            hourMinuteTextStyle: context.headlineMedium,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24),
             ),
@@ -49,12 +43,8 @@ Future<DateTime?> paisaDatePicker(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24),
             ),
-            headerHelpStyle: GoogleFonts.outfit(
-              textStyle: context.titleMedium,
-            ),
-            headerHeadlineStyle: GoogleFonts.outfit(
-              textStyle: context.headlineMedium,
-            ),
+            headerHelpStyle: context.titleMedium,
+            headerHeadlineStyle: context.headlineMedium,
           ),
         ),
         child: child!,

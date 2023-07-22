@@ -7,6 +7,7 @@ import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/core/widgets/choose_theme_mode_widget.dart';
 import 'package:paisa/features/settings/data/authenticate.dart';
 import 'package:paisa/features/settings/presentation/widgets/accounts_style_widget.dart';
+import 'package:paisa/features/settings/presentation/widgets/app_font_changer.dart';
 import 'package:paisa/features/settings/presentation/widgets/app_language_changer.dart';
 import 'package:paisa/features/settings/presentation/widgets/biometrics_auth_widget.dart';
 import 'package:paisa/features/settings/presentation/widgets/country_change_widget.dart';
@@ -84,6 +85,8 @@ class SettingsPage extends StatelessWidget {
                 const AppLanguageChanger(),
                 const Divider(),
                 const CountryChangeWidget(),
+                const Divider(),
+                const AppFontChanger(),
                 const Divider(),
                 const FixExpenseWidget(),
                 const Divider(),

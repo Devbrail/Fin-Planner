@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'custom_color.dart';
 
@@ -17,11 +16,9 @@ ElevatedButtonThemeData elevatedButtonTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(32.0),
       ),
-      textStyle: GoogleFonts.outfit(
-        textStyle: TextStyle(
-          fontWeight: FontWeight.w600,
-          color: colorScheme.onPrimary,
-        ),
+      textStyle: TextStyle(
+        fontWeight: FontWeight.w600,
+        color: colorScheme.onPrimary,
       ),
     ),
   );
@@ -36,30 +33,39 @@ InputDecorationTheme get inputDecorationTheme {
   );
 }
 
-NavigationBarThemeData navigationBarThemeData(ColorScheme colorScheme) {
+NavigationBarThemeData navigationBarThemeData(
+  ColorScheme colorScheme,
+  TextTheme? textTheme,
+) {
   return NavigationBarThemeData(
     backgroundColor: colorScheme.surface,
     labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
     labelTextStyle: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return GoogleFonts.outfit().copyWith(fontWeight: FontWeight.bold);
+        return textTheme?.bodyLarge?.copyWith(
+          fontWeight: FontWeight.bold,
+          color: colorScheme.onSurface,
+        );
       } else {
-        return GoogleFonts.outfit();
+        return textTheme?.bodyLarge?.copyWith(
+          color: colorScheme.onSurface.withOpacity(0.75),
+        );
       }
     }),
   );
 }
 
 NavigationDrawerThemeData navigationDrawerThemeData(
-    ColorScheme colorScheme, TextTheme textTheme) {
+  ColorScheme colorScheme,
+  TextTheme? textTheme,
+) {
   return NavigationDrawerThemeData(
     backgroundColor: colorScheme.surface,
     labelTextStyle: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return GoogleFonts.outfit(textStyle: textTheme.bodyLarge)
-            .copyWith(fontWeight: FontWeight.bold);
+        return textTheme?.bodyLarge?.copyWith(fontWeight: FontWeight.bold);
       } else {
-        return GoogleFonts.outfit(textStyle: textTheme.bodyLarge);
+        return textTheme?.bodyLarge;
       }
     }),
   );
@@ -92,10 +98,8 @@ AppBarTheme appBarThemeDark(ColorScheme colorScheme) {
 
 DialogTheme get dialogTheme {
   return DialogTheme(
-    titleTextStyle: GoogleFonts.outfit(
-      textStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
+    titleTextStyle: const TextStyle(
+      fontWeight: FontWeight.bold,
     ),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(24),
@@ -105,15 +109,11 @@ DialogTheme get dialogTheme {
 
 TimePickerThemeData get timePickerTheme {
   return TimePickerThemeData(
-    helpTextStyle: GoogleFonts.outfit(
-      textStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
+    helpTextStyle: const TextStyle(
+      fontWeight: FontWeight.bold,
     ),
-    hourMinuteTextStyle: GoogleFonts.outfit(
-      textStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
+    hourMinuteTextStyle: const TextStyle(
+      fontWeight: FontWeight.bold,
     ),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
     hourMinuteShape: const CircleBorder(),

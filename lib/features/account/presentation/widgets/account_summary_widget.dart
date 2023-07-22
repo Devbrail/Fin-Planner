@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/theme/custom_color.dart';
@@ -31,9 +31,8 @@ class AccountSummaryWidget extends StatelessWidget {
             visualDensity: const VisualDensity(horizontal: 0, vertical: -3),
             title: Text(
               context.loc.thisMonth,
-              style: GoogleFonts.outfit(
+              style: context.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
-                textStyle: context.titleMedium,
                 color: context.onBackground,
               ),
             ),

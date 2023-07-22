@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/core/constants/constants.dart';
@@ -68,9 +68,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                 ListTile(
                   title: Text(
                     context.loc.addedCategories,
-                    style: GoogleFonts.outfit(
-                      textStyle: context.titleMedium,
-                    ),
+                    style: context.titleMedium,
                   ),
                 ),
                 ScreenTypeLayout(
@@ -117,9 +115,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                 ListTile(
                   title: Text(
                     context.loc.defaultCategories,
-                    style: GoogleFonts.outfit(
-                      textStyle: context.titleMedium,
-                    ),
+                    style: context.titleMedium,
                   ),
                 ),
                 Padding(

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 extension TextStyleHelper on BuildContext {
-  /*  TextStyle get bodyMedium {
-    return GoogleFonts.outfit(textStyle: Theme.of(this).textTheme.bodyMedium);
-  }
- */
   TextStyle? get titleLarge => Theme.of(this).textTheme.titleLarge;
   TextStyle? get titleMedium => Theme.of(this).textTheme.titleMedium;
   TextStyle? get titleSmall => Theme.of(this).textTheme.titleSmall;

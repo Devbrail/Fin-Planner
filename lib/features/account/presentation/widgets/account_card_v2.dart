@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/enum/card_type.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
@@ -53,18 +53,14 @@ class AccountCardV2 extends StatelessWidget {
                   ),
                   title: Text(
                     account.name ?? '',
-                    style: GoogleFonts.outfit(
-                      textStyle: context.bodyMedium?.copyWith(
-                        color: onPrimary,
-                      ),
+                    style: context.bodyMedium?.copyWith(
+                      color: onPrimary,
                     ),
                   ),
                   subtitle: Text(
                     account.bankName ?? '',
-                    style: GoogleFonts.outfit(
-                      textStyle: context.bodyMedium?.copyWith(
-                        color: onPrimary.withOpacity(0.5),
-                      ),
+                    style: context.bodyMedium?.copyWith(
+                      color: onPrimary.withOpacity(0.5),
                     ),
                   ),
                 ),
@@ -72,11 +68,9 @@ class AccountCardV2 extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
                     totalBalance,
-                    style: GoogleFonts.manrope(
-                      textStyle: context.headlineSmall?.copyWith(
-                        color: onPrimary,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    style: context.headlineSmall?.copyWith(
+                      color: onPrimary,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -141,19 +135,15 @@ class ThisMonthTransactionWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: GoogleFonts.outfit(
-              textStyle: TextStyle(
-                color: color.withOpacity(0.75),
-              ),
+            style: TextStyle(
+              color: color.withOpacity(0.75),
             ),
           ),
           const SizedBox(height: 6),
           Text(
             content,
-            style: GoogleFonts.manrope(
-              textStyle: context.titleLarge?.copyWith(
-                color: color,
-              ),
+            style: context.titleLarge?.copyWith(
+              color: color,
             ),
           ),
         ],

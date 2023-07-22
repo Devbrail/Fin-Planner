@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:paisa/core/common.dart';
 
@@ -45,10 +44,8 @@ class PaisaToggleButton extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Text(
           title,
-          style: GoogleFonts.outfit(
-            textStyle: context.bodyMedium?.copyWith(
-              color: textColor,
-            ),
+          style: context.bodyMedium?.copyWith(
+            color: textColor,
           ),
         ),
       ),

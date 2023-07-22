@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/theme/custom_color.dart';
@@ -56,10 +55,8 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                   ),
                   Text(
                     '+${income.toFormateCurrency(context)}',
-                    style: GoogleFonts.manrope(
-                      textStyle: context.titleLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
+                    style: context.titleLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                   ),
                 ],
@@ -89,10 +86,8 @@ class ExpenseTotalForMonthWidget extends StatelessWidget {
                   ),
                   Text(
                     '-${outcome.toFormateCurrency(context)}',
-                    style: GoogleFonts.manrope(
-                      textStyle: context.titleLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
+                    style: context.titleLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                   ),
                 ],

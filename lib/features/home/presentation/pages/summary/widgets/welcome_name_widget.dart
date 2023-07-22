@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/main.dart';
@@ -23,9 +23,8 @@ class WelcomeNameWidget extends StatelessWidget {
         return ListTile(
           title: Text(
             name,
-            style: GoogleFonts.outfit(
+            style: context.titleMedium?.copyWith(
               fontWeight: FontWeight.w600,
-              textStyle: context.titleMedium,
               color: context.onBackground,
             ),
           ),

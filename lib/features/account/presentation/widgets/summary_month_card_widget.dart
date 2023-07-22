@@ -1,6 +1,6 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:paisa/core/widgets/paisa_widgets/paisa_card.dart';
 
 class SummaryMonthCardWidget extends StatelessWidget {
@@ -45,26 +45,20 @@ class SummaryMonthCardWidget extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: GoogleFonts.outfit(
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSurfaceVariant
-                                      .withOpacity(0.75),
-                                ),
-                          ),
+                          style:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant
+                                        .withOpacity(0.75),
+                                  ),
                         ),
                         Text(
                           total,
-                          style: GoogleFonts.manrope(
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         )
                       ],
                     ),

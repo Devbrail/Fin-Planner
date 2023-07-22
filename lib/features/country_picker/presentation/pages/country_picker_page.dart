@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
@@ -227,9 +227,7 @@ class CountryWidget extends StatelessWidget {
               ),
               child: Text(
                 countryModel.symbol,
-                style: GoogleFonts.manrope(
-                  textStyle: context.titleLarge,
-                ),
+                style: context.titleLarge,
               ),
             ),
             const Spacer(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:paisa/core/common.dart';
@@ -45,15 +45,13 @@ class ExpenseItemWidget extends StatelessWidget {
       child: ListTile(
         title: Text(
           expense.name ?? '',
-          style: GoogleFonts.manrope(
-            textStyle: context.bodyMedium,
+          style: context.bodyMedium?.copyWith(
             fontWeight: FontWeight.w600,
           ),
         ),
         subtitle: Text(
           getSubtitle(context),
-          style: GoogleFonts.manrope(
-            textStyle: context.bodySmall,
+          style: context.bodySmall?.copyWith(
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -71,10 +69,8 @@ class ExpenseItemWidget extends StatelessWidget {
         ),
         trailing: Text(
           expense.currency!.toFormateCurrency(context),
-          style: GoogleFonts.manrope(
-            textStyle: context.bodyMedium?.copyWith(
-              color: expense.type?.color(context),
-            ),
+          style: context.bodyMedium?.copyWith(
+            color: expense.type?.color(context),
           ),
         ),
       ),
@@ -119,10 +115,8 @@ class ExpenseTransferItemWidget extends StatelessWidget {
           ),
           trailing: Text(
             '${expense.type?.sign}${expense.currency!.toFormateCurrency(context)}',
-            style: GoogleFonts.manrope(
-              textStyle: context.bodyLarge?.copyWith(
-                color: expense.type?.color(context),
-              ),
+            style: context.bodyLarge?.copyWith(
+              color: expense.type?.color(context),
             ),
           ),
         ),
