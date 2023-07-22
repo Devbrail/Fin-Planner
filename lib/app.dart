@@ -60,6 +60,7 @@ class _PaisaAppState extends State<PaisaApp> {
             dynamicThemeKey,
             themeModeKey,
             userCountryKey,
+            appLanguageKey
           ],
         ),
         builder: (context, value, _) {
@@ -76,7 +77,8 @@ class _PaisaAppState extends State<PaisaApp> {
             defaultValue: 0xFF795548,
           );
           final Color primaryColor = Color(color);
-
+          final Locale locale =
+              Locale(value.get(appLanguageKey, defaultValue: 'en'));
           return ProxyProvider0<Country>(
             update: (BuildContext context, _) {
               final Map? jsonString = value.get(userCountryKey);
@@ -102,6 +104,7 @@ class _PaisaAppState extends State<PaisaApp> {
                 }
 
                 return MaterialApp.router(
+                  locale: locale,
                   routeInformationProvider: goRouter.routeInformationProvider,
                   routeInformationParser: goRouter.routeInformationParser,
                   routerDelegate: goRouter.routerDelegate,
@@ -120,8 +123,6 @@ class _PaisaAppState extends State<PaisaApp> {
                     timePickerTheme: timePickerTheme,
                     appBarTheme: appBarThemeLight(lightColorScheme),
                     useMaterial3: true,
-                    textTheme: GoogleFonts.outfitTextTheme(
-                        ThemeData.light().textTheme),
                     scaffoldBackgroundColor: lightColorScheme.background,
                     dialogBackgroundColor: lightColorScheme.background,
                     navigationBarTheme:

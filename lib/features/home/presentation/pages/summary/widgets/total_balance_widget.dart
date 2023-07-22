@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:paisa/core/common.dart';
 
@@ -30,11 +29,9 @@ class TotalBalanceWidget extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           amount.toFormateCurrency(context),
-          style: GoogleFonts.manrope(
-            textStyle: context.headlineMedium?.copyWith(
-              color: context.onPrimaryContainer,
-              fontWeight: FontWeight.w700,
-            ),
+          style: context.headlineMedium?.copyWith(
+            color: context.onPrimaryContainer,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ],

@@ -56,9 +56,10 @@ class _CountryPickerPageState extends State<CountryPickerPage> {
           body: SafeArea(
             child: Column(
               children: [
-                widget.forceCountrySelector
-                    ? const SizedBox.shrink()
-                    : const SizedBox(height: 16),
+                if (widget.forceCountrySelector)
+                  const SizedBox.shrink()
+                else
+                  const SizedBox(height: 16),
                 FractionallySizedBox(
                   widthFactor: 0.8,
                   child: Column(
@@ -166,7 +167,7 @@ class _CountriesWidgetState extends State<CountriesWidget> {
       padding: const EdgeInsets.only(bottom: 82, left: 8, right: 8),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 256,
-        childAspectRatio: 16 / 12,
+        childAspectRatio: 15 / 12,
       ),
       shrinkWrap: true,
       itemCount: widget.countries.length,

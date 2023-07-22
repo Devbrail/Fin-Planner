@@ -53,10 +53,10 @@ class _UserOnboardingPageState extends State<UserOnboardingPage> {
               ),
               const Spacer(),
               FloatingActionButton.extended(
-                onPressed: () async {
+                onPressed: () {
                   if (currentIndex == 0) {
                     if (_formState.currentState!.validate()) {
-                      Provider.of<Box<dynamic>>(context)
+                      Provider.of<Box<dynamic>>(context, listen: false)
                           .put(userNameKey, _nameController.text)
                           .then((value) {
                         return controller.nextPage(
@@ -66,13 +66,16 @@ class _UserOnboardingPageState extends State<UserOnboardingPage> {
                       });
                     }
                   } else if (currentIndex == 1) {
-                    final String image = Provider.of<Box<dynamic>>(context)
-                        .get(userImageKey, defaultValue: '');
+                    final String image =
+                        Provider.of<Box<dynamic>>(context, listen: false)
+                            .get(userImageKey, defaultValue: '');
                     if (image.isEmpty) {
-                      await Provider.of<Box<dynamic>>(context)
-                          .put(userImageKey, 'no-image');
+                      Provider.of<Box<dynamic>>(context, listen: false)
+                          .put(userImageKey, 'no-image')
+                          .then((value) => context.go(categorySelectorPath));
+                    } else {
+                      context.go(categorySelectorPath);
                     }
-                    if (context.mounted) context.go(categorySelectorPath);
                   }
                 },
                 extendedPadding: const EdgeInsets.symmetric(horizontal: 24),
