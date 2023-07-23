@@ -23,8 +23,8 @@ class AppFontChanger extends StatelessWidget {
       builder: (context, value, child) {
         return ListTile(
           leading: Icon(MdiIcons.formatFont),
-          title: Text('Change font'),
-          subtitle: Text('Switch font between system and outfit'),
+          title: Text(context.loc.fontStyle),
+          subtitle: Text(context.loc.fontStyleDescription),
           onTap: () {
             showModalBottomSheet(
               context: context,
@@ -93,7 +93,7 @@ class _FontListWidgetState extends State<FontListWidget> {
         children: [
           ListTile(
             title: Text(
-              'Select language',
+              context.loc.chooseFont,
               style: context.titleLarge,
             ),
           ),
@@ -101,7 +101,7 @@ class _FontListWidgetState extends State<FontListWidget> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: PaisaTextField(
               controller: textEditingController,
-              hintText: 'Search',
+              hintText: context.loc.search,
               keyboardType: TextInputType.name,
               onChanged: (value) {
                 valueNotifier.value = value;

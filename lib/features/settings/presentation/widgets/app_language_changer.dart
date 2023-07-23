@@ -49,7 +49,7 @@ class AppLanguageChanger extends StatelessWidget {
                         children: [
                           ListTile(
                             title: Text(
-                              'Select language',
+                              context.loc.chooseAppLanguage,
                               style: context.titleLarge,
                             ),
                           ),

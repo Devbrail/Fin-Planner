@@ -974,5 +974,25 @@
     "@lockAppDescription": {
         "description": "Text shown on settings page",
         "type": "text"
+    },
+    "fontStyle": "Font style",
+    "@fontStyle": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "fontStyleDescription": "Change the font style to personalize your app's appearance. Select from various font options to suit your preferences and enhance readability.",
+    "@fontStyleDescription": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "chooseFont": "Choose font",
+    "@chooseFont": {
+        "description": "Text shown on font selection dialog title",
+        "type": "text"
+    },
+    "chooseAppLanguage": "Choose language",
+    "@chooseAppLanguage": {
+        "description": "Text shown on app language selection dialog title",
+        "type": "text"
     }
 }

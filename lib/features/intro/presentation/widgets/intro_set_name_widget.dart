@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:paisa/core/common.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 
 class IntroSetNameWidget extends StatelessWidget {
   const IntroSetNameWidget({
@@ -63,14 +64,11 @@ class IntroSetNameWidget extends StatelessWidget {
             const SizedBox(height: 16),
             Form(
               key: formState,
-              child: TextFormField(
+              child: PaisaTextFormField(
                 key: const Key('user_name_textfield'),
                 controller: nameController,
-                textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(
-                  hintText: context.loc.enterNameHint,
-                  label: Text(context.loc.nameHint),
-                ),
+                hintText: context.loc.enterNameHint,
+                label: context.loc.nameHint,
                 keyboardType: TextInputType.name,
                 validator: (val) {
                   if (val!.isNotEmpty) {

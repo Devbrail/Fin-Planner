@@ -15,6 +15,7 @@ class PaisaTextFormField extends StatelessWidget {
     this.label,
     this.inputFormatters,
     this.counterText,
+    this.textCapitalization = TextCapitalization.words,
   });
 
   final String? Function(String?)? validator;
@@ -28,6 +29,7 @@ class PaisaTextFormField extends StatelessWidget {
   final String? label;
   final int? maxLength;
   final int? maxLines;
+  final TextCapitalization textCapitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class PaisaTextFormField extends StatelessWidget {
       enabled: enabled,
       controller: controller,
       keyboardType: keyboardType,
+      textCapitalization: textCapitalization,
       decoration: InputDecoration(
         counterText: "",
         hintText: hintText,

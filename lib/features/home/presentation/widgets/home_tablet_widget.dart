@@ -29,7 +29,7 @@ class HomeTabletWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 14.0),
           child: PaisaIconTitle(),
         ),
-        leadingWidth: 150,
+        leadingWidth: 180,
         title: const HomeSearchBar(),
         actions: const [PaisaUserWidget()],
       ),
