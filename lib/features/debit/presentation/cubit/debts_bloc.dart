@@ -16,8 +16,8 @@ part 'debts_state.dart';
 enum SelectedTime { start, end }
 
 @injectable
-class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
-  DebtsBloc({
+class DebitBloc extends Bloc<DebtsEvent, DebtsState> {
+  DebitBloc({
     required this.addDebtUseCase,
     required this.getDebtUseCase,
     required this.getTransactionsUseCase,
@@ -41,7 +41,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
   final AddDebitTransactionUseCase addTransactionUseCase;
   double? currentAmount;
   Debit? currentDebt;
-  DebtType currentDebtType = DebtType.debt;
+  DebitType currentDebtType = DebitType.debit;
   String? currentDescription;
   String? currentName;
   final DeleteDebitUseCase deleteDebtUseCase;
@@ -63,7 +63,7 @@ class DebtsBloc extends Bloc<DebtsEvent, DebtsState> {
     final String? description = currentDescription?.trim();
     final DateTime? dateTime = startDateTime;
     final DateTime? dueDateTime = endDateTime;
-    final DebtType debtType = currentDebtType;
+    final DebitType debtType = currentDebtType;
 
     if (amount == null) {
       return emit(const DebtErrorState('Enter amount'));

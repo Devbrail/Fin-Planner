@@ -22,7 +22,7 @@ class AccountSelectorPage extends StatefulWidget {
 }
 
 class _AccountSelectorPageState extends State<AccountSelectorPage> {
-  final LocalAccountDataManager dataSource = getIt.get();
+  final LocalAccountManager dataSource = getIt.get();
   final List<AccountModel> defaultModels = defaultAccountsData();
 
   Future<void> saveAndNavigate() async {

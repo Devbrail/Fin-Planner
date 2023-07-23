@@ -60,11 +60,11 @@ class DebtsPage extends StatelessWidget {
           valueListenable: getIt.get<Box<DebitModel>>().listenable(),
           builder: (context, value, child) {
             final debts = value.values
-                .where((element) => element.debtType == DebtType.debt)
+                .where((element) => element.debtType == DebitType.debit)
                 .toList();
 
             final credits = value.values
-                .where((element) => element.debtType == DebtType.credit)
+                .where((element) => element.debtType == DebitType.credit)
                 .toList();
 
             return TabBarView(

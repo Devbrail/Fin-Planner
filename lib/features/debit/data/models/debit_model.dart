@@ -22,8 +22,8 @@ class DebitModel extends HiveObject with EquatableMixin {
   @HiveField(3)
   DateTime dateTime;
 
-  @HiveField(5, defaultValue: DebtType.debt)
-  DebtType debtType;
+  @HiveField(5, defaultValue: DebitType.debit)
+  DebitType debtType;
 
   @HiveField(1)
   String description;

@@ -1,6 +1,6 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
-
+import 'package:paisa/core/common.dart';
 import 'package:paisa/core/widgets/paisa_widgets/paisa_card.dart';
 
 class SummaryMonthCardWidget extends StatelessWidget {
@@ -45,19 +45,13 @@ class SummaryMonthCardWidget extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurfaceVariant
-                                        .withOpacity(0.75),
-                                  ),
+                          style: context.labelMedium?.copyWith(
+                            color: context.onSurfaceVariant.withOpacity(0.75),
+                          ),
                         ),
                         Text(
                           total,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
+                          style: context.titleSmall
                               ?.copyWith(fontWeight: FontWeight.bold),
                         )
                       ],

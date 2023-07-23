@@ -40,7 +40,7 @@ class AddOrUpdateEvent extends DebtsEvent {
 class ChangeDebtTypeEvent extends DebtsEvent {
   const ChangeDebtTypeEvent(this.debtType);
 
-  final DebtType debtType;
+  final DebitType debtType;
 
   @override
   List<Object?> get props => [debtType];

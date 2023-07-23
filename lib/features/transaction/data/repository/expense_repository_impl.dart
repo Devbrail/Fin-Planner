@@ -1,6 +1,9 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/common_enum.dart';
-import 'package:paisa/features/transaction/data/data_sources/local_transaction_data_manager.dart';
+import 'package:paisa/core/error/failures.dart';
+import 'package:paisa/features/transaction/data/data_sources/local/transaction_data_manager.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
 import 'package:paisa/features/transaction/data/model/search_query.dart';
 import 'package:paisa/features/transaction/domain/repository/expense_repository.dart';
@@ -11,10 +14,10 @@ class ExpenseRepositoryImpl extends TransactionRepository {
     required this.dataSource,
   });
 
-  final ExpenseLocalDataManager dataSource;
+  final LocalTransactionManager dataSource;
 
   @override
-  Future<void> addExpense(
+  Future<Either<Failure, bool>> addExpense(
     String? name,
     double? amount,
     DateTime? time,
@@ -23,17 +26,27 @@ class ExpenseRepositoryImpl extends TransactionRepository {
     TransactionType? transactionType,
     String? description,
   ) async {
-    return dataSource.add(
-      TransactionModel(
-        name: name,
-        currency: amount,
-        time: time,
-        categoryId: category,
-        accountId: account,
-        type: transactionType,
-        description: description,
-      ),
-    );
+    try {
+      final int result = await dataSource.add(
+        TransactionModel(
+          name: name,
+          currency: amount,
+          time: time,
+          categoryId: category,
+          accountId: account,
+          type: transactionType,
+          description: description,
+        ),
+      );
+      if (result != -1) {
+        return right(true);
+      } else {
+        return right(false);
+      }
+    } catch (err) {
+      debugPrint(err.toString());
+      return left(FailedToAddTransactionFailure());
+    }
   }
 
   @override

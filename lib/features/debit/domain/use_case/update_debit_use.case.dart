@@ -29,7 +29,7 @@ class UpdateDebitParams extends Equatable {
   final double amount;
   final DateTime currentDateTime;
   final DateTime dueDateTime;
-  final DebtType debtType;
+  final DebitType debtType;
   final int key;
 
   const UpdateDebitParams(

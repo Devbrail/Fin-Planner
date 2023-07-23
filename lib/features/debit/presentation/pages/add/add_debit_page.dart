@@ -13,8 +13,8 @@ import 'package:paisa/features/debit/presentation/cubit/debts_bloc.dart';
 import 'package:paisa/features/debit/presentation/widgets/debt_toggle_buttons_widget.dart';
 import 'package:paisa/main.dart';
 
-class AddOrEditDebtPage extends StatefulWidget {
-  const AddOrEditDebtPage({
+class AddOrEditDebitPage extends StatefulWidget {
+  const AddOrEditDebitPage({
     super.key,
     this.debtId,
   });
@@ -22,12 +22,12 @@ class AddOrEditDebtPage extends StatefulWidget {
   final String? debtId;
 
   @override
-  State<AddOrEditDebtPage> createState() => _AddOrEditDebtPageState();
+  State<AddOrEditDebitPage> createState() => _AddOrEditDebitPageState();
 }
 
-class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
+class _AddOrEditDebitPageState extends State<AddOrEditDebitPage> {
   final TextEditingController amountController = TextEditingController();
-  final DebtsBloc debtBloc = getIt.get();
+  final DebitBloc debitBloc = getIt.get();
   final TextEditingController descController = TextEditingController();
   late final bool isDebtAddOrUpdate = widget.debtId == null;
   final TextEditingController nameController = TextEditingController();
@@ -45,7 +45,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
   @override
   void initState() {
     super.initState();
-    debtBloc.add(FetchDebtOrCreditFromIdEvent(widget.debtId));
+    debitBloc.add(FetchDebtOrCreditFromIdEvent(widget.debtId));
   }
 
   @override
@@ -53,9 +53,9 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
     return PaisaAnnotatedRegionWidget(
       color: context.background,
       child: BlocProvider(
-        create: (_) => debtBloc,
+        create: (_) => debitBloc,
         child: BlocConsumer(
-          bloc: debtBloc,
+          bloc: debitBloc,
           listener: (context, state) {
             if (state is DebtsAdded) {
               GoRouter.of(context).pop();
@@ -107,7 +107,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                                     const EdgeInsets.symmetric(horizontal: 16),
                               ),
                               onPressed: () {
-                                debtBloc.add(DeleteDebtEvent(
+                                debitBloc.add(DeleteDebtEvent(
                                     int.tryParse(widget.debtId!) ?? 0));
                               },
                               child: const Text('Delete'),
@@ -129,7 +129,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         children: [
-                          DebtToggleButtonsWidget(debtsBloc: debtBloc),
+                          DebtToggleButtonsWidget(debtsBloc: debitBloc),
                           const SizedBox(height: 16),
                           AmountWidget(controller: amountController),
                           const SizedBox(height: 16),
@@ -169,7 +169,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                             return ListTile(
                               leading: IconButton(
                                 onPressed: () {
-                                  debtBloc.add(
+                                  debitBloc.add(
                                     DeleteTransactionEvent(
                                         transaction.superId!),
                                   );
@@ -196,7 +196,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                       if (!isValid) {
                         return;
                       }
-                      debtBloc.add(AddOrUpdateEvent(isDebtAddOrUpdate));
+                      debitBloc.add(AddOrUpdateEvent(isDebtAddOrUpdate));
                     },
                     title: isDebtAddOrUpdate
                         ? context.loc.add
@@ -217,7 +217,7 @@ class StartAndEndDateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final debtBloc = BlocProvider.of<DebtsBloc>(context);
+    final debtBloc = BlocProvider.of<DebitBloc>(context);
     return Row(
       children: [
         BlocBuilder(
@@ -332,7 +332,7 @@ class NameWidget extends StatelessWidget {
         }
       },
       onChanged: (value) =>
-          BlocProvider.of<DebtsBloc>(context).currentName = value,
+          BlocProvider.of<DebitBloc>(context).currentName = value,
     );
   }
 }
@@ -359,7 +359,7 @@ class DescriptionWidget extends StatelessWidget {
         }
       },
       onChanged: (value) =>
-          BlocProvider.of<DebtsBloc>(context).currentDescription = value,
+          BlocProvider.of<DebitBloc>(context).currentDescription = value,
     );
   }
 }
@@ -380,7 +380,7 @@ class AmountWidget extends StatelessWidget {
       hintText: context.loc.amount,
       onChanged: (value) {
         double? amount = double.tryParse(value);
-        BlocProvider.of<DebtsBloc>(context).currentAmount = amount;
+        BlocProvider.of<DebitBloc>(context).currentAmount = amount;
       },
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),

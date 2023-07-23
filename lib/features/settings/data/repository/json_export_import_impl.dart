@@ -17,7 +17,7 @@ import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/features/settings/data/model/data.dart';
 import 'package:paisa/features/settings/domain/repository/import_export.dart';
 import 'package:paisa/features/settings/presentation/cubit/settings_cubit.dart';
-import 'package:paisa/features/transaction/data/data_sources/local_transaction_data_manager.dart';
+import 'package:paisa/features/transaction/data/data_sources/local/transaction_data_manager.dart';
 import 'package:paisa/features/transaction/data/model/expense_model.dart';
 
 @Named('json_export')
@@ -29,9 +29,9 @@ class JSONExportImpl implements Export {
     this.expenseDataManager,
   );
 
-  final LocalAccountDataManager accountDataManager;
+  final LocalAccountManager accountDataManager;
   final LocalCategoryDataManager categoryDataManager;
-  final ExpenseLocalDataManager expenseDataManager;
+  final LocalTransactionManager expenseDataManager;
 
   @override
   Future<String> export() async {
@@ -71,10 +71,10 @@ class JSONImportImpl implements Import {
     this.expenseDataManager,
   );
 
-  final LocalAccountDataManager accountDataManager;
+  final LocalAccountManager accountDataManager;
   final LocalCategoryDataManager categoryDataManager;
   final DeviceInfoPlugin deviceInfo;
-  final ExpenseLocalDataManager expenseDataManager;
+  final LocalTransactionManager expenseDataManager;
 
   @override
   Future<bool> import() async {

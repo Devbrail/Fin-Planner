@@ -4,7 +4,6 @@ import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
 import 'package:paisa/features/transaction/domain/entities/transaction.dart';
-import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 
 import 'expense_item_widget.dart';
 
@@ -12,11 +11,9 @@ class ExpenseListWidget extends StatelessWidget {
   const ExpenseListWidget({
     Key? key,
     required this.expenses,
-    required this.summaryController,
   }) : super(key: key);
 
   final List<TransactionEntity> expenses;
-  final SummaryController summaryController;
 
   @override
   Widget build(BuildContext context) {

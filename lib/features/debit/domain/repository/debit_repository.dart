@@ -9,7 +9,7 @@ abstract class DebitRepository {
     double amount,
     DateTime currentDateTime,
     DateTime dueDateTime,
-    DebtType debtType,
+    DebitType debtType,
   );
 
   Future<void> updateDebt({
@@ -18,7 +18,7 @@ abstract class DebitRepository {
     required double amount,
     required DateTime currentDateTime,
     required DateTime dueDateTime,
-    required DebtType debtType,
+    required DebitType debtType,
     required int key,
   });
 

@@ -13,7 +13,7 @@ import 'package:paisa/features/category/presentation/pages/category_list_page.da
 import 'package:paisa/features/category/presentation/pages/selector/category_selector_page.dart';
 import 'package:paisa/features/country_picker/presentation/cubit/country_picker_cubit.dart';
 import 'package:paisa/features/country_picker/presentation/pages/country_picker_page.dart';
-import 'package:paisa/features/debit/presentation/pages/add/add_debt_page.dart';
+import 'package:paisa/features/debit/presentation/pages/add/add_debit_page.dart';
 import 'package:paisa/features/home/presentation/pages/home/home_page.dart';
 import 'package:paisa/features/home/presentation/pages/overview/transactions_by_category_list_page.dart';
 import 'package:paisa/features/intro/presentation/pages/biometric_page.dart';
@@ -232,14 +232,14 @@ final GoRouter goRouter = GoRouter(
           name: addDebitName,
           path: addDebitPath,
           builder: (BuildContext context, GoRouterState state) {
-            return const AddOrEditDebtPage();
+            return const AddOrEditDebitPage();
           },
         ),
         GoRoute(
           name: debtAddOrEditName,
           path: debtAddOrEditPath,
           builder: (BuildContext context, GoRouterState state) {
-            return AddOrEditDebtPage(
+            return AddOrEditDebitPage(
               debtId: state.pathParameters['did'],
             );
           },

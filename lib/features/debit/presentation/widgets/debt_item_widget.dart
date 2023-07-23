@@ -98,7 +98,7 @@ class DebtItemWidget extends StatelessWidget {
                     if (dateTime != null) {
                       final double amount =
                           double.tryParse(controller.text) ?? 0;
-                      getIt.get<DebtsBloc>().add(
+                      getIt.get<DebitBloc>().add(
                           AddTransactionToDebtEvent(debt, amount, dateTime!));
                       Navigator.pop(context);
                     } else {
@@ -197,7 +197,7 @@ class DebtItemWidget extends StatelessWidget {
                             color: context.onSurfaceVariant,
                           ),
                           label: Text(
-                            debt.debtType == DebtType.debt
+                            debt.debtType == DebitType.debit
                                 ? context.loc.payDebt
                                 : context.loc.payCredit,
                             style: Theme.of(context)

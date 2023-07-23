@@ -3,7 +3,7 @@ import 'package:paisa/features/category/data/data_sources/local/category_data_so
 import 'package:paisa/features/category/domain/repository/category_repository.dart';
 
 import 'package:paisa/features/category/data/model/category_model.dart';
-import 'package:paisa/features/transaction/data/data_sources/local_transaction_data_manager.dart';
+import 'package:paisa/features/transaction/data/data_sources/local/transaction_data_manager.dart';
 
 @Singleton(as: CategoryRepository)
 class CategoryRepositoryImpl extends CategoryRepository {
@@ -13,7 +13,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
   });
 
   final LocalCategoryDataManager dataSources;
-  final ExpenseLocalDataManager expenseDataManager;
+  final LocalTransactionManager expenseDataManager;
 
   @override
   Future<void> add({

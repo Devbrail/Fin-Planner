@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paisa/core/common.dart';
 
 extension TextStyleHelper on BuildContext {
   TextStyle? get titleLarge => Theme.of(this).textTheme.titleLarge;
@@ -16,4 +17,34 @@ extension TextStyleHelper on BuildContext {
   TextStyle? get headlineLarge => Theme.of(this).textTheme.headlineLarge;
   TextStyle? get headlineMedium => Theme.of(this).textTheme.headlineMedium;
   TextStyle? get headlineSmall => Theme.of(this).textTheme.headlineSmall;
+}
+
+extension TextStyleColorMapping on TextStyle {
+  TextStyle onPrimary(BuildContext context) {
+    return copyWith(color: context.onPrimary);
+  }
+
+  TextStyle onSecondary(BuildContext context) {
+    return copyWith(color: context.onSecondary);
+  }
+
+  TextStyle onTertiary(BuildContext context) {
+    return copyWith(color: context.onTertiary);
+  }
+
+  TextStyle onPrimaryContainer(BuildContext context) {
+    return copyWith(color: context.onPrimaryContainer);
+  }
+
+  TextStyle onSecondaryContainer(BuildContext context) {
+    return copyWith(color: context.onSecondaryContainer);
+  }
+
+  TextStyle onTertiaryContainer(BuildContext context) {
+    return copyWith(color: context.onTertiaryContainer);
+  }
+
+  TextStyle onSurface(BuildContext context) {
+    return copyWith(color: context.onSurface);
+  }
 }

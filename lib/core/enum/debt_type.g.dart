@@ -6,29 +6,29 @@ part of 'debt_type.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class DebtTypeAdapter extends TypeAdapter<DebtType> {
+class DebtTypeAdapter extends TypeAdapter<DebitType> {
   @override
   final int typeId = 15;
 
   @override
-  DebtType read(BinaryReader reader) {
+  DebitType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 1:
-        return DebtType.debt;
+        return DebitType.debit;
       case 2:
-        return DebtType.credit;
+        return DebitType.credit;
       default:
-        return DebtType.debt;
+        return DebitType.debit;
     }
   }
 
   @override
-  void write(BinaryWriter writer, DebtType obj) {
+  void write(BinaryWriter writer, DebitType obj) {
     switch (obj) {
-      case DebtType.debt:
+      case DebitType.debit:
         writer.writeByte(1);
         break;
-      case DebtType.credit:
+      case DebitType.credit:
         writer.writeByte(2);
         break;
     }

@@ -5,7 +5,7 @@ export 'extensions/card_type_extension.dart';
 export 'extensions/category_extension.dart';
 export 'extensions/color_extension.dart';
 export 'extensions/country_extension.dart';
-export 'extensions/debt_extensions.dart';
+export 'extensions/debit_extensions.dart';
 export 'extensions/double_extensions.dart';
 export 'extensions/expense_extensions.dart';
 export 'extensions/filter_expense_extension.dart';

@@ -151,9 +151,9 @@ import 'package:paisa/features/settings/domain/use_case/settings_use_case.dart'
     as _i31;
 import 'package:paisa/features/settings/presentation/cubit/settings_cubit.dart'
     as _i96;
-import 'package:paisa/features/transaction/data/data_sources/local_transaction_data_manager.dart'
+import 'package:paisa/features/transaction/data/data_sources/local/transaction_data_manager.dart'
     as _i14;
-import 'package:paisa/features/transaction/data/data_sources/local_transaction_data_manager_impl.dart'
+import 'package:paisa/features/transaction/data/data_sources/local/transaction_data_manager.dart'
     as _i15;
 import 'package:paisa/features/transaction/data/model/expense_model.dart'
     as _i7;
@@ -235,13 +235,13 @@ Future<_i1.GetIt> init(
   gh.singleton<_i11.CountryRepository>(_i12.CountryRepositoryImpl());
   gh.singleton<_i13.DeviceInfoPlugin>(
       serviceBoxModule.providesDeviceInfoPlugin());
-  gh.factory<_i14.ExpenseLocalDataManager>(() =>
-      _i15.LocalExpenseDataManagerImpl(gh<_i16.Box<_i7.TransactionModel>>()));
+  gh.factory<_i14.LocalTransactionManager>(() =>
+      _i15.LocalTransactionManagerImpl(gh<_i16.Box<_i7.TransactionModel>>()));
   gh.factory<_i17.GetCountriesUseCase>(
       () => _i17.GetCountriesUseCase(repository: gh<_i11.CountryRepository>()));
   gh.singleton<_i18.ImagePicker>(serviceBoxModule.providesImagePicker());
   gh.singleton<_i19.InAppReview>(serviceBoxModule.providesInAppReview());
-  gh.singleton<_i20.LocalAccountDataManager>(_i20.LocalAccountDataManagerImpl(
+  gh.singleton<_i20.LocalAccountManager>(_i20.LocalAccountManagerImpl(
       accountBox: gh<_i4.Box<_i5.AccountModel>>()));
   gh.singleton<_i21.LocalCategoryDataManager>(
       _i21.LocalCategoryManagerDataSourceImpl(
@@ -258,7 +258,7 @@ Future<_i1.GetIt> init(
   ));
   gh.singleton<_i27.RecurringRepository>(_i28.RecurringRepositoryImpl(
     gh<_i23.LocalRecurringDataManager>(),
-    gh<_i14.ExpenseLocalDataManager>(),
+    gh<_i14.LocalTransactionManager>(),
   ));
   gh.factory<_i29.SettingsRepository>(() => _i30.SettingsRepositoryImpl(
       gh<_i4.Box<dynamic>>(instanceName: 'settings')));
@@ -267,11 +267,11 @@ Future<_i1.GetIt> init(
   gh.singleton<_i32.SummaryController>(
       _i32.SummaryController(gh<_i33.SettingsUseCase>()));
   gh.singleton<_i34.TransactionRepository>(_i35.ExpenseRepositoryImpl(
-      dataSource: gh<_i14.ExpenseLocalDataManager>()));
+      dataSource: gh<_i14.LocalTransactionManager>()));
   gh.singleton<_i36.UpdateTransactionUseCase>(_i36.UpdateTransactionUseCase(
       expenseRepository: gh<_i34.TransactionRepository>()));
-  gh.singleton<_i37.AccountRepository>(_i38.AccountRepositoryImpl(
-      dataSource: gh<_i20.LocalAccountDataManager>()));
+  gh.singleton<_i37.AccountRepository>(
+      _i38.AccountRepositoryImpl(dataSource: gh<_i20.LocalAccountManager>()));
   gh.singleton<_i39.AddAccountUseCase>(
       _i39.AddAccountUseCase(accountRepository: gh<_i37.AccountRepository>()));
   gh.singleton<_i40.AddRecurringUseCase>(
@@ -280,7 +280,7 @@ Future<_i1.GetIt> init(
       expenseRepository: gh<_i34.TransactionRepository>()));
   gh.singleton<_i42.CategoryRepository>(_i43.CategoryRepositoryImpl(
     dataSources: gh<_i21.LocalCategoryDataManager>(),
-    expenseDataManager: gh<_i14.ExpenseLocalDataManager>(),
+    expenseDataManager: gh<_i14.LocalTransactionManager>(),
   ));
   gh.factory<_i44.CountryPickerCubit>(() => _i44.CountryPickerCubit(
         gh<_i17.GetCountriesUseCase>(),
@@ -310,26 +310,26 @@ Future<_i1.GetIt> init(
           transactionRepository: gh<_i34.TransactionRepository>()));
   gh.lazySingleton<_i55.Export>(
     () => _i56.JSONExportImpl(
-      gh<_i20.LocalAccountDataManager>(),
+      gh<_i20.LocalAccountManager>(),
       gh<_i21.LocalCategoryDataManager>(),
-      gh<_i14.ExpenseLocalDataManager>(),
+      gh<_i14.LocalTransactionManager>(),
     ),
     instanceName: 'json_export',
   );
   gh.lazySingleton<_i55.Export>(
     () => _i57.CSVExport(
       gh<_i13.DeviceInfoPlugin>(),
-      gh<_i20.LocalAccountDataManager>(),
+      gh<_i20.LocalAccountManager>(),
       gh<_i21.LocalCategoryDataManager>(),
-      gh<_i14.ExpenseLocalDataManager>(),
+      gh<_i14.LocalTransactionManager>(),
     ),
     instanceName: 'csv',
   );
   gh.singleton<_i58.FileHandler>(_i58.FileHandler(
     gh<_i13.DeviceInfoPlugin>(),
-    gh<_i20.LocalAccountDataManager>(),
+    gh<_i20.LocalAccountManager>(),
     gh<_i21.LocalCategoryDataManager>(),
-    gh<_i14.ExpenseLocalDataManager>(),
+    gh<_i14.LocalTransactionManager>(),
   ));
   gh.singleton<_i59.GetAccountUseCase>(
       _i59.GetAccountUseCase(accountRepository: gh<_i37.AccountRepository>()));
@@ -367,9 +367,9 @@ Future<_i1.GetIt> init(
   gh.lazySingleton<_i55.Import>(
     () => _i56.JSONImportImpl(
       gh<_i13.DeviceInfoPlugin>(),
-      gh<_i20.LocalAccountDataManager>(),
+      gh<_i20.LocalAccountManager>(),
       gh<_i21.LocalCategoryDataManager>(),
-      gh<_i14.ExpenseLocalDataManager>(),
+      gh<_i14.LocalTransactionManager>(),
     ),
     instanceName: 'json_import',
   );
@@ -440,7 +440,7 @@ Future<_i1.GetIt> init(
             gh<_i70.DeleteTransactionsByCategoryIdUseCase>(),
         updateCategoryUseCase: gh<_i71.UpdateCategoryUseCase>(),
       ));
-  gh.factory<_i93.DebtsBloc>(() => _i93.DebtsBloc(
+  gh.factory<_i93.DebitBloc>(() => _i93.DebitBloc(
         addDebtUseCase: gh<_i94.AddDebitUseCase>(),
         getDebtUseCase: gh<_i94.GetDebitUseCase>(),
         getTransactionsUseCase: gh<_i94.GetDebitTransactionsUseCase>(),

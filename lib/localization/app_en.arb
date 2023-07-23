@@ -994,5 +994,10 @@
     "@chooseAppLanguage": {
         "description": "Text shown on app language selection dialog title",
         "type": "text"
+    },
+    "appLanguage": "App language",
+    "@appLanguage": {
+        "description": "Text shown on settings page",
+        "type": "text"
     }
 }

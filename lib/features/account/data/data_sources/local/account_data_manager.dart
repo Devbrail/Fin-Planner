@@ -3,7 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/features/account/data/model/account_model.dart';
 
-abstract class LocalAccountDataManager {
+abstract class LocalAccountManager {
   Future<void> add(AccountModel account);
 
   Future<void> delete(int key);
@@ -19,9 +19,9 @@ abstract class LocalAccountDataManager {
   Future<void> clear();
 }
 
-@Singleton(as: LocalAccountDataManager)
-class LocalAccountDataManagerImpl implements LocalAccountDataManager {
-  LocalAccountDataManagerImpl({
+@Singleton(as: LocalAccountManager)
+class LocalAccountManagerImpl implements LocalAccountManager {
+  LocalAccountManagerImpl({
     required this.accountBox,
   });
 

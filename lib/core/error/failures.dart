@@ -21,3 +21,5 @@ String mapFailureToMessage(Failure failure) {
       return 'Unexpected error';
   }
 }
+
+class FailedToAddTransactionFailure extends Failure {}

@@ -35,7 +35,7 @@ class AddDebit extends Equatable {
 
   final double amount;
   final DateTime currentDateTime;
-  final DebtType debtType;
+  final DebitType debtType;
   final String description;
   final DateTime dueDateTime;
   final String name;

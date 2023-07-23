@@ -8,7 +8,7 @@ import 'package:paisa/features/account/domain/repository/account_repository.dart
 class AccountRepositoryImpl extends AccountRepository {
   AccountRepositoryImpl({required this.dataSource});
 
-  final LocalAccountDataManager dataSource;
+  final LocalAccountManager dataSource;
 
   @override
   Future<void> addAccount({

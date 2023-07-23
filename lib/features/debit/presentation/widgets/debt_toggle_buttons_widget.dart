@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paisa/core/enum/debt_type.dart';
-import 'package:paisa/core/extensions/debt_extensions.dart';
+import 'package:paisa/core/extensions/debit_extensions.dart';
 import 'package:paisa/features/debit/presentation/cubit/debts_bloc.dart';
 
 import 'package:paisa/core/widgets/paisa_widget.dart';
@@ -12,9 +12,9 @@ class DebtToggleButtonsWidget extends StatelessWidget {
     required this.debtsBloc,
   }) : super(key: key);
 
-  final DebtsBloc debtsBloc;
+  final DebitBloc debtsBloc;
 
-  void _update(DebtType type) {
+  void _update(DebitType type) {
     debtsBloc.add(ChangeDebtTypeEvent(type));
   }
 
@@ -27,14 +27,14 @@ class DebtToggleButtonsWidget extends StatelessWidget {
         return Row(
           children: [
             PaisaPillChip(
-              title: DebtType.debt.stringValue(context),
-              isSelected: debtsBloc.currentDebtType == DebtType.debt,
-              onPressed: () => _update(DebtType.debt),
+              title: DebitType.debit.stringValue(context),
+              isSelected: debtsBloc.currentDebtType == DebitType.debit,
+              onPressed: () => _update(DebitType.debit),
             ),
             PaisaPillChip(
-              title: DebtType.credit.stringValue(context),
-              isSelected: debtsBloc.currentDebtType == DebtType.credit,
-              onPressed: () => _update(DebtType.credit),
+              title: DebitType.credit.stringValue(context),
+              isSelected: debtsBloc.currentDebtType == DebitType.credit,
+              onPressed: () => _update(DebitType.credit),
             ),
           ],
         );

@@ -18,7 +18,7 @@ class DebtRepositoryImpl extends DebitRepository {
     double amount,
     DateTime currentDateTime,
     DateTime dueDateTime,
-    DebtType debtType,
+    DebitType debtType,
   ) {
     return dataSource.addDebtOrCredit(
       DebitModel(
@@ -76,7 +76,7 @@ class DebtRepositoryImpl extends DebitRepository {
     required double amount,
     required DateTime currentDateTime,
     required DateTime dueDateTime,
-    required DebtType debtType,
+    required DebitType debtType,
     required int key,
   }) {
     return dataSource.updateDebt(DebitModel(

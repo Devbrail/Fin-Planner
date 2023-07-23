@@ -5,12 +5,12 @@ import 'package:paisa/features/debit/domain/entities/debit.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
 
-extension DebtTypeHelper on DebtType {
+extension DebitTypeHelper on DebitType {
   String stringValue(BuildContext context) {
     switch (this) {
-      case DebtType.debt:
+      case DebitType.debit:
         return context.loc.debt;
-      case DebtType.credit:
+      case DebitType.credit:
         return context.loc.credit;
     }
   }

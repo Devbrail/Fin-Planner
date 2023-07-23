@@ -22,7 +22,7 @@ class DebitModelAdapter extends TypeAdapter<DebitModel> {
       amount: fields[2] as double,
       dateTime: fields[3] as DateTime,
       expiryDateTime: fields[4] as DateTime,
-      debtType: fields[5] == null ? DebtType.debt : fields[5] as DebtType,
+      debtType: fields[5] == null ? DebitType.debit : fields[5] as DebitType,
       superId: fields[6] == null ? 0 : fields[6] as int?,
     );
   }
