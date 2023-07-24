@@ -18,7 +18,7 @@ import 'package:paisa/features/settings/data/model/data.dart';
 import 'package:paisa/features/settings/domain/repository/import_export.dart';
 import 'package:paisa/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:paisa/features/transaction/data/data_sources/local/transaction_data_manager.dart';
-import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/transaction_model.dart';
 
 @Named('json_export')
 @LazySingleton(as: Export)
@@ -30,7 +30,7 @@ class JSONExportImpl implements Export {
   );
 
   final LocalAccountManager accountDataManager;
-  final LocalCategoryDataManager categoryDataManager;
+  final LocalCategoryManager categoryDataManager;
   final LocalTransactionManager expenseDataManager;
 
   @override
@@ -72,7 +72,7 @@ class JSONImportImpl implements Import {
   );
 
   final LocalAccountManager accountDataManager;
-  final LocalCategoryDataManager categoryDataManager;
+  final LocalCategoryManager categoryDataManager;
   final DeviceInfoPlugin deviceInfo;
   final LocalTransactionManager expenseDataManager;
 

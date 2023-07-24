@@ -4,9 +4,9 @@ import 'package:injectable/injectable.dart';
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/core/error/failures.dart';
 import 'package:paisa/features/transaction/data/data_sources/local/transaction_data_manager.dart';
-import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/transaction_model.dart';
 import 'package:paisa/features/transaction/data/model/search_query.dart';
-import 'package:paisa/features/transaction/domain/repository/expense_repository.dart';
+import 'package:paisa/features/transaction/domain/repository/transaction_repository.dart';
 
 @Singleton(as: TransactionRepository)
 class ExpenseRepositoryImpl extends TransactionRepository {

@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
 
-part 'expense_model.g.dart';
+part 'transaction_model.g.dart';
 
 @HiveType(typeId: 0)
 class TransactionModel extends HiveObject with EquatableMixin {

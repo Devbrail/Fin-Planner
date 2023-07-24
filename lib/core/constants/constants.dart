@@ -81,6 +81,9 @@ const expensesByCategoryPath = 'expenses-by-category/:cid';
 const exportAndImportName = 'import-export';
 const exportAndImportPath = 'import-export';
 
+const fontPickerName = 'font-picker';
+const fontPickerPath = 'font-picker';
+
 const recurringTransactionsName = 'recurring';
 const recurringTransactionsPath = 'recurring';
 

@@ -6,7 +6,7 @@ import 'dart:convert';
 
 import 'package:paisa/features/account/data/model/account_model.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
-import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/transaction_model.dart';
 
 class Data {
   Data({

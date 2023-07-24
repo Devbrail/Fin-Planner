@@ -7,7 +7,7 @@ import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/features/debit/data/models/debit_model.dart';
 import 'package:paisa/features/debit/data/models/debit_transactions_model.dart';
 import 'package:paisa/features/recurring/data/model/recurring.dart';
-import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/transaction_model.dart';
 
 @module
 abstract class HiveBoxModule {
@@ -57,7 +57,7 @@ class HiveAdapters {
       ..registerAdapter(AccountModelAdapter())
       ..registerAdapter(TransactionTypeAdapter())
       ..registerAdapter(DebitModelAdapter())
-      ..registerAdapter(DebtTypeAdapter())
+      ..registerAdapter(DebitTypeAdapter())
       ..registerAdapter(DebitTransactionsModelAdapter())
       ..registerAdapter(CardTypeAdapter())
       ..registerAdapter(RecurringTypeAdapter())

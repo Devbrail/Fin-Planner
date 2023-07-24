@@ -9,7 +9,7 @@ import 'package:paisa/features/category/data/data_sources/local/category_data_so
 import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/features/settings/domain/repository/import_export.dart';
 import 'package:paisa/features/transaction/data/data_sources/local/transaction_data_manager.dart';
-import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/transaction_model.dart';
 import 'package:path_provider/path_provider.dart';
 
 @Named('csv')
@@ -23,7 +23,7 @@ class CSVExport extends Export {
   );
 
   final LocalAccountManager accountDataManager;
-  final LocalCategoryDataManager categoryDataManager;
+  final LocalCategoryManager categoryDataManager;
   final DeviceInfoPlugin deviceInfo;
   final LocalTransactionManager expenseDataManager;
 

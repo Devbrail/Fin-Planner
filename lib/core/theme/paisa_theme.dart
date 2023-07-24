@@ -63,11 +63,22 @@ NavigationDrawerThemeData navigationDrawerThemeData(
     backgroundColor: colorScheme.surface,
     labelTextStyle: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return textTheme?.bodyLarge?.copyWith(fontWeight: FontWeight.bold);
+        return textTheme?.bodyLarge?.copyWith(
+          fontWeight: FontWeight.bold,
+        );
       } else {
         return textTheme?.bodyLarge;
       }
     }),
+  );
+}
+
+DrawerThemeData drawerThemeData(
+  ColorScheme colorScheme,
+  TextTheme? textTheme,
+) {
+  return DrawerThemeData(
+    backgroundColor: colorScheme.surface,
   );
 }
 

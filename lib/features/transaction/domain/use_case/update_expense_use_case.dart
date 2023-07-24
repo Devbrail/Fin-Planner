@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/enum/transaction_type.dart';
 import 'package:paisa/core/use_case/use_case.dart';
-import 'package:paisa/features/transaction/domain/repository/expense_repository.dart';
+import 'package:paisa/features/transaction/domain/repository/transaction_repository.dart';
 
 @singleton
 class UpdateTransactionUseCase

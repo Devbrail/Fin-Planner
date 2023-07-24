@@ -21,6 +21,7 @@ import 'package:paisa/features/recurring/presentation/page/add_recurring_page.da
 import 'package:paisa/features/recurring/presentation/page/recurring_page.dart';
 import 'package:paisa/features/search/presentation/pages/search_page.dart';
 import 'package:paisa/features/settings/presentation/pages/export_and_import_page.dart';
+import 'package:paisa/features/settings/presentation/pages/font_picker_page.dart';
 import 'package:paisa/features/settings/presentation/pages/setting_page.dart';
 import 'package:paisa/features/transaction/presentation/pages/transaction_page.dart';
 import 'package:paisa/main.dart';
@@ -279,6 +280,18 @@ final GoRouter goRouter = GoRouter(
               path: exportAndImportPath,
               builder: (BuildContext context, GoRouterState state) {
                 return const ExportAndImportPage();
+              },
+            ),
+            GoRoute(
+              name: fontPickerName,
+              path: fontPickerPath,
+              builder: (BuildContext context, GoRouterState state) {
+                return FontPickerPage(
+                  currentFont: settings.get(
+                    appFontChangerKey,
+                    defaultValue: 'Outfit',
+                  ),
+                );
               },
             ),
           ],

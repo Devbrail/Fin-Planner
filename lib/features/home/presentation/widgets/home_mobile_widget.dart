@@ -32,43 +32,41 @@ class HomeMobileWidget extends StatelessWidget {
           SizedBox(width: 8),
         ],
       ),
-      drawer: Drawer(
-        child: BlocBuilder<HomeBloc, HomeState>(
-          builder: (context, state) {
-            return NavigationDrawer(
-              selectedIndex: homeBloc.selectedIndex,
-              onDestinationSelected: (index) {
-                homeBloc.add(CurrentIndexEvent(index));
-                Navigator.pop(context);
-              },
-              children: [
-                const PaisaIconTitle(),
-                ...destinations
-                    .map((e) => NavigationDrawerDestination(
-                          icon: e.icon,
-                          selectedIcon: e.selectedIcon,
-                          label: Text(e.pageType.name(context)),
-                        ))
-                    .toList(),
-                const Divider(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: ListTile(
-                    onTap: () {
-                      context.pushNamed(settingsName);
-                      Navigator.pop(context);
-                    },
-                    leading: const Icon(Icons.settings),
-                    title: Text(
-                      context.loc.settings,
-                      style: context.bodyLarge,
-                    ),
+      drawer: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          return NavigationDrawer(
+            selectedIndex: homeBloc.selectedIndex,
+            onDestinationSelected: (index) {
+              homeBloc.add(CurrentIndexEvent(index));
+              Navigator.pop(context);
+            },
+            children: [
+              const PaisaIconTitle(),
+              ...destinations
+                  .map((e) => NavigationDrawerDestination(
+                        icon: e.icon,
+                        selectedIcon: e.selectedIcon,
+                        label: Text(e.pageType.name(context)),
+                      ))
+                  .toList(),
+              const Divider(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: ListTile(
+                  onTap: () {
+                    context.pushNamed(settingsName);
+                    Navigator.pop(context);
+                  },
+                  leading: const Icon(Icons.settings),
+                  title: Text(
+                    context.loc.settings,
+                    style: context.bodyLarge,
                   ),
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        },
       ),
       body: const ContentWidget(),
       floatingActionButton: floatingActionButton,

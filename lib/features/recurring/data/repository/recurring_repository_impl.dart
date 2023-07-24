@@ -5,7 +5,7 @@ import 'package:paisa/features/recurring/data/data_sources/local_recurring_data_
 import 'package:paisa/features/recurring/data/model/recurring.dart';
 import 'package:paisa/features/recurring/domain/repository/recurring_repository.dart';
 import 'package:paisa/features/transaction/data/data_sources/local/transaction_data_manager.dart';
-import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/transaction_model.dart';
 
 @Singleton(as: RecurringRepository)
 class RecurringRepositoryImpl implements RecurringRepository {

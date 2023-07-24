@@ -3,12 +3,12 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
 
-abstract class LocalCategoryDataManager {
+abstract class LocalCategoryManager {
   Future<void> add(CategoryModel category);
 
   Future<void> delete(int key);
 
-  Future<List<CategoryModel>> categories();
+  List<CategoryModel> categories();
 
   CategoryModel? findById(int? categoryId);
 
@@ -21,8 +21,8 @@ abstract class LocalCategoryDataManager {
   List<CategoryModel> defaultCategories();
 }
 
-@Singleton(as: LocalCategoryDataManager)
-class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
+@Singleton(as: LocalCategoryManager)
+class LocalCategoryManagerDataSourceImpl implements LocalCategoryManager {
   LocalCategoryManagerDataSourceImpl(this.categoryBox);
 
   final Box<CategoryModel> categoryBox;
@@ -35,7 +35,7 @@ class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
   }
 
   @override
-  Future<List<CategoryModel>> categories() async {
+  List<CategoryModel> categories() {
     return categoryBox.values
         .where((element) => element.isDefault != null)
         .where((element) => !element.isDefault!)

@@ -107,7 +107,14 @@ class _PaisaAppState extends State<PaisaApp> {
                     brightness: Brightness.dark,
                   );
                 }
-
+                final lightTextTheme = GoogleFonts.getTextTheme(
+                  fontPreference,
+                  ThemeData.light().textTheme,
+                );
+                final darkTextTheme = GoogleFonts.getTextTheme(
+                  fontPreference,
+                  ThemeData.dark().textTheme,
+                );
                 return MaterialApp.router(
                   locale: locale,
                   routeInformationProvider: goRouter.routeInformationProvider,
@@ -123,10 +130,7 @@ class _PaisaAppState extends State<PaisaApp> {
                   theme: ThemeData.from(
                     colorScheme: lightColorScheme,
                   ).copyWith(
-                    textTheme: GoogleFonts.getTextTheme(
-                      fontPreference,
-                      ThemeData.light().textTheme,
-                    ),
+                    textTheme: lightTextTheme,
                     colorScheme: lightColorScheme,
                     dialogTheme: dialogTheme,
                     timePickerTheme: timePickerTheme,
@@ -136,11 +140,15 @@ class _PaisaAppState extends State<PaisaApp> {
                     dialogBackgroundColor: lightColorScheme.background,
                     navigationBarTheme: navigationBarThemeData(
                       lightColorScheme,
-                      ThemeData.light().textTheme,
+                      lightTextTheme,
                     ),
                     navigationDrawerTheme: navigationDrawerThemeData(
                       lightColorScheme,
-                      ThemeData.light().textTheme,
+                      lightTextTheme,
+                    ),
+                    drawerTheme: drawerThemeData(
+                      lightColorScheme,
+                      lightTextTheme,
                     ),
                     applyElevationOverlayColor: true,
                     inputDecorationTheme: inputDecorationTheme,
@@ -156,10 +164,7 @@ class _PaisaAppState extends State<PaisaApp> {
                   darkTheme: ThemeData.from(
                     colorScheme: darkColorScheme,
                   ).copyWith(
-                    textTheme: GoogleFonts.getTextTheme(
-                      fontPreference,
-                      ThemeData.dark().textTheme,
-                    ),
+                    textTheme: darkTextTheme,
                     colorScheme: darkColorScheme,
                     dialogTheme: dialogTheme,
                     timePickerTheme: timePickerTheme,
@@ -169,11 +174,15 @@ class _PaisaAppState extends State<PaisaApp> {
                     dialogBackgroundColor: darkColorScheme.background,
                     navigationBarTheme: navigationBarThemeData(
                       darkColorScheme,
-                      ThemeData.dark().textTheme,
+                      darkTextTheme,
                     ),
                     navigationDrawerTheme: navigationDrawerThemeData(
                       darkColorScheme,
-                      ThemeData.dark().textTheme,
+                      darkTextTheme,
+                    ),
+                    drawerTheme: drawerThemeData(
+                      darkColorScheme,
+                      darkTextTheme,
                     ),
                     applyElevationOverlayColor: true,
                     inputDecorationTheme: inputDecorationTheme,

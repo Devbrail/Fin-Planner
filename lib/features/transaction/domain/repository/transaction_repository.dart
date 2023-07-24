@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:paisa/core/enum/transaction_type.dart';
 import 'package:paisa/core/error/failures.dart';
-import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/transaction_model.dart';
 
 abstract class TransactionRepository {
   Future<Either<Failure, bool>> addExpense(

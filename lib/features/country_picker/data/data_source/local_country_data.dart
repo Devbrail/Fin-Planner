@@ -1,3 +1,10 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// All thanks the https://github.com/Daniel-Ioannou for the data `flutter_currency_picker`
+/// Link: https://github.com/Daniel-Ioannou/flutter_currency_picker/blob/master/lib/src/currencies.dart
+///
+///////////////////////////////////////////////////////////////////////////////
+
 const List<Map<String, dynamic>> localCountriesData = [
   {
     "code": "USD",

@@ -7,7 +7,7 @@ import 'package:paisa/features/home/presentation/pages/overview/widgets/filter_b
 import 'package:paisa/features/home/presentation/pages/overview/widgets/filter_date_range_widget.dart';
 import 'package:paisa/features/home/presentation/pages/overview/widgets/overview_filter_widget.dart';
 import 'package:paisa/features/home/presentation/pages/overview/widgets/overview_list_widget.dart';
-import 'package:paisa/features/transaction/data/model/expense_model.dart';
+import 'package:paisa/features/transaction/data/model/transaction_model.dart';
 import 'package:paisa/main.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';

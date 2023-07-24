@@ -12,7 +12,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
     required this.expenseDataManager,
   });
 
-  final LocalCategoryDataManager dataSources;
+  final LocalCategoryManager dataSources;
   final LocalTransactionManager expenseDataManager;
 
   @override

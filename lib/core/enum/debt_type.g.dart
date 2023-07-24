@@ -6,7 +6,7 @@ part of 'debt_type.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class DebtTypeAdapter extends TypeAdapter<DebitType> {
+class DebitTypeAdapter extends TypeAdapter<DebitType> {
   @override
   final int typeId = 15;
 
@@ -40,7 +40,7 @@ class DebtTypeAdapter extends TypeAdapter<DebitType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DebtTypeAdapter &&
+      other is DebitTypeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
