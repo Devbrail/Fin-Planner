@@ -62,7 +62,7 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
           packageName: dev.hemanths.paisa
-          releaseFiles: app-release.aab
+          releaseFiles: app-prod-release.aab
           track: internal
           status: completed
           inAppUpdatePriority: 5
