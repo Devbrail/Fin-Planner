@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: android-release
-          path: build/app/outputs/bundle/release/app-release.aab
+          path: build/app/outputs/bundle/prodRelease/app-prod-release.aab
 
   deploy:
     name: Deploy Android Build
@@ -63,5 +63,5 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
           packageName: dev.hemanths.paisa
           releaseFiles: app-release.aab
-          track: alpha
+          track: internalSharing
           status: completed
