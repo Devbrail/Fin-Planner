@@ -63,5 +63,5 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
           packageName: dev.hemanths.paisa
           releaseFiles: app-release.aab
-          track: internalSharing
+          track: internal
           status: completed
