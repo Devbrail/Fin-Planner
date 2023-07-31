@@ -18,7 +18,7 @@ class SelectCategoryIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<CategoryModel>>(
       valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
-      builder: (context, value, child) {
+      builder: (BuildContext context, Box<CategoryModel> value, Widget? child) {
         final List<CategoryEntity> categories =
             value.values.filterDefault.toEntities();
 
@@ -78,9 +78,9 @@ class SelectedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final expenseBloc = BlocProvider.of<TransactionBloc>(context);
+    final TransactionBloc expenseBloc = BlocProvider.of<TransactionBloc>(context);
     return BlocBuilder<TransactionBloc, TransactionState>(
-      builder: (context, state) {
+      builder: (BuildContext context, TransactionState state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Wrap(
@@ -88,11 +88,11 @@ class SelectedItem extends StatelessWidget {
             runSpacing: 12.0,
             children: List.generate(
               categories.length + 1,
-              (index) {
+              (int index) {
                 if (index == 0) {
                   return CategoryChip(
                     selected: false,
-                    onSelected: (p0) => context.pushNamed(addCategoryPath),
+                    onSelected: (bool p0) => context.pushNamed(addCategoryPath),
                     icon: MdiIcons.plus.codePoint,
                     title: context.loc.addNew,
                     iconColor: context.primary,
@@ -104,7 +104,7 @@ class SelectedItem extends StatelessWidget {
                       category.superId == expenseBloc.selectedCategoryId;
                   return CategoryChip(
                     selected: selected,
-                    onSelected: (value) =>
+                    onSelected: (bool value) =>
                         expenseBloc.add(ChangeCategoryEvent(category)),
                     icon: category.icon ?? 0,
                     title: category.name ?? '',

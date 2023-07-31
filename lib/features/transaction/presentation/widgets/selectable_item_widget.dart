@@ -22,7 +22,7 @@ class ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shape = selected
+    final RoundedRectangleBorder shape = selected
         ? RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
             side: BorderSide(

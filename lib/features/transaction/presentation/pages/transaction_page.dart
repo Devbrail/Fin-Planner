@@ -66,9 +66,9 @@ class _TransactionPageState extends State<TransactionPage> {
     return PaisaAnnotatedRegionWidget(
       color: Colors.transparent,
       child: BlocProvider(
-        create: (context) => transactionBloc,
+        create: (BuildContext context) => transactionBloc,
         child: BlocConsumer<TransactionBloc, TransactionState>(
-          listener: (context, state) {
+          listener: (BuildContext context, TransactionState state) {
             if (state is TransactionDeletedState) {
               context.showMaterialSnackBar(
                 context.loc.deletedTransaction,
@@ -77,7 +77,7 @@ class _TransactionPageState extends State<TransactionPage> {
               );
               context.pop();
             } else if (state is TransactionAdded) {
-              final content = state.isAddOrUpdate
+              final String content = state.isAddOrUpdate
                   ? context.loc.addedTransaction
                   : context.loc.updatedTransaction;
               context.showMaterialSnackBar(
@@ -107,7 +107,7 @@ class _TransactionPageState extends State<TransactionPage> {
               );
             }
           },
-          builder: (context, state) {
+          builder: (BuildContext context, TransactionState state) {
             if (widget.accountId != null) {
               BlocProvider.of<TransactionBloc>(context).selectedAccountId =
                   int.tryParse(widget.accountId!);
@@ -139,9 +139,9 @@ class _TransactionPageState extends State<TransactionPage> {
                   ],
                 ),
                 body: BlocBuilder<TransactionBloc, TransactionState>(
-                  buildWhen: (previous, current) =>
+                  buildWhen: (TransactionState previous, TransactionState current) =>
                       current is ChangeTransactionTypeState,
-                  builder: (context, state) {
+                  builder: (BuildContext context, TransactionState state) {
                     if (state is ChangeTransactionTypeState) {
                       if (state.transactionType == TransactionType.transfer) {
                         return TransferWidget(controller: amountController);

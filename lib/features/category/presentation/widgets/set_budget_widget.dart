@@ -18,11 +18,11 @@ class SetBudgetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      buildWhen: (previous, current) =>
+      buildWhen: (Object? previous, Object? current) =>
           current is CategorySuccessState ||
           current is UpdateCategoryBudgetState,
       bloc: BlocProvider.of<CategoryBloc>(context),
-      builder: (context, state) {
+      builder: (BuildContext context, Object? state) {
         bool budget = false;
         if (state is CategorySuccessState) {
           budget = BlocProvider.of<CategoryBloc>(context).isBudgetSet ?? false;
@@ -47,7 +47,7 @@ class SetBudgetWidget extends StatelessWidget {
               value: budget,
             ),
             Builder(
-              builder: (context) {
+              builder: (BuildContext context) {
                 return budget
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -77,16 +77,16 @@ class CategoryBudgetWidget extends StatelessWidget {
       controller: controller,
       hintText: context.loc.enterBudget,
       label: context.loc.budget,
-      onChanged: (value) {
+      onChanged: (String value) {
         double? amount = double.tryParse(value);
         BlocProvider.of<CategoryBloc>(context).categoryBudget = amount;
       },
       keyboardType: TextInputType.number,
       inputFormatters: <TextInputFormatter>[
         FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-        TextInputFormatter.withFunction((oldValue, newValue) {
+        TextInputFormatter.withFunction((TextEditingValue oldValue, TextEditingValue newValue) {
           try {
-            final text = newValue.text;
+            final String text = newValue.text;
             if (text.isNotEmpty) double.parse(text);
             return newValue;
           } catch (_) {}

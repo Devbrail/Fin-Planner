@@ -52,7 +52,7 @@ class _FontPickerPageState extends State<FontPickerPage> {
                 controller: textEditingController,
                 hintText: context.loc.search,
                 keyboardType: TextInputType.name,
-                onChanged: (value) {
+                onChanged: (String value) {
                   valueNotifier.value = value;
                 },
               ),
@@ -61,11 +61,11 @@ class _FontPickerPageState extends State<FontPickerPage> {
         ),
         body: ValueListenableBuilder<String>(
           valueListenable: valueNotifier,
-          builder: (context, String filterFont, _) {
+          builder: (BuildContext context, String filterFont, _) {
             List<String> tempFonts = fonts;
             if (filterFont.isNotEmpty) {
               tempFonts = fonts
-                  .where((element) =>
+                  .where((String element) =>
                       element.toLowerCase().contains(filterFont.toLowerCase()))
                   .toList();
             }
@@ -73,12 +73,12 @@ class _FontPickerPageState extends State<FontPickerPage> {
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: tempFonts.length,
-                itemBuilder: (context, index) {
+                itemBuilder: (BuildContext context, int index) {
                   final String font = tempFonts[index];
                   return RadioListTile(
                     value: font,
                     groupValue: selectedFont,
-                    onChanged: (value) {
+                    onChanged: (String? value) {
                       if (value == null) {
                         return;
                       }

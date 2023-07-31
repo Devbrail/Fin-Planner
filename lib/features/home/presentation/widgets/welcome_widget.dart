@@ -21,14 +21,14 @@ class UserImageWidget extends StatelessWidget {
       valueListenable: getIt
           .get<Box<dynamic>>(instanceName: BoxType.settings.name)
           .listenable(keys: [userImageKey, userNameKey]),
-      builder: (context, value, _) {
+      builder: (BuildContext context, Box value, _) {
         String image = value.get(userImageKey, defaultValue: '');
         if (image == 'no-image') {
           image = '';
         }
         return ScreenTypeLayout(
           mobile: Builder(
-            builder: (context) {
+            builder: (BuildContext context) {
               if (image.isEmpty) {
                 return ClipOval(
                   child: Container(
@@ -52,7 +52,7 @@ class UserImageWidget extends StatelessWidget {
             },
           ),
           tablet: Builder(
-            builder: (context) {
+            builder: (BuildContext context) {
               if (image.isEmpty) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),

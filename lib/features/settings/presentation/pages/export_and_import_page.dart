@@ -17,7 +17,7 @@ class ExportAndImportPage extends StatelessWidget {
       color: context.background,
       child: BlocListener(
         bloc: settingCubit,
-        listener: (context, state) {
+        listener: (BuildContext context, Object? state) {
           if (state is ImportFileSuccessState) {
             context.showMaterialSnackBar(context.loc.restoringBackupSuccess);
           } else if (state is ImportFileError) {
@@ -32,7 +32,7 @@ class ExportAndImportPage extends StatelessWidget {
             actions: [
               BlocBuilder(
                 bloc: settingCubit,
-                builder: (context, state) {
+                builder: (BuildContext context, Object? state) {
                   if (state is ImportFileLoading) {
                     return const SizedBox(
                       height: 16,

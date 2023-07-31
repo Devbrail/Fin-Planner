@@ -4,10 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:paisa/features/account/presentation/bloc/accounts_bloc.dart';
-import 'package:paisa/features/category/domain/entities/category.dart';
-import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
-import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_item_widget.dart';
-import 'package:paisa/features/transaction/domain/entities/transaction.dart';
+import 'package:paisa/features/home/domain/entity/combined_transaction_entity.dart';
+import 'package:paisa/features/home/presentation/pages/summary/widgets/transaction_widget.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 
 class AccountTransactionsPage extends StatelessWidget {
@@ -30,7 +28,7 @@ class AccountTransactionsPage extends StatelessWidget {
       child: Scaffold(
         appBar: context.materialYouAppBar(
           context.loc.transactionHistory,
-          actions: [
+          actions: <Widget>[
             IconButton(
               tooltip: context.loc.edit,
               onPressed: () {
@@ -50,13 +48,13 @@ class AccountTransactionsPage extends StatelessWidget {
                     context.loc.dialogDeleteTitle,
                   ),
                   child: BlocBuilder<AccountBloc, AccountState>(
-                    builder: (context, state) {
-                      if (state is AccountAndExpensesState) {
+                    builder: (BuildContext context, AccountState state) {
+                      if (state is AccountAndCombinedTransactionsState) {
                         return RichText(
                           text: TextSpan(
                             text: context.loc.deleteAccount,
                             style: context.bodyMedium,
-                            children: [
+                            children: <TextSpan>[
                               TextSpan(
                                 text: state.account.name,
                                 style: const TextStyle(
@@ -91,13 +89,13 @@ class AccountTransactionsPage extends StatelessWidget {
           ],
         ),
         body: BlocConsumer<AccountBloc, AccountState>(
-          listener: (context, state) {
+          listener: (BuildContext context, AccountState state) {
             if (state is AccountDeletedState) {
               context.pop();
             }
           },
-          builder: (context, state) {
-            if (state is AccountAndExpensesState) {
+          builder: (BuildContext context, AccountState state) {
+            if (state is AccountAndCombinedTransactionsState) {
               if (state.expenses.isEmpty) {
                 return EmptyWidget(
                   icon: Icons.credit_card,
@@ -111,18 +109,17 @@ class AccountTransactionsPage extends StatelessWidget {
                     controller: scrollController,
                     shrinkWrap: true,
                     itemCount: state.expenses.length,
-                    itemBuilder: (context, index) {
-                      final TransactionEntity expense = state.expenses[index];
-                      final CategoryEntity? category =
-                          BlocProvider.of<HomeBloc>(context)
-                              .fetchCategoryFromId(expense.categoryId!);
-                      if (category == null) {
+                    itemBuilder: (BuildContext context, int index) {
+                      final CombinedTransactionEntity expense =
+                          state.expenses[index];
+
+                      if (expense.category == null) {
                         return const SizedBox.shrink();
                       } else {
-                        return ExpenseItemWidget(
+                        return TransactionWidget(
                           expense: expense,
                           account: state.account,
-                          category: category,
+                          category: expense.category!,
                         );
                       }
                     },

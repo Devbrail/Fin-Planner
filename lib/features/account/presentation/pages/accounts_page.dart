@@ -21,10 +21,10 @@ class AccountsPage extends StatelessWidget {
         valueListenable: getIt
             .get<Box<dynamic>>(instanceName: BoxType.settings.name)
             .listenable(keys: [userAccountsStyleKey]),
-        builder: (_, settings, __) {
+        builder: (_, Box settings, __) {
           return ValueListenableBuilder<Box<AccountModel>>(
             valueListenable: getIt.get<Box<AccountModel>>().listenable(),
-            builder: (_, value, __) {
+            builder: (_, Box<AccountModel> value, __) {
               final List<AccountEntity> accounts = value.toEntities();
               if (accounts.isEmpty) {
                 return EmptyWidget(

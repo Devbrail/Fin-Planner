@@ -25,7 +25,7 @@ class PaisaFilterTransactionWidget extends StatelessWidget {
               topRight: Radius.circular(16),
             ),
           ),
-          builder: (context) {
+          builder: (BuildContext context) {
             return FilterBudgetToggleWidget(
               summaryController: Provider.of<SummaryController>(context),
             );

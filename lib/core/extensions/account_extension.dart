@@ -18,25 +18,26 @@ extension AccountModelMapping on AccountModel {
 
 extension AccountModelsMapping on Iterable<AccountModel> {
   List<Map<String, dynamic>> toJson() {
-    return map((e) => e.toJson()).toList();
+    return map((AccountModel accountModel) => accountModel.toJson()).toList();
   }
 
   List<AccountEntity> toEntities() =>
-      map((accountModel) => accountModel.toEntity()).toList();
+      map((AccountModel accountModel) => accountModel.toEntity()).toList();
 }
 
 extension AccountBoxMapping on Box<AccountModel> {
   List<AccountEntity> toEntities() => values
-      .map((accountModel) => accountModel.toEntity())
-      .sorted((a, b) => b.name!.compareTo(a.name!))
+      .map((AccountModel accountModel) => accountModel.toEntity())
+      .sorted((AccountEntity a, AccountEntity b) => b.name!.compareTo(a.name!))
       .toList();
 
-  double get totalAccountInitialAmount =>
-      groupBy(values, (AccountModel account) => account.key)
-          .keys
-          .map((accountId) => get(accountId)!)
-          .map((account) => account.initialAmount)
-          .fold<double>(0, (previousValue, element) => previousValue + element);
+  double get totalAccountInitialAmount => groupBy(
+          values, (AccountModel account) => account.key)
+      .keys
+      .map((accountId) => get(accountId)!)
+      .map((AccountModel account) => account.initialAmount)
+      .fold<double>(
+          0, (double previousValue, double element) => previousValue + element);
 }
 
 extension AccountEntityHelper on AccountEntity {

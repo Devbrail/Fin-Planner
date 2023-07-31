@@ -28,4 +28,6 @@ abstract class CategoryRepository {
   Future<void> clear();
 
   List<CategoryModel> defaultCategories();
+
+  List<CategoryModel> categories();
 }

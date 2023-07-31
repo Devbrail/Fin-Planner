@@ -19,8 +19,8 @@ class SelectedAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<AccountModel>>(
       valueListenable: getIt.get<Box<AccountModel>>().listenable(),
-      builder: (context, value, child) {
-        final accounts = value.values.toEntities();
+      builder: (BuildContext context, Box<AccountModel> value, Widget? child) {
+        final List<AccountEntity> accounts = value.values.toEntities();
         if (accounts.isEmpty) {
           return ListTile(
             onTap: () => context.pushNamed(addAccountPath),
@@ -82,8 +82,8 @@ class AccountSelectedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TransactionBloc, TransactionState>(
-      buildWhen: (previous, current) => current is ChangeAccountState,
-      builder: (context, state) {
+      buildWhen: (TransactionState previous, TransactionState current) => current is ChangeAccountState,
+      builder: (BuildContext context, TransactionState state) {
         return SizedBox(
           height: 160,
           child: ListView.builder(
@@ -95,7 +95,7 @@ class AccountSelectedItem extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             shrinkWrap: false,
             itemCount: accounts.length + 1,
-            itemBuilder: (_, index) {
+            itemBuilder: (_, int index) {
               if (index == 0) {
                 return ItemWidget(
                   color: context.secondary,

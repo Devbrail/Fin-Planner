@@ -35,7 +35,7 @@ Future<T?> paisaAlertDialog<T>(
 }) {
   return showDialog<T>(
     context: context,
-    builder: (context) => AlertDialog(
+    builder: (BuildContext context) => AlertDialog(
       titleTextStyle: context.titleLarge,
       title: title,
       content: child,

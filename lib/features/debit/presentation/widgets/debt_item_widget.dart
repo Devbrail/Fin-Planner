@@ -21,7 +21,7 @@ class DebtItemWidget extends StatelessWidget {
   final DebitModel debt;
 
   void addPayment(BuildContext context) {
-    final controller = TextEditingController();
+    final TextEditingController controller = TextEditingController();
     DateTime? dateTime;
     showModalBottomSheet(
       context: context,
@@ -29,7 +29,7 @@ class DebtItemWidget extends StatelessWidget {
         maxWidth:
             MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
       ),
-      builder: (context) => Padding(
+      builder: (BuildContext context) => Padding(
         padding: MediaQuery.of(context).viewInsets,
         child: SafeArea(
           child: Column(
@@ -55,9 +55,9 @@ class DebtItemWidget extends StatelessWidget {
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
                           TextInputFormatter.withFunction(
-                            (oldValue, newValue) {
+                            (TextEditingValue oldValue, TextEditingValue newValue) {
                               try {
-                                final text = newValue.text;
+                                final String text = newValue.text;
                                 if (text.isNotEmpty) {
                                   double.parse(text);
                                 }
@@ -133,11 +133,11 @@ class DebtItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<DebitTransactionsModel>>(
       valueListenable: getIt.get<Box<DebitTransactionsModel>>().listenable(),
-      builder: (context, value, child) {
+      builder: (BuildContext context, Box<DebitTransactionsModel> value, Widget? child) {
         final List<DebitTransaction> transactions =
             value.getTransactionsFromId(debt.superId ?? 0).toEntities();
         final double amount = transactions.fold<double>(
-            0, (previousValue, element) => previousValue + element.amount);
+            0, (double previousValue, DebitTransaction element) => previousValue + element.amount);
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: PaisaFilledCard(

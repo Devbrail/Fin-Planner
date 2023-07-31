@@ -23,8 +23,8 @@ class OverviewTablet extends StatelessWidget {
       children: [
         Expanded(
           child: BlocBuilder<OverviewCubit, BudgetState>(
-            buildWhen: (previous, current) => current is InitialSelectedState,
-            builder: (context, state) {
+            buildWhen: (BudgetState previous, BudgetState current) => current is InitialSelectedState,
+            builder: (BuildContext context, BudgetState state) {
               if (state is InitialSelectedState) {
                 return SizedBox(
                   height: 70,
@@ -39,8 +39,8 @@ class OverviewTablet extends StatelessWidget {
                           padding: const EdgeInsets.all(16),
                           scrollDirection: Axis.horizontal,
                           itemCount: state.filerTimes.length,
-                          itemBuilder: (context, index) {
-                            final item = state.filerTimes[index];
+                          itemBuilder: (BuildContext context, int index) {
+                            final String item = state.filerTimes[index];
                             return PaisaPillChip(
                               title: item,
                               onPressed: () {

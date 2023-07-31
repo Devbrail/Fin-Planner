@@ -45,9 +45,9 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
         widget.authenticate.isDeviceSupported(),
         widget.authenticate.canCheckBiometrics()
       ]),
-      builder: (supported) {
+      builder: (List<bool> supported) {
         return Visibility(
-          visible: supported.every((element) => element),
+          visible: supported.every((bool element) => element),
           child: Column(
             children: [
               SwitchListTile(

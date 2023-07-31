@@ -26,7 +26,7 @@ Future<IconData> paisaIconPicker({
         child: _IconPickerWidget(
           iconKeys: iconKeys,
           selectedIcon: selectedIcon,
-          onSelectedIcon: (icon) {
+          onSelectedIcon: (IconData icon) {
             //onSelectedIcon.call(icon);
             // Navigator.of(context).pop();
             selectedIcon = icon;
@@ -79,7 +79,7 @@ class _IconPickerWidget extends StatefulWidget {
 }
 
 class _IconPickerWidgetState extends State<_IconPickerWidget> {
-  final controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
   late List<String> iconKeys = widget.iconKeys;
   late IconData? selectedIcon = widget.selectedIcon;
 
@@ -89,9 +89,9 @@ class _IconPickerWidgetState extends State<_IconPickerWidget> {
       children: [
         TextField(
           controller: controller,
-          onChanged: (value) {
+          onChanged: (String value) {
             iconKeys = widget.iconKeys
-                .where((element) => element
+                .where((String element) => element
                     .toLowerCase()
                     .contains(value.toLowerCase().replaceAll(' ', '')))
                 .toList();
@@ -106,7 +106,7 @@ class _IconPickerWidgetState extends State<_IconPickerWidget> {
             ),
             shrinkWrap: true,
             itemCount: iconKeys.length,
-            itemBuilder: (_, index) {
+            itemBuilder: (_, int index) {
               final bool isSelected =
                   selectedIcon == MdiIcons.fromString(iconKeys[index]);
               return Container(

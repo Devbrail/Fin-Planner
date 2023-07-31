@@ -70,7 +70,7 @@ class IntroSetNameWidget extends StatelessWidget {
                 hintText: context.loc.enterNameHint,
                 label: context.loc.nameHint,
                 keyboardType: TextInputType.name,
-                validator: (val) {
+                validator: (String? val) {
                   if (val!.isNotEmpty) {
                     return null;
                   } else {

@@ -20,8 +20,8 @@ class UserOnboardingPage extends StatefulWidget {
 
 class _UserOnboardingPageState extends State<UserOnboardingPage> {
   final PageController controller = PageController();
-  final _formState = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
+  final GlobalKey<FormState> _formState = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
   int currentIndex = 0;
 
   @override
@@ -91,7 +91,7 @@ class _UserOnboardingPageState extends State<UserOnboardingPage> {
         ),
       ),
       body: PageView(
-        onPageChanged: (value) => setState(() {
+        onPageChanged: (int value) => setState(() {
           currentIndex = value;
         }),
         controller: controller,

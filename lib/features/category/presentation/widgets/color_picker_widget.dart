@@ -14,10 +14,10 @@ class ColorPickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategoryBloc, CategoryState>(
-      buildWhen: (previous, current) =>
+      buildWhen: (CategoryState previous, CategoryState current) =>
           current is CategoryColorSelectedState ||
           current is CategorySuccessState,
-      builder: (context, state) {
+      builder: (BuildContext context, CategoryState state) {
         int color = Colors.red.value;
         if (state is CategoryColorSelectedState) {
           color = state.categoryColor;
@@ -28,7 +28,7 @@ class ColorPickerWidget extends StatelessWidget {
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           onTap: () {
-            paisaColorPicker(context).then((color) =>
+            paisaColorPicker(context).then((int color) =>
                 BlocProvider.of<CategoryBloc>(context)
                     .add(CategoryColorSelectedEvent(color)));
           },

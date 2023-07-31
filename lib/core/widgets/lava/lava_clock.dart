@@ -35,7 +35,7 @@ class LavaAnimationState extends State<LavaAnimation>
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) => AnimatedBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) => AnimatedBuilder(
         animation: _animation,
         builder: (BuildContext context, _) => CustomPaint(
           size: const Size(100, 100),

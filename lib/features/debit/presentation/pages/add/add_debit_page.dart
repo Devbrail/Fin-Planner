@@ -56,7 +56,7 @@ class _AddOrEditDebitPageState extends State<AddOrEditDebitPage> {
         create: (_) => debitBloc,
         child: BlocConsumer(
           bloc: debitBloc,
-          listener: (context, state) {
+          listener: (BuildContext context, Object? state) {
             if (state is DebtsAdded) {
               GoRouter.of(context).pop();
             } else if (state is DebtsSuccessState) {
@@ -84,7 +84,7 @@ class _AddOrEditDebitPageState extends State<AddOrEditDebitPage> {
               context.pop();
             }
           },
-          builder: (context, state) {
+          builder: (BuildContext context, Object? state) {
             return Scaffold(
               appBar: context.materialYouAppBar(
                 context.loc.addDebt,
@@ -153,7 +153,7 @@ class _AddOrEditDebitPageState extends State<AddOrEditDebitPage> {
                     ValueListenableBuilder<Box<DebitTransactionsModel>>(
                       valueListenable:
                           getIt.get<Box<DebitTransactionsModel>>().listenable(),
-                      builder: (context, value, child) {
+                      builder: (BuildContext context, Box<DebitTransactionsModel> value, Widget? child) {
                         final int? parentId = int.tryParse(widget.debtId ?? '');
                         if (parentId == null) return const SizedBox.shrink();
                         final List<DebitTransaction> transactions =
@@ -163,7 +163,7 @@ class _AddOrEditDebitPageState extends State<AddOrEditDebitPage> {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: transactions.length,
-                          itemBuilder: (_, index) {
+                          itemBuilder: (_, int index) {
                             final DebitTransaction transaction =
                                 transactions[index];
                             return ListTile(
@@ -192,7 +192,7 @@ class _AddOrEditDebitPageState extends State<AddOrEditDebitPage> {
                   padding: const EdgeInsets.all(16.0),
                   child: PaisaBigButton(
                     onPressed: () {
-                      final isValid = _formKey.currentState!.validate();
+                      final bool isValid = _formKey.currentState!.validate();
                       if (!isValid) {
                         return;
                       }
@@ -217,17 +217,17 @@ class StartAndEndDateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final debtBloc = BlocProvider.of<DebitBloc>(context);
+    final DebitBloc debtBloc = BlocProvider.of<DebitBloc>(context);
     return Row(
       children: [
         BlocBuilder(
           bloc: debtBloc,
-          buildWhen: (previous, current) => current is SelectedStartDateState,
-          builder: (context, state) {
+          buildWhen: (Object? previous, Object? current) => current is SelectedStartDateState,
+          builder: (BuildContext context, Object? state) {
             if (state is SelectedStartDateState) {
               return Expanded(
                 child: DatePickerWidget(
-                  onSelected: (date) {
+                  onSelected: (DateTime date) {
                     debtBloc.add(SelectedStartDateEvent(date));
                   },
                   title: context.loc.startDate,
@@ -244,12 +244,12 @@ class StartAndEndDateWidget extends StatelessWidget {
         ),
         BlocBuilder(
           bloc: debtBloc,
-          buildWhen: (previous, current) => current is SelectedEndDateState,
-          builder: (context, state) {
+          buildWhen: (Object? previous, Object? current) => current is SelectedEndDateState,
+          builder: (BuildContext context, Object? state) {
             if (state is SelectedEndDateState) {
               return Expanded(
                 child: DatePickerWidget(
-                  onSelected: (date) {
+                  onSelected: (DateTime date) {
                     debtBloc.add(SelectedEndDateEvent(date));
                   },
                   title: context.loc.dueDate,
@@ -294,7 +294,7 @@ class DatePickerWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       onTap: () async {
-        final result = await showDatePicker(
+        final DateTime? result = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
           firstDate: firstDate,
@@ -324,14 +324,14 @@ class NameWidget extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.name,
       hintText: context.loc.nameHint,
-      validator: (value) {
+      validator: (String? value) {
         if (value!.length >= 2) {
           return null;
         } else {
           return context.loc.validName;
         }
       },
-      onChanged: (value) =>
+      onChanged: (String value) =>
           BlocProvider.of<DebitBloc>(context).currentName = value,
     );
   }
@@ -351,14 +351,14 @@ class DescriptionWidget extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.name,
       hintText: context.loc.description,
-      validator: (value) {
+      validator: (String? value) {
         if (value!.length >= 3) {
           return null;
         } else {
           return context.loc.validDescription;
         }
       },
-      onChanged: (value) =>
+      onChanged: (String value) =>
           BlocProvider.of<DebitBloc>(context).currentDescription = value,
     );
   }
@@ -378,22 +378,22 @@ class AmountWidget extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.number,
       hintText: context.loc.amount,
-      onChanged: (value) {
+      onChanged: (String value) {
         double? amount = double.tryParse(value);
         BlocProvider.of<DebitBloc>(context).currentAmount = amount;
       },
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-        TextInputFormatter.withFunction((oldValue, newValue) {
+        TextInputFormatter.withFunction((TextEditingValue oldValue, TextEditingValue newValue) {
           try {
-            final text = newValue.text;
+            final String text = newValue.text;
             if (text.isNotEmpty) double.parse(text);
             return newValue;
           } catch (_) {}
           return oldValue;
         }),
       ],
-      validator: (value) {
+      validator: (String? value) {
         if (value!.isNotEmpty) {
           return null;
         } else {

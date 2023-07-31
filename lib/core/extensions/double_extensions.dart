@@ -15,7 +15,7 @@ extension MappingOnDouble on double {
 
   String toFormateCurrency(BuildContext context) {
     final Country country = Provider.of<Country>(context);
-    final formatter = NumberFormat.currency(customPattern: country.pattern);
+    final NumberFormat formatter = NumberFormat.currency(customPattern: country.pattern);
     if (country.symbolOnLeft) {
       return '${country.symbol}${country.spaceBetweenAmountAndSymbol ? ' ' : ''}${formatter.format(this)}'
           .replaceAll(',', country.thousandsSeparator)

@@ -26,7 +26,7 @@ class PaisaUserImageWidget extends StatelessWidget {
       valueListenable: BlocProvider.of<ProfileCubit>(context)
           .settings
           .listenable(keys: [userImageKey]),
-      builder: (context, value, _) {
+      builder: (BuildContext context, Box value, _) {
         String image = value.get(userImageKey, defaultValue: '');
         if (image == 'no-image') {
           image = '';
@@ -34,7 +34,7 @@ class PaisaUserImageWidget extends StatelessWidget {
         return GestureDetector(
           onTap: pickImage,
           child: Builder(
-            builder: (context) {
+            builder: (BuildContext context) {
               if (image.isEmpty) {
                 return CircleAvatar(
                   backgroundColor: context.primary,

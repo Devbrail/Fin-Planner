@@ -49,7 +49,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
         ),
         body: ValueListenableBuilder<Box<AccountModel>>(
           valueListenable: getIt.get<Box<AccountModel>>().listenable(),
-          builder: (context, value, child) {
+          builder: (BuildContext context, Box<AccountModel> value, Widget? child) {
             final List<AccountModel> categoryModels = value.values.toList();
             return ListView(
               children: [
@@ -62,11 +62,11 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                 ScreenTypeLayout(
                   mobile: PaisaFilledCard(
                     child: ListView.separated(
-                      separatorBuilder: (context, index) => const Divider(),
+                      separatorBuilder: (BuildContext context, int index) => const Divider(),
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: categoryModels.length,
                       shrinkWrap: true,
-                      itemBuilder: (context, index) {
+                      itemBuilder: (BuildContext context, int index) {
                         final AccountModel model = categoryModels[index];
                         return AccountItemWidget(
                           model: model,
@@ -88,7 +88,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: categoryModels.length,
                     shrinkWrap: true,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (BuildContext context, int index) {
                       final AccountModel model = categoryModels[index];
                       return AccountItemWidget(
                         model: model,
@@ -112,8 +112,8 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                     spacing: 12.0,
                     runSpacing: 12.0,
                     children: defaultModels
-                        .map((model) => FilterChip(
-                              onSelected: (value) {
+                        .map((AccountModel model) => FilterChip(
+                              onSelected: (bool value) {
                                 dataSource.add(model
                                   ..name = settings.get(
                                     userNameKey,

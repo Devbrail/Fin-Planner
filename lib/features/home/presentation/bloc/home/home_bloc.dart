@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -18,19 +19,17 @@ part 'home_state.dart';
 @injectable
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(
-    this.expensesUseCase,
-    this.defaultCategoriesUseCase,
+    this.getTransactionsUseCase,
     this.getAccountUseCase,
     this.getCategoryUseCase,
     this.getExpensesFromCategoryIdUseCase,
   ) : super(const CurrentIndexState(0)) {
-    on<HomeEvent>((event, emit) {});
+    on<HomeEvent>((HomeEvent event, Emitter<HomeState> emit) {});
     on<CurrentIndexEvent>(_currentIndex);
   }
 
   int selectedIndex = 0;
-  final GetTransactionsUseCase expensesUseCase;
-  final GetDefaultCategoriesUseCase defaultCategoriesUseCase;
+  final GetTransactionsUseCase getTransactionsUseCase;
   final GetAccountUseCase getAccountUseCase;
   final GetCategoryUseCase getCategoryUseCase;
   final GetTransactionsByCategoryIdUseCase getExpensesFromCategoryIdUseCase;
@@ -72,5 +71,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       getAccountUseCase(params: GetAccountParams(accountId));
 
   List<TransactionEntity> fetchExpensesFromCategoryId(int categoryId) =>
-      getExpensesFromCategoryIdUseCase(categoryId);
+      getExpensesFromCategoryIdUseCase(
+          params: GetTransactionsByCategoryIdParams(categoryId));
 }

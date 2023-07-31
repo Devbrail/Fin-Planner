@@ -16,9 +16,9 @@ class ProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (_, boxConstraints) {
-        var x = boxConstraints.maxWidth;
-        var percent = (current / max) * x;
+      builder: (_, BoxConstraints boxConstraints) {
+        double x = boxConstraints.maxWidth;
+        double percent = (current / max) * x;
         return Stack(
           children: [
             Container(

@@ -22,7 +22,7 @@ class CategoryListWidget extends StatelessWidget {
       physics: const ClampingScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 124),
       itemCount: categoryGrouped.length,
-      itemBuilder: (context, index) {
+      itemBuilder: (BuildContext context, int index) {
         final MapEntry<CategoryEntity, List<TransactionEntity>> map =
             categoryGrouped[index];
         return InkWell(

@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -13,7 +14,7 @@ import 'package:paisa/core/common.dart';
 
 part 'settings_state.dart';
 
-const expenseFixKey = "expense_fix_key";
+const String expenseFixKey = "expense_fix_key";
 
 @injectable
 class SettingCubit extends Cubit<SettingsState> {
@@ -43,7 +44,7 @@ class SettingCubit extends Cubit<SettingsState> {
         return emit(FixExpenseError());
       }
       final List<TransactionEntity> transactions = transactionsUseCase()
-          .where((element) => element.categoryId == -1)
+          .where((TransactionEntity element) => element.categoryId == -1)
           .toList();
 
       for (final TransactionEntity element in transactions) {
@@ -65,9 +66,9 @@ class SettingCubit extends Cubit<SettingsState> {
   }
 
   void shareFile() {
-    jsonFileExportUseCase().then((fileExport) => fileExport.fold(
-          (failure) => emit(ImportFileError(mapFailureToMessage(failure))),
-          (path) => Share.shareXFiles(
+    jsonFileExportUseCase().then((Either<Failure, String> fileExport) => fileExport.fold(
+          (Failure failure) => emit(ImportFileError(mapFailureToMessage(failure))),
+          (String path) => Share.shareXFiles(
             [XFile(path)],
             subject: 'Share',
           ),
@@ -75,9 +76,9 @@ class SettingCubit extends Cubit<SettingsState> {
   }
 
   void shareCSVFile() {
-    csvFileExportUseCase().then((fileExport) => fileExport.fold(
-          (failure) => emit(ImportFileError(mapFailureToMessage(failure))),
-          (path) => Share.shareXFiles(
+    csvFileExportUseCase().then((Either<Failure, String> fileExport) => fileExport.fold(
+          (Failure failure) => emit(ImportFileError(mapFailureToMessage(failure))),
+          (String path) => Share.shareXFiles(
             [XFile(path)],
             subject: 'Share',
           ),
@@ -86,9 +87,9 @@ class SettingCubit extends Cubit<SettingsState> {
 
   void importDataFromJson() {
     emit(ImportFileLoading());
-    jsonFileImportUseCase().then((fileImport) => fileImport.fold(
-          (failure) => emit(ImportFileError(mapFailureToMessage(failure))),
-          (r) => emit(ImportFileSuccessState()),
+    jsonFileImportUseCase().then((Either<Failure, bool> fileImport) => fileImport.fold(
+          (Failure failure) => emit(ImportFileError(mapFailureToMessage(failure))),
+          (bool r) => emit(ImportFileSuccessState()),
         ));
   }
 

@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -23,11 +24,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   void pickImage() {
-    imagePickerUseCase().then((imagePicker) {
+    imagePickerUseCase().then((Either<Failure, bool> imagePicker) {
       return imagePicker.fold(
-        (failure) =>
+        (Failure failure) =>
             emit(ProfileImagePickErrorState(mapFailureToMessage(failure))),
-        (status) => null,
+        (bool status) => null,
       );
     });
   }

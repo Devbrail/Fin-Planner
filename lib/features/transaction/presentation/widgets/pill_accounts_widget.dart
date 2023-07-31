@@ -27,8 +27,8 @@ class _PillsAccountWidgetState extends State<PillsAccountWidget> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<AccountModel>>(
       valueListenable: getIt.get<Box<AccountModel>>().listenable(),
-      builder: (context, value, child) {
-        final accounts = value.values.toEntities();
+      builder: (BuildContext context, Box<AccountModel> value, Widget? child) {
+        final List<AccountEntity> accounts = value.values.toEntities();
 
         return GridView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -39,7 +39,7 @@ class _PillsAccountWidgetState extends State<PillsAccountWidget> {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: accounts.length,
           shrinkWrap: true,
-          itemBuilder: (context, index) {
+          itemBuilder: (BuildContext context, int index) {
             final AccountEntity account = accounts[index];
             return PaisaFilterChip(
               color: Color(account.color ?? Colors.brown.shade200.value),

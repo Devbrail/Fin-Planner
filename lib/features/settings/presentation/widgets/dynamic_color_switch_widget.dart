@@ -13,7 +13,7 @@ class DynamicColorSwitchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(
-      builder: (context, setState) {
+      builder: (BuildContext context, setState) {
         return SettingsOption(
           title: context.loc.dynamicColor,
           trailing: Switch(
@@ -22,7 +22,7 @@ class DynamicColorSwitchWidget extends StatelessWidget {
               dynamicThemeKey,
               defaultValue: false,
             ),
-            onChanged: (value) {
+            onChanged: (bool value) {
               Provider.of<Box<dynamic>>(context).put(dynamicThemeKey, value);
               setState(() {});
             },

@@ -31,9 +31,9 @@ class UserProfileBottomSheetWidget extends StatelessWidget {
     controller.text = name;
     controller.selection = TextSelection.collapsed(offset: name.length);
     return BlocProvider(
-      create: (context) => profileCubit,
+      create: (BuildContext context) => profileCubit,
       child: BlocListener<ProfileCubit, ProfileState>(
-        listener: (context, state) {
+        listener: (BuildContext context, ProfileState state) {
           if (state is SavedNameState) {
             Navigator.pop(context);
           } else if (state is ProfileImagePickErrorState) {
@@ -65,7 +65,7 @@ class UserProfileBottomSheetWidget extends StatelessWidget {
                           controller: controller,
                           hintText: 'Enter name',
                           keyboardType: TextInputType.name,
-                          onChanged: (value) {},
+                          onChanged: (String value) {},
                         ),
                       ),
                     ),

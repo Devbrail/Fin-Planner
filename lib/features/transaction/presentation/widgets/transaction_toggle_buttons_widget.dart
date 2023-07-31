@@ -17,8 +17,8 @@ class TransactionToggleButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TransactionBloc, TransactionState>(
-      buildWhen: (previous, current) => current is ChangeTransactionTypeState,
-      builder: (context, state) {
+      buildWhen: (TransactionState previous, TransactionState current) => current is ChangeTransactionTypeState,
+      builder: (BuildContext context, TransactionState state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: SingleChildScrollView(

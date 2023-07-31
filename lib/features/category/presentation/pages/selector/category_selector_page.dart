@@ -26,12 +26,12 @@ class CategorySelectorPage extends StatefulWidget {
 class _CategorySelectorPageState extends State<CategorySelectorPage> {
   final LocalCategoryManager dataSource = getIt.get();
   final List<CategoryModel> defaultModels = defaultCategoriesData;
-  final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+  final Box settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   @override
   void initState() {
     super.initState();
-    getIt.get<Box<CategoryModel>>().values.filterDefault.forEach((element) {
+    getIt.get<Box<CategoryModel>>().values.filterDefault.forEach((CategoryModel element) {
       defaultModels.remove(element);
     });
   }
@@ -47,7 +47,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<CategoryModel>>(
       valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
-      builder: (context, value, child) {
+      builder: (BuildContext context, Box<CategoryModel> value, Widget? child) {
         final List<CategoryModel> categoryModels =
             value.values.filterDefault.toList();
         return PaisaAnnotatedRegionWidget(
@@ -74,11 +74,11 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                 ScreenTypeLayout(
                   mobile: PaisaFilledCard(
                     child: ListView.separated(
-                      separatorBuilder: (context, index) => const Divider(),
+                      separatorBuilder: (BuildContext context, int index) => const Divider(),
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: categoryModels.length,
                       shrinkWrap: true,
-                      itemBuilder: (context, index) {
+                      itemBuilder: (BuildContext context, int index) {
                         final CategoryModel model = categoryModels[index];
                         return CategoryItemWidget(
                           model: model,
@@ -100,7 +100,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: categoryModels.length,
                     shrinkWrap: true,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (BuildContext context, int index) {
                       final CategoryModel model = categoryModels[index];
                       return CategoryItemWidget(
                         model: model,
@@ -124,9 +124,9 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                     spacing: 12.0,
                     runSpacing: 12.0,
                     children: defaultModels
-                        .map((model) => FilterChip(
+                        .map((CategoryModel model) => FilterChip(
                               label: Text(model.name ?? ''),
-                              onSelected: (value) {
+                              onSelected: (bool value) {
                                 dataSource.add(model);
                                 setState(() {
                                   defaultModels.remove(model);

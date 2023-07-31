@@ -10,10 +10,10 @@ class AccountColorPickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountBloc, AccountState>(
-      buildWhen: (previous, current) =>
+      buildWhen: (AccountState previous, AccountState current) =>
           current is AccountColorSelectedState ||
           current is AccountSuccessState,
-      builder: (context, state) {
+      builder: (BuildContext context, AccountState state) {
         int color = Colors.red.value;
         if (state is AccountColorSelectedState) {
           color = state.categoryColor;
@@ -24,7 +24,7 @@ class AccountColorPickerWidget extends StatelessWidget {
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           onTap: () async {
-            final color = await paisaColorPicker(
+            final int color = await paisaColorPicker(
               context,
               defaultColor:
                   BlocProvider.of<AccountBloc>(context).selectedColor ??

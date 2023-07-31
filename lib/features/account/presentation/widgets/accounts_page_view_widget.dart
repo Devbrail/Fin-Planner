@@ -46,22 +46,21 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
               key: const Key('accounts_page_view'),
               controller: _controller,
               itemCount: widget.accounts.length,
-              onPageChanged: (index) {
+              onPageChanged: (int index) {
                 BlocProvider.of<AccountBloc>(context)
                     .add(AccountSelectedEvent(widget.accounts[index]));
               },
-              itemBuilder: (_, index) {
+              itemBuilder: (_, int index) {
                 return BlocBuilder<AccountBloc, AccountState>(
-                  builder: (context, state) {
+                  builder: (BuildContext context, AccountState state) {
                     if (state is AccountSelectedState) {
                       final AccountEntity account = widget.accounts[index];
-                      final String expense = state.expenses.totalExpense
-                          .toFormateCurrency(context);
-                      final String income =
-                          state.expenses.totalIncome.toFormateCurrency(context);
-                      final String totalBalance =
-                          (state.expenses.fullTotal + account.initialAmount)
-                              .toFormateCurrency(context);
+                      const String expense =
+                          ''; //state.expenses.totalExpense .toFormateCurrency(context);
+                      const String income =
+                          ''; //  state.expenses.totalIncome.toFormateCurrency(context);
+                      const String totalBalance =
+                          ''; //  (state.expenses.fullTotal + account.initialAmount)  .toFormateCurrency(context);
                       return AccountCard(
                         key: ValueKey(account.hashCode),
                         expense: expense,
@@ -157,13 +156,13 @@ class AccountPageViewDotsIndicator extends StatelessWidget {
       return const SizedBox.shrink();
     }
     return BlocBuilder<AccountBloc, AccountState>(
-      builder: (context, state) {
+      builder: (BuildContext context, AccountState state) {
         if (state is AccountSelectedState) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: List.generate(accounts.length, (index) {
+              children: List.generate(accounts.length, (int index) {
                 return GestureDetector(
                   onTap: () {
                     pageController.jumpToPage(index);

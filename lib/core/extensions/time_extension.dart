@@ -11,19 +11,19 @@ extension DateUtils on DateTime {
   String get shortDayString => DateFormat('dd EEE • hh:mm a').format(this);
 
   bool get isToday {
-    final now = DateTime.now();
+    final DateTime now = DateTime.now();
     return now.day == day && now.month == month && now.year == year;
   }
 
   bool get isTomorrow {
-    final tomorrow = DateTime.now().add(const Duration(days: 1));
+    final DateTime tomorrow = DateTime.now().add(const Duration(days: 1));
     return tomorrow.day == day &&
         tomorrow.month == month &&
         tomorrow.year == year;
   }
 
   bool get isYesterday {
-    final yesterday = DateTime.now().subtract(const Duration(days: 1));
+    final DateTime yesterday = DateTime.now().subtract(const Duration(days: 1));
     return yesterday.day == day &&
         yesterday.month == month &&
         yesterday.year == year;
@@ -35,7 +35,7 @@ extension DateUtils on DateTime {
       );
 
   int get ordinalDate {
-    const offsets = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+    const List<int> offsets = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
     return offsets[month - 1] + day + (isLeapYear && month > 2 ? 1 : 0);
   }
 
@@ -45,7 +45,7 @@ extension DateUtils on DateTime {
   }
 
   int get weekOfYear {
-    final woy = ((ordinalDate - weekday + 10) ~/ 7);
+    final int woy = ((ordinalDate - weekday + 10) ~/ 7);
     if (woy == 0) {
       return DateTime(year - 1, 12, 28).weekOfYear;
     }

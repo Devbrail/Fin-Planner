@@ -28,7 +28,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = ThemeMode.values[getIt
+    final ThemeMode currentTheme = ThemeMode.values[getIt
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
         .get(themeModeKey, defaultValue: 0)];
     return PaisaAnnotatedRegionWidget(

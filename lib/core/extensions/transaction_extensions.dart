@@ -9,33 +9,33 @@ import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 extension ExpenseModelBoxMapping on Box<TransactionModel> {
   List<TransactionModel> get expenses =>
-      values.sortedBy<DateTime>((element) => element.time!);
+      values.sortedBy<DateTime>((TransactionModel element) => element.time!);
 
   List<TransactionModel> expensesFromAccountId(int accountId) =>
-      expenses.where((element) => element.accountId == accountId).toList();
+      expenses.where((TransactionModel element) => element.accountId == accountId).toList();
 
   List<TransactionEntity> get toEntities => values
-      .map((expenseModel) => expenseModel.toEntity())
-      .sortedBy<DateTime>((element) => element.time!);
+      .map((TransactionModel expenseModel) => expenseModel.toEntity())
+      .sortedBy<DateTime>((TransactionEntity element) => element.time!);
 
   List<TransactionModel> isFilterTimeBetween(DateTimeRange range) => values
-      .where((element) => element.time!.isAfterBeforeTime(range))
+      .where((TransactionModel element) => element.time!.isAfterBeforeTime(range))
       .toList();
 
   Iterable<TransactionModel> get expenseList =>
-      values.where((element) => element.type == TransactionType.expense);
+      values.where((TransactionModel element) => element.type == TransactionType.expense);
 
   Iterable<TransactionModel> get incomeList =>
-      values.where((element) => element.type == TransactionType.income);
+      values.where((TransactionModel element) => element.type == TransactionType.income);
 
-  double get totalExpense => expenseList.map((e) => e.currency).fold<double>(
-      0, (previousValue, element) => previousValue + (element ?? 0));
+  double get totalExpense => expenseList.map((TransactionModel e) => e.currency).fold<double>(
+      0, (double previousValue, double? element) => previousValue + (element ?? 0));
 
-  double get totalIncome => incomeList.map((e) => e.currency).fold<double>(
-      0, (previousValue, element) => previousValue + (element ?? 0));
+  double get totalIncome => incomeList.map((TransactionModel e) => e.currency).fold<double>(
+      0, (double previousValue, double? element) => previousValue + (element ?? 0));
 
   Iterable<TransactionModel> search(SearchQuery query) {
-    return values.where((element) {
+    return values.where((TransactionModel element) {
       final String text = query.query?.toLowerCase() ?? '';
       final String desc = (element.description ?? '').toLowerCase();
       final String name = (element.name ?? '').toLowerCase();
@@ -63,36 +63,36 @@ extension ExpenseModelHelper on TransactionModel {
 
 extension ExpenseModelsHelper on Iterable<TransactionModel> {
   List<Map<String, dynamic>> toJson() {
-    return map((e) => e.toJson()).toList();
+    return map((TransactionModel e) => e.toJson()).toList();
   }
 
   List<TransactionEntity> toEntities() {
-    return map((expenseModel) => expenseModel.toEntity())
-        .sortedBy<DateTime>((element) => element.time!);
+    return map((TransactionModel expenseModel) => expenseModel.toEntity())
+        .sortedBy<DateTime>((TransactionEntity element) => element.time!);
   }
 
   List<TransactionEntity> budgetOverView(TransactionType transactionType) =>
-      sortedBy<DateTime>((element) => element.time!)
-          .where((element) => element.type == transactionType)
+      sortedBy<DateTime>((TransactionModel element) => element.time!)
+          .where((TransactionModel element) => element.type == transactionType)
           .toEntities();
 }
 
 extension ExpensesHelper on Iterable<TransactionEntity> {
   List<TransactionEntity> sortByTime() =>
-      sortedBy<DateTime>((element) => element.time!);
+      sortedBy<DateTime>((TransactionEntity element) => element.time!);
 
   List<TransactionEntity> get expenses => sortByTime();
 
   List<TransactionEntity> get expenseList =>
-      where((element) => element.type == TransactionType.expense).toList();
+      where((TransactionEntity element) => element.type == TransactionType.expense).toList();
 
   List<TransactionEntity> get incomeList =>
-      where((element) => element.type == TransactionType.income).toList();
+      where((TransactionEntity element) => element.type == TransactionType.income).toList();
 
   List<TransactionEntity> isFilterTimeBetween(DateTimeRange range) =>
-      where((element) => element.time!.isAfterBeforeTime(range)).toList();
+      where((TransactionEntity element) => element.time!.isAfterBeforeTime(range)).toList();
 
-  double get filterTotal => fold<double>(0, (previousValue, element) {
+  double get filterTotal => fold<double>(0, (double previousValue, TransactionEntity element) {
         if (element.type == TransactionType.expense) {
           return previousValue - (element.currency ?? 0);
         } else if (element.type == TransactionType.income) {
@@ -103,52 +103,52 @@ extension ExpensesHelper on Iterable<TransactionEntity> {
       });
   double get fullTotal => totalIncome - totalExpense;
 
-  double get totalExpense => expenseList.map((e) => e.currency).fold<double>(
-      0, (previousValue, element) => previousValue + (element ?? 0));
+  double get totalExpense => expenseList.map((TransactionEntity e) => e.currency).fold<double>(
+      0, (double previousValue, double? element) => previousValue + (element ?? 0));
 
-  double get totalIncome => incomeList.map((e) => e.currency).fold<double>(
-      0, (previousValue, element) => previousValue + (element ?? 0));
+  double get totalIncome => incomeList.map((TransactionEntity e) => e.currency).fold<double>(
+      0, (double previousValue, double? element) => previousValue + (element ?? 0));
 
-  double get total => map((e) => e.currency).fold<double>(
-      0, (previousValue, element) => previousValue + (element ?? 0));
+  double get total => map((TransactionEntity e) => e.currency).fold<double>(
+      0, (double previousValue, double? element) => previousValue + (element ?? 0));
 
   double get thisMonthExpense =>
-      where((element) => element.type == TransactionType.expense)
-          .where((element) =>
+      where((TransactionEntity element) => element.type == TransactionType.expense)
+          .where((TransactionEntity element) =>
               element.time?.month == DateTime.now().month &&
               element.time?.year == DateTime.now().year)
-          .map((e) => e.currency)
+          .map((TransactionEntity e) => e.currency)
           .fold<double>(
-              0, (previousValue, element) => previousValue + (element ?? 0));
+              0, (double previousValue, double? element) => previousValue + (element ?? 0));
 
   List<TransactionEntity> get thisMonthExpensesList =>
-      where((element) => element.type == TransactionType.expense)
-          .where((element) =>
+      where((TransactionEntity element) => element.type == TransactionType.expense)
+          .where((TransactionEntity element) =>
               element.time?.month == DateTime.now().month &&
               element.time?.year == DateTime.now().year)
           .toList();
 
   List<double> get expenseDoubleList =>
-      thisMonthExpensesList.map((element) => (element.currency ?? 0)).toList();
+      thisMonthExpensesList.map((TransactionEntity element) => (element.currency ?? 0)).toList();
 
   List<TransactionEntity> get thisMonthIncomeList =>
-      where((element) => element.type == TransactionType.income)
-          .where((element) =>
+      where((TransactionEntity element) => element.type == TransactionType.income)
+          .where((TransactionEntity element) =>
               element.time?.month == DateTime.now().month &&
               element.time?.year == DateTime.now().year)
           .toList();
 
   List<double> get incomeDoubleList =>
-      thisMonthIncomeList.map((element) => (element.currency ?? 0)).toList();
+      thisMonthIncomeList.map((TransactionEntity element) => (element.currency ?? 0)).toList();
 
   double get thisMonthIncome =>
-      where((element) => element.type == TransactionType.income)
-          .where((element) =>
+      where((TransactionEntity element) => element.type == TransactionType.income)
+          .where((TransactionEntity element) =>
               element.time?.month == DateTime.now().month &&
               element.time?.year == DateTime.now().year)
-          .map((e) => e.currency)
+          .map((TransactionEntity e) => e.currency)
           .fold<double>(
-              0, (previousValue, element) => previousValue + (element ?? 0));
+              0, (double previousValue, double? element) => previousValue + (element ?? 0));
 }
 
 extension TransactionHelper on TransactionEntity {}

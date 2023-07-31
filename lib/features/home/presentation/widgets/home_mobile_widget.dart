@@ -33,17 +33,17 @@ class HomeMobileWidget extends StatelessWidget {
         ],
       ),
       drawer: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
+        builder: (BuildContext context, HomeState state) {
           return NavigationDrawer(
             selectedIndex: homeBloc.selectedIndex,
-            onDestinationSelected: (index) {
+            onDestinationSelected: (int index) {
               homeBloc.add(CurrentIndexEvent(index));
               Navigator.pop(context);
             },
             children: [
               const PaisaIconTitle(),
               ...destinations
-                  .map((e) => NavigationDrawerDestination(
+                  .map((Destination e) => NavigationDrawerDestination(
                         icon: e.icon,
                         selectedIcon: e.selectedIcon,
                         label: Text(e.pageType.name(context)),
@@ -71,8 +71,8 @@ class HomeMobileWidget extends StatelessWidget {
       body: const ContentWidget(),
       floatingActionButton: floatingActionButton,
       bottomNavigationBar: BlocBuilder<HomeBloc, HomeState>(
-        buildWhen: (previous, current) => current is CurrentIndexState,
-        builder: (context, state) {
+        buildWhen: (HomeState previous, HomeState current) => current is CurrentIndexState,
+        builder: (BuildContext context, HomeState state) {
           if (state is CurrentIndexState &&
               (state.currentPage == 4 ||
                   state.currentPage == 6 ||
@@ -87,11 +87,11 @@ class HomeMobileWidget extends StatelessWidget {
               elevation: 1,
               backgroundColor: context.surface,
               selectedIndex: homeBloc.selectedIndex,
-              onDestinationSelected: (index) =>
+              onDestinationSelected: (int index) =>
                   homeBloc.add(CurrentIndexEvent(index)),
               destinations: destinations
                   .sublist(0, 4)
-                  .map((e) => NavigationDestination(
+                  .map((Destination e) => NavigationDestination(
                         icon: e.icon,
                         selectedIcon: e.selectedIcon,
                         label: e.pageType.name(context),

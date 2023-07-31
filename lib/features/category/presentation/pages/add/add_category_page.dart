@@ -29,9 +29,9 @@ class AddCategoryPage extends StatefulWidget {
 
 class _AddCategoryPageState extends State<AddCategoryPage> {
   final CategoryBloc categoryBloc = getIt.get();
-  final budgetController = TextEditingController();
-  final categoryController = TextEditingController();
-  final descController = TextEditingController();
+  final TextEditingController budgetController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
+  final TextEditingController descController = TextEditingController();
   late final bool isAddCategory = widget.categoryId == null;
 
   @override
@@ -51,9 +51,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => categoryBloc,
+      create: (BuildContext context) => categoryBloc,
       child: BlocConsumer<CategoryBloc, CategoryState>(
-        listener: (context, state) {
+        listener: (BuildContext context, CategoryState state) {
           if (state is CategoryAddedState) {
             context.showMaterialSnackBar(
               isAddCategory
@@ -86,7 +86,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             );
           }
         },
-        builder: (context, state) {
+        builder: (BuildContext context, CategoryState state) {
           return ScreenTypeLayout(
             mobile: Scaffold(
               appBar: context.materialYouAppBar(
@@ -131,7 +131,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                   padding: const EdgeInsets.all(16.0),
                   child: PaisaBigButton(
                     onPressed: () {
-                      final isValid = _formKey.currentState!.validate();
+                      final bool isValid = _formKey.currentState!.validate();
                       if (!isValid) {
                         return;
                       }
@@ -153,7 +153,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                     DeleteCategoryWidget(categoryId: widget.categoryId),
                     PaisaButton(
                       onPressed: () {
-                        final isValid = _formKey.currentState!.validate();
+                        final bool isValid = _formKey.currentState!.validate();
                         if (!isValid) {
                           return;
                         }
@@ -267,7 +267,7 @@ class CategoryColorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategoryBloc, CategoryState>(
-      builder: (context, state) {
+      builder: (BuildContext context, CategoryState state) {
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           onTap: () {
@@ -275,7 +275,7 @@ class CategoryColorWidget extends StatelessWidget {
                     defaultColor:
                         BlocProvider.of<CategoryBloc>(context).selectedColor ??
                             Colors.red.value)
-                .then((color) {
+                .then((int color) {
               BlocProvider.of<CategoryBloc>(context)
                   .add(CategoryColorSelectedEvent(color));
             });
@@ -313,11 +313,11 @@ class _TransferCategoryWidgetState extends State<TransferCategoryWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategoryBloc, CategoryState>(
-      builder: (context, state) {
+      builder: (BuildContext context, CategoryState state) {
         return SwitchListTile(
           title: Text(context.loc.transferCategory),
           value: BlocProvider.of<CategoryBloc>(context).isDefault ?? false,
-          onChanged: (value) {
+          onChanged: (bool value) {
             setState(() {
               BlocProvider.of<CategoryBloc>(context).isDefault = value;
             });
@@ -342,9 +342,9 @@ class CategoryNameWidget extends StatelessWidget {
       controller: controller,
       hintText: context.loc.enterCategory,
       keyboardType: TextInputType.name,
-      onChanged: (value) =>
+      onChanged: (String value) =>
           BlocProvider.of<CategoryBloc>(context).categoryTitle = value,
-      validator: (value) {
+      validator: (String? value) {
         if (value!.isNotEmpty) {
           return null;
         } else {
@@ -369,7 +369,7 @@ class CategoryDescriptionWidget extends StatelessWidget {
       controller: controller,
       hintText: context.loc.enterDescription,
       keyboardType: TextInputType.name,
-      onChanged: (value) =>
+      onChanged: (String value) =>
           BlocProvider.of<CategoryBloc>(context).categoryDesc = value,
     );
   }

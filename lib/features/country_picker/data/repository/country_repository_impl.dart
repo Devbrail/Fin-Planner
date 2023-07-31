@@ -8,6 +8,6 @@ class CountryRepositoryImpl implements CountryRepository {
   @override
   List<CountryModel> fetchCountries() {
     return List<CountryModel>.from(
-        localCountriesData.map((x) => CountryModel.fromJson(x)));
+        localCountriesData.map((Map<String, dynamic> x) => CountryModel.fromJson(x)));
   }
 }

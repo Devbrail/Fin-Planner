@@ -20,25 +20,25 @@ extension CategoryModelHelper on CategoryModel {
 
 extension CategoryModelsHelper on Iterable<CategoryModel> {
   List<Map<String, dynamic>> toJson() {
-    return map((e) => e.toJson()).toList();
+    return map((CategoryModel e) => e.toJson()).toList();
   }
 
   Iterable<CategoryModel> sort() =>
-      sorted((a, b) => a.name!.compareTo(b.name!));
+      sorted((CategoryModel a, CategoryModel b) => a.name!.compareTo(b.name!));
 
   Iterable<CategoryModel> get filterDefault {
     return sort()
-        .where((element) => element.isDefault != null)
-        .where((element) => !element.isDefault!);
+        .where((CategoryModel element) => element.isDefault != null)
+        .where((CategoryModel element) => !element.isDefault!);
   }
 
   List<CategoryEntity> toEntities() =>
-      sort().map((categoryModel) => categoryModel.toEntity()).toList();
+      sort().map((CategoryModel categoryModel) => categoryModel.toEntity()).toList();
 
   List<CategoryEntity> toBudgetEntities() => sort()
-      .map((categoryModel) => categoryModel.toEntity())
-      .where((element) => element.isBudget != null)
-      .where((element) => element.isBudget!)
+      .map((CategoryModel categoryModel) => categoryModel.toEntity())
+      .where((CategoryEntity element) => element.isBudget != null)
+      .where((CategoryEntity element) => element.isBudget!)
       .toList();
 }
 

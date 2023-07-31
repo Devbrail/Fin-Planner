@@ -1,8 +1,8 @@
-const gitHubUrl = 'https://github.com/h4h13/paisa';
-const playStoreUrl =
+const String gitHubUrl = 'https://github.com/h4h13/paisa';
+const String playStoreUrl =
     'https://play.google.com/store/apps/details?id=dev.hemanths.paisa';
-const telegramGroupUrl = 'https://t.me/app_paisa';
-const termsAndConditionsUrl = 'https://hemanths.dev/privacy';
+const String telegramGroupUrl = 'https://t.me/app_paisa';
+const String termsAndConditionsUrl = 'https://hemanths.dev/privacy';
 
 const String themeModeKey = 'key_theme_mode';
 const String appColorKey = 'key_app_color';
@@ -28,88 +28,88 @@ const String selectedHomeFilterExpenseKey = "selected_home_filter_expense_key";
 const String defaultAccountIdKey = "default_account_id_key";
 const String appLanguageKey = "app_language_key";
 const String appFontChangerKey = "app_font_changer_key";
-const buyMeCoffeeUrl = 'https://www.buymeacoffee.com/h4h13';
+const String buyMeCoffeeUrl = 'https://www.buymeacoffee.com/h4h13';
 
-const loginPath = '/login';
-const loginName = 'login';
+const String loginPath = '/login';
+const String loginName = 'login';
 
-const countrySelectorPath = '/country-selector';
-const countrySelectorName = 'country-selector';
+const String countrySelectorPath = '/country-selector';
+const String countrySelectorName = 'country-selector';
 
-const biometricPath = '/biometric';
-const biometricName = 'biometric';
+const String biometricPath = '/biometric';
+const String biometricName = 'biometric';
 
-const landingPath = '/landing';
-const landingName = 'landing';
+const String landingPath = '/landing';
+const String landingName = 'landing';
 
-const searchPath = 'search';
-const searchName = 'search';
+const String searchPath = 'search';
+const String searchName = 'search';
 
-const addTransactionPath = 'add-transaction';
-const addTransactionsName = 'add-transaction';
+const String addTransactionPath = 'add-transaction';
+const String addTransactionsName = 'add-transaction';
 
-const editTransactionsName = 'edit-transaction';
-const editTransactionsPath = 'edit-transaction/:eid';
+const String editTransactionsName = 'edit-transaction';
+const String editTransactionsPath = 'edit-transaction/:eid';
 
-const addCategoryPath = 'add-category';
-const addCategoryName = 'add-category';
+const String addCategoryPath = 'add-category';
+const String addCategoryName = 'add-category';
 
-const manageCategoriesPath = 'categories';
-const manageCategoriesName = 'categories';
+const String manageCategoriesPath = 'categories';
+const String manageCategoriesName = 'categories';
 
-const editCategoryPath = 'edit-category/:cid';
-const editCategoryName = 'edit-category';
+const String editCategoryPath = 'edit-category/:cid';
+const String editCategoryName = 'edit-category';
 
-const addAccountPath = 'add-account';
-const addAccountName = 'add-account';
+const String addAccountPath = 'add-account';
+const String addAccountName = 'add-account';
 
-const editAccountPath = 'edit-account/:aid';
-const editAccountName = 'edit-account';
+const String editAccountPath = 'edit-account/:aid';
+const String editAccountName = 'edit-account';
 
-const editAccountWithIdPath = 'edit';
-const editAccountWithIdName = 'edit';
+const String editAccountWithIdPath = 'edit';
+const String editAccountWithIdName = 'edit';
 
-const addAccountWithIdPath = 'add';
-const addAccountWithIdName = 'add';
+const String addAccountWithIdPath = 'add';
+const String addAccountWithIdName = 'add';
 
-const accountTransactionPath = 'account-transaction/:aid';
-const accountTransactionName = 'account-transaction';
+const String accountTransactionPath = 'account-transaction/:aid';
+const String accountTransactionName = 'account-transaction';
 
-const expensesByCategoryName = 'expenses-by-category';
-const expensesByCategoryPath = 'expenses-by-category/:cid';
+const String expensesByCategoryName = 'expenses-by-category';
+const String expensesByCategoryPath = 'expenses-by-category/:cid';
 
-const exportAndImportName = 'import-export';
-const exportAndImportPath = 'import-export';
+const String exportAndImportName = 'import-export';
+const String exportAndImportPath = 'import-export';
 
-const fontPickerName = 'font-picker';
-const fontPickerPath = 'font-picker';
+const String fontPickerName = 'font-picker';
+const String fontPickerPath = 'font-picker';
 
-const recurringTransactionsName = 'recurring';
-const recurringTransactionsPath = 'recurring';
+const String recurringTransactionsName = 'recurring';
+const String recurringTransactionsPath = 'recurring';
 
-const recurringName = 'add-recurring';
-const recurringPath = 'add-recurring';
+const String recurringName = 'add-recurring';
+const String recurringPath = 'add-recurring';
 
-const settingsPath = 'settings';
-const settingsName = 'settings';
+const String settingsPath = 'settings';
+const String settingsName = 'settings';
 
-const debtAddOrEditName = 'edit-debt';
-const debtAddOrEditPath = 'edit-debt/:did';
+const String debtAddOrEditName = 'edit-debt';
+const String debtAddOrEditPath = 'edit-debt/:did';
 
-const addDebitName = 'add-debit';
-const addDebitPath = 'add-debit';
+const String addDebitName = 'add-debit';
+const String addDebitPath = 'add-debit';
 
-const introPageName = 'intro';
-const introPagePath = '/intro';
+const String introPageName = 'intro';
+const String introPagePath = '/intro';
 
-const categorySelectorName = 'category-selector';
-const categorySelectorPath = '/category-selector';
+const String categorySelectorName = 'category-selector';
+const String categorySelectorPath = '/category-selector';
 
-const accountSelectorName = 'account-selector';
-const accountSelectorPath = '/account-selector';
+const String accountSelectorName = 'account-selector';
+const String accountSelectorPath = '/account-selector';
 
-const iconPickerName = 'icon-picker';
-const iconPickerPath = 'icon-picker';
+const String iconPickerName = 'icon-picker';
+const String iconPickerPath = 'icon-picker';
 
-const userOnboardingName = 'onboarding';
-const userOnboardingPath = '/onboarding';
+const String userOnboardingName = 'onboarding';
+const String userOnboardingPath = '/onboarding';

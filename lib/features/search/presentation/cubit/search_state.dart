@@ -12,7 +12,7 @@ class SearchInitial extends SearchState {}
 class SearchResultState extends SearchState {
   const SearchResultState(this.expenses);
 
-  final List<TransactionEntity> expenses;
+  final List<CombinedTransactionEntity> expenses;
 
   @override
   List<Object> get props => [expenses];

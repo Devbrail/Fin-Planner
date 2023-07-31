@@ -38,16 +38,16 @@ class HomeDesktopWidget extends StatelessWidget {
       body: Row(
         children: [
           BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) {
+            builder: (BuildContext context, HomeState state) {
               return NavigationDrawer(
                 elevation: 0,
                 selectedIndex: homeBloc.selectedIndex,
-                onDestinationSelected: (index) {
+                onDestinationSelected: (int index) {
                   homeBloc.add(CurrentIndexEvent(index));
                 },
                 children: [
                   ...destinations
-                      .map((e) => NavigationDrawerDestination(
+                      .map((Destination e) => NavigationDrawerDestination(
                             icon: e.icon,
                             selectedIcon: e.selectedIcon,
                             label: Text(e.pageType.name(context)),

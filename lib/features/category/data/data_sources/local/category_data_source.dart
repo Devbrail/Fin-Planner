@@ -37,8 +37,8 @@ class LocalCategoryManagerDataSourceImpl implements LocalCategoryManager {
   @override
   List<CategoryModel> categories() {
     return categoryBox.values
-        .where((element) => element.isDefault != null)
-        .where((element) => !element.isDefault!)
+        .where((CategoryModel element) => element.isDefault != null)
+        .where((CategoryModel element) => !element.isDefault!)
         .toList();
   }
 
@@ -48,8 +48,8 @@ class LocalCategoryManagerDataSourceImpl implements LocalCategoryManager {
   @override
   List<CategoryModel> defaultCategories() {
     return categoryBox.values
-        .where((element) => element.isDefault != null)
-        .where((element) => element.isDefault!)
+        .where((CategoryModel element) => element.isDefault != null)
+        .where((CategoryModel element) => element.isDefault!)
         .toList();
   }
 
@@ -64,7 +64,7 @@ class LocalCategoryManagerDataSourceImpl implements LocalCategoryManager {
   @override
   CategoryModel? findById(int? categoryId) =>
       categoryBox.values.firstWhereOrNull(
-        (element) => element.superId == categoryId,
+        (CategoryModel element) => element.superId == categoryId,
       );
 
   @override

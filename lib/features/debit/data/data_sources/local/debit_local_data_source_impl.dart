@@ -59,18 +59,18 @@ class LocalDebitDataSourceImpl extends LocalDebitDataSource {
   @override
   Future<void> deleteDebitTransactionsFromDebitId(int parentId) {
     final Iterable<int> transactionsKeys = transactionsBox.values
-        .where((element) => element.parentId == parentId)
-        .map((e) => e.superId!);
+        .where((DebitTransactionsModel element) => element.parentId == parentId)
+        .map((DebitTransactionsModel e) => e.superId!);
     return transactionsBox.deleteAll(transactionsKeys);
   }
 
   @override
   DebitModel? fetchDebtOrCreditFromId(int debtId) =>
-      debtBox.values.firstWhereOrNull((element) => element.superId == debtId);
+      debtBox.values.firstWhereOrNull((DebitModel element) => element.superId == debtId);
 
   @override
   Iterable<DebitTransactionsModel> getTransactionsFromId(int? id) {
-    return transactionsBox.values.where((element) => element.parentId == id);
+    return transactionsBox.values.where((DebitTransactionsModel element) => element.parentId == id);
   }
 
   @override

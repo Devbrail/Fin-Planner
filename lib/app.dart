@@ -36,22 +36,22 @@ class _PaisaAppState extends State<PaisaApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt.get<SettingCubit>(),
+          create: (BuildContext context) => getIt.get<SettingCubit>(),
         ),
         BlocProvider(
-          create: (context) => getIt.get<AccountBloc>(),
+          create: (BuildContext context) => getIt.get<AccountBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt.get<HomeBloc>(),
+          create: (BuildContext context) => getIt.get<HomeBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt.get<OverviewCubit>(),
+          create: (BuildContext context) => getIt.get<OverviewCubit>(),
         ),
         Provider(
-          create: (context) => getIt.get<SummaryController>(),
+          create: (BuildContext context) => getIt.get<SummaryController>(),
         ),
         Provider<Box<dynamic>>(
-          create: (context) => widget.settings,
+          create: (BuildContext context) => widget.settings,
         ),
       ],
       child: ValueListenableBuilder<Box>(
@@ -65,7 +65,7 @@ class _PaisaAppState extends State<PaisaApp> {
             appFontChangerKey,
           ],
         ),
-        builder: (context, value, _) {
+        builder: (BuildContext context, Box value, _) {
           final bool isDynamic = value.get(
             dynamicThemeKey,
             defaultValue: false,
@@ -107,11 +107,11 @@ class _PaisaAppState extends State<PaisaApp> {
                     brightness: Brightness.dark,
                   );
                 }
-                final lightTextTheme = GoogleFonts.getTextTheme(
+                final TextTheme lightTextTheme = GoogleFonts.getTextTheme(
                   fontPreference,
                   ThemeData.light().textTheme,
                 );
-                final darkTextTheme = GoogleFonts.getTextTheme(
+                final TextTheme darkTextTheme = GoogleFonts.getTextTheme(
                   fontPreference,
                   ThemeData.dark().textTheme,
                 );

@@ -11,7 +11,10 @@ import 'package:paisa/features/home/presentation/pages/overview/overview_page.da
 import 'package:paisa/features/home/presentation/pages/summary/summary_page.dart';
 import 'package:paisa/features/recurring/presentation/page/recurring_page.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
+import 'package:paisa/main.dart';
 import 'package:provider/provider.dart';
+
+import '../cubit/combined_transaction/combined_transaction_cubit.dart';
 
 class ContentWidget extends StatelessWidget {
   const ContentWidget({
@@ -21,7 +24,7 @@ class ContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<int, Widget> pages = {
-      0: const SummaryPage(),
+      0: SummaryPage(cubit: getIt.get<CombinedTransactionCubit>()),
       1: const AccountsPage(),
       2: const DebtsPage(),
       3: OverViewPage(
@@ -34,15 +37,16 @@ class ContentWidget extends StatelessWidget {
       ),
       6: const RecurringPage(),
     };
-    return BlocBuilder(
-      bloc: BlocProvider.of<HomeBloc>(context),
-      builder: (context, state) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (HomeState previous, HomeState current) =>
+          current is CurrentIndexState,
+      builder: (BuildContext context, HomeState state) {
         if (state is CurrentIndexState) {
           return PageTransitionSwitcher(
             transitionBuilder: (
-              child,
-              primaryAnimation,
-              secondaryAnimation,
+              Widget child,
+              Animation<double> primaryAnimation,
+              Animation<double> secondaryAnimation,
             ) =>
                 FadeThroughTransition(
               animation: primaryAnimation,

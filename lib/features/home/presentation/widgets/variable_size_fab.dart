@@ -40,17 +40,17 @@ class HomeFloatingActionButtonWidget extends StatelessWidget {
   }
 
   Future<void> _dateRangePicker(BuildContext context) async {
-    final initialDateRange = DateTimeRange(
+    final DateTimeRange initialDateRange = DateTimeRange(
       start: DateTime.now().subtract(const Duration(days: 3)),
       end: DateTime.now(),
     );
-    final newDateRange = await showDateRangePicker(
+    final DateTimeRange? newDateRange = await showDateRangePicker(
       context: context,
       firstDate: DateTime(DateTime.now().year - 5),
       lastDate: DateTime.now(),
       initialDateRange: initialDateRange,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
-      builder: (_, child) {
+      builder: (_, Widget? child) {
         return Theme(
           data: ThemeData.from(colorScheme: Theme.of(context).colorScheme)
               .copyWith(
@@ -67,7 +67,7 @@ class HomeFloatingActionButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
-      builder: (context, state) {
+      builder: (BuildContext context, HomeState state) {
         if (state is CurrentIndexState && state.currentPage != 5) {
           return VariableFABSize(
             onPressed: () => _handleClick(context, state.currentPage),

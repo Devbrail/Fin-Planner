@@ -19,7 +19,7 @@ class FilterDateRangeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<DateTimeRange?>(
       valueListenable: dateTimeRangeNotifier,
-      builder: (context, value, child) {
+      builder: (BuildContext context, DateTimeRange? value, Widget? child) {
         if (value != null) {
           return builder.call(expenses.isFilterTimeBetween(value));
         } else {

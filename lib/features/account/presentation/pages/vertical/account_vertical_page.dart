@@ -17,17 +17,17 @@ class AccountMobileVerticalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<TransactionModel>>(
       valueListenable: getIt.get<Box<TransactionModel>>().listenable(),
-      builder: (context, value, child) {
+      builder: (BuildContext context, Box<TransactionModel> value, Widget? child) {
         return ScreenTypeLayout(
           mobile: ListView.builder(
             physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             padding: const EdgeInsets.only(bottom: 124),
             itemCount: accounts.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (BuildContext context, int index) {
               final List<TransactionEntity> expenses = value
                   .expensesFromAccountId(accounts[index].superId!)
-                  .map((e) => e.toEntity())
+                  .map((TransactionModel e) => e.toEntity())
                   .toList();
               return AccountCardV2(
                 account: accounts[index],
@@ -46,7 +46,7 @@ class AccountMobileVerticalPage extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final List<TransactionEntity> expenses = value
                   .expensesFromAccountId(accounts[index].superId!)
-                  .map((e) => e.toEntity())
+                  .map((TransactionModel e) => e.toEntity())
                   .toList();
               return AccountCardV2(
                 account: accounts[index],

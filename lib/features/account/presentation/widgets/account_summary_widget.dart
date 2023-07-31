@@ -4,16 +4,16 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/theme/custom_color.dart';
 import 'package:paisa/features/account/presentation/widgets/summary_month_card_widget.dart';
-import 'package:paisa/features/transaction/domain/entities/transaction.dart';
+import 'package:paisa/features/home/domain/entity/combined_transaction_entity.dart';
 
 class AccountSummaryWidget extends StatelessWidget {
   const AccountSummaryWidget({
     super.key,
-    required this.expenses,
+    required this.transactions,
     this.useAccountsList = false,
   });
 
-  final List<TransactionEntity> expenses;
+  final List<CombinedTransactionEntity> transactions;
   final bool useAccountsList;
 
   @override
@@ -44,8 +44,9 @@ class AccountSummaryWidget extends StatelessWidget {
               Expanded(
                 child: SummaryMonthCardWidget(
                   title: context.loc.income,
-                  total: expenses.thisMonthIncome.toFormateCurrency(context),
-                  data: expenses.incomeDoubleList,
+                  total: '',
+                  //transactions.thisMonthIncome.toFormateCurrency(context),
+                  data: const [], //transactions.incomeDoubleList,
                   graphLineColor:
                       Theme.of(context).extension<CustomColors>()!.green ??
                           context.secondary,
@@ -55,8 +56,9 @@ class AccountSummaryWidget extends StatelessWidget {
               Expanded(
                 child: SummaryMonthCardWidget(
                   title: context.loc.expense,
-                  total: expenses.thisMonthExpense.toFormateCurrency(context),
-                  data: expenses.expenseDoubleList,
+                  total:
+                      '', //transactions.thisMonthExpense.toFormateCurrency(context),
+                  data: const [], // transactions.expenseDoubleList,
                   graphLineColor:
                       Theme.of(context).extension<CustomColors>()!.red ??
                           context.secondary,

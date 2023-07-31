@@ -19,7 +19,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final map = paisaIconMap.entries.toList();
+    final List<MapEntry<String, List<IconData>>> map = paisaIconMap.entries.toList();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -34,7 +34,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
               paisaIconPicker(
                 context: context,
                 defaultIcon: selectedIcon!,
-              ).then((resultIcon) => selectedIcon = resultIcon);
+              ).then((IconData resultIcon) => selectedIcon = resultIcon);
             },
             title: context.loc.more,
           )
@@ -54,8 +54,8 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
       body: ListView.builder(
         itemCount: map.length,
         shrinkWrap: true,
-        itemBuilder: (context, index) {
-          final iconData = map[index];
+        itemBuilder: (BuildContext context, int index) {
+          final MapEntry<String, List<IconData>> iconData = map[index];
           return PaisaFilledCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +85,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
                     maxCrossAxisExtent: 70,
                     childAspectRatio: 1 / 1,
                   ),
-                  itemBuilder: (context, index) {
+                  itemBuilder: (BuildContext context, int index) {
                     final bool isSelected =
                         selectedIcon == iconData.value[index];
                     return Container(
@@ -124,7 +124,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
   }
 }
 
-final paisaIconMap = {
+final Map<String, List<IconData>> paisaIconMap = {
   "Animal": [
     MdiIcons.butterfly,
     MdiIcons.cat,

@@ -13,11 +13,11 @@ class CategoryIconPickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      buildWhen: (previous, current) =>
+      buildWhen: (Object? previous, Object? current) =>
           current is CategoryIconSelectedState ||
           current is CategorySuccessState,
       bloc: BlocProvider.of<CategoryBloc>(context),
-      builder: (context, state) {
+      builder: (BuildContext context, Object? state) {
         int codePoint = MdiIcons.home.codePoint;
         if (state is CategoryIconSelectedState) {
           codePoint = state.categoryIcon;

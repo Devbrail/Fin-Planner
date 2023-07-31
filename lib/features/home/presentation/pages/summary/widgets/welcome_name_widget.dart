@@ -17,7 +17,7 @@ class WelcomeNameWidget extends StatelessWidget {
           .listenable(
         keys: [userNameKey],
       ),
-      builder: (context, value, _) {
+      builder: (BuildContext context, Box value, _) {
         final name = value.get(userNameKey, defaultValue: 'Name');
 
         return ListTile(

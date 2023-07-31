@@ -19,7 +19,7 @@ class AppFontChanger extends StatelessWidget {
           appFontChangerKey,
         ],
       ),
-      builder: (context, value, child) {
+      builder: (BuildContext context, Box value, Widget? child) {
         return ListTile(
           leading: Icon(MdiIcons.formatFont),
           title: Text(context.loc.fontStyle),

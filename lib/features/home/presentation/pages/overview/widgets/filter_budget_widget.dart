@@ -21,7 +21,7 @@ class FilterOverviewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<TransactionType>(
       valueListenable: valueNotifier,
-      builder: (context, value, child) {
+      builder: (BuildContext context, TransactionType value, Widget? child) {
         return builder.call(expenses.budgetOverView(value));
       },
     );

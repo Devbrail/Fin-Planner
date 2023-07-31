@@ -8,7 +8,7 @@ Future<TimeOfDay?> paisaTimerPicker(
   return showTimePicker(
     context: context,
     initialTime: TimeOfDay.now(),
-    builder: (context, child) {
+    builder: (BuildContext context, Widget? child) {
       return Theme(
         data: Theme.of(context).copyWith(
           timePickerTheme: TimePickerThemeData(
@@ -36,7 +36,7 @@ Future<DateTime?> paisaDatePicker(
     initialDate: selectedDateTime,
     firstDate: DateTime(1950),
     lastDate: DateTime.now(),
-    builder: (context, child) {
+    builder: (BuildContext context, Widget? child) {
       return Theme(
         data: Theme.of(context).copyWith(
           datePickerTheme: DatePickerThemeData(

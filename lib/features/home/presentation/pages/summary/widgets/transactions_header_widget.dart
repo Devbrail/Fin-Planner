@@ -36,7 +36,7 @@ class TransactionsHeaderWidget extends StatelessWidget {
         ),
         label: ValueListenableBuilder<FilterExpense>(
           valueListenable: summaryController.sortHomeExpenseNotifier,
-          builder: (context, value, child) {
+          builder: (BuildContext context, FilterExpense value, Widget? child) {
             return Text(value.stringValue(context));
           },
         ),
@@ -55,7 +55,7 @@ class TransactionsHeaderWidget extends StatelessWidget {
                 topRight: Radius.circular(16),
               ),
             ),
-            builder: (context) {
+            builder: (BuildContext context) {
               return FilterHomeExpensesWidget(
                   summaryController: summaryController);
             },

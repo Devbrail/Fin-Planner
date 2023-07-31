@@ -18,7 +18,7 @@ class CategoryTransactionFilterWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ValueListenableBuilder<TransactionType>(
         valueListenable: summaryController.typeNotifier,
-        builder: (context, type, child) {
+        builder: (BuildContext context, TransactionType type, Widget? child) {
           return SegmentedButton<TransactionType>(
             showSelectedIcon: false,
             segments: [
@@ -32,7 +32,7 @@ class CategoryTransactionFilterWidget extends StatelessWidget {
               ),
             ],
             selected: <TransactionType>{type},
-            onSelectionChanged: (newSelection) {
+            onSelectionChanged: (Set<TransactionType> newSelection) {
               summaryController.typeNotifier.value = newSelection.first;
             },
           );

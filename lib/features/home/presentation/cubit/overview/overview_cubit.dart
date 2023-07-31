@@ -61,7 +61,7 @@ class OverviewCubit extends Cubit<BudgetState> {
     });
     final List<MapEntry<CategoryEntity, List<TransactionEntity>>> mapExpenses =
         categoryGroupedExpenses.entries.toList().sorted(
-            (a, b) => b.value.totalExpense.compareTo(a.value.totalExpense));
+            (MapEntry<CategoryEntity, List<TransactionEntity>> a, MapEntry<CategoryEntity, List<TransactionEntity>> b) => b.value.totalExpense.compareTo(a.value.totalExpense));
     emit(FilteredCategoryListState(
       mapExpenses,
       selectedTimeExpenses.total,

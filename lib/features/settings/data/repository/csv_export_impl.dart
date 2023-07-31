@@ -64,10 +64,10 @@ class CSVExport extends Export {
       ],
       ...List.generate(
         expenses.length,
-        (index) {
-          final expense = expenses[index];
-          final account = accountDataManager.findById(expense.accountId);
-          final category = categoryDataManager.findById(expense.categoryId);
+        (int index) {
+          final TransactionModel expense = expenses[index];
+          final AccountModel? account = accountDataManager.findById(expense.accountId);
+          final CategoryModel? category = categoryDataManager.findById(expense.categoryId);
           return expenseRow(
             index,
             expense: expense,

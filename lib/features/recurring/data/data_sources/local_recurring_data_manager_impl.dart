@@ -12,7 +12,7 @@ class LocalRecurringDataManagerImpl implements LocalRecurringDataManager {
 
   @override
   Future<void> addRecurringEvent(RecurringModel recurringModel) async {
-    final id = await recurringBox.add(recurringModel);
+    final int id = await recurringBox.add(recurringModel);
     recurringModel.superId = id;
     return recurringModel.save();
   }

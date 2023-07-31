@@ -14,8 +14,8 @@ class TransferCategoriesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<TransactionBloc>(context).add(FetchDefaultCategoryEvent());
     return BlocBuilder<TransactionBloc, TransactionState>(
-      buildWhen: (previous, current) => current is DefaultCategoriesState,
-      builder: (context, state) {
+      buildWhen: (TransactionState previous, TransactionState current) => current is DefaultCategoriesState,
+      builder: (BuildContext context, TransactionState state) {
         if (state is DefaultCategoriesState) {
           if (state.categories.isEmpty) {
             return ListTile(
@@ -67,9 +67,9 @@ class SelectDefaultCategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final expenseBloc = BlocProvider.of<TransactionBloc>(context);
+    final TransactionBloc expenseBloc = BlocProvider.of<TransactionBloc>(context);
     return BlocBuilder<TransactionBloc, TransactionState>(
-      builder: (context, state) {
+      builder: (BuildContext context, TransactionState state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Wrap(
@@ -77,11 +77,11 @@ class SelectDefaultCategoryWidget extends StatelessWidget {
             runSpacing: 12.0,
             children: List.generate(
               categories.length + 1,
-              (index) {
+              (int index) {
                 if (index == 0) {
                   return CategoryChip(
                     selected: false,
-                    onSelected: (p0) => context.pushNamed(addCategoryPath),
+                    onSelected: (bool p0) => context.pushNamed(addCategoryPath),
                     icon: MdiIcons.plus.codePoint,
                     title: context.loc.addNew,
                     iconColor: context.primary,
@@ -93,7 +93,7 @@ class SelectDefaultCategoryWidget extends StatelessWidget {
                       category.superId == expenseBloc.selectedCategoryId;
                   return CategoryChip(
                     selected: selected,
-                    onSelected: (value) =>
+                    onSelected: (bool value) =>
                         expenseBloc.add(ChangeCategoryEvent(category)),
                     icon: category.icon ?? 0,
                     title: category.name ?? '',

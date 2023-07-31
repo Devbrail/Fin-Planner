@@ -22,7 +22,7 @@ class VariableFABSize extends StatelessWidget {
           smallSizeFabKey,
         ],
       ),
-      builder: (context, value, child) {
+      builder: (BuildContext context, Box value, Widget? child) {
         final isSmallSize = value.get(smallSizeFabKey, defaultValue: false);
         if (isSmallSize) {
           return FloatingActionButton(

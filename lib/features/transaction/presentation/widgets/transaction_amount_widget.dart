@@ -27,20 +27,20 @@ class TransactionAmountWidget extends StatelessWidget {
         counterText: '',
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-          TextInputFormatter.withFunction((oldValue, newValue) {
+          TextInputFormatter.withFunction((TextEditingValue oldValue, TextEditingValue newValue) {
             try {
-              final text = newValue.text;
+              final String text = newValue.text;
               if (text.isNotEmpty) double.parse(text);
               return newValue;
             } catch (_) {}
             return oldValue;
           }),
         ],
-        onChanged: (value) {
+        onChanged: (String value) {
           double? amount = double.tryParse(value);
           BlocProvider.of<TransactionBloc>(context).transactionAmount = amount;
         },
-        validator: (value) {
+        validator: (String? value) {
           if (value!.isNotEmpty) {
             return null;
           } else {

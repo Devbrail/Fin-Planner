@@ -14,6 +14,6 @@ class GetCountriesUseCase implements UseCase<List<CountryModel>, void> {
   List<CountryModel> call({void params}) {
     return repository
         .fetchCountries()
-        .sorted((a, b) => a.name.compareTo(b.name));
+        .sorted((CountryModel a, CountryModel b) => a.name.compareTo(b.name));
   }
 }

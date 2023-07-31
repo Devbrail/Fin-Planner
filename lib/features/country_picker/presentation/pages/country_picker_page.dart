@@ -46,7 +46,7 @@ class _CountryPickerPageState extends State<CountryPickerPage> {
     return PaisaAnnotatedRegionWidget(
       color: context.background,
       child: BlocListener<CountryPickerCubit, CountryPickerState>(
-        listener: (context, state) {
+        listener: (BuildContext context, CountryPickerState state) {
           if (state is NavigateToLading) {
             context.goNamed(landingName);
           }
@@ -89,13 +89,13 @@ class _CountryPickerPageState extends State<CountryPickerPage> {
                     hintText: context.loc.search,
                     controller: TextEditingController(),
                     keyboardType: TextInputType.name,
-                    onChanged: (value) => countryCubit.filterCountry(value),
+                    onChanged: (String value) => countryCubit.filterCountry(value),
                   ),
                 ),
                 Expanded(
                   child: BlocBuilder<CountryPickerCubit, CountryPickerState>(
                     bloc: countryCubit,
-                    builder: (context, state) {
+                    builder: (BuildContext context, CountryPickerState state) {
                       if (state is CountriesState) {
                         return ScreenTypeLayout(
                           mobile: CountriesWidget(
@@ -171,12 +171,12 @@ class _CountriesWidgetState extends State<CountriesWidget> {
       ),
       shrinkWrap: true,
       itemCount: widget.countries.length,
-      itemBuilder: (context, index) {
+      itemBuilder: (BuildContext context, int index) {
         final CountryModel model = widget.countries[index];
         return CountryWidget(
           countryModel: model,
           selected: selectedModel == model,
-          onSelected: (countryModel) {
+          onSelected: (CountryModel countryModel) {
             setState(() {
               selectedModel = countryModel;
             });

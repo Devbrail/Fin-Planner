@@ -17,8 +17,8 @@ class CardTypeButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountBloc, AccountState>(
-      buildWhen: (previous, current) => current is UpdateCardTypeState,
-      builder: (context, state) {
+      buildWhen: (AccountState previous, AccountState current) => current is UpdateCardTypeState,
+      builder: (BuildContext context, AccountState state) {
         return Row(
           children: [
             PaisaPillChip(

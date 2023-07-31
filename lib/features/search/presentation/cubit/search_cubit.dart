@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paisa/features/home/domain/entity/combined_transaction_entity.dart';
 import 'package:paisa/features/search/domain/use_case/filter_expense_use_case.dart';
-import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 part 'search_state.dart';
 
@@ -17,13 +17,14 @@ class SearchCubit extends Cubit<SearchState> {
     if (query.isEmpty) {
       return emit(SearchQueryEmptyState());
     }
-    final List<TransactionEntity> expenses = searchUseCase(
+    final List<CombinedTransactionEntity> expenses =
+        []; /* searchUseCase(
       params: SearchParams(
         query: query,
         accounts: selectedAccountId,
         categories: selectedCategoryId,
       ),
-    );
+    ); */
     if (expenses.isEmpty) {
       return emit(SearchEmptyState());
     } else {

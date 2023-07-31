@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
-import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_month_card.dart';
-import 'package:paisa/features/transaction/domain/entities/transaction.dart';
+import 'package:paisa/features/home/domain/entity/combined_transaction_entity.dart';
+import 'package:paisa/features/home/presentation/pages/summary/widgets/transacitons_by_month_card_widget.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 
 class AccountHistoryWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class AccountHistoryWidget extends StatelessWidget {
     required this.summaryController,
   });
 
-  final List<TransactionEntity> expenses;
+  final List<CombinedTransactionEntity> expenses;
   final SummaryController summaryController;
 
   @override
@@ -28,19 +28,22 @@ class AccountHistoryWidget extends StatelessWidget {
     } else {
       return ValueListenableBuilder<FilterExpense>(
         valueListenable: summaryController.sortHomeExpenseNotifier,
-        builder: (_, value, __) {
-          final maps = groupBy(expenses,
-              (TransactionEntity element) => element.time!.formatted(value));
+        builder: (_, FilterExpense value, __) {
+          final Map<String, List<CombinedTransactionEntity>> maps = groupBy(
+              expenses,
+              (CombinedTransactionEntity element) =>
+                  element.time!.formatted(value));
           return ListView.separated(
-            separatorBuilder: (context, index) => const Divider(),
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: maps.entries.length,
-            itemBuilder: (_, mapIndex) => ExpenseMonthCardWidget(
+            itemBuilder: (_, int mapIndex) => TransactionsByMonthCard(
               title: maps.keys.elementAt(mapIndex),
-              total: maps.values.elementAt(mapIndex).filterTotal,
-              expenses: maps.values.elementAt(mapIndex),
+              total: 0.0, // maps.values.elementAt(mapIndex).filterTotal,
+              transactions: maps.values.elementAt(mapIndex),
             ),
           );
         },

@@ -22,8 +22,8 @@ class DebtToggleButtonsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: debtsBloc,
-      buildWhen: (previous, current) => current is DebtsTabState,
-      builder: (context, state) {
+      buildWhen: (Object? previous, Object? current) => current is DebtsTabState,
+      builder: (BuildContext context, Object? state) {
         return Row(
           children: [
             PaisaPillChip(

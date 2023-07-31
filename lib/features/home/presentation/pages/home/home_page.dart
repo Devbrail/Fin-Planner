@@ -14,7 +14,7 @@ import 'package:paisa/core/in_app.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-final destinations = [
+final List<Destination> destinations = [
   Destination(
     pageType: PageType.home,
     icon: const Icon(Icons.home_outlined),
@@ -79,11 +79,11 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
 
-    final actionButton =
+    final HomeFloatingActionButtonWidget actionButton =
         HomeFloatingActionButtonWidget(summaryController: getIt.get());
     return PaisaAnnotatedRegionWidget(
       child: BlocProvider(
-        create: (context) => homeBloc,
+        create: (BuildContext context) => homeBloc,
         child: WillPopScope(
           onWillPop: () async {
             if (homeBloc.selectedIndex == 0) {

@@ -22,8 +22,8 @@ class Ball {
         (.2 + .25 * Random().nextDouble());
     velocity = ForcePoint(vel(ratio: 0.25), vel());
 
-    var i = .1;
-    var h = 1.5;
+    double i = .1;
+    double h = 1.5;
 
     double calculatePosition(double fullSize) =>
         Random().nextDouble() * fullSize;

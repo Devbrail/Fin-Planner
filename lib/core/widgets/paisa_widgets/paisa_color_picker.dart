@@ -20,7 +20,7 @@ Future<int> paisaColorPicker(
       maxWidth:
           MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
     ),
-    builder: (context) => Padding(
+    builder: (BuildContext context) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -33,7 +33,7 @@ Future<int> paisaColorPicker(
             ),
           ),
           ColorPickerGridWidget(
-            onSelected: (color) => selectedColor = color,
+            onSelected: (int color) => selectedColor = color,
             selectedColor: selectedColor,
           ),
           Padding(
@@ -90,8 +90,8 @@ class _ColorPickerGridWidgetState extends State<ColorPickerGridWidget> {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: MediaQuery.of(context).size.width >= 700 ? 9 : 6,
       ),
-      itemBuilder: (_, index) {
-        final color = Colors.primaries[index].value;
+      itemBuilder: (_, int index) {
+        final int color = Colors.primaries[index].value;
         if (color == selectedColor) {
           return Stack(
             children: [

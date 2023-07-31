@@ -17,7 +17,7 @@ class RecurringPage extends StatelessWidget {
       child: Scaffold(
         body: ValueListenableBuilder<Box<RecurringModel>>(
           valueListenable: getIt.get<Box<RecurringModel>>().listenable(),
-          builder: (_, value, child) {
+          builder: (_, Box<RecurringModel> value, Widget? child) {
             final List<RecurringModel> recurringModels = value.values.toList();
             if (recurringModels.isEmpty) {
               return EmptyWidget(
@@ -50,7 +50,7 @@ class RecurringListWidget extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       itemCount: recurringModels.length,
-      itemBuilder: (context, index) {
+      itemBuilder: (BuildContext context, int index) {
         final RecurringModel expense = recurringModels[index];
         return ListTile(
           title: Text(expense.name),

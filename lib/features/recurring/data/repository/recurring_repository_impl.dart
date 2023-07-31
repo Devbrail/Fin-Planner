@@ -40,14 +40,14 @@ class RecurringRepositoryImpl implements RecurringRepository {
   @override
   Future<void> checkForRecurring() async {
     final List<RecurringModel> recurringModels = dataManager.recurringModels();
-    final now = DateTime.now();
+    final DateTime now = DateTime.now();
     for (final RecurringModel recurringModel in recurringModels) {
       if (recurringModel.recurringDate.isBefore(now)) {
-        final nextTime = recurringModel.recurringType.getTime;
+        final Duration nextTime = recurringModel.recurringType.getTime;
 
-        final numberOfTimes = recurringModel.recurringType
+        final int numberOfTimes = recurringModel.recurringType
             .differenceInNumber(now, recurringModel.recurringDate);
-        for (var i = 0; i < numberOfTimes; i++) {
+        for (int i = 0; i < numberOfTimes; i++) {
           final TransactionModel addExpenseModel = recurringModel
               .toExpenseModel(recurringModel.recurringDate.add(nextTime * i));
           await expenseDataManager.add(addExpenseModel);

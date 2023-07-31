@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:paisa/core/theme/custom_color.dart';
-import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_list_widget.dart';
-import 'package:paisa/features/transaction/domain/entities/transaction.dart';
+import 'package:paisa/features/home/domain/entity/combined_transaction_entity.dart';
+import 'package:paisa/features/home/presentation/pages/summary/widgets/transactions_list_widget.dart';
 
 import 'package:paisa/core/common.dart';
 
-class ExpenseMonthCardWidget extends StatelessWidget {
-  const ExpenseMonthCardWidget({
+class TransactionsByMonthCard extends StatelessWidget {
+  const TransactionsByMonthCard({
     Key? key,
     required this.title,
     required this.total,
-    required this.expenses,
+    required this.transactions,
   }) : super(key: key);
 
-  final List<TransactionEntity> expenses;
+  final List<CombinedTransactionEntity> transactions;
   final String title;
   final double total;
 
@@ -40,8 +40,8 @@ class ExpenseMonthCardWidget extends StatelessWidget {
             ),
           ),
         ),
-        ExpenseListWidget(
-          expenses: expenses,
+        TransactionsListWidget(
+          transactions: transactions,
         ),
       ],
     );

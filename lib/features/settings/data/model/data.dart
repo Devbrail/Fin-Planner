@@ -33,8 +33,8 @@ class Data {
       );
 
   Map<String, dynamic> toJson() => {
-        "expenses": List<dynamic>.from(expenses.map((x) => x.toJson())),
-        "accounts": List<dynamic>.from(accounts.map((x) => x.toJson())),
-        "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+        "expenses": List<dynamic>.from(expenses.map((TransactionModel x) => x.toJson())),
+        "accounts": List<dynamic>.from(accounts.map((AccountModel x) => x.toJson())),
+        "categories": List<dynamic>.from(categories.map((CategoryModel x) => x.toJson())),
       };
 }

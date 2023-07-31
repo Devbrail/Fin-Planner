@@ -9,7 +9,7 @@ import 'package:paisa/features/account/data/model/account_model.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/category/data/model/category_model.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
-import 'package:paisa/features/home/presentation/pages/summary/widgets/expense_list_widget.dart';
+import 'package:paisa/features/home/presentation/pages/summary/widgets/transactions_list_widget.dart';
 import 'package:paisa/features/search/presentation/cubit/search_cubit.dart';
 import 'package:paisa/main.dart';
 
@@ -44,7 +44,7 @@ class _SearchPageState extends State<SearchPage> {
                       hintText: context.loc.search,
                     ),
                     controller: textEditingController,
-                    onChanged: (value) {
+                    onChanged: (String value) {
                       searchCubitCubit.searchWithQuery(value);
                     },
                   ),
@@ -67,13 +67,14 @@ class _SearchPageState extends State<SearchPage> {
                           topRight: Radius.circular(16),
                         ),
                       ),
-                      builder: (context) {
+                      builder: (BuildContext context) {
                         return DraggableScrollableSheet(
                           initialChildSize: 0.4,
                           minChildSize: 0.2,
                           maxChildSize: 0.95,
                           expand: false,
-                          builder: (context, scrollController) {
+                          builder: (BuildContext context,
+                              ScrollController scrollController) {
                             return FilterWidget(
                               scrollController,
                               selectedAccount:
@@ -103,7 +104,7 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: BlocBuilder(
         bloc: searchCubitCubit,
-        builder: (context, state) {
+        builder: (BuildContext context, Object? state) {
           if (state is SearchResultState) {
             return SingleChildScrollView(
               child: Column(
@@ -118,7 +119,7 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                     ),
                   ),
-                  ExpenseListWidget(expenses: state.expenses),
+                  TransactionsListWidget(transactions: state.expenses),
                 ],
               ),
             );
@@ -202,21 +203,23 @@ class _FilterWidgetState extends State<FilterWidget> {
         ),
         ValueListenableBuilder<Box<AccountModel>>(
           valueListenable: getIt.get<Box<AccountModel>>().listenable(),
-          builder: (context, value, child) {
-            final accounts = value.values.toEntities();
+          builder:
+              (BuildContext context, Box<AccountModel> value, Widget? child) {
+            final List<AccountEntity> accounts = value.values.toEntities();
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Wrap(
                 spacing: 4.0,
                 runSpacing: 8.0,
-                children: List.generate(accounts.length, (index) {
+                children: List.generate(accounts.length, (int index) {
                   final AccountEntity account = accounts[index];
-                  final isSelected = selectedAccount.contains(account.superId);
+                  final bool isSelected =
+                      selectedAccount.contains(account.superId);
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: FilterChip(
                       selected: isSelected,
-                      onSelected: (value) {
+                      onSelected: (bool value) {
                         setState(() {
                           if (isSelected) {
                             selectedAccount.remove(account.superId);
@@ -273,7 +276,8 @@ class _FilterWidgetState extends State<FilterWidget> {
         ),
         ValueListenableBuilder<Box<CategoryModel>>(
           valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
-          builder: (context, value, child) {
+          builder:
+              (BuildContext context, Box<CategoryModel> value, Widget? child) {
             final List<CategoryEntity> categories = value.values.toEntities();
 
             return Padding(
@@ -281,7 +285,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               child: Wrap(
                 spacing: 4.0,
                 runSpacing: 8.0,
-                children: List.generate(categories.length, (index) {
+                children: List.generate(categories.length, (int index) {
                   final CategoryEntity categoryEntity = categories[index];
                   final bool isSelected =
                       selectedCategory.contains(categoryEntity.superId);
@@ -289,7 +293,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                     padding: const EdgeInsets.only(right: 8),
                     child: FilterChip(
                       selected: isSelected,
-                      onSelected: (value) {
+                      onSelected: (bool value) {
                         setState(() {
                           if (isSelected) {
                             selectedCategory.remove(categoryEntity.superId);

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/account/presentation/bloc/accounts_bloc.dart';
-import 'package:paisa/features/account/presentation/widgets/account_summary_widget.dart';
 import 'package:paisa/features/account/presentation/widgets/account_transaction_widget.dart';
 import 'package:paisa/features/account/presentation/widgets/accounts_page_view_widget.dart';
 
@@ -18,16 +17,17 @@ class AccountsHorizontalTabletPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: <Widget>[
               AccountPageViewWidget(accounts: accounts),
               BlocBuilder<AccountBloc, AccountState>(
-                builder: (context, state) {
+                builder: (BuildContext context, AccountState state) {
                   if (state is AccountSelectedState) {
-                    return AccountSummaryWidget(expenses: state.expenses);
+                    return const SizedBox
+                        .shrink(); // return AccountSummaryWidget(transactions: state.expenses);
                   } else {
                     return const SizedBox.shrink();
                   }

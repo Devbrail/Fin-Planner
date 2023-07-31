@@ -20,14 +20,14 @@ class FixExpenseWidget extends StatelessWidget {
       subtitle: const Text(
           'Add one or more transfer category & click this. Restart once completed'),
       trailing: BlocConsumer<SettingCubit, SettingsState>(
-        listener: (context, state) {
+        listener: (BuildContext context, SettingsState state) {
           if (state is FixExpenseError) {
             context.showMaterialSnackBar('Add transfer category');
           } else if (state is FixExpenseDone) {
             context.showMaterialSnackBar('Add transfer category');
           }
         },
-        builder: (context, state) {
+        builder: (BuildContext context, SettingsState state) {
           if (state is FixExpenseLoading) {
             return const SizedBox(
               width: 16,

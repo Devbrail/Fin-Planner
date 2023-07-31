@@ -49,7 +49,7 @@ class LocalAccountManagerImpl implements LocalAccountManager {
   @override
   AccountModel? findById(int? accountId) {
     return accountBox.values
-        .firstWhereOrNull((element) => element.superId == accountId);
+        .firstWhereOrNull((AccountModel element) => element.superId == accountId);
   }
 
   @override

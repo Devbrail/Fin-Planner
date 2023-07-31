@@ -21,7 +21,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<FilterExpense>(
       valueListenable: summaryController.filterExpenseNotifier,
-      builder: (_, value, child) {
+      builder: (_, FilterExpense value, Widget? child) {
         summaryController.settingsUseCase.put(selectedFilterExpenseKey, value);
 
         return SafeArea(

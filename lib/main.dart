@@ -6,7 +6,7 @@ import 'package:paisa/features/recurring/domain/repository/recurring_repository.
 import 'package:paisa/app.dart';
 import 'package:paisa/di/di.dart';
 
-final getIt = GetIt.instance;
+final GetIt getIt = GetIt.instance;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

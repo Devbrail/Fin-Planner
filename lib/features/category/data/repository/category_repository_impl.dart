@@ -70,4 +70,9 @@ class CategoryRepositoryImpl extends CategoryRepository {
       superId: key,
     ));
   }
+
+  @override
+  List<CategoryModel> categories() {
+    return dataSources.categories();
+  }
 }

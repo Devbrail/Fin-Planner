@@ -8,13 +8,13 @@ class AppLanguageChanger extends StatelessWidget {
   const AppLanguageChanger({super.key});
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
+    return ValueListenableBuilder<Box<dynamic>>(
       valueListenable: Provider.of<Box<dynamic>>(context).listenable(
         keys: [
           appLanguageKey,
         ],
       ),
-      builder: (context, value, child) {
+      builder: (BuildContext context, Box<dynamic> value, Widget? child) {
         final String code = value.get(appLanguageKey, defaultValue: 'en');
         return ListTile(
           leading: Icon(
@@ -37,16 +37,17 @@ class AppLanguageChanger extends StatelessWidget {
                   topRight: Radius.circular(16),
                 ),
               ),
-              builder: (context) {
+              builder: (BuildContext context) {
                 return DraggableScrollableSheet(
                   initialChildSize: 0.5,
                   maxChildSize: 1,
                   expand: false,
-                  builder: (context, scrollController) {
+                  builder: (BuildContext context,
+                      ScrollController scrollController) {
                     return SafeArea(
                       child: ListView(
                         shrinkWrap: true,
-                        children: [
+                        children: <Widget>[
                           ListTile(
                             title: Text(
                               context.loc.chooseAppLanguage,
@@ -57,13 +58,14 @@ class AppLanguageChanger extends StatelessWidget {
                             controller: scrollController,
                             shrinkWrap: true,
                             itemCount: Languages.languages.length,
-                            itemBuilder: (context, index) {
+                            itemBuilder: (BuildContext context, int index) {
                               final LanguageEntity entity =
                                   Languages.languages[index];
                               return ListTile(
                                 onTap: () => value
                                     .put(appLanguageKey, entity.code)
-                                    .then((value) => Navigator.pop(context)),
+                                    .then(
+                                        (void value) => Navigator.pop(context)),
                                 title: Text(entity.value),
                               );
                             },
@@ -78,7 +80,7 @@ class AppLanguageChanger extends StatelessWidget {
           },
           title: const Text('App language'),
           subtitle: Text(Languages.languages
-              .firstWhere((element) => element.code == code)
+              .firstWhere((LanguageEntity element) => element.code == code)
               .value),
         );
       },
@@ -99,7 +101,7 @@ class LanguageEntity {
 class Languages {
   const Languages._();
 
-  static const languages = [
+  static const List<LanguageEntity> languages = <LanguageEntity>[
     LanguageEntity(code: 'en', value: 'English'),
     LanguageEntity(code: 'be', value: 'Belarusian'),
     LanguageEntity(code: 'de', value: 'German'),

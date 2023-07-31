@@ -35,7 +35,7 @@ class ChooseThemeModeWidgetState extends State<ChooseThemeModeWidget> {
           ),
           ...ThemeMode.values
               .map(
-                (e) => RadioListTile(
+                (ThemeMode e) => RadioListTile(
                   value: e,
                   activeColor: context.primary,
                   groupValue: currentIndex,

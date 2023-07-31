@@ -30,7 +30,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
     required this.accountsUseCase,
     required this.getDefaultCategoriesUseCase,
   }) : super(ExpenseInitial()) {
-    on<ExpenseEvent>((event, emit) {});
+    on<ExpenseEvent>((ExpenseEvent event, Emitter<TransactionState> emit) {});
     on<AddOrUpdateExpenseEvent>(_addExpense);
     on<ClearExpenseEvent>(_deleteExpense);
     on<ChangeTransactionTypeEvent>(_changeExpense);

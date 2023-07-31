@@ -34,7 +34,7 @@ class _VersionWidgetState extends State<VersionWidget> {
         title: context.loc.version,
       );
     }
-    final version = packageInfo?.version ?? '';
+    final String version = packageInfo?.version ?? '';
     return SettingsOption(
       icon: MdiIcons.numeric,
       title: context.loc.version,

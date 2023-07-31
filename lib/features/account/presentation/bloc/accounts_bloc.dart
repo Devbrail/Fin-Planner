@@ -1,13 +1,19 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/enum/card_type.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/account/domain/use_case/account_use_case.dart';
+import 'package:paisa/features/category/domain/entities/category.dart';
+import 'package:paisa/features/category/domain/use_case/get_categories_use_case.dart';
 import 'package:paisa/features/category/domain/use_case/get_category_use_case.dart';
+import 'package:paisa/features/home/domain/entity/combined_request.dart';
+import 'package:paisa/features/home/domain/entity/combined_transaction_entity.dart';
+import 'package:paisa/features/home/presentation/cubit/combined_transaction/combined_transaction_cubit.dart';
 import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 import 'package:paisa/features/transaction/domain/use_case/transaction_use_case.dart';
 
@@ -16,16 +22,17 @@ part 'accounts_state.dart';
 
 @injectable
 class AccountBloc extends Bloc<AccountsEvent, AccountState> {
-  AccountBloc({
-    required this.getAccountUseCase,
-    required this.deleteAccountUseCase,
-    required this.getTransactionsByAccountIdUseCase,
-    required this.addAccountUseCase,
-    required this.getCategoryUseCase,
-    required this.deleteExpensesFromAccountIdUseCase,
-    required this.updateAccountUseCase,
-  }) : super(AccountsInitial()) {
-    on<AccountsEvent>((event, emit) {});
+  AccountBloc(
+    this.getCategoriesUseCase,
+    this.getAccountUseCase,
+    this.deleteAccountUseCase,
+    this.getTransactionsByAccountIdUseCase,
+    this.addAccountUseCase,
+    this.getCategoryUseCase,
+    this.deleteExpensesFromAccountIdUseCase,
+    this.updateAccountUseCase,
+  ) : super(AccountsInitial()) {
+    on<AccountsEvent>((AccountsEvent event, Emitter<AccountState> emit) {});
     on<AddOrUpdateAccountEvent>(_addAccount);
     on<DeleteAccountEvent>(_deleteAccount);
     on<AccountSelectedEvent>(_accountSelected);
@@ -45,6 +52,7 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
   final DeleteTransactionsByAccountIdUseCase deleteExpensesFromAccountIdUseCase;
   final GetAccountUseCase getAccountUseCase;
   final GetCategoryUseCase getCategoryUseCase;
+  final GetCategoriesUseCase getCategoriesUseCase;
   final GetTransactionsByAccountIdUseCase getTransactionsByAccountIdUseCase;
   double? initialAmount;
   int? selectedColor;
@@ -137,10 +145,21 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
     AccountSelectedEvent event,
     Emitter<AccountState> emit,
   ) async {
-    final List<TransactionEntity> expenses = getTransactionsByAccountIdUseCase(
+    final List<TransactionEntity> transactions =
+        getTransactionsByAccountIdUseCase(
       params: GetTransactionsByAccountIdParams(event.account.superId!),
     );
-    emit(AccountSelectedState(event.account, expenses));
+    final List<AccountEntity> accounts = [event.account];
+    final List<CategoryEntity> categories = getCategoriesUseCase();
+    final List<CombinedTransactionEntity> result = await compute(
+      combineList,
+      CombineRequest(
+        accounts,
+        categories,
+        transactions,
+      ),
+    );
+    emit(AccountSelectedState(event.account, result));
   }
 
   FutureOr<void> _updateCardType(
@@ -180,11 +199,23 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
     final AccountEntity? account = getAccountUseCase(
       params: GetAccountParams(accountId),
     );
-    final List<TransactionEntity> expenses = getTransactionsByAccountIdUseCase(
-      params: GetTransactionsByAccountIdParams(accountId),
-    );
+
     if (account != null) {
-      emit(AccountAndExpensesState(account, expenses));
+      final List<TransactionEntity> transactions =
+          getTransactionsByAccountIdUseCase(
+        params: GetTransactionsByAccountIdParams(accountId),
+      );
+      final List<AccountEntity> accounts = [account];
+      final List<CategoryEntity> categories = getCategoriesUseCase();
+      final List<CombinedTransactionEntity> result = await compute(
+        combineList,
+        CombineRequest(
+          accounts,
+          categories,
+          transactions,
+        ),
+      );
+      emit(AccountAndCombinedTransactionsState(account, result));
     }
   }
 }

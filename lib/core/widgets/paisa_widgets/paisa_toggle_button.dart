@@ -20,8 +20,8 @@ class PaisaToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = isSelected ? context.primary : null;
-    final color = isSelected ? context.primaryContainer : null;
+    final Color? textColor = isSelected ? context.primary : null;
+    final Color? color = isSelected ? context.primaryContainer : null;
     final BorderRadius borderRadius = itemIndex == ItemIndex.first
         ? const BorderRadius.only(
             topLeft: Radius.circular(8),

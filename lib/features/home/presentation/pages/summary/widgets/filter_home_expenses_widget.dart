@@ -21,7 +21,7 @@ class FilterHomeExpensesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<FilterExpense>(
       valueListenable: summaryController.sortHomeExpenseNotifier,
-      builder: (_, value, child) {
+      builder: (_, FilterExpense value, Widget? child) {
         summaryController.settingsUseCase
             .put(selectedHomeFilterExpenseKey, value);
         return SafeArea(

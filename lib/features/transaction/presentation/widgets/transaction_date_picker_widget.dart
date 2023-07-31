@@ -23,7 +23,7 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TransactionBloc, TransactionState>(
-      builder: (context, state) {
+      builder: (BuildContext context, TransactionState state) {
         return Row(
           children: [
             Expanded(

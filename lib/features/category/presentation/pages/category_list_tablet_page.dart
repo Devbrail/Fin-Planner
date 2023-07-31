@@ -34,7 +34,7 @@ class CategoryListTabletWidget extends StatelessWidget {
       ),
       itemCount: categories.length,
       shrinkWrap: true,
-      itemBuilder: (_, index) {
+      itemBuilder: (_, int index) {
         return CategoryItemTabletWidget(
           category: categories[index],
           onPressed: () => paisaAlertDialog(

@@ -16,7 +16,7 @@ class FutureResolve<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: future,
-      builder: (context, snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
         if (snapshot.hasData && snapshot.data != null) {
           return builder.call(snapshot.data as T);
         } else {

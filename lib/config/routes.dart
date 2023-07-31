@@ -14,6 +14,7 @@ import 'package:paisa/features/category/presentation/pages/selector/category_sel
 import 'package:paisa/features/country_picker/presentation/cubit/country_picker_cubit.dart';
 import 'package:paisa/features/country_picker/presentation/pages/country_picker_page.dart';
 import 'package:paisa/features/debit/presentation/pages/add/add_debit_page.dart';
+import 'package:paisa/features/home/presentation/cubit/combined_transaction/combined_transaction_cubit.dart';
 import 'package:paisa/features/home/presentation/pages/home/home_page.dart';
 import 'package:paisa/features/home/presentation/pages/overview/transactions_by_category_list_page.dart';
 import 'package:paisa/features/intro/presentation/pages/biometric_page.dart';
@@ -225,7 +226,7 @@ final GoRouter goRouter = GoRouter(
           builder: (BuildContext context, GoRouterState state) {
             return TransactionByCategoryListPage(
               categoryId: state.pathParameters['cid'] as String,
-              summaryController: Provider.of<SummaryController>(context),
+              combinedTransactionCubit: getIt.get<CombinedTransactionCubit>(),
             );
           },
         ),

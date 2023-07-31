@@ -40,7 +40,7 @@ NavigationBarThemeData navigationBarThemeData(
   return NavigationBarThemeData(
     backgroundColor: colorScheme.surface,
     labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-    labelTextStyle: MaterialStateProperty.resolveWith((states) {
+    labelTextStyle: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
         return textTheme?.bodyLarge?.copyWith(
           fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ NavigationDrawerThemeData navigationDrawerThemeData(
 ) {
   return NavigationDrawerThemeData(
     backgroundColor: colorScheme.surface,
-    labelTextStyle: MaterialStateProperty.resolveWith((states) {
+    labelTextStyle: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
         return textTheme?.bodyLarge?.copyWith(
           fontWeight: FontWeight.bold,
@@ -135,7 +135,7 @@ extension ColorExtension on Color {
   /// Convert the color to a darken color based on the [percent]
   Color darken([int percent = 40]) {
     assert(1 <= percent && percent <= 100);
-    final value = 1 - percent / 100;
+    final double value = 1 - percent / 100;
     return Color.fromARGB(alpha, (red * value).round(), (green * value).round(),
         (blue * value).round());
   }

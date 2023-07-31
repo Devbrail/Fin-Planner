@@ -37,7 +37,7 @@ class HomeTabletWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) {
+            builder: (BuildContext context, HomeState state) {
               return NavigationRail(
                 elevation: 1,
                 selectedLabelTextStyle: context.bodyLarge?.copyWith(
@@ -47,7 +47,7 @@ class HomeTabletWidget extends StatelessWidget {
                 labelType: NavigationRailLabelType.all,
                 backgroundColor: context.surface,
                 selectedIndex: homeBloc.selectedIndex,
-                onDestinationSelected: (index) =>
+                onDestinationSelected: (int index) =>
                     homeBloc.add(CurrentIndexEvent(index)),
                 minWidth: 55,
                 useIndicator: true,
@@ -66,7 +66,7 @@ class HomeTabletWidget extends StatelessWidget {
                   ),
                 ),
                 destinations: destinations
-                    .map((e) => NavigationRailDestination(
+                    .map((Destination e) => NavigationRailDestination(
                           icon: e.icon,
                           selectedIcon: e.selectedIcon,
                           label: Text(e.pageType.name(context)),

@@ -25,10 +25,10 @@ class OverviewMobile extends StatelessWidget {
         CategoryTransactionFilterWidget(summaryController: summaryController),
         BlocBuilder(
           bloc: budgetCubit,
-          buildWhen: (previous, current) =>
+          buildWhen: (Object? previous, Object? current) =>
               current is InitialSelectedState ||
               current is EmptyFilterListState,
-          builder: (context, state) {
+          builder: (BuildContext context, Object? state) {
             if (state is InitialSelectedState) {
               return SizedBox(
                 height: 70,
@@ -43,8 +43,8 @@ class OverviewMobile extends StatelessWidget {
                         padding: const EdgeInsets.all(16),
                         scrollDirection: Axis.horizontal,
                         itemCount: state.filerTimes.length,
-                        itemBuilder: (context, index) {
-                          final item = state.filerTimes[index];
+                        itemBuilder: (BuildContext context, int index) {
+                          final String item = state.filerTimes[index];
                           return PaisaPillChip(
                             title: item,
                             onPressed: () {

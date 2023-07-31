@@ -40,8 +40,8 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   Future<String> _saveImageFileToCache(XFile xFile) async {
     final Directory directory = await getTemporaryDirectory();
-    final cachePath = '${directory.path}/profile_picture.jpg';
-    final imageFile = File(xFile.path);
+    final String cachePath = '${directory.path}/profile_picture.jpg';
+    final File imageFile = File(xFile.path);
     await imageFile.copy(cachePath);
     return cachePath;
   }

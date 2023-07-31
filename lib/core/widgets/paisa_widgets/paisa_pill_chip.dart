@@ -17,9 +17,9 @@ class PaisaPillChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = context.primaryContainer;
-    final textColor = context.primary;
-    final borderColor = isSelected ? context.primary : null;
+    final Color bgColor = context.primaryContainer;
+    final Color textColor = context.primary;
+    final Color? borderColor = isSelected ? context.primary : null;
 
     return Row(
       children: [

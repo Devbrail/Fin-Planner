@@ -84,22 +84,22 @@ class JSONImportImpl implements Import {
         throw FileNotFoundException();
       }
 
-      final jsonString = await _readJSONFromFile(result.files.first.path!);
+      final String jsonString = await _readJSONFromFile(result.files.first.path!);
       final Data data = Data.fromRawJson(jsonString);
 
       await expenseDataManager.clear();
       await categoryDataManager.clear();
       await accountDataManager.clear();
 
-      for (var element in data.accounts) {
+      for (AccountModel element in data.accounts) {
         await accountDataManager.update(element);
       }
 
-      for (var element in data.categories) {
+      for (CategoryModel element in data.categories) {
         await categoryDataManager.update(element);
       }
 
-      for (var element in data.expenses) {
+      for (TransactionModel element in data.expenses) {
         await expenseDataManager.update(element);
       }
 

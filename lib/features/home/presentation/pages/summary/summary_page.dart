@@ -1,30 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/core/common.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:paisa/features/home/domain/entity/combined_transaction_entity.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+import 'package:paisa/features/home/presentation/cubit/combined_transaction/combined_transaction_cubit.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/summary_desktop_widget.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/summary_mobile_widget.dart';
 import 'package:paisa/features/home/presentation/pages/summary/widgets/summary_tablet_widget.dart';
-import 'package:paisa/features/transaction/data/model/transaction_model.dart';
-import 'package:paisa/main.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
-class SummaryPage extends StatelessWidget {
+class SummaryPage extends StatefulWidget {
   const SummaryPage({
     Key? key,
+    required this.cubit,
   }) : super(key: key);
+  final CombinedTransactionCubit cubit;
+
+  @override
+  State<SummaryPage> createState() => _SummaryPageState();
+}
+
+class _SummaryPageState extends State<SummaryPage>
+    with AutomaticKeepAliveClientMixin {
+  final List<CombinedTransactionEntity> transactions = [];
+  @override
+  void initState() {
+    super.initState();
+    widget.cubit.fetchTransactions();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Box<TransactionModel>>(
-      valueListenable: getIt.get<Box<TransactionModel>>().listenable(),
-      builder: (_, value, child) {
-        final expenses = value.values.toEntities();
+    super.build(context);
+    return BlocBuilder(
+      bloc: widget.cubit,
+      builder: (BuildContext context, CombinedTransactionState state) {
+        if (state is CombinedResultState) {
+          transactions.addAll(state.result);
+        }
         return ScreenTypeLayout(
-          mobile: SummaryMobileWidget(expenses: expenses),
-          tablet: SummaryTabletWidget(expenses: expenses),
-          desktop: SummaryDesktopWidget(expenses: expenses),
+          mobile: SummaryMobileWidget(transactions: transactions),
+          tablet: SummaryTabletWidget(expenses: transactions),
+          desktop: SummaryDesktopWidget(transactions: transactions),
         );
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

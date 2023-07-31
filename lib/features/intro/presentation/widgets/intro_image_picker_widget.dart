@@ -16,7 +16,7 @@ class IntroImagePickerWidget extends StatelessWidget {
 
   void _pickImage(BuildContext context) {
     final ImagePicker picker = ImagePicker();
-    picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
+    picker.pickImage(source: ImageSource.gallery).then((XFile? pickedFile) {
       if (pickedFile != null) {
         Provider.of<Box<dynamic>>(context).put(userImageKey, pickedFile.path);
       }
@@ -26,7 +26,7 @@ class IntroImagePickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt.get<ProfileCubit>(),
+      create: (BuildContext context) => getIt.get<ProfileCubit>(),
       child: SafeArea(
         child: FractionallySizedBox(
           widthFactor: 0.8,

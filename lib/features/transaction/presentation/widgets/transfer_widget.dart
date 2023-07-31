@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paisa/core/common.dart';
+import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/transaction/presentation/bloc/transaction_bloc.dart';
 
 import 'pill_accounts_widget.dart';
@@ -48,7 +49,7 @@ class TransferWidget extends StatelessWidget {
           ),
         ),
         PillsAccountWidget(
-          accountSelected: (account) {
+          accountSelected: (AccountEntity account) {
             BlocProvider.of<TransactionBloc>(context).fromAccount = account;
           },
         ),
@@ -62,7 +63,7 @@ class TransferWidget extends StatelessWidget {
           ),
         ),
         PillsAccountWidget(
-          accountSelected: (account) {
+          accountSelected: (AccountEntity account) {
             BlocProvider.of<TransactionBloc>(context).toAccount = account;
           },
         ),

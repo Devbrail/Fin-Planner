@@ -28,7 +28,7 @@ class Lava {
   late List<Ball> balls;
   int ballsLength;
   double iter = 0;
-  final ix = [1, 0, -1, 0, 0, 1, 0, -1, -1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1];
+  final List<int> ix = [1, 0, -1, 0, 0, 1, 0, -1, -1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1];
   late Map<int, Map<int, ForcePoint>> matrix;
   final List<int> mscases = [0, 3, 0, 3, 1, 3, 0, 3, 2, 2, 0, 2, 1, 1, 0];
   bool paint = false;
@@ -61,7 +61,7 @@ class Lava {
       }
     }
     balls = List.filled(ballsLength, Ball(const Size(0, 0)));
-    for (var index = 0; ballsLength > index; index++) {
+    for (int index = 0; ballsLength > index; index++) {
       balls[index] = Ball(size);
     }
   }
@@ -73,7 +73,7 @@ class Lava {
     } else {
       force = 0;
       final ForcePoint? point = matrix[sx]![sy];
-      for (final ball in balls) {
+      for (final Ball ball in balls) {
         force += ball.size *
             ball.size /
             (-2 * point!.x * ball.pos.x -
@@ -98,9 +98,9 @@ class Lava {
     int dir;
 
     int mscase = 0;
-    for (var a = 0; 4 > a; a++) {
-      final dx = ix[a + 12];
-      final dy = ix[a + 16];
+    for (int a = 0; 4 > a; a++) {
+      final int dx = ix[a + 12];
+      final int dy = ix[a + 16];
       double force = matrix[sx + dx]![sy + dy]!.force;
       if (force > 0 && sign < 0 || force < 0 && sign > 0 || force == 0) {
         force = computeForce(sx + dx, sy + dy);
@@ -119,23 +119,23 @@ class Lava {
       matrix[sx]![sy]!.computed = iter;
     }
 
-    final dx1 = plx[4 * dir + 2];
-    final dy1 = ply[4 * dir + 2];
-    final pForce1 = matrix[sx + dx1]![sy + dy1]!.force;
+    final int dx1 = plx[4 * dir + 2];
+    final int dy1 = ply[4 * dir + 2];
+    final double pForce1 = matrix[sx + dx1]![sy + dy1]!.force;
 
-    final dx2 = plx[4 * dir + 3];
-    final dy2 = ply[4 * dir + 3];
-    final pForce2 = matrix[sx + dx2]![sy + dy2]!.force;
-    final p =
+    final int dx2 = plx[4 * dir + 3];
+    final int dy2 = ply[4 * dir + 3];
+    final double pForce2 = matrix[sx + dx2]![sy + dy2]!.force;
+    final double p =
         step / ((pForce1.abs() - 1).abs() / (pForce2.abs() - 1).abs() + 1.0);
 
-    final dxX = plx[4 * dir];
-    final dyX = ply[4 * dir];
-    final dxY = plx[4 * dir + 1];
-    final dyY = ply[4 * dir + 1];
+    final int dxX = plx[4 * dir];
+    final int dyX = ply[4 * dir];
+    final int dxY = plx[4 * dir + 1];
+    final int dyY = ply[4 * dir + 1];
 
-    final lineX = matrix[sx + dxX]![sy + dyX]!.x + ix[dir] * p;
-    final lineY = matrix[sx + dxY]![sy + dyY]!.y + ix[dir + 4] * p;
+    final double lineX = matrix[sx + dxX]![sy + dyX]!.x + ix[dir] * p;
+    final double lineY = matrix[sx + dxY]![sy + dyY]!.y + ix[dir + 4] * p;
 
     if (paint == false) {
       path.moveTo(lineX, lineY);
@@ -179,14 +179,14 @@ class Lava {
     } catch (_) {}
 
     if (debug) {
-      for (final ball in balls) {
+      for (final Ball ball in balls) {
         canvas.drawCircle(Offset(ball.pos.x.toDouble(), ball.pos.y.toDouble()),
             ball.size, Paint()..color = Colors.black.withOpacity(0.5));
       }
 
       matrix.forEach(
-        (_, item) => item.forEach(
-          (_, point) => canvas.drawCircle(
+        (_, Map<int, ForcePoint> item) => item.forEach(
+          (_, ForcePoint point) => canvas.drawCircle(
             Offset(point.x.toDouble(), point.y.toDouble()),
             max(1, min(point.force.abs(), 5)),
             Paint()..color = point.force > 0 ? Colors.blue : Colors.red,

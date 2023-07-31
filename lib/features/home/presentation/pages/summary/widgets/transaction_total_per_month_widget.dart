@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/theme/custom_color.dart';
 
-class ExpenseTotalForMonthWidget extends StatelessWidget {
-  const ExpenseTotalForMonthWidget({
+class TransactionsPerMonthTotalWidget extends StatelessWidget {
+  const TransactionsPerMonthTotalWidget({
     Key? key,
     required this.income,
     required this.outcome,

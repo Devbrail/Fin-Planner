@@ -5,26 +5,27 @@ import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
 import 'package:paisa/features/account/domain/entities/account.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
+import 'package:paisa/features/home/domain/entity/combined_transaction_entity.dart';
 import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
-class ExpenseItemWidget extends StatelessWidget {
-  const ExpenseItemWidget({
+class TransactionWidget extends StatelessWidget {
+  const TransactionWidget({
     Key? key,
     required this.expense,
     required this.account,
     required this.category,
   }) : super(key: key);
 
-  final AccountEntity account;
-  final CategoryEntity category;
-  final TransactionEntity expense;
+  final AccountEntity? account;
+  final CategoryEntity? category;
+  final CombinedTransactionEntity expense;
 
   String getSubtitle(BuildContext context) {
     if (expense.type == TransactionType.transfer) {
       return expense.time!.shortDayString;
     } else {
       return context.loc.transactionSubTittleText(
-        account.bankName ?? '',
+        account?.bankName ?? '',
         expense.time!.shortDayString,
       );
     }
@@ -55,14 +56,14 @@ class ExpenseItemWidget extends StatelessWidget {
         ),
         leading: CircleAvatar(
           backgroundColor:
-              Color(category.color ?? context.surface.value).withOpacity(0.2),
+              Color(category?.color ?? context.surface.value).withOpacity(0.2),
           child: Icon(
             IconData(
-              category.icon ?? 0,
+              category?.icon ?? MdiIcons.wallet.codePoint,
               fontFamily: fontFamilyName,
               fontPackage: fontFamilyPackageName,
             ),
-            color: Color(category.color ?? context.surface.value),
+            color: Color(category?.color ?? context.surface.value),
           ),
         ),
         trailing: Text(

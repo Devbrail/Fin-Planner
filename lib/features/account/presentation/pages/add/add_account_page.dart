@@ -26,10 +26,10 @@ class AddAccountPage extends StatefulWidget {
 }
 
 class AddAccountPageState extends State<AddAccountPage> {
-  final accountHolderController = TextEditingController();
-  final accountInitialAmountController = TextEditingController();
-  final accountNameController = TextEditingController();
-  final accountNumberController = TextEditingController();
+  final TextEditingController accountHolderController = TextEditingController();
+  final TextEditingController accountInitialAmountController = TextEditingController();
+  final TextEditingController accountNameController = TextEditingController();
+  final TextEditingController accountNumberController = TextEditingController();
   final AccountBloc accountsBloc = getIt.get();
   late final bool isAccountAddOrUpdate = widget.accountId == null;
 
@@ -56,7 +56,7 @@ class AddAccountPageState extends State<AddAccountPage> {
           ),
         ),
         context: context,
-        builder: (context) {
+        builder: (BuildContext context) {
           return SafeArea(
             maintainBottomViewPadding: true,
             child: Column(
@@ -104,9 +104,9 @@ class AddAccountPageState extends State<AddAccountPage> {
     return PaisaAnnotatedRegionWidget(
       color: context.background,
       child: BlocProvider(
-        create: (context) => accountsBloc,
+        create: (BuildContext context) => accountsBloc,
         child: BlocConsumer<AccountBloc, AccountState>(
-          listener: (context, state) {
+          listener: (BuildContext context, AccountState state) {
             if (state is AccountAddedState) {
               context.showMaterialSnackBar(
                 isAccountAddOrUpdate
@@ -150,7 +150,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                       offset: state.account.amount.toString().length);
             }
           },
-          builder: (context, state) {
+          builder: (BuildContext context, AccountState state) {
             return ScreenTypeLayout(
               mobile: Scaffold(
                 appBar: context.materialYouAppBar(
@@ -196,7 +196,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                               ),
                               const SizedBox(height: 16),
                               Builder(
-                                builder: (context) {
+                                builder: (BuildContext context) {
                                   if (state is UpdateCardTypeState &&
                                       state.cardType == CardType.bank) {
                                     return AccountNumberWidget(
@@ -225,7 +225,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                     padding: const EdgeInsets.all(16.0),
                     child: PaisaBigButton(
                       onPressed: () {
-                        final isValid = _form.currentState!.validate();
+                        final bool isValid = _form.currentState!.validate();
                         if (!isValid) {
                           return;
                         }
@@ -252,7 +252,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                     DeleteAccountWidget(accountId: widget.accountId),
                     PaisaButton(
                       onPressed: () {
-                        final isValid = _form.currentState!.validate();
+                        final bool isValid = _form.currentState!.validate();
                         if (!isValid) {
                           return;
                         }
@@ -294,7 +294,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 ),
                                 const SizedBox(height: 16),
                                 Builder(
-                                  builder: (context) {
+                                  builder: (BuildContext context) {
                                     if (state is UpdateCardTypeState &&
                                         state.cardType == CardType.bank) {
                                       return AccountNumberWidget(
@@ -335,12 +335,12 @@ class AccountColorPickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountBloc, AccountState>(
-      builder: (context, state) {
+      builder: (BuildContext context, AccountState state) {
         return ListTile(
           contentPadding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           onTap: () async {
-            final color = await paisaColorPicker(
+            final int color = await paisaColorPicker(
               context,
               defaultColor:
                   BlocProvider.of<AccountBloc>(context).selectedColor ??
@@ -443,7 +443,7 @@ class AccountCardHolderNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(
-      builder: (context) {
+      builder: (BuildContext context) {
         return PaisaTextFormField(
           controller: controller,
           hintText: context.loc.enterCardHolderName,
@@ -451,7 +451,7 @@ class AccountCardHolderNameWidget extends StatelessWidget {
           inputFormatters: [
             FilteringTextInputFormatter.singleLineFormatter,
           ],
-          onChanged: (value) =>
+          onChanged: (String value) =>
               BlocProvider.of<AccountBloc>(context).accountHolderName = value,
         );
       },
@@ -470,7 +470,7 @@ class AccountNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(
-      builder: (context) {
+      builder: (BuildContext context) {
         return PaisaTextFormField(
           controller: controller,
           hintText: context.loc.enterAccountName,
@@ -478,7 +478,7 @@ class AccountNameWidget extends StatelessWidget {
           inputFormatters: [
             FilteringTextInputFormatter.singleLineFormatter,
           ],
-          onChanged: (value) =>
+          onChanged: (String value) =>
               BlocProvider.of<AccountBloc>(context).accountName = value,
         );
       },
@@ -504,7 +504,7 @@ class AccountNumberWidget extends StatelessWidget {
       ],
       hintText: context.loc.enterNumberOptional,
       keyboardType: TextInputType.number,
-      onChanged: (value) =>
+      onChanged: (String value) =>
           BlocProvider.of<AccountBloc>(context).accountNumber = value,
     );
   }
@@ -526,16 +526,16 @@ class AccountInitialAmountWidget extends StatelessWidget {
       keyboardType: TextInputType.number,
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-        TextInputFormatter.withFunction((oldValue, newValue) {
+        TextInputFormatter.withFunction((TextEditingValue oldValue, TextEditingValue newValue) {
           try {
-            final text = newValue.text;
+            final String text = newValue.text;
             if (text.isNotEmpty) double.parse(text);
             return newValue;
           } catch (_) {}
           return oldValue;
         }),
       ],
-      onChanged: (value) {
+      onChanged: (String value) {
         double? amount = double.tryParse(value);
         BlocProvider.of<AccountBloc>(context).initialAmount = amount;
       },
@@ -569,7 +569,7 @@ class _AccountDefaultSwitchWidgetState
       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
       title: Text(context.loc.defaultAccount),
       value: isAccountDefault,
-      onChanged: (value) {
+      onChanged: (bool value) {
         if (value) {
           settingCubit.setDefaultAccountId(widget.accountId);
         } else {

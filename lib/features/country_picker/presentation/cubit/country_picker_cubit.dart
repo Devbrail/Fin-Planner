@@ -39,7 +39,7 @@ class CountryPickerCubit extends Cubit<CountryPickerState> {
   void filterCountry(String value) {
     List<CountryModel> countries = getCountryUseCase()
         .where(
-          (element) =>
+          (CountryModel element) =>
               element.name.toLowerCase().contains(value.toLowerCase()) ||
               element.code.toLowerCase().contains(value.toLowerCase()),
         )

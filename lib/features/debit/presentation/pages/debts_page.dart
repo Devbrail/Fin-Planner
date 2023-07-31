@@ -58,19 +58,19 @@ class DebtsPage extends StatelessWidget {
         ),
         body: ValueListenableBuilder<Box<DebitModel>>(
           valueListenable: getIt.get<Box<DebitModel>>().listenable(),
-          builder: (context, value, child) {
-            final debts = value.values
-                .where((element) => element.debtType == DebitType.debit)
+          builder: (BuildContext context, Box<DebitModel> value, Widget? child) {
+            final List<DebitModel> debts = value.values
+                .where((DebitModel element) => element.debtType == DebitType.debit)
                 .toList();
 
-            final credits = value.values
-                .where((element) => element.debtType == DebitType.credit)
+            final List<DebitModel> credits = value.values
+                .where((DebitModel element) => element.debtType == DebitType.credit)
                 .toList();
 
             return TabBarView(
               children: [
                 Builder(
-                  builder: (context) {
+                  builder: (BuildContext context) {
                     return debts.isNotEmpty
                         ? DebtsListWidget(debts: debts)
                         : EmptyWidget(
@@ -81,7 +81,7 @@ class DebtsPage extends StatelessWidget {
                   },
                 ),
                 Builder(
-                  builder: (context) {
+                  builder: (BuildContext context) {
                     return credits.isNotEmpty
                         ? DebtsListWidget(debts: credits)
                         : EmptyWidget(

@@ -8,6 +8,7 @@ import 'package:paisa/features/home/presentation/pages/overview/widgets/filter_d
 import 'package:paisa/features/home/presentation/pages/overview/widgets/overview_filter_widget.dart';
 import 'package:paisa/features/home/presentation/pages/overview/widgets/overview_list_widget.dart';
 import 'package:paisa/features/transaction/data/model/transaction_model.dart';
+import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 import 'package:paisa/main.dart';
 import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
@@ -27,7 +28,7 @@ class OverViewPage extends StatelessWidget {
     budgetCubit.fetchDefaultCategory();
     return ValueListenableBuilder<Box<TransactionModel>>(
       valueListenable: getIt.get<Box<TransactionModel>>().listenable(),
-      builder: (context, expenseBox, _) {
+      builder: (BuildContext context, Box<TransactionModel> expenseBox, _) {
         if (expenseBox.values.isEmpty) {
           return EmptyWidget(
             icon: Icons.paid,
@@ -38,14 +39,14 @@ class OverViewPage extends StatelessWidget {
         return FilterOverviewWidget(
           expenses: expenseBox.values,
           valueNotifier: summaryController.typeNotifier,
-          builder: (expenses) {
+          builder: (List<TransactionEntity> expenses) {
             return FilterDateRangeWidget(
               dateTimeRangeNotifier: summaryController.dateTimeRangeNotifier,
               expenses: expenses,
-              builder: (filterExpenses) {
+              builder: (List<TransactionEntity> filterExpenses) {
                 return ValueListenableBuilder<FilterExpense>(
                   valueListenable: summaryController.filterExpenseNotifier,
-                  builder: (context, value, child) {
+                  builder: (BuildContext context, FilterExpense value, Widget? child) {
                     budgetCubit.fetchBudgetSummary(filterExpenses, value);
                     return Scaffold(
                       body: ListView(

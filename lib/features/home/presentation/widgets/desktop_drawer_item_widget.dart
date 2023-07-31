@@ -18,7 +18,7 @@ class NavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isSelected ? context.primary : context.labelLarge?.color;
+    final Color? color = isSelected ? context.primary : context.labelLarge?.color;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),

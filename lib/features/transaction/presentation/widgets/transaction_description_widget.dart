@@ -21,7 +21,7 @@ class ExpenseDescriptionWidget extends StatelessWidget {
         controller: controller,
         hintText: context.loc.description,
         keyboardType: TextInputType.name,
-        onChanged: (value) => BlocProvider.of<TransactionBloc>(context)
+        onChanged: (String value) => BlocProvider.of<TransactionBloc>(context)
             .currentDescription = value,
       ),
     );

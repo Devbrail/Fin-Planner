@@ -18,8 +18,8 @@ class TransactionNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TransactionBloc, TransactionState>(
-      buildWhen: (oldState, newState) => newState is ChangeTransactionTypeState,
-      builder: (context, state) {
+      buildWhen: (TransactionState oldState, TransactionState newState) => newState is ChangeTransactionTypeState,
+      builder: (BuildContext context, TransactionState state) {
         String hintName = TransactionType.expense.hintName(context);
         if (state is ChangeTransactionTypeState) {
           hintName = state.transactionType.hintName(context);
@@ -34,14 +34,14 @@ class TransactionNameWidget extends StatelessWidget {
             inputFormatters: [
               FilteringTextInputFormatter.singleLineFormatter,
             ],
-            validator: (value) {
+            validator: (String? value) {
               if (value!.isNotEmpty) {
                 return null;
               } else {
                 return context.loc.validName;
               }
             },
-            onChanged: (value) =>
+            onChanged: (String value) =>
                 BlocProvider.of<TransactionBloc>(context).expenseName = value,
           ),
         );

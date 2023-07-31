@@ -42,7 +42,7 @@ class LocalTransactionManagerImpl implements LocalTransactionManager {
 
   @override
   Future<int> add(TransactionModel transaction) async {
-    final id = await transactionBox.add(transaction);
+    final int id = await transactionBox.add(transaction);
     transaction.superId = id;
     transaction.save();
     return id;
@@ -58,17 +58,17 @@ class LocalTransactionManagerImpl implements LocalTransactionManager {
 
   @override
   Future<void> deleteByAccountId(int accountId) {
-    final keys = transactionBox.values
-        .where((element) => element.accountId == accountId)
-        .map((e) => e.key);
+    final Iterable keys = transactionBox.values
+        .where((TransactionModel element) => element.accountId == accountId)
+        .map((TransactionModel e) => e.key);
     return transactionBox.deleteAll(keys);
   }
 
   @override
   Future<void> deleteByCategoryId(int categoryId) {
-    final keys = transactionBox.values
-        .where((element) => element.categoryId == categoryId)
-        .map((e) => e.key);
+    final Iterable keys = transactionBox.values
+        .where((TransactionModel element) => element.categoryId == categoryId)
+        .map((TransactionModel e) => e.key);
     return transactionBox.deleteAll(keys);
   }
 
@@ -80,18 +80,18 @@ class LocalTransactionManagerImpl implements LocalTransactionManager {
 
   @override
   TransactionModel? findById(int expenseId) => transactionBox.values
-      .firstWhereOrNull((element) => element.key == expenseId);
+      .firstWhereOrNull((TransactionModel element) => element.key == expenseId);
 
   @override
   List<TransactionModel> findByAccountId(int accountId) => transactionBox.values
-      .where((element) => element.accountId != -1 && element.categoryId != -1)
-      .where((element) => element.accountId == accountId)
+      .where((TransactionModel element) => element.accountId != -1 && element.categoryId != -1)
+      .where((TransactionModel element) => element.accountId == accountId)
       .toList();
 
   @override
   List<TransactionModel> findByCategoryId(int category) => transactionBox.values
-      .where((element) => element.accountId != -1 && element.categoryId != -1)
-      .where((element) => element.categoryId == category)
+      .where((TransactionModel element) => element.accountId != -1 && element.categoryId != -1)
+      .where((TransactionModel element) => element.categoryId == category)
       .toList();
 
   @override
@@ -103,8 +103,8 @@ class LocalTransactionManagerImpl implements LocalTransactionManager {
   Future<List<TransactionModel>> filteredExpenses(
       DateTimeRange dateTimeRange) async {
     final List<TransactionModel> expenses =
-        transactionBox.values.sortedBy<DateTime>((element) => element.time!);
-    final filteredExpenses = expenses.takeWhile((value) {
+        transactionBox.values.sortedBy<DateTime>((TransactionModel element) => element.time!);
+    final List<TransactionModel> filteredExpenses = expenses.takeWhile((TransactionModel value) {
       return value.time!.isAfter(dateTimeRange.start) &&
           value.time!.isBefore(dateTimeRange.end);
     }).toList();

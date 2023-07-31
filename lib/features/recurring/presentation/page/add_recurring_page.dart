@@ -25,9 +25,9 @@ class AddRecurringPage extends StatefulWidget {
 }
 
 class _AddRecurringPageState extends State<AddRecurringPage> {
-  final amountController = TextEditingController();
-  final descriptionController = TextEditingController();
-  final nameController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   late final RecurringCubit recurringCubit = getIt.get<RecurringCubit>();
 
   @override
@@ -43,10 +43,10 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
     return PaisaAnnotatedRegionWidget(
       color: context.background,
       child: BlocProvider(
-        create: (context) => recurringCubit,
+        create: (BuildContext context) => recurringCubit,
         child: BlocConsumer(
           bloc: recurringCubit,
-          listener: (context, state) {
+          listener: (BuildContext context, Object? state) {
             if (state is RecurringErrorState) {
               context.showMaterialSnackBar(
                 state.error,
@@ -57,7 +57,7 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
               context.pop();
             }
           },
-          builder: (context, state) {
+          builder: (BuildContext context, Object? state) {
             return ScreenTypeLayout(
               mobile: Scaffold(
                 appBar: context.materialYouAppBar(
@@ -116,8 +116,8 @@ class TransactionToggleButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: recurringCubit,
-      buildWhen: (previous, current) => current is TransactionTypeState,
-      builder: (context, state) {
+      buildWhen: (Object? previous, Object? current) => current is TransactionTypeState,
+      builder: (BuildContext context, Object? state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SingleChildScrollView(
@@ -153,8 +153,8 @@ class SelectedAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<AccountModel>>(
       valueListenable: getIt.get<Box<AccountModel>>().listenable(),
-      builder: (context, value, child) {
-        final accounts = value.values.toEntities();
+      builder: (BuildContext context, Box<AccountModel> value, Widget? child) {
+        final List<AccountEntity> accounts = value.values.toEntities();
         if (accounts.isEmpty) {
           return ListTile(
             onTap: () => context.pushNamed(addAccountPath),
@@ -178,7 +178,7 @@ class SelectedAccount extends StatelessWidget {
             ),
             AccountSelectedWidget(
               accounts: accounts,
-              onSelected: (selectedId) {
+              onSelected: (int selectedId) {
                 BlocProvider.of<RecurringCubit>(context).selectedAccountId =
                     selectedId;
               },
@@ -220,7 +220,7 @@ class _AccountSelectedWidgetState extends State<AccountSelectedWidget> {
         scrollDirection: Axis.horizontal,
         shrinkWrap: false,
         itemCount: widget.accounts.length + 1,
-        itemBuilder: (_, index) {
+        itemBuilder: (_, int index) {
           if (index == 0) {
             return ItemWidget(
               color: context.primary,
@@ -258,7 +258,7 @@ class SelectCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<CategoryModel>>(
       valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
-      builder: (context, value, child) {
+      builder: (BuildContext context, Box<CategoryModel> value, Widget? child) {
         final List<CategoryEntity> categories = value.values.toEntities();
         if (categories.isEmpty) {
           return ListTile(
@@ -322,12 +322,12 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
         runSpacing: 8.0,
         children: List.generate(
           widget.categories.length + 1,
-          (index) {
+          (int index) {
             if (index == 0) {
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: FilterChip(
-                  onSelected: (value) => context.pushNamed(addCategoryPath),
+                  onSelected: (bool value) => context.pushNamed(addCategoryPath),
                   avatar: Icon(
                     color: context.primary,
                     IconData(
@@ -364,7 +364,7 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                 padding: const EdgeInsets.only(right: 8),
                 child: FilterChip(
                   selected: category.superId == selectedId,
-                  onSelected: (value) {
+                  onSelected: (bool value) {
                     setState(() {
                       selectedId = category.superId!;
                       widget.onSelected(selectedId);
@@ -425,14 +425,14 @@ class RecurringNameWidget extends StatelessWidget {
         inputFormatters: [
           FilteringTextInputFormatter.singleLineFormatter,
         ],
-        validator: (value) {
+        validator: (String? value) {
           if (value!.isNotEmpty) {
             return null;
           } else {
             return context.loc.validName;
           }
         },
-        onChanged: (value) =>
+        onChanged: (String value) =>
             BlocProvider.of<RecurringCubit>(context).recurringName = value,
       ),
     );
@@ -460,20 +460,20 @@ class RecurringAmountWidget extends StatelessWidget {
         counterText: '',
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-          TextInputFormatter.withFunction((oldValue, newValue) {
+          TextInputFormatter.withFunction((TextEditingValue oldValue, TextEditingValue newValue) {
             try {
-              final text = newValue.text;
+              final String text = newValue.text;
               if (text.isNotEmpty) double.parse(text);
               return newValue;
             } catch (_) {}
             return oldValue;
           }),
         ],
-        onChanged: (value) {
+        onChanged: (String value) {
           double? amount = double.tryParse(value);
           BlocProvider.of<RecurringCubit>(context).amount = amount;
         },
-        validator: (value) {
+        validator: (String? value) {
           if (value!.isNotEmpty) {
             return null;
           } else {
@@ -586,8 +586,8 @@ class RecurringWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: recurringCubit,
-      buildWhen: (oldState, newState) => newState is RecurringTypeState,
-      builder: (context, state) {
+      buildWhen: (Object? oldState, Object? newState) => newState is RecurringTypeState,
+      builder: (BuildContext context, Object? state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

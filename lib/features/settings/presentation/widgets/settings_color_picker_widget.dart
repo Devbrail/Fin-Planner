@@ -34,9 +34,9 @@ class SettingsColorPickerWidget extends StatelessWidget {
           dynamicThemeKey,
         ],
       ),
-      builder: (context, value, _) {
+      builder: (BuildContext context, Box value, _) {
         final isDynamic = value.get(dynamicThemeKey, defaultValue: false);
-        final color = _extractColorValue(context, value);
+        final int color = _extractColorValue(context, value);
         return SettingsOption(
           icon: MdiIcons.palette,
           title: context.loc.accentColor,
@@ -59,7 +59,7 @@ class SettingsColorPickerWidget extends StatelessWidget {
                   ? 700
                   : double.infinity,
             ),
-            builder: (context) => const ColorPickerDialogWidget(),
+            builder: (BuildContext context) => const ColorPickerDialogWidget(),
           ),
         );
       },
@@ -77,12 +77,12 @@ class ColorPickerDialogWidget extends StatelessWidget {
     if (Platform.isAndroid) {
       return FutureResolve<AndroidDeviceInfo>(
         future: DeviceInfoPlugin().androidInfo,
-        builder: (info) {
-          final sdk = info.version.sdkInt;
+        builder: (AndroidDeviceInfo info) {
+          final int sdk = info.version.sdkInt;
           bool isAndroid12 = sdk >= 29;
           return ValueListenableBuilder<Box<dynamic>>(
             valueListenable: Provider.of<Box<dynamic>>(context).listenable(),
-            builder: (context, value, _) {
+            builder: (BuildContext context, Box value, _) {
               final bool isDynamic = value.get(
                 dynamicThemeKey,
                 defaultValue: false,
@@ -113,7 +113,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                       child: isDynamic
                           ? const SizedBox.shrink()
                           : ColorPickerGridWidget(
-                              onSelected: (color) {
+                              onSelected: (int color) {
                                 selectedColor = color;
                               },
                               selectedColor: selectedColor,
@@ -161,7 +161,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
               ),
             ),
             ColorPickerGridWidget(
-              onSelected: (color) {
+              onSelected: (int color) {
                 selectedColor = color;
               },
               selectedColor: selectedColor,

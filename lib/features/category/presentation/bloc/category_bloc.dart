@@ -21,7 +21,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     required this.deleteExpensesFromCategoryIdUseCase,
     required this.updateCategoryUseCase,
   }) : super(AddCategoryInitial()) {
-    on<CategoryEvent>((event, emit) {});
+    on<CategoryEvent>((CategoryEvent event, Emitter<CategoryState> emit) {});
     on<FetchCategoryFromIdEvent>(_fetchCategoryFromId);
     on<AddOrUpdateCategoryEvent>(_addOrUpdateCategory);
     on<CategoryDeleteEvent>(_deleteCategory);

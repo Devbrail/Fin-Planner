@@ -26,8 +26,8 @@ class BudgetPage extends StatelessWidget {
       color: context.background,
       child: ValueListenableBuilder<Box<CategoryModel>>(
         valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
-        builder: (_, value, child) {
-          final categories = value.values.toBudgetEntities();
+        builder: (_, Box<CategoryModel> value, Widget? child) {
+          final List<CategoryEntity> categories = value.values.toBudgetEntities();
           if (categories.isEmpty) {
             return EmptyWidget(
               icon: MdiIcons.timetable,
@@ -38,7 +38,7 @@ class BudgetPage extends StatelessWidget {
           return ListView.separated(
             physics: const BouncingScrollPhysics(),
             itemCount: categories.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (BuildContext context, int index) {
               final CategoryEntity category = categories[index];
               final List<TransactionEntity> expenses =
                   BlocProvider.of<HomeBloc>(context)
