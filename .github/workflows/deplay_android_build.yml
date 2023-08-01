@@ -2,9 +2,9 @@ name: Android Release
 
 on:
   push:
-    branches: ["master"]
-  pull_request:
-    branches: ["master"]
+    # Pattern matched against refs/tags
+    tags:
+      - "*"
 
   workflow_dispatch:
 
@@ -38,14 +38,14 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Create Android release apk
+      - name: Build Android Release APK
         run: flutter build apk --flavor prod --no-tree-shake-icons
 
-      - name: Upload Android release to GitHub
+      - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: build/app/outputs/flutter-apk/app-prod-debug.apk
-          token: ${{ secrets.GH_TOKEN }}
+          artifacts: build/app/outputs/flutter-apk/app-prod-release.apk
+          token: ${{ secrets.GITHUB_TOKEN  }}
 
       - name: Create Android release appbundle
         run: flutter build appbundle --flavor prod --no-tree-shake-icons
