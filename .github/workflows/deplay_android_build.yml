@@ -46,6 +46,9 @@ jobs:
         with:
           artifacts: build/app/outputs/flutter-apk/app-prod-release.apk
           token: ${{ secrets.GITHUB_TOKEN  }}
+          generateReleaseNotes: true
+          makeLatest: true
+          bodyFile: "body.md"
 
       - name: Create Android release appbundle
         run: flutter build appbundle --flavor prod --no-tree-shake-icons
