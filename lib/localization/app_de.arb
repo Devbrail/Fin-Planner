@@ -31,8 +31,8 @@
     "selectAccount": "Konto auswählen",
     "selectCategory": "Kategorie auswählen",
     "settings": "Einstellungen",
-    "localApp": "App sperren",
-    "expense": "Ausgabe",
+    "localApp": "App entsperren mit Fingerabdruck",
+    "expense": "Ausgaben",
     "transfer": "Übertragungen",
     "daily": "Täglich",
     "weekly": "Wöchentlich",
@@ -86,7 +86,7 @@
     "done": "Bestätigen",
     "cancel": "Abbrechen",
     "custom": "Eigenes Thema",
-    "accentColor": "Primärfarbe",
+    "accentColor": "Primäre Farbe",
     "dynamicColor": "Dynamisch",
     "pickColor": "Farbe wählen",
     "pickColorDesc": "Lege die Farbe für deine Kategorie fest",
@@ -175,8 +175,8 @@
     "recurringEmptyMessageSubTitle": "Füge wiederkehrende Ereignisse hinzu, um sie hier anzuzeigen",
     "recurringAction": "Füge wiederkehrende Ereignisse hinzu",
     "sortList": "Liste sortieren",
-    "smallSizeFab": "Kleiner FAB",
-    "smallSizeFabMessage": "Kleine Aktionsschaltfläche auf dem gesamten Bildschirm anzeigen",
+    "smallSizeFab": "Kleiner Button",
+    "smallSizeFabMessage": "Kleinere Aktionsschaltfläche anzeigen am unteren Bildschirmrand.",
     "selectDateErrorMessage": "Datum auswählen",
     "edit": "Bearbeiten",
     "fromAccount": "Konto übertragen von",
@@ -192,5 +192,52 @@
     "colorsUI": "Farbe & UI",
     "more": "Mehr",
     "chooseIcon": "Symbol wählen",
-    "transferCategory": "Kategorie übertragen"
+    "transferCategory": "Kategorie übertragen",
+    "accountStyle": "Konto stil",
+    "accountStyleDescription": "Select your preferred account display style : vertical or horizontal",
+    "@accountStyleDescription": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "supportMe": "Support me",
+    "@supportMe": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "supportMeDescription": "If you think I deserve a little treat for my hard work, you can buy me a virtual beer",
+    "@supportMeDescription": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "lockAppDescription": "When enabled, you'll need to use fingerprint to open Paisa.",
+    "@lockAppDescription": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "fontStyle": "Font style",
+    "@fontStyle": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "fontStyleDescription": "Change the font style to personalize your app's appearance. Select from various font options to suit your preferences and enhance readability.",
+    "@fontStyleDescription": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    },
+    "chooseFont": "Choose font",
+    "@chooseFont": {
+        "description": "Text shown on font selection dialog title",
+        "type": "text"
+    },
+    "chooseAppLanguage": "Choose language",
+    "@chooseAppLanguage": {
+        "description": "Text shown on app language selection dialog title",
+        "type": "text"
+    },
+    "appLanguage": "App language",
+    "@appLanguage": {
+        "description": "Text shown on settings page",
+        "type": "text"
+    }
+
 }
