@@ -14,7 +14,7 @@
   "addAccountTooltip": "Dodaj konto",
   "addCategoryTooltip": "Dodaj kategorię",
   "addDebtTooltip": "Dodaj dług",
-  "addRecurringTooltip": "Dodaj cykliczną",
+  "addRecurringTooltip": "Dodaj transakcję cykliczną",
   "selectDateRangeTooltip": "Termin",
   "transactionSubTittleText": "{bankName} • {dateString}",
   "addCategory": "Dodaj kategorię",
