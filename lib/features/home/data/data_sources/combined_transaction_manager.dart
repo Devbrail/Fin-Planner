@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';

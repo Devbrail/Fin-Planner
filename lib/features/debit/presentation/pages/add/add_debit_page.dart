@@ -89,35 +89,35 @@ class _AddOrEditDebitPageState extends State<AddOrEditDebitPage> {
               appBar: context.materialYouAppBar(
                 context.loc.addDebt,
                 actions: [
-                  isDebtAddOrUpdate
-                      ? const SizedBox.shrink()
-                      : IconButton(
-                          onPressed: () => paisaAlertDialog(
-                            context,
-                            title: Text(context.loc.dialogDeleteTitle),
-                            child: RichText(
-                              text: TextSpan(
-                                text: context.loc.deleteDebtOrCredit,
-                                style: context.bodyLarge,
-                              ),
-                            ),
-                            confirmationButton: TextButton(
-                              style: TextButton.styleFrom(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                              ),
-                              onPressed: () {
-                                debitBloc.add(DeleteDebtEvent(
-                                    int.tryParse(widget.debtId!) ?? 0));
-                              },
-                              child: const Text('Delete'),
-                            ),
-                          ).then((value) => context.pop()),
-                          icon: Icon(
-                            Icons.delete_rounded,
-                            color: context.error,
+                  if (isDebtAddOrUpdate)
+                    const SizedBox.shrink()
+                  else
+                    IconButton(
+                      onPressed: () => paisaAlertDialog(
+                        context,
+                        title: Text(context.loc.dialogDeleteTitle),
+                        child: RichText(
+                          text: TextSpan(
+                            text: context.loc.deleteDebtOrCredit,
+                            style: context.bodyLarge,
                           ),
-                        )
+                        ),
+                        confirmationButton: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                          ),
+                          onPressed: () {
+                            debitBloc.add(DeleteDebtEvent(
+                                int.tryParse(widget.debtId!) ?? 0));
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ).then((value) => context.pop()),
+                      icon: Icon(
+                        Icons.delete_rounded,
+                        color: context.error,
+                      ),
+                    )
                 ],
               ),
               body: Form(
