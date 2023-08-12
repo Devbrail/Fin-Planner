@@ -156,7 +156,7 @@ class TransactionBloc extends Bloc<ExpenseEvent, TransactionState> {
         return emit(const TransactionErrorState('Enter valid amount'));
       }
 
-      if (accountId == null) {
+      if (accountId == null || accountId == -1) {
         return emit(const TransactionErrorState('Select account'));
       }
       if (categoryId == null) {
