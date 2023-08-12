@@ -20,6 +20,7 @@ class UpdateCategoryUseCase
       budget: params.budget,
       desc: params.description,
       isBudget: params.isBudget,
+      isDefault: params.isDefault,
     );
   }
 }
