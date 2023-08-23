@@ -69,6 +69,13 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               backgroundColor: context.errorContainer,
               color: context.onErrorContainer,
             );
+          } else if (state is CategoryDeletedState) {
+            context.showMaterialSnackBar(
+              context.loc.deleteCategory,
+              backgroundColor: context.error,
+              color: context.onError,
+            );
+            context.pop();
           } else if (state is CategorySuccessState) {
             budgetController.text = state.category.budget.toString();
             budgetController.selection = TextSelection.collapsed(
