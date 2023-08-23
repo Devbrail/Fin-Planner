@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
+import 'package:paisa/core/enum/calender_formats.dart';
 import 'package:paisa/core/theme/paisa_theme.dart';
 import 'package:paisa/features/account/presentation/bloc/accounts_bloc.dart';
 import 'package:paisa/features/country_picker/data/models/country_model.dart';
@@ -60,6 +61,7 @@ class _PaisaAppState extends State<PaisaApp> {
             appColorKey,
             dynamicThemeKey,
             themeModeKey,
+            calenderFormatKey,
             userCountryKey,
             appLanguageKey,
             appFontChangerKey,
