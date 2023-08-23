@@ -600,8 +600,8 @@
         "description": "Text shown on the button on settings screen",
         "type": "text"
     },
-    "calenderFormat": "Calender format",
-    "@calenderFormat": {
+    "calendarFormat": "Calendar format",
+    "@calendarFormat": {
         "description": "Text shown on the button on settings screen",
         "type": "text"
     },

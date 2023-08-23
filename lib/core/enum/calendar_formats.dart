@@ -6,7 +6,7 @@
 // dd/mm/yyyy
 import 'package:intl/intl.dart';
 
-enum CalenderFormats {
+enum CalendarFormats {
   yyyymmdd,
   yymmdd,
   mmddyyyy,
@@ -16,12 +16,12 @@ enum CalenderFormats {
 
   String get format {
     return switch (this) {
-      CalenderFormats.yyyymmdd => 'yyyy/MM/dd',
-      CalenderFormats.yymmdd => 'yy/MM/dd',
-      CalenderFormats.mmddyyyy => 'MM/dd/yyyy',
-      CalenderFormats.mmddyy => 'MM/dd/yy',
-      CalenderFormats.ddmmyyyy => 'dd/MM/yyyy',
-      CalenderFormats.ddmmyy => 'dd/MM/yy',
+      CalendarFormats.yyyymmdd => 'yyyy/MM/dd',
+      CalendarFormats.yymmdd => 'yy/MM/dd',
+      CalendarFormats.mmddyyyy => 'MM/dd/yyyy',
+      CalendarFormats.mmddyy => 'MM/dd/yy',
+      CalendarFormats.ddmmyyyy => 'dd/MM/yyyy',
+      CalendarFormats.ddmmyy => 'dd/MM/yy',
     };
   }
 

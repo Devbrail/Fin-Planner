@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
-
 import 'package:paisa/core/common_enum.dart';
 
 import '../../main.dart';
 import '../constants/constants.dart';
-import '../enum/calender_formats.dart';
+import '../enum/calendar_formats.dart';
 
 extension DateUtils on DateTime {
   String get formattedDate {
-    final selectedCalenderFormat = CalenderFormats.values[getIt
+    final selectedCalendarFormat = CalendarFormats.values[getIt
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-        .get(calenderFormatKey, defaultValue: 2)];
-    return selectedCalenderFormat.dateFormat.format(this);
+        .get(calendarFormatKey, defaultValue: 2)];
+    return selectedCalendarFormat.dateFormat.format(this);
   }
 
   String get formattedTime => DateFormat('hh:mm a').format(this);

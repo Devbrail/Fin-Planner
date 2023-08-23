@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
-import 'package:paisa/core/enum/calender_formats.dart';
+import 'package:paisa/core/enum/calendar_formats.dart';
 import 'package:paisa/main.dart';
 
-class ChooseCalenderFormatWidget extends StatefulWidget {
-  const ChooseCalenderFormatWidget({
+class ChooseCalendarFormatWidget extends StatefulWidget {
+  const ChooseCalendarFormatWidget({
     Key? key,
     this.currentFormat,
   }) : super(key: key);
 
-  final CalenderFormats? currentFormat;
+  final CalendarFormats? currentFormat;
 
   @override
-  ChooseCalenderFormatWidgetState createState() =>
-      ChooseCalenderFormatWidgetState();
+  ChooseCalendarFormatWidgetState createState() =>
+      ChooseCalendarFormatWidgetState();
 }
 
-class ChooseCalenderFormatWidgetState
-    extends State<ChooseCalenderFormatWidget> {
-  late CalenderFormats currentIndex =
-      widget.currentFormat ?? CalenderFormats.mmddyyyy;
+class ChooseCalendarFormatWidgetState
+    extends State<ChooseCalendarFormatWidget> {
+  late CalendarFormats currentIndex =
+      widget.currentFormat ?? CalendarFormats.mmddyyyy;
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +32,17 @@ class ChooseCalenderFormatWidgetState
         children: [
           ListTile(
             title: Text(
-              context.loc.calenderFormat,
+              context.loc.calendarFormat,
               style: context.titleLarge,
             ),
           ),
-          ...CalenderFormats.values
+          ...CalendarFormats.values
               .map(
-                (e) => RadioListTile<CalenderFormats>(
+                (e) => RadioListTile<CalendarFormats>(
                   value: e,
                   activeColor: context.primary,
                   groupValue: currentIndex,
-                  onChanged: (CalenderFormats? value) {
+                  onChanged: (CalendarFormats? value) {
                     currentIndex = value!;
                     setState(() {});
                   },
@@ -88,7 +88,7 @@ class ChooseCalenderFormatWidgetState
                   ),
                   onPressed: () => getIt
                       .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-                      .put(calenderFormatKey, currentIndex.index)
+                      .put(calendarFormatKey, currentIndex.index)
                       .then((value) => Navigator.pop(context)),
                   child: Text(context.loc.ok),
                 ),

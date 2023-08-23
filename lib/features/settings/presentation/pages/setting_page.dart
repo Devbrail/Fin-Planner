@@ -4,8 +4,8 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
-import 'package:paisa/core/enum/calender_formats.dart';
-import 'package:paisa/core/widgets/choose_calender_format_widget.dart';
+import 'package:paisa/core/enum/calendar_formats.dart';
+import 'package:paisa/core/widgets/choose_calendar_format_widget.dart';
 import 'package:paisa/core/widgets/choose_theme_mode_widget.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:paisa/features/settings/data/authenticate.dart';
@@ -33,9 +33,9 @@ class SettingsPage extends StatelessWidget {
     final currentTheme = ThemeMode.values[getIt
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
         .get(themeModeKey, defaultValue: 0)];
-    final currentFormat = CalenderFormats.values[getIt
+    final currentFormat = CalendarFormats.values[getIt
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-        .get(calenderFormatKey, defaultValue: 2)];
+        .get(calendarFormatKey, defaultValue: 2)];
     return PaisaAnnotatedRegionWidget(
       color: Colors.transparent,
       child: Scaffold(
@@ -93,7 +93,7 @@ class SettingsPage extends StatelessWidget {
                 const Divider(),
                 SettingsOption(
                   icon: MdiIcons.calendar,
-                  title: context.loc.calenderFormat,
+                  title: context.loc.calendarFormat,
                   subtitle: currentFormat.exampleValue,
                   onTap: () {
                     showModalBottomSheet(
@@ -109,7 +109,7 @@ class SettingsPage extends StatelessWidget {
                         ),
                       ),
                       context: context,
-                      builder: (_) => ChooseCalenderFormatWidget(
+                      builder: (_) => ChooseCalendarFormatWidget(
                         currentFormat: currentFormat,
                       ),
                     );
