@@ -117,9 +117,7 @@ class _PaisaAppState extends State<PaisaApp> {
                 );
                 return MaterialApp.router(
                   locale: locale,
-                  routeInformationProvider: goRouter.routeInformationProvider,
-                  routeInformationParser: goRouter.routeInformationParser,
-                  routerDelegate: goRouter.routerDelegate,
+                  routerConfig: goRouter,
                   debugShowCheckedModeBanner: false,
                   themeMode: themeMode,
                   localizationsDelegates:

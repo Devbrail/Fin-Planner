@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/core/common.dart';
-import 'package:paisa/core/enum/transaction_type.dart';
-import 'package:paisa/features/transaction/presentation/bloc/transaction_bloc.dart';
-import 'package:paisa/features/transaction/presentation/widgets/expense_and_income_widget.dart';
-import 'package:paisa/features/transaction/presentation/widgets/select_account_widget.dart';
-import 'package:paisa/features/transaction/presentation/widgets/select_category_widget.dart';
-import 'package:paisa/features/transaction/presentation/widgets/transaction_amount_widget.dart';
-import 'package:paisa/features/transaction/presentation/widgets/transaction_date_picker_widget.dart';
-import 'package:paisa/features/transaction/presentation/widgets/transaction_delete_widget.dart';
-import 'package:paisa/features/transaction/presentation/widgets/transaction_description_widget.dart';
-import 'package:paisa/features/transaction/presentation/widgets/transaction_name_widget.dart';
-import 'package:paisa/features/transaction/presentation/widgets/transaction_toggle_buttons_widget.dart';
-import 'package:paisa/features/transaction/presentation/widgets/transfer_widget.dart';
-import 'package:paisa/main.dart';
-import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+
+import '../../../../core/common.dart';
+import '../../../../core/enum/transaction_type.dart';
+import '../../../../core/widgets/paisa_widget.dart';
+import '../../../../main.dart';
+import '../bloc/transaction_bloc.dart';
+import '../widgets/expense_and_income_widget.dart';
+import '../widgets/select_account_widget.dart';
+import '../widgets/select_category_widget.dart';
+import '../widgets/transaction_amount_widget.dart';
+import '../widgets/transaction_date_picker_widget.dart';
+import '../widgets/transaction_delete_widget.dart';
+import '../widgets/transaction_description_widget.dart';
+import '../widgets/transaction_name_widget.dart';
+import '../widgets/transaction_toggle_buttons_widget.dart';
+import '../widgets/transfer_widget.dart';
 
 class TransactionPage extends StatefulWidget {
   const TransactionPage({
@@ -116,8 +117,8 @@ class _TransactionPageState extends State<TransactionPage> {
               BlocProvider.of<TransactionBloc>(context).selectedCategoryId =
                   int.tryParse(widget.categoryId!);
             }
-            return ScreenTypeLayout(
-              mobile: Scaffold(
+            return ScreenTypeLayout.builder(
+              mobile: (p0) => Scaffold(
                 extendBody: true,
                 appBar: AppBar(
                   title: Text(
@@ -171,7 +172,7 @@ class _TransactionPageState extends State<TransactionPage> {
                   ),
                 ),
               ),
-              tablet: Scaffold(
+              tablet: (p0) => Scaffold(
                 appBar: AppBar(
                   systemOverlayStyle: SystemUiOverlayStyle(
                     statusBarColor: Colors.transparent,

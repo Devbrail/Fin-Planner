@@ -30,8 +30,8 @@ class SelectedAccount extends StatelessWidget {
           );
         }
 
-        return ScreenTypeLayout(
-          tablet: Column(
+        return ScreenTypeLayout.builder(
+          tablet: (p0) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -48,7 +48,7 @@ class SelectedAccount extends StatelessWidget {
               )
             ],
           ),
-          mobile: Column(
+          mobile: (p0) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(

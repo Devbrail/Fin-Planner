@@ -71,8 +71,8 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                     style: context.titleMedium,
                   ),
                 ),
-                ScreenTypeLayout(
-                  mobile: PaisaFilledCard(
+                ScreenTypeLayout.builder(
+                  mobile: (p0) => PaisaFilledCard(
                     child: ListView.separated(
                       separatorBuilder: (context, index) => const Divider(),
                       physics: const NeverScrollableScrollPhysics(),
@@ -90,7 +90,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                       },
                     ),
                   ),
-                  tablet: GridView.builder(
+                  tablet: (p0) => GridView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -177,8 +177,8 @@ class CategoryItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
-      mobile: ListTile(
+    return ScreenTypeLayout.builder(
+      mobile: (p0) => ListTile(
         onTap: onPress,
         leading: Icon(
           IconData(
@@ -191,7 +191,7 @@ class CategoryItemWidget extends StatelessWidget {
         title: Text(model.name ?? ''),
         trailing: Icon(MdiIcons.delete),
       ),
-      tablet: PaisaCard(
+      tablet: (p0) => PaisaCard(
         child: InkWell(
           onTap: onPress,
           child: Padding(

@@ -18,8 +18,8 @@ class AccountMobileVerticalPage extends StatelessWidget {
     return ValueListenableBuilder<Box<TransactionModel>>(
       valueListenable: getIt.get<Box<TransactionModel>>().listenable(),
       builder: (context, value, child) {
-        return ScreenTypeLayout(
-          mobile: ListView.builder(
+        return ScreenTypeLayout.builder(
+          mobile: (p0) => ListView.builder(
             physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             padding: const EdgeInsets.only(bottom: 124),
@@ -35,7 +35,7 @@ class AccountMobileVerticalPage extends StatelessWidget {
               );
             },
           ),
-          tablet: GridView.builder(
+          tablet: (p0) => GridView.builder(
             padding: const EdgeInsets.only(bottom: 124),
             shrinkWrap: true,
             itemCount: accounts.length,

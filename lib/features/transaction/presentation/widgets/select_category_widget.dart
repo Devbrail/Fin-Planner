@@ -31,8 +31,8 @@ class SelectCategoryIcon extends StatelessWidget {
           );
         }
 
-        return ScreenTypeLayout(
-          tablet: Column(
+        return ScreenTypeLayout.builder(
+          tablet: (p0) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -47,7 +47,7 @@ class SelectCategoryIcon extends StatelessWidget {
               SelectedItem(categories: categories)
             ],
           ),
-          mobile: Column(
+          mobile: (p0) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(

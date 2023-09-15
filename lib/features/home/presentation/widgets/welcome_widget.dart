@@ -26,8 +26,8 @@ class UserImageWidget extends StatelessWidget {
         if (image == 'no-image') {
           image = '';
         }
-        return ScreenTypeLayout(
-          mobile: Builder(
+        return ScreenTypeLayout.builder(
+          mobile: (p0) => Builder(
             builder: (context) {
               if (image.isEmpty) {
                 return ClipOval(
@@ -51,7 +51,7 @@ class UserImageWidget extends StatelessWidget {
               }
             },
           ),
-          tablet: Builder(
+          tablet: (p0) => Builder(
             builder: (context) {
               if (image.isEmpty) {
                 return Padding(

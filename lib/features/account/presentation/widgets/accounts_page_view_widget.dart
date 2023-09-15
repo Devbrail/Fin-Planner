@@ -39,7 +39,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
       children: [
         LavaAnimation(
           child: SizedBox(
-            height: 246,
+            height: 256,
             child: PageView.builder(
               padEnds: true,
               pageSnapping: true,

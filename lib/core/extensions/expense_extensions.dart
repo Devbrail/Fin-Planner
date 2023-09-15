@@ -9,14 +9,14 @@ import 'package:paisa/features/transaction/domain/entities/transaction.dart';
 
 extension ExpenseModelBoxMapping on Box<TransactionModel> {
   List<TransactionModel> get expenses =>
-      values.sortedBy<DateTime>((element) => element.time!);
+      values.sorted((a, b) => b.time!.compareTo(a.time!));
 
   List<TransactionModel> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
 
   List<TransactionEntity> get toEntities => values
       .map((expenseModel) => expenseModel.toEntity())
-      .sortedBy<DateTime>((element) => element.time!);
+      .sorted((a, b) => b.time!.compareTo(a.time!));
 
   List<TransactionModel> isFilterTimeBetween(DateTimeRange range) => values
       .where((element) => element.time!.isAfterBeforeTime(range))
@@ -68,18 +68,18 @@ extension ExpenseModelsHelper on Iterable<TransactionModel> {
 
   List<TransactionEntity> toEntities() {
     return map((expenseModel) => expenseModel.toEntity())
-        .sortedBy<DateTime>((element) => element.time!);
+        .sorted((a, b) => b.time!.compareTo(a.time!));
   }
 
   List<TransactionEntity> budgetOverView(TransactionType transactionType) =>
-      sortedBy<DateTime>((element) => element.time!)
+      sorted((a, b) => b.time!.compareTo(a.time!))
           .where((element) => element.type == transactionType)
           .toEntities();
 }
 
 extension ExpensesHelper on Iterable<TransactionEntity> {
   List<TransactionEntity> sortByTime() =>
-      sortedBy<DateTime>((element) => element.time!);
+      sorted((a, b) => b.time!.compareTo(a.time!));
 
   List<TransactionEntity> get expenses => sortByTime();
 

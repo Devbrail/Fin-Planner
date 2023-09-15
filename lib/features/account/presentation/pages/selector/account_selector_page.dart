@@ -59,8 +59,8 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                     style: context.titleMedium,
                   ),
                 ),
-                ScreenTypeLayout(
-                  mobile: PaisaFilledCard(
+                ScreenTypeLayout.builder(
+                  mobile: (p0) => PaisaFilledCard(
                     child: ListView.separated(
                       separatorBuilder: (context, index) => const Divider(),
                       physics: const NeverScrollableScrollPhysics(),
@@ -78,7 +78,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                       },
                     ),
                   ),
-                  tablet: GridView.builder(
+                  tablet: (p0) => GridView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -165,8 +165,8 @@ class AccountItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
-      mobile: ListTile(
+    return ScreenTypeLayout.builder(
+      mobile: (p0) => ListTile(
         onTap: onPress,
         leading: Icon(
           model.cardType!.icon,
@@ -176,7 +176,7 @@ class AccountItemWidget extends StatelessWidget {
         subtitle: Text(model.name ?? ''),
         trailing: Icon(MdiIcons.delete),
       ),
-      tablet: PaisaCard(
+      tablet: (p0) => PaisaCard(
         child: InkWell(
           onTap: onPress,
           child: Padding(

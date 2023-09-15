@@ -37,8 +37,8 @@ class HomeMobileWidget extends StatelessWidget {
           return NavigationDrawer(
             selectedIndex: homeBloc.selectedIndex,
             onDestinationSelected: (index) {
+              Navigator.canPop(context);
               homeBloc.add(CurrentIndexEvent(index));
-              Navigator.pop(context);
             },
             children: [
               const PaisaIconTitle(),

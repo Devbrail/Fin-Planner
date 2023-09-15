@@ -30,16 +30,16 @@ class CategoryListPage extends StatelessWidget {
                 icon: Icons.category,
               );
             }
-            return ScreenTypeLayout(
-              mobile: CategoryListMobileWidget(
+            return ScreenTypeLayout.builder(
+              mobile: (p0) => CategoryListMobileWidget(
                 categories: categories,
               ),
-              tablet: CategoryListTabletWidget(
+              tablet: (p0) => CategoryListTabletWidget(
                 addCategoryBloc: bloc,
                 crossAxisCount: 3,
                 categories: categories,
               ),
-              desktop: CategoryListTabletWidget(
+              desktop: (p0) => CategoryListTabletWidget(
                 addCategoryBloc: bloc,
                 crossAxisCount: 5,
                 categories: categories,
