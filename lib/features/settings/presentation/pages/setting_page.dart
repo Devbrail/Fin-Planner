@@ -4,7 +4,10 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
+import 'package:paisa/core/enum/calendar_formats.dart';
+import 'package:paisa/core/widgets/choose_calendar_format_widget.dart';
 import 'package:paisa/core/widgets/choose_theme_mode_widget.dart';
+import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:paisa/features/settings/data/authenticate.dart';
 import 'package:paisa/features/settings/presentation/widgets/accounts_style_widget.dart';
 import 'package:paisa/features/settings/presentation/widgets/app_font_changer.dart';
@@ -18,7 +21,6 @@ import 'package:paisa/features/settings/presentation/widgets/settings_group_card
 import 'package:paisa/features/settings/presentation/widgets/small_size_fab_widget.dart';
 import 'package:paisa/features/settings/presentation/widgets/version_widget.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/core/widgets/paisa_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -31,6 +33,9 @@ class SettingsPage extends StatelessWidget {
     final currentTheme = ThemeMode.values[getIt
         .get<Box<dynamic>>(instanceName: BoxType.settings.name)
         .get(themeModeKey, defaultValue: 0)];
+    final currentFormat = CalendarFormats.values[getIt
+        .get<Box<dynamic>>(instanceName: BoxType.settings.name)
+        .get(calendarFormatKey, defaultValue: 2)];
     return PaisaAnnotatedRegionWidget(
       color: Colors.transparent,
       child: Scaffold(
@@ -85,6 +90,31 @@ class SettingsPage extends StatelessWidget {
                 const AppLanguageChanger(),
                 const Divider(),
                 const CountryChangeWidget(),
+                const Divider(),
+                SettingsOption(
+                  icon: MdiIcons.calendar,
+                  title: context.loc.calendarFormat,
+                  subtitle: currentFormat.exampleValue,
+                  onTap: () {
+                    showModalBottomSheet(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width >= 700
+                            ? 700
+                            : double.infinity,
+                      ),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                          topRight: Radius.circular(16),
+                        ),
+                      ),
+                      context: context,
+                      builder: (_) => ChooseCalendarFormatWidget(
+                        currentFormat: currentFormat,
+                      ),
+                    );
+                  },
+                ),
                 const Divider(),
                 const AppFontChanger(),
                 const Divider(),

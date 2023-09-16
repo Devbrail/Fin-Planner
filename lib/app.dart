@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:hive_flutter/adapters.dart';
 import 'package:paisa/config/routes.dart';
 import 'package:paisa/core/common.dart';
@@ -12,10 +11,10 @@ import 'package:paisa/features/account/presentation/bloc/accounts_bloc.dart';
 import 'package:paisa/features/country_picker/data/models/country_model.dart';
 import 'package:paisa/features/country_picker/domain/entities/country.dart';
 import 'package:paisa/features/home/presentation/bloc/home/home_bloc.dart';
+import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 import 'package:paisa/features/home/presentation/cubit/overview/overview_cubit.dart';
 import 'package:paisa/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:paisa/main.dart';
-import 'package:paisa/features/home/presentation/controller/summary_controller.dart';
 import 'package:provider/provider.dart';
 
 class PaisaApp extends StatefulWidget {
@@ -60,6 +59,7 @@ class _PaisaAppState extends State<PaisaApp> {
             appColorKey,
             dynamicThemeKey,
             themeModeKey,
+            calendarFormatKey,
             userCountryKey,
             appLanguageKey,
             appFontChangerKey,

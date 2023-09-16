@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
-
 import 'package:paisa/core/common_enum.dart';
 
+import '../../main.dart';
+import '../constants/constants.dart';
+import '../enum/calendar_formats.dart';
+
 extension DateUtils on DateTime {
-  String get formattedDate => DateFormat('dd/MM/yyyy').format(this);
+  String get formattedDate {
+    final selectedCalendarFormat = CalendarFormats.values[getIt
+        .get<Box<dynamic>>(instanceName: BoxType.settings.name)
+        .get(calendarFormatKey, defaultValue: 2)];
+    return selectedCalendarFormat.dateFormat.format(this);
+  }
+
   String get formattedTime => DateFormat('hh:mm a').format(this);
   String get dayString => DateFormat('dd').format(this);
   String get weekString => DateFormat('EEE').format(this);

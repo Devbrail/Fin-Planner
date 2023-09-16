@@ -53,9 +53,9 @@ PODS:
     - Flutter
   - quick_actions_ios (0.0.1):
     - Flutter
-  - SDWebImage (5.14.3):
-    - SDWebImage/Core (= 5.14.3)
-  - SDWebImage/Core (5.14.3)
+  - SDWebImage (5.17.0):
+    - SDWebImage/Core (= 5.17.0)
+  - SDWebImage/Core (5.17.0)
   - share_plus (0.0.1):
     - Flutter
   - SwiftyGif (5.4.4)
@@ -126,11 +126,11 @@ SPEC CHECKSUMS:
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   quick_actions_ios: bb09d1c35b4a89f9dbb15487039fa1b983ca375e
-  SDWebImage: 9c36e66c8ce4620b41a7407698dda44211a96764
+  SDWebImage: 750adf017a315a280c60fde706ab1e552a3ae4e9
   share_plus: 599aa54e4ea31d4b4c0e9c911bcc26c55e791028
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.11.3

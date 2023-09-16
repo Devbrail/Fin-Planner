@@ -116,6 +116,7 @@
     "selectIconSubTitle": "Nhấn để chọn biểu tượng",
     "incomeName": "Tên thu nhập",
     "currencySign": "Ký hiệu tiền tệ",
+    "calendarFormat": "Định dạng lịch",
     "expenseByCategory": "Chi phí theo danh mục",
     "transactionsByCategory": "Giao dịch theo danh mục",
     "backupAndRestoreTitle": "Sao lưu và khôi phục",

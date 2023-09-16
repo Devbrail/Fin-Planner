@@ -116,6 +116,7 @@
     "selectIconSubTitle": "Tippe um ein Symbol auszuwählen",
     "incomeName": "Einkommensname",
     "currencySign": "Währungssymbol",
+    "calendarFormat": "Kalender Format",
     "expenseByCategory": "Ausgaben nach Kategorie",
     "transactionsByCategory": "Transaktionen nach Kategorie",
     "backupAndRestoreTitle": "Sichern und Wiederherstellen",

@@ -116,6 +116,7 @@
   "selectIconSubTitle": "Нажмите, чтобы выбрать иконку",
   "incomeName": "Название дохода",
   "currencySign": "Значок валюты",
+  "calendarFormat": "Формат календаря",
   "expenseByCategory": "Затраты по категориям",
   "backupAndRestoreTitle": "Резервное копирование",
   "backupAndRestoreSubTitle": "Резервное копирование и восстановление расходов, счетов и категорий",

@@ -605,6 +605,11 @@
         "description": "Text shown on the button on settings screen",
         "type": "text"
     },
+    "calendarFormat": "Calendar format",
+    "@calendarFormat": {
+        "description": "Text shown on the button on settings screen",
+        "type": "text"
+    },
     "expenseByCategory": "Expense by category",
     "@expenseByCategory": {
         "description": "Text shown on the toolbar title",

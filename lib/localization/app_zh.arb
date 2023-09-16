@@ -116,6 +116,7 @@
     "selectIconSubTitle": "点击以选择图标",
     "incomeName": "收入名称",
     "currencySign": "货币符号",
+    "calendarFormat": "日历格式",
     "expenseByCategory": "按类别划分的费用",
     "backupAndRestoreTitle": "备份和还原",
     "backupAndRestoreSubTitle": "备份和恢复您的费用、帐户和类别",
