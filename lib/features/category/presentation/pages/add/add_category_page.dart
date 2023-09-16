@@ -69,6 +69,13 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               backgroundColor: context.errorContainer,
               color: context.onErrorContainer,
             );
+          } else if (state is CategoryDeletedState) {
+            context.showMaterialSnackBar(
+              context.loc.deletedCategory,
+              backgroundColor: context.error,
+              color: context.onError,
+            );
+            context.pop();
           } else if (state is CategorySuccessState) {
             budgetController.text = state.category.budget.toString();
             budgetController.selection = TextSelection.collapsed(
@@ -87,8 +94,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           }
         },
         builder: (context, state) {
-          return ScreenTypeLayout(
-            mobile: Scaffold(
+          return ScreenTypeLayout.builder(
+            mobile: (p0) => Scaffold(
               appBar: context.materialYouAppBar(
                 isAddCategory
                     ? context.loc.addCategory
@@ -144,7 +151,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                 ),
               ),
             ),
-            tablet: Scaffold(
+            tablet: (p0) => Scaffold(
               appBar: context.materialYouAppBar(
                   isAddCategory
                       ? context.loc.addCategory
@@ -245,15 +252,15 @@ class DeleteCategoryWidget extends StatelessWidget {
     if (categoryId == null) {
       return const SizedBox.shrink();
     }
-    return ScreenTypeLayout(
-      mobile: IconButton(
+    return ScreenTypeLayout.builder(
+      mobile: (p0) => IconButton(
         onPressed: () => onPressed(context),
         icon: Icon(
           Icons.delete_rounded,
           color: context.error,
         ),
       ),
-      tablet: PaisaTextButton(
+      tablet: (p0) => PaisaTextButton(
         onPressed: () => onPressed(context),
         title: context.loc.delete,
       ),

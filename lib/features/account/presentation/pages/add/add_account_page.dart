@@ -151,8 +151,8 @@ class AddAccountPageState extends State<AddAccountPage> {
             }
           },
           builder: (context, state) {
-            return ScreenTypeLayout(
-              mobile: Scaffold(
+            return ScreenTypeLayout.builder(
+              mobile: (p0) => Scaffold(
                 appBar: context.materialYouAppBar(
                   isAccountAddOrUpdate
                       ? context.loc.addAccount
@@ -239,7 +239,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                   ),
                 ),
               ),
-              tablet: Scaffold(
+              tablet: (p0) => Scaffold(
                 appBar: context.materialYouAppBar(
                   isAccountAddOrUpdate
                       ? context.loc.addAccount
@@ -416,15 +416,15 @@ class DeleteAccountWidget extends StatelessWidget {
     if (accountId == null) {
       return const SizedBox.shrink();
     }
-    return ScreenTypeLayout(
-      mobile: IconButton(
+    return ScreenTypeLayout.builder(
+      mobile: (p0) => IconButton(
         onPressed: () => onPressed(context),
         icon: Icon(
           Icons.delete_rounded,
           color: context.error,
         ),
       ),
-      tablet: PaisaTextButton(
+      tablet: (p0) => PaisaTextButton(
         onPressed: () => onPressed(context),
         title: context.loc.delete,
       ),

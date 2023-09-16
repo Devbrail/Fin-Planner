@@ -97,18 +97,18 @@ class _CountryPickerPageState extends State<CountryPickerPage> {
                     bloc: countryCubit,
                     builder: (context, state) {
                       if (state is CountriesState) {
-                        return ScreenTypeLayout(
-                          mobile: CountriesWidget(
+                        return ScreenTypeLayout.builder(
+                          mobile: (p0) => CountriesWidget(
                             countries: state.countries,
                             crossAxisCount: 2,
                             selectedModel: countryModel,
                           ),
-                          tablet: CountriesWidget(
+                          tablet: (p0) => CountriesWidget(
                             countries: state.countries,
                             crossAxisCount: 3,
                             selectedModel: countryModel,
                           ),
-                          desktop: CountriesWidget(
+                          desktop: (p0) => CountriesWidget(
                             countries: state.countries,
                             crossAxisCount: 6,
                             selectedModel: countryModel,

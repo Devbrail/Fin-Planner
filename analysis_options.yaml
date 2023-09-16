@@ -26,6 +26,7 @@ linter:
     - prefer_const_constructors: true
     - package_import_order: true
     - package_prefixed_library_names: true
+    - always_use_package_imports: true
     - camel_case_types
     - avoid_print
     #- always_specify_types

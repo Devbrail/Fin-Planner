@@ -75,7 +75,7 @@ final GoRouter goRouter = GoRouter(
       path: countrySelectorPath,
       builder: (BuildContext context, GoRouterState state) {
         final String? forceCountrySelector =
-            state.queryParameters['force_country_selector'];
+            state.uri.queryParameters['force_country_selector'];
         return BlocProvider<CountryPickerCubit>(
           create: (BuildContext context) => getIt.get<CountryPickerCubit>(),
           child: CountryPickerPage(
@@ -99,32 +99,27 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           path: addTransactionPath,
           name: addTransactionsName,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            final String? transactionTypeString = state.queryParameters['type'];
-            final String? accountId = state.queryParameters['aid'];
-            final String? categoryId = state.queryParameters['cid'];
+          builder: (context, state) {
+            final String? transactionTypeString =
+                state.uri.queryParameters['type'];
+            final String? accountId = state.uri.queryParameters['aid'];
+            final String? categoryId = state.uri.queryParameters['cid'];
             final int typeInt = int.tryParse(transactionTypeString ?? '') ?? 0;
             final TransactionType transactionType =
                 TransactionType.values[typeInt];
-            return MaterialPage<dynamic>(
-              key: ValueKey<String>(state.location),
-              child: TransactionPage(
-                accountId: accountId,
-                categoryId: categoryId,
-                transactionType: transactionType,
-              ),
+            return TransactionPage(
+              accountId: accountId,
+              categoryId: categoryId,
+              transactionType: transactionType,
             );
           },
         ),
         GoRoute(
           name: editTransactionsName,
           path: editTransactionsPath,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return MaterialPage<dynamic>(
-              key: ValueKey<String>(state.location),
-              child: TransactionPage(
-                expenseId: state.pathParameters['eid'],
-              ),
+          builder: (context, state) {
+            return TransactionPage(
+              expenseId: state.pathParameters['eid'],
             );
           },
         ),
@@ -200,20 +195,17 @@ final GoRouter goRouter = GoRouter(
             GoRoute(
               path: addAccountWithIdPath,
               name: addAccountWithIdName,
-              pageBuilder: (BuildContext context, GoRouterState state) {
+              builder: (context, state) {
                 final String? transactionTypeString =
-                    state.queryParameters['type'];
-                final String? accountId = state.queryParameters['aid'];
+                    state.uri.queryParameters['type'];
+                final String? accountId = state.uri.queryParameters['aid'];
                 final int typeInt =
                     int.tryParse(transactionTypeString ?? '') ?? 0;
                 final TransactionType transactionType =
                     TransactionType.values[typeInt];
-                return MaterialPage<dynamic>(
-                  key: ValueKey<String>(state.location),
-                  child: TransactionPage(
-                    accountId: accountId,
-                    transactionType: transactionType,
-                  ),
+                return TransactionPage(
+                  accountId: accountId,
+                  transactionType: transactionType,
                 );
               },
             ),
@@ -305,7 +297,7 @@ final GoRouter goRouter = GoRouter(
     );
   },
   redirect: (_, GoRouterState state) async {
-    final bool isLogging = state.location == introPagePath;
+    final bool isLogging = state.matchedLocation == introPagePath;
     bool isIntroDone = settings.get(userIntroKey, defaultValue: false);
     if (!isIntroDone) {
       return introPagePath;

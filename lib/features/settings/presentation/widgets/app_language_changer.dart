@@ -68,6 +68,44 @@ class AppLanguageChanger extends StatelessWidget {
                               );
                             },
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 16),
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 24, vertical: 12),
+                                  ),
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text(
+                                    context.loc.cancel,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 16.0, bottom: 16),
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 24,
+                                      vertical: 12,
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                  child: Text(context.loc.ok),
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     );
@@ -111,5 +149,6 @@ class Languages {
     LanguageEntity(code: 'ta', value: 'Tamil (IN)'),
     LanguageEntity(code: 'vi', value: 'Vietnamese'),
     LanguageEntity(code: 'zh', value: 'Chinese'),
+    LanguageEntity(code: 'zh_TW', value: 'Traditional Chinese'),
   ];
 }

@@ -272,6 +272,11 @@
         "description": "Successful message when account deleted",
         "type": "text"
     },
+    "deletedCategory": "Category deleted",
+    "@deletedCategory": {
+        "description": "Successful message when category deleted",
+        "type": "text"
+    },
     "successAddCategory": "Category added",
     "@successAddCategory": {
         "description": "Successful message when category deleted",

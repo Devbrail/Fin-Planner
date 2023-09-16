@@ -10,6 +10,8 @@ import 'package:paisa/features/home/presentation/widgets/home_search_button.dart
 import 'package:paisa/features/profile/presentation/pages/paisa_user_widget.dart';
 import 'package:paisa/core/widgets/paisa_widget.dart';
 
+final GlobalKey<ScaffoldState> _scaffoldStateKey = GlobalKey<ScaffoldState>();
+
 class HomeMobileWidget extends StatelessWidget {
   const HomeMobileWidget({
     super.key,
@@ -24,6 +26,7 @@ class HomeMobileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
     return Scaffold(
+      key: _scaffoldStateKey,
       appBar: AppBar(
         title: const PaisaTitle(),
         actions: const [
@@ -37,8 +40,8 @@ class HomeMobileWidget extends StatelessWidget {
           return NavigationDrawer(
             selectedIndex: homeBloc.selectedIndex,
             onDestinationSelected: (index) {
+              _scaffoldStateKey.currentState?.closeDrawer();
               homeBloc.add(CurrentIndexEvent(index));
-              Navigator.pop(context);
             },
             children: [
               const PaisaIconTitle(),

@@ -58,8 +58,8 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
             }
           },
           builder: (context, state) {
-            return ScreenTypeLayout(
-              mobile: Scaffold(
+            return ScreenTypeLayout.builder(
+              mobile: (p0) => Scaffold(
                 appBar: context.materialYouAppBar(
                   context.loc.recurring,
                 ),

@@ -18,12 +18,12 @@ class OverviewFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
-      tablet: OverviewTablet(
+    return ScreenTypeLayout.builder(
+      tablet: (p0) => OverviewTablet(
         summaryController: summaryController,
         budgetCubit: budgetCubit,
       ),
-      mobile: OverviewMobile(
+      mobile: (p0) => OverviewMobile(
         summaryController: summaryController,
         budgetCubit: budgetCubit,
       ),

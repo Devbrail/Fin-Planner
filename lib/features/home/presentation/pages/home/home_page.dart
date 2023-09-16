@@ -92,16 +92,16 @@ class LandingPage extends StatelessWidget {
             homeBloc.add(const CurrentIndexEvent(0));
             return false;
           },
-          child: ScreenTypeLayout(
-            mobile: HomeMobileWidget(
+          child: ScreenTypeLayout.builder(
+            mobile: (p0) => HomeMobileWidget(
               floatingActionButton: actionButton,
               destinations: destinations,
             ),
-            tablet: HomeTabletWidget(
+            tablet: (p0) => HomeTabletWidget(
               floatingActionButton: actionButton,
               destinations: destinations,
             ),
-            desktop: HomeDesktopWidget(
+            desktop: (p0) => HomeDesktopWidget(
               floatingActionButton: actionButton,
               destinations: destinations,
             ),

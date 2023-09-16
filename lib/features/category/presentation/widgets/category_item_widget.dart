@@ -17,16 +17,16 @@ class CategoryItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
-      tablet: CategoryItemTabletWidget(
+    return ScreenTypeLayout.builder(
+      tablet: (p0) => CategoryItemTabletWidget(
         category: category,
         onPressed: onPressed,
       ),
-      desktop: CategoryItemTabletWidget(
+      desktop: (p0) => CategoryItemTabletWidget(
         category: category,
         onPressed: onPressed,
       ),
-      mobile: CategoryItemMobileWidget(category: category),
+      mobile: (p0) => CategoryItemMobileWidget(category: category),
     );
   }
 }

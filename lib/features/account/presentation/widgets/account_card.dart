@@ -34,8 +34,8 @@ class _AccountCardState extends State<AccountCard>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
-      mobile: MobileAccountCard(
+    return ScreenTypeLayout.builder(
+      mobile: (p0) => MobileAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
         totalBalance: widget.totalBalance,
@@ -45,7 +45,7 @@ class _AccountCardState extends State<AccountCard>
         expense: widget.expense,
         income: widget.income,
       ),
-      tablet: TabletAccountCard(
+      tablet: (p0) => TabletAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
         cardNumber: widget.totalBalance,
@@ -55,7 +55,7 @@ class _AccountCardState extends State<AccountCard>
         expense: widget.expense,
         income: widget.income,
       ),
-      desktop: DesktopAccountCard(
+      desktop: (p0) => DesktopAccountCard(
         bankName: widget.bankName,
         cardHolder: widget.cardHolder,
         cardNumber: widget.totalBalance,
@@ -97,7 +97,7 @@ class MobileAccountCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GlassmorphicContainer(
-          height: 240,
+          height: 260,
           width: MediaQuery.of(context).size.width,
           borderRadius: 24,
           blur: 25,
@@ -121,6 +121,7 @@ class MobileAccountCard extends StatelessWidget {
           ),
           border: 2,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ListTile(
                 minVerticalPadding: 10,
@@ -137,7 +138,6 @@ class MobileAccountCard extends StatelessWidget {
                       )
                     : const SizedBox.shrink(),
               ),
-              const Spacer(),
               ListTile(
                 minVerticalPadding: 10,
                 title: Text(
@@ -151,7 +151,6 @@ class MobileAccountCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const Spacer(),
               Row(
                 children: [
                   Expanded(
