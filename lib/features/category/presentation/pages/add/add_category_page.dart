@@ -71,7 +71,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             );
           } else if (state is CategoryDeletedState) {
             context.showMaterialSnackBar(
-              context.loc.deleteCategory,
+              context.loc.deletedCategory,
               backgroundColor: context.error,
               color: context.onError,
             );
