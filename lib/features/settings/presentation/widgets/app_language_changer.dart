@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -43,6 +44,10 @@ class AppLanguageChanger extends StatelessWidget {
                   maxChildSize: 1,
                   expand: false,
                   builder: (context, scrollController) {
+                    final List<LanguageEntity> languages =
+                        Languages.languages.sorted(
+                      (a, b) => a.value.compareTo(b.value),
+                    );
                     return SafeArea(
                       child: ListView(
                         shrinkWrap: true,
@@ -56,56 +61,28 @@ class AppLanguageChanger extends StatelessWidget {
                           ListView.builder(
                             controller: scrollController,
                             shrinkWrap: true,
-                            itemCount: Languages.languages.length,
+                            itemCount: languages.length,
                             itemBuilder: (context, index) {
-                              final LanguageEntity entity =
-                                  Languages.languages[index];
+                              final LanguageEntity entity = languages[index];
                               return ListTile(
                                 onTap: () => value
                                     .put(appLanguageKey, entity.code)
                                     .then((value) => Navigator.pop(context)),
-                                title: Text(entity.value),
+                                title: Text(
+                                  entity.value,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                          color: code == entity.code
+                                              ? Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                              : null),
+                                ),
                               );
                             },
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 24, vertical: 12),
-                                  ),
-                                  onPressed: () => Navigator.pop(context),
-                                  child: Text(
-                                    context.loc.cancel,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 16.0, bottom: 16),
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 24,
-                                      vertical: 12,
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                  child: Text(context.loc.ok),
-                                ),
-                              ),
-                            ],
-                          )
                         ],
                       ),
                     );
