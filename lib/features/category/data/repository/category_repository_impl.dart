@@ -59,6 +59,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
     required String? desc,
     required double? budget,
     required bool isBudget,
+    required bool isDefault,
   }) {
     return dataSources.update(CategoryModel(
       description: desc,
@@ -66,6 +67,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
       icon: icon,
       budget: budget,
       isBudget: isBudget,
+      isDefault: isDefault,
       color: color,
       superId: key,
     ));

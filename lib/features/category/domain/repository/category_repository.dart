@@ -23,6 +23,7 @@ abstract class CategoryRepository {
     required String? desc,
     required double? budget,
     required bool isBudget,
+    required bool isDefault,
   });
 
   Future<void> clear();
