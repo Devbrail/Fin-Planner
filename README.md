@@ -47,7 +47,7 @@
 ### Expense Tracking
 
 - Tracking expenses, incomes & deposits
-- Account & budget vise overview
+- Account & budget wise overview
 - Manage categories
   
 ### Steps to translate
