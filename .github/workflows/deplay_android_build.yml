@@ -74,7 +74,7 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON  }}
           packageName: dev.hemanths.paisa
-          releaseFiles: build/app/outputs/bundle/prodRelease/app-prod-release.aab
+          releaseFiles: app-prod-release.aab
           track: internal
           status: completed
           inAppUpdatePriority: 5
