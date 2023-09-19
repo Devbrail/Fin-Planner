@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/common_enum.dart';
+import 'package:paisa/core/use_case/use_case.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
 import 'package:paisa/features/transaction/domain/entities/transaction.dart';
@@ -55,8 +56,7 @@ class OverviewCubit extends Cubit<BudgetState> {
         _groupedExpenses[time] ?? [];
     final Map<CategoryEntity, List<TransactionEntity>> categoryGroupedExpenses =
         groupBy(selectedTimeExpenses, (TransactionEntity expense) {
-      return getCategoryUseCase(
-              params: GetCategoryParams(expense.categoryId)) ??
+      return getCategoryUseCase(GetCategoryParams(expense.categoryId)) ??
           _defaultCategories.first;
     });
     final List<MapEntry<CategoryEntity, List<TransactionEntity>>> mapExpenses =
@@ -69,7 +69,7 @@ class OverviewCubit extends Cubit<BudgetState> {
   }
 
   void fetchDefaultCategory() {
-    _defaultCategories.addAll(getCategoriesUseCase.call());
+    _defaultCategories.addAll(getCategoriesUseCase(NoParams()));
   }
 }
 

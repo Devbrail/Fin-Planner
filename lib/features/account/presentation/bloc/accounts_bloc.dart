@@ -47,6 +47,7 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
   final GetCategoryUseCase getCategoryUseCase;
   final GetTransactionsByAccountIdUseCase getTransactionsByAccountIdUseCase;
   double? initialAmount;
+  bool isAccountExcluded = false;
   int? selectedColor;
   CardType selectedType = CardType.cash;
   final UpdateAccountUseCase updateAccountUseCase;
@@ -59,7 +60,7 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
     if (accountId == null) return;
 
     final AccountEntity? account =
-        getAccountUseCase(params: GetAccountParams(accountId));
+        getAccountUseCase(GetAccountParams(accountId));
     if (account != null) {
       accountName = account.bankName;
       accountHolderName = account.name;
@@ -96,19 +97,18 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
     }
 
     if (event.isAdding) {
-      await addAccountUseCase(
-          params: AddAccountParams(
+      await addAccountUseCase(AddAccountParams(
         bankName: bankName,
         holderName: holderName,
         number: number ?? '',
         cardType: cardType,
         amount: amount ?? 0,
         color: color,
+        isAccountExcluded: isAccountExcluded,
       ));
     } else {
       if (currentAccount == null) return;
-      await updateAccountUseCase(
-          params: UpdateAccountParams(
+      await updateAccountUseCase(UpdateAccountParams(
         currentAccount!.superId!,
         bankName: bankName,
         holderName: holderName,
@@ -116,6 +116,7 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
         cardType: cardType,
         amount: amount ?? 0,
         color: color,
+        isAccountExcluded: isAccountExcluded,
       ));
     }
     emit(AccountAddedState(isAddOrUpdate: event.isAdding));
@@ -127,9 +128,9 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
   ) async {
     final int accountId = int.parse(event.accountId);
     await deleteExpensesFromAccountIdUseCase(
-      params: DeleteTransactionsFromAccountIdParams(accountId),
+      DeleteTransactionsFromAccountIdParams(accountId),
     );
-    await deleteAccountUseCase(params: DeleteAccountParams(accountId));
+    await deleteAccountUseCase(DeleteAccountParams(accountId));
     emit(AccountDeletedState());
   }
 
@@ -138,7 +139,7 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
     Emitter<AccountState> emit,
   ) async {
     final List<TransactionEntity> expenses = getTransactionsByAccountIdUseCase(
-      params: GetTransactionsByAccountIdParams(event.account.superId!),
+      GetTransactionsByAccountIdParams(event.account.superId!),
     );
     emit(AccountSelectedState(event.account, expenses));
   }
@@ -156,7 +157,7 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
     Emitter<AccountState> emit,
   ) async {
     List<TransactionEntity> expenses = getTransactionsByAccountIdUseCase(
-      params: GetTransactionsByAccountIdParams(int.parse(event.accountId)),
+      GetTransactionsByAccountIdParams(int.parse(event.accountId)),
     );
     emit(ExpensesFromAccountIdState(expenses));
   }
@@ -177,11 +178,10 @@ class AccountBloc extends Bloc<AccountsEvent, AccountState> {
     if (accountId == null) {
       return;
     }
-    final AccountEntity? account = getAccountUseCase(
-      params: GetAccountParams(accountId),
-    );
+    final AccountEntity? account =
+        getAccountUseCase(GetAccountParams(accountId));
     final List<TransactionEntity> expenses = getTransactionsByAccountIdUseCase(
-      params: GetTransactionsByAccountIdParams(accountId),
+      GetTransactionsByAccountIdParams(accountId),
     );
     if (account != null) {
       emit(AccountAndExpensesState(account, expenses));

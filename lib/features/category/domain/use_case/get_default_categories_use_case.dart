@@ -12,7 +12,7 @@ class GetDefaultCategoriesUseCase
   final CategoryRepository categoryRepository;
 
   @override
-  List<CategoryEntity> call({NoParams? params}) {
+  List<CategoryEntity> call(NoParams params) {
     return categoryRepository.defaultCategories().toEntities();
   }
 }

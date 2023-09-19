@@ -14,6 +14,7 @@ class AccountModel extends HiveObject {
     this.superId,
     required this.amount,
     required this.color,
+    this.isAccountExcluded = false,
   });
 
   factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
@@ -23,7 +24,9 @@ class AccountModel extends HiveObject {
         cardType: (json["cardType"] as String).type,
         amount: json["amount"],
         color: json["color"],
-      )..superId = json["superId"];
+        isAccountExcluded: json["isAccountExcluded"],
+        superId: json["superId"],
+      );
 
   @HiveField(8, defaultValue: 0)
   double? amount;
@@ -36,6 +39,9 @@ class AccountModel extends HiveObject {
 
   @HiveField(9, defaultValue: 0xFFFFC107)
   int? color;
+
+  @HiveField(1, defaultValue: false)
+  bool? isAccountExcluded;
 
   @HiveField(0)
   String? name;
@@ -54,6 +60,7 @@ class AccountModel extends HiveObject {
         'superId': superId,
         'amount': amount,
         'color': color,
+        'isAccountExcluded': isAccountExcluded,
       };
 
   AccountModel copyWith({
@@ -65,6 +72,7 @@ class AccountModel extends HiveObject {
     int? superId,
     double? amount,
     int? color,
+    bool? isAccountExcluded,
   }) {
     return AccountModel(
       name: name ?? this.name,
@@ -74,6 +82,7 @@ class AccountModel extends HiveObject {
       superId: superId ?? this.superId,
       amount: amount ?? this.amount,
       color: color ?? this.color,
+      isAccountExcluded: isAccountExcluded ?? this.isAccountExcluded,
     );
   }
 }

@@ -12,9 +12,9 @@ class GetTransactionUseCase
   final TransactionRepository transactionRepository;
 
   @override
-  Future<TransactionEntity?> call({GetTransactionParams? params}) async =>
+  Future<TransactionEntity?> call(GetTransactionParams params) async =>
       transactionRepository
-          .fetchExpenseFromId(params!.transactionId)
+          .fetchExpenseFromId(params.transactionId)
           ?.toEntity();
 }
 

@@ -54,7 +54,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     if (categoryId == null) return;
 
     final CategoryEntity? category = getCategoryUseCase(
-      params: GetCategoryParams(categoryId),
+      GetCategoryParams(categoryId),
     );
     if (category != null) {
       categoryTitle = category.name;
@@ -90,8 +90,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       return emit(const CategoryErrorState('Select category color'));
     }
     if (event.isAddOrUpdate) {
-      await addCategoryUseCase(
-          params: AddCategoryParams(
+      await addCategoryUseCase(AddCategoryParams(
         icon: icon,
         description: description,
         name: title,
@@ -103,8 +102,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     } else {
       if (currentCategory == null) return;
 
-      await updateCategoryUseCase(
-          params: UpdateCategoryParams(
+      await updateCategoryUseCase(UpdateCategoryParams(
         currentCategory!.superId!,
         budget: budget,
         color: color,
@@ -123,9 +121,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     Emitter<CategoryState> emit,
   ) async {
     final int categoryId = int.parse(event.categoryId);
-    await deleteCategoryUseCase(params: DeleteCategoryParams(categoryId));
+    await deleteCategoryUseCase(DeleteCategoryParams(categoryId));
     await deleteExpensesFromCategoryIdUseCase(
-      params: DeleteTransactionsByCategoryIdParams(categoryId),
+      DeleteTransactionsByCategoryIdParams(categoryId),
     );
     emit(CategoryDeletedState());
   }

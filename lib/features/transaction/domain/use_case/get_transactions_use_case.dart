@@ -11,7 +11,7 @@ class GetTransactionsUseCase
 
   final TransactionRepository expenseRepository;
   @override
-  List<TransactionEntity> call({NoParams? params}) {
+  List<TransactionEntity> call(NoParams params) {
     return expenseRepository.expenses().toEntities();
   }
 }

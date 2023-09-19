@@ -13,8 +13,8 @@ class GetDebitTransactionsUseCase
   final DebitRepository debtRepository;
 
   @override
-  List<DebitTransaction> call({GetDebitTransactionsParams? params}) {
-    return debtRepository.fetchTransactionsFromId(params!.debitId).toEntities();
+  List<DebitTransaction> call(GetDebitTransactionsParams params) {
+    return debtRepository.fetchTransactionsFromId(params.debitId).toEntities();
   }
 }
 

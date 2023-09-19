@@ -5,13 +5,13 @@ import 'package:paisa/features/country_picker/data/models/country_model.dart';
 import 'package:paisa/features/country_picker/domain/repository/country_repository.dart';
 
 @injectable
-class GetCountriesUseCase implements UseCase<List<CountryModel>, void> {
+class GetCountriesUseCase implements UseCase<List<CountryModel>, NoParams> {
   GetCountriesUseCase({required this.repository});
 
   final CountryRepository repository;
 
   @override
-  List<CountryModel> call({void params}) {
+  List<CountryModel> call(NoParams params) {
     return repository
         .fetchCountries()
         .sorted((a, b) => a.name.compareTo(b.name));

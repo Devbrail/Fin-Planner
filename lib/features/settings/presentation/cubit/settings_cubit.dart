@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/common.dart';
 import 'package:paisa/core/error/failures.dart';
+import 'package:paisa/core/use_case/use_case.dart';
 import 'package:paisa/features/category/domain/entities/category.dart';
 import 'package:paisa/features/category/domain/use_case/category_use_case.dart';
 import 'package:paisa/features/settings/domain/use_case/setting_use_case.dart';
@@ -37,17 +38,18 @@ class SettingCubit extends Cubit<SettingsState> {
   void fixExpenses() async {
     if (settingsUseCase.get(expenseFixKey, defaultValue: true)) {
       emit(FixExpenseLoading());
-      final List<CategoryEntity> categories = getDefaultCategoriesUseCase();
+      final List<CategoryEntity> categories =
+          getDefaultCategoriesUseCase(NoParams());
       if (categories.isEmpty) {
         return emit(FixExpenseError());
       }
-      final List<TransactionEntity> transactions = transactionsUseCase()
-          .where((element) => element.categoryId == -1)
-          .toList();
+      final List<TransactionEntity> transactions =
+          transactionsUseCase(NoParams())
+              .where((element) => element.categoryId == -1)
+              .toList();
 
       for (final TransactionEntity element in transactions) {
-        await updateExpensesUseCase(
-            params: UpdateTransactionParams(
+        await updateExpensesUseCase(UpdateTransactionParams(
           element.superId!,
           accountId: element.accountId,
           categoryId: categories.first.superId!,

@@ -12,9 +12,9 @@ class AddTransactionUseCase
 
   final TransactionRepository expenseRepository;
   @override
-  Future<Either<Failure, bool>> call({AddTransactionParams? params}) {
+  Future<Either<Failure, bool>> call(AddTransactionParams params) {
     return expenseRepository.addExpense(
-      params!.name,
+      params.name,
       params.amount,
       params.time,
       params.categoryId,

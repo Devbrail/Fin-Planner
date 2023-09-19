@@ -11,8 +11,8 @@ class DeleteCategoryUseCase
   final CategoryRepository categoryRepository;
 
   @override
-  Future<void> call({DeleteCategoryParams? params}) {
-    return categoryRepository.delete(params!.categoryId);
+  Future<void> call(DeleteCategoryParams params) {
+    return categoryRepository.delete(params.categoryId);
   }
 }
 

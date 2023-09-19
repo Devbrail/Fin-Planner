@@ -10,9 +10,9 @@ class UpdateTransactionUseCase
 
   final TransactionRepository expenseRepository;
   @override
-  Future<void> call({UpdateTransactionParams? params}) {
+  Future<void> call(UpdateTransactionParams params) {
     return expenseRepository.updateExpense(
-      params!.superId,
+      params.superId,
       params.name,
       params.currency,
       params.time,

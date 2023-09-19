@@ -81,7 +81,7 @@ class DebitBloc extends Bloc<DebtsEvent, DebtsState> {
     }
     if (event.isUpdate) {
       await addDebtUseCase(
-        params: AddDebit(
+        ParamsAddDebit(
           description: description ?? '',
           name: name,
           amount: amount,
@@ -92,8 +92,7 @@ class DebitBloc extends Bloc<DebtsEvent, DebtsState> {
       );
     } else {
       if (currentDebt != null) {
-        await updateDebtUseCase(
-            params: UpdateDebitParams(
+        await updateDebtUseCase(UpdateDebitParams(
           currentDebt!.key,
           description: description ?? '',
           name: name,
@@ -128,7 +127,7 @@ class DebitBloc extends Bloc<DebtsEvent, DebtsState> {
     Emitter<DebtsState> emit,
   ) async {
     await addTransactionUseCase(
-      params: AddDebitTransactionParams(
+      AddDebitTransactionParams(
         event.amount,
         event.dateTime,
         event.debt.superId!,
@@ -148,7 +147,7 @@ class DebitBloc extends Bloc<DebtsEvent, DebtsState> {
       return;
     }
 
-    final Debit? debt = getDebtUseCase(params: GetDebitParams(debitId));
+    final Debit? debt = getDebtUseCase(GetDebitParams(debitId));
     if (debt != null) {
       currentAmount = debt.amount;
       currentName = debt.name;
@@ -182,9 +181,9 @@ class DebitBloc extends Bloc<DebtsEvent, DebtsState> {
     Emitter<DebtsState> emit,
   ) async {
     final int debitId = event.id;
-    await deleteDebtUseCase(params: DeleteDebitParams(debitId));
+    await deleteDebtUseCase(DeleteDebitParams(debitId));
     await deleteDebitTransactionsByDebitIdUseCase(
-        params: DeleteDebitTransactionsDebitIdParams(debitId));
+        DeleteDebitTransactionsDebitIdParams(debitId));
     emit(DeleteDebtsState());
   }
 
@@ -193,7 +192,7 @@ class DebitBloc extends Bloc<DebtsEvent, DebtsState> {
     Emitter<DebtsState> emit,
   ) async {
     await deleteDebitTransactionUseCase(
-      params: DeleteDebitTransactionParams(event.id),
+      DeleteDebitTransactionParams(event.id),
     );
     emit(DeleteDebtsState());
   }

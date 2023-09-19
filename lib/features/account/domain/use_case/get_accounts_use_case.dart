@@ -11,7 +11,7 @@ class GetAccountsUseCase implements UseCase<List<AccountEntity>, NoParams> {
   final AccountRepository accountRepository;
 
   @override
-  List<AccountEntity> call({NoParams? params}) {
+  List<AccountEntity> call(NoParams params) {
     return accountRepository.getAccounts().toEntities();
   }
 }

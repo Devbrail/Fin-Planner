@@ -10,9 +10,9 @@ class UpdateDebitUseCase implements UseCase<void, UpdateDebitParams> {
 
   final DebitRepository debtRepository;
   @override
-  Future<void> call({UpdateDebitParams? params}) {
+  Future<void> call(UpdateDebitParams params) {
     return debtRepository.updateDebt(
-      description: params!.description,
+      description: params.description,
       name: params.name,
       amount: params.amount,
       currentDateTime: params.currentDateTime,

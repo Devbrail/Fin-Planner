@@ -18,6 +18,7 @@ class AccountRepositoryImpl extends AccountRepository {
     required CardType cardType,
     required double amount,
     required int color,
+    required bool isAccountExcluded,
   }) {
     return dataSource.add(AccountModel(
       name: holderName,
@@ -26,21 +27,29 @@ class AccountRepositoryImpl extends AccountRepository {
       cardType: cardType,
       amount: amount,
       color: color,
+      isAccountExcluded: isAccountExcluded,
     ));
   }
 
   @override
-  Future<void> clearAll() => dataSource.clear();
+  Future<void> clearAll() {
+    return dataSource.clear();
+  }
 
   @override
-  Future<void> deleteAccount(int key) => dataSource.delete(key);
+  Future<void> deleteAccount(int key) {
+    return dataSource.delete(key);
+  }
 
   @override
-  AccountModel? fetchAccountFromId(int? accountId) =>
-      dataSource.findById(accountId);
+  AccountModel? fetchAccountFromId(int? accountId) {
+    return dataSource.findById(accountId);
+  }
 
   @override
-  List<AccountModel> getAccounts() => dataSource.accounts();
+  List<AccountModel> getAccounts() {
+    return dataSource.accounts();
+  }
 
   @override
   Future<void> updateAccount({
@@ -51,15 +60,19 @@ class AccountRepositoryImpl extends AccountRepository {
     required CardType? cardType,
     required double? amount,
     required int? color,
+    required bool isAccountExcluded,
   }) {
-    return dataSource.update(AccountModel(
-      name: holderName,
-      bankName: bankName,
-      number: number,
-      cardType: cardType,
-      amount: amount,
-      superId: key,
-      color: color,
-    ));
+    return dataSource.update(
+      AccountModel(
+        name: holderName,
+        bankName: bankName,
+        number: number,
+        cardType: cardType,
+        amount: amount,
+        superId: key,
+        color: color,
+        isAccountExcluded: isAccountExcluded,
+      ),
+    );
   }
 }

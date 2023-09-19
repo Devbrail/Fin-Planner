@@ -11,9 +11,9 @@ class DeleteDebitTransactionsByDebitIdUseCase
   final DebitRepository debtRepository;
 
   @override
-  Future<void> call({DeleteDebitTransactionsDebitIdParams? params}) {
+  Future<void> call(DeleteDebitTransactionsDebitIdParams params) {
     return debtRepository.deleteDebitTransactionsFromDebitId(
-      params!.debitTransactionId,
+      params.debitTransactionId,
     );
   }
 }

@@ -12,8 +12,8 @@ class DeleteTransactionsByCategoryIdUseCase
   final TransactionRepository transactionRepository;
 
   @override
-  Future<void> call({DeleteTransactionsByCategoryIdParams? params}) =>
-      transactionRepository.deleteExpensesByCategoryId(params!.categoryId);
+  Future<void> call(DeleteTransactionsByCategoryIdParams params) =>
+      transactionRepository.deleteExpensesByCategoryId(params.categoryId);
 }
 
 class DeleteTransactionsByCategoryIdParams {

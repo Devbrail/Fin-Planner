@@ -10,8 +10,8 @@ class DeleteTransactionUseCase
   final TransactionRepository expenseRepository;
 
   @override
-  Future<void> call({DeleteTransactionParams? params}) async =>
-      expenseRepository.clearExpense(params!.transactionId);
+  Future<void> call(DeleteTransactionParams params) async =>
+      expenseRepository.clearExpense(params.transactionId);
 }
 
 class DeleteTransactionParams {

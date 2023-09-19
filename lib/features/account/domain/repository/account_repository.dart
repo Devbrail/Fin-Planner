@@ -9,6 +9,7 @@ abstract class AccountRepository {
     required CardType cardType,
     required double amount,
     required int color,
+    required bool isAccountExcluded,
   });
 
   Future<void> updateAccount({
@@ -19,6 +20,7 @@ abstract class AccountRepository {
     required CardType? cardType,
     required double? amount,
     required int? color,
+    required bool isAccountExcluded,
   });
 
   Future<void> deleteAccount(int key);

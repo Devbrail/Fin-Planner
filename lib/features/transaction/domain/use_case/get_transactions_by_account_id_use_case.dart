@@ -13,9 +13,9 @@ class GetTransactionsByAccountIdUseCase
   final TransactionRepository expenseRepository;
 
   @override
-  List<TransactionEntity> call({GetTransactionsByAccountIdParams? params}) =>
+  List<TransactionEntity> call(GetTransactionsByAccountIdParams params) =>
       expenseRepository
-          .fetchExpensesFromAccountId(params!.accountId)
+          .fetchExpensesFromAccountId(params.accountId)
           .toEntities();
 }
 

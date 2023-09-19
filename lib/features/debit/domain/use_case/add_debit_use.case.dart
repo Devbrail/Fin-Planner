@@ -5,15 +5,15 @@ import 'package:paisa/core/use_case/use_case.dart';
 import 'package:paisa/features/debit/domain/repository/debit_repository.dart';
 
 @singleton
-class AddDebitUseCase implements UseCase<Future<void>, AddDebit> {
+class AddDebitUseCase implements UseCase<Future<void>, ParamsAddDebit> {
   AddDebitUseCase({required this.debtRepository});
 
   final DebitRepository debtRepository;
 
   @override
-  Future<void> call({AddDebit? params}) {
+  Future<void> call(ParamsAddDebit params) {
     return debtRepository.addDebtOrCredit(
-      params!.description,
+      params.description,
       params.name,
       params.amount,
       params.currentDateTime,
@@ -23,8 +23,8 @@ class AddDebitUseCase implements UseCase<Future<void>, AddDebit> {
   }
 }
 
-class AddDebit extends Equatable {
-  const AddDebit({
+class ParamsAddDebit extends Equatable {
+  const ParamsAddDebit({
     required this.description,
     required this.name,
     required this.amount,

@@ -12,8 +12,8 @@ class GetDebitUseCase implements UseCase<Debit?, GetDebitParams> {
   final DebitRepository debtRepository;
 
   @override
-  Debit? call({GetDebitParams? params}) {
-    return debtRepository.fetchDebtOrCreditFromId(params!.debitId)?.toEntity();
+  Debit? call(GetDebitParams params) {
+    return debtRepository.fetchDebtOrCreditFromId(params.debitId)?.toEntity();
   }
 }
 

@@ -11,9 +11,9 @@ class AddDebitTransactionUseCase
   final DebitRepository debtRepository;
 
   @override
-  Future<void> call({AddDebitTransactionParams? params}) {
+  Future<void> call(AddDebitTransactionParams params) {
     return debtRepository.addTransaction(
-      params!.amount,
+      params.amount,
       params.currentDateTime,
       params.parentId,
     );

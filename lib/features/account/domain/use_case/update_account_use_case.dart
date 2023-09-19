@@ -11,15 +11,16 @@ class UpdateAccountUseCase implements UseCase<void, UpdateAccountParams> {
   final AccountRepository accountRepository;
 
   @override
-  Future<void> call({UpdateAccountParams? params}) {
+  Future<void> call(UpdateAccountParams params) {
     return accountRepository.updateAccount(
-      bankName: params!.bankName,
+      bankName: params.bankName,
       holderName: params.holderName,
       number: params.number,
       cardType: params.cardType,
       amount: params.amount,
       key: params.key,
       color: params.color,
+      isAccountExcluded: params.isAccountExcluded,
     );
   }
 }
@@ -33,6 +34,7 @@ class UpdateAccountParams extends Equatable {
     required this.cardType,
     required this.amount,
     required this.color,
+    required this.isAccountExcluded,
   });
 
   final double amount;
@@ -42,6 +44,7 @@ class UpdateAccountParams extends Equatable {
   final String holderName;
   final int key;
   final String number;
+  final bool isAccountExcluded;
 
   @override
   List<Object?> get props => [
@@ -52,5 +55,6 @@ class UpdateAccountParams extends Equatable {
         cardType,
         amount,
         color,
+        isAccountExcluded,
       ];
 }

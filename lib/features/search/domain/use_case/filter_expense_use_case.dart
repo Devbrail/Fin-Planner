@@ -10,10 +10,10 @@ class SearchUseCase implements UseCase<List<TransactionEntity>, SearchParams> {
 
   final TransactionRepository expenseRepository;
   @override
-  List<TransactionEntity> call({SearchParams? params}) {
+  List<TransactionEntity> call(SearchParams params) {
     return expenseRepository
         .filterExpenses(
-          params!.query,
+          params.query,
           params.accounts,
           params.categories,
         )

@@ -18,7 +18,7 @@ class SearchCubit extends Cubit<SearchState> {
       return emit(SearchQueryEmptyState());
     }
     final List<TransactionEntity> expenses = searchUseCase(
-      params: SearchParams(
+      SearchParams(
         query: query,
         accounts: selectedAccountId,
         categories: selectedCategoryId,

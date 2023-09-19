@@ -10,8 +10,8 @@ class DeleteTransactionsByAccountIdUseCase
   final TransactionRepository expenseRepository;
 
   @override
-  Future<void> call({DeleteTransactionsFromAccountIdParams? params}) async =>
-      expenseRepository.deleteExpensesByAccountId(params!.accountId);
+  Future<void> call(DeleteTransactionsFromAccountIdParams params) async =>
+      expenseRepository.deleteExpensesByAccountId(params.accountId);
 }
 
 class DeleteTransactionsFromAccountIdParams {

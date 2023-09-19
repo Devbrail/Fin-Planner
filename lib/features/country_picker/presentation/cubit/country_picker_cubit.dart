@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paisa/core/constants/constants.dart';
+import 'package:paisa/core/use_case/use_case.dart';
 import 'package:paisa/features/country_picker/data/models/country_model.dart';
 import 'package:paisa/features/country_picker/domain/use_case/get_contries_user_case.dart';
 import 'package:paisa/features/settings/domain/use_case/setting_use_case.dart';
@@ -32,12 +33,12 @@ class CountryPickerCubit extends Cubit<CountryPickerState> {
   }
 
   void fetchCountry() {
-    List<CountryModel> countries = getCountryUseCase();
+    List<CountryModel> countries = getCountryUseCase(NoParams());
     emit(CountriesState(countries));
   }
 
   void filterCountry(String value) {
-    List<CountryModel> countries = getCountryUseCase()
+    List<CountryModel> countries = getCountryUseCase(NoParams())
         .where(
           (element) =>
               element.name.toLowerCase().contains(value.toLowerCase()) ||
